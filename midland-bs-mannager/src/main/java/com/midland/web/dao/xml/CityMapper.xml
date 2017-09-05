@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.midland.web.dao.CityMapper">
+
+ 	<resultMap id="BaseResultMap" type="com.midland.web.model.City" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+		<result column="parent_id" property="parentId" jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id,city_name,parent_id
+	</sql>
+
+	<select id="selectById" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from city
+		 where id= #{id}
+	</select>
+
+	<delete id="deleteById" >
+		delete from city
+		 where id= #{id}
+	</delete>
+
+	<update id="updateById" >
+		update city 
+		<set>
+		<include refid="update_option"/>
+		</set>
+
+		 where id= #{id}
+	</update>
+
+	<select id="findCityList" parameterType="com.midland.web.model.City" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from city
+		where 1=1
+		<include refid="select_option" />
+	</select>
+
+	<insert id="insertCity" parameterType="com.midland.web.model.City">
+		insert into city
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="cityName != null">
+				city_name,
+			</if>
+			<if test="parentId != null">
+				parent_id,
+			</if>
+		</trim>
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="cityName != null">
+				city_name= #{cityName,jdbcType=VARCHAR},
+			</if>
+			<if test="parentId != null">
+				parent_id= #{parentId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+
+	<sql id="update_option">
+		<if test="cityName != null">
+			city_name= #{cityName,jdbcType=VARCHAR},
+		</if>
+		<if test="parentId != null">
+			parent_id= #{parentId,jdbcType=INTEGER},
+		</if>
+	</sql>
+
+	<sql id="select_option">
+		<if test="id != null">
+			 and id= #{id,jdbcType=INTEGER}
+		</if>
+		<if test="cityName != null">
+			 and city_name= #{cityName,jdbcType=VARCHAR}
+		</if>
+		<if test="parentId != null">
+			 and parent_id= #{parentId,jdbcType=INTEGER}
+		</if>
+	</sql>
+
+</mapper>

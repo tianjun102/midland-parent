@@ -1,0 +1,579 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@include file="../layout/tablib.jsp"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+
+<c:set var="ctx" value="${pageContext['request'].contextPath}" />
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" class="no-js">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+<base href="<%=basePath%>">
+<meta charset="utf-8" />
+<title>修改产品</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta content="" name="description" />
+<meta content="" name="author" />
+<meta name="MobileOptimized" content="320">
+
+<link rel="stylesheet" href="${ctx}/assets/css/easydropdown.css" />
+<script type="text/javascript" src="${ctx}/assets/scripts/jquery.min.js"></script>
+<script type="text/javascript" src="${ctx}/assets/scripts/jquery.easydropdown.js"></script>
+<script type="text/javascript" src="${ctx}/assets/scripts/bootstrap.min.js"></script>
+<link rel="shortcut icon" href="${ctx}/assets/app/img/favicon.ico" />
+<link rel="stylesheet" href="${ctx }/assets/css/common.css">
+<script type="text/javascript"src="${ctx}/assets/scripts/layer/layer.js"></script>
+<script type="text/javascript"src="${ctx}/assets/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript"src="${ctx}/assets/UEditor/ueditor.config.js"></script>
+<script type="text/javascript"src="${ctx}/assets/UEditor/ueditor.all.js"></script>
+<script type="text/javascript"src="${ctx}/assets/UEditor/lang/zh-cn/zh-cn.js"></script>
+</head>
+<!-- END HEAD -->
+
+<!-- BEGIN BODY -->
+<body>
+
+	<div class = "box">
+	<section class="content" style = "width:auto;">
+		<p class="detail-title">
+			<span>产品修改</span>
+		</p>
+		<form action="${ctx}/rest/product/forModifyProduct"
+			id="ModifyProductForm" enctype="multipart/form-data" method="post">
+			<ul class="adminfo row">
+				<li><span>分类：</span> <select name="catId" class="dropdown"
+					id="catId" disabled="disabled">
+						<option value="" class="label">${product.catName}</option>
+				</select> <label style="color: red"  class = "_star ">*</label></li>
+				<li><span>产品名称：</span> <input type="text" name="productName"
+					value="${product.productName}" /> <input type="hidden"
+					name="productId" value="${product.productId}" /> <input
+					type="hidden" value="${product.prodStatus}" name="prodStatus" /> <label
+					style="color: red" class = "_star ">*</label></li>
+				<li><span>产品编码：</span><input type="text" name="productCode"
+					value="${product.productCode}" /><label style="color: red"  class = "_star ">*</label></li>
+				<li><span>市场价：</span><input type="text" name="marketPrice"
+					value="${product.marketPrice}"><label style="color: red"  class = "_star ">*</label></li>
+				<li><span>进店价：</span><input type="text" name=salePrice
+					value="${product.salePrice}"><label style="color: red"  class = "_star ">*</label></li>
+				<li><span>起订数：</span><input type="text" name="miniNum"
+					value="${product.miniNum}"><label style="color: red"  class = "_star ">*</label></li>
+				<li><span>单位：</span><input type="text" name="unit"
+					value="${product.unit}"><label style="color: red"  class = "_star ">*</label></li>
+				<li><span>质保维护：</span> <textarea id="warrantyNotes"
+						name="warrantyNotes"
+						style="width: 45%; height: 150px; resize: none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;">${product.warrantyNotes}</textarea>
+					<label style="color: red"  class = "_star ">*</label></li>
+				<li><span>图片：</span>
+					<div id="img" style = "overflow:hidden;">
+								<c:forEach items="${product.picList}" var="pic"
+									varStatus="status">
+									<div class="imgbox1">
+										<label class="close1"  style="display: inline;" onclick="imgDelete(this)" >X<input type="hidden" value="${pic.picId}"/></label>
+										<div class="imgnum1" onclick="changeMsg()" >
+											<c:if test="${!empty pic.thumbUrl}">
+												<img src="${ctx}/assets/img/btn.png" class="img1" style="display: none;">
+												<img src="${pic.thumbUrl}" class="img2">
+											</c:if>
+											<c:if test="${empty pic.thumbUrl}">
+												<img src="${ctx}/assets/img/btn.png" class="img1" />
+												<img src="" class="img2" >
+											</c:if>
+											<img src="" class="img2" />
+										</div>
+									</div>
+								</c:forEach>
+								<c:if test="${product.picList.size()<5 }">
+									<div class="imgbox1">
+										<div class="imgnum">
+											<input name="file1" type="file" class="filepath1"onchange="imgChange(this)" />
+											<label class="close1"  onclick="imgDelete(this)">X</label>  
+											<img src="${ctx}/assets/img/btn.png" class="img1" /> 
+											<img src="" class="img2" />
+										</div>
+									</div>
+								</c:if>
+						
+					</div>
+					<div style = "font-size:12px; color:#666; margin-top:10px; text-indent: 70px;">(请添加大小不超过500K、分辨率为416 * 416 Pix、图片格式为JPG或PNG的图片)</div>
+				</li>
+				<li><span>产品属性：</span>
+					<div id="showDiv" style="width: 35%; overflow:hidden;">
+						<table id='showTable' class='table table-bordered table-add'
+							style='float:left;'>
+							<c:choose>
+								<c:when test="${!empty product.propList}">
+									<c:forEach var="perp" items="${product.propList}"
+										varStatus="status">
+										<input type='hidden' name='attrList[${status.index}].propId'
+											value='${perp.propId}' />
+										<input type='hidden' name='attrList[${status.index}].attrId'
+											value='${perp.attrId}' />
+										<c:if test="${perp.propType=='text'}">
+											<tr>
+												<td style="width: 35%;text-align:left;">${perp.propName}</td>
+												<td><input name='attrList[${status.index}].propValue'
+													type="text" value="${perp.aPropValue}" /></td>
+											</tr>
+										</c:if>
+										<c:if test="${perp.propType=='checkbox'}">
+											<tr>
+												<td style="width: 35%; text-align:left;">${perp.propName}</td>
+												<td><input type='hidden'name='attrList[${status.index}].propValue' /> 
+													<c:forEach var="name" items="${perp.arrNameValue}">
+														<input type='checkbox'name="showattrList[${status.index}].propValue"value='${name}'
+														<c:forEach var="value" items="${perp.arrValue}">
+																<c:if test="${name==value}">
+																	checked="checked"
+				 								 				</c:if>
+														</c:forEach>
+														 >${name}
+													</c:forEach>
+												</td>
+											</tr>
+										</c:if>
+										<c:if test="${perp.propType=='option'}">
+											<tr>
+												<td style="width: 35%;text-align:left;">${perp.propName}</td>
+												<td><input type='hidden' name='"+value+"' /> <select
+													class="dropdown" name="attrList[${status.index}].propValue">
+														<c:forEach var="name" items="${perp.arrNameValue}">
+															<c:if test="${name==perp.aPropValue}">
+																<option value='${name}' selected="selected">${name}</option>
+															</c:if>
+															<c:if test="${name!=perp.aPropValue}">
+																<option value='${name}'>${name}</option>
+															</c:if>
+														</c:forEach>
+												</select></td>
+											</tr>
+										</c:if>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<tr>
+										<td colspan="2">暂时没有属性!</td>
+									</tr>
+								</c:otherwise>
+							</c:choose>
+						</table>
+					</div></li>
+				<li><span>产品描述：</span> <textarea name="prodDetails"
+						id="myEditor" style="width: 92%;min-height: 350px; float:left;">${product.prodDetails}</textarea></li>
+				<li><span>上架状态：</span> 
+				
+					<c:if test="${product.prodStatus==2}">
+						<input type="radio" class="redBtn" name="isNowTime" value="3" checked="checked" onclick="upProduct(this.value)" />
+						<span style = "text-align:left;">已下架</span>&nbsp;&nbsp; 
+					</c:if>
+					<input type="radio" class="redBtn" name="isNowTime" value="1"
+					<c:if test="${product.isNowTime==1 && product.prodStatus!=2 }">checked="checked"</c:if>
+					onclick="upProduct(this.value)" />
+					<span style = "text-align:left;">立即上架</span>&nbsp;&nbsp; 
+					<input type="radio" style = "margin-left:30px;" name="isNowTime" value="2" <c:if test="${product.isNowTime==2 && product.prodStatus!=2}">checked="checked"</c:if>onclick="upProduct(this.value)" /><span style = "text-align:left;">定时上架</span>&nbsp;&nbsp;
+					<div id="dateDiv"
+						style="vertical-align: middle;
+						<c:choose>
+							<c:when test="${product.isNowTime==2}">
+								display: block;
+							</c:when>
+							<c:otherwise>
+								display: none;
+							</c:otherwise>
+						</c:choose>
+							
+					">
+						<input class="Wdate date"
+							onFocus="WdatePicker({isShowClear:false,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm',minDate:'%y-%M-%d %H:%m'})"
+							name="planSaleTime" value="${product.planSaleTime}"
+							id="planSaleTime" /> <label style="color: red"  class = "_star ">*</label>
+					</div></li>
+				<li><span>橱窗推荐：</span> <input type="radio" class="redBtn"
+					name="isRecommend" value="1"
+					<c:if test="${product.isRecommend==1}">checked="checked"</c:if> /><span style = "text-align:left;">推荐</span>&nbsp;&nbsp;
+					<input style = "margin-left:6px;" type="radio" name="isRecommend" value="0"
+					<c:if test="${product.isRecommend==0}">checked="checked"</c:if> /><span style = "text-align:left;">不推荐</span>
+				</li>
+				<li><span>浏览授权：</span> <input type="radio" class="redBtn"
+					name="isShowAll" value="1"
+					<c:if test="${product.isShowAll==1}">checked="checked"</c:if> /><span style = "text-align:left;">全部授权</span>&nbsp;&nbsp;
+					<input type="radio" name="isShowAll" value="0" style = "margin-left:6px;"
+					<c:if test="${product.isShowAll==0}">checked="checked"</c:if> /><span style = "text-align:left;">部分授权</span>
+				</li>
+				<li><span></span> <a target="contentF" class="public_btn bg2"
+					id="save" onclick="formSubmit()">发布</a> <a
+					style="margin-left: 20px"
+					href="${ctx}/rest/product/showProductIndex" target="contentF"
+					class="public_btn bg3" id="cancel">取消</a></li>
+			</ul>
+		</form>
+	</section>
+	</div>
+</body>
+<script type="text/javascript">
+	var ImgObj=new Image();   //建立一个图像对象	
+	var AllImgExt=".jpg|.jpeg|.gif|.bmp|.png|"//全部图片格式类型
+	var FileObj,ImgFileSize,ImgWidth,ImgHeight,FileExt,ErrMsg,FileMsg,HasCheked,IsImg//全局变量 图片相关属性
+	
+	//以下为限制变量
+	var AllowExt=".jpg|.jpeg|.png|" //允许上传的文件类型 ŀ为无限制 每个扩展名后边要加一个"|" 小写字母表示
+	var AllowImgFileSize=1;  //允许上传图片文件的大小 0为无限制  单位：M
+	var AllowImgWidth=225;   //允许上传的图片的宽度 ŀ为无限制　单位：px(像素)
+	var AllowImgHeight=140;   //允许上传的图片的高度 ŀ为无限制　单位：px(像素) 
+	function getObjectURL(file) {
+	    var url = null;
+	    if (window.createObjectURL != undefined) {
+	        url = window.createObjectURL(file)
+	    } else if (window.URL != undefined) {
+	        url = window.URL.createObjectURL(file)
+	    } else if (window.webkitURL != undefined) {
+	        url = window.webkitURL.createObjectURL(file)
+	    }
+	    return url
+	 }
+		
+
+	function changeMsg(){
+		layer.msg("该图片已上传，只能删除！", {icon : 2});
+	}
+	
+	
+	
+	function imgChange(img) {
+		FileExt=img.value.substr(img.value.lastIndexOf(".")).toLowerCase();
+		console.log(FileExt);
+		if(AllowExt!=0&&AllowExt.indexOf(FileExt+"|")==-1){ //判断文件类型是否允许上传
+		    ErrMsg="\n该文件类型不允许上传。请上传 "+AllowExt+" 类型的文件，当前文件类型为"+FileExt;
+		    $(img).val("");
+		    layer.alert(ErrMsg);
+		    return false;
+		}
+	    ImgFileSize=img.files.item(0).size;
+	 	ImgFileSize=Math.round(ImgFileSize*1000/(1024*1024))/1000;//取得图片文件的大小
+	 	if(ImgFileSize>1){
+		 		layer.alert("图片大小为"+ImgFileSize+"M，请上传小于1M的图片！");
+		 		return false;
+	 	}
+		var srcs = getObjectURL(img.files[0]); //获取路径
+
+		var index = $("#img input:file").length + 1;
+		$("#img .close1").each(function (){
+			$(this).css('display','inline'); 
+			//$(this).bind('click',imgDelete($(this).parent()));
+		})
+		
+		var htmlImg = '<div class="imgbox1">' 
+						+ '<div class="imgnum1">'
+						+ '<input type="file" name="file' + index+ '" class="filepath1"  onchange="imgChange(this)"/>'
+						+ '<label class="close1" onclick="imgDelete(this)">X</label>'
+						+ '<img src="${ctx}/assets/img/btn.png" class="img1" />'
+						+ '<img src="" class="img2" />' 
+						+ '</div>' 
+					+ '</div>';
+				
+		
+		/**
+		 * 判断是新增操作，还是编辑操作
+		 */
+		var _name = $(img).parent()[0].children[0].name;
+		var _index = _name.substr(4, 1);
+		if (_index >= $("#img input:file").length) {
+			//新增操作添加图片，显示
+			$(img).parent().find(".img2").attr('src', srcs);
+			$(img).parent().parent().after(htmlImg);
+			$(img).parent().find(".img1").hide(); //this指的是input
+			$(img).parent().find('.close1').show();
+
+			if ($('.imgbox1').length == 6) {
+				$("#img div:last").hide();
+			}
+		} else {
+			//编辑操作，只更新src
+			$(img).parent().find(".img2").attr('src', srcs);
+		}
+	}
+
+	function imgDelete(span) {
+		//
+		var pid  = $(span).find("input:hidden").val();
+		if(pid==null || pid == undefined){
+			$(span).hide(); //this指的是span
+			$(span).next().nextAll(".img2").hide();
+			$(span).next().nextAll(".img1").show();
+			$(span).parent().parent().remove();
+			$("#img div:last").show();
+		  	$("#img input:file").each(function(j) {
+		    		$(this).attr("name","file"+(j+1));
+	    	})
+		}else{
+			
+			layer.open({
+				type : 1,
+				skin : 'layer-style',
+				area: ['350px','215px'],
+				shadeClose : false, //点击遮罩关闭
+				title : [ '删除图片' ],
+				resize : false,
+				scrollbar : false,
+				content : '<section class = "content" style = "border:none;width:auto;">'
+						+ '<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">您是否确定删除该图片?</p>'
+						+ '</section>',
+				btn : [ '确定', '取消' ],
+				yes : function(index) {
+						$.ajax({
+							type : "post",
+							url : "${ctx}/rest/product/forRemovePic?prodId="+ pid,
+							cache : false,
+							async : false, // 此处必须同步
+							dataType : "json",
+							success : function(xmlobj) {
+								if (xmlobj.flag == 1) {
+									layer.msg("删除成功！", {icon : 1});
+									$(span).hide(); //this指的是span
+									$(span).next().nextAll(".img2").hide();
+									$(span).next().nextAll(".img1").show();
+									$(span).parent().remove();
+									$("#img div:last").show();
+									$("#img input:file").each(function(j) {
+								    		$(this).attr("name","file"+(j+1));
+							    	})
+								}
+								if (xmlobj.flag == 0) {
+									layer.msg("删除失败！！", {icon : 7});
+								}
+								layer.close(index);
+							}
+						});
+						
+				}
+					,success: function (layero) {
+				      var btn = layero.find('.layui-layer-btn');
+				      btn.css('text-align', 'center');
+				  }
+			})
+			
+			
+		}
+		
+	}	
+
+	UE.getEditor('myEditor');
+
+	function formChange() {
+		var arr = $("input[type='checkbox']");
+		var content = "";
+		for (var i = 0; i < arr.length; i++) {
+			var str = "";
+			var checkbox = arr[i];
+			var boxId = arr.eq(i).attr("name");
+			var valueId = boxId.substr(4);
+			if (content.indexOf(boxId) != -1) {
+				continue;
+			}
+			content = content + boxId;
+			console.log(content);
+			console.log(valueId);
+			var valueStr = "";
+			 $("input[name='"+boxId+"']:checked").each(function () {
+				 valueStr = valueStr +  " "+this.value 
+	         });
+			 $("input[name='"+valueId+"']").val(valueStr.trim());
+
+		}
+
+	}
+	function  changeFile(){
+		$("input[type='file']").each(function (){
+			if($(this).val==""){
+				$(this).remove();
+			}
+		})
+		$("#img div:last").remove();
+	}
+	function formSubmit() {
+		var b = checkForm();
+		if(!b){
+			return false;
+		}
+		formChange();
+		changeFile();
+		var isNowTime = $("input:radio:checked").val();//上架状态
+		var msg = "";
+		if(isNowTime=="2"){
+			msg="定时上架";
+		}else{
+			msg="保存";
+		}
+		var form = document.getElementById("ModifyProductForm");
+		var data = new FormData(form);
+		$.ajax({
+			url : "${ctx}/rest/product/forModifyProduct",
+			type : 'post', //数据发送方式 
+			cache : false,
+			contentType : false,
+			processData : false,
+			dataType: "json",
+			data : data,
+			async : false,
+			success : function(result) {
+				if (result.flag == 1) {
+					layer.msg(msg+"成功！", {icon : 1});
+					$('#save').removeAttr("onclick");
+					setTimeout(function() {window.open("${ctx}/rest/product/showProductIndex","contentF");}, 2000);
+				} else {
+					layer.msg(msg+"失败！", {icon : 2});
+				}
+			},
+			error : function() {
+				layer.msg(msg+"失败！", {icon : 2});
+			}
+		});
+	}
+
+	function upProduct(obj) {
+		if (obj == "2") {
+			$("input[name='prodStatus']").val("3");
+			$("input[name='planSaleTime']").val("");
+			$("#dateDiv").show();
+			$("#dateDiv").css("display","inline-block");
+		} else {
+			$("input[name='prodStatus']").val(obj);
+			$("#dateDiv").hide();
+		}
+	}
+
+	//数据校验
+	function checkForm() {
+		var productName = $("input[name='productName']").val(); // 产品名称
+		var productCode = $("input[name='productCode']").val(); //产品编码
+		var marketPrice = $("input[name='marketPrice']").val();//市场价
+		var salePrice = $("input[name='salePrice']").val();//进店价
+		var miniNum = $("input[name='miniNum']").val();//起订数
+		var unit = $("input[name='unit']").val();//单位
+		var warrantyNotes = $("#warrantyNotes").val();//质保维护
+		var myEditor = $("#myEditor").val();//产品描述
+		var isNowTime = $("input:radio:checked").val();//上架状态
+		var planSaleTime = $("input[name='planSaleTime']").val();//上架状态
+
+		//产品名称
+		if (productName.trim() == "" || productName == null) {
+			layer.msg("产品名称不能为空！");
+			return false;
+		}
+		if (!getStrLenght(productName, 50)) {
+			layer.msg("产品名称长度不能超过50个字符！");
+			return false;
+		}
+		//产品编码
+		if (productCode.trim() == "" || productCode == null) {
+			layer.msg("产品编码不能为空！");
+			return false;
+		}
+		if (!getStrLenght(productCode, 20)) {
+			layer.msg("产品编码长度不能超过20个字符！");
+			return false;
+		}
+		//市场价
+		if (marketPrice.trim() == "" || marketPrice == null) {
+			layer.msg("市场价不能为空！");
+			return false;
+		}
+		if (!getStrLenght(marketPrice, 10)) {
+			layer.msg("市场价长度不能超过10个字符！");
+			return false;
+		}
+		if (!moneyValidate(marketPrice) || marketPrice <= 0) {
+			layer.msg("请输出正确的市场价！");
+			return false;
+		}
+		//进店价
+		if (salePrice.trim() == "" || salePrice == null) {
+			layer.msg("进店价不能为空！");
+			return false;
+		}
+		if (!getStrLenght(salePrice, 10)) {
+			layer.msg("进店价长度不能超过10个字符！");
+			return false;
+		}
+		if (!moneyValidate(salePrice) || salePrice <= 0) {
+			layer.msg("请输出正确的进店价！");
+			return false;
+		}
+		//起订数
+		if (miniNum.trim() == "" || miniNum == null) {
+			layer.msg("起订数不能为空！");
+			return false;
+		}
+		if (isNaN(miniNum) || miniNum <= 0) {
+			layer.msg("请输入正确的起订数！");
+			return false;
+		}
+		//单位
+		if (unit.trim() == "" || unit == null) {
+			layer.msg("单位不能为空！");
+			return false;
+		}
+		if (!getStrLenght(unit, 30)) {
+			layer.msg("单位长度不能超过30个字符！");
+			return false;
+		}
+		//质保维护
+		if (warrantyNotes.trim() == "" || warrantyNotes == null) {
+			layer.msg("质保维护不能为空！");
+			return false;
+		}
+		if (!getStrLenght(warrantyNotes, 500)) {
+			layer.msg("质保维护不能超过500个字符！");
+			return false;
+		}
+		/* //产品描述
+		if(myEditor.trim() =="" || myEditor==null){
+			layer.msg("产品描述不能为空！");
+			return false;
+		} */
+		var imgLength = $(".imgbox1").length;
+		if(imgLength<=1){
+			layer.msg("产品图片不能为空！");
+			return false;
+		}
+		//上架状态
+		if (isNowTime == 2) {
+			if (planSaleTime.trim() == "" || planSaleTime == null) {
+				layer.msg("上架时间不能为空！");
+				return false;
+			}
+		}
+
+		if (isNowTime == 3) {
+			$("input:radio:checked").val("");
+		}
+		
+		return true;
+	}
+
+	//长度校验 
+	function getStrLenght(message, MaxLenght) {
+		var strlenght = 0; //初始定义长度为0
+		var txtval = message.trim();
+		for (var i = 0; i < txtval.length; i++) {
+			strlenght = strlenght + 1; //一个字符
+		}
+		return strlenght > MaxLenght ? false : true;
+	}
+
+	//金额校验  
+	function moneyValidate(money) {
+		var reg = /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/;
+		return reg.test(money);
+	}
+</script>
+</html>

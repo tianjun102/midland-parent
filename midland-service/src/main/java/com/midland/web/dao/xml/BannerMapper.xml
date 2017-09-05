@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.midland.web.dao.BannerMapper">
+
+ 	<resultMap id="BaseResultMap" type="com.midland.web.model.Banner" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="banner_img" property="bannerImg" jdbcType="VARCHAR" />
+		<result column="banner_linkurl" property="bannerLinkurl" jdbcType="VARCHAR" />
+		<result column="img_desc" property="imgDesc" jdbcType="VARCHAR" />
+		<result column="sort_order" property="sortOrder" jdbcType="INTEGER" />
+		<result column="enabled" property="enabled" jdbcType="INTEGER" />
+		<result column="city_id" property="cityId" jdbcType="VARCHAR" />
+		<result column="source" property="source" jdbcType="INTEGER" />
+		<result column="model" property="model" jdbcType="VARCHAR" />
+		<result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+		<result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+		<result column="position" property="position" jdbcType="VARCHAR" />
+		<result column="video_url" property="videoUrl" jdbcType="VARCHAR" />
+		<result column="detail" property="detail" jdbcType="LONGVARCHAR" />
+		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+		<result column="city_name" property="cityName" jdbcType="INTEGER" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id,banner_img,banner_linkurl,img_desc,sort_order,enabled,city_id,source,model,DATE_FORMAT(start_time,'%Y-%m-%d %H:%i:%s') start_time,DATE_FORMAT(end_time,'%Y-%m-%d %H:%i:%s') end_time,position,video_url,detail,is_delete,city_name,clik_num,type
+	</sql>
+
+	<select id="selectById" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from banner
+		 where id= #{id}
+	</select>
+
+	<delete id="deleteById" >
+		delete from banner
+		 where id= #{id}
+	</delete>
+
+	<update id="updateById" >
+		update banner 
+		<set>
+		<include refid="update_option"/>
+		</set>
+
+		 where id= #{id}
+	</update>
+
+	<select id="findBannerList" parameterType="com.midland.web.model.Banner" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from banner
+		where 
+		is_delete=0
+		<include refid="select_option" />
+	</select>
+
+	<insert id="insertBanner" parameterType="com.midland.web.model.Banner">
+		insert into banner
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="bannerImg != null">
+				banner_img,
+			</if>
+			<if test="bannerLinkurl != null">
+				banner_linkurl,
+			</if>
+			<if test="imgDesc != null">
+				img_desc,
+			</if>
+			<if test="sortOrder != null">
+				sort_order,
+			</if>
+			<if test="enabled != null">
+				enabled,
+			</if>
+			<if test="cityId != null">
+				city_id,
+			</if>
+			<if test="source != null">
+				source,
+			</if>
+			<if test="model != null">
+				model,
+			</if>
+			<if test="startTime != null">
+				start_time,
+			</if>
+			<if test="endTime != null">
+				end_time,
+			</if>
+			<if test="position != null">
+				position,
+			</if>
+			<if test="videoUrl != null">
+				video_url,
+			</if>
+			<if test="detail != null">
+				detail,
+			</if>
+			<if test="isDelete != null">
+				is_delete,
+			</if>
+			<if test="cityName != null">
+				city_name,
+			</if>
+			<if test="clikNum != null">
+				clik_num,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+		</trim>
+		values
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="bannerImg != null">
+				#{bannerImg,jdbcType=VARCHAR},
+			</if>
+			<if test="bannerLinkurl != null">
+				#{bannerLinkurl,jdbcType=VARCHAR},
+			</if>
+			<if test="imgDesc != null">
+				#{imgDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="sortOrder != null">
+				#{sortOrder,jdbcType=INTEGER},
+			</if>
+			<if test="enabled != null">
+				#{enabled,jdbcType=INTEGER},
+			</if>
+			<if test="cityId != null">
+				#{cityId,jdbcType=VARCHAR},
+			</if>
+			<if test="source != null">
+				#{source,jdbcType=INTEGER},
+			</if>
+			<if test="model != null">
+				#{model,jdbcType=VARCHAR},
+			</if>
+			<if test="startTime != null">
+				#{startTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endTime != null">
+				#{endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="position != null">
+				#{position,jdbcType=VARCHAR},
+			</if>
+			<if test="videoUrl != null">
+				#{videoUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="detail != null">
+				#{detail,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="isDelete != null">
+				#{isDelete,jdbcType=INTEGER},
+			</if>
+		    <if test="cityName != null">
+			 	#{cityName,jdbcType=VARCHAR},
+			</if>
+			 <if test="clikNum != null">
+			    #{clikNum,jdbcType=INTEGER},
+			 </if>
+			 <if test="type != null">
+				 #{type,jdbcType=INTEGER},
+			 </if>
+		</trim>
+	</insert>
+
+	<sql id="update_option">
+		<if test="bannerImg != null">
+			banner_img= #{bannerImg,jdbcType=VARCHAR},
+		</if>
+		<if test="bannerLinkurl != null">
+			banner_linkurl= #{bannerLinkurl,jdbcType=VARCHAR},
+		</if>
+		<if test="imgDesc != null">
+			img_desc= #{imgDesc,jdbcType=VARCHAR},
+		</if>
+		<if test="sortOrder != null">
+			sort_order= #{sortOrder,jdbcType=INTEGER},
+		</if>
+		<if test="enabled != null">
+			enabled= #{enabled,jdbcType=INTEGER},
+		</if>
+		<if test="cityId != null">
+			city_id= #{cityId,jdbcType=VARCHAR},
+		</if>
+		<if test="source != null">
+			source= #{source,jdbcType=INTEGER},
+		</if>
+		<if test="model != null">
+			model= #{model,jdbcType=VARCHAR},
+		</if>
+		<if test="startTime != null">
+			start_time= #{startTime,jdbcType=TIMESTAMP},
+		</if>
+		<if test="endTime != null">
+			end_time= #{endTime,jdbcType=TIMESTAMP},
+		</if>
+		<if test="position != null">
+			position= #{position,jdbcType=VARCHAR},
+		</if>
+		<if test="videoUrl != null">
+			video_url= #{videoUrl,jdbcType=VARCHAR},
+		</if>
+		<if test="detail != null">
+			detail= #{detail,jdbcType=LONGVARCHAR},
+		</if>
+		<if test="isDelete != null">
+			is_delete= #{isDelete,jdbcType=INTEGER},
+		</if>
+		<if test="cityName != null">
+			city_name= #{cityName,jdbcType=INTEGER},
+		</if>
+		<if test="clikNum != null">
+			clik_num= #{clikNum,jdbcType=INTEGER},
+		</if>
+		<if test="type != null">
+			type= #{type,jdbcType=INTEGER},
+		</if>
+	</sql>
+
+	<sql id="select_option">
+		<if test="id != null">
+			 and id= #{id,jdbcType=INTEGER}
+		</if>
+		<if test="bannerImg != null">
+			 and banner_img= #{bannerImg,jdbcType=VARCHAR}
+		</if>
+		<if test="bannerLinkurl != null">
+			 and banner_linkurl= #{bannerLinkurl,jdbcType=VARCHAR}
+		</if>
+		<if test="imgDesc != null">
+			 and img_desc= #{imgDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="sortOrder != null">
+			 and sort_order= #{sortOrder,jdbcType=INTEGER}
+		</if>
+		<if test="enabled != null">
+			 and enabled= #{enabled,jdbcType=INTEGER}
+		</if>
+		<if test="cityId != null">
+			 and city_id= #{cityId,jdbcType=VARCHAR}
+		</if>
+		<if test="source != null">
+			 and source= #{source,jdbcType=INTEGER}
+		</if>
+		<if test="model != null">
+			 and model= #{model,jdbcType=VARCHAR}
+		</if>
+		<if test="startTime != null">
+			 and start_time= #{startTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="endTime != null">
+			 and end_time= #{endTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="position != null">
+			 and position= #{position,jdbcType=VARCHAR}
+		</if>
+		<if test="videoUrl != null">
+			 and video_url= #{videoUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="detail != null">
+			 and detail= #{detail,jdbcType=LONGVARCHAR}
+		</if>
+		<if test="isDelete != null">
+			 and is_delete= #{isDelete,jdbcType=INTEGER}
+		</if>
+		<if test="cityName != null">
+			and city_name= #{cityName,jdbcType=INTEGER}
+		</if>
+		<if test="clikNum != null">
+			and clik_num= #{clikNum,jdbcType=INTEGER}
+		</if>
+		<if test="type != null">
+			and type= #{type,jdbcType=INTEGER}
+		</if>
+	</sql>
+
+</mapper>

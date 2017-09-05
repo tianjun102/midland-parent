@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.midland.web.dao.LinkUrlManagerMapper">
+
+ 	<resultMap id="BaseResultMap" type="com.midland.web.model.LinkUrlManager" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="city_id" property="cityId" jdbcType="VARCHAR" />
+		<result column="link_name" property="linkName" jdbcType="VARCHAR" />
+		<result column="link_url" property="linkUrl" jdbcType="VARCHAR" />
+		<result column="contacts" property="contacts" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="remarks" property="remarks" jdbcType="LONGVARCHAR" />
+		<result column="is_show" property="isShow" jdbcType="INTEGER" />
+		<result column="order_by" property="orderBy" jdbcType="INTEGER" />
+		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+		<result column="source" property="source" jdbcType="INTEGER" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id,city_id,link_name,link_url,contacts,phone,remarks,is_show,order_by,is_delete,source,city_name
+	</sql>
+
+	<select id="selectById" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from link_url_manager
+		 where id= #{id}
+	</select>
+
+	<delete id="deleteById" >
+		delete from link_url_manager
+		 where id= #{id}
+	</delete>
+
+	<update id="updateById" >
+		update link_url_manager 
+		<set>
+		<include refid="update_option"/>
+		</set>
+
+		 where id= #{id}
+	</update>
+
+	<select id="findLinkUrlManagerList" parameterType="com.midland.web.model.LinkUrlManager" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from link_url_manager
+		where 
+		is_delete=0
+		<include refid="select_option" />
+	</select>
+
+	<insert id="insertLinkUrlManager" parameterType="com.midland.web.model.LinkUrlManager">
+		insert into link_url_manager
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="cityId != null">
+				city_id,
+			</if>
+			<if test="linkName != null">
+				link_name,
+			</if>
+			<if test="linkUrl != null">
+				link_url,
+			</if>
+			<if test="contacts != null">
+				contacts,
+			</if>
+			<if test="phone != null">
+				phone,
+			</if>
+			<if test="remarks != null">
+				remarks,
+			</if>
+			<if test="isShow != null">
+				is_show,
+			</if>
+			<if test="orderBy != null">
+				order_by,
+			</if>
+			<if test="isDelete != null">
+				is_delete,
+			</if>
+			<if test="source != null">
+				source,
+			</if>
+			<if test="cityName != null">
+				city_name,
+			</if>
+		</trim>
+		values
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="cityId != null">
+				#{cityId,jdbcType=VARCHAR},
+			</if>
+			<if test="linkName != null">
+				#{linkName,jdbcType=VARCHAR},
+			</if>
+			<if test="linkUrl != null">
+				#{linkUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="contacts != null">
+				#{contacts,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				#{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="remarks != null">
+				#{remarks,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="isShow != null">
+				#{isShow,jdbcType=INTEGER},
+			</if>
+			<if test="orderBy != null">
+				#{orderBy,jdbcType=INTEGER},
+			</if>
+			<if test="isDelete != null">
+				#{isDelete,jdbcType=INTEGER},
+			</if>
+			<if test="source != null">
+				#{source,jdbcType=INTEGER},
+			</if>
+			<if test="cityName != null">
+				#{cityName,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<sql id="update_option">
+		<if test="cityId != null">
+			city_id= #{cityId,jdbcType=VARCHAR},
+		</if>
+		<if test="linkName != null">
+			link_name= #{linkName,jdbcType=VARCHAR},
+		</if>
+		<if test="linkUrl != null">
+			link_url= #{linkUrl,jdbcType=VARCHAR},
+		</if>
+		<if test="contacts != null">
+			contacts= #{contacts,jdbcType=VARCHAR},
+		</if>
+		<if test="phone != null">
+			phone= #{phone,jdbcType=VARCHAR},
+		</if>
+		<if test="remarks != null">
+			remarks= #{remarks,jdbcType=LONGVARCHAR},
+		</if>
+		<if test="isShow != null">
+			is_show= #{isShow,jdbcType=INTEGER},
+		</if>
+		<if test="orderBy != null">
+			order_by= #{orderBy,jdbcType=INTEGER},
+		</if>
+		<if test="isDelete != null">
+			is_delete= #{isDelete,jdbcType=INTEGER},
+		</if>
+		<if test="source != null">
+			source= #{source,jdbcType=INTEGER},
+		</if>
+		<if test="cityName != null">
+			city_name= #{cityName,jdbcType=VARCHAR},
+		</if>
+	</sql>
+
+	<sql id="select_option">
+		<if test="id != null">
+			 and id= #{id,jdbcType=INTEGER}
+		</if>
+		<if test="cityId != null">
+			 and city_id= #{cityId,jdbcType=VARCHAR}
+		</if>
+		<if test="linkName != null">
+			 and link_name= #{linkName,jdbcType=VARCHAR}
+		</if>
+		<if test="linkUrl != null">
+			 and link_url= #{linkUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="contacts != null">
+			 and contacts= #{contacts,jdbcType=VARCHAR}
+		</if>
+		<if test="phone != null">
+			 and phone= #{phone,jdbcType=VARCHAR}
+		</if>
+		<if test="remarks != null">
+			 and remarks= #{remarks,jdbcType=LONGVARCHAR}
+		</if>
+		<if test="isShow != null">
+			 and is_show= #{isShow,jdbcType=INTEGER}
+		</if>
+		<if test="orderBy != null">
+			 and order_by= #{orderBy,jdbcType=INTEGER}
+		</if>
+		<if test="isDelete != null">
+			 and is_delete= #{isDelete,jdbcType=INTEGER}
+		</if>
+		<if test="source != null">
+			 and source= #{source,jdbcType=INTEGER}
+		</if>
+		<if test="cityName != null">
+			 and city_name= #{cityName,jdbcType=VARCHAR}
+		</if>
+	</sql>
+
+</mapper>

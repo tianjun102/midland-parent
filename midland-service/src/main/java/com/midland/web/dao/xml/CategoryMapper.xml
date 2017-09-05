@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.midland.web.dao.CategoryMapper">
+
+ 	<resultMap id="BaseResultMap" type="com.midland.web.model.Category" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="cate_name" property="cateName" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="order_by" property="orderBy" jdbcType="INTEGER" />
+		<result column="parent_id" property="parentId" jdbcType="INTEGER" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+		<result column="city_id" property="cityId" jdbcType="VARCHAR" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id,cate_name,status,order_by,parent_id,type,is_delete,city_id,city_name
+	</sql>
+
+	<select id="selectCategoryById" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from category
+		 where id= #{id}
+	</select>
+
+	<delete id="deleteCategoryById" >
+		delete from category
+		 where id= #{id}
+	</delete>
+
+	<update id="updateCategoryById" >
+		update category 
+		<set>
+		<include refid="update_option"/>
+		</set>
+
+		 where id= #{id}
+	</update>
+
+	<select id="findCategoryList" parameterType="com.midland.web.model.Category" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from category
+		where 
+		is_delete=0
+		<include refid="select_option" />
+		ORDER BY order_by ASC
+	</select>
+
+	<insert id="insertCategory" parameterType="com.midland.web.model.Category">
+		<selectKey resultType="INTEGER" order="BEFORE" keyProperty="orderBy">
+			SELECT count(0)+1 as orderBy from category
+		</selectKey>
+		insert into category
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="cateName != null">
+				cate_name,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="orderBy != null">
+				order_by,
+			</if>
+			<if test="parentId != null">
+				parent_id,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="isDelete != null">
+				is_delete,
+			</if>
+			<if test="cityId != null">
+				city_id,
+			</if>
+			<if test="cityName != null">
+				city_name,
+			</if>
+		</trim>
+		values
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="cateName != null">
+				#{cateName,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="orderBy != null">
+				#{orderBy,jdbcType=INTEGER},
+			</if>
+			<if test="parentId != null">
+				#{parentId,jdbcType=INTEGER},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="isDelete != null">
+				#{isDelete,jdbcType=INTEGER},
+			</if>
+			 <if test="cityId != null">
+				 #{cityId},
+			 </if>
+			 <if test="cityName != null">
+				 #{cityName},
+			 </if>
+		</trim>
+	</insert>
+
+	<sql id="update_option">
+		<if test="cateName != null">
+			cate_name= #{cateName,jdbcType=VARCHAR},
+		</if>
+		<if test="status != null">
+			status= #{status,jdbcType=INTEGER},
+		</if>
+		<if test="orderBy != null">
+			order_by= #{orderBy,jdbcType=INTEGER},
+		</if>
+		<if test="parentId != null">
+			parent_id= #{parentId,jdbcType=INTEGER},
+		</if>
+		<if test="type != null">
+			type= #{type,jdbcType=INTEGER},
+		</if>
+		<if test="isDelete != null">
+			is_delete= #{isDelete,jdbcType=INTEGER},
+		</if>
+		<if test="cityId != null">
+			city_id= #{cityId},
+		</if>
+		<if test="cityName != null">
+			city_name= #{cityName},
+		</if>
+	</sql>
+
+	<sql id="select_option">
+		<if test="id != null">
+			 and id= #{id,jdbcType=INTEGER}
+		</if>
+		<if test="cateName != null">
+			 and cate_name= #{cateName,jdbcType=VARCHAR}
+		</if>
+		<if test="status != null">
+			 and status= #{status,jdbcType=INTEGER}
+		</if>
+		<if test="orderBy != null">
+			 and order_by= #{orderBy,jdbcType=INTEGER}
+		</if>
+		<if test="parentId != null">
+			 and parent_id= #{parentId,jdbcType=INTEGER}
+		</if>
+		<if test="type != null">
+			 and type= #{type,jdbcType=INTEGER}
+		</if>
+		<if test="isDelete != null">
+			 and is_delete= #{isDelete,jdbcType=INTEGER}
+		</if>
+		<if test="cityId != null">
+			and city_id= #{cityId}
+		</if>
+		<if test="cityName != null">
+			and city_name= #{cityName}
+		</if>
+	</sql>
+
+</mapper>

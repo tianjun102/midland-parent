@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.midland.web.dao.TradeFairMapper">
+
+ 	<resultMap id="BaseResultMap" type="com.midland.web.model.TradeFair" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="houses_id" property="housesId" jdbcType="INTEGER" />
+		<result column="introduction" property="introduction" jdbcType="LONGVARCHAR" />
+		<result column="is_show" property="isShow" jdbcType="INTEGER" />
+		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="operator_id" property="operatorId" jdbcType="INTEGER" />
+		<result column="operator_name" property="operatorName" jdbcType="VARCHAR" />
+		<result column="trade_type" property="tradeType" jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id,img_url,title,houses_id,introduction,is_show,is_delete,description,operator_id,operator_name,trade_type
+	</sql>
+
+	<select id="selectTradeFairById" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from trade_fair
+		 where id= #{id}
+	</select>
+
+	<delete id="deleteTradeFairById" >
+		delete from trade_fair
+		 where id= #{id}
+	</delete>
+
+	<update id="updateTradeFairById" >
+		update trade_fair 
+		<set>
+		<include refid="update_option"/>
+		</set>
+
+		 where id= #{id}
+	</update>
+
+	<select id="findTradeFairList" parameterType="com.midland.web.model.TradeFair" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from trade_fair
+		where 
+		is_delete=0
+		<include refid="select_option" />
+	</select>
+
+	<insert id="insertTradeFair" parameterType="com.midland.web.model.TradeFair">
+		insert into trade_fair
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="imgUrl != null">
+				img_url,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="housesId != null">
+				houses_id,
+			</if>
+			<if test="introduction != null">
+				introduction,
+			</if>
+			<if test="isShow != null">
+				is_show,
+			</if>
+			<if test="isDelete != null">
+				is_delete,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="operatorId != null">
+				operator_id,
+			</if>
+			<if test="operatorName != null">
+				operator_name,
+			</if>
+			<if test="tradeType != null">
+				trade_type,
+			</if>
+		</trim>
+		values
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="imgUrl != null">
+				#{imgUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="housesId != null">
+				#{housesId,jdbcType=INTEGER},
+			</if>
+			<if test="introduction != null">
+				#{introduction,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="isShow != null">
+				#{isShow,jdbcType=INTEGER},
+			</if>
+			<if test="isDelete != null">
+				#{isDelete,jdbcType=INTEGER},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorId != null">
+				#{operatorId,jdbcType=INTEGER},
+			</if>
+			<if test="operatorName != null">
+				#{operatorName,jdbcType=VARCHAR},
+			</if>
+			<if test="tradeType != null">
+				#{tradeType,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+
+	<sql id="update_option">
+		<if test="imgUrl != null">
+			img_url= #{imgUrl,jdbcType=VARCHAR},
+		</if>
+		<if test="title != null">
+			title= #{title,jdbcType=VARCHAR},
+		</if>
+		<if test="housesId != null">
+			houses_id= #{housesId,jdbcType=INTEGER},
+		</if>
+		<if test="introduction != null">
+			introduction= #{introduction,jdbcType=LONGVARCHAR},
+		</if>
+		<if test="isShow != null">
+			is_show= #{isShow,jdbcType=INTEGER},
+		</if>
+		<if test="isDelete != null">
+			is_delete= #{isDelete,jdbcType=INTEGER},
+		</if>
+		<if test="description != null">
+			description= #{description,jdbcType=VARCHAR},
+		</if>
+		<if test="operatorId != null">
+			operator_id= #{operatorId,jdbcType=INTEGER},
+		</if>
+		<if test="operatorName != null">
+			operator_name= #{operatorName,jdbcType=VARCHAR},
+		</if>
+		<if test="tradeType != null">
+			trade_type= #{tradeType,jdbcType=INTEGER},
+		</if>
+	</sql>
+
+	<sql id="select_option">
+		<if test="id != null">
+			 and id= #{id,jdbcType=INTEGER}
+		</if>
+		<if test="imgUrl != null">
+			 and img_url= #{imgUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="title != null">
+			 and title= #{title,jdbcType=VARCHAR}
+		</if>
+		<if test="housesId != null">
+			 and houses_id= #{housesId,jdbcType=INTEGER}
+		</if>
+		<if test="introduction != null">
+			 and introduction= #{introduction,jdbcType=LONGVARCHAR}
+		</if>
+		<if test="isShow != null">
+			 and is_show= #{isShow,jdbcType=INTEGER}
+		</if>
+		<if test="isDelete != null">
+			 and is_delete= #{isDelete,jdbcType=INTEGER}
+		</if>
+		<if test="description != null">
+			 and description= #{description,jdbcType=VARCHAR}
+		</if>
+		<if test="operatorId != null">
+			 and operator_id= #{operatorId,jdbcType=INTEGER}
+		</if>
+		<if test="operatorName != null">
+			 and operator_name= #{operatorName,jdbcType=VARCHAR}
+		</if>
+		<if test="tradeType != null">
+			 and trade_type= #{tradeType,jdbcType=INTEGER}
+		</if>
+	</sql>
+
+</mapper>

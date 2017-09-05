@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.midland.web.dao.QuotationMapper">
+
+ 	<resultMap id="BaseResultMap" type="com.midland.web.model.Quotation" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="data_time" property="dataTime" jdbcType="TIMESTAMP" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+		<result column="city_id" property="cityId" jdbcType="INTEGER" />
+		<result column="area_id" property="areaId" jdbcType="INTEGER" />
+		<result column="slice_id" property="sliceId" jdbcType="INTEGER" />
+		<result column="deal_num" property="dealNum" jdbcType="INTEGER" />
+		<result column="deal_acreage" property="dealAcreage" jdbcType="INTEGER" />
+		<result column="price" property="price" jdbcType="VARCHAR" />
+		<result column="sold_num" property="soldNum" jdbcType="INTEGER" />
+		<result column="sold_area" property="soldArea" jdbcType="VARCHAR" />
+		<result column="ring_ratio" property="ringRatio" jdbcType="VARCHAR" />
+		<result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+		<result column="is_new" property="isNew" jdbcType="INTEGER" />
+		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+		<result column="area_name" property="areaName" jdbcType="VARCHAR" />
+		<result column="slice_name" property="sliceName" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id,data_time,type,city_id,area_id,slice_id,deal_num,deal_acreage,price,sold_num,sold_area,ring_ratio,update_time,is_new,is_delete,city_name,area_name,slice_name
+	</sql>
+
+	<select id="selectQuotationById" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from quotation
+		 where id= #{id}
+	</select>
+
+	<delete id="deleteQuotationById" >
+		delete from quotation
+		 where id= #{id}
+	</delete>
+
+	<update id="updateQuotationById" >
+		update quotation 
+		<set>
+		<include refid="update_option"/>
+		</set>
+
+		 where id= #{id}
+	</update>
+
+	<select id="findQuotationList" parameterType="com.midland.web.model.Quotation" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from quotation
+		where 
+		is_delete=0
+		<include refid="select_option" />
+	</select>
+
+	<insert id="insertQuotation" parameterType="com.midland.web.model.Quotation">
+		insert into quotation
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="dataTime != null">
+				data_time,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="cityId != null">
+				city_id,
+			</if>
+			<if test="areaId != null">
+				area_id,
+			</if>
+			<if test="sliceId != null">
+				slice_id,
+			</if>
+			<if test="dealNum != null">
+				deal_num,
+			</if>
+			<if test="dealAcreage != null">
+				deal_acreage,
+			</if>
+			<if test="price != null">
+				price,
+			</if>
+			<if test="soldNum != null">
+				sold_num,
+			</if>
+			<if test="soldArea != null">
+				sold_area,
+			</if>
+			<if test="ringRatio != null">
+				ring_ratio,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="isNew != null">
+				is_new,
+			</if>
+			<if test="isDelete != null">
+				is_delete,
+			</if>
+			<if test="cityName != null">
+				city_name,
+			</if>
+			<if test="areaName != null">
+				area_name,
+			</if>
+			<if test="sliceName != null">
+				slice_name,
+			</if>
+		</trim>
+		values
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="dataTime != null">
+				#{dataTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="cityId != null">
+				#{cityId,jdbcType=INTEGER},
+			</if>
+			<if test="areaId != null">
+				#{areaId,jdbcType=INTEGER},
+			</if>
+			<if test="sliceId != null">
+				#{sliceId,jdbcType=INTEGER},
+			</if>
+			<if test="dealNum != null">
+				#{dealNum,jdbcType=INTEGER},
+			</if>
+			<if test="dealAcreage != null">
+				#{dealAcreage,jdbcType=INTEGER},
+			</if>
+			<if test="price != null">
+				#{price,jdbcType=VARCHAR},
+			</if>
+			<if test="soldNum != null">
+				#{soldNum,jdbcType=INTEGER},
+			</if>
+			<if test="soldArea != null">
+				#{soldArea,jdbcType=VARCHAR},
+			</if>
+			<if test="ringRatio != null">
+				#{ringRatio,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=VARCHAR},
+			</if>
+			<if test="isNew != null">
+				#{isNew,jdbcType=INTEGER},
+			</if>
+			<if test="isDelete != null">
+				#{isDelete,jdbcType=INTEGER},
+			</if>
+			<if test="cityName != null">
+				#{cityName,jdbcType=VARCHAR},
+			</if>
+			<if test="areaName != null">
+				#{areaName,jdbcType=VARCHAR},
+			</if>
+			<if test="sliceName != null">
+				#{sliceName,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<sql id="update_option">
+		<if test="dataTime != null">
+			data_time= #{dataTime,jdbcType=TIMESTAMP},
+		</if>
+		<if test="type != null">
+			type= #{type,jdbcType=INTEGER},
+		</if>
+		<if test="cityId != null">
+			city_id= #{cityId,jdbcType=INTEGER},
+		</if>
+		<if test="areaId != null">
+			area_id= #{areaId,jdbcType=INTEGER},
+		</if>
+		<if test="sliceId != null">
+			slice_id= #{sliceId,jdbcType=INTEGER},
+		</if>
+		<if test="dealNum != null">
+			deal_num= #{dealNum,jdbcType=INTEGER},
+		</if>
+		<if test="dealAcreage != null">
+			deal_acreage= #{dealAcreage,jdbcType=INTEGER},
+		</if>
+		<if test="price != null">
+			price= #{price,jdbcType=VARCHAR},
+		</if>
+		<if test="soldNum != null">
+			sold_num= #{soldNum,jdbcType=INTEGER},
+		</if>
+		<if test="soldArea != null">
+			sold_area= #{soldArea,jdbcType=VARCHAR},
+		</if>
+		<if test="ringRatio != null">
+			ring_ratio= #{ringRatio,jdbcType=VARCHAR},
+		</if>
+		<if test="updateTime != null">
+			update_time= #{updateTime,jdbcType=VARCHAR},
+		</if>
+		<if test="isNew != null">
+			is_new= #{isNew,jdbcType=INTEGER},
+		</if>
+		<if test="isDelete != null">
+			is_delete= #{isDelete,jdbcType=INTEGER},
+		</if>
+		<if test="cityName != null">
+			city_name= #{cityName,jdbcType=VARCHAR},
+		</if>
+		<if test="areaName != null">
+			area_name= #{areaName,jdbcType=VARCHAR},
+		</if>
+		<if test="sliceName != null">
+			slice_name= #{sliceName,jdbcType=VARCHAR},
+		</if>
+	</sql>
+
+	<sql id="select_option">
+		<if test="id != null">
+			 and id= #{id,jdbcType=INTEGER}
+		</if>
+		<if test="dataTime != null">
+			 and data_time= #{dataTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="type != null">
+			 and type= #{type,jdbcType=INTEGER}
+		</if>
+		<if test="cityId != null">
+			 and city_id= #{cityId,jdbcType=INTEGER}
+		</if>
+		<if test="areaId != null">
+			 and area_id= #{areaId,jdbcType=INTEGER}
+		</if>
+		<if test="sliceId != null">
+			 and slice_id= #{sliceId,jdbcType=INTEGER}
+		</if>
+		<if test="dealNum != null">
+			 and deal_num= #{dealNum,jdbcType=INTEGER}
+		</if>
+		<if test="dealAcreage != null">
+			 and deal_acreage= #{dealAcreage,jdbcType=INTEGER}
+		</if>
+		<if test="price != null">
+			 and price= #{price,jdbcType=VARCHAR}
+		</if>
+		<if test="soldNum != null">
+			 and sold_num= #{soldNum,jdbcType=INTEGER}
+		</if>
+		<if test="soldArea != null">
+			 and sold_area= #{soldArea,jdbcType=VARCHAR}
+		</if>
+		<if test="ringRatio != null">
+			 and ring_ratio= #{ringRatio,jdbcType=VARCHAR}
+		</if>
+		<if test="updateTime != null">
+			 and update_time= #{updateTime,jdbcType=VARCHAR}
+		</if>
+		<if test="isNew != null">
+			 and is_new= #{isNew,jdbcType=INTEGER}
+		</if>
+		<if test="isDelete != null">
+			 and is_delete= #{isDelete,jdbcType=INTEGER}
+		</if>
+		<if test="cityName != null">
+			 and city_name= #{cityName,jdbcType=VARCHAR}
+		</if>
+		<if test="areaName != null">
+			 and area_name= #{areaName,jdbcType=VARCHAR}
+		</if>
+		<if test="sliceName != null">
+			 and slice_name= #{sliceName,jdbcType=VARCHAR}
+		</if>
+	</sql>
+
+</mapper>

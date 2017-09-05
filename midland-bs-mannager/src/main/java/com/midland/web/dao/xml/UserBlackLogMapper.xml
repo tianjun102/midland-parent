@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.midland.web.dao.UserBlackLogMapper" >
+  <resultMap id="BaseResultMap" type="com.midland.web.model.user.UserBlackLog" >
+    <id column="black_log_id" property="blackLogId" jdbcType="INTEGER" />
+    <result column="log_time" property="logTime" jdbcType="TIMESTAMP" />
+    <result column="operator_id" property="operatorId" jdbcType="INTEGER" />
+    <result column="operator_name" property="operatorName" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    black_log_id, log_time, operator_id, operator_name, remark, state, user_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_black_log
+    where black_log_id = #{blackLogId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from user_black_log
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user_black_log
+    where black_log_id = #{blackLogId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.midland.web.model.user.UserBlackLog" >
+    insert into user_black_log (black_log_id, log_time, operator_id, 
+      operator_name, remark, state, 
+      user_id)
+    values (#{blackLogId,jdbcType=INTEGER}, #{logTime,jdbcType=TIMESTAMP}, #{operatorId,jdbcType=INTEGER}, 
+      #{operatorName,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.midland.web.model.user.UserBlackLog" >
+    insert into user_black_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="blackLogId != null" >
+        black_log_id,
+      </if>
+      <if test="logTime != null" >
+        log_time,
+      </if>
+      <if test="operatorId != null" >
+        operator_id,
+      </if>
+      <if test="operatorName != null" >
+        operator_name,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="blackLogId != null" >
+        #{blackLogId,jdbcType=INTEGER},
+      </if>
+      <if test="logTime != null" >
+        #{logTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorId != null" >
+        #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="operatorName != null" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.midland.web.model.user.UserBlackLog" >
+    update user_black_log
+    <set >
+      <if test="logTime != null" >
+        log_time = #{logTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorId != null" >
+        operator_id = #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="operatorName != null" >
+        operator_name = #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where black_log_id = #{blackLogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.midland.web.model.user.UserBlackLog" >
+    update user_black_log
+    set log_time = #{logTime,jdbcType=TIMESTAMP},
+      operator_id = #{operatorId,jdbcType=INTEGER},
+      operator_name = #{operatorName,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER}
+    where black_log_id = #{blackLogId,jdbcType=INTEGER}
+  </update>
+</mapper>

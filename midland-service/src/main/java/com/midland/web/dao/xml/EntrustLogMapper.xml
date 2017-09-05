@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.midland.web.dao.EntrustLogMapper">
+
+ 	<resultMap id="BaseResultMap" type="com.midland.web.model.EntrustLog" >
+		<id column="entrust_log_id" property="entrustLogId" jdbcType="INTEGER" />
+		<result column="log_time" property="logTime" jdbcType="TIMESTAMP" />
+		<result column="operator_id" property="operatorId" jdbcType="INTEGER" />
+		<result column="operator_name" property="operatorName" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="state" property="state" jdbcType="INTEGER" />
+		<result column="entrust_id" property="entrustId" jdbcType="INTEGER" />
+		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		entrust_log_id,log_time,operator_id,operator_name,remark,state,entrust_id,is_delete
+	</sql>
+
+	<select id="selectEntrustLogByEntrustLogId" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from entrust_log
+		 where entrust_log_id= #{entrustLogId}
+	</select>
+	<select id="selectEntrustLogByEntrustId" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from entrust_log
+		 where entrust_id= #{entrustId}
+	</select>
+
+	<delete id="deleteEntrustLogByEntrustLogId" >
+		delete from entrust_log
+		 where entrust_log_id= #{entrustLogId}
+	</delete>
+
+	<update id="updateEntrustLogByEntrustLogId" >
+		update entrust_log 
+		<set>
+		<include refid="update_option"/>
+		</set>
+
+		 where entrust_log_id= #{entrustLogId}
+	</update>
+
+	<select id="findEntrustLogList" parameterType="com.midland.web.model.EntrustLog" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from entrust_log
+		where 
+		is_delete=0
+		<include refid="select_option" />
+	</select>
+
+	<insert id="insertEntrustLog" parameterType="com.midland.web.model.EntrustLog">
+		insert into entrust_log
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="logTime != null">
+				log_time,
+			</if>
+			<if test="operatorId != null">
+				operator_id,
+			</if>
+			<if test="operatorName != null">
+				operator_name,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="state != null">
+				state,
+			</if>
+			<if test="entrustId != null">
+				entrust_id,
+			</if>
+			<if test="isDelete != null">
+				is_delete,
+			</if>
+		</trim>
+		values
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="logTime != null">
+				#{logTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="operatorId != null">
+				#{operatorId,jdbcType=INTEGER},
+			</if>
+			<if test="operatorName != null">
+				#{operatorName,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=INTEGER},
+			</if>
+			<if test="entrustId != null">
+				#{entrustId,jdbcType=INTEGER},
+			</if>
+			<if test="isDelete != null">
+				#{isDelete,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+
+	<sql id="update_option">
+		<if test="logTime != null">
+			log_time= #{logTime,jdbcType=TIMESTAMP},
+		</if>
+		<if test="operatorId != null">
+			operator_id= #{operatorId,jdbcType=INTEGER},
+		</if>
+		<if test="operatorName != null">
+			operator_name= #{operatorName,jdbcType=VARCHAR},
+		</if>
+		<if test="remark != null">
+			remark= #{remark,jdbcType=VARCHAR},
+		</if>
+		<if test="state != null">
+			state= #{state,jdbcType=INTEGER},
+		</if>
+		<if test="entrustId != null">
+			entrust_id= #{entrustId,jdbcType=INTEGER},
+		</if>
+		<if test="isDelete != null">
+			is_delete= #{isDelete,jdbcType=INTEGER},
+		</if>
+	</sql>
+
+	<sql id="select_option">
+		<if test="entrustLogId != null">
+			 and entrust_log_id= #{entrustLogId,jdbcType=INTEGER}
+		</if>
+		<if test="logTime != null">
+			 and log_time= #{logTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="operatorId != null">
+			 and operator_id= #{operatorId,jdbcType=INTEGER}
+		</if>
+		<if test="operatorName != null">
+			 and operator_name= #{operatorName,jdbcType=VARCHAR}
+		</if>
+		<if test="remark != null">
+			 and remark= #{remark,jdbcType=VARCHAR}
+		</if>
+		<if test="state != null">
+			 and state= #{state,jdbcType=INTEGER}
+		</if>
+		<if test="entrustId != null">
+			 and entrust_id= #{entrustId,jdbcType=INTEGER}
+		</if>
+		<if test="isDelete != null">
+			 and is_delete= #{isDelete,jdbcType=INTEGER}
+		</if>
+	</sql>
+
+</mapper>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.midland.web.dao.QuestionsMapper" >
+  <resultMap id="BaseResultMap" type="com.midland.web.model.Questions" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="questions_title" property="questionsTitle" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="INTEGER" />
+    <result column="question_time" property="questionTime" jdbcType="TIMESTAMP" />
+    <result column="question_name" property="questionName" jdbcType="VARCHAR" />
+    <result column="question_phone" property="questionPhone" jdbcType="VARCHAR" />
+    <result column="auditor" property="auditor" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="click_num" property="clickNum" jdbcType="INTEGER" />
+    <result column="fabulous" property="fabulous" jdbcType="INTEGER" />
+    <result column="questions_area" property="questionsArea" jdbcType="LONGVARCHAR" />
+    <result column="audit_remark" property="auditRemark" jdbcType="LONGVARCHAR" />
+
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, questions_title, source, question_time, question_name, question_phone, auditor, 
+    status, click_num, fabulous,questions_area,audit_remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from questions
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="questionPage" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from questions
+    where 1=1
+    <include refid="select_option"/>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from questions
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <delete id="deleteByIds">
+    delete from questions
+    where id in <foreach collection="idlist" index="index" item="id" open="(" separator="," close=")">
+    #{id}
+  </foreach>
+  </delete>
+  <insert id="insertSelective" parameterType="com.midland.web.model.Questions" >
+    insert into questions
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="questionsTitle != null" >
+        questions_title,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="questionTime != null" >
+        question_time,
+      </if>
+      <if test="questionName != null" >
+        question_name,
+      </if>
+      <if test="questionPhone != null" >
+        question_phone,
+      </if>
+      <if test="auditor != null" >
+        auditor,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="clickNum != null" >
+        click_num,
+      </if>
+      <if test="fabulous != null" >
+        fabulous,
+      </if>
+      <if test="questionsArea != null" >
+        questions_area,
+      </if>
+      <if test="auditRemark != null" >
+        audit_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="questionsTitle != null" >
+        #{questionsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=INTEGER},
+      </if>
+      <if test="questionTime != null" >
+        #{questionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="questionName != null" >
+        #{questionName,jdbcType=VARCHAR},
+      </if>
+      <if test="questionPhone != null" >
+        #{questionPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null" >
+        #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="clickNum != null" >
+        #{clickNum,jdbcType=INTEGER},
+      </if>
+      <if test="fabulous != null" >
+        #{fabulous,jdbcType=INTEGER},
+      </if>
+      <if test="questionsArea != null" >
+        #{questionsArea,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="auditRemark != null" >
+        #{auditRemark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.midland.web.model.Questions" >
+    update questions
+    <set >
+      <if test="questionsTitle != null" >
+        questions_title = #{questionsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=INTEGER},
+      </if>
+      <if test="questionTime != null" >
+        question_time = #{questionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="questionName != null" >
+        question_name = #{questionName,jdbcType=VARCHAR},
+      </if>
+      <if test="questionPhone != null" >
+        question_phone = #{questionPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null" >
+        auditor = #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="clickNum != null" >
+        click_num = #{clickNum,jdbcType=INTEGER},
+      </if>
+      <if test="fabulous != null" >
+        fabulous = #{fabulous,jdbcType=INTEGER},
+      </if>
+      <if test="questionsArea != null" >
+        questions_area = #{questionsArea,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="auditRemark != null" >
+        audit_remark = #{auditRemark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <sql id="select_option">
+    <if test="id != null" >
+      and id = #{id}
+    </if>
+    <if test="questionsTitle != null" >
+      and questions_title = #{questionsTitle,jdbcType=VARCHAR}
+    </if>
+    <if test="source != null" >
+      and source = #{source,jdbcType=INTEGER}
+    </if>
+    <if test="questionTime != null" >
+      and question_time = #{questionTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="questionName != null" >
+      and question_name = #{questionName,jdbcType=VARCHAR}
+    </if>
+    <if test="questionPhone != null" >
+      and question_phone = #{questionPhone,jdbcType=VARCHAR}
+    </if>
+    <if test="auditor != null" >
+      and auditor = #{auditor,jdbcType=VARCHAR}
+    </if>
+    <if test="status != null" >
+      and status = #{status,jdbcType=INTEGER}
+    </if>
+    <if test="clickNum != null" >
+      and click_num = #{clickNum,jdbcType=INTEGER}
+    </if>
+    <if test="fabulous != null" >
+      and fabulous = #{fabulous,jdbcType=INTEGER}
+    </if>
+    <if test="questionsArea != null" >
+      and questions_area = #{questionsArea,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="startTime != null" >
+      and question_time &gt; #{startTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="endTime != null" >
+      and question_time &lt; #{endTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="auditRemark != null" >
+      and audit_remark = #{auditRemark,jdbcType=LONGVARCHAR}
+    </if>
+  </sql>
+
+</mapper>

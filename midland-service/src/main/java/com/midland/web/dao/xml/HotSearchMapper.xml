@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.midland.web.dao.HotSearchMapper">
+
+ 	<resultMap id="BaseResultMap" type="com.midland.web.model.HotSearch" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="keywords" property="keywords" jdbcType="VARCHAR" />
+		<result column="count" property="count" jdbcType="INTEGER" />
+		<result column="sort_order" property="sortOrder" jdbcType="INTEGER" />
+		<result column="city_id" property="cityId" jdbcType="VARCHAR" />
+		<result column="menu_id" property="menuId" jdbcType="INTEGER" />
+		<result column="is_show" property="isShow" jdbcType="INTEGER" />
+		<result column="order_by" property="orderBy" jdbcType="INTEGER" />
+		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+		<result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id,keywords,count,sort_order,city_id,menu_id,is_show,order_by,is_delete,city_name,menu_name
+	</sql>
+
+	<select id="selectHotSearchById" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from hot_search
+		 where id= #{id}
+	</select>
+
+	<delete id="deleteHotSearchById" >
+		delete from hot_search
+		 where id= #{id}
+	</delete>
+
+	<update id="updateHotSearchById" >
+		update hot_search 
+		<set>
+		<include refid="update_option"/>
+		</set>
+
+		 where id= #{id}
+	</update>
+
+	<select id="findHotSearchList" parameterType="com.midland.web.model.HotSearch" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from hot_search
+		where 
+		is_delete=0
+		<include refid="select_option" />
+	</select>
+
+	<insert id="insertHotSearch" parameterType="com.midland.web.model.HotSearch">
+		insert into hot_search
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="keywords != null">
+				keywords,
+			</if>
+			<if test="count != null">
+				count,
+			</if>
+			<if test="sortOrder != null">
+				sort_order,
+			</if>
+			<if test="cityId != null">
+				city_id,
+			</if>
+			<if test="menuId != null">
+				menu_id,
+			</if>
+			<if test="isShow != null">
+				is_show,
+			</if>
+			<if test="orderBy != null">
+				order_by,
+			</if>
+			<if test="isDelete != null">
+				is_delete,
+			</if>
+			<if test="cityName != null">
+				city_name,
+			</if>
+			<if test="menuName != null">
+				menu_name,
+			</if>
+		</trim>
+		values
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="keywords != null">
+				#{keywords,jdbcType=VARCHAR},
+			</if>
+			<if test="count != null">
+				#{count,jdbcType=INTEGER},
+			</if>
+			<if test="sortOrder != null">
+				#{sortOrder,jdbcType=INTEGER},
+			</if>
+			<if test="cityId != null">
+				#{cityId,jdbcType=VARCHAR},
+			</if>
+			<if test="menuId != null">
+				#{menuId,jdbcType=INTEGER},
+			</if>
+			<if test="isShow != null">
+				#{isShow,jdbcType=INTEGER},
+			</if>
+			<if test="orderBy != null">
+				#{orderBy,jdbcType=INTEGER},
+			</if>
+			<if test="isDelete != null">
+				#{isDelete,jdbcType=INTEGER},
+			</if>
+			<if test="cityName != null">
+				#{cityName,jdbcType=VARCHAR},
+			</if>
+			<if test="menuName != null">
+				#{menuName,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<sql id="update_option">
+		<if test="keywords != null">
+			keywords= #{keywords,jdbcType=VARCHAR},
+		</if>
+		<if test="count != null">
+			count= #{count,jdbcType=INTEGER},
+		</if>
+		<if test="sortOrder != null">
+			sort_order= #{sortOrder,jdbcType=INTEGER},
+		</if>
+		<if test="cityId != null">
+			city_id= #{cityId,jdbcType=VARCHAR},
+		</if>
+		<if test="menuId != null">
+			menu_id= #{menuId,jdbcType=INTEGER},
+		</if>
+		<if test="isShow != null">
+			is_show= #{isShow,jdbcType=INTEGER},
+		</if>
+		<if test="orderBy != null">
+			order_by= #{orderBy,jdbcType=INTEGER},
+		</if>
+		<if test="isDelete != null">
+			is_delete= #{isDelete,jdbcType=INTEGER},
+		</if>
+		<if test="cityName != null">
+			city_name= #{cityName,jdbcType=VARCHAR},
+		</if>
+		<if test="menuName != null">
+			menu_name= #{menuName,jdbcType=VARCHAR},
+		</if>
+	</sql>
+
+	<sql id="select_option">
+		<if test="id != null">
+			 and id= #{id,jdbcType=INTEGER}
+		</if>
+		<if test="keywords != null">
+			 and keywords= #{keywords,jdbcType=VARCHAR}
+		</if>
+		<if test="count != null">
+			 and count= #{count,jdbcType=INTEGER}
+		</if>
+		<if test="sortOrder != null">
+			 and sort_order= #{sortOrder,jdbcType=INTEGER}
+		</if>
+		<if test="cityId != null">
+			 and city_id= #{cityId,jdbcType=VARCHAR}
+		</if>
+		<if test="menuId != null">
+			 and menu_id= #{menuId,jdbcType=INTEGER}
+		</if>
+		<if test="isShow != null">
+			 and is_show= #{isShow,jdbcType=INTEGER}
+		</if>
+		<if test="orderBy != null">
+			 and order_by= #{orderBy,jdbcType=INTEGER}
+		</if>
+		<if test="isDelete != null">
+			 and is_delete= #{isDelete,jdbcType=INTEGER}
+		</if>
+		<if test="cityName != null">
+			 and city_name= #{cityName,jdbcType=VARCHAR}
+		</if>
+		<if test="menuName != null">
+			 and menu_name= #{menuName,jdbcType=VARCHAR}
+		</if>
+	</sql>
+
+</mapper>

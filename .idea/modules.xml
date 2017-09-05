@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/midland-bs-mannager/midland-bs-mannager.iml" filepath="$PROJECT_DIR$/midland-bs-mannager/midland-bs-mannager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/midland-parent.iml" filepath="$PROJECT_DIR$/midland-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/midland-service/midland-service.iml" filepath="$PROJECT_DIR$/midland-service/midland-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/midland-web-portal/midland-web-portal.iml" filepath="$PROJECT_DIR$/midland-web-portal/midland-web-portal.iml" />
+    </modules>
+  </component>
+</project>

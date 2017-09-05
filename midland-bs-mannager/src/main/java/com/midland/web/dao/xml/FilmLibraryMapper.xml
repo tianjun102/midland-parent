@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.midland.web.dao.FilmLibraryMapper">
+
+ 	<resultMap id="BaseResultMap" type="com.midland.web.model.FilmLibrary" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="city_id" property="cityId" jdbcType="VARCHAR" />
+		<result column="img_desc" property="imgDesc" jdbcType="VARCHAR" />
+		<result column="houses_name" property="housesName" jdbcType="VARCHAR" />
+		<result column="houses_id" property="housesId" jdbcType="INTEGER" />
+		<result column="introduction" property="introduction" jdbcType="LONGVARCHAR" />
+		<result column="video_url" property="videoUrl" jdbcType="VARCHAR" />
+		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+		<result column="click_num" property="clickNum" jdbcType="INTEGER" />
+		<result column="film_type" property="filmType" jdbcType="INTEGER" />
+		<result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+		<result column="operator_id" property="operatorId" jdbcType="INTEGER" />
+		<result column="operator_name" property="operatorName" jdbcType="VARCHAR" />
+		<result column="duration" property="duration" jdbcType="DECIMAL" />
+		<result column="is_show" property="isShow" jdbcType="INTEGER" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id,city_id,img_desc,houses_name,houses_id,introduction,video_url,is_delete,click_num,film_type,img_url,operator_id,operator_name,duration,is_show,city_name
+	</sql>
+
+	<select id="selectFilmLibraryById" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from film_library
+		 where id= #{id}
+	</select>
+
+	<delete id="deleteFilmLibraryById" >
+		delete from film_library
+		 where id= #{id}
+	</delete>
+
+	<update id="updateFilmLibraryById" >
+		update film_library 
+		<set>
+		<include refid="update_option"/>
+		</set>
+
+		 where id= #{id}
+	</update>
+
+	<select id="findFilmLibraryList" parameterType="com.midland.web.model.FilmLibrary" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from film_library
+		where 
+		is_delete=0
+		<include refid="select_option" />
+	</select>
+
+	<insert id="insertFilmLibrary" parameterType="com.midland.web.model.FilmLibrary">
+		insert into film_library
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="cityId != null">
+				city_id,
+			</if>
+			<if test="imgDesc != null">
+				img_desc,
+			</if>
+			<if test="housesName != null">
+				houses_name,
+			</if>
+			<if test="housesId != null">
+				houses_id,
+			</if>
+			<if test="introduction != null">
+				introduction,
+			</if>
+			<if test="videoUrl != null">
+				video_url,
+			</if>
+			<if test="isDelete != null">
+				is_delete,
+			</if>
+			<if test="clickNum != null">
+				click_num,
+			</if>
+			<if test="filmType != null">
+				film_type,
+			</if>
+			<if test="imgUrl != null">
+				img_url,
+			</if>
+			<if test="operatorId != null">
+				operator_id,
+			</if>
+			<if test="operatorName != null">
+				operator_name,
+			</if>
+			<if test="duration != null">
+				duration,
+			</if>
+			<if test="isShow != null">
+				is_show,
+			</if>
+			<if test="cityName != null">
+				city_name,
+			</if>
+		</trim>
+		values
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="cityId != null">
+				#{cityId,jdbcType=VARCHAR},
+			</if>
+			<if test="imgDesc != null">
+				#{imgDesc,jdbcType=VARCHAR},
+			</if>
+			<if test="housesName != null">
+				#{housesName,jdbcType=VARCHAR},
+			</if>
+			<if test="housesId != null">
+				#{housesId,jdbcType=INTEGER},
+			</if>
+			<if test="introduction != null">
+				#{introduction,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="videoUrl != null">
+				#{videoUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="isDelete != null">
+				#{isDelete,jdbcType=INTEGER},
+			</if>
+			<if test="clickNum != null">
+				#{clickNum,jdbcType=INTEGER},
+			</if>
+			<if test="filmType != null">
+				#{filmType,jdbcType=INTEGER},
+			</if>
+			<if test="imgUrl != null">
+				#{imgUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorId != null">
+				#{operatorId,jdbcType=INTEGER},
+			</if>
+			<if test="operatorName != null">
+				#{operatorName,jdbcType=VARCHAR},
+			</if>
+			<if test="duration != null">
+				#{duration,jdbcType=DECIMAL},
+			</if>
+			<if test="isShow != null">
+				#{isShow,jdbcType=INTEGER},
+			</if>
+			<if test="cityName != null">
+				#{cityName,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<sql id="update_option">
+		<if test="cityId != null">
+			city_id= #{cityId,jdbcType=VARCHAR},
+		</if>
+		<if test="imgDesc != null">
+			img_desc= #{imgDesc,jdbcType=VARCHAR},
+		</if>
+		<if test="housesName != null">
+			houses_name= #{housesName,jdbcType=VARCHAR},
+		</if>
+		<if test="housesId != null">
+			houses_id= #{housesId,jdbcType=INTEGER},
+		</if>
+		<if test="introduction != null">
+			introduction= #{introduction,jdbcType=LONGVARCHAR},
+		</if>
+		<if test="videoUrl != null">
+			video_url= #{videoUrl,jdbcType=VARCHAR},
+		</if>
+		<if test="isDelete != null">
+			is_delete= #{isDelete,jdbcType=INTEGER},
+		</if>
+		<if test="clickNum != null">
+			click_num= #{clickNum,jdbcType=INTEGER},
+		</if>
+		<if test="filmType != null">
+			film_type= #{filmType,jdbcType=INTEGER},
+		</if>
+		<if test="imgUrl != null">
+			img_url= #{imgUrl,jdbcType=VARCHAR},
+		</if>
+		<if test="operatorId != null">
+			operator_id= #{operatorId,jdbcType=INTEGER},
+		</if>
+		<if test="operatorName != null">
+			operator_name= #{operatorName,jdbcType=VARCHAR},
+		</if>
+		<if test="duration != null">
+			duration= #{duration,jdbcType=DECIMAL},
+		</if>
+		<if test="isShow != null">
+			is_show= #{isShow,jdbcType=INTEGER},
+		</if>
+		<if test="cityName != null">
+			city_name= #{cityName,jdbcType=VARCHAR},
+		</if>
+	</sql>
+
+	<sql id="select_option">
+		<if test="id != null">
+			 and id= #{id,jdbcType=INTEGER}
+		</if>
+		<if test="cityId != null">
+			 and city_id= #{cityId,jdbcType=VARCHAR}
+		</if>
+		<if test="imgDesc != null">
+			 and img_desc= #{imgDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="housesName != null">
+			 and houses_name= #{housesName,jdbcType=VARCHAR}
+		</if>
+		<if test="housesId != null">
+			 and houses_id= #{housesId,jdbcType=INTEGER}
+		</if>
+		<if test="introduction != null">
+			 and introduction= #{introduction,jdbcType=LONGVARCHAR}
+		</if>
+		<if test="videoUrl != null">
+			 and video_url= #{videoUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="isDelete != null">
+			 and is_delete= #{isDelete,jdbcType=INTEGER}
+		</if>
+		<if test="clickNum != null">
+			 and click_num= #{clickNum,jdbcType=INTEGER}
+		</if>
+		<if test="filmType != null">
+			 and film_type= #{filmType,jdbcType=INTEGER}
+		</if>
+		<if test="imgUrl != null">
+			 and img_url= #{imgUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="operatorId != null">
+			 and operator_id= #{operatorId,jdbcType=INTEGER}
+		</if>
+		<if test="operatorName != null">
+			 and operator_name= #{operatorName,jdbcType=VARCHAR}
+		</if>
+		<if test="duration != null">
+			 and duration= #{duration,jdbcType=DECIMAL}
+		</if>
+		<if test="isShow != null">
+			 and is_show= #{isShow,jdbcType=INTEGER}
+		</if>
+		<if test="cityName != null">
+			 and city_name= #{cityName,jdbcType=VARCHAR}
+		</if>
+	</sql>
+
+</mapper>
