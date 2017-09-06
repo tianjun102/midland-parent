@@ -6,8 +6,6 @@
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="icon_img" property="iconImg" jdbcType="VARCHAR" />
 		<result column="city_id" property="cityId" jdbcType="VARCHAR" />
-		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
-		<result column="platform" property="platform" jdbcType="INTEGER" />
 		<result column="menu_name" property="menuName" jdbcType="VARCHAR" />
 		<result column="click_num" property="clickNum" jdbcType="INTEGER" />
 		<result column="order_by" property="orderBy" jdbcType="INTEGER" />
@@ -17,10 +15,11 @@
 		<result column="parent_id" property="parentId" jdbcType="INTEGER" />
 		<result column="source" property="source" jdbcType="INTEGER" />
 		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		menu.id,icon_img,city_id,platform,menu_name,click_num,menu.order_by,url,is_show,position,menu.parent_id,source,menu.is_delete
+		id,icon_img,city_id,menu_name,click_num,order_by,url,is_show,position,parent_id,source,is_delete,city_name
 	</sql>
 
 	<select id="selectMenuById" resultMap="BaseResultMap">
@@ -43,11 +42,10 @@
 	</update>
 
 	<select id="findMenuList" parameterType="com.midland.web.model.Menu" resultMap="BaseResultMap">
-		select <include refid="Base_Column_List" />,city.city_name from menu ,city
-		where menu.city_id=city.id and
-		menu.is_delete=0
+		select <include refid="Base_Column_List" /> from menu
+		where 
+		is_delete=0
 		<include refid="select_option" />
-		order by menu.order_by asc
 	</select>
 
 	<insert id="insertMenu" parameterType="com.midland.web.model.Menu">
@@ -58,9 +56,6 @@
 			</if>
 			<if test="cityId != null">
 				city_id,
-			</if>
-			<if test="platform != null">
-				platform,
 			</if>
 			<if test="menuName != null">
 				menu_name,
@@ -89,6 +84,9 @@
 			<if test="isDelete != null">
 				is_delete,
 			</if>
+			<if test="cityName != null">
+				city_name,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -97,9 +95,6 @@
 			</if>
 			<if test="cityId != null">
 				#{cityId,jdbcType=VARCHAR},
-			</if>
-			<if test="platform != null">
-				#{platform,jdbcType=INTEGER},
 			</if>
 			<if test="menuName != null">
 				#{menuName,jdbcType=VARCHAR},
@@ -128,6 +123,9 @@
 			<if test="isDelete != null">
 				#{isDelete,jdbcType=INTEGER},
 			</if>
+			<if test="cityName != null">
+				#{cityName,jdbcType=VARCHAR},
+			</if>
 		</trim>
 	</insert>
 
@@ -137,9 +135,6 @@
 		</if>
 		<if test="cityId != null">
 			city_id= #{cityId,jdbcType=VARCHAR},
-		</if>
-		<if test="platform != null">
-			platform= #{platform,jdbcType=INTEGER},
 		</if>
 		<if test="menuName != null">
 			menu_name= #{menuName,jdbcType=VARCHAR},
@@ -168,6 +163,9 @@
 		<if test="isDelete != null">
 			is_delete= #{isDelete,jdbcType=INTEGER},
 		</if>
+		<if test="cityName != null">
+			city_name= #{cityName,jdbcType=VARCHAR},
+		</if>
 	</sql>
 
 	<sql id="select_option">
@@ -179,9 +177,6 @@
 		</if>
 		<if test="cityId != null">
 			 and city_id= #{cityId,jdbcType=VARCHAR}
-		</if>
-		<if test="platform != null">
-			 and platform= #{platform,jdbcType=INTEGER}
 		</if>
 		<if test="menuName != null">
 			 and menu_name= #{menuName,jdbcType=VARCHAR}
@@ -209,6 +204,9 @@
 		</if>
 		<if test="isDelete != null">
 			 and is_delete= #{isDelete,jdbcType=INTEGER}
+		</if>
+		<if test="cityName != null">
+			 and city_name= #{cityName,jdbcType=VARCHAR}
 		</if>
 	</sql>
 

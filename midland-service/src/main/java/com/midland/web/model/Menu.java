@@ -15,14 +15,6 @@ public class Menu{
 	 **/
 	private String cityId;
 	/**
-	 * 城市名称
-	 **/
-	private String cityName;
-	/**
-	 * 0=pc网站；1=微站
-	 **/
-	private Integer platform;
-	/**
 	 * 菜单名称
 	 **/
 	private String menuName;
@@ -58,15 +50,12 @@ public class Menu{
 	 * 0未删除，1删除
 	 **/
 	private Integer isDelete;
-	
-	public String getCityName() {
-		return cityName;
-	}
-	
-	public void setCityName(String cityName) {
-		this.cityName = cityName;
-	}
-	
+	/**
+	 * 城市名称
+	 **/
+	private String cityName;
+
+
 	public Integer getId() {
 		return id;
 	}
@@ -89,14 +78,6 @@ public class Menu{
 
 	public void setCityId(String cityId) {
 		this.cityId = cityId;
-	}
-
-	public Integer getPlatform() {
-		return platform;
-	}
-
-	public void setPlatform(Integer platform) {
-		this.platform = platform;
 	}
 
 	public String getMenuName() {
@@ -171,6 +152,14 @@ public class Menu{
 		this.isDelete = isDelete;
 	}
 
+	public String getCityName() {
+		return cityName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
 	@Override
 	public String toString() {
 		 final StringBuffer sb=new StringBuffer("Menu{");
@@ -182,9 +171,6 @@ public class Menu{
 		}
 		if (cityId != null) {
 			sb.append(", \"cityId\":\"").append(cityId).append("\"");
-		}
-		if (platform != null) {
-			sb.append(", \"platform\":\"").append(platform).append("\"");
 		}
 		if (menuName != null) {
 			sb.append(", \"menuName\":\"").append(menuName).append("\"");
@@ -212,6 +198,9 @@ public class Menu{
 		}
 		if (isDelete != null) {
 			sb.append(", \"isDelete\":\"").append(isDelete).append("\"");
+		}
+		if (cityName != null) {
+			sb.append(", \"cityName\":\"").append(cityName).append("\"");
 		}
 		return sb.toString();
 	}
