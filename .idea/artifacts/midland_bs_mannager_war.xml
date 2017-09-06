@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="midland-bs-mannager:war">
-    <output-path>$PROJECT_DIR$/midland-bs-mannager/target</output-path>
-    <root id="archive" name="midland.war">
-      <element id="artifact" artifact-name="midland-bs-mannager:war exploded" />
-    </root>
-  </artifact>
-</component>
