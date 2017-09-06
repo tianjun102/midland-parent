@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.web.controller.base.BaseController;
+import com.midland.web.model.Area;
 import com.midland.web.model.Quotation;
 import com.midland.web.service.QuotationService;
 import com.midland.web.service.SettingService;
@@ -44,6 +45,8 @@ public class QuotationController extends BaseController {
 		List<ParamObject> paramObjects = JsonMapReader.getMap("quotation_type");
 		model.addAttribute("types", paramObjects);
 		model.addAttribute("isNew", quotation.getIsNew());
+		List<Area> list = settingService.queryAllCityByRedis();
+		model.addAttribute("citys",list);
 		return "quotation/quotationIndex";
 	}
 	

@@ -15,9 +15,9 @@ public class Quotation{
 	 **/
 	private Integer type;
 	/**
-	 * 
+	 * 城市
 	 **/
-	private Integer cityId;
+	private String cityId;
 	/**
 	 * 区域id
 	 **/
@@ -100,11 +100,11 @@ public class Quotation{
 		this.type = type;
 	}
 
-	public Integer getCityId() {
+	public String getCityId() {
 		return cityId;
 	}
 
-	public void setCityId(Integer cityId) {
+	public void setCityId(String cityId) {
 		this.cityId = cityId;
 	}
 

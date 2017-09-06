@@ -63,106 +63,14 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 	}
 	
 	@RequestMapping("excel_read")
-	public void imports(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String dateMonth = null;//excel表格的月份
+	public void imports(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Workbook wb = null;
 		InputStream is = null;
 		try {
 			FileItem fileItem = getUploadFileItem(request, response);
-			String name = fileItem.getName();
 			is = fileItem.getInputStream();
-			String fileType = name.substring(name.lastIndexOf(".") + 1, name.length());
-			if (fileType.equals("xls")) {
-				wb = new HSSFWorkbook(is);
-			} else if (fileType.equals("xlsx")) {
-				wb = new XSSFWorkbook(is);
-			} else {
-				throw new Exception("读取的不是excel文件");
-			}
-			List result = new ArrayList<>();//对应excel文件
-			
-			Sheet sheet = wb.getSheetAt(0);
-			
-			int rowSize = sheet.getLastRowNum() + 1;
-			List<String> areaList =null;
-			List<String> distNum = null;
-			String areaName = null;
-			String houseType = null;
-			for (int j = 0; j < rowSize; j++) {//遍历行
-				Row row = sheet.getRow(j);
-				if (row == null) {//略过空行
-					continue;
-				}
-				List <String> list =null;
-				
-				if (j>0 && j%2==1){
-					areaList = new ArrayList<>();
-					list=areaList;
-				}else if (j>0 && j%2==0){
-					distNum = new ArrayList<>();
-					list=distNum;
-					
-				}
-				int cellSize = row.getLastCellNum();//行中有多少个单元格，也就是有多少列
-				for (int k = 0; k < cellSize; k++) {
-					Cell cell = row.getCell(k);
-					String value = null;
-					if (cell != null) {
-						value = cell.toString();
-					}
-					if (j == 0) {//获取日期
-						if (k == 1) {
-							dateMonth = value;
-							System.out.println(dateMonth);
-						}
-						continue;
-					}
-					if (k==0){
-						if (value!=null && !value.equals("")){
-							areaName=value;
-						}
-					}
-					else if (k==1){
-						if (value!=null && !value.equals("")){
-							houseType=value;
-						}
-					}
-					else if (k==2){
-						
-					}else{
-						list.add(value);
-					}
-					
-				}
-				if (j>0 && j%2==0){
-					int length =areaList.size()<31?areaList.size():31;
-					for (int x=0;x<length;x++){
-						if (areaList.get(x)!=null&& !areaList.get(x).equals("")) {
-							Quotation quotation = new Quotation();
-							quotation.setCityName("深圳");
-							quotation.setAreaName(areaName);
-							int houseTypeId = 3;
-							if (houseType.equals("商业")) {
-								houseTypeId = 0;
-							}
-							if (houseType.equals("住宅")) {
-								houseTypeId = 1;
-							}
-							if (houseType.equals("其他")) {
-								houseTypeId = 2;
-							}
-							if (houseType.equals("办公")) {
-								houseTypeId = 3;
-							}
-							quotation.setType(houseTypeId);
-							quotation.setDealAcreage(String.valueOf(areaList.get(x)));
-							quotation.setDealNum(Double.valueOf(distNum.get(x)).intValue());
-							result.add(quotation);
-						}
-					}
-				}
-			}
-			System.out.println(JSONArray.toJSONString(result));
+			wb = getWorkbook(fileItem,is);
+			quotationExcelReader(request, wb);
 		} catch (Exception e) {
 			logger.error("",e);
 		} finally {
@@ -173,6 +81,123 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 				is.close();
 			}
 		}
+	}
+	
+	/**
+	 * 根据is生成workbook
+	 * @param fileItem
+	 * @param is
+	 * @return
+	 * @throws Exception
+	 */
+	private Workbook getWorkbook(FileItem fileItem, InputStream is) throws Exception {
+		String name = fileItem.getName();
+		Workbook wb;
+		String fileType = name.substring(name.lastIndexOf(".") + 1, name.length());
+		
+		if (fileType.equals("xls")) {
+			wb = new HSSFWorkbook(is);
+		} else if (fileType.equals("xlsx")) {
+			wb = new XSSFWorkbook(is);
+		} else {
+			throw new Exception("读取的不是excel文件");
+		}
+		return wb;
+	}
+	
+	/**
+	 * 二手房详情导入数据专用
+	 * @param request
+	 * @param wb
+	 */
+	private void quotationExcelReader(HttpServletRequest request, Workbook wb) {
+		String dateMonth;List result = new ArrayList<>();//对应excel文件
+		
+		Sheet sheet = wb.getSheetAt(0);
+		
+		int rowSize = sheet.getLastRowNum() + 1;
+		List<String> areaList =null;
+		List<String> distNum = null;
+		String cityId=request.getParameter("cityId");
+		String cityName=request.getParameter("cityName");
+		String areaName = null;
+		String houseType = null;
+		for (int j = 0; j < rowSize; j++) {//遍历行
+			Row row = sheet.getRow(j);
+			if (row == null) {//略过空行
+				continue;
+			}
+			List <String> list =null;
+			
+			if (j>0 && j%2==1){
+				areaList = new ArrayList<>();
+				list=areaList;
+			}else if (j>0 && j%2==0){
+				distNum = new ArrayList<>();
+				list=distNum;
+				
+			}
+			int cellSize = row.getLastCellNum();//行中有多少个单元格，也就是有多少列
+			for (int k = 0; k < cellSize; k++) {
+				Cell cell = row.getCell(k);
+				String value = null;
+				if (cell != null) {
+					value = cell.toString();
+				}
+				if (j == 0) {//获取日期
+					if (k == 1) {
+						dateMonth = value;
+						System.out.println(dateMonth);
+					}
+					continue;
+				}
+				if (k==0){
+					if (value!=null && !value.equals("")){
+						areaName=value;
+					}
+				}
+				else if (k==1){
+					if (value!=null && !value.equals("")){
+						houseType=value;
+					}
+				}
+				else if (k==2){
+					
+				}else{
+					list.add(value);
+				}
+				
+			}
+			if (j>0 && j%2==0){
+				int length =areaList.size()<31?areaList.size():31;
+				for (int x=0;x<length;x++){
+					if (areaList.get(x)!=null&& !areaList.get(x).equals("")) {
+						Quotation quotation = new Quotation();
+						quotation.setCityId(cityId);
+						quotation.setCityName(cityName);
+						quotation.setAreaName(areaName);
+						int houseTypeId = 3;
+						if (houseType.equals("商业")) {
+							houseTypeId = 0;
+						}
+						if (houseType.equals("住宅")) {
+							houseTypeId = 1;
+						}
+						if (houseType.equals("其他")) {
+							houseTypeId = 2;
+						}
+						if (houseType.equals("办公")) {
+							houseTypeId = 3;
+						}
+						quotation.setType(houseTypeId);
+						quotation.setDealAcreage(String.valueOf(areaList.get(x)));
+						quotation.setDealNum(Double.valueOf(distNum.get(x)).intValue());
+						result.add(quotation);
+					}
+				}
+			}
+		}
+		System.out.println(JSONArray.toJSONString(result));
 	}
 	
 	

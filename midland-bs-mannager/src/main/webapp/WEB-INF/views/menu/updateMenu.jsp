@@ -39,10 +39,21 @@
             <input type="hidden" name="id" id="id" value="${item.id}">
             <li style="display:flex;align-items:center">
                 <span>城市：</span>
-                <select name="source" id="source" class="dropdown">
+                <input type="hidden" name="cityName" id="cityName" >
+                <select name="cityId" id="cityId" class="dropdown">
                     <c:forEach items="${citys}" var="s">
                         <option value="${s.id}" <c:if test="${s.id == item.cityId}">selected="selected"</c:if>>
-                                ${s.cityName}
+                                ${s.name}
+                        </option>
+                    </c:forEach>
+                </select>
+            </li>
+            <li style="display:flex;align-items:center">
+                <span>来源：</span>
+                <select name="source" id="source" class="dropdown">
+                    <c:forEach items="${sources}" var="s">
+                        <option value="${s.id}" <c:if test="${s.id == item.source}">selected="selected"</c:if>>
+                                ${s.name}
                         </option>
                     </c:forEach>
                 </select>
@@ -74,6 +85,10 @@
 </section>
 
 <script type="text/javascript">
+
+    $("#cityId").change(function(){
+        $("#cityName").val($("#cityId").find("option:selected").text());
+    })
     //保存数据
     function updateData() {
         var data = $("#dataForm").serialize();

@@ -11,7 +11,14 @@
             $('#file_upload').uploadify({
                 'swf': '${ctx }/assets/scripts/uploadify/uploadify.swf',
                 'uploader': '${ctx }/rest/upload/excel_read',
+				'method':'get',
                 'multi': false,// 是否支持多个文件上传
+                'onUploadStart' : function(file) {
+                    $("#file_upload").uploadify("settings", "formData", {
+                        'cityId':$('#excelCityId').val(),
+						'cityName':$('#excelCityName').val()
+                    });
+                },
                 'onUploadSuccess': function (file, data, response) {
 
                 },
@@ -70,6 +77,15 @@
 			<a class="edit_img" target="contentF" href="${ctx}/rest/quotation/showTooltip">生成预览</a>
 		</section>
 	</div>
+	<li><span>城市：</span>
+		<input type="hidden" id="excelCityName">
+		<select  id="excelCityId" class="dropdown">
+			<option value="" >全部</option>
+			<c:forEach items="${citys}" var="item">
+				<option value="${item.id}" >${item.name}</option>
+			</c:forEach>
+		</select>
+	</li>
 	<li><span>图片上传：</span>
 		<div style="width: 250px;float: left;">
 			<img style="margin-bottom: 10px;max-width:80px;max-height:80px" id="iconImg1" >

@@ -3,12 +3,16 @@ package com.midland.web.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.web.controller.base.BaseController;
+import com.midland.web.model.Area;
 import com.midland.web.model.City;
 import com.midland.web.model.Menu;
 import com.midland.web.service.CityService;
 import com.midland.web.service.JdbcService;
 import com.midland.web.service.MenuService;
+import com.midland.web.service.SettingService;
+import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
+import com.midland.web.util.ParamObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +36,7 @@ public class MenuController extends BaseController{
 	@Autowired
 	private MenuService menuServiceImpl;
 	@Autowired
-	private CityService cityServiceImpl;
+	private SettingService settingService;
 	@Autowired
 	private JdbcService jdbcService;
 	@RequestMapping("/index")
@@ -67,9 +71,12 @@ public class MenuController extends BaseController{
 	@RequestMapping("to_update")
 	public String toUpdate(int id, Model model, HttpServletRequest request) throws Exception {
 		Menu result = menuServiceImpl.selectMenuById(id);
-		List<City> cityList = cityServiceImpl.findCityList(new City());
 		model.addAttribute("item",result);
-		model.addAttribute("citys",cityList);
+		List<ParamObject> sources = JsonMapReader.getMap("source");
+		model.addAttribute("sources",sources);
+		
+		List<Area> list = settingService.queryAllCityByRedis();
+		model.addAttribute("citys",list);
 		return "/menu/updateMenu";
 	}
 	
