@@ -62,7 +62,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 		return map;
 	}
 	
-	@RequestMapping("excel_read")
+	@RequestMapping(value = "excel_read",produces  = "application/json" )
 	public void imports(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Workbook wb = null;
 		InputStream is = null;
@@ -105,23 +105,26 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 		return wb;
 	}
 	
-	/**
-	 * 二手房详情导入数据专用
-	 * @param request
-	 * @param wb
-	 */
+	
 	private void quotationExcelReader(HttpServletRequest request, Workbook wb) {
-		String dateMonth;List result = new ArrayList<>();//对应excel文件
-		
+		List result = new ArrayList<>();//对应excel文件
 		Sheet sheet = wb.getSheetAt(0);
-		
 		int rowSize = sheet.getLastRowNum() + 1;
 		List<String> areaList =null;
 		List<String> distNum = null;
 		String cityId=request.getParameter("cityId");
 		String cityName=request.getParameter("cityName");
+		cityName= ascii2native(cityName);
 		String areaName = null;
 		String houseType = null;
+		secondHandHouseResource(result, sheet, rowSize, areaList, distNum, cityId, cityName, areaName, houseType);
+		System.out.println(JSONArray.toJSONString(result));
+	}
+	/**
+	 * 二手房详情导入数据专用
+	 */
+	private void secondHandHouseResource(List result, Sheet sheet, int rowSize, List<String> areaList, List<String> distNum, String cityId, String cityName, String areaName, String houseType) {
+		String dateMonth;
 		for (int j = 0; j < rowSize; j++) {//遍历行
 			Row row = sheet.getRow(j);
 			if (row == null) {//略过空行
@@ -197,10 +200,18 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 				}
 			}
 		}
-		System.out.println(JSONArray.toJSONString(result));
 	}
 	
-	
+	public String ascii2native(String ascii) {
+		int n = ascii.length() / 6;
+		StringBuilder sb = new StringBuilder(n);
+		for (int i = 0, j = 2; i < n; i++, j += 6) {
+			String code = ascii.substring(j, j + 4);
+			char ch = (char) Integer.parseInt(code, 16);
+			sb.append(ch);
+		}
+		return sb.toString();
+	}
 	private FileItem getUploadFileItem(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		ServletFileUpload upload = new ServletFileUpload(factory);

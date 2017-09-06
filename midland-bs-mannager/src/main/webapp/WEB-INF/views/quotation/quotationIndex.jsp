@@ -17,7 +17,9 @@
                     $("#file_upload").uploadify("settings", "formData", {
                         'cityId':$('#excelCityId').val(),
 						'cityName':$('#excelCityName').val()
+
                     });
+
                 },
                 'onUploadSuccess': function (file, data, response) {
 
@@ -49,7 +51,7 @@
 			<input type="hidden" name="isNew" value="${isNew}"/>
 			<ul class = "userinfo row">
 				<li><span>城市：</span>
-					<select name="cityId" id="cityId" class="dropdown">
+					<select  name="cityId" id="cityId" class="dropdown">
 						<option value="" >全部</option>
 						<c:forEach items="${citys}" var="item">
 						<option value="${item.id}" >${item.name}</option>
@@ -78,9 +80,9 @@
 		</section>
 	</div>
 	<li><span>城市：</span>
-		<input type="hidden" id="excelCityName">
-		<select  id="excelCityId" class="dropdown">
-			<option value="" >全部</option>
+		<input type="text" id="excelCityName" value="">
+		<select onchange="setCityName()" id="excelCityId" class="dropdown">
+			<option value="" >请选择</option>
 			<c:forEach items="${citys}" var="item">
 				<option value="${item.id}" >${item.name}</option>
 			</c:forEach>
@@ -94,6 +96,17 @@
 	</li>
 
 	<script type="text/javascript">
+
+		function setCityName() {
+            if($("#excelCityId").find("option:selected").text()=="请选择"){
+                $("#excelCityName").attr("value","");
+
+            }else{
+                var str = $("#excelCityId").find("option:selected").text();
+                var sta =unicode(str);
+                $("#excelCityName").attr("value",sta);
+            }
+        }
 
             function toAddPage(){
             layer.open({
@@ -110,6 +123,23 @@
 		 window.onload = function(){
              $('#searchForm').submit();
 		}
+
+        function unicode(str){
+            var value='';
+            for (var i = 0; i < str.length; i++) {
+                value += '\\u' + left_zero_4(parseInt(str.charCodeAt(i)).toString(16));
+            }
+            return value;
+        }
+        function left_zero_4(str) {
+            if (str != null && str != '' && str != 'undefined') {
+                if (str.length == 2) {
+                    return '00' + str;
+                }
+            }
+            return str;
+        }
+
 	</script>
 	<script type="text/javascript" src="${ctx}/assets/scripts/layer/layer.js"></script>
 </body>
