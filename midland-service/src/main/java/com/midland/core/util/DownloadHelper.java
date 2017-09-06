@@ -1,9 +1,10 @@
 package com.midland.core.util;
+
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import javax.servlet.http.HttpServletResponse;
 
 public class DownloadHelper {
 	/**

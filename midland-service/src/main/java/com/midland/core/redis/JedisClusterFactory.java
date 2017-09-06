@@ -1,16 +1,18 @@
 package com.midland.core.redis;
 
-import java.util.HashSet;
-import java.util.Properties;
-import java.util.Set;
-import java.util.regex.Pattern;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.Resource;
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.JedisCluster;
-/**   
+
+import java.util.HashSet;
+import java.util.Properties;
+import java.util.Set;
+import java.util.regex.Pattern;
+
+/**
  * JedisClusterFactory
  * @category          JedisClusterFactory
  * @projectName  	 hxin-common-cache-client

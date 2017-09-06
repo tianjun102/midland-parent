@@ -11,7 +11,7 @@ import java.util.Map;
 
 public interface SettingService {
 
-    public List<Popular> findPopularList(Popular popular );
+    public List<Popular> findPopularList(Popular popular);
 
     public Popular findPopular(Popular popular);
 
@@ -19,13 +19,13 @@ public interface SettingService {
 
     public int insertPopular(Popular popular);
 
-    public Map<String, List<Area>> queryCityByRedis(Map<String,String> parem);
+    public Map<String, List<Area>> queryCityByRedis(Map<String, String> parem);
 	
 	void getAllProvinceList(Model model);
 	
 	List<Area> queryAllCityByRedis();
 	
-	public Map<String, List<Area>> queryAreaByRedis(Map<String,String> parem);
+	public Map<String, List<Area>> queryAreaByRedis(Map<String, String> parem);
 
     /**
      * 友情链接
@@ -33,7 +33,7 @@ public interface SettingService {
      * @return
      */
 
-    public List<LinkUrlManager> findLinkUrlList(LinkUrlManager linkUrlManager );
+    public List<LinkUrlManager> findLinkUrlList(LinkUrlManager linkUrlManager);
 
     public LinkUrlManager findLinkUrlManager(LinkUrlManager linkUrlManager);
 
@@ -46,7 +46,7 @@ public interface SettingService {
      * Banner管理
      */
 
-    public List<Banner> findBannerList(Banner banner );
+    public List<Banner> findBannerList(Banner banner);
 
     public Banner findBanner(Banner banner);
 

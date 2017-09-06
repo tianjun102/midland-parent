@@ -1,28 +1,30 @@
 package com.midland.web.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.Paginator;
+import com.midland.web.controller.base.BaseController;
 import com.midland.web.model.LiaisonRecord;
 import com.midland.web.service.LiaisonRecordService;
-import com.midland.web.controller.base.BaseController;
 import com.midland.web.util.JsonMapReader;
+import com.midland.web.util.MidlandHelper;
 import com.midland.web.util.ParamObject;
 import org.slf4j.Logger;
-import java.util.Map;
-import java.util.HashMap;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.Paginator;
-import java.util.List;
-import com.midland.web.util.MidlandHelper;
-import org.springframework.ui.Model;
+
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Controller
 @SuppressWarnings("all")
 @RequestMapping("/liaisonRecord/")
-public class LiaisonRecordController extends BaseController  {
+public class LiaisonRecordController extends BaseController {
 
 	private Logger log = LoggerFactory.getLogger(LiaisonRecordController.class);
 	@Autowired
@@ -32,7 +34,7 @@ public class LiaisonRecordController extends BaseController  {
 	 * 
 	 **/
 	@RequestMapping("index")
-	public String liaisonRecordIndex(LiaisonRecord liaisonRecord,Model model) throws Exception {
+	public String liaisonRecordIndex(LiaisonRecord liaisonRecord, Model model) throws Exception {
 		List<ParamObject> list = JsonMapReader.getMap("liaisonRecord_category");
 		model.addAttribute("categorys",list);
 		return "liaisonRecord/liaisonRecordIndex";
@@ -42,7 +44,7 @@ public class LiaisonRecordController extends BaseController  {
 	 * 
 	 **/
 	@RequestMapping("to_add")
-	public String toAddLiaisonRecord(LiaisonRecord liaisonRecord,Model model) throws Exception {
+	public String toAddLiaisonRecord(LiaisonRecord liaisonRecord, Model model) throws Exception {
 		return "liaisonRecord/addLiaisonRecord";
 	}
 
@@ -123,7 +125,7 @@ public class LiaisonRecordController extends BaseController  {
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
 	 **/
 	@RequestMapping("list")
-	public String findLiaisonRecordList(LiaisonRecord liaisonRecord,Model model, HttpServletRequest request) {
+	public String findLiaisonRecordList(LiaisonRecord liaisonRecord, Model model, HttpServletRequest request) {
 		try {
 			log.info("findLiaisonRecordList  {}",liaisonRecord);
 			MidlandHelper.doPage(request);

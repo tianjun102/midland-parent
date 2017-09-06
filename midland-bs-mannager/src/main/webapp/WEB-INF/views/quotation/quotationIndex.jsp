@@ -6,17 +6,37 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+	<script type="text/javascript">
+        $(function () {
+            $('#file_upload').uploadify({
+                'swf': '${ctx }/assets/scripts/uploadify/uploadify.swf',
+                'uploader': '${ctx }/rest/upload/excel_read',
+                'multi': false,// 是否支持多个文件上传
+                'onUploadSuccess': function (file, data, response) {
 
+                },
+                'onQueueComplete': function (queueData) {
+                    if (queueData.uploadsSuccessful < 1) {
+                        alert('文件上传失败');
+                    }
+                }
+
+                // Your options here
+            });
+        })
+	</script>
 </head>
 <body>
-	
-	
+
+
 	<!--列表界面-->
-	<div class="box"> 
+	<div class="box">
 		<section class = "content">
 			<p class = "detail-title">
 				<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>
 			</p>
+
+
 		<form action="${ctx }/rest/quotation/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<input type="hidden" name="isNew" value="${isNew}"/>
@@ -47,12 +67,19 @@
 			</ul>
 			</form>
 			<div id="listDiv"></div>
+			<a class="edit_img" target="contentF" href="${ctx}/rest/quotation/showTooltip">生成预览</a>
 		</section>
 	</div>
-	
-	
+	<li><span>图片上传：</span>
+		<div style="width: 250px;float: left;">
+			<img style="margin-bottom: 10px;max-width:80px;max-height:80px" id="iconImg1" >
+			<input type="file" name="file_upload" id="file_upload"/>
+		</div>
+	</li>
+
 	<script type="text/javascript">
-        function toAddPage(){
+
+            function toAddPage(){
             layer.open({
                 type: 2,
                 skin: 'layer-style',

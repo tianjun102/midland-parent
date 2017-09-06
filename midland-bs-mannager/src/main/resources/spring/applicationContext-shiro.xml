@@ -21,8 +21,6 @@
                 /rest/user/checkLink = anon
                 /rest/user/sendSms = anon
                 /rest/user/checkVcode = anon
-                <!-- 前端接口不需要验证 -->
-                /rest/api/* = anon
                 <!-- 其他资源需要认证 -->
                 /** = authc
             </value>

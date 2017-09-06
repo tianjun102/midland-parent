@@ -33,24 +33,24 @@ public class AnswerServiceImpl implements AnswerService {
 	 * 查询
 	 **/
 	@Override
-	public Answer selectById(Integer id) {
-		log.info("selectById  {}",id);
-		return answerMapper.selectById(id);
+	public Answer selectAnswerById(Integer id) {
+		log.info("selectAnswerById  {}",id);
+		return answerMapper.selectAnswerById(id);
 	}
 
 	/**
 	 * 删除
 	 **/
 	@Override
-	public void deleteById(Integer id)throws Exception {
+	public void deleteAnswerById(Integer id)throws Exception {
 		try {
-			log.info("deleteById  {}",id);
-			int result = answerMapper.deleteById(id);
+			log.info("deleteAnswerById  {}",id);
+			int result = answerMapper.deleteAnswerById(id);
 			if (result < 1) {
-				throw new Exception("deleteById失败");
+				throw new Exception("deleteAnswerById失败");
 			}
 		} catch(Exception e) {
-			log.error("deleteById  {}",id,e);
+			log.error("deleteAnswerById  {}",id,e);
 			throw e;
 		}
 	}
@@ -58,21 +58,21 @@ public class AnswerServiceImpl implements AnswerService {
 	 * 更新
 	 **/
 	@Override
-	public void updateById(Answer answer) throws Exception {
+	public void updateAnswerById(Answer answer) throws Exception {
 		try {
-			log.info("updateById  {}",answer);
-			int result = answerMapper.updateById(answer);
+			log.info("updateAnswerById  {}",answer);
+			int result = answerMapper.updateAnswerById(answer);
 			if (result < 1) {
-				throw new Exception("updateById失败");
+				throw new Exception("updateAnswerById失败");
 			}
 		} catch(Exception e) {
-			log.error("updateById  {}",answer,e);
+			log.error("updateAnswerById  {}",answer,e);
 			throw e;
 		}
 	}
 
 	/**
-	 * 分页，这里建议使用插件（com.com.github.pagehelper.PageHelper）
+	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
 	 **/
 	@Override
 	public List<Answer> findAnswerList(Answer answer) throws Exception {

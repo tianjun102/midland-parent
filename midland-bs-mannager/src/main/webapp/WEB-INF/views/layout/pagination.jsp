@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@include file="../layout/tablib.jsp" %>
 <div class="row">
     <div class="col-sm-6">
     	<div style = "overflow:hidden; line-height:30px;">
@@ -50,23 +49,6 @@
             <c:if test="${!paginator.lastPage}">
             <li class="paginate_button last" tabindex="0"><a href="javascript:void(0);" onclick="javascript:setPage(${paginator.totalPages},'${target}');">尾页</a></li>
            </c:if>
-
-
-            <%--<li>--%>
-                <%--<a href="#" aria-label="Previous">--%>
-                    <%--<span aria-hidden="true">&laquo;</span>--%>
-                <%--</a>--%>
-            <%--</li>--%>
-            <%--<li><a href="#">1</a></li>--%>
-            <%--<li><a href="#">2</a></li>--%>
-            <%--<li><a href="#">3</a></li>--%>
-            <%--<li><a href="#">4</a></li>--%>
-            <%--<li><a href="#">5</a></li>--%>
-            <%--<li>--%>
-                <%--<a href="#" aria-label="Next">--%>
-                    <%--<span aria-hidden="true">&raquo;</span>--%>
-                <%--</a>--%>
-            <%--</li>--%>
         </ul>
     </div>
 </div>

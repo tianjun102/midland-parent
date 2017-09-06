@@ -1,12 +1,10 @@
 package com.midland.web.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.midland.web.controller.base.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Collections;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 公共视图控制器

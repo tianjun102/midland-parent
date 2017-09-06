@@ -1,11 +1,8 @@
 package com.midland.core.util;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.SortedMap;
+import java.util.*;
+
 /**
  * 
  * @author tianjun

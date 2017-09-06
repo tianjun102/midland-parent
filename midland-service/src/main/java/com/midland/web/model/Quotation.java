@@ -33,7 +33,7 @@ public class Quotation{
 	/**
 	 * 成交面积
 	 **/
-	private Integer dealAcreage;
+	private String dealAcreage;
 	/**
 	 * 成交均价
 	 **/
@@ -132,11 +132,11 @@ public class Quotation{
 		this.dealNum = dealNum;
 	}
 
-	public Integer getDealAcreage() {
+	public String getDealAcreage() {
 		return dealAcreage;
 	}
 
-	public void setDealAcreage(Integer dealAcreage) {
+	public void setDealAcreage(String dealAcreage) {
 		this.dealAcreage = dealAcreage;
 	}
 

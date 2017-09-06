@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Map;
+
 @Service
 public class QuotationServiceImpl implements QuotationService {
 
@@ -36,6 +38,11 @@ public class QuotationServiceImpl implements QuotationService {
 	public Quotation selectQuotationById(Integer id) {
 		log.info("selectQuotationById  {}",id);
 		return quotationMapper.selectQuotationById(id);
+	}
+	@Override
+	public List<Map> tooltip(Quotation id) {
+		log.info("selectQuotationById  {}",id);
+		return quotationMapper.tooltip(id);
 	}
 
 	/**

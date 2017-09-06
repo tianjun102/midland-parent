@@ -5,7 +5,9 @@ import com.github.pagehelper.Paginator;
 import com.midland.web.controller.base.BaseController;
 import com.midland.web.model.City;
 import com.midland.web.model.Menu;
-import com.midland.web.service.*;
+import com.midland.web.service.CityService;
+import com.midland.web.service.JdbcService;
+import com.midland.web.service.MenuService;
 import com.midland.web.util.MidlandHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +41,7 @@ public class MenuController extends BaseController{
 		return "/menu/menuIndex";
 	}
 	@RequestMapping("list")
-	public String showMenuIndex(Menu menu,Model model,HttpServletRequest request) throws Exception {
+	public String showMenuIndex(Menu menu, Model model, HttpServletRequest request) throws Exception {
 		MidlandHelper.doPage(request);
 		Page<Menu> result=(Page<Menu>) menuServiceImpl.findMenuList(menu);
 		Paginator paginator = result.getPaginator();

@@ -1,27 +1,29 @@
 package com.midland.web.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.Paginator;
+import com.midland.web.controller.base.BaseController;
 import com.midland.web.model.Area;
 import com.midland.web.model.Category;
 import com.midland.web.model.Information;
 import com.midland.web.service.CategoryService;
 import com.midland.web.service.InformationService;
-import com.midland.web.controller.base.BaseController;
 import com.midland.web.service.JdbcService;
 import com.midland.web.service.SettingService;
+import com.midland.web.util.MidlandHelper;
 import org.slf4j.Logger;
-import java.util.Map;
-import java.util.HashMap;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.Paginator;
-import java.util.List;
-import com.midland.web.util.MidlandHelper;
-import org.springframework.ui.Model;
+
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @Controller
 @SuppressWarnings("all")
 @RequestMapping("/information/")
@@ -44,7 +46,7 @@ public class InformationController extends BaseController  {
 	 * 
 	 **/
 	@RequestMapping("index")
-	public String informationIndex(Information information,Model model) throws Exception {
+	public String informationIndex(Information information, Model model) throws Exception {
 		Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
 		parem.put("id","*");
@@ -58,7 +60,7 @@ public class InformationController extends BaseController  {
 	 * 
 	 **/
 	@RequestMapping("to_add")
-	public String toAddInformation(Information information,Model model) throws Exception {
+	public String toAddInformation(Information information, Model model) throws Exception {
 		Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
 		parem.put("id","*");
@@ -163,7 +165,7 @@ public class InformationController extends BaseController  {
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
 	 **/
 	@RequestMapping("list")
-	public String findInformationList(Information information,Model model, HttpServletRequest request) {
+	public String findInformationList(Information information, Model model, HttpServletRequest request) {
 		try {
 			log.info("findInformationList  {}",information);
 			MidlandHelper.doPage(request);

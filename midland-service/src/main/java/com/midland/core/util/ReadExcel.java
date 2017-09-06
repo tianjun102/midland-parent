@@ -1,4 +1,4 @@
-//package com.midland.core.util;
+package com.midland.core.util;//package com.midland.core.util;
 //
 //import java.io.File;
 //import java.io.FileInputStream;

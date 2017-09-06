@@ -46,7 +46,7 @@ public class ResearchController extends BaseController  {
 	 * 
 	 **/
 	@RequestMapping("index")
-	public String informationIndex(Information information,Model model) throws Exception {
+	public String informationIndex(Information information, Model model) throws Exception {
 		Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
 		parem.put("id","*");
@@ -60,7 +60,7 @@ public class ResearchController extends BaseController  {
 	 * 
 	 **/
 	@RequestMapping("to_add")
-	public String toAddInformation(Information information,Model model) throws Exception {
+	public String toAddInformation(Information information, Model model) throws Exception {
 		Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
 		parem.put("id","*");
@@ -164,7 +164,7 @@ public class ResearchController extends BaseController  {
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
 	 **/
 	@RequestMapping("list")
-	public String findInformationList(Information information,Model model, HttpServletRequest request) {
+	public String findInformationList(Information information, Model model, HttpServletRequest request) {
 		try {
 			log.info("findInformationList  {}",information);
 			MidlandHelper.doPage(request);

@@ -48,7 +48,7 @@ public class RoleController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/roleIndex", method = {RequestMethod.GET,RequestMethod.POST})
-	public String findRoleIndex(Role role,Model model,HttpServletRequest request){
+	public String findRoleIndex(Role role, Model model, HttpServletRequest request){
 		
 		return "role/roleIndex";
 	}
@@ -59,7 +59,7 @@ public class RoleController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/roleList", method={RequestMethod.GET, RequestMethod.POST})
-	public String selectRoleList(Role role,Model model,HttpServletRequest request){
+	public String selectRoleList(Role role, Model model, HttpServletRequest request){
 
 		String pageSize = request.getParameter("pageSize");
 		String pageNo = request.getParameter("pageNo");

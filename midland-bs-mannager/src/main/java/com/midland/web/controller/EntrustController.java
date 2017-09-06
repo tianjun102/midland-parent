@@ -5,7 +5,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.Paginator;
 import com.midland.web.controller.base.BaseController;
 import com.midland.web.enums.ContextEnums;
-import com.midland.web.model.Appointment;
 import com.midland.web.model.Entrust;
 import com.midland.web.model.EntrustLog;
 import com.midland.web.model.ExportModel;
@@ -101,6 +100,9 @@ public class EntrustController extends BaseController{
 		model.addAttribute("sources",paramObjects2);
 		List<ParamObject> paramObjects3 = JsonMapReader.getMap("appointment_houseType");
 		model.addAttribute("houses",paramObjects3);
+		List<ParamObject> paramObjects4 = JsonMapReader.getMap("entrust_status");
+		model.addAttribute("statusList",paramObjects4);
+		
 	}
 	
 	
@@ -127,6 +129,7 @@ public class EntrustController extends BaseController{
 	public String toUpdateAppointment(int entrustId, Model model) {
 		Entrust entrust=entrustServiceImpl.selectEntrustById(entrustId);
 		List<EntrustLog> entrustLogs = entrustLogServiceImpl.selectEntrustLogByEntrustId(entrustId);
+		
 		getSelectParam(model);
 		model.addAttribute("entrust",entrust);
 		model.addAttribute("entrustLogs",entrustLogs);

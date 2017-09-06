@@ -5,11 +5,11 @@ import java.util.List;
 
 public interface AnswerMapper {
 
-	Answer selectById(Integer answer);
+	Answer selectAnswerById(Integer answer);
 
-	int deleteById(Integer answer);
+	int deleteAnswerById(Integer answer);
 
-	int updateById(Answer answer);
+	int updateAnswerById(Answer answer);
 
 	int insertAnswer(Answer answer);
 

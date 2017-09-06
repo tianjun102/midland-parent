@@ -64,7 +64,7 @@ public class QuestionsController extends BaseController{
 	public Object deleteAnswerByPrimaryKey(Integer id) {
 		Map map = new HashMap<>();
 		try {
-			answerServiceImpl.deleteById(id);
+			answerServiceImpl.deleteAnswerById(id);
 			map.put("state",0);
 		} catch (Exception e) {
 			logger.error("deleteAnswerByPrimaryKey {}",id,e);
@@ -136,11 +136,22 @@ public class QuestionsController extends BaseController{
 		return "questions/updateViewQuestion";
 	}
 	
+	@RequestMapping("/to_repeat")
+	public String toRepeat(int id,Model model) throws Exception {
+		Questions questions=questionsServiceImpl.selectByPrimaryKey(id);
+		Answer answer = new Answer();
+		answer.setQuestionsId(id);
+		List<Answer> answerList = answerServiceImpl.findAnswerList(answer);
+		model.addAttribute("questions",questions);
+		model.addAttribute("answerList",answerList);
+		return "questions/repeat";
+	}
+	
 	
 	
 	@RequestMapping("/update")
 	@ResponseBody
-	public Object updateByPrimaryKeySelective(Questions record,HttpServletRequest request) {
+	public Object updateByPrimaryKeySelective(Questions record, HttpServletRequest request) {
 		Map map = new HashMap();
 		User user = (User)request.getSession().getAttribute("userInfo");
 		record.setAuditor(user.getUsername());
@@ -150,6 +161,22 @@ public class QuestionsController extends BaseController{
 			return map;
 		}
 		map.put("state",-1);
+		return map;
+	}
+	@RequestMapping("/repeat")
+	@ResponseBody
+	public Object repeat(Answer answer, HttpServletRequest request) {
+		Map map = new HashMap();
+		answer.setAnswerTime(MidlandHelper.getCurrentTime());
+		User user = MidlandHelper.getCurrentUser(request);
+		answer.setAnswerName(user.getUserCnName());
+		try {
+			answerServiceImpl.insertAnswer(answer);
+			map.put("state",0);
+		} catch (Exception e) {
+			logger.error("repeat : {}",answer,e);
+			map.put("state",-1);
+		}
 		return map;
 	}
 }

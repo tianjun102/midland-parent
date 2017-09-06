@@ -1,37 +1,27 @@
 package com.midland.core.util;
 
 
-
-import java.io.IOException;
-
-
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.security.KeyStore;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import javax.net.ssl.SSLContext;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.ssl.SSLContexts;
 import org.apache.http.util.EntityUtils;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
+
+import javax.net.ssl.SSLContext;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * 创建时间：2016年11月9日 下午4:16:32
@@ -137,6 +127,20 @@ public class HttpUtils {
 	 * @return 请求失败返回null
 	 */
 	public static String post(String url, Map<String, String> params) {
+		return _post(url, params,DEFAULT_CHARSET);
+	}
+	/**
+	 * @description 功能描述: post 请求
+	 * @param url 请求地址
+	 * @param params 参数
+	 * @param charset 编码格式
+	 * @return 请求失败返回null
+	 */
+	public static String post(String url, Map<String, String> params,String charset) {
+		return _post(url, params,charset);
+	}
+	
+	private static String _post(String url, Map<String, String> params,String charset) {
 		CloseableHttpClient httpClient = null;
 		HttpPost httpPost = new HttpPost(url);
 		List<NameValuePair> nameValuePairs = new ArrayList<>();
@@ -145,16 +149,16 @@ public class HttpUtils {
 				nameValuePairs.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
 			}
 		}
-
+		
 		String body = null;
 		CloseableHttpResponse response = null;
 		try {
 			httpClient = HttpClients.custom()
 					.setDefaultRequestConfig(REQUEST_CONFIG)
 					.build();
-			httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, DEFAULT_CHARSET));
+			httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, charset));
 			response = httpClient.execute(httpPost);
-			body = EntityUtils.toString(response.getEntity(), DEFAULT_CHARSET);
+			body = EntityUtils.toString(response.getEntity(), charset);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -176,7 +180,7 @@ public class HttpUtils {
 		}
 		return body;
 	}
-
+	
 	/**
 	 * @description 功能描述: post 请求
 	 * @param url 请求地址
@@ -184,64 +188,31 @@ public class HttpUtils {
 	 * @return 请求失败返回null
 	 */
 	public static String post(String url, String s) {
-		CloseableHttpClient httpClient = null;
-		HttpPost httpPost = new HttpPost(url);
-		String body = null;
-		CloseableHttpResponse response = null;
-		try {
-			httpClient = HttpClients.custom()
-					.setDefaultRequestConfig(REQUEST_CONFIG)
-					.build();
-			httpPost.setEntity(new StringEntity(s, DEFAULT_CHARSET));
-			response = httpClient.execute(httpPost);
-			body = EntityUtils.toString(response.getEntity(), DEFAULT_CHARSET);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (response != null) {
-				try {
-					response.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-
-			if (httpClient != null) {
-				try {
-					httpClient.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return body;
+		return _StringPost(url, s,DEFAULT_CHARSET);
 	}
-
 	/**
-	 * @description 功能描述: post https请求，服务器双向证书验证
+	 * @description 功能描述: post 请求
 	 * @param url 请求地址
-	 * @param params 参数
+	 * @param s 参数xml
 	 * @return 请求失败返回null
 	 */
-	 public static String posts(String url, Map<String, String> params) {
+	public static String post(String url, String s,String charset) {
+		return _StringPost(url, s,charset);
+	}
+	
+	
+	private static String _StringPost(String url, String s,String charset) {
 		CloseableHttpClient httpClient = null;
 		HttpPost httpPost = new HttpPost(url);
-		List<NameValuePair> nameValuePairs = new ArrayList<>();
-		if (params != null && !params.isEmpty()) {
-			for (Entry<String, String> entry : params.entrySet()) {
-				nameValuePairs.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
-			}
-		}
-
 		String body = null;
 		CloseableHttpResponse response = null;
 		try {
 			httpClient = HttpClients.custom()
 					.setDefaultRequestConfig(REQUEST_CONFIG)
 					.build();
-			httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, DEFAULT_CHARSET));
+			httpPost.setEntity(new StringEntity(s, charset));
 			response = httpClient.execute(httpPost);
-			body = EntityUtils.toString(response.getEntity(), DEFAULT_CHARSET);
+			body = EntityUtils.toString(response.getEntity(), charset);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -267,41 +238,21 @@ public class HttpUtils {
 	/**
 	 * @description 功能描述: post https请求，服务器双向证书验证
 	 * @param url 请求地址
+	 * @param params 参数
+	 * @return 请求失败返回null
+	 */
+	 public static String posts(String url, Map<String, String> params) {
+		 return _post(url, params,DEFAULT_CHARSET);
+	}
+	
+	/**
+	 * @description 功能描述: post https请求，服务器双向证书验证
+	 * @param url 请求地址
 	 * @param s 参数xml
 	 * @return 请求失败返回null
 	 */
 	public static String posts(String url, String s) {
-		CloseableHttpClient httpClient = null;
-		HttpPost httpPost = new HttpPost(url);
-		String body = null;
-		CloseableHttpResponse response = null;
-		try {
-			httpClient = HttpClients.custom()
-					.setDefaultRequestConfig(REQUEST_CONFIG)
-					.build();
-			httpPost.setEntity(new StringEntity(s, DEFAULT_CHARSET)); 
-			response = httpClient.execute(httpPost);
-			body = EntityUtils.toString(response.getEntity(), DEFAULT_CHARSET);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (response != null) {
-				try {
-					response.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-
-			if (httpClient != null) {
-				try {
-					httpClient.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return body;
+		return _StringPost(url, s,DEFAULT_CHARSET);
 	}
 	
 	public static void main(String[] args) {

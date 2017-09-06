@@ -2,15 +2,12 @@ package com.midland.web.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.Paginator;
 import com.midland.core.util.AppSetting;
 import com.midland.core.util.ApplicationUtils;
 import com.midland.core.util.MD5Util;
 import com.midland.core.util.SmsUtil;
 import com.midland.web.controller.base.BaseController;
-import com.midland.web.enums.ContextEnums;
-import com.midland.web.model.Menu;
 import com.midland.web.model.role.Role;
 import com.midland.web.model.user.User;
 import com.midland.web.security.PermissionSign;
@@ -45,7 +42,10 @@ import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.sql.Timestamp;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -79,7 +79,7 @@ public class UserController extends BaseController {
      * @throws UnsupportedEncodingException 
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@Valid User user, BindingResult result, Model model, HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException {
+    public String login(@Valid User user, BindingResult result, Model model, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
     	String username=URLEncoder.encode(request.getParameter("username"),"utf-8");
     	String password=request.getParameter("password");
     	 String flag=request.getParameter("remember");//记住密码
@@ -217,7 +217,7 @@ public class UserController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/userIndex", method = {RequestMethod.GET,RequestMethod.POST})
-    public String findUserIndex(User user,Model model,HttpServletRequest request){
+    public String findUserIndex(User user, Model model, HttpServletRequest request){
     	return "user/userIndex";
     }
     /**
@@ -226,7 +226,7 @@ public class UserController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/userList", method = {RequestMethod.GET,RequestMethod.POST})
-    public String selectUserList(User user,Model model,HttpServletRequest request){
+    public String selectUserList(User user, Model model, HttpServletRequest request){
 	    getUserList(user,model, request);
     	return "user/userlist";
     }
@@ -234,7 +234,7 @@ public class UserController extends BaseController {
 	
 	
 	
-	public void getUserList(User user,Model model, HttpServletRequest request) {
+	public void getUserList(User user, Model model, HttpServletRequest request) {
 		MidlandHelper.doPage(request);
 		Page<User> userList=(Page<User>)userService.selectByExampleAndPage(user);
 		Paginator paginator = userList.getPaginator();
@@ -354,7 +354,7 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "/edit", method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public Object updateUser(User user,int isFlag,HttpServletRequest request){
+    public Object updateUser(User user, int isFlag, HttpServletRequest request){
     	Map<String, Object> map = new HashMap<String, Object>();
     	if (isFlag ==1){
 		    user.setUsername(null);
@@ -377,7 +377,7 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "/audit", method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public Object auditUser(User user,HttpServletRequest request){
+    public Object auditUser(User user, HttpServletRequest request){
     	User currUser = (User)request.getSession().getAttribute("userInfo");
     	Map<String, Object> map = new HashMap<>();
     	user.setAuditTime(MidlandHelper.getCurrentTime());
@@ -599,7 +599,7 @@ public class UserController extends BaseController {
                 + "</a>  或者    <a href=" + resetPassHref
                 + " target='_BLANK'>点击我重新设置密码</a>"
                 + "<br/>tips:本邮件超过30分钟,链接将会失效，需要重新申请'找回密码'" + key
-                + "\t" + digitalSignature; 
+                + "\t" + digitalSignature;
 
 	    
         SmsUtil.send("13602825350", "xcv12345678");
@@ -744,7 +744,7 @@ public class UserController extends BaseController {
     
     
     @RequestMapping("/export")
-    public void userInfoExportExcel(User user,HttpServletResponse response){
+    public void userInfoExportExcel(User user, HttpServletResponse response){
 	    List<User> dataList = userService.selectUserList(user);
 	    PoiExcelExport pee = new PoiExcelExport(response,"用户","sheet1");
 	    //调用

@@ -1,6 +1,7 @@
 package com.midland.core.util;
 
 import java.security.MessageDigest;
+
 /**
  * 
  * @author tianjun

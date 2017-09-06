@@ -2,13 +2,17 @@ package com.midland.web.service;
 
 import com.midland.web.model.Quotation;
 import java.util.List;
+import java.util.Map;
+
 public interface QuotationService {
 
 	/**
 	 * 主键查询
 	 **/
 	Quotation selectQuotationById(Integer id);
-
+	
+	List<Map> tooltip(Quotation id);
+	
 	/**
 	 * 主键删除
 	 **/

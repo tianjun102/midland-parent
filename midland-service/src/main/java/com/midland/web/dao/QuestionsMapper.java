@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface QuestionsMapper {
     int deleteByPrimaryKey(Integer id);
-    int deleteByIds(Map<String,Object> map);
+    int deleteByIds(Map<String, Object> map);
     int insertSelective(Questions record);
     Questions selectByPrimaryKey(Integer id);
     List<Questions> questionPage(Questions questions);

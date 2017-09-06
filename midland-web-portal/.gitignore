@@ -1,0 +1,9 @@
+# Project ignore files
+/*
+!.gitignore
+!src
+!pom.xml
+!*.txt
+!readme.md
+
+

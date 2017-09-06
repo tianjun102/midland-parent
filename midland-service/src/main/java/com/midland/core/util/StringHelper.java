@@ -1,16 +1,15 @@
 package com.midland.core.util;
 
 
-import java.security.MessageDigest;
+import com.google.gson.Gson;
 
+import java.security.MessageDigest;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import com.google.gson.Gson;
 
 
 public class StringHelper {

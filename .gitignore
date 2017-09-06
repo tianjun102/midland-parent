@@ -1,0 +1,12 @@
+# Project ignore files
+/*
+!.gitignore
+!src
+!pom.xml
+!*.txt
+!midland-bs-mannager
+!midland-service
+!midland-web-portal
+!readme.md
+
+

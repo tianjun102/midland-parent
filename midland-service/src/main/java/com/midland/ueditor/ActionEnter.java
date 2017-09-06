@@ -1,10 +1,6 @@
 package com.midland.ueditor;
 
-import java.util.Map;
-
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.midland.base.BaseFilter;
 import com.midland.ueditor.define.ActionMap;
 import com.midland.ueditor.define.AppInfo;
 import com.midland.ueditor.define.BaseState;
@@ -12,12 +8,14 @@ import com.midland.ueditor.define.State;
 import com.midland.ueditor.hunter.FileManager;
 import com.midland.ueditor.hunter.ImageHunter;
 import com.midland.ueditor.upload.Uploader;
-import com.midland.web.controller.base.BaseController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
-public class ActionEnter extends BaseController{
+
+public class ActionEnter extends BaseFilter{
 	private final Logger logger = LoggerFactory.getLogger(ActionEnter.class);
 	private HttpServletRequest request = null;
 	

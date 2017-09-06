@@ -169,7 +169,7 @@ public class AppointmentController extends BaseController{
 	
 	@RequestMapping("/update")
 	@ResponseBody
-	public Object updateByPrimaryKeySelective(Appointment record,HttpServletRequest request) {
+	public Object updateByPrimaryKeySelective(Appointment record, HttpServletRequest request) {
 		Map map = new HashMap();
 		try {
 			appointmentServiceImpl.updateAppointmentById(record);
@@ -212,7 +212,7 @@ public class AppointmentController extends BaseController{
 	}
 	
 	@RequestMapping("/export")
-	public void userInfoExportExcel(Appointment appointment,HttpServletResponse response) throws Exception {
+	public void userInfoExportExcel(Appointment appointment, HttpServletResponse response) throws Exception {
 		List<Appointment> dataList = appointmentServiceImpl.findAppointmentList(appointment);
 		PoiExcelExport pee = new PoiExcelExport(response,"预约看房","sheet1");
 		//调用

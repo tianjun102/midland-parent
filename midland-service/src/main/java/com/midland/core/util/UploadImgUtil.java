@@ -1,4 +1,4 @@
-//package com.midland.core.util;
+package com.midland.core.util;//package com.midland.core.util;
 //
 //import java.awt.Image;
 //import java.awt.image.BufferedImage;

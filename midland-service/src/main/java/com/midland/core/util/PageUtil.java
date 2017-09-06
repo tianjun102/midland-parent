@@ -1,15 +1,14 @@
 package com.midland.core.util;
 
 
-import java.beans.PropertyDescriptor;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.commons.beanutils.PropertyUtilsBean;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.beans.PropertyDescriptor;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**

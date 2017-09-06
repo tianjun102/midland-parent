@@ -1,9 +1,10 @@
 package com.midland.core.redis;
 
+import redis.clients.jedis.JedisCluster;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import redis.clients.jedis.JedisCluster;
 
 /**
  * @author huangpq

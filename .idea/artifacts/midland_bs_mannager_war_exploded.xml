@@ -7,6 +7,9 @@
           <element id="module-output" name="midland-bs-mannager" />
         </element>
         <element id="directory" name="lib">
+          <element id="archive" name="midland-service-1.1.0.jar">
+            <element id="module-output" name="midland-service" />
+          </element>
           <element id="library" level="project" name="Maven: com.github.pagehelper:pagehelper:5.0.0-rc" />
           <element id="library" level="project" name="Maven: com.github.jsqlparser:jsqlparser:0.9.5" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.6.1" />

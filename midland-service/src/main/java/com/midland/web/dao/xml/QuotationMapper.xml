@@ -10,7 +10,7 @@
 		<result column="area_id" property="areaId" jdbcType="INTEGER" />
 		<result column="slice_id" property="sliceId" jdbcType="INTEGER" />
 		<result column="deal_num" property="dealNum" jdbcType="INTEGER" />
-		<result column="deal_acreage" property="dealAcreage" jdbcType="INTEGER" />
+		<result column="deal_acreage" property="dealAcreage" jdbcType="VARCHAR" />
 		<result column="price" property="price" jdbcType="VARCHAR" />
 		<result column="sold_num" property="soldNum" jdbcType="INTEGER" />
 		<result column="sold_area" property="soldArea" jdbcType="VARCHAR" />
@@ -26,6 +26,20 @@
 	<sql id="Base_Column_List">
 		id,data_time,type,city_id,area_id,slice_id,deal_num,deal_acreage,price,sold_num,sold_area,ring_ratio,update_time,is_new,is_delete,city_name,area_name,slice_name
 	</sql>
+
+	<select id="tooltip" resultType="Map">
+		SELECT
+	DATE_FORMAT(a.data_time , '%Y-%m') AS months ,
+	ROUND(sum(price)/DAYOFMONTH(LAST_DAY(data_time)),2)  cur,
+	ROUND(( SELECT
+		sum(price)
+		FROM quotation WHERE
+			DATE_FORMAT(a.data_time , '%Y%m') = DATE_FORMAT( DATE_add(data_time , INTERVAL 1 MONTH) , '%Y%m'))/
+			DAYOFMONTH( LAST_DAY( DATE_add(data_time , INTERVAL - 1 MONTH))) ,2) pre
+	FROM quotation a
+	<include refid="select_option"/>
+	GROUP BY months ASC
+	</select>
 
 	<select id="selectQuotationById" resultMap="BaseResultMap">
 		select <include refid="Base_Column_List" /> from quotation
@@ -129,7 +143,7 @@
 				#{dealNum,jdbcType=INTEGER},
 			</if>
 			<if test="dealAcreage != null">
-				#{dealAcreage,jdbcType=INTEGER},
+				#{dealAcreage,jdbcType=VARCHAR},
 			</if>
 			<if test="price != null">
 				#{price,jdbcType=VARCHAR},
@@ -184,7 +198,7 @@
 			deal_num= #{dealNum,jdbcType=INTEGER},
 		</if>
 		<if test="dealAcreage != null">
-			deal_acreage= #{dealAcreage,jdbcType=INTEGER},
+			deal_acreage= #{dealAcreage,jdbcType=VARCHAR},
 		</if>
 		<if test="price != null">
 			price= #{price,jdbcType=VARCHAR},
@@ -241,7 +255,7 @@
 			 and deal_num= #{dealNum,jdbcType=INTEGER}
 		</if>
 		<if test="dealAcreage != null">
-			 and deal_acreage= #{dealAcreage,jdbcType=INTEGER}
+			 and deal_acreage= #{dealAcreage,jdbcType=VARCHAR}
 		</if>
 		<if test="price != null">
 			 and price= #{price,jdbcType=VARCHAR}

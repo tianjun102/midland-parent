@@ -1,27 +1,28 @@
 package com.midland.web.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.Paginator;
+import com.midland.web.controller.base.BaseController;
 import com.midland.web.model.Feedback;
 import com.midland.web.model.user.User;
 import com.midland.web.service.FeedbackService;
-import com.midland.web.controller.base.BaseController;
+import com.midland.web.util.MidlandHelper;
 import org.slf4j.Logger;
-import java.util.Map;
-import java.util.HashMap;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.Paginator;
-import java.util.List;
-import com.midland.web.util.MidlandHelper;
-import org.springframework.ui.Model;
+
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
+
 @Controller
 @SuppressWarnings("all")
 @RequestMapping("/feedback/")
-public class FeedbackController extends BaseController  {
+public class FeedbackController extends BaseController {
 
 	private Logger log = LoggerFactory.getLogger(FeedbackController.class);
 	@Autowired
@@ -31,7 +32,7 @@ public class FeedbackController extends BaseController  {
 	 * 
 	 **/
 	@RequestMapping("index")
-	public String feedbackIndex(Feedback feedback,Model model) throws Exception {
+	public String feedbackIndex(Feedback feedback, Model model) throws Exception {
 		return "feedback/feedbackIndex";
 	}
 
@@ -39,7 +40,7 @@ public class FeedbackController extends BaseController  {
 	 * 
 	 **/
 	@RequestMapping("to_add")
-	public String toAddFeedback(Feedback feedback,Model model) throws Exception {
+	public String toAddFeedback(Feedback feedback, Model model) throws Exception {
 		return "feedback/addFeedback";
 	}
 
@@ -48,7 +49,7 @@ public class FeedbackController extends BaseController  {
 	 **/
 	@RequestMapping("add")
 	@ResponseBody
-	public Object addFeedback(Feedback feedback,HttpServletRequest request) throws Exception {
+	public Object addFeedback(Feedback feedback, HttpServletRequest request) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
 			
@@ -105,7 +106,7 @@ public class FeedbackController extends BaseController  {
 	 **/
 	@RequestMapping("update")
 	@ResponseBody
-	public Object updateFeedbackById(Feedback feedback,HttpServletRequest request) throws Exception {
+	public Object updateFeedbackById(Feedback feedback, HttpServletRequest request) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
 			User user = MidlandHelper.getCurrentUser(request);
@@ -125,7 +126,7 @@ public class FeedbackController extends BaseController  {
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
 	 **/
 	@RequestMapping("list")
-	public String findFeedbackList(Feedback feedback,Model model, HttpServletRequest request) {
+	public String findFeedbackList(Feedback feedback, Model model, HttpServletRequest request) {
 		try {
 			log.info("findFeedbackList  {}",feedback);
 			MidlandHelper.doPage(request);

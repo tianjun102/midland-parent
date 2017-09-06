@@ -5,15 +5,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Properties;
+
 public class AppSetting {
 	private static Properties prop = new Properties();    
     static{        
         try {
-            InputStream inputStream = AppSetting.class.getClassLoader().
-                    getResourceAsStream("/properties/appsetting.properties");
-            
-            prop.load(inputStream);
-        } catch (IOException e) {
+            InputStream inputStream =
+                    AppSetting.class.getClassLoader().getResourceAsStream("/properties/appsetting.properties");
+             prop.load(inputStream);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

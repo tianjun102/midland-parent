@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 
 @Component
-public class BaseRedisTemplate<V, HK> implements IBaseRedisTemplate<V, HK>{
+public class BaseRedisTemplate<V, HK> implements IBaseRedisTemplate<V, HK> {
 
 	@Autowired
 	protected RedisTemplate<Serializable, Serializable> redisTemplate;

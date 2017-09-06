@@ -191,7 +191,7 @@ private SettingService settingService;
             pageSize = ContextEnums.PAGESIZE;
         }
         PageHelper.startPage(Integer.valueOf(pageNo), Integer.valueOf(pageSize));
-        Page<LinkUrlManager> linkUrlList =( Page<LinkUrlManager>) settingService.findLinkUrlList(linkUrlManager);
+        Page<LinkUrlManager> linkUrlList =(Page<LinkUrlManager>) settingService.findLinkUrlList(linkUrlManager);
         model.addAttribute("linkUrlList",linkUrlList);
         model.addAttribute("paginator",linkUrlList.getPaginator());
 
@@ -280,7 +280,7 @@ private SettingService settingService;
     @RequestMapping(value = "bannerList", method = { RequestMethod.GET, RequestMethod.POST })
     public String bannerList(Model model, HttpServletRequest request,Banner Banner){
         MidlandHelper.doPage(request);
-        Page<Banner> bannerList =  (Page<Banner>) settingService.findBannerList(Banner);
+        Page<com.midland.web.model.Banner> bannerList =  (Page<com.midland.web.model.Banner>) settingService.findBannerList(Banner);
         Paginator paginator = bannerList.getPaginator();
         model.addAttribute("paginator",paginator);
         model.addAttribute("bannerList",bannerList);

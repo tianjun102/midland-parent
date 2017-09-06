@@ -29,6 +29,10 @@ public class Answer{
 	 * 提问id 关联提问表id
 	 **/
 	private Integer questionsId;
+	/**
+	 * 0未删除，1删除
+	 **/
+	private Integer isDelete;
 
 
 	public Integer getId() {
@@ -87,6 +91,14 @@ public class Answer{
 		this.questionsId = questionsId;
 	}
 
+	public Integer getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(Integer isDelete) {
+		this.isDelete = isDelete;
+	}
+
 	@Override
 	public String toString() {
 		 final StringBuffer sb=new StringBuffer("Answer{");
@@ -110,6 +122,9 @@ public class Answer{
 		}
 		if (questionsId != null) {
 			sb.append(", \"questionsId\":\"").append(questionsId).append("\"");
+		}
+		if (isDelete != null) {
+			sb.append(", \"isDelete\":\"").append(isDelete).append("\"");
 		}
 		return sb.toString();
 	}

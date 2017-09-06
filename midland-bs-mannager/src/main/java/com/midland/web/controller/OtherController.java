@@ -3,7 +3,6 @@ package com.midland.web.controller;
 import com.midland.web.controller.base.BaseController;
 import com.midland.web.model.Footer;
 import com.midland.web.service.FooterService;
-import com.midland.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

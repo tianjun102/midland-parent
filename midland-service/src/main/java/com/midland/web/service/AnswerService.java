@@ -7,17 +7,17 @@ public interface AnswerService {
 	/**
 	 * 主键查询
 	 **/
-	Answer selectById(Integer id);
+	Answer selectAnswerById(Integer id);
 
 	/**
 	 * 主键删除
 	 **/
-	void deleteById(Integer id) throws Exception;
+	void deleteAnswerById(Integer id) throws Exception;
 
 	/**
 	 * 主键更新
 	 **/
-	void updateById(Answer answer) throws Exception;
+	void updateAnswerById(Answer answer) throws Exception;
 
 	/**
 	 * 插入
@@ -25,7 +25,7 @@ public interface AnswerService {
 	void insertAnswer(Answer answer) throws Exception;
 
 	/**
-	 * 分页，这里建议使用插件（com.com.github.pagehelper.PageHelper）
+	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
 	 **/
 	List<Answer> findAnswerList(Answer answer) throws Exception;
 

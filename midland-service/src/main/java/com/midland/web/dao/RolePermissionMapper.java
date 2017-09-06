@@ -30,5 +30,5 @@ public interface RolePermissionMapper {
     
     int insertBatch(List<RolePermission> record);
 
-	int deleteBatch(@Param("roleId") Integer roleId,@Param("list") List<RolePermission> list);
+	int deleteBatch(@Param("roleId") Integer roleId, @Param("list") List<RolePermission> list);
 }

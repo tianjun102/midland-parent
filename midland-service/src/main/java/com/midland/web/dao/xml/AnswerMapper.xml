@@ -10,23 +10,24 @@
 		<result column="against_num" property="againstNum" jdbcType="INTEGER" />
 		<result column="support_num" property="supportNum" jdbcType="INTEGER" />
 		<result column="questions_id" property="questionsId" jdbcType="INTEGER" />
+		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,answer_area,answer_time,answer_name,against_num,support_num,questions_id
+		id,answer_area,answer_time,answer_name,against_num,support_num,questions_id,is_delete
 	</sql>
 
-	<select id="selectById" resultMap="BaseResultMap">
+	<select id="selectAnswerById" resultMap="BaseResultMap">
 		select <include refid="Base_Column_List" /> from answer
 		 where id= #{id}
 	</select>
 
-	<delete id="deleteById" >
+	<delete id="deleteAnswerById" >
 		delete from answer
 		 where id= #{id}
 	</delete>
 
-	<update id="updateById" >
+	<update id="updateAnswerById" >
 		update answer 
 		<set>
 		<include refid="update_option"/>
@@ -37,7 +38,8 @@
 
 	<select id="findAnswerList" parameterType="com.midland.web.model.Answer" resultMap="BaseResultMap">
 		select <include refid="Base_Column_List" /> from answer
-		where 1=1
+		where 
+		is_delete=0
 		<include refid="select_option" />
 	</select>
 
@@ -62,25 +64,32 @@
 			<if test="questionsId != null">
 				questions_id,
 			</if>
+			<if test="isDelete != null">
+				is_delete,
+			</if>
 		</trim>
+		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
 			<if test="answerArea != null">
-				answer_area= #{answerArea,jdbcType=LONGVARCHAR},
+				#{answerArea,jdbcType=LONGVARCHAR},
 			</if>
 			<if test="answerTime != null">
-				answer_time= #{answerTime,jdbcType=TIMESTAMP},
+				#{answerTime,jdbcType=TIMESTAMP},
 			</if>
 			<if test="answerName != null">
-				answer_name= #{answerName,jdbcType=VARCHAR},
+				#{answerName,jdbcType=VARCHAR},
 			</if>
 			<if test="againstNum != null">
-				against_num= #{againstNum,jdbcType=INTEGER},
+				#{againstNum,jdbcType=INTEGER},
 			</if>
 			<if test="supportNum != null">
-				support_num= #{supportNum,jdbcType=INTEGER},
+				#{supportNum,jdbcType=INTEGER},
 			</if>
 			<if test="questionsId != null">
-				questions_id= #{questionsId,jdbcType=INTEGER},
+				#{questionsId,jdbcType=INTEGER},
+			</if>
+			<if test="isDelete != null">
+				#{isDelete,jdbcType=INTEGER},
 			</if>
 		</trim>
 	</insert>
@@ -103,6 +112,9 @@
 		</if>
 		<if test="questionsId != null">
 			questions_id= #{questionsId,jdbcType=INTEGER},
+		</if>
+		<if test="isDelete != null">
+			is_delete= #{isDelete,jdbcType=INTEGER},
 		</if>
 	</sql>
 
@@ -127,6 +139,9 @@
 		</if>
 		<if test="questionsId != null">
 			 and questions_id= #{questionsId,jdbcType=INTEGER}
+		</if>
+		<if test="isDelete != null">
+			 and is_delete= #{isDelete,jdbcType=INTEGER}
 		</if>
 	</sql>
 

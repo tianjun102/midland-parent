@@ -1,32 +1,29 @@
 package com.midland.ueditor.upload;
 
 
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
-import com.midland.web.controller.base.BaseController;
-import org.apache.commons.fileupload.FileItemIterator;
-import org.apache.commons.fileupload.FileItemStream;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
+import com.midland.base.BaseFilter;
 import com.midland.core.util.AppSetting;
 import com.midland.ueditor.PathFormat;
 import com.midland.ueditor.define.AppInfo;
 import com.midland.ueditor.define.BaseState;
 import com.midland.ueditor.define.FileType;
 import com.midland.ueditor.define.State;
+import org.apache.commons.fileupload.FileItemIterator;
+import org.apache.commons.fileupload.FileItemStream;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class BinaryUploader  extends BaseController {
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
+public class BinaryUploader  extends BaseFilter {
 
 	private static final Logger logger = LoggerFactory.getLogger(BinaryUploader.class);
 	
