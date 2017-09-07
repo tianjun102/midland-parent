@@ -37,14 +37,12 @@
     <form action="${ctx}/rest/appoint/update" method="post" id="dataForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
-            <li style="display:flex;align-items:center">
-                <span>城市：</span>
-                <input type="hidden" name="cityName" id="cityName" >
-                <select name="cityId" id="cityId" class="dropdown">
+            <li><span>城市：</span>
+                <input type="hidden" id="cityName" name="cityName" value="${item.cityName}">
+                <select onchange="setCityName()" name="cityId" id="cityId" class="dropdown">
+                    <option value="" >请选择</option>
                     <c:forEach items="${citys}" var="s">
-                        <option value="${s.id}" <c:if test="${s.id == item.cityId}">selected="selected"</c:if>>
-                                ${s.name}
-                        </option>
+                        <option value="${s.id}" <c:if test="${item.cityId==s.id}">selected</c:if>>${s.name}</option>
                     </c:forEach>
                 </select>
             </li>
@@ -86,9 +84,15 @@
 
 <script type="text/javascript">
 
-    $("#cityId").change(function(){
-        $("#cityName").val($("#cityId").find("option:selected").text());
-    })
+    function setCityName() {
+        if($("#cityId").find("option:selected").text()=="请选择"){
+            $("#cityName").val("");
+
+        }else{
+            $("#cityName").val($("#cityId").find("option:selected").text());
+        }
+    }
+
     //保存数据
     function updateData() {
         var data = $("#dataForm").serialize();
