@@ -14,17 +14,16 @@
                 'method': 'get',
                 'multi': false,// 是否支持多个文件上传
                 'onUploadStart': function (file) {
-                    alert($("input[name=provinceName]").val().trim());
                     $("#file_upload").uploadify("settings", "formData", {
                         'provinceId': $("input[name=provinceId]").val(),
-                        'provinceName': unicode($("input[name=provinceName]").val()),
+                        'provinceName': unicode($("input[name=provinceName]").val().trim()),
                         'cityId': $("input[name='cityId']").val(),
-                        'cityName': unicode($("input[name='cityName']").val()),
+                        'cityName': unicode($("input[name='cityName']").val().trim()),
                         'distId': $("input[name='distId']").val(),
-                        'distName': unicode($("input[name='distName']").val()),
+                        'distName': unicode($("input[name='distName']").val().trim()),
                         'readType': $('#isNew').val(),
                         'sliceId': $("input[name='sheetId']").val(),
-                        'sliceName': unicode($("input[name='sheetName']").val())
+                        'sliceName': unicode($("input[name='sheetName']").val().trim())
 
                     });
 

@@ -114,6 +114,15 @@ public class SettingServiceImpl implements SettingService {
         return areaMap;
     }
     
+    @Override
+    public List<Area> getAreaByCityId(String cityId){
+        Map parem= new HashMap();
+        parem.put("flag","area");
+        parem.put("id",cityId);
+        Map result = queryCityByRedis(parem);
+        return (List<Area>)result.get("city");
+    }
+    
     /**
      *
      * @param parem flag = province(省) , city(市) ,area(区), sheet(片区) id 或 parentId

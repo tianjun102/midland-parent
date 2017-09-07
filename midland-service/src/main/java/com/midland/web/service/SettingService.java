@@ -25,6 +25,8 @@ public interface SettingService {
 	
 	List<Area> queryAllCityByRedis();
 	
+	List<Area> getAreaByCityId(String cityId);
+	
 	public Map<String, List<Area>> queryAreaByRedis(Map<String, String> parem);
 
     /**

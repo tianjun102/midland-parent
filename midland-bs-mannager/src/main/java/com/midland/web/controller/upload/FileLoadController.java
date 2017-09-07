@@ -136,11 +136,8 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 			throw new Exception("请选择城市");
 		}
 		int rowSize = sheet.getLastRowNum() + 1;
-		String areaName = null;
-		String houseType = null;
 		List<String> areaList =null;
 		List<String> soldNum = null;
-		String dateMonth=null;
 		for (int j = 0; j < rowSize; j++) {//遍历行
 			Row row = sheet.getRow(j);
 			if (row == null) {//略过空行
@@ -157,10 +154,10 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 				
 			}
 			int cellSize = row.getLastCellNum();//行中有多少个单元格，也就是有多少列
-			ExcelInvoke excelInvoke = new ExcelInvoke(areaName, houseType, dateMonth, j, row, list, cellSize).invoke();
-			areaName = excelInvoke.getAreaName();
-			houseType = excelInvoke.getHouseType();
-			dateMonth = excelInvoke.getDateMonth();
+			ExcelInvoke excelInvoke = new ExcelInvoke(j, row, list, cellSize).invoke();
+			String areaName = excelInvoke.getAreaName();
+			String houseType = excelInvoke.getHouseType();
+			String dateMonth = excelInvoke.getDateMonth();
 			if (j>0 && j%2==0){
 				int length =areaList.size()<31?areaList.size():31;
 				for (int x=0;x<length;x++){
@@ -212,26 +209,27 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 	 * 新房详情导入数据专用
 	 */
 	private void newHouseResource(List result, Sheet sheet, HttpServletRequest request) throws Exception {
-		String cityId=request.getParameter("cityId");
-		String cityName=ascii2native(request.getParameter("cityName"));
-		String provinceId=request.getParameter("provinceId");
-		String provinceName=ascii2native(request.getParameter("provinceName").trim());
-		String distId=request.getParameter("distId");
-		String distName=ascii2native(request.getParameter("distName"));
-		String sliceId=request.getParameter("sliceId");
-		String sliceName=ascii2native(request.getParameter("sliceName"));
+		
+		ExcelCity excelCity = new ExcelCity(request).invoke();
+		String cityId = excelCity.getCityId();
+		String cityName = excelCity.getCityName();
+		String provinceId=excelCity.getProvinceId();
+		String provinceName=excelCity.getProvinceName();
+		String distId=excelCity.getDistId();
+		String distName=excelCity.getDistName();
+		String sliceId=excelCity.getSliceId();
+		String sliceName=excelCity.getSliceName();
+		
+		
 		if (StringUtils.isEmpty(cityId)|| StringUtils.isEmpty(cityName)){
 			throw new Exception("请选择城市");
 		}
 		int rowSize = sheet.getLastRowNum() + 1;
-		String areaName = null;
-		String houseType = null;
 		List<String> dealNum =null;
 		List<String> dealArea = null;
 		List<String> dealAvgPriceList = null;
 		List<String> soldAbleNumList = null;
 		List<String> soldAbleAreaList = null;
-		String dateMonth=null;
 		for (int j = 0; j < rowSize; j++) {//遍历行
 			Row row = sheet.getRow(j);
 			if (row == null) {//略过空行
@@ -263,10 +261,10 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 				
 			}
 			int cellSize = row.getLastCellNum();//行中有多少个单元格，也就是有多少列
-			ExcelInvoke excelInvoke = new ExcelInvoke(areaName, houseType, dateMonth, j, row, list, cellSize).invoke();
-			areaName = excelInvoke.getAreaName();
-			houseType = excelInvoke.getHouseType();
-			dateMonth = excelInvoke.getDateMonth();
+			ExcelInvoke excelInvoke = new ExcelInvoke( j, row, list, cellSize).invoke();
+			String areaName = excelInvoke.getAreaName();
+			String houseType = excelInvoke.getHouseType();
+			String dateMonth = excelInvoke.getDateMonth();
 			if (j>0 && j%5==0){
 				int length =dealNum.size()<31?dealNum.size():31;
 				for (int x=0;x<length;x++){
@@ -427,6 +425,12 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 		private HttpServletRequest request;
 		private String cityId;
 		private String cityName;
+		private String provinceId;
+		private String provinceName;
+		private String distId;
+		private String distName;
+		private String sliceId;
+		private String sliceName;
 		
 		public ExcelCity(HttpServletRequest request) {
 			this.request = request;
@@ -440,15 +444,79 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 			return cityName;
 		}
 		
+		public HttpServletRequest getRequest() {
+			return request;
+		}
+		
+		public void setRequest(HttpServletRequest request) {
+			this.request = request;
+		}
+		
+		public void setCityId(String cityId) {
+			this.cityId = cityId;
+		}
+		
+		public void setCityName(String cityName) {
+			this.cityName = cityName;
+		}
+		
+		public String getProvinceId() {
+			return provinceId;
+		}
+		
+		public void setProvinceId(String provinceId) {
+			this.provinceId = provinceId;
+		}
+		
+		public String getProvinceName() {
+			return provinceName;
+		}
+		
+		public void setProvinceName(String provinceName) {
+			this.provinceName = provinceName;
+		}
+		
+		public String getDistId() {
+			return distId;
+		}
+		
+		public void setDistId(String distId) {
+			this.distId = distId;
+		}
+		
+		public String getDistName() {
+			return distName;
+		}
+		
+		public void setDistName(String distName) {
+			this.distName = distName;
+		}
+		
+		public String getSliceId() {
+			return sliceId;
+		}
+		
+		public void setSliceId(String sliceId) {
+			this.sliceId = sliceId;
+		}
+		
+		public String getSliceName() {
+			return sliceName;
+		}
+		
+		public void setSliceName(String sliceName) {
+			this.sliceName = sliceName;
+		}
+		
 		public ExcelCity invoke() {
-			cityId = request.getParameter("cityId");
-			cityName = ascii2native(request.getParameter("cityName"));
-			String provinceId=request.getParameter("provinceId");
-			String provinceName=request.getParameter("provinceName");
-			String distId=request.getParameter("distId");
-			String distName=request.getParameter("distName");
-			String sliceId=request.getParameter("sliceId");
-			String sliceName=request.getParameter("sliceName");
+			cityId=request.getParameter("cityId");
+			cityName=ascii2native(request.getParameter("cityName"));
+			provinceId=request.getParameter("provinceId");
+			provinceName=ascii2native(request.getParameter("provinceName").trim());
+			distId=request.getParameter("distId");
+			distName=ascii2native(request.getParameter("distName"));
+			sliceId=request.getParameter("sliceId");
+			sliceName=ascii2native(request.getParameter("sliceName"));
 			return this;
 		}
 	}
@@ -462,10 +530,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 		private List<String> list;
 		private int cellSize;
 		
-		public ExcelInvoke(String areaName, String houseType, String dateMonth, int j, Row row, List<String> list, int cellSize) {
-			this.areaName = areaName;
-			this.houseType = houseType;
-			this.dateMonth = dateMonth;
+		public ExcelInvoke( int j, Row row, List<String> list, int cellSize) {
 			this.j = j;
 			this.row = row;
 			this.list = list;
