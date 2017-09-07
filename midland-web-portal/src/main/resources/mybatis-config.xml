@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <properties>
-        <property name="dialectClass" value="com.huixin.wks.web.commons.core.feature.orm.dialect.MySql5Dialect"/>
+        <property name="dialectClass" value="com.bluemobi.midland.web.commons.core.feature.orm.dialect.MySql5Dialect"/>
     </properties>
 
     <!-- 配置mybatis的缓存，延迟加载等等一系列属性 -->
@@ -57,15 +57,9 @@
     </settings>
 
     <typeAliases>
-        <!-- <package name="com.huixin.wks.web.model" /> -->
-        <package name="com.huixin.wks.web.commons.enums" />
+        <package name="com.bluemobi.midland.web.commons.enums" />
     </typeAliases>
 
-    <!-- <plugins>
-        <plugin interceptor="com.huixin.core.feature.orm.mybatis.PaginationResultSetHandlerInterceptor"/>
-        <plugin interceptor="com.huixin.core.feature.orm.mybatis.PaginationStatementHandlerInterceptor"/>
-    </plugins> -->
-    
     <plugins>
 		<!-- 分页操作对象 -->
 		<plugin interceptor="com.github.miemiedev.mybatis.paginator.OffsetLimitInterceptor">

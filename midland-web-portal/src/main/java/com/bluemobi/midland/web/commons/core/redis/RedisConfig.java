@@ -1,4 +1,4 @@
-package com.huixin.wks.web.commons.core.redis;
+package com.bluemobi.midland.web.commons.core.redis;
 
 
 

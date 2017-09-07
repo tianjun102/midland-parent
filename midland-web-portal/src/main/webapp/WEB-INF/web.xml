@@ -39,7 +39,7 @@
     </session-config> 
 	<filter>
 		<filter-name>sessionFilter</filter-name>
-		<filter-class>com.huixin.wks.web.filter.GetContextFilter</filter-class>
+		<filter-class>com.bluemobi.midland.web.filter.GetContextFilter</filter-class>
 	</filter>
  
 	<filter-mapping>
