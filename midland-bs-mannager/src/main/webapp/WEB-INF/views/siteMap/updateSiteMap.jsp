@@ -39,6 +39,15 @@
             <li><span>linkUrl：</span>
                <input type="text" name="linkUrl" id="linkUrl" value="${item.linkUrl}"/>
             </li>
+            <li><span>isDelete：</span>
+               <input type="text" name="isDelete" id="isDelete" value="${item.isDelete}"/>
+            </li>
+            <li><span>orderBy：</span>
+               <input type="text" name="orderBy" id="orderBy" value="${item.orderBy}"/>
+            </li>
+            <li><span>isShow：</span>
+               <input type="text" name="isShow" id="isShow" value="${item.isShow}"/>
+            </li>
             <li>
                 <span></span>
                 <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">更新</a>

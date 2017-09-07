@@ -38,6 +38,18 @@ public class SiteMap{
 	 * 链接地址
 	 **/
 	private String linkUrl;
+	/**
+	 * 是否删除
+	 **/
+	private Integer isDelete;
+	/**
+	 * 排序
+	 **/
+	private Integer orderBy;
+	/**
+	 * 是否显示
+	 **/
+	private Integer isShow;
 
 
 	public Integer getId() {
@@ -112,6 +124,30 @@ public class SiteMap{
 		this.linkUrl = linkUrl;
 	}
 
+	public Integer getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(Integer isDelete) {
+		this.isDelete = isDelete;
+	}
+
+	public Integer getOrderBy() {
+		return orderBy;
+	}
+
+	public void setOrderBy(Integer orderBy) {
+		this.orderBy = orderBy;
+	}
+
+	public Integer getIsShow() {
+		return isShow;
+	}
+
+	public void setIsShow(Integer isShow) {
+		this.isShow = isShow;
+	}
+
 	@Override
 	public String toString() {
 		 final StringBuffer sb=new StringBuffer("SiteMap{");
@@ -141,6 +177,15 @@ public class SiteMap{
 		}
 		if (linkUrl != null) {
 			sb.append(", \"linkUrl\":\"").append(linkUrl).append("\"");
+		}
+		if (isDelete != null) {
+			sb.append(", \"isDelete\":\"").append(isDelete).append("\"");
+		}
+		if (orderBy != null) {
+			sb.append(", \"orderBy\":\"").append(orderBy).append("\"");
+		}
+		if (isShow != null) {
+			sb.append(", \"isShow\":\"").append(isShow).append("\"");
 		}
 		return sb.toString();
 	}

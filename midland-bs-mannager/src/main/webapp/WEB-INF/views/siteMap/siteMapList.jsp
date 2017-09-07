@@ -22,6 +22,9 @@
 				<th style="width: 8%">cateId</th>
 				<th style="width: 8%">cateName</th>
 				<th style="width: 8%">linkUrl</th>
+				<th style="width: 8%">isDelete</th>
+				<th style="width: 8%">orderBy</th>
+				<th style="width: 8%">isShow</th>
                 <th style="width: 10%">操作</th>
             </tr>
         </thead>
@@ -39,6 +42,9 @@
 						<td>${item.cateId}</td>
 						<td>${item.cateName}</td>
 						<td>${item.linkUrl}</td>
+						<td>${item.isDelete}</td>
+						<td>${item.orderBy}</td>
+						<td>${item.isShow}</td>
 						<td>
                             <a target="contentF" onclick="to_edit(${item.id })">编辑</a>
                             <a target="contentF" onclick="delete1(${item.id })">删除</a>
