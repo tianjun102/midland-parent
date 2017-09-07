@@ -12,21 +12,9 @@
 	<!-- 扫描controller（controller层注入） -->
 	<context:component-scan base-package="com.bluemobi.midland.web.controller" />
 	<context:component-scan base-package="com.bluemobi.midland.web.paycontroller" />
+	<mvc:annotation-driven />
 	<!-- 配置使Spring采用CGLIB代理 -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
-
-	<!-- 会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 
-		两个bean,是spring MVC为@Controllers分发请求所必须的 -->
-	<!-- 指定自己定义的validator -->
-	<!-- 拦截器 -->
-		<!-- 多个拦截器，顺序执行 -->
-	<!-- <mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<bean class="com.huixin.wks.web.interceptor.CommonInterceptor" />
-		</mvc:interceptor>
-	</mvc:interceptors> -->
-
 
 	<mvc:interceptors>
 		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
