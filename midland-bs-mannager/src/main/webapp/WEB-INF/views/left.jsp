@@ -153,10 +153,10 @@
 				</dt>
 				<dd>
 					<shiro:hasPermission name="quotationNew">
-						<a id = "settlementIndex" target="contentF" href="${ctx}/rest/quotation/index?isNew=0"><span>新房</span></a>
+						<a id = "settlementIndex" target="contentF" href="${ctx}/rest/quotation/index?isNew=1"><span>新房</span></a>
 					</shiro:hasPermission>
 					<shiro:hasPermission name="quotationOld">
-						<a id = "settlementIndex" target="contentF" href="${ctx}/rest/quotation/index?isNew=1"><span>二手房</span></a>
+						<a id = "settlementIndex" target="contentF" href="${ctx}/rest/quotation/index?isNew=0"><span>二手房</span></a>
 					</shiro:hasPermission>
 				</dd>
 			</dl>

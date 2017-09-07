@@ -13,6 +13,7 @@ public interface QuotationMapper {
 	int updateQuotationById(Quotation quotation);
 
 	int insertQuotation(Quotation quotation);
+	int insertQuotationBatch(List<Quotation> list);
 
 	List<Quotation> findQuotationList(Quotation quotation);
 	List<Map> tooltip(Quotation quotation);

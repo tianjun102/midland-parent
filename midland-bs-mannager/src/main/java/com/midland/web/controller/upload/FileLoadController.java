@@ -1,14 +1,15 @@
 package com.midland.web.controller.upload;
 
-import com.alibaba.fastjson.JSONArray;
 import com.midland.core.util.AppSetting;
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.Quotation;
+import com.midland.web.service.QuotationService;
+import com.midland.web.util.MidlandHelper;
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.fileupload.servlet.ServletRequestContext;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -17,6 +18,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,8 +43,9 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 	
 	private final Logger logger = LoggerFactory.getLogger(FileLoadController.class);
 	private ServletContext servletContext;
-	
 	private ServletConfig servletConfig;
+	@Autowired
+	private QuotationService quotationServiceImpl;
 	
 	private static String OS = System.getProperty("os.name").toLowerCase();
 	
@@ -106,25 +109,38 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 	}
 	
 	
-	private void quotationExcelReader(HttpServletRequest request, Workbook wb) {
+	private void quotationExcelReader(HttpServletRequest request, Workbook wb) throws Exception {
 		List result = new ArrayList<>();//对应excel文件
 		Sheet sheet = wb.getSheetAt(0);
-		int rowSize = sheet.getLastRowNum() + 1;
-		List<String> areaList =null;
-		List<String> distNum = null;
-		String cityId=request.getParameter("cityId");
-		String cityName=request.getParameter("cityName");
-		cityName= ascii2native(cityName);
-		String areaName = null;
-		String houseType = null;
-		secondHandHouseResource(result, sheet, rowSize, areaList, distNum, cityId, cityName, areaName, houseType);
-		System.out.println(JSONArray.toJSONString(result));
+		String readType = request.getParameter("readType");
+		if ("1".equals(readType)){
+			//读取新房excel数据
+			newHouseResource(result, sheet,request);
+			
+		}else if ("0".equals(readType)){
+			//读取二手房excel数据
+			secondHandHouseResource(result, sheet,request);
+			
+		}
+		quotationServiceImpl.insertQuotationBatch(result);
 	}
 	/**
 	 * 二手房详情导入数据专用
 	 */
-	private void secondHandHouseResource(List result, Sheet sheet, int rowSize, List<String> areaList, List<String> distNum, String cityId, String cityName, String areaName, String houseType) {
-		String dateMonth;
+	private void secondHandHouseResource(List result, Sheet sheet, HttpServletRequest request) throws Exception {
+		
+		ExcelCity excelCity = new ExcelCity(request).invoke();
+		String cityId = excelCity.getCityId();
+		String cityName = excelCity.getCityName();
+		if (StringUtils.isEmpty(cityId)|| StringUtils.isEmpty(cityName)){
+			throw new Exception("请选择城市");
+		}
+		int rowSize = sheet.getLastRowNum() + 1;
+		String areaName = null;
+		String houseType = null;
+		List<String> areaList =null;
+		List<String> soldNum = null;
+		String dateMonth=null;
 		for (int j = 0; j < rowSize; j++) {//遍历行
 			Row row = sheet.getRow(j);
 			if (row == null) {//略过空行
@@ -136,41 +152,15 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 				areaList = new ArrayList<>();
 				list=areaList;
 			}else if (j>0 && j%2==0){
-				distNum = new ArrayList<>();
-				list=distNum;
+				soldNum = new ArrayList<>();
+				list=soldNum;
 				
 			}
 			int cellSize = row.getLastCellNum();//行中有多少个单元格，也就是有多少列
-			for (int k = 0; k < cellSize; k++) {
-				Cell cell = row.getCell(k);
-				String value = null;
-				if (cell != null) {
-					value = cell.toString();
-				}
-				if (j == 0) {//获取日期
-					if (k == 1) {
-						dateMonth = value;
-						System.out.println(dateMonth);
-					}
-					continue;
-				}
-				if (k==0){
-					if (value!=null && !value.equals("")){
-						areaName=value;
-					}
-				}
-				else if (k==1){
-					if (value!=null && !value.equals("")){
-						houseType=value;
-					}
-				}
-				else if (k==2){
-					
-				}else{
-					list.add(value);
-				}
-				
-			}
+			ExcelInvoke excelInvoke = new ExcelInvoke(areaName, houseType, dateMonth, j, row, list, cellSize).invoke();
+			areaName = excelInvoke.getAreaName();
+			houseType = excelInvoke.getHouseType();
+			dateMonth = excelInvoke.getDateMonth();
 			if (j>0 && j%2==0){
 				int length =areaList.size()<31?areaList.size():31;
 				for (int x=0;x<length;x++){
@@ -179,28 +169,139 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 						quotation.setCityId(cityId);
 						quotation.setCityName(cityName);
 						quotation.setAreaName(areaName);
-						int houseTypeId = 3;
-						if (houseType.equals("商业")) {
-							houseTypeId = 0;
+						int houseTypeId = getHouseTypeId(houseType);
+						int i = x+1;
+						quotation.setIsNew(Contant.isOldHouse);
+						if (dateMonth!=null) {
+							quotation.setDataTime(dateMonth + "-" + i);
+						}else {
+							throw new Exception("日期错误");
 						}
-						if (houseType.equals("住宅")) {
-							houseTypeId = 1;
-						}
-						if (houseType.equals("其他")) {
-							houseTypeId = 2;
-						}
-						if (houseType.equals("办公")) {
-							houseTypeId = 3;
-						}
+						quotation.setUpdateTime(MidlandHelper.getCurrentTime());
 						quotation.setType(houseTypeId);
 						quotation.setDealAcreage(String.valueOf(areaList.get(x)));
-						quotation.setDealNum(Double.valueOf(distNum.get(x)).intValue());
+						quotation.setDealNum(Double.valueOf(soldNum.get(x)).intValue());
 						result.add(quotation);
 					}
 				}
 			}
 		}
+		System.out.println(result);
 	}
+	
+	private int getHouseTypeId(String houseType) throws Exception {
+		int houseTypeId;
+		if (houseType.equals("商业")) {
+			houseTypeId = 0;
+		}
+		else if (houseType.equals("住宅")) {
+			houseTypeId = 1;
+		}
+		else if (houseType.equals("其他")) {
+			houseTypeId = 2;
+		}
+		else if (houseType.equals("办公")) {
+			houseTypeId = 3;
+		}else{
+			throw new Exception("房源类型错误");
+		}
+		return houseTypeId;
+	}
+	
+	/**
+	 * 新房详情导入数据专用
+	 */
+	private void newHouseResource(List result, Sheet sheet, HttpServletRequest request) throws Exception {
+		String cityId=request.getParameter("cityId");
+		String cityName=ascii2native(request.getParameter("cityName"));
+		String provinceId=request.getParameter("provinceId");
+		String provinceName=ascii2native(request.getParameter("provinceName").trim());
+		String distId=request.getParameter("distId");
+		String distName=ascii2native(request.getParameter("distName"));
+		String sliceId=request.getParameter("sliceId");
+		String sliceName=ascii2native(request.getParameter("sliceName"));
+		if (StringUtils.isEmpty(cityId)|| StringUtils.isEmpty(cityName)){
+			throw new Exception("请选择城市");
+		}
+		int rowSize = sheet.getLastRowNum() + 1;
+		String areaName = null;
+		String houseType = null;
+		List<String> dealNum =null;
+		List<String> dealArea = null;
+		List<String> dealAvgPriceList = null;
+		List<String> soldAbleNumList = null;
+		List<String> soldAbleAreaList = null;
+		String dateMonth=null;
+		for (int j = 0; j < rowSize; j++) {//遍历行
+			Row row = sheet.getRow(j);
+			if (row == null) {//略过空行
+				continue;
+			}
+			List <String> list =null;
+			
+			if (j>0 && j%5==1){
+				dealNum = new ArrayList<>();
+				list=dealNum;
+			}else if (j>0 && j%5==2){
+				dealArea = new ArrayList<>();
+				list=dealArea;
+				
+			}
+			else if (j>0 && j%5==3){
+				dealAvgPriceList = new ArrayList<>();
+				list=dealAvgPriceList;
+				
+			}
+			else if (j>0 && j%5==4){
+				soldAbleNumList = new ArrayList<>();
+				list=soldAbleNumList;
+				
+			}
+			else if (j>0 && j%5==0){
+				soldAbleAreaList = new ArrayList<>();
+				list=soldAbleAreaList;
+				
+			}
+			int cellSize = row.getLastCellNum();//行中有多少个单元格，也就是有多少列
+			ExcelInvoke excelInvoke = new ExcelInvoke(areaName, houseType, dateMonth, j, row, list, cellSize).invoke();
+			areaName = excelInvoke.getAreaName();
+			houseType = excelInvoke.getHouseType();
+			dateMonth = excelInvoke.getDateMonth();
+			if (j>0 && j%5==0){
+				int length =dealNum.size()<31?dealNum.size():31;
+				for (int x=0;x<length;x++){
+					if (dealNum.get(x)!=null&& !dealNum.get(x).equals("")) {
+						Quotation quotation = new Quotation();
+						quotation.setCityId(cityId);
+						quotation.setCityName(cityName);
+						quotation.setAreaName(areaName);
+						int houseTypeId = getHouseTypeId(houseType);
+						int i = x+1;
+						quotation.setIsNew(Contant.isNewHouse);
+						if (dateMonth!=null) {
+							quotation.setDataTime(dateMonth + "-" + i);
+						}else {
+							throw new Exception("日期错误");
+						}
+						quotation.setUpdateTime(MidlandHelper.getCurrentTime());
+						quotation.setType(houseTypeId);
+						quotation.setDealAcreage(String.valueOf(dealArea.get(x)));
+						quotation.setDealNum(Double.valueOf(dealNum.get(x)).intValue());
+						quotation.setPrice(String.valueOf(dealAvgPriceList.get(x)));
+						quotation.setSoldNum(Double.valueOf(soldAbleNumList.get(x)).intValue());
+						quotation.setSoldArea(String.valueOf(soldAbleAreaList.get(x)));
+						result.add(quotation);
+					}
+				}
+			}
+		}
+		System.out.println(result);
+		
+	}
+	
+	
+	
+	
 	
 	public String ascii2native(String ascii) {
 		int n = ascii.length() / 6;
@@ -307,11 +408,6 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 		}
 	}
 	
-	public boolean isMultipartContent(HttpServletRequest request) {
-		return !"POST".equalsIgnoreCase(request.getMethod()) ? false : FileUploadBase.isMultipartContent(new ServletRequestContext(request));
-		
-	}
-	
 	
 	public static boolean isMacOSX() {
 		return OS.indexOf("mac") >= 0 && OS.indexOf("os") > 0 && OS.indexOf("x") > 0;
@@ -325,5 +421,100 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 	@Override
 	public void setServletContext(ServletContext servletContext) {
 		this.servletContext = servletContext;
+	}
+	
+	private class ExcelCity {
+		private HttpServletRequest request;
+		private String cityId;
+		private String cityName;
+		
+		public ExcelCity(HttpServletRequest request) {
+			this.request = request;
+		}
+		
+		public String getCityId() {
+			return cityId;
+		}
+		
+		public String getCityName() {
+			return cityName;
+		}
+		
+		public ExcelCity invoke() {
+			cityId = request.getParameter("cityId");
+			cityName = ascii2native(request.getParameter("cityName"));
+			String provinceId=request.getParameter("provinceId");
+			String provinceName=request.getParameter("provinceName");
+			String distId=request.getParameter("distId");
+			String distName=request.getParameter("distName");
+			String sliceId=request.getParameter("sliceId");
+			String sliceName=request.getParameter("sliceName");
+			return this;
+		}
+	}
+	
+	private class ExcelInvoke {
+		private String areaName;
+		private String houseType;
+		private String dateMonth;
+		private int j;
+		private Row row;
+		private List<String> list;
+		private int cellSize;
+		
+		public ExcelInvoke(String areaName, String houseType, String dateMonth, int j, Row row, List<String> list, int cellSize) {
+			this.areaName = areaName;
+			this.houseType = houseType;
+			this.dateMonth = dateMonth;
+			this.j = j;
+			this.row = row;
+			this.list = list;
+			this.cellSize = cellSize;
+		}
+		
+		public String getAreaName() {
+			return areaName;
+		}
+		
+		public String getHouseType() {
+			return houseType;
+		}
+		
+		public String getDateMonth() {
+			return dateMonth;
+		}
+		
+		public ExcelInvoke invoke() {
+			for (int k = 0; k < cellSize; k++) {
+				Cell cell = row.getCell(k);
+				String value = null;
+				if (cell != null) {
+					value = cell.toString();
+				}
+				if (j == 0) {//获取日期
+					if (k == 1) {
+						dateMonth = value;
+					}
+					continue;
+				}
+				if (k==0){
+					if (value!=null && !value.equals("")){
+						areaName=value;
+					}
+				}
+				else if (k==1){
+					if (value!=null && !value.equals("")){
+						houseType=value;
+					}
+				}
+				else if (k==2){
+					
+				}else{
+					list.add(value);
+				}
+				
+			}
+			return this;
+		}
 	}
 }

@@ -46,6 +46,8 @@ public class QuotationController extends BaseController {
 		model.addAttribute("types", paramObjects);
 		model.addAttribute("isNew", quotation.getIsNew());
 		List<Area> list = settingService.queryAllCityByRedis();
+		settingService.getAllProvinceList(model);
+		
 		model.addAttribute("citys",list);
 		return "quotation/quotationIndex";
 	}
@@ -169,12 +171,18 @@ public class QuotationController extends BaseController {
 		List<Double> ratios = new ArrayList<>();
 		for (Map map : result) {
 			String mon = (String) map.get("months");
-			double cur = (Double) map.get("cur");
+			Double cur = (Double) map.get("cur");
 			Double pre = (Double) map.get("pre");
 			month.add(mon);
 			data.add(cur);
 			if (pre == null || pre == 0) {
-				pre = cur;
+				
+				if (cur==null || cur==0){
+					cur=0.0;
+					pre=1.0;
+				}else {
+					pre = cur;
+				}
 			}
 			double ratio = Calculate.divide(cur, pre);
 			ratio = Calculate.multiply(ratio,100.00);

@@ -30,6 +30,19 @@ public class QuotationServiceImpl implements QuotationService {
 			throw e;
 		}
 	}
+	/**
+	 * 批量插入
+	 **/
+	@Override
+	public void insertQuotationBatch(List<Quotation> quotation) throws Exception {
+		try {
+			log.info("insertQuotationBatch {}",quotation);
+			quotationMapper.insertQuotationBatch(quotation);
+		} catch(Exception e) {
+			log.error("insertQuotationBatch异常 {}",quotation,e);
+			throw e;
+		}
+	}
 
 	/**
 	 * 查询

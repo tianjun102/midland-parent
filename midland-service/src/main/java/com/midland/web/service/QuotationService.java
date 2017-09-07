@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 public interface QuotationService {
-
+	
+	void insertQuotationBatch(List<Quotation> quotation) throws Exception;
+	
 	/**
 	 * 主键查询
 	 **/
