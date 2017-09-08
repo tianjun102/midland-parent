@@ -7,7 +7,7 @@
 		<result column="name" property="name" jdbcType="VARCHAR" />
 		<result column="mode_id" property="modeId" jdbcType="INTEGER" />
 		<result column="mode_name" property="modeName" jdbcType="VARCHAR" />
-		<result column="city_id" property="cityId" jdbcType="INTEGER" />
+		<result column="city_id" property="cityId" jdbcType="VARCHAR" />
 		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
 		<result column="cate_id" property="cateId" jdbcType="INTEGER" />
 		<result column="cate_name" property="cateName" jdbcType="VARCHAR" />
@@ -15,10 +15,11 @@
 		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
 		<result column="order_by" property="orderBy" jdbcType="INTEGER" />
 		<result column="is_show" property="isShow" jdbcType="INTEGER" />
+		<result column="source" property="source" jdbcType="INTEGER" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,name,mode_id,mode_name,city_id,city_name,cate_id,cate_name,link_url,is_delete,order_by,is_show
+		id,name,mode_id,mode_name,city_id,city_name,cate_id,cate_name,link_url,is_delete,order_by,is_show,source
 	</sql>
 
 	<select id="selectSiteMapById" resultMap="BaseResultMap">
@@ -45,9 +46,13 @@
 		where 
 		is_delete=0
 		<include refid="select_option" />
+		ORDER BY order_by ASC
 	</select>
 
 	<insert id="insertSiteMap" parameterType="com.midland.web.model.SiteMap">
+		<selectKey resultType="INTEGER" order="BEFORE" keyProperty="orderBy">
+			SELECT count(0)+1 as orderBy from site_map
+		</selectKey>
 		insert into site_map
 		<trim prefix="(" suffix=")" suffixOverrides="," >
 			<if test="name != null">
@@ -83,6 +88,9 @@
 			<if test="isShow != null">
 				is_show,
 			</if>
+			<if test="source != null">
+				source,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -96,7 +104,7 @@
 				#{modeName,jdbcType=VARCHAR},
 			</if>
 			<if test="cityId != null">
-				#{cityId,jdbcType=INTEGER},
+				#{cityId,jdbcType=VARCHAR},
 			</if>
 			<if test="cityName != null">
 				#{cityName,jdbcType=VARCHAR},
@@ -119,6 +127,9 @@
 			<if test="isShow != null">
 				#{isShow,jdbcType=INTEGER},
 			</if>
+			<if test="source != null">
+				#{source,jdbcType=INTEGER},
+			</if>
 		</trim>
 	</insert>
 
@@ -133,7 +144,7 @@
 			mode_name= #{modeName,jdbcType=VARCHAR},
 		</if>
 		<if test="cityId != null">
-			city_id= #{cityId,jdbcType=INTEGER},
+			city_id= #{cityId,jdbcType=VARCHAR},
 		</if>
 		<if test="cityName != null">
 			city_name= #{cityName,jdbcType=VARCHAR},
@@ -156,6 +167,9 @@
 		<if test="isShow != null">
 			is_show= #{isShow,jdbcType=INTEGER},
 		</if>
+		<if test="source != null">
+			source= #{source,jdbcType=INTEGER},
+		</if>
 	</sql>
 
 	<sql id="select_option">
@@ -172,7 +186,7 @@
 			 and mode_name= #{modeName,jdbcType=VARCHAR}
 		</if>
 		<if test="cityId != null">
-			 and city_id= #{cityId,jdbcType=INTEGER}
+			 and city_id= #{cityId,jdbcType=VARCHAR}
 		</if>
 		<if test="cityName != null">
 			 and city_name= #{cityName,jdbcType=VARCHAR}
@@ -194,6 +208,9 @@
 		</if>
 		<if test="isShow != null">
 			 and is_show= #{isShow,jdbcType=INTEGER}
+		</if>
+		<if test="source != null">
+			 and source= #{source,jdbcType=INTEGER}
 		</if>
 	</sql>
 

@@ -13,44 +13,52 @@
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/siteMap/add" method="post" id="dataForm">
+        <input type="hidden" name="cityName" id="cityName" value="" >
         <ul class="userinfo row">
-            <input type="hidden" name="id" id="id" value="${item.id}">
-            <li><span>name：</span>
-               <input type="text" name="name" id="name" ß/>
+            <li><span>关键字：</span>
+               <input type="text" name="name" id="name"/>
             </li>
-            <li><span>modeId：</span>
-               <input type="text" name="modeId" id="modeId" ß/>
+            <li><span>平台：</span>
+                <select name="source" id="source" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <option value="0">网站</option>
+                    <option value="1">微站</option>
+                </select>
+                <span class = "_star ">*</span>
             </li>
-            <li><span>modeName：</span>
-               <input type="text" name="modeName" id="modeName" ß/>
+            <li><span>城市：</span>
+                <select onchange="setCityName();" name="cityId" id="cityId" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <option value="">全部</option>
+                    <c:forEach items="${cityList}" var="city">
+                        <option value="${city.id}">${city.name}</option>
+                    </c:forEach>
+                </select>
+                <span class = "_star ">*</span>
             </li>
-            <li><span>cityId：</span>
-               <input type="text" name="cityId" id="cityId" ß/>
+
+            <li><span>分类：</span>
+                <input type="hidden" name="cateName" id="cateName" value="">
+                <select onchange="setCateName();" name="cateId" id="cateId" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <option value="">全部</option>
+                        <option value="1">新房</option>
+                        <option value="1">二手房</option>
+                        <option value="1">租房</option>
+                        <option value="1">写字楼</option>
+                        <option value="1">商铺</option>
+                </select>
+                <span class = "_star ">*</span>
             </li>
-            <li><span>cityName：</span>
-               <input type="text" name="cityName" id="cityName" ß/>
+
+            <li>
+                <span>模块名称：</span><input type="text" name="modeName" >
             </li>
-            <li><span>cateId：</span>
-               <input type="text" name="cateId" id="cateId" ß/>
+
+            <li><span>链接：</span>
+               <input type="text" name="linkUrl" id="linkUrl" />
             </li>
-            <li><span>cateName：</span>
-               <input type="text" name="cateName" id="cateName" ß/>
-            </li>
-            <li><span>linkUrl：</span>
-               <input type="text" name="linkUrl" id="linkUrl" ß/>
-            </li>
-            <li><span>isDelete：</span>
-               <input type="text" name="isDelete" id="isDelete" ß/>
-            </li>
-            <li><span>orderBy：</span>
-               <input type="text" name="orderBy" id="orderBy" ß/>
-            </li>
-            <li><span>isShow：</span>
-               <input type="text" name="isShow" id="isShow" ß/>
-            </li>
+
             <li>
                 <span></span>
-                <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">更新</a>
+                <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">保存</a>
                 <a style="margin-left: 20px" class="public_btn bg3" id="cancel" onclick="closeWin();">取消</a>
             </li>
         </ul>
@@ -91,6 +99,14 @@
     function closeWin() {
         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
         parent.layer.close(index);
+    }
+
+    function setCityName(){
+        $("#cityName").val($("#cityId option:selected").text())
+    }
+
+    function setCateName(){
+        $("#cateName").val($("#cateId option:selected").text())
     }
 </script>
 </body>

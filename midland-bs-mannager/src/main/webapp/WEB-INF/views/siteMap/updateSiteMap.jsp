@@ -12,45 +12,54 @@
 </head>
 <body>
 <section class="content" style="border:none;">
-    <form action="${ctx}/rest/siteMap/update" method="post" id="dataForm">
+    <form action="${ctx}/rest/siteMap/add" method="post" id="dataForm">
+        <input type="hidden" name="id" id="id" value="${item.id}" >
+        <input type="hidden" name="cityName" id="cityName" value="${item.cityName}" >
         <ul class="userinfo row">
-            <input type="hidden" name="id" id="id" value="${item.id}">
-            <li><span>name：</span>
-               <input type="text" name="name" id="name" value="${item.name}"/>
+            <li><span>关键字：</span>
+                <input type="text" name="name" id="name" value="${item.name}"/>
             </li>
-            <li><span>modeId：</span>
-               <input type="text" name="modeId" id="modeId" value="${item.modeId}"/>
+            <li><span>平台：</span>
+                <select name="source" id="source" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <option <c:if test="${item.source==0}">selected="selected"</c:if> value="0">网站</option>
+                    <option <c:if test="${item.source==1}">selected="selected"</c:if> value="1">微站</option>
+                </select>
+                <span class = "_star ">*</span>
             </li>
-            <li><span>modeName：</span>
-               <input type="text" name="modeName" id="modeName" value="${item.modeName}"/>
+            <li><span>城市：</span>
+                <select onchange="setCityName();" name="cityId" id="cityId" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <option value="">全部</option>
+                    <c:forEach items="${cityList}" var="city">
+                        <option <c:if test="${item.cityId==city.id}">selected="selected"</c:if> value="${city.id}">${city.name}</option>
+                    </c:forEach>
+                </select>
+                <span class = "_star ">*</span>
             </li>
-            <li><span>cityId：</span>
-               <input type="text" name="cityId" id="cityId" value="${item.cityId}"/>
+
+            <li><span>分类：</span>
+                <input type="hidden" name="cateName" id="cateName" value="">
+                <select onchange="setCateName();" name="cateId" id="cateId" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <option value="">全部</option>
+                    <option <c:if test="${item.cateId==0}">selected="selected"</c:if> value="0">新房</option>
+                    <option <c:if test="${item.cateId==1}">selected="selected"</c:if> value="1">二手房</option>
+                    <option <c:if test="${item.cateId==2}">selected="selected"</c:if> value="2">租房</option>
+                    <option <c:if test="${item.cateId==3}">selected="selected"</c:if> value="3">写字楼</option>
+                    <option <c:if test="${item.cateId==4}">selected="selected"</c:if> value="4">商铺</option>
+                </select>
+                <span class = "_star ">*</span>
             </li>
-            <li><span>cityName：</span>
-               <input type="text" name="cityName" id="cityName" value="${item.cityName}"/>
+
+            <li>
+                <span>模块名称：</span><input type="text" name="modeName" value="${item.modeName}" >
             </li>
-            <li><span>cateId：</span>
-               <input type="text" name="cateId" id="cateId" value="${item.cateId}"/>
+
+            <li><span>链接：</span>
+                <input type="text" name="linkUrl" id="linkUrl" value="${item.linkUrl}" />
             </li>
-            <li><span>cateName：</span>
-               <input type="text" name="cateName" id="cateName" value="${item.cateName}"/>
-            </li>
-            <li><span>linkUrl：</span>
-               <input type="text" name="linkUrl" id="linkUrl" value="${item.linkUrl}"/>
-            </li>
-            <li><span>isDelete：</span>
-               <input type="text" name="isDelete" id="isDelete" value="${item.isDelete}"/>
-            </li>
-            <li><span>orderBy：</span>
-               <input type="text" name="orderBy" id="orderBy" value="${item.orderBy}"/>
-            </li>
-            <li><span>isShow：</span>
-               <input type="text" name="isShow" id="isShow" value="${item.isShow}"/>
-            </li>
+
             <li>
                 <span></span>
-                <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">更新</a>
+                <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">修改</a>
                 <a style="margin-left: 20px" class="public_btn bg3" id="cancel" onclick="closeWin();">取消</a>
             </li>
         </ul>
@@ -71,18 +80,18 @@
             data: data,
             success: function (data) {
                 if (data.state == 0) {
-                    layer.msg("保存成功！！！", {icon: 1});
+                    layer.msg("修改成功！！！", {icon: 1});
                     $('#save').removeAttr("onclick");
                     setTimeout(function () {
                         parent.location.reload();
                     }, 1000);
 
                 } else {
-                    layer.msg("保存失败！", {icon: 2});
+                    layer.msg("修改失败！", {icon: 2});
                 }
             },
             error: function () {
-                layer.msg("保存失败！", {icon: 2});
+                layer.msg("修改失败！", {icon: 2});
             }
         });
     }
@@ -91,6 +100,14 @@
     function closeWin() {
         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
         parent.layer.close(index);
+    }
+
+    function setCityName(){
+        $("#cityName").val($("#cityId option:selected").text())
+    }
+
+    function setCateName(){
+        $("#cateName").val($("#cateId option:selected").text())
     }
 </script>
 </body>
