@@ -49,8 +49,8 @@
         </p>
         <form id="formId" action="${ctx}/rest/banner/addBanner" method="post" enctype="multipart/form-data" method="post">
             <ul class = "adminfo row">
-                <li><span>分类：</span>
-                    <input type="hidden" name="id" id="id" value="${item.id}">
+                <input type="hidden" name="id" id="id" value="${item.id}">
+                <%--<li><span>分类：</span>
                     <input type="hidden" name="cateName" id="cateName" value="${item.cateName}">
                     <select name="cateId" id="cateId" class="dropdown" onchange="setCateName();">
                         <option value="" class="label">请选择</option>
@@ -59,7 +59,30 @@
                         </c:forEach>
                     </select>
                     <span class = "_star ">*</span>
+                </li>--%>
+
+                <li><span>一级分类：</span>
+                    <input type="hidden" name="cateParentName" id="cateParentName" value="">
+                    <select name="cateParentid" id="cateParentid" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <%--class="dropdown"--%> onchange="setChildCateName();">
+                        <option value="" class="label">请选择</option>
+                        <c:forEach items="${cateList}" var="cate">
+                            <option <c:if test="${cate.id==item.cateParentid}">selected="selected"</c:if> value="${cate.id}">${cate.cateName}</option>
+                        </c:forEach>
+                    </select>
+                    <span class = "_star ">*</span>
                 </li>
+                <li><span>二级分类：</span>
+                    <input type="hidden" name="cateName" id="cateName" value="${item.cateName}">
+                    <select name="cateId" id="cateId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <%--class="dropdown"--%> onchange="setCateName();">
+                        <option value="" class="label">请选择</option>
+                        <c:forEach items="${cateChildList}" var="cate">
+                            <option <c:if test="${cate.id==item.cateId}">selected="selected"</c:if> value="${cate.id}">${cate.cateName}</option>
+                        </c:forEach>
+                    </select>
+                    <span class = "_star ">*</span>
+                </li>
+
+
                 <li>
                     <span style = "float:left;">城市：</span>
                     <input type="hidden" name="cityName" id="cityName" value="">
@@ -231,6 +254,33 @@
 
     function setCateName(){
         $("#cateName").val($("#cateId option:selected").text())
+    }
+
+
+    function setChildCateName(){
+        var parentId =  $("#cateParentid option:selected").val();
+
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/category/findChildList?parentId="+parentId,
+            async: false, // 此处必须同步
+            dataType: "json",
+            data:"" ,
+            success: function (data) {
+                console.log(data);
+                $("#cateId").html("<option value='' >请选择</option>");
+                data.forEach(function(list) {
+                    $("#cateId").append(
+                        "<option value="+list.id+" >"
+                        + list.cateName + "</option>");
+                })
+            },
+            error: function () {
+                layer.msg("新增失败！", {icon: 2});
+            }
+
+        });
+
     }
 
 </script>

@@ -11,6 +11,7 @@ import com.midland.web.service.InformationService;
 import com.midland.web.service.JdbcService;
 import com.midland.web.service.SettingService;
 import com.midland.web.util.MidlandHelper;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +69,7 @@ public class InformationController extends BaseController  {
 		Category category = new Category();
 		//查询资讯分类
 		category.setType(1);
+		category.setParentId(0);
 		List<Category> cateList = categoryService.findCategoryList(category);
 		List<Area> cityList = cityMap.get("city");
 		model.addAttribute("cityList",cityList);
@@ -86,6 +88,10 @@ public class InformationController extends BaseController  {
 			log.info("addInformation {}",information);
 			//1=资讯；0=市场调研
 			information.setArticeType(1);
+			if (information.getCateId()==null&& StringUtils.isEmpty(information.getCateName())){
+				information.setCateId(information.getCateParentid());
+				information.setCateName(information.getCateParentName());
+			}
 			informationServiceImpl.insertInformation(information);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -135,11 +141,15 @@ public class InformationController extends BaseController  {
 		Category category = new Category();
 		//查询资讯分类
 		category.setType(1);
+		category.setParentId(0);
 		List<Category> cateList = categoryService.findCategoryList(category);
 		List<Area> cityList = cityMap.get("city");
+		category.setParentId(result.getCateParentid());
+		List<Category> cateChildList = categoryService.findCategoryList(category);
 		model.addAttribute("item",result);
 		model.addAttribute("cityList",cityList);
 		model.addAttribute("cateList",cateList);
+		model.addAttribute("cateChildList",cateChildList);
 		return "information/updateInformation";
 	}
 

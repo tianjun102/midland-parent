@@ -36,6 +36,15 @@
                 </select>
             </li>
             <li>
+                <span>父分类：</span>
+                <select name="parentId" id="parentId" style="height: 38px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <option value="">全部</option>
+                    <c:forEach items="${cateList}" var="cate">
+                        <option value="${cate.id}">${cate.cateName}</option>
+                    </c:forEach>
+                </select>
+            </li>
+            <li>
                 <span>分类名称：</span><input style="width:274px;" type="text" name="cateName" id="cateName" maxlength="50"/>
             </li>
             <li>

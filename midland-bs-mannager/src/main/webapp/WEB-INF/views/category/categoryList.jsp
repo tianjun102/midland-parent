@@ -31,7 +31,10 @@
                         <td>${xh.count }</td>
                         <td>${item.cateName }</td>
                         <td>${item.cityName }</td>
-                        <td>${item.type }</td>
+                        <td>
+                            <c:if test="${item.type ==0}">市场调究</c:if>
+                            <c:if test="${item.type ==1}">资讯</c:if>
+                        </td>
                         <td>
 
                             <a target="contentF" class="edit_img" title="编辑" onclick="to_edit(${item.id })"></a>

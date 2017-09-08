@@ -52,12 +52,15 @@ public class CategoryController extends BaseController  {
 	 **/
 	@RequestMapping("to_add")
 	public String toAddCategory(Category category, Model model) throws Exception {
+		category.setParentId(0);
 		Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
 		parem.put("id","*");
 		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
 		List<Area> cityList = cityMap.get("city");
+		List<Category> cateList = categoryServiceImpl.findCategoryList(category);
 		model.addAttribute("cityList",cityList);
+		model.addAttribute("cateList",cateList);
 		return "category/addCategory";
 	}
 
@@ -111,12 +114,16 @@ public class CategoryController extends BaseController  {
 	 **/
 	@RequestMapping("to_update")
 	public String toUpdateCategory(Integer id,Model model) throws Exception {
+		Category category = new Category();
+		category.setParentId(0);
 		Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
 		parem.put("id","*");
 		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
 		List<Area> cityList = cityMap.get("city");
 		Category result = categoryServiceImpl.selectCategoryById(id);
+		List<Category> cateList = categoryServiceImpl.findCategoryList(category);
+		model.addAttribute("cateList",cateList);
 		model.addAttribute("cityList",cityList);
 		model.addAttribute("item",result);
 		return "category/updateCategory";
@@ -174,6 +181,23 @@ public class CategoryController extends BaseController  {
 		map.put("state",0);
 		return map;
 	}
+
+
+	/**
+	 * 查询子分类
+	 **/
+	@RequestMapping("findChildList")
+	@ResponseBody
+	public Object findChildList(Category category, Model model, HttpServletRequest request) {
+		List<Category> cateList = null;
+		try {
+			  cateList =  categoryServiceImpl.findCategoryList(category);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		  return cateList;
+	}
+
 
 }
 

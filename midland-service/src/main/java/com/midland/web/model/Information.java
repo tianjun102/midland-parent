@@ -92,6 +92,8 @@ public class Information{
 	 */
 	private Integer status;
 
+	private String cateParentName;
+
 
 	public Integer getId() {
 		return id;
@@ -270,6 +272,14 @@ public class Information{
 		this.status = status;
 	}
 
+	public String getCateParentName() {
+		return cateParentName;
+	}
+
+	public void setCateParentName(String cateParentName) {
+		this.cateParentName = cateParentName;
+	}
+
 	@Override
 	public String toString() {
 		 final StringBuffer sb=new StringBuffer("Information{");
@@ -338,6 +348,9 @@ public class Information{
 		}
 		if (status != null) {
 			sb.append(", \"status\":\"").append(status).append("\"");
+		}
+		if (cateParentName != null) {
+			sb.append(", \"cateParentName\":\"").append(cateParentName).append("\"");
 		}
 		return sb.toString();
 	}
