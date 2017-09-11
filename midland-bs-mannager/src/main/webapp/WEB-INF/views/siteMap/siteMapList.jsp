@@ -36,6 +36,11 @@
                             <a class="delete_img" target="contentF" onclick="delete1(${item.id })"></a>
                             <a target="contentF" onclick="sort(${item.id },${item.orderBy},1)">上移</a>
                             <a target="contentF" onclick="sort(${item.id },${item.orderBy},2)">下移</a>
+                            <a href="javascript:;" target="contentF"
+                               <c:if test="${item.isShow == 1}">class = "offon_img" title = "隐藏"</c:if>
+                               <c:if test="${item.isShow == 0}">class = "onoff_img"  title = "显示"</c:if>
+                               onclick="isOffOn(${item.id },'${item.isShow}');">
+                            </a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -103,6 +108,88 @@
                 layer.msg("操作失败！", {icon: 2});
             }
         })
+    }
+
+    //启用关闭
+    function isOffOn(id,isShow){
+        if(isShow=="0"){
+
+            layer.open({
+                type: 1,
+                skin: 'layer-style',
+                area: ['350px','200px'],
+                shadeClose: false, //点击遮罩关闭
+                title:['启用'],
+                resize: false,
+                scrollbar:false,
+                content:
+                '<section class = "content" style = "border:none; height:100%;">'+
+                '<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">您是否隐藏该条信息?</p>'+
+                '</section>',
+                btn:['确定','取消'],
+                yes: function(index){
+                    $.ajax({
+                        type: "post",
+                        url: "${ctx}/rest/siteMap/update?id="+id+"&isShow=1",
+                        cache:false,
+                        async:false, // 此处必须同步
+                        dataType: "json",
+                        success: function(xmlobj){
+                            if(xmlobj.state==0){
+                                layer.msg("隐藏成功！",{icon:1});
+                            }
+                            else{
+                                layer.msg("操作失败！！",{icon:7});
+                            }
+                            setTimeout(function(){$("#searchForm").submit();},100);
+                            layer.close(index);
+                        }
+                    });
+                }
+                ,success: function (layero) {
+                    var btn = layero.find('.layui-layer-btn');
+                    btn.css('text-align', 'center');
+                }
+            });
+        }else{
+            layer.open({
+                type: 1,
+                skin: 'layer-style',
+                area: ['350px','200px'],
+                shadeClose: false, //点击遮罩关闭
+                title:['关闭'],
+                resize: false,
+                scrollbar:false,
+                content:
+                '<section class = "content" style = "border:none; height:100%;">'+
+                '<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">您是否确定显示该条信息?</p>'+
+                '</section>',
+                btn:['确定','取消'],
+                yes: function(index){
+                    $.ajax({
+                        type: "post",
+                        url: "${ctx}/rest/siteMap/update?id="+id+"&isShow=0",
+                        cache:false,
+                        async:false, // 此处必须同步
+                        dataType: "json",
+                        success: function(xmlobj){
+                            if(xmlobj.state==0){
+                                layer.msg("显示成功！",{icon:1});
+                            }
+                            else{
+                                layer.msg("操作失败！！",{icon:7});
+                            }
+                            setTimeout(function(){$("#searchForm").submit();},100);
+                            layer.close(index);
+                        }
+                    });
+                }
+                ,success: function (layero) {
+                    var btn = layero.find('.layui-layer-btn');
+                    btn.css('text-align', 'center');
+                }
+            });
+        }
     }
 
 
