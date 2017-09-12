@@ -74,15 +74,19 @@
   "quotation_type": [
     {
       "id": "0",
-      "name": "住宅"
+      "name": "商业"
+    },
+    {
+      "id": "1",
+      "name": "其它"
     },
     {
       "id": "2",
-      "name": "办公楼"
+      "name": "住宅"
     },
     {
       "id": "3",
-      "name": "商业"
+      "name": "办公"
     }
   ],
   "liaisonRecord_category": [

@@ -16,16 +16,9 @@ public class Calculate {
      * @param decimal
      * @return
      */
-    public static boolean keepTwoDecimal(double decimal) {
-        String[] result = String.valueOf(decimal).split("\\.");
-        int count = result.length;
-        if (count < 2) {
-            return false;
-        } else if (count == 2 && result[1].length() > 2) {
-            return true;
-        } else {
-            return false;
-        }
+    public static double keepTwoDecimal(double decimal) {
+        BigDecimal decimal1 = new BigDecimal(decimal);
+        return decimal1.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
     
 

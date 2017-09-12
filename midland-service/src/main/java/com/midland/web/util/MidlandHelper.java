@@ -9,8 +9,10 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,7 +21,8 @@ import java.util.List;
 public class MidlandHelper {
 	
 	private static final String COMMON_DATE = "yyyy-MM-dd hh:mm:ss";
-
+	
+	
 	public static String getCurrentTime(){
 		long intTime = System.currentTimeMillis();
 		DateFormat format = new SimpleDateFormat(COMMON_DATE);

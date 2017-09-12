@@ -1,7 +1,8 @@
 package com.midland.web.model;
 
+import java.util.Date;
 
-public class Quotation{
+public class QuotationSecondHand{
 	/**
 	 * 行情表，主键
 	 **/
@@ -9,13 +10,13 @@ public class Quotation{
 	/**
 	 * 数据时间
 	 **/
-	private String dataTime;
+	private Date dataTime;
 	/**
 	 * 类型
 	 **/
 	private Integer type;
 	/**
-	 * 城市
+	 * 
 	 **/
 	private String cityId;
 	/**
@@ -35,29 +36,13 @@ public class Quotation{
 	 **/
 	private String dealAcreage;
 	/**
-	 * 成交均价
-	 **/
-	private String price;
-	/**
-	 * 可售套数
-	 **/
-	private Integer soldNum;
-	/**
-	 * 可售面积
-	 **/
-	private String soldArea;
-	/**
 	 * 环比
 	 **/
 	private String ringRatio;
 	/**
 	 * 更新时间
 	 **/
-	private String updateTime;
-	/**
-	 * 1，新房；0，二手房
-	 **/
-	private Integer isNew;
+	private Date updateTime;
 	/**
 	 * 0未删除，1删除
 	 **/
@@ -84,11 +69,11 @@ public class Quotation{
 		this.id = id;
 	}
 
-	public String getDataTime() {
+	public Date getDataTime() {
 		return dataTime;
 	}
 
-	public void setDataTime(String dataTime) {
+	public void setDataTime(Date dataTime) {
 		this.dataTime = dataTime;
 	}
 
@@ -140,30 +125,6 @@ public class Quotation{
 		this.dealAcreage = dealAcreage;
 	}
 
-	public String getPrice() {
-		return price;
-	}
-
-	public void setPrice(String price) {
-		this.price = price;
-	}
-
-	public Integer getSoldNum() {
-		return soldNum;
-	}
-
-	public void setSoldNum(Integer soldNum) {
-		this.soldNum = soldNum;
-	}
-
-	public String getSoldArea() {
-		return soldArea;
-	}
-
-	public void setSoldArea(String soldArea) {
-		this.soldArea = soldArea;
-	}
-
 	public String getRingRatio() {
 		return ringRatio;
 	}
@@ -172,20 +133,12 @@ public class Quotation{
 		this.ringRatio = ringRatio;
 	}
 
-	public String getUpdateTime() {
+	public Date getUpdateTime() {
 		return updateTime;
 	}
 
-	public void setUpdateTime(String updateTime) {
+	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
-	}
-
-	public Integer getIsNew() {
-		return isNew;
-	}
-
-	public void setIsNew(Integer isNew) {
-		this.isNew = isNew;
 	}
 
 	public Integer getIsDelete() {
@@ -222,7 +175,7 @@ public class Quotation{
 
 	@Override
 	public String toString() {
-		 final StringBuffer sb=new StringBuffer("Quotation{");
+		 final StringBuffer sb=new StringBuffer("QuotationSecondHand{");
 		if (id != null) {
 			sb.append(", \"id\":\"").append(id).append("\"");
 		}
@@ -247,23 +200,11 @@ public class Quotation{
 		if (dealAcreage != null) {
 			sb.append(", \"dealAcreage\":\"").append(dealAcreage).append("\"");
 		}
-		if (price != null) {
-			sb.append(", \"price\":\"").append(price).append("\"");
-		}
-		if (soldNum != null) {
-			sb.append(", \"soldNum\":\"").append(soldNum).append("\"");
-		}
-		if (soldArea != null) {
-			sb.append(", \"soldArea\":\"").append(soldArea).append("\"");
-		}
 		if (ringRatio != null) {
 			sb.append(", \"ringRatio\":\"").append(ringRatio).append("\"");
 		}
 		if (updateTime != null) {
 			sb.append(", \"updateTime\":\"").append(updateTime).append("\"");
-		}
-		if (isNew != null) {
-			sb.append(", \"isNew\":\"").append(isNew).append("\"");
 		}
 		if (isDelete != null) {
 			sb.append(", \"isDelete\":\"").append(isDelete).append("\"");
