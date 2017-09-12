@@ -84,7 +84,7 @@ private SettingService settingService;
             result = settingService.queryAreaByRedis(parem);
         }
         Map<String,Object> map = new HashMap<>();
-        map.put("result",result.get(flag));
+        map.put("result",result==null?null:result.get(flag));
         return map;
     }
 
