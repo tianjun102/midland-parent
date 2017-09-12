@@ -72,6 +72,16 @@ public class SettingServiceImpl implements SettingService {
         List<Area> provinceList = result.get("province");
         model.addAttribute("provinceList",provinceList);
     }
+    /**
+     * 查询所有省份
+     */
+    @Override
+    public List<Area> getAllProvince() {
+        Map<String,String> param = new HashMap<>();
+        param.put("flag","province");
+        Map<String, List<Area>> result = queryCityByRedis(param);
+        return result.get("province");
+    }
     
     /**
      * 查询所有城市
@@ -84,6 +94,69 @@ public class SettingServiceImpl implements SettingService {
         param.put("id","*");
         Map<String, List<Area>> list=getStringListMap(param);
         return list.get("city");
+    }
+    @Override
+    public Area getCityByCityId(String cityId) {
+        Map<String,String> param = new HashMap<>();
+        param.put("flag","_city");
+        param.put("id",cityId);
+        Map<String, List<Area>> list=getStringListMap(param);
+        if (list != null){
+            if (list.get("_city")!=null){
+                return list.get("_city").get(0);
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * 查询省份
+     * @return
+     */
+    @Override
+    public Area queryProvinceByCityId(String cityId) {
+        Map<String,String> param = new HashMap<>();
+        param.put("flag","province");
+        List<Area> result = getAllProvince();
+        for (Area area : result){
+            if (area.getId().equals(cityId)){
+                return area;
+            }
+        }
+        
+        return null;
+    }
+    
+    
+    
+    @Override
+    public List<Area> getAreaByCityId(String cityId){
+        Map param = new HashMap();
+        param.put("flag","area");
+        param.put("id",cityId);
+        Map result = queryCityByRedis(param);
+        return (List<Area>)result.get("area");
+    }
+    
+    @Override
+    public Area getDistByCityIdAndDistName(String cityId, String distName){
+        List<Area> areas = getAreaByCityId(cityId);
+        for (Area area:areas){
+            if (area.getName().equals(distName)){
+                return area;
+            }
+        }
+        return null;
+    }
+    @Override
+    public Area getDistByCityIdAndDistId(String cityId, String distId){
+        List<Area> areas = getAreaByCityId(cityId);
+        for (Area area:areas){
+            if (area.getId().equals(distId)){
+                return area;
+            }
+        }
+        return null;
     }
     
     private Map<String, List<Area>> getStringListMap(Map<String, String> parem) {
@@ -113,15 +186,7 @@ public class SettingServiceImpl implements SettingService {
         
         return areaMap;
     }
-    
-    @Override
-    public List<Area> getAreaByCityId(String cityId){
-        Map parem= new HashMap();
-        parem.put("flag","area");
-        parem.put("id",cityId);
-        Map result = queryCityByRedis(parem);
-        return (List<Area>)result.get("city");
-    }
+   
     
     /**
      *
@@ -224,7 +289,14 @@ public class SettingServiceImpl implements SettingService {
              if(keys==null||keys.size()<=0){
                  return null;
              }
-        }else if ("city".equals(flag)){
+        }else if ("_city".equals(flag)){
+            keys = baseRedisTemplate.getKeysLike("city:"+id+":*");
+            if(keys==null||keys.size()<=0){
+                return null;
+            }
+        }
+        
+        else if ("city".equals(flag)){
              keys = baseRedisTemplate.getKeysLike("city:*:"+id);
             if(keys==null||keys.size()<=0){
                 return null;

@@ -57,17 +57,16 @@ public class HttpUtils {
 	 * @return 请求失败返回null
 	 */
 	public static String get(String url, Map<String, String> params, Map<String, String> headers) {
-
+		boolean flag=url.contains("?");
 		CloseableHttpClient httpClient = null;
 		if (params != null && !params.isEmpty()) {
 			StringBuffer param = new StringBuffer();
-			boolean flag = true; // 是否开始
 			for (Entry<String, String> entry : params.entrySet()) {
-				if (flag) {
+				if (flag) {;
+					param.append("&");
+				} else {
 					param.append("?");
 					flag = false;
-				} else {
-					param.append("&");
 				}
 				param.append(entry.getKey()).append("=");
 				

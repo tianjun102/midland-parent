@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.midland.web.dao.RecruitManagerMapper">
+
+ 	<resultMap id="BaseResultMap" type="com.midland.web.model.RecruitManager" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+		<result column="post" property="post" jdbcType="VARCHAR" />
+		<result column="recruiters_num" property="recruitersNum" jdbcType="INTEGER" />
+		<result column="education" property="education" jdbcType="INTEGER" />
+		<result column="work_lift" property="workLift" jdbcType="INTEGER" />
+		<result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+		<result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+		<result column="release_status" property="releaseStatus" jdbcType="INTEGER" />
+		<result column="post_desc" property="postDesc" jdbcType="LONGVARCHAR" />
+		<result column="job_claim" property="jobClaim" jdbcType="LONGVARCHAR" />
+		<result column="city_id" property="cityId" jdbcType="VARCHAR" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+		<result column="release_time" property="releaseTime" jdbcType="TIMESTAMP" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id,type,post,recruiters_num,education,work_lift,start_time,end_time,release_status,post_desc,job_claim,city_id,city_name,release_time,email
+	</sql>
+
+	<select id="selectRecruitManagerById" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from recruit_manager
+		 where id= #{id}
+	</select>
+
+	<delete id="deleteRecruitManagerById" >
+		delete from recruit_manager
+		 where id= #{id}
+	</delete>
+
+	<update id="updateRecruitManagerById" >
+		update recruit_manager 
+		<set>
+		<include refid="update_option"/>
+		</set>
+
+		 where id= #{id}
+	</update>
+
+	<select id="findRecruitManagerList" parameterType="com.midland.web.model.RecruitManager" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from recruit_manager
+		where 
+		is_delete=0
+		<include refid="select_option" />
+	</select>
+
+	<insert id="insertRecruitManager" parameterType="com.midland.web.model.RecruitManager">
+		insert into recruit_manager
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="type != null">
+				type,
+			</if>
+			<if test="post != null">
+				post,
+			</if>
+			<if test="recruitersNum != null">
+				recruiters_num,
+			</if>
+			<if test="education != null">
+				education,
+			</if>
+			<if test="workLift != null">
+				work_lift,
+			</if>
+			<if test="startTime != null">
+				start_time,
+			</if>
+			<if test="endTime != null">
+				end_time,
+			</if>
+			<if test="releaseStatus != null">
+				release_status,
+			</if>
+			<if test="postDesc != null">
+				post_desc,
+			</if>
+			<if test="jobClaim != null">
+				job_claim,
+			</if>
+			<if test="cityId != null">
+				city_id,
+			</if>
+			<if test="cityName != null">
+				city_name,
+			</if>
+			<if test="releaseTime != null">
+				release_time,
+			</if>
+			<if test="email != null">
+				email,
+			</if>
+		</trim>
+		values
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="post != null">
+				#{post,jdbcType=VARCHAR},
+			</if>
+			<if test="recruitersNum != null">
+				#{recruitersNum,jdbcType=INTEGER},
+			</if>
+			<if test="education != null">
+				#{education,jdbcType=INTEGER},
+			</if>
+			<if test="workLift != null">
+				#{workLift,jdbcType=INTEGER},
+			</if>
+			<if test="startTime != null">
+				#{startTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endTime != null">
+				#{endTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="releaseStatus != null">
+				#{releaseStatus,jdbcType=INTEGER},
+			</if>
+			<if test="postDesc != null">
+				#{postDesc,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="jobClaim != null">
+				#{jobClaim,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="cityId != null">
+				#{cityId,jdbcType=VARCHAR},
+			</if>
+			<if test="cityName != null">
+				#{cityName,jdbcType=VARCHAR},
+			</if>
+			<if test="releaseTime != null">
+				#{releaseTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="email != null">
+				#{email,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<sql id="update_option">
+		<if test="type != null">
+			type= #{type,jdbcType=INTEGER},
+		</if>
+		<if test="post != null">
+			post= #{post,jdbcType=VARCHAR},
+		</if>
+		<if test="recruitersNum != null">
+			recruiters_num= #{recruitersNum,jdbcType=INTEGER},
+		</if>
+		<if test="education != null">
+			education= #{education,jdbcType=INTEGER},
+		</if>
+		<if test="workLift != null">
+			work_lift= #{workLift,jdbcType=INTEGER},
+		</if>
+		<if test="startTime != null">
+			start_time= #{startTime,jdbcType=TIMESTAMP},
+		</if>
+		<if test="endTime != null">
+			end_time= #{endTime,jdbcType=TIMESTAMP},
+		</if>
+		<if test="releaseStatus != null">
+			release_status= #{releaseStatus,jdbcType=INTEGER},
+		</if>
+		<if test="postDesc != null">
+			post_desc= #{postDesc,jdbcType=LONGVARCHAR},
+		</if>
+		<if test="jobClaim != null">
+			job_claim= #{jobClaim,jdbcType=LONGVARCHAR},
+		</if>
+		<if test="cityId != null">
+			city_id= #{cityId,jdbcType=VARCHAR},
+		</if>
+		<if test="cityName != null">
+			city_name= #{cityName,jdbcType=VARCHAR},
+		</if>
+		<if test="releaseTime != null">
+			release_time= #{releaseTime,jdbcType=TIMESTAMP},
+		</if>
+		<if test="email != null">
+			email= #{email,jdbcType=VARCHAR},
+		</if>
+	</sql>
+
+	<sql id="select_option">
+		<if test="id != null">
+			 and id= #{id,jdbcType=INTEGER}
+		</if>
+		<if test="type != null">
+			 and type= #{type,jdbcType=INTEGER}
+		</if>
+		<if test="post != null">
+			 and post= #{post,jdbcType=VARCHAR}
+		</if>
+		<if test="recruitersNum != null">
+			 and recruiters_num= #{recruitersNum,jdbcType=INTEGER}
+		</if>
+		<if test="education != null">
+			 and education= #{education,jdbcType=INTEGER}
+		</if>
+		<if test="workLift != null">
+			 and work_lift= #{workLift,jdbcType=INTEGER}
+		</if>
+		<if test="startTime != null">
+			 and start_time= #{startTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="endTime != null">
+			 and end_time= #{endTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="releaseStatus != null">
+			 and release_status= #{releaseStatus,jdbcType=INTEGER}
+		</if>
+		<if test="postDesc != null">
+			 and post_desc= #{postDesc,jdbcType=LONGVARCHAR}
+		</if>
+		<if test="jobClaim != null">
+			 and job_claim= #{jobClaim,jdbcType=LONGVARCHAR}
+		</if>
+		<if test="cityId != null">
+			 and city_id= #{cityId,jdbcType=VARCHAR}
+		</if>
+		<if test="cityName != null">
+			 and city_name= #{cityName,jdbcType=VARCHAR}
+		</if>
+		<if test="releaseTime != null">
+			 and release_time= #{releaseTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="email != null">
+			 and email= #{email,jdbcType=VARCHAR}
+		</if>
+	</sql>
+
+</mapper>

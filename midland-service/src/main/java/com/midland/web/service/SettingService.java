@@ -23,9 +23,19 @@ public interface SettingService {
 	
 	void getAllProvinceList(Model model);
 	
+	List<Area> getAllProvince();
+	
 	List<Area> queryAllCityByRedis();
 	
+	Area getCityByCityId(String cityId);
+	
+	Area queryProvinceByCityId(String cityId);
+	
 	List<Area> getAreaByCityId(String cityId);
+	
+	Area getDistByCityIdAndDistName(String cityId, String distName);
+	
+	Area getDistByCityIdAndDistId(String cityId, String distId);
 	
 	public Map<String, List<Area>> queryAreaByRedis(Map<String, String> parem);
 

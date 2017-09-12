@@ -117,6 +117,8 @@ public class QuotationController extends BaseController {
 	public String toUpdateQuotation(Integer id, Model model) throws Exception {
 		Quotation result = quotationServiceImpl.selectQuotationById(id);
 		List<ParamObject> paramObjects = JsonMapReader.getMap("quotation_type");
+		Area province = settingService.getCityByCityId(result.getCityId());
+		model.addAttribute("area", province);
 		model.addAttribute("types", paramObjects);
 		settingService.getAllProvinceList(model);
 		model.addAttribute("item", result);

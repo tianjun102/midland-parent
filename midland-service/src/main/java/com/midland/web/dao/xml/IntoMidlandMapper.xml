@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.midland.web.dao.IntoMidlandMapper">
+
+ 	<resultMap id="BaseResultMap" type="com.midland.web.model.IntoMidland" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="company_profile" property="companyProfile" jdbcType="LONGVARCHAR" />
+		<result column="company_process" property="companyProcess" jdbcType="LONGVARCHAR" />
+		<result column="company_honor" property="companyHonor" jdbcType="LONGVARCHAR" />
+		<result column="company_training" property="companyTraining" jdbcType="LONGVARCHAR" />
+		<result column="company_culture" property="companyCulture" jdbcType="LONGVARCHAR" />
+		<result column="promotion_benefits" property="promotionBenefits" jdbcType="LONGVARCHAR" />
+		<result column="contact_us" property="contactUs" jdbcType="LONGVARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id,company_profile,company_process,company_honor,company_training,company_culture,promotion_benefits,contact_us
+	</sql>
+
+	<select id="selectIntoMidlandById" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from into_midland
+		 where id= #{id}
+	</select>
+
+	<delete id="deleteIntoMidlandById" >
+		delete from into_midland
+		 where id= #{id}
+	</delete>
+
+	<update id="updateIntoMidlandById" >
+		update into_midland 
+		<set>
+		<include refid="update_option"/>
+		</set>
+
+		 where id= #{id}
+	</update>
+
+	<select id="findIntoMidlandList" parameterType="com.midland.web.model.IntoMidland" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from into_midland
+		where 
+		is_delete=0
+		<include refid="select_option" />
+	</select>
+
+	<insert id="insertIntoMidland" parameterType="com.midland.web.model.IntoMidland">
+		insert into into_midland
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="companyProfile != null">
+				company_profile,
+			</if>
+			<if test="companyProcess != null">
+				company_process,
+			</if>
+			<if test="companyHonor != null">
+				company_honor,
+			</if>
+			<if test="companyTraining != null">
+				company_training,
+			</if>
+			<if test="companyCulture != null">
+				company_culture,
+			</if>
+			<if test="promotionBenefits != null">
+				promotion_benefits,
+			</if>
+			<if test="contactUs != null">
+				contact_us,
+			</if>
+		</trim>
+		values
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="companyProfile != null">
+				#{companyProfile,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="companyProcess != null">
+				#{companyProcess,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="companyHonor != null">
+				#{companyHonor,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="companyTraining != null">
+				#{companyTraining,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="companyCulture != null">
+				#{companyCulture,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="promotionBenefits != null">
+				#{promotionBenefits,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="contactUs != null">
+				#{contactUs,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<sql id="update_option">
+		<if test="companyProfile != null">
+			company_profile= #{companyProfile,jdbcType=LONGVARCHAR},
+		</if>
+		<if test="companyProcess != null">
+			company_process= #{companyProcess,jdbcType=LONGVARCHAR},
+		</if>
+		<if test="companyHonor != null">
+			company_honor= #{companyHonor,jdbcType=LONGVARCHAR},
+		</if>
+		<if test="companyTraining != null">
+			company_training= #{companyTraining,jdbcType=LONGVARCHAR},
+		</if>
+		<if test="companyCulture != null">
+			company_culture= #{companyCulture,jdbcType=LONGVARCHAR},
+		</if>
+		<if test="promotionBenefits != null">
+			promotion_benefits= #{promotionBenefits,jdbcType=LONGVARCHAR},
+		</if>
+		<if test="contactUs != null">
+			contact_us= #{contactUs,jdbcType=LONGVARCHAR},
+		</if>
+	</sql>
+
+	<sql id="select_option">
+		<if test="id != null">
+			 and id= #{id,jdbcType=INTEGER}
+		</if>
+		<if test="companyProfile != null">
+			 and company_profile= #{companyProfile,jdbcType=LONGVARCHAR}
+		</if>
+		<if test="companyProcess != null">
+			 and company_process= #{companyProcess,jdbcType=LONGVARCHAR}
+		</if>
+		<if test="companyHonor != null">
+			 and company_honor= #{companyHonor,jdbcType=LONGVARCHAR}
+		</if>
+		<if test="companyTraining != null">
+			 and company_training= #{companyTraining,jdbcType=LONGVARCHAR}
+		</if>
+		<if test="companyCulture != null">
+			 and company_culture= #{companyCulture,jdbcType=LONGVARCHAR}
+		</if>
+		<if test="promotionBenefits != null">
+			 and promotion_benefits= #{promotionBenefits,jdbcType=LONGVARCHAR}
+		</if>
+		<if test="contactUs != null">
+			 and contact_us= #{contactUs,jdbcType=LONGVARCHAR}
+		</if>
+	</sql>
+
+</mapper>

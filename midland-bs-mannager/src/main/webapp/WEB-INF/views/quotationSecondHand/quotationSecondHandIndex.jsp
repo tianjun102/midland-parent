@@ -17,7 +17,9 @@
                     $("#file_upload").uploadify("settings", "formData", {
                         'cityId': $("input[name='cityId']").val(),
                         'cityName': unicode($("input[name='cityName']").val().trim()),
-                        'readType': $('#isNew').val()
+                        'provinceId': $("input[name='provinceId']").val(),
+                        'provinceName': unicode($("input[name='provinceName']").val().trim()),
+                        'readType': '0'
                     });
 
                 },
@@ -46,7 +48,7 @@
         </p>
 
 
-        <form action="${ctx }/rest/quotation/list" method="POST" id="searchForm"
+        <form action="${ctx }/rest/quotationSecondHand/list" method="POST" id="searchForm"
               onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
             <input type="hidden" name="isNew" id="isNew" value="${isNew}"/>
             <ul class="userinfo row">
