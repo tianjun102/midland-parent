@@ -21,7 +21,7 @@ public class SiteMap{
 	/**
 	 * 城市id
 	 **/
-	private Integer cityId;
+	private String cityId;
 	/**
 	 * 城市名称
 	 **/
@@ -50,6 +50,10 @@ public class SiteMap{
 	 * 是否显示
 	 **/
 	private Integer isShow;
+	/**
+	 * 平台来源
+	 **/
+	private Integer source;
 
 
 	public Integer getId() {
@@ -84,11 +88,11 @@ public class SiteMap{
 		this.modeName = modeName;
 	}
 
-	public Integer getCityId() {
+	public String getCityId() {
 		return cityId;
 	}
 
-	public void setCityId(Integer cityId) {
+	public void setCityId(String cityId) {
 		this.cityId = cityId;
 	}
 
@@ -148,6 +152,15 @@ public class SiteMap{
 		this.isShow = isShow;
 	}
 
+
+	public Integer getSource() {
+		return source;
+	}
+
+	public void setSource(Integer source) {
+		this.source = source;
+	}
+
 	@Override
 	public String toString() {
 		 final StringBuffer sb=new StringBuffer("SiteMap{");
@@ -186,6 +199,9 @@ public class SiteMap{
 		}
 		if (isShow != null) {
 			sb.append(", \"isShow\":\"").append(isShow).append("\"");
+		}
+		if (source != null) {
+			sb.append(", \"source\":\"").append(source).append("\"");
 		}
 		return sb.toString();
 	}

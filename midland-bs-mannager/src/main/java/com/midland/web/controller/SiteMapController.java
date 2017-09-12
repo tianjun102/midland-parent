@@ -1,6 +1,10 @@
 package com.midland.web.controller;
 
+import com.midland.web.model.Area;
+import com.midland.web.model.Information;
 import com.midland.web.model.SiteMap;
+import com.midland.web.service.JdbcService;
+import com.midland.web.service.SettingService;
 import com.midland.web.service.SiteMapService;
 import com.midland.web.controller.base.BaseController;
 import org.slf4j.Logger;
@@ -25,12 +29,22 @@ public class SiteMapController extends BaseController  {
 	private Logger log = LoggerFactory.getLogger(SiteMapController.class);
 	@Autowired
 	private SiteMapService siteMapServiceImpl;
+	@Autowired
+	private SettingService settingService;
+    @Autowired
+    private JdbcService jdbcService;
 
 	/**
 	 * 
 	 **/
 	@RequestMapping("index")
 	public String siteMapIndex(SiteMap siteMap,Model model) throws Exception {
+		Map<String,String> parem = new HashMap<>();
+		parem.put("flag","city");
+		parem.put("id","*");
+		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
+		List<Area> cityList = cityMap.get("city");
+		model.addAttribute("cityList",cityList);
 		return "siteMap/siteMapIndex";
 	}
 
@@ -39,6 +53,12 @@ public class SiteMapController extends BaseController  {
 	 **/
 	@RequestMapping("to_add")
 	public String toAddSiteMap(SiteMap siteMap,Model model) throws Exception {
+		Map<String,String> parem = new HashMap<>();
+		parem.put("flag","city");
+		parem.put("id","*");
+		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
+		List<Area> cityList = cityMap.get("city");
+		model.addAttribute("cityList",cityList);
 		return "siteMap/addSiteMap";
 	}
 
@@ -93,6 +113,12 @@ public class SiteMapController extends BaseController  {
 	@RequestMapping("to_update")
 	public String toUpdateSiteMap(Integer id,Model model) throws Exception {
 		SiteMap result = siteMapServiceImpl.selectSiteMapById(id);
+		Map<String,String> parem = new HashMap<>();
+		parem.put("flag","city");
+		parem.put("id","*");
+		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
+		List<Area> cityList = cityMap.get("city");
+		model.addAttribute("cityList",cityList);
 		model.addAttribute("item",result);
 		return "siteMap/updateSiteMap";
 	}
@@ -134,4 +160,18 @@ public class SiteMapController extends BaseController  {
 		}
 		return "siteMap/siteMapList";
 	}
+
+    @RequestMapping("sort")
+    @ResponseBody
+    public Map listDesc(SiteMap siteMap, int sort, Model model, HttpServletRequest request) throws Exception {
+        String primaryKeyName="id";
+        String primaryParam=String.valueOf(siteMap.getId());
+        String tableName="site_map";
+        String orderByColumn="order_by";
+        String orderByParam=String.valueOf(siteMap.getOrderBy());
+        jdbcService.listDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,sort);
+        Map map = new HashMap();
+        map.put("state",0);
+        return map;
+    }
 }

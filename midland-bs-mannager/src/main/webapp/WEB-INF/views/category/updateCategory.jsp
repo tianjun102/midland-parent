@@ -28,11 +28,20 @@
         <ul class="userinfo row">
             <li>
                 <span style = "float:left;">城市：</span>
-                <input type="hidden" name="cityName" id="cityName" value="${item.id}">
+                <input type="hidden" name="cityName" id="cityName" value="${item.cityName}">
                 <select onchange="setCityName()" name="cityId" id="cityId" style="height: 38px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option value="">全部</option>
                     <c:forEach items="${cityList}" var="city">
                         <option <c:if test="${item.cityId == city.id}"> selected = 'selected'</c:if> value="${city.id}">${city.name}</option>
+                    </c:forEach>
+                </select>
+            </li>
+            <li>
+                <span>父分类：</span>
+                <select name="parentId" id="parentId" style="height: 38px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <option value="">全部</option>
+                    <c:forEach items="${cateList}" var="cate">
+                    <option <c:if test="${cate.id==item.parentId}">selected="selected"</c:if> value="${cate.id}">${cate.cateName}</option>
                     </c:forEach>
                 </select>
             </li>

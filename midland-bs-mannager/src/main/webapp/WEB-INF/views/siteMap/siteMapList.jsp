@@ -14,18 +14,11 @@
     <table class="table table-bordered table-add">
         <thead>
             <tr>
-				<th style="width: 8%">name</th>
-				<th style="width: 8%">modeId</th>
-				<th style="width: 8%">modeName</th>
-				<th style="width: 8%">cityId</th>
-				<th style="width: 8%">cityName</th>
-				<th style="width: 8%">cateId</th>
-				<th style="width: 8%">cateName</th>
-				<th style="width: 8%">linkUrl</th>
-				<th style="width: 8%">isDelete</th>
-				<th style="width: 8%">orderBy</th>
-				<th style="width: 8%">isShow</th>
-                <th style="width: 10%">操作</th>
+				<th style="width: 10%">序号</th>
+				<th style="width: 10%">模块名称</th>
+				<th style="width: 10%">城市</th>
+				<th style="width: 10%">分类</th>
+                <th style="width: 40%">操作</th>
             </tr>
         </thead>
         <tbody>
@@ -34,20 +27,15 @@
                 <c:forEach items="${requestScope.items }" var="item" varStatus="xh">
                     <tr>
 						<input type="hidden" id="id" value="${item.id}"/>
-						<td>${item.name}</td>
-						<td>${item.modeId}</td>
+						<td>${xh.count}</td>
 						<td>${item.modeName}</td>
-						<td>${item.cityId}</td>
 						<td>${item.cityName}</td>
-						<td>${item.cateId}</td>
 						<td>${item.cateName}</td>
-						<td>${item.linkUrl}</td>
-						<td>${item.isDelete}</td>
-						<td>${item.orderBy}</td>
-						<td>${item.isShow}</td>
 						<td>
-                            <a target="contentF" onclick="to_edit(${item.id })">编辑</a>
-                            <a target="contentF" onclick="delete1(${item.id })">删除</a>
+                            <a class="edit_img" target="contentF" onclick="to_edit(${item.id })"></a>
+                            <a class="delete_img" target="contentF" onclick="delete1(${item.id })"></a>
+                            <a target="contentF" onclick="sort(${item.id },${item.orderBy},1)">上移</a>
+                            <a target="contentF" onclick="sort(${item.id },${item.orderBy},2)">下移</a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -93,9 +81,28 @@
             type: 2,
             title: ['修改'],
             shade: 0.3,
-            area: ['500px', '700px'],
+            area: ['450px', '500px'],
             content: ['${ctx}/rest/siteMap/to_update?id='+id,'no']
         });
+    }
+
+    //排序
+    function sort(id,orderById,sort) {
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/siteMap/sort?sort="+sort+"&orderBy="+orderById+"&id="+id,
+            async: false, // 此处必须同步
+            dataType: "json",
+
+            success: function (data) {
+                if (data.state==0){
+                    $('#searchForm').submit();
+                }
+            },
+            error: function () {
+                layer.msg("操作失败！", {icon: 2});
+            }
+        })
     }
 
 

@@ -20,16 +20,22 @@
 		<form action="${ctx }/rest/siteMap/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
-				<li><span>select：</span>
-					<select name="cityId" id="cityId" class="dropdown">
-						<option value="" >全部</option>
-						<c:forEach items="${citys}" var="item">
-						<option value="${item.id}" >${item.name}</option>
+				<li>
+					<span style = "float:left;">城市：</span>
+					<select name="cityId" id="cityId" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+						<option value="">全部</option>
+						<c:forEach items="${cityList}" var="city">
+							<option value="${city.id}">${city.name}</option>
 						</c:forEach>
 					</select>
 				</li>
-				<li><span>手机号码：</span>
-					<input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>
+				<li>
+					<span style = "float:left;">平台：</span>
+					<select name="source" id="source" class="dropdown">
+						<option value="">全部</option>
+						<option value="0">网站</option>
+						<option value="1">微站</option>
+					</select>
 				</li>
 				<li>
 					<input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/>
@@ -46,7 +52,7 @@
             layer.open({
                 type: 2,
                 skin: 'layer-style',
-                area: ['500px','700px'],
+                area: ['450px','500px'],
                 shadeClose: false, //点击遮罩关闭
                 title:['新增'],
                 resize: false,
