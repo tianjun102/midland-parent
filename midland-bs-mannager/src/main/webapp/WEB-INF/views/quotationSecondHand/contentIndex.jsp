@@ -14,19 +14,16 @@
 	<div class="box" style = "width:auto;">
 		<section class = "content" style = "width:auto;">
 			<p class = "detail-title">
-				<span>预览新房行情</span>
+				<span>二手房详情</span>
 			</p>
 			<dl>
-			<dt style = "font-size:28px; color:#d20000; margin-top:45px; margin-bottom:30px; text-align:center;">预览新房行情</dt>
+			<dt style = "font-size:28px; color:#d20000; margin-top:45px; margin-bottom:30px; text-align:center;">二手房详情</dt>
 			<dt style = "text-align:center;">
 				<div class = "canva" id="main" style="width: 90%;height:600px;text-align: center;" ></div>
 			</dt>
 			</dl>
 		</section>
 	</div>
-${month}
-${data}
-${radios}
 </body>
 </html>
 
@@ -36,7 +33,7 @@ ${radios}
 
     options = {
         title: {
-            text: '折柱混合'
+            text: '二手房-套数'
         },
 
         tooltip: {
@@ -57,12 +54,12 @@ ${radios}
             }
         },
         legend: {
-            data:['一手房','二手房','平均价格']
+            data:['套数','环比']
         },
         xAxis: [
             {
                 type: 'category',
-                data: ${month},
+                data: ${months},
                 axisPointer: {
                     type: 'shadow'
                 }
@@ -71,48 +68,51 @@ ${radios}
         yAxis: [
             {
                 type: 'value',
-                name: '价格',
-                min: 0,
-                max: 70000,
-                interval:5000,
+                name: '套数',
+                min: 2000,
+                max: 0,
+                interval:200,
                 axisLabel: {
-                    formatter: '{value} 元'
+                    formatter: '{value} 套'
                 }
             },
             {
                 type: 'value',
-                name: '价格',
-                min: -350,
-                max: 350,
+                name: '环比 [(当月-上月)/上月]*100',
+                min: 400,
+                max: -100,
                 interval: 50,
                 axisLabel: {
                     formatter: '{value} %'
                 }
             }
         ],
+
         series: [
             {
-                name:'价格',
+                name:'套数',
                 type:'bar',
-                data:${data},
-				barWidth:'20',
-				itemStyle:{
+                data:${numList},
+                barWidth:'20',
+                itemStyle:{
                     normal:{
                         color:'#b6a2de',
-						barBorderRadius:[6,6,6,6]
+                        barBorderRadius:[6,6,6,6]
                     }
                 }
             },
+
             {
-                name:'环比',
+                name:'套数环比',
                 type:'line',
                 yAxisIndex: 1,
+                data:${numRatioList},
+				barWidth:'20',
                 smooth: true,
-                symbolSize: 7,
-                data:${ratios},
-                itemStyle:{
+				itemStyle:{
                     normal:{
-                        color:'#2ec7c9'
+                        color:'#b6a2de',
+						barBorderRadius:[1,1,1,1]
                     }
                 }
             }

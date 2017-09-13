@@ -12,6 +12,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +22,7 @@ import java.util.List;
 public class MidlandHelper {
 	
 	private static final String COMMON_DATE = "yyyy-MM-dd hh:mm:ss";
+	private static final String MONTH = "yyyy-MM";
 	
 	
 	public static String getCurrentTime(){
@@ -28,7 +30,13 @@ public class MidlandHelper {
 		DateFormat format = new SimpleDateFormat(COMMON_DATE);
 		return format.format(intTime);
 	}
-	
+	public static String getMonth(Date time ,Integer amount){
+		DateFormat format = new SimpleDateFormat(COMMON_DATE);
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(time);
+		calendar.add(Calendar.MONTH,amount);
+		return format.format(calendar.getTime());
+	}
 	
 	/**
 	 * request 包含 pageNo，pageSize

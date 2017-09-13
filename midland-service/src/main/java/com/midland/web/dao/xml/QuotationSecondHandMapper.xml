@@ -22,7 +22,6 @@
     <sql id="Base_Column_List">
 		id,data_time,type,city_id,area_id,slice_id,deal_num,deal_acreage,ring_ratio,update_time,is_delete,city_name,area_name,slice_name
 	</sql>
-
     <select id="selectQuotationSecondHandById" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

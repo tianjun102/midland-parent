@@ -73,7 +73,12 @@ public class Calculate {
      * @return
      */
     public static Double divide(Double divider, Double divider1) {
-    
+        if (divider1 ==0 || divider1==null){
+            divider1 = 1.0;
+        }
+        if (divider == null ){
+            divider = 0.0;
+        }
         String dividerStr = String.valueOf(divider);
     
         String dividerStr1 = String.valueOf(divider1);
@@ -107,20 +112,26 @@ public class Calculate {
      * @return
      */
     public static Double minus(Double minus1, Double minus2, Boolean printLog) {
+        if (minus2-0==0 || minus2==null){
+            minus2 = 1.0;
+        }
+        if (minus1 == null ){
+            minus1 = 0.0;
+        }
         if (printLog == null) printLog = true;
         if (printLog) {
             logger.debug("minus :　substr1={},substr2={}", minus1, minus2);
         }
     
-        String moneyStr = String.valueOf(minus1);
+        String minusTemp = String.valueOf(minus1);
     
-        String payMoneyStr = String.valueOf(minus2);
+        String minus2Temp = String.valueOf(minus2);
     
-        BigDecimal moneyDecimal = new BigDecimal(moneyStr);
+        BigDecimal minusDecimal = new BigDecimal(minusTemp);
     
-        BigDecimal payMoneyDecimal = new BigDecimal(payMoneyStr);
+        BigDecimal minus2TempDecimal = new BigDecimal(minus2Temp);
     
-        Double result = moneyDecimal.subtract(payMoneyDecimal).setScale(2, BigDecimal.ROUND_FLOOR).doubleValue();
+        Double result = minusDecimal.subtract(minus2TempDecimal).setScale(2, BigDecimal.ROUND_FLOOR).doubleValue();
         if (printLog) {
             logger.info("minus :　substr1={},substr2={},result={}", minus1, minus2, result);
         }
