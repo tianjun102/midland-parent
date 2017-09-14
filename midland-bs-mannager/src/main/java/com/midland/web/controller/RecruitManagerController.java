@@ -1,9 +1,9 @@
 package com.midland.web.controller;
 
+import com.midland.base.BaseFilter;
 import com.midland.web.model.Area;
 import com.midland.web.model.RecruitManager;
 import com.midland.web.service.RecruitManagerService;
-import com.midland.web.controller.base.BaseController;
 import com.midland.web.service.SettingService;
 import org.slf4j.Logger;
 import java.util.Map;
@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
  * 招聘管理控制层
  */
 @RequestMapping("/recruitManager/")
-public class RecruitManagerController extends BaseController  {
+public class RecruitManagerController extends BaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(RecruitManagerController.class);
 	@Autowired

@@ -1,8 +1,8 @@
 package com.midland.web.controller;
 
+import com.midland.base.BaseFilter;
 import com.midland.web.model.IntoMidland;
 import com.midland.web.service.IntoMidlandService;
-import com.midland.web.controller.base.BaseController;
 import org.slf4j.Logger;
 import java.util.Map;
 import java.util.HashMap;
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 走进美联控制层
  */
-public class IntoMidlandController extends BaseController  {
+public class IntoMidlandController extends BaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(IntoMidlandController.class);
 	@Autowired

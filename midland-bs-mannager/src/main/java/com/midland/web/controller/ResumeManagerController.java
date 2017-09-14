@@ -1,9 +1,9 @@
 package com.midland.web.controller;
 
+import com.midland.base.BaseFilter;
 import com.midland.web.model.Area;
 import com.midland.web.model.ResumeManager;
 import com.midland.web.service.ResumeManagerService;
-import com.midland.web.controller.base.BaseController;
 import com.midland.web.service.SettingService;
 import org.slf4j.Logger;
 import java.util.Map;
@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
  * 简历管理控制层
  */
 @RequestMapping("/resumeManager/")
-public class ResumeManagerController extends BaseController  {
+public class ResumeManagerController extends BaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(ResumeManagerController.class);
 	@Autowired
