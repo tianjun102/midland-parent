@@ -7,6 +7,7 @@ import com.midland.base.BaseFilter;
 import com.midland.web.model.Area;
 import com.midland.web.model.QuotationSecondHand;
 import com.midland.web.model.QuotationSecondHandView;
+import com.midland.web.model.user.User;
 import com.midland.web.service.QuotationSecondHandService;
 import com.midland.web.service.QuotationSecondHandViewService;
 import com.midland.web.service.SettingService;
@@ -33,7 +34,7 @@ public class QuotationSecondHandController extends BaseFilter {
 	private Logger log = LoggerFactory.getLogger(QuotationSecondHandController.class);
 	@Autowired
 	private QuotationSecondHandService quotationSecondHandServiceImpl;
-@Autowired
+	@Autowired
 	private QuotationSecondHandViewService quotationSecondHandViewService;
 
 	@Autowired
@@ -199,6 +200,9 @@ public class QuotationSecondHandController extends BaseFilter {
 	public String findQuotationSecondHandList(QuotationSecondHand quotationSecondHand,Model model, HttpServletRequest request) {
 		try {
 			log.info("findQuotationSecondHandList  {}",quotationSecondHand);
+			User user = MidlandHelper.getCurrentUser(request);
+			//只展示登录用户当前城市的信息
+			quotationSecondHand.setCityId(user.getCityId());
 			MidlandHelper.doPage(request);
 			Page<QuotationSecondHand> result = (Page<QuotationSecondHand>)quotationSecondHandServiceImpl.findQuotationSecondHandList(quotationSecondHand);
 			Paginator paginator=result.getPaginator();
