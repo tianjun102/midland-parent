@@ -192,6 +192,59 @@
 			</dl>
 		</shiro:hasPermission>
 
+		<shiro:hasPermission name="talentRecruitment">
+				<dl class="list-left6">
+					<dt>
+						<a href="javascript:;"
+						   dota="url(${ctx}/assets/img/06.png) no-repeat 20px center"
+						   data-img="url(${ctx}/assets/img/06_w.png) no-repeat 20px center">招聘管理<span
+								class="glyphicon glyphicon-menu-right"></span></a>
+					</dt>
+					<dd>
+						<shiro:hasPermission name="resumeManagerList">
+							<a id = "report1" href="${ctx}/rest/resumeManager/index" target="contentF"><span>简历信息</span></a>
+						</shiro:hasPermission>
+						<shiro:hasPermission name="recruitList">
+							<a id = "report1" href="${ctx}/rest/recruitManager/index" target="contentF"><span>招聘管理</span></a>
+						</shiro:hasPermission>
+					</dd>
+				</dl>
+		</shiro:hasPermission>
+
+		<shiro:hasPermission name="intoMidland">
+				<dl class="list-left6">
+					<dt>
+						<a href="javascript:;"
+						   dota="url(${ctx}/assets/img/06.png) no-repeat 20px center"
+						   data-img="url(${ctx}/assets/img/06_w.png) no-repeat 20px center">走进美联<span
+								class="glyphicon glyphicon-menu-right"></span></a>
+					</dt>
+					<dd>
+						<shiro:hasPermission name="intoMidlandList">
+							<a id = "report1" href="${ctx}/rest/intoMidland/index?flag=1" target="contentF"><span>公司介绍</span></a>
+						</shiro:hasPermission>
+						<shiro:hasPermission name="researchList">
+							<a id = "report1" href="${ctx}/rest/intoMidland/index?flag=2" target="contentF"><span>公司历程</span></a>
+						</shiro:hasPermission>
+						<shiro:hasPermission name="researchList">
+							<a id = "report1" href="${ctx}/rest/intoMidland/index?flag=3" target="contentF"><span>公司荣誉</span></a>
+						</shiro:hasPermission>
+						<shiro:hasPermission name="researchList">
+							<a id = "report1" href="${ctx}/rest/intoMidland/index?flag=4" target="contentF"><span>公司培训</span></a>
+						</shiro:hasPermission>
+						<shiro:hasPermission name="researchList">
+							<a id = "report1" href="${ctx}/rest/intoMidland/index?flag=5" target="contentF"><span>公司文化</span></a>
+						</shiro:hasPermission>
+						<shiro:hasPermission name="researchList">
+							<a id = "report1" href="${ctx}/rest/intoMidland/index?flag=6" target="contentF"><span>晋升福利</span></a>
+						</shiro:hasPermission>
+						<shiro:hasPermission name="researchList">
+							<a id = "report1" href="${ctx}/rest/intoMidland/index?flag=7" target="contentF"><span>联系我们</span></a>
+						</shiro:hasPermission>
+					</dd>
+				</dl>
+		</shiro:hasPermission>
+
 		<shiro:hasPermission name="systemManage">
 			<dl class="list-left8">
 				<dt>

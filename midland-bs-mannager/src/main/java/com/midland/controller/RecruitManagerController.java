@@ -1,36 +1,49 @@
 package com.midland.controller;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
+import com.midland.web.model.Area;
 import com.midland.web.model.RecruitManager;
 import com.midland.web.service.RecruitManagerService;
-import com.midland.web.util.MidlandHelper;
+import com.midland.web.service.SettingService;
 import org.slf4j.Logger;
+import java.util.Map;
+import java.util.HashMap;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import com.github.pagehelper.Page;
+import com.github.pagehelper.Paginator;
+import java.util.List;
+import com.midland.web.util.MidlandHelper;
+import org.springframework.ui.Model;
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
 @Controller
 @SuppressWarnings("all")
+/**
+ * 招聘管理控制层
+ */
 @RequestMapping("/recruitManager/")
 public class RecruitManagerController extends BaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(RecruitManagerController.class);
 	@Autowired
 	private RecruitManagerService recruitManagerServiceImpl;
+	@Autowired
+	private SettingService settingService;
 
 	/**
 	 * 
 	 **/
 	@RequestMapping("index")
 	public String recruitManagerIndex(RecruitManager recruitManager,Model model) throws Exception {
+		Map<String,String> parem = new HashMap<>();
+		parem.put("flag","city");
+		parem.put("id","*");
+		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
+		List<Area> cityList = cityMap.get("city");
+		model.addAttribute("cityList",cityList);
 		return "recruitManager/recruitManagerIndex";
 	}
 
@@ -39,6 +52,12 @@ public class RecruitManagerController extends BaseFilter {
 	 **/
 	@RequestMapping("to_add")
 	public String toAddRecruitManager(RecruitManager recruitManager,Model model) throws Exception {
+		Map<String,String> parem = new HashMap<>();
+		parem.put("flag","city");
+		parem.put("id","*");
+		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
+		List<Area> cityList = cityMap.get("city");
+		model.addAttribute("cityList",cityList);
 		return "recruitManager/addRecruitManager";
 	}
 

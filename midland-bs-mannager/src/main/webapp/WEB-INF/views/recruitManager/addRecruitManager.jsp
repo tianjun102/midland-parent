@@ -11,63 +11,95 @@
 
 </head>
 <body>
-<section class="content" style="border:none;">
-    <form action="${ctx}/rest/recruitManager/add" method="post" id="dataForm">
-        <ul class="userinfo row">
-            <input type="hidden" name="id" id="id" value="${item.id}">
-            <li><span>type：</span>
-               <input type="text" name="type" id="type" ß/>
-            </li>
-            <li><span>post：</span>
-               <input type="text" name="post" id="post" ß/>
-            </li>
-            <li><span>recruitersNum：</span>
-               <input type="text" name="recruitersNum" id="recruitersNum" ß/>
-            </li>
-            <li><span>education：</span>
-               <input type="text" name="education" id="education" ß/>
-            </li>
-            <li><span>workLift：</span>
-               <input type="text" name="workLift" id="workLift" ß/>
-            </li>
-            <li><span>startTime：</span>
-               <input type="text" name="startTime" id="startTime" ß/>
-            </li>
-            <li><span>endTime：</span>
-               <input type="text" name="endTime" id="endTime" ß/>
-            </li>
-            <li><span>releaseStatus：</span>
-               <input type="text" name="releaseStatus" id="releaseStatus" ß/>
-            </li>
-            <li><span>postDesc：</span>
-               <input type="text" name="postDesc" id="postDesc" ß/>
-            </li>
-            <li><span>jobClaim：</span>
-               <input type="text" name="jobClaim" id="jobClaim" ß/>
-            </li>
-            <li><span>cityId：</span>
-               <input type="text" name="cityId" id="cityId" ß/>
-            </li>
-            <li><span>cityName：</span>
-               <input type="text" name="cityName" id="cityName" ß/>
-            </li>
-            <li><span>releaseTime：</span>
-               <input type="text" name="releaseTime" id="releaseTime" ß/>
-            </li>
-            <li><span>email：</span>
-               <input type="text" name="email" id="email" ß/>
-            </li>
-            <li>
-                <span></span>
-                <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">更新</a>
-                <a style="margin-left: 20px" class="public_btn bg3" id="cancel" onclick="closeWin();">取消</a>
-            </li>
-        </ul>
 
-    </form>
-</section>
+
+<div class="box">
+    <section class = "content">
+        <p class = "detail-title">
+            <span>添加招聘信息</span>
+        </p>
+        <form id="dataForm" action="${ctx}/rest/recruitManager/add" method="post" enctype="multipart/form-data" method="post">
+            <input type="hidden" name="cityName" id="cityName" value="" >
+            <ul class = "adminfo row">
+                <li><span>招聘类型：</span>
+                    <select name="type" id="type" class="dropdown" >
+                        <option value="" class="label">请选择</option>
+                        <option value="1">校招</option>
+                        <option value="2">社招</option>
+                    </select>
+                    <span class = "_star ">*</span>
+                </li>
+                <li><span>城市：</span>
+                    <select onchange="setCityName();" name="cityId" id="cityId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                        <option value="">全部</option>
+                        <c:forEach items="${cityList}" var="city">
+                            <option value="${city.id}">${city.name}</option>
+                        </c:forEach>
+                    </select>
+                    <span class = "_star ">*</span>
+                </li>
+                <li>
+                    <span>上线时间：</span>
+                    <input type="text" name="startTime" class="Wdate half" id="time3" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time4\')}'})" />
+                    <em class = "gang">-</em>
+                    <input type="text" name="endTime" class="Wdate half" id="time4" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'time3\')}'})"/>
+                </li>
+                <li><span>招聘岗位：</span>
+                    <input id="post" name="post" maxlength="255" type="text" value="">
+                </li>
+                <li><span>招聘人数：</span>
+                    <input id="recruitersNum" name="recruitersNum" maxlength="255" type="text" value="">
+                </li>
+                <li><span>学历要求：</span>
+                    <select name="education" id="education" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                        <option value="0">不限</option>
+                        <option value="1">高中</option>
+                        <option value="2">大专</option>
+                        <option value="3">本科</option>
+                        <option value="4">硕士及硕士以上</option>
+                    </select>
+                    <span class = "_star ">*</span>
+                </li>
+                <li><span>工作年限：</span>
+                    <select name="workLift" id="workLift" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                        <option value="0">不限</option>
+                        <option value="1">应届毕业生</option>
+                        <option value="2">1-3年</option>
+                        <option value="3">3-5年</option>
+                        <option value="4">5-10年</option>
+                        <option value="5">10年以上</option>
+                    </select>
+                    <span class = "_star ">*</span>
+                </li>
+                <li><span>发布状态：</span>
+                    <select name="releaseStatus" id="releaseStatus" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                        <option value="0">上线</option>
+                        <option value="1">下线</option>
+                    </select>
+                    <span class = "_star ">*</span>
+                </li>
+                <li id="textArea" ><span>职位描述：</span><textarea style="width: 93%;min-height: 250px;resize:none; outline-color: #0099e0;float: right" name="postDesc" id="myEditor" rows="" cols=""></textarea></li>
+                <li id="textArea1" ><span>任职要求：</span><textarea style="width: 93%;min-height: 250px;resize:none; outline-color: #0099e0;float: right" name="jobClaim" id="myEditor1" rows="" cols=""></textarea></li>
+
+            </ul>
+
+
+
+
+            <ul class = "adminfo row">
+                <li>
+                    <span></span>
+                    <a onclick="updateData();" target="contentF" class = "public_btn bg2">保存</a>
+                    <a style="margin-left: 20px" href="${ctx}/rest/banner/bannerindex" target="contentF" class="public_btn bg3" id="cancel">取消</a>
+                </li>
+            </ul>
+        </form>
+    </section>
+</div>
 
 <script type="text/javascript">
+    UE.getEditor('myEditor');
+    UE.getEditor('myEditor1');
     //保存数据
     function updateData() {
         var data = $("#dataForm").serialize();
@@ -100,6 +132,10 @@
     function closeWin() {
         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
         parent.layer.close(index);
+    }
+
+    function setCityName(){
+        $("#cityName").val($("#cityId option:selected").text())
     }
 </script>
 </body>

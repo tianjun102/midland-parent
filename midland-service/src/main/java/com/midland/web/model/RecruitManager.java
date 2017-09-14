@@ -24,7 +24,7 @@ public class RecruitManager{
 	 **/
 	private Integer education;
 	/**
-	 * 工作年限
+	 * 工作年限； 0=不限；1=应届；2=1-3年；3=3-5年；4=5-10年；10年以上
 	 **/
 	private Integer workLift;
 	/**

@@ -1,25 +1,28 @@
 package com.midland.controller;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.web.model.IntoMidland;
 import com.midland.web.service.IntoMidlandService;
-import com.midland.web.util.MidlandHelper;
 import org.slf4j.Logger;
+import java.util.Map;
+import java.util.HashMap;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import com.github.pagehelper.Page;
+import com.github.pagehelper.Paginator;
+import java.util.List;
+import com.midland.web.util.MidlandHelper;
+import org.springframework.ui.Model;
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
 @Controller
 @SuppressWarnings("all")
 @RequestMapping("/intoMidland/")
+/**
+ * 走进美联控制层
+ */
 public class IntoMidlandController extends BaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(IntoMidlandController.class);
@@ -30,7 +33,14 @@ public class IntoMidlandController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("index")
-	public String intoMidlandIndex(IntoMidland intoMidland,Model model) throws Exception {
+	public String intoMidlandIndex(IntoMidland intoMidland,Model model,String flag) throws Exception {
+
+		List<IntoMidland> intoMidlandList = intoMidlandServiceImpl.findIntoMidlandList(intoMidland);
+		if(intoMidlandList!=null&&intoMidlandList.size()>0){
+			intoMidland = intoMidlandList.get(0);
+		}
+		model.addAttribute("flag",flag);
+		model.addAttribute("items",intoMidland);
 		return "intoMidland/intoMidlandIndex";
 	}
 
@@ -51,7 +61,11 @@ public class IntoMidlandController extends BaseFilter {
 		Map<String,Object> map = new HashMap<>();
 		try {
 			log.info("addIntoMidland {}",intoMidland);
-			intoMidlandServiceImpl.insertIntoMidland(intoMidland);
+			if(intoMidland.getId()!=null){
+				intoMidlandServiceImpl.updateIntoMidlandById(intoMidland);
+			}else {
+				intoMidlandServiceImpl.insertIntoMidland(intoMidland);
+			}
 			map.put("state",0);
 		} catch(Exception e) {
 			log.error("addIntoMidland异常 {}",intoMidland,e);
