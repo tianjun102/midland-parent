@@ -2,7 +2,7 @@ package com.midland.web.controller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
-import com.midland.web.controller.base.BaseController;
+import com.midland.base.BaseFilter;
 import com.midland.web.model.TradeFair;
 import com.midland.web.model.user.User;
 import com.midland.web.service.TradeFairService;
@@ -21,7 +21,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/tradeFair/")
-public class TradeFairController extends BaseController  {
+public class TradeFairController extends BaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(TradeFairController.class);
 	@Autowired

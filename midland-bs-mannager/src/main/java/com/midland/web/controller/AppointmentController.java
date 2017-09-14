@@ -3,7 +3,7 @@ package com.midland.web.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.Paginator;
-import com.midland.web.controller.base.BaseController;
+import com.midland.base.BaseFilter;
 import com.midland.web.enums.ContextEnums;
 import com.midland.web.model.AppointLog;
 import com.midland.web.model.Appointment;
@@ -39,7 +39,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/appoint")
-public class AppointmentController extends BaseController{
+public class AppointmentController extends BaseFilter{
 	@Autowired
 	private AppointmentService appointmentServiceImpl;
 	@Autowired

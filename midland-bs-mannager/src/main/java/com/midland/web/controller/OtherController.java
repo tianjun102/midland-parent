@@ -1,6 +1,6 @@
 package com.midland.web.controller;
 
-import com.midland.web.controller.base.BaseController;
+import com.midland.base.BaseFilter;
 import com.midland.web.model.Footer;
 import com.midland.web.service.FooterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  * Created by 'ms.x' on 2017/8/7.
  */
 @Controller
-public class OtherController extends BaseController {
+public class OtherController extends BaseFilter {
 	@Autowired
 	private FooterService footerServiceImpl;
 	

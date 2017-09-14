@@ -1,25 +1,18 @@
 package com.midland.ueditor.upload;
 
 
-
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
-import com.midland.web.controller.base.BaseController;
-import org.apache.commons.io.FileUtils;
-
+import com.midland.base.BaseFilter;
 import com.midland.ueditor.define.AppInfo;
 import com.midland.ueditor.define.BaseState;
 import com.midland.ueditor.define.State;
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.*;
 
-public class StorageManager  extends BaseController {
+
+public class StorageManager  extends BaseFilter {
 	public static final int BUFFER_SIZE = 8192;
 	private static final Logger logger = LoggerFactory.getLogger(BinaryUploader.class);
 

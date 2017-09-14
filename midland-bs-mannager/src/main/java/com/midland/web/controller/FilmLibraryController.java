@@ -2,7 +2,7 @@ package com.midland.web.controller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
-import com.midland.web.controller.base.BaseController;
+import com.midland.base.BaseFilter;
 import com.midland.web.model.Area;
 import com.midland.web.model.FilmLibrary;
 import com.midland.web.model.user.User;
@@ -25,7 +25,7 @@ import java.util.Map;
 @Controller
 @SuppressWarnings("all")
 @RequestMapping("/filmLibrary/")
-public class FilmLibraryController extends BaseController  {
+public class FilmLibraryController extends BaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(FilmLibraryController.class);
 	@Autowired

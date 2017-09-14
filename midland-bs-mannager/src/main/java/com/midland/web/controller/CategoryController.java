@@ -2,7 +2,7 @@ package com.midland.web.controller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
-import com.midland.web.controller.base.BaseController;
+import com.midland.base.BaseFilter;
 import com.midland.web.model.Area;
 import com.midland.web.model.Category;
 import com.midland.web.service.CategoryService;
@@ -24,7 +24,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/category/")
-public class CategoryController extends BaseController  {
+public class CategoryController extends BaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(CategoryController.class);
 	@Autowired

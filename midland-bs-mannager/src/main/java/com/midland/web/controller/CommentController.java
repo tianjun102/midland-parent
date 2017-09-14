@@ -2,7 +2,7 @@ package com.midland.web.controller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
-import com.midland.web.controller.base.BaseController;
+import com.midland.base.BaseFilter;
 import com.midland.web.model.Comment;
 import com.midland.web.model.Information;
 import com.midland.web.service.CommentService;
@@ -23,7 +23,7 @@ import java.util.Map;
 @Controller
 @SuppressWarnings("all")
 @RequestMapping("/comment/")
-public class CommentController extends BaseController  {
+public class CommentController extends BaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(CommentController.class);
 	@Autowired

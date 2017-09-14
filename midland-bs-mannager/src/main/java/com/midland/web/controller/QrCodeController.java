@@ -2,7 +2,7 @@ package com.midland.web.controller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
-import com.midland.web.controller.base.BaseController;
+import com.midland.base.BaseFilter;
 import com.midland.web.model.Area;
 import com.midland.web.model.QrCode;
 import com.midland.web.service.QrCodeService;
@@ -24,7 +24,7 @@ import java.util.Map;
 @Controller
 @SuppressWarnings("all")
 @RequestMapping("/qrCode/")
-public class QrCodeController extends BaseController  {
+public class QrCodeController extends BaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(QrCodeController.class);
 	@Autowired

@@ -2,7 +2,7 @@ package com.midland.web.controller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
-import com.midland.web.controller.base.BaseController;
+import com.midland.base.BaseFilter;
 import com.midland.web.model.Area;
 import com.midland.web.model.SpecialPage;
 import com.midland.web.service.SettingService;
@@ -24,7 +24,7 @@ import java.util.Map;
 @Controller
 @SuppressWarnings("all")
 @RequestMapping("/specialPage/")
-public class SpecialPageController extends BaseController  {
+public class SpecialPageController extends BaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(SpecialPageController.class);
 	@Autowired

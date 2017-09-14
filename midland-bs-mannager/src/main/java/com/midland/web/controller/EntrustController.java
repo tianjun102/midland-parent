@@ -3,7 +3,7 @@ package com.midland.web.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.Paginator;
-import com.midland.web.controller.base.BaseController;
+import com.midland.base.BaseFilter;
 import com.midland.web.enums.ContextEnums;
 import com.midland.web.model.Entrust;
 import com.midland.web.model.EntrustLog;
@@ -38,7 +38,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/entrust")
-public class EntrustController extends BaseController{
+public class EntrustController extends BaseFilter{
 	@Autowired
 	private EntrustService entrustServiceImpl;
 	@Autowired

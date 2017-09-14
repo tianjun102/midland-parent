@@ -2,7 +2,7 @@ package com.midland.web.controller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
-import com.midland.web.controller.base.BaseController;
+import com.midland.base.BaseFilter;
 import com.midland.web.model.LiaisonRecord;
 import com.midland.web.service.LiaisonRecordService;
 import com.midland.web.util.JsonMapReader;
@@ -24,7 +24,7 @@ import java.util.Map;
 @Controller
 @SuppressWarnings("all")
 @RequestMapping("/liaisonRecord/")
-public class LiaisonRecordController extends BaseController {
+public class LiaisonRecordController extends BaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(LiaisonRecordController.class);
 	@Autowired

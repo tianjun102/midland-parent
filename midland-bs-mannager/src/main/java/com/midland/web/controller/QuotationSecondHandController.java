@@ -1,35 +1,34 @@
 package com.midland.web.controller;
 
 import com.alibaba.fastjson.JSONArray;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.Paginator;
+import com.midland.base.BaseFilter;
 import com.midland.web.model.Area;
 import com.midland.web.model.QuotationSecondHand;
 import com.midland.web.model.QuotationSecondHandView;
 import com.midland.web.service.QuotationSecondHandService;
-import com.midland.web.controller.base.BaseController;
 import com.midland.web.service.QuotationSecondHandViewService;
 import com.midland.web.service.SettingService;
 import com.midland.web.util.Calculate;
 import com.midland.web.util.JsonMapReader;
+import com.midland.web.util.MidlandHelper;
 import com.midland.web.util.ParamObject;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
-
-import java.util.*;
-
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.Paginator;
-import com.midland.web.util.MidlandHelper;
-import org.springframework.ui.Model;
+
 import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 @Controller
 @SuppressWarnings("all")
 @RequestMapping("/quotationSecondHand/")
-public class QuotationSecondHandController extends BaseController  {
+public class QuotationSecondHandController extends BaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(QuotationSecondHandController.class);
 	@Autowired

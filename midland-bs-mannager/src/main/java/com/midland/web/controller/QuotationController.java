@@ -3,7 +3,7 @@ package com.midland.web.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
-import com.midland.web.controller.base.BaseController;
+import com.midland.base.BaseFilter;
 import com.midland.web.model.Area;
 import com.midland.web.model.Quotation;
 import com.midland.web.service.QuotationService;
@@ -29,7 +29,7 @@ import java.util.Map;
 @Controller
 @SuppressWarnings("all")
 @RequestMapping("/quotation/")
-public class QuotationController extends BaseController {
+public class QuotationController extends BaseFilter {
 	
 	private Logger log = LoggerFactory.getLogger(QuotationController.class);
 	@Autowired

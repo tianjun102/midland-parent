@@ -2,7 +2,7 @@ package com.midland.web.controller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
-import com.midland.web.controller.base.BaseController;
+import com.midland.base.BaseFilter;
 import com.midland.web.model.Feedback;
 import com.midland.web.model.user.User;
 import com.midland.web.service.FeedbackService;
@@ -22,7 +22,7 @@ import java.util.Map;
 @Controller
 @SuppressWarnings("all")
 @RequestMapping("/feedback/")
-public class FeedbackController extends BaseController {
+public class FeedbackController extends BaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(FeedbackController.class);
 	@Autowired

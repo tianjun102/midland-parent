@@ -3,11 +3,11 @@ package com.midland.web.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
+import com.midland.base.BaseFilter;
 import com.midland.core.util.AppSetting;
 import com.midland.core.util.ApplicationUtils;
 import com.midland.core.util.MD5Util;
 import com.midland.core.util.SmsUtil;
-import com.midland.web.controller.base.BaseController;
 import com.midland.web.model.Area;
 import com.midland.web.model.role.Role;
 import com.midland.web.model.user.User;
@@ -60,7 +60,7 @@ import java.util.concurrent.TimeUnit;
  **/
 @Controller
 @RequestMapping(value = "/user")
-public class UserController extends BaseController {
+public class UserController extends BaseFilter {
 
 	private final Logger logger = LoggerFactory.getLogger(UserController.class);
     @Resource
