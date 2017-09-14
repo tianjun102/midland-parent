@@ -53,7 +53,7 @@
                             <c:if test="${item.sellRent == s.id}">${s.name}</c:if>
                         </c:forEach></td>
                         <td>${item.appointmentTime }</td>
-                        <td>${item.area }</td>
+                        <td>${item.areaName }</td>
                         <td>${item.communityName }</td>
                         <td>${item.address }</td>
                         <td>${item.layout }</td>

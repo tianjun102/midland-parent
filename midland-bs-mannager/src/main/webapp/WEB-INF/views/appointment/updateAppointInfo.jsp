@@ -61,7 +61,7 @@
                 </select>
                 <span class="_star">*</span>
             </li>
-            <li class="col-md-6"><span>区域：</span><input type="text" name="area" id="area" value="${appointment.area}"/>
+            <li class="col-md-6"><span>区域：</span><input type="text" name="areaName" id="areaName" value="${appointment.areaName}"/>
             </li>
             <li class="col-md-6"><span>小区：</span><input type="text" name="communityName" id="communityName"
                                                         value="${appointment.communityName}" maxlength="50"/><span

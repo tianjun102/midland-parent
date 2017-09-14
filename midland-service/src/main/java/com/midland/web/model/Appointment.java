@@ -1,6 +1,5 @@
 package com.midland.web.model;
 
-
 public class Appointment{
 	/**
 	 * 预约记录表ID，采用自增长
@@ -37,7 +36,7 @@ public class Appointment{
 	/**
 	 * 所属区域
 	 **/
-	private String area;
+	private String areaName;
 	/**
 	 * 小区名字
 	 **/
@@ -86,21 +85,21 @@ public class Appointment{
 	 * 0未删除，1删除
 	 **/
 	private Integer isDelete;
-    /**
-     * 前端备注
-     **/
-    private String remark;
-    
-    
-    public String getRemark() {
-        return remark;
-    }
-    
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-    
-    public Integer getId() {
+	/**
+	 * 城市id
+	 **/
+	private String cityId;
+	/**
+	 * 城市名称
+	 **/
+	private String cityName;
+	/**
+	 * 区域id
+	 **/
+	private Integer areaId;
+
+
+	public Integer getId() {
 		return id;
 	}
 
@@ -164,12 +163,12 @@ public class Appointment{
 		this.appointmentTime = appointmentTime;
 	}
 
-	public String getArea() {
-		return area;
+	public String getAreaName() {
+		return areaName;
 	}
 
-	public void setArea(String area) {
-		this.area = area;
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
 	}
 
 	public String getCommunityName() {
@@ -268,6 +267,30 @@ public class Appointment{
 		this.isDelete = isDelete;
 	}
 
+	public String getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(String cityId) {
+		this.cityId = cityId;
+	}
+
+	public String getCityName() {
+		return cityName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
+	public Integer getAreaId() {
+		return areaId;
+	}
+
+	public void setAreaId(Integer areaId) {
+		this.areaId = areaId;
+	}
+
 	@Override
 	public String toString() {
 		 final StringBuffer sb=new StringBuffer("Appointment{");
@@ -295,8 +318,8 @@ public class Appointment{
 		if (appointmentTime != null) {
 			sb.append(", \"appointmentTime\":\"").append(appointmentTime).append("\"");
 		}
-		if (area != null) {
-			sb.append(", \"area\":\"").append(area).append("\"");
+		if (areaName != null) {
+			sb.append(", \"areaName\":\"").append(areaName).append("\"");
 		}
 		if (communityName != null) {
 			sb.append(", \"communityName\":\"").append(communityName).append("\"");
@@ -333,6 +356,15 @@ public class Appointment{
 		}
 		if (isDelete != null) {
 			sb.append(", \"isDelete\":\"").append(isDelete).append("\"");
+		}
+		if (cityId != null) {
+			sb.append(", \"cityId\":\"").append(cityId).append("\"");
+		}
+		if (cityName != null) {
+			sb.append(", \"cityName\":\"").append(cityName).append("\"");
+		}
+		if (areaId != null) {
+			sb.append(", \"areaId\":\"").append(areaId).append("\"");
 		}
 		return sb.toString();
 	}

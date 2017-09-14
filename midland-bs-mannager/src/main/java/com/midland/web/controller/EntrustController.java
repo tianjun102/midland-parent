@@ -107,13 +107,15 @@ public class EntrustController extends BaseController{
 	
 	
 	@RequestMapping("/page")
-	public String entrustPage(Model model, Entrust record, String pageNo, String pageSize) throws Exception {
+	public String entrustPage(Model model, Entrust record, String pageNo, String pageSize,HttpServletRequest request) throws Exception {
 		if(pageNo==null||pageNo.equals("")){
 			pageNo = ContextEnums.PAGENO;
 		}
 		if(pageSize==null||pageSize.equals("")){
 			pageSize = ContextEnums.PAGESIZE;
 		}
+		User user =MidlandHelper.getCurrentUser(request);
+		record.setCityId(user.getCityId());
 		PageHelper.startPage(Integer.valueOf(pageNo),Integer.valueOf(pageSize));
 		Page<Entrust> result =(Page<Entrust>) entrustServiceImpl.findEntrustList(record);
 		Paginator paginator = result.getPaginator();
@@ -140,17 +142,17 @@ public class EntrustController extends BaseController{
 	
 	@RequestMapping("/update")
 	@ResponseBody
-	public Object updateByPrimaryKeySelective(Entrust entrust, HttpServletRequest request) {
+	public Object updateByPrimaryKeySelective(Entrust entrust,String remark, HttpServletRequest request) {
 		Map map = new HashMap();
 		try {
 			entrustServiceImpl.updateEntrustById(entrust);
 			User user = (User)request.getSession().getAttribute("userInfo");
 			
 			EntrustLog appointLog = new EntrustLog();
-			if (StringUtils.isEmpty(entrust.getRemark())){
+			if (StringUtils.isEmpty(remark)){
 				appointLog.setRemark("无");
 			}else{
-				appointLog.setRemark(entrust.getRemark());
+				appointLog.setRemark(remark);
 			}
 			appointLog.setEntrustId(entrust.getId());
 			appointLog.setLogTime(MidlandHelper.getCurrentTime());
@@ -229,7 +231,7 @@ public class EntrustController extends BaseController{
 			List<ParamObject> sellRents = JsonMapReader.getMap("appointment_sellRent");
 			exportModel.setModelName6(MidlandHelper.getNameById(appointment1.getSellRent(), sellRents));
 			exportModel.setModelName7(appointment1.getEntrustTime());
-			exportModel.setModelName8(appointment1.getArea());
+			exportModel.setModelName8(appointment1.getAreaName());
 			exportModel.setModelName9(appointment1.getCommunityName());
 			exportModel.setModelName10(appointment1.getAddress());
 			exportModel.setModelName11(appointment1.getLayout());

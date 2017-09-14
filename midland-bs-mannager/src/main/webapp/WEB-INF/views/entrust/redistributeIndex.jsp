@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="${ctx }/assets/css/bootstrap.min.css">
 
 <link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css" />
-<link rel="stylesheet" href="${ctx }/assets/css/common.css">
+<link rel="stylesheet" href="a${ctx }/assets/css/common.css">
 
 </head>
 <body>

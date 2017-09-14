@@ -9,7 +9,7 @@
 		<result column="house_type" property="houseType" jdbcType="INTEGER" />
 		<result column="sell_rent" property="sellRent" jdbcType="INTEGER" />
 		<result column="entrust_time" property="entrustTime" jdbcType="TIMESTAMP" />
-		<result column="area" property="area" jdbcType="VARCHAR" />
+		<result column="area_name" property="areaName" jdbcType="VARCHAR" />
 		<result column="community_name" property="communityName" jdbcType="VARCHAR" />
 		<result column="address" property="address" jdbcType="VARCHAR" />
 		<result column="layout" property="layout" jdbcType="VARCHAR" />
@@ -27,13 +27,14 @@
 		<result column="washing_machine" property="washingMachine" jdbcType="INTEGER" />
 		<result column="household" property="household" jdbcType="INTEGER" />
 		<result column="fridge" property="fridge" jdbcType="INTEGER" />
+		<result column="entrust_type" property="entrustType" jdbcType="INTEGER" />
+		<result column="city_id" property="cityId" jdbcType="VARCHAR" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+		<result column="area_id" property="areaId" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,entrust_sn,source,house_type,sell_rent,DATE_FORMAT(entrust_time,'%Y-%m-%d %H:%i:%s') entrust_time,
-		area,community_name,address,layout,measure,price,user_id,user_cn_name,status,
-		DATE_FORMAT(handle_time,'%Y-%m-%d %H:%i:%s') handle_time,
-		nick_name,renovation,phone,is_delete,broadband,washing_machine,household,fridge
+		id,entrust_sn,source,house_type,sell_rent,entrust_time,area_name,community_name,address,layout,measure,price,user_id,user_cn_name,status,handle_time,nick_name,renovation,phone,is_delete,broadband,washing_machine,household,fridge,entrust_type,city_id,city_name,area_id
 	</sql>
 
 	<select id="selectEntrustById" resultMap="BaseResultMap">
@@ -80,8 +81,8 @@
 			<if test="entrustTime != null">
 				entrust_time,
 			</if>
-			<if test="area != null">
-				area,
+			<if test="areaName != null">
+				area_name,
 			</if>
 			<if test="communityName != null">
 				community_name,
@@ -134,6 +135,18 @@
 			<if test="fridge != null">
 				fridge,
 			</if>
+			<if test="entrustType != null">
+				entrust_type,
+			</if>
+			<if test="cityId != null">
+				city_id,
+			</if>
+			<if test="cityName != null">
+				city_name,
+			</if>
+			<if test="areaId != null">
+				area_id,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -152,8 +165,8 @@
 			<if test="entrustTime != null">
 				#{entrustTime,jdbcType=TIMESTAMP},
 			</if>
-			<if test="area != null">
-				#{area,jdbcType=VARCHAR},
+			<if test="areaName != null">
+				#{areaName,jdbcType=VARCHAR},
 			</if>
 			<if test="communityName != null">
 				#{communityName,jdbcType=VARCHAR},
@@ -206,6 +219,18 @@
 			<if test="fridge != null">
 				#{fridge,jdbcType=INTEGER},
 			</if>
+			<if test="entrustType != null">
+				#{entrustType,jdbcType=INTEGER},
+			</if>
+			<if test="cityId != null">
+				#{cityId,jdbcType=VARCHAR},
+			</if>
+			<if test="cityName != null">
+				#{cityName,jdbcType=VARCHAR},
+			</if>
+			<if test="areaId != null">
+				#{areaId,jdbcType=VARCHAR},
+			</if>
 		</trim>
 	</insert>
 
@@ -225,8 +250,8 @@
 		<if test="entrustTime != null">
 			entrust_time= #{entrustTime,jdbcType=TIMESTAMP},
 		</if>
-		<if test="area != null">
-			area= #{area,jdbcType=VARCHAR},
+		<if test="areaName != null">
+			area_name= #{areaName,jdbcType=VARCHAR},
 		</if>
 		<if test="communityName != null">
 			community_name= #{communityName,jdbcType=VARCHAR},
@@ -279,6 +304,18 @@
 		<if test="fridge != null">
 			fridge= #{fridge,jdbcType=INTEGER},
 		</if>
+		<if test="entrustType != null">
+			entrust_type= #{entrustType,jdbcType=INTEGER},
+		</if>
+		<if test="cityId != null">
+			city_id= #{cityId,jdbcType=VARCHAR},
+		</if>
+		<if test="cityName != null">
+			city_name= #{cityName,jdbcType=VARCHAR},
+		</if>
+		<if test="areaId != null">
+			area_id= #{areaId,jdbcType=VARCHAR},
+		</if>
 	</sql>
 
 	<sql id="select_option">
@@ -300,8 +337,8 @@
 		<if test="entrustTime != null">
 			 and entrust_time= #{entrustTime,jdbcType=TIMESTAMP}
 		</if>
-		<if test="area != null">
-			 and area= #{area,jdbcType=VARCHAR}
+		<if test="areaName != null">
+			 and area_name= #{areaName,jdbcType=VARCHAR}
 		</if>
 		<if test="communityName != null">
 			 and community_name= #{communityName,jdbcType=VARCHAR}
@@ -354,11 +391,17 @@
 		<if test="fridge != null">
 			 and fridge= #{fridge,jdbcType=INTEGER}
 		</if>
-		<if test="startTime != null">
-			 and entrust_time &gt; #{startTime,jdbcType=TIMESTAMP},
+		<if test="entrustType != null">
+			 and entrust_type= #{entrustType,jdbcType=INTEGER}
 		</if>
-		<if test="endTime != null">
-			 and entrust_time &lt; #{endTime,jdbcType=TIMESTAMP},
+		<if test="cityId != null">
+			 and city_id= #{cityId,jdbcType=VARCHAR}
+		</if>
+		<if test="cityName != null">
+			 and city_name= #{cityName,jdbcType=VARCHAR}
+		</if>
+		<if test="areaId != null">
+			 and area_id= #{areaId,jdbcType=VARCHAR}
 		</if>
 	</sql>
 

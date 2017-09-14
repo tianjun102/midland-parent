@@ -49,7 +49,7 @@ public interface UserService extends GenericService<User, Integer> {
      * @param user
      * @return
      */
-	int addUser(User user);
+	void addUser(User user) throws Exception;
 
 	/**
 	 * 修改
