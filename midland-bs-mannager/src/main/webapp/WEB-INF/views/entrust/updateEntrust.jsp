@@ -86,7 +86,7 @@
                 </select>
             </li>
 
-            <li class="col-md-6"><span>区域：</span><input type="text" name="area" id="area" value="${entrust.area}"/>
+            <li class="col-md-6"><span>区域：</span><input type="text" name="areaName" id="areaName" value="${entrust.areaName}"/>
             </li>
             <li class="col-md-6"><span>小区：</span><input type="text" name="communityName" id="communityName"
                                                         value="${entrust.communityName}" maxlength="50"/><span

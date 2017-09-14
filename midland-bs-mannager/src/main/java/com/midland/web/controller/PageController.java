@@ -1,6 +1,6 @@
 package com.midland.web.controller;
 
-import com.midland.web.controller.base.BaseController;
+import com.midland.base.BaseFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  **/
 @Controller
 @RequestMapping("/page")
-public class PageController extends BaseController {
+public class PageController extends BaseFilter {
 
     /**
      * 登录页

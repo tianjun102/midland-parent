@@ -3,7 +3,7 @@ package com.midland.web.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.Paginator;
-import com.midland.web.controller.base.BaseController;
+import com.midland.base.BaseFilter;
 import com.midland.web.enums.ContextEnums;
 import com.midland.web.model.AppointLog;
 import com.midland.web.model.Appointment;
@@ -39,7 +39,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/appoint")
-public class AppointmentController extends BaseController{
+public class AppointmentController extends BaseFilter{
 	@Autowired
 	private AppointmentService appointmentServiceImpl;
 	@Autowired
@@ -118,13 +118,16 @@ public class AppointmentController extends BaseController{
 	
 	
 	@RequestMapping("/page")
-	public String appointmentPage(Model model, Appointment record, String pageNo, String pageSize) throws Exception {
+	public String appointmentPage(Model model, Appointment record, String pageNo, String pageSize,HttpServletRequest request) throws Exception {
 		if(pageNo==null||pageNo.equals("")){
 			pageNo = ContextEnums.PAGENO;
 		}
 		if(pageSize==null||pageSize.equals("")){
 			pageSize = ContextEnums.PAGESIZE;
 		}
+		User user = MidlandHelper.getCurrentUser(request);
+		//只展示用户所属城市的信息
+		record.setCityId(user.getCityId());
 		PageHelper.startPage(Integer.valueOf(pageNo),Integer.valueOf(pageSize));
 		Page<Appointment> result = (Page<Appointment>)appointmentServiceImpl.findAppointmentList(record);
 		Paginator paginator = result.getPaginator();
@@ -169,17 +172,17 @@ public class AppointmentController extends BaseController{
 	
 	@RequestMapping("/update")
 	@ResponseBody
-	public Object updateByPrimaryKeySelective(Appointment record, HttpServletRequest request) {
+	public Object updateByPrimaryKeySelective(Appointment record,String remark, HttpServletRequest request) {
 		Map map = new HashMap();
 		try {
 			appointmentServiceImpl.updateAppointmentById(record);
 			User user = (User)request.getSession().getAttribute("userInfo");
 			
 			AppointLog appointLog = new AppointLog();
-			if (StringUtils.isEmpty(record.getRemark())){
+			if (StringUtils.isEmpty(remark)){
 				appointLog.setRemark("无");
 			}else{
-				appointLog.setRemark(record.getRemark());
+				appointLog.setRemark(remark);
 			}
 			appointLog.setAppointId(record.getId());
 			appointLog.setLogTime(MidlandHelper.getCurrentTime());
@@ -229,7 +232,7 @@ public class AppointmentController extends BaseController{
 			List<ParamObject> sellRents = JsonMapReader.getMap("appointment_sellRent");
 			exportModel.setModelName6(MidlandHelper.getNameById(appointment1.getSellRent(), sellRents));
 			exportModel.setModelName7(appointment1.getAppointmentTime());
-			exportModel.setModelName8(appointment1.getArea());
+			exportModel.setModelName8(appointment1.getAreaName());
 			exportModel.setModelName9(appointment1.getCommunityName());
 			exportModel.setModelName10(appointment1.getAddress());
 			exportModel.setModelName11(appointment1.getLayout());

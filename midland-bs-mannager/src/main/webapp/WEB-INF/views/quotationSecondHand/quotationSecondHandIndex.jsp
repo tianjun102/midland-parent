@@ -78,7 +78,7 @@
             </ul>
         </form>
         <div id="listDiv"></div>
-        <a class="edit_img" target="contentF" href="${ctx}/rest/quotation/showTooltip">生成预览</a>
+        <a class="edit_img" target="contentF" href="${ctx}/rest/quotationSecondHand/toolsTip">生成预览</a>
     </section>
 </div>
 <%--<li><span>城市：</span>--%>

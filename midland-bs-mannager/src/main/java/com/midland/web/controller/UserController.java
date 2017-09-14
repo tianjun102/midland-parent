@@ -3,17 +3,19 @@ package com.midland.web.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
+import com.midland.base.BaseFilter;
 import com.midland.core.util.AppSetting;
 import com.midland.core.util.ApplicationUtils;
 import com.midland.core.util.MD5Util;
 import com.midland.core.util.SmsUtil;
-import com.midland.web.controller.base.BaseController;
+import com.midland.web.model.Area;
 import com.midland.web.model.role.Role;
 import com.midland.web.model.user.User;
 import com.midland.web.security.PermissionSign;
 import com.midland.web.security.RoleSign;
 import com.midland.web.service.MenuService;
 import com.midland.web.service.RoleService;
+import com.midland.web.service.SettingService;
 import com.midland.web.service.UserService;
 import com.midland.web.util.MidlandHelper;
 import com.midland.web.util.PoiExcelExport;
@@ -23,6 +25,8 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -56,8 +60,9 @@ import java.util.concurrent.TimeUnit;
  **/
 @Controller
 @RequestMapping(value = "/user")
-public class UserController extends BaseController {
+public class UserController extends BaseFilter {
 
+	private final Logger logger = LoggerFactory.getLogger(UserController.class);
     @Resource
     private UserService userService;
     
@@ -65,6 +70,8 @@ public class UserController extends BaseController {
 	private RoleService roleService;
 	@Autowired
 	private MenuService menuServiceImpl;
+    @Autowired
+	private SettingService settingService;
     
     @Resource
 	private RedisTemplate<String, Object> redisTemplate;
@@ -254,6 +261,10 @@ public class UserController extends BaseController {
     	Role role=new Role();
     	role.setState(1);
     	List<Role> roles = roleService.selectRoleList(role);
+	    List<Area> list = settingService.queryAllCityByRedis();
+	    settingService.getAllProvinceList(model);
+	
+	    model.addAttribute("citys",list);
     	model.addAttribute("roles", roles);
     	return "user/addUser";
     }
@@ -267,14 +278,17 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "/addUser", method = {RequestMethod.GET,RequestMethod.POST},produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public String addUser(User user){
-    	Map<String, Object> map = new HashMap<String, Object>();
+    public Object addUser(User user){
+    	Map<String, Object> map = new HashMap<>();
     	map.put("flag", 0);
-    	user.setUserType(0);
-    	if(userService.addUser(user)>0){
-    		map.put("flag", 1);
-    	}
-    	return JSONObject.toJSONString(map);
+	    try {
+		    userService.addUser(user);
+		    map.put("flag", 1);
+	    } catch (Exception e) {
+		    logger.error("addUser :{}",user,e);
+	    }
+	    
+    	return map;
     }
 
     /**

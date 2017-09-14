@@ -4,7 +4,6 @@ import java.util.*;
 
 import javax.annotation.Resource;
 
-import com.github.pagehelper.Page;
 import com.midland.web.util.MidlandHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -87,8 +86,7 @@ public class UserServiceImpl extends GenericServiceImpl<User, Integer> implement
 	}
 
 	@Override
-	public int addUser(User user) {
-		int n=0;
+	public void addUser(User user) throws Exception {
 		if(user!=null){
 			user.setCreateTime(MidlandHelper.getCurrentTime());
 	    	user.setState("1");
@@ -96,10 +94,12 @@ public class UserServiceImpl extends GenericServiceImpl<User, Integer> implement
 	    		user.setUserType(0);//默认为0  沃可视
 	    	}
 	    	user.setPassword(ApplicationUtils.sha256Hex(com.midland.web.security.Resource.DEFAULT_PASSWORD));
-	    	n=userMapper.insertSelective(user);//新增返回主键id值
+			int n=userMapper.insertSelective(user);//新增返回主键id值
+			if (n<1){
+				throw new Exception("新增用户失败");
+			}
 	    	this.insertUserRoleBatch(user.getId(), user.getUserRoles());
 		}
-		return n;
 	}
 	/**
 	 * 批量新增用户角色关系

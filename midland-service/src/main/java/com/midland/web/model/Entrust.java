@@ -1,6 +1,7 @@
 package com.midland.web.model;
 
-public class Entrust {
+
+public class Entrust{
 	/**
 	 * 委托表主键id；
 	 **/
@@ -28,7 +29,7 @@ public class Entrust {
 	/**
 	 * 所属区域
 	 **/
-	private String area;
+	private String areaName;
 	/**
 	 * 小区名字
 	 **/
@@ -98,232 +99,250 @@ public class Entrust {
 	 **/
 	private Integer fridge;
 	/**
-	 * 备注
+	 * 买房委托类型：0我要买房，1我要卖房，2我要出租，3我要租房，4我要估价
 	 **/
-	private String remark;
-	
-	private String startTime;
-	private String endTime;
-	
-	public String getStartTime() {
-		return startTime;
-	}
-	
-	public void setStartTime(String startTime) {
-		this.startTime = startTime;
-	}
-	
-	public String getEndTime() {
-		return endTime;
-	}
-	
-	public void setEndTime(String endTime) {
-		this.endTime = endTime;
-	}
-	
-	public String getRemark() {
-		return remark;
-	}
-	
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-	
+	private Integer entrustType;
+	/**
+	 * 城市id
+	 **/
+	private String cityId;
+	/**
+	 * 城市名称
+	 **/
+	private String cityName;
+	/**
+	 * 区域id
+	 **/
+	private String areaId;
+
+
 	public Integer getId() {
 		return id;
 	}
-	
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	public String getEntrustSn() {
 		return entrustSn;
 	}
-	
+
 	public void setEntrustSn(String entrustSn) {
 		this.entrustSn = entrustSn;
 	}
-	
+
 	public Integer getSource() {
 		return source;
 	}
-	
+
 	public void setSource(Integer source) {
 		this.source = source;
 	}
-	
+
 	public Integer getHouseType() {
 		return houseType;
 	}
-	
+
 	public void setHouseType(Integer houseType) {
 		this.houseType = houseType;
 	}
-	
+
 	public Integer getSellRent() {
 		return sellRent;
 	}
-	
+
 	public void setSellRent(Integer sellRent) {
 		this.sellRent = sellRent;
 	}
-	
+
 	public String getEntrustTime() {
 		return entrustTime;
 	}
-	
+
 	public void setEntrustTime(String entrustTime) {
 		this.entrustTime = entrustTime;
 	}
-	
-	public String getArea() {
-		return area;
+
+	public String getAreaName() {
+		return areaName;
 	}
-	
-	public void setArea(String area) {
-		this.area = area;
+
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
 	}
-	
+
 	public String getCommunityName() {
 		return communityName;
 	}
-	
+
 	public void setCommunityName(String communityName) {
 		this.communityName = communityName;
 	}
-	
+
 	public String getAddress() {
 		return address;
 	}
-	
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+
 	public String getLayout() {
 		return layout;
 	}
-	
+
 	public void setLayout(String layout) {
 		this.layout = layout;
 	}
-	
+
 	public String getMeasure() {
 		return measure;
 	}
-	
+
 	public void setMeasure(String measure) {
 		this.measure = measure;
 	}
-	
+
 	public String getPrice() {
 		return price;
 	}
-	
+
 	public void setPrice(String price) {
 		this.price = price;
 	}
-	
+
 	public Integer getUserId() {
 		return userId;
 	}
-	
+
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
-	
+
 	public String getUserCnName() {
 		return userCnName;
 	}
-	
+
 	public void setUserCnName(String userCnName) {
 		this.userCnName = userCnName;
 	}
-	
+
 	public Integer getStatus() {
 		return status;
 	}
-	
+
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	
+
 	public String getHandleTime() {
 		return handleTime;
 	}
-	
+
 	public void setHandleTime(String handleTime) {
 		this.handleTime = handleTime;
 	}
-	
+
 	public String getNickName() {
 		return nickName;
 	}
-	
+
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
-	
+
 	public Integer getRenovation() {
 		return renovation;
 	}
-	
+
 	public void setRenovation(Integer renovation) {
 		this.renovation = renovation;
 	}
-	
+
 	public String getPhone() {
 		return phone;
 	}
-	
+
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
+
 	public Integer getIsDelete() {
 		return isDelete;
 	}
-	
+
 	public void setIsDelete(Integer isDelete) {
 		this.isDelete = isDelete;
 	}
-	
+
 	public Integer getBroadband() {
 		return broadband;
 	}
-	
+
 	public void setBroadband(Integer broadband) {
 		this.broadband = broadband;
 	}
-	
+
 	public Integer getWashingMachine() {
 		return washingMachine;
 	}
-	
+
 	public void setWashingMachine(Integer washingMachine) {
 		this.washingMachine = washingMachine;
 	}
-	
+
 	public Integer getHousehold() {
 		return household;
 	}
-	
+
 	public void setHousehold(Integer household) {
 		this.household = household;
 	}
-	
+
 	public Integer getFridge() {
 		return fridge;
 	}
-	
+
 	public void setFridge(Integer fridge) {
 		this.fridge = fridge;
 	}
-	
+
+	public Integer getEntrustType() {
+		return entrustType;
+	}
+
+	public void setEntrustType(Integer entrustType) {
+		this.entrustType = entrustType;
+	}
+
+	public String getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(String cityId) {
+		this.cityId = cityId;
+	}
+
+	public String getCityName() {
+		return cityName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
+	public String getAreaId() {
+		return areaId;
+	}
+
+	public void setAreaId(String areaId) {
+		this.areaId = areaId;
+	}
+
 	@Override
 	public String toString() {
-		final StringBuffer sb = new StringBuffer("Entrust{");
+		 final StringBuffer sb=new StringBuffer("Entrust{");
 		if (id != null) {
 			sb.append(", \"id\":\"").append(id).append("\"");
 		}
@@ -342,8 +361,8 @@ public class Entrust {
 		if (entrustTime != null) {
 			sb.append(", \"entrustTime\":\"").append(entrustTime).append("\"");
 		}
-		if (area != null) {
-			sb.append(", \"area\":\"").append(area).append("\"");
+		if (areaName != null) {
+			sb.append(", \"areaName\":\"").append(areaName).append("\"");
 		}
 		if (communityName != null) {
 			sb.append(", \"communityName\":\"").append(communityName).append("\"");
@@ -395,6 +414,18 @@ public class Entrust {
 		}
 		if (fridge != null) {
 			sb.append(", \"fridge\":\"").append(fridge).append("\"");
+		}
+		if (entrustType != null) {
+			sb.append(", \"entrustType\":\"").append(entrustType).append("\"");
+		}
+		if (cityId != null) {
+			sb.append(", \"cityId\":\"").append(cityId).append("\"");
+		}
+		if (cityName != null) {
+			sb.append(", \"cityName\":\"").append(cityName).append("\"");
+		}
+		if (areaId != null) {
+			sb.append(", \"areaId\":\"").append(areaId).append("\"");
 		}
 		return sb.toString();
 	}

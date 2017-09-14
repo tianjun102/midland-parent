@@ -3,7 +3,7 @@ package com.midland.web.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.Paginator;
-import com.midland.web.controller.base.BaseController;
+import com.midland.base.BaseFilter;
 import com.midland.web.enums.ContextEnums;
 import com.midland.web.model.Area;
 import com.midland.web.model.Banner;
@@ -26,7 +26,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/setting")
-public class SettingContorller extends BaseController{
+public class SettingContorller extends BaseFilter {
 @Autowired
 private SettingService settingService;
     // 进入热门关注首页面

@@ -11,7 +11,7 @@
 		<result column="house_type" property="houseType" jdbcType="INTEGER" />
 		<result column="sell_rent" property="sellRent" jdbcType="INTEGER" />
 		<result column="appointment_time" property="appointmentTime" jdbcType="TIMESTAMP" />
-		<result column="area" property="area" jdbcType="VARCHAR" />
+		<result column="area_name" property="areaName" jdbcType="VARCHAR" />
 		<result column="community_name" property="communityName" jdbcType="VARCHAR" />
 		<result column="address" property="address" jdbcType="VARCHAR" />
 		<result column="layout" property="layout" jdbcType="VARCHAR" />
@@ -24,10 +24,13 @@
 		<result column="handle_time" property="handleTime" jdbcType="TIMESTAMP" />
 		<result column="decoration" property="decoration" jdbcType="TINYINT" />
 		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+		<result column="city_id" property="cityId" jdbcType="VARCHAR" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+		<result column="area_id" property="areaId" jdbcType="INTEGER" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,appoint_sn,source,nick_name,phone,house_type,sell_rent,appointment_time,area,community_name,address,layout,measure,price,entrust_time,user_id,user_cn_name,status,handle_time,decoration,is_delete
+		id,appoint_sn,source,nick_name,phone,house_type,sell_rent,appointment_time,area_name,community_name,address,layout,measure,price,entrust_time,user_id,user_cn_name,status,handle_time,decoration,is_delete,city_id,city_name,area_id
 	</sql>
 
 	<select id="selectAppointmentById" resultMap="BaseResultMap">
@@ -80,8 +83,8 @@
 			<if test="appointmentTime != null">
 				appointment_time,
 			</if>
-			<if test="area != null">
-				area,
+			<if test="areaName != null">
+				area_name,
 			</if>
 			<if test="communityName != null">
 				community_name,
@@ -119,6 +122,15 @@
 			<if test="isDelete != null">
 				is_delete,
 			</if>
+			<if test="cityId != null">
+				city_id,
+			</if>
+			<if test="cityName != null">
+				city_name,
+			</if>
+			<if test="areaId != null">
+				area_id,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -129,7 +141,7 @@
 				#{source,jdbcType=INTEGER},
 			</if>
 			<if test="nickName != null">
-				#{nickName,jdbcType=INTEGER},
+				#{nickName,jdbcType=VARCHAR},
 			</if>
 			<if test="phone != null">
 				#{phone,jdbcType=VARCHAR},
@@ -143,8 +155,8 @@
 			<if test="appointmentTime != null">
 				#{appointmentTime,jdbcType=TIMESTAMP},
 			</if>
-			<if test="area != null">
-				#{area,jdbcType=VARCHAR},
+			<if test="areaName != null">
+				#{areaName,jdbcType=VARCHAR},
 			</if>
 			<if test="communityName != null">
 				#{communityName,jdbcType=VARCHAR},
@@ -182,6 +194,15 @@
 			<if test="isDelete != null">
 				#{isDelete,jdbcType=INTEGER},
 			</if>
+			<if test="cityId != null">
+				#{cityId,jdbcType=VARCHAR},
+			</if>
+			<if test="cityName != null">
+				#{cityName,jdbcType=VARCHAR},
+			</if>
+			<if test="areaId != null">
+				#{areaId,jdbcType=INTEGER},
+			</if>
 		</trim>
 	</insert>
 
@@ -193,7 +214,7 @@
 			source= #{source,jdbcType=INTEGER},
 		</if>
 		<if test="nickName != null">
-			nick_name= #{nickName,jdbcType=INTEGER},
+			nick_name= #{nickName,jdbcType=VARCHAR},
 		</if>
 		<if test="phone != null">
 			phone= #{phone,jdbcType=VARCHAR},
@@ -207,8 +228,8 @@
 		<if test="appointmentTime != null">
 			appointment_time= #{appointmentTime,jdbcType=TIMESTAMP},
 		</if>
-		<if test="area != null">
-			area= #{area,jdbcType=VARCHAR},
+		<if test="areaName != null">
+			area_name= #{areaName,jdbcType=VARCHAR},
 		</if>
 		<if test="communityName != null">
 			community_name= #{communityName,jdbcType=VARCHAR},
@@ -246,6 +267,15 @@
 		<if test="isDelete != null">
 			is_delete= #{isDelete,jdbcType=INTEGER},
 		</if>
+		<if test="cityId != null">
+			city_id= #{cityId,jdbcType=VARCHAR},
+		</if>
+		<if test="cityName != null">
+			city_name= #{cityName,jdbcType=VARCHAR},
+		</if>
+		<if test="areaId != null">
+			area_id= #{areaId,jdbcType=INTEGER},
+		</if>
 	</sql>
 
 	<sql id="select_option">
@@ -259,7 +289,7 @@
 			 and source= #{source,jdbcType=INTEGER}
 		</if>
 		<if test="nickName != null">
-			 and nick_name= #{nickName,jdbcType=INTEGER}
+			 and nick_name= #{nickName,jdbcType=VARCHAR}
 		</if>
 		<if test="phone != null">
 			 and phone= #{phone,jdbcType=VARCHAR}
@@ -273,8 +303,8 @@
 		<if test="appointmentTime != null">
 			 and appointment_time= #{appointmentTime,jdbcType=TIMESTAMP}
 		</if>
-		<if test="area != null">
-			 and area= #{area,jdbcType=VARCHAR}
+		<if test="areaName != null">
+			 and area_name= #{areaName,jdbcType=VARCHAR}
 		</if>
 		<if test="communityName != null">
 			 and community_name= #{communityName,jdbcType=VARCHAR}
@@ -311,6 +341,15 @@
 		</if>
 		<if test="isDelete != null">
 			 and is_delete= #{isDelete,jdbcType=INTEGER}
+		</if>
+		<if test="cityId != null">
+			 and city_id= #{cityId,jdbcType=VARCHAR}
+		</if>
+		<if test="cityName != null">
+			 and city_name= #{cityName,jdbcType=VARCHAR}
+		</if>
+		<if test="areaId != null">
+			 and area_id= #{areaId,jdbcType=INTEGER}
 		</if>
 	</sql>
 

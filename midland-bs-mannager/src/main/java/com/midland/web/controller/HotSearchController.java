@@ -2,7 +2,7 @@ package com.midland.web.controller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
-import com.midland.web.controller.base.BaseController;
+import com.midland.base.BaseFilter;
 import com.midland.web.model.Area;
 import com.midland.web.model.HotSearch;
 import com.midland.web.model.Information;
@@ -26,7 +26,7 @@ import java.util.Map;
 @Controller
 @SuppressWarnings("all")
 @RequestMapping("/hotSearch/")
-public class HotSearchController extends BaseController  {
+public class HotSearchController extends BaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(HotSearchController.class);
 	@Autowired

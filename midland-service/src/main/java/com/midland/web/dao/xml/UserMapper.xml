@@ -24,6 +24,10 @@
         <result column="idcart_img1" property="idcartImg1" jdbcType="VARCHAR"/>
         <result column="audit_name" property="auditName" jdbcType="VARCHAR"/>
         <result column="audit_remark" property="auditRemark" jdbcType="VARCHAR"/>
+        <result column="audit_name" property="auditName" jdbcType="VARCHAR"/>
+        <result column="audit_remark" property="auditRemark" jdbcType="VARCHAR"/>
+        <result column="city_id" property="cityId" jdbcType="VARCHAR" />
+        <result column="city_name" property="cityName" jdbcType="VARCHAR" />
     </resultMap>
     <resultMap id="UserRoleResultMap" type="com.midland.web.model.user.UserRole">
         <id column="id" property="id" jdbcType="BIGINT"/>
@@ -35,7 +39,7 @@
     <sql id="Base_Column_List">
     id, username, user_cn_name, password, user_type, state, email, phone, create_time,
     create_by, modify_time, head_img, source, audit_status, audit_time, is_black, black_remark,
-    identification, idcart_img, idcart_img1, audit_name, audit_remark
+    identification, idcart_img, idcart_img1, audit_name, audit_remark,city_id,city_name
   </sql>
 
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.midland.web.model.user.User">
@@ -129,6 +133,12 @@
             <if test="auditRemark != null" >
                 audit_remark,
             </if>
+            <if test="cityId != null" >
+                city_id,
+            </if>
+            <if test="cityName != null" >
+                city_name,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
             <if test="id != null" >
@@ -196,6 +206,12 @@
             </if>
             <if test="auditRemark != null" >
                 #{auditRemark,jdbcType=VARCHAR},
+            </if>
+            <if test="cityId != null" >
+                #{cityId,jdbcType=VARCHAR},
+            </if>
+            <if test="cityName != null" >
+                #{cityName,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -383,7 +399,12 @@
         <if test="auditRemark != null">
             AND audit_remark = #{auditRemark,jdbcType=VARCHAR}
         </if>
-
+        <if test="cityId != null">
+            AND city_id = #{cityId,jdbcType=VARCHAR}
+        </if>
+        <if test="cityName != null">
+            AND city_name = #{cityName,jdbcType=VARCHAR}
+        </if>
 
     </sql>
 
@@ -453,7 +474,12 @@
         <if test="auditRemark != null">
             audit_remark = #{auditRemark,jdbcType=VARCHAR},
         </if>
-
+        <if test="cityId != null">
+            city_id = #{cityId,jdbcType=VARCHAR},
+        </if>
+        <if test="cityName != null">
+            city_name = #{cityName,jdbcType=VARCHAR},
+        </if>
 
     </sql>
 

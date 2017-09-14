@@ -2,7 +2,7 @@ package com.midland.web.controller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
-import com.midland.web.controller.base.BaseController;
+import com.midland.base.BaseFilter;
 import com.midland.web.model.Area;
 import com.midland.web.model.Menu;
 import com.midland.web.service.JdbcService;
@@ -29,7 +29,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/menu")
-public class MenuController extends BaseController{
+public class MenuController extends BaseFilter{
 	private final Logger logger = LoggerFactory.getLogger(MenuController.class);
 	@Autowired
 	private MenuService menuServiceImpl;

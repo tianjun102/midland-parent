@@ -2,7 +2,7 @@ package com.midland.web.controller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
-import com.midland.web.controller.base.BaseController;
+import com.midland.base.BaseFilter;
 import com.midland.web.model.Area;
 import com.midland.web.model.Category;
 import com.midland.web.model.Information;
@@ -28,7 +28,7 @@ import java.util.Map;
 @Controller
 @SuppressWarnings("all")
 @RequestMapping("/information/")
-public class InformationController extends BaseController  {
+public class InformationController extends BaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(InformationController.class);
 	@Autowired

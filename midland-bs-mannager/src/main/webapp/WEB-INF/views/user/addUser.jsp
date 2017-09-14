@@ -50,7 +50,7 @@
     <form action="" method="post" id="addFrom">
         <ul class="userinfo row">
             <li><span>用户名：</span><input style="width:264px;" type="text" name="username" id="username"
-                                        disabled="disabled" value="${user.username}" onblur="checkUserName();"
+                                        value="${user.username}" onblur="checkUserName();"
                                         maxlength="50"/><span class="_star">*</span></li>
             <li><span>用户名称：</span><input style="width:264px;" type="text" name="userCnName" id="userCnName"
                                          value="${user.userCnName}" maxlength="50"/><span class="_star">*</span></li>
@@ -62,6 +62,7 @@
                     <option value="1">微商</option>
                 </select>
             </li>
+            <%@include file="../layout/area.jsp" %>
             <li><span>手机号码：</span><input style="width:264px;" type="text" name="phone" id="phone" value="${user.phone}"
                                          onblur="checkPhone();"/><span class="_star">*</span></li>
             <li><span>邮箱：</span><input style="width:264px;" type="text" name="email" id="email" value="${user.email}"
@@ -110,10 +111,7 @@
                 url: "${ctx}/rest/user/addUser",
                 async: false, // 此处必须同步
                 dataType: "json",
-                data: {
-                    "username": username, "userCnName": userCnName, "userType": userType, source: source,
-                    "phone": phone, "email": email, "userRoles": userRoles
-                },
+                data: $('#addFrom').serialize(),
                 success: function (data) {
                     if (data.flag == 1) {
                         layer.msg("新增成功！！！", {icon: 1});

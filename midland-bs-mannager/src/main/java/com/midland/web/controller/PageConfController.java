@@ -2,7 +2,7 @@ package com.midland.web.controller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
-import com.midland.web.controller.base.BaseController;
+import com.midland.base.BaseFilter;
 import com.midland.web.model.Area;
 import com.midland.web.model.PageConf;
 import com.midland.web.service.PageConfService;
@@ -24,7 +24,7 @@ import java.util.Map;
 @Controller
 @SuppressWarnings("all")
 @RequestMapping("/pageConf/")
-public class PageConfController extends BaseController  {
+public class PageConfController extends BaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(PageConfController.class);
 	@Autowired

@@ -6,6 +6,7 @@
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="icon_img" property="iconImg" jdbcType="VARCHAR" />
 		<result column="city_id" property="cityId" jdbcType="VARCHAR" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
 		<result column="menu_name" property="menuName" jdbcType="VARCHAR" />
 		<result column="click_num" property="clickNum" jdbcType="INTEGER" />
 		<result column="order_by" property="orderBy" jdbcType="INTEGER" />
@@ -15,7 +16,7 @@
 		<result column="parent_id" property="parentId" jdbcType="INTEGER" />
 		<result column="source" property="source" jdbcType="INTEGER" />
 		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
-		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+
 	</resultMap>
 
 	<sql id="Base_Column_List">
