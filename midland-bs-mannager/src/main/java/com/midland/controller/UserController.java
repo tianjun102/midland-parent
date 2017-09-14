@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
-import com.midland.core.util.AppSetting;
+import com.midland.config.MidlandConfig;
 import com.midland.core.util.ApplicationUtils;
 import com.midland.core.util.MD5Util;
 import com.midland.core.util.SmsUtil;
@@ -59,6 +59,7 @@ import java.util.concurrent.TimeUnit;
  * @since 2016年5月28日 下午3:54:00
  **/
 @Controller
+@SuppressWarnings("all")
 @RequestMapping(value = "/user")
 public class UserController extends BaseFilter {
 
@@ -76,7 +77,9 @@ public class UserController extends BaseFilter {
     @Resource
 	private RedisTemplate<String, Object> redisTemplate;
 
-    private String loginurl = AppSetting.getAppSetting("loginurl");
+    @Autowired
+    private MidlandConfig midlandConfig;
+    
     /**
      * 用户登录
      * 
@@ -116,7 +119,7 @@ public class UserController extends BaseFilter {
             }
             if (result.hasErrors()) {
                 //model.addAttribute("error", "参数错误！");
-                return "redirect:"+loginurl+"?errorCode=2";
+                return "redirect:"+midlandConfig.getLoginUrl()+"?errorCode=2";
             }
             UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
             if(userType!=null&&userType.equals("1")){
@@ -135,7 +138,7 @@ public class UserController extends BaseFilter {
             //model.addAttribute("error", "用户名或密码错误!");
         	
         	e.printStackTrace();
-            return "redirect:"+loginurl+"?errorCode=1";
+            return "redirect:"+midlandConfig.getLoginUrl()+"?errorCode=1";
         }
         if(user.getPassword().equals("92925488b28ab12584ac8fcaa8a27a0f497b2c62940c8f4fbc8ef19ebc87c43e")){
         	return "redirect:/rest/user/forcedModifyPassword";
@@ -155,7 +158,7 @@ public class UserController extends BaseFilter {
         // 登出操作
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
-        return "redirect:"+loginurl;
+        return "redirect:"+midlandConfig.getLoginUrl();
     }
     
     /**
