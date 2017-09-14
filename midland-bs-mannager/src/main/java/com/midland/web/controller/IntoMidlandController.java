@@ -20,6 +20,9 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @SuppressWarnings("all")
 @RequestMapping("/intoMidland/")
+/**
+ * 走进美联控制层
+ */
 public class IntoMidlandController extends BaseController  {
 
 	private Logger log = LoggerFactory.getLogger(IntoMidlandController.class);
@@ -30,7 +33,14 @@ public class IntoMidlandController extends BaseController  {
 	 * 
 	 **/
 	@RequestMapping("index")
-	public String intoMidlandIndex(IntoMidland intoMidland,Model model) throws Exception {
+	public String intoMidlandIndex(IntoMidland intoMidland,Model model,String flag) throws Exception {
+
+		List<IntoMidland> intoMidlandList = intoMidlandServiceImpl.findIntoMidlandList(intoMidland);
+		if(intoMidlandList!=null&&intoMidlandList.size()>0){
+			intoMidland = intoMidlandList.get(0);
+		}
+		model.addAttribute("flag",flag);
+		model.addAttribute("items",intoMidland);
 		return "intoMidland/intoMidlandIndex";
 	}
 
@@ -51,7 +61,11 @@ public class IntoMidlandController extends BaseController  {
 		Map<String,Object> map = new HashMap<>();
 		try {
 			log.info("addIntoMidland {}",intoMidland);
-			intoMidlandServiceImpl.insertIntoMidland(intoMidland);
+			if(intoMidland.getId()!=null){
+				intoMidlandServiceImpl.updateIntoMidlandById(intoMidland);
+			}else {
+				intoMidlandServiceImpl.insertIntoMidland(intoMidland);
+			}
 			map.put("state",0);
 		} catch(Exception e) {
 			log.error("addIntoMidland异常 {}",intoMidland,e);

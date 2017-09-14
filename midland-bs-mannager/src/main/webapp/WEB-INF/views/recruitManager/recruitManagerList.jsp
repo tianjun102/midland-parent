@@ -14,21 +14,13 @@
     <table class="table table-bordered table-add">
         <thead>
             <tr>
-				<th style="width: 8%">type</th>
-				<th style="width: 8%">post</th>
-				<th style="width: 8%">recruitersNum</th>
-				<th style="width: 8%">education</th>
-				<th style="width: 8%">workLift</th>
-				<th style="width: 8%">startTime</th>
-				<th style="width: 8%">endTime</th>
-				<th style="width: 8%">releaseStatus</th>
-				<th style="width: 8%">postDesc</th>
-				<th style="width: 8%">jobClaim</th>
-				<th style="width: 8%">cityId</th>
-				<th style="width: 8%">cityName</th>
-				<th style="width: 8%">releaseTime</th>
-				<th style="width: 8%">email</th>
-                <th style="width: 10%">操作</th>
+                <th style="width: 8%">编号</th>
+				<th style="width: 8%">招聘类别</th>
+				<th style="width: 8%">工作地点</th>
+				<th style="width: 8%">招聘岗位</th>
+				<th style="width: 8%">发布状态</th>
+				<th style="width: 10%">发布时间</th>
+                <th style="width: 15%">操作</th>
             </tr>
         </thead>
         <tbody>
@@ -37,20 +29,12 @@
                 <c:forEach items="${requestScope.items }" var="item" varStatus="xh">
                     <tr>
 						<input type="hidden" id="id" value="${item.id}"/>
+                        <td>${xh.count}</td>
 						<td>${item.type}</td>
+                        <td>${item.cityName}</td>
 						<td>${item.post}</td>
-						<td>${item.recruitersNum}</td>
-						<td>${item.education}</td>
-						<td>${item.workLift}</td>
-						<td>${item.startTime}</td>
-						<td>${item.endTime}</td>
 						<td>${item.releaseStatus}</td>
-						<td>${item.postDesc}</td>
-						<td>${item.jobClaim}</td>
-						<td>${item.cityId}</td>
-						<td>${item.cityName}</td>
-						<td>${item.releaseTime}</td>
-						<td>${item.email}</td>
+                        <td>${item.releaseTime}</td>
 						<td>
                             <a target="contentF" onclick="to_edit(${item.id })">编辑</a>
                             <a target="contentF" onclick="delete1(${item.id })">删除</a>

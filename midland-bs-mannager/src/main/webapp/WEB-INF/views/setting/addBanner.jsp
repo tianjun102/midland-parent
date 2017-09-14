@@ -113,7 +113,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				<li id="picLike"><span>图片链接：</span>
 				<input id="bannerId" name="bannerLinkurl" maxlength="255" type="text" value=""> 
 				</li>
-				<li id="textArea" style="display: none;"><span>页面内容：</span><textarea style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;" name="detail" id="myEditor" rows="" cols=""></textarea></li>
+				<li id="textArea" style="display: none;"><span>页面内容：</span><textarea style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;float: right" name="detail" id="myEditor" rows="" cols=""></textarea></li>
 				<div id="prodInfo" style="display: none;" class = "table-responsive m40">
 					<table class="table table-bordered table-add">
 					<thead>
