@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -29,6 +28,7 @@ import java.util.Map.Entry;
  * @author andy
  * @version 2.2
  */
+@SuppressWarnings("all")
 public class HttpUtils {
 
 	private static final String DEFAULT_CHARSET = "UTF-8";
@@ -71,7 +71,7 @@ public class HttpUtils {
 
 		String body = null;
 		CloseableHttpResponse response = null;
-		try {
+		try {;
 			httpClient = HttpClients.custom()
 					.setDefaultRequestConfig(REQUEST_CONFIG)
 					.build();
@@ -138,6 +138,7 @@ public class HttpUtils {
 	 * @return 请求失败返回null
 	 */
 	public static String post(String url, Map<String, String> params,String charset) {
+		
 		return _post(url, params,charset);
 	}
 	
@@ -145,7 +146,7 @@ public class HttpUtils {
 		CloseableHttpClient httpClient = null;
 		HttpPost httpPost = new HttpPost(url);
 		List<NameValuePair> nameValuePairs = new ArrayList<>();
-		if (params != null && !params.isEmpty()) {
+		if (params != null && !params.isEmpty()) {;
 			for (Entry<String, String> entry : params.entrySet()) {
 				nameValuePairs.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
 			}
@@ -154,6 +155,7 @@ public class HttpUtils {
 		String body = null;
 		CloseableHttpResponse response = null;
 		try {
+			;
 			httpClient = HttpClients.custom()
 					.setDefaultRequestConfig(REQUEST_CONFIG)
 					.build();
@@ -189,6 +191,7 @@ public class HttpUtils {
 	 * @return 请求失败返回null
 	 */
 	public static String post(String url, String s) {
+		
 		return _StringPost(url, s,DEFAULT_CHARSET);
 	}
 	/**
@@ -198,12 +201,14 @@ public class HttpUtils {
 	 * @return 请求失败返回null
 	 */
 	public static String post(String url, String s,String charset) {
+		
 		return _StringPost(url, s,charset);
 	}
 	
 	
 	private static String _StringPost(String url, String s,String charset) {
 		CloseableHttpClient httpClient = null;
+		;
 		HttpPost httpPost = new HttpPost(url);
 		String body = null;
 		CloseableHttpResponse response = null;
@@ -211,6 +216,7 @@ public class HttpUtils {
 			httpClient = HttpClients.custom()
 					.setDefaultRequestConfig(REQUEST_CONFIG)
 					.build();
+			;
 			httpPost.setEntity(new StringEntity(s, charset));
 			response = httpClient.execute(httpPost);
 			body = EntityUtils.toString(response.getEntity(), charset);
@@ -252,25 +258,10 @@ public class HttpUtils {
 	 * @param s 参数xml
 	 * @return 请求失败返回null
 	 */
-	public static String posts(String url, String s) {
+	public static String posts(String url, String s)
+	{
 		return _StringPost(url, s,DEFAULT_CHARSET);
 	}
 	
-	public static void main(String[] args) {
-		Map<String,String> map = new HashMap<String, String>();
-		Map<String,String> map1 = new HashMap<String, String>();
-		Map<String,Map> map2 = new HashMap<String, Map>();
-		Map<String,String> map3 = new HashMap<String, String>();
-		map1.put("idcard", "2721041119850428294227");
-		map1.put("beginDate", "272016-07-0127");
-		map1.put("endDate", "272016-07-3027");
-		map2.put("conditionJson", map1);
-		map3.put("params", map2.toString());
-		
-		
-		map.put("params", "{\"conditionJson\":{\"idcard\":\"2721041119850428294227\",\"beginDate\":\"272016-07-0127\",\"endDate\":\"272016-07-3027\"}}");
-		String a = post("http://218.18.9.171:8181/dingjian/api?dataCenter=dataSource_mldc&apiNumber=104_getDealreportInfoByIdCard",map3);
-		System.out.print(a);
-	}
 
 }
