@@ -1,12 +1,15 @@
-import com.alibaba.fastjson.JSONArray;
 import com.midland.config.MidlandConfig;
-import com.midland.web.model.Appointment;
+import com.midland.web.SmsSender.SmsClient;
+import com.midland.web.SmsSender.SmsModel;
 import com.midland.web.service.AppointmentService;
+import org.jdom.JDOMException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.io.IOException;
 
 /**
  * Created by 'ms.x' on 2017/9/14.
@@ -20,10 +23,21 @@ public class PTest {
 	private AppointmentService appointmentServiceImpl;
 	@Autowired
 	private MidlandConfig midlandConfig;
+	@Autowired
+	private SmsClient smsClient;
 	
 	@Test
 	public void dsfs(){
-		System.out.println(midlandConfig.getLoginUrl());
-		System.out.println("1111111111111111111111111111");
+		SmsModel smsModel = new SmsModel();
+		smsModel.setSendType(1);
+		smsModel.setCont("dsfdf");
+		smsModel.setPhones("13489475845");
+		try {
+			smsClient.execute(smsModel);
+		} catch (JDOMException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
