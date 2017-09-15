@@ -30,13 +30,13 @@
                     <tr>
 						<input type="hidden" id="id" value="${item.id}"/>
                         <td>${xh.count}</td>
-						<td>${item.type}</td>
+						<td><c:if test="${item.type==1}">校招</c:if><c:if test="${item.type==2}">社招</c:if></td>
                         <td>${item.cityName}</td>
 						<td>${item.post}</td>
-						<td>${item.releaseStatus}</td>
+                        <td><c:if test="${item.releaseStatus==0}">已发布</c:if><c:if test="${item.releaseStatus==1}">未发布</c:if></td>
                         <td>${item.releaseTime}</td>
 						<td>
-                            <a target="contentF" onclick="to_edit(${item.id })">编辑</a>
+                            <a target="contentF" href="${ctx}/rest/recruitManager/to_update?id=${item.id}">编辑</a>
                             <a target="contentF" onclick="delete1(${item.id })">删除</a>
                         </td>
                     </tr>

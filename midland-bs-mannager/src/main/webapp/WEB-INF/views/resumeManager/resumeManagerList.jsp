@@ -14,16 +14,13 @@
     <table class="table table-bordered table-add">
         <thead>
             <tr>
-				<th style="width: 8%">deliverer</th>
-				<th style="width: 8%">phone</th>
-				<th style="width: 8%">post</th>
-				<th style="width: 8%">email</th>
-				<th style="width: 8%">addTime</th>
-				<th style="width: 8%">enclosureUrl</th>
-				<th style="width: 8%">cityId</th>
-				<th style="width: 8%">cityName</th>
-				<th style="width: 8%">isDelete</th>
-				<th style="width: 8%">reply</th>
+                <th style="width: 8%">编号</th>
+				<th style="width: 8%">姓名</th>
+				<th style="width: 8%">联系方式</th>
+				<th style="width: 8%">岗位</th>
+				<th style="width: 8%">邮箱</th>
+				<th style="width: 8%">接受时间</th>
+                <th style="width: 8%">工作城市</th>
                 <th style="width: 10%">操作</th>
             </tr>
         </thead>
@@ -33,18 +30,16 @@
                 <c:forEach items="${requestScope.items }" var="item" varStatus="xh">
                     <tr>
 						<input type="hidden" id="id" value="${item.id}"/>
+                        <td>${xh.count}</td>
 						<td>${item.deliverer}</td>
 						<td>${item.phone}</td>
 						<td>${item.post}</td>
 						<td>${item.email}</td>
 						<td>${item.addTime}</td>
-						<td>${item.enclosureUrl}</td>
-						<td>${item.cityId}</td>
-						<td>${item.cityName}</td>
-						<td>${item.isDelete}</td>
-						<td>${item.reply}</td>
+                        <td>${item.cityName}</td>
 						<td>
-                            <a target="contentF" onclick="to_edit(${item.id })">编辑</a>
+                            <a target="contentF" onclick="to_edit(${item.id })">回复</a>
+                            <a target="contentF" href="${ctx}/rest/resumeManager/fileDownload">下载</a>
                             <a target="contentF" onclick="delete1(${item.id })">删除</a>
                         </td>
                     </tr>

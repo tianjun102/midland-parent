@@ -11,8 +11,11 @@
 
 </head>
 <body>
-
-
+<style>
+    .layui-layer{
+        top:260px!important;
+    }
+</style>
 <div class="box">
     <section class = "content">
         <p class = "detail-title">
@@ -107,7 +110,7 @@
         debugger;
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/recruitManager/add",
+            url: "${ctx}/rest/recruitManager/update",
             async: false, // 此处必须同步
             dataType: "json",
             data: data,
@@ -115,10 +118,7 @@
                 if (data.state == 0) {
                     layer.msg("保存成功！！！", {icon: 1});
                     $('#save').removeAttr("onclick");
-                    setTimeout(function () {
-                        parent.location.reload();
-                    }, 1000);
-
+                    setTimeout(function(){window.open("${ctx}/rest/recruitManager/index","contentF");},2000);
                 } else {
                     layer.msg("保存失败！", {icon: 2});
                 }

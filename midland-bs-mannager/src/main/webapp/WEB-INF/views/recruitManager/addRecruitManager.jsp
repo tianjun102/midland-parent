@@ -11,7 +11,11 @@
 
 </head>
 <body>
-
+<style>
+    .layui-layer{
+        top:260px!important;
+    }
+</style>
 
 <div class="box">
     <section class = "content">
@@ -114,10 +118,7 @@
                 if (data.state == 0) {
                     layer.msg("保存成功！！！", {icon: 1});
                     $('#save').removeAttr("onclick");
-                    setTimeout(function () {
-                        parent.location.reload();
-                    }, 1000);
-
+                    setTimeout(function(){window.open("${ctx}/rest/recruitManager/index","contentF");},2000);
                 } else {
                     layer.msg("保存失败！", {icon: 2});
                 }

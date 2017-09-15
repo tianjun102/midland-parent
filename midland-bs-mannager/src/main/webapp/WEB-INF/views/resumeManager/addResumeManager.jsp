@@ -10,6 +10,11 @@
     </script>
 
 </head>
+<style>
+    .layui-layer{
+        top:260px!important;
+    }
+</style>
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/resumeManager/add" method="post" id="dataForm">
@@ -70,9 +75,7 @@
                 if (data.state == 0) {
                     layer.msg("保存成功！！！", {icon: 1});
                     $('#save').removeAttr("onclick");
-                    setTimeout(function () {
-                        parent.location.reload();
-                    }, 1000);
+                    setTimeout(function(){window.open("${ctx}/rest/resumeManager/index","contentF");},2000);
 
                 } else {
                     layer.msg("保存失败！", {icon: 2});
