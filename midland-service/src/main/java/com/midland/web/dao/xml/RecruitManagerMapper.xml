@@ -18,10 +18,11 @@
 		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
 		<result column="release_time" property="releaseTime" jdbcType="VARCHAR" />
 		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,type,post,recruiters_num,education,work_lift,start_time,end_time,release_status,post_desc,job_claim,city_id,city_name,release_time,email
+		id,type,post,recruiters_num,education,work_lift,start_time,end_time,release_status,post_desc,job_claim,city_id,city_name,release_time,email,is_delete
 	</sql>
 
 	<select id="selectRecruitManagerById" resultMap="BaseResultMap">
@@ -95,6 +96,9 @@
 			<if test="email != null">
 				email,
 			</if>
+			<if test="isDelete != null">
+				is_delete,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -139,6 +143,9 @@
 			</if>
 			<if test="email != null">
 				#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="isDelete != null">
+				 #{isDelete,jdbcType=INTEGER}
 			</if>
 		</trim>
 	</insert>
@@ -185,6 +192,9 @@
 		</if>
 		<if test="email != null">
 			email= #{email,jdbcType=VARCHAR},
+		</if>
+		<if test="isDelete != null">
+			is_delete= #{isDelete},
 		</if>
 	</sql>
 
@@ -233,6 +243,9 @@
 		</if>
 		<if test="email != null">
 			 and email= #{email,jdbcType=VARCHAR}
+		</if>
+		<if test="isDelete != null">
+			 and is_delete= #{isDelete}
 		</if>
 	</sql>
 

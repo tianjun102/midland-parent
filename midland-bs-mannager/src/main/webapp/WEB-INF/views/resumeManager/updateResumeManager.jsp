@@ -15,36 +15,11 @@
     <form action="${ctx}/rest/resumeManager/update" method="post" id="dataForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
-            <li><span>deliverer：</span>
-               <input type="text" name="deliverer" id="deliverer" value="${item.deliverer}"/>
-            </li>
-            <li><span>phone：</span>
-               <input type="text" name="phone" id="phone" value="${item.phone}"/>
-            </li>
-            <li><span>post：</span>
-               <input type="text" name="post" id="post" value="${item.post}"/>
-            </li>
-            <li><span>email：</span>
-               <input type="text" name="email" id="email" value="${item.email}"/>
-            </li>
-            <li><span>addTime：</span>
-               <input type="text" name="addTime" id="addTime" value="${item.addTime}"/>
-            </li>
-            <li><span>enclosureUrl：</span>
-               <input type="text" name="enclosureUrl" id="enclosureUrl" value="${item.enclosureUrl}"/>
-            </li>
-            <li><span>cityId：</span>
-               <input type="text" name="cityId" id="cityId" value="${item.cityId}"/>
-            </li>
-            <li><span>cityName：</span>
-               <input type="text" name="cityName" id="cityName" value="${item.cityName}"/>
-            </li>
-            <li><span>isDelete：</span>
-               <input type="text" name="isDelete" id="isDelete" value="${item.isDelete}"/>
-            </li>
-            <li><span>reply：</span>
-               <input type="text" name="reply" id="reply" value="${item.reply}"/>
-            </li>
+            <li><span style = "float:left;">回复类容：</span> <!-- <textarea name="custNote" id="custNote" rows="" cols="" placeholder="备注说明"></textarea> -->
+                <textarea id="reply" name="reply"
+                          style="width: 265px; height: 110px; resize: none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;"
+                          rows="" cols="">${item.reply}</textarea></li>
+            <li>
             <li>
                 <span></span>
                 <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">更新</a>

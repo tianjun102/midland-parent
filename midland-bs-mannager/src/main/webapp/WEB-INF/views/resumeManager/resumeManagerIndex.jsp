@@ -15,7 +15,7 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
-				<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>
+				<span>简历管理</span>
 			</p>
 		<form action="${ctx }/rest/resumeManager/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">

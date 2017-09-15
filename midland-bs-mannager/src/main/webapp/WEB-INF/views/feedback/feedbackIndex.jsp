@@ -15,13 +15,14 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
+				<span>反馈管理列表</span>
 				<%--<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>--%>
 			</p>
 		<form action="${ctx }/rest/feedback/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
 				<li>
-					<span>反馈时间</span><input class="Wdate half" id="time1"
+					<span>反馈时间：</span><input class="Wdate half" id="time1"
 											onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time2\')}'})"
 											name="startTime"/> <em class="gang">-</em><input
 						class="Wdate half"

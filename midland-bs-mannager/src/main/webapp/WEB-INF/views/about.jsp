@@ -18,11 +18,11 @@
 			</p>
 			<dl class="about">
 				<dt>
-					<img src="${ctx}/assets/img/logo1.png"/>
+					<img src="${ctx}/assets/img/logo.png"/>
 				</dt>
 				<dd>美联物业管理平台</dd>
 				<dd>版本 v1.0</dd>
-				<dd>Copyright ©2016-2017开发支持融创 All Rights Reserved.</dd>
+				<dd>Copyright ©2016-2017开发支持科匠 All Rights Reserved.</dd>
 			</dl>
 		</section>
 	</div>

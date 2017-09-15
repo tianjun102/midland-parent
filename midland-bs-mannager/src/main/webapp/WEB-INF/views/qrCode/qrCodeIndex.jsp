@@ -15,6 +15,7 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
+				<span>二维码管理</span>
 				<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>
 			</p>
 		<form action="${ctx }/rest/qrCode/list" method="POST" id="searchForm"

@@ -64,6 +64,8 @@ public class RecruitManager{
 	 **/
 	private String email;
 
+	private int isDelete;
+
 
 	public Integer getId() {
 		return id;
@@ -183,6 +185,15 @@ public class RecruitManager{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+
+	public int getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(int isDelete) {
+		this.isDelete = isDelete;
 	}
 
 	@Override
