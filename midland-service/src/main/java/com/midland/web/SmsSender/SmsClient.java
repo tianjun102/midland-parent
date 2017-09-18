@@ -14,11 +14,12 @@ public class SmsClient {
 	
 	
 	public void SmsClient(SmsModel smsModel) {
-		this.phones=smsModel.getPhones();
+		this.phones = smsModel.getPhones();
 		this.cont = smsModel.getCont();
-		this.sendType=smsModel.getSendType();
-		this.ucCode=smsModel.getUcCode();
+		this.sendType = smsModel.getSendType();
+		this.ucCode = smsModel.getUcCode();
 	}
+	
 	private String url;
 	/**
 	 * 应用id
@@ -29,11 +30,11 @@ public class SmsClient {
 	 */
 	private String customerId;
 	/**
-	 * 	1、通过用户操作 2、非用户操作
+	 * 1、通过用户操作 2、非用户操作
 	 */
 	private Integer sendType;
 	/**
-	 * 	用户名编号
+	 * 用户名编号
 	 */
 	private String userId;
 	/**
@@ -41,7 +42,7 @@ public class SmsClient {
 	 */
 	private String webKey;
 	/**
-	 * 	会话标识，非用户操作时，必填
+	 * 会话标识，非用户操作时，必填
 	 */
 	private String sessionId;
 	/**
@@ -49,11 +50,11 @@ public class SmsClient {
 	 */
 	private String phones;
 	/**
-	 * 	短信内容（base64编码）
+	 * 短信内容（base64编码）
 	 */
 	private String cont;
 	/**
-	 * 	产品的类别
+	 * 产品的类别
 	 */
 	private Integer type;
 	/**
@@ -62,16 +63,15 @@ public class SmsClient {
 	private String ucCode;
 	
 	
-	private String charset ="utf-8";
+	private String charset = "utf-8";
 	
 	
-	
-	private String postSend(String strUrl,String param){
+	private String postSend(String strUrl, String param) {
 		
 		String result = null;
 		try {
-			result= HttpUtils.post(strUrl,param,this.charset);
-		}catch (Exception e){
+			result = HttpUtils.smsPost(strUrl, param, this.charset);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return result;
@@ -80,61 +80,38 @@ public class SmsClient {
 	public SmsResult execute(SmsModel smsModel) throws JDOMException, IOException {
 		String str = _execute(smsModel);
 		Map map = XMLUtil.doXMLParse(str);
-		String resultCode = (String)map.get("resultCode");
-		String batchId = (String)map.get("batchId");
-		String desc = (String)map.get("desc");
-		return new SmsResult(resultCode,batchId,desc);
+		String resultCode = (String) map.get("resultCode");
+		String batchId = (String) map.get("batchId");
+		String desc = (String) map.get("desc");
+		return new SmsResult(resultCode, batchId, desc);
 	}
-	public String _execute(SmsModel smsModel){
+	
+	public String _execute(SmsModel smsModel) {
 		SmsClient(smsModel);
 		return postSend(this.url, toString());
 	}
 	
-	public String toString(){
-		StringBuffer sb = new StringBuffer("temp=");
-		if (bizAppId != null){
-			sb.append("&bizAppId=").append(bizAppId);
-		}
-		if (customerId != null){
-			sb.append("&customerId=").append(customerId);
-			
-		}
-		if (sendType != null){
-			sb.append("&sendType=").append(sendType);
-			
-		}
-		if (userId != null){
-			sb.append("&userId=").append(userId);
-			
-		}
-		if (webKey != null){
-			sb.append("&webKey=").append(webKey);
-		}
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append("webKey=").append(webKey);
+		sb.append("&sessionId=").append(sessionId);
 		
-		if (phones != null){
-			sb.append("&phones=").append(phones);
-			
-		}
-		if (sessionId != null){
-			sb.append("&sessionId=").append(sessionId);
-			
-		}
-		if (cont != null){
-			sb.append("&cont=").append(cont);
-			
-		}
-		if (type != null){
-			sb.append("&type=").append(type);
-			
-		}
-		if (ucCode != null){
-			sb.append("&ucCode=").append(ucCode);
-			
-		}
-		if (charset != null){
-			sb.append("&charset=").append(charset);
-			
-		}
+		sb.append("&bizAppId=").append(bizAppId);
+		sb.append("&customerId=").append(customerId);
+		
+		sb.append("&sendType=").append(sendType);
+		
+		sb.append("&userId=").append(userId);
+		
+		
+		sb.append("&phones=").append(phones);
+		
+		sb.append("&cont=").append(cont);
+		
+		sb.append("&type=").append(type);
+		
+		sb.append("&ucCode=").append(ucCode);
+		sb.append("&charset=").append(charset);
 		
 		
 		return sb.toString();

@@ -22,7 +22,7 @@ public class XMLUtil {
 	 */
 	public static Map doXMLParse(String strxml) throws JDOMException, IOException {
 		strxml = strxml.replaceFirst("encoding=\".*\"", "encoding=\"UTF-8\"");
-
+		;
 		if(null == strxml || "".equals(strxml)) {
 			return null;
 		}
@@ -33,7 +33,7 @@ public class XMLUtil {
 		Element root = doc.getRootElement();
 		List list = root.getChildren();
 		Iterator it = list.iterator();
-		while(it.hasNext()) {
+		while(it.hasNext()) {;
 			Element e = (Element) it.next();
 			String k = e.getName();
 			String v = "";

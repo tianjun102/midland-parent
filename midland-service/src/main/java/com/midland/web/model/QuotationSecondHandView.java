@@ -2,6 +2,43 @@ package com.midland.web.model;
 
 public class QuotationSecondHandView {
 	
+	
+	
+	
+	/**
+	 * 行情表，主键
+	 **/
+	private Integer id;
+
+	/**
+	 * 片区
+	 **/
+	private String sliceId;
+
+	/**
+	 * 环比
+	 **/
+	private String ringRatio;
+	/**
+	 * 更新时间
+	 **/
+	private String updateTime;
+	/**
+	 * 0未删除，1删除
+	 **/
+	private Integer isDelete;
+	/**
+	 * 城市名称
+	 **/
+	private String cityName;
+	/**
+	 * 区域名称
+	 **/
+	private String areaName;
+	/**
+	 * 片区名称
+	 **/
+	private String sliceName;
 	/**
 	 * 数据时间
 	 **/
@@ -122,6 +159,70 @@ public class QuotationSecondHandView {
 	
 	public void setDealAcreage(String dealAcreage) {
 		this.dealAcreage = dealAcreage;
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
+	public String getSliceId() {
+		return sliceId;
+	}
+	
+	public void setSliceId(String sliceId) {
+		this.sliceId = sliceId;
+	}
+	
+	public String getRingRatio() {
+		return ringRatio;
+	}
+	
+	public void setRingRatio(String ringRatio) {
+		this.ringRatio = ringRatio;
+	}
+	
+	public String getUpdateTime() {
+		return updateTime;
+	}
+	
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
+	}
+	
+	public Integer getIsDelete() {
+		return isDelete;
+	}
+	
+	public void setIsDelete(Integer isDelete) {
+		this.isDelete = isDelete;
+	}
+	
+	public String getCityName() {
+		return cityName;
+	}
+	
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+	
+	public String getAreaName() {
+		return areaName;
+	}
+	
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
+	}
+	
+	public String getSliceName() {
+		return sliceName;
+	}
+	
+	public void setSliceName(String sliceName) {
+		this.sliceName = sliceName;
 	}
 	
 	@Override

@@ -19,6 +19,7 @@
         <th style="width: 8%">类型</th>
         <th style="width: 8%">成交套数</th>
         <th style="width: 8%">成交面积</th>
+        <th style="width: 8%">环比</th>
         <th style="width: 8%">数据时间</th>
         <th style="width: 8%">更新时间</th>
         <th style="width: 10%">操作</th>
@@ -37,6 +38,17 @@
                     </c:forEach></td>
                     <td>${item.dealNum}</td>
                     <td>${item.dealAcreage}</td>
+                    <%--<td>--%>
+                        <%--<c:choose>--%>
+                            <%--<c:when test="${item.ringRatio<0}">--%>
+                                <%--${item.ringRatio < 0 ? -item.ringRatio:item.ringRatio}--%>
+                            <%--</c:when>--%>
+                            <%--<c:otherwise>--%>
+
+                            <%--</c:otherwise>--%>
+                        <%--</c:choose>--%>
+                        <%--</td>--%>
+                    <td>${item.ringRatio}</td>
                     <td>${item.dataTime}</td>
                     <td>${item.updateTime}</td>
                     <td>

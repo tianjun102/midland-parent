@@ -3,6 +3,13 @@
 <mapper namespace="com.midland.web.dao.QuotationSecondHandViewMapper">
 
     <resultMap id="BaseResultMap" type="com.midland.web.model.QuotationSecondHandView">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="ring_ratio" property="ringRatio" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="is_delete" property="isDelete" jdbcType="INTEGER"/>
+        <result column="city_name" property="cityName" jdbcType="VARCHAR"/>
+        <result column="area_name" property="areaName" jdbcType="VARCHAR"/>
+        <result column="slice_name" property="sliceName" jdbcType="VARCHAR"/>
         <result column="data_time" property="dataTime" jdbcType="TIMESTAMP"/>
         <result column="type" property="type" jdbcType="INTEGER"/>
         <result column="city_id" property="cityId" jdbcType="VARCHAR"/>

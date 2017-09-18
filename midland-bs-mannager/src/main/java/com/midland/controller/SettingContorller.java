@@ -4,14 +4,19 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
+import com.midland.config.MidlandConfig;
+import com.midland.core.util.HttpUtils;
 import com.midland.web.enums.ContextEnums;
 import com.midland.web.model.Area;
 import com.midland.web.model.Banner;
 import com.midland.web.model.LinkUrlManager;
 import com.midland.web.model.Popular;
+import com.midland.web.model.remote.Agent;
 import com.midland.web.service.SettingService;
 import com.midland.web.util.MidlandHelper;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,8 +32,12 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "/setting")
 public class SettingContorller extends BaseFilter {
+    
+    private final Logger logger= LoggerFactory.getLogger(SettingContorller.class);
 @Autowired
 private SettingService settingService;
+@Autowired
+private MidlandConfig midlandConfig;
     // 进入热门关注首页面
     @RequestMapping(value = "showPopularIndex", method = { RequestMethod.GET, RequestMethod.POST })
     public String showPopularIndex(Model model, HttpServletRequest request) {
@@ -371,21 +380,8 @@ private SettingService settingService;
         }
         return map;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
+    
 
 
 }

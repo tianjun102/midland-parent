@@ -4,10 +4,13 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
+import com.midland.config.MidlandConfig;
+import com.midland.core.util.HttpUtils;
 import com.midland.web.enums.ContextEnums;
 import com.midland.web.model.AppointLog;
 import com.midland.web.model.Appointment;
 import com.midland.web.model.ExportModel;
+import com.midland.web.model.remote.Agent;
 import com.midland.web.model.user.User;
 import com.midland.web.service.AppointLogService;
 import com.midland.web.service.AppointmentService;
@@ -46,6 +49,8 @@ public class AppointmentController extends BaseFilter{
 	private AppointLogService appointLogServiceImpl;
 	@Autowired
 	private DingJiangService dingJiangServiceImpl;
+	@Autowired
+	private MidlandConfig midlandConfig;
 	
 	@Autowired
 	private UserService userServiceImpl;
@@ -77,7 +82,10 @@ public class AppointmentController extends BaseFilter{
 	public Object deleteByPrimaryKey(Integer id) {
 		Map map = new HashMap<>();
 		try {
-			appointmentServiceImpl.deleteAppointmentById(id);
+			Appointment appointment = new Appointment();
+			appointment.setId(id);
+			appointment.setIsDelete(1);
+			appointmentServiceImpl.updateAppointmentById(appointment);
 			map.put("state",0);
 		} catch (Exception e) {
 			logger.error("deleteByPrimaryKey : id={}",id,e);
@@ -206,13 +214,26 @@ public class AppointmentController extends BaseFilter{
 	 * @return
 	 */
 	@RequestMapping(value = "/redistribute_page", method = {RequestMethod.GET,RequestMethod.POST})
-	public String getAppointRedistribute(User user, Model model, HttpServletRequest request){
-		Page<User> result = dingJiangServiceImpl.getUserList(user,"5", model, request);
-		Paginator paginator = result.getPaginator();
-		model.addAttribute("paginator", paginator);
-		model.addAttribute("users", result);
+	public String getAppointRedistribute(Agent agent, Model model, HttpServletRequest request){
+		try {
+			int pageSize=Integer.valueOf(request.getParameter("pageSize"));
+			int pageNo=Integer.valueOf(request.getParameter("pageNo"));
+			Map map1 = MidlandHelper.objectToMap(agent);
+			map1.put("pageSize",pageSize);
+			map1.put("pageNo",pageNo);
+			String data = HttpUtils.get(midlandConfig.getAgentPage(), map1);
+			List result = MidlandHelper.getPojoList(data, Agent.class);
+			
+			Paginator paginator = new Paginator(pageNo,pageSize,100);
+			model.addAttribute("paginator", paginator);
+			model.addAttribute("users", result);
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		
 		return "appointment/redistributeList";
 	}
+	
 	
 	@RequestMapping("/export")
 	public void userInfoExportExcel(Appointment appointment, HttpServletResponse response) throws Exception {

@@ -14,6 +14,16 @@ public class MidlandConfig {
 	private String apiUrl;
 	@Value("${areaUrl}")
 	private String areaUrl;
+	@Value("${agentPage}")
+	private String agentPage;
+	
+	public String getAgentPage() {
+		return agentPage;
+	}
+	
+	public void setAgentPage(String agentPage) {
+		this.agentPage = agentPage;
+	}
 	
 	public String getLoginUrl() {
 		return loginUrl;

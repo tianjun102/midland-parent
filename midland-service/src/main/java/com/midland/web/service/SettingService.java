@@ -4,6 +4,7 @@ import com.midland.web.model.Area;
 import com.midland.web.model.Banner;
 import com.midland.web.model.LinkUrlManager;
 import com.midland.web.model.Popular;
+import com.midland.web.model.remote.Agent;
 import org.springframework.ui.Model;
 
 import java.util.List;
@@ -65,6 +66,5 @@ public interface SettingService {
     public int updateBanner(Banner banner);
 
     public int insertBanner(Banner banner);
-
 
 }
