@@ -15,6 +15,7 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
+				<span>网站地图管理列表</span>
 				<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>
 			</p>
 		<form action="${ctx }/rest/siteMap/list" method="POST" id="searchForm"

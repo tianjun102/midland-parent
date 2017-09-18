@@ -30,11 +30,11 @@ public class RecruitManager{
 	/**
 	 * 开始时间
 	 **/
-	private Date startTime;
+	private String startTime;
 	/**
 	 * 结束时间
 	 **/
-	private Date endTime;
+	private String endTime;
 	/**
 	 * 0=已发布；1=未发布
 	 **/
@@ -58,11 +58,13 @@ public class RecruitManager{
 	/**
 	 * 发布时间
 	 **/
-	private Date releaseTime;
+	private String releaseTime;
 	/**
 	 * 接收邮箱
 	 **/
 	private String email;
+
+	private int isDelete;
 
 
 	public Integer getId() {
@@ -113,19 +115,19 @@ public class RecruitManager{
 		this.workLift = workLift;
 	}
 
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 
@@ -169,11 +171,11 @@ public class RecruitManager{
 		this.cityName = cityName;
 	}
 
-	public Date getReleaseTime() {
+	public String getReleaseTime() {
 		return releaseTime;
 	}
 
-	public void setReleaseTime(Date releaseTime) {
+	public void setReleaseTime(String releaseTime) {
 		this.releaseTime = releaseTime;
 	}
 
@@ -183,6 +185,15 @@ public class RecruitManager{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+
+	public int getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(int isDelete) {
+		this.isDelete = isDelete;
 	}
 
 	@Override

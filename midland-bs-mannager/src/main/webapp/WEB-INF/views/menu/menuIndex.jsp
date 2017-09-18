@@ -20,7 +20,7 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
-				<span>委托记录列表</span>
+				<span>菜单管理列表</span>
 			</p>
 		<form action="${ctx }/rest/menu/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">

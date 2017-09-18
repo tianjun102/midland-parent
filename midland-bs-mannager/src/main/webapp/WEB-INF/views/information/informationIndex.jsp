@@ -20,6 +20,7 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
+				<span>资讯管理</span>
 				<a class = "setup"  target="contentF" href="/rest/information/to_add">新增</a>
 			</p>
 		<form action="${ctx }/rest/information/list" method="POST" id="searchForm"

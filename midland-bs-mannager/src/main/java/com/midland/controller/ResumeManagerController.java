@@ -5,13 +5,19 @@ import com.midland.web.model.Area;
 import com.midland.web.model.ResumeManager;
 import com.midland.web.service.ResumeManagerService;
 import com.midland.web.service.SettingService;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
+
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.Map;
 import java.util.HashMap;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
@@ -19,6 +25,8 @@ import java.util.List;
 import com.midland.web.util.MidlandHelper;
 import org.springframework.ui.Model;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 @Controller
 @SuppressWarnings("all")
 /**
@@ -152,5 +160,29 @@ public class ResumeManagerController extends BaseFilter {
 			model.addAttribute("items",null);
 		}
 		return "resumeManager/resumeManagerList";
+	}
+
+	@RequestMapping(value = "/fileDownload", method = RequestMethod.GET)
+	@ResponseBody
+	public void fileDownload(String filePath, HttpServletRequest request,
+							   HttpServletResponse response) {
+		Map result = new HashMap();
+
+		File file = new File("D://bg_new.jpg");
+		if (!file.exists()) {
+			System.out.println("文件不存在");
+		}
+
+		try {
+			response.reset(); //设置ContentType
+			response.setContentType("application/octet-stream; charset=utf-8");
+			String fileName = new String(file.getName().getBytes("utf-8"), "ISO-8859-1"); //处理中文文件名中文乱码问题
+			response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+			IOUtils.copy(new FileInputStream(file), response.getOutputStream());
+		}
+		catch (Exception e) {
+			System.out.println("文件下载失败");
+		}
+
 	}
 }
