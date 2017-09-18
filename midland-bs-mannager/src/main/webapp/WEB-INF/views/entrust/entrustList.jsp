@@ -29,7 +29,7 @@
             <th style="width: auto">售价/租价</th>
             <th style="width: auto">预约时间</th>
             <th style="width: auto">经纪人</th>
-            <th style="width: auto">state</th>
+            <th style="width: auto">状态</th>
             <th style="width: auto">处理时间</th>
             <th style="width: auto">操作</th>
         </tr>
@@ -70,6 +70,7 @@
                             <a target="contentF" onclick="toRedistribute(${item.id })">分配</a>
 
                             <a target="contentF" onclick="toUpdateEntrust(${item.id })">修改</a>
+                            <a target="contentF" class="delete_img" onclick="deleteEntrust(${item.id })"></a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -100,6 +101,45 @@
             shade: 0.3,
             area: ['1000px', '700px'],
             content: ['${ctx}/rest/entrust/toRedistribute?entrustId=' + id , 'no']
+        });
+    }
+    function deleteEntrust(id) {
+        layer.open({
+            type: 1,
+            skin: 'layer-style',
+            area: ['350px','200px'],
+            shadeClose: false, //点击遮罩关闭
+            title:['删除'],
+            resize: false,
+            scrollbar:false,
+            content:
+            '<section class = "content" style = "border:none; height:100%;">'+
+            '<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">您确定要删除当前信息?</p>'+
+            '</section>',
+            btn:['确定','取消'],
+            yes: function(index){
+                $.ajax({
+                    type: "post",
+                    url: "${ctx}/rest/entrust/update?id="+id+"&isDelete=1",
+                    cache:false,
+                    async:false, // 此处必须同步
+                    dataType: "json",
+                    success: function(xmlobj){
+                        if(xmlobj.state==0){
+                            layer.msg("删除成功！",{icon:1});
+                            $("#searchForm").submit();
+                        }
+                        if(xmlobj.state==1){
+                            layer.msg("删除失败！！",{icon:7});
+                        }
+                        layer.close(index);
+                    }
+                });
+            }
+            ,success: function (layero) {
+                var btn = layero.find('.layui-layer-btn');
+                btn.css('text-align', 'center');
+            }
         });
     }
 

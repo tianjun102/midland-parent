@@ -127,6 +127,17 @@
                     </span>
                 </div>
             </li>
+            <li class="col-md-6"><span>状态：</span>
+                <select name="status" id="status" class="dropdown">
+
+                    <c:forEach items="${statusList}" var="s">
+                        <option value="${s.id}" <c:if test="${s.id==entrust.status}">selected</c:if>>
+                                ${s.name}
+                        </option>
+                    </c:forEach>
+
+                </select>
+            </li>
             <li class="col-md-11"><span>备注：</span>
                 <textarea name="remark" id="remark"
                           style="width:calc(100% - 120px);height:50px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;"></textarea>
