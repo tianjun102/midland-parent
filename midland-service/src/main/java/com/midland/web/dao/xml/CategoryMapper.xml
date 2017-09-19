@@ -12,10 +12,11 @@
 		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
 		<result column="city_id" property="cityId" jdbcType="VARCHAR" />
 		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+		<result column="cate_desc" property="cateDesc" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,cate_name,status,order_by,parent_id,type,is_delete,city_id,city_name
+		id,cate_name,status,order_by,parent_id,type,is_delete,city_id,city_name,cate_desc
 	</sql>
 
 	<select id="selectCategoryById" resultMap="BaseResultMap">
@@ -75,6 +76,9 @@
 			<if test="cityName != null">
 				city_name,
 			</if>
+			<if test="cateDesc != null">
+				cate_desc,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -101,6 +105,9 @@
 			 </if>
 			 <if test="cityName != null">
 				 #{cityName},
+			 </if>
+			 <if test="cateDesc != null">
+				 #{cateDesc},
 			 </if>
 		</trim>
 	</insert>
@@ -129,6 +136,9 @@
 		</if>
 		<if test="cityName != null">
 			city_name= #{cityName},
+		</if>
+		<if test="cateDesc != null">
+			#{cate_desc},
 		</if>
 	</sql>
 
@@ -159,6 +169,9 @@
 		</if>
 		<if test="cityName != null">
 			and city_name= #{cityName}
+		</if>
+		<if test="cateDesc != null">
+			and cate_desc= #{cateDesc}
 		</if>
 	</sql>
 

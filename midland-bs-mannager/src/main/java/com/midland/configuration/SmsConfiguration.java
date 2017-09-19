@@ -25,6 +25,7 @@ public class SmsConfiguration {
 		smsClient.setWebKey(smsProperties.getWebKey());
 		smsClient.setUrl(smsProperties.getUrl());
 		smsClient.setCharset(smsProperties.getCharset());
+		smsClient.setPassword(smsProperties.getPassword());
 		return smsClient;
 	}
 	

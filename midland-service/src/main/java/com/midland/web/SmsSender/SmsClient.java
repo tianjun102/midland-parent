@@ -63,6 +63,8 @@ public class SmsClient {
 	
 	
 	private String charset ="utf-8";
+
+	private String password;
 	
 	
 	
@@ -93,7 +95,7 @@ public class SmsClient {
 	public String toString(){
 		StringBuffer sb = new StringBuffer("temp=");
 		if (bizAppId != null){
-			sb.append("&bizAppId=").append(bizAppId);
+			sb.append("&appId=").append(bizAppId);
 		}
 		if (customerId != null){
 			sb.append("&customerId=").append(customerId);
@@ -134,6 +136,10 @@ public class SmsClient {
 		if (charset != null){
 			sb.append("&charset=").append(charset);
 			
+		}
+		if (password != null){
+			sb.append("&password=").append(password);
+
 		}
 		
 		
@@ -234,5 +240,13 @@ public class SmsClient {
 	
 	public void setCharset(String charset) {
 		this.charset = charset;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

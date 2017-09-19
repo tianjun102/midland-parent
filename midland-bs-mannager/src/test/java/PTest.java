@@ -31,7 +31,7 @@ public class PTest {
 		SmsModel smsModel = new SmsModel();
 		smsModel.setSendType(1);
 		smsModel.setCont("dsfdf");
-		smsModel.setPhones("13489475845");
+		smsModel.setPhones("13600158343");
 		try {
 			smsClient.execute(smsModel);
 		} catch (JDOMException e) {

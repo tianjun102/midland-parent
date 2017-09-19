@@ -1,19 +1,18 @@
 package com.midland.web.dao;
 
 import com.midland.web.model.EliteClub;
+import java.util.List;
 
 public interface EliteClubMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(EliteClub record);
+	EliteClub selectEliteClubById(Integer eliteClub);
 
-    int insertSelective(EliteClub record);
+	int deleteEliteClubById(Integer eliteClub);
 
-    EliteClub selectByPrimaryKey(Integer id);
+	int updateEliteClubById(EliteClub eliteClub);
 
-    int updateByPrimaryKeySelective(EliteClub record);
+	int insertEliteClub(EliteClub eliteClub);
 
-    int updateByPrimaryKeyWithBLOBs(EliteClub record);
+	List<EliteClub> findEliteClubList(EliteClub eliteClub);
 
-    int updateByPrimaryKey(EliteClub record);
 }

@@ -1,103 +1,208 @@
 package com.midland.web.model;
 
-public class EliteClub {
-    private Integer id;
+import java.util.Date;
 
-    private Integer cityId;
+public class EliteClub{
+	/**
+	 * 精英会主键id
+	 **/
+	private Integer id;
+	/**
+	 * 城市id
+	 **/
+	private String cityId;
+	/**
+	 * 上传图片路径
+	 **/
+	private String imgUrl;
+	/**
+	 * 图片描述
+	 **/
+	private String imgDesc;
+	/**
+	 * 活动名称
+	 **/
+	private String adName;
+	/**
+	 * 活动时间
+	 **/
+	private Date adTime;
+	/**
+	 * 活动主题
+	 **/
+	private String adTitle;
+	/**
+	 * 活动地址
+	 **/
+	private String adAddress;
+	/**
+	 * 活动详情
+	 **/
+	private String detail;
+	/**
+	 * 是否开放
+	 **/
+	private Integer isshow;
+	/**
+	 * 0未删除，1删除
+	 **/
+	private Integer isDelete;
+	/**
+	 * 城市名称
+	 **/
+	private String cityName;
+	/**
+	 * 0显示；1隐藏
+	 **/
+	private Integer isShow;
 
-    private String imgUrl;
 
-    private String imgDesc;
+	public Integer getId() {
+		return id;
+	}
 
-    private String adName;
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    private String adTime;
+	public String getCityId() {
+		return cityId;
+	}
 
-    private String adTitle;
+	public void setCityId(String cityId) {
+		this.cityId = cityId;
+	}
 
-    private String adAddress;
+	public String getImgUrl() {
+		return imgUrl;
+	}
 
-    private Integer isshow;
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
 
-    private String detail;
+	public String getImgDesc() {
+		return imgDesc;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public void setImgDesc(String imgDesc) {
+		this.imgDesc = imgDesc;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public String getAdName() {
+		return adName;
+	}
 
-    public Integer getCityId() {
-        return cityId;
-    }
+	public void setAdName(String adName) {
+		this.adName = adName;
+	}
 
-    public void setCityId(Integer cityId) {
-        this.cityId = cityId;
-    }
+	public Date getAdTime() {
+		return adTime;
+	}
 
-    public String getImgUrl() {
-        return imgUrl;
-    }
+	public void setAdTime(Date adTime) {
+		this.adTime = adTime;
+	}
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl == null ? null : imgUrl.trim();
-    }
+	public String getAdTitle() {
+		return adTitle;
+	}
 
-    public String getImgDesc() {
-        return imgDesc;
-    }
+	public void setAdTitle(String adTitle) {
+		this.adTitle = adTitle;
+	}
 
-    public void setImgDesc(String imgDesc) {
-        this.imgDesc = imgDesc == null ? null : imgDesc.trim();
-    }
+	public String getAdAddress() {
+		return adAddress;
+	}
 
-    public String getAdName() {
-        return adName;
-    }
+	public void setAdAddress(String adAddress) {
+		this.adAddress = adAddress;
+	}
 
-    public void setAdName(String adName) {
-        this.adName = adName == null ? null : adName.trim();
-    }
+	public String getDetail() {
+		return detail;
+	}
 
-    public String getAdTime() {
-        return adTime;
-    }
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
 
-    public void setAdTime(String adTime) {
-        this.adTime = adTime;
-    }
+	public Integer getIsshow() {
+		return isshow;
+	}
 
-    public String getAdTitle() {
-        return adTitle;
-    }
+	public void setIsshow(Integer isshow) {
+		this.isshow = isshow;
+	}
 
-    public void setAdTitle(String adTitle) {
-        this.adTitle = adTitle == null ? null : adTitle.trim();
-    }
+	public Integer getIsDelete() {
+		return isDelete;
+	}
 
-    public String getAdAddress() {
-        return adAddress;
-    }
+	public void setIsDelete(Integer isDelete) {
+		this.isDelete = isDelete;
+	}
 
-    public void setAdAddress(String adAddress) {
-        this.adAddress = adAddress == null ? null : adAddress.trim();
-    }
+	public String getCityName() {
+		return cityName;
+	}
 
-    public Integer getIsshow() {
-        return isshow;
-    }
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
 
-    public void setIsshow(Integer isshow) {
-        this.isshow = isshow;
-    }
+	public Integer getIsShow() {
+		return isShow;
+	}
 
-    public String getDetail() {
-        return detail;
-    }
+	public void setIsShow(Integer isShow) {
+		this.isShow = isShow;
+	}
 
-    public void setDetail(String detail) {
-        this.detail = detail == null ? null : detail.trim();
-    }
+	@Override
+	public String toString() {
+		 final StringBuffer sb=new StringBuffer("EliteClub{");
+		if (id != null) {
+			sb.append(", \"id\":\"").append(id).append("\"");
+		}
+		if (cityId != null) {
+			sb.append(", \"cityId\":\"").append(cityId).append("\"");
+		}
+		if (imgUrl != null) {
+			sb.append(", \"imgUrl\":\"").append(imgUrl).append("\"");
+		}
+		if (imgDesc != null) {
+			sb.append(", \"imgDesc\":\"").append(imgDesc).append("\"");
+		}
+		if (adName != null) {
+			sb.append(", \"adName\":\"").append(adName).append("\"");
+		}
+		if (adTime != null) {
+			sb.append(", \"adTime\":\"").append(adTime).append("\"");
+		}
+		if (adTitle != null) {
+			sb.append(", \"adTitle\":\"").append(adTitle).append("\"");
+		}
+		if (adAddress != null) {
+			sb.append(", \"adAddress\":\"").append(adAddress).append("\"");
+		}
+		if (detail != null) {
+			sb.append(", \"detail\":\"").append(detail).append("\"");
+		}
+		if (isshow != null) {
+			sb.append(", \"isshow\":\"").append(isshow).append("\"");
+		}
+		if (isDelete != null) {
+			sb.append(", \"isDelete\":\"").append(isDelete).append("\"");
+		}
+		if (cityName != null) {
+			sb.append(", \"cityName\":\"").append(cityName).append("\"");
+		}
+		if (isShow != null) {
+			sb.append(", \"isShow\":\"").append(isShow).append("\"");
+		}
+		return sb.toString();
+	}
 }

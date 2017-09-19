@@ -1,17 +1,18 @@
 package com.midland.web.dao;
 
 import com.midland.web.model.EliteVip;
+import java.util.List;
 
 public interface EliteVipMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(EliteVip record);
+	EliteVip selectEliteVipById(Integer eliteVip);
 
-    int insertSelective(EliteVip record);
+	int deleteEliteVipById(Integer eliteVip);
 
-    EliteVip selectByPrimaryKey(Integer id);
+	int updateEliteVipById(EliteVip eliteVip);
 
-    int updateByPrimaryKeySelective(EliteVip record);
+	int insertEliteVip(EliteVip eliteVip);
 
-    int updateByPrimaryKey(EliteVip record);
+	List<EliteVip> findEliteVipList(EliteVip eliteVip);
+
 }

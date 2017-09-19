@@ -38,6 +38,10 @@ public class Category{
 	 * 城市ID
 	 **/
 	private String cityId;
+	/**
+	 * 分类描述
+	 **/
+	private String cateDesc;
 
 
 	public Integer getId() {
@@ -112,6 +116,14 @@ public class Category{
 		this.cityId = cityId;
 	}
 
+	public String getCateDesc() {
+		return cateDesc;
+	}
+
+	public void setCateDesc(String cateDesc) {
+		this.cateDesc = cateDesc;
+	}
+
 	@Override
 	public String toString() {
 		 final StringBuffer sb=new StringBuffer("Category{");
@@ -142,6 +154,10 @@ public class Category{
 		if (cityName != null) {
 			sb.append(", \"cityName\":\"").append(cityName).append("\"");
 		}
+		if (cateDesc != null) {
+			sb.append(", \"cateDesc\":\"").append(cateDesc).append("\"");
+		}
+
 		return sb.toString();
 	}
 }

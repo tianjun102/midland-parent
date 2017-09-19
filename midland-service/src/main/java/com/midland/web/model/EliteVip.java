@@ -1,93 +1,192 @@
 package com.midland.web.model;
 
-public class EliteVip {
-    private Integer id;
 
-    private String type;
+public class EliteVip{
+	/**
+	 * 
+	 **/
+	private Integer id;
+	/**
+	 * 精英类别
+	 **/
+	private String type;
+	/**
+	 * 会员级别
+	 **/
+	private String level;
+	/**
+	 * 中文名称
+	 **/
+	private String cname;
+	/**
+	 * 英文名称
+	 **/
+	private String ename;
+	/**
+	 * 所属地区
+	 **/
+	private String address;
+	/**
+	 * 职务
+	 **/
+	private String post;
+	/**
+	 * 图片路径
+	 **/
+	private String imgUrl;
+	/**
+	 * 图片描述
+	 **/
+	private String imgDesc;
+	/**
+	 * 0未删除，1删除
+	 **/
+	private Integer isDelete;
+	/**
+	 * 分类id
+	 **/
+	private Integer cateId;
+	/**
+	 * 分类名称
+	 **/
+	private String cateName;
 
-    private String level;
 
-    private String cname;
+	public Integer getId() {
+		return id;
+	}
 
-    private String ename;
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    private String address;
+	public String getType() {
+		return type;
+	}
 
-    private String post;
+	public void setType(String type) {
+		this.type = type;
+	}
 
-    private String imgUrl;
+	public String getLevel() {
+		return level;
+	}
 
-    private String imgDesc;
+	public void setLevel(String level) {
+		this.level = level;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public String getCname() {
+		return cname;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
 
-    public String getType() {
-        return type;
-    }
+	public String getEname() {
+		return ename;
+	}
 
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
-    }
+	public void setEname(String ename) {
+		this.ename = ename;
+	}
 
-    public String getLevel() {
-        return level;
-    }
+	public String getAddress() {
+		return address;
+	}
 
-    public void setLevel(String level) {
-        this.level = level == null ? null : level.trim();
-    }
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-    public String getCname() {
-        return cname;
-    }
+	public String getPost() {
+		return post;
+	}
 
-    public void setCname(String cname) {
-        this.cname = cname == null ? null : cname.trim();
-    }
+	public void setPost(String post) {
+		this.post = post;
+	}
 
-    public String getEname() {
-        return ename;
-    }
+	public String getImgUrl() {
+		return imgUrl;
+	}
 
-    public void setEname(String ename) {
-        this.ename = ename == null ? null : ename.trim();
-    }
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
 
-    public String getAddress() {
-        return address;
-    }
+	public String getImgDesc() {
+		return imgDesc;
+	}
 
-    public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
-    }
+	public void setImgDesc(String imgDesc) {
+		this.imgDesc = imgDesc;
+	}
 
-    public String getPost() {
-        return post;
-    }
+	public Integer getIsDelete() {
+		return isDelete;
+	}
 
-    public void setPost(String post) {
-        this.post = post == null ? null : post.trim();
-    }
+	public void setIsDelete(Integer isDelete) {
+		this.isDelete = isDelete;
+	}
 
-    public String getImgUrl() {
-        return imgUrl;
-    }
+	public Integer getCateId() {
+		return cateId;
+	}
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl == null ? null : imgUrl.trim();
-    }
+	public void setCateId(Integer cateId) {
+		this.cateId = cateId;
+	}
 
-    public String getImgDesc() {
-        return imgDesc;
-    }
+	public String getCateName() {
+		return cateName;
+	}
 
-    public void setImgDesc(String imgDesc) {
-        this.imgDesc = imgDesc == null ? null : imgDesc.trim();
-    }
+	public void setCateName(String cateName) {
+		this.cateName = cateName;
+	}
+
+	@Override
+	public String toString() {
+		 final StringBuffer sb=new StringBuffer("EliteVip{");
+		if (id != null) {
+			sb.append(", \"id\":\"").append(id).append("\"");
+		}
+		if (type != null) {
+			sb.append(", \"type\":\"").append(type).append("\"");
+		}
+		if (level != null) {
+			sb.append(", \"level\":\"").append(level).append("\"");
+		}
+		if (cname != null) {
+			sb.append(", \"cname\":\"").append(cname).append("\"");
+		}
+		if (ename != null) {
+			sb.append(", \"ename\":\"").append(ename).append("\"");
+		}
+		if (address != null) {
+			sb.append(", \"address\":\"").append(address).append("\"");
+		}
+		if (post != null) {
+			sb.append(", \"post\":\"").append(post).append("\"");
+		}
+		if (imgUrl != null) {
+			sb.append(", \"imgUrl\":\"").append(imgUrl).append("\"");
+		}
+		if (imgDesc != null) {
+			sb.append(", \"imgDesc\":\"").append(imgDesc).append("\"");
+		}
+		if (isDelete != null) {
+			sb.append(", \"isDelete\":\"").append(isDelete).append("\"");
+		}
+		if (cateId != null) {
+			sb.append(", \"cateId\":\"").append(cateId).append("\"");
+		}
+		if (cateName != null) {
+			sb.append(", \"cateName\":\"").append(cateName).append("\"");
+		}
+		return sb.toString();
+	}
 }

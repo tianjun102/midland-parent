@@ -46,7 +46,11 @@ public class SmsProperties {
 	
 	@Value("${charset}")
 	private String charset ="utf-8";
-	
+
+	@Value("${password}")
+	private String password;
+
+
 	public String getUrl() {
 		return url;
 	}
@@ -110,4 +114,13 @@ public class SmsProperties {
 	public void setCharset(String charset) {
 		this.charset = charset;
 	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 }

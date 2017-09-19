@@ -25,6 +25,14 @@ public class SmsModel {
 	 * 用户指定uc号码发送短信，允许为空。
 	 */
 	private String ucCode;
+	/**
+	 * 用户指定模板id
+	 */
+	private String tpId;
+	/**
+	 * 用户指定模板类容填充字段多个使用||隔开
+	 */
+	private String fields;
 	
 	public Integer getSendType() {
 		return sendType;
@@ -56,5 +64,21 @@ public class SmsModel {
 	
 	public void setUcCode(String ucCode) {
 		this.ucCode = ucCode;
+	}
+
+	public String getTpId() {
+		return tpId;
+	}
+
+	public void setTpId(String tpId) {
+		this.tpId = tpId;
+	}
+
+	public String getFields() {
+		return fields;
+	}
+
+	public void setFields(String fields) {
+		this.fields = fields;
 	}
 }
