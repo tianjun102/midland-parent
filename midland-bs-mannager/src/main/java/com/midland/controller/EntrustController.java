@@ -4,10 +4,13 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
+import com.midland.config.MidlandConfig;
+import com.midland.core.util.HttpUtils;
 import com.midland.web.enums.ContextEnums;
 import com.midland.web.model.Entrust;
 import com.midland.web.model.EntrustLog;
 import com.midland.web.model.ExportModel;
+import com.midland.web.model.remote.Agent;
 import com.midland.web.model.user.User;
 import com.midland.web.service.DingJiangService;
 import com.midland.web.service.EntrustLogService;
@@ -43,6 +46,8 @@ public class EntrustController extends BaseFilter{
 	private EntrustService entrustServiceImpl;
 	@Autowired
 	private EntrustLogService entrustLogServiceImpl;
+	@Autowired
+	private MidlandConfig midlandConfig;
 	
 	@Autowired
 	private DingJiangService dingJiangServiceImpl;
@@ -202,15 +207,27 @@ public class EntrustController extends BaseFilter{
 	}
 	/**
 	 * 委托看房（重新分配经纪人）
-	 * @param user
+	 * @param agent
 	 * @return
 	 */
 	@RequestMapping(value = "/redistribute_page", method = {RequestMethod.GET,RequestMethod.POST})
-	public String getEntrustRedistribute(User user, Model model, HttpServletRequest request){
-		Page<User> result = dingJiangServiceImpl.getUserList(user,"5", model, request);
-		Paginator paginator = result.getPaginator();
+	public String getEntrustRedistribute(Agent agent, Model model, HttpServletRequest request){
+		String pageSize=request.getParameter("pageSize");
+		String pageNo=request.getParameter("pageNo");
+		if (pageSize == null ){
+			pageSize="5";
+		}
+		if (pageNo == null ){
+			pageNo="1";
+		}
+		Map map1 = agent.agentToMap();
+		map1.put("pageSize",pageSize);
+		map1.put("pageNo",pageNo);
+		String data = HttpUtils.get(midlandConfig.getAgentPage(), map1);
+		List result = MidlandHelper.getPojoList(data, Agent.class);
+		Paginator paginator = new Paginator(Integer.valueOf(pageNo),Integer.valueOf(pageSize),100);
 		model.addAttribute("paginator", paginator);
-		model.addAttribute("users", result);
+		model.addAttribute("agents", result);
 		return "entrust/redistributeList";
 	}
 	@RequestMapping("/export")
@@ -238,7 +255,7 @@ public class EntrustController extends BaseFilter{
 			exportModel.setModelName12(appointment1.getMeasure());
 			exportModel.setModelName13(appointment1.getPrice());
 			exportModel.setModelName14(appointment1.getEntrustTime());
-			exportModel.setModelName15(appointment1.getUserCnName());
+			exportModel.setModelName15(appointment1.getAgentName());
 			List<ParamObject> statusList = JsonMapReader.getMap("appointment_status");
 			exportModel.setModelName16(MidlandHelper.getNameById(appointment1.getStatus(), statusList));
 			exportModel.setModelName17(appointment1.getHandleTime());

@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Field;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -34,6 +35,11 @@ public class MidlandHelper {
 		calendar.add(Calendar.MONTH,amount);
 		return format.format(calendar.getTime());
 	}
+	public static Date stringToDate(String time ) throws ParseException {
+		DateFormat format = new SimpleDateFormat(COMMON_DATE);
+		return format.parse(time);
+	}
+	
 	
 	/**
 	 * request 包含 pageNo，pageSize

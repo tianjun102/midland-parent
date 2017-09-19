@@ -15,52 +15,31 @@
         <thead>
         <tr>
             <th style="width: 5%"></th>
-            <th style="width: 5%">序号</th>
-            <th style="width: 5%">用户名</th>
+            <th style="width: 5%">工号</th>
+            <th style="width: 5%">名称</th>
             <th style="width: 10%">手机号码</th>
-            <th style="width: 5%">注册时间</th>
-            <th style="width: 10%">注册来源</th>
-            <th style="width: 4%">实名状态</th>
-            <th style="width: 5%">审核人</th>
-            <th style="width: 10%">审核时间</th>
-            <th style="width: 10%">用户类型</th>
-            <th style="width: 15%">操作</th>
+            <th style="width: 5%">门店</th>
+            <%--<th style="width: 10%">店铺地址</th>--%>
+            <th style="width: 4%">服务类型</th>
+            <th style="width: 5%">服务区域</th>
+            <th style="width: 10%">职称</th>
         </tr>
         </thead>
         <tbody>
         <c:choose>
-            <c:when test="${!empty requestScope.users }">
-                <c:forEach items="${requestScope.users }" var="cust" varStatus="xh">
+            <c:when test="${!empty requestScope.agents }">
+                <c:forEach items="${requestScope.agents }" var="cust" varStatus="xh">
                     <tr>
                         <td><input name="radio" type="radio" value="${cust.id }"/></td>
-
-                        <td>${xh.count }</td>
-                        <td>${cust.username }</td>
+                        <td>${cust.jobNum }</td>
+                        <td>${cust.name }</td>
                         <td>${cust.phone }</td>
-                        <td>${cust.createTime }</td>
-                        <td> <c:if test="${appoint.source ==0 }">网站</c:if>
-                            <c:if test="${appoint.source ==1 }">微站</c:if></td>
-                        <td>${cust.auditStatus }</td>
-                        <td>${cust.auditName }</td>
-                        <td>${cust.auditTime }</td>
-                        <td>
-                            <c:if test="${cust.userType==0}">智者汇</c:if>
-                            <c:if test="${cust.userType==1}">渠道服务商</c:if>
-                        </td>
-                        <td>
+                        <td>${cust.storeName }</td>
+                            <%--<td> ${cust.photoUrl}</td>--%>
+                        <td>${cust.serviceType }</td>
+                        <td>${cust.serviceAreaName }</td>
+                        <td>${cust.post }</td>
 
-                            <a target="contentF" onclick="alterUser(${cust.id })">编辑</a>
-
-                            <a target="contentF" onclick="takeblacklist(${cust.id })">加入黑名单</a>
-                            <a target="contentF" onclick="viewRealRegistration(${cust.id })">
-                                <c:choose>
-                                    <c:when test="${cust.auditStatus==0}">审核实名信息
-                                    </c:when>
-                                    <c:otherwise>查看实名信息
-                                    </c:otherwise>
-                                </c:choose>
-                            </a>
-                        </td>
                     </tr>
                 </c:forEach>
             </c:when>
@@ -92,7 +71,7 @@
     function saveData(id){
         var entrustId = $("#entrustId").val();
         var intHot = $("input[name='radio']:checked");
-        var agentId = intHot.parent().next().text();
+        var agentNo = intHot.parent().next().text();
         var agentName = intHot.parent().next().next().text();
         $.ajax({
             type: "post",
@@ -100,7 +79,7 @@
             async: false, // 此处必须同步
             dataType: "json",
             data: {
-                "id": entrustId, "userId": agentId, "userCnName": agentName
+                "id": entrustId, "agentId": agentNo, "agentName": agentName
             },
             success: function (data) {
                 if (data.state == 0) {
@@ -119,6 +98,11 @@
             }
 
         });
+    }
+
+    function closeWin(){
+        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+        parent.layer.close(index);
     }
 </script>
 </body>

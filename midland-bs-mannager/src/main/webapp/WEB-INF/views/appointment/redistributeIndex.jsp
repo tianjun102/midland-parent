@@ -32,7 +32,6 @@
 			</ul>
 			</form>
 			<div id="listDiv"></div>
-
 		</section>
 	</div>
 	
