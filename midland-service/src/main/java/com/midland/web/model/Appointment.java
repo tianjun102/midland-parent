@@ -64,11 +64,16 @@ public class Appointment{
 	/**
 	 * 经纪人id
 	 **/
-	private Integer userId;
+	private String agentId;
 	/**
 	 * 经纪人名字
 	 **/
-	private String userCnName;
+	private String agentName;
+	
+	/**
+	 * 经纪人工号
+	 */
+	private String jobNum;
 	/**
 	 * 状态；0=未处理；1=处理中；2已完成
 	 **/
@@ -97,8 +102,31 @@ public class Appointment{
 	 * 区域id
 	 **/
 	private Integer areaId;
-
-
+	
+	public String getAgentId() {
+		return agentId;
+	}
+	
+	public void setAgentId(String agentId) {
+		this.agentId = agentId;
+	}
+	
+	public String getAgentName() {
+		return agentName;
+	}
+	
+	public void setAgentName(String agentName) {
+		this.agentName = agentName;
+	}
+	
+	public String getJobNum() {
+		return jobNum;
+	}
+	
+	public void setJobNum(String jobNum) {
+		this.jobNum = jobNum;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -218,23 +246,8 @@ public class Appointment{
 	public void setEntrustTime(String entrustTime) {
 		this.entrustTime = entrustTime;
 	}
-
-	public Integer getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-
-	public String getUserCnName() {
-		return userCnName;
-	}
-
-	public void setUserCnName(String userCnName) {
-		this.userCnName = userCnName;
-	}
-
+	
+	
 	public Integer getStatus() {
 		return status;
 	}
@@ -339,12 +352,7 @@ public class Appointment{
 		if (entrustTime != null) {
 			sb.append(", \"entrustTime\":\"").append(entrustTime).append("\"");
 		}
-		if (userId != null) {
-			sb.append(", \"userId\":\"").append(userId).append("\"");
-		}
-		if (userCnName != null) {
-			sb.append(", \"userCnName\":\"").append(userCnName).append("\"");
-		}
+
 		if (status != null) {
 			sb.append(", \"status\":\"").append(status).append("\"");
 		}

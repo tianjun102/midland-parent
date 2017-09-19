@@ -80,6 +80,7 @@
         <div id="listDiv"></div>
         <a class="edit_img" target="contentF" href="${ctx}/rest/quotationSecondHand/toolsTip">生成预览</a>
     </section>
+    <a href="#" onclick="export1()">导出</a>
 </div>
 <%--<li><span>城市：</span>--%>
 <%--<input type="hidden" id="excelCityName" value="">--%>
@@ -99,6 +100,13 @@
 </li>
 
 <script type="text/javascript">
+
+
+    function export1(){
+        var data = $("#searchForm").serialize();
+
+        window.location.href="${ctx}/rest/quotationSecondHand/export?"+data;
+    }
 
     function toAddPage() {
         layer.open({

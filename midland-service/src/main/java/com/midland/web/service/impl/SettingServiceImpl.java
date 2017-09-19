@@ -1,7 +1,8 @@
 package com.midland.web.service.impl;
 
+import com.github.pagehelper.Paginator;
+import com.midland.config.MidlandConfig;
 import com.midland.core.redis.IBaseRedisTemplate;
-import com.midland.core.util.AppSetting;
 import com.midland.core.util.HttpUtils;
 import com.midland.web.dao.BannerMapper;
 import com.midland.web.dao.LinkUrlManagerMapper;
@@ -10,9 +11,12 @@ import com.midland.web.model.Area;
 import com.midland.web.model.Banner;
 import com.midland.web.model.LinkUrlManager;
 import com.midland.web.model.Popular;
+import com.midland.web.model.remote.Agent;
 import com.midland.web.service.SettingService;
 import com.midland.web.util.MidlandHelper;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -23,6 +27,7 @@ import java.util.*;
 @Service
 public class SettingServiceImpl implements SettingService {
 
+    private final Logger logger= LoggerFactory.getLogger(SettingServiceImpl.class);
     @Autowired
     private IBaseRedisTemplate baseRedisTemplate;
 
@@ -34,6 +39,8 @@ public class SettingServiceImpl implements SettingService {
 
     @Autowired
     private BannerMapper bannerMapper;
+ @Autowired
+    private MidlandConfig midlandConfig;
 
     @Override
     public List<Popular> findPopularList(Popular popular) {
@@ -168,7 +175,7 @@ public class SettingServiceImpl implements SettingService {
             if(StringUtils.isNotEmpty(parem.get("parentId"))){
                 parem.put("areaId",parem.get("parentId"));
             }
-            String data = HttpUtils.get(AppSetting.getAppSetting("APIURL"), parem);
+            String data = HttpUtils.get(midlandConfig.getAreaUrl(), parem);
             List<Area> areaList = MidlandHelper.getPojoList(data, Area.class);
             String parentId = "";
             if (areaList !=null) {
@@ -206,7 +213,7 @@ public class SettingServiceImpl implements SettingService {
             }
             String data = null;
             try{
-                data = HttpUtils.get(AppSetting.getAppSetting("AREAURL"), parem);
+                data = HttpUtils.get(midlandConfig.getAreaUrl(), parem);
             }catch (Exception e){
                 data = null;
             }
@@ -327,7 +334,5 @@ public class SettingServiceImpl implements SettingService {
 
         return  result;
     }
-
-
-
+    
 }

@@ -1,7 +1,5 @@
 package com.midland.web.model;
 
-import java.util.Date;
-
 public class QuotationSecondHand{
 	/**
 	 * 行情表，主键
@@ -10,7 +8,7 @@ public class QuotationSecondHand{
 	/**
 	 * 数据时间
 	 **/
-	private Date dataTime;
+	private String dataTime;
 	/**
 	 * 类型
 	 **/
@@ -42,7 +40,7 @@ public class QuotationSecondHand{
 	/**
 	 * 更新时间
 	 **/
-	private Date updateTime;
+	private String updateTime;
 	/**
 	 * 0未删除，1删除
 	 **/
@@ -69,11 +67,11 @@ public class QuotationSecondHand{
 		this.id = id;
 	}
 
-	public Date getDataTime() {
+	public String getDataTime() {
 		return dataTime;
 	}
 
-	public void setDataTime(Date dataTime) {
+	public void setDataTime(String dataTime) {
 		this.dataTime = dataTime;
 	}
 
@@ -133,11 +131,11 @@ public class QuotationSecondHand{
 		this.ringRatio = ringRatio;
 	}
 
-	public Date getUpdateTime() {
+	public String getUpdateTime() {
 		return updateTime;
 	}
 
-	public void setUpdateTime(Date updateTime) {
+	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
 	}
 

@@ -8,13 +8,10 @@ import com.midland.web.model.user.User;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Field;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by 'ms.x' on 2017/7/31.
@@ -134,5 +131,18 @@ public class MidlandHelper {
 		return source;
 	}
 	
+	
+	public static Map<String, Object> objectToMap(Object obj) throws IllegalAccessException {
+		if(obj == null){
+			return null;
+		}
+		Map<String, Object> map = new HashMap<>();
+		Field[] declaredFields = obj.getClass().getDeclaredFields();
+		for (Field field : declaredFields) {
+			field.setAccessible(true);
+			map.put(field.getName(), field.get(obj));
+		}
+		return map;
+	}
 	
 }

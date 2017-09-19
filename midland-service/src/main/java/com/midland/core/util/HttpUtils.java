@@ -14,8 +14,12 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import javax.net.ssl.SSLContext;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +42,7 @@ public class HttpUtils {
 	private static final RequestConfig REQUEST_CONFIG = RequestConfig.custom().setConnectTimeout(CONNECT_TIME_OUT).build();
 	
 	private static SSLContext wx_ssl_context = null; //微信支付ssl证书
+	
 	
 	/**
 	 * @description 功能描述: get 请求
@@ -263,5 +268,36 @@ public class HttpUtils {
 		return _StringPost(url, s,DEFAULT_CHARSET);
 	}
 	
+	
+	public static String smsPost(String urlStr, String param, String charset) throws IOException {
+		
+		String str =new StringBuffer(urlStr).append("?").append(param).toString();
+		URL url = new URL(str);
+		
+		StringBuffer sbs= new StringBuffer();
+		HttpURLConnection connection = null;
+		BufferedReader in=null;
+		try {
+			connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("POST");
+			in = new BufferedReader(new InputStreamReader(url.openStream()));
+			String line=null;
+			while((line = in.readLine()) != null){
+				sbs.append(line);
+			}
+			return sbs.toString();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally {
+			if (connection !=null){
+				connection.disconnect();
+			}if (in !=null){
+				in.close();
+			}
+		}
+		
+		
+		return null;
+	}
 
 }
