@@ -1,6 +1,5 @@
 package com.midland.task;
 
-import com.midland.config.MidlandConfig;
 import com.midland.web.model.Appointment;
 import com.midland.web.service.AppointmentService;
 import com.midland.web.util.MidlandHelper;
@@ -22,9 +21,6 @@ public class MidlandTask {
 	
 	@Autowired
 	private AppointmentService appointmentServiceImpl;
-	
-	@Autowired
-	private MidlandConfig midlandConfig;
 	
 	//经纪人重新分配规则，24小时内状态没有修改，发送短信给经纪人及其领导，48小时后没有处理，则关闭此预约，并发送给有指定邮箱
 	@Scheduled(fixedRate = 3600000)

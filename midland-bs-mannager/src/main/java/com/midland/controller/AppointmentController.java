@@ -6,6 +6,8 @@ import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.config.MidlandConfig;
 import com.midland.core.util.HttpUtils;
+import com.midland.web.SmsSender.SmsClient;
+import com.midland.web.SmsSender.SmsModel;
 import com.midland.web.enums.ContextEnums;
 import com.midland.web.model.AppointLog;
 import com.midland.web.model.Appointment;
@@ -53,8 +55,7 @@ public class AppointmentController extends BaseFilter{
 	private MidlandConfig midlandConfig;
 	
 	@Autowired
-	private UserService userServiceImpl;
-	
+	private SmsClient smsClient;
 	
 	Logger logger = LoggerFactory.getLogger(AppointmentController.class);
 	
@@ -99,6 +100,9 @@ public class AppointmentController extends BaseFilter{
 		Map map = new HashMap();
 		try {
 			appointmentServiceImpl.insertAppointment(record);
+			SmsModel smsModel = new SmsModel();
+			smsModel.setPhones(record.getAgentPhone());
+			smsClient.execute(smsModel);
 			map.put("state",0);
 			return map;
 		} catch (Exception e) {

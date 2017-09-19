@@ -69,6 +69,10 @@ public class Appointment{
 	 * 经纪人名字
 	 **/
 	private String agentName;
+	/**
+	 * 经纪人手机号
+	 */
+	private String agentPhone;
 	
 	/**
 	 * 经纪人工号
@@ -107,6 +111,13 @@ public class Appointment{
 	 **/
 	private Integer flag;
 	
+	public String getAgentPhone() {
+		return agentPhone;
+	}
+	
+	public void setAgentPhone(String agentPhone) {
+		this.agentPhone = agentPhone;
+	}
 	
 	public Integer getFlag() {
 		return flag;
