@@ -15,8 +15,8 @@
 		<result column="layout" property="layout" jdbcType="VARCHAR" />
 		<result column="measure" property="measure" jdbcType="VARCHAR" />
 		<result column="price" property="price" jdbcType="VARCHAR" />
-		<result column="user_id" property="userId" jdbcType="INTEGER" />
-		<result column="user_cn_name" property="userCnName" jdbcType="VARCHAR" />
+		<result column="agent_id" property="agentId" jdbcType="VARCHAR" />
+		<result column="agent_name" property="agentName" jdbcType="VARCHAR" />
 		<result column="status" property="status" jdbcType="INTEGER" />
 		<result column="handle_time" property="handleTime" jdbcType="TIMESTAMP" />
 		<result column="nick_name" property="nickName" jdbcType="VARCHAR" />
@@ -34,7 +34,7 @@
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,entrust_sn,source,house_type,sell_rent,entrust_time,area_name,community_name,address,layout,measure,price,user_id,user_cn_name,status,handle_time,nick_name,renovation,phone,is_delete,broadband,washing_machine,household,fridge,entrust_type,city_id,city_name,area_id
+		id,entrust_sn,source,house_type,sell_rent,entrust_time,area_name,community_name,address,layout,measure,price,agent_id,agent_name,status,handle_time,nick_name,renovation,phone,is_delete,broadband,washing_machine,household,fridge,entrust_type,city_id,city_name,area_id
 	</sql>
 
 	<select id="selectEntrustById" resultMap="BaseResultMap">
@@ -99,11 +99,11 @@
 			<if test="price != null">
 				price,
 			</if>
-			<if test="userId != null">
-				user_id,
+			<if test="agentId != null">
+				agent_id,
 			</if>
-			<if test="userCnName != null">
-				user_cn_name,
+			<if test="agentName != null">
+				agent_name,
 			</if>
 			<if test="status != null">
 				status,
@@ -183,11 +183,11 @@
 			<if test="price != null">
 				#{price,jdbcType=VARCHAR},
 			</if>
-			<if test="userId != null">
-				#{userId,jdbcType=INTEGER},
+			<if test="agentId != null">
+				#{agentId,jdbcType=VARCHAR},
 			</if>
-			<if test="userCnName != null">
-				#{userCnName,jdbcType=VARCHAR},
+			<if test="agentName != null">
+				#{agentName,jdbcType=VARCHAR},
 			</if>
 			<if test="status != null">
 				#{status,jdbcType=INTEGER},
@@ -268,11 +268,11 @@
 		<if test="price != null">
 			price= #{price,jdbcType=VARCHAR},
 		</if>
-		<if test="userId != null">
-			user_id= #{userId,jdbcType=INTEGER},
+		<if test="agentId != null">
+			agent_id= #{agentId,jdbcType=VARCHAR},
 		</if>
-		<if test="userCnName != null">
-			user_cn_name= #{userCnName,jdbcType=VARCHAR},
+		<if test="agentName != null">
+			agent_name= #{agentName,jdbcType=VARCHAR},
 		</if>
 		<if test="status != null">
 			status= #{status,jdbcType=INTEGER},
@@ -355,11 +355,11 @@
 		<if test="price != null">
 			 and price= #{price,jdbcType=VARCHAR}
 		</if>
-		<if test="userId != null">
-			 and user_id= #{userId,jdbcType=INTEGER}
+		<if test="agentId != null">
+			 and agent_id= #{agentId,jdbcType=VARCHAR}
 		</if>
-		<if test="userCnName != null">
-			 and user_cn_name= #{userCnName,jdbcType=VARCHAR}
+		<if test="agentName != null">
+			 and agent_name= #{agentName,jdbcType=VARCHAR}
 		</if>
 		<if test="status != null">
 			 and status= #{status,jdbcType=INTEGER}

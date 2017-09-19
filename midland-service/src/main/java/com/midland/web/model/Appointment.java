@@ -102,6 +102,19 @@ public class Appointment{
 	 * 区域id
 	 **/
 	private Integer areaId;
+	/**
+	 * 24小时状态没修改时发起提醒成功：0未发送，1已发送
+	 **/
+	private Integer flag;
+	
+	
+	public Integer getFlag() {
+		return flag;
+	}
+	
+	public void setFlag(Integer flag) {
+		this.flag = flag;
+	}
 	
 	public String getAgentId() {
 		return agentId;

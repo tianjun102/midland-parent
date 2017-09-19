@@ -53,11 +53,11 @@ public class Entrust{
 	/**
 	 * 用户id
 	 **/
-	private Integer userId;
+	private String agentId;
 	/**
 	 * 经纪人名字
 	 **/
-	private String userCnName;
+	private String agentName;
 	/**
 	 * 状态；0=未处理；1=处理中
 	 **/
@@ -114,8 +114,23 @@ public class Entrust{
 	 * 区域id
 	 **/
 	private String areaId;
-
-
+	
+	public String getAgentId() {
+		return agentId;
+	}
+	
+	public void setAgentId(String agentId) {
+		this.agentId = agentId;
+	}
+	
+	public String getAgentName() {
+		return agentName;
+	}
+	
+	public void setAgentName(String agentName) {
+		this.agentName = agentName;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -211,22 +226,7 @@ public class Entrust{
 	public void setPrice(String price) {
 		this.price = price;
 	}
-
-	public Integer getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-
-	public String getUserCnName() {
-		return userCnName;
-	}
-
-	public void setUserCnName(String userCnName) {
-		this.userCnName = userCnName;
-	}
+	
 
 	public Integer getStatus() {
 		return status;
@@ -379,11 +379,11 @@ public class Entrust{
 		if (price != null) {
 			sb.append(", \"price\":\"").append(price).append("\"");
 		}
-		if (userId != null) {
-			sb.append(", \"userId\":\"").append(userId).append("\"");
+		if (agentId != null) {
+			sb.append(", \"agentId\":\"").append(agentId).append("\"");
 		}
-		if (userCnName != null) {
-			sb.append(", \"userCnName\":\"").append(userCnName).append("\"");
+		if (agentName != null) {
+			sb.append(", \"agentName\":\"").append(agentName).append("\"");
 		}
 		if (status != null) {
 			sb.append(", \"status\":\"").append(status).append("\"");

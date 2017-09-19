@@ -17,6 +17,17 @@ public class MidlandConfig {
 	@Value("${agentPage}")
 	private String agentPage;
 	
+	@Value("${appointTaskTime}")
+	private String appointTaskTime;
+	
+	public String getAppointTaskTime() {
+		return appointTaskTime;
+	}
+	
+	public void setAppointTaskTime(String appointTaskTime) {
+		this.appointTaskTime = appointTaskTime;
+	}
+	
 	public String getAgentPage() {
 		return agentPage;
 	}

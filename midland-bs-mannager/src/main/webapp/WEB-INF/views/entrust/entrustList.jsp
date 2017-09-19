@@ -60,7 +60,7 @@
                         <td>${item.measure }</td>
                         <td>${item.price }</td>
                         <td>${item.entrustTime }</td>
-                        <td>${item.userCnName }</td>
+                        <td>${item.agentName }</td>
                         <td><c:forEach items="${statusList}" var="s">
                             <c:if test="${item.status == s.id}">${s.name}</c:if>
                         </c:forEach></td>

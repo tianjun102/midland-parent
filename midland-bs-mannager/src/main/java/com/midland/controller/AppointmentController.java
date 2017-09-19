@@ -228,7 +228,6 @@ public class AppointmentController extends BaseFilter{
 		map1.put("pageNo",pageNo);
 		String data = HttpUtils.get(midlandConfig.getAgentPage(), map1);
 		List result = MidlandHelper.getPojoList(data, Agent.class);
-		
 		Paginator paginator = new Paginator(Integer.valueOf(pageNo),Integer.valueOf(pageSize),100);
 		model.addAttribute("paginator", paginator);
 		model.addAttribute("agents", result);
