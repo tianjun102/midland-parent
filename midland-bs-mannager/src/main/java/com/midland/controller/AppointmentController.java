@@ -210,26 +210,28 @@ public class AppointmentController extends BaseFilter{
 	
 	/**
 	 * 预约看房（重新分配经纪人）
-	 * @param user
+	 * @param agent
 	 * @return
 	 */
 	@RequestMapping(value = "/redistribute_page", method = {RequestMethod.GET,RequestMethod.POST})
 	public String getAppointRedistribute(Agent agent, Model model, HttpServletRequest request){
-		try {
-			int pageSize=Integer.valueOf(request.getParameter("pageSize"));
-			int pageNo=Integer.valueOf(request.getParameter("pageNo"));
-			Map map1 = MidlandHelper.objectToMap(agent);
-			map1.put("pageSize",pageSize);
-			map1.put("pageNo",pageNo);
-			String data = HttpUtils.get(midlandConfig.getAgentPage(), map1);
-			List result = MidlandHelper.getPojoList(data, Agent.class);
-			
-			Paginator paginator = new Paginator(pageNo,pageSize,100);
-			model.addAttribute("paginator", paginator);
-			model.addAttribute("users", result);
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+		String pageSize=request.getParameter("pageSize");
+		String pageNo=request.getParameter("pageNo");
+		if (pageSize == null ){
+			pageSize="5";
 		}
+		if (pageNo == null ){
+			pageNo="1";
+		}
+		Map map1 = agent.agentToMap();
+		map1.put("pageSize",pageSize);
+		map1.put("pageNo",pageNo);
+		String data = HttpUtils.get(midlandConfig.getAgentPage(), map1);
+		List result = MidlandHelper.getPojoList(data, Agent.class);
+		
+		Paginator paginator = new Paginator(Integer.valueOf(pageNo),Integer.valueOf(pageSize),100);
+		model.addAttribute("paginator", paginator);
+		model.addAttribute("agents", result);
 		
 		return "appointment/redistributeList";
 	}
@@ -260,7 +262,7 @@ public class AppointmentController extends BaseFilter{
 			exportModel.setModelName12(appointment1.getMeasure());
 			exportModel.setModelName13(appointment1.getPrice());
 			exportModel.setModelName14(appointment1.getEntrustTime());
-			exportModel.setModelName15(appointment1.getUserCnName());
+			exportModel.setModelName15(appointment1.getAgentName());
 			List<ParamObject> statusList = JsonMapReader.getMap("appointment_status");
 			exportModel.setModelName16(MidlandHelper.getNameById(appointment1.getStatus(), statusList));
 			exportModel.setModelName17(appointment1.getHandleTime());

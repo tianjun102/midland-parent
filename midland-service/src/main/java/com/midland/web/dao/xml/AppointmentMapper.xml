@@ -18,8 +18,8 @@
 		<result column="measure" property="measure" jdbcType="VARCHAR" />
 		<result column="price" property="price" jdbcType="VARCHAR" />
 		<result column="entrust_time" property="entrustTime" jdbcType="TIMESTAMP" />
-		<result column="user_id" property="userId" jdbcType="INTEGER" />
-		<result column="user_cn_name" property="userCnName" jdbcType="VARCHAR" />
+		<result column="agent_id" property="agentId" jdbcType="VARCHAR" />
+		<result column="agent_name" property="agentName" jdbcType="VARCHAR" />
 		<result column="status" property="status" jdbcType="INTEGER" />
 		<result column="handle_time" property="handleTime" jdbcType="TIMESTAMP" />
 		<result column="decoration" property="decoration" jdbcType="TINYINT" />
@@ -30,7 +30,7 @@
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,appoint_sn,source,nick_name,phone,house_type,sell_rent,appointment_time,area_name,community_name,address,layout,measure,price,entrust_time,user_id,user_cn_name,status,handle_time,decoration,is_delete,city_id,city_name,area_id
+		id,appoint_sn,source,nick_name,phone,house_type,sell_rent,appointment_time,area_name,community_name,address,layout,measure,price,entrust_time,agent_id,agent_name,status,handle_time,decoration,is_delete,city_id,city_name,area_id
 	</sql>
 
 	<select id="selectAppointmentById" resultMap="BaseResultMap">
@@ -104,11 +104,11 @@
 			<if test="entrustTime != null">
 				entrust_time,
 			</if>
-			<if test="userId != null">
-				user_id,
+			<if test="agentId != null">
+				agent_id,
 			</if>
-			<if test="userCnName != null">
-				user_cn_name,
+			<if test="agentName != null">
+				agent_name,
 			</if>
 			<if test="status != null">
 				status,
@@ -131,6 +131,7 @@
 			<if test="areaId != null">
 				area_id,
 			</if>
+
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -176,11 +177,11 @@
 			<if test="entrustTime != null">
 				#{entrustTime,jdbcType=TIMESTAMP},
 			</if>
-			<if test="userId != null">
-				#{userId,jdbcType=INTEGER},
+			<if test="agentId != null">
+				#{agentId,jdbcType=INTEGER},
 			</if>
-			<if test="userCnName != null">
-				#{userCnName,jdbcType=VARCHAR},
+			<if test="agentName != null">
+				#{agentName,jdbcType=VARCHAR},
 			</if>
 			<if test="status != null">
 				#{status,jdbcType=INTEGER},
@@ -203,6 +204,7 @@
 			<if test="areaId != null">
 				#{areaId,jdbcType=INTEGER},
 			</if>
+
 		</trim>
 	</insert>
 
@@ -249,11 +251,11 @@
 		<if test="entrustTime != null">
 			entrust_time= #{entrustTime,jdbcType=TIMESTAMP},
 		</if>
-		<if test="userId != null">
-			user_id= #{userId,jdbcType=INTEGER},
+		<if test="agentId != null">
+			agent_id= #{agentId,jdbcType=INTEGER},
 		</if>
-		<if test="userCnName != null">
-			user_cn_name= #{userCnName,jdbcType=VARCHAR},
+		<if test="agentName != null">
+			agent_name= #{agentName,jdbcType=VARCHAR},
 		</if>
 		<if test="status != null">
 			status= #{status,jdbcType=INTEGER},
@@ -324,11 +326,11 @@
 		<if test="entrustTime != null">
 			 and entrust_time= #{entrustTime,jdbcType=TIMESTAMP}
 		</if>
-		<if test="userId != null">
-			 and user_id= #{userId,jdbcType=INTEGER}
+		<if test="agentId != null">
+			 and agent_id= #{agentId,jdbcType=INTEGER}
 		</if>
-		<if test="userCnName != null">
-			 and user_cn_name= #{userCnName,jdbcType=VARCHAR}
+		<if test="agentName != null">
+			 and agent_name= #{agentName,jdbcType=VARCHAR}
 		</if>
 		<if test="status != null">
 			 and status= #{status,jdbcType=INTEGER}
@@ -351,6 +353,7 @@
 		<if test="areaId != null">
 			 and area_id= #{areaId,jdbcType=INTEGER}
 		</if>
+
 	</sql>
 
 </mapper>

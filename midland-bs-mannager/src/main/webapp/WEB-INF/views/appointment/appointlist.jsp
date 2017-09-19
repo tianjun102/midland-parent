@@ -60,18 +60,16 @@
                         <td>${item.measure }</td>
                         <td>${item.price }</td>
                         <td>${item.entrustTime }</td>
-                        <td>${item.userCnName }</td>
+                        <td>${item.agentName }</td>
                         <td><c:forEach items="${statusList}" var="s">
                             <c:if test="${item.status == s.id}">${s.name}</c:if>
                         </c:forEach></td>
                         <td>${item.handleTime }</td>
                         <td>
-
                             <a target="contentF" class="edit_img" title="重新分配经纪人"
                                onclick="toRedistribute(${item.id })"></a>
-
-                            <a target="contentF" class="edit_img" title="编辑"
-                               onclick="toUpdateAppointment(${item.id})"></a>
+                            <a target="contentF" title="编辑"
+                               onclick="toUpdateAppointment(${item.id})">编辑</a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -100,7 +98,7 @@
             type: 2,
             title: ['重新分配经纪人'],
             shade: 0.3,
-            area: ['1000px', '700px'],
+            area: ['1300px', '700px'],
             content: ['${ctx}/rest/appoint/toRedistribute?appointId=' + id, 'no']
         });
     }

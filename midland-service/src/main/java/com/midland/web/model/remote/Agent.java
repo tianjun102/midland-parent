@@ -1,5 +1,8 @@
 package com.midland.web.model.remote;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by 'ms.x' on 2017/9/18.
  */
@@ -172,6 +175,56 @@ public class Agent {
 	
 	public void setPhotoUrl(String photoUrl) {
 		this.photoUrl = photoUrl;
+	}
+	
+	
+	public Map agentToMap(){
+		Map map =new HashMap();
+		if (phone != null){
+			map.put("phone",phone);
+		}
+		if (post != null){
+			map.put("post",post);
+		}
+		if (IM_ID != null){
+			map.put("IM_ID",IM_ID);
+		}
+		if (serviceType != null){
+			map.put("serviceType",serviceType);
+		}
+		if (serviceAreaName != null){
+			map.put("serviceAreaName",serviceAreaName);
+		}
+		if (url != null){
+			map.put("url",url);
+		}
+		if (jobNum != null){
+			map.put("jobNum",jobNum);
+		}
+		if (knowGardenName != null){
+			map.put("knowGardenName",knowGardenName);
+		}
+		if (id != null){
+			map.put("id",id);
+		}
+		if (rentCount != null){
+			map.put("rentCount",rentCount);
+		}
+		if (saleCount != null){
+			map.put("saleCount",saleCount);
+		}
+		if (name != null){
+			map.put("name",name);
+		}
+	
+		if (photoUrl != null){
+			map.put("photoUrl",photoUrl);
+		}
+		if (storeName != null){
+			map.put("storeName",storeName);
+		}
+		
+		return map;
 	}
 	
 	@Override
