@@ -24,6 +24,14 @@ public class OtherController extends BaseFilter {
 		model.addAttribute("item", footer);
 		return "footer/privacy";
 	}
+
+	@RequestMapping("/elite/index")
+	public String eliteIndex(HttpServletRequest request, Model model,String flag) {
+		Footer footer = footerServiceImpl.getFooter();
+		model.addAttribute("item", footer);
+		model.addAttribute("flag",flag);
+		return "eliteClub/eliteClub";
+	}
 	
 	@RequestMapping("/disclaimer/index")
 	public String disclaimerIndex(HttpServletRequest request, Model model) {

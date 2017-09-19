@@ -45,9 +45,9 @@ public class PTest {
 	@Test
 	public void dsfs(){
 		SmsModel smsModel = new SmsModel();
-		smsModel.setSendType(1);
-		smsModel.setCont("dsfdf");
 		smsModel.setPhones("13600158343");
+		smsModel.setFields("11||11||111");
+		smsModel.setTpId("2029157");
 		try {
 			SmsResult reuslt = smsClient.execute(smsModel);
 			System.out.println();

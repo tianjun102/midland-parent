@@ -107,7 +107,12 @@ public class FooterController extends BaseFilter {
 		Map<String,Object> map = new HashMap<>();
 		try {
 			log.info("updateFooterById  {}",footer);
+			if (footer.getId()!=null){
 			footerServiceImpl.updateFooterById(footer);
+			}else{
+			footerServiceImpl.insertFooter(footer);
+			}
+
 			map.put("state",0);
 		} catch(Exception e) {
 			log.error("updateFooterById  {}",footer,e);
