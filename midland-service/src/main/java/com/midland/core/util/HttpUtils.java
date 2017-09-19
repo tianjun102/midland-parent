@@ -199,15 +199,16 @@ public class HttpUtils {
 		
 		return _StringPost(url, s,DEFAULT_CHARSET);
 	}
+
 	/**
 	 * @description 功能描述: post 请求
 	 * @param url 请求地址
 	 * @param s 参数xml
 	 * @return 请求失败返回null
 	 */
-	public static String post(String url, String s,String charset) {
+	public static String post(String url, String s,String charset) throws IOException {
 		
-		return _StringPost(url, s,charset);
+		return smsPost(url, s,charset);
 	}
 	
 	
@@ -280,12 +281,13 @@ public class HttpUtils {
 		try {
 			connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestMethod("POST");
-			in = new BufferedReader(new InputStreamReader(url.openStream()));
+			in = new BufferedReader(new InputStreamReader(url.openStream(),charset));
 			String line=null;
 			while((line = in.readLine()) != null){
 				sbs.append(line);
 			}
-			return sbs.toString();
+			 String strTemp = sbs.toString();
+			return strTemp;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}finally {

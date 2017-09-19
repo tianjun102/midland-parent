@@ -27,23 +27,8 @@ public class SmsProperties {
 	 */
 	@Value("${userId}")
 	private String userId;
-	/**
-	 * 接口通信唯一标识，64位16进制数，每次登录重新生成,如果非用户操作，可以为空。
-	 */
-	@Value("${webKey}")
-	private String webKey;
-	/**
-	 * 	会话标识，非用户操作时，必填
-	 */
-	@Value("${sessionId}")
-	private String sessionId;
-	
-	/**
-	 * 	产品的类别
-	 */
-	@Value("${type}")
-	private String type;
-	
+
+
 	@Value("${charset}")
 	private String charset ="utf-8";
 
@@ -82,31 +67,7 @@ public class SmsProperties {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	
-	public String getWebKey() {
-		return webKey;
-	}
-	
-	public void setWebKey(String webKey) {
-		this.webKey = webKey;
-	}
-	
-	public String getSessionId() {
-		return sessionId;
-	}
-	
-	public void setSessionId(String sessionId) {
-		this.sessionId = sessionId;
-	}
-	
-	public String getType() {
-		return type;
-	}
-	
-	public void setType(String type) {
-		this.type = type;
-	}
-	
+
 	public String getCharset() {
 		return charset;
 	}

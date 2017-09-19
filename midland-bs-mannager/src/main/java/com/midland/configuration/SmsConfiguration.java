@@ -19,10 +19,7 @@ public class SmsConfiguration {
 		
 		smsClient.setBizAppId(smsProperties.getBizAppId());
 		smsClient.setCustomerId(smsProperties.getCustomerId());
-		smsClient.setSessionId(smsProperties.getSessionId());
-		smsClient.setType(Integer.valueOf(smsProperties.getType()));
 		smsClient.setUserId(smsProperties.getUserId());
-		smsClient.setWebKey(smsProperties.getWebKey());
 		smsClient.setUrl(smsProperties.getUrl());
 		smsClient.setCharset(smsProperties.getCharset());
 		smsClient.setPassword(smsProperties.getPassword());

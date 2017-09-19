@@ -256,22 +256,22 @@
 					</dt>
 					<dd>
 						<shiro:hasPermission name="purpose">
-							<a id = "report1" href="${ctx}/rest/intoMidland/index?flag=1" target="contentF"><span>精英会宗旨</span></a>
+							<a id = "report1" href="${ctx}/rest/elite/index?flag=0" target="contentF"><span>精英会宗旨</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="eliteDesc">
-							<a id = "report1" href="${ctx}/rest/intoMidland/index?flag=2" target="contentF"><span>精英会简介</span></a>
+							<a id = "report1" href="${ctx}/rest/elite/index?flag=1" target="contentF"><span>精英会简介</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="memberShip">
-							<a id = "report1" href="${ctx}/rest/intoMidland/index?flag=3" target="contentF"><span>入会资格</span></a>
+							<a id = "report1" href="${ctx}/rest/elite/index?flag=2" target="contentF"><span>入会资格</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="development">
-							<a id = "report1" href="${ctx}/rest/intoMidland/index?flag=4" target="contentF"><span>发展前瞻</span></a>
+							<a id = "report1" href="${ctx}/rest/elite/index?flag=3" target="contentF"><span>发展前瞻</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="eliteAd">
-							<a id = "report1" href="${ctx}/rest/intoMidland/index?flag=5" target="contentF"><span>精英会活动</span></a>
+							<a id = "report1" href="${ctx}/rest/eliteClub/index" target="contentF"><span>精英会活动</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="eliteVip">
-							<a id = "report1" href="${ctx}/rest/intoMidland/index?flag=6" target="contentF"><span>精英会员管理</span></a>
+							<a id = "report1" href="${ctx}/rest/eliteVip/index" target="contentF"><span>精英会员管理</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="eliteCate">
 							<a id = "report1" href="${ctx}/rest/intoMidland/index?flag=7" target="contentF"><span>会员分类管理</span></a>
