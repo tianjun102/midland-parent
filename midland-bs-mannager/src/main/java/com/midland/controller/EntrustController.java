@@ -6,13 +6,14 @@ import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.config.MidlandConfig;
 import com.midland.core.util.HttpUtils;
+import com.midland.web.api.ApiHelper;
+import com.midland.web.api.SmsSender.SmsModel;
 import com.midland.web.enums.ContextEnums;
 import com.midland.web.model.Entrust;
 import com.midland.web.model.EntrustLog;
 import com.midland.web.model.ExportModel;
 import com.midland.web.model.remote.Agent;
 import com.midland.web.model.user.User;
-import com.midland.web.service.DingJiangService;
 import com.midland.web.service.EntrustLogService;
 import com.midland.web.service.EntrustService;
 import com.midland.web.util.JsonMapReader;
@@ -50,7 +51,7 @@ public class EntrustController extends BaseFilter{
 	private MidlandConfig midlandConfig;
 	
 	@Autowired
-	private DingJiangService dingJiangServiceImpl;
+	private ApiHelper apiHelper;
 	
 	Logger logger = LoggerFactory.getLogger(EntrustController.class);
 	
@@ -196,7 +197,13 @@ public class EntrustController extends BaseFilter{
 		logger.info("resetAgent ： 重新分配经纪人，{}",record);
 		Map map = new HashMap();
 		try {
+			List<String> list = new ArrayList<>();
+			list.add("您好");
+			list.add("您好");
+			list.add("您好");
 			entrustServiceImpl.updateEntrustById(record);
+			SmsModel smsModel = new SmsModel("135765456789","2029157",list);
+			apiHelper.smsSender("resetAgent",smsModel);
 			map.put("state",0);
 		} catch (Exception e) {
 			logger.error("resetAgent : {}",record,e);

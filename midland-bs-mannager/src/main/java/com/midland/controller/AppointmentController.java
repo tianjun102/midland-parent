@@ -6,8 +6,9 @@ import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.config.MidlandConfig;
 import com.midland.core.util.HttpUtils;
-import com.midland.web.SmsSender.SmsClient;
-import com.midland.web.SmsSender.SmsModel;
+import com.midland.web.api.SmsSender.SmsClient;
+import com.midland.web.api.SmsSender.SmsModel;
+import com.midland.web.api.SmsSender.SmsResult;
 import com.midland.web.enums.ContextEnums;
 import com.midland.web.model.AppointLog;
 import com.midland.web.model.Appointment;
@@ -17,7 +18,6 @@ import com.midland.web.model.user.User;
 import com.midland.web.service.AppointLogService;
 import com.midland.web.service.AppointmentService;
 import com.midland.web.service.DingJiangService;
-import com.midland.web.service.UserService;
 import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
 import com.midland.web.util.ParamObject;
@@ -102,7 +102,11 @@ public class AppointmentController extends BaseFilter{
 			appointmentServiceImpl.insertAppointment(record);
 			SmsModel smsModel = new SmsModel();
 			smsModel.setPhones(record.getAgentPhone());
-			smsClient.execute(smsModel);
+			SmsResult result = smsClient.execute(smsModel);
+			// TODO: 2017/9/19 预约看房发送短信
+			if ("".equals(result.getResultCode())){
+				logger.error("预约看房时发送短信失败,{}",result);
+			}
 			map.put("state",0);
 			return map;
 		} catch (Exception e) {

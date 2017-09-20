@@ -1,7 +1,6 @@
 package com.midland.configuration;
 
-import com.midland.web.SmsSender.SmsProperties;
-import com.midland.web.mailSender.MailProperties;
+import com.midland.web.api.mailSender.MailProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.mail.javamail.JavaMailSender;

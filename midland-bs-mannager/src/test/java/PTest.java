@@ -1,13 +1,11 @@
-import com.alibaba.fastjson.JSONArray;
 import com.midland.config.MidlandConfig;
 import com.midland.core.util.HttpUtils;
-import com.midland.web.SmsSender.SmsClient;
-import com.midland.web.SmsSender.SmsModel;
-import com.midland.web.SmsSender.SmsResult;
+import com.midland.web.api.ApiHelper;
+import com.midland.web.api.SmsSender.SmsClient;
+import com.midland.web.api.SmsSender.SmsModel;
 import com.midland.web.model.remote.Agent;
 import com.midland.web.service.AppointmentService;
 import com.midland.web.util.MidlandHelper;
-import org.jdom.JDOMException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,29 +40,18 @@ public class PTest {
 	private SmsClient smsClient;
 	@Autowired
 	private JavaMailSender javaMailSender;
+	@Autowired
+	private ApiHelper apiHelper;
 	
 	@Test
 	public void dsfs(){
-		SmsModel smsModel = new SmsModel();
-		smsModel.setPhones("13600158343");
-		smsModel.setFields("11||11||111");
-		smsModel.setTpId("2029157");
-		try {
-			SmsResult reuslt = smsClient.execute(smsModel);
-			System.out.println();
-			System.out.println();
-			System.out.println();
-			System.out.println(JSONArray.toJSONString(reuslt));
-			System.out.println();
-			System.out.println();
-			System.out.println();
-			System.out.println();
-			
-		} catch (JDOMException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		List list = new ArrayList();
+		list.add("sdfef");
+		list.add("dfef");
+		list.add("qqqq");
+		SmsModel smsModel = new SmsModel("135765456789","2029157",list);
+		
+		apiHelper.smsSender("dsfs",smsModel);
 	}
 	
 	@Test
@@ -101,7 +89,7 @@ public class PTest {
 		message.setTo("977543176@qq.com");
 		message.setSubject("主题：简单邮件");
 		message.setText("简单邮件内容");
-		javaMailSender.send(message);
+		apiHelper.emailSender("sendSimpleMail",message);
 	}
 	
 }

@@ -17,6 +17,7 @@
 		<result column="price" property="price" jdbcType="VARCHAR" />
 		<result column="agent_id" property="agentId" jdbcType="VARCHAR" />
 		<result column="agent_name" property="agentName" jdbcType="VARCHAR" />
+		<result column="agent_phone" property="agentPhone" jdbcType="VARCHAR" />
 		<result column="status" property="status" jdbcType="INTEGER" />
 		<result column="handle_time" property="handleTime" jdbcType="TIMESTAMP" />
 		<result column="nick_name" property="nickName" jdbcType="VARCHAR" />
@@ -34,7 +35,7 @@
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,entrust_sn,source,house_type,sell_rent,entrust_time,area_name,community_name,address,layout,measure,price,agent_id,agent_name,status,handle_time,nick_name,renovation,phone,is_delete,broadband,washing_machine,household,fridge,entrust_type,city_id,city_name,area_id
+		id,entrust_sn,source,house_type,sell_rent,entrust_time,area_name,community_name,address,layout,measure,price,agent_id,agent_name,status,handle_time,nick_name,renovation,phone,is_delete,broadband,washing_machine,household,fridge,entrust_type,city_id,city_name,area_id,agent_phone
 	</sql>
 
 	<select id="selectEntrustById" resultMap="BaseResultMap">
@@ -147,6 +148,9 @@
 			<if test="areaId != null">
 				area_id,
 			</if>
+			<if test="agentPhone != null">
+				agent_phone,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -231,6 +235,9 @@
 			<if test="areaId != null">
 				#{areaId,jdbcType=VARCHAR},
 			</if>
+			 <if test="agentPhone != null">
+				 #{agentPhone,jdbcType=VARCHAR},
+			 </if>
 		</trim>
 	</insert>
 
@@ -315,6 +322,9 @@
 		</if>
 		<if test="areaId != null">
 			area_id= #{areaId,jdbcType=VARCHAR},
+		</if>
+		<if test="agentPhone != null">
+			agent_phone= #{agentPhone,jdbcType=VARCHAR},
 		</if>
 	</sql>
 
@@ -402,6 +412,9 @@
 		</if>
 		<if test="areaId != null">
 			 and area_id= #{areaId,jdbcType=VARCHAR}
+		</if>
+		<if test="agentPhone != null">
+			and agent_phone= #{agentPhone,jdbcType=VARCHAR}
 		</if>
 	</sql>
 

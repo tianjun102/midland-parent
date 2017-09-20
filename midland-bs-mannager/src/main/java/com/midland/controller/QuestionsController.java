@@ -4,12 +4,16 @@ package com.midland.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.midland.base.BaseFilter;
+import com.midland.web.Contants.Contant;
+import com.midland.web.api.ApiHelper;
+import com.midland.web.api.SmsSender.SmsModel;
 import com.midland.web.enums.ContextEnums;
 import com.midland.web.model.Answer;
 import com.midland.web.model.Questions;
 import com.midland.web.model.user.User;
 import com.midland.web.service.AnswerService;
 import com.midland.web.service.QuestionsService;
+import com.midland.web.service.RedisService;
 import com.midland.web.util.MidlandHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +41,10 @@ public class QuestionsController extends BaseFilter {
 	
 	@Autowired
 	private AnswerService answerServiceImpl;
-	
+	@Autowired
+	private RedisService redisServiceImpl;
+	@Autowired
+	private ApiHelper apiHelper;
 	Logger logger = LoggerFactory.getLogger(QuestionsController.class);
 	
 	@RequestMapping("/index")
@@ -64,7 +72,10 @@ public class QuestionsController extends BaseFilter {
 	public Object deleteAnswerByPrimaryKey(Integer id) {
 		Map map = new HashMap<>();
 		try {
-			answerServiceImpl.deleteAnswerById(id);
+			Answer answer = new Answer();
+			answer.setId(id);
+			answer.setIsDelete(1);
+			answerServiceImpl.updateAnswerById(answer);
 			map.put("state",0);
 		} catch (Exception e) {
 			logger.error("deleteAnswerByPrimaryKey {}",id,e);
@@ -126,7 +137,7 @@ public class QuestionsController extends BaseFilter {
 	
 	
 	@RequestMapping("/to_view")
-	public String toUpdateAppointment(int id,Model model) throws Exception {
+	public String toUpdateAnswer(int id,Model model) throws Exception {
 		Questions questions=questionsServiceImpl.selectByPrimaryKey(id);
 		Answer answer = new Answer();
 		answer.setQuestionsId(id);
@@ -170,6 +181,10 @@ public class QuestionsController extends BaseFilter {
 		answer.setAnswerTime(MidlandHelper.getCurrentTime());
 		User user = MidlandHelper.getCurrentUser(request);
 		answer.setAnswerName(user.getUserCnName());
+		if (redisServiceImpl.getAnswerAuditFlag()== Contant.answerAuditClose){
+			//关闭审核功能，回复的审核状态就默认为“审核通过”
+			answer.setAuditStatus(1);
+		}
 		try {
 			answerServiceImpl.insertAnswer(answer);
 			map.put("state",0);
@@ -179,4 +194,30 @@ public class QuestionsController extends BaseFilter {
 		}
 		return map;
 	}
+	@RequestMapping("/updateAnswer")
+	@ResponseBody
+	public Object updateAnswer(Answer answer,HttpServletRequest request){
+		Map map = new HashMap();
+		try {
+			if (answer.getAuditStatus() == 2){
+				//审核不通过，发送短信通知经纪人
+				List list = new ArrayList();
+				String remark = request.getParameter("auditRemark");
+				
+				list.add(remark);
+				list.add("dfef");
+				list.add("qqqq");
+				SmsModel smsModel = new SmsModel("135765456789","2029157",list);
+				apiHelper.smsSender("updateAnswer",smsModel);
+			}
+			answerServiceImpl.updateAnswerById(answer);
+			map.put("state",0);
+			
+		} catch (Exception e) {
+			logger.error("updateAnswer : {}",answer,e);
+			map.put("state",-1);
+		}
+		return map;
+	}
+	
 }

@@ -59,6 +59,10 @@ public class Entrust{
 	 **/
 	private String agentName;
 	/**
+	 * 经纪人手机号
+	 **/
+	private String agentPhone;
+	/**
 	 * 状态；0=未处理；1=处理中
 	 **/
 	private Integer status;
@@ -114,6 +118,14 @@ public class Entrust{
 	 * 区域id
 	 **/
 	private String areaId;
+	
+	public String getAgentPhone() {
+		return agentPhone;
+	}
+	
+	public void setAgentPhone(String agentPhone) {
+		this.agentPhone = agentPhone;
+	}
 	
 	public String getAgentId() {
 		return agentId;
@@ -384,6 +396,9 @@ public class Entrust{
 		}
 		if (agentName != null) {
 			sb.append(", \"agentName\":\"").append(agentName).append("\"");
+		}
+		if (agentPhone != null) {
+			sb.append(", \"agentPhone\":\"").append(agentPhone).append("\"");
 		}
 		if (status != null) {
 			sb.append(", \"status\":\"").append(status).append("\"");

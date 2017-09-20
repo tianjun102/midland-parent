@@ -1,4 +1,4 @@
-package com.midland.web.SmsSender;
+package com.midland.web.api.SmsSender;
 
 import com.midland.core.util.HttpUtils;
 import com.midland.core.util.XMLUtil;

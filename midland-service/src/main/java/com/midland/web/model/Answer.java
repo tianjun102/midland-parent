@@ -33,8 +33,20 @@ public class Answer{
 	 * 0未删除，1删除
 	 **/
 	private Integer isDelete;
-
-
+	
+	/**
+	 * 审核状态：0未审核，1审核通过，2审核不通过
+	 */
+	private Integer auditStatus;
+	
+	public Integer getAuditStatus() {
+		return auditStatus;
+	}
+	
+	public void setAuditStatus(Integer auditStatus) {
+		this.auditStatus = auditStatus;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -126,6 +138,7 @@ public class Answer{
 		if (isDelete != null) {
 			sb.append(", \"isDelete\":\"").append(isDelete).append("\"");
 		}
+		sb.append("}");
 		return sb.toString();
 	}
 }

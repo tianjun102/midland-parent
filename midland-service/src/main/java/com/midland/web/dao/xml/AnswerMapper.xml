@@ -11,10 +11,11 @@
 		<result column="support_num" property="supportNum" jdbcType="INTEGER" />
 		<result column="questions_id" property="questionsId" jdbcType="INTEGER" />
 		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+		<result column="audit_status" property="auditStatus" jdbcType="INTEGER" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,answer_area,answer_time,answer_name,against_num,support_num,questions_id,is_delete
+		id,answer_area,answer_time,answer_name,against_num,support_num,questions_id,is_delete,audit_status
 	</sql>
 
 	<select id="selectAnswerById" resultMap="BaseResultMap">
@@ -67,6 +68,9 @@
 			<if test="isDelete != null">
 				is_delete,
 			</if>
+			<if test="auditStatus != null">
+				audit_status,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -91,6 +95,9 @@
 			<if test="isDelete != null">
 				#{isDelete,jdbcType=INTEGER},
 			</if>
+			 <if test="auditStatus != null">
+				 #{auditStatus,jdbcType=INTEGER},
+			 </if>
 		</trim>
 	</insert>
 
@@ -115,6 +122,9 @@
 		</if>
 		<if test="isDelete != null">
 			is_delete= #{isDelete,jdbcType=INTEGER},
+		</if>
+		<if test="auditStatus != null">
+			audit_status=#{auditStatus,jdbcType=INTEGER},
 		</if>
 	</sql>
 
@@ -142,6 +152,9 @@
 		</if>
 		<if test="isDelete != null">
 			 and is_delete= #{isDelete,jdbcType=INTEGER}
+		</if>
+		<if test="auditStatus != null">
+			and audit_status=#{auditStatus,jdbcType=INTEGER}
 		</if>
 	</sql>
 
