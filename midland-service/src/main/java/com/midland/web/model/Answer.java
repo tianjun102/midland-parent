@@ -1,5 +1,6 @@
 package com.midland.web.model;
 
+
 public class Answer{
 	/**
 	 * 回答表主键ID
@@ -14,7 +15,7 @@ public class Answer{
 	 **/
 	private String answerTime;
 	/**
-	 * 回答人名字
+	 * 回答人名字（经纪人名称）
 	 **/
 	private String answerName;
 	/**
@@ -33,20 +34,20 @@ public class Answer{
 	 * 0未删除，1删除
 	 **/
 	private Integer isDelete;
-	
 	/**
 	 * 审核状态：0未审核，1审核通过，2审核不通过
-	 */
+	 **/
 	private Integer auditStatus;
-	
-	public Integer getAuditStatus() {
-		return auditStatus;
-	}
-	
-	public void setAuditStatus(Integer auditStatus) {
-		this.auditStatus = auditStatus;
-	}
-	
+	/**
+	 * 回答人电话（经纪人电话）
+	 **/
+	private String answerPhone;
+	/**
+	 * 回答人工号（经纪人工号）
+	 **/
+	private Integer answerNo;
+
+
 	public Integer getId() {
 		return id;
 	}
@@ -111,6 +112,30 @@ public class Answer{
 		this.isDelete = isDelete;
 	}
 
+	public Integer getAuditStatus() {
+		return auditStatus;
+	}
+
+	public void setAuditStatus(Integer auditStatus) {
+		this.auditStatus = auditStatus;
+	}
+
+	public String getAnswerPhone() {
+		return answerPhone;
+	}
+
+	public void setAnswerPhone(String answerPhone) {
+		this.answerPhone = answerPhone;
+	}
+
+	public Integer getAnswerNo() {
+		return answerNo;
+	}
+
+	public void setAnswerNo(Integer answerNo) {
+		this.answerNo = answerNo;
+	}
+
 	@Override
 	public String toString() {
 		 final StringBuffer sb=new StringBuffer("Answer{");
@@ -137,6 +162,15 @@ public class Answer{
 		}
 		if (isDelete != null) {
 			sb.append(", \"isDelete\":\"").append(isDelete).append("\"");
+		}
+		if (auditStatus != null) {
+			sb.append(", \"auditStatus\":\"").append(auditStatus).append("\"");
+		}
+		if (answerPhone != null) {
+			sb.append(", \"answerPhone\":\"").append(answerPhone).append("\"");
+		}
+		if (answerNo != null) {
+			sb.append(", \"answerNo\":\"").append(answerNo).append("\"");
 		}
 		sb.append("}");
 		return sb.toString();

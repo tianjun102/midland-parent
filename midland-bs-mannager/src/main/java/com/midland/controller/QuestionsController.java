@@ -174,6 +174,8 @@ public class QuestionsController extends BaseFilter {
 		map.put("state",-1);
 		return map;
 	}
+	
+	
 	@RequestMapping("/repeat")
 	@ResponseBody
 	public Object repeat(Answer answer, HttpServletRequest request) {
@@ -181,6 +183,7 @@ public class QuestionsController extends BaseFilter {
 		answer.setAnswerTime(MidlandHelper.getCurrentTime());
 		User user = MidlandHelper.getCurrentUser(request);
 		answer.setAnswerName(user.getUserCnName());
+		answer.setAnswerPhone(user.getPhone());
 		if (redisServiceImpl.getAnswerAuditFlag()== Contant.answerAuditClose){
 			//关闭审核功能，回复的审核状态就默认为“审核通过”
 			answer.setAuditStatus(1);
@@ -199,18 +202,18 @@ public class QuestionsController extends BaseFilter {
 	public Object updateAnswer(Answer answer,HttpServletRequest request){
 		Map map = new HashMap();
 		try {
+			answerServiceImpl.updateAnswerById(answer);
+			Answer answer1= answerServiceImpl.selectAnswerById(answer.getId());
 			if (answer.getAuditStatus() == 2){
 				//审核不通过，发送短信通知经纪人
 				List list = new ArrayList();
 				String remark = request.getParameter("auditRemark");
-				
 				list.add(remark);
 				list.add("dfef");
 				list.add("qqqq");
-				SmsModel smsModel = new SmsModel("135765456789","2029157",list);
+				SmsModel smsModel = new SmsModel(answer1.getAnswerPhone(),"2029157",list);
 				apiHelper.smsSender("updateAnswer",smsModel);
 			}
-			answerServiceImpl.updateAnswerById(answer);
 			map.put("state",0);
 			
 		} catch (Exception e) {

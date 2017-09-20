@@ -12,10 +12,12 @@
 		<result column="questions_id" property="questionsId" jdbcType="INTEGER" />
 		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
 		<result column="audit_status" property="auditStatus" jdbcType="INTEGER" />
+		<result column="answer_phone" property="answerPhone" jdbcType="VARCHAR" />
+		<result column="answer_no" property="answerNo" jdbcType="INTEGER" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,answer_area,answer_time,answer_name,against_num,support_num,questions_id,is_delete,audit_status
+		id,answer_area,answer_time,answer_name,against_num,support_num,questions_id,is_delete,audit_status,answer_phone,answer_no
 	</sql>
 
 	<select id="selectAnswerById" resultMap="BaseResultMap">
@@ -71,6 +73,12 @@
 			<if test="auditStatus != null">
 				audit_status,
 			</if>
+			<if test="answerPhone != null">
+				answer_phone,
+			</if>
+			<if test="answerNo != null">
+				answer_no,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -95,9 +103,15 @@
 			<if test="isDelete != null">
 				#{isDelete,jdbcType=INTEGER},
 			</if>
-			 <if test="auditStatus != null">
-				 #{auditStatus,jdbcType=INTEGER},
-			 </if>
+			<if test="auditStatus != null">
+				#{auditStatus,jdbcType=INTEGER},
+			</if>
+			<if test="answerPhone != null">
+				#{answerPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="answerNo != null">
+				#{answerNo,jdbcType=INTEGER},
+			</if>
 		</trim>
 	</insert>
 
@@ -124,7 +138,13 @@
 			is_delete= #{isDelete,jdbcType=INTEGER},
 		</if>
 		<if test="auditStatus != null">
-			audit_status=#{auditStatus,jdbcType=INTEGER},
+			audit_status= #{auditStatus,jdbcType=INTEGER},
+		</if>
+		<if test="answerPhone != null">
+			answer_phone= #{answerPhone,jdbcType=VARCHAR},
+		</if>
+		<if test="answerNo != null">
+			answer_no= #{answerNo,jdbcType=INTEGER},
 		</if>
 	</sql>
 
@@ -154,7 +174,13 @@
 			 and is_delete= #{isDelete,jdbcType=INTEGER}
 		</if>
 		<if test="auditStatus != null">
-			and audit_status=#{auditStatus,jdbcType=INTEGER}
+			 and audit_status= #{auditStatus,jdbcType=INTEGER}
+		</if>
+		<if test="answerPhone != null">
+			 and answer_phone= #{answerPhone,jdbcType=VARCHAR}
+		</if>
+		<if test="answerNo != null">
+			 and answer_no= #{answerNo,jdbcType=INTEGER}
 		</if>
 	</sql>
 

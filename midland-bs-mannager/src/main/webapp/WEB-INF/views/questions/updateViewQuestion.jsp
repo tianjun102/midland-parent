@@ -157,8 +157,7 @@
     }
 
 
-    function deleteAnswer(){
-        var data = $("#answerId").val();
+    function deleteAnswer(data){
         update(data);
 
     }
@@ -174,7 +173,7 @@
                     layer.msg("删除成功！！！", {icon: 1});
                     $('#save').removeAttr("onclick");
                     setTimeout(function () {
-                        parent.location.reload();
+                        location.reload();
                     }, 1000);
 
                 } else {
