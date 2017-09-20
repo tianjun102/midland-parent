@@ -66,8 +66,9 @@
                         </c:forEach></td>
                         <td>${item.handleTime }</td>
                         <td>
-
-                            <a target="contentF" onclick="toRedistribute(${item.id })">分配</a>
+                            <c:if test="${item.resetFlag==1}">
+                                <a target="contentF" onclick="toRedistribute(${item.id })">分配</a>
+                            </c:if>
 
                             <a target="contentF" onclick="toUpdateEntrust(${item.id })">修改</a>
                             <a target="contentF" class="delete_img" onclick="deleteEntrust(${item.id })"></a>
@@ -92,15 +93,16 @@
 </c:if>
 
 <script type="text/javascript">
-    //删除
-    //修改
+
     function toRedistribute(id) {
+        //重新分配经纪人时，保存的地址
+        var url = "${ctx}/rest/entrust/reset_agent";
         layer.open({
             type: 2,
             title: ['重新分配经纪人'],
             shade: 0.3,
             area: ['1000px', '700px'],
-            content: ['${ctx}/rest/entrust/toRedistribute?entrustId=' + id , 'no']
+            content: ['${ctx}/rest/public/toRedistribute?id=' + id+"&url="+url , 'no']
         });
     }
     function deleteEntrust(id) {

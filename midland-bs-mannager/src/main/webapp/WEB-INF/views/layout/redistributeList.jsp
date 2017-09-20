@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%@include file="../layout/tablib.jsp" %>
+<%@include file="tablib.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -57,7 +57,7 @@
 <c:if test="${!empty paginator}">
     <c:set var="paginator" value="${paginator}"/>
     <c:set var="target" value="listDiv"/>
-    <%@include file="../layout/pagination.jsp" %>
+    <%@include file="pagination.jsp" %>
 </c:if>
 <ul class = "userinfo row">
     <li style="padding-top:30px;">
@@ -69,17 +69,19 @@
 
 <script type="text/javascript">
     function saveData(id){
-        var appointId = $("#appointId").val();
+        var id = $("#id").val();
+        var url = $("#url").val();
         var intHot = $("input[name='radio']:checked");
         var agentNo = intHot.parent().next().text();
         var agentName = intHot.parent().next().next().text();
+        var agentPhone = intHot.parent().next().next().next().text();
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/appoint/reset_agent",
+            url: url,
             async: false, // 此处必须同步
             dataType: "json",
             data: {
-                "id": appointId, "agentId": agentNo, "agentName": agentName
+                "id": id, "agentId": agentNo, "agentName": agentName,"agentPhone":agentPhone
             },
             success: function (data) {
                 if (data.state == 0) {

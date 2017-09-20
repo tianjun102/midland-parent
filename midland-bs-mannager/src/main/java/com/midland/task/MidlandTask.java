@@ -1,7 +1,9 @@
 package com.midland.task;
 
 import com.midland.web.model.Appointment;
+import com.midland.web.model.Entrust;
 import com.midland.web.service.AppointmentService;
+import com.midland.web.service.EntrustService;
 import com.midland.web.util.MidlandHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -21,8 +23,10 @@ public class MidlandTask {
 	
 	@Autowired
 	private AppointmentService appointmentServiceImpl;
+	@Autowired
+	private EntrustService entrustServiceImpl;
 	
-	//经纪人重新分配规则，24小时内状态没有修改，发送短信给经纪人及其领导，48小时后没有处理，则关闭此预约，并发送给有指定邮箱
+	//委托看房，经纪人重新分配规则，24小时内状态没有修改，发送短信给经纪人及其领导，48小时后没有处理，则关闭此预约，并发送给有指定邮箱
 	@Scheduled(fixedRate = 3600000)
 	public void scanAppointment() {
 		try {
@@ -59,6 +63,38 @@ public class MidlandTask {
 						// TODO: 2017/9/19  发送短信给经纪人及其领导，
 						System.out.println(111);
 					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//委托记录可重新分配经纪人，建议设置提醒功能，若指定时间内已分配的业务员未跟进（还未从已分配状态变为看房中），后台可重新分配。
+	@Scheduled(fixedRate = 10000)
+	public void entrustReset(){
+		try {
+			Entrust temp = new Entrust();
+			temp.setStatus(1);//1看房中，
+			temp.setResetFlag(0);//1看房中，且是还没展示“重新分配”按钮的数据
+			List<Entrust> lists = entrustServiceImpl.findEntrustList(temp);
+			for (Entrust entrust1 : lists) {
+				String time = entrust1.getAssignedTime();
+				Date assignTime = MidlandHelper.stringToDate(time);
+				Date date = new Date();
+				Calendar calendar = Calendar.getInstance();
+				calendar.setTime(date);
+				
+				calendar.add(calendar.HOUR, -24);
+				Date time_24 = calendar.getTime();
+				if (time_24.getTime() > assignTime.getTime()) {
+					
+					Entrust entrust = new Entrust();
+					entrust.setResetFlag(1);//标记为展示
+					entrust.setId(entrust1.getId());
+					entrust.setEntrustTime(null);
+					entrustServiceImpl.updateEntrustById(entrust);
+						
 				}
 			}
 		} catch (Exception e) {

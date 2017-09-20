@@ -50,11 +50,6 @@ public class AppointmentController extends BaseFilter{
 	@Autowired
 	private AppointLogService appointLogServiceImpl;
 	@Autowired
-	private DingJiangService dingJiangServiceImpl;
-	@Autowired
-	private MidlandConfig midlandConfig;
-	
-	@Autowired
 	private SmsClient smsClient;
 	
 	Logger logger = LoggerFactory.getLogger(AppointmentController.class);
@@ -120,16 +115,7 @@ public class AppointmentController extends BaseFilter{
 		
 		return appointmentServiceImpl.selectAppointmentById(id);
 	}
-	/**
-	 * 用户列表查询（重新分配经纪人）
-	 * @param appointId
-	 * @return
-	 */
-	@RequestMapping(value = "/toRedistribute", method = {RequestMethod.GET,RequestMethod.POST})
-	public String toRedistribute(String appointId, Model model, HttpServletRequest request){
-		model.addAttribute("appointId",appointId);
-		return "appointment/redistributeIndex";
-	}
+	
 	
 	
 	
@@ -216,32 +202,7 @@ public class AppointmentController extends BaseFilter{
 		return map;
 	}
 	
-	/**
-	 * 预约看房（重新分配经纪人）
-	 * @param agent
-	 * @return
-	 */
-	@RequestMapping(value = "/redistribute_page", method = {RequestMethod.GET,RequestMethod.POST})
-	public String getAppointRedistribute(Agent agent, Model model, HttpServletRequest request){
-		String pageSize=request.getParameter("pageSize");
-		String pageNo=request.getParameter("pageNo");
-		if (pageSize == null ){
-			pageSize="5";
-		}
-		if (pageNo == null ){
-			pageNo="1";
-		}
-		Map map1 = agent.agentToMap();
-		map1.put("pageSize",pageSize);
-		map1.put("pageNo",pageNo);
-		String data = HttpUtils.get(midlandConfig.getAgentPage(), map1);
-		List result = MidlandHelper.getPojoList(data, Agent.class);
-		Paginator paginator = new Paginator(Integer.valueOf(pageNo),Integer.valueOf(pageSize),100);
-		model.addAttribute("paginator", paginator);
-		model.addAttribute("agents", result);
-		
-		return "appointment/redistributeList";
-	}
+	
 	
 	
 	@RequestMapping("/export")

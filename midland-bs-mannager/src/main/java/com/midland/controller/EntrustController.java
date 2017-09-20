@@ -78,10 +78,19 @@ public class EntrustController extends BaseFilter{
 	}
 	@RequestMapping("/add")
 	@ResponseBody
-	public Object addAppointment(Entrust record) {
+	public Object addEntrust(Entrust record) {
 		Map map = new HashMap();
 		try {
+			record.setAssignedTime(MidlandHelper.getCurrentTime());
 			entrustServiceImpl.insertEntrust(record);
+			if (StringUtils.isNotEmpty(record.getAgentPhone() )){//发送短信
+				List<String> list = new ArrayList<>();;
+				list.add("您好");
+				list.add("您好");
+				list.add("您好");
+				SmsModel smsModel = new SmsModel(record.getAgentPhone(),"2029157",list);
+				apiHelper.smsSender("resetAgent",smsModel);
+			}
 			map.put("state",0);
 			return map;
 		} catch (Exception e) {
@@ -151,6 +160,10 @@ public class EntrustController extends BaseFilter{
 	public Object updateByPrimaryKeySelective(Entrust entrust,String remark, HttpServletRequest request) {
 		Map map = new HashMap();
 		try {
+			if (1 !=entrust.getStatus()){
+				//如果委托状态不是已分配，隐藏重新分配按钮
+				entrust.setResetFlag(0);
+			}
 			entrustServiceImpl.updateEntrustById(entrust);
 			User user = (User)request.getSession().getAttribute("userInfo");
 			
@@ -160,6 +173,7 @@ public class EntrustController extends BaseFilter{
 			}else{
 				appointLog.setRemark(remark);
 			}
+			
 			appointLog.setEntrustId(entrust.getId());
 			appointLog.setLogTime(MidlandHelper.getCurrentTime());
 			appointLog.setOperatorId(user.getId());
@@ -175,16 +189,6 @@ public class EntrustController extends BaseFilter{
 		return map;
 	}
 	
-	/**
-	 * 用户列表查询（重新分配经纪人）
-	 * @param entrustId
-	 * @return
-	 */
-	@RequestMapping(value = "/toRedistribute", method = {RequestMethod.GET,RequestMethod.POST})
-	public String toRedistribute(String entrustId, Model model, HttpServletRequest request){
-		model.addAttribute("entrustId",entrustId);
-		return "entrust/redistributeIndex";
-	}
 	
 	/**
 	 * 重新分配经纪人，把经纪人更新到委托记录里
@@ -197,13 +201,17 @@ public class EntrustController extends BaseFilter{
 		logger.info("resetAgent ： 重新分配经纪人，{}",record);
 		Map map = new HashMap();
 		try {
-			List<String> list = new ArrayList<>();
-			list.add("您好");
-			list.add("您好");
-			list.add("您好");
+			record.setResetFlag(0);//重新分配经纪人后，隐藏“重新分配按钮”
+			record.setAssignedTime(MidlandHelper.getCurrentTime());
 			entrustServiceImpl.updateEntrustById(record);
-			SmsModel smsModel = new SmsModel("135765456789","2029157",list);
-			apiHelper.smsSender("resetAgent",smsModel);
+			if (StringUtils.isNotEmpty(record.getAgentPhone() )){//发送短信
+				List<String> list = new ArrayList<>();
+				list.add("您好");
+				list.add("您好");
+				list.add("您好");
+				SmsModel smsModel = new SmsModel(record.getAgentPhone(),"2029157",list);
+				apiHelper.smsSender("resetAgent",smsModel);
+			}
 			map.put("state",0);
 		} catch (Exception e) {
 			logger.error("resetAgent : {}",record,e);
@@ -212,31 +220,7 @@ public class EntrustController extends BaseFilter{
 		
 		return map;
 	}
-	/**
-	 * 委托看房（重新分配经纪人）
-	 * @param agent
-	 * @return
-	 */
-	@RequestMapping(value = "/redistribute_page", method = {RequestMethod.GET,RequestMethod.POST})
-	public String getEntrustRedistribute(Agent agent, Model model, HttpServletRequest request){
-		String pageSize=request.getParameter("pageSize");
-		String pageNo=request.getParameter("pageNo");
-		if (pageSize == null ){
-			pageSize="5";
-		}
-		if (pageNo == null ){
-			pageNo="1";
-		}
-		Map map1 = agent.agentToMap();
-		map1.put("pageSize",pageSize);
-		map1.put("pageNo",pageNo);
-		String data = HttpUtils.get(midlandConfig.getAgentPage(), map1);
-		List result = MidlandHelper.getPojoList(data, Agent.class);
-		Paginator paginator = new Paginator(Integer.valueOf(pageNo),Integer.valueOf(pageSize),100);
-		model.addAttribute("paginator", paginator);
-		model.addAttribute("agents", result);
-		return "entrust/redistributeList";
-	}
+	
 	@RequestMapping("/export")
 	public void userInfoExportExcel(Entrust entrust, HttpServletResponse response) throws Exception {
 		List<Entrust> dataList = entrustServiceImpl.findEntrustList(entrust);

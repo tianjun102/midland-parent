@@ -19,10 +19,11 @@
 	<!--预约看房重新分配经纪人-->
 	<div class="box"> 
 		<section class = "content">
-		<form action="${ctx }/rest/appoint/redistribute_page" method="POST" id="searchForm"
+		<form action="${ctx }/rest/public/redistribute_page" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
-				<li><input type="hidden" id="appointId" value="${appointId}"/></li>
+				<li><input type="hidden" id="id" value="${id}"/></li>
+				<li><input type="hidden" id="url" value="${url}"/></li>
 				<li><span>经纪人工号：</span><input type="text" name="jobNum" id="jobNum" placeholder="请输入工号" /></li>
 				<li><span>经纪人：</span><input type="text" name="name" id="name" placeholder="请输入名称" /></li>
 				<li><span>手机号码：</span><input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>

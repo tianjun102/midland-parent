@@ -94,12 +94,14 @@
     //删除
     //修改
     function toRedistribute(id) {
+        //重新分配经纪人时，保存的地址
+        var url = "${ctx}/rest/appoint/reset_agent";
         layer.open({
             type: 2,
             title: ['重新分配经纪人'],
             shade: 0.3,
             area: ['1300px', '700px'],
-            content: ['${ctx}/rest/appoint/toRedistribute?appointId=' + id, 'no']
+            content: ['${ctx}/rest/public/toRedistribute?id=' + id+"&url="+url, 'no']
         });
     }
 
