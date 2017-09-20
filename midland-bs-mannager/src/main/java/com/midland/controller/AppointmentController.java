@@ -6,6 +6,7 @@ import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.config.MidlandConfig;
 import com.midland.core.util.HttpUtils;
+import com.midland.web.api.ApiHelper;
 import com.midland.web.api.SmsSender.SmsClient;
 import com.midland.web.api.SmsSender.SmsModel;
 import com.midland.web.api.SmsSender.SmsResult;
@@ -50,7 +51,7 @@ public class AppointmentController extends BaseFilter{
 	@Autowired
 	private AppointLogService appointLogServiceImpl;
 	@Autowired
-	private SmsClient smsClient;
+	private ApiHelper apiHelper;
 	
 	Logger logger = LoggerFactory.getLogger(AppointmentController.class);
 	
@@ -95,12 +96,13 @@ public class AppointmentController extends BaseFilter{
 		Map map = new HashMap();
 		try {
 			appointmentServiceImpl.insertAppointment(record);
-			SmsModel smsModel = new SmsModel();
-			smsModel.setPhones(record.getAgentPhone());
-			SmsResult result = smsClient.execute(smsModel);
-			// TODO: 2017/9/19 预约看房发送短信
-			if ("".equals(result.getResultCode())){
-				logger.error("预约看房时发送短信失败,{}",result);
+			if (StringUtils.isNotEmpty(record.getAgentPhone() )){//发送短信
+				List<String> list = new ArrayList<>();
+				list.add("您好");
+				list.add("您好");
+				list.add("您好");;
+				SmsModel smsModel = new SmsModel(record.getAgentPhone(),"2029157",list);
+				apiHelper.smsSender("addAppointment",smsModel);
 			}
 			map.put("state",0);
 			return map;
@@ -149,7 +151,16 @@ public class AppointmentController extends BaseFilter{
 	public Object resetAgent(Appointment record) {
 		Map map = new HashMap();
 		try {
+			record.setResetFlag(0);//重新分配经纪人后，隐藏“重新分配按钮”
 			appointmentServiceImpl.updateAppointmentById(record);
+			if (StringUtils.isNotEmpty(record.getAgentPhone() )){//发送短信
+				List<String> list = new ArrayList<>();
+				list.add("您好");;
+				list.add("您好");
+				list.add("您好");
+				SmsModel smsModel = new SmsModel(record.getAgentPhone(),"2029157",list);
+				apiHelper.smsSender("resetAgent",smsModel);
+			}
 			map.put("state",0);
 		} catch (Exception e) {
 			logger.error("resetAgent : {}",record,e);
@@ -177,6 +188,10 @@ public class AppointmentController extends BaseFilter{
 	public Object updateByPrimaryKeySelective(Appointment record,String remark, HttpServletRequest request) {
 		Map map = new HashMap();
 		try {
+			if (0 !=record.getStatus()){
+				//如果委托状态不是已分配，隐藏重新分配按钮
+				record.setResetFlag(0);
+			}
 			appointmentServiceImpl.updateAppointmentById(record);
 			User user = (User)request.getSession().getAttribute("userInfo");
 			
