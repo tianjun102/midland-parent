@@ -71,7 +71,7 @@ public class MidlandTask {
 	}
 	
 	//委托记录可重新分配经纪人，建议设置提醒功能，若指定时间内已分配的业务员未跟进（还未从已分配状态变为看房中），后台可重新分配。
-	@Scheduled(fixedRate = 10000)
+	@Scheduled(fixedRate = 3600000)
 	public void entrustReset(){
 		try {
 			Entrust temp = new Entrust();
@@ -102,7 +102,7 @@ public class MidlandTask {
 		}
 	}
 	
-	@Scheduled(fixedRate = 10000)
+	@Scheduled(fixedRate = 3600000)
 	public void appointReset(){
 		try {
 			Appointment temp = new Appointment();

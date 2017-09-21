@@ -17,7 +17,7 @@
                     $("#file_upload").uploadify("settings", "formData", {
                         'cityId': $("input[name='cityId']").val(),
                         'cityName': unicode($("input[name='cityName']").val().trim()),
-                        'readType': $('#isNew').val()
+                        'readType': 1
                     });
 
                 },
