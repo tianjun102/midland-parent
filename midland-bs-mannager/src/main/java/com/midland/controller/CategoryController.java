@@ -46,6 +46,7 @@ public class CategoryController extends BaseFilter {
 		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
 		List<Area> cityList = cityMap.get("city");
 		model.addAttribute("cityList",cityList);
+		model.addAttribute("type",category.getType());
 		return "category/categoryIndex";
 	}
 
@@ -54,17 +55,17 @@ public class CategoryController extends BaseFilter {
 	 **/
 	@RequestMapping("to_add")
 	public String toAddCategory(Category category, Model model) throws Exception {
-		category.setParentId(0);
 		Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
 		parem.put("id","*");
 		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
 		List<Area> cityList = cityMap.get("city");
-		String result = getCategoryTree("");
+		String result = getCategoryTree("",category);
 		if(StringUtils.isNotEmpty(result)){
 			model.addAttribute("categoryData",result );
 		}
 		model.addAttribute("cityList",cityList);
+		model.addAttribute("type",category.getType());
 		return "category/addCategory";
 	}
 
@@ -205,19 +206,19 @@ public class CategoryController extends BaseFilter {
 
 
 	// 把查询结果转换成JSON格式      type: 1-查询1-2级 ； 为空时查询所有
-	public String getCategoryTree(String type) {
+	public String getCategoryTree(String type,Category category) {
 		// 避免数据库中存在换行符,进行菜单文字的过滤
 		// String replaceStr = "(\r\n|\r|\n|\n\r)";
 		List list = new ArrayList<>();
 		if("1".equals(type)){
 			try {
-				list = categoryServiceImpl.findCategoryList(null);
+				list = categoryServiceImpl.findCategoryList(category);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}else{
 			try {
-				list = categoryServiceImpl.findCategoryList(null);
+				list = categoryServiceImpl.findCategoryList(category);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

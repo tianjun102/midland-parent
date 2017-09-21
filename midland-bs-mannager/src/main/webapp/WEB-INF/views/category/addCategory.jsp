@@ -9,7 +9,6 @@
     <title>添加热门关注</title>
     <link rel="stylesheet" href="${ctx}/assets/css/ztree/css/demo.css">
     <link rel="stylesheet" href="${ctx }/assets/css/common.css">
-    <link rel="stylesheet" href="${ctx }/assets/css/layer.css">
     <link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css">
     <style type="text/css">
         /*.content ul.userinfo>li {
@@ -69,6 +68,7 @@
         <ul class="userinfo row">
             <li>
                 <span style = "float:left;">城市：</span>
+                <input type="hidden" name="type" value="${type}">
                 <input type="hidden" name="cityName" id="cityName" value="">
                 <select onchange="setCityName()" name="cityId" id="cityId" style="height: 38px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option value="">全部</option>
@@ -77,20 +77,20 @@
                     </c:forEach>
                 </select>
             </li>
-            <li>
+            <%--<li>
                 <span style = "float:left;">类型：</span>
                 <select name="type" id="type" class="dropdown">
                     <option value="0">市场调研分类</option>
                     <option value="1">资讯分类</option>
                 </select>
-            </li>
+            </li>--%>
             <li><span>父节点：</span><input name="parentName" onclick="showTree()" readonly="readonly"/>
                 <input name="parentId" type="hidden"/><label style="color: red" class = "_star " >*</label>
 
             </li>
             <li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >
                 <div class="zTreeDemoBackground left" style  = "position:absolute; left: -278px; top: 52px;"   onblur="test(event)">
-                    <ul id="categoryTree" class="ztree" style  = "width:235px; height: 240px;"></ul>
+                    <ul id="categoryTree" class="ztree" style  = "width:235px; height: 140px!important;"></ul>
                 </div>
                 <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: -30px; top: 63px;" onclick="hideTree()">
             </li>

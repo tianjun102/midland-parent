@@ -23,6 +23,7 @@
 			</p>
 		<form action="${ctx }/rest//category/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
+			<input type="hidden" name="type" value="${type}">
 			<ul class = "userinfo row">
 				<li>
 					<span style = "float:left;">城市：</span>
@@ -55,7 +56,7 @@
                 title:['新增楼盘信息'],
                 resize: false,
                 scrollbar:false,
-                content:['${ctx}/rest/category/to_add', 'no']
+                content:['${ctx}/rest/category/to_add?type=${type}', 'no']
             });
         }
 		 window.onload = function(){
