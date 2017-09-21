@@ -69,7 +69,7 @@
 				</dt>
 				<dd>
 					<shiro:hasPermission name="categoryList">
-						<a id = "showCategoryIndex" href="${ctx}/rest/category/index" target="contentF"><span>分类</span></a>
+						<a id = "showCategoryIndex" href="${ctx}/rest/category/index?type=1" target="contentF"><span>分类</span></a>
 					</shiro:hasPermission>
 					<shiro:hasPermission name="informationList">
 						<a id = "showProductIndex" href="${ctx}/rest/information/index" target="contentF"><span>资讯列表</span></a>
@@ -188,6 +188,9 @@
 					<shiro:hasPermission name="researchList">
 						<a id = "report1" href="${ctx}/rest/research/index" target="contentF"><span>市场调究列表</span></a>
 					</shiro:hasPermission>
+					<shiro:hasPermission name="categoryList">
+						<a id = "showCategoryIndex" href="${ctx}/rest/category/index?type=0" target="contentF"><span>分类</span></a>
+					</shiro:hasPermission>
 				</dd>
 			</dl>
 		</shiro:hasPermission>
@@ -274,7 +277,7 @@
 							<a id = "report1" href="${ctx}/rest/eliteVip/index" target="contentF"><span>精英会员管理</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="eliteCate">
-							<a id = "report1" href="${ctx}/rest/intoMidland/index?flag=7" target="contentF"><span>会员分类管理</span></a>
+							<a id = "showCategoryIndex" href="${ctx}/rest/category/index?type=2" target="contentF"><span>会员分类管理</span></a>
 						</shiro:hasPermission>
 					</dd>
 				</dl>

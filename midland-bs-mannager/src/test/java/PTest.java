@@ -17,8 +17,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,10 +47,16 @@ public class PTest {
 	
 	@Test
 	public void dsfs(){
+		String SGIN = null;
+		try {
+			SGIN = URLEncoder.encode("美联房产查档","GBK");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		List list = new ArrayList();
 		list.add("sdfef");
 		list.add("dfef");
-		list.add("qqqq");
+		list.add(SGIN);
 		SmsModel smsModel = new SmsModel("135765456789","2029157",list);
 		
 		apiHelper.smsSender("dsfs",smsModel);

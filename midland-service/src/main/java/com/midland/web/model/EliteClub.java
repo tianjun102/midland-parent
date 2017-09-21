@@ -26,7 +26,7 @@ public class EliteClub{
 	/**
 	 * 活动时间
 	 **/
-	private Date adTime;
+	private String adTime;
 	/**
 	 * 活动主题
 	 **/
@@ -97,11 +97,11 @@ public class EliteClub{
 		this.adName = adName;
 	}
 
-	public Date getAdTime() {
+	public String getAdTime() {
 		return adTime;
 	}
 
-	public void setAdTime(Date adTime) {
+	public void setAdTime(String adTime) {
 		this.adTime = adTime;
 	}
 

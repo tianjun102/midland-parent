@@ -1,9 +1,13 @@
 package com.midland.controller;
 
 import com.midland.base.BaseFilter;
+import com.midland.web.model.Area;
 import com.midland.web.model.EliteClub;
 import com.midland.web.service.EliteClubService;
+import com.midland.web.service.SettingService;
 import org.slf4j.Logger;
+
+import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import org.slf4j.LoggerFactory;
@@ -24,12 +28,20 @@ public class EliteClubController extends BaseFilter {
 	private Logger log = LoggerFactory.getLogger(EliteClubController.class);
 	@Autowired
 	private EliteClubService eliteClubServiceImpl;
+	@Autowired
+	private SettingService settingService;
 
 	/**
 	 * 
 	 **/
 	@RequestMapping("index")
 	public String eliteClubIndex(EliteClub eliteClub,Model model) throws Exception {
+		Map<String,String> parem = new HashMap<>();
+		parem.put("flag","city");
+		parem.put("id","*");
+		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
+		List<Area> cityList = cityMap.get("city");
+		model.addAttribute("cityList",cityList);
 		return "eliteClub/eliteClubIndex";
 	}
 
@@ -38,6 +50,12 @@ public class EliteClubController extends BaseFilter {
 	 **/
 	@RequestMapping("to_add")
 	public String toAddEliteClub(EliteClub eliteClub,Model model) throws Exception {
+		Map<String,String> parem = new HashMap<>();
+		parem.put("flag","city");
+		parem.put("id","*");
+		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
+		List<Area> cityList = cityMap.get("city");
+		model.addAttribute("cityList",cityList);
 		return "eliteClub/addEliteClub";
 	}
 
@@ -92,6 +110,12 @@ public class EliteClubController extends BaseFilter {
 	@RequestMapping("to_update")
 	public String toUpdateEliteClub(Integer id,Model model) throws Exception {
 		EliteClub result = eliteClubServiceImpl.selectEliteClubById(id);
+		Map<String,String> parem = new HashMap<>();
+		parem.put("flag","city");
+		parem.put("id","*");
+		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
+		List<Area> cityList = cityMap.get("city");
+		model.addAttribute("cityList",cityList);
 		model.addAttribute("item",result);
 		return "eliteClub/updateEliteClub";
 	}

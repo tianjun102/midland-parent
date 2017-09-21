@@ -29,4 +29,6 @@ public interface CategoryService {
 	 **/
 	List<Category> findCategoryList(Category category) throws Exception;
 
+	List<Category> findCategoryTreeList(Category category) throws Exception;
+
 }

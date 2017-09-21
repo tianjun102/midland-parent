@@ -14,18 +14,11 @@
     <table class="table table-bordered table-add">
         <thead>
             <tr>
-				<th style="width: 8%">cityId</th>
-				<th style="width: 8%">imgUrl</th>
-				<th style="width: 8%">imgDesc</th>
-				<th style="width: 8%">adName</th>
-				<th style="width: 8%">adTime</th>
-				<th style="width: 8%">adTitle</th>
-				<th style="width: 8%">adAddress</th>
-				<th style="width: 8%">detail</th>
-				<th style="width: 8%">isshow</th>
-				<th style="width: 8%">isDelete</th>
-				<th style="width: 8%">cityName</th>
-				<th style="width: 8%">isShow</th>
+				<th style="width: 8%">编号</th>
+				<th style="width: 8%">预览图片</th>
+                <th style="width: 8%">状态</th>
+				<th style="width: 8%">活动名称</th>
+				<th style="width: 8%">出游时间</th>
                 <th style="width: 10%">操作</th>
             </tr>
         </thead>
@@ -35,21 +28,15 @@
                 <c:forEach items="${requestScope.items }" var="item" varStatus="xh">
                     <tr>
 						<input type="hidden" id="id" value="${item.id}"/>
-						<td>${item.cityId}</td>
+						<td>${xh.count}</td>
 						<td>${item.imgUrl}</td>
-						<td>${item.imgDesc}</td>
-						<td>${item.adName}</td>
-						<td>${item.adTime}</td>
-						<td>${item.adTitle}</td>
-						<td>${item.adAddress}</td>
-						<td>${item.detail}</td>
-						<td>${item.isshow}</td>
-						<td>${item.isDelete}</td>
-						<td>${item.cityName}</td>
-						<td>${item.isShow}</td>
+                        <td><c:if test="${item.isShow==0}">显示</c:if><c:if test="${item.isShow==1}">隐藏</c:if></td>
+                        <td>${item.adName}</td>
+                        <td>${item.adTime}</td>
 						<td>
-                            <a target="contentF" onclick="to_edit(${item.id })">编辑</a>
-                            <a target="contentF" onclick="delete1(${item.id })">删除</a>
+                            <a class="edit_img" target="contentF" href="${ctx}/rest/eliteClub/to_update?id=${item.id}"></a>
+                            <a class="delete_img" target="contentF" onclick="delete1(${item.id })"></a>
+                            <a <c:if test="${item.isShow==0}">class="onoff_img"</c:if> <c:if test="${item.isShow==1}">class="offon_img"</c:if> target="contentF" onclick="updateElite(${item.isShow},${item.id })"></a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -97,6 +84,27 @@
             shade: 0.3,
             area: ['500px', '700px'],
             content: ['${ctx}/rest/eliteClub/to_update?id='+id,'no']
+        });
+    }
+
+    //启用，禁用
+    function updateElite(isShow,id){
+        if(isShow==1){
+            isShow=0;
+        }else if(isShow == 0){
+            isShow = 1;
+        }
+
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/eliteClub/update?isShow="+isShow+"&id="+id,
+            async:false, // 此处必须同步
+            dataType: "json",
+            data:"",
+            success: function(data){
+
+                $('#searchForm').submit();
+            }
         });
     }
 

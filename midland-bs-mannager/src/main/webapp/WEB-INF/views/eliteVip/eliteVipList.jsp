@@ -14,17 +14,13 @@
     <table class="table table-bordered table-add">
         <thead>
             <tr>
-				<th style="width: 8%">type</th>
-				<th style="width: 8%">level</th>
-				<th style="width: 8%">cname</th>
-				<th style="width: 8%">ename</th>
-				<th style="width: 8%">address</th>
-				<th style="width: 8%">post</th>
-				<th style="width: 8%">imgUrl</th>
-				<th style="width: 8%">imgDesc</th>
-				<th style="width: 8%">isDelete</th>
-				<th style="width: 8%">cateId</th>
-				<th style="width: 8%">cateName</th>
+				<th style="width: 8%">编号</th>
+				<th style="width: 8%">会员级别</th>
+				<th style="width: 8%">会员中文名</th>
+				<th style="width: 8%">会员分类</th>
+				<th style="width: 8%">会员英文名</th>
+				<th style="width: 8%">所属地区</th>
+				<th style="width: 8%">会员职位</th>
                 <th style="width: 10%">操作</th>
             </tr>
         </thead>
@@ -34,20 +30,16 @@
                 <c:forEach items="${requestScope.items }" var="item" varStatus="xh">
                     <tr>
 						<input type="hidden" id="id" value="${item.id}"/>
-						<td>${item.type}</td>
+						<td>${xh.count}</td>
 						<td>${item.level}</td>
 						<td>${item.cname}</td>
+						<td>${item.cateName}</td>
 						<td>${item.ename}</td>
 						<td>${item.address}</td>
 						<td>${item.post}</td>
-						<td>${item.imgUrl}</td>
-						<td>${item.imgDesc}</td>
-						<td>${item.isDelete}</td>
-						<td>${item.cateId}</td>
-						<td>${item.cateName}</td>
 						<td>
-                            <a target="contentF" onclick="to_edit(${item.id })">编辑</a>
-                            <a target="contentF" onclick="delete1(${item.id })">删除</a>
+                            <a class="edit_img" target="contentF" href="${ctx}/rest/eliteVip/to_update?id=${item.id}"></a>
+                            <a class="delete_img" target="contentF" onclick="delete1(${item.id })"></a>
                         </td>
                     </tr>
                 </c:forEach>

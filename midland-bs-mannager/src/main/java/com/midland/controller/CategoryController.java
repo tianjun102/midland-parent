@@ -9,6 +9,7 @@ import com.midland.web.service.CategoryService;
 import com.midland.web.service.JdbcService;
 import com.midland.web.service.SettingService;
 import com.midland.web.util.MidlandHelper;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +46,7 @@ public class CategoryController extends BaseFilter {
 		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
 		List<Area> cityList = cityMap.get("city");
 		model.addAttribute("cityList",cityList);
+		model.addAttribute("type",category.getType());
 		return "category/categoryIndex";
 	}
 
@@ -52,15 +55,17 @@ public class CategoryController extends BaseFilter {
 	 **/
 	@RequestMapping("to_add")
 	public String toAddCategory(Category category, Model model) throws Exception {
-		category.setParentId(0);
 		Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
 		parem.put("id","*");
 		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
 		List<Area> cityList = cityMap.get("city");
-		List<Category> cateList = categoryServiceImpl.findCategoryList(category);
+		String result = getCategoryTree("",category);
+		if(StringUtils.isNotEmpty(result)){
+			model.addAttribute("categoryData",result );
+		}
 		model.addAttribute("cityList",cityList);
-		model.addAttribute("cateList",cateList);
+		model.addAttribute("type",category.getType());
 		return "category/addCategory";
 	}
 
@@ -196,6 +201,48 @@ public class CategoryController extends BaseFilter {
 			e.printStackTrace();
 		}
 		  return cateList;
+	}
+
+
+
+	// 把查询结果转换成JSON格式      type: 1-查询1-2级 ； 为空时查询所有
+	public String getCategoryTree(String type,Category category) {
+		// 避免数据库中存在换行符,进行菜单文字的过滤
+		// String replaceStr = "(\r\n|\r|\n|\n\r)";
+		List list = new ArrayList<>();
+		if("1".equals(type)){
+			try {
+				list = categoryServiceImpl.findCategoryList(category);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else{
+			try {
+				list = categoryServiceImpl.findCategoryList(category);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		StringBuffer ret = new StringBuffer("");
+		if (list != null   &&  list.size()>0) {
+			for (int i = 0; i < list.size(); i++) {
+				Category cat = (Category) list.get(i);
+				ret.append("{id:").append(cat.getId()).append(", pId:").append(cat.getParentId())
+						.append(", name:'").append(cat.getCateName()).append("',open:true,nocheck:true");
+				if("".equals(type)){
+					ret.append(", chirdCount:").append(cat.getChirdCount());
+				}
+				if(!("0".equals(cat.getParentId().toString()))){
+					ret.append(",iconSkin:'pIcon03'");
+				}
+
+				ret.append("},");
+			}
+			return ret.substring(0, ret.length() - 1);
+		}
+
+		return "";
 	}
 
 

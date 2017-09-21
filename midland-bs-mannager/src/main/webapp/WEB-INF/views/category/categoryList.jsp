@@ -34,6 +34,7 @@
                         <td>
                             <c:if test="${item.type ==0}">市场调究</c:if>
                             <c:if test="${item.type ==1}">资讯</c:if>
+                            <c:if test="${item.type ==2}">会员分类</c:if>
                         </td>
                         <td>
 
