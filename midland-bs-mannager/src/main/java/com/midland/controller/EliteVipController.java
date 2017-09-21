@@ -1,8 +1,10 @@
 package com.midland.controller;
 
 import com.midland.base.BaseFilter;
+import com.midland.web.model.Category;
 import com.midland.web.model.EliteVip;
 import com.midland.web.service.EliteVipService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import java.util.Map;
 import java.util.HashMap;
@@ -38,6 +40,13 @@ public class EliteVipController extends BaseFilter {
 	 **/
 	@RequestMapping("to_add")
 	public String toAddEliteVip(EliteVip eliteVip,Model model) throws Exception {
+		Category category = new Category();
+		category.setType(2);
+		String result = getCategoryTree("",category);
+		if(StringUtils.isNotEmpty(result)){
+			model.addAttribute("categoryData",result );
+		}
+		model.addAttribute("type",category.getType());
 		return "eliteVip/addEliteVip";
 	}
 
@@ -92,6 +101,12 @@ public class EliteVipController extends BaseFilter {
 	@RequestMapping("to_update")
 	public String toUpdateEliteVip(Integer id,Model model) throws Exception {
 		EliteVip result = eliteVipServiceImpl.selectEliteVipById(id);
+		Category category = new Category();
+		category.setType(2);
+		String cateResult = getCategoryTree("",category);
+		if(StringUtils.isNotEmpty(cateResult)){
+			model.addAttribute("categoryData",cateResult );
+		}
 		model.addAttribute("item",result);
 		return "eliteVip/updateEliteVip";
 	}

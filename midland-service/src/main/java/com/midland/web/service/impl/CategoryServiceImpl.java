@@ -94,4 +94,14 @@ public class CategoryServiceImpl implements CategoryService {
 			throw e;
 		}
     }
+
+    @Override
+    public Category selectCategoryParentNameById(Integer id) {
+		try {
+			return categoryMapper.selectCategoryParentById(id);
+		}catch (Exception e){
+			log.error("selectCategoryParentNameById  {}",id,e);
+			throw e;
+		}
+    }
 }

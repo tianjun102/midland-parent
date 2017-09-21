@@ -17,4 +17,8 @@ public interface CategoryMapper {
 
 	List<Category> findCategoryTreeList(Category category);
 
+	List<Category> findCategoryParentNameList(Category category);
+
+	Category selectCategoryParentById(Integer category);
+
 }

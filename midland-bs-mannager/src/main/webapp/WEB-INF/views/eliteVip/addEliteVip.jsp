@@ -6,7 +6,7 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <%@include file="../layout/tablib.jsp"%>
-
+<%@include file="../layout/zTree.jsp"%>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
@@ -23,11 +23,64 @@
     <meta content="" name="description" />
     <meta content="" name="author" />
     <meta name="MobileOptimized" content="320">
+    <link rel="stylesheet" href="${ctx}/assets/css/ztree/css/demo.css">
+    <link rel="stylesheet" href="${ctx }/assets/css/common.css">
+    <link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css"/>
     <style>
         .layui-layer{
             top:260px!important;
         }
+        .vipcate{
+            width: 250px;
+            height: 38px;
+            line-height: 38px;
+            border: 1px solid #dbe2e6;
+            border-radius: 4px;
+            text-indent: 10px;
+            outline-color: #0099e0;
+        }
+
     </style>
+    <script type="text/javascript">
+
+        var setting = {
+            check: {
+                enable: true,
+                chkboxType: { "Y": "sp", "N": "sp" }
+
+
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                beforeClick: beforeClick
+            }
+        };
+        var catProNodes =[{id:0, pId:0,name:'分类',open:true,nocheck:true,iconSkin:"pIcon01"},${categoryData}];
+
+
+        $(document).ready(function(){
+            $.fn.zTree.init($("#categoryTree"), setting, catProNodes);
+        });
+
+        function beforeClick(treeId, treeNode, clickFlag) {
+            $("input[name='cateId']").val(treeNode.id);
+            $("input[name='cateName']").val(treeNode.name);
+            $("#showDiv").hide();
+        }
+
+        function showTree(event){
+            $("#showDiv").show();
+        }
+
+        function hideTree(event){
+            $("#showDiv").hide();
+        }
+
+    </script>
 </head>
 <body >
 <div class="box">
@@ -39,15 +92,24 @@
             <input type="hidden" name="cityName" id="cityName" value="" >
             <ul class = "adminfo row">
 
-                <input type="hidden" name="id" id="id" value="${item.id}">
                 <input type="hidden" name="cateName" id="cateName">
-                <li><span>会员分类：</span>
+                <%--<li><span>会员分类：</span>
                     <select id="cateId" name="cateId" class="dropdown" onchange="setCateName();">
                         <option value="1">会员分类1</option>
                         <option value="2">会员分类2</option>
                         <option value="3">会员分类3</option>
                         <option value="4">会员分类4</option>
                     </select>
+                </li>--%>
+                <li><span>会员分类：</span><input class="vipcate" name="cateName" onclick="showTree()" readonly="readonly"/>
+                    <input name="cateId" type="hidden"/><label style="color: red" class = "_star " >*</label>
+
+                </li>
+                <li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >
+                    <div class="zTreeDemoBackground left" style  = "position:absolute;"   onblur="test(event)">
+                        <ul id="categoryTree" class="ztree" style  = "width:235px; height: 140px!important;"></ul>
+                    </div>
+                    <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: 310px;" onclick="hideTree()">
                 </li>
                 <li><span>会员等级：</span>
                     <input type="text" name="level" id="level"/>
