@@ -151,4 +151,18 @@ public class MidlandHelper {
 		return map;
 	}
 	
+	public static String getSmsField(List<String> list){
+		int length=list.size();
+		if (list==null && length>0){
+			return null;
+		}else{
+			StringBuffer sb = new StringBuffer();
+			for (String str : list){
+				 sb.append(str).append("||");
+			}
+			String temp =sb.toString();
+			return temp.substring(0,temp.length()-2);
+		}
+	}
+	
 }

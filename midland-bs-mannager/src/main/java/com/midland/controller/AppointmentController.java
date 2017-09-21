@@ -6,6 +6,10 @@ import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.config.MidlandConfig;
 import com.midland.core.util.HttpUtils;
+import com.midland.web.api.ApiHelper;
+import com.midland.web.api.SmsSender.SmsClient;
+import com.midland.web.api.SmsSender.SmsModel;
+import com.midland.web.api.SmsSender.SmsResult;
 import com.midland.web.enums.ContextEnums;
 import com.midland.web.model.AppointLog;
 import com.midland.web.model.Appointment;
@@ -15,7 +19,6 @@ import com.midland.web.model.user.User;
 import com.midland.web.service.AppointLogService;
 import com.midland.web.service.AppointmentService;
 import com.midland.web.service.DingJiangService;
-import com.midland.web.service.UserService;
 import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
 import com.midland.web.util.ParamObject;
@@ -48,13 +51,7 @@ public class AppointmentController extends BaseFilter{
 	@Autowired
 	private AppointLogService appointLogServiceImpl;
 	@Autowired
-	private DingJiangService dingJiangServiceImpl;
-	@Autowired
-	private MidlandConfig midlandConfig;
-	
-	@Autowired
-	private UserService userServiceImpl;
-	
+	private ApiHelper apiHelper;
 	
 	Logger logger = LoggerFactory.getLogger(AppointmentController.class);
 	
@@ -99,6 +96,14 @@ public class AppointmentController extends BaseFilter{
 		Map map = new HashMap();
 		try {
 			appointmentServiceImpl.insertAppointment(record);
+			if (StringUtils.isNotEmpty(record.getAgentPhone() )){//发送短信
+				List<String> list = new ArrayList<>();
+				list.add("您好");
+				list.add("您好");
+				list.add("您好");;
+				SmsModel smsModel = new SmsModel(record.getAgentPhone(),"2029157",list);
+				apiHelper.smsSender("addAppointment",smsModel);
+			}
 			map.put("state",0);
 			return map;
 		} catch (Exception e) {
@@ -112,16 +117,7 @@ public class AppointmentController extends BaseFilter{
 		
 		return appointmentServiceImpl.selectAppointmentById(id);
 	}
-	/**
-	 * 用户列表查询（重新分配经纪人）
-	 * @param appointId
-	 * @return
-	 */
-	@RequestMapping(value = "/toRedistribute", method = {RequestMethod.GET,RequestMethod.POST})
-	public String toRedistribute(String appointId, Model model, HttpServletRequest request){
-		model.addAttribute("appointId",appointId);
-		return "appointment/redistributeIndex";
-	}
+	
 	
 	
 	
@@ -155,7 +151,16 @@ public class AppointmentController extends BaseFilter{
 	public Object resetAgent(Appointment record) {
 		Map map = new HashMap();
 		try {
+			record.setResetFlag(0);//重新分配经纪人后，隐藏“重新分配按钮”
 			appointmentServiceImpl.updateAppointmentById(record);
+			if (StringUtils.isNotEmpty(record.getAgentPhone() )){//发送短信
+				List<String> list = new ArrayList<>();
+				list.add("您好");;
+				list.add("您好");
+				list.add("您好");
+				SmsModel smsModel = new SmsModel(record.getAgentPhone(),"2029157",list);
+				apiHelper.smsSender("resetAgent",smsModel);
+			}
 			map.put("state",0);
 		} catch (Exception e) {
 			logger.error("resetAgent : {}",record,e);
@@ -183,6 +188,10 @@ public class AppointmentController extends BaseFilter{
 	public Object updateByPrimaryKeySelective(Appointment record,String remark, HttpServletRequest request) {
 		Map map = new HashMap();
 		try {
+			if (0 !=record.getStatus()){
+				//如果委托状态不是已分配，隐藏重新分配按钮
+				record.setResetFlag(0);
+			}
 			appointmentServiceImpl.updateAppointmentById(record);
 			User user = (User)request.getSession().getAttribute("userInfo");
 			
@@ -208,32 +217,7 @@ public class AppointmentController extends BaseFilter{
 		return map;
 	}
 	
-	/**
-	 * 预约看房（重新分配经纪人）
-	 * @param agent
-	 * @return
-	 */
-	@RequestMapping(value = "/redistribute_page", method = {RequestMethod.GET,RequestMethod.POST})
-	public String getAppointRedistribute(Agent agent, Model model, HttpServletRequest request){
-		String pageSize=request.getParameter("pageSize");
-		String pageNo=request.getParameter("pageNo");
-		if (pageSize == null ){
-			pageSize="5";
-		}
-		if (pageNo == null ){
-			pageNo="1";
-		}
-		Map map1 = agent.agentToMap();
-		map1.put("pageSize",pageSize);
-		map1.put("pageNo",pageNo);
-		String data = HttpUtils.get(midlandConfig.getAgentPage(), map1);
-		List result = MidlandHelper.getPojoList(data, Agent.class);
-		Paginator paginator = new Paginator(Integer.valueOf(pageNo),Integer.valueOf(pageSize),100);
-		model.addAttribute("paginator", paginator);
-		model.addAttribute("agents", result);
-		
-		return "appointment/redistributeList";
-	}
+	
 	
 	
 	@RequestMapping("/export")

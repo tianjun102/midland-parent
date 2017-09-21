@@ -1,26 +1,25 @@
-import com.alibaba.fastjson.JSONArray;
 import com.midland.config.MidlandConfig;
 import com.midland.core.util.HttpUtils;
-import com.midland.web.SmsSender.SmsClient;
-import com.midland.web.SmsSender.SmsModel;
-import com.midland.web.SmsSender.SmsResult;
+import com.midland.web.api.ApiHelper;
+import com.midland.web.api.SmsSender.SmsClient;
+import com.midland.web.api.SmsSender.SmsModel;
 import com.midland.web.model.remote.Agent;
 import com.midland.web.service.AppointmentService;
 import com.midland.web.util.MidlandHelper;
-import org.jdom.JDOMException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,33 +38,20 @@ public class PTest {
 	private MidlandConfig midlandConfig;
 	@Autowired
 	private SmsClient smsClient;
+	@Autowired
+	private JavaMailSender javaMailSender;
+	@Autowired
+	private ApiHelper apiHelper;
 	
 	@Test
 	public void dsfs(){
-		SmsModel smsModel = new SmsModel();
-		smsModel.setPhones("13600158343");
-		try {
-			smsModel.setFields("11||11||"+ URLEncoder.encode("美联房产查档", "GBK"));
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		smsModel.setTpId("2029157");
-		try {
-			SmsResult reuslt = smsClient.execute(smsModel);
-			System.out.println();
-			System.out.println();
-			System.out.println();
-			System.out.println(JSONArray.toJSONString(reuslt));
-			System.out.println();
-			System.out.println();
-			System.out.println();
-			System.out.println();
-			
-		} catch (JDOMException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		List list = new ArrayList();
+		list.add("sdfef");
+		list.add("dfef");
+		list.add("qqqq");
+		SmsModel smsModel = new SmsModel("135765456789","2029157",list);
+		
+		apiHelper.smsSender("dsfs",smsModel);
 	}
 	
 	@Test
@@ -95,4 +81,15 @@ public class PTest {
 		System.out.println(data);
 		
 	}
+	
+	@Test
+	public void sendSimpleMail() throws Exception {
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setFrom("3332932@qq.com");
+		message.setTo("977543176@qq.com");
+		message.setSubject("主题：简单邮件");
+		message.setText("简单邮件内容");
+		apiHelper.emailSender("sendSimpleMail",message);
+	}
+	
 }

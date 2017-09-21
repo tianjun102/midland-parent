@@ -1,4 +1,4 @@
-package com.midland.web.SmsSender;
+package com.midland.web.api.SmsSender;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

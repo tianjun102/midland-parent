@@ -28,10 +28,14 @@
 		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
 		<result column="area_id" property="areaId" jdbcType="INTEGER" />
 		<result column="flag" property="flag" jdbcType="INTEGER" />
+		<result column="agent_phone" property="agentPhone" jdbcType="VARCHAR" />
+		<result column="view_url" property="viewUrl" jdbcType="VARCHAR" />
+		<result column="reset_flag" property="resetFlag" jdbcType="INTEGER" />
+		<result column="assigned_time" property="assignedTime" jdbcType="TIMESTAMP" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,appoint_sn,source,nick_name,phone,house_type,sell_rent,appointment_time,area_name,community_name,address,layout,measure,price,entrust_time,agent_id,agent_name,status,handle_time,decoration,is_delete,city_id,city_name,area_id,flag
+		id,appoint_sn,source,nick_name,phone,house_type,sell_rent,appointment_time,area_name,community_name,address,layout,measure,price,entrust_time,agent_id,agent_name,status,handle_time,decoration,is_delete,city_id,city_name,area_id,flag,agent_phone,view_url,reset_flag,assigned_time
 	</sql>
 
 	<select id="selectAppointmentById" resultMap="BaseResultMap">
@@ -132,7 +136,21 @@
 			<if test="areaId != null">
 				area_id,
 			</if>
-
+			<if test="flag != null">
+				flag,
+			</if>
+			<if test="agentPhone != null">
+				agent_phone,
+			</if>
+			<if test="viewUrl != null">
+				view_url,
+			</if>
+			<if test="resetFlag != null">
+				reset_flag,
+			</if>
+			<if test="assignedTime != null">
+				assigned_time,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -179,7 +197,7 @@
 				#{entrustTime,jdbcType=TIMESTAMP},
 			</if>
 			<if test="agentId != null">
-				#{agentId,jdbcType=INTEGER},
+				#{agentId,jdbcType=VARCHAR},
 			</if>
 			<if test="agentName != null">
 				#{agentName,jdbcType=VARCHAR},
@@ -205,7 +223,21 @@
 			<if test="areaId != null">
 				#{areaId,jdbcType=INTEGER},
 			</if>
-
+			<if test="flag != null">
+				#{flag,jdbcType=INTEGER},
+			</if>
+			<if test="agentPhone != null">
+				#{agentPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="viewUrl != null">
+				#{viewUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="resetFlag != null">
+				#{resetFlag,jdbcType=INTEGER},
+			</if>
+			<if test="assignedTime != null">
+				#{assignedTime,jdbcType=TIMESTAMP},
+			</if>
 		</trim>
 	</insert>
 
@@ -253,7 +285,7 @@
 			entrust_time= #{entrustTime,jdbcType=TIMESTAMP},
 		</if>
 		<if test="agentId != null">
-			agent_id= #{agentId,jdbcType=INTEGER},
+			agent_id= #{agentId,jdbcType=VARCHAR},
 		</if>
 		<if test="agentName != null">
 			agent_name= #{agentName,jdbcType=VARCHAR},
@@ -281,6 +313,18 @@
 		</if>
 		<if test="flag != null">
 			flag= #{flag,jdbcType=INTEGER},
+		</if>
+		<if test="agentPhone != null">
+			agent_phone= #{agentPhone,jdbcType=VARCHAR},
+		</if>
+		<if test="viewUrl != null">
+			view_url= #{viewUrl,jdbcType=VARCHAR},
+		</if>
+		<if test="resetFlag != null">
+			reset_flag= #{resetFlag,jdbcType=INTEGER},
+		</if>
+		<if test="assignedTime != null">
+			assigned_time= #{assignedTime,jdbcType=TIMESTAMP},
 		</if>
 	</sql>
 
@@ -331,7 +375,7 @@
 			 and entrust_time= #{entrustTime,jdbcType=TIMESTAMP}
 		</if>
 		<if test="agentId != null">
-			 and agent_id= #{agentId,jdbcType=INTEGER}
+			 and agent_id= #{agentId,jdbcType=VARCHAR}
 		</if>
 		<if test="agentName != null">
 			 and agent_name= #{agentName,jdbcType=VARCHAR}
@@ -357,10 +401,21 @@
 		<if test="areaId != null">
 			 and area_id= #{areaId,jdbcType=INTEGER}
 		</if>
-<if test="flag != null">
+		<if test="flag != null">
 			 and flag= #{flag,jdbcType=INTEGER}
 		</if>
-
+		<if test="agentPhone != null">
+			 and agent_phone= #{agentPhone,jdbcType=VARCHAR}
+		</if>
+		<if test="viewUrl != null">
+			 and view_url= #{viewUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="resetFlag != null">
+			 and reset_flag= #{resetFlag,jdbcType=INTEGER}
+		</if>
+		<if test="assignedTime != null">
+			 and assigned_time= #{assignedTime,jdbcType=TIMESTAMP}
+		</if>
 	</sql>
 
 </mapper>

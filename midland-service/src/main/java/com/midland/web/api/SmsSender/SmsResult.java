@@ -1,4 +1,4 @@
-package com.midland.web.SmsSender;
+package com.midland.web.api.SmsSender;
 
 /**
  * Created by 'ms.x' on 2017/8/31.
@@ -45,5 +45,15 @@ public class SmsResult {
 	
 	public void setDesc(String desc) {
 		this.desc = desc;
+	}
+	
+	@Override
+	public String toString() {
+		final StringBuffer sb = new StringBuffer("SmsResult{");
+		sb.append("resultCode='").append(resultCode).append('\'');
+		sb.append(", batchId='").append(batchId).append('\'');
+		sb.append(", desc='").append(desc).append('\'');
+		sb.append('}');
+		return sb.toString();
 	}
 }

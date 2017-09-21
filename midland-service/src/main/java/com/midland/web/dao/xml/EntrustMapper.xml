@@ -31,10 +31,13 @@
 		<result column="city_id" property="cityId" jdbcType="VARCHAR" />
 		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
 		<result column="area_id" property="areaId" jdbcType="VARCHAR" />
+		<result column="agent_phone" property="agentPhone" jdbcType="VARCHAR" />
+		<result column="reset_flag" property="resetFlag" jdbcType="INTEGER" />
+		<result column="assigned_time" property="assignedTime" jdbcType="TIMESTAMP" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,entrust_sn,source,house_type,sell_rent,entrust_time,area_name,community_name,address,layout,measure,price,agent_id,agent_name,status,handle_time,nick_name,renovation,phone,is_delete,broadband,washing_machine,household,fridge,entrust_type,city_id,city_name,area_id
+		id,entrust_sn,source,house_type,sell_rent,entrust_time,area_name,community_name,address,layout,measure,price,agent_id,agent_name,status,handle_time,nick_name,renovation,phone,is_delete,broadband,washing_machine,household,fridge,entrust_type,city_id,city_name,area_id,agent_phone,reset_flag,assigned_time
 	</sql>
 
 	<select id="selectEntrustById" resultMap="BaseResultMap">
@@ -147,6 +150,15 @@
 			<if test="areaId != null">
 				area_id,
 			</if>
+			<if test="agentPhone != null">
+				agent_phone,
+			</if>
+			<if test="resetFlag != null">
+				reset_flag,
+			</if>
+			<if test="assignedTime != null">
+				assigned_time,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -230,6 +242,15 @@
 			</if>
 			<if test="areaId != null">
 				#{areaId,jdbcType=VARCHAR},
+			</if>
+			<if test="agentPhone != null">
+				#{agentPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="resetFlag != null">
+				#{resetFlag,jdbcType=INTEGER},
+			</if>
+			<if test="assignedTime != null">
+				#{assignedTime,jdbcType=TIMESTAMP},
 			</if>
 		</trim>
 	</insert>
@@ -315,6 +336,15 @@
 		</if>
 		<if test="areaId != null">
 			area_id= #{areaId,jdbcType=VARCHAR},
+		</if>
+		<if test="agentPhone != null">
+			agent_phone= #{agentPhone,jdbcType=VARCHAR},
+		</if>
+		<if test="resetFlag != null">
+			reset_flag= #{resetFlag,jdbcType=INTEGER},
+		</if>
+		<if test="assignedTime != null">
+			assigned_time= #{assignedTime,jdbcType=TIMESTAMP},
 		</if>
 	</sql>
 
@@ -402,6 +432,15 @@
 		</if>
 		<if test="areaId != null">
 			 and area_id= #{areaId,jdbcType=VARCHAR}
+		</if>
+		<if test="agentPhone != null">
+			 and agent_phone= #{agentPhone,jdbcType=VARCHAR}
+		</if>
+		<if test="resetFlag != null">
+			 and reset_flag= #{resetFlag,jdbcType=INTEGER}
+		</if>
+		<if test="assignedTime != null">
+			 and assigned_time= #{assignedTime,jdbcType=TIMESTAMP}
 		</if>
 	</sql>
 

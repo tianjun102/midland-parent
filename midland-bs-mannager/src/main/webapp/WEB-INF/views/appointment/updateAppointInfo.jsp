@@ -146,58 +146,7 @@
             }
         });
     }
-    //检查手机号格式
-    function checkPhone() {
 
-        var phone0 = $("#ph").val();
-        var reg = /^1[3,4,5,7,8]\d{9}$/;
-        var phone = $("input[name='phone']").val();
-        if (phone.trim() == '') {
-            layer.tips("手机号不能为空！", "input[name='phone']", {tips: 1});
-            return false;
-        }
-        if (!reg.test(phone)) {
-            layer.tips("手机号格式有误,请核对!", "input[name='phone']", {tips: 3});
-            return false;
-        }
-        if (phone0 == phone) {
-            return true;
-        }
-
-        var a = true;
-        $.ajax({
-            type: "post",
-            url: "${ctx }/rest/user/checkPhoneUnique",
-            async: false, // 此处必须同步
-            dataType: "json",
-            data: {"phone": phone},
-            success: function (xmlobj) {
-                if (xmlobj.flag == 1) {
-                    layer.tips("当前手机号码已被使用，请更换手机号码！", "input[name='phone']", {tips: 1});
-                    a = false;
-                } else {
-                    a = true;
-                }
-            }
-        });
-        return a;
-    }
-
-    //检查邮箱格式
-    function checkEmail() {
-        var reg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
-        var email = $("input[name='email']").val();
-        if (email.trim() == '') {
-            //layer.tips("邮箱不能为空！", "input[name='email']",{tips:3});
-            return true;
-        }
-        if (!reg.test(email)) {
-            layer.tips("邮箱格式有误,请核对!", "input[name='email']", {tips: 3});
-            //$("input[name='email']").focus();
-            return false;
-        }
-        return true;
-    }
 
     //取消
     function closeWin() {

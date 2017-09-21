@@ -6,6 +6,16 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
+    <style type="text/css">
+        .table-add tr td a.house-detail {
+            width: auto;
+            height: auto;
+            padding: 2px 3px;
+            background-color: #00aeee;
+            border-radius: 2px;
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
 
@@ -55,7 +65,7 @@
                         <td>${item.appointmentTime }</td>
                         <td>${item.areaName }</td>
                         <td>${item.communityName }</td>
-                        <td>${item.address }</td>
+                        <td>${item.address }<a target="_blank" href="${item.viewUrl}" class="house-detail">房源详情</a></td>
                         <td>${item.layout }</td>
                         <td>${item.measure }</td>
                         <td>${item.price }</td>
@@ -66,8 +76,11 @@
                         </c:forEach></td>
                         <td>${item.handleTime }</td>
                         <td>
-                            <a target="contentF" class="edit_img" title="重新分配经纪人"
-                               onclick="toRedistribute(${item.id })"></a>
+                            <c:if test="${item.resetFlag==1}">
+                                <a target="contentF" class="edit_img" title="重新分配经纪人"
+                                   onclick="toRedistribute(${item.id })"></a>
+                            </c:if>
+
                             <a target="contentF" title="编辑"
                                onclick="toUpdateAppointment(${item.id})">编辑</a>
                         </td>
@@ -94,12 +107,14 @@
     //删除
     //修改
     function toRedistribute(id) {
+        //重新分配经纪人时，保存的地址
+        var url = "${ctx}/rest/appoint/reset_agent";
         layer.open({
             type: 2,
             title: ['重新分配经纪人'],
             shade: 0.3,
             area: ['1300px', '700px'],
-            content: ['${ctx}/rest/appoint/toRedistribute?appointId=' + id, 'no']
+            content: ['${ctx}/rest/public/toRedistribute?id=' + id + "&url=" + url, 'no']
         });
     }
 

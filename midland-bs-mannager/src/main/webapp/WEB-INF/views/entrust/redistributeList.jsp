@@ -73,13 +73,14 @@
         var intHot = $("input[name='radio']:checked");
         var agentNo = intHot.parent().next().text();
         var agentName = intHot.parent().next().next().text();
+        var agentPhone = intHot.parent().next().next().next().text();
         $.ajax({
             type: "post",
             url: "${ctx}/rest/entrust/reset_agent",
             async: false, // 此处必须同步
             dataType: "json",
             data: {
-                "id": entrustId, "agentId": agentNo, "agentName": agentName
+                "id": entrustId, "agentId": agentNo, "agentName": agentName,"agentPhone":agentPhone
             },
             success: function (data) {
                 if (data.state == 0) {

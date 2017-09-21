@@ -53,9 +53,10 @@
                                     <a style="width: auto;" target="contentF" onclick="toAudit(${item.id })">审核</a>
                                 </c:when>
                                 <c:otherwise>
-                                    <a style="width: auto;" target="contentF" onclick="viewQuestion(${item.id })">查看问题</a>
+                                    <a style="width: auto;" target="contentF" href="${ctx}/rest/questions/to_view?id=${item.id}">查看问题</a>
                                 </c:otherwise>
                             </c:choose>
+                            <a style="width: auto;" target="contentF" href="${ctx}/rest/questions/to_repeat?id=${item.id}">回答</a>
                         </td>
                     </tr>
                 </c:forEach>

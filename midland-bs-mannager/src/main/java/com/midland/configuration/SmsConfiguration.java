@@ -1,7 +1,7 @@
 package com.midland.configuration;
 
-import com.midland.web.SmsSender.SmsClient;
-import com.midland.web.SmsSender.SmsProperties;
+import com.midland.web.api.SmsSender.SmsClient;
+import com.midland.web.api.SmsSender.SmsProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;

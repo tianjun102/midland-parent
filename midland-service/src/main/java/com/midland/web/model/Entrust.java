@@ -59,7 +59,7 @@ public class Entrust{
 	 **/
 	private String agentName;
 	/**
-	 * 状态；0=未处理；1=处理中
+	 * 状态；0=待分配；1=已分配；2看房中，3已取消，4议价中，5已成交
 	 **/
 	private Integer status;
 	/**
@@ -71,7 +71,7 @@ public class Entrust{
 	 **/
 	private String nickName;
 	/**
-	 * 0=简装；1=精装
+	 * 0豪装；1精装，2普装，3毛坯
 	 **/
 	private Integer renovation;
 	/**
@@ -114,23 +114,20 @@ public class Entrust{
 	 * 区域id
 	 **/
 	private String areaId;
-	
-	public String getAgentId() {
-		return agentId;
-	}
-	
-	public void setAgentId(String agentId) {
-		this.agentId = agentId;
-	}
-	
-	public String getAgentName() {
-		return agentName;
-	}
-	
-	public void setAgentName(String agentName) {
-		this.agentName = agentName;
-	}
-	
+	/**
+	 * 经纪人手机号
+	 **/
+	private String agentPhone;
+	/**
+	 * 是否展示重新分配按钮，0不，1是
+	 **/
+	private Integer resetFlag;
+	/**
+	 * 分配经纪人时间
+	 **/
+	private String assignedTime;
+
+
 	public Integer getId() {
 		return id;
 	}
@@ -226,7 +223,22 @@ public class Entrust{
 	public void setPrice(String price) {
 		this.price = price;
 	}
-	
+
+	public String getAgentId() {
+		return agentId;
+	}
+
+	public void setAgentId(String agentId) {
+		this.agentId = agentId;
+	}
+
+	public String getAgentName() {
+		return agentName;
+	}
+
+	public void setAgentName(String agentName) {
+		this.agentName = agentName;
+	}
 
 	public Integer getStatus() {
 		return status;
@@ -340,6 +352,30 @@ public class Entrust{
 		this.areaId = areaId;
 	}
 
+	public String getAgentPhone() {
+		return agentPhone;
+	}
+
+	public void setAgentPhone(String agentPhone) {
+		this.agentPhone = agentPhone;
+	}
+
+	public Integer getResetFlag() {
+		return resetFlag;
+	}
+
+	public void setResetFlag(Integer resetFlag) {
+		this.resetFlag = resetFlag;
+	}
+
+	public String getAssignedTime() {
+		return assignedTime;
+	}
+
+	public void setAssignedTime(String assignedTime) {
+		this.assignedTime = assignedTime;
+	}
+
 	@Override
 	public String toString() {
 		 final StringBuffer sb=new StringBuffer("Entrust{");
@@ -427,6 +463,16 @@ public class Entrust{
 		if (areaId != null) {
 			sb.append(", \"areaId\":\"").append(areaId).append("\"");
 		}
+		if (agentPhone != null) {
+			sb.append(", \"agentPhone\":\"").append(agentPhone).append("\"");
+		}
+		if (resetFlag != null) {
+			sb.append(", \"resetFlag\":\"").append(resetFlag).append("\"");
+		}
+		if (assignedTime != null) {
+			sb.append(", \"assignedTime\":\"").append(assignedTime).append("\"");
+		}
+		sb.append("}");
 		return sb.toString();
 	}
 }
