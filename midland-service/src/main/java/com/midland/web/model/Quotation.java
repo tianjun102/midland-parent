@@ -15,17 +15,29 @@ public class Quotation{
 	 **/
 	private Integer type;
 	/**
-	 * 城市
+	 * 
 	 **/
 	private String cityId;
+	/**
+	 * 城市名称
+	 **/
+	private String cityName;
 	/**
 	 * 区域id
 	 **/
 	private String areaId;
 	/**
+	 * 区域名称
+	 **/
+	private String areaName;
+	/**
 	 * 片区
 	 **/
 	private String sliceId;
+	/**
+	 * 片区名称
+	 **/
+	private String sliceName;
 	/**
 	 * 成交数量
 	 **/
@@ -63,17 +75,9 @@ public class Quotation{
 	 **/
 	private Integer isDelete;
 	/**
-	 * 城市名称
+	 * 房子面积范围（只有住宅类型的房子才有面积范围）
 	 **/
-	private String cityName;
-	/**
-	 * 区域名称
-	 **/
-	private String areaName;
-	/**
-	 * 片区名称
-	 **/
-	private String sliceName;
+	private String houseAcreage;
 
 
 	public Integer getId() {
@@ -108,6 +112,14 @@ public class Quotation{
 		this.cityId = cityId;
 	}
 
+	public String getCityName() {
+		return cityName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
 	public String getAreaId() {
 		return areaId;
 	}
@@ -116,12 +128,28 @@ public class Quotation{
 		this.areaId = areaId;
 	}
 
+	public String getAreaName() {
+		return areaName;
+	}
+
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
+	}
+
 	public String getSliceId() {
 		return sliceId;
 	}
 
 	public void setSliceId(String sliceId) {
 		this.sliceId = sliceId;
+	}
+
+	public String getSliceName() {
+		return sliceName;
+	}
+
+	public void setSliceName(String sliceName) {
+		this.sliceName = sliceName;
 	}
 
 	public Integer getDealNum() {
@@ -196,28 +224,12 @@ public class Quotation{
 		this.isDelete = isDelete;
 	}
 
-	public String getCityName() {
-		return cityName;
+	public String getHouseAcreage() {
+		return houseAcreage;
 	}
 
-	public void setCityName(String cityName) {
-		this.cityName = cityName;
-	}
-
-	public String getAreaName() {
-		return areaName;
-	}
-
-	public void setAreaName(String areaName) {
-		this.areaName = areaName;
-	}
-
-	public String getSliceName() {
-		return sliceName;
-	}
-
-	public void setSliceName(String sliceName) {
-		this.sliceName = sliceName;
+	public void setHouseAcreage(String houseAcreage) {
+		this.houseAcreage = houseAcreage;
 	}
 
 	@Override
@@ -235,11 +247,20 @@ public class Quotation{
 		if (cityId != null) {
 			sb.append(", \"cityId\":\"").append(cityId).append("\"");
 		}
+		if (cityName != null) {
+			sb.append(", \"cityName\":\"").append(cityName).append("\"");
+		}
 		if (areaId != null) {
 			sb.append(", \"areaId\":\"").append(areaId).append("\"");
 		}
+		if (areaName != null) {
+			sb.append(", \"areaName\":\"").append(areaName).append("\"");
+		}
 		if (sliceId != null) {
 			sb.append(", \"sliceId\":\"").append(sliceId).append("\"");
+		}
+		if (sliceName != null) {
+			sb.append(", \"sliceName\":\"").append(sliceName).append("\"");
 		}
 		if (dealNum != null) {
 			sb.append(", \"dealNum\":\"").append(dealNum).append("\"");
@@ -268,15 +289,10 @@ public class Quotation{
 		if (isDelete != null) {
 			sb.append(", \"isDelete\":\"").append(isDelete).append("\"");
 		}
-		if (cityName != null) {
-			sb.append(", \"cityName\":\"").append(cityName).append("\"");
+		if (houseAcreage != null) {
+			sb.append(", \"houseAcreage\":\"").append(houseAcreage).append("\"");
 		}
-		if (areaName != null) {
-			sb.append(", \"areaName\":\"").append(areaName).append("\"");
-		}
-		if (sliceName != null) {
-			sb.append(", \"sliceName\":\"").append(sliceName).append("\"");
-		}
+		sb.append("}");
 		return sb.toString();
 	}
 }
