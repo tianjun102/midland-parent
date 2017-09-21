@@ -84,4 +84,14 @@ public class CategoryServiceImpl implements CategoryService {
 			throw e;
 		}
 	}
+
+    @Override
+    public List<Category> findCategoryTreeList(Category category) throws Exception {
+		try {
+			return categoryMapper.findCategoryTreeList(category);
+		} catch(Exception e) {
+			log.error("findCategoryTreeList  {}",category,e);
+			throw e;
+		}
+    }
 }

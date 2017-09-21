@@ -40,7 +40,7 @@
 						<td>
                             <a target="contentF" onclick="to_edit(${item.id })">回复</a>
                             <a target="contentF" href="${ctx}/rest/resumeManager/fileDownload">下载</a>
-                            <a target="contentF" class="delete_img" onclick="delete1(${item.id })">删除</a>
+                            <a target="contentF" class="delete_img" onclick="delete1(${item.id })"></a>
                         </td>
                     </tr>
                 </c:forEach>

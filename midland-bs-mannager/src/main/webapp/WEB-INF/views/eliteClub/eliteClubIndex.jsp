@@ -15,21 +15,26 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
-				<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>
+				<a class = "setup"  target="contentF" href="${ctx}/rest/eliteClub/to_add">新增</a>
 			</p>
 		<form action="${ctx }/rest/eliteClub/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
-				<li><span>select：</span>
-					<select name="cityId" id="cityId" class="dropdown">
-						<option value="" >全部</option>
-						<c:forEach items="${citys}" var="item">
-						<option value="${item.id}" >${item.name}</option>
-						</c:forEach>
+				<li>
+					<span style = "float:left;">状态：</span>
+					<select name="isShow" id="isShow" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+						<option value="">全部</option>
+						<option value="0">上线</option>
+						<option value="1">下线</option>
 					</select>
 				</li>
-				<li><span>手机号码：</span>
-					<input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>
+				<li><span>城市：</span>
+					<select name="cityId" id="cityId" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+						<option value="">全部</option>
+						<c:forEach items="${cityList}" var="city">
+							<option value="${city.id}">${city.name}</option>
+						</c:forEach>
+					</select>
 				</li>
 				<li>
 					<input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/>

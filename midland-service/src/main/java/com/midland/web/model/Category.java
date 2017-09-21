@@ -43,6 +43,10 @@ public class Category{
 	 **/
 	private String cateDesc;
 
+	private Integer	chirdCount;   //子类数
+
+	private String	parentName;
+
 
 	public Integer getId() {
 		return id;
@@ -122,6 +126,22 @@ public class Category{
 
 	public void setCateDesc(String cateDesc) {
 		this.cateDesc = cateDesc;
+	}
+
+	public Integer getChirdCount() {
+		return chirdCount;
+	}
+
+	public void setChirdCount(Integer chirdCount) {
+		this.chirdCount = chirdCount;
+	}
+
+	public String getParentName() {
+		return parentName;
+	}
+
+	public void setParentName(String parentName) {
+		this.parentName = parentName;
 	}
 
 	@Override

@@ -8,7 +8,7 @@
 		<result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
 		<result column="img_desc" property="imgDesc" jdbcType="VARCHAR" />
 		<result column="ad_name" property="adName" jdbcType="VARCHAR" />
-		<result column="ad_time" property="adTime" jdbcType="TIMESTAMP" />
+		<result column="ad_time" property="adTime" jdbcType="VARCHAR" />
 		<result column="ad_title" property="adTitle" jdbcType="VARCHAR" />
 		<result column="ad_address" property="adAddress" jdbcType="VARCHAR" />
 		<result column="detail" property="detail" jdbcType="LONGVARCHAR" />
@@ -103,7 +103,7 @@
 				#{adName,jdbcType=VARCHAR},
 			</if>
 			<if test="adTime != null">
-				#{adTime,jdbcType=TIMESTAMP},
+				#{adTime,jdbcType=VARCHAR},
 			</if>
 			<if test="adTitle != null">
 				#{adTitle,jdbcType=VARCHAR},
@@ -143,7 +143,7 @@
 			ad_name= #{adName,jdbcType=VARCHAR},
 		</if>
 		<if test="adTime != null">
-			ad_time= #{adTime,jdbcType=TIMESTAMP},
+			ad_time= #{adTime,jdbcType=VARCHAR},
 		</if>
 		<if test="adTitle != null">
 			ad_title= #{adTitle,jdbcType=VARCHAR},
@@ -185,7 +185,7 @@
 			 and ad_name= #{adName,jdbcType=VARCHAR}
 		</if>
 		<if test="adTime != null">
-			 and ad_time= #{adTime,jdbcType=TIMESTAMP}
+			 and ad_time= #{adTime,jdbcType=VARCHAR}
 		</if>
 		<if test="adTitle != null">
 			 and ad_title= #{adTitle,jdbcType=VARCHAR}

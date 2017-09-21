@@ -274,7 +274,7 @@
 							<a id = "report1" href="${ctx}/rest/eliteVip/index" target="contentF"><span>精英会员管理</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="eliteCate">
-							<a id = "report1" href="${ctx}/rest/intoMidland/index?flag=7" target="contentF"><span>会员分类管理</span></a>
+							<a id = "report1" href="${ctx}/rest/category/index" target="contentF"><span>会员分类管理</span></a>
 						</shiro:hasPermission>
 					</dd>
 				</dl>

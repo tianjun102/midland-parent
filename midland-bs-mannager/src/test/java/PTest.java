@@ -17,8 +17,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +44,11 @@ public class PTest {
 	public void dsfs(){
 		SmsModel smsModel = new SmsModel();
 		smsModel.setPhones("13600158343");
-		smsModel.setFields("11||11||111");
+		try {
+			smsModel.setFields("11||11||"+ URLEncoder.encode("美联房产查档", "GBK"));
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		smsModel.setTpId("2029157");
 		try {
 			SmsResult reuslt = smsClient.execute(smsModel);
