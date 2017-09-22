@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.midland.core.util.SmsUtil;
+import com.midland.core.util.UploadImgUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -26,8 +28,6 @@ import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.github.miemiedev.mybatis.paginator.domain.Paginator;
 import com.google.common.collect.Maps;
-import com.bluemobi.core.util.SmsUtil;
-import com.bluemobi.core.util.UploadImgUtil;
 import com.bluemobi.midland.web.commons.FastJsonUtils;
 import com.bluemobi.midland.web.commons.Result;
 import com.bluemobi.midland.web.commons.core.util.ApplicationUtils;
@@ -341,6 +341,7 @@ public class UserController extends CommonsController {
 				map.put("oldImg",user.getHeadImg());
 				map.put("imgContent",params.get("imgContent"));
 				String headImg  = UploadImgUtil.GenerateImage(map);
+
 				if(StringUtils.isNotEmpty(headImg)){
 					user.setHeadImg(headImg);
 				}
@@ -577,7 +578,7 @@ public class UserController extends CommonsController {
 	
     /**
      * 发送短信
-     * @param username
+     * @param parems
      * @return
      */
     @RequestMapping(value = "/sendSms",produces = "application/json; charset=UTF-8", method = {RequestMethod.GET,RequestMethod.POST})
@@ -635,7 +636,7 @@ public class UserController extends CommonsController {
     
     /**
      * 验证码校验
-     * @param vcode
+     * @param parem
      * @return
      */
     @RequestMapping(value = "/checkVcode", method = {RequestMethod.GET,RequestMethod.POST})

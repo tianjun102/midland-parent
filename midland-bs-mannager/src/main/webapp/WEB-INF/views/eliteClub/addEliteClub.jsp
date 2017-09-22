@@ -17,7 +17,7 @@
 <head>
     <base href="<%=basePath%>">
     <meta charset="utf-8" />
-    <title>添加Banner图</title>
+    <title>添加精英会活动</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
@@ -33,7 +33,7 @@
 <div class="box">
     <section class = "content">
         <p class = "detail-title">
-            <span>添加Banner</span>
+            <span>添加精英会活动</span>
         </p>
         <form id="formId" action="${ctx}/rest/banner/addBanner" method="post" enctype="multipart/form-data" method="post">
             <input type="hidden" name="cityName" id="cityName" value="" >

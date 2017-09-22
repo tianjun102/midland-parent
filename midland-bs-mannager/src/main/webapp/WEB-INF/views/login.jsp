@@ -30,6 +30,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <meta name="MobileOptimized" content="320">
 <link rel="stylesheet" href="${ctx}/assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="${ctx}/assets/css/common.css">
+<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="1106342971" data-redirecturi="http://175.102.18.14:8083/wechat/" charset="utf-8"></script>
 
 <%
      String username = "";
@@ -100,7 +101,7 @@ top.location.href = location.href;
 								<span class="warn-area"	id="warnArea"></span>
 							</div>
 							<input type="button" value="登录" id="logsub" />
-							<p class = "forget"><a href="javascript:;">忘记密码?</a></p>
+							<p class = "forget"><a href="javascript:;">忘记密码?</a><span id="qqLoginBtn"></span></p>
 						</form>
 					</div>
 				</div>
@@ -269,6 +270,10 @@ top.location.href = location.href;
 				return true;
 			}
 		}
+
+        QC.Login({
+            btnId:"qqLoginBtn"    //插入按钮的节点id
+        });
 	</script>
 
 </body>
