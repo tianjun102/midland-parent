@@ -303,7 +303,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 			if (j > 0 ) {
 				//每个市27行
 				
-				if (row_27<19){//每个市的前12行，为住宅信息
+				if (j!=27 && row_27<13){//每个市的前12行，为住宅信息
 					int row_4=row_27%4;
 					if (row_4==1){
 						dealNum=new ArrayList<>();
@@ -475,7 +475,8 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 									houseTypeId = 3;
 								} else {
 									throw new Exception("房源类型错误：" + houseType);
-								}								int i = x + 1;
+								}
+								int i = x + 1;
 								String month = "-" + i;
 								String day = "-01";
 								quotation.setIsNew(Contant.isOldHouse);

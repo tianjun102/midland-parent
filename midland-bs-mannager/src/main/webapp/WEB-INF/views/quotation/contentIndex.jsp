@@ -73,8 +73,8 @@ ${radios}
                 type: 'value',
                 name: '价格',
                 min: 0,
-                max: 2000,
-                interval:100,
+                max: 1000,
+                interval:200,
                 axisLabel: {
                     formatter: '{value} 元'
                 }
@@ -82,8 +82,8 @@ ${radios}
             {
                 type: 'value',
                 name: '价格',
-                min: -350,
-                max: 350,
+                min: -250,
+                max: 250,
                 interval: 50,
                 axisLabel: {
                     formatter: '{value} %'

@@ -20,6 +20,7 @@
         <th style="width: 8%">成交套数</th>
         <th style="width: 8%">成交面积</th>
         <th style="width: 8%">成交均价</th>
+        <th style="width: 8%">成交金额</th>
         <th style="width: 8%">可售套数</th>
         <th style="width: 8%">可售面积</th>
         <th style="width: 8%">数据时间</th>
@@ -41,6 +42,7 @@
                     <td>${item.dealNum}</td>
                     <td>${item.dealAcreage}</td>
                     <td>${item.price}</td>
+                    <td>${item.dealPrice}</td>
                     <td>${item.soldNum}</td>
                     <td>${item.soldArea}</td>
                     <td>${item.dataTime}</td>

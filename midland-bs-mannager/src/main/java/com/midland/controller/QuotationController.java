@@ -188,28 +188,48 @@ public class QuotationController extends BaseFilter {
 			obj.setEndTime(MidlandHelper.getCurrentTime());
 		}
 		List<String> month = new ArrayList<>();
-		List<Object> numRatioList = new ArrayList<>();
-		List<Object> acreageRatioList = new ArrayList<>();
+		
 		List<Object> numList = new ArrayList<>();
+		List<Object> numRatioList = new ArrayList<>();
 		List<Object> acreageList = new ArrayList<>();
+		List<Object> acreageRatioList = new ArrayList<>();
+		List<Object> priceList = new ArrayList<>();
+		List<Object> priceRatioList = new ArrayList<>();
+		List<Object> soldNumList = new ArrayList<>();
+		List<Object> soldNumRatioList = new ArrayList<>();
+		List<Object> soldAcreageList = new ArrayList<>();
+		List<Object> soldAcreageRatioList = new ArrayList<>();
+		
 		List<QuotationView> result = quotationViewServiceImpl.findQuotationViewList(obj);
 		for (QuotationView view : result){
 			month.add(view.getDataTime());
 			//（当前月数据-上个月数据)/上个月数据=当月环比
-			getRatio(numRatioList, Double.valueOf(view.getDealNum()),view.getPreDealNum());
 			numList.add(view.getDealNum());
+			getRatio(numRatioList, Double.valueOf(view.getDealNum()),view.getPreDealNum());
 			acreageList.add(view.getDealAcreage());
 			getRatio(acreageRatioList,Double.valueOf(view.getDealAcreage()),view.getPreDealAcreage());
+			priceList.add(view.getPrice());
+			getRatio(priceRatioList,Double.valueOf(view.getPrice()),view.getPrePrice());
+			soldNumList.add(view.getPrice());
+			getRatio(soldNumRatioList,Double.valueOf(view.getSoldNum()),view.getPreSoldNum());
+			soldAcreageList.add(view.getSoldArea());
+			getRatio(soldAcreageRatioList,Double.valueOf(view.getSoldArea()),view.getPreSoldArea());
+			
+		
+		
 		}
 		model.addAttribute("months", JSONArray.toJSONString(month));
 		model.addAttribute("numList",numList);
-		model.addAttribute("acreageList",acreageList);
 		model.addAttribute("numRatioList",numRatioList);
-		
+		model.addAttribute("acreageList",acreageList);
 		model.addAttribute("acreageRatioList",acreageRatioList);
+		model.addAttribute("priceList",acreageList);
+		model.addAttribute("priceRatioList",acreageRatioList);
+		model.addAttribute("soldNumList",acreageList);
+		model.addAttribute("soldNumRatioList",acreageRatioList);
+		model.addAttribute("soldAcreageList",acreageList);
+		model.addAttribute("soldAcreageRatioList",acreageRatioList);
 		return "quotation/contentIndex";
-		
-		
 		
 	}
 	
