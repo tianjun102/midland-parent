@@ -6,12 +6,16 @@ import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.web.model.Area;
 import com.midland.web.model.Quotation;
+import com.midland.web.model.QuotationSecondHandView;
+import com.midland.web.model.QuotationView;
 import com.midland.web.service.QuotationService;
+import com.midland.web.service.QuotationViewService;
 import com.midland.web.service.SettingService;
 import com.midland.web.util.Calculate;
 import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
 import com.midland.web.util.ParamObject;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @SuppressWarnings("all")
@@ -34,6 +35,8 @@ public class QuotationController extends BaseFilter {
 	private Logger log = LoggerFactory.getLogger(QuotationController.class);
 	@Autowired
 	private QuotationService quotationServiceImpl;
+	@Autowired
+	private QuotationViewService quotationViewServiceImpl;
 	@Autowired
 	private SettingService settingService;
 	
@@ -166,33 +169,54 @@ public class QuotationController extends BaseFilter {
 	}
 	
 	@RequestMapping("showTooltip")
-	public String showTooltip(Integer id, Quotation quotation, Model model) throws Exception {
-		List<Map> result = quotationServiceImpl.tooltip(quotation);
-		List<String> month = new ArrayList<>();
-		List<Double> data = new ArrayList<>();
-		List<Double> ratios = new ArrayList<>();
-		for (Map map : result) {
-			String mon = (String) map.get("months");
-			Double cur = (Double) map.get("cur");
-			Double pre = (Double) map.get("pre");
-			month.add(mon);
-			data.add(cur);
-			if (pre == null || pre == 0) {
-				
-				if (cur==null || cur==0){
-					cur=0.0;
-					pre=1.0;
-				}else {
-					pre = cur;
-				}
-			}
-			double ratio = Calculate.divide(cur, pre);
-			ratio = Calculate.multiply(ratio,100.00);
-			ratios.add(ratio);
+	public String showTooltip(Integer id, QuotationView obj, Model model) throws Exception {
+		
+		if (StringUtils.isEmpty(obj.getAreaId())){
+			obj.setAreaId("0");
 		}
-		model.addAttribute("month", JSONArray.toJSONString(month));
-		model.addAttribute("data", data);
-		model.addAttribute("ratios", ratios);
+		if (StringUtils.isEmpty(obj.getCityId())){
+			obj.setCityId("085");
+		}
+		if (obj.getType()==null){
+			obj.setType(0);
+		}
+		if (obj.getStartTime()==null){
+			Date date= new Date();
+			obj.setStartTime(MidlandHelper.getMonth(date,-12));
+		}
+		if (obj.getEndTime() == null){
+			obj.setEndTime(MidlandHelper.getCurrentTime());
+		}
+		List<String> month = new ArrayList<>();
+		List<Object> numRatioList = new ArrayList<>();
+		List<Object> acreageRatioList = new ArrayList<>();
+		List<Object> numList = new ArrayList<>();
+		List<Object> acreageList = new ArrayList<>();
+		List<QuotationView> result = quotationViewServiceImpl.findQuotationViewList(obj);
+		for (QuotationView view : result){
+			month.add(view.getDataTime());
+			//（当前月数据-上个月数据)/上个月数据=当月环比
+			getRatio(numRatioList, Double.valueOf(view.getDealNum()),view.getPreDealNum());
+			numList.add(view.getDealNum());
+			acreageList.add(view.getDealAcreage());
+			getRatio(acreageRatioList,Double.valueOf(view.getDealAcreage()),view.getPreDealAcreage());
+		}
+		model.addAttribute("months", JSONArray.toJSONString(month));
+		model.addAttribute("numList",numList);
+		model.addAttribute("acreageList",acreageList);
+		model.addAttribute("numRatioList",numRatioList);
+		
+		model.addAttribute("acreageRatioList",acreageRatioList);
 		return "quotation/contentIndex";
+		
+		
+		
+	}
+	
+	private void getRatio(List<Object> numRatioList, Double dealNum,Double preDealNum) {
+		double minus = preDealNum==null?dealNum:preDealNum;
+		double numRes= Calculate.minus(Double.valueOf(dealNum),minus);
+		double numRatio=Calculate.divide(numRes,minus);
+		numRatioList.add(Calculate.multiply(numRatio,100.00));
 	}
 }

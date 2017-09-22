@@ -22,10 +22,11 @@
         <result column="area_name" property="areaName" jdbcType="VARCHAR"/>
         <result column="slice_name" property="sliceName" jdbcType="VARCHAR"/>
         <result column="house_acreage" property="houseAcreage" jdbcType="VARCHAR"/>
+        <result column="deal_price" property="dealPrice" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-		id,data_time,type,city_id,area_id,slice_id,deal_num,deal_acreage,price,sold_num,sold_area,ring_ratio,update_time,is_new,is_delete,city_name,area_name,slice_name,house_acreage
+		id,data_time,type,city_id,area_id,slice_id,deal_num,deal_acreage,price,sold_num,sold_area,ring_ratio,update_time,is_new,is_delete,city_name,area_name,slice_name,house_acreage,deal_price
 	</sql>
 
     <select id="tooltip" resultType="Map">
@@ -132,6 +133,9 @@
                 <if test="s.houseAcreage != null">
                     house_acreage,
                 </if>
+                <if test="s.dealPrice != null">
+                    deal_price,
+                </if>
             </trim>
             values
             <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -188,6 +192,9 @@
                 </if>
                 <if test="s.houseAcreage != null">
                     #{s.houseAcreage,jdbcType=VARCHAR},
+                </if>
+                <if test="s.dealPrice != null">
+                    #{s.dealPrice,jdbcType=VARCHAR},
                 </if>
             </trim>
         </foreach>
@@ -253,6 +260,9 @@
             <if test="houseAcreage != null">
                 house_acreage,
             </if>
+            <if test="dealPrice != null">
+                deal_price,
+            </if>
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -307,8 +317,11 @@
             <if test="sliceName != null">
                 #{sliceName,jdbcType=VARCHAR},
             </if>
-            <if test="s.houseAcreage != null">
-                #{s.houseAcreage,jdbcType=VARCHAR},
+            <if test="houseAcreage != null">
+                #{houseAcreage,jdbcType=VARCHAR},
+            </if>
+            <if test="dealPrice != null">
+                #{dealPrice,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -364,6 +377,12 @@
         </if>
         <if test="sliceName != null">
             slice_name= #{sliceName,jdbcType=VARCHAR},
+        </if>
+        <if test="houseAcreage != null">
+            house_acreage=#{houseAcreage,jdbcType=VARCHAR},
+        </if>
+        <if test="dealPrice != null">
+            deal_price=#{dealPrice,jdbcType=VARCHAR},
         </if>
     </sql>
 
@@ -424,6 +443,9 @@
         </if>
         <if test="houseAcreage != null">
             and house_acreage=#{houseAcreage,jdbcType=VARCHAR}
+        </if>
+        <if test="dealPrice != null">
+            and deal_price=#{dealPrice,jdbcType=VARCHAR}
         </if>
     </sql>
 

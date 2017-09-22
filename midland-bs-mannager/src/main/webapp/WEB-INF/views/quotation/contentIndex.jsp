@@ -62,7 +62,7 @@ ${radios}
         xAxis: [
             {
                 type: 'category',
-                data: ${month},
+                data: ${months},
                 axisPointer: {
                     type: 'shadow'
                 }
@@ -73,8 +73,8 @@ ${radios}
                 type: 'value',
                 name: '价格',
                 min: 0,
-                max: 70000,
-                interval:5000,
+                max: 2000,
+                interval:100,
                 axisLabel: {
                     formatter: '{value} 元'
                 }
@@ -94,7 +94,7 @@ ${radios}
             {
                 name:'价格',
                 type:'bar',
-                data:${data},
+                data:${numList},
 				barWidth:'20',
 				itemStyle:{
                     normal:{
@@ -109,7 +109,7 @@ ${radios}
                 yAxisIndex: 1,
                 smooth: true,
                 symbolSize: 7,
-                data:${ratios},
+                data:${numRatioList},
                 itemStyle:{
                     normal:{
                         color:'#2ec7c9'
