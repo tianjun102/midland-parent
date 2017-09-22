@@ -50,13 +50,28 @@ public class QuotationSecondHandController extends BaseFilter {
 		model.addAttribute("citys",list);
 		return "quotationSecondHand/quotationSecondHandIndex";
 	}
+	
+	
+	@RequestMapping("toolsTip_index")
+	public String toolsTipIndex(Model model){
+		List<Area> list1 = settingService.queryAllCityByRedis();
+		settingService.getAllProvinceList(model);
+		List<ParamObject> paramObjects = JsonMapReader.getMap("quotation_type");
+		model.addAttribute("types", paramObjects);
+		model.addAttribute("citys",list1);
+		return "quotationSecondHand/contentIndex";
+	}
+	
 	/**
 	 *
 	 **/
 	@RequestMapping("toolsTip")
-	public String toolsTip(QuotationSecondHandView obj, Model model) throws Exception {
-		if (StringUtils.isEmpty(obj.getAreaId())){
+	public String toolsTip(QuotationSecondHandView obj,String distName,String distId,String url, Model model) throws Exception {
+		if (StringUtils.isEmpty(distId)&&StringUtils.isEmpty(distName)){
 			obj.setAreaId("0");
+		}else{
+			obj.setAreaId(distId);
+			obj.setAreaName(distName);
 		}
 		if (StringUtils.isEmpty(obj.getCityId())){
 			obj.setCityId("085");
@@ -83,22 +98,27 @@ public class QuotationSecondHandController extends BaseFilter {
 			double minus = view.getPreNum()==null?view.getDealNum():view.getPreNum();
 			double numRes=Calculate.minus(Double.valueOf(view.getDealNum()),minus);
 			double numRatio=Calculate.divide(numRes,minus);
-			numRatioList.add(Calculate.multiply(numRatio,100.00));
 			numList.add(view.getDealNum());
-			acreageList.add(view.getDealAcreage());
+			numRatioList.add(Calculate.multiply(numRatio,100.00));
 			
 			String minus1 = view.getPreAcreage()==null?view.getDealAcreage():view.getPreAcreage();
 			double acreageRes=Calculate.minus(Double.valueOf(view.getDealAcreage()),Double.valueOf(minus1));
 			double acreageRatio=Calculate.divide(acreageRes,Double.valueOf(minus1));
-			acreageRatioList.add(acreageRatio);
+			acreageList.add(view.getDealAcreage());
+			acreageRatioList.add(Calculate.multiply(acreageRatio,100.00));
 		}
+		
 		model.addAttribute("months", JSONArray.toJSONString(month));
 		model.addAttribute("numList",numList);
 		model.addAttribute("acreageList",acreageList);
 		model.addAttribute("numRatioList",numRatioList);
-		
+		List<ParamObject> paramObjects = JsonMapReader.getMap("quotation_type");
+		model.addAttribute("types", paramObjects);
 		model.addAttribute("acreageRatioList",acreageRatioList);
-		return "quotationSecondHand/contentIndex";
+		if (url!=null){
+			return "quotationSecondHand/"+url;
+		}
+		return "quotationSecondHand/dealNumContent";
 	}
 	
 	@RequestMapping("list")

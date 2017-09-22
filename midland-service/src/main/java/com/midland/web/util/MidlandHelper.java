@@ -9,7 +9,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -21,6 +23,13 @@ public class MidlandHelper {
 	
 	private static final String COMMON_DATE = "yyyy-MM-dd hh:mm:ss";
 	private static final String MONTH = "yyyy-MM";
+	
+	
+	
+	public static String scientificNotation(String s){
+		BigDecimal bigDecimal = new BigDecimal(s);
+		return bigDecimal.toPlainString();
+	}
 	
 	
 	public static String getCurrentTime(){

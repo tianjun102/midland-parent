@@ -78,6 +78,10 @@ public class Quotation{
 	 * 房子面积范围（只有住宅类型的房子才有面积范围）
 	 **/
 	private String houseAcreage;
+	/**
+	 * 成交金额
+	 **/
+	private String dealPrice;
 
 
 	public Integer getId() {
@@ -232,6 +236,14 @@ public class Quotation{
 		this.houseAcreage = houseAcreage;
 	}
 
+	public String getDealPrice() {
+		return dealPrice;
+	}
+
+	public void setDealPrice(String dealPrice) {
+		this.dealPrice = dealPrice;
+	}
+
 	@Override
 	public String toString() {
 		 final StringBuffer sb=new StringBuffer("Quotation{");
@@ -291,6 +303,9 @@ public class Quotation{
 		}
 		if (houseAcreage != null) {
 			sb.append(", \"houseAcreage\":\"").append(houseAcreage).append("\"");
+		}
+		if (dealPrice != null) {
+			sb.append(", \"dealPrice\":\"").append(dealPrice).append("\"");
 		}
 		sb.append("}");
 		return sb.toString();

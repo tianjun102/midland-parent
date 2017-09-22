@@ -288,7 +288,10 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 				String value = null;
 				if (cell != null) {
 					;
-					dateMonth = cell.toString();
+					if (StringUtils.isNotEmpty(cell.toString())){
+						
+					}
+					dateMonth = String.valueOf(Double.valueOf(cell.toString()).intValue());
 					if (dateMonth==null){
 						throw new Exception("日期错误");
 					}
@@ -296,22 +299,22 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 					throw new Exception("日期错误");
 				}
 			}
-			int row_27 = j-1 % 27;
+			int row_27 = j % 27;
 			if (j > 0 ) {
 				//每个市27行
 				
-				if (row_27<12){//每个市的前12行，为住宅信息
+				if (j!=27 && row_27<13){//每个市的前12行，为住宅信息
 					int row_4=row_27%4;
-					if (row_4==0){
+					if (row_4==1){
 						dealNum=new ArrayList<>();
 						list=dealNum;
-					}else if (row_4==1){
+					}else if (row_4==2){
 						dealArea=new ArrayList<>();
 						list=dealArea;
-					}else if (row_4==2){
+					}else if (row_4==3){
 						dealAvgPriceList=new ArrayList<>();
 						list=dealAvgPriceList;
-					}else if (row_4==3){
+					}else if (row_4==0){
 						dealprice=new ArrayList<>();
 						list=dealprice;
 					}
@@ -392,8 +395,10 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 								quotation.setHouseAcreage(houseAcreage);
 								quotation.setUpdateTime(MidlandHelper.getCurrentTime());
 								quotation.setType(houseTypeId);
-								quotation.setDealAcreage(String.valueOf(Calculate.keepTwoDecimal(Double.valueOf(dealArea.get(x)))));
 								quotation.setDealNum(Double.valueOf(dealNum.get(x)).intValue());
+								quotation.setDealAcreage(String.valueOf(Calculate.keepTwoDecimal(Double.valueOf(dealArea.get(x)))));
+								quotation.setPrice(MidlandHelper.scientificNotation(dealAvgPriceList.get(x)));
+								quotation.setDealPrice(MidlandHelper.scientificNotation(dealprice.get(x)));
 								result.add(quotation);
 							}
 						}
@@ -401,20 +406,20 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 					
 				}else{
 					//每个市的后16行，为商业、办公楼、其他信息
-					int row_5=row_27%5;
-					if (row_5==0){
+					int row_5=(j-12)%5;
+					if (row_5==1){
 						dealNum=new ArrayList<>();
 						list=dealNum;
-					}else if (row_5==1){
+					}else if (row_5==2){
 						dealArea=new ArrayList<>();
 						list=dealArea;
-					}else if (row_5==2){
+					}else if (row_5==3){
 						dealAvgPriceList=new ArrayList<>();
 						list=dealAvgPriceList;
-					}else if (row_5==3){
+					}else if (row_5==4){
 						soldAbleNumList=new ArrayList<>();
 						list=soldAbleNumList;
-					}else if (row_5==4){
+					}else if (row_5==0){
 						soldAbleAreaList=new ArrayList<>();
 						list=soldAbleAreaList;
 					}
@@ -450,7 +455,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 					} else {
 						area = getArea(cityId, distName);
 					}
-					if (j > 0 && j % 5 == 0) {
+					if (j > 13 && (j-12) % 5 == 0) {
 						int length = dealNum.size() < 12 ? dealNum.size() : 12;
 						for (int x = 0; x < length; x++) {
 							if (dealNum.get(x) != null && !dealNum.get(x).equals("")) {
@@ -463,25 +468,15 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 								String houseAcreage=null;
 								if (houseType.equals("商业")) {
 									houseTypeId = 0;
-								} else if (houseType.equals("90㎡以下")) {
-									houseTypeId = 1;
-									houseAcreage="0";
-								} else if (houseType.equals("90~144㎡")) {
-									houseTypeId = 1;
-									houseAcreage="1";
-									
-								} else if (houseType.equals("144㎡以上")) {
-									houseTypeId = 1;
-									houseAcreage="2";
-									
-								} else if (houseType.equals("其他")) {
+								}  else if (houseType.equals("其他")) {
 									houseTypeId = 2;
 									;
 								} else if (houseType.equals("办公楼")) {
 									houseTypeId = 3;
 								} else {
 									throw new Exception("房源类型错误：" + houseType);
-								}								int i = x + 1;
+								}
+								int i = x + 1;
 								String month = "-" + i;
 								String day = "-01";
 								quotation.setIsNew(Contant.isOldHouse);
@@ -492,11 +487,11 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 								}
 								quotation.setUpdateTime(MidlandHelper.getCurrentTime());
 								quotation.setType(houseTypeId);
-								quotation.setDealAcreage(String.valueOf(Calculate.keepTwoDecimal(Double.valueOf(dealArea.get(x)))));
+								quotation.setDealAcreage(dealArea.get(x));
 								quotation.setDealNum(Double.valueOf(dealNum.get(x)).intValue());
 								quotation.setSoldNum(Double.valueOf(soldAbleNumList.get(x)).intValue());
-								quotation.setSoldArea(String.valueOf(Calculate.keepTwoDecimal(Double.valueOf(soldAbleAreaList.get(x)))));
-								quotation.setPrice(String.valueOf(Calculate.keepTwoDecimal(Double.valueOf(dealAvgPriceList.get(x)))));
+								quotation.setSoldArea(soldAbleAreaList.get(x));
+								quotation.setPrice(MidlandHelper.scientificNotation(dealAvgPriceList.get(x)));
 								result.add(quotation);
 							}
 						}

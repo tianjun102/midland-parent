@@ -50,6 +50,9 @@
         <if test="areaId != null">
             and area_id= #{areaId,jdbcType=VARCHAR}
         </if>
+        <if test="areaName != null">
+            and area_name= #{areaName,jdbcType=VARCHAR}
+        </if>
 
     </sql>
 
