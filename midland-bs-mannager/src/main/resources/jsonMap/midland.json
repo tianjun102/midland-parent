@@ -122,5 +122,20 @@
       "id": "1",
       "name": "微站"
     }
+  ],
+  
+  "quotation_houseType_acreage_range": [
+    {
+      "id": "0",
+      "name": "90㎡以下"
+    },
+    {
+      "id": "1",
+      "name": "90~144㎡"
+    },
+    {
+      "id": "2",
+      "name": "144㎡以上"
+    }
   ]
 }

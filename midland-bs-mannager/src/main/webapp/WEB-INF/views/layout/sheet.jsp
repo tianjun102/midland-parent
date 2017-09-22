@@ -46,6 +46,16 @@
                 </p>
             </li>
 
+            <li class="col-sm-6 col-md-6 col-lg-6"class="col-sm-6 col-md-6 col-lg-6">
+                <!-- 片区 -->
+                <span>片区：</span>
+                <p id="sheet" style="display: inline-block;height: 38px;">
+                    <label ></label> <input type="hidden" value="" name="sheetId"> <input type="hidden" value="" name="sheetName">
+                    <select id="sheets" onchange="initSheet()" style="height: 100%;width: 248px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                        <option value="">请选择</option>
+                    </select>
+                </p>
+            </li>
 
 <script type="text/javascript">
 

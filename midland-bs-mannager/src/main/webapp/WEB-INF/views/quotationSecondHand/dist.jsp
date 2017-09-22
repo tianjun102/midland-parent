@@ -9,7 +9,7 @@
 </head>
 <body>
 
-            <li class="col-sm-6 col-md-6 col-lg-6"><span>省：</span> <!-- 省 -->
+                <span>省：</span> <!-- 省 -->
                 <p id="province" style="display: inline-block;height: 38px;">
                     <label ></label> <input type="hidden"  name="provinceId">
                     <input type="hidden" name="regionSn"> <input type="hidden"
@@ -44,7 +44,7 @@
                         <option value="">请选择</option>
                     </select>
                 </p>
-            </li>
+
 
 
 <script type="text/javascript">
@@ -114,7 +114,7 @@
             dataType : "json",
             data : "",
             success : function(data) {
-                $("#districts").html("<option value='' >请选择</option>");
+                $("#districts").html("<option value='' >全市</option>");
                 data.result.forEach(function(list) {
                     $("#districts").append(
                         "<option value="+list.id+" >"
