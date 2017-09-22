@@ -194,4 +194,50 @@
 		ORDER BY order_by ASC
 	</select>
 
+	<select id="findCategoryParentNameList" parameterType="com.midland.web.model.Category" resultType="com.midland.web.model.Category">
+		SELECT b.*,(SELECT cate_name from category a where a.id=b.parent_id ) as parent_name
+		FROM `category` b
+		where
+		b.is_delete=0
+		<if test="id != null">
+			and b.id= #{id,jdbcType=INTEGER}
+		</if>
+		<if test="cateName != null">
+			and b.cate_name= #{cateName,jdbcType=VARCHAR}
+		</if>
+		<if test="status != null">
+			and b.status= #{status,jdbcType=INTEGER}
+		</if>
+		<if test="orderBy != null">
+			and b.order_by= #{orderBy,jdbcType=INTEGER}
+		</if>
+		<if test="parentId != null">
+			and b.parent_id= #{parentId,jdbcType=INTEGER}
+		</if>
+		<if test="type != null">
+			and b.type= #{type,jdbcType=INTEGER}
+		</if>
+		<if test="isDelete != null">
+			and b.is_delete= #{isDelete,jdbcType=INTEGER}
+		</if>
+		<if test="cityId != null">
+			and b.city_id= #{cityId}
+		</if>
+		<if test="cityName != null">
+			and b.city_name= #{cityName}
+		</if>
+		<if test="cateDesc != null">
+			and b.cate_desc= #{cateDesc}
+		</if>
+		ORDER BY b.order_by ASC
+	</select>
+
+	<select id="selectCategoryParentById"  resultType="com.midland.web.model.Category">
+		SELECT b.*,(SELECT cate_name from category a where a.id=b.parent_id ) as parent_name
+		FROM `category` b
+		where
+		b.is_delete=0 and b.id= #{id,jdbcType=INTEGER}
+	</select>
+
+
 </mapper>

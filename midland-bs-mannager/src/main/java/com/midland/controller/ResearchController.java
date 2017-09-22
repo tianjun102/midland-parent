@@ -11,6 +11,7 @@ import com.midland.web.service.InformationService;
 import com.midland.web.service.JdbcService;
 import com.midland.web.service.SettingService;
 import com.midland.web.util.MidlandHelper;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,10 +69,12 @@ public class ResearchController extends BaseFilter {
 		Category category = new Category();
 		//查询资讯分类
 		category.setType(0);
-		List<Category> cateList = categoryService.findCategoryList(category);
+		String result = getCategoryTree("",category);
+		if(StringUtils.isNotEmpty(result)){
+			model.addAttribute("categoryData",result );
+		}
 		List<Area> cityList = cityMap.get("city");
 		model.addAttribute("cityList",cityList);
-		model.addAttribute("cateList",cateList);
 		return "research/addInformation";
 	}
 
@@ -134,11 +137,13 @@ public class ResearchController extends BaseFilter {
 		Category category = new Category();
 		//查询资讯分类
 		category.setType(0);
-		List<Category> cateList = categoryService.findCategoryList(category);
+		String cateResult = getCategoryTree("",category);
+		if(StringUtils.isNotEmpty(cateResult)){
+			model.addAttribute("categoryData",cateResult );
+		}
 		List<Area> cityList = cityMap.get("city");
 		model.addAttribute("item",result);
 		model.addAttribute("cityList",cityList);
-		model.addAttribute("cateList",cateList);
 		return "research/updateInformation";
 	}
 

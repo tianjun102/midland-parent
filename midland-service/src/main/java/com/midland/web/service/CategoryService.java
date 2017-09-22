@@ -31,4 +31,6 @@ public interface CategoryService {
 
 	List<Category> findCategoryTreeList(Category category) throws Exception;
 
+	Category selectCategoryParentNameById(Integer id);
+
 }

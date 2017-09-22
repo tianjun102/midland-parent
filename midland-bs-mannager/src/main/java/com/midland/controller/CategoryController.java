@@ -119,16 +119,22 @@ public class CategoryController extends BaseFilter {
 	 **/
 	@RequestMapping("to_update")
 	public String toUpdateCategory(Integer id,Model model) throws Exception {
-		Category category = new Category();
-		category.setParentId(0);
+		/*Category category = new Category();
+		category.setParentId(0);*/
 		Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
 		parem.put("id","*");
 		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
 		List<Area> cityList = cityMap.get("city");
-		Category result = categoryServiceImpl.selectCategoryById(id);
-		List<Category> cateList = categoryServiceImpl.findCategoryList(category);
-		model.addAttribute("cateList",cateList);
+		Category result = categoryServiceImpl.selectCategoryParentNameById(id);
+		/*List<Category> cateList = categoryServiceImpl.findCategoryList(category);*/
+		Category newCategory = new Category();
+		newCategory.setType(result.getType());
+		String cateResult = getCategoryTree("",newCategory);
+		if(StringUtils.isNotEmpty(cateResult)){
+			model.addAttribute("categoryData",cateResult);
+		}
+		/*model.addAttribute("cateList",cateList);*/
 		model.addAttribute("cityList",cityList);
 		model.addAttribute("item",result);
 		return "category/updateCategory";
@@ -202,49 +208,6 @@ public class CategoryController extends BaseFilter {
 		}
 		  return cateList;
 	}
-
-
-
-	// 把查询结果转换成JSON格式      type: 1-查询1-2级 ； 为空时查询所有
-	public String getCategoryTree(String type,Category category) {
-		// 避免数据库中存在换行符,进行菜单文字的过滤
-		// String replaceStr = "(\r\n|\r|\n|\n\r)";
-		List list = new ArrayList<>();
-		if("1".equals(type)){
-			try {
-				list = categoryServiceImpl.findCategoryList(category);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}else{
-			try {
-				list = categoryServiceImpl.findCategoryList(category);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
-		StringBuffer ret = new StringBuffer("");
-		if (list != null   &&  list.size()>0) {
-			for (int i = 0; i < list.size(); i++) {
-				Category cat = (Category) list.get(i);
-				ret.append("{id:").append(cat.getId()).append(", pId:").append(cat.getParentId())
-						.append(", name:'").append(cat.getCateName()).append("',open:true,nocheck:true");
-				if("".equals(type)){
-					ret.append(", chirdCount:").append(cat.getChirdCount());
-				}
-				if(!("0".equals(cat.getParentId().toString()))){
-					ret.append(",iconSkin:'pIcon03'");
-				}
-
-				ret.append("},");
-			}
-			return ret.substring(0, ret.length() - 1);
-		}
-
-		return "";
-	}
-
 
 }
 
