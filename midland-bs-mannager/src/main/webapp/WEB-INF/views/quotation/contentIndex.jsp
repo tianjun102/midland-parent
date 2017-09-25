@@ -31,6 +31,7 @@
 	<form action="${ctx }/rest/quotation/toolsTip" method="POST" id="searchForm"
 		  onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 		<input type="hidden" name="url" id="url" value="${url}"/>
+		<input type="hidden" name="showType" id="showType" value="${showType}"/>
 		<ul class="userinfo row">
 			<li>
 				<%@include file="../quotation/dist.jsp" %>
@@ -111,19 +112,29 @@
 
     function fieldChange() {
         var i= $("#field").val();
-        if(i==0){
+        if(i==0){//成交套数
             $("#url").val("dealNumContent");
-        }else if(i==1){
+            $("#showType").val("0");
+        }else if(i==1){//成交面积
             $("#url").val("dealAcreageContent");
-		}else if(i==2){
-            $("#url").val("priceContent");
-        }else if (i==3){
-            $("#url").val("dealPriceContent");
-		}else if (i==4){
+            $("#showType").val("1");
+
+        }else if(i==2){//成交均价
+            $("#url").val("dealAvgPriceContent");
+            $("#showType").val("2");
+
+        }else if (i==3){//成交金额
+            $("#url").val("turnVolumeContent");
+            $("#showType").val("3");
+
+        }else if (i==4){//可售套数
             $("#url").val("soldNumContent");
-		}
-        else{
+            $("#showType").val("4");
+
+        }
+        else{//可售面积
             $("#url").val("soldAcreageContent");
+            $("#showType").val("5");
         }
     }
 </script>

@@ -180,12 +180,13 @@ public class QuotationController extends BaseFilter {
 		List<ParamObject> paramObjects1 = JsonMapReader.getMap("quotation_houseType_acreage_range");
 		model.addAttribute("acreageRange", paramObjects1);
 		model.addAttribute("citys",list1);
+		model.addAttribute("showType",0);//优先展示成交套数
 		return "quotation/contentIndex";
 	}
 	
 	
 	@RequestMapping("toolsTip")
-	public String showTooltip(Integer id, QuotationView obj,String distName,String distId,String url, Model model) throws Exception {
+	public String showTooltip(Integer id, QuotationView obj,String distName,String distId,String url,String showType, Model model) throws Exception {
 		if (StringUtils.isEmpty(distId)&&StringUtils.isEmpty(distName)){
 			obj.setAreaId("0");
 		}else{
@@ -224,37 +225,41 @@ public class QuotationController extends BaseFilter {
 		for (QuotationView view : result){
 			month.add(view.getDataTime());
 			//（当前月数据-上个月数据)/上个月数据=当月环比
-			numList.add(view.getDealNum());
-			getRatio(numRatioList, Double.valueOf(view.getDealNum()),view.getPreDealNum());
-			acreageList.add(view.getDealAcreage());
-			getRatio(acreageRatioList,Double.valueOf(view.getDealAcreage()),view.getPreDealAcreage());
-			dealAvgPriceList.add(view.getPrice());
-			getRatio(dealAvgPriceRatioList,Double.valueOf(view.getPrice()),view.getPrePrice());
-			if (view.getSoldNum()!=null) {
-				soldNumList.add(view.getPrice());
-				getRatio(soldNumRatioList, Double.valueOf(view.getSoldNum()), view.getPreSoldNum());
-			}if (view.getSoldArea()!=null) {
-				getRatio(soldAcreageRatioList,Double.valueOf(view.getSoldArea()),view.getPreSoldArea());
-				soldAcreageList.add(view.getSoldArea());
-				
-			}if (view.getDealPrice()!=null){
+			
+			if ("0".equals(showType)){
+				numList.add(view.getDealNum());
+				getRatio(numRatioList, Double.valueOf(view.getDealNum()),view.getPreDealNum());
+				model.addAttribute("numList",numList);
+				model.addAttribute("numRatioList",numRatioList);
+			}else if ("1".equals(showType)){
+				acreageList.add(view.getDealAcreage());
+				getRatio(acreageRatioList,Double.valueOf(view.getDealAcreage()),view.getPreDealAcreage());
+				model.addAttribute("acreageList",acreageList);
+				model.addAttribute("acreageRatioList",acreageRatioList);
+			}else if ("2".equals(showType)){
+				dealAvgPriceList.add(view.getPrice());
+				getRatio(dealAvgPriceRatioList,Double.valueOf(view.getPrice()),view.getPrePrice());
+				model.addAttribute("dealAvgPriceList",dealAvgPriceList);
+				model.addAttribute("dealAvgPriceRatioList",dealAvgPriceRatioList);
+			}else if ("3".equals(showType)&&view.getDealPrice()!=null){
 				getRatio(turnVolumeRatioList,Double.valueOf(view.getDealPrice()),view.getPreDealPrice());
 				turnVolumeList.add(view.getDealPrice());
+				model.addAttribute("turnVolumeList",turnVolumeList);
+				model.addAttribute("turnVolumeRatioList",turnVolumeRatioList);
+			}else if ("4".equals(showType)&&view.getSoldNum()!=null) {
+				soldNumList.add(view.getPrice());
+				getRatio(soldNumRatioList, Double.valueOf(view.getSoldNum()), view.getPreSoldNum());
+				model.addAttribute("soldNumList",soldNumList);
+				model.addAttribute("soldNumRatioList",soldNumRatioList);
+			}else if ("5".equals(showType)&&view.getSoldArea()!=null) {
+				getRatio(soldAcreageRatioList,Double.valueOf(view.getSoldArea()),view.getPreSoldArea());
+				soldAcreageList.add(view.getSoldArea());
+				model.addAttribute("soldAcreageList",soldAcreageList);
+				model.addAttribute("soldAcreageRatioList",soldAcreageRatioList);
 			}
 		}
 		model.addAttribute("months", JSONArray.toJSONString(month));
-		model.addAttribute("numList",numList);
-		model.addAttribute("numRatioList",numRatioList);
-		model.addAttribute("acreageList",acreageList);
-		model.addAttribute("acreageRatioList",acreageRatioList);
-		model.addAttribute("dealAvgPriceList",dealAvgPriceList);
-		model.addAttribute("dealAvgPriceRatioList",dealAvgPriceRatioList);
-		model.addAttribute("turnVolumeList",turnVolumeList);
-		model.addAttribute("turnVolumeRatioList",turnVolumeRatioList);
-		model.addAttribute("soldNumList",soldNumList);
-		model.addAttribute("soldNumRatioList",soldNumRatioList);
-		model.addAttribute("soldAcreageList",soldAcreageList);
-		model.addAttribute("soldAcreageRatioList",soldAcreageRatioList);
+		
 		if (url!=null){
 			return "quotation/"+url;
 		}
