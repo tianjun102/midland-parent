@@ -562,6 +562,11 @@
             <artifactId>poi-ooxml-schemas</artifactId>
             <version>${poi.version}</version>
         </dependency>
+        <!--<dependency>
+            <groupId>com.qq.connect</groupId>
+            <artifactId>QQSdk4J</artifactId>
+            <version>1.0.0</version>
+        </dependency>-->
         <!--<dependency>-->
         <!--<groupId>net.sf.jxls</groupId>-->
         <!--<artifactId>jxls-core</artifactId>-->

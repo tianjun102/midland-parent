@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.midland.core.util.SmsUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
@@ -29,7 +30,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.github.miemiedev.mybatis.paginator.domain.Paginator;
-import com.bluemobi.core.util.SmsUtil;
 import com.bluemobi.midland.web.commons.FastJsonUtils;
 import com.bluemobi.midland.web.commons.Result;
 import com.bluemobi.midland.web.commons.core.util.ApplicationUtils;
