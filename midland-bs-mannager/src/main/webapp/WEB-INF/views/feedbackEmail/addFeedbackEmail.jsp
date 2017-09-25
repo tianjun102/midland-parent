@@ -12,19 +12,37 @@
 </head>
 <body>
 <section class="content" style="border:none;">
-    <form action="${ctx}/rest/resumeManager/update" method="post" id="dataForm">
+    <form action="${ctx}/rest/feedbackEmail/add" method="post" id="dataForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
-            <li><span style = "float:left;">邮件标题：</span>
-            <input name="title" value="" id="title">
+            <li>
+                <span style = "float:left;">城市：</span>
+                <input type="hidden" name="cityName" id="cityName" value="">
+                <select onchange="setCityName()" name="cityId" id="cityId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <option value="">全部</option>
+                    <c:forEach items="${cityList}" var="city">
+                        <option value="${city.id}">${city.name}</option>
+                    </c:forEach>
+                </select>
             </li>
-            <li><span style = "float:left;">回复类容：</span> <!-- <textarea name="custNote" id="custNote" rows="" cols="" placeholder="备注说明"></textarea> -->
-                <textarea id="reply" name="reply"
-                          style="width: 265px; height: 110px; resize: none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;"
-                          rows="" cols="">${item.reply}</textarea></li>
+            <li><span>邮箱：</span>
+               <input type="text" name="email" id="email" />
+            </li>
+            <li><span>类型：</span>
+               <select name="type" id="type" class="dropdown">
+                   <option value="0">总部</option>
+                   <option value="1">分部</option>
+               </select>
+            </li>
+            <li><span>联系人：</span>
+               <input type="text" name="contactPerson" id="contactPerson" />
+            </li>
+            <li><span>联系方式：</span>
+               <input type="text" name="phone" id="phone" />
+            </li>
             <li>
                 <span></span>
-                <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">更新</a>
+                <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">保存</a>
                 <a style="margin-left: 20px" class="public_btn bg3" id="cancel" onclick="closeWin();">取消</a>
             </li>
         </ul>
@@ -39,7 +57,7 @@
         debugger;
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/resumeManager/update",
+            url: "${ctx}/rest/feedbackEmail/add",
             async: false, // 此处必须同步
             dataType: "json",
             data: data,
@@ -65,6 +83,10 @@
     function closeWin() {
         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
         parent.layer.close(index);
+    }
+
+    function setCityName(){
+        $("#cityName").val($("#cityId option:selected").text())
     }
 </script>
 </body>

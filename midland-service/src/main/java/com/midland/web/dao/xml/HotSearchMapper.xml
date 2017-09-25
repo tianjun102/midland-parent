@@ -44,6 +44,7 @@
 		where 
 		is_delete=0
 		<include refid="select_option" />
+		ORDER BY order_by ASC
 	</select>
 
 	<insert id="insertHotSearch" parameterType="com.midland.web.model.HotSearch">

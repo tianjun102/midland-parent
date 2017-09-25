@@ -95,8 +95,8 @@ public class PTest {
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setFrom("3332932@qq.com");
 		message.setTo("977543176@qq.com");
-		message.setSubject("主题：简单邮件");
-		message.setText("简单邮件内容");
+		message.setSubject("主题：简单邮件1");
+		message.setText("简单邮件内容1");
 		apiHelper.emailSender("sendSimpleMail",message);
 	}
 	

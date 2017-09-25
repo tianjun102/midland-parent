@@ -52,6 +52,8 @@ public class ResumeManager{
 
 	private String endTime;
 
+	private String title;
+
 
 	public Integer getId() {
 		return id;
@@ -155,6 +157,14 @@ public class ResumeManager{
 
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	@Override
