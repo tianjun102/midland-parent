@@ -76,18 +76,10 @@
             </ul>
         </form>
         <div id="listDiv"></div>
-        <a class="edit_img" target="contentF" href="${ctx}/rest/quotation/showTooltip">生成预览</a>
+        <a class="edit_img" target="contentF" href="${ctx}/rest/quotation/toolsTip_index">生成预览</a>
     </section>
 </div>
-<%--<li><span>城市：</span>--%>
-<%--<input type="hidden" id="excelCityName" value="">--%>
-<%--<select onchange="setCityName()" id="excelCityId" class="dropdown">--%>
-<%--<option value="" >请选择</option>--%>
-<%--<c:forEach items="${citys}" var="item">--%>
-<%--<option value="${item.id}" >${item.name}</option>--%>
-<%--</c:forEach>--%>
-<%--</select>--%>
-<%--</li>--%>
+
 <%@include file="../layout/area.jsp" %>
 <li><span>图片上传：</span>
     <div style="width: 250px;float: left;">
