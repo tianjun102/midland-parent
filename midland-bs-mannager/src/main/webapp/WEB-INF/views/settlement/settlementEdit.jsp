@@ -7,6 +7,8 @@
 			+ path + "/";
 %>
 <%@include file="../layout/tablib.jsp"%>
+<%@include file="../layout/source.jsp"%>
+
 
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
@@ -24,17 +26,6 @@
 <meta content="" name="description" />
 <meta content="" name="author" />
 <meta name="MobileOptimized" content="320">
-<link rel="stylesheet" href="${ctx}/assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="${ctx}/assets/css/common.css">
-<link rel="stylesheet" href="${ctx}/assets/css/easydropdown.css" />
-<script type="text/javascript" src="${ctx}/assets/scripts/jquery.min.js"></script>
-<script type="text/javascript" src="${ctx}/assets/scripts/jquery.easydropdown.js" ></script>
-<script type="text/javascript" src="${ctx}/assets/scripts/bootstrap.min.js"></script>
-<script src="${ctx}/assets/scripts/common.js"></script>
-<script src="${ctx}/assets/scripts/layer.js" type="text/javascript"></script>
-<script src="${ctx}/assets/scripts/base.js" type="text/javascript"></script>
-<script type="text/javascript" src="${ctx}/assets/My97DatePicker/WdatePicker.js"></script>
-<script src="${ctx}/assets/scripts/inputControl.js" type="text/javascript"></script>
 <style>
 	#customer>dd {
 		margin:3px 0;

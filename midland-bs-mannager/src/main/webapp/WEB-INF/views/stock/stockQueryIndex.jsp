@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="../layout/tablib.jsp"%>
+<%@include file="../layout/source.jsp"%>
+
 <%@include file="../layout/zTree.jsp"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,11 +17,6 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <meta content="" name="description" />
 <meta content="" name="author" />
-<link rel="stylesheet" href="${ctx}/assets/css/ztree/css/demo.css" type="text/css">
-<link rel="stylesheet" href="${ctx}/assets/css/easydropdown.css" />
-<link rel="stylesheet" href="${ctx}/assets/css/common.css">
-<link rel="stylesheet" href="${ctx}/assets/css/jquery-ui.css">
-<link rel="stylesheet" href="${ctx }/assets/css/bootstrap.min.css" type="text/css">
 
 </head>
 <SCRIPT type="text/javascript">

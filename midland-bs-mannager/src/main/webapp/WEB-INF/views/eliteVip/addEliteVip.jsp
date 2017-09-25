@@ -7,6 +7,8 @@
 %>
 <%@include file="../layout/tablib.jsp"%>
 <%@include file="../layout/zTree.jsp"%>
+<%@include file="../layout/source.jsp"%>
+
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->

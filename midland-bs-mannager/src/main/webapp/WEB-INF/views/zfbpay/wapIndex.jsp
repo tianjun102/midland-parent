@@ -9,6 +9,8 @@
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../layout/tablib.jsp"%>
+<%@include file="../layout/source.jsp"%>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -156,22 +158,26 @@
         <form name=alipayment action="${ctx}/rest/zfbpay/wapalipayapi" method=post target="_blank">
             <div id="body" style="clear:left">
                 <dl class="content">
-					<dt>商户订单号：</dt>
+					<dt>商户订单号
+：</dt>
 					<dd>
 						<input name="WIDout_trade_no" id="WIDout_trade_no" />
 					</dd>
                     			<hr class="one_line">
-					<dt>订单名称：</dt>
+					<dt>订单名称
+：</dt>
 					<dd>
 						<input name="WIDsubject" id="WIDsubject" />
 					</dd>
                     			<hr class="one_line">
-					<dt>付款金额：</dt>
+					<dt>付款金额
+：</dt>
 					<dd>
 						<input name="WIDtotal_fee" id="WIDtotal_fee" />
 					</dd>
                     			<hr class="one_line">
-					<dt>商品展示网址：</dt>
+					<dt>商品展示网址
+：</dt>
 					<dd>
 						<input name="WIDshow_url" id="WIDshow_url" />
 					</dd>

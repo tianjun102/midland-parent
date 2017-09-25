@@ -5,6 +5,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%@include file="layout/tablib.jsp"%>
+
 <!DOCTYPE html>
 <!-- 
 Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.0.3
@@ -28,8 +29,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <meta content="" name="description"/>
 <meta content="" name="author"/>
 <meta name="MobileOptimized" content="320">
-<link rel="stylesheet" href="${ctx}/assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="${ctx}/assets/css/common.css">
 <%--
 <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="1106342971" data-redirecturi="http://175.102.18.14:8083/wechat/" charset="utf-8"></script>
 --%>

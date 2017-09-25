@@ -1,5 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@include file="../layout/tablib.jsp"%>
+<%@include file="../layout/source.jsp"%>
+
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -24,17 +26,6 @@
 <meta content="" name="description" />
 <meta content="" name="author" />
 <meta name="MobileOptimized" content="320">
-<link rel="stylesheet" href="${ctx}/assets/css/easydropdown.css" />
-<script type="text/javascript" src="${ctx}/assets/scripts/jquery.min.js"></script>
-<script type="text/javascript" src="${ctx}/assets/scripts/jquery.easydropdown.js"></script>
-<script type="text/javascript" src="${ctx}/assets/scripts/bootstrap.min.js"></script>
-<link rel="shortcut icon" href="${ctx}/assets/app/img/favicon.ico" />
-<link rel="stylesheet" href="${ctx }/assets/css/common.css">
-<script type="text/javascript"src="${ctx}/assets/scripts/layer/layer.js"></script>
-<script type="text/javascript"src="${ctx}/assets/My97DatePicker/WdatePicker.js"></script>
-<script type="text/javascript"src="${ctx}/assets/UEditor/ueditor.config.js"></script>
-<script type="text/javascript"src="${ctx}/assets/UEditor/ueditor.all.js"></script>
-<script type="text/javascript"src="${ctx}/assets/UEditor/lang/zh-cn/zh-cn.js"></script>
 <!-- END HEAD -->
 
 <!-- BEGIN BODY -->
