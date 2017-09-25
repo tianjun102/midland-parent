@@ -1,6 +1,7 @@
 package com.midland.controller;
 
 import com.midland.base.BaseFilter;
+import com.midland.web.api.ApiHelper;
 import com.midland.web.model.Area;
 import com.midland.web.model.ResumeManager;
 import com.midland.web.service.ResumeManagerService;
@@ -14,6 +15,7 @@ import java.util.Map;
 import java.util.HashMap;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,6 +42,8 @@ public class ResumeManagerController extends BaseFilter {
 	private ResumeManagerService resumeManagerServiceImpl;
 	@Autowired
 	private SettingService settingService;
+	@Autowired
+	private ApiHelper apiHelper;
 
 	/**
 	 * 
@@ -134,6 +138,12 @@ public class ResumeManagerController extends BaseFilter {
 		try {
 			log.info("updateResumeManagerById  {}",resumeManager);
 			resumeManagerServiceImpl.updateResumeManagerById(resumeManager);
+			SimpleMailMessage message = new SimpleMailMessage();
+			message.setFrom("3332932@qq.com");
+			message.setTo("977543176@qq.com");
+			message.setSubject(resumeManager.getTitle());
+			message.setText(resumeManager.getReply());
+			apiHelper.emailSender("sendSimpleMail",message);
 			map.put("state",0);
 		} catch(Exception e) {
 			log.error("updateResumeManagerById  {}",resumeManager,e);

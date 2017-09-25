@@ -66,7 +66,7 @@
 				skin: 'layer-style',
 				area: ['500px','600px'],
 				shadeClose: false, //点击遮罩关闭
-				title:['创建用户'],
+				title:['添加热门关注'],
 				resize: false,
 				scrollbar:false,
 				content:['${ctx}/rest/setting/toAddPage', 'no']

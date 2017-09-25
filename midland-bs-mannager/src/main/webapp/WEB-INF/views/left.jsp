@@ -333,6 +333,10 @@
 						<a id = "feedbackIndex" href="${ctx}/rest/feedback/index" target="contentF"><span>反馈管理</span></a>
 					</shiro:hasPermission>
 
+					<shiro:hasPermission name="feedbackEmail">
+						<a id = "feedbackIndex" href="${ctx}/rest/feedbackEmail/index" target="contentF"><span>反馈邮箱</span></a>
+					</shiro:hasPermission>
+
 					<shiro:hasPermission name="siteMapList">
 						<a id = "feedbackIndex" href="${ctx}/rest/siteMap/index" target="contentF"><span>网站地图管理</span></a>
 					</shiro:hasPermission>

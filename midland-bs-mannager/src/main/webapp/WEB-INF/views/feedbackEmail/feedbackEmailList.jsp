@@ -14,13 +14,10 @@
     <table class="table table-bordered table-add">
         <thead>
             <tr>
-                <th style="width: 8%">编号</th>
-				<th style="width: 8%">姓名</th>
-				<th style="width: 8%">联系方式</th>
-				<th style="width: 8%">岗位</th>
+				<th style="width: 8%">编号</th>
 				<th style="width: 8%">邮箱</th>
-				<th style="width: 8%">接受时间</th>
-                <th style="width: 8%">工作城市</th>
+				<th style="width: 8%">类型</th>
+				<th style="width: 8%">城市</th>
                 <th style="width: 10%">操作</th>
             </tr>
         </thead>
@@ -30,17 +27,13 @@
                 <c:forEach items="${requestScope.items }" var="item" varStatus="xh">
                     <tr>
 						<input type="hidden" id="id" value="${item.id}"/>
-                        <td>${xh.count}</td>
-						<td>${item.deliverer}</td>
-						<td>${item.phone}</td>
-						<td>${item.post}</td>
+						<td>${xh.count}</td>
 						<td>${item.email}</td>
-						<td>${item.addTime}</td>
-                        <td>${item.cityName}</td>
+						<td><c:if test="${item.type==0}">总部</c:if><c:if test="${item.type==1}">分部</c:if></td>
+						<td>${item.cityName}</td>
 						<td>
-                            <a target="contentF" onclick="to_edit(${item.id })">回复</a>
-                            <a target="contentF" href="${ctx}/rest/resumeManager/fileDownload">下载</a>
-                            <a target="contentF" class="delete_img" onclick="delete1(${item.id })"></a>
+                            <a class="edit_img" target="contentF" onclick="to_edit(${item.id })"></a>
+                            <a class="delete_img" target="contentF" onclick="delete1(${item.id })"></a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -69,18 +62,18 @@
             skin: 'layer-style',
             area: ['350px','200px'],
             shadeClose: false, //点击遮罩关闭
-            title:['删除市场调研'],
+            title:['删除Banner'],
             resize: false,
             scrollbar:false,
             content:
             '<section class = "content" style = "border:none; height:100%;">'+
-            '<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">您确定要删除当前市场调研吗?</p>'+
+            '<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">您确定要删除当前邮箱设置吗?</p>'+
             '</section>',
             btn:['确定','取消'],
             yes: function(index){
                 $.ajax({
                     type: "post",
-                    url: "${ctx}/rest/resumeManager/update?id="+id+"&isDelete=1",
+                    url: "${ctx}/rest/feedbackEmail/update?id="+id+"&isDelete=1",
                     cache:false,
                     async:false, // 此处必须同步
                     dataType: "json",
@@ -100,16 +93,15 @@
                 btn.css('text-align', 'center');
             }
         });
-
     }
 
     function to_edit(id){
         layer.open({
             type: 2,
-            title: ['回复'],
+            title: ['修改'],
             shade: 0.3,
-            area: ['450px', '350px'],
-            content: ['${ctx}/rest/resumeManager/to_update?id='+id,'no']
+            area: ['500px', '500px'],
+            content: ['${ctx}/rest/feedbackEmail/to_update?id='+id,'no']
         });
     }
 

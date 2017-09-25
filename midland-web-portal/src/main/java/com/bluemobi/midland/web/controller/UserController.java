@@ -72,8 +72,6 @@ public class UserController extends CommonsController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public String login(@RequestBody User user, boolean remember, HttpServletRequest request,
 			HttpServletResponse response) {
-		/*user.setUsername("VOAX11");
-		user.setPassword("888888");*/
 		Result<User> result = new Result<>();
 		// 登录日志状态：0,正常;1,错误
 		Short isError = 0;
