@@ -63,20 +63,20 @@
         yAxis: [
             {
                 type: 'value',
-                name: '价格',
+                name: '套数',
                 min: 0,
-                max: 10000,
-                interval:1000,
+                max: ${listMax},
+                interval:${listStep},
                 axisLabel: {
-                    formatter: '{value} 元'
+                    formatter: '{value} 套'
                 }
             },
             {
                 type: 'value',
-                name: '价格',
-                min: -250,
-                max: 250,
-                interval: 50,
+                name: '百分比',
+                min: ${ratioMin},
+                max: ${ratioMax},
+                interval: ${ratioStep},
                 axisLabel: {
                     formatter: '{value} %'
                 }

@@ -65,8 +65,8 @@
                 type: 'value',
                 name: '成交面积',
                 min: 0,
-                max: 1000000,
-                interval:200000,
+                max: ${listMax},
+                interval:${listStep},
                 axisLabel: {
                     formatter: '{value} 元'
                 }
@@ -74,9 +74,9 @@
             {
                 type: 'value',
                 name: '环比',
-                min: -250,
-                max: 250,
-                interval: 50,
+                min: ${ratioMin},
+                max: ${ratioMax},
+                interval: ${ratioStep},
                 axisLabel: {
                     formatter: '{value} %'
                 }

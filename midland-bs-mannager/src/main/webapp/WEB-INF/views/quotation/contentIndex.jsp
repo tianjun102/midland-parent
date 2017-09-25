@@ -77,7 +77,7 @@
     function typeChange() {
 		var j = $("#type").val();
         if (j==0){
-            $("#field").html("<option value='0'>成交套数</option>");
+            $("#field").html("<option value='0' selected='selected' >成交套数</option>");
             $("#field").append("<option value='1'>成交面积</option>");
             $("#field").append("<option value='2'>成交均价</option>");
             $("#field").append("<option value='4'>可售套数</option>");
@@ -86,13 +86,13 @@
 			$("#houseAcreage").val("");
 
 		}else if (j==1){
-            $("#field").html("<option value='0'>成交套数</option>");
+            $("#field").html("<option value='0' selected='selected'>成交套数</option>");
             $("#field").append("<option value='1'>成交面积</option>");
             $("#field").append("<option value='2'>成交均价</option>");
             $("#field").append("<option value='3'>成交金额</option>");
             $("#acreageShow").css('display','block');
 		}else if (j==2){
-            $("#field").html("<option value='0'>成交套数</option>");
+            $("#field").html("<option value='0' selected='selected'>成交套数</option>");
             $("#field").append("<option value='1'>成交面积</option>");
             $("#field").append("<option value='2'>成交均价</option>");
             $("#field").append("<option value='4'>可售套数</option>");
@@ -100,7 +100,7 @@
             $("#houseAcreage").val("");
             $("#acreageShow").css('display','none');
         }else if (j==3){
-            $("#field").html("<option value='0'>成交套数</option>");
+            $("#field").html("<option value='0' selected='selected'>成交套数</option>");
             $("#field").append("<option value='1'>成交面积</option>");
             $("#field").append("<option value='2'>成交均价</option>");
             $("#field").append("<option value='4'>可售套数</option>");

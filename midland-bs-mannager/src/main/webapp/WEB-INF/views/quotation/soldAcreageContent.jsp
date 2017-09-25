@@ -65,18 +65,18 @@
                 type: 'value',
                 name: '可售面积',
                 min: 0,
-                max: 1000,
-                interval:200,
+                max: ${listMax},
+                interval:${listStep},
                 axisLabel: {
                     formatter: '{value} m²'
                 }
             },
             {
                 type: 'value',
-                name: '可售面积',
-                min: -250,
-                max: 250,
-                interval: 50,
+                name: '环比',
+                min: ${ratioMin},
+                max: ${ratioMax},
+                interval: ${ratioStep},
                 axisLabel: {
                     formatter: '{value} %'
                 }
