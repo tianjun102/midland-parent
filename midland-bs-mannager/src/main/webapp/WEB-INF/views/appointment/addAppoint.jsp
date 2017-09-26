@@ -174,10 +174,5 @@
         parent.layer.close(index);
     }
 </script>
-
-<script type="text/javascript" src="${ctx}/assets/scripts/jquery.min.js"></script>
-<script type="text/javascript" src="${ctx}/assets/plugins/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="${ctx}/assets/scripts/layer/layer.js"></script>
-<script src="${ctx}/assets/scripts/jquery.easydropdown.js" type="text/javascript"></script>
 </body>
 </html>
