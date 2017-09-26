@@ -14,7 +14,7 @@
 </head>
 <body>
 <section class="content" style="border:none;">
-    <form action="${ctx}/rest/quotation/update" method="post" id="dataForm">
+    <form action="${ctx}/rest/quotationSecondHand/update" method="post" id="dataForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <li class="col-sm-6 col-md-6 col-lg-6"><span>数据时间：</span>
@@ -38,15 +38,6 @@
             <li class="col-sm-6 col-md-6 col-lg-6"><span>成交面积：</span>
                 <input type="text" name="dealAcreage" id="dealAcreage" value="${item.dealAcreage}"/>
             </li>
-            <li class="col-sm-6 col-md-6 col-lg-6"><span>成交均价：</span>
-                <input type="text" name="price" id="price" value="${item.price}"/>
-            </li>
-            <li class="col-sm-6 col-md-6 col-lg-6"><span>可售套数：</span>
-                <input type="text" name="soldNum" id="soldNum" value="${item.soldNum}"/>
-            </li>
-            <li class="col-sm-6 col-md-6 col-lg-6"><span>可售面积：</span>
-                <input type="text" name="soldArea" id="soldArea" value="${item.soldArea}"/>
-            </li>
             <li class="col-sm-12 col-md-12 col-lg-12">
                 <span></span>
                 <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">更新</a>
@@ -64,7 +55,7 @@
         debugger;
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/quotation/update",
+            url: "${ctx}/rest/quotationSecondHand/update",
             async: false, // 此处必须同步
             dataType: "json",
             data: data,

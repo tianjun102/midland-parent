@@ -110,7 +110,7 @@
             title: ['新增'],
             resize: false,
             scrollbar: false,
-            content: ['${ctx}/rest/quotation/to_add', 'no']
+            content: ['${ctx}/rest/quotationSecondHand/to_add', 'no']
         });
     }
     window.onload = function () {
