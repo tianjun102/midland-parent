@@ -234,7 +234,7 @@ public class QuotationController extends BaseFilter {
 				numRatioList.add(ratio);
 				listMax=getMax(listMax,view.getDealNum());
 				ratioMax=getMax(ratioMax,ratio);
-				ratioMin=getMin(ratioMax,ratio);
+				ratioMin=getMin(ratioMin,ratio);
 				model.addAttribute("numList",numList);
 				model.addAttribute("numRatioList",numRatioList);
 			}else if ("1".equals(showType)){
@@ -252,7 +252,7 @@ public class QuotationController extends BaseFilter {
 				dealAvgPriceRatioList.add(ratio);
 				listMax=getMax(listMax,Double.valueOf(view.getPrice()));
 				ratioMax=getMax(ratioMax,ratio);
-				ratioMin=getMin(ratioMax,ratio);
+				ratioMin=getMin(ratioMin,ratio);
 				model.addAttribute("dealAvgPriceList",dealAvgPriceList);
 				model.addAttribute("dealAvgPriceRatioList",dealAvgPriceRatioList);
 			}else if ("3".equals(showType)&&view.getDealPrice()!=null){
@@ -261,7 +261,7 @@ public class QuotationController extends BaseFilter {
 				turnVolumeRatioList.add(ratio);
 				listMax=getMax(listMax,Double.valueOf(view.getDealPrice()));
 				ratioMax=getMax(ratioMax,ratio);
-				ratioMin=getMin(ratioMax,ratio);
+				ratioMin=getMin(ratioMin,ratio);
 				model.addAttribute("turnVolumeList",turnVolumeList);
 				model.addAttribute("turnVolumeRatioList",turnVolumeRatioList);
 			}else if ("4".equals(showType)&&view.getSoldNum()!=null) {
@@ -270,7 +270,7 @@ public class QuotationController extends BaseFilter {
 				soldNumRatioList.add(ratio);
 				listMax=getMax(listMax,view.getSoldNum());
 				ratioMax=getMax(ratioMax,ratio);
-				ratioMin=getMin(ratioMax,ratio);
+				ratioMin=getMin(ratioMin,ratio);
 				model.addAttribute("soldNumList",soldNumList);
 				model.addAttribute("soldNumRatioList",soldNumRatioList);
 			}else if ("5".equals(showType)&&view.getSoldArea()!=null) {
@@ -279,7 +279,7 @@ public class QuotationController extends BaseFilter {
 				soldAcreageRatioList.add(ratio);
 				listMax=getMax(listMax,Double.valueOf(view.getSoldArea()));
 				ratioMax=getMax(ratioMax,ratio);
-				ratioMin=getMin(ratioMax,ratio);
+				ratioMin=getMin(ratioMin,ratio);
 				model.addAttribute("soldAcreageList",soldAcreageList);
 				model.addAttribute("soldAcreageRatioList",soldAcreageRatioList);
 			}

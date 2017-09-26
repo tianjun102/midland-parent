@@ -64,7 +64,7 @@
         yAxis: [
             {
                 type: 'value',
-                name: '套数',
+                name: '成交套数',
                 min: 0,
                 max: ${listMax},
                 interval:${listStep},
@@ -74,7 +74,7 @@
             },
             {
                 type: 'value',
-                name: '百分比',
+                name: '环比',
                 min: ${ratioMin},
                 max: ${ratioMax},
                 interval: ${ratioStep},

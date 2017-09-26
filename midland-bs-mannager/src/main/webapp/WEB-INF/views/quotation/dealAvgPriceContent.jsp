@@ -63,7 +63,7 @@
         yAxis: [
             {
                 type: 'value',
-                name: '价格',
+                name: '成交均价',
                 min: 0,
                 max: ${listMax},
                 interval:${listStep},
@@ -73,7 +73,7 @@
             },
             {
                 type: 'value',
-                name: '成交均价',
+                name: '环比',
                 min: ${ratioMin},
                 max: ${ratioMax},
                 interval: ${ratioStep},
