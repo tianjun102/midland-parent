@@ -220,7 +220,7 @@
             'onUploadSuccess': function (file, data, response) {
                 console.log(data);
                 $("#enclosure").attr("value", data);
-                $("#iconImg1").attr("src", "http://localhost"+data);
+                $("#iconImg1").attr("src", "${fileUrl}"+data);
             },
             'onQueueComplete': function (queueData) {
                 if (queueData.uploadsSuccessful < 1) {
@@ -239,7 +239,7 @@
             'onUploadSuccess': function (file, data, response) {
                 console.log(data);
                 $("#imgUrl").attr("value", data);
-                $("#iconImg2").attr("src", "http://localhost"+data);
+                $("#iconImg2").attr("src", "${fileUrl}"+data);
             },
             'onQueueComplete': function (queueData) {
                 if (queueData.uploadsSuccessful < 1) {
