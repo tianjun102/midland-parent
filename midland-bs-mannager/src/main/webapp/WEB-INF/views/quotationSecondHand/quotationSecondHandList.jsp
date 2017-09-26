@@ -79,7 +79,7 @@
     function delete1(id){
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/quotation/update?id="+id+"&isDelete=1",
+            url: "${ctx}/rest/quotationSecondHand/update?id="+id+"&isDelete=1",
             async: false, // 此处必须同步
             dataType: "json",
 
@@ -100,7 +100,7 @@
             title: ['修改'],
             shade: 0.3,
             area: ['500px','700px'],
-            content: ['${ctx}/rest/quotation/to_update?id='+id,'no']
+            content: ['${ctx}/rest/quotationSecondHand/to_update?id='+id,'no']
         });
     }
 
