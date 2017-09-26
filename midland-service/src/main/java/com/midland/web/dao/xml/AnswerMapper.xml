@@ -17,7 +17,7 @@
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,answer_area,answer_time,answer_name,against_num,support_num,questions_id,is_delete,audit_status,answer_phone,answer_no
+		id,answer_area,DATE_FORMAT(answer_time,'%Y-%m-%d %H:%i:%s')answer_time,answer_name,against_num,support_num,questions_id,is_delete,audit_status,answer_phone,answer_no
 	</sql>
 
 	<select id="selectAnswerById" resultMap="BaseResultMap">

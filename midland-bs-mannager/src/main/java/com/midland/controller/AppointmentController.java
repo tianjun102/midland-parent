@@ -45,7 +45,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/appoint")
-public class AppointmentController extends BaseFilter{
+public class AppointmentController extends BaseFilter {
 	@Autowired
 	private AppointmentService appointmentServiceImpl;
 	@Autowired
@@ -56,7 +56,7 @@ public class AppointmentController extends BaseFilter{
 	Logger logger = LoggerFactory.getLogger(AppointmentController.class);
 	
 	@RequestMapping("/index")
-	public String showAppointIndex(HttpServletRequest request,Model model) {
+	public String showAppointIndex(HttpServletRequest request, Model model) {
 		getSelectParam(model);
 		
 		return "/appointment/appointIndex";
@@ -64,13 +64,13 @@ public class AppointmentController extends BaseFilter{
 	
 	private void getSelectParam(Model model) {
 		List<ParamObject> paramObjects = JsonMapReader.getMap("appointment_sellRent");
-		model.addAttribute("sellRents",paramObjects);
+		model.addAttribute("sellRents", paramObjects);
 		List<ParamObject> paramObjects1 = JsonMapReader.getMap("appointment_status");
-		model.addAttribute("statusList",paramObjects1);
+		model.addAttribute("statusList", paramObjects1);
 		List<ParamObject> paramObjects2 = JsonMapReader.getMap("source");
-		model.addAttribute("sources",paramObjects2);
+		model.addAttribute("sources", paramObjects2);
 		List<ParamObject> paramObjects3 = JsonMapReader.getMap("appointment_houseType");
-		model.addAttribute("houses",paramObjects3);
+		model.addAttribute("houses", paramObjects3);
 	}
 	
 	
@@ -83,35 +83,38 @@ public class AppointmentController extends BaseFilter{
 			appointment.setId(id);
 			appointment.setIsDelete(1);
 			appointmentServiceImpl.updateAppointmentById(appointment);
-			map.put("state",0);
+			map.put("state", 0);
 		} catch (Exception e) {
-			logger.error("deleteByPrimaryKey : id={}",id,e);
-			map.put("state",-1);
+			logger.error("deleteByPrimaryKey : id={}", id, e);
+			map.put("state", -1);
 		}
 		return map;
 	}
+	
 	@RequestMapping("/add")
 	@ResponseBody
 	public Object addAppointment(Appointment record) {
 		Map map = new HashMap();
 		try {
 			appointmentServiceImpl.insertAppointment(record);
-			if (StringUtils.isNotEmpty(record.getAgentPhone() )){//发送短信
+			if (StringUtils.isNotEmpty(record.getAgentPhone())) {//发送短信
 				List<String> list = new ArrayList<>();
 				list.add("您好");
 				list.add("您好");
-				list.add("您好");;
-				SmsModel smsModel = new SmsModel(record.getAgentPhone(),"2029157",list);
-				apiHelper.smsSender("addAppointment",smsModel);
+				list.add("您好");
+				;
+				SmsModel smsModel = new SmsModel(record.getAgentPhone(), "2029157", list);
+				apiHelper.smsSender("addAppointment", smsModel);
 			}
-			map.put("state",0);
+			map.put("state", 0);
 			return map;
 		} catch (Exception e) {
-			logger.error("addAppointment {}",record,e);
-			map.put("state",-1);
+			logger.error("addAppointment {}", record, e);
+			map.put("state", -1);
 			return map;
 		}
 	}
+	
 	@RequestMapping("/get")
 	public Appointment selectByPrimaryKey(Integer id) {
 		
@@ -119,21 +122,19 @@ public class AppointmentController extends BaseFilter{
 	}
 	
 	
-	
-	
 	@RequestMapping("/page")
-	public String appointmentPage(Model model, Appointment record, String pageNo, String pageSize,HttpServletRequest request) throws Exception {
-		if(pageNo==null||pageNo.equals("")){
+	public String appointmentPage(Model model, Appointment record, String pageNo, String pageSize, HttpServletRequest request) throws Exception {
+		if (pageNo == null || pageNo.equals("")) {
 			pageNo = ContextEnums.PAGENO;
 		}
-		if(pageSize==null||pageSize.equals("")){
+		if (pageSize == null || pageSize.equals("")) {
 			pageSize = ContextEnums.PAGESIZE;
 		}
 		User user = MidlandHelper.getCurrentUser(request);
 		//只展示用户所属城市的信息
 		record.setCityId(user.getCityId());
-		PageHelper.startPage(Integer.valueOf(pageNo),Integer.valueOf(pageSize));
-		Page<Appointment> result = (Page<Appointment>)appointmentServiceImpl.findAppointmentList(record);
+		PageHelper.startPage(Integer.valueOf(pageNo), Integer.valueOf(pageSize));
+		Page<Appointment> result = (Page<Appointment>) appointmentServiceImpl.findAppointmentList(record);
 		Paginator paginator = result.getPaginator();
 		getSelectParam(model);
 		model.addAttribute("paginator", paginator);
@@ -143,6 +144,7 @@ public class AppointmentController extends BaseFilter{
 	
 	/**
 	 * 重新分配经纪人，把经纪人更新到预约记录里
+	 *
 	 * @param record
 	 * @return
 	 */
@@ -153,52 +155,51 @@ public class AppointmentController extends BaseFilter{
 		try {
 			record.setResetFlag(0);//重新分配经纪人后，隐藏“重新分配按钮”
 			appointmentServiceImpl.updateAppointmentById(record);
-			if (StringUtils.isNotEmpty(record.getAgentPhone() )){//发送短信
+			if (StringUtils.isNotEmpty(record.getAgentPhone())) {//发送短信
 				List<String> list = new ArrayList<>();
-				list.add("您好");;
+				list.add("您好");
+				;
 				list.add("您好");
 				list.add("您好");
-				SmsModel smsModel = new SmsModel(record.getAgentPhone(),"2029157",list);
-				apiHelper.smsSender("resetAgent",smsModel);
+				SmsModel smsModel = new SmsModel(record.getAgentPhone(), "2029157", list);
+				apiHelper.smsSender("resetAgent", smsModel);
 			}
-			map.put("state",0);
+			map.put("state", 0);
 		} catch (Exception e) {
-			logger.error("resetAgent : {}",record,e);
-			map.put("state",-1);
+			logger.error("resetAgent : {}", record, e);
+			map.put("state", -1);
 		}
 		return map;
 	}
 	
 	
-	
 	@RequestMapping("/to_update")
-	public String toUpdateAppointment(int appointId,Model model) {
-		Appointment appointment=appointmentServiceImpl.selectAppointmentById(appointId);
+	public String toUpdateAppointment(int appointId, Model model) {
+		Appointment appointment = appointmentServiceImpl.selectAppointmentById(appointId);
 		List<AppointLog> appointLogs = appointLogServiceImpl.selectAppointLogByAppointId(appointId);
 		getSelectParam(model);
-		model.addAttribute("appointment",appointment);
-		model.addAttribute("appointLogs",appointLogs);
+		model.addAttribute("appointment", appointment);
+		model.addAttribute("appointLogs", appointLogs);
 		return "appointment/updateAppointInfo";
 	}
 	
 	
-	
 	@RequestMapping("/update")
 	@ResponseBody
-	public Object updateByPrimaryKeySelective(Appointment record,String remark, HttpServletRequest request) {
+	public Object updateByPrimaryKeySelective(Appointment record, String remark, HttpServletRequest request) {
 		Map map = new HashMap();
 		try {
-			if (0 !=record.getStatus()){
+			if (0 != record.getStatus()) {
 				//如果委托状态不是已分配，隐藏重新分配按钮
 				record.setResetFlag(0);
 			}
 			appointmentServiceImpl.updateAppointmentById(record);
-			User user = (User)request.getSession().getAttribute("userInfo");
+			User user = (User) request.getSession().getAttribute("userInfo");
 			
 			AppointLog appointLog = new AppointLog();
-			if (StringUtils.isEmpty(remark)){
+			if (StringUtils.isEmpty(remark)) {
 				appointLog.setRemark("无");
-			}else{
+			} else {
 				appointLog.setRemark(remark);
 			}
 			appointLog.setAppointId(record.getId());
@@ -208,25 +209,23 @@ public class AppointmentController extends BaseFilter{
 			
 			appointLog.setState(record.getStatus());
 			appointLogServiceImpl.insertAppointLog(appointLog);
-			map.put("state",0);
+			map.put("state", 0);
 		} catch (Exception e) {
-			logger.error("updateByPrimaryKeySelective : {}",record,e);
-			map.put("state",-1);
+			logger.error("updateByPrimaryKeySelective : {}", record, e);
+			map.put("state", -1);
 		}
 		
 		return map;
 	}
 	
 	
-	
-	
 	@RequestMapping("/export")
 	public void userInfoExportExcel(Appointment appointment, HttpServletResponse response) throws Exception {
 		List<Appointment> dataList = appointmentServiceImpl.findAppointmentList(appointment);
-		PoiExcelExport pee = new PoiExcelExport(response,"预约看房","sheet1");
+		PoiExcelExport pee = new PoiExcelExport(response, "预约看房", "sheet1");
 		//调用
-		List<ExportModel> exportModels=new ArrayList<>();
-		for (Appointment appointment1:dataList){
+		List<ExportModel> exportModels = new ArrayList<>();
+		for (Appointment appointment1 : dataList) {
 			ExportModel exportModel = new ExportModel();
 			exportModel.setModelName1(appointment1.getAppointSn());
 			List<ParamObject> sources = JsonMapReader.getMap("source");
@@ -251,9 +250,9 @@ public class AppointmentController extends BaseFilter{
 			exportModel.setModelName17(appointment1.getHandleTime());
 			exportModels.add(exportModel);
 		}
-		String titleColumn[] = {"modelName1","modelName2","modelName3","modelName4","modelName5","modelName6","modelName7","modelName8","modelName9","modelName10","modelName11","modelName12","modelName13","modelName14","modelName15","modelName16","modelName17"};
-		String titleName[] = {"委托编号","信息来源","称呼","电话","类型","分类","委托时间","所属区域","小区名","门牌地址","户型","面积","售价/租价","预约时间","经纪人","状态","处理时间"};
-		int titleSize[] = {13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13};
+		String titleColumn[] = {"modelName1", "modelName2", "modelName3", "modelName4", "modelName5", "modelName6", "modelName7", "modelName8", "modelName9", "modelName10", "modelName11", "modelName12", "modelName13", "modelName14", "modelName15", "modelName16", "modelName17"};
+		String titleName[] = {"委托编号", "信息来源", "称呼", "电话", "类型", "分类", "委托时间", "所属区域", "小区名", "门牌地址", "户型", "面积", "售价/租价", "预约时间", "经纪人", "状态", "处理时间"};
+		int titleSize[] = {13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13};
 		//其他设置 set方法可全不调用
 		pee.wirteExcel(titleColumn, titleName, titleSize, exportModels);
 	}

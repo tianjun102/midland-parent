@@ -20,7 +20,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-		id,data_time,type,city_id,area_id,slice_id,deal_num,deal_acreage,ring_ratio,update_time,is_delete,city_name,area_name,slice_name
+		id,DATE_FORMAT(data_time,'%Y-%m-%d %H:%i:%s')data_time,type,city_id,area_id,slice_id,deal_num,deal_acreage,ring_ratio,DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s')update_time,is_delete,city_name,area_name,slice_name
 	</sql>
     <select id="selectQuotationSecondHandById" resultMap="BaseResultMap">
         select

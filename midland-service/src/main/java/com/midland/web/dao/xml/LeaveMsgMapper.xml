@@ -15,7 +15,7 @@
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,message,add_time,user_id,user_name,phone,reply_msg,type,is_delete
+		id,message,DATE_FORMAT(add_time,'%Y-%m-%d %H:%i:%s')add_time,user_id,user_name,phone,reply_msg,type,is_delete
 	</sql>
 
 	<select id="selectLeaveMsgById" resultMap="BaseResultMap">

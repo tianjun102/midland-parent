@@ -14,7 +14,7 @@
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		entrust_log_id,log_time,operator_id,operator_name,remark,state,entrust_id,is_delete
+		entrust_log_id,DATE_FORMAT(log_time,'%Y-%m-%d %H:%i:%s')log_time,operator_id,operator_name,remark,state,entrust_id,is_delete
 	</sql>
 
 	<select id="selectEntrustLogByEntrustLogId" resultMap="BaseResultMap">

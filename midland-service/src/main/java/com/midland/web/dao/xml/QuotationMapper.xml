@@ -26,7 +26,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-		id,data_time,type,city_id,area_id,slice_id,deal_num,deal_acreage,price,sold_num,sold_area,ring_ratio,update_time,is_new,is_delete,city_name,area_name,slice_name,house_acreage,deal_price
+		id,data_time,type,city_id,area_id,slice_id,deal_num,deal_acreage,price,sold_num,sold_area,ring_ratio,DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s')update_time,is_new,is_delete,city_name,area_name,slice_name,house_acreage,deal_price
 	</sql>
 
     <select id="tooltip" resultType="Map">
