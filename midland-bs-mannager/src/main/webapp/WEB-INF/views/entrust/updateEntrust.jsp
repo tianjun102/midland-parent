@@ -55,7 +55,7 @@
                                                           value="${entrust.entrustSn}"/>
             </li>
             <li class="col-md-6"><span>委托时间：</span><input type="text" name="entrustTime" id="entrustTime"
-                                                          value="${entrust.entrustTime}" maxlength="50"/><span
+                                                          value="${entrust.entrustTime}" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" maxlength="50"/><span
                     class="_star">*</span>
             </li>
             <li class="col-md-6"><span>用户：</span><input type="text" name="nickName" id="nickName"

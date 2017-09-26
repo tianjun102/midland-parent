@@ -32,8 +32,10 @@
             <li class="col-md-6"><span>预约编号：</span><input type="text" name="appointSn" id="appointSn"
                                                           value="${appointment.appointSn}"/>
             </li>
-            <li class="col-md-6"><span>预约时间：</span><input type="text" name="appointmentTime" id="appointmentTime"
-                                                          value="${appointment.appointmentTime}" maxlength="50"/><span
+            <li class="col-md-6"><span>预约时间：</span>
+                <input type="text" name="appointmentTime" id="appointmentTime"
+                                                          value="${appointment.appointmentTime}" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+                                                           maxlength="50"/><span
                     class="_star">*</span>
             </li>
             <li class="col-md-6"><span>用户：</span><input type="text" name="nickName" id="nickName"
