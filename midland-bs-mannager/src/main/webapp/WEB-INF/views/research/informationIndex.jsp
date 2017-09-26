@@ -21,7 +21,7 @@
 		<section class = "content">
 			<p class = "detail-title">
 				<span>市场调究管理</span>
-				<a class = "setup"  target="contentF" href="/rest/research/to_add">新增</a>
+				<a class = "setup"  target="contentF" href="${ctx}/rest/research/to_add">新增</a>
 			</p>
 		<form action="${ctx }/rest/research/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">

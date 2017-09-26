@@ -1,16 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="../layout/tablib.jsp"%>
+<%@include file="../layout/source.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${ctx }/assets/css/layer.css">
-<link rel="stylesheet" href="${ctx }/assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="${ctx }/assets/css/common.css">
-<link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css" />
-
 </head>
 <body>
 <!--角色列表界面-->
@@ -65,11 +61,5 @@
 	}
 	
 </script>
-	<script type="text/javascript" src="${ctx}/assets/scripts/jquery.min.js"></script>
-	<script type="text/javascript" src="${ctx}/assets/scripts/jquery.easydropdown.js" ></script>
-	<script type="text/javascript" src="${ctx}/assets/scripts/bootstrap.min.js"></script>
-	<script type="text/javascript" src="${ctx}/assets/scripts/layer.js"></script>
-	<script type="text/javascript" src="${ctx}/assets/scripts/common.js"></script>
-	<script type="text/javascript" src="${ctx}/assets/scripts/base.js" ></script>
 </body>
 </html>
