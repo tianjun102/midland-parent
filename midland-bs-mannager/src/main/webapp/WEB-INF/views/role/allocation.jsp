@@ -9,7 +9,13 @@
 
 <meta charset="UTF-8">
 <title>角色</title>
+	<link rel="stylesheet" href="${ctx }/assets/css/zTreeStyle.css">
+	<link rel="stylesheet" href="${ctx }/assets/css/common.css">
 
+	<script src="${ctx}/assets/plugins/jquery-1.10.2.min.js" type="text/javascript"></script>
+	<script src="${ctx}/assets/scripts/jstree.min.js" type="text/javascript"></script>
+	<script src="${ctx}/assets/scripts/jquery.ztree.core-3.5.js" type="text/javascript"></script>
+	<script src="${ctx}/assets/scripts/jquery.ztree.excheck-3.5.js" type="text/javascript"></script>
 
 </head>
 
