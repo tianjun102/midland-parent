@@ -14,7 +14,7 @@
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		appoint_log_id,log_time,operator_id,operator_name,remark,state,appoint_id,is_delete
+		appoint_log_id,DATE_FORMAT(log_time,'%Y-%m-%d %H:%i:%s')log_time,operator_id,operator_name,remark,state,appoint_id,is_delete
 	</sql>
 
 	<select id="selectAppointLogByAppointLogId" resultMap="BaseResultMap">

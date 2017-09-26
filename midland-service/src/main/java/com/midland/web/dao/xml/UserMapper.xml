@@ -37,8 +37,8 @@
 
 
     <sql id="Base_Column_List">
-    id, username, user_cn_name, password, user_type, state, email, phone, create_time,
-    create_by, modify_time, head_img, source, audit_status, audit_time, is_black, black_remark,
+    id, username, user_cn_name, password, user_type, state, email, phone, DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s')create_time,
+    create_by, DATE_FORMAT(modify_time,'%Y-%m-%d %H:%i:%s')modify_time, head_img, source, audit_status, DATE_FORMAT(audit_time,'%Y-%m-%d %H:%i:%s')audit_time, is_black, black_remark,
     identification, idcart_img, idcart_img1, audit_name, audit_remark,city_id,city_name
   </sql>
 

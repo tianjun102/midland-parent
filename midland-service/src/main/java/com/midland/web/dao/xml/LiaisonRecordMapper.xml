@@ -16,7 +16,7 @@
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,name,phone,category,leaving_message,add_time,is_ontact,is_delete,user_id,email
+		id,name,phone,category,leaving_message,DATE_FORMAT(add_time,'%Y-%m-%d %H:%i:%s')add_time,is_ontact,is_delete,user_id,email
 	</sql>
 
 	<select id="selectLiaisonRecordById" resultMap="BaseResultMap">
