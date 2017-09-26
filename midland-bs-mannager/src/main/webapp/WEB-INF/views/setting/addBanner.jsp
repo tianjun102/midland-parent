@@ -401,7 +401,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
             'onUploadSuccess': function (file, data, response) {
                 console.log(data);
                 $("#bannerImg").attr("value", data);
-                $("#iconImg1").attr("src", "http://localhost"+data);
+                $("#iconImg1").attr("src", "${fileUrl}"+data);
             },
             'onQueueComplete': function (queueData) {
                 if (queueData.uploadsSuccessful < 1) {

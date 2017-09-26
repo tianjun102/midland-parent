@@ -62,7 +62,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 					<c:forEach items="${bannerList}" var="banner">
 						<tr>
 							<%-- <td>${banner.id}</td> --%>
-							<td><img style="height: 36px;" src="http://localhost${banner.bannerImg}" class="suo"/></td>
+							<td><img style="height: 36px;" src="${fileUrl}${banner.bannerImg}" class="suo"/></td>
 							<td><c:if test="${banner.enabled =='0'}">关闭</c:if><c:if test="${banner.enabled =='1'}">开放</c:if></td>
 							<td>${banner.cityName}</td>
 							<td><c:if test="${banner.source =='0'}">网站</c:if><c:if test="${banner.source =='1'}">微站</c:if></td>
