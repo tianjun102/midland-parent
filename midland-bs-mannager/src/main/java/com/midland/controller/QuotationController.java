@@ -236,8 +236,7 @@ public class QuotationController extends BaseFilter {
 				listMax=QuotationUtil.getMax(listMax,view.getDealNum());
 				ratioMax=QuotationUtil.getMax(ratioMax,ratio);
 				ratioMin=QuotationUtil.getMin(ratioMin,ratio);
-				model.addAttribute("numList",numList);
-				model.addAttribute("numRatioList",numRatioList);
+				
 			}else if ("1".equals(showType)){
 				acreageList.add(view.getDealAcreage());
 				Double ratio =QuotationUtil.getRatio(Double.valueOf(view.getDealAcreage()),view.getPreDealAcreage());
@@ -245,8 +244,7 @@ public class QuotationController extends BaseFilter {
 				listMax=QuotationUtil.getMax(listMax,Double.valueOf(view.getDealAcreage()));
 				ratioMax=QuotationUtil.getMax(ratioMax,ratio);
 				ratioMin=QuotationUtil.getMin(ratioMin,ratio);
-				model.addAttribute("acreageList",acreageList);
-				model.addAttribute("acreageRatioList",acreageRatioList);
+				
 			}else if ("2".equals(showType)){
 				dealAvgPriceList.add(view.getPrice());
 				Double ratio =QuotationUtil.getRatio(Double.valueOf(view.getPrice()),view.getPrePrice());
@@ -254,8 +252,7 @@ public class QuotationController extends BaseFilter {
 				listMax=QuotationUtil.getMax(listMax,Double.valueOf(view.getPrice()));
 				ratioMax=QuotationUtil.getMax(ratioMax,ratio);
 				ratioMin=QuotationUtil.getMin(ratioMin,ratio);
-				model.addAttribute("dealAvgPriceList",dealAvgPriceList);
-				model.addAttribute("dealAvgPriceRatioList",dealAvgPriceRatioList);
+				
 			}else if ("3".equals(showType)&&view.getDealPrice()!=null){
 				Double ratio =QuotationUtil.getRatio(Double.valueOf(view.getDealPrice()),view.getPreDealPrice());
 				turnVolumeList.add(view.getDealPrice());
@@ -263,8 +260,7 @@ public class QuotationController extends BaseFilter {
 				listMax=QuotationUtil.getMax(listMax,Double.valueOf(view.getDealPrice()));
 				ratioMax=QuotationUtil.getMax(ratioMax,ratio);
 				ratioMin=QuotationUtil.getMin(ratioMin,ratio);
-				model.addAttribute("turnVolumeList",turnVolumeList);
-				model.addAttribute("turnVolumeRatioList",turnVolumeRatioList);
+				
 			}else if ("4".equals(showType)&&view.getSoldNum()!=null) {
 				soldNumList.add(view.getSoldNum());
 				Double ratio =QuotationUtil.getRatio(Double.valueOf(view.getSoldNum()), view.getPreSoldNum());
@@ -272,8 +268,7 @@ public class QuotationController extends BaseFilter {
 				listMax=QuotationUtil.getMax(listMax,view.getSoldNum());
 				ratioMax=QuotationUtil.getMax(ratioMax,ratio);
 				ratioMin=QuotationUtil.getMin(ratioMin,ratio);
-				model.addAttribute("soldNumList",soldNumList);
-				model.addAttribute("soldNumRatioList",soldNumRatioList);
+				
 			}else if ("5".equals(showType)&&view.getSoldArea()!=null) {
 				Double ratio =QuotationUtil.getRatio(Double.valueOf(view.getSoldArea()),view.getPreSoldArea());
 				soldAcreageList.add(view.getSoldArea());
@@ -281,11 +276,21 @@ public class QuotationController extends BaseFilter {
 				listMax=QuotationUtil.getMax(listMax,Double.valueOf(view.getSoldArea()));
 				ratioMax=QuotationUtil.getMax(ratioMax,ratio);
 				ratioMin=QuotationUtil.getMin(ratioMin,ratio);
-				model.addAttribute("soldAcreageList",soldAcreageList);
-				model.addAttribute("soldAcreageRatioList",soldAcreageRatioList);
+				
 			}
 		}
-//
+		model.addAttribute("numList",numList);
+		model.addAttribute("numRatioList",numRatioList);
+		model.addAttribute("acreageList",acreageList);
+		model.addAttribute("acreageRatioList",acreageRatioList);
+		model.addAttribute("dealAvgPriceList",dealAvgPriceList);
+		model.addAttribute("dealAvgPriceRatioList",dealAvgPriceRatioList);
+		model.addAttribute("soldNumList",soldNumList);
+		model.addAttribute("soldNumRatioList",soldNumRatioList);
+		model.addAttribute("soldAcreageList",soldAcreageList);
+		model.addAttribute("soldAcreageRatioList",soldAcreageRatioList);
+		model.addAttribute("turnVolumeList",turnVolumeList);
+		model.addAttribute("turnVolumeRatioList",turnVolumeRatioList);
 		listMax=QuotationUtil.getDoubleUp(listMax);
 		listMin=0;
 		ratioMax=QuotationUtil.getRatioDoubleUp(ratioMax);

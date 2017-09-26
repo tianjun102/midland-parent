@@ -114,8 +114,7 @@ public class QuotationSecondHandController extends BaseFilter {
 				listMax=QuotationUtil.getMax(listMax,view.getDealNum());
 				ratioMax=QuotationUtil.getMax(ratioMax,ratio);
 				ratioMin=QuotationUtil.getMin(ratioMin,ratio);
-				model.addAttribute("numList",numList);
-				model.addAttribute("numRatioList",numRatioList);
+				
 			}else{
 				Double minus1 = view.getPreAcreage()==null?view.getDealAcreage():view.getPreAcreage();
 				double acreageRes=Calculate.minus(Double.valueOf(view.getDealAcreage()),Double.valueOf(minus1));
@@ -126,13 +125,15 @@ public class QuotationSecondHandController extends BaseFilter {
 				ratioMax=QuotationUtil.getMax(ratioMax,ratio);
 				ratioMin=QuotationUtil.getMin(ratioMin,ratio);
 				acreageRatioList.add(ratio);
-				model.addAttribute("acreageList",acreageList);
-				model.addAttribute("acreageRatioList",acreageRatioList);
+				
 			}
 			
 			
 		}
-		
+		model.addAttribute("numList",numList);
+		model.addAttribute("numRatioList",numRatioList);
+		model.addAttribute("acreageList",acreageList);
+		model.addAttribute("acreageRatioList",acreageRatioList);
 		listMax=QuotationUtil.getDoubleUp(listMax);
 		listMin=0;
 		ratioMax=QuotationUtil.getRatioDoubleUp(ratioMax);
