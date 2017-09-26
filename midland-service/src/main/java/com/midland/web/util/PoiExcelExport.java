@@ -221,8 +221,9 @@ public class PoiExcelExport {
                       
                 }  
             }
+           // ByteArrayInputStream inputStream = new ByteArrayInputStream(workbook.getBytes());
             workbook.write(out);
-        } catch (Exception e) {  
+        } catch (Exception e) {
             e.printStackTrace();  
         } finally {    
             try {  
