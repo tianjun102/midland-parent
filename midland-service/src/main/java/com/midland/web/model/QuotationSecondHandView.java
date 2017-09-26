@@ -58,11 +58,11 @@ public class QuotationSecondHandView {
 	/**
 	 * 上个月成交数量
 	 **/
-	private Integer preNum;
+	private Double preNum;
 	/**
 	 * 上个月成交面积
 	 **/
-	private String preAcreage;
+	private Double preAcreage;
 	/**
 	 * 成交数量
 	 **/
@@ -70,7 +70,7 @@ public class QuotationSecondHandView {
 	/**
 	 * 成交面积
 	 **/
-	private String dealAcreage;
+	private Double dealAcreage;
 	/**
 	 * 开始时间
 	 **/
@@ -129,19 +129,19 @@ public class QuotationSecondHandView {
 		this.areaId = areaId;
 	}
 	
-	public Integer getPreNum() {
+	public Double getPreNum() {
 		return preNum;
 	}
 	
-	public void setPreNum(Integer preNum) {
+	public void setPreNum(Double preNum) {
 		this.preNum = preNum;
 	}
 	
-	public String getPreAcreage() {
+	public Double getPreAcreage() {
 		return preAcreage;
 	}
 	
-	public void setPreAcreage(String preAcreage) {
+	public void setPreAcreage(Double preAcreage) {
 		this.preAcreage = preAcreage;
 	}
 	
@@ -153,11 +153,11 @@ public class QuotationSecondHandView {
 		this.dealNum = dealNum;
 	}
 	
-	public String getDealAcreage() {
+	public Double getDealAcreage() {
 		return dealAcreage;
 	}
 	
-	public void setDealAcreage(String dealAcreage) {
+	public void setDealAcreage(Double dealAcreage) {
 		this.dealAcreage = dealAcreage;
 	}
 	
