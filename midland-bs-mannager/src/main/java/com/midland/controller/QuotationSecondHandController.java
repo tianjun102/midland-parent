@@ -66,7 +66,7 @@ public class QuotationSecondHandController extends BaseFilter {
 	 *
 	 **/
 	@RequestMapping("toolsTip")
-	public String toolsTip(QuotationSecondHandView obj,String distName,String distId,String url, Model model) throws Exception {
+	public String toolsTip(QuotationSecondHandView obj,String distName,String distId,String url,String showType, Model model) throws Exception {
 		if (StringUtils.isEmpty(distId)&&StringUtils.isEmpty(distName)){
 			obj.setAreaId("0");
 		}else{
@@ -95,17 +95,22 @@ public class QuotationSecondHandController extends BaseFilter {
 		for (QuotationSecondHandView view : list){
 			month.add(view.getDataTime());
 			//（当前月数据-上个月数据)/上个月数据=当月环比
-			double minus = view.getPreNum()==null?view.getDealNum():view.getPreNum();
-			double numRes=Calculate.minus(Double.valueOf(view.getDealNum()),minus);
-			double numRatio=Calculate.divide(numRes,minus);
-			numList.add(view.getDealNum());
-			numRatioList.add(Calculate.multiply(numRatio,100.00));
 			
-			String minus1 = view.getPreAcreage()==null?view.getDealAcreage():view.getPreAcreage();
-			double acreageRes=Calculate.minus(Double.valueOf(view.getDealAcreage()),Double.valueOf(minus1));
-			double acreageRatio=Calculate.divide(acreageRes,Double.valueOf(minus1));
-			acreageList.add(view.getDealAcreage());
-			acreageRatioList.add(Calculate.multiply(acreageRatio,100.00));
+			if ("0".equals(showType)) {
+				double minus = view.getPreNum() == null ? view.getDealNum() : view.getPreNum();
+				double numRes = Calculate.minus(Double.valueOf(view.getDealNum()), minus);
+				double numRatio = Calculate.divide(numRes, minus);
+				numList.add(view.getDealNum());
+				numRatioList.add(Calculate.multiply(numRatio, 100.00));
+			}else{
+				String minus1 = view.getPreAcreage()==null?view.getDealAcreage():view.getPreAcreage();
+				double acreageRes=Calculate.minus(Double.valueOf(view.getDealAcreage()),Double.valueOf(minus1));
+				double acreageRatio=Calculate.divide(acreageRes,Double.valueOf(minus1));
+				acreageList.add(view.getDealAcreage());
+				acreageRatioList.add(Calculate.multiply(acreageRatio,100.00));
+			}
+			
+			
 		}
 		
 		model.addAttribute("months", JSONArray.toJSONString(month));

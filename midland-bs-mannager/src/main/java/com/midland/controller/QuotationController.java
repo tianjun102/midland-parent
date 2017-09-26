@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
+import com.midland.controller.PublicUtils.QuotationUtil;
 import com.midland.web.model.Area;
 import com.midland.web.model.Quotation;
 import com.midland.web.model.QuotationView;
@@ -230,65 +231,65 @@ public class QuotationController extends BaseFilter {
 			
 			if ("0".equals(showType)){
 				numList.add(view.getDealNum());
-				Double ratio = getRatio(Double.valueOf(view.getDealNum()),view.getPreDealNum());
+				Double ratio = QuotationUtil.getRatio(Double.valueOf(view.getDealNum()),view.getPreDealNum());
 				numRatioList.add(ratio);
-				listMax=getMax(listMax,view.getDealNum());
-				ratioMax=getMax(ratioMax,ratio);
-				ratioMin=getMin(ratioMin,ratio);
+				listMax=QuotationUtil.getMax(listMax,view.getDealNum());
+				ratioMax=QuotationUtil.getMax(ratioMax,ratio);
+				ratioMin=QuotationUtil.getMin(ratioMin,ratio);
 				model.addAttribute("numList",numList);
 				model.addAttribute("numRatioList",numRatioList);
 			}else if ("1".equals(showType)){
 				acreageList.add(view.getDealAcreage());
-				Double ratio =getRatio(Double.valueOf(view.getDealAcreage()),view.getPreDealAcreage());
+				Double ratio =QuotationUtil.getRatio(Double.valueOf(view.getDealAcreage()),view.getPreDealAcreage());
 				acreageRatioList.add(ratio);
-				listMax=getMax(listMax,Double.valueOf(view.getDealAcreage()));
-				ratioMax=getMax(ratioMax,ratio);
-				ratioMin=getMin(ratioMin,ratio);
+				listMax=QuotationUtil.getMax(listMax,Double.valueOf(view.getDealAcreage()));
+				ratioMax=QuotationUtil.getMax(ratioMax,ratio);
+				ratioMin=QuotationUtil.getMin(ratioMin,ratio);
 				model.addAttribute("acreageList",acreageList);
 				model.addAttribute("acreageRatioList",acreageRatioList);
 			}else if ("2".equals(showType)){
 				dealAvgPriceList.add(view.getPrice());
-				Double ratio =getRatio(Double.valueOf(view.getPrice()),view.getPrePrice());
+				Double ratio =QuotationUtil.getRatio(Double.valueOf(view.getPrice()),view.getPrePrice());
 				dealAvgPriceRatioList.add(ratio);
-				listMax=getMax(listMax,Double.valueOf(view.getPrice()));
-				ratioMax=getMax(ratioMax,ratio);
-				ratioMin=getMin(ratioMin,ratio);
+				listMax=QuotationUtil.getMax(listMax,Double.valueOf(view.getPrice()));
+				ratioMax=QuotationUtil.getMax(ratioMax,ratio);
+				ratioMin=QuotationUtil.getMin(ratioMin,ratio);
 				model.addAttribute("dealAvgPriceList",dealAvgPriceList);
 				model.addAttribute("dealAvgPriceRatioList",dealAvgPriceRatioList);
 			}else if ("3".equals(showType)&&view.getDealPrice()!=null){
-				Double ratio =getRatio(Double.valueOf(view.getDealPrice()),view.getPreDealPrice());
+				Double ratio =QuotationUtil.getRatio(Double.valueOf(view.getDealPrice()),view.getPreDealPrice());
 				turnVolumeList.add(view.getDealPrice());
 				turnVolumeRatioList.add(ratio);
-				listMax=getMax(listMax,Double.valueOf(view.getDealPrice()));
-				ratioMax=getMax(ratioMax,ratio);
-				ratioMin=getMin(ratioMin,ratio);
+				listMax=QuotationUtil.getMax(listMax,Double.valueOf(view.getDealPrice()));
+				ratioMax=QuotationUtil.getMax(ratioMax,ratio);
+				ratioMin=QuotationUtil.getMin(ratioMin,ratio);
 				model.addAttribute("turnVolumeList",turnVolumeList);
 				model.addAttribute("turnVolumeRatioList",turnVolumeRatioList);
 			}else if ("4".equals(showType)&&view.getSoldNum()!=null) {
 				soldNumList.add(view.getSoldNum());
-				Double ratio =getRatio(Double.valueOf(view.getSoldNum()), view.getPreSoldNum());
+				Double ratio =QuotationUtil.getRatio(Double.valueOf(view.getSoldNum()), view.getPreSoldNum());
 				soldNumRatioList.add(ratio);
-				listMax=getMax(listMax,view.getSoldNum());
-				ratioMax=getMax(ratioMax,ratio);
-				ratioMin=getMin(ratioMin,ratio);
+				listMax=QuotationUtil.getMax(listMax,view.getSoldNum());
+				ratioMax=QuotationUtil.getMax(ratioMax,ratio);
+				ratioMin=QuotationUtil.getMin(ratioMin,ratio);
 				model.addAttribute("soldNumList",soldNumList);
 				model.addAttribute("soldNumRatioList",soldNumRatioList);
 			}else if ("5".equals(showType)&&view.getSoldArea()!=null) {
-				Double ratio =getRatio(Double.valueOf(view.getSoldArea()),view.getPreSoldArea());
+				Double ratio =QuotationUtil.getRatio(Double.valueOf(view.getSoldArea()),view.getPreSoldArea());
 				soldAcreageList.add(view.getSoldArea());
 				soldAcreageRatioList.add(ratio);
-				listMax=getMax(listMax,Double.valueOf(view.getSoldArea()));
-				ratioMax=getMax(ratioMax,ratio);
-				ratioMin=getMin(ratioMin,ratio);
+				listMax=QuotationUtil.getMax(listMax,Double.valueOf(view.getSoldArea()));
+				ratioMax=QuotationUtil.getMax(ratioMax,ratio);
+				ratioMin=QuotationUtil.getMin(ratioMin,ratio);
 				model.addAttribute("soldAcreageList",soldAcreageList);
 				model.addAttribute("soldAcreageRatioList",soldAcreageRatioList);
 			}
 		}
 //
-		listMax=getDoubleUp(listMax);
+		listMax=QuotationUtil.getDoubleUp(listMax);
 		listMin=0;
-		ratioMax=getRatioDoubleUp(ratioMax);
-		ratioMin=getRatioDoubleUp(ratioMin);
+		ratioMax=QuotationUtil.getRatioDoubleUp(ratioMax);
+		ratioMin= QuotationUtil.getRatioDoubleUp(ratioMin);
 //
 		model.addAttribute("months", JSONArray.toJSONString(month));
 		model.addAttribute("listMax", listMax);
@@ -308,55 +309,6 @@ public class QuotationController extends BaseFilter {
 		
 	}
 	
-	public double getDoubleUp(double value){
-		String val = String.valueOf(value);
-		if (val.contains("E")){
-			val=MidlandHelper.scientificNotation(val);
-		}
-		int length;
-		int len = val.indexOf(".");
-		if (len==-1) {
-			length = val.length();
-		}else {
-			length=len;
-		}
-		int intVal = Integer.valueOf(val.substring(0,1))+1;
-		return intVal*Math.pow(10, length-1);
-	}
 	
-	
-	public double getRatioDoubleUp(double value){
-		String val = String.valueOf(value);
-		
-		int length;
-		int len = val.indexOf(".");
-		if (len==-1) {
-			length = val.length();
-		}else {
-			length=len;
-		}
-		int intVal;
-		if (val.contains("-")){
-			intVal= Integer.valueOf(val.substring(0,2))-1;
-			return intVal*Math.pow(10, length-2);
-		}else{
-			intVal = Integer.valueOf(val.substring(0,1))+1;
-			return intVal*Math.pow(10, length-1);
-		}
-	}
-	
-	private Double getRatio(Double dealNum, Double preDealNum) {
-		double minus = preDealNum==null?dealNum:preDealNum;
-		double numRes= Calculate.minus(Double.valueOf(dealNum),minus);
-		double numRatio=Calculate.divide(numRes,minus);
-		return Calculate.multiply(numRatio,100.00);
-	}
-	
-	public double getMin(double x ,double y){
-		return x>y?y:x;
-	}
-	public double getMax(double x ,double y){
-		return x>y?x:y;
-	}
 
 }

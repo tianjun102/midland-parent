@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../layout/tablib.jsp"%>
-<%@include file="../layout/source.jsp"%>
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -51,7 +50,7 @@
             }
         },
         legend: {
-            data:['面积','环比']
+            data:['成交面积','成交面积环比']
         },
         xAxis: [
             {
@@ -65,7 +64,7 @@
         yAxis: [
             {
                 type: 'value',
-                name: '面积',
+                name: '成交面积',
                 min: 2000000,
                 max: 0,
                 interval:200000,
@@ -87,7 +86,7 @@
 
         series: [
             {
-                name:'面积',
+                name:'成交面积',
                 type:'bar',
                 data:${acreageList},
                 barWidth:'20',
@@ -100,7 +99,7 @@
             },
 
             {
-                name:'面积环比',
+                name:'成交面积环比',
                 type:'line',
                 yAxisIndex: 1,
                 data:${acreageRatioList},
