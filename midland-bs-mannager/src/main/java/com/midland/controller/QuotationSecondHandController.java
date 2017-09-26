@@ -4,7 +4,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
-import com.midland.web.model.*;
+import com.midland.controller.PublicUtils.QuotationUtil;
+import com.midland.web.model.Area;
+import com.midland.web.model.ExportModel;
+import com.midland.web.model.QuotationSecondHand;
+import com.midland.web.model.QuotationSecondHandView;
 import com.midland.web.model.user.User;
 import com.midland.web.service.QuotationSecondHandService;
 import com.midland.web.service.QuotationSecondHandViewService;
@@ -59,6 +63,7 @@ public class QuotationSecondHandController extends BaseFilter {
 		List<ParamObject> paramObjects = JsonMapReader.getMap("quotation_type");
 		model.addAttribute("types", paramObjects);
 		model.addAttribute("citys",list1);
+		model.addAttribute("showType","0");
 		return "quotationSecondHand/contentIndex";
 	}
 	
@@ -91,6 +96,10 @@ public class QuotationSecondHandController extends BaseFilter {
 		List<Object> acreageRatioList = new ArrayList<>();
 		List<Object> numList = new ArrayList<>();
 		List<Object> acreageList = new ArrayList<>();
+		double listMax=0;
+		double listMin=0;
+		double ratioMax=0;
+		double ratioMin=0;
 		List<QuotationSecondHandView> list = quotationSecondHandViewService.toolTip(obj);
 		for (QuotationSecondHandView view : list){
 			month.add(view.getDataTime());
@@ -98,28 +107,48 @@ public class QuotationSecondHandController extends BaseFilter {
 			
 			if ("0".equals(showType)) {
 				double minus = view.getPreNum() == null ? view.getDealNum() : view.getPreNum();
-				double numRes = Calculate.minus(Double.valueOf(view.getDealNum()), minus);
-				double numRatio = Calculate.divide(numRes, minus);
 				numList.add(view.getDealNum());
-				numRatioList.add(Calculate.multiply(numRatio, 100.00));
+				Double ratio = QuotationUtil.getRatio(Double.valueOf(view.getDealNum()),view.getPreNum());
+				
+				numRatioList.add(ratio);
+				listMax=QuotationUtil.getMax(listMax,view.getDealNum());
+				ratioMax=QuotationUtil.getMax(ratioMax,ratio);
+				ratioMin=QuotationUtil.getMin(ratioMin,ratio);
+				model.addAttribute("numList",numList);
+				model.addAttribute("numRatioList",numRatioList);
 			}else{
-				String minus1 = view.getPreAcreage()==null?view.getDealAcreage():view.getPreAcreage();
+				Double minus1 = view.getPreAcreage()==null?view.getDealAcreage():view.getPreAcreage();
 				double acreageRes=Calculate.minus(Double.valueOf(view.getDealAcreage()),Double.valueOf(minus1));
 				double acreageRatio=Calculate.divide(acreageRes,Double.valueOf(minus1));
 				acreageList.add(view.getDealAcreage());
-				acreageRatioList.add(Calculate.multiply(acreageRatio,100.00));
+				Double ratio = QuotationUtil.getRatio(Double.valueOf(view.getDealAcreage()),view.getPreAcreage());
+				listMax=QuotationUtil.getMax(listMax,view.getDealAcreage());
+				ratioMax=QuotationUtil.getMax(ratioMax,ratio);
+				ratioMin=QuotationUtil.getMin(ratioMin,ratio);
+				acreageRatioList.add(ratio);
+				model.addAttribute("acreageList",acreageList);
+				model.addAttribute("acreageRatioList",acreageRatioList);
 			}
 			
 			
 		}
 		
+		listMax=QuotationUtil.getDoubleUp(listMax);
+		listMin=0;
+		ratioMax=QuotationUtil.getRatioDoubleUp(ratioMax);
+		ratioMin= QuotationUtil.getRatioDoubleUp(ratioMin);
+//
 		model.addAttribute("months", JSONArray.toJSONString(month));
-		model.addAttribute("numList",numList);
-		model.addAttribute("acreageList",acreageList);
-		model.addAttribute("numRatioList",numRatioList);
+		model.addAttribute("listMax", listMax);
+		model.addAttribute("listMin", listMin);
+		model.addAttribute("listStep", (listMax-listMin)/10);
+		model.addAttribute("ratioMax", ratioMax);
+		model.addAttribute("ratioMin", ratioMin);
+		model.addAttribute("ratioStep", (ratioMax-ratioMin)/10);
+		
 		List<ParamObject> paramObjects = JsonMapReader.getMap("quotation_type");
 		model.addAttribute("types", paramObjects);
-		model.addAttribute("acreageRatioList",acreageRatioList);
+		
 		if (url!=null){
 			return "quotationSecondHand/"+url;
 		}
@@ -296,7 +325,7 @@ public class QuotationSecondHandController extends BaseFilter {
 			
 			exportModel.setModelName3(MidlandHelper.getNameById(view.getType(), quotationType));
 			exportModel.setModelName4(String.valueOf(view.getDealNum()));
-			exportModel.setModelName5(view.getDealAcreage());
+			exportModel.setModelName5(String.valueOf(view.getDealAcreage()));
 			//（当前月数据-上个月数据)/上个月数据=当月环比
 			double minus = view.getPreNum()==null?view.getDealNum():view.getPreNum();
 			double numRes=Calculate.minus(Double.valueOf(view.getDealNum()),minus);

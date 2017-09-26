@@ -65,9 +65,9 @@
             {
                 type: 'value',
                 name: '成交面积',
-                min: 2000000,
-                max: 0,
-                interval:200000,
+                min: ${listMin},
+                max: ${listMax},
+                interval:${listStep},
                 axisLabel: {
                     formatter: '{value} m²'
                 }
@@ -75,9 +75,9 @@
             {
                 type: 'value',
                 name: '环比 [(当月-上月)/上月]*100',
-                min: 400,
-                max: -100,
-                interval: 50,
+                min: ${ratioMin},
+                max: ${ratioMax},
+                interval:${ratioStep},
                 axisLabel: {
                     formatter: '{value} %'
                 }

@@ -16,6 +16,7 @@
     <form action="${ctx }/rest/quotationSecondHand/toolsTip" method="POST" id="searchForm"
           onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
         <input type="hidden" name="url" id="url" value="${url}"/>
+        <input type="hidden" name="showType" id="showType" value="${showType}"/>
         <ul class="userinfo row">
             <li>
                 <%@include file="../quotationSecondHand/dist.jsp" %>
@@ -55,8 +56,10 @@
     function fieldChange() {
         var i= $("#field").val();
         if(i==0){
+            $("#showType").val("0");
             $("#url").val("dealNumContent");
         }else{
+            $("#showType").val("1");
             $("#url").val("dealAcreageContent");
         }
     }
