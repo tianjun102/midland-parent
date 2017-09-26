@@ -110,6 +110,9 @@ public class QuotationSecondHandController extends BaseFilter {
 				Double ratio = QuotationUtil.getRatio(Double.valueOf(view.getDealNum()),view.getPreNum());
 				
 				numRatioList.add(ratio);
+				listMax=QuotationUtil.getMax(listMax,view.getDealNum());
+				ratioMax=QuotationUtil.getMax(ratioMax,ratio);
+				ratioMin=QuotationUtil.getMin(ratioMin,ratio);
 				model.addAttribute("numList",numList);
 				model.addAttribute("numRatioList",numRatioList);
 			}else{
@@ -118,8 +121,10 @@ public class QuotationSecondHandController extends BaseFilter {
 				double acreageRatio=Calculate.divide(acreageRes,Double.valueOf(minus1));
 				acreageList.add(view.getDealAcreage());
 				Double ratio = QuotationUtil.getRatio(Double.valueOf(view.getDealAcreage()),view.getPreAcreage());
-				
-				acreageRatioList.add(Calculate.multiply(acreageRatio,100.00));
+				listMax=QuotationUtil.getMax(listMax,view.getDealAcreage());
+				ratioMax=QuotationUtil.getMax(ratioMax,ratio);
+				ratioMin=QuotationUtil.getMin(ratioMin,ratio);
+				acreageRatioList.add(ratio);
 				model.addAttribute("acreageList",acreageList);
 				model.addAttribute("acreageRatioList",acreageRatioList);
 			}
@@ -128,6 +133,9 @@ public class QuotationSecondHandController extends BaseFilter {
 		}
 		
 		model.addAttribute("months", JSONArray.toJSONString(month));
+		model.addAttribute("listMax", listMax);
+		model.addAttribute("ratioMax", ratioMax);
+		model.addAttribute("ratioMin", ratioMin);
 		
 		List<ParamObject> paramObjects = JsonMapReader.getMap("quotation_type");
 		model.addAttribute("types", paramObjects);
