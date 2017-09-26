@@ -63,6 +63,7 @@ public class QuotationSecondHandController extends BaseFilter {
 		List<ParamObject> paramObjects = JsonMapReader.getMap("quotation_type");
 		model.addAttribute("types", paramObjects);
 		model.addAttribute("citys",list1);
+		model.addAttribute("showType","0");
 		return "quotationSecondHand/contentIndex";
 	}
 	
@@ -132,10 +133,18 @@ public class QuotationSecondHandController extends BaseFilter {
 			
 		}
 		
+		listMax=QuotationUtil.getDoubleUp(listMax);
+		listMin=0;
+		ratioMax=QuotationUtil.getRatioDoubleUp(ratioMax);
+		ratioMin= QuotationUtil.getRatioDoubleUp(ratioMin);
+//
 		model.addAttribute("months", JSONArray.toJSONString(month));
 		model.addAttribute("listMax", listMax);
+		model.addAttribute("listMin", listMin);
+		model.addAttribute("listStep", (listMax-listMin)/10);
 		model.addAttribute("ratioMax", ratioMax);
 		model.addAttribute("ratioMin", ratioMin);
+		model.addAttribute("ratioStep", (ratioMax-ratioMin)/10);
 		
 		List<ParamObject> paramObjects = JsonMapReader.getMap("quotation_type");
 		model.addAttribute("types", paramObjects);
