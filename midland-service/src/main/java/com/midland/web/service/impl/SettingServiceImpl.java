@@ -175,7 +175,7 @@ public class SettingServiceImpl implements SettingService {
             if(StringUtils.isNotEmpty(parem.get("parentId"))){
                 parem.put("areaId",parem.get("parentId"));
             }
-            String data = HttpUtils.get(midlandConfig.getAreaUrl(), parem);
+            String data = HttpUtils.get(midlandConfig.getApiUrl(), parem);
             List<Area> areaList = MidlandHelper.getPojoList(data, Area.class);
             String parentId = "";
             if (areaList !=null) {
