@@ -118,8 +118,8 @@ public class UserController extends BaseFilter {
                 return "redirect:/";
             }
             if (result.hasErrors()) {
-                //model.addAttribute("error", "参数错误！");
-                return "redirect:"+midlandConfig.getLoginUrl()+"?errorCode=2";
+                model.addAttribute("error", "参数错误！");
+                return "login";
             }
             UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
             if(userType!=null&&userType.equals("1")){
@@ -135,14 +135,15 @@ public class UserController extends BaseFilter {
             request.getSession().setAttribute("userInfo", authUserInfo);
         } catch (AuthenticationException e) {
             // 身份验证失败
-            //model.addAttribute("error", "用户名或密码错误!");
+            model.addAttribute("error", "用户名或密码错误!");
         	
         	e.printStackTrace();
-            return "redirect:"+midlandConfig.getLoginUrl()+"?errorCode=1";
+			return "login";
+            //return "redirect:"+midlandConfig.getLoginUrl()+"?errorCode=1";
         }
-        if(user.getPassword().equals("92925488b28ab12584ac8fcaa8a27a0f497b2c62940c8f4fbc8ef19ebc87c43e")){
+        /*if(user.getPassword().equals("92925488b28ab12584ac8fcaa8a27a0f497b2c62940c8f4fbc8ef19ebc87c43e")){
         	return "redirect:/rest/user/forcedModifyPassword";
-        }
+        }*/
         return "redirect:/";
     }
 
