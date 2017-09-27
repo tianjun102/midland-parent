@@ -119,14 +119,14 @@
 
                 <li><span>缩略图：</span>
                     <div style="float: left;">
-                        <input type="hidden" name="imgUrl" id="imgUrl" value="${item.imgDesc}">
+                        <input type="hidden" name="imgUrl" id="imgUrl" value="${item.imgUrl}">
 
                         <img style="margin-bottom: 10px;max-width:200px;max-height:200px" id="iconImg2"
-                             src="${item.imgDesc}">
+                             src="${item.imgUrl}">
                         <input type="file" name="file_upload1" id="file_upload1"/>
                     </div>
                 </li>
-                <li><span>图片说明：</span><input type="text" name="imgDesc"></li>
+                <li><span>图片说明：</span><input value="${item.imgDesc}" type="text" name="imgDesc"></li>
                 <li style="overflow: hidden" id="textArea"><span style = "float:left;">页面内容：</span><textarea style="width: 90%;min-height: 350px;resize:none; outline-color: #0099e0;float: right" name="details" id="myEditor" rows="" cols="">${item.details}</textarea></li>
             </ul>
 
