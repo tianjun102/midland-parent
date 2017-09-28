@@ -33,8 +33,8 @@
 						<td>${item.addTime}</td>
 
                         <td>
-                            <a target="contentF" onclick="to_edit(${item.id })">编辑</a>
-                            <a target="contentF" onclick="delete1(${item.id })">删除</a>
+                            <a class="edit_img" target="contentF" onclick="to_edit(${item.id })">编辑</a>
+                            <a class="delete_img" target="contentF" onclick="delete1(${item.id })">删除</a>
                         </td>
                     </tr>
                 </c:forEach>
