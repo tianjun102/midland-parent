@@ -78,7 +78,7 @@ public class CategoryServiceImpl implements CategoryService {
 	public List<Category> findCategoryList(Category category) throws Exception {
 		try {
 			log.info("findCategoryList  {}",category);
-			return categoryMapper.findCategoryList(category);
+			return categoryMapper.findCategoryParentNameList(category);
 		} catch(Exception e) {
 			log.error("findCategoryList  {}",category,e);
 			throw e;

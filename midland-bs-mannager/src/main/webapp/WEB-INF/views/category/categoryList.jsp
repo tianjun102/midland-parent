@@ -18,6 +18,7 @@
             <th style="width: 15%">分类名称</th>
             <th style="width: 10%">城市</th>
             <th style="width: 10%">类型</th>
+            <th style="width: 10%">父分类名称</th>
             <th style="width: 32%">操作</th>
         </tr>
         </thead>
@@ -36,6 +37,7 @@
                             <c:if test="${item.type ==1}">资讯</c:if>
                             <c:if test="${item.type ==2}">会员分类</c:if>
                         </td>
+                        <td><c:if test="${empty item.parentName}">顶尖分类</c:if>${item.parentName}</td>
                         <td>
 
                             <a target="contentF" class="edit_img" title="编辑" onclick="to_edit(${item.id })"></a>
