@@ -19,6 +19,7 @@
 		<section class = "content">
 			<p class = "detail-title">
 				<span>委托记录列表</span>
+				<a class = "setup"  target="contentF" onclick="addEntrust()">新增</a>
 			</p>
 		<form action="${ctx }/rest/entrust/page" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
@@ -73,6 +74,20 @@
 	
 	
 	<script type="text/javascript">
+        function addEntrust(){
+            layer.open({
+                type: 2,
+                skin: 'layer-style',
+                area: ['500px','700px'],
+                shadeClose: false, //点击遮罩关闭
+                title:['委托'],
+                resize: false,
+                scrollbar:false,
+                content:['${ctx}/rest/entrust/to_add', 'no']
+            });
+        }
+
+
         function export1(){
             var data = $("#searchForm").serialize();
 

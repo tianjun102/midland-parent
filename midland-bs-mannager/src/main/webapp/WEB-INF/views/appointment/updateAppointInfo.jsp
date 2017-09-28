@@ -29,11 +29,11 @@
     <form action="${ctx}/rest/appoint/update" method="post" id="appointInfoForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${appointment.id}">
-            <li class="col-md-6"><span>预约编号：</span><input type="text" name="appointSn" id="appointSn"
+            <li class="col-md-6"><span>预约编号：</span><input type="text" name="appointSn" id="appointSn" disabled="disabled"
                                                           value="${appointment.appointSn}"/>
             </li>
             <li class="col-md-6"><span>预约时间：</span>
-                <input type="text" name="appointmentTime" id="appointmentTime"
+                <input type="text" name="appointmentTime" id="appointmentTime"  disabled="disabled"
                                                           value="${appointment.appointmentTime}" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})"
                                                            maxlength="50"/><span
                     class="_star">*</span>
@@ -45,7 +45,7 @@
                                                           value="${appointment.phone}"
                                                           maxlength="50"/><span class="_star">*</span></li>
             <li class="col-md-6"><span>预约类型：</span>
-                <select name="houseType" id="houseType" class="dropdown">
+                <select name="houseType"  disabled="disabled" id="houseType" class="dropdown">
 
                     <c:forEach items="${houses}" var="s">
                         <option value="${s.id}" <c:if test="${s.id==appointment.houseType}">selected</c:if>>
@@ -56,7 +56,7 @@
                 </select>
             </li>
             <li class="col-md-6"><span>分类：</span>
-                <select name="sellRent" id="sellRent" class="dropdown">
+                <select name="sellRent" id="sellRent"  disabled="disabled" class="dropdown">
                     <c:forEach items="${sellRents}" var="s">
                         <option value="${s.id}" <c:if test="${s.id==appointment.sellRent}">selected</c:if>>
                                 ${s.name}
@@ -65,24 +65,31 @@
                 </select>
                 <span class="_star">*</span>
             </li>
-            <li class="col-md-6"><span>区域：</span><input type="text" name="areaName" id="areaName" value="${appointment.areaName}"/>
+            <li class="col-md-6"><span>区域：</span><input type="text"  disabled="disabled" name="areaName" id="areaName" value="${appointment.areaName}"/>
             </li>
-            <li class="col-md-6"><span>小区：</span><input type="text" name="communityName" id="communityName"
+            <li class="col-md-6"><span>小区：</span><input type="text" name="communityName"  disabled="disabled" id="communityName"
                                                         value="${appointment.communityName}" maxlength="50"/><span
                     class="_star">*</span></li>
-            <li class="col-md-6"><span>地址：</span><input type="text" name="address" id="address"
+            <li class="col-md-6"><span>地址：</span><input type="text"  disabled="disabled" name="address" id="address"
                                                         value="${appointment.address}"/>
             </li>
-            <li class="col-md-6"><span>户型：</span><input type="text" name="layout" id="layout"
+            <li class="col-md-6"><span>户型：</span><input type="text" name="layout"  disabled="disabled" id="layout"
                                                         value="${appointment.layout}"/>
 
             </li>
-            <li class="col-md-6"><span>面积：</span><input type="text" name="measure" id="measure"
+            <li class="col-md-6"><span>面积：</span><input type="text"  disabled="disabled" name="measure" id="measure"
                                                         value="${appointment.measure}"
                                                         maxlength="50"/><span class="_star">*</span></li>
-            <li class="col-md-6"><span>装修：</span><input type="text" name="decoration" id="decoration"
-                                                        value="${appointment.decoration}"/>
+            <li class="col-md-6"><span>装修：</span>
+                <select name="decoration" id="decoration"  disabled="disabled" class="dropdown">
 
+                    <c:forEach items="${decorations}" var="s">
+                        <option value="${s.id}" <c:if test="${s.id==appointment.decoration}">selected</c:if>>
+                                ${s.name}
+                        </option>
+                    </c:forEach>
+
+                </select>
 
             </li>
             <li class="col-md-6"><span>状态：</span>
@@ -105,11 +112,12 @@
             <li class="col-md-11"><span>处理记录：</span>
                 <textarea name="record" id="record" disabled="disabled"
                           style="width:calc(100% - 120px);height:150px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;">
-<c:forEach items="${appointLogs}" var="s">
-    ${s.state}
-    ${s.logTime}
-    ${s.operatorName}
-    ${s.remark}
+<c:forEach items="${appointLogs}" var="s">    状态    ： <c:forEach items="${statusList}" var="m"><c:if test="${m.id==s.state}">${m.name}</c:if> </c:forEach>
+    时间    ：${s.logTime}
+    操作人：${s.operatorName}
+    备注    ：${s.remark}
+
+
 </c:forEach>
                 </textarea></li>
             </li>

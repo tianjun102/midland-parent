@@ -94,7 +94,7 @@ public class AppointmentController extends BaseFilter {
 	@RequestMapping("to_add")
 	public String toAdd(HttpServletRequest request) {
 
-		return "appointment/addAppoint";
+		return "appointment/addAppointment";
 	}
 
 	@RequestMapping("/add")
@@ -143,6 +143,8 @@ public class AppointmentController extends BaseFilter {
 		Page<Appointment> result = (Page<Appointment>) appointmentServiceImpl.findAppointmentList(record);
 		Paginator paginator = result.getPaginator();
 		getSelectParam(model);
+
+
 		model.addAttribute("paginator", paginator);
 		model.addAttribute("appoint", result);
 		return "appointment/appointlist";
@@ -184,6 +186,8 @@ public class AppointmentController extends BaseFilter {
 		Appointment appointment = appointmentServiceImpl.selectAppointmentById(appointId);
 		List<AppointLog> appointLogs = appointLogServiceImpl.selectAppointLogByAppointId(appointId);
 		getSelectParam(model);
+		List<ParamObject> paramObjects = JsonMapReader.getMap("decoration");
+		model.addAttribute("decorations", paramObjects);
 		model.addAttribute("appointment", appointment);
 		model.addAttribute("appointLogs", appointLogs);
 		return "appointment/updateAppointInfo";
