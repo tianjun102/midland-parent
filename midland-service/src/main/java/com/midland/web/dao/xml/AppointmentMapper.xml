@@ -339,7 +339,7 @@
 			 and source= #{source,jdbcType=INTEGER}
 		</if>
 		<if test="nickName != null">
-			 and nick_name= #{nickName,jdbcType=VARCHAR}
+			 and nick_name  like '%${nickName}%'
 		</if>
 		<if test="phone != null">
 			 and phone= #{phone,jdbcType=VARCHAR}
@@ -357,7 +357,7 @@
 			 and area_name= #{areaName,jdbcType=VARCHAR}
 		</if>
 		<if test="communityName != null">
-			 and community_name= #{communityName,jdbcType=VARCHAR}
+			 and community_name like '%${communityName}%'
 		</if>
 		<if test="address != null">
 			 and address= #{address,jdbcType=VARCHAR}

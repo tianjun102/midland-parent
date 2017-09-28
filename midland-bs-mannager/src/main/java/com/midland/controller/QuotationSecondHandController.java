@@ -162,7 +162,9 @@ public class QuotationSecondHandController extends BaseFilter {
 			obj.setAreaId("0");
 		}
 		if (StringUtils.isEmpty(obj.getCityId())){
-			obj.setCityId("085");
+			User user = MidlandHelper.getCurrentUser(request);
+
+			obj.setCityId(user.getCityId());
 		}
 		if (obj.getType()==null){
 			obj.setType(0);
@@ -174,9 +176,8 @@ public class QuotationSecondHandController extends BaseFilter {
 		if (obj.getEndTime() == null){
 			obj.setEndTime(MidlandHelper.getCurrentTime());
 		}
-		User user = MidlandHelper.getCurrentUser(request);
 		//只展示登录用户当前城市的信息
-		obj.setCityId(user.getCityId());
+
 		List<QuotationSecondHandView> resultList = new ArrayList<>();
 		MidlandHelper.doPage(request);
 		Page<QuotationSecondHandView> list = (Page<QuotationSecondHandView>)quotationSecondHandViewService.toolTip(obj);

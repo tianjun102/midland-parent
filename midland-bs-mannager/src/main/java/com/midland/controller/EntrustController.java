@@ -16,6 +16,7 @@ import com.midland.web.model.remote.Agent;
 import com.midland.web.model.user.User;
 import com.midland.web.service.EntrustLogService;
 import com.midland.web.service.EntrustService;
+import com.midland.web.service.SettingService;
 import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
 import com.midland.web.util.ParamObject;
@@ -49,7 +50,9 @@ public class EntrustController extends BaseFilter{
 	private EntrustLogService entrustLogServiceImpl;
 	@Autowired
 	private MidlandConfig midlandConfig;
-	
+	@Autowired
+	private SettingService settingService;
+
 	@Autowired
 	private ApiHelper apiHelper;
 	
@@ -78,8 +81,9 @@ public class EntrustController extends BaseFilter{
 	}
 
 	@RequestMapping("/to_add")
-	public String toAdd(HttpServletRequest request) {
-
+	public String toAdd(HttpServletRequest request,Model model) {
+		getSelectParam(model);
+		settingService.getAllProvinceList(model);
 		return "entrust/addEntrust";
 	}
 	@RequestMapping("/add")
@@ -123,6 +127,8 @@ public class EntrustController extends BaseFilter{
 		model.addAttribute("houses",paramObjects3);
 		List<ParamObject> paramObjects4 = JsonMapReader.getMap("entrust_status");
 		model.addAttribute("statusList",paramObjects4);
+		List<ParamObject> paramObjects5 = JsonMapReader.getMap("decoration");
+		model.addAttribute("decorations", paramObjects5);
 		
 	}
 	

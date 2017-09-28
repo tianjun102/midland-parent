@@ -371,7 +371,7 @@
 			 and area_name= #{areaName,jdbcType=VARCHAR}
 		</if>
 		<if test="communityName != null">
-			 and community_name= #{communityName,jdbcType=VARCHAR}
+			 and community_name   like '%${communityName}%'
 		</if>
 		<if test="address != null">
 			 and address= #{address,jdbcType=VARCHAR}
@@ -398,7 +398,7 @@
 			 and handle_time= #{handleTime,jdbcType=TIMESTAMP}
 		</if>
 		<if test="nickName != null">
-			 and nick_name= #{nickName,jdbcType=VARCHAR}
+			 and nick_name  like '%${nickName}%'
 		</if>
 		<if test="renovation != null">
 			 and renovation= #{renovation,jdbcType=INTEGER}
