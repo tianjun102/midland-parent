@@ -62,6 +62,15 @@
             <li class="col-md-6"><span>用户：</span><input type="text" name="nickName" id="nickName"
                                                         value="${entrust.nickName}"/>
             </li>
+            <li class="col-md-6"><span>来源：</span>
+                <select name="source" id="source" class="dropdown">
+                <c:forEach items="${sources}" var="s">
+                    <option value="${s.id}">
+                            ${s.name}
+                    </option>
+                </c:forEach>
+                </select>
+            </li>
             <li class="col-md-6"><span>手机号码：</span><input type="text" name="phone" id="phone"
                                                           value="${entrust.phone}"
                                                           maxlength="50"/><span class="_star">*</span></li>
@@ -107,11 +116,23 @@
             <li class="col-md-6"><span>面积：</span><input type="text" name="measure" id="measure"
                                                         value="${entrust.measure}"
                                                         maxlength="50"/><span class="_star">*</span></li>
-            <li class="col-md-6"><span>装修：</span><input type="text" name="renovation" id="renovation"
-                                                        value="${entrust.renovation}"/>
+            <li class="col-md-6"><span>装修：</span>
+                <select name="renovation" id="renovation" class="dropdown">
 
+                    <c:forEach items="${decorations}" var="s">
+                        <option value="${s.id}">
+                                ${s.name}
+                        </option>
+                    </c:forEach>
+
+                </select>
+                </select>
 
             </li>
+            <li class="col-md-6"><span>售价/租价：</span><input type="text" name="price" id="price"
+                                                          value="${entrust.price}"/>
+            </li>
+
             <li class="col-md-6"><span>配套：</span>
                 <div class="peitao">
                     <span><input onchange="lick(this,'household')"  type="checkbox"
