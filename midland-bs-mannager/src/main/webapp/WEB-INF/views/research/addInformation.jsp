@@ -6,6 +6,7 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <%@include file="../layout/tablib.jsp"%>
+<%@include file="../layout/source.jsp"%>
 <%@include file="../layout/zTree.jsp"%>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
@@ -118,7 +119,7 @@
                 <li>
                     <span style = "float:left;">城市：</span>
                     <input type="hidden" name="cityName" id="cityName" value="">
-                    <select onchange="setCityName()" name="cityId" id="cityId" style="height: 38px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <select onchange="setCityName()" name="cityId" id="cityId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <option value="">全部</option>
                         <c:forEach items="${cityList}" var="city">
                             <option value="${city.id}">${city.name}</option>
