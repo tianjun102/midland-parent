@@ -22,6 +22,7 @@
 		<section class = "content">
 			<p class = "detail-title">
 				<span>看房记录列表</span>
+				<a class = "setup"  target="contentF" onclick="addAppointment()">新增</a>
 			</p>
 		<form action="${ctx }/rest/appoint/page" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
@@ -81,6 +82,18 @@
             var data = $("#searchForm").serialize();
 
             window.location.href="${ctx}/rest/appoint/export?"+data;
+        }
+        function addAppointment(){
+            layer.open({
+                type: 2,
+                skin: 'layer-style',
+                area: ['500px','700px'],
+                shadeClose: false, //点击遮罩关闭
+                title:['预约'],
+                resize: false,
+                scrollbar:false,
+                content:['${ctx}/rest/appoint/to_add', 'no']
+            });
         }
 		 window.onload = function(){
              $('#searchForm').submit();

@@ -53,15 +53,15 @@
 									<%--<a target="contentF" class = "delete_img" title = "删除" onclick="isDelete(${cust.id })" --%>
 
 										<a target="contentF" onclick="alterUser(${cust.id })" class="edit_img" title="编辑"></a>
-										<c:choose>
-											<c:when test="${cust.isBlack==0}">
-												<a target="contentF" onclick="takeInblacklist(${cust.id })">加入黑名单</a>
-											</c:when>
-											<c:otherwise>
-												<a target="contentF" onclick="takeOutblacklist(${cust.id })">撤销黑名单</a>
+										<%--<c:choose>--%>
+											<%--<c:when test="${cust.isBlack==0}">--%>
+												<%--<a target="contentF" onclick="takeInblacklist(${cust.id })">加入黑名单</a>--%>
+											<%--</c:when>--%>
+											<%--<c:otherwise>--%>
+												<%--<a target="contentF" onclick="takeOutblacklist(${cust.id })">撤销黑名单</a>--%>
 
-											</c:otherwise>
-										</c:choose>
+											<%--</c:otherwise>--%>
+										<%--</c:choose>--%>
 										<a target="contentF" onclick="viewRealRegistration(${cust.id })">
 											<c:choose>
 												<c:when test="${cust.auditStatus==0}">审核实名信息
