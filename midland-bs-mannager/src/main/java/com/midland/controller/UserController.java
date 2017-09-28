@@ -17,7 +17,9 @@ import com.midland.web.service.MenuService;
 import com.midland.web.service.RoleService;
 import com.midland.web.service.SettingService;
 import com.midland.web.service.UserService;
+import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
+import com.midland.web.util.ParamObject;
 import com.midland.web.util.PoiExcelExport;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -239,6 +241,7 @@ public class UserController extends BaseFilter {
     @RequestMapping(value = "/userList", method = {RequestMethod.GET,RequestMethod.POST})
     public String selectUserList(User user, Model model, HttpServletRequest request){
 	    getUserList(user,model, request);
+		List<ParamObject> map = JsonMapReader.getMap("user_audit");
     	return "user/userlist";
     }
 	

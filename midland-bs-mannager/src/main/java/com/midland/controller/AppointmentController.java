@@ -90,7 +90,13 @@ public class AppointmentController extends BaseFilter {
 		}
 		return map;
 	}
-	
+
+	@RequestMapping("to_add")
+	public String toAdd(HttpServletRequest request) {
+
+		return "appointment/addAppoint";
+	}
+
 	@RequestMapping("/add")
 	@ResponseBody
 	public Object addAppointment(Appointment record) {
