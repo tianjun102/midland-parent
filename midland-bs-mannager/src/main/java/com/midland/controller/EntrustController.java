@@ -172,10 +172,11 @@ public class EntrustController extends BaseFilter{
 	public Object updateByPrimaryKeySelective(Entrust entrust,String remark, HttpServletRequest request) {
 		Map map = new HashMap();
 		try {
-			if (1 !=entrust.getStatus()){
+			if (entrust.getStatus()!=null && 1 !=entrust.getStatus()){
 				//如果委托状态不是已分配，隐藏重新分配按钮
 				entrust.setResetFlag(0);
 			}
+			entrust.setHandleTime(MidlandHelper.getCurrentTime());
 			entrustServiceImpl.updateEntrustById(entrust);
 			User user = (User)request.getSession().getAttribute("userInfo");
 			
