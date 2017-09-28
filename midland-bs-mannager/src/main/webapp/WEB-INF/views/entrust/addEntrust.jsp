@@ -51,6 +51,7 @@
     <form action="${ctx}/rest/appoint/update" method="post" id="appointInfoForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${entrust.id}">
+            <input type="hidden" name="resetFlag" id="resetFlag" value="1">
             <li class="col-md-6"><span>预约编号：</span><input type="text" name="entrustSn" id="entrustSn"
                                                           value="${entrust.entrustSn}"/>
             </li>
@@ -64,6 +65,10 @@
             <li class="col-md-6"><span>手机号码：</span><input type="text" name="phone" id="phone"
                                                           value="${entrust.phone}"
                                                           maxlength="50"/><span class="_star">*</span></li>
+            <li>
+                <%@include file="../layout/area.jsp" %>
+
+            </li>
             <li class="col-md-6"><span>分类：</span>
                 <select name="sellRent" id="sellRent" class="dropdown">
                     <c:forEach items="${sellRents}" var="s">

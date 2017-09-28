@@ -102,9 +102,16 @@
             <li class="col-md-6"><span>面积：</span><input type="text" name="measure" id="measure"
                                                         value="${entrust.measure}"
                                                         maxlength="50"/><span class="_star">*</span></li>
-            <li class="col-md-6"><span>装修：</span><input type="text" name="renovation" id="renovation"
-                                                        value="${entrust.renovation}"/>
+            <li class="col-md-6"><span>装修：</span>
+                <select name="renovation" id="renovation" class="dropdown">
 
+                    <c:forEach items="${decorations}" var="s">
+                        <option value="${s.id}" <c:if test="${s.id==entrust.renovation}">selected</c:if>>
+                                ${s.name}
+                        </option>
+                    </c:forEach>
+
+                </select>
 
             </li>
             <li class="col-md-6"><span>配套：</span>
