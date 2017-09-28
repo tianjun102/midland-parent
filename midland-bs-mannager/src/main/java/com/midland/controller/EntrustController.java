@@ -76,6 +76,12 @@ public class EntrustController extends BaseFilter{
 		}
 		return map;
 	}
+
+	@RequestMapping("/to_add")
+	public String toAdd(HttpServletRequest request) {
+
+		return "entrust/addEntrust";
+	}
 	@RequestMapping("/add")
 	@ResponseBody
 	public Object addEntrust(Entrust record) {

@@ -17,6 +17,24 @@
       "name": "商铺"
     }
   ],
+"decoration": [
+    {
+      "id": "0",
+      "name": "豪装"
+    },
+    {
+      "id": "1",
+      "name": "精装"
+    },
+    {
+      "id": "2",
+      "name": "普装"
+    },
+    {
+      "id": "3",
+      "name": "毛坯"
+    }
+  ],
 
   "appointment_status": [
     {
