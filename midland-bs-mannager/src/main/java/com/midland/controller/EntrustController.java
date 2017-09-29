@@ -235,7 +235,9 @@ public class EntrustController extends BaseFilter{
 	}
 	
 	@RequestMapping("/export")
-	public void userInfoExportExcel(Entrust entrust, HttpServletResponse response) throws Exception {
+	public void userInfoExportExcel(Entrust entrust,HttpServletRequest request, HttpServletResponse response) throws Exception {
+		User user =MidlandHelper.getCurrentUser(request);
+		entrust.setCityId(user.getCityId());
 		List<Entrust> dataList = entrustServiceImpl.findEntrustList(entrust);
 		PoiExcelExport pee = new PoiExcelExport(response,"委托记录","sheet1");
 		//调用
