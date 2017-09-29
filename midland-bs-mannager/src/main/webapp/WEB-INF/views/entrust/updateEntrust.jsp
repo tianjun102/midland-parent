@@ -58,7 +58,7 @@
                                                           value="${entrust.entrustTime}" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" maxlength="50"/><span
                     class="_star">*</span>
             </li>
-            <li class="col-md-6"><span>用户：</span><input type="text" name="nickName" id="nickName"
+            <li class="col-md-6"><span>委托人：</span><input type="text" name="nickName" id="nickName"
                                                         value="${entrust.nickName}"/>
             </li>
             <li class="col-md-6"><span>手机号码：</span><input type="text" name="phone" id="phone"

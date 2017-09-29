@@ -32,8 +32,8 @@
 				<li><span>状态：</span>
 					<select name="isShow" id="isShow" class="dropdown">
 						<option value="">全部</option>
-						<option value="0">上线</option>
-						<option value="1">下线</option>
+						<option value="0">显示</option>
+						<option value="1">隐藏</option>
 
 					</select>
 				</li>

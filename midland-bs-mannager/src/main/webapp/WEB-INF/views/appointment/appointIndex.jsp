@@ -28,7 +28,7 @@
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
 				<li><span>小区名：</span><input type="text" name="communityName" id="communityName" placeholder="请输入小区名" /></li>
-				<li><span>称呼：</span><input type="text" name="nickName" id="nickName" placeholder="请输入用户称呼" /></li>
+				<li><span>预约人：</span><input type="text" name="nickName" id="nickName" placeholder="请输入预约人" /></li>
 				<li><span>手机号码：</span><input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>
 				<li>
 					<span>分类：</span>
