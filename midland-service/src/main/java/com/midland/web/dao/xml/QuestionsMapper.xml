@@ -170,7 +170,7 @@
       and id = #{id}
     </if>
     <if test="questionsTitle != null" >
-      and questions_title = #{questionsTitle,jdbcType=VARCHAR}
+      and questions_title like '%${questionsTitle,jdbcType=VARCHAR}%'
     </if>
     <if test="source != null" >
       and source = #{source,jdbcType=INTEGER}
