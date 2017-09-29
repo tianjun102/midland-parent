@@ -101,7 +101,7 @@
             </li>
             <li class="col-md-6"><span>面积：</span><input type="text" name="measure" id="measure"
                                                         value="${entrust.measure}"
-                                                        maxlength="50"/><span class="_star">*</span></li>
+                                                        maxlength="50"/>㎡<span class="_star">*</span></li>
             <li class="col-md-6"><span>装修：</span>
                 <select name="renovation" id="renovation" class="dropdown">
 

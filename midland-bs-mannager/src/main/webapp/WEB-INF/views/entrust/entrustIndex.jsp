@@ -58,7 +58,7 @@
 						</c:forEach>
 					</select>
 				</li>
-				<li><span>委托时间</span><input  class="Wdate half" id="time1"
+				<li><span>委托时间：</span><input  class="Wdate half" id="time1"
 										onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time2\')}'})"
 										name="startTime" /> <em class = "gang">-</em><input
 						class="Wdate half"

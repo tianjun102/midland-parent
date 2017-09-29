@@ -122,7 +122,7 @@
     function toUpdateAppointment(appointId) {
         layer.open({
             type: 2,
-            title: ['更新'],
+            title: ['预约详情'],
             shade: 0.3,
             area: ['1000px', '700px'],
             content: ['${ctx}/rest/appoint/to_update?appointId=' + appointId, 'no']
