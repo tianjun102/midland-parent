@@ -18,17 +18,18 @@
         <input type="hidden" name="cityName" id="cityName" value="" >
         <ul class="userinfo row">
             <li><span>关键字：</span>
-               <input type="text" name="name" id="name"/>
+               <input type="text" name="name" id="name" onblur="notEmpty('name','name','关键字不能为空！')"/>
+               <span class = "_star ">*</span>
             </li>
             <li><span>平台：</span>
-                <select name="source" id="source" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                <select name="source" id="source" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option value="0">网站</option>
                     <option value="1">微站</option>
                 </select>
                 <span class = "_star ">*</span>
             </li>
             <li><span>城市：</span>
-                <select onchange="setCityName();" name="cityId" id="cityId" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                <select onchange="setCityName();" name="cityId" id="cityId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option value="">全部</option>
                     <c:forEach items="${cityList}" var="city">
                         <option value="${city.id}">${city.name}</option>
@@ -39,7 +40,7 @@
 
             <li><span>分类：</span>
                 <input type="hidden" name="cateName" id="cateName" value="">
-                <select onchange="setCateName();" name="cateId" id="cateId" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                <select onchange="setCateName();" name="cateId" id="cateId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option value="">全部</option>
                         <option value="1">新房</option>
                         <option value="1">二手房</option>
@@ -51,11 +52,13 @@
             </li>
 
             <li>
-                <span>模块名称：</span><input type="text" name="modeName" >
+                <span>模块名称：</span><input type="text" name="modeName" id="modeName" onblur="notEmpty('modeName','modeName','模块名称不能为空！')">
+                <span class = "_star ">*</span>
             </li>
 
             <li><span>链接：</span>
-               <input type="text" name="linkUrl" id="linkUrl" />
+               <input type="text" name="linkUrl" id="linkUrl" onblur="notEmpty('linkUrl','linkUrl','链接不能为空！')"/>
+                <span class = "_star ">*</span>
             </li>
 
             <li>
