@@ -30,7 +30,7 @@
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,city_id,area_id,type,slice_id,DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s')update_time,is_delete,city_name,area_name,slice_name,house_acreage,DATE_FORMAT(data_time,'%Y-%m-%d %H:%i:%s')data_time,deal_num,pre_deal_num,deal_acreage,pre_deal_acreage,price,pre_price,sold_num,pre_sold_num,sold_area,pre_sold_area,deal_price,pre_deal_price
+		id,city_id,area_id,type,slice_id,DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s')update_time,is_delete,city_name,area_name,slice_name,house_acreage,data_time,deal_num,pre_deal_num,deal_acreage,pre_deal_acreage,price,pre_price,sold_num,pre_sold_num,sold_area,pre_sold_area,deal_price,pre_deal_price
 	</sql>
 
  	<select id="findQuotationViewList" parameterType="com.midland.web.model.QuotationView" resultMap="BaseResultMap">
