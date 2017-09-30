@@ -7,9 +7,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>添加热门关注</title>
-    <link rel="stylesheet" href="${ctx }/assets/css/common.css">
-    <link rel="stylesheet" href="${ctx }/assets/css/layer.css">
-    <link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css"/>
     <style type="text/css">
         .content ul.userinfo>li {
             float: none !important;
@@ -39,7 +36,7 @@
                     </select>
                 </p>
             </li>
-            <li><span>链接名：</span><input style="width:274px;" type="text" name="linkName" value="${linkUrlManager.linkName}" id="linkName" maxlength="50"/><span class="_star">*</span></li>
+            <li><span>链接名：</span><input style="width:274px;" type="text" name="linkName" value="${linkUrlManager.linkName}" id="linkName" onblur="notEmpty('linkName','linkName','链接名不能为空！');" maxlength="50"/><span class="_star">*</span></li>
             <li style="display:flex;align-items:center">
                 <span style = "float:left;">平台：</span>
                 <select name="source" id="source" class="dropdown">
@@ -48,10 +45,10 @@
                 </select>
             </li>
             <li>
-                <span>链接URL：</span><input style="width:274px;" type="text" name="linkUrl" id="linkUrl" value="${linkUrlManager.linkUrl}" /><span class="_star">*</span>
+                <span>链接URL：</span><input style="width:274px;" type="text" name="linkUrl" id="linkUrl" onblur="checkUrl('linkUrl','linkUrl','网址格式不正确！')" value="${linkUrlManager.linkUrl}" /><span class="_star">*</span>
             </li>
-            <li><span>联系人：</span><input style="width:274px;" type="text" value="${linkUrlManager.contacts}" name="contacts" id="contacts" maxlength="50"/><span class="_star">*</span></li>
-            <li><span>联系方式：</span><input style="width:274px;" type="text" value="${linkUrlManager.phone}" name="phone" id="phone" maxlength="50"/><span class="_star">*</span></li>
+            <li><span>联系人：</span><input style="width:274px;" type="text" value="${linkUrlManager.contacts}" name="contacts" id="contacts" onblur="notEmpty('contacts','contacts','联系人不能为空！');" maxlength="50"/><span class="_star">*</span></li>
+            <li><span>联系方式：</span><input style="width:274px;" type="text" value="${linkUrlManager.phone}" name="phone" id="phone" onblur="checkPhone('phone','phone','手机格式不正确！');" maxlength="50"/><span class="_star">*</span></li>
             <li><span>备注：</span> <textarea name="remarks"
                                            id="remarks"
                                            style="width: 55%; height: 50px; resize: none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;">${linkUrlManager.remarks}</textarea>
@@ -67,6 +64,7 @@
 </section>
 <script type="text/javascript">
     function saveData() {
+        if(notEmpty('linkName','linkName','链接名不能为空！')&&checkSelect("source","来源不能为空！")&&notEmpty('linkUrl','linkUrl','链接名不能为空！')&&notEmpty('contacts','contacts','链接名不能为空！')&&checkPhone('phone','phone','手机格式不正确！')){
             var data = $("#addFrom").serialize();
             $.ajax({
                 type: "post",
@@ -91,7 +89,7 @@
                 }
 
             });
-
+        }
     }
 
 
@@ -322,10 +320,5 @@
 
 
 </script>
-
-<script type="text/javascript" src="${ctx}/assets/scripts/jquery.min.js"></script>
-<script type="text/javascript" src="${ctx}/assets/plugins/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="${ctx}/assets/scripts/layer/layer.js"></script>
-<script src="${ctx}/assets/scripts/jquery.easydropdown.js" type="text/javascript"></script>
 </body>
 </html>
