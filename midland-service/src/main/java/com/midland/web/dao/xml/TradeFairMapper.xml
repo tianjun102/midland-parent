@@ -156,7 +156,7 @@
 			 and img_url= #{imgUrl,jdbcType=VARCHAR}
 		</if>
 		<if test="title != null">
-			 and title= #{title,jdbcType=VARCHAR}
+			 and title like '%${title}%'
 		</if>
 		<if test="housesId != null">
 			 and houses_id= #{housesId,jdbcType=INTEGER}

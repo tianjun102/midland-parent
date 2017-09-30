@@ -21,7 +21,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-		id,DATE_FORMAT(data_time,'%Y-%m-%d %H:%i:%s')data_time,type,city_id,area_id,deal_num,deal_acreage,pre_num,pre_acreage
+		id,data_time,type,city_id,area_id,deal_num,deal_acreage,pre_num,pre_acreage
 	</sql>
 
     <select id="toolTip" parameterType="com.midland.web.model.QuotationSecondHandView" resultMap="BaseResultMap">

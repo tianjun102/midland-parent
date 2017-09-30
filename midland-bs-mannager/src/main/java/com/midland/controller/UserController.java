@@ -242,6 +242,7 @@ public class UserController extends BaseFilter {
     public String selectUserList(User user, Model model, HttpServletRequest request){
 	    getUserList(user,model, request);
 		List<ParamObject> map = JsonMapReader.getMap("user_audit");
+		model.addAttribute("",map);
     	return "user/userlist";
     }
 	

@@ -38,12 +38,22 @@
                                                            maxlength="50"/><span
                     class="_star">*</span>
             </li>
-            <li class="col-md-6"><span>用户：</span><input type="text" name="nickName" id="nickName"
+            <li class="col-md-6"><span>预约人：</span><input type="text" name="nickName" id="nickName"
                                                         value="${appointment.nickName}"/>
             </li>
             <li class="col-md-6"><span>手机号码：</span><input type="text" name="phone" id="phone"
                                                           value="${appointment.phone}"
                                                           maxlength="50"/><span class="_star">*</span></li>
+            <li class="col-md-6"><span>分类：</span>
+                <select name="sellRent" id="sellRent"  disabled="disabled" class="dropdown">
+                    <c:forEach items="${sellRents}" var="s">
+                        <option value="${s.id}" <c:if test="${s.id==appointment.sellRent}">selected</c:if>>
+                                ${s.name}
+                        </option>
+                    </c:forEach>
+                </select>
+                <span class="_star">*</span>
+            </li>
             <li class="col-md-6"><span>预约类型：</span>
                 <select name="houseType"  disabled="disabled" id="houseType" class="dropdown">
 
@@ -55,16 +65,7 @@
 
                 </select>
             </li>
-            <li class="col-md-6"><span>分类：</span>
-                <select name="sellRent" id="sellRent"  disabled="disabled" class="dropdown">
-                    <c:forEach items="${sellRents}" var="s">
-                        <option value="${s.id}" <c:if test="${s.id==appointment.sellRent}">selected</c:if>>
-                                ${s.name}
-                        </option>
-                    </c:forEach>
-                </select>
-                <span class="_star">*</span>
-            </li>
+
             <li class="col-md-6"><span>区域：</span><input type="text"  disabled="disabled" name="areaName" id="areaName" value="${appointment.areaName}"/>
             </li>
             <li class="col-md-6"><span>小区：</span><input type="text" name="communityName"  disabled="disabled" id="communityName"
@@ -79,7 +80,7 @@
             </li>
             <li class="col-md-6"><span>面积：</span><input type="text"  disabled="disabled" name="measure" id="measure"
                                                         value="${appointment.measure}"
-                                                        maxlength="50"/><span class="_star">*</span></li>
+                                                        maxlength="50"/>㎡<span class="_star">*</span></li>
             <li class="col-md-6"><span>装修：</span>
                 <select name="decoration" id="decoration"  disabled="disabled" class="dropdown">
 

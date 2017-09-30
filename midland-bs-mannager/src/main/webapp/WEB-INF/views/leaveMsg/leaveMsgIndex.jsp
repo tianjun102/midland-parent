@@ -28,7 +28,7 @@
 				<li><span>手机号码：</span>
 					<input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>
 				</li>
-				<li><span>留言时间</span><input class="Wdate half" id="time1"
+				<li><span>留言时间：</span><input class="Wdate half" id="time1"
 										  onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time2\')}'})"
 										  name="startTime" /> <em class = "gang">-</em><input
 						class="Wdate half"

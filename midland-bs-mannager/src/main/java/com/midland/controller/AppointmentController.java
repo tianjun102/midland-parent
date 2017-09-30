@@ -230,7 +230,10 @@ public class AppointmentController extends BaseFilter {
 	
 	
 	@RequestMapping("/export")
-	public void userInfoExportExcel(Appointment appointment, HttpServletResponse response) throws Exception {
+	public void userInfoExportExcel(Appointment appointment,HttpServletRequest request, HttpServletResponse response) throws Exception {
+		User user = MidlandHelper.getCurrentUser(request);
+		//只展示用户所属城市的信息
+		appointment.setCityId(user.getCityId());
 		List<Appointment> dataList = appointmentServiceImpl.findAppointmentList(appointment);
 		PoiExcelExport pee = new PoiExcelExport(response, "预约看房", "sheet1");
 		//调用

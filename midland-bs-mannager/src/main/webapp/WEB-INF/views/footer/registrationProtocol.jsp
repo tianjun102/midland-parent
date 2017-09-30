@@ -25,11 +25,11 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
         <meta content="" name="description" />
         <meta content="" name="author" />
         <meta name="MobileOptimized" content="320">
-		<link rel="stylesheet" href="${ctx}/assets/css/layer.css">
-		<link rel="stylesheet" href="${ctx}/assets/css/bootstrap.min.css">
-		<link rel="stylesheet" href="${ctx}/assets/css/common.css">
-		<link rel="stylesheet" href="${ctx}/assets/css/easydropdown.css" />
-		<link rel="stylesheet" type="text/css" href="${ctx }/assets/scripts/uploadify/uploadify.css">
+		<style type="text/css">
+			.layui-layer{
+				top:260px!important;
+			}
+		</style>
 
 	</head>
 	<body >

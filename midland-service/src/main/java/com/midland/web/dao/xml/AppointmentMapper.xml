@@ -353,6 +353,12 @@
 		<if test="appointmentTime != null">
 			 and appointment_time= #{appointmentTime,jdbcType=TIMESTAMP}
 		</if>
+		<if test="startTime != null">
+			and appointment_time &gt; #{startTime}
+		</if>
+		<if test="endTime != null">
+			and appointment_time &lt; #{endTime}
+		</if>
 		<if test="areaName != null">
 			 and area_name= #{areaName,jdbcType=VARCHAR}
 		</if>

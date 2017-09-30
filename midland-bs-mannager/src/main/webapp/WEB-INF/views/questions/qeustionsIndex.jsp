@@ -20,14 +20,14 @@
 <div class="box">
     <section class="content">
         <p class="detail-title">
-            <span>委托记录列表</span>
+            <span>问答记录列表</span>
         </p>
         <form action="${ctx }/rest/questions/page" method="POST" id="searchForm"
               onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
             <ul class="userinfo row">
                 <li>
                     <span>问题主题：</span>
-                    <input type="text" name="questionsTitle" id="questionsTitle" placeholder="请输入小区"/>
+                    <input type="text" name="questionsTitle" id="questionsTitle" placeholder="请输入问题主题"/>
                 </li>
                 <li>
                     <span>手机号码：</span>

@@ -25,22 +25,11 @@
 		<form action="${ctx }/rest/menu/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
-				<li><span>小区名：</span><input type="text" name="communityName" id="communityName" placeholder="请输入小区" /></li>
-				<li><span>手机号码：</span><input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>
-				<li><span>分类：</span>
-					<select name="sellRent" id="sellRent" class="dropdown">
-						<option value="">全部</option>
-						<option value="0">租房</option>
-						<option value="1">卖房</option>
-					</select>
-				<li><span>状态：</span>
-					<select name="status" id="status" class="dropdown">
-						<option value="">全部</option>
-						<option value="0">待分配</option>
-						<option value="1">未联系</option>
-						<option value="2">已联系</option>
-
-					</select>
+				<li>
+					<%@include file="../layout/area.jsp" %>
+				</li>
+				<li><span>菜单名称：</span>
+					<input type="text" name="menuName" id="menuName" placeholder="请输入菜单名称" /></li>
 				</li>
 				<li><span>来源：</span>
 					<select name="source" id="source" class="dropdown">
@@ -49,12 +38,6 @@
 						<option value="1">微商</option>
 					</select>
 				</li>
-				<li><span>委托时间</span><input class="Wdate half" id="time1" type="text"
-										onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time2\')}'})"
-										name="startTime" /> <em class = "gang">-</em><input
-						class="Wdate half"
-						onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'time1\')}'})"
-						id="time2" name="endTime" /></li>
 
 				<li><input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/></li>
 			</ul>

@@ -16,7 +16,7 @@
         <tr>
             <th style="width: auto">委托编号</th>
             <th style="width: auto">信息来源</th>
-            <th style="width: auto">称呼</th>
+            <th style="width: auto">委托人</th>
             <th style="width: auto">电话</th>
             <th style="width: auto">类型</th>
             <th style="width: auto">分类</th>
@@ -149,7 +149,7 @@
     function toUpdateEntrust(appointId) {
         layer.open({
             type: 2,
-            title: ['更新'],
+            title: ['委托详情'],
             shade: 0.3,
             area: ['1000px', '700px'],
             content: ['${ctx}/rest/entrust/to_update?entrustId=' + appointId , 'no']

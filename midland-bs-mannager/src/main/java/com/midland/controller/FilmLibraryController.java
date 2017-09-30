@@ -9,6 +9,7 @@ import com.midland.web.model.user.User;
 import com.midland.web.service.FilmLibraryService;
 import com.midland.web.service.SettingService;
 import com.midland.web.util.MidlandHelper;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,7 @@ public class FilmLibraryController extends BaseFilter {
 	@RequestMapping("index")
 	public String filmLibraryIndex(FilmLibrary filmLibrary, Model model) throws Exception {
 		List<Area> list = settingService.queryAllCityByRedis();
+		settingService.getAllProvinceList(model);
 		model.addAttribute("citys",list);
 		return "filmLibrary/filmLibraryIndex";
 	}
@@ -138,6 +140,10 @@ public class FilmLibraryController extends BaseFilter {
 	public String findFilmLibraryList(FilmLibrary filmLibrary, Model model, HttpServletRequest request) {
 		try {
 			log.info("findFilmLibraryList  {}",filmLibrary);
+			User user = MidlandHelper.getCurrentUser(request);
+			if (StringUtils.isEmpty(filmLibrary.getCityId())){
+				filmLibrary.setCityId(user.getCityId());
+			}
 			MidlandHelper.doPage(request);
 			Page<FilmLibrary> result = (Page<FilmLibrary>)filmLibraryServiceImpl.findFilmLibraryList(filmLibrary);
 			Paginator paginator=result.getPaginator();

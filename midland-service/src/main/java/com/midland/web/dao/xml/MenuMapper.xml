@@ -180,7 +180,7 @@
 			 and city_id= #{cityId,jdbcType=VARCHAR}
 		</if>
 		<if test="menuName != null">
-			 and menu_name= #{menuName,jdbcType=VARCHAR}
+			 and menu_name like '%${menuName}%'
 		</if>
 		<if test="clickNum != null">
 			 and click_num= #{clickNum,jdbcType=INTEGER}

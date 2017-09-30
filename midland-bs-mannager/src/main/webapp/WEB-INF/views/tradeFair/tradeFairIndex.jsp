@@ -23,12 +23,17 @@
 		<form action="${ctx }/rest/tradeFair/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
-
+				<li><span>楼盘id：</span>
+					<input type="text" name="housesId" id="housesId" placeholder="请输入名称" /></li>
+				</li>
+				<li><span>楼盘名称：</span>
+					<input type="text" name="title" id="title" placeholder="请输入名称" /></li>
+				</li>
 				<li><span>状态：</span>
 					<select name="isShow" id="isShow" class="dropdown">
 						<option value="">全部</option>
-						<option value="0">上线</option>
-						<option value="1">下线</option>
+						<option value="0">显示</option>
+						<option value="1">隐藏</option>
 
 					</select>
 				</li>

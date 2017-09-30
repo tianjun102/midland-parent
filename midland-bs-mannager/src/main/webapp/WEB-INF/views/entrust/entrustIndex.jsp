@@ -25,7 +25,7 @@
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
 				<li><span>小区名：</span><input type="text" name="communityName" id="communityName" placeholder="请输入小区名" /></li>
-				<li><span>称呼：</span><input type="text" name="nickName" id="nickName" placeholder="请输入称呼" /></li>
+				<li><span>委托人：</span><input type="text" name="nickName" id="nickName" placeholder="请输入委托人" /></li>
 				<li><span>手机号码：</span><input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>
 				<li>
 					<span>分类：</span>
@@ -58,7 +58,7 @@
 						</c:forEach>
 					</select>
 				</li>
-				<li><span>委托时间</span><input  class="Wdate half" id="time1"
+				<li><span>委托时间：</span><input  class="Wdate half" id="time1"
 										onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time2\')}'})"
 										name="startTime" /> <em class = "gang">-</em><input
 						class="Wdate half"
@@ -79,7 +79,7 @@
             layer.open({
                 type: 2,
                 skin: 'layer-style',
-                area: ['1000px', '700px'],
+                area: ['1000px', '750px'],
                 shadeClose: false, //点击遮罩关闭
                 title:['委托'],
                 resize: false,

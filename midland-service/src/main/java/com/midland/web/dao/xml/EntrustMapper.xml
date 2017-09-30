@@ -367,6 +367,12 @@
 		<if test="entrustTime != null">
 			 and entrust_time= #{entrustTime,jdbcType=TIMESTAMP}
 		</if>
+		<if test="startTime != null">
+			and entrust_time &gt; #{startTime}
+		</if>
+		<if test="endTime != null">
+			and entrust_time &lt; #{endTime}
+		</if>
 		<if test="areaName != null">
 			 and area_name= #{areaName,jdbcType=VARCHAR}
 		</if>
