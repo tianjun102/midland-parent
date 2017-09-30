@@ -39,7 +39,11 @@
 								<td>${cust.createTime }</td>
 								<td> <c:if test="${cust.source ==0 }">网站</c:if>
 									<c:if test="${cust.source ==1 }">微站</c:if></td>
-								<td>${cust.auditStatus }</td>
+								<td><c:forEach items="${auditSatusList}" var="s">
+									<c:if test="${cust.auditStatus eq s.id}">
+										${s.name}
+									</c:if>
+								</c:forEach> </td>
 								<td>${cust.auditName }</td>
 								<td>${cust.auditTime }</td>
 								<%--<td>--%>
