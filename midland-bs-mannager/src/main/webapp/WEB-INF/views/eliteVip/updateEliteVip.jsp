@@ -6,8 +6,8 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <%@include file="../layout/tablib.jsp"%>
-<%@include file="../layout/zTree.jsp"%>
 <%@include file="../layout/source.jsp"%>
+<%@include file="../layout/zTree.jsp"%>
 
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->

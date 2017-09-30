@@ -6,8 +6,8 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <%@include file="../layout/tablib.jsp"%>
-<%@include file="../layout/zTree.jsp"%>
 <%@include file="../layout/source.jsp"%>
+<%@include file="../layout/zTree.jsp"%>
 
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
@@ -108,10 +108,10 @@
 
                 </li>
                 <li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >
-                    <div class="zTreeDemoBackground left" style  = "position:absolute;"   onblur="test(event)">
+                    <div class="zTreeDemoBackground left" style  = "position:absolute;top: -10px;"   onblur="test(event)">
                         <ul id="categoryTree" class="ztree" style  = "width:235px; height: 140px!important;"></ul>
                     </div>
-                    <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: 310px;" onclick="hideTree()">
+                    <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: 290px;" onclick="hideTree()">
                 </li>
                 <li><span>会员等级：</span>
                     <input type="text" name="level" id="level"/>
