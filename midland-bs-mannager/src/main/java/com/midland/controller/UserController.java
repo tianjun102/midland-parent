@@ -9,6 +9,7 @@ import com.midland.core.util.ApplicationUtils;
 import com.midland.core.util.MD5Util;
 import com.midland.core.util.SmsUtil;
 import com.midland.web.model.Area;
+import com.midland.web.model.ExportModel;
 import com.midland.web.model.role.Role;
 import com.midland.web.model.user.User;
 import com.midland.web.security.PermissionSign;
@@ -48,10 +49,7 @@ import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -231,6 +229,7 @@ public class UserController extends BaseFilter {
      */
     @RequestMapping(value = "/userIndex", method = {RequestMethod.GET,RequestMethod.POST})
     public String findUserIndex(User user, Model model, HttpServletRequest request){
+
     	return "user/userIndex";
     }
     /**
@@ -242,7 +241,7 @@ public class UserController extends BaseFilter {
     public String selectUserList(User user, Model model, HttpServletRequest request){
 	    getUserList(user,model, request);
 		List<ParamObject> map = JsonMapReader.getMap("user_audit");
-		model.addAttribute("",map);
+		model.addAttribute("auditSatusList",map);
     	return "user/userlist";
     }
 	
@@ -768,13 +767,30 @@ public class UserController extends BaseFilter {
     @RequestMapping("/export")
     public void userInfoExportExcel(User user, HttpServletResponse response){
 	    List<User> dataList = userService.selectUserList(user);
+		List<ExportModel> exportModels = new ArrayList<>();
+
+
+		for (User user1: dataList){
+			ExportModel exportModel = new ExportModel();
+			exportModel.setModelName1(String.valueOf(user1.getId()));
+			exportModel.setModelName2(user1.getUsername());
+			exportModel.setModelName3(user1.getUserCnName());
+			exportModel.setModelName4(user1.getPhone());
+			exportModel.setModelName5(user1.getEmail());
+			exportModel.setModelName6(user1.getCityName());
+			List<ParamObject> sources = JsonMapReader.getMap("source");
+			exportModel.setModelName7(MidlandHelper.getNameById(user1.getSource(), sources));
+			List<ParamObject> userTypes = JsonMapReader.getMap("user_audit");
+			exportModel.setModelName8(MidlandHelper.getNameById(user1.getAuditStatus(), userTypes));
+			exportModels.add(exportModel);
+		}
 	    PoiExcelExport pee = new PoiExcelExport(response,"用户","sheet1");
 	    //调用
-	    String titleColumn[] = {"id","username","userCnName","userType","state"};
-	    String titleName[] = {"用户id","用户名","昵称","用户类型","状态"};
-	    int titleSize[] = {13,13,13,13,13};
+	    String titleColumn[] = {"modelName1","modelName2","modelName3","modelName4","modelName5","modelName6","modelName7","modelName8"};
+	    String titleName[] = {"用户id","用户名","昵称","联系方式","邮箱","城市","来源","审核状态"};
+	    int titleSize[] = {13,13,13,13,13,13,13,13};
 	    //其他设置 set方法可全不调用
-	    pee.wirteExcel(titleColumn, titleName, titleSize, dataList);
+	    pee.wirteExcel(titleColumn, titleName, titleSize, exportModels);
     }
     
     

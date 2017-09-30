@@ -80,7 +80,8 @@
             </c:choose>
             </tbody>
         </table>
-        <a href="${ctx}/rest/questions/index" >返回</a>
+        <a style="margin-left: 20px" href="${ctx}/rest/questions/index" target="contentF"
+           class="public_btn bg3" id="cancel">返回</a>
     </section>
 </div>
 

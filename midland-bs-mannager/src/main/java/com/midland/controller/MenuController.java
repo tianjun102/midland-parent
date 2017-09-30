@@ -5,12 +5,14 @@ import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.web.model.Area;
 import com.midland.web.model.Menu;
+import com.midland.web.model.user.User;
 import com.midland.web.service.JdbcService;
 import com.midland.web.service.MenuService;
 import com.midland.web.service.SettingService;
 import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
 import com.midland.web.util.ParamObject;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +46,10 @@ public class MenuController extends BaseFilter{
 	}
 	@RequestMapping("list")
 	public String showMenuIndex(Menu menu, Model model, HttpServletRequest request) throws Exception {
+		if (StringUtils.isEmpty(menu.getCityId())){
+			User user = MidlandHelper.getCurrentUser(request);
+			menu.setCityId(user.getCityId());
+		}
 		MidlandHelper.doPage(request);
 		Page<Menu> result=(Page<Menu>) menuServiceImpl.findMenuList(menu);
 		Paginator paginator = result.getPaginator();
