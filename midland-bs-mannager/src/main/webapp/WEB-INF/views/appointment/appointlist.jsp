@@ -28,6 +28,7 @@
             <th style="width:auto">信息来源</th>
             <th style="width:auto">预约人</th>
             <th style="width:auto">电话</th>
+            <th style="width:auto">性别</th>
             <th style="width:auto">类型</th>
             <th style="width:auto">分类</th>
             <th style="width:auto">委托时间</th>
@@ -56,6 +57,9 @@
                         </c:forEach></td>
                         <td>${item.nickName }</td>
                         <td>${item.phone }</td>
+                        <td><c:forEach items="${sexs}" var="s">
+                            <c:if test="${item.sex == s.id}">${s.name}</c:if>
+                        </c:forEach></td>
                         <td><c:forEach items="${houses}" var="s">
                             <c:if test="${item.houseType == s.id}">${s.name}</c:if>
                         </c:forEach></td>

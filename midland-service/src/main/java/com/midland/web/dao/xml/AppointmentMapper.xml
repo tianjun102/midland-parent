@@ -32,10 +32,11 @@
 		<result column="view_url" property="viewUrl" jdbcType="VARCHAR" />
 		<result column="reset_flag" property="resetFlag" jdbcType="INTEGER" />
 		<result column="assigned_time" property="assignedTime" jdbcType="TIMESTAMP" />
+		<result column="sex" property="sex" jdbcType="INTEGER" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,appoint_sn,source,nick_name,phone,house_type,sell_rent,DATE_FORMAT(appointment_time,'%Y-%m-%d %H:%i:%s')appointment_time,area_name,community_name,address,layout,measure,price,DATE_FORMAT(entrust_time,'%Y-%m-%d %H:%i:%s'),agent_id,agent_name,status,DATE_FORMAT(handle_time,'%Y-%m-%d %H:%i:%s')handle_time,decoration,is_delete,city_id,city_name,area_id,flag,agent_phone,view_url,reset_flag,DATE_FORMAT(assigned_time,'%Y-%m-%d %H:%i:%s')assigned_time
+		id,appoint_sn,source,nick_name,phone,house_type,sell_rent,DATE_FORMAT(appointment_time,'%Y-%m-%d %H:%i:%s')appointment_time,area_name,community_name,address,layout,measure,price,DATE_FORMAT(entrust_time,'%Y-%m-%d %H:%i:%s'),agent_id,agent_name,status,DATE_FORMAT(handle_time,'%Y-%m-%d %H:%i:%s')handle_time,decoration,is_delete,city_id,city_name,area_id,flag,agent_phone,view_url,reset_flag,DATE_FORMAT(assigned_time,'%Y-%m-%d %H:%i:%s')assigned_time,sex
 	</sql>
 
 	<select id="selectAppointmentById" resultMap="BaseResultMap">
@@ -150,6 +151,8 @@
 			</if>
 			<if test="assignedTime != null">
 				assigned_time,
+			</if><if test="sex != null">
+			sex,
 			</if>
 		</trim>
 		values
@@ -238,6 +241,10 @@
 			<if test="assignedTime != null">
 				#{assignedTime,jdbcType=TIMESTAMP},
 			</if>
+			 <if test="sex != null">
+				#{sex,jdbcType=INTEGER},
+			</if>
+
 		</trim>
 	</insert>
 
@@ -326,6 +333,10 @@
 		<if test="assignedTime != null">
 			assigned_time= #{assignedTime,jdbcType=TIMESTAMP},
 		</if>
+		<if test="sex != null">
+			sex= #{sex,jdbcType=INTEGER},
+		</if>
+
 	</sql>
 
 	<sql id="select_option">

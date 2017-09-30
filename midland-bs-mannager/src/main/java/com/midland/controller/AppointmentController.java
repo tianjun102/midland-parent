@@ -144,7 +144,8 @@ public class AppointmentController extends BaseFilter {
 		Paginator paginator = result.getPaginator();
 		getSelectParam(model);
 
-
+		List<ParamObject> paramObjects = JsonMapReader.getMap("sex");
+		model.addAttribute("sexs", paramObjects);
 		model.addAttribute("paginator", paginator);
 		model.addAttribute("appoint", result);
 		return "appointment/appointlist";
