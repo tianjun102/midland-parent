@@ -116,7 +116,7 @@ public class EntrustController extends BaseFilter{
 	}
 	
 	private void getSelectParam(Model model) {
-		List<ParamObject> paramObjects = JsonMapReader.getMap("appointment_sellRent");
+		List<ParamObject> paramObjects = JsonMapReader.getMap("entrust_sellRent");
 		;
 		model.addAttribute("sellRents",paramObjects);
 		List<ParamObject> paramObjects1 = JsonMapReader.getMap("appointment_status");
@@ -251,7 +251,7 @@ public class EntrustController extends BaseFilter{
 			exportModel.setModelName4(appointment1.getPhone());
 			List<ParamObject> houseTypes = JsonMapReader.getMap("appointment_houseType");
 			exportModel.setModelName5(MidlandHelper.getNameById(appointment1.getHouseType(), houseTypes));
-			List<ParamObject> sellRents = JsonMapReader.getMap("appointment_sellRent");
+			List<ParamObject> sellRents = JsonMapReader.getMap("entrust_sellRent");
 			exportModel.setModelName6(MidlandHelper.getNameById(appointment1.getSellRent(), sellRents));
 			exportModel.setModelName7(appointment1.getEntrustTime());
 			exportModel.setModelName8(appointment1.getAreaName());

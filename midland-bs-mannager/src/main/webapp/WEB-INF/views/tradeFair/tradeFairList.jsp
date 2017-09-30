@@ -72,12 +72,13 @@
     function delete1(id){
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/tradeFair/delete?id="+id,
+            url: "${ctx}/rest/tradeFair/update?id="+id+"&isDelete=1",
             async: false, // 此处必须同步
             dataType: "json",
 
             success: function (data) {
                 if (data.state==0){
+                    layer.msg("删除成功！", {icon: 2});
                     $('#searchForm').submit();
                 }
             },
