@@ -16,6 +16,9 @@ function　checkLetterNum(id,name,msg){
 function　notEmpty(id,name,msg){
     var value = $("#"+id).val();
     if (value == null || value.trim() == "") {
+        if(msg == null|| msg==""){
+            msg="不能为空！";
+        }
         layer.tips(msg, "input[name='"+name+"']", {tips: 1});
         return false;
     }

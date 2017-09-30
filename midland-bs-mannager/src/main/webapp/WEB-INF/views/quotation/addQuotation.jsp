@@ -64,7 +64,7 @@
         debugger;
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/quotation/update",
+            url: "${ctx}/rest/quotation/add",
             async: false, // 此处必须同步
             dataType: "json",
             data: data,

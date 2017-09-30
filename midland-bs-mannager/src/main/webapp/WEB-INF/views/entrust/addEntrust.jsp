@@ -52,14 +52,14 @@
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${entrust.id}">
             <input type="hidden" name="resetFlag" id="resetFlag" value="1">
-            <li class="col-md-6"><span>预约编号：</span><input type="text" name="entrustSn" id="entrustSn"
+            <li class="col-md-6"><span>预约编号：</span><input type="text" name="entrustSn" id="entrustSn" onblur="notEmpty('entrustSn','entrustSn','')"
                                                           value="${entrust.entrustSn}"/>
             </li>
-            <li class="col-md-6"><span>委托时间：</span><input type="text" name="entrustTime" id="entrustTime"
+            <li class="col-md-6"><span>委托时间：</span><input type="text" name="entrustTime" id="entrustTime" onblur="notEmpty('entrustTime','entrustTime','')"
                                                           value="${entrust.entrustTime}" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" maxlength="50"/><span
                     class="_star">*</span>
             </li>
-            <li class="col-md-6"><span>委托人：</span><input type="text" name="nickName" id="nickName"
+            <li class="col-md-6"><span>委托人：</span><input type="text" name="nickName" id="nickName" onblur="notEmpty('nickName','nickName','')"
                                                         value="${entrust.nickName}"/>
             </li>
             <li class="col-md-6"><span>来源：</span>
@@ -73,9 +73,9 @@
             </li>
             <li class="col-md-6"><span>手机号码：</span><input type="text" name="phone" id="phone"
                                                           value="${entrust.phone}"
-                                                          maxlength="50"/><span class="_star">*</span></li>
+                                                          maxlength="50" onblur="checkPhone('','phone','')"/><span class="_star">*</span></li>
             <li>
-                <%@include file="../layout/area.jsp" %>
+                <%@include file="area.jsp" %>
 
             </li>
             <li class="col-md-6"><span>分类：</span>
@@ -101,21 +101,21 @@
                 </select>
             </li>
 
-            <li class="col-md-6"><span>区域：</span><input type="text" name="areaName" id="areaName" value="${entrust.areaName}"/>
+            <li class="col-md-6"><span>区域：</span><input type="text" name="areaName" id="areaName" onblur="notEmpty('areaName','areaName','')"  value="${entrust.areaName}"/>
             </li>
-            <li class="col-md-6"><span>小区：</span><input type="text" name="communityName" id="communityName"
+            <li class="col-md-6"><span>小区：</span><input type="text" name="communityName" id="communityName" onblur="notEmpty('communityName','communityName','')"
                                                         value="${entrust.communityName}" maxlength="50"/><span
                     class="_star">*</span></li>
-            <li class="col-md-6"><span>地址：</span><input type="text" name="address" id="address"
+            <li class="col-md-6"><span>地址：</span><input type="text" name="address" id="address" onblur="notEmpty('address','address','')"
                                                         value="${entrust.address}"/>
             </li>
-            <li class="col-md-6"><span>户型：</span><input type="text" name="layout" id="layout"
+            <li class="col-md-6"><span>户型：</span><input type="text" name="layout" id="layout" onblur="notEmpty('layout','layout','')"
                                                         value="${entrust.layout}"/>
 
             </li>
-            <li class="col-md-6"><span>面积：</span><input type="text" name="measure" id="measure"
+            <li class="col-md-6"><span>面积：</span><input type="text" name="measure" id="measure" onblur="notEmpty('measure','measure','');InitInput.setNumber(this,9,2,2)"
                                                         value="${entrust.measure}"
-                                                        maxlength="50"/><span class="_star">*</span></li>
+                                                        maxlength="50"/>㎡<span class="_star">*</span></li>
             <li class="col-md-6"><span>装修：</span>
                 <select name="renovation" id="renovation" class="dropdown">
 
@@ -129,7 +129,7 @@
                 </select>
 
             </li>
-            <li class="col-md-6"><span>售价/租价：</span><input type="text" name="price" id="price"
+            <li class="col-md-6"><span>售价/租价：</span><input type="text" name="price" id="price" onblur="notEmpty('price','price','');InitInput.setNumber(this,9,2,2)"
                                                           value="${entrust.price}"/>
             </li>
 
@@ -205,6 +205,11 @@
 
     //保存数据
     function updateData() {
+        if(!notEmpty('entrustSn','entrustSn','')||!notEmpty('entrustTime','entrustTime','')||!notEmpty('nickName','nickName','')||!notEmpty('areaName','areaName','')
+            ||!notEmpty('communityName','communityName','')||!notEmpty('address','address','')||!notEmpty('layout','layout','')||!notEmpty('measure','measure','')
+            ||!checkPhone('','phone','')){
+            return;
+        }
         var data = $("#appointInfoForm").serialize();
 
         $.ajax({
@@ -230,59 +235,6 @@
             }
         });
     }
-    //检查手机号格式
-    function checkPhone() {
-
-        var phone0 = $("#ph").val();
-        var reg = /^1[3,4,5,7,8]\d{9}$/;
-        var phone = $("input[name='phone']").val();
-        if (phone.trim() == '') {
-            layer.tips("手机号不能为空！", "input[name='phone']", {tips: 1});
-            return false;
-        }
-        if (!reg.test(phone)) {
-            layer.tips("手机号格式有误,请核对!", "input[name='phone']", {tips: 3});
-            return false;
-        }
-        if (phone0 == phone) {
-            return true;
-        }
-
-        var a = true;
-        $.ajax({
-            type: "post",
-            url: "${ctx }/rest/user/checkPhoneUnique",
-            async: false, // 此处必须同步
-            dataType: "json",
-            data: {"phone": phone},
-            success: function (xmlobj) {
-                if (xmlobj.flag == 1) {
-                    layer.tips("当前手机号码已被使用，请更换手机号码！", "input[name='phone']", {tips: 1});
-                    a = false;
-                } else {
-                    a = true;
-                }
-            }
-        });
-        return a;
-    }
-
-    //检查邮箱格式
-    function checkEmail() {
-        var reg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
-        var email = $("input[name='email']").val();
-        if (email.trim() == '') {
-            //layer.tips("邮箱不能为空！", "input[name='email']",{tips:3});
-            return true;
-        }
-        if (!reg.test(email)) {
-            layer.tips("邮箱格式有误,请核对!", "input[name='email']", {tips: 3});
-            //$("input[name='email']").focus();
-            return false;
-        }
-        return true;
-    }
-
     //取消
     function closeWin() {
         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引

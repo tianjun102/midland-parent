@@ -26,7 +26,7 @@
                <input type="text" name="nickName" id="nickName" ß/>
             </li>
             <li><span>phone：</span>
-               <input type="text" name="phone" id="phone" ß/>
+               <input type="text" name="phone" id="phone" onblur="checkPhone('','phone','')"/>
             </li>
             <li><span>houseType：</span>
                <input type="text" name="houseType" id="houseType" ß/>
