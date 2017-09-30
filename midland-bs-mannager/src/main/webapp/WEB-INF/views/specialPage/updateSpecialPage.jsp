@@ -17,12 +17,17 @@
 <head>
     <base href="<%=basePath%>">
     <meta charset="utf-8" />
-    <title>添加Banner图</title>
+    <title>添加首页特殊模块</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
     <meta name="MobileOptimized" content="320">
+    <style>
+        .layui-layer-msg{
+            top:260px!important;
+        }
+    </style>
 </head>
 <body >
 <div class="box">
@@ -35,7 +40,7 @@
             <input type="hidden" name="id" id="id" value="${item.id}">
             <ul class = "adminfo row">
                 <li><span>城市：</span>
-                    <select onchange="setCityName();" name="cityId" id="cityId" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <select onchange="setCityName();" name="cityId" id="cityId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <option value="">全部</option>
                         <c:forEach items="${cityList}" var="city">
                             <option <c:if test="${item.cityId == city.id}">selected = 'selected'</c:if> value="${city.id}">${city.name}</option>
@@ -43,17 +48,18 @@
                     </select>
                 </li>
                 <li><span>平台：</span>
-                    <select name="source" id="source" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <select name="source" id="source" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <option <c:if test="${item.source == '0'}" ></c:if> value="0">网站</option>
                         <option <c:if test="${item.source == '1'}" ></c:if> value="1">微站</option>
                     </select>
                     <span class = "_star ">*</span>
                 </li>
                 <li>
-                    <span>模块名称：</span><input type="text" name="modeName" value="${item.modeName}" >
+                    <span>模块名称：</span><input type="text" name="modeName" id="modeName" value="${item.modeName}" onblur="notEmpty('modeName','modeName','模块名称不能为空！');">
+                    <span class = "_star ">*</span>
                 </li>
                 <li><span>位置：</span>
-                    <select name="position" id="position" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <select name="position" id="position" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <option <c:if test="${item.position == '0'}" >selected="selected"</c:if> value="0">位置１</option>
                         <option <c:if test="${item.position == '1'}" >selected="selected"</c:if> value="1">位置２</option>
                         <option <c:if test="${item.position == '2'}" >selected="selected"</c:if> value="2">位置３</option>
@@ -62,16 +68,20 @@
                     <span class = "_star ">*</span>
                 </li>
                 <li><span>标题：</span>
-                    <input id="title" name="title" maxlength="255" type="text" value="${item.title}">
+                    <input id="title" name="title" maxlength="255" type="text" value="${item.title}" onblur="notEmpty('title','title','模块名称不能为空！');">
+                    <span class = "_star ">*</span>
                 </li>
                 <li><span>描述：</span>
-                    <input id="description" name="description" maxlength="255" type="text" value="${item.description}">
+                    <input id="description" name="description" maxlength="255" type="text" value="${item.description}" onblur="notEmpty('description','description','模块名称不能为空！');">
+                    <span class = "_star ">*</span>
                 </li>
                 <li><span>均价：</span>
-                    <input type="text" name="price" id="price" value="${item.price}"/>
+                    <input type="text" name="price" id="price" value="${item.price}" onblur="notEmpty('price','price','均价不能为空！');" onfocus="InitInput.setNumber(this,9,2,2);"/>
+                    <span class = "_star ">*</span>
                 </li>
                 <li><span>地址：</span>
-                    <input type="text" name="address" id="address" value="${item.address}"/>
+                    <input type="text" name="address" id="address" value="${item.address}" onblur="notEmpty('address','address','地址不能为空！');"/>
+                    <span class = "_star ">*</span>
                 </li>
                 <li><span>地铁描述：</span>
                     <input type="text" name="subwayDistance" id="subwayDistance" value="${item.subwayDistance}"/>
@@ -86,7 +96,7 @@
                     </div>
                 </li>
                 <li id="picLike"><span>图片链接：</span>
-                    <input id="bannerId" name="linkUrl" maxlength="255" type="text" value="${item.linkUrl}">
+                    <input id="linkUrl" name="linkUrl" onblur="checkUrl('linkUrl','linkUrl','链接格式不正确！')" maxlength="255" type="text" value="${item.linkUrl}">
                 </li>
                 <li><span>图片说明：</span><input type="text" name="imgDesc" value="${item.imgDesc}"></li>
             </ul>
@@ -187,6 +197,9 @@
 
 
     function subumintSpecialPage(){
+        if(!(notEmpty('modeName','modeName','模块名称不能为空！')&&notEmpty('title','title','标题名称不能为空！')&&notEmpty('description','description','描述不能为空！')&&notEmpty('price','price','均价不能为空！')&&notEmpty('address','address','地址不能为空！')&&checkUrl('linkUrl','linkUrl','链接格式不正确！'))){
+            return;
+        }
         var data = $("#formId").serialize();
         $.ajax({
             type: "post",
