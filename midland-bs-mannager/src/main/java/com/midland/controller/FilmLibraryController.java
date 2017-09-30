@@ -52,6 +52,7 @@ public class FilmLibraryController extends BaseFilter {
 	public String toAddFilmLibrary(FilmLibrary filmLibrary, Model model) throws Exception {
 		List<Area> list = settingService.queryAllCityByRedis();
 		model.addAttribute("citys",list);
+		settingService.getAllProvinceList(model);
 		return "filmLibrary/addFilmLibrary";
 	}
 
