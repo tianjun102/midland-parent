@@ -21,14 +21,17 @@
 		<form action="${ctx }/rest/filmLibrary/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
-				<li><span>城市：</span>
-					<select name="cityId" id="cityId" class="dropdown">
-						<option value="" >全部</option>
-						<c:forEach items="${citys}" var="item">
-						<option value="${item.id}" >${item.name}</option>
-						</c:forEach>
-					</select>
-				</li>
+				<%--<li><span>城市：</span>--%>
+					<%--<select name="cityId" id="cityId" class="dropdown">--%>
+						<%--<option value="" >全部</option>--%>
+						<%--<c:forEach items="${citys}" var="item">--%>
+						<%--<option value="${item.id}" >${item.name}</option>--%>
+						<%--</c:forEach>--%>
+					<%--</select>--%>
+				<%--</li>--%>
+					<li>
+						<%@include file="../layout/area.jsp" %>
+					</li>
 				<li><span>状态：</span>
 					<select name="isShow" id="isShow" class="dropdown">
 						<option value="">全部</option>

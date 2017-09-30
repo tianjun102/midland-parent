@@ -39,7 +39,7 @@ public class MenuController extends BaseFilter{
 	private JdbcService jdbcService;
 	@RequestMapping("/index")
 	public String menuIndex(Model model ,HttpServletRequest request){
-		
+		settingService.getAllProvinceList(model);
 		return "/menu/menuIndex";
 	}
 	@RequestMapping("list")

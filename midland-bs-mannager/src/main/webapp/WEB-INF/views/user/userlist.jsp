@@ -23,7 +23,7 @@
 							<th style="width: 6%">实名状态</th>
 							<th style="width: 7%">审核人</th>
 							<th style="width: 15%">审核时间</th>
-							<th style="width: 10%">用户类型</th>
+							<%--<th style="width: 10%">用户类型</th>--%>
 							<th style="width: 25%">操作</th>
 						</tr>
 					</thead>
@@ -42,10 +42,10 @@
 								<td>${cust.auditStatus }</td>
 								<td>${cust.auditName }</td>
 								<td>${cust.auditTime }</td>
-								<td>
-									<c:if test="${cust.userType==0}">智者汇</c:if> 
-									<c:if test="${cust.userType==1}">渠道服务商</c:if>
-								</td>
+								<%--<td>--%>
+									<%--<c:if test="${cust.userType==0}">智者汇</c:if> --%>
+									<%--<c:if test="${cust.userType==1}">渠道服务商</c:if>--%>
+								<%--</td>--%>
 								<td>
 									<%--<a onclick="preUpdate(${cust.id })" target="contentF" class = "edit_img" title = "编辑"></a>--%>
 									<a onclick="userRole(${cust.id },'${cust.userCnName }')" target="contentF" class = "uList_img" title = "角色列表"></a>

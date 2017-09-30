@@ -40,6 +40,7 @@ public class FilmLibraryController extends BaseFilter {
 	@RequestMapping("index")
 	public String filmLibraryIndex(FilmLibrary filmLibrary, Model model) throws Exception {
 		List<Area> list = settingService.queryAllCityByRedis();
+		settingService.getAllProvinceList(model);
 		model.addAttribute("citys",list);
 		return "filmLibrary/filmLibraryIndex";
 	}
