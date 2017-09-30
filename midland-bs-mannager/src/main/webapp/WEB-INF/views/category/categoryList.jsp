@@ -111,7 +111,7 @@
             type: 2,
             title: ['修改'],
             shade: 0.3,
-            area: ['500px', '400px'],
+            area: ['420px','370px'],
             content: ['${ctx}/rest/category/to_update?id='+id,'no']
         });
     }

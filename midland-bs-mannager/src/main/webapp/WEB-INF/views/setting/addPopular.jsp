@@ -7,9 +7,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>添加热门关注</title>
-    <link rel="stylesheet" href="${ctx }/assets/css/common.css">
-    <link rel="stylesheet" href="${ctx }/assets/css/layer.css">
-    <link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css"/>
     <style type="text/css">
         .content ul.userinfo>li {
             float: none !important;
@@ -26,7 +23,7 @@
 <section class="content" style="border:none;">
     <form action="" method="post" id="addFrom">
         <ul class="userinfo row">
-            <li><span>链接名：</span><input style="width:274px;" type="text" name="name" id="name" maxlength="50"/><span class="_star">*</span></li>
+            <li><span>链接名：</span><input style="width:274px;" type="text" onblur="notEmpty('name','name','链接名不能为空！');" name="name" id="name" maxlength="50"/><span class="_star">*</span></li>
             <li style="display:flex;align-items:center">
                 <span style = "float:left;">平台：</span>
                 <select name="source" id="source" class="dropdown">
@@ -34,6 +31,7 @@
                     <option value="1">网站</option>
                     <option value="2">微站</option>
                 </select>
+                <span class="_star">*</span>
             </li>
             <li style="display:flex;align-items:center">
                 <span style = "float:left;">类型：</span>
@@ -41,14 +39,16 @@
                     <option value="1">精选深圳二手房</option>
                     <option value="2">精选深圳租房</option>
                 </select>
+                <span class="_star">*</span>
             </li>
             <li style="display:flex;align-items:center">
-                <span style = "float:left;">类型：</span>
+                <span style = "float:left;">模块：</span>
                 <select name="menuId" id="menuId" class="dropdown">
                     <option value="1">首页</option>
                     <option value="2">新房</option>
-                    <option value="2">新二手房</option>
+                    <option value="3">新二手房</option>
                 </select>
+                <span class="_star">*</span>
             </li>
 
             <li><span>省：</span> <!-- 省 -->
@@ -96,8 +96,7 @@
                     </select>
                 </p>
             </li>
-            <li><span>链接URL：</span><input style="width:274px;" type="text" name="url" id="url" value=""
-                                         onblur="checkPhone();"/><span class="_star">*</span>
+            <li><span>链接URL：</span><input style="width:274px;" type="text" name="url" id="url" value="" onblur="checkUrl('url','url','网址格式不正确！')"/><span class="_star">*</span>
             </li>
             <li style="padding-top:30px;">
                 <span></span>
@@ -110,7 +109,7 @@
 </section>
 <script type="text/javascript">
     function saveData() {
-
+    if(notEmpty('name','name','链接名不能为空！')&&checkSelect("source|cateId|menuId","平台不能为空！|类型不能为空！|模块不能为空！")&&checkUrl("url","url","网址格式不正确！")){
             var name = $("#name").val();
             var source = $("#source option:selected").val();
             var provinceId = $("input[name='provinceId']").val();
@@ -153,6 +152,7 @@
                 }
 
             });
+        }
 
     }
 
@@ -380,10 +380,5 @@
 
 
 </script>
-
-<script type="text/javascript" src="${ctx}/assets/scripts/jquery.min.js"></script>
-<script type="text/javascript" src="${ctx}/assets/plugins/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="${ctx}/assets/scripts/layer/layer.js"></script>
-<script src="${ctx}/assets/scripts/jquery.easydropdown.js" type="text/javascript"></script>
 </body>
 </html>

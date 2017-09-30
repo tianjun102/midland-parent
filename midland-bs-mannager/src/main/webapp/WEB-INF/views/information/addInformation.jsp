@@ -38,7 +38,7 @@
         color: rgb(102, 102, 102);
     }
 
-    .layui-layer{
+    .layui-layer-msg{
         top:260px!important;
     }
 
@@ -51,6 +51,16 @@
         </p>
         <form id="formId" action="" method="post" enctype="multipart/form-data" method="post">
             <ul class = "adminfo row">
+                <li>
+                    <span style = "float:left;">城市：</span>
+                    <input type="hidden" name="cityName" id="cityName" value="">
+                    <select onchange="setCityName()" name="cityId" id="cityId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                        <option value="">全部</option>
+                        <c:forEach items="${cityList}" var="city">
+                            <option value="${city.id}">${city.name}</option>
+                        </c:forEach>
+                    </select>
+                </li>
                 <li><span>一级分类：</span>
                     <input type="hidden" name="cateParentName" id="cateParentName" value="">
                     <select name="cateParentid" id="cateParentid" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <%--class="dropdown"--%> onchange="setChildCateName();">
@@ -69,18 +79,9 @@
                     <span class = "_star ">*</span>
                 </li>
                 <li>
-                    <span style = "float:left;">城市：</span>
-                    <input type="hidden" name="cityName" id="cityName" value="">
-                    <select onchange="setCityName()" name="cityId" id="cityId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
-                        <option value="">全部</option>
-                        <c:forEach items="${cityList}" var="city">
-                            <option value="${city.id}">${city.name}</option>
-                        </c:forEach>
-                    </select>
-                </li>
-                <li>
                     <span>标题：</span>
-                    <input type="text" name="title"  />
+                    <input type="text" name="title" id="title" onfocus="checkSelect('cateParentid|cateId','请填写一级分类！|请填写二级分类！')" onblur="notEmpty('title','title','标题不能为空！');" />
+                    <span class = "_star ">*</span>
                 </li>
                 <li><span>来源：</span><input name="source" id="source" type="text">
                 </li>
@@ -155,6 +156,7 @@
     }
 
     function subumintInformation(){
+       if(checkSelect('cateParentid|cateId','请填写一级分类！|请填写二级分类！')&&notEmpty('title','title','标题不能为空！')){
         var data = $("#formId").serialize();
         $.ajax({
             type: "post",
@@ -175,6 +177,7 @@
             }
 
         });
+       }
 
     }
 

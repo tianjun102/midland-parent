@@ -72,7 +72,7 @@
             <li>
                 <span style = "float:left;">城市：</span>
                 <input type="hidden" name="cityName" id="cityName" value="${item.cityName}">
-                <select onchange="setCityName()" name="cityId" id="cityId" style="height: 38px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                <select onchange="setCityName()" name="cityId" id="cityId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option value="">全部</option>
                     <c:forEach items="${cityList}" var="city">
                         <option <c:if test="${item.cityId == city.id}"> selected = 'selected'</c:if> value="${city.id}">${city.name}</option>
@@ -100,7 +100,7 @@
             </li>
 
             <li>
-                <span>分类名称：</span><input style="width:274px;" type="text" name="cateName" id="cateName" value="${item.cateName}" maxlength="50"/>
+                <span>分类名称：</span><input style="width:250px;" type="text" name="cateName" id="cateName" value="${item.cateName}" onblur="notEmpty('cateName','cateName','分类名称不能为空！');" maxlength="50"/>
             </li>
             <%--<li>
                 <span style = "float:left;">类型：</span>
@@ -120,6 +120,7 @@
 </section>
 <script type="text/javascript">
     function saveData() {
+        if(notEmpty('cateName','cateName','分类名称不能为空！')){
         var data = $("#addFrom").serialize();
         $.ajax({
             type: "post",
@@ -144,6 +145,7 @@
             }
 
         });
+        }
 
     }
 

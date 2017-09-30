@@ -103,15 +103,15 @@
         <form id="formId" action="${ctx}/rest/banner/addBanner" method="post" enctype="multipart/form-data" method="post">
             <ul class = "adminfo row">
                 <input type="hidden" value="${item.id}" name="id" id="id">
-                <li><span>分类：</span><input class="vipcate" value="${item.cateName}" name="cateName" onclick="showTree()" readonly="readonly"/>
+                <li><span>市场调究分类：</span><input class="vipcate" value="${item.cateName}" name="cateName" onclick="showTree()" readonly="readonly"/>
                     <input value="${item.cateId}" name="cateId" type="hidden"/><label style="color: red" class = "_star " >*</label>
 
                 </li>
                 <li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >
-                    <div class="zTreeDemoBackground left" style  = "position:absolute;left: 100px;"   onblur="test(event)">
+                    <div class="zTreeDemoBackground left" style  = "position:absolute;left: 100px;top: -10px;"   onblur="test(event)">
                         <ul id="categoryTree" class="ztree" style  = "width:235px; height: 140px!important;"></ul>
                     </div>
-                    <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: 340px;" onclick="hideTree()">
+                    <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: 320px;" onclick="hideTree()">
                 </li>
                 <li>
                     <span style = "float:left;">城市：</span>
@@ -200,6 +200,7 @@
     }
 
     function subumintInformation(){
+        if(notEmpty('vipcate','vipcate','请填写市场分类！')&&notEmpty('title','title','标题不能为空！')){
         var data = $("#formId").serialize();
         $.ajax({
             type: "post",
@@ -220,7 +221,7 @@
             }
 
         });
-
+        }
     }
 
 

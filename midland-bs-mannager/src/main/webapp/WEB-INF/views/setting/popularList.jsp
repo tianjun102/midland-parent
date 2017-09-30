@@ -35,8 +35,15 @@
 									<c:if test="${popular.source==1}">网站</c:if>
 									<c:if test="${popular.source==2}">微站</c:if>
 								</td>
-								<td>${popular.menuId}</td>
-								<td>${popular.cateId}</td>
+								<td>
+									<c:if test="${popular.menuId==1}">首页</c:if>
+									<c:if test="${popular.menuId==2}">新房</c:if>
+									<c:if test="${popular.menuId==3}">二手房</c:if>
+								</td>
+								<td>
+									<c:if test="${popular.cateId==1}">精选二手房</c:if>
+									<c:if test="${popular.cateId==2}">精选租房</c:if>
+								</td>
 								<td>${popular.name}</td>
 								<td>
 									<a onclick="preUpdate(${popular.id })" target="contentF" class = "edit_img" title = "编辑"></a>

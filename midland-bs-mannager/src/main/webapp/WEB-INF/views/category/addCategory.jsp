@@ -71,7 +71,7 @@
                 <span style = "float:left;">城市：</span>
                 <input type="hidden" name="type" value="${type}">
                 <input type="hidden" name="cityName" id="cityName" value="">
-                <select onchange="setCityName()" name="cityId" id="cityId" style="height: 38px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                <select onchange="setCityName()" name="cityId" id="cityId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option value="">全部</option>
                     <c:forEach items="${cityList}" var="city">
                         <option value="${city.id}">${city.name}</option>
@@ -95,7 +95,7 @@
                 <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: -50px; top: 63px;" onclick="hideTree()">
             </li>
             <li>
-                <span>分类名称：</span><input style="width:274px;" type="text" name="cateName" id="cateName" maxlength="50"/>
+                <span>分类名称：</span><input style="width:250px;" type="text" name="cateName" id="cateName" onblur="notEmpty('cateName','cateName','分类名称不能为空！');" maxlength="50"/>
             </li>
             <li style="padding-top:30px;">
                 <span></span>
@@ -108,7 +108,8 @@
 </section>
 <script type="text/javascript">
     function saveData() {
-var data = $("#addFrom").serialize();
+        if(notEmpty('cateName','cateName','分类名称不能为空！')){
+        var data = $("#addFrom").serialize();
         $.ajax({
             type: "post",
             url: "${ctx}/rest/category/add",
@@ -132,6 +133,7 @@ var data = $("#addFrom").serialize();
             }
 
         });
+        }
 
     }
 

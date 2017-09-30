@@ -17,7 +17,7 @@
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <li><span>搜索词：</span>
-                <input type="text" name="keywords" id="keywords" value="${item.keywords}" />
+                <input type="text" name="keywords" id="keywords" value="${item.keywords}" onblur="notEmpty('keywords','keywords','搜索词不能为空！');"/><label style="color: red" class = "_star " >*</label>
             </li>
             <li>
                 <span style = "float:left;">城市：</span>
@@ -46,6 +46,7 @@
                     <option <c:if test="${item.menuId =='10'}">selected="selected"</c:if> value="10">资讯</option>
                     <option <c:if test="${item.menuId =='11'}">selected="selected"</c:if> value="11">问答</option>
                 </select>
+                <label style="color: red" class = "_star " >*</label>
             </li>
             <li>
                 <span></span>
@@ -60,6 +61,7 @@
 <script type="text/javascript">
     //保存数据
     function updateData() {
+        if(notEmpty('keywords','keywords','搜索词不能为空！')&&checkSelect('menuId','请选择模块！')){
         var data = $("#dataForm").serialize();
         debugger;
         $.ajax({
@@ -84,6 +86,7 @@
                 layer.msg("保存失败！", {icon: 2});
             }
         });
+        }
     }
 
     //取消

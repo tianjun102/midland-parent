@@ -42,7 +42,7 @@
         color: rgb(102, 102, 102);
     }
 
-    .layui-layer{
+    .layui-layer-msg{
         top:260px!important;
     }
 
@@ -86,6 +86,7 @@
     function beforeClick(treeId, treeNode, clickFlag) {
         $("input[name='cateId']").val(treeNode.id);
         $("input[name='cateName']").val(treeNode.name);
+        $("input[name='vipcate']").val(treeNode.name);
         $("#showDiv").hide();
     }
 
@@ -106,15 +107,15 @@
         <form id="formId" action="" method="post" enctype="multipart/form-data" method="post">
             <ul class = "adminfo row">
                 <input type="hidden" name="cateName" id="cateName">
-                <li><span>会员分类：</span><input class="vipcate" name="cateName" onclick="showTree()" readonly="readonly"/>
+                <li><span>市场调究分类：</span><input class="vipcate" id="vipcate"  name="vipcate" onclick="showTree()" readonly="readonly"/>
                     <input name="cateId" type="hidden"/><label style="color: red" class = "_star " >*</label>
 
                 </li>
                 <li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >
-                    <div class="zTreeDemoBackground left" style  = "position:absolute;left: 100px;"   onblur="test(event)">
+                    <div class="zTreeDemoBackground left" style  = "position:absolute;left: 100px;top:-10px;"   onblur="test(event)">
                         <ul id="categoryTree" class="ztree" style  = "width:235px; height: 140px!important;"></ul>
                     </div>
-                    <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: 340px;" onclick="hideTree()">
+                    <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: 320px;" onclick="hideTree()">
                 </li>
                 <li>
                     <span style = "float:left;">城市：</span>
@@ -128,7 +129,7 @@
                 </li>
                 <li>
                     <span>标题：</span>
-                    <input type="text" name="title"  />
+                    <input type="text" name="title" id="title"  onblur="notEmpty('title','title','标题不能为空！');"  onfocus="notEmpty('vipcate','vipcate','请填写市场分类！')"  />
                 </li>
                 <li><span>来源：</span><input name="source" id="source" type="text">
                 </li>
@@ -204,6 +205,7 @@
 
     function subumintInformation(){
         var data = $("#formId").serialize();
+        if(notEmpty('vipcate','vipcate','请填写市场分类！')&&notEmpty('title','title','标题不能为空！')){
         $.ajax({
             type: "post",
             url: "${ctx}/rest/research/add",
@@ -213,6 +215,7 @@
             success: function (data) {
                 if(data.state==0){
                     layer.msg("保存成功！",{icon:1});
+                    debugger;
                     setTimeout(function(){window.open("${ctx}/rest/research/index","contentF");},2000);
                 } else {
                     layer.msg("新增失败！", {icon: 2});
@@ -223,7 +226,7 @@
             }
 
         });
-
+        }
     }
 
 

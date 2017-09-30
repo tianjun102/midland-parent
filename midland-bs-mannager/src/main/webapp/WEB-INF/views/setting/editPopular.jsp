@@ -7,9 +7,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>添加热门关注</title>
-    <link rel="stylesheet" href="${ctx }/assets/css/common.css">
-    <link rel="stylesheet" href="${ctx }/assets/css/layer.css">
-    <link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css"/>
     <style type="text/css">
         .content ul.userinfo>li {
             float: none !important;
@@ -27,7 +24,7 @@
     <form action="" method="post" id="addFrom">
         <input type="hidden" name="id" id="id" value="${popular.id}">
         <ul class="userinfo row">
-            <li><span>链接名：</span><input style="width:274px;" type="text" value="${popular.name}" name="name" id="name" maxlength="50"/><span class="_star">*</span></li>
+            <li><span>链接名：</span><input style="width:274px;" type="text" value="${popular.name}" onblur="notEmpty('name','name','链接名不能为空！');" name="name" id="name" maxlength="50"/><span class="_star">*</span></li>
             <li style="display:flex;align-items:center">
                 <span style = "float:left;">平台：</span>
                 <select name="source" id="source" class="dropdown">
@@ -44,7 +41,7 @@
                 </select>
             </li>
             <li style="display:flex;align-items:center">
-                <span style = "float:left;">类型：</span>
+                <span style = "float:left;">模块：</span>
                 <select name="menuId" id="menuId" class="dropdown">
                     <option <c:if test="${popular.source =='1'}">selected = 'selected'</c:if> value="1">首页</option>
                     <option <c:if test="${popular.source =='2'}">selected = 'selected'</c:if> value="2">新房</option>
@@ -108,7 +105,7 @@
                 </p>
             </li>
             <li><span>链接URL：</span><input style="width:274px;" type="text" name="url" id="url" value="${popular.url}"
-                                         onblur="checkPhone();"/><span class="_star">*</span>
+                                          onblur="checkUrl('url','url','网址格式不正确！');"/><span class="_star">*</span>
             </li>
             <%-- <li>
                 <span>角色类型：</span>
@@ -134,6 +131,7 @@
 </section>
 <script type="text/javascript">
     function saveData() {
+        if(notEmpty('name','name','链接名不能为空！')&&checkSelect("source|cateId|menuId","平台不能为空！|类型不能为空！|模块不能为空！")&&checkUrl("url","url","网址格式不正确！")){
             var id =  $("#id").val();
             var name = $("#name").val();
             var source = $("#source option:selected").val();
@@ -177,7 +175,7 @@
                 }
 
             });
-
+        }
     }
 
 
@@ -404,10 +402,5 @@
 
 
 </script>
-
-<script type="text/javascript" src="${ctx}/assets/scripts/jquery.min.js"></script>
-<script type="text/javascript" src="${ctx}/assets/plugins/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="${ctx}/assets/scripts/layer/layer.js"></script>
-<script src="${ctx}/assets/scripts/jquery.easydropdown.js" type="text/javascript"></script>
 </body>
 </html>

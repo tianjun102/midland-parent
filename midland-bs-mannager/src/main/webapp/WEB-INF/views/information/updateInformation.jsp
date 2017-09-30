@@ -37,7 +37,7 @@
         font-size: 14px;
         color: rgb(102, 102, 102);
     }
-    .layui-layer{
+    .layui-layer-msg{
         top:260px!important;
     }
 
@@ -50,17 +50,16 @@
         <form id="formId" action="${ctx}/rest/banner/addBanner" method="post" enctype="multipart/form-data" method="post">
             <ul class = "adminfo row">
                 <input type="hidden" name="id" id="id" value="${item.id}">
-                <%--<li><span>分类：</span>
-                    <input type="hidden" name="cateName" id="cateName" value="${item.cateName}">
-                    <select name="cateId" id="cateId" class="dropdown" onchange="setCateName();">
-                        <option value="" class="label">请选择</option>
-                        <c:forEach items="${cateList}" var="cate">
-                            <option <c:if test="${item.cateId == cate.id}"> selected ='selected' </c:if> value="${cate.id}">${cate.cateName}</option>
+                <li>
+                    <span style = "float:left;">城市：</span>
+                    <input type="hidden" name="cityName" id="cityName" value="">
+                    <select onchange="setCityName()" name="cityId" id="cityId" style="height: 38px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                        <option value="">全部</option>
+                        <c:forEach items="${cityList}" var="city">
+                            <option <c:if test="${item.cityId == city.id}"> selected ='selected' </c:if>  value="${city.id}">${city.name}</option>
                         </c:forEach>
                     </select>
-                    <span class = "_star ">*</span>
-                </li>--%>
-
+                </li>
                 <li><span>一级分类：</span>
                     <input type="hidden" name="cateParentName" id="cateParentName" value="">
                     <select name="cateParentid" id="cateParentid" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <%--class="dropdown"--%> onchange="setChildCateName();">
@@ -84,18 +83,8 @@
 
 
                 <li>
-                    <span style = "float:left;">城市：</span>
-                    <input type="hidden" name="cityName" id="cityName" value="">
-                    <select onchange="setCityName()" name="cityId" id="cityId" style="height: 38px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
-                        <option value="">全部</option>
-                        <c:forEach items="${cityList}" var="city">
-                            <option <c:if test="${item.cityId == city.id}"> selected ='selected' </c:if>  value="${city.id}">${city.name}</option>
-                        </c:forEach>
-                    </select>
-                </li>
-                <li>
                     <span>标题：</span>
-                    <input type="text" name="title" value="${item.title}" />
+                    <input type="text" id="title" name="title" value="${item.title}" onfocus="checkSelect('cateParentid|cateId','请填写一级分类！|请填写二级分类！')" onblur="notEmpty('title','title','标题不能为空！');" />
                 </li>
                 <li><span>来源：</span><input name="source" id="source" type="text" value="${item.source}" />
                 </li>
@@ -170,6 +159,7 @@
     }
 
     function subumintInformation(){
+        if(checkSelect('cateParentid|cateId','请填写一级分类！|请填写二级分类！')&&notEmpty('title','title','标题不能为空！')){
         var data = $("#formId").serialize();
         $.ajax({
             type: "post",
@@ -190,6 +180,7 @@
             }
 
         });
+        }
 
     }
 

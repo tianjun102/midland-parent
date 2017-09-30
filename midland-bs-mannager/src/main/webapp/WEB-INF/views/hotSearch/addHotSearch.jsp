@@ -17,12 +17,12 @@
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <li><span>搜索词：</span>
-               <input type="text" name="keywords" id="keywords" />
+               <input type="text" name="keywords" id="keywords"  onblur="notEmpty('keywords','keywords','搜索词不能为空！');" /><label style="color: red" class = "_star " >*</label>
             </li>
             <li>
                 <span style = "float:left;">城市：</span>
                 <input type="hidden" name="cityName" id="cityName" value="">
-                <select onchange="setCityName()" name="cityId" id="cityId" style="height: 38px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                <select onchange="setCityName()" name="cityId" id="cityId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option value="">全部</option>
                     <c:forEach items="${cityList}" var="city">
                         <option value="${city.id}">${city.name}</option>
@@ -31,7 +31,7 @@
             </li>
             <li><span>模块：</span>
                 <input type="hidden" id="menuName" name="menuName" value="" >
-                <select onchange="setMenuName()" name="menuId" id="menuId" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                <select onchange="setMenuName()" name="menuId" id="menuId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option value="">全部</option>
                     <option value="0">首页</option>
                     <option value="1">新房</option>
@@ -46,6 +46,7 @@
                     <option value="10">资讯</option>
                     <option value="11">问答</option>
                 </select>
+                <label style="color: red" class = "_star " >*</label>
             </li>
             <li>
                 <span></span>
@@ -60,6 +61,7 @@
 <script type="text/javascript">
     //保存数据
     function updateData() {
+        if(notEmpty('keywords','keywords','搜索词不能为空！')&&checkSelect('menuId','请选择模块！')){
         var data = $("#dataForm").serialize();
         debugger;
         $.ajax({
@@ -84,6 +86,7 @@
                 layer.msg("保存失败！", {icon: 2});
             }
         });
+        }
     }
 
     //取消
