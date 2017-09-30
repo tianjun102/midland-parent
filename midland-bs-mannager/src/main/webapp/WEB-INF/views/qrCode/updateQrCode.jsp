@@ -19,7 +19,7 @@
         <ul class="userinfo row">
             <li>
                 <span style = "float:left;">城市：</span>
-                <select onclick="setCityName();" name="cityId" id="cityId" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                <select onclick="setCityName();" name="cityId" id="cityId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option value="">全部</option>
                     <c:forEach items="${cityList}" var="city">
                         <option <c:if test="${city.id == item.cityId}">selected = 'selected' </c:if> value="${city.id}">${city.name}</option>
@@ -27,14 +27,14 @@
                 </select>
             </li>
             <li><span>平台：</span>
-                <select name="source" id="source" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                <select name="source" id="source" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option <c:if test="${item.source == '0'}">selected = 'selected'</c:if> value="0">网站</option>
                     <option <c:if test="${item.source == '1'}">selected = 'selected'</c:if> value="1">微站</option>
                 </select>
-                <span class = "_star ">*</span>
             </li>
             <li><span>名称：</span>
-                <input type="text" name="name" id="name" value="${item.name}"/>
+                <input type="text" name="name" id="name" value="${item.name}" onblur="notEmpty('linkName','linkName','名称不能为空！')"/>
+                <span class = "_star ">*</span>
             </li>
             <li><span>图片：</span>
                 <div style="float: left;">
@@ -58,6 +58,9 @@
 <script type="text/javascript">
     //保存数据
     function updateData() {
+        if(!notEmpty('name','name','名称不能为空！')){
+            return;
+        }
         var data = $("#dataForm").serialize();
         debugger;
         $.ajax({
