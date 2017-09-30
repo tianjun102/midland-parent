@@ -23,27 +23,13 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
         <meta content="" name="description" />
         <meta content="" name="author" />
         <meta name="MobileOptimized" content="320">
-		<link rel="stylesheet" href="${ctx}/assets/css/layer.css">
-		<link rel="stylesheet" href="${ctx}/assets/css/bootstrap.min.css">
-		<link rel="stylesheet" href="${ctx}/assets/css/common.css">
-		<link rel="stylesheet" href="${ctx}/assets/css/easydropdown.css" />
-		<link rel="stylesheet" type="text/css" href="${ctx }/assets/scripts/uploadify/uploadify.css">
-
+		<style>
+			.layui-layer-msg{
+				top:260px!important;
+			}
+		</style>
 	</head>
 	<body >
-	<script type="text/javascript" src="${ctx}/assets/scripts/jquery.min.js"></script>
-		<script type="text/javascript" src="${ctx}/assets/plugins/jquery-validation/lib/jquery.form.js"></script>
-		<script type="text/javascript" src="${ctx}/assets/scripts/jquery.easydropdown.js" ></script>
-		<script type="text/javascript" src="${ctx}/assets/scripts/bootstrap.min.js"></script>
-		<script src="${ctx}/assets/scripts/common.js"></script>
-		<script src="${ctx}/assets/scripts/layer.js" type="text/javascript"></script>
-		<script src="${ctx}/assets/scripts/base.js" type="text/javascript"></script>
-		<script src="${ctx}/assets/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
-		<script src="${ctx}/assets/UEditor/ueditor.config.js" type="text/javascript"></script>
-		<script src="${ctx}/assets/UEditor/ueditor.all.js" type="text/javascript"></script>
-		<script src="${ctx}/assets/UEditor/lang/zh-cn/zh-cn.js" type="text/javascript"></script>
-		<script src="${ctx}/assets/scripts/inputControl.js" type="text/javascript"></script>
-		<script type="text/javascript" src="${ctx }/assets/scripts/uploadify/jquery.uploadify.min.js"></script>
 	<div class="box">
 		<section class = "content">
 			<p class = "detail-title">
@@ -62,28 +48,27 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				</li>
 				<li>
 					<span>上线时间：</span>
-					<input type="text" name="startTime" class="Wdate half" id="time3" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time4\')}'})" />
+					<input type="text" name="startTime" id="startTime" class="Wdate half"  onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'endTime\')}'})" />
 					<em class = "gang">-</em>
-					<input type="text" name="endTime" class="Wdate half" id="time4" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'time3\')}'})"/>
+					<input type="text" name="endTime" id="endTime" class="Wdate half"  onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'startTime\')}'})"/>
 				</li>
 				<li><span>城市：</span>
-					<select onchange="setCityName();" name="cityId" id="cityId" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+					<select onchange="setCityName();" name="cityId" id="cityId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
 						<option value="">全部</option>
 						<c:forEach items="${cityList}" var="city">
 							<option value="${city.id}">${city.name}</option>
 						</c:forEach>
 					</select>
-					<span class = "_star ">*</span>
 				</li>
 				<li><span>平台：</span>
-					<select name="source" id="source" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+					<select name="source" id="source" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
 							<option value="0">网站</option>
 						    <option value="1">微站</option>
 					</select>
 					<span class = "_star ">*</span>
 				</li>
 				<li><span>模块：</span>
-					<select name="model" id="model" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+					<select name="model" id="model" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
 						<option value="0">首页</option>
 						<option value="1">新房</option>
 						<option value="2">二手房</option>
@@ -92,7 +77,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 					<span class = "_star ">*</span>
 				</li>
 				<li><span>位置：</span>
-					<select name="position" id="position" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+					<select name="position" id="position" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
 						<option value="0">位置１</option>
 						<option value="1">位置２</option>
 						<option value="2">位置３</option>
@@ -111,40 +96,11 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				</li>
 				<!-- <li><span>小图：</span><img  src="" width="120px" height="100px" alt=""><input type="file" name="file2" id="file2" onchange="previewImg(this)"></li> -->
 				<li id="picLike"><span>图片链接：</span>
-				<input id="bannerId" name="bannerLinkurl" maxlength="255" type="text" value=""> 
+				<input id="bannerLinkurl" name="bannerLinkurl" maxlength="255" type="text" onblur="checkUrl('bannerLinkurl','bannerLinkurl','网址格式不正确！')" value="">
 				</li>
 				<li id="textArea" style="display: none;"><span>页面内容：</span><textarea style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;float: right" name="detail" id="myEditor" rows="" cols=""></textarea></li>
-				<div id="prodInfo" style="display: none;" class = "table-responsive m40">
-					<table class="table table-bordered table-add">
-					<thead>
-				       	<tr>
-					       	<th>商品编号</th>
-					       	<th>商品名称</th>
-					       	<th>商品分类</th>
-					       	<th>商品价格</th>
-					       	<th>操作</th>
-				       	</tr>
-			       	</thead>
-			       	<tbody id="productList">
-			       	</tbody>
-					</table>
-				</div>
-				
 				<li><span>图片说明：</span><input type="text" name="imgDesc"></li>
-				<%--<li style="display:flex;align-items:center">
-				<span>状态：<input name = "enabled" id = "enabled" type="hidden" value=""></span>
-					<input style="width: 15px;height: 15px;margin: 0px;" onchange="addIsShow();" type="radio" name="isshow" value="1">
-					<em class = "gang" style = "margin-right:15px;">开放</em>   
-					<input style="width: 15px;height: 15px;margin: 0px;" onchange="addIsShow();" type="radio" name="isshow" value="0">
-					<em class = "gang">关闭</em>
-					<span class = "_star ">*</span> 
-				</li>
-				<li><span>排序：</span><input maxlength="3" type="text" name="sortOrder" onfocus="InitInput.setNumber(this,3,0,0)"><span class = "_star ">*</span></li>--%>
 			</ul>
-			
-			
-			
-			
 	       	<ul class = "adminfo row">
 	       		<li>
 					<span></span>
@@ -316,7 +272,15 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
     }
     
     function subumintBanner(){
-		var data = $("#formId").serialize();
+        if(!(notEmpty('startTime','startTime','开始时间不能为空！')&&notEmpty('endTime','endTime','结束时间不能为空！')&&checkSelect("source|model|position","来源不能为空！|模块不能为空！|位置不能为空！"))){
+            return;
+        }
+		if($("#picLike").attr("style")!='display: none;'){
+            if(!checkUrl('bannerLinkurl','bannerLinkurl','网址格式不正确！')){
+                return;
+			}
+		}
+        var data = $("#formId").serialize();
         $.ajax({
             type: "post",
             url: "${ctx}/rest/setting/addBanner",

@@ -92,11 +92,11 @@
                 <input value="${item.parentId}" name="parentId" type="hidden"/><label style="color: red" class = "_star " >*</label>
 
             </li>
-            <li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >
+            <li  id="showDiv" style="display: none;padding-top: 0px;position:relative;" >
                 <div class="zTreeDemoBackground left" style  = "position:absolute; left: -278px; top: 52px;"   onblur="test(event)">
                     <ul id="categoryTree" class="ztree" style  = "width:235px; height: 140px!important;"></ul>
                 </div>
-                <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: -30px; top: 63px;" onclick="hideTree()">
+                <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: -60px; top: 63px;" onclick="hideTree()">
             </li>
 
             <li>

@@ -66,8 +66,18 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							<td><c:if test="${banner.enabled =='0'}">关闭</c:if><c:if test="${banner.enabled =='1'}">开放</c:if></td>
 							<td>${banner.cityName}</td>
 							<td><c:if test="${banner.source =='0'}">网站</c:if><c:if test="${banner.source =='1'}">微站</c:if></td>
-							<td>${banner.model}</td>
-							<td>${banner.position}</td>
+							<td>
+								<c:if test="${banner.model==0}">首页</c:if>
+								<c:if test="${banner.model==1}">新房</c:if>
+								<c:if test="${banner.model==2}">二手房</c:if>
+								<c:if test="${banner.model==3}">租房</c:if>
+							</td>
+							<td>
+								<c:if test="${banner.position==0}">位置一</c:if>
+								<c:if test="${banner.position==1}">位置二</c:if>
+								<c:if test="${banner.position==2}">位置三</c:if>
+								<c:if test="${banner.position==3}">位置四</c:if>
+							</td>
 							<td>${banner.id}</td>
 							<td>${banner.startTime}</td>
 							<td>${banner.endTime}</td>
