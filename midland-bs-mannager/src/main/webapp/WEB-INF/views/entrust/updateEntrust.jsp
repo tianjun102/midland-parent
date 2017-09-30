@@ -51,17 +51,17 @@
     <form action="${ctx}/rest/appoint/update" method="post" id="appointInfoForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${entrust.id}">
-            <li class="col-md-6"><span>预约编号：</span><input type="text" name="entrustSn" id="entrustSn"
+            <li class="col-md-6"><span>预约编号：</span><input type="text" name="entrustSn" id="entrustSn" disabled="disabled"
                                                           value="${entrust.entrustSn}"/>
             </li>
-            <li class="col-md-6"><span>委托时间：</span><input type="text" name="entrustTime" id="entrustTime"
+            <li class="col-md-6"><span>委托时间：</span><input type="text" name="entrustTime" id="entrustTime" disabled="disabled"
                                                           value="${entrust.entrustTime}" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" maxlength="50"/><span
                     class="_star">*</span>
             </li>
-            <li class="col-md-6"><span>委托人：</span><input type="text" name="nickName" id="nickName"
+            <li class="col-md-6"><span>委托人：</span><input type="text" name="nickName" id="nickName"  onblur="notEmpty('nickName','nickName','')"
                                                         value="${entrust.nickName}"/>
             </li>
-            <li class="col-md-6"><span>手机号码：</span><input type="text" name="phone" id="phone"
+            <li class="col-md-6"><span>手机号码：</span><input type="text" name="phone" id="phone" onblur="checkPhone('','phone','')"
                                                           value="${entrust.phone}"
                                                           maxlength="50"/><span class="_star">*</span></li>
             <li class="col-md-6"><span>分类：</span>
@@ -87,19 +87,19 @@
                 </select>
             </li>
 
-            <li class="col-md-6"><span>区域：</span><input type="text" name="areaName" id="areaName" value="${entrust.areaName}"/>
+            <li class="col-md-6"><span>区域：</span><input type="text" name="areaName" id="areaName"  onblur="notEmpty('areaName','areaName','')" value="${entrust.areaName}"/>
             </li>
-            <li class="col-md-6"><span>小区：</span><input type="text" name="communityName" id="communityName"
+            <li class="col-md-6"><span>小区：</span><input type="text" name="communityName" id="communityName"  onblur="notEmpty('communityName','communityName','')"
                                                         value="${entrust.communityName}" maxlength="50"/><span
                     class="_star">*</span></li>
-            <li class="col-md-6"><span>地址：</span><input type="text" name="address" id="address"
+            <li class="col-md-6"><span>地址：</span><input type="text" name="address" id="address"  onblur="notEmpty('address','address','')"
                                                         value="${entrust.address}"/>
             </li>
-            <li class="col-md-6"><span>户型：</span><input type="text" name="layout" id="layout"
+            <li class="col-md-6"><span>户型：</span><input type="text" name="layout" id="layout"  onblur="notEmpty('layout','layout','')"
                                                         value="${entrust.layout}"/>
 
             </li>
-            <li class="col-md-6"><span>面积：</span><input type="text" name="measure" id="measure"
+            <li class="col-md-6"><span>面积：</span><input type="text" name="measure" id="measure"  onblur="notEmpty('measure','measure','');InitInput.setNumber(this,9,2,2)"
                                                         value="${entrust.measure}"
                                                         maxlength="50"/>㎡<span class="_star">*</span></li>
             <li class="col-md-6"><span>装修：</span>
@@ -187,6 +187,12 @@
 
     //保存数据
     function updateData() {
+        if(!notEmpty('nickName','nickName','')||!notEmpty('areaName','areaName','')
+            ||!notEmpty('communityName','communityName','')||!notEmpty('address','address','')||!notEmpty('layout','layout','')||!notEmpty('measure','measure','')
+            ||!checkPhone('','phone','')){
+            return;
+        }
+
         var data = $("#appointInfoForm").serialize();
 
         $.ajax({
