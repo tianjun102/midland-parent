@@ -82,7 +82,16 @@
       "name": "已成交"
     }
   ],
-
+  "sex": [
+    {
+      "id": "0",
+      "name": "女"
+    },
+    {
+      "id": "1",
+      "name": "男"
+    }
+  ],
   "appointment_sellRent": [
     {
       "id": "1",

@@ -120,6 +120,18 @@ public class Appointment{
 	private String assignedTime;
 	private String startTime;
 	private String endTime;
+	/**
+	 * 委托人性别，0女1男
+	 */
+	private int sex;
+
+	public int getSex() {
+		return sex;
+	}
+
+	public void setSex(int sex) {
+		this.sex = sex;
+	}
 
 	public String getStartTime() {
 		return startTime;
