@@ -51,7 +51,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 	       		<li>
 					<span></span>
 					<a onclick="subumintBanner();" target="contentF" class = "public_btn bg2">保存</a>
-					<a style="margin-left: 20px" href="${ctx}/rest/banner/bannerindex" target="contentF" class="public_btn bg3" id="cancel">取消</a>
+					<a style="margin-left: 20px" onclick="window.parent.location.reload();" href="#" target="contentF" class="public_btn bg3" id="cancel">取消</a>
 				</li>
 	       	</ul>
 		</form>
@@ -62,7 +62,6 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
         HasCheked=true;
         UE.getEditor('myEditor');
-
 
         function subumintBanner(){
             var data = $("#formId").serialize();

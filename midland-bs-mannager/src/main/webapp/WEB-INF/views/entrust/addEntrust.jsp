@@ -76,7 +76,6 @@
                                                           maxlength="50" onblur="checkPhone('','phone','')"/><span class="_star">*</span></li>
             <li>
                 <%@include file="area.jsp" %>
-
             </li>
             <li class="col-md-6"><span>分类：</span>
                 <select name="sellRent" id="sellRent" class="dropdown">

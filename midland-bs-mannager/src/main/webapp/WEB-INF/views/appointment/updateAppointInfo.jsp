@@ -38,10 +38,10 @@
                                                            maxlength="50"/><span
                     class="_star">*</span>
             </li>
-            <li class="col-md-6"><span>预约人：</span><input type="text" name="nickName" id="nickName"
+            <li class="col-md-6"><span>预约人：</span><input type="text" name="nickName" id="nickName" onblur="notEmpty('nickName','nickName','')"
                                                         value="${appointment.nickName}"/>
             </li>
-            <li class="col-md-6"><span>手机号码：</span><input type="text" name="phone" id="phone"
+            <li class="col-md-6"><span>手机号码：</span><input type="text" name="phone" id="phone" onblur="checkPhone('','phone','')"
                                                           value="${appointment.phone}"
                                                           maxlength="50"/><span class="_star">*</span></li>
             <li class="col-md-6"><span>分类：</span>
@@ -135,6 +135,9 @@
 <script type="text/javascript">
     //保存数据
     function updateData() {
+        if (!notEmpty('nickName','nickName','')||!checkPhone('','phone','')){
+            return;
+        }
         var data = $("#appointInfoForm").serialize();
         $.ajax({
             type: "post",
