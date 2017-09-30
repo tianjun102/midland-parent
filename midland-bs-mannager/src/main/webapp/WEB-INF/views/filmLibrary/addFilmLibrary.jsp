@@ -73,12 +73,14 @@
             </li>
 
             <li><span>楼盘名称：</span>
-                <input type="text" name="imgDesc" id="title" />
+                <input type="text" name="housesName" id="housesName" />
             </li>
             <li><span>图片描述：</span>
-                <textarea rows="" cols="" style="width: 250px;height: 70px;border: 1px solid #dbe2e6;" name="introduction" id="introduction"></textarea>
+                <textarea rows="" cols="" style="width: 250px;height: 70px;border: 1px solid #dbe2e6;" name="imgDesc" id="imgDesc"></textarea>
             </li>
-
+                <li><span>简介：</span>
+                    <textarea rows="" cols="" style="width: 250px;height: 70px;border: 1px solid #dbe2e6;" name="introduction" id="introduction"></textarea>
+                </li>
             <li><span>视频上传：</span>
                 <div style="float: left;">
                     <input type="file" name="file_upload1" id="file_upload1"/>
