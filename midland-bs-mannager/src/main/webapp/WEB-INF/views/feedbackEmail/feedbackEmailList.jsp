@@ -15,6 +15,8 @@
         <thead>
             <tr>
 				<th style="width: 8%">编号</th>
+                <th style="width: 8%">联系人</th>
+                <th style="width: 8%">联系方式</th>
 				<th style="width: 8%">邮箱</th>
 				<th style="width: 8%">类型</th>
 				<th style="width: 8%">城市</th>
@@ -28,6 +30,8 @@
                     <tr>
 						<input type="hidden" id="id" value="${item.id}"/>
 						<td>${xh.count}</td>
+                        <td>${item.contactPerson}</td>
+                        <td>${item.phone}</td>
 						<td>${item.email}</td>
 						<td><c:if test="${item.type==0}">总部</c:if><c:if test="${item.type==1}">分部</c:if></td>
 						<td>${item.cityName}</td>

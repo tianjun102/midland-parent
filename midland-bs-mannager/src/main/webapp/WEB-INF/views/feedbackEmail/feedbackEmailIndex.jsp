@@ -16,6 +16,7 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
+				<span>反馈邮箱</span>
 				<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>
 			</p>
 		<form action="${ctx }/rest/feedbackEmail/list" method="POST" id="searchForm"
@@ -36,6 +37,12 @@
 						<option value="0" >总部</option>
 						<option value="1" >分部</option>
 					</select>
+				</li>
+				<li><span>联系人：</span>
+					<input type="text" name="contactPerson" id="contactPerson" placeholder="请输入联系人" /></li>
+				</li>
+				<li><span>联系方式：</span>
+					<input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>
 				</li>
 				<li>
 					<input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/>
