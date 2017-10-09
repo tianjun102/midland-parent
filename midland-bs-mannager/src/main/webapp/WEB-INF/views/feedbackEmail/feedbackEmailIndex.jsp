@@ -21,14 +21,15 @@
 		<form action="${ctx }/rest/feedbackEmail/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
-				<li><span>地区：</span>
+				<%--<li><span>地区：</span>
 					<select name="cityId" id="cityId" class="dropdown">
 						<option value="" >全部</option>
 						<c:forEach items="${cityList}" var="item">
 						<option value="${item.id}" >${item.name}</option>
 						</c:forEach>
 					</select>
-				</li>
+				</li>--%>
+				<%@include file="../layout/sherchArea.jsp" %>
 				<li><span>类型：</span>
 					<select name="type" id="type" class="dropdown">
 						<option value="" >全部</option>

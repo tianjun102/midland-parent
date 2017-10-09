@@ -12,6 +12,7 @@ import com.midland.web.model.Banner;
 import com.midland.web.model.LinkUrlManager;
 import com.midland.web.model.Popular;
 import com.midland.web.model.remote.Agent;
+import com.midland.web.model.user.User;
 import com.midland.web.service.SettingService;
 import com.midland.web.util.MidlandHelper;
 import org.apache.commons.lang3.StringUtils;
@@ -41,12 +42,15 @@ private MidlandConfig midlandConfig;
     // 进入热门关注首页面
     @RequestMapping(value = "showPopularIndex", method = { RequestMethod.GET, RequestMethod.POST })
     public String showPopularIndex(Model model, HttpServletRequest request) {
-        Map<String,String> parem = new HashMap<>();
+        /*Map<String,String> parem = new HashMap<>();
         parem.put("flag","city");
         parem.put("id","*");
         Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
         List<Area> cityList = cityMap.get("city");
-        model.addAttribute("cityList",cityList);
+        model.addAttribute("cityList",cityList);*/
+        settingService.getAllProvinceList(model);
+        User user = MidlandHelper.getCurrentUser(request);
+        model.addAttribute("cityId",user.getCityId());
         return "setting/showPopularIndex";
     }
     // 进入热门关注列表页
@@ -179,12 +183,15 @@ private MidlandConfig midlandConfig;
     // 进入友情链接首页面
     @RequestMapping(value = "showlinkUrlIndex", method = { RequestMethod.GET, RequestMethod.POST })
     public String showlinkUrlIndex(Model model, HttpServletRequest request) {
-        Map<String,String> parem = new HashMap<>();
+        /*Map<String,String> parem = new HashMap<>();
         parem.put("flag","city");
         parem.put("id","*");
         Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
         List<Area> cityList = cityMap.get("city");
-        model.addAttribute("cityList",cityList);
+        model.addAttribute("cityList",cityList);*/
+        settingService.getAllProvinceList(model);
+        User user = MidlandHelper.getCurrentUser(request);
+        model.addAttribute("cityId",user.getCityId());
         return "setting/linkUrlMannagerIndex";
     }
     // 进入友情链接列表页
@@ -276,13 +283,15 @@ private MidlandConfig midlandConfig;
 
     @RequestMapping(value = "bannerIndex", method = { RequestMethod.GET, RequestMethod.POST })
     public String bannerIndex(Model model, HttpServletRequest request,Banner Banner){
-        Map<String,String> parem = new HashMap<>();
+        /*Map<String,String> parem = new HashMap<>();
         parem.put("flag","city");
         parem.put("id","*");
         Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
         List<Area> cityList = cityMap.get("city");
-        model.addAttribute("cityList",cityList);
-
+        model.addAttribute("cityList",cityList);*/
+        settingService.getAllProvinceList(model);
+        User user = MidlandHelper.getCurrentUser(request);
+        model.addAttribute("cityId",user.getCityId());
         return "setting/bannerIndex";
     }
 

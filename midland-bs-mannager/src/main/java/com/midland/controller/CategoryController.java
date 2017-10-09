@@ -5,6 +5,7 @@ import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.web.model.Area;
 import com.midland.web.model.Category;
+import com.midland.web.model.user.User;
 import com.midland.web.service.CategoryService;
 import com.midland.web.service.JdbcService;
 import com.midland.web.service.SettingService;
@@ -39,14 +40,17 @@ public class CategoryController extends BaseFilter {
 	 * 分类控制层
 	 **/
 	@RequestMapping("index")
-	public String categoryIndex(Category category, Model model) throws Exception {
-		Map<String,String> parem = new HashMap<>();
+	public String categoryIndex(Category category, Model model,HttpServletRequest request) throws Exception {
+		/*Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
 		parem.put("id","*");
 		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
-		List<Area> cityList = cityMap.get("city");
-		model.addAttribute("cityList",cityList);
+		List<Area> cityList = cityMap.get("city");*/
+		/*model.addAttribute("cityList",cityList);*/
+		settingService.getAllProvinceList(model);
+		User user = MidlandHelper.getCurrentUser(request);
 		model.addAttribute("type",category.getType());
+		model.addAttribute("cityId",user.getCityId());
 		return "category/categoryIndex";
 	}
 
@@ -161,7 +165,7 @@ public class CategoryController extends BaseFilter {
 	/**
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
 	 **/
-	@RequestMapping("list")
+	@RequestMapping(value = "list",produces ="application/json; charset=UTF-8")
 	public String findCategoryList(Category category, Model model, HttpServletRequest request) {
 		try {
 			log.info("findCategoryList  {}",category);
