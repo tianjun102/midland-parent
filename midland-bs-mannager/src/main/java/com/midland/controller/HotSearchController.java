@@ -184,7 +184,7 @@ public class HotSearchController extends BaseFilter {
 
 
 	@RequestMapping("/export")
-	public void userInfoExportExcel(HotSearch hotSearch, HttpServletResponse response) throws Exception {
+	public void userInfoExportExcel(HotSearch hotSearch, HttpServletResponse response,HttpServletRequest request) throws Exception {
 		List<HotSearch> dataList = hotSearchServiceImpl.findHotSearchList(hotSearch);
 		PoiExcelExport pee = new PoiExcelExport(response,"热搜词","sheet1");
 		//调用
@@ -201,6 +201,6 @@ public class HotSearchController extends BaseFilter {
 		String titleName[] = {"编号","城市","热搜词","模块"};
 		int titleSize[] = {13,13,13,13};
 		//其他设置 set方法可全不调用
-		pee.wirteExcel(titleColumn, titleName, titleSize, exportModels);
+		pee.wirteExcel(titleColumn, titleName, titleSize, exportModels,request);
 	}
 }

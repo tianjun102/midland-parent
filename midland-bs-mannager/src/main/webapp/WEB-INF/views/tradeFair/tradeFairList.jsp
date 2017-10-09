@@ -44,7 +44,14 @@
                         <td>${item.housesId }</td>
                         <td>${item.operatorName }</td>
                         <td>
-
+                            <c:choose>
+                                <c:when test="${item.isShow==0}">
+                                    <a target="contentF" onclick="hiddenOrShow(${item.id },1)">显示</a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a target="contentF" onclick="hiddenOrShow(${item.id },0)">隐藏</a>
+                                </c:otherwise>
+                            </c:choose>
                             <a target="contentF" onclick="to_edit(${item.id })">编辑</a>
                             <a target="contentF" onclick="delete1(${item.id })">删除</a>
                         </td>
@@ -68,6 +75,25 @@
 </c:if>
 
 <script type="text/javascript">
+    function hiddenOrShow(id, flag){
+        //0隐藏，1显示
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/tradeFair/update?id="+id+"&isShow="+flag,
+            async: false, // 此处必须同步
+            dataType: "json",
+
+            success: function (data) {
+                if (data.state==0){
+                    $('#searchForm').submit();
+                }
+            },
+            error: function () {
+                layer.msg("操作失败！", {icon: 2});
+            }
+        })
+    }
+
 
     function delete1(id){
         $.ajax({

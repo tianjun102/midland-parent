@@ -765,7 +765,7 @@ public class UserController extends BaseFilter {
     
     
     @RequestMapping("/export")
-    public void userInfoExportExcel(User user, HttpServletResponse response){
+    public void userInfoExportExcel(User user, HttpServletResponse response,HttpServletRequest request){
 	    List<User> dataList = userService.selectUserList(user);
 		List<ExportModel> exportModels = new ArrayList<>();
 
@@ -790,7 +790,7 @@ public class UserController extends BaseFilter {
 	    String titleName[] = {"用户id","用户名","昵称","联系方式","邮箱","城市","来源","审核状态"};
 	    int titleSize[] = {13,13,13,13,13,13,13,13};
 	    //其他设置 set方法可全不调用
-	    pee.wirteExcel(titleColumn, titleName, titleSize, exportModels);
+	    pee.wirteExcel(titleColumn, titleName, titleSize, exportModels,request);
     }
     
     
