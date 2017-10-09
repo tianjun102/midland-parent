@@ -4,11 +4,14 @@ import java.io.*;
 import java.lang.reflect.Method;
 import java.net.URLEncoder;  
 import java.text.DecimalFormat;  
-import java.util.List;  
-  
-import javax.servlet.http.HttpServletResponse;  
-  
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;  
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;  
 import org.apache.poi.hssf.usermodel.HSSFPalette;  
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;  
@@ -132,7 +135,7 @@ public class PoiExcelExport {
      * @param titleSize   列宽 
      * @param dataList  数据 
      */  
-    public void wirteExcel(String titleColumn[],String titleName[],int titleSize[],List<?> dataList){  
+    public void wirteExcel(String titleColumn[], String titleName[], int titleSize[], List<?> dataList, HttpServletRequest request){
         //添加Worksheet（不添加sheet时生成的xls文件打开时会报错)  
         Sheet sheet = workbook.createSheet(this.sheetName);    
         //新建文件  
@@ -143,13 +146,24 @@ public class PoiExcelExport {
                 out = new FileOutputStream(fileDir);                  
             }else{  
                 //否则，直接写到输出流中  
-                out = response.getOutputStream();  
-                fileName = fileName+".xls";  
-                response.setContentType("application/x-msdownload");  
-                response.setHeader("Content-Disposition", "attachment; filename="  
-                        + URLEncoder.encode(fileName, "UTF-8"));  
-            }  
-              
+                out = response.getOutputStream();
+                String agent = request.getHeader("USER-AGENT");
+                Boolean flag= agent.indexOf("like Gecko")>0;
+
+                if (request.getHeader("User-Agent").toLowerCase().indexOf("msie") >0||flag){
+                    fileName = URLEncoder.encode(fileName, "UTF-8");//IE浏览器
+                    fileName = fileName + ".xls";
+                    response.setHeader("Content-Disposition", "attachment; filename="+fileName);
+                }else {
+                    byte[] bytes = agent.contains("MSIE") ? fileName.getBytes() : fileName.getBytes("UTF-8"); // name.getBytes("UTF-8")处理safari的乱码问题
+                    fileName = new String(bytes, "ISO-8859-1"); // 各浏览器基本都支持ISO编码
+                    fileName = fileName + ".xls";
+
+                    response.setHeader("Content-disposition", String.format("attachment; filename=\"%s\"", fileName)); // 文件名外的双引号处理firefox的空格截断问题
+                }
+                response.setContentType("application/x-msdownload");
+
+            }
             //写入excel的表头  
             Row titleNameRow = workbook.getSheet(sheetName).createRow(0);   
             //设置样式  
@@ -232,8 +246,11 @@ public class PoiExcelExport {
                 e.printStackTrace();  
             }  
         }    
-    }  
-      
+    }
+
+
+
+
     /** 
      * 将16进制的颜色代码写入样式中来设置颜色 
      * @param style  保证style统一 
@@ -313,5 +330,34 @@ public class PoiExcelExport {
             }   
         }  
         return flag;  
-    }  
+    }
+
+    /**
+     * 对文件流输出下载的中文文件名进行编码 屏蔽各种浏览器版本的差异性
+     * @throws UnsupportedEncodingException
+     */
+    public static String encodeChineseDownloadFileName(
+            HttpServletRequest request, String pFileName) throws UnsupportedEncodingException {
+
+//        byte[] bytes = agent.contains("MSIE") ? pFileName.getBytes() : pFileName.getBytes("UTF-8"); // name.getBytes("UTF-8")处理safari的乱码问题
+//        pFileName = new String(bytes, "ISO-8859-1"); // 各浏览器基本都支持ISO编码
+//        response.setHeader("Content-disposition", String.format("attachment; filename=\"%s\"", pFileName)); // 文件名外的双引号处理firefox的空格截断问题
+//
+
+        String filename = pFileName;
+        String agent = request.getHeader("USER-AGENT");
+        if (null != agent){
+            if (-1 != agent.indexOf("Firefox")) {//Firefox
+                filename = "=?UTF-8?B?" + (new String(org.apache.commons.codec.binary.Base64.encodeBase64(pFileName.getBytes("UTF-8"))))+ "?=";
+            }else if (-1 != agent.indexOf("Chrome")) {//Chrome
+                filename = new String(pFileName.getBytes(), "ISO8859-1");
+            } else {//IE7+
+                filename = java.net.URLEncoder.encode(pFileName, "UTF-8");
+                filename = StringUtils.replace(filename, "+", "%20");//替换空格
+            }
+        } else {
+            filename = pFileName;
+        }
+        return filename;
+    }
 }  

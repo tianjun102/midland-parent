@@ -314,7 +314,7 @@ public class QuotationSecondHandController extends BaseFilter {
 	}
 	
 	@RequestMapping("/export")
-	public void quotationSecondHandExportExcel(QuotationSecondHandView view1, HttpServletResponse response) throws Exception {
+	public void quotationSecondHandExportExcel(QuotationSecondHandView view1, HttpServletResponse response,HttpServletRequest request) throws Exception {
 		List<QuotationSecondHandView> dataList = quotationSecondHandViewService.toolTip(view1);
 		PoiExcelExport pee = new PoiExcelExport(response,"二手房信息","sheet1");
 		//调用
@@ -341,7 +341,7 @@ public class QuotationSecondHandController extends BaseFilter {
 		String titleName[] = {"城市","区域","类型","成交套数","成交面积","环比","数据时间","更新时间"};
 		int titleSize[] = {13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13};
 		//其他设置 set方法可全不调用
-		pee.wirteExcel(titleColumn, titleName, titleSize, exportModels);
+		pee.wirteExcel(titleColumn, titleName, titleSize, exportModels,request);
 	}
 	
 }

@@ -168,7 +168,7 @@ public class FeedbackEmailController extends BaseFilter {
 
 
 	@RequestMapping("/export")
-	public void userInfoExportExcel(FeedbackEmail feedbackEmail, HttpServletResponse response) throws Exception {
+	public void userInfoExportExcel(FeedbackEmail feedbackEmail, HttpServletResponse response,HttpServletRequest request) throws Exception {
 		List<FeedbackEmail> dataList = feedbackEmailServiceImpl.findFeedbackEmailList(feedbackEmail);
 		PoiExcelExport pee = new PoiExcelExport(response,"反馈邮箱","sheet1");
 		//调用
@@ -185,7 +185,7 @@ public class FeedbackEmailController extends BaseFilter {
 		String titleName[] = {"编号","邮箱","类型","城市"};
 		int titleSize[] = {13,13,13,13};
 		//其他设置 set方法可全不调用
-		pee.wirteExcel(titleColumn, titleName, titleSize, exportModels);
+		pee.wirteExcel(titleColumn, titleName, titleSize, exportModels,request);
 	}
 
 }

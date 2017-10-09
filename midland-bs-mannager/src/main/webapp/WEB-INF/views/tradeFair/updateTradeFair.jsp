@@ -56,7 +56,7 @@
                 <input type="text" name="housesId" id="housesId" value="${item.housesId}"/>
             </li>
 
-            <li><span>标题：</span>
+            <li><span>楼盘名称：</span>
                 <input type="text" name="title" id="title" value="${item.title}"/>
             </li>
             <li><span>简介：</span>
