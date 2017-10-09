@@ -29,19 +29,23 @@
                 </select>
             </li>
             <li><span>邮箱：</span>
-                <input type="text" value="${item.email}" name="email" id="email" />
+                <input type="text" value="${item.email}" name="email" id="email" onblur="checkEmail('email','email','邮箱格式错误！')"/>
+                <span class = "_star ">*</span>
             </li>
             <li><span>类型：</span>
                 <select name="type" id="type" class="dropdown">
                     <option <c:if test="${item.type==0}">selected="selected"</c:if> value="0">总部</option>
                     <option <c:if test="${item.type==1}">selected="selected"</c:if> value="1">分部</option>
                 </select>
+                <span class = "_star ">*</span>
             </li>
             <li><span>联系人：</span>
-                <input type="text" name="contactPerson" id="contactPerson" value="${item.contactPerson}" />
+                <input type="text" name="contactPerson" id="contactPerson" value="${item.contactPerson}" onblur="notEmpty('contactPerson','contactPerson','联系人不能为空！')"/>
+                <span class = "_star ">*</span>
             </li>
             <li><span>联系方式：</span>
-                <input type="text" name="phone" id="phone" value="${item.phone}" />
+                <input type="text" name="phone" id="phone" value="${item.phone}" onblur="checkPhone('phone','phone','手机号码格式不正确！')" />
+                <span class = "_star ">*</span>
             </li>
             <li>
                 <span></span>
@@ -56,6 +60,9 @@
 <script type="text/javascript">
     //保存数据
     function updateData() {
+        if(!(checkEmail('email','email','邮箱格式错误！')&&checkSelect('type','类型不能为空！')&&notEmpty('contactPerson','contactPerson','联系人不能为空！')&&checkPhone('phone','phone','手机号码格式不正确！'))){
+            return;
+        }
         var data = $("#dataForm").serialize();
         debugger;
         $.ajax({
