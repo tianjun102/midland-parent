@@ -4,12 +4,14 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.web.model.Area;
+import com.midland.web.model.Category;
 import com.midland.web.model.SiteMap;
 import com.midland.web.model.user.User;
 import com.midland.web.service.JdbcService;
 import com.midland.web.service.SettingService;
 import com.midland.web.service.SiteMapService;
 import com.midland.web.util.MidlandHelper;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +64,12 @@ public class SiteMapController extends BaseFilter {
 		parem.put("id","*");
 		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
 		List<Area> cityList = cityMap.get("city");
+		Category category = new Category();
+		category.setType(4);
+		String resultCate = getCategoryTree("",category);
+		if(StringUtils.isNotEmpty(resultCate)){
+			model.addAttribute("categoryData",resultCate );
+		}
 		model.addAttribute("cityList",cityList);
 		return "siteMap/addSiteMap";
 	}
@@ -122,6 +130,12 @@ public class SiteMapController extends BaseFilter {
 		parem.put("id","*");
 		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
 		List<Area> cityList = cityMap.get("city");
+		Category category = new Category();
+		category.setType(4);
+		String resultCate = getCategoryTree("",category);
+		if(StringUtils.isNotEmpty(resultCate)){
+			model.addAttribute("categoryData",resultCate );
+		}
 		model.addAttribute("cityList",cityList);
 		model.addAttribute("item",result);
 		return "siteMap/updateSiteMap";
