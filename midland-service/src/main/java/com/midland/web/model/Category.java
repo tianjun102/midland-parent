@@ -47,6 +47,8 @@ public class Category{
 
 	private String	parentName;
 
+	private Integer isShow;
+
 
 	public Integer getId() {
 		return id;
@@ -142,6 +144,14 @@ public class Category{
 
 	public void setParentName(String parentName) {
 		this.parentName = parentName;
+	}
+
+	public Integer getIsShow() {
+		return isShow;
+	}
+
+	public void setIsShow(Integer isShow) {
+		this.isShow = isShow;
 	}
 
 	@Override

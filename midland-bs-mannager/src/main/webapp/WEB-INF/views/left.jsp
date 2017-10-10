@@ -304,6 +304,10 @@
 						<a id = "system2" href="${ctx}/rest/setting/showlinkUrlIndex" target="contentF"><span>友情链接管理</span></a>
 					</shiro:hasPermission>
 
+					<shiro:hasPermission name="popularCateList">
+						<a id = "system2" href="${ctx}/rest/category/index?type=3" target="contentF"><span>友情链接分类管理</span></a>
+					</shiro:hasPermission>
+
 					<shiro:hasPermission name="bannerList">
 						<a id = "system2" href="${ctx}/rest/setting/bannerIndex" target="contentF"><span>Banner管理</span></a>
 					</shiro:hasPermission>

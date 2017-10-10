@@ -7,10 +7,7 @@ import com.midland.base.BaseFilter;
 import com.midland.config.MidlandConfig;
 import com.midland.core.util.HttpUtils;
 import com.midland.web.enums.ContextEnums;
-import com.midland.web.model.Area;
-import com.midland.web.model.Banner;
-import com.midland.web.model.LinkUrlManager;
-import com.midland.web.model.Popular;
+import com.midland.web.model.*;
 import com.midland.web.model.remote.Agent;
 import com.midland.web.model.user.User;
 import com.midland.web.service.SettingService;
@@ -76,6 +73,12 @@ private MidlandConfig midlandConfig;
     @RequestMapping(value = "toAddPage", method = { RequestMethod.GET, RequestMethod.POST })
     public String toAddPage(Model model, HttpServletRequest request){
         settingService.getAllProvinceList(model);
+        Category category = new Category();
+        category.setType(3);
+        String result = getCategoryTree("",category);
+        if(StringUtils.isNotEmpty(result)){
+            model.addAttribute("categoryData",result );
+        }
         return "setting/addPopular";
     }
     
@@ -144,6 +147,12 @@ private MidlandConfig midlandConfig;
             parem.put("id",popular.getCityId());
             parem.put("parentId",popular.getAreaId());
             sheetLst = settingService.queryAreaByRedis(parem);
+        }
+        Category category = new Category();
+        category.setType(3);
+        String resultCate = getCategoryTree("",category);
+        if(StringUtils.isNotEmpty(resultCate)){
+            model.addAttribute("categoryData",resultCate );
         }
         model.addAttribute("sheetList",sheetLst==null?null:sheetLst.get("sheet"));
         model.addAttribute("popular",popular);

@@ -63,6 +63,8 @@ public class Popular{
 	 **/
 	private String sheetName;
 
+	private String cateName;
+
 
 	public Integer getId() {
 		return id;
@@ -182,6 +184,14 @@ public class Popular{
 
 	public void setSheetName(String sheetName) {
 		this.sheetName = sheetName;
+	}
+
+	public String getCateName() {
+		return cateName;
+	}
+
+	public void setCateName(String cateName) {
+		this.cateName = cateName;
 	}
 
 	@Override

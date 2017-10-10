@@ -19,10 +19,11 @@
 		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
 		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
 		<result column="img_desc" property="imgDesc" jdbcType="VARCHAR" />
+		<result column="is_show" property="isShow" jdbcType="INTEGER" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,city_id,source,mode_name,position,title,description,price,address,img_url,subway_distance,link_url,detail,is_delete,city_name,img_desc
+		id,city_id,source,mode_name,position,title,description,price,address,img_url,subway_distance,link_url,detail,is_delete,city_name,img_desc,is_show
 	</sql>
 
 	<select id="selectSpecialPageById" resultMap="BaseResultMap">
@@ -99,6 +100,9 @@
 			<if test="imgDesc != null">
 				img_desc,
 			</if>
+			<if test="isShow != null">
+				is_show,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -146,6 +150,9 @@
 			</if>
 			 <if test="imgDesc != null">
 				 #{imgDesc,jdbcType=VARCHAR},
+			 </if>
+			 <if test="isShow != null">
+				 #{isShow,jdbcType=INTEGER},
 			 </if>
 		</trim>
 	</insert>
@@ -195,6 +202,9 @@
 		</if>
 		<if test="imgDesc != null">
 			img_desc= #{imgDesc,jdbcType=VARCHAR},
+		</if>
+		<if test="isShow != null">
+			is_show= #{isShow,jdbcType=INTEGER},
 		</if>
 	</sql>
 
@@ -246,6 +256,9 @@
 		</if>
 		<if test="imgDesc != null">
 			 and img_desc= #{imgDesc,jdbcType=VARCHAR}
+		</if>
+		<if test="isShow != null">
+			 and is_show= #{isShow,jdbcType=INTEGER}
 		</if>
 	</sql>
 
