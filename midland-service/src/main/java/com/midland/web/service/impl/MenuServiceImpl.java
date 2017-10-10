@@ -84,4 +84,10 @@ public class MenuServiceImpl implements MenuService {
 			throw e;
 		}
 	}
+
+	@Override
+	public int getMaxOrderBy() {
+		Integer result = menuMapper.getMaxOrderBy();
+		return result==null?0:result;
+	}
 }

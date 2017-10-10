@@ -21,6 +21,7 @@
 		<section class = "content">
 			<p class = "detail-title">
 				<span>菜单管理列表</span>
+				<a class = "setup"  target="contentF" onclick="addMenu()">新增</a>
 			</p>
 		<form action="${ctx }/rest/menu/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
@@ -34,8 +35,11 @@
 				<li><span>来源：</span>
 					<select name="source" id="source" class="dropdown">
                         <option value="" >请选择</option>
-						<option value="0">网站</option>
-						<option value="1">微商</option>
+						<c:forEach items="${sources}" var="s">
+							<option value="${s.id}" <c:if test="${s.id == item.source}">selected="selected"</c:if>>
+									${s.name}
+							</option>
+						</c:forEach>
 					</select>
 				</li>
 
@@ -48,6 +52,19 @@
 	
 	
 	<script type="text/javascript">
+
+		function addMenu() {
+            layer.open({
+                type: 2,
+                skin: 'layer-style',
+                area: ['500px','700px'],
+                shadeClose: false, //点击遮罩关闭
+                title:['新增菜单'],
+                resize: false,
+                scrollbar:false,
+                content:['${ctx}/rest/menu/to_add', 'no']
+            });
+        }
 
 		 window.onload = function(){
              $('#searchForm').submit();

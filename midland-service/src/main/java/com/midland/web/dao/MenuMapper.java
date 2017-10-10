@@ -1,8 +1,10 @@
 package com.midland.web.dao;
 
 import com.midland.web.model.Menu;
-import java.util.List;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+@Repository
 public interface MenuMapper {
 
 	Menu selectMenuById(Integer menu);
@@ -12,6 +14,8 @@ public interface MenuMapper {
 	int updateMenuById(Menu menu);
 
 	int insertMenu(Menu menu);
+
+	Integer getMaxOrderBy();
 
 	List<Menu> findMenuList(Menu menu);
 
