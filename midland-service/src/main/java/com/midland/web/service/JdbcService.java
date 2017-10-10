@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 
@@ -92,6 +93,7 @@ public class JdbcService {
 	 * @param orderByParam 要对数据上移或者下移或者置顶的那条数据的排序序号
 	 * @param sort 0置顶，1上移，2下移，这个是页面控制后台逻辑用的，不保存到数据库
 	 */
+	@Transactional(rollbackFor = Exception.class)
 	public void listDesc(String primaryKeyName,String id,String orderByColumn, String tableName, String orderByParam,int sort){
 		if (sort==0){
 			Map map= stickly(primaryKeyName,id,orderByColumn,tableName);
@@ -114,9 +116,14 @@ public class JdbcService {
 		}
 		String primaryKeyId=String.valueOf(map.get(primaryKeyName));
 		//要交换的排序号
+
 		String descNumResult=String.valueOf(map.get(orderByColumn));
+		updateSql(primaryKeyName,primaryKeyId,orderByColumn,tableName,"-99999");
 		updateSql(primaryKeyName,id,orderByColumn,tableName,descNumResult);
 		updateSql(primaryKeyName,primaryKeyId,orderByColumn,tableName,orderByParam);
+
+
+
 	}
 	
 	

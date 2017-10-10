@@ -88,6 +88,6 @@ public class MenuServiceImpl implements MenuService {
 	@Override
 	public int getMaxOrderBy() {
 		Integer result = menuMapper.getMaxOrderBy();
-		return result==null?0:result;
+		return result==null?0:result+1;
 	}
 }

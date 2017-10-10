@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="../layout/tablib.jsp"%>
+<%@include file="../layout/source.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -38,12 +39,12 @@
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
 				<li>
-					<%@include file="../entrust/area.jsp" %>
+					<%@include file="area.jsp" %>
 				</li>
 				<li><span>菜单名称：</span>
 					<input type="text" name="menuName" id="menuName" placeholder="请输入菜单名称" /></li>
 				</li>
-				<li><span>来源：</span>
+				<li><span>平台：</span>
 					<select name="source" id="source" class="dropdown">
                         <option value="" >请选择</option>
 						<c:forEach items="${sources}" var="s">
@@ -68,7 +69,7 @@
             layer.open({
                 type: 2,
                 skin: 'layer-style',
-                area: ['500px','700px'],
+                area: ['500px','500px'],
                 shadeClose: false, //点击遮罩关闭
                 title:['新增菜单'],
                 resize: false,

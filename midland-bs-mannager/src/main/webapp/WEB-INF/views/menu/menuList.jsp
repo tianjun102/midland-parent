@@ -16,6 +16,7 @@
         <tr>
             <th style="width: 3%"></th>
             <th style="width: 3%">城市</th>
+            <th style="width: 3%">图标</th>
             <th style="width: 3%">平台</th>
             <th style="width: 3%">名称</th>
             <th style="width: 5%">点击量</th>
@@ -32,6 +33,7 @@
                         <input type="hidden" id="id" value="${item.id}"/>
                         <td>${xh.count }</td>
                         <td>${item.cityName }</td>
+                        <td><img src="${item.iconImg }" style="width:40px;height:40px" alt=""></td>
                         <td> <c:if test="${item.source ==0 }">网站</c:if>
                             <c:if test="${item.source ==1 }">微站</c:if></td>
                         <td>${item.menuName }</td>
@@ -132,6 +134,8 @@
             success: function (data) {
                 if (data.state==0){
                     $('#searchForm').submit();
+                }else{
+                    layer.msg("操作频繁！", {icon: 2});
                 }
             },
             error: function () {
