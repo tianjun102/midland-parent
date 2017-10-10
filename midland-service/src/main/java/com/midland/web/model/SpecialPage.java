@@ -66,6 +66,10 @@ public class SpecialPage{
 	 * 缩略图描述
 	 **/
 	private String imgDesc;
+	/**
+	 * 是否显示隐藏0=显示；1隐藏
+	 **/
+	private Integer isShow;
 
 
 	public Integer getId() {
@@ -194,6 +198,14 @@ public class SpecialPage{
 
 	public void setImgDesc(String imgDesc) {
 		this.imgDesc = imgDesc;
+	}
+
+	public Integer getIsShow() {
+		return isShow;
+	}
+
+	public void setIsShow(Integer isShow) {
+		this.isShow = isShow;
 	}
 
 	@Override

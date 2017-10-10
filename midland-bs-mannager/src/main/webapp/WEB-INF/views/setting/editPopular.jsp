@@ -2,11 +2,15 @@
          pageEncoding="UTF-8" %>
 <%@include file="../layout/tablib.jsp" %>
 <%@include file="../layout/source.jsp"%>
+<%@include file="../layout/zTree.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>添加热门关注</title>
+    <link rel="stylesheet" href="${ctx}/assets/css/ztree/css/demo.css">
+    <link rel="stylesheet" href="${ctx }/assets/css/common.css">
+    <link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css"/>
     <style type="text/css">
         .content ul.userinfo>li {
             float: none !important;
@@ -17,7 +21,56 @@
         .dropdown {
             width: 274px!important;
         }
+        .vipcate{
+            width: 274px!important;;
+            height: 38px;
+            line-height: 38px;
+            border: 1px solid #dbe2e6;
+            border-radius: 4px;
+            text-indent: 10px;
+            outline-color: #0099e0;
+        }
     </style>
+    <script type="text/javascript">
+
+        var setting = {
+            check: {
+                enable: true,
+                chkboxType: { "Y": "sp", "N": "sp" }
+
+
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                beforeClick: beforeClick
+            }
+        };
+        var catProNodes =[{id:0, pId:0,name:'分类',open:true,nocheck:true,iconSkin:"pIcon01"},${categoryData}];
+
+
+        $(document).ready(function(){
+            $.fn.zTree.init($("#categoryTree"), setting, catProNodes);
+        });
+
+        function beforeClick(treeId, treeNode, clickFlag) {
+            $("input[name='cateId']").val(treeNode.id);
+            $("input[name='cateName']").val(treeNode.name);
+            $("#showDiv").hide();
+        }
+
+        function showTree(event){
+            $("#showDiv").show();
+        }
+
+        function hideTree(event){
+            $("#showDiv").hide();
+        }
+
+    </script>
 </head>
 <body>
 <section class="content" style="border:none;">
@@ -27,22 +80,32 @@
             <li><span>链接名：</span><input style="width:274px;" type="text" value="${popular.name}" onblur="notEmpty('name','name','链接名不能为空！');" name="name" id="name" maxlength="50"/><span class="_star">*</span></li>
             <li style="display:flex;align-items:center">
                 <span style = "float:left;">平台：</span>
-                <select name="source" id="source" class="dropdown">
+                <select name="source" id="source" style="height: 38px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option value="">全部</option>
                     <option <c:if test="${popular.source =='1'}">selected = 'selected'</c:if> value="1">网站</option>
                     <option <c:if test="${popular.source =='2'}">selected = 'selected'</c:if> value="2">微站</option>
                 </select>
             </li>
-            <li style="display:flex;align-items:center">
+            <%--<li style="display:flex;align-items:center">
                 <span style = "float:left;">类型：</span>
                 <select name="cateId" id="cateId" class="dropdown">
                     <option <c:if test="${popular.source =='1'}">selected = 'selected'</c:if> value="1">精选深圳二手房</option>
                     <option <c:if test="${popular.source =='1'}">selected = 'selected'</c:if> value="2">精选深圳租房</option>
                 </select>
+            </li>--%>
+            <li><span>类型：</span><input class="vipcate" id="cateName" name="cateName" value="${popular.cateName}" onclick="showTree()" readonly="readonly"/>
+                <input name="cateId" value="${popular.cateId}" type="hidden"/><label style="color: red" class = "_star " >*</label>
+
+            </li>
+            <li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >
+                <div class="zTreeDemoBackground left" style  = "position:absolute;top: -10px;"   onblur="test(event)">
+                    <ul id="categoryTree" class="ztree" style  = "width:270px; height: 140px!important;"></ul>
+                </div>
+                <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: 323px;" onclick="hideTree()">
             </li>
             <li style="display:flex;align-items:center">
                 <span style = "float:left;">模块：</span>
-                <select name="menuId" id="menuId" class="dropdown">
+                <select name="menuId" id="menuId" style="height: 38px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option <c:if test="${popular.source =='1'}">selected = 'selected'</c:if> value="1">首页</option>
                     <option <c:if test="${popular.source =='2'}">selected = 'selected'</c:if> value="2">新房</option>
                     <option <c:if test="${popular.source =='3'}">selected = 'selected'</c:if> value="2">新二手房</option>
@@ -131,7 +194,7 @@
 </section>
 <script type="text/javascript">
     function saveData() {
-        if(notEmpty('name','name','链接名不能为空！')&&checkSelect("source|cateId|menuId","平台不能为空！|类型不能为空！|模块不能为空！")&&checkUrl("url","url","网址格式不正确！")){
+        if(notEmpty('name','name','链接名不能为空！')&&notEmpty('cateName','cateName','链接名不能为空！')&&checkSelect("source|menuId","平台不能为空！|类型不能为空！|模块不能为空！")&&checkUrl("url","url","网址格式不正确！")){
             var id =  $("#id").val();
             var name = $("#name").val();
             var source = $("#source option:selected").val();
@@ -148,7 +211,7 @@
             var sheetName = $("input[name='sheetName']").val();
             var cateId = $("#cateId option:selected").val();
             var menuId = $("#menuId option:selected").val();
-
+            var cateName = $("input[name='cateName']").val();
             $.ajax({
                 type: "post",
                 url: "${ctx}/rest/setting/saveEditPopular",
@@ -156,7 +219,7 @@
                 dataType: "json",
                 data: {
                     "name": name, "source": source, "provinceId": provinceId, "cityId": cityId,
-                    "areaId": distId, "sheetId": sheetId, "url": url,"cateId":cateId,"menuId":menuId,"provinceName":provinceName,"cityName":cityName,"areaName":areaName,"sheetName":sheetName,"id":id
+                    "areaId": distId, "sheetId": sheetId, "url": url,"cateId":cateId,"menuId":menuId,"provinceName":provinceName,"cityName":cityName,"areaName":areaName,"sheetName":sheetName,"id":id,"cateName":cateName
                 },
                 success: function (data) {
                     if (data.flag == 1) {

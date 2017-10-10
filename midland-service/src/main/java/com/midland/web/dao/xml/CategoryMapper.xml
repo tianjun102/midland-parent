@@ -13,10 +13,11 @@
 		<result column="city_id" property="cityId" jdbcType="VARCHAR" />
 		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
 		<result column="cate_desc" property="cateDesc" jdbcType="VARCHAR" />
+		<result column="is_show" property="isShow" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,cate_name,status,order_by,parent_id,type,is_delete,city_id,city_name,cate_desc
+		id,cate_name,status,order_by,parent_id,type,is_delete,city_id,city_name,cate_desc,is_show
 	</sql>
 
 	<select id="selectCategoryById" resultMap="BaseResultMap">
@@ -79,6 +80,9 @@
 			<if test="cateDesc != null">
 				cate_desc,
 			</if>
+			<if test="isShow != null">
+				is_show,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -109,6 +113,9 @@
 			 <if test="cateDesc != null">
 				 #{cateDesc},
 			 </if>
+			 <if test="isShow != null">
+				 #{isShow},
+			 </if>
 		</trim>
 	</insert>
 
@@ -138,7 +145,10 @@
 			city_name= #{cityName},
 		</if>
 		<if test="cateDesc != null">
-			#{cate_desc},
+			cate_desc= #{cateDesc},
+		</if>
+		<if test="isShow != null">
+			is_show= #{isShow},
 		</if>
 	</sql>
 
@@ -172,6 +182,9 @@
 		</if>
 		<if test="cateDesc != null">
 			and cate_desc= #{cateDesc}
+		</if>
+		<if test="isShow != null">
+			and is_show= #{isShow}
 		</if>
 	</sql>
 
@@ -228,6 +241,9 @@
 		</if>
 		<if test="cateDesc != null">
 			and b.cate_desc= #{cateDesc}
+		</if>
+		<if test="isShow != null">
+			and b.is_show= #{isShow}
 		</if>
 		ORDER BY b.order_by ASC
 	</select>

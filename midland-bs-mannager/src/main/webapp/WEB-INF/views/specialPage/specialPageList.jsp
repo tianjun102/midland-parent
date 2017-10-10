@@ -37,6 +37,7 @@
 						<td>
                             <a class="edit_img" title="编辑" target="contentF" href="${ctx}/rest/specialPage/to_update?id=${item.id}"></a>
                             <a class="delete_img" title="删除" target="contentF" onclick="delete1(${item.id })"></a>
+                            <a <c:if test="${item.isShow==0}">class="onoff_img"</c:if> <c:if test="${item.isShow==1}">class="offon_img"</c:if> target="contentF" onclick="updateSpecial(${item.isShow},${item.id })"></a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -105,6 +106,27 @@
             shade: 0.3,
             area: ['500px', '700px'],
             content: ['${ctx}/rest/specialPage/to_update?id='+id,'no']
+        });
+    }
+
+    //启用，禁用
+    function updateSpecial(isShow,id){
+        if(isShow==1){
+            isShow=0;
+        }else if(isShow == 0){
+            isShow = 1;
+        }
+
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/specialPage/update?isShow="+isShow+"&id="+id,
+            async:false, // 此处必须同步
+            dataType: "json",
+            data:"",
+            success: function(data){
+
+                $('#searchForm').submit();
+            }
         });
     }
 
