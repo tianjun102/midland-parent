@@ -60,7 +60,7 @@
 					<li>
 						<span></span>
 						<a onclick="saveData();" target="contentF" class = "public_btn bg2">保存</a>
-						<%--<a style="margin-left: 20px" href="${ctx}/rest//information/index" target="contentF" class="public_btn bg3" id="cancel">取消</a>--%>
+						<a style="margin-left: 20px" href="${ctx}/rest/intoMidland/index?flag=${flag}" target="contentF" class="public_btn bg3" id="cancel">取消</a>
 					</li>
 				</ul>
 			</form>
