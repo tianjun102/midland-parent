@@ -23,7 +23,7 @@
 		<form action="${ctx }/rest/siteMap/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
-				<li>
+				<%--<li>
 					<span style = "float:left;">城市：</span>
 					<select name="cityId" id="cityId" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
 						<option value="">全部</option>
@@ -31,7 +31,8 @@
 							<option value="${city.id}">${city.name}</option>
 						</c:forEach>
 					</select>
-				</li>
+				</li>--%>
+				<%@include file="../layout/sherchArea.jsp" %>
 				<li>
 					<span style = "float:left;">平台：</span>
 					<select name="source" id="source" class="dropdown">

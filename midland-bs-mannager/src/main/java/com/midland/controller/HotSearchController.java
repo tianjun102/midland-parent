@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.web.model.*;
+import com.midland.web.model.user.User;
 import com.midland.web.service.HotSearchService;
 import com.midland.web.service.JdbcService;
 import com.midland.web.service.SettingService;
@@ -41,13 +42,16 @@ public class HotSearchController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("index")
-	public String hotSearchIndex(HotSearch hotSearch, Model model) throws Exception {
-		Map<String,String> parem = new HashMap<>();
+	public String hotSearchIndex(HotSearch hotSearch, Model model,HttpServletRequest request) throws Exception {
+		/*Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
 		parem.put("id","*");
 		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
 		List<Area> cityList = cityMap.get("city");
-		model.addAttribute("cityList",cityList);
+		model.addAttribute("cityList",cityList);*/
+		settingService.getAllProvinceList(model);
+		User user = MidlandHelper.getCurrentUser(request);
+		model.addAttribute("cityId",user.getCityId());
 		return "hotSearch/hotSearchIndex";
 	}
 

@@ -16,25 +16,33 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
+				<span>反馈邮箱</span>
 				<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>
 			</p>
 		<form action="${ctx }/rest/feedbackEmail/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
-				<li><span>地区：</span>
+				<%--<li><span>地区：</span>
 					<select name="cityId" id="cityId" class="dropdown">
 						<option value="" >全部</option>
 						<c:forEach items="${cityList}" var="item">
 						<option value="${item.id}" >${item.name}</option>
 						</c:forEach>
 					</select>
-				</li>
+				</li>--%>
+				<%@include file="../layout/sherchArea.jsp" %>
 				<li><span>类型：</span>
 					<select name="type" id="type" class="dropdown">
 						<option value="" >全部</option>
 						<option value="0" >总部</option>
 						<option value="1" >分部</option>
 					</select>
+				</li>
+				<li><span>联系人：</span>
+					<input type="text" name="contactPerson" id="contactPerson" placeholder="请输入联系人" /></li>
+				</li>
+				<li><span>联系方式：</span>
+					<input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>
 				</li>
 				<li>
 					<input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/>

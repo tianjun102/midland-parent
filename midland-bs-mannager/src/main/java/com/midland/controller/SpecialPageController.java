@@ -5,6 +5,7 @@ import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.web.model.Area;
 import com.midland.web.model.SpecialPage;
+import com.midland.web.model.user.User;
 import com.midland.web.service.SettingService;
 import com.midland.web.service.SpecialPageService;
 import com.midland.web.util.MidlandHelper;
@@ -36,13 +37,16 @@ public class SpecialPageController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("index")
-	public String specialPageIndex(SpecialPage specialPage, Model model) throws Exception {
-		Map<String,String> parem = new HashMap<>();
+	public String specialPageIndex(SpecialPage specialPage, Model model,HttpServletRequest request) throws Exception {
+        /*Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
 		parem.put("id","*");
 		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
 		List<Area> cityList = cityMap.get("city");
-		model.addAttribute("cityList",cityList);
+		model.addAttribute("cityList",cityList);*/
+		settingService.getAllProvinceList(model);
+		User user = MidlandHelper.getCurrentUser(request);
+		model.addAttribute("cityId",user.getCityId());
 		return "specialPage/specialPageIndex";
 	}
 

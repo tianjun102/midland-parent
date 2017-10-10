@@ -3,6 +3,7 @@ package com.midland.controller;
 import com.midland.base.BaseFilter;
 import com.midland.web.model.Area;
 import com.midland.web.model.EliteClub;
+import com.midland.web.model.user.User;
 import com.midland.web.service.EliteClubService;
 import com.midland.web.service.SettingService;
 import org.slf4j.Logger;
@@ -35,13 +36,16 @@ public class EliteClubController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("index")
-	public String eliteClubIndex(EliteClub eliteClub,Model model) throws Exception {
-		Map<String,String> parem = new HashMap<>();
+	public String eliteClubIndex(EliteClub eliteClub,Model model,HttpServletRequest request) throws Exception {
+		/*Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
 		parem.put("id","*");
 		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
 		List<Area> cityList = cityMap.get("city");
-		model.addAttribute("cityList",cityList);
+		model.addAttribute("cityList",cityList);*/
+		settingService.getAllProvinceList(model);
+		User user = MidlandHelper.getCurrentUser(request);
+		model.addAttribute("cityId",user.getCityId());
 		return "eliteClub/eliteClubIndex";
 	}
 
