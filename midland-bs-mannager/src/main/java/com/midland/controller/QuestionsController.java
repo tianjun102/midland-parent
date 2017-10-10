@@ -14,7 +14,9 @@ import com.midland.web.model.user.User;
 import com.midland.web.service.AnswerService;
 import com.midland.web.service.QuestionsService;
 import com.midland.web.service.RedisService;
+import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
+import com.midland.web.util.ParamObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,8 +50,10 @@ public class QuestionsController extends BaseFilter {
 	Logger logger = LoggerFactory.getLogger(QuestionsController.class);
 	
 	@RequestMapping("/index")
-	public String showAppointIndex(HttpServletRequest request) {
-		
+	public String showAppointIndex(HttpServletRequest request,Model model) {
+		List<ParamObject> sources = JsonMapReader.getMap("source");
+		model.addAttribute("sources",sources);
+		model.addAttribute("auditFlag",redisServiceImpl.getAnswerAuditFlag());
 		return "/questions/qeustionsIndex";
 	}
 	
@@ -104,6 +108,22 @@ public class QuestionsController extends BaseFilter {
 		
 		return questionsServiceImpl.selectByPrimaryKey(id);
 	}
+	@RequestMapping("/open")
+	@ResponseBody
+	public Object openAudit(Integer id) {
+		Map  map = new HashMap();
+		try {
+			redisServiceImpl.setAnswerAuditFlag(id);
+			map.put("state",0);
+		} catch (Exception e) {
+			logger.error("openAudit ",e);
+			map.put("state",0);
+
+		}
+		return map;
+	}
+
+
 	/**
 	 * 审核页面
 	 * @param id

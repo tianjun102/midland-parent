@@ -12,6 +12,24 @@
     <link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css"/>
     <link rel="stylesheet" href="${ctx }/assets/css/common.css">
 
+    <style type="text/css">
+        .content ul.userinfo li>span{
+            width: 90px;
+        }
+        .content ul.userinfo li:not(:last-child) input{
+            float: left;
+            width: 250px;
+            height: 38px;
+            line-height: 38px;
+            text-indent: 10px;
+            outline-color: rgb(0, 153, 224);
+            border-width: 1px;
+            border-style: solid;
+            border-color: rgb(219, 226, 230);
+            border-image: initial;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
 
@@ -21,7 +39,16 @@
     <section class="content">
         <p class="detail-title">
             <span>问答记录列表</span>
+            <c:choose>
+                <c:when test="${auditFlag==0}">
+                    <a class = "setup" target="contentF" onclick="openOrCloseAudit(1)">开启审核</a>
+                </c:when>
+                <c:otherwise>
+                    <a class = "setup" target="contentF" onclick="openOrCloseAudit(0)">关闭审核</a>
+                </c:otherwise>
+            </c:choose>
         </p>
+
         <form action="${ctx }/rest/questions/page" method="POST" id="searchForm"
               onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
             <ul class="userinfo row">
@@ -37,8 +64,11 @@
                     <span>来源：</span>
                     <select name="source" id="source" class="dropdown">
                         <option value="">请选择</option>
-                        <option value="0">网站</option>
-                        <option value="1">微商</option>
+                        <c:forEach items="${sources}" var="s">
+                            <option value="${s.id}" <c:if test="${s.id == item.source}">selected="selected"</c:if>>
+                                    ${s.name}
+                            </option>
+                        </c:forEach>
                     </select>
                 </li>
                 <li>
@@ -60,6 +90,25 @@
 
 
 <script type="text/javascript">
+
+    function openOrCloseAudit(id){
+        //0隐藏，1显示
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/questions/open?id="+id,
+            async: false, // 此处必须同步
+            dataType: "json",
+
+            success: function (data) {
+                if (data.state==0){
+                    window.location.reload();
+                }
+            },
+            error: function () {
+                layer.msg("操作失败！", {icon: 2});
+            }
+        })
+    }
 
     window.onload = function () {
         $('#searchForm').submit();

@@ -8,7 +8,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-
+<style type="text/css">
+	.content ul.userinfo li>span{
+		float: left;
+		display: inline-block;
+		width: 90px;
+		height: 38px;
+		line-height: 38px;
+		text-align: right;
+		font-size: 14px;
+		color: rgb( 102, 102, 102 );
+	}
+</style>
 </head>
 <body>
 	
@@ -34,7 +45,7 @@
 					</select>
 				</li>
 				<li><span>审核人：</span><input type="text" name="auditName" id="auditName" placeholder="请输入审核人" /></li>
-				<li><span>注册时间</span><input class="Wdate half" id="time1"
+				<li><span>注册时间：</span><input class="Wdate half" id="time1"
 										onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time2\')}'})"
 										name="startTime" /> <em class = "gang">-</em><input
 						class="Wdate half"

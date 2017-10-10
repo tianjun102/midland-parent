@@ -229,7 +229,8 @@ public class UserController extends BaseFilter {
      */
     @RequestMapping(value = "/userIndex", method = {RequestMethod.GET,RequestMethod.POST})
     public String findUserIndex(User user, Model model, HttpServletRequest request){
-
+		List<ParamObject> sources = JsonMapReader.getMap("source");
+		model.addAttribute("sources",sources);
     	return "user/userIndex";
     }
     /**
@@ -270,7 +271,8 @@ public class UserController extends BaseFilter {
     	List<Role> roles = roleService.selectRoleList(role);
 	    List<Area> list = settingService.queryAllCityByRedis();
 	    settingService.getAllProvinceList(model);
-	
+		List<ParamObject> sources = JsonMapReader.getMap("source");
+		model.addAttribute("sources",sources);
 	    model.addAttribute("citys",list);
     	model.addAttribute("roles", roles);
     	return "user/addUser";
@@ -364,6 +366,8 @@ public class UserController extends BaseFilter {
 	public String toUpdatePage(Model model,int userId,HttpServletRequest request){
 		User userInfo = userService.selectById(userId);
 		model.addAttribute("user", userInfo);
+		List<ParamObject> sources = JsonMapReader.getMap("source");
+		model.addAttribute("sources",sources);
 		return "user/updateUser";
 	}
     

@@ -11,7 +11,18 @@
 
 <link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css" />
 <link rel="stylesheet" href="${ctx }/assets/css/common.css">
-
+	<style type="text/css">
+		.content ul.userinfo li>span{
+			float: left;
+			display: inline-block;
+			width: 90px;
+			height: 38px;
+			line-height: 38px;
+			text-align: right;
+			font-size: 14px;
+			color: rgb( 102, 102, 102 );
+		}
+	</style>
 </head>
 <body>
 	
@@ -27,7 +38,7 @@
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
 				<li>
-					<%@include file="../layout/area.jsp" %>
+					<%@include file="../entrust/area.jsp" %>
 				</li>
 				<li><span>菜单名称：</span>
 					<input type="text" name="menuName" id="menuName" placeholder="请输入菜单名称" /></li>

@@ -12,6 +12,18 @@
     <link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css" />
     <link rel="stylesheet" href="${ctx }/assets/css/common.css">
 
+    <style type="text/css">
+        .content ul.userinfo li>span{
+            float: left;
+            display: inline-block;
+            width: 90px;
+            height: 38px;
+            line-height: 38px;
+            text-align: right;
+            font-size: 14px;
+            color: rgb( 102, 102, 102 );
+        }
+    </style>
 </head>
 <body>
 
@@ -19,30 +31,17 @@
 <!--预约看房重新分配经纪人-->
 <div class="box">
     <section class = "content">
-        <ul class = "userinfo row">
-
-            <li>
-                <span>提问人：</span><span >${questions.questionName}</span>
-            </li>
-
-            <li>
-                <span>手机号码：</span><span >${questions.questionPhone}</span>
-            </li>
-
-            <li>
-                <span>提问时间：</span><span >${questions.questionTime}</span>
-            </li>
-
-            <li>
-                <span>提问主题：</span><span >${questions.questionsTitle}</span>
-            </li>
-
-            <li>
-                <span>提问内容：</span><span >${questions.questionsArea}</span>
-            </li>
-
-        </ul>
-
+        <div style="margin-bottom: 10px;">
+            <span style="padding-right: 15px;">提问人：${questions.questionName}</span>
+            <span style="padding-right: 15px;">手机号码：${questions.questionPhone}</span>
+            <span>提问时间：${questions.questionTime}</span>
+        </div>
+        <div style="margin-bottom: 10px;word-wrap: break-word;">
+            <span>提问主题：${questions.questionsTitle}</span>
+        </div>
+        <div>
+            <span style="word-wrap: break-word;">提问内容：${questions.questionsArea}</span>
+        </div>
         <table class="table table-bordered table-add">
             <thead>
             <tr>

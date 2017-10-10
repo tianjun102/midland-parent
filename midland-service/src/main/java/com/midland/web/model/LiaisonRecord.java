@@ -1,7 +1,5 @@
 package com.midland.web.model;
 
-import java.util.Date;
-
 public class LiaisonRecord{
 	/**
 	 * 联络记录表id
@@ -26,7 +24,7 @@ public class LiaisonRecord{
 	/**
 	 * 提交时间
 	 **/
-	private Date addTime;
+	private String addTime;
 	/**
 	 * 是否联系:0未联系，1已联系
 	 **/
@@ -102,11 +100,11 @@ public class LiaisonRecord{
 		this.leavingMessage = leavingMessage;
 	}
 
-	public Date getAddTime() {
+	public String getAddTime() {
 		return addTime;
 	}
 
-	public void setAddTime(Date addTime) {
+	public void setAddTime(String addTime) {
 		this.addTime = addTime;
 	}
 
