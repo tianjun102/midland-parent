@@ -29,4 +29,8 @@ public interface MenuService {
 	 **/
 	List<Menu> findMenuList(Menu menu) throws Exception;
 
+	int getMaxOrderBy();
+
+
+
 }

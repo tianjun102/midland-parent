@@ -49,6 +49,11 @@
 		<include refid="select_option" />
 	</select>
 
+	<select id="getMaxOrderBy" resultType="java.lang.Integer">
+		select order_by from menu
+		order by order_by desc limit 1;
+	</select>
+
 	<insert id="insertMenu" parameterType="com.midland.web.model.Menu">
 		insert into menu
 		<trim prefix="(" suffix=")" suffixOverrides="," >
