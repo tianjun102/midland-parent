@@ -348,6 +348,10 @@
 						<a id = "feedbackIndex" href="${ctx}/rest/siteMap/index" target="contentF"><span>网站地图管理</span></a>
 					</shiro:hasPermission>
 
+					<shiro:hasPermission name="siteMapCate">
+						<a id = "feedbackIndex" href="${ctx}/rest/category/index?type=4" target="contentF"><span>网站地图分类管理</span></a>
+					</shiro:hasPermission>
+
 						<a id = "system7" href="${ctx}/rest/user/toModifyPwdPage" target="contentF"><span>修改密码</span></a>
 						<a id = "system8" href="${ctx}/rest/user/about" target="contentF"><span>关于平台</span></a>
 				</dd>

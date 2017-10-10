@@ -2,15 +2,55 @@
          pageEncoding="UTF-8" %>
 <%@include file="../layout/tablib.jsp" %>
 <%@include file="../layout/source.jsp"%>
-
+<%@include file="../layout/zTree.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
+    <link rel="stylesheet" href="${ctx}/assets/css/ztree/css/demo.css">
+    <link rel="stylesheet" href="${ctx }/assets/css/common.css">
+    <link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css"/>
     <script type="text/javascript">
-    </script>
 
+        var setting = {
+            check: {
+                enable: true,
+                chkboxType: { "Y": "sp", "N": "sp" }
+
+
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                beforeClick: beforeClick
+            }
+        };
+        var catProNodes =[{id:0, pId:0,name:'分类',open:true,nocheck:true,iconSkin:"pIcon01"},${categoryData}];
+
+
+        $(document).ready(function(){
+            $.fn.zTree.init($("#categoryTree"), setting, catProNodes);
+        });
+
+        function beforeClick(treeId, treeNode, clickFlag) {
+            $("input[name='cateId']").val(treeNode.id);
+            $("input[name='cateName']").val(treeNode.name);
+            $("#showDiv").hide();
+        }
+
+        function showTree(event){
+            $("#showDiv").show();
+        }
+
+        function hideTree(event){
+            $("#showDiv").hide();
+        }
+
+    </script>
 </head>
 <body>
 <section class="content" style="border:none;">
@@ -39,7 +79,7 @@
                 <span class = "_star ">*</span>
             </li>
 
-            <li><span>分类：</span>
+            <%--<li><span>分类：</span>
                 <input type="hidden" name="cateName" id="cateName" value="">
                 <select onchange="setCateName();" name="cateId" id="cateId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option value="">全部</option>
@@ -50,6 +90,16 @@
                     <option <c:if test="${item.cateId==4}">selected="selected"</c:if> value="4">商铺</option>
                 </select>
                 <span class = "_star ">*</span>
+            </li>--%>
+            <li><span>类型：</span><input class="vipcate" id="cateName" name="cateName" value="${item.cateName}" onclick="showTree()" readonly="readonly"/>
+                <input name="cateId" value="${item.cateName}" type="hidden"/><label style="color: red" class = "_star " >*</label>
+
+            </li>
+            <li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >
+                <div class="zTreeDemoBackground left" style  = "position:absolute;top: -10px;"   onblur="test(event)">
+                    <ul id="categoryTree" class="ztree" style  = "width:250px; height: 140px!important;"></ul>
+                </div>
+                <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: 305px;" onclick="hideTree()">
             </li>
 
             <li>
@@ -58,7 +108,7 @@
             </li>
 
             <li><span>链接：</span>
-                <input type="text" name="linkUrl" id="linkUrl" value="${item.linkUrl}" onblur="notEmpty('linkUrl','linkUrl','模块名称不能为空！')" />
+                <input type="text" name="linkUrl" id="linkUrl" value="${item.linkUrl}" onblur="checkUrl('linkUrl','linkUrl','链接格式不正确！')" />
                 <span class = "_star ">*</span>
             </li>
 
@@ -75,8 +125,10 @@
 <script type="text/javascript">
     //保存数据
     function updateData() {
+        if(!(notEmpty('name','name','关键字不能为空！')&&checkSelect("source|cityId","平台不能为空！城市不能为空！")&&notEmpty('cateName','cateName','类型不能为空！')&&notEmpty('modeName','modeName','模块名称不能为空！')&&checkUrl('linkUrl','linkUrl','链接格式不正确！'))){
+            return;
+        }
         var data = $("#dataForm").serialize();
-        debugger;
         $.ajax({
             type: "post",
             url: "${ctx}/rest/siteMap/update",
