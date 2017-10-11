@@ -3,10 +3,13 @@ package com.midland.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
+import com.midland.web.model.ExportModel;
 import com.midland.web.model.Feedback;
+import com.midland.web.model.HotSearch;
 import com.midland.web.model.user.User;
 import com.midland.web.service.FeedbackService;
 import com.midland.web.util.MidlandHelper;
+import com.midland.web.util.PoiExcelExport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -140,5 +146,27 @@ public class FeedbackController extends BaseFilter {
 			model.addAttribute("items",null);
 		}
 		return "feedback/feedbackList";
+	}
+
+	@RequestMapping("/export")
+	public void userInfoExportExcel(Feedback feedback, HttpServletResponse response, HttpServletRequest request) throws Exception {
+		List<Feedback> dataList = feedbackServiceImpl.findFeedbackList(feedback);
+		PoiExcelExport pee = new PoiExcelExport(response,"热搜词","sheet1");
+		//调用
+		List<ExportModel> exportModels=new ArrayList<>();
+		for (Feedback feedback1:dataList){
+			ExportModel exportModel = new ExportModel();
+			exportModel.setModelName1(feedback1.getNickName());
+			exportModel.setModelName2(feedback1.getPhone());
+			exportModel.setModelName3(feedback1.getSource()==0?"网站":"微站");
+			exportModel.setModelName4(feedback1.getFeedbackContent());
+			exportModel.setModelName5(feedback1.getAddTime());
+			exportModels.add(exportModel);
+		}
+		String titleColumn[] = {"modelName1","modelName2","modelName3","modelName4","modelName5"};
+		String titleName[] = {"用户昵称","手机号码","来源","反馈类容","反馈时间"};
+		int titleSize[] = {13,13,13,13,20};
+		//其他设置 set方法可全不调用
+		pee.wirteExcel(titleColumn, titleName, titleSize, exportModels,request);
 	}
 }

@@ -27,9 +27,9 @@ public final class ThirdPartyLoginHelper {
 		Map<String, String> map = new HashMap<String, String>();
 		// 获取令牌
 		String tokenUrl = "https://graph.qq.com/oauth2.0/token";
-		tokenUrl = tokenUrl + "?grant_type=authorization_code&client_id=" + "1106342971"
-				+ "&client_secret=" + "7iq1v6nB1CaXUwoL" + "&code=" + code
-				+ "&redirect_uri=http://localhost:8085/thirdParty/callback/qq";
+		tokenUrl = tokenUrl + "?grant_type=authorization_code&client_id=" + "101432824"
+				+ "&client_secret=" + "0446b2c6df40dfab4707056ff5657c80" + "&code=" + code
+				+ "&redirect_uri=http://10.58.189.10:8085/thirdParty/callback/qq";
 		String tokenRes = BaseHttpUtil.httpClientPost(tokenUrl);
 		if (tokenRes != null && tokenRes.indexOf("access_token") > -1) {
 			Map<String, String> tokenMap = toMap(tokenRes);
@@ -60,7 +60,7 @@ public final class ThirdPartyLoginHelper {
 		ThirdPartyUser user = new ThirdPartyUser();
 		String url = "https://graph.qq.com/user/get_user_info";
 		url = url + "?format=json&access_token=" + token + "&oauth_consumer_key="
-				+ "1106342971" + "&openid=" + openid;
+				+ "101432824" + "&openid=" + openid;
 		String res = BaseHttpUtil.httpClientPost(url);
 		JSONObject json = JSONObject.parseObject(res);
 		if (json.getIntValue("ret") == 0) {

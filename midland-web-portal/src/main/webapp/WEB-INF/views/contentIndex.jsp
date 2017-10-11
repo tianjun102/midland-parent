@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>美联物业 - 关于平台</title>
 <link rel="stylesheet" href="${ctx }/assets/css/common.css">
-	<%----%><script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="1106342971" data-redirecturi="http://localhost:8085/thirdParty/callback/qq" charset="utf-8"></script>
+	<%----%><script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101432824" data-redirecturi="http://10.58.189.10:8085/thirdParty/callback/qq" charset="utf-8"></script>
 </head>
 <body>
 <!--关于平台界面-->
@@ -21,7 +21,7 @@
 			<dl>
 			<dt style = "font-size:28px; color:#d20000; margin-top:45px; margin-bottom:30px; text-align:center;">美联物业首页面</dt>
 			<dt style = "text-align:center;">
-				<a href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=1106342971&redirect_uri=http://localhost:8085/thirdParty/callback/qq&state=1&scope=get_user_info,get_info">请使用你的QQ账号登陆</a>
+				<a href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=101432824&redirect_uri=http://10.58.189.10:8085/thirdParty/callback/qq&state=1&scope=get_user_info,get_info">请使用你的QQ账号登陆</a>
 				<span id="qqLoginBtn"></span>
 			</dt>
 			</dl>
