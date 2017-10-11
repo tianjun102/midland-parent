@@ -40,8 +40,11 @@
 				<li><span>注册来源：</span>
 					<select name="source" id="source" class="dropdown">
 						<option value="" >请选择</option>
-						<option value="0">网站</option>
-						<option value="1">微商</option>
+						<c:forEach items="${sources}" var="s">
+							<option value="${s.id}" >
+									${s.name}
+							</option>
+						</c:forEach>
 					</select>
 				</li>
 				<li><span>审核人：</span><input type="text" name="auditName" id="auditName" placeholder="请输入审核人" /></li>
