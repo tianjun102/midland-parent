@@ -66,20 +66,7 @@
 
 											<%--</c:otherwise>--%>
 										<%--</c:choose>--%>
-										<a target="contentF" onclick="viewRealRegistration(${cust.id })">
-											<c:choose>
-												<c:when test="${cust.auditStatus==0}">审核实名信息
-												</c:when>
-												<c:otherwise>查看实名信息
-												</c:otherwise>
-											</c:choose>
-										</a>
-									<%--<a href="javascript:;" target="contentF" --%>
-										<%--<c:if test="${cust.state == 0}">class = "offon_img" title = "启用"</c:if>--%>
-										<%--<c:if test="${cust.state == 1}">class = "onoff_img"  title = "关闭"</c:if>--%>
-										<%--<c:if test="${cust.username == 'admin'}">style="visibility: hidden;"</c:if>--%>
-										 <%--onclick="isOffOn(${cust.id },'${cust.state }');">--%>
-									<%--</a>--%>
+										<a target="contentF" style="width: 100px;" onclick="viewRealRegistration(${cust.id })"><c:choose><c:when test="${cust.auditStatus==0}">审核实名信息</c:when><c:otherwise>查看实名信息</c:otherwise></c:choose></a>
 								  </td>
 							</tr>
 						</c:forEach>
