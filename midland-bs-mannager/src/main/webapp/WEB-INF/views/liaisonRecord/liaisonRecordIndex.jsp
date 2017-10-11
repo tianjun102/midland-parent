@@ -17,7 +17,7 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
-				<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>
+				<%--<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>--%>
 			</p>
 		<form action="${ctx }/rest/liaisonRecord/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
@@ -48,12 +48,20 @@
 				</li>
 			</ul>
 			</form>
+			<a href="#" onclick="exportLiaison()">导出</a>
 			<div id="listDiv"></div>
 		</section>
 	</div>
 	
 	
 	<script type="text/javascript">
+
+        function exportLiaison(){
+            var data = $("#searchForm").serialize();
+
+            window.location.href="${ctx}/rest/liaisonRecord/export?"+data;
+        }
+
         function toAddPage(){
             layer.open({
                 type: 2,

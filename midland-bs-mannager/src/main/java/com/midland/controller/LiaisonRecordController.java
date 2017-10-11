@@ -3,11 +3,14 @@ package com.midland.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
+import com.midland.web.model.ExportModel;
 import com.midland.web.model.LiaisonRecord;
+import com.midland.web.model.user.User;
 import com.midland.web.service.LiaisonRecordService;
 import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
 import com.midland.web.util.ParamObject;
+import com.midland.web.util.PoiExcelExport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -140,4 +145,31 @@ public class LiaisonRecordController extends BaseFilter {
 		}
 		return "liaisonRecord/liaisonRecordList";
 	}
+
+	@RequestMapping("/export")
+	public void userInfoExportExcel(LiaisonRecord liaisonRecord, HttpServletResponse response, HttpServletRequest request){
+		List<LiaisonRecord> dataList = liaisonRecordServiceImpl.findLiaisonRecordList(liaisonRecord);
+		List<ExportModel> exportModels = new ArrayList<>();
+
+
+		for (LiaisonRecord liaisonRecord1: dataList){
+			ExportModel exportModel = new ExportModel();
+			exportModel.setModelName1(String.valueOf(liaisonRecord1.getName()));
+			exportModel.setModelName2(liaisonRecord1.getPhone());
+			exportModel.setModelName3(liaisonRecord1.getEmail());
+			List<ParamObject> categorys = JsonMapReader.getMap("liaisonRecord_category");
+			exportModel.setModelName4(MidlandHelper.getNameById(Integer.valueOf(liaisonRecord1.getCategory()), categorys));
+			exportModel.setModelName5(liaisonRecord1.getLeavingMessage());
+			exportModel.setModelName6(liaisonRecord1.getAddTime());
+			exportModels.add(exportModel);
+		}
+		PoiExcelExport pee = new PoiExcelExport(response,"联络管理","sheet1");
+		//调用
+		String titleColumn[] = {"modelName1","modelName2","modelName3","modelName4","modelName5","modelName6"};
+		String titleName[] = {"姓名","电话","邮箱","分类","留言","提交时间"};
+		int titleSize[] = {13,13,13,13,13,13,13,13};
+		//其他设置 set方法可全不调用
+		pee.wirteExcel(titleColumn, titleName, titleSize, exportModels,request);
+	}
+
 }
