@@ -57,6 +57,8 @@ public class Feedback{
 	 * 结束时间
 	 **/
 	private String endTime;
+
+	private Integer source;
 	
 	
 	public String getStartTime() {
@@ -169,6 +171,14 @@ public class Feedback{
 
 	public void setOperatorName(String operatorName) {
 		this.operatorName = operatorName;
+	}
+
+	public Integer getSource() {
+		return source;
+	}
+
+	public void setSource(Integer source) {
+		this.source = source;
 	}
 
 	@Override
