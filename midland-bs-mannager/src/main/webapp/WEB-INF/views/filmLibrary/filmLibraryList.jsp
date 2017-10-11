@@ -45,8 +45,8 @@
                         <td>${item.operatorName }</td>
                         <td>
 
-                            <a target="contentF" onclick="to_edit(${item.id })">编辑</a>
-                            <a target="contentF" onclick="delete1(${item.id })">删除</a>
+                            <a target="contentF" style="width: 40px" onclick="to_edit(${item.id })">编辑</a>
+                            <a target="contentF" style="width: 40px" onclick="delete1(${item.id })">删除</a>
                         </td>
                     </tr>
                 </c:forEach>

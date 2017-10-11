@@ -53,15 +53,7 @@
               onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
             <input type="hidden" name="isNew" id="isNew" value="${isNew}"/>
             <ul class="userinfo row">
-                <li>
-                    <%--<select name="cityId" id="cityId" class="dropdown">--%>
-                        <%--<option value="">全部</option>--%>
-                        <%--<c:forEach items="${citys}" var="item">--%>
-                            <%--<option value="${item.id}">${item.name}</option>--%>
-                        <%--</c:forEach>--%>
-                    <%--</select>--%>
-                    <%@include file="area.jsp" %>
-                </li>
+                <%@include file="../menu/area.jsp" %>
                 <li><span>区域：</span>
                     <input type="text" name="phone" id="phone" placeholder="请输入手机号码"/></li>
                 </li>

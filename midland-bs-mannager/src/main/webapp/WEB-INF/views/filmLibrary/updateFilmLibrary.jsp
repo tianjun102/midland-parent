@@ -61,14 +61,7 @@
                     <option value="1">看楼团</option>
                 </select>
             </li>
-            <li><span>城市：</span>
-                <input type="hidden" id="cityName" name="cityName" value="${item.cityName}">
-                <select name="cityId" id="cityId" class="dropdown">
-                    <c:forEach items="${citys}" var="s">
-                        <option value="${s.id}" <c:if test="${item.cityId==s.id}">selected</c:if>>${s.name}</option>
-                    </c:forEach>
-                </select>
-            </li>
+            <%@include file="../menu/area.jsp" %>
             <li><span>楼盘ID：</span>
                 <input type="text" name="housesId" id="housesId" value="${item.housesId}"/>
             </li>
