@@ -3,6 +3,7 @@ package com.midland.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
+import com.midland.core.util.DateUtils;
 import com.midland.web.model.Area;
 import com.midland.web.model.Category;
 import com.midland.web.model.Information;
@@ -157,6 +158,9 @@ public class ResearchController extends BaseFilter {
 	@RequestMapping("update")
 	@ResponseBody
 	public Object updateInformationById(Information information) throws Exception {
+		if(information.getStatus()!=null&&information.getStatus()==0){
+			information.setReleaseTime(DateUtils.nowDateToStringYYMMDDHHmmss());
+		}
 		Map<String,Object> map = new HashMap<>();
 		try {
 			log.info("updateInformationById  {}",information);

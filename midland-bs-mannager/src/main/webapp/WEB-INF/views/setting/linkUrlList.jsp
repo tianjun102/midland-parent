@@ -16,9 +16,9 @@
 						<tr>
 							<th style="width: 5%">序号</th>
 							<th style="width: 5%">城市</th>
-							<th style="width: 10%">平台</th>
-							<th style="width: 4%">名称</th>
-							<th style="width: 5%">操作</th>
+							<th style="width: 5%">平台</th>
+							<th style="width: 5%">名称</th>
+							<th style="width: 10%">操作</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -35,8 +35,11 @@
 								</td>
 								<td>${linkUrl.linkName}</td>
 								<td>
+									<a target="contentF" onclick="sort(${linkUrl.id },${linkUrl.orderBy},1)">上移</a>
+									<a target="contentF" onclick="sort(${linkUrl.id },${linkUrl.orderBy},2)">下移</a>
 									<a onclick="preUpdate(${linkUrl.id })" target="contentF" class = "edit_img" title = "编辑"></a>
 									<a target="contentF" class = "delete_img" title = "删除" onclick="isDelete(${linkUrl.id })"></a>
+									<a <c:if test="${linkUrl.isShow==0}">class="onoff_img"</c:if> <c:if test="${linkUrl.isShow==1}">class="offon_img"</c:if> target="contentF" onclick="updateLinkUrl(${linkUrl.isShow},${linkUrl.id })"></a>
 								  </td>
 							</tr>
 						</c:forEach>
@@ -300,6 +303,47 @@ function takeblacklist(userId){
 				  });
 		}
 	}
+
+    //排序
+    function sort(id,orderById,sort) {
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/setting/linkUrlSort?sort="+sort+"&orderBy="+orderById+"&id="+id,
+            async: false, // 此处必须同步
+            dataType: "json",
+
+            success: function (data) {
+                if (data.state==0){
+                    $('#searchForm').submit();
+                }
+            },
+            error: function () {
+                layer.msg("操作失败！", {icon: 2});
+            }
+        })
+    }
+
+    //启用，禁用
+    function updateLinkUrl(isShow,id){
+        if(isShow==1){
+            isShow=0;
+        }else if(isShow == 0){
+            isShow = 1;
+        }
+
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/setting/saveEditLinkUrl?isShow="+isShow+"&id="+id,
+            async:false, // 此处必须同步
+            dataType: "json",
+            data:"",
+            success: function(data){
+
+                $('#searchForm').submit();
+            }
+        });
+    }
+
 </script>
 </body>
 </html>

@@ -93,7 +93,10 @@ public class Information{
 	private Integer status;
 
 	private String cateParentName;
-
+	/**
+	 * 上架状态；0=网站；1=微站
+	 */
+	private Integer platform;
 
 	public Integer getId() {
 		return id;
@@ -278,6 +281,14 @@ public class Information{
 
 	public void setCateParentName(String cateParentName) {
 		this.cateParentName = cateParentName;
+	}
+
+	public Integer getPlatform() {
+		return platform;
+	}
+
+	public void setPlatform(Integer platform) {
+		this.platform = platform;
 	}
 
 	@Override

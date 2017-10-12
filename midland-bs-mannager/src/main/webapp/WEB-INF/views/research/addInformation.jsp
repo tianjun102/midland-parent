@@ -127,6 +127,13 @@
                         </c:forEach>
                     </select>
                 </li>
+                <li><span>平台：</span>
+                    <select name="platform" id="platform" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                        <option value="0" >网站</option>
+                        <option value="1" >微站</option>
+                    </select>
+                    <span class = "_star ">*</span>
+                </li>
                 <li>
                     <span>标题：</span>
                     <input type="text" name="title" id="title"  onblur="notEmpty('title','title','标题不能为空！');"  onfocus="notEmpty('vipcate','vipcate','请填写市场分类！')"  />

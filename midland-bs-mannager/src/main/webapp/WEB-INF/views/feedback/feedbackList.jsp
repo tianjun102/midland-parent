@@ -18,6 +18,7 @@
 				<th style="width: 8%">手机号</th>
 				<th style="width: 8%">反馈内容</th>
 				<th style="width: 8%">反馈时间</th>
+                <th style="width: 8%">来源</th>
                 <th style="width: 10%">操作</th>
             </tr>
         </thead>
@@ -31,7 +32,7 @@
 						<td>${item.phone}</td>
 						<td>${item.feedbackContent}</td>
 						<td>${item.addTime}</td>
-
+                        <td><c:if test="${item.source==0}">网站</c:if><c:if test="${item.source==1}">微站</c:if></td>
                         <td>
                             <a class="edit_img" target="contentF" onclick="to_edit(${item.id })"></a>
                             <a class="delete_img" target="contentF" onclick="delete1(${item.id })"></a>
