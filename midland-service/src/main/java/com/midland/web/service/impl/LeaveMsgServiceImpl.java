@@ -21,7 +21,7 @@ public class LeaveMsgServiceImpl implements LeaveMsgService {
 	@Override
 	public void insertLeaveMsg(LeaveMsg leaveMsg) throws Exception {
 		try {
-			log.info("insert {}",leaveMsg);
+			log.debug("insert {}",leaveMsg);
 			leaveMsgMapper.insertLeaveMsg(leaveMsg);
 		} catch(Exception e) {
 			log.error("insertLeaveMsg异常 {}",leaveMsg,e);
@@ -34,7 +34,7 @@ public class LeaveMsgServiceImpl implements LeaveMsgService {
 	 **/
 	@Override
 	public LeaveMsg selectLeaveMsgById(Integer id) {
-		log.info("selectLeaveMsgById  {}",id);
+		log.debug("selectLeaveMsgById  {}",id);
 		return leaveMsgMapper.selectLeaveMsgById(id);
 	}
 
@@ -44,7 +44,7 @@ public class LeaveMsgServiceImpl implements LeaveMsgService {
 	@Override
 	public void deleteLeaveMsgById(Integer id)throws Exception {
 		try {
-			log.info("deleteLeaveMsgById  {}",id);
+			log.debug("deleteLeaveMsgById  {}",id);
 			int result = leaveMsgMapper.deleteLeaveMsgById(id);
 			if (result < 1) {
 				throw new Exception("deleteLeaveMsgById失败");
@@ -60,7 +60,7 @@ public class LeaveMsgServiceImpl implements LeaveMsgService {
 	@Override
 	public void updateLeaveMsgById(LeaveMsg leaveMsg) throws Exception {
 		try {
-			log.info("updateLeaveMsgById  {}",leaveMsg);
+			log.debug("updateLeaveMsgById  {}",leaveMsg);
 			int result = leaveMsgMapper.updateLeaveMsgById(leaveMsg);
 			if (result < 1) {
 				throw new Exception("updateLeaveMsgById失败");
@@ -77,7 +77,7 @@ public class LeaveMsgServiceImpl implements LeaveMsgService {
 	@Override
 	public List<LeaveMsg> findLeaveMsgList(LeaveMsg leaveMsg) throws Exception {
 		try {
-			log.info("findLeaveMsgList  {}",leaveMsg);
+			log.debug("findLeaveMsgList  {}",leaveMsg);
 			return leaveMsgMapper.findLeaveMsgList(leaveMsg);
 		} catch(Exception e) {
 			log.error("findLeaveMsgList  {}",leaveMsg,e);

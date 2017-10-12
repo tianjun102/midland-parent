@@ -21,7 +21,7 @@ public class PopularCateServiceImpl implements PopularCateService {
 	@Override
 	public void insertPopularCate(PopularCate popularCate) throws Exception {
 		try {
-			log.info("insert {}",popularCate);
+			log.debug("insert {}",popularCate);
 			popularCateMapper.insertPopularCate(popularCate);
 		} catch(Exception e) {
 			log.error("insertPopularCate异常 {}",popularCate,e);
@@ -34,7 +34,7 @@ public class PopularCateServiceImpl implements PopularCateService {
 	 **/
 	@Override
 	public PopularCate selectPopularCateById(Integer id) {
-		log.info("selectPopularCateById  {}",id);
+		log.debug("selectPopularCateById  {}",id);
 		return popularCateMapper.selectPopularCateById(id);
 	}
 
@@ -44,7 +44,7 @@ public class PopularCateServiceImpl implements PopularCateService {
 	@Override
 	public void deletePopularCateById(Integer id)throws Exception {
 		try {
-			log.info("deletePopularCateById  {}",id);
+			log.debug("deletePopularCateById  {}",id);
 			int result = popularCateMapper.deletePopularCateById(id);
 			if (result < 1) {
 				throw new Exception("deletePopularCateById失败");
@@ -60,7 +60,7 @@ public class PopularCateServiceImpl implements PopularCateService {
 	@Override
 	public void updatePopularCateById(PopularCate popularCate) throws Exception {
 		try {
-			log.info("updatePopularCateById  {}",popularCate);
+			log.debug("updatePopularCateById  {}",popularCate);
 			int result = popularCateMapper.updatePopularCateById(popularCate);
 			if (result < 1) {
 				throw new Exception("updatePopularCateById失败");
@@ -77,7 +77,7 @@ public class PopularCateServiceImpl implements PopularCateService {
 	@Override
 	public List<PopularCate> findPopularCateList(PopularCate popularCate) throws Exception {
 		try {
-			log.info("findPopularCateList  {}",popularCate);
+			log.debug("findPopularCateList  {}",popularCate);
 			return popularCateMapper.findPopularCateList(popularCate);
 		} catch(Exception e) {
 			log.error("findPopularCateList  {}",popularCate,e);

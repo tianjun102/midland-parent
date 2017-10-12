@@ -21,7 +21,7 @@ public class QuotationViewServiceImpl implements QuotationViewService {
 	@Override
 	public List<QuotationView> findQuotationViewList(QuotationView quotationView) throws Exception {
 		try {
-			log.info("findQuotationViewList  {}",quotationView);
+			log.debug("findQuotationViewList  {}",quotationView);
 			return quotationViewMapper.findQuotationViewList(quotationView);
 		} catch(Exception e) {
 			log.error("findQuotationViewList  {}",quotationView,e);

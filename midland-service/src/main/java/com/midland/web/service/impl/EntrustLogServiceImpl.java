@@ -21,7 +21,7 @@ public class EntrustLogServiceImpl implements EntrustLogService {
 	@Override
 	public void insertEntrustLog(EntrustLog entrustLog) throws Exception {
 		try {
-			log.info("insert {}",entrustLog);
+			log.debug("insert {}",entrustLog);
 			entrustLogMapper.insertEntrustLog(entrustLog);
 		} catch(Exception e) {
 			log.error("insertEntrustLog异常 {}",entrustLog,e);
@@ -34,7 +34,7 @@ public class EntrustLogServiceImpl implements EntrustLogService {
 	 **/
 	@Override
 	public EntrustLog selectEntrustLogByEntrustLogId(Integer entrustLogId) {
-		log.info("selectEntrustLogByEntrustLogId  {}",entrustLogId);
+		log.debug("selectEntrustLogByEntrustLogId  {}",entrustLogId);
 		return entrustLogMapper.selectEntrustLogByEntrustLogId(entrustLogId);
 	}
 	/**
@@ -42,7 +42,7 @@ public class EntrustLogServiceImpl implements EntrustLogService {
 	 **/
 	@Override
 	public List<EntrustLog> selectEntrustLogByEntrustId(Integer entrustId) {
-		log.info("selectEntrustLogByEntrustId  {}",entrustId);
+		log.debug("selectEntrustLogByEntrustId  {}",entrustId);
 		return entrustLogMapper.selectEntrustLogByEntrustId(entrustId);
 	}
 
@@ -52,7 +52,7 @@ public class EntrustLogServiceImpl implements EntrustLogService {
 	@Override
 	public void deleteEntrustLogByEntrustLogId(Integer entrustLogId)throws Exception {
 		try {
-			log.info("deleteEntrustLogByEntrustLogId  {}",entrustLogId);
+			log.debug("deleteEntrustLogByEntrustLogId  {}",entrustLogId);
 			int result = entrustLogMapper.deleteEntrustLogByEntrustLogId(entrustLogId);
 			if (result < 1) {
 				throw new Exception("deleteEntrustLogByEntrustLogId失败");
@@ -68,7 +68,7 @@ public class EntrustLogServiceImpl implements EntrustLogService {
 	@Override
 	public void updateEntrustLogByEntrustLogId(EntrustLog entrustLog) throws Exception {
 		try {
-			log.info("updateEntrustLogByEntrustLogId  {}",entrustLog);
+			log.debug("updateEntrustLogByEntrustLogId  {}",entrustLog);
 			int result = entrustLogMapper.updateEntrustLogByEntrustLogId(entrustLog);
 			if (result < 1) {
 				throw new Exception("updateEntrustLogByEntrustLogId失败");
@@ -85,7 +85,7 @@ public class EntrustLogServiceImpl implements EntrustLogService {
 	@Override
 	public List<EntrustLog> findEntrustLogList(EntrustLog entrustLog) throws Exception {
 		try {
-			log.info("findEntrustLogList  {}",entrustLog);
+			log.debug("findEntrustLogList  {}",entrustLog);
 			return entrustLogMapper.findEntrustLogList(entrustLog);
 		} catch(Exception e) {
 			log.error("findEntrustLogList  {}",entrustLog,e);

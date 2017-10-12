@@ -21,7 +21,7 @@ public class PageConfServiceImpl implements PageConfService {
 	@Override
 	public void insertPageConf(PageConf pageConf) throws Exception {
 		try {
-			log.info("insert {}",pageConf);
+			log.debug("insert {}",pageConf);
 			pageConfMapper.insertPageConf(pageConf);
 		} catch(Exception e) {
 			log.error("insertPageConf异常 {}",pageConf,e);
@@ -34,7 +34,7 @@ public class PageConfServiceImpl implements PageConfService {
 	 **/
 	@Override
 	public PageConf selectPageConfById(Integer id) {
-		log.info("selectPageConfById  {}",id);
+		log.debug("selectPageConfById  {}",id);
 		return pageConfMapper.selectPageConfById(id);
 	}
 
@@ -44,7 +44,7 @@ public class PageConfServiceImpl implements PageConfService {
 	@Override
 	public void deletePageConfById(Integer id)throws Exception {
 		try {
-			log.info("deletePageConfById  {}",id);
+			log.debug("deletePageConfById  {}",id);
 			int result = pageConfMapper.deletePageConfById(id);
 			if (result < 1) {
 				throw new Exception("deletePageConfById失败");
@@ -60,7 +60,7 @@ public class PageConfServiceImpl implements PageConfService {
 	@Override
 	public void updatePageConfById(PageConf pageConf) throws Exception {
 		try {
-			log.info("updatePageConfById  {}",pageConf);
+			log.debug("updatePageConfById  {}",pageConf);
 			int result = pageConfMapper.updatePageConfById(pageConf);
 			if (result < 1) {
 				throw new Exception("updatePageConfById失败");
@@ -77,7 +77,7 @@ public class PageConfServiceImpl implements PageConfService {
 	@Override
 	public List<PageConf> findPageConfList(PageConf pageConf) throws Exception {
 		try {
-			log.info("findPageConfList  {}",pageConf);
+			log.debug("findPageConfList  {}",pageConf);
 			return pageConfMapper.findPageConfList(pageConf);
 		} catch(Exception e) {
 			log.error("findPageConfList  {}",pageConf,e);

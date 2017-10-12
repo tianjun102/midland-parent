@@ -21,7 +21,7 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public void insertComment(Comment comment) throws Exception {
 		try {
-			log.info("insert {}",comment);
+			log.debug("insert {}",comment);
 			commentMapper.insertComment(comment);
 		} catch(Exception e) {
 			log.error("insertComment异常 {}",comment,e);
@@ -34,7 +34,7 @@ public class CommentServiceImpl implements CommentService {
 	 **/
 	@Override
 	public Comment selectCommentById(Integer id) {
-		log.info("selectCommentById  {}",id);
+		log.debug("selectCommentById  {}",id);
 		return commentMapper.selectCommentById(id);
 	}
 
@@ -44,7 +44,7 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public void deleteCommentById(Integer id)throws Exception {
 		try {
-			log.info("deleteCommentById  {}",id);
+			log.debug("deleteCommentById  {}",id);
 			int result = commentMapper.deleteCommentById(id);
 			if (result < 1) {
 				throw new Exception("deleteCommentById失败");
@@ -60,7 +60,7 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public void updateCommentById(Comment comment) throws Exception {
 		try {
-			log.info("updateCommentById  {}",comment);
+			log.debug("updateCommentById  {}",comment);
 			int result = commentMapper.updateCommentById(comment);
 			if (result < 1) {
 				throw new Exception("updateCommentById失败");
@@ -77,7 +77,7 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public List<Comment> findCommentList(Comment comment) throws Exception {
 		try {
-			log.info("findCommentList  {}",comment);
+			log.debug("findCommentList  {}",comment);
 			return commentMapper.findCommentList(comment);
 		} catch(Exception e) {
 			log.error("findCommentList  {}",comment,e);

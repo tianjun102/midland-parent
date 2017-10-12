@@ -21,7 +21,7 @@ public class PopularServiceImpl implements PopularService {
 	@Override
 	public void insertPopular(Popular popular) throws Exception {
 		try {
-			log.info("insert {}",popular);
+			log.debug("insert {}",popular);
 			popularMapper.insertPopular(popular);
 		} catch(Exception e) {
 			log.error("insertPopular异常 {}",popular,e);
@@ -34,7 +34,7 @@ public class PopularServiceImpl implements PopularService {
 	 **/
 	@Override
 	public Popular selectById(Integer id) {
-		log.info("selectById  {}",id);
+		log.debug("selectById  {}",id);
 		return popularMapper.selectById(id);
 	}
 
@@ -44,7 +44,7 @@ public class PopularServiceImpl implements PopularService {
 	@Override
 	public void deleteById(Integer id)throws Exception {
 		try {
-			log.info("deleteById  {}",id);
+			log.debug("deleteById  {}",id);
 			int result = popularMapper.deleteById(id);
 			if (result < 1) {
 				throw new Exception("deleteById失败");
@@ -60,7 +60,7 @@ public class PopularServiceImpl implements PopularService {
 	@Override
 	public void updateById(Popular popular) throws Exception {
 		try {
-			log.info("updateById  {}",popular);
+			log.debug("updateById  {}",popular);
 			int result = popularMapper.updateById(popular);
 			if (result < 1) {
 				throw new Exception("updateById失败");
@@ -77,7 +77,7 @@ public class PopularServiceImpl implements PopularService {
 	@Override
 	public List<Popular> findPopularList(Popular popular) throws Exception {
 		try {
-			log.info("findPopularList  {}",popular);
+			log.debug("findPopularList  {}",popular);
 			return popularMapper.findPopularList(popular);
 		} catch(Exception e) {
 			log.error("findPopularList  {}",popular,e);

@@ -23,7 +23,7 @@ public class QuotationServiceImpl implements QuotationService {
 	@Override
 	public void insertQuotation(Quotation quotation) throws Exception {
 		try {
-			log.info("insert {}",quotation);
+			log.debug("insert {}",quotation);
 			quotationMapper.insertQuotation(quotation);
 		} catch(Exception e) {
 			log.error("insertQuotation异常 {}",quotation,e);
@@ -36,7 +36,7 @@ public class QuotationServiceImpl implements QuotationService {
 	@Override
 	public void insertQuotationBatch(List<Quotation> quotation) throws Exception {
 		try {
-			log.info("insertQuotationBatch {}",quotation);
+			log.debug("insertQuotationBatch {}",quotation);
 			quotationMapper.insertQuotationBatch(quotation);
 		} catch(Exception e) {
 			log.error("insertQuotationBatch异常 {}",quotation,e);
@@ -49,12 +49,12 @@ public class QuotationServiceImpl implements QuotationService {
 	 **/
 	@Override
 	public Quotation selectQuotationById(Integer id) {
-		log.info("selectQuotationById  {}",id);
+		log.debug("selectQuotationById  {}",id);
 		return quotationMapper.selectQuotationById(id);
 	}
 	@Override
 	public List<Map> tooltip(Quotation id) {
-		log.info("selectQuotationById  {}",id);
+		log.debug("selectQuotationById  {}",id);
 		return quotationMapper.tooltip(id);
 	}
 
@@ -64,7 +64,7 @@ public class QuotationServiceImpl implements QuotationService {
 	@Override
 	public void deleteQuotationById(Integer id)throws Exception {
 		try {
-			log.info("deleteQuotationById  {}",id);
+			log.debug("deleteQuotationById  {}",id);
 			int result = quotationMapper.deleteQuotationById(id);
 			if (result < 1) {
 				throw new Exception("deleteQuotationById失败");
@@ -80,7 +80,7 @@ public class QuotationServiceImpl implements QuotationService {
 	@Override
 	public void updateQuotationById(Quotation quotation) throws Exception {
 		try {
-			log.info("updateQuotationById  {}",quotation);
+			log.debug("updateQuotationById  {}",quotation);
 			int result = quotationMapper.updateQuotationById(quotation);
 			if (result < 1) {
 				throw new Exception("updateQuotationById失败");
@@ -97,7 +97,7 @@ public class QuotationServiceImpl implements QuotationService {
 	@Override
 	public List<Quotation> findQuotationList(Quotation quotation) throws Exception {
 		try {
-			log.info("findQuotationList  {}",quotation);
+			log.debug("findQuotationList  {}",quotation);
 			return quotationMapper.findQuotationList(quotation);
 		} catch(Exception e) {
 			log.error("findQuotationList  {}",quotation,e);

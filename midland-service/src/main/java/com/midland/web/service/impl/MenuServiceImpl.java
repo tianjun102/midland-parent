@@ -21,7 +21,7 @@ public class MenuServiceImpl implements MenuService {
 	@Override
 	public void insertMenu(Menu menu) throws Exception {
 		try {
-			log.info("insert {}",menu);
+			log.debug("insert {}",menu);
 			menuMapper.insertMenu(menu);
 		} catch(Exception e) {
 			log.error("insertMenu异常 {}",menu,e);
@@ -34,7 +34,7 @@ public class MenuServiceImpl implements MenuService {
 	 **/
 	@Override
 	public Menu selectMenuById(Integer id) {
-		log.info("selectMenuById  {}",id);
+		log.debug("selectMenuById  {}",id);
 		return menuMapper.selectMenuById(id);
 	}
 
@@ -44,7 +44,7 @@ public class MenuServiceImpl implements MenuService {
 	@Override
 	public void deleteMenuById(Integer id)throws Exception {
 		try {
-			log.info("deleteMenuById  {}",id);
+			log.debug("deleteMenuById  {}",id);
 			int result = menuMapper.deleteMenuById(id);
 			if (result < 1) {
 				throw new Exception("deleteMenuById失败");
@@ -60,7 +60,7 @@ public class MenuServiceImpl implements MenuService {
 	@Override
 	public void updateMenuById(Menu menu) throws Exception {
 		try {
-			log.info("updateMenuById  {}",menu);
+			log.debug("updateMenuById  {}",menu);
 			int result = menuMapper.updateMenuById(menu);
 			if (result < 1) {
 				throw new Exception("updateMenuById失败");
@@ -77,7 +77,7 @@ public class MenuServiceImpl implements MenuService {
 	@Override
 	public List<Menu> findMenuList(Menu menu) throws Exception {
 		try {
-			log.info("findMenuList  {}",menu);
+			log.debug("findMenuList  {}",menu);
 			return menuMapper.findMenuList(menu);
 		} catch(Exception e) {
 			log.error("findMenuList  {}",menu,e);

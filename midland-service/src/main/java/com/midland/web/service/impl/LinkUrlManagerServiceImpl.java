@@ -21,7 +21,7 @@ public class LinkUrlManagerServiceImpl implements LinkUrlManagerService {
 	@Override
 	public void insertLinkUrlManager(LinkUrlManager linkUrlManager) throws Exception {
 		try {
-			log.info("insert {}",linkUrlManager);
+			log.debug("insert {}",linkUrlManager);
 			linkUrlManagerMapper.insertLinkUrlManager(linkUrlManager);
 		} catch(Exception e) {
 			log.error("insertLinkUrlManager异常 {}",linkUrlManager,e);
@@ -34,7 +34,7 @@ public class LinkUrlManagerServiceImpl implements LinkUrlManagerService {
 	 **/
 	@Override
 	public LinkUrlManager selectById(Integer id) {
-		log.info("selectById  {}",id);
+		log.debug("selectById  {}",id);
 		return linkUrlManagerMapper.selectById(id);
 	}
 
@@ -44,7 +44,7 @@ public class LinkUrlManagerServiceImpl implements LinkUrlManagerService {
 	@Override
 	public void deleteById(Integer id)throws Exception {
 		try {
-			log.info("deleteById  {}",id);
+			log.debug("deleteById  {}",id);
 			int result = linkUrlManagerMapper.deleteById(id);
 			if (result < 1) {
 				throw new Exception("deleteById失败");
@@ -60,7 +60,7 @@ public class LinkUrlManagerServiceImpl implements LinkUrlManagerService {
 	@Override
 	public void updateById(LinkUrlManager linkUrlManager) throws Exception {
 		try {
-			log.info("updateById  {}",linkUrlManager);
+			log.debug("updateById  {}",linkUrlManager);
 			int result = linkUrlManagerMapper.updateById(linkUrlManager);
 			if (result < 1) {
 				throw new Exception("updateById失败");
@@ -77,7 +77,7 @@ public class LinkUrlManagerServiceImpl implements LinkUrlManagerService {
 	@Override
 	public List<LinkUrlManager> findLinkUrlManagerList(LinkUrlManager linkUrlManager) throws Exception {
 		try {
-			log.info("findLinkUrlManagerList  {}",linkUrlManager);
+			log.debug("findLinkUrlManagerList  {}",linkUrlManager);
 			return linkUrlManagerMapper.findLinkUrlManagerList(linkUrlManager);
 		} catch(Exception e) {
 			log.error("findLinkUrlManagerList  {}",linkUrlManager,e);

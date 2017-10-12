@@ -21,7 +21,7 @@ public class AnswerServiceImpl implements AnswerService {
 	@Override
 	public void insertAnswer(Answer answer) throws Exception {
 		try {
-			log.info("insert {}",answer);
+			log.debug("insert {}",answer);
 			answerMapper.insertAnswer(answer);
 		} catch(Exception e) {
 			log.error("insertAnswer异常 {}",answer,e);
@@ -34,7 +34,7 @@ public class AnswerServiceImpl implements AnswerService {
 	 **/
 	@Override
 	public Answer selectAnswerById(Integer id) {
-		log.info("selectAnswerById  {}",id);
+		log.debug("selectAnswerById  {}",id);
 		return answerMapper.selectAnswerById(id);
 	}
 
@@ -44,7 +44,7 @@ public class AnswerServiceImpl implements AnswerService {
 	@Override
 	public void deleteAnswerById(Integer id)throws Exception {
 		try {
-			log.info("deleteAnswerById  {}",id);
+			log.debug("deleteAnswerById  {}",id);
 			int result = answerMapper.deleteAnswerById(id);
 			if (result < 1) {
 				throw new Exception("deleteAnswerById失败");
@@ -60,7 +60,7 @@ public class AnswerServiceImpl implements AnswerService {
 	@Override
 	public void updateAnswerById(Answer answer) throws Exception {
 		try {
-			log.info("updateAnswerById  {}",answer);
+			log.debug("updateAnswerById  {}",answer);
 			int result = answerMapper.updateAnswerById(answer);
 			if (result < 1) {
 				throw new Exception("updateAnswerById失败");
@@ -77,7 +77,7 @@ public class AnswerServiceImpl implements AnswerService {
 	@Override
 	public List<Answer> findAnswerList(Answer answer) throws Exception {
 		try {
-			log.info("findAnswerList  {}",answer);
+			log.debug("findAnswerList  {}",answer);
 			return answerMapper.findAnswerList(answer);
 		} catch(Exception e) {
 			log.error("findAnswerList  {}",answer,e);

@@ -21,7 +21,7 @@ public class SpecialPageServiceImpl implements SpecialPageService {
 	@Override
 	public void insertSpecialPage(SpecialPage specialPage) throws Exception {
 		try {
-			log.info("insert {}",specialPage);
+			log.debug("insert {}",specialPage);
 			specialPageMapper.insertSpecialPage(specialPage);
 		} catch(Exception e) {
 			log.error("insertSpecialPage异常 {}",specialPage,e);
@@ -34,7 +34,7 @@ public class SpecialPageServiceImpl implements SpecialPageService {
 	 **/
 	@Override
 	public SpecialPage selectSpecialPageById(Integer id) {
-		log.info("selectSpecialPageById  {}",id);
+		log.debug("selectSpecialPageById  {}",id);
 		return specialPageMapper.selectSpecialPageById(id);
 	}
 
@@ -44,7 +44,7 @@ public class SpecialPageServiceImpl implements SpecialPageService {
 	@Override
 	public void deleteSpecialPageById(Integer id)throws Exception {
 		try {
-			log.info("deleteSpecialPageById  {}",id);
+			log.debug("deleteSpecialPageById  {}",id);
 			int result = specialPageMapper.deleteSpecialPageById(id);
 			if (result < 1) {
 				throw new Exception("deleteSpecialPageById失败");
@@ -60,7 +60,7 @@ public class SpecialPageServiceImpl implements SpecialPageService {
 	@Override
 	public void updateSpecialPageById(SpecialPage specialPage) throws Exception {
 		try {
-			log.info("updateSpecialPageById  {}",specialPage);
+			log.debug("updateSpecialPageById  {}",specialPage);
 			int result = specialPageMapper.updateSpecialPageById(specialPage);
 			if (result < 1) {
 				throw new Exception("updateSpecialPageById失败");
@@ -77,7 +77,7 @@ public class SpecialPageServiceImpl implements SpecialPageService {
 	@Override
 	public List<SpecialPage> findSpecialPageList(SpecialPage specialPage) throws Exception {
 		try {
-			log.info("findSpecialPageList  {}",specialPage);
+			log.debug("findSpecialPageList  {}",specialPage);
 			return specialPageMapper.findSpecialPageList(specialPage);
 		} catch(Exception e) {
 			log.error("findSpecialPageList  {}",specialPage,e);
