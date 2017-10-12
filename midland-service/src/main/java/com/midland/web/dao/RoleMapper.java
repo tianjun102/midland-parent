@@ -13,6 +13,7 @@ import com.midland.web.model.role.RoleAuth;
 import com.midland.web.model.role.RoleExample;
 import com.midland.web.model.role.RolePermission;
 import com.midland.web.model.user.UserRole;
+import org.springframework.stereotype.Repository;
 
 /**
  * 角色Dao 接口
@@ -20,6 +21,7 @@ import com.midland.web.model.user.UserRole;
  * @author 
  * @since 2016年7月5日 上午11:55:59
  **/
+@Repository
 public interface RoleMapper extends GenericDao<Role, Integer> {
     int countByExample(RoleExample example);
 

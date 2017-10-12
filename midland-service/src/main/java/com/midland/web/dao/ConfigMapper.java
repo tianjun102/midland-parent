@@ -1,7 +1,9 @@
 package com.midland.web.dao;
 
 import com.midland.web.model.Config;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ConfigMapper {
     int deleteByPrimaryKey(Integer id);
 

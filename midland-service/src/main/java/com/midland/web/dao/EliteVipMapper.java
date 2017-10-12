@@ -1,8 +1,10 @@
 package com.midland.web.dao;
 
 import com.midland.web.model.EliteVip;
-import java.util.List;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+@Repository
 public interface EliteVipMapper {
 
 	EliteVip selectEliteVipById(Integer eliteVip);

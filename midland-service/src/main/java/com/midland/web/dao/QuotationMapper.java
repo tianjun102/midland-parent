@@ -1,9 +1,11 @@
 package com.midland.web.dao;
 
 import com.midland.web.model.Quotation;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Map;
-
+@Repository
 public interface QuotationMapper {
 
 	Quotation selectQuotationById(Integer quotation);

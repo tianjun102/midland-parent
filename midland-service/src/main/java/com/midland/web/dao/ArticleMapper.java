@@ -1,7 +1,9 @@
 package com.midland.web.dao;
 
 import com.midland.web.model.Article;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ArticleMapper {
     int deleteByPrimaryKey(Integer id);
 
