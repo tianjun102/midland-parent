@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<li class="col-sm-6 col-md-6 col-lg-6"><span>省：</span> <!-- 省 -->
+<li style="display:flex;align-items:center"><span>省：</span> <!-- 省 -->
     <p id="province" style="display: inline-block;height: 38px;">
         <label></label> <input type="hidden" name="provinceId">
         <input type="hidden" name="regionSn"> <input type="hidden"

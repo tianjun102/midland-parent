@@ -45,10 +45,17 @@
 <div class="box">
     <section class="content">
         <p class="detail-title">
+            <a class="left" target="contentF" href="${ctx}/rest/quotationSecondHand/toolsTip_index">生成预览</a>
             <a class="setup" target="contentF" onclick="toAddPage()">新增</a>
         </p>
 
-
+        <%@include file="../layout/area.jsp" %>
+        <li><span>导入：</span>
+            <div style="width: 250px;float: left;">
+                <img style="margin-bottom: 10px;max-width:80px;max-height:80px" id="iconImg1">
+                <input type="file" name="file_upload" id="file_upload"/>
+            </div>
+        </li>
         <form action="${ctx }/rest/quotationSecondHand/list" method="POST" id="searchForm"
               onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
             <input type="hidden" name="isNew" id="isNew" value="${isNew}"/>
@@ -72,18 +79,12 @@
             </ul>
         </form>
         <div id="listDiv"></div>
-        <a class="edit_img" target="contentF" href="${ctx}/rest/quotationSecondHand/toolsTip_index">生成预览</a>
+
     </section>
     <a href="#" onclick="export1()">导出</a>
 </div>
 
-<%@include file="../layout/area.jsp" %>
-<li><span>导入：</span>
-    <div style="width: 250px;float: left;">
-        <img style="margin-bottom: 10px;max-width:80px;max-height:80px" id="iconImg1">
-        <input type="file" name="file_upload" id="file_upload"/>
-    </div>
-</li>
+
 
 <script type="text/javascript">
 

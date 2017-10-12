@@ -8,6 +8,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
+
     <script type="text/javascript">
         $(function () {
             $('#file_upload').uploadify({
@@ -44,6 +45,7 @@
 <div class="box">
     <section class="content">
         <p class="detail-title">
+            <a class="left" target="contentF" href="${ctx}/rest/quotation/toolsTip_index">生成预览</a>
             <a class="setup" target="contentF" onclick="toAddPage()">新增</a>
         </p>
 
@@ -73,7 +75,7 @@
             </ul>
         </form>
         <div id="listDiv"></div>
-        <a class="edit_img" target="contentF" href="${ctx}/rest/quotation/toolsTip_index">生成预览</a>
+
     </section>
 </div>
 
