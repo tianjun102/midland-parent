@@ -246,7 +246,7 @@ public class UserController extends BaseFilter {
 			user.setCityId(currUser.getCityId());
 		}
 	    getUserList(user,model, request);
-		List<ParamObject> map = JsonMapReader.getMap("user_audit");
+		List<ParamObject> map = JsonMapReader.getMap("audit_status");
 		model.addAttribute("auditSatusList",map);
     	return "user/userlist";
     }
@@ -792,7 +792,7 @@ public class UserController extends BaseFilter {
 			exportModel.setModelName6(user1.getCityName());
 			List<ParamObject> sources = JsonMapReader.getMap("source");
 			exportModel.setModelName7(MidlandHelper.getNameById(user1.getSource(), sources));
-			List<ParamObject> userTypes = JsonMapReader.getMap("user_audit");
+			List<ParamObject> userTypes = JsonMapReader.getMap("audit_status");
 			exportModel.setModelName8(MidlandHelper.getNameById(user1.getAuditStatus(), userTypes));
 			exportModels.add(exportModel);
 		}

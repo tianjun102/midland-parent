@@ -78,8 +78,7 @@
     //取消
     function closeWin(){
         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-		alert(index);
-        layer.close(index);
+        layer.closeAll();
     }
 
 

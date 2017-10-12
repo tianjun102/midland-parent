@@ -56,7 +56,13 @@ public class QuestionsController extends BaseFilter {
 		model.addAttribute("auditFlag",redisServiceImpl.getAnswerAuditFlag());
 		return "/questions/qeustionsIndex";
 	}
-	
+	@RequestMapping("/audit_answer")
+	public String auditQuestion(HttpServletRequest request,Integer id ,Model model) {
+		Answer ans = answerServiceImpl.selectAnswerById(id);
+		model.addAttribute("answer",ans);
+		return "/questions/auditAnswer";
+	}
+
 	
 	@RequestMapping("/delete")
 	@ResponseBody
@@ -162,6 +168,8 @@ public class QuestionsController extends BaseFilter {
 		Answer answer = new Answer();
 		answer.setQuestionsId(id);
 		List<Answer> answerList = answerServiceImpl.findAnswerList(answer);
+		List<ParamObject> paramObject = JsonMapReader.getMap("audit_status");
+		model.addAttribute("auditStatusList",paramObject);
 		model.addAttribute("questions",questions);
 		model.addAttribute("answerList",answerList);
 		return "questions/updateViewQuestion";
@@ -224,7 +232,7 @@ public class QuestionsController extends BaseFilter {
 		try {
 			answerServiceImpl.updateAnswerById(answer);
 			Answer answer1= answerServiceImpl.selectAnswerById(answer.getId());
-			if (answer.getAuditStatus() == 2){
+			if (answer.getAuditStatus() == 3){
 				//审核不通过，发送短信通知经纪人
 				List list = new ArrayList();
 				String remark = request.getParameter("auditRemark");

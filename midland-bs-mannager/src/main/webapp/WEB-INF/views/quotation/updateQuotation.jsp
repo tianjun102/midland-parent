@@ -11,6 +11,24 @@
     <title>Insert title here</title>
     <style type="text/css">
         .content ul.userinfo>li {margin-left: 0!important;}
+        .content ul.userinfo li > span {
+            float: left;
+            display: inline-block;
+            width: 90px;
+            height: 38px;
+            line-height: 38px;
+            text-align: right;
+            font-size: 14px;
+            color: rgb(102, 102, 102);
+        }
+        td
+        {
+            white-space: nowrap;
+        }
+        th
+        {
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body>
@@ -32,7 +50,7 @@
                     </c:forEach>
                 </select>
             </li>
-            <%@include file="../layout/area.jsp" %>
+            <%@include file="../menu/area.jsp" %>
             <li class="col-sm-6 col-md-6 col-lg-6"><span>成交套数：</span>
                <input type="text" name="dealNum" id="dealNum" value="${item.dealNum}"/>
             </li>
