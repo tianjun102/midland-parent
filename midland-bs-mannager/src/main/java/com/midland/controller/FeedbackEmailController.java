@@ -79,7 +79,7 @@ public class FeedbackEmailController extends BaseFilter {
 	public Object addFeedbackEmail(FeedbackEmail feedbackEmail) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("addFeedbackEmail {}",feedbackEmail);
+			log.debug("addFeedbackEmail {}",feedbackEmail);
 			feedbackEmailServiceImpl.insertFeedbackEmail(feedbackEmail);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -94,7 +94,7 @@ public class FeedbackEmailController extends BaseFilter {
 	 **/
 	@RequestMapping("get_feedbackEmail")
 	public String getFeedbackEmailById(Integer id,Model model) {
-		log.info("getFeedbackEmailById  {}",id);
+		log.debug("getFeedbackEmailById  {}",id);
 		FeedbackEmail result = feedbackEmailServiceImpl.selectFeedbackEmailById(id);
 		model.addAttribute("item",result);
 		return "feedbackEmail/updateFeedbackEmail";	}
@@ -107,7 +107,7 @@ public class FeedbackEmailController extends BaseFilter {
 	public Object deleteFeedbackEmailById(Integer id)throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("deleteFeedbackEmailById  {}",id);
+			log.debug("deleteFeedbackEmailById  {}",id);
 			feedbackEmailServiceImpl.deleteFeedbackEmailById(id);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -140,7 +140,7 @@ public class FeedbackEmailController extends BaseFilter {
 	public Object updateFeedbackEmailById(FeedbackEmail feedbackEmail) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("updateFeedbackEmailById  {}",feedbackEmail);
+			log.debug("updateFeedbackEmailById  {}",feedbackEmail);
 			feedbackEmailServiceImpl.updateFeedbackEmailById(feedbackEmail);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -156,7 +156,7 @@ public class FeedbackEmailController extends BaseFilter {
 	@RequestMapping("list")
 	public String findFeedbackEmailList(FeedbackEmail feedbackEmail,Model model, HttpServletRequest request) {
 		try {
-			log.info("findFeedbackEmailList  {}",feedbackEmail);
+			log.debug("findFeedbackEmailList  {}",feedbackEmail);
 			MidlandHelper.doPage(request);
 			Page<FeedbackEmail> result = (Page<FeedbackEmail>)feedbackEmailServiceImpl.findFeedbackEmailList(feedbackEmail);
 			Paginator paginator=result.getPaginator();

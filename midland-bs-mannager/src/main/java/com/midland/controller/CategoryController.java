@@ -81,7 +81,7 @@ public class CategoryController extends BaseFilter {
 	public Object addCategory(Category category) throws Exception {
 		Map map = new HashMap<>();
 		try {
-			log.info("addCategory {}",category);
+			log.debug("addCategory {}",category);
 			categoryServiceImpl.insertCategory(category);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -96,7 +96,7 @@ public class CategoryController extends BaseFilter {
 	 **/
 	@RequestMapping("get_category")
 	public String getCategoryById(Integer id,Model model) {
-		log.info("getCategoryById  {}",id);
+		log.debug("getCategoryById  {}",id);
 		Category result = categoryServiceImpl.selectCategoryById(id);
 		model.addAttribute("item",result);
 		return "category/updateCategory";	}
@@ -109,7 +109,7 @@ public class CategoryController extends BaseFilter {
 	public Object deleteCategoryById(Integer id)throws Exception {
 		Map map = new HashMap<>();
 		try {
-			log.info("deleteCategoryById  {}",id);
+			log.debug("deleteCategoryById  {}",id);
 			categoryServiceImpl.deleteCategoryById(id);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -152,7 +152,7 @@ public class CategoryController extends BaseFilter {
 	public Object updateCategoryById(Category category) throws Exception {
 		Map map = new HashMap<>();
 		try {
-			log.info("updateCategoryById  {}",category);
+			log.debug("updateCategoryById  {}",category);
 			categoryServiceImpl.updateCategoryById(category);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -168,7 +168,7 @@ public class CategoryController extends BaseFilter {
 	@RequestMapping(value = "list",produces ="application/json; charset=UTF-8")
 	public String findCategoryList(Category category, Model model, HttpServletRequest request) {
 		try {
-			log.info("findCategoryList  {}",category);
+			log.debug("findCategoryList  {}",category);
 			MidlandHelper.doPage(request);
 			Page<Category> result = (Page<Category>)categoryServiceImpl.findCategoryList(category);
 			Paginator paginator=result.getPaginator();

@@ -71,7 +71,7 @@ public class EliteClubController extends BaseFilter {
 	public Object addEliteClub(EliteClub eliteClub) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("addEliteClub {}",eliteClub);
+			log.debug("addEliteClub {}",eliteClub);
 			eliteClubServiceImpl.insertEliteClub(eliteClub);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -86,7 +86,7 @@ public class EliteClubController extends BaseFilter {
 	 **/
 	@RequestMapping("get_eliteClub")
 	public String getEliteClubById(Integer id,Model model) {
-		log.info("getEliteClubById  {}",id);
+		log.debug("getEliteClubById  {}",id);
 		EliteClub result = eliteClubServiceImpl.selectEliteClubById(id);
 		model.addAttribute("item",result);
 		return "eliteClub/updateEliteClub";	}
@@ -99,7 +99,7 @@ public class EliteClubController extends BaseFilter {
 	public Object deleteEliteClubById(Integer id)throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("deleteEliteClubById  {}",id);
+			log.debug("deleteEliteClubById  {}",id);
 			eliteClubServiceImpl.deleteEliteClubById(id);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -132,7 +132,7 @@ public class EliteClubController extends BaseFilter {
 	public Object updateEliteClubById(EliteClub eliteClub) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("updateEliteClubById  {}",eliteClub);
+			log.debug("updateEliteClubById  {}",eliteClub);
 			eliteClubServiceImpl.updateEliteClubById(eliteClub);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -148,7 +148,7 @@ public class EliteClubController extends BaseFilter {
 	@RequestMapping("list")
 	public String findEliteClubList(EliteClub eliteClub,Model model, HttpServletRequest request) {
 		try {
-			log.info("findEliteClubList  {}",eliteClub);
+			log.debug("findEliteClubList  {}",eliteClub);
 			MidlandHelper.doPage(request);
 			Page<EliteClub> result = (Page<EliteClub>)eliteClubServiceImpl.findEliteClubList(eliteClub);
 			Paginator paginator=result.getPaginator();

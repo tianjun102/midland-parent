@@ -81,7 +81,7 @@ public class ResumeManagerController extends BaseFilter {
 	public Object addResumeManager(ResumeManager resumeManager) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("addResumeManager {}",resumeManager);
+			log.debug("addResumeManager {}",resumeManager);
 			resumeManagerServiceImpl.insertResumeManager(resumeManager);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -96,7 +96,7 @@ public class ResumeManagerController extends BaseFilter {
 	 **/
 	@RequestMapping("get_resumeManager")
 	public String getResumeManagerById(Integer id,Model model) {
-		log.info("getResumeManagerById  {}",id);
+		log.debug("getResumeManagerById  {}",id);
 		ResumeManager result = resumeManagerServiceImpl.selectResumeManagerById(id);
 		model.addAttribute("item",result);
 		return "resumeManager/updateResumeManager";	}
@@ -109,7 +109,7 @@ public class ResumeManagerController extends BaseFilter {
 	public Object deleteResumeManagerById(Integer id)throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("deleteResumeManagerById  {}",id);
+			log.debug("deleteResumeManagerById  {}",id);
 			resumeManagerServiceImpl.deleteResumeManagerById(id);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -136,7 +136,7 @@ public class ResumeManagerController extends BaseFilter {
 	public Object updateResumeManagerById(ResumeManager resumeManager) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("updateResumeManagerById  {}",resumeManager);
+			log.debug("updateResumeManagerById  {}",resumeManager);
 			resumeManagerServiceImpl.updateResumeManagerById(resumeManager);
 			SimpleMailMessage message = new SimpleMailMessage();
 			message.setFrom("3332932@qq.com");
@@ -158,7 +158,7 @@ public class ResumeManagerController extends BaseFilter {
 	@RequestMapping("list")
 	public String findResumeManagerList(ResumeManager resumeManager,Model model, HttpServletRequest request) {
 		try {
-			log.info("findResumeManagerList  {}",resumeManager);
+			log.debug("findResumeManagerList  {}",resumeManager);
 			MidlandHelper.doPage(request);
 			Page<ResumeManager> result = (Page<ResumeManager>)resumeManagerServiceImpl.findResumeManagerList(resumeManager);
 			Paginator paginator=result.getPaginator();

@@ -51,7 +51,7 @@ public class LeaveMsgController extends BaseFilter {
 	public Object addLeaveMsg(LeaveMsg leaveMsg) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("addLeaveMsg {}",leaveMsg);
+			log.debug("addLeaveMsg {}",leaveMsg);
 			leaveMsg.setAddTime(MidlandHelper.getCurrentTime());
 			leaveMsgServiceImpl.insertLeaveMsg(leaveMsg);
 			map.put("state",0);
@@ -67,7 +67,7 @@ public class LeaveMsgController extends BaseFilter {
 	 **/
 	@RequestMapping("get_leaveMsg")
 	public String getLeaveMsgById(Integer id,Model model) {
-		log.info("getLeaveMsgById  {}",id);
+		log.debug("getLeaveMsgById  {}",id);
 		LeaveMsg result = leaveMsgServiceImpl.selectLeaveMsgById(id);
 		model.addAttribute("item",result);
 		return "leaveMsg/updateLeaveMsg";	}
@@ -80,7 +80,7 @@ public class LeaveMsgController extends BaseFilter {
 	public Object deleteLeaveMsgById(Integer id)throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("deleteLeaveMsgById  {}",id);
+			log.debug("deleteLeaveMsgById  {}",id);
 			leaveMsgServiceImpl.deleteLeaveMsgById(id);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -107,7 +107,7 @@ public class LeaveMsgController extends BaseFilter {
 	public Object updateLeaveMsgById(LeaveMsg leaveMsg) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("updateLeaveMsgById  {}",leaveMsg);
+			log.debug("updateLeaveMsgById  {}",leaveMsg);
 			leaveMsgServiceImpl.updateLeaveMsgById(leaveMsg);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -123,7 +123,7 @@ public class LeaveMsgController extends BaseFilter {
 	@RequestMapping("list")
 	public String findLeaveMsgList(LeaveMsg leaveMsg, Model model, HttpServletRequest request) {
 		try {
-			log.info("findLeaveMsgList  {}",leaveMsg);
+			log.debug("findLeaveMsgList  {}",leaveMsg);
 			MidlandHelper.doPage(request);
 			Page<LeaveMsg> result = (Page<LeaveMsg>)leaveMsgServiceImpl.findLeaveMsgList(leaveMsg);
 			Paginator paginator=result.getPaginator();

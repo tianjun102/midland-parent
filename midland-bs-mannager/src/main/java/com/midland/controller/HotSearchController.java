@@ -77,7 +77,7 @@ public class HotSearchController extends BaseFilter {
 	public Object addHotSearch(HotSearch hotSearch) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("addHotSearch {}",hotSearch);
+			log.debug("addHotSearch {}",hotSearch);
 			hotSearchServiceImpl.insertHotSearch(hotSearch);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -92,7 +92,7 @@ public class HotSearchController extends BaseFilter {
 	 **/
 	@RequestMapping("get_hotSearch")
 	public String getHotSearchById(Integer id,Model model) {
-		log.info("getHotSearchById  {}",id);
+		log.debug("getHotSearchById  {}",id);
 		HotSearch result = hotSearchServiceImpl.selectHotSearchById(id);
 		model.addAttribute("item",result);
 		return "hotSearch/updateHotSearch";	}
@@ -105,7 +105,7 @@ public class HotSearchController extends BaseFilter {
 	public Object deleteHotSearchById(Integer id)throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("deleteHotSearchById  {}",id);
+			log.debug("deleteHotSearchById  {}",id);
 			hotSearchServiceImpl.deleteHotSearchById(id);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -138,7 +138,7 @@ public class HotSearchController extends BaseFilter {
 	public Object updateHotSearchById(HotSearch hotSearch) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("updateHotSearchById  {}",hotSearch);
+			log.debug("updateHotSearchById  {}",hotSearch);
 			hotSearchServiceImpl.updateHotSearchById(hotSearch);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -154,7 +154,7 @@ public class HotSearchController extends BaseFilter {
 	@RequestMapping("list")
 	public String findHotSearchList(HotSearch hotSearch, Model model, HttpServletRequest request) {
 		try {
-			log.info("findHotSearchList  {}",hotSearch);
+			log.debug("findHotSearchList  {}",hotSearch);
 			MidlandHelper.doPage(request);
 			Page<HotSearch> result = (Page<HotSearch>)hotSearchServiceImpl.findHotSearchList(hotSearch);
 			Paginator paginator=result.getPaginator();

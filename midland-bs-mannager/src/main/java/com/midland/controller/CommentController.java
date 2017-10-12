@@ -59,7 +59,7 @@ public class CommentController extends BaseFilter {
 	public Object addComment(Comment comment) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("addComment {}",comment);
+			log.debug("addComment {}",comment);
 			commentServiceImpl.insertComment(comment);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -74,7 +74,7 @@ public class CommentController extends BaseFilter {
 	 **/
 	@RequestMapping("get_comment")
 	public String getCommentById(Integer id,Model model) {
-		log.info("getCommentById  {}",id);
+		log.debug("getCommentById  {}",id);
 		Comment result = commentServiceImpl.selectCommentById(id);
 		model.addAttribute("item",result);
 		return "comment/updateComment";	}
@@ -87,7 +87,7 @@ public class CommentController extends BaseFilter {
 	public Object deleteCommentById(Integer id)throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("deleteCommentById  {}",id);
+			log.debug("deleteCommentById  {}",id);
 			commentServiceImpl.deleteCommentById(id);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -114,7 +114,7 @@ public class CommentController extends BaseFilter {
 	public Object updateCommentById(Comment comment) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("updateCommentById  {}",comment);
+			log.debug("updateCommentById  {}",comment);
 			commentServiceImpl.updateCommentById(comment);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -130,7 +130,7 @@ public class CommentController extends BaseFilter {
 	@RequestMapping("list")
 	public String findCommentList(Comment comment, Model model, HttpServletRequest request) {
 		try {
-			log.info("findCommentList  {}",comment);
+			log.debug("findCommentList  {}",comment);
 			MidlandHelper.doPage(request);
 			Page<Comment> result = (Page<Comment>)commentServiceImpl.findCommentList(comment);
 			Paginator paginator=result.getPaginator();

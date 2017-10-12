@@ -72,7 +72,7 @@ public class QrCodeController extends BaseFilter {
 	public Object addQrCode(QrCode qrCode) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("addQrCode {}",qrCode);
+			log.debug("addQrCode {}",qrCode);
 			qrCodeServiceImpl.insertQrCode(qrCode);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -87,7 +87,7 @@ public class QrCodeController extends BaseFilter {
 	 **/
 	@RequestMapping("get_qrCode")
 	public String getQrCodeById(Integer id,Model model) {
-		log.info("getQrCodeById  {}",id);
+		log.debug("getQrCodeById  {}",id);
 		QrCode result = qrCodeServiceImpl.selectQrCodeById(id);
 		model.addAttribute("item",result);
 		return "qrCode/updateQrCode";	}
@@ -100,7 +100,7 @@ public class QrCodeController extends BaseFilter {
 	public Object deleteQrCodeById(Integer id)throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("deleteQrCodeById  {}",id);
+			log.debug("deleteQrCodeById  {}",id);
 			qrCodeServiceImpl.deleteQrCodeById(id);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -133,7 +133,7 @@ public class QrCodeController extends BaseFilter {
 	public Object updateQrCodeById(QrCode qrCode) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("updateQrCodeById  {}",qrCode);
+			log.debug("updateQrCodeById  {}",qrCode);
 			qrCodeServiceImpl.updateQrCodeById(qrCode);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -149,7 +149,7 @@ public class QrCodeController extends BaseFilter {
 	@RequestMapping("list")
 	public String findQrCodeList(QrCode qrCode, Model model, HttpServletRequest request) {
 		try {
-			log.info("findQrCodeList  {}",qrCode);
+			log.debug("findQrCodeList  {}",qrCode);
 			MidlandHelper.doPage(request);
 			Page<QrCode> result = (Page<QrCode>)qrCodeServiceImpl.findQrCodeList(qrCode);
 			Paginator paginator=result.getPaginator();

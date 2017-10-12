@@ -67,7 +67,7 @@ public class FilmLibraryController extends BaseFilter {
 			User user = MidlandHelper.getCurrentUser(request);
 			filmLibrary.setOperatorName(user.getUserCnName());
 			filmLibrary.setOperatorId(user.getId());
-			log.info("addFilmLibrary {}",filmLibrary);
+			log.debug("addFilmLibrary {}",filmLibrary);
 			filmLibraryServiceImpl.insertFilmLibrary(filmLibrary);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -82,7 +82,7 @@ public class FilmLibraryController extends BaseFilter {
 	 **/
 	@RequestMapping("get_filmLibrary")
 	public String getFilmLibraryById(Integer id,Model model) {
-		log.info("getFilmLibraryById  {}",id);
+		log.debug("getFilmLibraryById  {}",id);
 		FilmLibrary result = filmLibraryServiceImpl.selectFilmLibraryById(id);
 		model.addAttribute("item",result);
 		return "filmLibrary/updateFilmLibrary";	}
@@ -95,7 +95,7 @@ public class FilmLibraryController extends BaseFilter {
 	public Object deleteFilmLibraryById(Integer id)throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("deleteFilmLibraryById  {}",id);
+			log.debug("deleteFilmLibraryById  {}",id);
 			filmLibraryServiceImpl.deleteFilmLibraryById(id);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -126,7 +126,7 @@ public class FilmLibraryController extends BaseFilter {
 	public Object updateFilmLibraryById(FilmLibrary filmLibrary) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("updateFilmLibraryById  {}",filmLibrary);
+			log.debug("updateFilmLibraryById  {}",filmLibrary);
 			filmLibraryServiceImpl.updateFilmLibraryById(filmLibrary);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -142,7 +142,7 @@ public class FilmLibraryController extends BaseFilter {
 	@RequestMapping("list")
 	public String findFilmLibraryList(FilmLibrary filmLibrary, Model model, HttpServletRequest request) {
 		try {
-			log.info("findFilmLibraryList  {}",filmLibrary);
+			log.debug("findFilmLibraryList  {}",filmLibrary);
 			User user = MidlandHelper.getCurrentUser(request);
 			if (StringUtils.isEmpty(filmLibrary.getCityId())){
 				filmLibrary.setCityId(user.getCityId());

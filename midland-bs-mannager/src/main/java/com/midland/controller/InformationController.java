@@ -90,7 +90,7 @@ public class InformationController extends BaseFilter {
 	public Object addInformation(Information information) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("addInformation {}",information);
+			log.debug("addInformation {}",information);
 			//1=资讯；0=市场调研
 			information.setArticeType(1);
 			if (information.getCateId()==null&& StringUtils.isEmpty(information.getCateName())){
@@ -111,7 +111,7 @@ public class InformationController extends BaseFilter {
 	 **/
 	@RequestMapping("get_information")
 	public String getInformationById(Integer id,Model model) {
-		log.info("getInformationById  {}",id);
+		log.debug("getInformationById  {}",id);
 		Information result = informationServiceImpl.selectInformationById(id);
 		model.addAttribute("item",result);
 		return "information/updateInformation";	}
@@ -124,7 +124,7 @@ public class InformationController extends BaseFilter {
 	public Object deleteInformationById(Integer id)throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("deleteInformationById  {}",id);
+			log.debug("deleteInformationById  {}",id);
 			informationServiceImpl.deleteInformationById(id);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -169,7 +169,7 @@ public class InformationController extends BaseFilter {
 		}
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("updateInformationById  {}",information);
+			log.debug("updateInformationById  {}",information);
 			informationServiceImpl.updateInformationById(information);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -185,7 +185,7 @@ public class InformationController extends BaseFilter {
 	@RequestMapping("list")
 	public String findInformationList(Information information, Model model, HttpServletRequest request) {
 		try {
-			log.info("findInformationList  {}",information);
+			log.debug("findInformationList  {}",information);
 			MidlandHelper.doPage(request);
 			information.setArticeType(1);
 			Page<Information> result = (Page<Information>)informationServiceImpl.findInformationList(information);

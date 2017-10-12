@@ -56,7 +56,7 @@ public class PopularCateController extends BaseFilter {
 	public Object addPopularCate(PopularCate popularCate) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("addPopularCate {}",popularCate);
+			log.debug("addPopularCate {}",popularCate);
 			popularCateServiceImpl.insertPopularCate(popularCate);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -71,7 +71,7 @@ public class PopularCateController extends BaseFilter {
 	 **/
 	@RequestMapping("get_popularCate")
 	public String getPopularCateById(Integer id,Model model) {
-		log.info("getPopularCateById  {}",id);
+		log.debug("getPopularCateById  {}",id);
 		PopularCate result = popularCateServiceImpl.selectPopularCateById(id);
 		model.addAttribute("item",result);
 		return "popularCate/updatePopularCate";	}
@@ -84,7 +84,7 @@ public class PopularCateController extends BaseFilter {
 	public Object deletePopularCateById(Integer id)throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("deletePopularCateById  {}",id);
+			log.debug("deletePopularCateById  {}",id);
 			popularCateServiceImpl.deletePopularCateById(id);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -111,7 +111,7 @@ public class PopularCateController extends BaseFilter {
 	public Object updatePopularCateById(PopularCate popularCate) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("updatePopularCateById  {}",popularCate);
+			log.debug("updatePopularCateById  {}",popularCate);
 			popularCateServiceImpl.updatePopularCateById(popularCate);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -127,7 +127,7 @@ public class PopularCateController extends BaseFilter {
 	@RequestMapping("list")
 	public String findPopularCateList(PopularCate popularCate,Model model, HttpServletRequest request) {
 		try {
-			log.info("findPopularCateList  {}",popularCate);
+			log.debug("findPopularCateList  {}",popularCate);
 			MidlandHelper.doPage(request);
 			Page<PopularCate> result = (Page<PopularCate>)popularCateServiceImpl.findPopularCateList(popularCate);
 			Paginator paginator=result.getPaginator();

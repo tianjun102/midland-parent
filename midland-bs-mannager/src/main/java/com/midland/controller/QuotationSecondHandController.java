@@ -225,7 +225,7 @@ public class QuotationSecondHandController extends BaseFilter {
 	public Object addQuotationSecondHand(QuotationSecondHand quotationSecondHand) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("addQuotationSecondHand {}",quotationSecondHand);
+			log.debug("addQuotationSecondHand {}",quotationSecondHand);
 			quotationSecondHandServiceImpl.insertQuotationSecondHand(quotationSecondHand);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -240,7 +240,7 @@ public class QuotationSecondHandController extends BaseFilter {
 	 **/
 	@RequestMapping("get_quotationSecondHand")
 	public String getQuotationSecondHandById(Integer id,Model model) {
-		log.info("getQuotationSecondHandById  {}",id);
+		log.debug("getQuotationSecondHandById  {}",id);
 		QuotationSecondHand result = quotationSecondHandServiceImpl.selectQuotationSecondHandById(id);
 		model.addAttribute("item",result);
 		return "quotationSecondHand/updateQuotationSecondHand";	}
@@ -253,7 +253,7 @@ public class QuotationSecondHandController extends BaseFilter {
 	public Object deleteQuotationSecondHandById(Integer id)throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("deleteQuotationSecondHandById  {}",id);
+			log.debug("deleteQuotationSecondHandById  {}",id);
 			quotationSecondHandServiceImpl.deleteQuotationSecondHandById(id);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -285,7 +285,7 @@ public class QuotationSecondHandController extends BaseFilter {
 	public Object updateQuotationSecondHandById(QuotationSecondHand quotationSecondHand) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("updateQuotationSecondHandById  {}",quotationSecondHand);
+			log.debug("updateQuotationSecondHandById  {}",quotationSecondHand);
 			quotationSecondHandServiceImpl.updateQuotationSecondHandById(quotationSecondHand);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -301,7 +301,7 @@ public class QuotationSecondHandController extends BaseFilter {
 	//@RequestMapping("list")
 	public String findQuotationSecondHandList(QuotationSecondHand quotationSecondHand,Model model, HttpServletRequest request) {
 		try {
-			log.info("findQuotationSecondHandList  {}",quotationSecondHand);
+			log.debug("findQuotationSecondHandList  {}",quotationSecondHand);
 			User user = MidlandHelper.getCurrentUser(request);
 			//只展示登录用户当前城市的信息
 			quotationSecondHand.setCityId(user.getCityId());

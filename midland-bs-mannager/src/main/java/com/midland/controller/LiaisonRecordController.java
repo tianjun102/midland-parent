@@ -61,7 +61,7 @@ public class LiaisonRecordController extends BaseFilter {
 	public Object addLiaisonRecord(LiaisonRecord liaisonRecord) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("addLiaisonRecord {}",liaisonRecord);
+			log.debug("addLiaisonRecord {}",liaisonRecord);
 			liaisonRecordServiceImpl.insertLiaisonRecord(liaisonRecord);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -76,7 +76,7 @@ public class LiaisonRecordController extends BaseFilter {
 	 **/
 	@RequestMapping("get_liaisonRecord")
 	public String getLiaisonRecordById(Integer id,Model model) {
-		log.info("getLiaisonRecordById  {}",id);
+		log.debug("getLiaisonRecordById  {}",id);
 		LiaisonRecord result = liaisonRecordServiceImpl.selectLiaisonRecordById(id);
 		model.addAttribute("item",result);
 		return "liaisonRecord/updateLiaisonRecord";	}
@@ -89,7 +89,7 @@ public class LiaisonRecordController extends BaseFilter {
 	public Object deleteLiaisonRecordById(Integer id)throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("deleteLiaisonRecordById  {}",id);
+			log.debug("deleteLiaisonRecordById  {}",id);
 			liaisonRecordServiceImpl.deleteLiaisonRecordById(id);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -116,7 +116,7 @@ public class LiaisonRecordController extends BaseFilter {
 	public Object updateLiaisonRecordById(LiaisonRecord liaisonRecord) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("updateLiaisonRecordById  {}",liaisonRecord);
+			log.debug("updateLiaisonRecordById  {}",liaisonRecord);
 			liaisonRecordServiceImpl.updateLiaisonRecordById(liaisonRecord);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -132,7 +132,7 @@ public class LiaisonRecordController extends BaseFilter {
 	@RequestMapping("list")
 	public String findLiaisonRecordList(LiaisonRecord liaisonRecord, Model model, HttpServletRequest request) {
 		try {
-			log.info("findLiaisonRecordList  {}",liaisonRecord);
+			log.debug("findLiaisonRecordList  {}",liaisonRecord);
 			MidlandHelper.doPage(request);
 			Page<LiaisonRecord> result = (Page<LiaisonRecord>)liaisonRecordServiceImpl.findLiaisonRecordList(liaisonRecord);
 			Paginator paginator=result.getPaginator();
