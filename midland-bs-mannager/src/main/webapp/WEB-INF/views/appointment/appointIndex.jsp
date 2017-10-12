@@ -12,7 +12,18 @@
 
 <link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css" />
 <link rel="stylesheet" href="${ctx }/assets/css/common.css">
-
+	<style type="text/css">
+		.content ul.userinfo li>span{
+			float: left;
+			display: inline-block;
+			width: 90px;
+			height: 38px;
+			line-height: 38px;
+			text-align: right;
+			font-size: 14px;
+			color: rgb( 102, 102, 102 );
+		}
+	</style>
 </head>
 <body>
 	

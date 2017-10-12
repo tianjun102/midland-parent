@@ -6,7 +6,7 @@
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
 		<result column="title" property="title" jdbcType="VARCHAR" />
-		<result column="houses_id" property="housesId" jdbcType="INTEGER" />
+		<result column="houses_id" property="housesId" jdbcType="VARCHAR" />
 		<result column="introduction" property="introduction" jdbcType="LONGVARCHAR" />
 		<result column="is_show" property="isShow" jdbcType="INTEGER" />
 		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
@@ -89,7 +89,7 @@
 				#{title,jdbcType=VARCHAR},
 			</if>
 			<if test="housesId != null">
-				#{housesId,jdbcType=INTEGER},
+				#{housesId,jdbcType=VARCHAR},
 			</if>
 			<if test="introduction != null">
 				#{introduction,jdbcType=LONGVARCHAR},
@@ -123,7 +123,7 @@
 			title= #{title,jdbcType=VARCHAR},
 		</if>
 		<if test="housesId != null">
-			houses_id= #{housesId,jdbcType=INTEGER},
+			houses_id= #{housesId,jdbcType=VARCHAR},
 		</if>
 		<if test="introduction != null">
 			introduction= #{introduction,jdbcType=LONGVARCHAR},
@@ -159,7 +159,7 @@
 			 and title like '%${title}%'
 		</if>
 		<if test="housesId != null">
-			 and houses_id= #{housesId,jdbcType=INTEGER}
+			 and houses_id= #{housesId,jdbcType=VARCHAR}
 		</if>
 		<if test="introduction != null">
 			 and introduction= #{introduction,jdbcType=LONGVARCHAR}

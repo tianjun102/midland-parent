@@ -6,6 +6,23 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
+    <style type="text/css">
+        .table-add tr td a {
+            display: inline-block;
+            width: 38px;!important;
+            height: 20px;
+            margin: 0 5px;
+            background-size: contain!important;
+        }
+        td
+        {
+            white-space: nowrap;
+        }
+        th
+        {
+            white-space: nowrap;
+        }
+    </style>
 </head>
 <body>
 
@@ -44,8 +61,7 @@
                         <td>${item.housesId }</td>
                         <td>${item.operatorName }</td>
                         <td>
-
-                            <a target="contentF" style="width: 40px" onclick="to_edit(${item.id })">编辑</a>
+                            <a class="setup" target="contentF" href="${ctx}/rest/filmLibrary/to_update?id=${item.id}">编辑</a>
                             <a target="contentF" style="width: 40px" onclick="delete1(${item.id })">删除</a>
                         </td>
                     </tr>

@@ -17,7 +17,7 @@ public class TradeFair{
 	/**
 	 * 楼盘id
 	 **/
-	private Integer housesId;
+	private String housesId;
 	/**
 	 * 简介
 	 **/
@@ -72,11 +72,11 @@ public class TradeFair{
 		this.title = title;
 	}
 
-	public Integer getHousesId() {
+	public String getHousesId() {
 		return housesId;
 	}
 
-	public void setHousesId(Integer housesId) {
+	public void setHousesId(String housesId) {
 		this.housesId = housesId;
 	}
 

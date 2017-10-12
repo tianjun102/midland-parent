@@ -8,7 +8,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-
+	<style type="text/css">
+		.content ul.userinfo li>span{
+			float: left;
+			display: inline-block;
+			width: 90px;
+			height: 38px;
+			line-height: 38px;
+			text-align: right;
+			font-size: 14px;
+			color: rgb( 102, 102, 102 );
+		}
+	</style>
 
 </head>
 <body>

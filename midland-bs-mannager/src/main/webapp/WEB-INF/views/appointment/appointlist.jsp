@@ -15,6 +15,21 @@
             border-radius: 2px;
             color: #fff;
         }
+        .table-add tr td a {
+            display: inline-block;
+            width: 38px;!important;
+            height: 20px;
+            margin: 0 5px;
+            background-size: contain!important;
+        }
+        td
+        {
+            white-space: nowrap;
+        }
+        th
+        {
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body>

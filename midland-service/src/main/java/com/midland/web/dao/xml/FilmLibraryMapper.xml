@@ -7,7 +7,7 @@
 		<result column="city_id" property="cityId" jdbcType="VARCHAR" />
 		<result column="img_desc" property="imgDesc" jdbcType="VARCHAR" />
 		<result column="houses_name" property="housesName" jdbcType="VARCHAR" />
-		<result column="houses_id" property="housesId" jdbcType="INTEGER" />
+		<result column="houses_id" property="housesId" jdbcType="VARCHAR" />
 		<result column="introduction" property="introduction" jdbcType="LONGVARCHAR" />
 		<result column="video_url" property="videoUrl" jdbcType="VARCHAR" />
 		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
@@ -112,7 +112,7 @@
 				#{housesName,jdbcType=VARCHAR},
 			</if>
 			<if test="housesId != null">
-				#{housesId,jdbcType=INTEGER},
+				#{housesId,jdbcType=VARCHAR},
 			</if>
 			<if test="introduction != null">
 				#{introduction,jdbcType=LONGVARCHAR},
@@ -161,7 +161,7 @@
 			houses_name= #{housesName,jdbcType=VARCHAR},
 		</if>
 		<if test="housesId != null">
-			houses_id= #{housesId,jdbcType=INTEGER},
+			houses_id= #{housesId,jdbcType=VARCHAR},
 		</if>
 		<if test="introduction != null">
 			introduction= #{introduction,jdbcType=LONGVARCHAR},
@@ -212,7 +212,7 @@
 			 and houses_name= #{housesName,jdbcType=VARCHAR}
 		</if>
 		<if test="housesId != null">
-			 and houses_id= #{housesId,jdbcType=INTEGER}
+			 and houses_id= #{housesId,jdbcType=VARCHAR}
 		</if>
 		<if test="introduction != null">
 			 and introduction= #{introduction,jdbcType=LONGVARCHAR}
