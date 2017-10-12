@@ -22,6 +22,7 @@ import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
 import com.midland.web.util.ParamObject;
 import com.midland.web.util.PoiExcelExport;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -240,6 +241,10 @@ public class UserController extends BaseFilter {
      */
     @RequestMapping(value = "/userList", method = {RequestMethod.GET,RequestMethod.POST})
     public String selectUserList(User user, Model model, HttpServletRequest request){
+    	User currUser = MidlandHelper.getCurrentUser(request);
+    	if (StringUtils.isEmpty(user.getCityId())){
+			user.setCityId(currUser.getCityId());
+		}
 	    getUserList(user,model, request);
 		List<ParamObject> map = JsonMapReader.getMap("user_audit");
 		model.addAttribute("auditSatusList",map);
@@ -770,13 +775,16 @@ public class UserController extends BaseFilter {
     
     @RequestMapping("/export")
     public void userInfoExportExcel(User user, HttpServletResponse response,HttpServletRequest request){
+		User currUser = MidlandHelper.getCurrentUser(request);
+		if (StringUtils.isEmpty(user.getCityId())){
+			user.setCityId(currUser.getCityId());
+		}
 	    List<User> dataList = userService.selectUserList(user);
 		List<ExportModel> exportModels = new ArrayList<>();
 
 
 		for (User user1: dataList){
 			ExportModel exportModel = new ExportModel();
-			exportModel.setModelName1(String.valueOf(user1.getId()));
 			exportModel.setModelName2(user1.getUsername());
 			exportModel.setModelName3(user1.getUserCnName());
 			exportModel.setModelName4(user1.getPhone());
@@ -790,9 +798,9 @@ public class UserController extends BaseFilter {
 		}
 	    PoiExcelExport pee = new PoiExcelExport(response,"用户","sheet1");
 	    //调用
-	    String titleColumn[] = {"modelName1","modelName2","modelName3","modelName4","modelName5","modelName6","modelName7","modelName8"};
-	    String titleName[] = {"用户id","用户名","昵称","联系方式","邮箱","城市","来源","审核状态"};
-	    int titleSize[] = {13,13,13,13,13,13,13,13};
+	    String titleColumn[] = {"modelName2","modelName3","modelName4","modelName5","modelName6","modelName7","modelName8"};
+	    String titleName[] = {"用户名","昵称","联系方式","邮箱","城市","来源","审核状态"};
+	    int titleSize[] = {13,13,13,13,13,13,13};
 	    //其他设置 set方法可全不调用
 	    pee.wirteExcel(titleColumn, titleName, titleSize, exportModels,request);
     }

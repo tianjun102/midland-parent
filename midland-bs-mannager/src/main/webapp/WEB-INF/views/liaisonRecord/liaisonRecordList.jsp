@@ -16,10 +16,10 @@
             <tr>
 				<th style="width: 8%">姓名</th>
 				<th style="width: 8%">电话</th>
-				<th style="width: 8%">分类</th>
+                <th style="width: 8%">邮箱</th>
+                <th style="width: 8%">分类</th>
 				<th style="width: 8%">留言</th>
 				<th style="width: 8%">提交时间</th>
-				<th style="width: 8%">邮箱</th>
                 <%--<th style="width: 10%">操作</th>--%>
             </tr>
         </thead>
@@ -31,10 +31,10 @@
 						<input type="hidden" id="id" value="${item.id}"/>
 						<td>${item.name}</td>
 						<td>${item.phone}</td>
-						<td>${item.category}</td>
+                        <td>${item.email}</td>
+                        <td>${item.category}</td>
 						<td>${item.leavingMessage}</td>
 						<td>${item.addTime}</td>
-						<td>${item.email}</td>
 						<%--<td>--%>
                             <%--<a target="contentF" onclick="to_edit(${item.id })">编辑</a>--%>
                             <%--<a target="contentF" onclick="delete1(${item.id })">删除</a>--%>

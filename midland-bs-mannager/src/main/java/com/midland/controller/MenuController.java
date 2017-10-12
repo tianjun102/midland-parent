@@ -69,7 +69,7 @@ public class MenuController extends BaseFilter  {
 		try {
 			log.info("addMenu {}",menu);
 			int maxOrderBy = menuServiceImpl.getMaxOrderBy();
-			menu.setOrderBy(maxOrderBy+1);
+			menu.setOrderBy(maxOrderBy);
 			menuServiceImpl.insertMenu(menu);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -111,13 +111,14 @@ public class MenuController extends BaseFilter  {
 	 **/
 	@RequestMapping("to_update")
 	public String toUpdateMenu(Integer id,Model model) throws Exception {
+		settingService.getAllProvinceList(model);
+
 		Menu result = menuServiceImpl.selectMenuById(id);
 		model.addAttribute("item",result);
 		List<ParamObject> sources = JsonMapReader.getMap("source");
 		model.addAttribute("sources",sources);
+		settingService.getAllProvinceList(model);
 
-		List<Area> list = settingService.queryAllCityByRedis();
-		model.addAttribute("citys",list);
 		return "menu/updateMenu";
 	}
 
@@ -170,10 +171,13 @@ public class MenuController extends BaseFilter  {
 		String tableName="menu";
 		String orderByColumn="order_by";
 		String orderByParam=String.valueOf(menu.getOrderBy());
-
-		jdbcService.listDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,sort);
 		Map map = new HashMap();
-		map.put("state",0);
+		try {
+			jdbcService.listDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,sort);
+			map.put("state",0);
+		} catch (Exception e) {
+			map.put("state",-1);
+		}
 		return map;
 	}
 }

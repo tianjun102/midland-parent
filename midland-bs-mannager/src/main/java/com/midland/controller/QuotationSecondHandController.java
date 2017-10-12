@@ -54,7 +54,14 @@ public class QuotationSecondHandController extends BaseFilter {
 		model.addAttribute("citys",list);
 		return "quotationSecondHand/quotationSecondHandIndex";
 	}
-	
+	@RequestMapping("to_import")
+	public String toImport(HttpServletRequest request,Model model) throws Exception {
+		List<ParamObject> paramObjects = JsonMapReader.getMap("quotation_type");
+		model.addAttribute("types", paramObjects);
+		model.addAttribute("isNew", "0");
+		settingService.getAllProvinceList(model);
+		return "quotationSecondHand/toImport";
+	}
 	
 	@RequestMapping("toolsTip_index")
 	public String toolsTipIndex(Model model){

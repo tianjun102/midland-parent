@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@include file="../layout/tablib.jsp" %>
+<%@include file="../layout/source.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -37,17 +38,9 @@
     <form action="${ctx}/rest/appoint/update" method="post" id="dataForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
-            <li><span>城市：</span>
-                <input type="hidden" id="cityName" name="cityName" value="${item.cityName}">
-                <select onchange="setCityName()" name="cityId" id="cityId" class="dropdown">
-                    <option value="" >请选择</option>
-                    <c:forEach items="${citys}" var="s">
-                        <option value="${s.id}" <c:if test="${item.cityId==s.id}">selected</c:if>>${s.name}</option>
-                    </c:forEach>
-                </select>
-            </li>
+            <%@include file="area.jsp" %>
             <li style="display:flex;align-items:center">
-                <span>来源：</span>
+                <span>平台：</span>
                 <select name="source" id="source" class="dropdown">
                     <c:forEach items="${sources}" var="s">
                         <option value="${s.id}" <c:if test="${s.id == item.source}">selected="selected"</c:if>>

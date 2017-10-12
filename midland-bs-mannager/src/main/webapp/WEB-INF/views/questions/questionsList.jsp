@@ -17,6 +17,7 @@
         <thead>
         <tr>
             <th style=""></th>
+            <th style="">序号</th>
             <th style="">问题主题</th>
             <th style="">来源</th>
             <th style="">提问时间</th>
@@ -34,6 +35,7 @@
                            varStatus="xh">
                     <tr>
                         <td><input name="checkbox" id="checkbox" type="checkbox" value="${item.id }"/></td>
+                        <td>${xh.count }</td>
                         <td>${item.questionsTitle }</td>
                         <td> <c:if test="${item.source ==0 }">网站</c:if>
                             <c:if test="${item.source ==1 }">微站</c:if></td>

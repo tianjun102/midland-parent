@@ -75,13 +75,13 @@ public class LiaisonRecordServiceImpl implements LiaisonRecordService {
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
 	 **/
 	@Override
-	public List<LiaisonRecord> findLiaisonRecordList(LiaisonRecord liaisonRecord) throws Exception {
+	public List<LiaisonRecord> findLiaisonRecordList(LiaisonRecord liaisonRecord){
 		try {
 			log.info("findLiaisonRecordList  {}",liaisonRecord);
 			return liaisonRecordMapper.findLiaisonRecordList(liaisonRecord);
 		} catch(Exception e) {
 			log.error("findLiaisonRecordList  {}",liaisonRecord,e);
-			throw e;
+			return null;
 		}
 	}
 }

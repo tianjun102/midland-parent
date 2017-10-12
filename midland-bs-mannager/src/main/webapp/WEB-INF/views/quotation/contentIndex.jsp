@@ -23,6 +23,7 @@
 			border-color: rgb(219, 226, 230) !important;
 			border-image: initial !important;
 		}
+
 	</style>
 
 </head>
@@ -46,7 +47,7 @@
 				</select>
 			</li>
 			<li style="display: block" id="acreageShow">
-				<span>面积范围：</span>
+				<span style="width:90px">面积范围：</span>
 				<select name="houseAcreage" id="houseAcreage"  class="dropdown">
 					<c:forEach items="${acreageRange}" var="s">
 						<option value="${s.id}">${s.name}</option>
@@ -54,7 +55,7 @@
 				</select>
 			</li>
 			<li>
-				<span>环比类型：</span>
+				<span style="width:90px">环比类型：</span>
 				<select name="field" onchange="fieldChange()" id="field" style="height: 36px;">
 					<option value="0">成交套数</option>
 					<option value="1">成交面积</option>

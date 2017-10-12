@@ -8,6 +8,31 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
+    <style type="text/css">
+        .table-add tr td a.house-detail {
+            width: auto;
+            height: auto;
+            padding: 2px 3px;
+            background-color: #00aeee;
+            border-radius: 2px;
+            color: #fff;
+        }
+        .table-add tr td a {
+            display: inline-block;
+            width: 38px;!important;
+            height: 20px;
+            margin: 0 5px;
+            background-size: contain!important;
+        }
+        td
+        {
+            white-space: nowrap;
+        }
+        th
+        {
+            white-space: nowrap;
+        }
+    </style>
 </head>
 <body>
 <div class="table-responsive m40">

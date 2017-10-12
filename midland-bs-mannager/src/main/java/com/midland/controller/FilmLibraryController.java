@@ -113,6 +113,8 @@ public class FilmLibraryController extends BaseFilter {
 		model.addAttribute("item",result);
 		List<Area> list = settingService.queryAllCityByRedis();
 		model.addAttribute("citys",list);
+		settingService.getAllProvinceList(model);
+
 		return "filmLibrary/updateFilmLibrary";
 	}
 

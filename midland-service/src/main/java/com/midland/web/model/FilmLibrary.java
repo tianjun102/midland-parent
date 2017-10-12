@@ -21,7 +21,7 @@ public class FilmLibrary{
 	/**
 	 * 楼盘id
 	 **/
-	private Integer housesId;
+	private String housesId;
 	/**
 	 * 简介
 	 **/
@@ -100,11 +100,11 @@ public class FilmLibrary{
 		this.housesName = housesName;
 	}
 
-	public Integer getHousesId() {
+	public String getHousesId() {
 		return housesId;
 	}
 
-	public void setHousesId(Integer housesId) {
+	public void setHousesId(String housesId) {
 		this.housesId = housesId;
 	}
 

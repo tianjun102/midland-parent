@@ -42,6 +42,16 @@
         .peitao > span em {
             vertical-align: middle;
         }
+        .content ul.userinfo li>span{
+            float: left;
+            display: inline-block;
+            width: 90px;
+            height: 38px;
+            line-height: 38px;
+            text-align: right;
+            font-size: 14px;
+            color: rgb( 102, 102, 102 );
+        }
     </style>
 </head>
 <body>
@@ -74,9 +84,7 @@
             <li class="col-md-6"><span>手机号码：</span><input type="text" name="phone" id="phone"
                                                           value="${entrust.phone}"
                                                           maxlength="50" onblur="checkPhone('','phone','')"/><span class="_star">*</span></li>
-            <li>
-                <%@include file="area.jsp" %>
-            </li>
+            <%@include file="area.jsp" %>
             <li class="col-md-6"><span>分类：</span>
                 <select name="sellRent" id="sellRent" class="dropdown">
                     <c:forEach items="${sellRents}" var="s">

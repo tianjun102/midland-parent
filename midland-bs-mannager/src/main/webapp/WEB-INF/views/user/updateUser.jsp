@@ -19,7 +19,6 @@
 			<li style = "display:flex;align-items:center">
 				<span>来源：</span>
 				<select name="source" id="source" class="dropdown">
-                    <option value="" >请选择</option>
 					<c:forEach items="${sources}" var="s">
 						<option value="${s.id}" <c:if test="${s.id == user.source}">selected="selected"</c:if>>
 								${s.name}

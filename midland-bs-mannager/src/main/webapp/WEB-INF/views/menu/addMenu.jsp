@@ -7,7 +7,29 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
+    <link rel="stylesheet" href="${ctx }/assets/css/common.css">
+    <link rel="stylesheet" type="text/css" href="${ctx }/assets/scripts/uploadify/uploadify.css">
+    <script type="text/javascript" src="${ctx }/assets/scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="${ctx }/assets/scripts/uploadify/jquery.uploadify.min.js"></script>
     <script type="text/javascript">
+        $(function () {
+            $('#file_upload').uploadify({
+                'swf': '${ctx }/assets/scripts/uploadify/uploadify.swf',
+                'uploader': '${ctx }/rest/upload/img',
+                'multi': false,// 是否支持多个文件上传
+                'onUploadSuccess': function (file, data, response) {
+                    $("#iconImg").attr("value", data);
+                    $("#iconImg1").attr("src", data);
+                },
+                'onQueueComplete': function (queueData) {
+                    if (queueData.uploadsSuccessful < 1) {
+                        alert('文件上传失败');
+                    }
+                }
+
+                // Your options here
+            });
+        })
     </script>
 
 </head>
@@ -16,10 +38,10 @@
     <form action="${ctx}/rest/menu/add" method="post" id="dataForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
-            <li> <%@include file="../layout/area.jsp" %>
-            </li>
+            <%@include file="area.jsp" %>
+
             <li style="display:flex;align-items:center">
-                <span>来源：</span>
+                <span>平台：</span>
                 <select name="source" id="source" class="dropdown">
                     <c:forEach items="${sources}" var="s">
                         <option value="${s.id}" <c:if test="${s.id == item.source}">selected="selected"</c:if>>
@@ -46,7 +68,7 @@
             </li>
             <li>
                 <span></span>
-                <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">保存</a>
+                <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">更新</a>
                 <a style="margin-left: 20px" class="public_btn bg3" id="cancel" onclick="closeWin();">取消</a>
             </li>
         </ul>
@@ -55,10 +77,20 @@
 </section>
 
 <script type="text/javascript">
+
+    function setCityName() {
+        if($("#cityId").find("option:selected").text()=="请选择"){
+            $("#cityName").val("");
+
+        }else{
+            $("#cityName").val($("#cityId").find("option:selected").text());
+        }
+    }
+
     //保存数据
     function updateData() {
         var data = $("#dataForm").serialize();
-        debugger;
+
         $.ajax({
             type: "post",
             url: "${ctx}/rest/menu/add",
@@ -88,6 +120,11 @@
         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
         parent.layer.close(index);
     }
+
+
 </script>
+<script type="text/javascript" src="${ctx}/assets/scripts/layer/layer.js"></script>
+
+
 </body>
 </html>

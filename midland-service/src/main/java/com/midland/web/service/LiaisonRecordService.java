@@ -27,6 +27,6 @@ public interface LiaisonRecordService {
 	/**
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
 	 **/
-	List<LiaisonRecord> findLiaisonRecordList(LiaisonRecord liaisonRecord) throws Exception;
+	List<LiaisonRecord> findLiaisonRecordList(LiaisonRecord liaisonRecord);
 
 }

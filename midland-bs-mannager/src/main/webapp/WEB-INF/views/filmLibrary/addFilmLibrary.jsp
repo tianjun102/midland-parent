@@ -9,6 +9,18 @@
     <title>Insert title here</title>
     <link rel="stylesheet" type="text/css" href="${ctx }/assets/scripts/uploadify/uploadify.css">
     <script type="text/javascript" src="${ctx }/assets/scripts/uploadify/jquery.uploadify.min.js"></script>
+    <style type="text/css">
+        .content ul.adminfo li>span{
+            float: left;
+            display: inline-block;
+            width: 90px;
+            height: 38px;
+            line-height: 38px;
+            text-align: right;
+            font-size: 14px;
+            color: rgb( 102, 102, 102 );
+        }
+    </style>
     <script type="text/javascript">
         $(function () {
             $('#file_upload').uploadify({
@@ -52,24 +64,10 @@
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/filmLibrary/add" method="post" id="dataForm">
-        <ul class="userinfo row">
-            <%--<li style="display:flex;align-items:center">--%>
-                <%--<span>类型：</span>--%>
-                <%--<select name="filmType" id="filmType" class="dropdown">--%>
-                    <%--<option value="0">楼盘展销会</option>--%>
-                    <%--<option value="1">看楼团</option>--%>
-                <%--</select>--%>
-            <%--</li>--%>
-                <%--<li><span>城市：</span>--%>
-                    <%--<input type="hidden" id="cityName" name="cityName" value="${citys[0].name}">--%>
-                    <%--<select name="cityId" id="cityId" class="dropdown">--%>
-                        <%--<c:forEach items="${citys}" var="item">--%>
-                            <%--<option value="${item.id}" >${item.name}</option>--%>
-                        <%--</c:forEach>--%>
-                    <%--</select>--%>
-                <%@include file="../layout/area.jsp" %>
+        <ul class="adminfo row">
 
-                </li>
+            <%@include file="../menu/area.jsp" %>
+
             <li><span>楼盘ID：</span>
                 <input type="text" name="housesId" id="housesId" />
             </li>
