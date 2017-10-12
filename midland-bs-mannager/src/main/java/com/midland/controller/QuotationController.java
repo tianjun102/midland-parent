@@ -5,16 +5,11 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.controller.PublicUtils.QuotationUtil;
-import com.midland.web.model.Area;
-import com.midland.web.model.Quotation;
-import com.midland.web.model.QuotationView;
+import com.midland.web.model.*;
 import com.midland.web.service.QuotationService;
 import com.midland.web.service.QuotationViewService;
 import com.midland.web.service.SettingService;
-import com.midland.web.util.Calculate;
-import com.midland.web.util.JsonMapReader;
-import com.midland.web.util.MidlandHelper;
-import com.midland.web.util.ParamObject;
+import com.midland.web.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 @Controller
@@ -54,7 +50,16 @@ public class QuotationController extends BaseFilter {
 		model.addAttribute("citys",list);
 		return "quotation/quotationIndex";
 	}
-	
+
+
+	@RequestMapping("to_import")
+	public String toImport(HttpServletRequest request,Model model) throws Exception {
+		List<ParamObject> paramObjects = JsonMapReader.getMap("quotation_type");
+		model.addAttribute("types", paramObjects);
+		model.addAttribute("isNew", "0");
+		settingService.getAllProvinceList(model);
+		return "quotation/toImport";
+	}
 	
 	/**
 	 *
@@ -151,11 +156,11 @@ public class QuotationController extends BaseFilter {
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
 	 **/
 	@RequestMapping("list")
-	public String findQuotationList(Quotation quotation, Model model, HttpServletRequest request) {
+	public String findQuotationList(QuotationView quotation, Model model, HttpServletRequest request) {
 		try {
 			log.info("findQuotationList  {}", quotation);
 			MidlandHelper.doPage(request);
-			Page<Quotation> result = (Page<Quotation>) quotationServiceImpl.findQuotationList(quotation);
+			Page<QuotationView> result = (Page<QuotationView>) quotationViewServiceImpl.findQuotationViewList(quotation);
 			Paginator paginator = result.getPaginator();
 			List<ParamObject> paramObjects = JsonMapReader.getMap("quotation_type");
 			model.addAttribute("types", paramObjects);
@@ -313,7 +318,36 @@ public class QuotationController extends BaseFilter {
 		return "quotation/dealNumContent";
 		
 	}
-	
-	
+
+	@RequestMapping("/export")
+	public void quotationExportExcel(QuotationView view1, HttpServletResponse response, HttpServletRequest request) throws Exception {
+		List<QuotationView> dataList = quotationViewServiceImpl.findQuotationViewList(view1);
+		PoiExcelExport pee = new PoiExcelExport(response,"新房信息","sheet1");
+		//调用
+		List<ExportModel> exportModels=new ArrayList<>();
+		for (QuotationView view:dataList){
+			ExportModel exportModel = new ExportModel();
+			exportModel.setModelName1(view.getCityName());
+			exportModel.setModelName2(view.getAreaName());
+			List<ParamObject> quotationType = JsonMapReader.getMap("quotation_type");
+
+			exportModel.setModelName3(MidlandHelper.getNameById(view.getType(), quotationType));
+			exportModel.setModelName4(String.valueOf(view.getDealNum()));
+			exportModel.setModelName5(String.valueOf(view.getDealAcreage()));
+
+			exportModel.setModelName6(String.valueOf(view.getPrice()));
+			exportModel.setModelName7(String.valueOf(view.getDealPrice()));
+			exportModel.setModelName8(String.valueOf(view.getSoldNum()));
+			exportModel.setModelName9(String.valueOf(view.getSoldArea()));
+			exportModel.setModelName10(view.getDataTime());
+			exportModel.setModelName11(view.getUpdateTime());
+			exportModels.add(exportModel);
+		}
+		String titleColumn[] = {"modelName1","modelName2","modelName3","modelName4","modelName5","modelName6","modelName7","modelName8","modelName9","modelName10","modelName11"};
+		String titleName[] = {"城市","区域","类型","成交套数","成交面积","成交均价","成交金额","可售套数","可售面积","数据时间","更新时间"};
+		int titleSize[] = {13,13,13,13,13,13,13,13,13,13,13};
+		//其他设置 set方法可全不调用
+		pee.wirteExcel(titleColumn, titleName, titleSize, exportModels,request);
+	}
 
 }

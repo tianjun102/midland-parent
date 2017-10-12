@@ -76,7 +76,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 	}
 	
 	@RequestMapping(value = "excel_read", produces = "application/json")
-	public void imports(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void imports(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Workbook wb = null;
 		InputStream is = null;
 		try {
@@ -86,6 +86,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 			quotationExcelReader(request, wb);
 		} catch (Exception e) {
 			logger.error("", e);
+			throw e;
 		} finally {
 			if (wb != null) {
 				//wb.close();
