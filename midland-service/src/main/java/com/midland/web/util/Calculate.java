@@ -133,7 +133,7 @@ public class Calculate {
     
         Double result = minusDecimal.subtract(minus2TempDecimal).setScale(2, BigDecimal.ROUND_FLOOR).doubleValue();
         if (printLog) {
-            logger.info("minus :　substr1={},substr2={},result={}", minus1, minus2, result);
+            logger.debug("minus :　substr1={},substr2={},result={}", minus1, minus2, result);
         }
         return result;
     }
