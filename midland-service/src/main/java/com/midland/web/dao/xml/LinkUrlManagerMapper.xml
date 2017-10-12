@@ -45,9 +45,13 @@
 		where 
 		is_delete=0
 		<include refid="select_option" />
+		ORDER BY order_by ASC
 	</select>
 
 	<insert id="insertLinkUrlManager" parameterType="com.midland.web.model.LinkUrlManager">
+		<selectKey resultType="INTEGER" order="BEFORE" keyProperty="orderBy">
+			SELECT count(0)+1 as orderBy from link_url_manager
+		</selectKey>
 		insert into link_url_manager
 		<trim prefix="(" suffix=")" suffixOverrides="," >
 			<if test="cityId != null">

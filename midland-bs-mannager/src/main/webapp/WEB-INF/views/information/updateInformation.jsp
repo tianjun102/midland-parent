@@ -80,8 +80,13 @@
                     </select>
                     <span class = "_star ">*</span>
                 </li>
-
-
+                <li><span>平台：</span>
+                    <select name="platform" id="platform" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                        <option <c:if test="${item.platform==0}">selected="selected"</c:if> value="0" >网站</option>
+                        <option <c:if test="${item.platform==1}">selected="selected"</c:if> value="1" >微站</option>
+                    </select>
+                    <span class = "_star ">*</span>
+                </li>
                 <li>
                     <span>标题：</span>
                     <input type="text" id="title" name="title" value="${item.title}" onfocus="checkSelect('cateParentid|cateId','请填写一级分类！|请填写二级分类！')" onblur="notEmpty('title','title','标题不能为空！');" />

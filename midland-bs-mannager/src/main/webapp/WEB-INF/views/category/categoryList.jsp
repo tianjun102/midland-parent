@@ -44,7 +44,7 @@
                             <a target="contentF" class="delete_img" title="删除" onclick="delete1(${item.id })"></a>
                             <a target="contentF" onclick="sort(${item.id },${item.orderBy},1)">上移</a>
                             <a target="contentF" onclick="sort(${item.id },${item.orderBy},2)">下移</a>
-                            <c:if test="${item.type==3}"><a <c:if test="${item.isShow==0}">class="onoff_img"</c:if> <c:if test="${item.isShow==1}">class="offon_img"</c:if> target="contentF" onclick="updateCate(${item.isShow},${item.id })"></a></c:if>
+                            <%--<c:if test="${item.type==3}">--%><a <c:if test="${item.isShow==0}">class="onoff_img"</c:if> <c:if test="${item.isShow==1}">class="offon_img"</c:if> target="contentF" onclick="updateCate(${item.isShow},${item.id })"></a><%--</c:if>--%>
                         </td>
                     </tr>
                 </c:forEach>

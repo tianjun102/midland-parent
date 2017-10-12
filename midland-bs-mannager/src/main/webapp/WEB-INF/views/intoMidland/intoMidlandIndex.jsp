@@ -43,17 +43,7 @@
 								  <c:if test="${flag==4}">name="companyTraining"</c:if>
 								  <c:if test="${flag==5}">name="companyCulture"</c:if>
 								  <c:if test="${flag==6}">name="promotionBenefits"</c:if>
-								  <c:if test="${flag==7}">name="contactUs"</c:if>>
-
-
-									<c:if test="${flag==1}">${items.companyProfile}</c:if>
-									<c:if test="${flag==2}">${items.companyProcess}</c:if>
-									<c:if test="${flag==3}">${items.companyHonor}</c:if>
-									<c:if test="${flag==4}">${items.companyTraining}</c:if>
-									<c:if test="${flag==5}">${items.companyCulture}</c:if>
-									<c:if test="${flag==6}">${items.promotionBenefits}</c:if>
-									<c:if test="${flag==7}">${items.contactUs}</c:if>
-						</textarea>
+								  <c:if test="${flag==7}">name="contactUs"</c:if>><c:if test="${flag==1}">${items.companyProfile}</c:if><c:if test="${flag==2}">${items.companyProcess}</c:if><c:if test="${flag==3}">${items.companyHonor}</c:if><c:if test="${flag==4}">${items.companyTraining}</c:if><c:if test="${flag==5}">${items.companyCulture}</c:if><c:if test="${flag==6}">${items.promotionBenefits}</c:if><c:if test="${flag==7}">${items.contactUs}</c:if></textarea>
 					</li>
 				</ul>
 				<ul class = "adminfo row">

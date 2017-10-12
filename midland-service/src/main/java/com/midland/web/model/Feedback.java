@@ -57,7 +57,9 @@ public class Feedback{
 	 * 结束时间
 	 **/
 	private String endTime;
-
+	/**
+	 * 0=网站；1=微站
+	 **/
 	private Integer source;
 	
 	

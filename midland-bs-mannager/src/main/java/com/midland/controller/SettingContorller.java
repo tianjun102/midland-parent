@@ -10,6 +10,7 @@ import com.midland.web.enums.ContextEnums;
 import com.midland.web.model.*;
 import com.midland.web.model.remote.Agent;
 import com.midland.web.model.user.User;
+import com.midland.web.service.JdbcService;
 import com.midland.web.service.SettingService;
 import com.midland.web.util.MidlandHelper;
 import org.apache.commons.lang3.StringUtils;
@@ -32,10 +33,12 @@ import java.util.Map;
 public class SettingContorller extends BaseFilter {
     
     private final Logger logger= LoggerFactory.getLogger(SettingContorller.class);
-@Autowired
-private SettingService settingService;
-@Autowired
-private MidlandConfig midlandConfig;
+    @Autowired
+    private SettingService settingService;
+    @Autowired
+    private MidlandConfig midlandConfig;
+    @Autowired
+    private JdbcService jdbcService;
     // 进入热门关注首页面
     @RequestMapping(value = "showPopularIndex", method = { RequestMethod.GET, RequestMethod.POST })
     public String showPopularIndex(Model model, HttpServletRequest request) {
@@ -224,6 +227,19 @@ private MidlandConfig midlandConfig;
     }
 
 
+    @RequestMapping("linkUrlSort")
+    @ResponseBody
+    public Map listDesc(LinkUrlManager linkUrlManager, int sort, Model model, HttpServletRequest request) throws Exception {
+        String primaryKeyName="id";
+        String primaryParam=String.valueOf(linkUrlManager.getId());
+        String tableName="link_url_manager";
+        String orderByColumn="order_by";
+        String orderByParam=String.valueOf(linkUrlManager.getOrderBy());
+        jdbcService.listDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,sort);
+        Map map = new HashMap();
+        map.put("state",0);
+        return map;
+    }
 
 
 
