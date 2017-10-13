@@ -21,7 +21,7 @@ public class InformationServiceImpl implements InformationService {
 	@Override
 	public void insertInformation(Information information) throws Exception {
 		try {
-			log.info("insert {}",information);
+			log.debug("insert {}",information);
 			informationMapper.insertInformation(information);
 		} catch(Exception e) {
 			log.error("insertInformation异常 {}",information,e);
@@ -34,7 +34,7 @@ public class InformationServiceImpl implements InformationService {
 	 **/
 	@Override
 	public Information selectInformationById(Integer id) {
-		log.info("selectInformationById  {}",id);
+		log.debug("selectInformationById  {}",id);
 		return informationMapper.selectInformationById(id);
 	}
 
@@ -44,7 +44,7 @@ public class InformationServiceImpl implements InformationService {
 	@Override
 	public void deleteInformationById(Integer id)throws Exception {
 		try {
-			log.info("deleteInformationById  {}",id);
+			log.debug("deleteInformationById  {}",id);
 			int result = informationMapper.deleteInformationById(id);
 			if (result < 1) {
 				throw new Exception("deleteInformationById失败");
@@ -60,7 +60,7 @@ public class InformationServiceImpl implements InformationService {
 	@Override
 	public void updateInformationById(Information information) throws Exception {
 		try {
-			log.info("updateInformationById  {}",information);
+			log.debug("updateInformationById  {}",information);
 			int result = informationMapper.updateInformationById(information);
 			if (result < 1) {
 				throw new Exception("updateInformationById失败");
@@ -77,7 +77,7 @@ public class InformationServiceImpl implements InformationService {
 	@Override
 	public List<Information> findInformationList(Information information) throws Exception {
 		try {
-			log.info("findInformationList  {}",information);
+			log.debug("findInformationList  {}",information);
 			return informationMapper.findInformationList(information);
 		} catch(Exception e) {
 			log.error("findInformationList  {}",information,e);

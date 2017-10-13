@@ -21,7 +21,7 @@ public class EliteVipServiceImpl implements EliteVipService {
 	@Override
 	public void insertEliteVip(EliteVip eliteVip) throws Exception {
 		try {
-			log.info("insert {}",eliteVip);
+			log.debug("insert {}",eliteVip);
 			eliteVipMapper.insertEliteVip(eliteVip);
 		} catch(Exception e) {
 			log.error("insertEliteVip异常 {}",eliteVip,e);
@@ -34,7 +34,7 @@ public class EliteVipServiceImpl implements EliteVipService {
 	 **/
 	@Override
 	public EliteVip selectEliteVipById(Integer id) {
-		log.info("selectEliteVipById  {}",id);
+		log.debug("selectEliteVipById  {}",id);
 		return eliteVipMapper.selectEliteVipById(id);
 	}
 
@@ -44,7 +44,7 @@ public class EliteVipServiceImpl implements EliteVipService {
 	@Override
 	public void deleteEliteVipById(Integer id)throws Exception {
 		try {
-			log.info("deleteEliteVipById  {}",id);
+			log.debug("deleteEliteVipById  {}",id);
 			int result = eliteVipMapper.deleteEliteVipById(id);
 			if (result < 1) {
 				throw new Exception("deleteEliteVipById失败");
@@ -60,7 +60,7 @@ public class EliteVipServiceImpl implements EliteVipService {
 	@Override
 	public void updateEliteVipById(EliteVip eliteVip) throws Exception {
 		try {
-			log.info("updateEliteVipById  {}",eliteVip);
+			log.debug("updateEliteVipById  {}",eliteVip);
 			int result = eliteVipMapper.updateEliteVipById(eliteVip);
 			if (result < 1) {
 				throw new Exception("updateEliteVipById失败");
@@ -77,7 +77,7 @@ public class EliteVipServiceImpl implements EliteVipService {
 	@Override
 	public List<EliteVip> findEliteVipList(EliteVip eliteVip) throws Exception {
 		try {
-			log.info("findEliteVipList  {}",eliteVip);
+			log.debug("findEliteVipList  {}",eliteVip);
 			return eliteVipMapper.findEliteVipList(eliteVip);
 		} catch(Exception e) {
 			log.error("findEliteVipList  {}",eliteVip,e);

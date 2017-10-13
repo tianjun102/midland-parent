@@ -21,7 +21,7 @@ public class FilmLibraryServiceImpl implements FilmLibraryService {
 	@Override
 	public void insertFilmLibrary(FilmLibrary filmLibrary) throws Exception {
 		try {
-			log.info("insert {}",filmLibrary);
+			log.debug("insert {}",filmLibrary);
 			filmLibraryMapper.insertFilmLibrary(filmLibrary);
 		} catch(Exception e) {
 			log.error("insertFilmLibrary异常 {}",filmLibrary,e);
@@ -34,7 +34,7 @@ public class FilmLibraryServiceImpl implements FilmLibraryService {
 	 **/
 	@Override
 	public FilmLibrary selectFilmLibraryById(Integer id) {
-		log.info("selectFilmLibraryById  {}",id);
+		log.debug("selectFilmLibraryById  {}",id);
 		return filmLibraryMapper.selectFilmLibraryById(id);
 	}
 
@@ -44,7 +44,7 @@ public class FilmLibraryServiceImpl implements FilmLibraryService {
 	@Override
 	public void deleteFilmLibraryById(Integer id)throws Exception {
 		try {
-			log.info("deleteFilmLibraryById  {}",id);
+			log.debug("deleteFilmLibraryById  {}",id);
 			int result = filmLibraryMapper.deleteFilmLibraryById(id);
 			if (result < 1) {
 				throw new Exception("deleteFilmLibraryById失败");
@@ -60,7 +60,7 @@ public class FilmLibraryServiceImpl implements FilmLibraryService {
 	@Override
 	public void updateFilmLibraryById(FilmLibrary filmLibrary) throws Exception {
 		try {
-			log.info("updateFilmLibraryById  {}",filmLibrary);
+			log.debug("updateFilmLibraryById  {}",filmLibrary);
 			int result = filmLibraryMapper.updateFilmLibraryById(filmLibrary);
 			if (result < 1) {
 				throw new Exception("updateFilmLibraryById失败");
@@ -77,7 +77,7 @@ public class FilmLibraryServiceImpl implements FilmLibraryService {
 	@Override
 	public List<FilmLibrary> findFilmLibraryList(FilmLibrary filmLibrary) throws Exception {
 		try {
-			log.info("findFilmLibraryList  {}",filmLibrary);
+			log.debug("findFilmLibraryList  {}",filmLibrary);
 			return filmLibraryMapper.findFilmLibraryList(filmLibrary);
 		} catch(Exception e) {
 			log.error("findFilmLibraryList  {}",filmLibrary,e);

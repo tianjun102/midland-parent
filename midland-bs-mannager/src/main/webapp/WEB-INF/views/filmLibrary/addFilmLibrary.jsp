@@ -69,14 +69,14 @@
             <%@include file="../menu/area.jsp" %>
 
             <li><span>楼盘ID：</span>
-                <input type="text" name="housesId" id="housesId" />
+                <input type="text" name="housesId" id="housesId" onblur="notEmpty('housesId','housesId','')"/>
             </li>
 
             <li><span>楼盘名称：</span>
-                <input type="text" name="housesName" id="housesName" />
+                <input type="text" name="housesName" id="housesName" onblur="notEmpty('housesName','housesName','')" />
             </li>
             <li><span>图片描述：</span>
-                <textarea rows="" cols="" style="width: 250px;height: 70px;border: 1px solid #dbe2e6;" name="imgDesc" id="imgDesc"></textarea>
+                <textarea rows="" cols="" style="width: 250px;height: 70px;border: 1px solid #dbe2e6;" name="imgDesc" id="imgDesc" ></textarea>
             </li>
                 <li><span>简介：</span>
                     <textarea rows="" cols="" style="width: 250px;height: 70px;border: 1px solid #dbe2e6;" name="introduction" id="introduction"></textarea>
@@ -118,7 +118,9 @@
     //保存数据
     function saveData() {
         var data = $("#dataForm").serialize();
-
+        if (!notEmpty('housesId','housesId','')||!notEmpty('housesName','housesName','')){
+            return;
+        }
         $.ajax({
             type: "post",
             url: "${ctx}/rest/filmLibrary/add",
@@ -130,7 +132,7 @@
                     layer.msg("保存成功！！！", {icon: 1});
                     $('#save').removeAttr("onclick");
                     setTimeout(function () {
-                        parent.location.reload();
+                        window.open("${ctx}/rest/filmLibrary/index","contentF");
                     }, 1000);
 
                 } else {

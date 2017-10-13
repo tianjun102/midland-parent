@@ -21,7 +21,7 @@ public class AppointLogServiceImpl implements AppointLogService {
 	@Override
 	public void insertAppointLog(AppointLog appointLog) throws Exception {
 		try {
-			log.info("insert {}",appointLog);
+			log.debug("insert {}",appointLog);
 			appointLogMapper.insertAppointLog(appointLog);
 		} catch(Exception e) {
 			log.error("insertAppointLog异常 {}",appointLog,e);
@@ -34,7 +34,7 @@ public class AppointLogServiceImpl implements AppointLogService {
 	 **/
 	@Override
 	public AppointLog selectAppointLogByAppointLogId(Integer appointLogId) {
-		log.info("selectAppointLogByAppointLogId  {}",appointLogId);
+		log.debug("selectAppointLogByAppointLogId  {}",appointLogId);
 		return appointLogMapper.selectAppointLogByAppointLogId(appointLogId);
 	}
 	/**
@@ -42,7 +42,7 @@ public class AppointLogServiceImpl implements AppointLogService {
 	 **/
 	@Override
 	public List<AppointLog> selectAppointLogByAppointId(Integer appointId) {
-		log.info("selectAppointLogByAppointId  {}",appointId);
+		log.debug("selectAppointLogByAppointId  {}",appointId);
 		return appointLogMapper.selectAppointLogByAppointId(appointId);
 	}
 
@@ -52,7 +52,7 @@ public class AppointLogServiceImpl implements AppointLogService {
 	@Override
 	public void deleteAppointLogByAppointLogId(Integer appointLogId)throws Exception {
 		try {
-			log.info("deleteAppointLogByAppointLogId  {}",appointLogId);
+			log.debug("deleteAppointLogByAppointLogId  {}",appointLogId);
 			int result = appointLogMapper.deleteAppointLogByAppointLogId(appointLogId);
 			if (result < 1) {
 				throw new Exception("deleteAppointLogByAppointLogId失败");
@@ -68,7 +68,7 @@ public class AppointLogServiceImpl implements AppointLogService {
 	@Override
 	public void updateAppointLogByAppointLogId(AppointLog appointLog) throws Exception {
 		try {
-			log.info("updateAppointLogByAppointLogId  {}",appointLog);
+			log.debug("updateAppointLogByAppointLogId  {}",appointLog);
 			int result = appointLogMapper.updateAppointLogByAppointLogId(appointLog);
 			if (result < 1) {
 				throw new Exception("updateAppointLogByAppointLogId失败");
@@ -85,7 +85,7 @@ public class AppointLogServiceImpl implements AppointLogService {
 	@Override
 	public List<AppointLog> findAppointLogList(AppointLog appointLog) throws Exception {
 		try {
-			log.info("findAppointLogList  {}",appointLog);
+			log.debug("findAppointLogList  {}",appointLog);
 			return appointLogMapper.findAppointLogList(appointLog);
 		} catch(Exception e) {
 			log.error("findAppointLogList  {}",appointLog,e);

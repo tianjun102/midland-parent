@@ -53,7 +53,7 @@ public class TradeFairController extends BaseFilter {
 	public Object addTradeFair(TradeFair tradeFair, HttpServletRequest request) throws Exception {
 		Map map = new HashMap<>();
 		try {
-			log.info("addTradeFair {}",tradeFair);
+			log.debug("addTradeFair {}",tradeFair);
 			User user = (User)request.getSession().getAttribute("userInfo");
 			tradeFair.setOperatorId(user.getId());
 			tradeFair.setOperatorName(user.getUserCnName());
@@ -71,7 +71,7 @@ public class TradeFairController extends BaseFilter {
 	 **/
 	@RequestMapping("get_tradeFair")
 	public String getTradeFairById(Integer id,Model model) {
-		log.info("getTradeFairById  {}",id);
+		log.debug("getTradeFairById  {}",id);
 		TradeFair result = tradeFairServiceImpl.selectTradeFairById(id);
 		model.addAttribute("item",result);
 		return "tradeFair/updateTradeFair";	}
@@ -84,7 +84,7 @@ public class TradeFairController extends BaseFilter {
 	public Object deleteTradeFairById(Integer id)throws Exception {
 		Map map = new HashMap<>();
 		try {
-			log.info("deleteTradeFairById  {}",id);
+			log.debug("deleteTradeFairById  {}",id);
 			tradeFairServiceImpl.deleteTradeFairById(id);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -111,7 +111,7 @@ public class TradeFairController extends BaseFilter {
 	public Object updateTradeFairById(TradeFair tradeFair) throws Exception {
 		Map map = new HashMap<>();
 		try {
-			log.info("updateTradeFairById  {}",tradeFair);
+			log.debug("updateTradeFairById  {}",tradeFair);
 			tradeFairServiceImpl.updateTradeFairById(tradeFair);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -127,7 +127,7 @@ public class TradeFairController extends BaseFilter {
 	@RequestMapping("list")
 	public String findTradeFairList(TradeFair tradeFair, Model model, HttpServletRequest request) {
 		try {
-			log.info("findTradeFairList  {}",tradeFair);
+			log.debug("findTradeFairList  {}",tradeFair);
 			MidlandHelper.doPage(request);
 			Page<TradeFair> result = (Page<TradeFair>)tradeFairServiceImpl.findTradeFairList(tradeFair);
 			Paginator paginator=result.getPaginator();

@@ -67,7 +67,7 @@ public class MenuController extends BaseFilter  {
 	public Object addMenu(Menu menu) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("addMenu {}",menu);
+			log.debug("addMenu {}",menu);
 			int maxOrderBy = menuServiceImpl.getMaxOrderBy();
 			menu.setOrderBy(maxOrderBy);
 			menuServiceImpl.insertMenu(menu);
@@ -84,7 +84,7 @@ public class MenuController extends BaseFilter  {
 	 **/
 	@RequestMapping("get_menu")
 	public String getMenuById(Integer id,Model model) {
-		log.info("getMenuById  {}",id);
+		log.debug("getMenuById  {}",id);
 		Menu result = menuServiceImpl.selectMenuById(id);
 		model.addAttribute("item",result);
 		return "menu/updateMenu";	}
@@ -97,7 +97,7 @@ public class MenuController extends BaseFilter  {
 	public Object deleteMenuById(Integer id)throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("deleteMenuById  {}",id);
+			log.debug("deleteMenuById  {}",id);
 			menuServiceImpl.deleteMenuById(id);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -130,7 +130,7 @@ public class MenuController extends BaseFilter  {
 	public Object updateMenuById(Menu menu) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("updateMenuById  {}",menu);
+			log.debug("updateMenuById  {}",menu);
 			menuServiceImpl.updateMenuById(menu);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -146,7 +146,7 @@ public class MenuController extends BaseFilter  {
 	@RequestMapping("list")
 	public String findMenuList(Menu menu,Model model, HttpServletRequest request) {
 		try {
-			log.info("findMenuList  {}",menu);
+			log.debug("findMenuList  {}",menu);
 			if (StringUtils.isEmpty(menu.getCityId())){
 				User user = MidlandHelper.getCurrentUser(request);
 				menu.setCityId(user.getCityId());

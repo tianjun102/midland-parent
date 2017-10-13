@@ -21,7 +21,7 @@ public class CityServiceImpl implements CityService {
 	@Override
 	public void insertCity(City city) throws Exception {
 		try {
-			log.info("insert {}",city);
+			log.debug("insert {}",city);
 			cityMapper.insertCity(city);
 		} catch(Exception e) {
 			log.error("insertCity异常 {}",city,e);
@@ -34,7 +34,7 @@ public class CityServiceImpl implements CityService {
 	 **/
 	@Override
 	public City selectById(Integer id) {
-		log.info("selectById  {}",id);
+		log.debug("selectById  {}",id);
 		return cityMapper.selectById(id);
 	}
 
@@ -44,7 +44,7 @@ public class CityServiceImpl implements CityService {
 	@Override
 	public void deleteById(Integer id)throws Exception {
 		try {
-			log.info("deleteById  {}",id);
+			log.debug("deleteById  {}",id);
 			int result = cityMapper.deleteById(id);
 			if (result < 1) {
 				throw new Exception("deleteById失败");
@@ -60,7 +60,7 @@ public class CityServiceImpl implements CityService {
 	@Override
 	public void updateById(City city) throws Exception {
 		try {
-			log.info("updateById  {}",city);
+			log.debug("updateById  {}",city);
 			int result = cityMapper.updateById(city);
 			if (result < 1) {
 				throw new Exception("updateById失败");
@@ -77,7 +77,7 @@ public class CityServiceImpl implements CityService {
 	@Override
 	public List<City> findCityList(City city) throws Exception {
 		try {
-			log.info("findCityList  {}",city);
+			log.debug("findCityList  {}",city);
 			return cityMapper.findCityList(city);
 		} catch(Exception e) {
 			log.error("findCityList  {}",city,e);

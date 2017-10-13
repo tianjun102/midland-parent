@@ -4,7 +4,9 @@ import com.midland.web.model.role.RolePermission;
 import com.midland.web.model.role.RolePermissionExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface RolePermissionMapper {
     int countByExample(RolePermissionExample example);
 

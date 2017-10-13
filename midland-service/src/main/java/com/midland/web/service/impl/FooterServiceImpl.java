@@ -21,7 +21,7 @@ public class FooterServiceImpl implements FooterService {
 	@Override
 	public void insertFooter(Footer footer) throws Exception {
 		try {
-			log.info("insert {}",footer);
+			log.debug("insert {}",footer);
 			footerMapper.insertFooter(footer);
 		} catch(Exception e) {
 			log.error("insertFooter异常 {}",footer,e);
@@ -34,7 +34,7 @@ public class FooterServiceImpl implements FooterService {
 	 **/
 	@Override
 	public Footer selectFooterById(Integer id) {
-		log.info("selectFooterById  {}",id);
+		log.debug("selectFooterById  {}",id);
 		return footerMapper.selectFooterById(id);
 	}
 /**
@@ -52,7 +52,7 @@ public class FooterServiceImpl implements FooterService {
 	@Override
 	public void deleteFooterById(Integer id)throws Exception {
 		try {
-			log.info("deleteFooterById  {}",id);
+			log.debug("deleteFooterById  {}",id);
 			int result = footerMapper.deleteFooterById(id);
 			if (result < 1) {
 				throw new Exception("deleteFooterById失败");
@@ -68,7 +68,7 @@ public class FooterServiceImpl implements FooterService {
 	@Override
 	public void updateFooterById(Footer footer) throws Exception {
 		try {
-			log.info("updateFooterById  {}",footer);
+			log.debug("updateFooterById  {}",footer);
 			int result = footerMapper.updateFooterById(footer);
 			if (result < 1) {
 				throw new Exception("updateFooterById失败");
@@ -85,7 +85,7 @@ public class FooterServiceImpl implements FooterService {
 	@Override
 	public List<Footer> findFooterList(Footer footer) throws Exception {
 		try {
-			log.info("findFooterList  {}",footer);
+			log.debug("findFooterList  {}",footer);
 			return footerMapper.findFooterList(footer);
 		} catch(Exception e) {
 			log.error("findFooterList  {}",footer,e);

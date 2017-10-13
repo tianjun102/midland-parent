@@ -21,7 +21,7 @@ public class QrCodeServiceImpl implements QrCodeService {
 	@Override
 	public void insertQrCode(QrCode qrCode) throws Exception {
 		try {
-			log.info("insert {}",qrCode);
+			log.debug("insert {}",qrCode);
 			qrCodeMapper.insertQrCode(qrCode);
 		} catch(Exception e) {
 			log.error("insertQrCode异常 {}",qrCode,e);
@@ -34,7 +34,7 @@ public class QrCodeServiceImpl implements QrCodeService {
 	 **/
 	@Override
 	public QrCode selectQrCodeById(Integer id) {
-		log.info("selectQrCodeById  {}",id);
+		log.debug("selectQrCodeById  {}",id);
 		return qrCodeMapper.selectQrCodeById(id);
 	}
 
@@ -44,7 +44,7 @@ public class QrCodeServiceImpl implements QrCodeService {
 	@Override
 	public void deleteQrCodeById(Integer id)throws Exception {
 		try {
-			log.info("deleteQrCodeById  {}",id);
+			log.debug("deleteQrCodeById  {}",id);
 			int result = qrCodeMapper.deleteQrCodeById(id);
 			if (result < 1) {
 				throw new Exception("deleteQrCodeById失败");
@@ -60,7 +60,7 @@ public class QrCodeServiceImpl implements QrCodeService {
 	@Override
 	public void updateQrCodeById(QrCode qrCode) throws Exception {
 		try {
-			log.info("updateQrCodeById  {}",qrCode);
+			log.debug("updateQrCodeById  {}",qrCode);
 			int result = qrCodeMapper.updateQrCodeById(qrCode);
 			if (result < 1) {
 				throw new Exception("updateQrCodeById失败");
@@ -77,7 +77,7 @@ public class QrCodeServiceImpl implements QrCodeService {
 	@Override
 	public List<QrCode> findQrCodeList(QrCode qrCode) throws Exception {
 		try {
-			log.info("findQrCodeList  {}",qrCode);
+			log.debug("findQrCodeList  {}",qrCode);
 			return qrCodeMapper.findQrCodeList(qrCode);
 		} catch(Exception e) {
 			log.error("findQrCodeList  {}",qrCode,e);

@@ -21,7 +21,7 @@ public class TradeFairServiceImpl implements TradeFairService {
 	@Override
 	public void insertTradeFair(TradeFair tradeFair) throws Exception {
 		try {
-			log.info("insert {}",tradeFair);
+			log.debug("insert {}",tradeFair);
 			tradeFairMapper.insertTradeFair(tradeFair);
 		} catch(Exception e) {
 			log.error("insertTradeFair异常 {}",tradeFair,e);
@@ -34,7 +34,7 @@ public class TradeFairServiceImpl implements TradeFairService {
 	 **/
 	@Override
 	public TradeFair selectTradeFairById(Integer id) {
-		log.info("selectTradeFairById  {}",id);
+		log.debug("selectTradeFairById  {}",id);
 		return tradeFairMapper.selectTradeFairById(id);
 	}
 
@@ -44,7 +44,7 @@ public class TradeFairServiceImpl implements TradeFairService {
 	@Override
 	public void deleteTradeFairById(Integer id)throws Exception {
 		try {
-			log.info("deleteTradeFairById  {}",id);
+			log.debug("deleteTradeFairById  {}",id);
 			int result = tradeFairMapper.deleteTradeFairById(id);
 			if (result < 1) {
 				throw new Exception("deleteTradeFairById失败");
@@ -60,7 +60,7 @@ public class TradeFairServiceImpl implements TradeFairService {
 	@Override
 	public void updateTradeFairById(TradeFair tradeFair) throws Exception {
 		try {
-			log.info("updateTradeFairById  {}",tradeFair);
+			log.debug("updateTradeFairById  {}",tradeFair);
 			int result = tradeFairMapper.updateTradeFairById(tradeFair);
 			if (result < 1) {
 				throw new Exception("updateTradeFairById失败");
@@ -77,7 +77,7 @@ public class TradeFairServiceImpl implements TradeFairService {
 	@Override
 	public List<TradeFair> findTradeFairList(TradeFair tradeFair) throws Exception {
 		try {
-			log.info("findTradeFairList  {}",tradeFair);
+			log.debug("findTradeFairList  {}",tradeFair);
 			return tradeFairMapper.findTradeFairList(tradeFair);
 		} catch(Exception e) {
 			log.error("findTradeFairList  {}",tradeFair,e);

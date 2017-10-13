@@ -60,7 +60,7 @@ public class IntoMidlandController extends BaseFilter {
 	public Object addIntoMidland(IntoMidland intoMidland) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("addIntoMidland {}",intoMidland);
+			log.debug("addIntoMidland {}",intoMidland);
 			if(intoMidland.getId()!=null){
 				intoMidlandServiceImpl.updateIntoMidlandById(intoMidland);
 			}else {
@@ -79,7 +79,7 @@ public class IntoMidlandController extends BaseFilter {
 	 **/
 	@RequestMapping("get_intoMidland")
 	public String getIntoMidlandById(Integer id,Model model) {
-		log.info("getIntoMidlandById  {}",id);
+		log.debug("getIntoMidlandById  {}",id);
 		IntoMidland result = intoMidlandServiceImpl.selectIntoMidlandById(id);
 		model.addAttribute("item",result);
 		return "intoMidland/updateIntoMidland";	}
@@ -92,7 +92,7 @@ public class IntoMidlandController extends BaseFilter {
 	public Object deleteIntoMidlandById(Integer id)throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("deleteIntoMidlandById  {}",id);
+			log.debug("deleteIntoMidlandById  {}",id);
 			intoMidlandServiceImpl.deleteIntoMidlandById(id);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -119,7 +119,7 @@ public class IntoMidlandController extends BaseFilter {
 	public Object updateIntoMidlandById(IntoMidland intoMidland) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("updateIntoMidlandById  {}",intoMidland);
+			log.debug("updateIntoMidlandById  {}",intoMidland);
 			intoMidlandServiceImpl.updateIntoMidlandById(intoMidland);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -135,7 +135,7 @@ public class IntoMidlandController extends BaseFilter {
 	@RequestMapping("list")
 	public String findIntoMidlandList(IntoMidland intoMidland,Model model, HttpServletRequest request) {
 		try {
-			log.info("findIntoMidlandList  {}",intoMidland);
+			log.debug("findIntoMidlandList  {}",intoMidland);
 			MidlandHelper.doPage(request);
 			Page<IntoMidland> result = (Page<IntoMidland>)intoMidlandServiceImpl.findIntoMidlandList(intoMidland);
 			Paginator paginator=result.getPaginator();

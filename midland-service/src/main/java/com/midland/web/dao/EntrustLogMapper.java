@@ -1,8 +1,10 @@
 package com.midland.web.dao;
 
 import com.midland.web.model.EntrustLog;
-import java.util.List;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+@Repository
 public interface EntrustLogMapper {
 
 	EntrustLog selectEntrustLogByEntrustLogId(Integer entrustLogId);

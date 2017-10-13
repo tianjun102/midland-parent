@@ -4,6 +4,7 @@ import com.midland.core.generic.GenericDao;
 import com.midland.web.model.user.User;
 import com.midland.web.model.user.UserRole;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import java.util.Map;
  * @author 
  * @since 2016年7月5日 上午11:49:57
  **/
+@Repository
 public interface UserMapper extends GenericDao<User, Integer> {
 
     int deleteByPrimaryKey(Integer id);

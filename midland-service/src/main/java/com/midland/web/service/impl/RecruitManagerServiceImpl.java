@@ -21,7 +21,7 @@ public class RecruitManagerServiceImpl implements RecruitManagerService {
 	@Override
 	public void insertRecruitManager(RecruitManager recruitManager) throws Exception {
 		try {
-			log.info("insert {}",recruitManager);
+			log.debug("insert {}",recruitManager);
 			recruitManagerMapper.insertRecruitManager(recruitManager);
 		} catch(Exception e) {
 			log.error("insertRecruitManager异常 {}",recruitManager,e);
@@ -34,7 +34,7 @@ public class RecruitManagerServiceImpl implements RecruitManagerService {
 	 **/
 	@Override
 	public RecruitManager selectRecruitManagerById(Integer id) {
-		log.info("selectRecruitManagerById  {}",id);
+		log.debug("selectRecruitManagerById  {}",id);
 		return recruitManagerMapper.selectRecruitManagerById(id);
 	}
 
@@ -44,7 +44,7 @@ public class RecruitManagerServiceImpl implements RecruitManagerService {
 	@Override
 	public void deleteRecruitManagerById(Integer id)throws Exception {
 		try {
-			log.info("deleteRecruitManagerById  {}",id);
+			log.debug("deleteRecruitManagerById  {}",id);
 			int result = recruitManagerMapper.deleteRecruitManagerById(id);
 			if (result < 1) {
 				throw new Exception("deleteRecruitManagerById失败");
@@ -60,7 +60,7 @@ public class RecruitManagerServiceImpl implements RecruitManagerService {
 	@Override
 	public void updateRecruitManagerById(RecruitManager recruitManager) throws Exception {
 		try {
-			log.info("updateRecruitManagerById  {}",recruitManager);
+			log.debug("updateRecruitManagerById  {}",recruitManager);
 			int result = recruitManagerMapper.updateRecruitManagerById(recruitManager);
 			if (result < 1) {
 				throw new Exception("updateRecruitManagerById失败");
@@ -77,7 +77,7 @@ public class RecruitManagerServiceImpl implements RecruitManagerService {
 	@Override
 	public List<RecruitManager> findRecruitManagerList(RecruitManager recruitManager) throws Exception {
 		try {
-			log.info("findRecruitManagerList  {}",recruitManager);
+			log.debug("findRecruitManagerList  {}",recruitManager);
 			return recruitManagerMapper.findRecruitManagerList(recruitManager);
 		} catch(Exception e) {
 			log.error("findRecruitManagerList  {}",recruitManager,e);

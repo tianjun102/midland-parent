@@ -80,7 +80,7 @@ public class QuotationController extends BaseFilter {
 	public Object addQuotation(Quotation quotation) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		try {
-			log.info("addQuotation {}", quotation);
+			log.debug("addQuotation {}", quotation);
 			quotationServiceImpl.insertQuotation(quotation);
 			map.put("state", 0);
 		} catch (Exception e) {
@@ -95,7 +95,7 @@ public class QuotationController extends BaseFilter {
 	 **/
 	@RequestMapping("get_quotation")
 	public String getQuotationById(Integer id, Model model) {
-		log.info("getQuotationById  {}", id);
+		log.debug("getQuotationById  {}", id);
 		Quotation result = quotationServiceImpl.selectQuotationById(id);
 		model.addAttribute("item", result);
 		return "quotation/updateQuotation";
@@ -109,7 +109,7 @@ public class QuotationController extends BaseFilter {
 	public Object deleteQuotationById(Integer id) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		try {
-			log.info("deleteQuotationById  {}", id);
+			log.debug("deleteQuotationById  {}", id);
 			quotationServiceImpl.deleteQuotationById(id);
 			map.put("state", 0);
 		} catch (Exception e) {
@@ -142,7 +142,7 @@ public class QuotationController extends BaseFilter {
 	public Object updateQuotationById(Quotation quotation) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		try {
-			log.info("updateQuotationById  {}", quotation);
+			log.debug("updateQuotationById  {}", quotation);
 			quotationServiceImpl.updateQuotationById(quotation);
 			map.put("state", 0);
 		} catch (Exception e) {
@@ -158,7 +158,7 @@ public class QuotationController extends BaseFilter {
 	@RequestMapping("list")
 	public String findQuotationList(QuotationView quotation, Model model, HttpServletRequest request) {
 		try {
-			log.info("findQuotationList  {}", quotation);
+			log.debug("findQuotationList  {}", quotation);
 			MidlandHelper.doPage(request);
 			Page<QuotationView> result = (Page<QuotationView>) quotationViewServiceImpl.findQuotationViewList(quotation);
 			Paginator paginator = result.getPaginator();

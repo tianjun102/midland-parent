@@ -1,8 +1,10 @@
 package com.midland.web.dao;
 
 import com.midland.web.model.Category;
-import java.util.List;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+@Repository
 public interface CategoryMapper {
 
 	Category selectCategoryById(Integer category);

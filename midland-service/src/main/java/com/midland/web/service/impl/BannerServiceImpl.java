@@ -21,7 +21,7 @@ public class BannerServiceImpl implements BannerService {
 	@Override
 	public void insertBanner(Banner banner) throws Exception {
 		try {
-			log.info("insert {}",banner);
+			log.debug("insert {}",banner);
 			bannerMapper.insertBanner(banner);
 		} catch(Exception e) {
 			log.error("insertBanner异常 {}",banner,e);
@@ -34,7 +34,7 @@ public class BannerServiceImpl implements BannerService {
 	 **/
 	@Override
 	public Banner selectById(Integer id) {
-		log.info("selectById  {}",id);
+		log.debug("selectById  {}",id);
 		return bannerMapper.selectById(id);
 	}
 
@@ -44,7 +44,7 @@ public class BannerServiceImpl implements BannerService {
 	@Override
 	public void deleteById(Integer id)throws Exception {
 		try {
-			log.info("deleteById  {}",id);
+			log.debug("deleteById  {}",id);
 			int result = bannerMapper.deleteById(id);
 			if (result < 1) {
 				throw new Exception("deleteById失败");
@@ -60,7 +60,7 @@ public class BannerServiceImpl implements BannerService {
 	@Override
 	public void updateById(Banner banner) throws Exception {
 		try {
-			log.info("updateById  {}",banner);
+			log.debug("updateById  {}",banner);
 			int result = bannerMapper.updateById(banner);
 			if (result < 1) {
 				throw new Exception("updateById失败");
@@ -77,7 +77,7 @@ public class BannerServiceImpl implements BannerService {
 	@Override
 	public List<Banner> findBannerList(Banner banner) throws Exception {
 		try {
-			log.info("findBannerList  {}",banner);
+			log.debug("findBannerList  {}",banner);
 			return bannerMapper.findBannerList(banner);
 		} catch(Exception e) {
 			log.error("findBannerList  {}",banner,e);

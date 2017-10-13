@@ -1,8 +1,10 @@
 package com.midland.web.dao;
 
 import com.midland.web.model.City;
-import java.util.List;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+@Repository
 public interface CityMapper {
 
 	City selectById(Integer city);

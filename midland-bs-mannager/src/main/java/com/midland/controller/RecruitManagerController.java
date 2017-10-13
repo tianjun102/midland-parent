@@ -69,7 +69,7 @@ public class RecruitManagerController extends BaseFilter {
 	public Object addRecruitManager(RecruitManager recruitManager) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("addRecruitManager {}",recruitManager);
+			log.debug("addRecruitManager {}",recruitManager);
 			recruitManagerServiceImpl.insertRecruitManager(recruitManager);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -84,7 +84,7 @@ public class RecruitManagerController extends BaseFilter {
 	 **/
 	@RequestMapping("get_recruitManager")
 	public String getRecruitManagerById(Integer id,Model model) {
-		log.info("getRecruitManagerById  {}",id);
+		log.debug("getRecruitManagerById  {}",id);
 		RecruitManager result = recruitManagerServiceImpl.selectRecruitManagerById(id);
 		model.addAttribute("item",result);
 		return "recruitManager/updateRecruitManager";	}
@@ -97,7 +97,7 @@ public class RecruitManagerController extends BaseFilter {
 	public Object deleteRecruitManagerById(Integer id)throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("deleteRecruitManagerById  {}",id);
+			log.debug("deleteRecruitManagerById  {}",id);
 			recruitManagerServiceImpl.deleteRecruitManagerById(id);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -124,7 +124,7 @@ public class RecruitManagerController extends BaseFilter {
 	public Object updateRecruitManagerById(RecruitManager recruitManager) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("updateRecruitManagerById  {}",recruitManager);
+			log.debug("updateRecruitManagerById  {}",recruitManager);
 			recruitManagerServiceImpl.updateRecruitManagerById(recruitManager);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -140,7 +140,7 @@ public class RecruitManagerController extends BaseFilter {
 	@RequestMapping("list")
 	public String findRecruitManagerList(RecruitManager recruitManager,Model model, HttpServletRequest request) {
 		try {
-			log.info("findRecruitManagerList  {}",recruitManager);
+			log.debug("findRecruitManagerList  {}",recruitManager);
 			MidlandHelper.doPage(request);
 			Page<RecruitManager> result = (Page<RecruitManager>)recruitManagerServiceImpl.findRecruitManagerList(recruitManager);
 			Paginator paginator=result.getPaginator();

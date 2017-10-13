@@ -21,7 +21,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 	@Override
 	public void insertFeedback(Feedback feedback) throws Exception {
 		try {
-			log.info("insert {}",feedback);
+			log.debug("insert {}",feedback);
 			feedbackMapper.insertFeedback(feedback);
 		} catch(Exception e) {
 			log.error("insertFeedback异常 {}",feedback,e);
@@ -34,7 +34,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 	 **/
 	@Override
 	public Feedback selectFeedbackById(Integer id) {
-		log.info("selectFeedbackById  {}",id);
+		log.debug("selectFeedbackById  {}",id);
 		return feedbackMapper.selectFeedbackById(id);
 	}
 
@@ -44,7 +44,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 	@Override
 	public void deleteFeedbackById(Integer id)throws Exception {
 		try {
-			log.info("deleteFeedbackById  {}",id);
+			log.debug("deleteFeedbackById  {}",id);
 			int result = feedbackMapper.deleteFeedbackById(id);
 			if (result < 1) {
 				throw new Exception("deleteFeedbackById失败");
@@ -60,7 +60,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 	@Override
 	public void updateFeedbackById(Feedback feedback) throws Exception {
 		try {
-			log.info("updateFeedbackById  {}",feedback);
+			log.debug("updateFeedbackById  {}",feedback);
 			int result = feedbackMapper.updateFeedbackById(feedback);
 			if (result < 1) {
 				throw new Exception("updateFeedbackById失败");
@@ -77,7 +77,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 	@Override
 	public List<Feedback> findFeedbackList(Feedback feedback) throws Exception {
 		try {
-			log.info("findFeedbackList  {}",feedback);
+			log.debug("findFeedbackList  {}",feedback);
 			return feedbackMapper.findFeedbackList(feedback);
 		} catch(Exception e) {
 			log.error("findFeedbackList  {}",feedback,e);

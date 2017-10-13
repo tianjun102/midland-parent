@@ -1,10 +1,11 @@
 package com.midland.web.dao;
 
 import com.midland.web.model.Questions;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
-
+@Repository
 public interface QuestionsMapper {
     int deleteByPrimaryKey(Integer id);
     int deleteByIds(Map<String, Object> map);

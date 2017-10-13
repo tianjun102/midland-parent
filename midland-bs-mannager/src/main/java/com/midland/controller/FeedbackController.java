@@ -60,7 +60,7 @@ public class FeedbackController extends BaseFilter {
 		try {
 			
 			feedback.setAddTime(MidlandHelper.getCurrentTime());
-			log.info("addFeedback {}",feedback);
+			log.debug("addFeedback {}",feedback);
 			feedbackServiceImpl.insertFeedback(feedback);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -75,7 +75,7 @@ public class FeedbackController extends BaseFilter {
 	 **/
 	@RequestMapping("get_feedback")
 	public String getFeedbackById(Integer id,Model model) {
-		log.info("getFeedbackById  {}",id);
+		log.debug("getFeedbackById  {}",id);
 		Feedback result = feedbackServiceImpl.selectFeedbackById(id);
 		model.addAttribute("item",result);
 		return "feedback/updateFeedback";	}
@@ -88,7 +88,7 @@ public class FeedbackController extends BaseFilter {
 	public Object deleteFeedbackById(Integer id)throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("deleteFeedbackById  {}",id);
+			log.debug("deleteFeedbackById  {}",id);
 			feedbackServiceImpl.deleteFeedbackById(id);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -118,7 +118,7 @@ public class FeedbackController extends BaseFilter {
 			User user = MidlandHelper.getCurrentUser(request);
 			feedback.setOperatorId(user.getId());
 			feedback.setOperatorName(user.getUserCnName());
-			log.info("updateFeedbackById  {}",feedback);
+			log.debug("updateFeedbackById  {}",feedback);
 			feedbackServiceImpl.updateFeedbackById(feedback);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -134,7 +134,7 @@ public class FeedbackController extends BaseFilter {
 	@RequestMapping("list")
 	public String findFeedbackList(Feedback feedback, Model model, HttpServletRequest request) {
 		try {
-			log.info("findFeedbackList  {}",feedback);
+			log.debug("findFeedbackList  {}",feedback);
 			MidlandHelper.doPage(request);
 			Page<Feedback> result = (Page<Feedback>)feedbackServiceImpl.findFeedbackList(feedback);
 			Paginator paginator=result.getPaginator();

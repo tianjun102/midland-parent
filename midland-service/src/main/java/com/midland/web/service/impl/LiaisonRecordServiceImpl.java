@@ -21,7 +21,7 @@ public class LiaisonRecordServiceImpl implements LiaisonRecordService {
 	@Override
 	public void insertLiaisonRecord(LiaisonRecord liaisonRecord) throws Exception {
 		try {
-			log.info("insert {}",liaisonRecord);
+			log.debug("insert {}",liaisonRecord);
 			liaisonRecordMapper.insertLiaisonRecord(liaisonRecord);
 		} catch(Exception e) {
 			log.error("insertLiaisonRecord异常 {}",liaisonRecord,e);
@@ -34,7 +34,7 @@ public class LiaisonRecordServiceImpl implements LiaisonRecordService {
 	 **/
 	@Override
 	public LiaisonRecord selectLiaisonRecordById(Integer id) {
-		log.info("selectLiaisonRecordById  {}",id);
+		log.debug("selectLiaisonRecordById  {}",id);
 		return liaisonRecordMapper.selectLiaisonRecordById(id);
 	}
 
@@ -44,7 +44,7 @@ public class LiaisonRecordServiceImpl implements LiaisonRecordService {
 	@Override
 	public void deleteLiaisonRecordById(Integer id)throws Exception {
 		try {
-			log.info("deleteLiaisonRecordById  {}",id);
+			log.debug("deleteLiaisonRecordById  {}",id);
 			int result = liaisonRecordMapper.deleteLiaisonRecordById(id);
 			if (result < 1) {
 				throw new Exception("deleteLiaisonRecordById失败");
@@ -60,7 +60,7 @@ public class LiaisonRecordServiceImpl implements LiaisonRecordService {
 	@Override
 	public void updateLiaisonRecordById(LiaisonRecord liaisonRecord) throws Exception {
 		try {
-			log.info("updateLiaisonRecordById  {}",liaisonRecord);
+			log.debug("updateLiaisonRecordById  {}",liaisonRecord);
 			int result = liaisonRecordMapper.updateLiaisonRecordById(liaisonRecord);
 			if (result < 1) {
 				throw new Exception("updateLiaisonRecordById失败");
@@ -77,7 +77,7 @@ public class LiaisonRecordServiceImpl implements LiaisonRecordService {
 	@Override
 	public List<LiaisonRecord> findLiaisonRecordList(LiaisonRecord liaisonRecord){
 		try {
-			log.info("findLiaisonRecordList  {}",liaisonRecord);
+			log.debug("findLiaisonRecordList  {}",liaisonRecord);
 			return liaisonRecordMapper.findLiaisonRecordList(liaisonRecord);
 		} catch(Exception e) {
 			log.error("findLiaisonRecordList  {}",liaisonRecord,e);

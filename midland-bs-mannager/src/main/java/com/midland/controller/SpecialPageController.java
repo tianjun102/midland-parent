@@ -72,7 +72,7 @@ public class SpecialPageController extends BaseFilter {
 	public Object addSpecialPage(SpecialPage specialPage) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("addSpecialPage {}",specialPage);
+			log.debug("addSpecialPage {}",specialPage);
 			specialPageServiceImpl.insertSpecialPage(specialPage);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -87,7 +87,7 @@ public class SpecialPageController extends BaseFilter {
 	 **/
 	@RequestMapping("get_specialPage")
 	public String getSpecialPageById(Integer id,Model model) {
-		log.info("getSpecialPageById  {}",id);
+		log.debug("getSpecialPageById  {}",id);
 		SpecialPage result = specialPageServiceImpl.selectSpecialPageById(id);
 		model.addAttribute("item",result);
 		return "specialPage/updateSpecialPage";	}
@@ -100,7 +100,7 @@ public class SpecialPageController extends BaseFilter {
 	public Object deleteSpecialPageById(Integer id)throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("deleteSpecialPageById  {}",id);
+			log.debug("deleteSpecialPageById  {}",id);
 			specialPageServiceImpl.deleteSpecialPageById(id);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -133,7 +133,7 @@ public class SpecialPageController extends BaseFilter {
 	public Object updateSpecialPageById(SpecialPage specialPage) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("updateSpecialPageById  {}",specialPage);
+			log.debug("updateSpecialPageById  {}",specialPage);
 			specialPageServiceImpl.updateSpecialPageById(specialPage);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -149,7 +149,7 @@ public class SpecialPageController extends BaseFilter {
 	@RequestMapping("list")
 	public String findSpecialPageList(SpecialPage specialPage, Model model, HttpServletRequest request) {
 		try {
-			log.info("findSpecialPageList  {}",specialPage);
+			log.debug("findSpecialPageList  {}",specialPage);
 			MidlandHelper.doPage(request);
 			Page<SpecialPage> result = (Page<SpecialPage>)specialPageServiceImpl.findSpecialPageList(specialPage);
 			Paginator paginator=result.getPaginator();

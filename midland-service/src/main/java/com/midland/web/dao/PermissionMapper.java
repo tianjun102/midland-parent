@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import com.midland.core.generic.GenericDao;
 import com.midland.web.model.Permission;
 import com.midland.web.model.PermissionExample;
+import org.springframework.stereotype.Repository;
 
 /**
  * 权限 Dao 接口
@@ -12,6 +13,7 @@ import com.midland.web.model.PermissionExample;
  * @author 
  * @since 2016年7月5日 上午11:59:03
  **/
+@Repository
 public interface PermissionMapper extends GenericDao<Permission, Integer> {
     int countByExample(PermissionExample example);
 

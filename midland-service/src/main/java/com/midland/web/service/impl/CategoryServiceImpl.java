@@ -21,7 +21,7 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public void insertCategory(Category category) throws Exception {
 		try {
-			log.info("insert {}",category);
+			log.debug("insert {}",category);
 			categoryMapper.insertCategory(category);
 		} catch(Exception e) {
 			log.error("insertCategory异常 {}",category,e);
@@ -34,7 +34,7 @@ public class CategoryServiceImpl implements CategoryService {
 	 **/
 	@Override
 	public Category selectCategoryById(Integer id) {
-		log.info("selectCategoryById  {}",id);
+		log.debug("selectCategoryById  {}",id);
 		return categoryMapper.selectCategoryById(id);
 	}
 
@@ -44,7 +44,7 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public void deleteCategoryById(Integer id)throws Exception {
 		try {
-			log.info("deleteCategoryById  {}",id);
+			log.debug("deleteCategoryById  {}",id);
 			int result = categoryMapper.deleteCategoryById(id);
 			if (result < 1) {
 				throw new Exception("deleteCategoryById失败");
@@ -60,7 +60,7 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public void updateCategoryById(Category category) throws Exception {
 		try {
-			log.info("updateCategoryById  {}",category);
+			log.debug("updateCategoryById  {}",category);
 			int result = categoryMapper.updateCategoryById(category);
 			if (result < 1) {
 				throw new Exception("updateCategoryById失败");
@@ -77,7 +77,7 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public List<Category> findCategoryList(Category category) throws Exception {
 		try {
-			log.info("findCategoryList  {}",category);
+			log.debug("findCategoryList  {}",category);
 			return categoryMapper.findCategoryParentNameList(category);
 		} catch(Exception e) {
 			log.error("findCategoryList  {}",category,e);

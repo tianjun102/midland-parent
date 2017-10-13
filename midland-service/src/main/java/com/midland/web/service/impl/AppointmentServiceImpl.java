@@ -21,7 +21,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 	@Override
 	public void insertAppointment(Appointment appointment) throws Exception {
 		try {
-			log.info("insert {}",appointment);
+			log.debug("insert {}",appointment);
 			appointmentMapper.insertAppointment(appointment);
 		} catch(Exception e) {
 			log.error("insertAppointment异常 {}",appointment,e);
@@ -34,7 +34,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 	 **/
 	@Override
 	public Appointment selectAppointmentById(Integer id) {
-		log.info("selectAppointmentById  {}",id);
+		log.debug("selectAppointmentById  {}",id);
 		return appointmentMapper.selectAppointmentById(id);
 	}
 
@@ -44,7 +44,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 	@Override
 	public void deleteAppointmentById(Integer id)throws Exception {
 		try {
-			log.info("deleteAppointmentById  {}",id);
+			log.debug("deleteAppointmentById  {}",id);
 			int result = appointmentMapper.deleteAppointmentById(id);
 			if (result < 1) {
 				throw new Exception("deleteAppointmentById失败");
@@ -60,7 +60,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 	@Override
 	public void updateAppointmentById(Appointment appointment) throws Exception {
 		try {
-			log.info("updateAppointmentById  {}",appointment);
+			log.debug("updateAppointmentById  {}",appointment);
 			int result = appointmentMapper.updateAppointmentById(appointment);
 			if (result < 1) {
 				throw new Exception("updateAppointmentById失败");
@@ -77,7 +77,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 	@Override
 	public List<Appointment> findAppointmentList(Appointment appointment) throws Exception {
 		try {
-			log.info("findAppointmentList  {}",appointment);
+			log.debug("findAppointmentList  {}",appointment);
 			return appointmentMapper.findAppointmentList(appointment);
 		} catch(Exception e) {
 			log.error("findAppointmentList  {}",appointment,e);

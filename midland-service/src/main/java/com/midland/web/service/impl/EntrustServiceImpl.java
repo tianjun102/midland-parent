@@ -21,7 +21,7 @@ public class EntrustServiceImpl implements EntrustService {
 	@Override
 	public void insertEntrust(Entrust entrust) throws Exception {
 		try {
-			log.info("insert {}",entrust);
+			log.debug("insert {}",entrust);
 			entrustMapper.insertEntrust(entrust);
 		} catch(Exception e) {
 			log.error("insertEntrust异常 {}",entrust,e);
@@ -34,7 +34,7 @@ public class EntrustServiceImpl implements EntrustService {
 	 **/
 	@Override
 	public Entrust selectEntrustById(Integer id) {
-		log.info("selectEntrustById  {}",id);
+		log.debug("selectEntrustById  {}",id);
 		return entrustMapper.selectEntrustById(id);
 	}
 
@@ -44,7 +44,7 @@ public class EntrustServiceImpl implements EntrustService {
 	@Override
 	public void deleteEntrustById(Integer id)throws Exception {
 		try {
-			log.info("deleteEntrustById  {}",id);
+			log.debug("deleteEntrustById  {}",id);
 			int result = entrustMapper.deleteEntrustById(id);
 			if (result < 1) {
 				throw new Exception("deleteEntrustById失败");
@@ -60,7 +60,7 @@ public class EntrustServiceImpl implements EntrustService {
 	@Override
 	public void updateEntrustById(Entrust entrust) throws Exception {
 		try {
-			log.info("updateEntrustById  {}",entrust);
+			log.debug("updateEntrustById  {}",entrust);
 			int result = entrustMapper.updateEntrustById(entrust);
 			if (result < 1) {
 				throw new Exception("updateEntrustById失败");
@@ -77,7 +77,7 @@ public class EntrustServiceImpl implements EntrustService {
 	@Override
 	public List<Entrust> findEntrustList(Entrust entrust) throws Exception {
 		try {
-			log.info("findEntrustList  {}",entrust);
+			log.debug("findEntrustList  {}",entrust);
 			return entrustMapper.findEntrustList(entrust);
 		} catch(Exception e) {
 			log.error("findEntrustList  {}",entrust,e);

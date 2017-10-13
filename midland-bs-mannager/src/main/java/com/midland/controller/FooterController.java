@@ -51,7 +51,7 @@ public class FooterController extends BaseFilter {
 	public Object addFooter(Footer footer) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("addFooter {}",footer);
+			log.debug("addFooter {}",footer);
 			footerServiceImpl.insertFooter(footer);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -66,7 +66,7 @@ public class FooterController extends BaseFilter {
 	 **/
 	@RequestMapping("get_footer")
 	public String getFooterById(Integer id,Model model) {
-		log.info("getFooterById  {}",id);
+		log.debug("getFooterById  {}",id);
 		Footer result = footerServiceImpl.selectFooterById(id);
 		model.addAttribute("item",result);
 		return "footer/updateFooter";	}
@@ -79,7 +79,7 @@ public class FooterController extends BaseFilter {
 	public Object deleteFooterById(Integer id)throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("deleteFooterById  {}",id);
+			log.debug("deleteFooterById  {}",id);
 			footerServiceImpl.deleteFooterById(id);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -106,7 +106,7 @@ public class FooterController extends BaseFilter {
 	public Object updateFooterById(Footer footer) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("updateFooterById  {}",footer);
+			log.debug("updateFooterById  {}",footer);
 			if (footer.getId()!=null){
 			footerServiceImpl.updateFooterById(footer);
 			}else{
@@ -127,7 +127,7 @@ public class FooterController extends BaseFilter {
 	@RequestMapping("list")
 	public String findFooterList(Footer footer, Model model, HttpServletRequest request) {
 		try {
-			log.info("findFooterList  {}",footer);
+			log.debug("findFooterList  {}",footer);
 			MidlandHelper.doPage(request);
 			Page<Footer> result = (Page<Footer>)footerServiceImpl.findFooterList(footer);
 			Paginator paginator=result.getPaginator();

@@ -189,7 +189,7 @@
     }
   ],
 
-  "user_audit": [
+  "audit_status": [
     {
       "id": "0",
       "name": "未审核"

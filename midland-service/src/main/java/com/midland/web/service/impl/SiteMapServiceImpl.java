@@ -21,7 +21,7 @@ public class SiteMapServiceImpl implements SiteMapService {
 	@Override
 	public void insertSiteMap(SiteMap siteMap) throws Exception {
 		try {
-			log.info("insert {}",siteMap);
+			log.debug("insert {}",siteMap);
 			siteMapMapper.insertSiteMap(siteMap);
 		} catch(Exception e) {
 			log.error("insertSiteMap异常 {}",siteMap,e);
@@ -34,7 +34,7 @@ public class SiteMapServiceImpl implements SiteMapService {
 	 **/
 	@Override
 	public SiteMap selectSiteMapById(Integer id) {
-		log.info("selectSiteMapById  {}",id);
+		log.debug("selectSiteMapById  {}",id);
 		return siteMapMapper.selectSiteMapById(id);
 	}
 
@@ -44,7 +44,7 @@ public class SiteMapServiceImpl implements SiteMapService {
 	@Override
 	public void deleteSiteMapById(Integer id)throws Exception {
 		try {
-			log.info("deleteSiteMapById  {}",id);
+			log.debug("deleteSiteMapById  {}",id);
 			int result = siteMapMapper.deleteSiteMapById(id);
 			if (result < 1) {
 				throw new Exception("deleteSiteMapById失败");
@@ -60,7 +60,7 @@ public class SiteMapServiceImpl implements SiteMapService {
 	@Override
 	public void updateSiteMapById(SiteMap siteMap) throws Exception {
 		try {
-			log.info("updateSiteMapById  {}",siteMap);
+			log.debug("updateSiteMapById  {}",siteMap);
 			int result = siteMapMapper.updateSiteMapById(siteMap);
 			if (result < 1) {
 				throw new Exception("updateSiteMapById失败");
@@ -77,7 +77,7 @@ public class SiteMapServiceImpl implements SiteMapService {
 	@Override
 	public List<SiteMap> findSiteMapList(SiteMap siteMap) throws Exception {
 		try {
-			log.info("findSiteMapList  {}",siteMap);
+			log.debug("findSiteMapList  {}",siteMap);
 			return siteMapMapper.findSiteMapList(siteMap);
 		} catch(Exception e) {
 			log.error("findSiteMapList  {}",siteMap,e);

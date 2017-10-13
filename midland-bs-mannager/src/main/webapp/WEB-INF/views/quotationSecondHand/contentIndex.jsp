@@ -19,7 +19,7 @@
         <input type="hidden" name="showType" id="showType" value="${showType}"/>
         <ul class="userinfo row">
             <li>
-                <%@include file="../quotationSecondHand/dist.jsp" %>
+                <%@include file="../quotation/dist.jsp" %>
             </li>
             <%--<li><span>区域：</span>--%>
                 <%--<input type="text" name="areaName">--%>
@@ -34,7 +34,7 @@
                 </select>
             </li>
             <li>
-                <span>环比类型：</span>
+                <span style="width: 90px">环比类型：</span>
                 <select name="field" onchange="fieldChange()" id="field" class="dropdown">
                     <option value="0">套数</option>
                     <option value="1">面积</option>

@@ -1,8 +1,10 @@
 package com.midland.web.dao;
 
 import com.midland.web.model.Footer;
-import java.util.List;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+@Repository
 public interface FooterMapper {
 
 	Footer selectFooterById(Integer footer);

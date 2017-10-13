@@ -21,7 +21,7 @@ public class HotSearchServiceImpl implements HotSearchService {
 	@Override
 	public void insertHotSearch(HotSearch hotSearch) throws Exception {
 		try {
-			log.info("insert {}",hotSearch);
+			log.debug("insert {}",hotSearch);
 			hotSearchMapper.insertHotSearch(hotSearch);
 		} catch(Exception e) {
 			log.error("insertHotSearch异常 {}",hotSearch,e);
@@ -34,7 +34,7 @@ public class HotSearchServiceImpl implements HotSearchService {
 	 **/
 	@Override
 	public HotSearch selectHotSearchById(Integer id) {
-		log.info("selectHotSearchById  {}",id);
+		log.debug("selectHotSearchById  {}",id);
 		return hotSearchMapper.selectHotSearchById(id);
 	}
 
@@ -44,7 +44,7 @@ public class HotSearchServiceImpl implements HotSearchService {
 	@Override
 	public void deleteHotSearchById(Integer id)throws Exception {
 		try {
-			log.info("deleteHotSearchById  {}",id);
+			log.debug("deleteHotSearchById  {}",id);
 			int result = hotSearchMapper.deleteHotSearchById(id);
 			if (result < 1) {
 				throw new Exception("deleteHotSearchById失败");
@@ -60,7 +60,7 @@ public class HotSearchServiceImpl implements HotSearchService {
 	@Override
 	public void updateHotSearchById(HotSearch hotSearch) throws Exception {
 		try {
-			log.info("updateHotSearchById  {}",hotSearch);
+			log.debug("updateHotSearchById  {}",hotSearch);
 			int result = hotSearchMapper.updateHotSearchById(hotSearch);
 			if (result < 1) {
 				throw new Exception("updateHotSearchById失败");
@@ -77,7 +77,7 @@ public class HotSearchServiceImpl implements HotSearchService {
 	@Override
 	public List<HotSearch> findHotSearchList(HotSearch hotSearch) throws Exception {
 		try {
-			log.info("findHotSearchList  {}",hotSearch);
+			log.debug("findHotSearchList  {}",hotSearch);
 			return hotSearchMapper.findHotSearchList(hotSearch);
 		} catch(Exception e) {
 			log.error("findHotSearchList  {}",hotSearch,e);

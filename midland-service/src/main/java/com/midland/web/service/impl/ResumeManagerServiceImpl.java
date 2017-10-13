@@ -21,7 +21,7 @@ public class ResumeManagerServiceImpl implements ResumeManagerService {
 	@Override
 	public void insertResumeManager(ResumeManager resumeManager) throws Exception {
 		try {
-			log.info("insert {}",resumeManager);
+			log.debug("insert {}",resumeManager);
 			resumeManagerMapper.insertResumeManager(resumeManager);
 		} catch(Exception e) {
 			log.error("insertResumeManager异常 {}",resumeManager,e);
@@ -34,7 +34,7 @@ public class ResumeManagerServiceImpl implements ResumeManagerService {
 	 **/
 	@Override
 	public ResumeManager selectResumeManagerById(Integer id) {
-		log.info("selectResumeManagerById  {}",id);
+		log.debug("selectResumeManagerById  {}",id);
 		return resumeManagerMapper.selectResumeManagerById(id);
 	}
 
@@ -44,7 +44,7 @@ public class ResumeManagerServiceImpl implements ResumeManagerService {
 	@Override
 	public void deleteResumeManagerById(Integer id)throws Exception {
 		try {
-			log.info("deleteResumeManagerById  {}",id);
+			log.debug("deleteResumeManagerById  {}",id);
 			int result = resumeManagerMapper.deleteResumeManagerById(id);
 			if (result < 1) {
 				throw new Exception("deleteResumeManagerById失败");
@@ -60,7 +60,7 @@ public class ResumeManagerServiceImpl implements ResumeManagerService {
 	@Override
 	public void updateResumeManagerById(ResumeManager resumeManager) throws Exception {
 		try {
-			log.info("updateResumeManagerById  {}",resumeManager);
+			log.debug("updateResumeManagerById  {}",resumeManager);
 			int result = resumeManagerMapper.updateResumeManagerById(resumeManager);
 			if (result < 1) {
 				throw new Exception("updateResumeManagerById失败");
@@ -77,7 +77,7 @@ public class ResumeManagerServiceImpl implements ResumeManagerService {
 	@Override
 	public List<ResumeManager> findResumeManagerList(ResumeManager resumeManager) throws Exception {
 		try {
-			log.info("findResumeManagerList  {}",resumeManager);
+			log.debug("findResumeManagerList  {}",resumeManager);
 			return resumeManagerMapper.findResumeManagerList(resumeManager);
 		} catch(Exception e) {
 			log.error("findResumeManagerList  {}",resumeManager,e);

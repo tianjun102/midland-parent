@@ -58,7 +58,7 @@ public class EliteVipController extends BaseFilter {
 	public Object addEliteVip(EliteVip eliteVip) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("addEliteVip {}",eliteVip);
+			log.debug("addEliteVip {}",eliteVip);
 			eliteVipServiceImpl.insertEliteVip(eliteVip);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -73,7 +73,7 @@ public class EliteVipController extends BaseFilter {
 	 **/
 	@RequestMapping("get_eliteVip")
 	public String getEliteVipById(Integer id,Model model) {
-		log.info("getEliteVipById  {}",id);
+		log.debug("getEliteVipById  {}",id);
 		EliteVip result = eliteVipServiceImpl.selectEliteVipById(id);
 		model.addAttribute("item",result);
 		return "eliteVip/updateEliteVip";	}
@@ -86,7 +86,7 @@ public class EliteVipController extends BaseFilter {
 	public Object deleteEliteVipById(Integer id)throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("deleteEliteVipById  {}",id);
+			log.debug("deleteEliteVipById  {}",id);
 			eliteVipServiceImpl.deleteEliteVipById(id);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -119,7 +119,7 @@ public class EliteVipController extends BaseFilter {
 	public Object updateEliteVipById(EliteVip eliteVip) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("updateEliteVipById  {}",eliteVip);
+			log.debug("updateEliteVipById  {}",eliteVip);
 			eliteVipServiceImpl.updateEliteVipById(eliteVip);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -135,7 +135,7 @@ public class EliteVipController extends BaseFilter {
 	@RequestMapping("list")
 	public String findEliteVipList(EliteVip eliteVip,Model model, HttpServletRequest request) {
 		try {
-			log.info("findEliteVipList  {}",eliteVip);
+			log.debug("findEliteVipList  {}",eliteVip);
 			MidlandHelper.doPage(request);
 			Page<EliteVip> result = (Page<EliteVip>)eliteVipServiceImpl.findEliteVipList(eliteVip);
 			Paginator paginator=result.getPaginator();

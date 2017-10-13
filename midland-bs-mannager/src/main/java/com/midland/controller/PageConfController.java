@@ -72,7 +72,7 @@ public class PageConfController extends BaseFilter {
 	public Object addPageConf(PageConf pageConf) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("addPageConf {}",pageConf);
+			log.debug("addPageConf {}",pageConf);
 			pageConfServiceImpl.insertPageConf(pageConf);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -87,7 +87,7 @@ public class PageConfController extends BaseFilter {
 	 **/
 	@RequestMapping("get_pageConf")
 	public String getPageConfById(Integer id,Model model) {
-		log.info("getPageConfById  {}",id);
+		log.debug("getPageConfById  {}",id);
 		PageConf result = pageConfServiceImpl.selectPageConfById(id);
 		model.addAttribute("item",result);
 		return "pageConf/updatePageConf";	}
@@ -100,7 +100,7 @@ public class PageConfController extends BaseFilter {
 	public Object deletePageConfById(Integer id)throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("deletePageConfById  {}",id);
+			log.debug("deletePageConfById  {}",id);
 			pageConfServiceImpl.deletePageConfById(id);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -133,7 +133,7 @@ public class PageConfController extends BaseFilter {
 	public Object updatePageConfById(PageConf pageConf) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("updatePageConfById  {}",pageConf);
+			log.debug("updatePageConfById  {}",pageConf);
 			pageConfServiceImpl.updatePageConfById(pageConf);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -149,7 +149,7 @@ public class PageConfController extends BaseFilter {
 	@RequestMapping("list")
 	public String findPageConfList(PageConf pageConf, Model model, HttpServletRequest request) {
 		try {
-			log.info("findPageConfList  {}",pageConf);
+			log.debug("findPageConfList  {}",pageConf);
 			MidlandHelper.doPage(request);
 			Page<PageConf> result = (Page<PageConf>)pageConfServiceImpl.findPageConfList(pageConf);
 			Paginator paginator=result.getPaginator();

@@ -21,7 +21,7 @@ public class IntoMidlandServiceImpl implements IntoMidlandService {
 	@Override
 	public void insertIntoMidland(IntoMidland intoMidland) throws Exception {
 		try {
-			log.info("insert {}",intoMidland);
+			log.debug("insert {}",intoMidland);
 			intoMidlandMapper.insertIntoMidland(intoMidland);
 		} catch(Exception e) {
 			log.error("insertIntoMidland异常 {}",intoMidland,e);
@@ -34,7 +34,7 @@ public class IntoMidlandServiceImpl implements IntoMidlandService {
 	 **/
 	@Override
 	public IntoMidland selectIntoMidlandById(Integer id) {
-		log.info("selectIntoMidlandById  {}",id);
+		log.debug("selectIntoMidlandById  {}",id);
 		return intoMidlandMapper.selectIntoMidlandById(id);
 	}
 
@@ -44,7 +44,7 @@ public class IntoMidlandServiceImpl implements IntoMidlandService {
 	@Override
 	public void deleteIntoMidlandById(Integer id)throws Exception {
 		try {
-			log.info("deleteIntoMidlandById  {}",id);
+			log.debug("deleteIntoMidlandById  {}",id);
 			int result = intoMidlandMapper.deleteIntoMidlandById(id);
 			if (result < 1) {
 				throw new Exception("deleteIntoMidlandById失败");
@@ -60,7 +60,7 @@ public class IntoMidlandServiceImpl implements IntoMidlandService {
 	@Override
 	public void updateIntoMidlandById(IntoMidland intoMidland) throws Exception {
 		try {
-			log.info("updateIntoMidlandById  {}",intoMidland);
+			log.debug("updateIntoMidlandById  {}",intoMidland);
 			int result = intoMidlandMapper.updateIntoMidlandById(intoMidland);
 			if (result < 1) {
 				throw new Exception("updateIntoMidlandById失败");
@@ -77,7 +77,7 @@ public class IntoMidlandServiceImpl implements IntoMidlandService {
 	@Override
 	public List<IntoMidland> findIntoMidlandList(IntoMidland intoMidland) throws Exception {
 		try {
-			log.info("findIntoMidlandList  {}",intoMidland);
+			log.debug("findIntoMidlandList  {}",intoMidland);
 			return intoMidlandMapper.findIntoMidlandList(intoMidland);
 		} catch(Exception e) {
 			log.error("findIntoMidlandList  {}",intoMidland,e);

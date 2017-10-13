@@ -82,7 +82,7 @@ public class SiteMapController extends BaseFilter {
 	public Object addSiteMap(SiteMap siteMap) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("addSiteMap {}",siteMap);
+			log.debug("addSiteMap {}",siteMap);
 			siteMapServiceImpl.insertSiteMap(siteMap);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -97,7 +97,7 @@ public class SiteMapController extends BaseFilter {
 	 **/
 	@RequestMapping("get_siteMap")
 	public String getSiteMapById(Integer id,Model model) {
-		log.info("getSiteMapById  {}",id);
+		log.debug("getSiteMapById  {}",id);
 		SiteMap result = siteMapServiceImpl.selectSiteMapById(id);
 		model.addAttribute("item",result);
 		return "siteMap/updateSiteMap";	}
@@ -110,7 +110,7 @@ public class SiteMapController extends BaseFilter {
 	public Object deleteSiteMapById(Integer id)throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("deleteSiteMapById  {}",id);
+			log.debug("deleteSiteMapById  {}",id);
 			siteMapServiceImpl.deleteSiteMapById(id);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -149,7 +149,7 @@ public class SiteMapController extends BaseFilter {
 	public Object updateSiteMapById(SiteMap siteMap) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.info("updateSiteMapById  {}",siteMap);
+			log.debug("updateSiteMapById  {}",siteMap);
 			siteMapServiceImpl.updateSiteMapById(siteMap);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -165,7 +165,7 @@ public class SiteMapController extends BaseFilter {
 	@RequestMapping("list")
 	public String findSiteMapList(SiteMap siteMap,Model model, HttpServletRequest request) {
 		try {
-			log.info("findSiteMapList  {}",siteMap);
+			log.debug("findSiteMapList  {}",siteMap);
 			MidlandHelper.doPage(request);
 			Page<SiteMap> result = (Page<SiteMap>)siteMapServiceImpl.findSiteMapList(siteMap);
 			Paginator paginator=result.getPaginator();

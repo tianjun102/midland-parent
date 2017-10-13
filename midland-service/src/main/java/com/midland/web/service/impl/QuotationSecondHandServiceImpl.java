@@ -21,7 +21,7 @@ public class QuotationSecondHandServiceImpl implements QuotationSecondHandServic
 	@Override
 	public void insertQuotationSecondHand(QuotationSecondHand quotationSecondHand) throws Exception {
 		try {
-			log.info("insert {}",quotationSecondHand);
+			log.debug("insert {}",quotationSecondHand);
 			quotationSecondHandMapper.insertQuotationSecondHand(quotationSecondHand);
 		} catch(Exception e) {
 			log.error("insertQuotationSecondHand异常 {}",quotationSecondHand,e);
@@ -34,7 +34,7 @@ public class QuotationSecondHandServiceImpl implements QuotationSecondHandServic
 	@Override
 	public void insertQuotationSecondHandBatch(List quotationSecondHand) throws Exception {
 		try {
-			log.info("insert {}",quotationSecondHand);
+			log.debug("insert {}",quotationSecondHand);
 			quotationSecondHandMapper.insertQuotationSecondHandBatch(quotationSecondHand);
 		} catch(Exception e) {
 			log.error("insertQuotationSecondHand异常 {}",quotationSecondHand,e);
@@ -47,7 +47,7 @@ public class QuotationSecondHandServiceImpl implements QuotationSecondHandServic
 	 **/
 	@Override
 	public QuotationSecondHand selectQuotationSecondHandById(Integer id) {
-		log.info("selectQuotationSecondHandById  {}",id);
+		log.debug("selectQuotationSecondHandById  {}",id);
 		return quotationSecondHandMapper.selectQuotationSecondHandById(id);
 	}
 
@@ -57,7 +57,7 @@ public class QuotationSecondHandServiceImpl implements QuotationSecondHandServic
 	@Override
 	public void deleteQuotationSecondHandById(Integer id)throws Exception {
 		try {
-			log.info("deleteQuotationSecondHandById  {}",id);
+			log.debug("deleteQuotationSecondHandById  {}",id);
 			int result = quotationSecondHandMapper.deleteQuotationSecondHandById(id);
 			if (result < 1) {
 				throw new Exception("deleteQuotationSecondHandById失败");
@@ -73,7 +73,7 @@ public class QuotationSecondHandServiceImpl implements QuotationSecondHandServic
 	@Override
 	public void updateQuotationSecondHandById(QuotationSecondHand quotationSecondHand) throws Exception {
 		try {
-			log.info("updateQuotationSecondHandById  {}",quotationSecondHand);
+			log.debug("updateQuotationSecondHandById  {}",quotationSecondHand);
 			int result = quotationSecondHandMapper.updateQuotationSecondHandById(quotationSecondHand);
 			if (result < 1) {
 				throw new Exception("updateQuotationSecondHandById失败");
@@ -90,7 +90,7 @@ public class QuotationSecondHandServiceImpl implements QuotationSecondHandServic
 	@Override
 	public List<QuotationSecondHand> findQuotationSecondHandList(QuotationSecondHand quotationSecondHand) throws Exception {
 		try {
-			log.info("findQuotationSecondHandList  {}",quotationSecondHand);
+			log.debug("findQuotationSecondHandList  {}",quotationSecondHand);
 			return quotationSecondHandMapper.findQuotationSecondHandList(quotationSecondHand);
 		} catch(Exception e) {
 			log.error("findQuotationSecondHandList  {}",quotationSecondHand,e);
