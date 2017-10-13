@@ -9,5 +9,12 @@ public class Contant {
 	public static final String answerAuditKey = "isAnswerAudit";
 	public static final int answerAuditOpen = 1;//开启问答审核
 	public static final int answerAuditClose = 0;//关闭问答审核,默认关闭
-	
+
+
+
+	public static final int ENTRUST_BUY=0;
+	public static final int ENTRUST_SALE=1;
+	public static final int ENTRUST_RENT_OUT=2;
+	public static final int ENTRUST_RENT_IN=3;
+	public static final int ENTRUST_EVALUATE=4;
 }

@@ -87,7 +87,19 @@
 				</dt>
 				<dd>
 					<shiro:hasPermission name="entrustList">
-						<a id = "enterPromotionIndex" href="${ctx}/rest/entrust/index" target="contentF"><span>委托记录</span></a>
+						<a id = "enterPromotionIndex" href="${ctx}/rest/entrust/buy/index" target="contentF"><span>买房委托</span></a>
+					</shiro:hasPermission>
+					<shiro:hasPermission name="entrustList">
+						<a id = "enterPromotionIndex" href="${ctx}/rest/entrust/sale/index" target="contentF"><span>卖房委托</span></a>
+					</shiro:hasPermission>
+					<shiro:hasPermission name="entrustList">
+						<a id = "enterPromotionIndex" href="${ctx}/rest/entrust/rentOut/index" target="contentF"><span>出租委托</span></a>
+					</shiro:hasPermission>
+					<shiro:hasPermission name="entrustList">
+						<a id = "enterPromotionIndex" href="${ctx}/rest/entrust/rentIn/index" target="contentF"><span>租房委托</span></a>
+					</shiro:hasPermission>
+					<shiro:hasPermission name="entrustList">
+						<a id = "enterPromotionIndex" href="${ctx}/rest/entrust/evaluate/index" target="contentF"><span>估价委托</span></a>
 					</shiro:hasPermission>
 				</dd>
 			</dl>

@@ -40,7 +40,9 @@
                     <option value="1">面积</option>
                 </select>
             </li>
-            <li><input class="public_btn bg1" type="submit" name="inquery" id="inquery" value="查询"/></li>
+            <li><input class="public_btn bg1" type="submit" name="inquery" id="inquery" value="查询"/>
+                <a class="setup"  href="${ctx}/rest/quotationSecondHand/index" target="contentF">返回</a></li>
+
         </ul>
 
 

@@ -41,14 +41,12 @@
         },
         toolbox: {
             feature: {
-                dataView: {show: true, readOnly: false},
-                magicType: {show: true, type: ['line', 'bar']},
                 restore: {show: true},
                 saveAsImage: {show: true}
             }
         },
         legend: {
-            data:['套数','环比']
+            data:['套数','套数环比']
         },
         xAxis: [
             {
@@ -105,7 +103,7 @@
                 smooth: true,
 				itemStyle:{
                     normal:{
-                        color:'#b6a2de',
+                        color:'#1ddeb6',
 						barBorderRadius:[1,1,1,1]
                     }
                 }
