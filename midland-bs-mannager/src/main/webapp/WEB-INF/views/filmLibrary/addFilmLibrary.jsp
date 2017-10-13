@@ -46,7 +46,8 @@
                 'multi': false,// 是否支持多个文件上传
                 'onUploadSuccess': function (file, data, response) {
                     $("#videoUrl").attr("value", data);
-                    $("#videoUrl1").attr("src", data);
+                    $("#videoUrl1").attr("src", "${ctx}/assets/UEditor/dialogs/attachment/fileTypeImages/"+getFileIcon(data));
+                    $("#fileUrl").html(    '<a style="font-size:12px; color:#0066cc;"  title="' + data.substr(data.lastIndexOf('/')+1) + '">' + data.substr(data.lastIndexOf('/')+1) + '</a>' );
                 },
                 'onQueueComplete': function (queueData) {
                     if (queueData.uploadsSuccessful < 1) {
@@ -84,6 +85,9 @@
             <li><span>视频上传：</span>
                 <div style="float: left;">
                     <input type="file" name="file_upload1" id="file_upload1"/>
+                    <img style="margin-bottom: -2px;max-width:200px;max-height:200px" id="videoUrl1"
+                         src="${item.iconImg}">
+                    <span id="fileUrl"></span>
                     <input type="hidden" name="videoUrl" id="videoUrl" >
                 </div>
             </li>
