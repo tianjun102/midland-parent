@@ -96,8 +96,9 @@
                     <div style="float: left;">
                         <input type="hidden" name="enclosure" id="enclosure" value="${item.iconImg}">
 
-                        <img style="margin-bottom: 10px;max-width:200px;max-height:200px" id="iconImg1"
+                        <img style="margin-bottom: -2px;max-width:200px;max-height:200px" id="iconImg1"
                              src="${item.iconImg}">
+                        <span id="fileUrl"></span>
                         <input type="file" name="file_upload" id="file_upload"/>
                     </div>
                 </li>
@@ -215,7 +216,8 @@
             'onUploadSuccess': function (file, data, response) {
                 console.log(data);
                 $("#enclosure").attr("value", data);
-                $("#iconImg1").attr("src", "${fileUrl}"+data);
+                $("#iconImg1").attr("src", "${ctx}/assets/UEditor/dialogs/attachment/fileTypeImages/"+getFileIcon(data));
+                $("#fileUrl").html(    '<a style="font-size:12px; color:#0066cc;"  title="' + data.substr(data.lastIndexOf('/')+1) + '">' + data.substr(data.lastIndexOf('/')+1) + '</a>' );
             },
             'onQueueComplete': function (queueData) {
                 if (queueData.uploadsSuccessful < 1) {

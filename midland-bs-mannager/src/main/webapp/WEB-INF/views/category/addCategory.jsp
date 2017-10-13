@@ -86,6 +86,7 @@
                 </select>
             </li>--%>
             <li><span>父节点：</span><input name="parentName" onclick="showTree()" readonly="readonly"/>
+                <input name="parentId" type="hidden"/>
                 <div style = "font-size:12px; color:#afadad;text-indent: 70px;">(不选父分类则默认一级分类)</div>
             </li>
             <li  id="showDiv" style="display: none;padding-top: 0px;position:relative;" >

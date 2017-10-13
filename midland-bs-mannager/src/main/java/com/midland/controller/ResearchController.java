@@ -56,6 +56,13 @@ public class ResearchController extends BaseFilter {
 		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
 		List<Area> cityList = cityMap.get("city");
 		model.addAttribute("cityList",cityList);*/
+		Category cate2 = new Category();
+		//查询资讯分类
+		cate2.setType(0);
+		String result = getCategoryTree("",cate2);
+		if(StringUtils.isNotEmpty(result)){
+			model.addAttribute("categoryData",result );
+		}
 		settingService.getAllProvinceList(model);
 		User user = MidlandHelper.getCurrentUser(request);
 		model.addAttribute("cityId",user.getCityId());
@@ -179,6 +186,9 @@ public class ResearchController extends BaseFilter {
 	@RequestMapping("list")
 	public String findInformationList(Information information, Model model, HttpServletRequest request) {
 		try {
+			if(information.getCateId()!=null&&information.getCateId()==0){
+				information.setCateId(null);
+			}
 			log.debug("findInformationList  {}",information);
 			MidlandHelper.doPage(request);
 			information.setArticeType(0);

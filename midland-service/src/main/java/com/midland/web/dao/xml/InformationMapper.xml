@@ -342,6 +342,12 @@
 		<if test="platform != null">
 			and platform = #{platform}
 		</if>
+		<if test="startTime != null">
+			and release_time &gt; #{startTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="endTime != null">
+			and release_time &lt; #{endTime,jdbcType=TIMESTAMP}
+		</if>
 	</sql>
 
 </mapper>

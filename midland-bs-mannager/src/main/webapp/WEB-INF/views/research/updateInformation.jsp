@@ -41,7 +41,7 @@
         font-size: 14px;
         color: rgb(102, 102, 102);
     }
-    .layui-layer{
+    .layui-layer-msg{
         top:260px!important;
     }
     .vipcate{
@@ -103,8 +103,8 @@
         <form id="formId" action="${ctx}/rest/banner/addBanner" method="post" enctype="multipart/form-data" method="post">
             <ul class = "adminfo row">
                 <input type="hidden" value="${item.id}" name="id" id="id">
-                <li><span>市场调究分类：</span><input class="vipcate" value="${item.cateName}" name="cateName" onclick="showTree()" readonly="readonly"/>
-                    <input value="${item.cateId}" name="cateId" type="hidden"/><label style="color: red" class = "_star " >*</label>
+                <li><span>市场调究分类：</span><input class="vipcate" id="cateName" value="${item.cateName}" name="cateName" onclick="showTree()" readonly="readonly"/>
+                    <input value="${item.cateId}" name="cateId" id="cateId" type="hidden"/><label style="color: red" class = "_star " >*</label>
 
                 </li>
                 <li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >
@@ -132,7 +132,7 @@
                 </li>
                 <li>
                     <span>标题：</span>
-                    <input type="text" name="title" value="${item.title}" />
+                    <input type="text" id="title" name="title" value="${item.title}" />
                 </li>
                 <li><span>来源：</span><input name="source" id="source" type="text" value="${item.source}" />
                 </li>
@@ -140,8 +140,9 @@
                     <div style="float: left;">
                         <input type="hidden" name="enclosure" id="enclosure" value="${item.enclosure}">
 
-                        <img style="margin-bottom: 10px;max-width:200px;max-height:200px" id="iconImg1"
+                        <img style="margin-bottom: -5px;max-width:200px;max-height:200px" id="iconImg1"
                              src="${item.enclosure}">
+                        <span id="fileUrl"></span>
                         <input type="file" name="file_upload" id="file_upload"/>
                     </div>
                 </li>
@@ -207,7 +208,7 @@
     }
 
     function subumintInformation(){
-        if(notEmpty('vipcate','vipcate','请填写市场分类！')&&notEmpty('title','title','标题不能为空！')){
+        if(notEmpty('cateName','cateName','请填写市场分类！')&&notEmpty('title','title','标题不能为空！')){
         var data = $("#formId").serialize();
         $.ajax({
             type: "post",
@@ -258,7 +259,8 @@
             'onUploadSuccess': function (file, data, response) {
                 console.log(data);
                 $("#enclosure").attr("value", data);
-                $("#iconImg1").attr("src", "${fileUrl}"+data);
+                $("#iconImg1").attr("src", "${ctx}/assets/UEditor/dialogs/attachment/fileTypeImages/"+getFileIcon(data));
+                $("#fileUrl").html(    '<a style="font-size:12px; color:#0066cc;" title="' + data.substr(data.lastIndexOf('/')+1) + '">' + data.substr(data.lastIndexOf('/')+1) + '</a>' );
             },
             'onQueueComplete': function (queueData) {
                 if (queueData.uploadsSuccessful < 1) {
@@ -287,6 +289,9 @@
 
             // Your options here
         });
+        var data = '${item.enclosure}';
+        $("#iconImg1").attr("src", "${ctx}/assets/UEditor/dialogs/attachment/fileTypeImages/"+getFileIcon(data));
+        $("#fileUrl").html(    '<a style="font-size:12px; color:#0066cc;"  title="' + data.substr(data.lastIndexOf('/')+1) + '">' + data.substr(data.lastIndexOf('/')+1) + '</a>' );
 
     })
 

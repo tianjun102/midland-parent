@@ -144,8 +144,9 @@
                     <div style="float: left;">
                         <input type="hidden" name="enclosure" id="enclosure" value="${item.iconImg}">
 
-                        <img style="margin-bottom: 10px;max-width:200px;max-height:200px" id="iconImg1"
+                        <img style="margin-bottom: -5px;max-width:200px;max-height:200px" id="iconImg1"
                              src="${item.iconImg}">
+                        <span id="fileUrl"></span>
                         <input type="file" name="file_upload" id="file_upload"/>
                     </div>
                 </li>
@@ -158,6 +159,19 @@
                     <input type="text" name="metaDesc"  />
                 </li>
 
+                <%--<li>
+                    <span>多图上传：</span>
+                    <button type="button" id="j_upload_img_btn">多图上传</button>
+                    <div id="upload_img_wrap"></div>
+                </li>
+
+                <li>
+                    <span>附件上传：</span>
+                    <button type="button" id="j_upload_file_btn">附件上传</button>
+                    <div id="upload_file_wrap"></div>
+                </li>--%>
+                <!-- 加载编辑器的容器 -->
+                <%--<textarea id="uploadEditor" style="display: none;"></textarea>--%>
                 <li><span>缩略图：</span>
                 <div style="float: left;">
                         <input type="hidden" name="imgUrl" id="imgUrl" value="${item.iconImg}">
@@ -187,29 +201,6 @@
 </body>
 <script type="text/javascript">
     UE.getEditor('myEditor');
-
-    function selectTypes(){
-        if($("#selectType option:selected").val()==1){
-            $("#searchbatton").show();
-            $("#catInfo").show();
-            $("#prodInfo").show();
-            $("#textArea").hide();
-        }else if($("#selectType option:selected").val()==0){
-            $("#searchbatton").hide();
-            $("#catInfo").hide();
-            $("#prodInfo").hide();
-            $("#picLike").hide();
-            $("#textArea").show();
-        }else{
-            $("#searchbatton").hide();
-            $("#catInfo").hide();
-            $("#prodInfo").hide();
-            $("#textArea").hide();
-            $("#picLike").show();
-        }
-
-    }
-
     function subumintInformation(){
         var data = $("#formId").serialize();
         if(notEmpty('vipcate','vipcate','请填写市场分类！')&&notEmpty('title','title','标题不能为空！')){
@@ -237,41 +228,6 @@
     }
 
 
-
-    $(function() {
-        $(".filepath").on("change",function() {
-//          alert($('.imgbox').length);
-            FileExt=this.value.substr(this.value.lastIndexOf(".")).toLowerCase();
-
-            if(AllowExt!=0&&AllowExt.indexOf(FileExt+"|")==-1) //判断文件类型是否允许上传
-            {
-                ErrMsg="\n该文件类型不允许上传。请上传 "+AllowExt+" 类型的文件，当前文件类型为"+FileExt;
-                $(this).val("");
-                layer.alert(ErrMsg);
-                return false;
-            }
-            ImgFileSize=document.getElementById(this.id).files.item(0).size;
-            ImgFileSize=Math.round(ImgFileSize*1000/(1024*1024))/1000;//取得图片文件的大小
-            if(ImgFileSize>1){
-                layer.alert("图片大小为"+ImgFileSize+"M，请上传小于1M的图片！");
-                return false;
-            }
-            var srcs = getObjectURL(this.files[0]);   //获取路径
-            $(this).nextAll(".img1").hide();   //this指的是input
-            $(this).nextAll(".img2").show();  //fireBUg查看第二次换图片不起做用
-            $(this).nextAll('.close').show();   //this指的是input
-            $(this).nextAll(".img2").attr("src",srcs);    //this指的是input
-            //$(this).val('');    //必须制空
-            $(".close").on("click",function() {
-                $(this).hide();     //this指的是span
-                $(this).nextAll(".img2").hide();
-                $(this).nextAll(".img1").show();
-                $(this).prev().val('');
-            })
-        })
-    })
-
-
     function setCityName(){
         $("#cityName").val($("#cityId option:selected").text())
     }
@@ -293,12 +249,13 @@
         $('#file_upload').uploadify({
             'swf': '${ctx }/assets/scripts/uploadify/uploadify.swf',
             'uploader': '${ctx }/rest/upload/img',
-            'multi': false,// 是否支持多个文件上传
+            'multi': true,// 是否支持多个文件上传
             'buttonText': '上传附件',
             'onUploadSuccess': function (file, data, response) {
                 console.log(data);
                 $("#enclosure").attr("value", data);
-                $("#iconImg1").attr("src", "${fileUrl}"+data);
+                $("#iconImg1").attr("src", "${ctx}/assets/UEditor/dialogs/attachment/fileTypeImages/"+getFileIcon(data));
+                $("#fileUrl").html(    '<a style="font-size:12px; color:#0066cc;" title="' + data.substr(data.lastIndexOf('/')+1) + '">' + data.substr(data.lastIndexOf('/')+1) + '</a>' );
             },
             'onQueueComplete': function (queueData) {
                 if (queueData.uploadsSuccessful < 1) {
@@ -332,6 +289,73 @@
     function setCateName(){
         $("#cateName").val($("#cateId option:selected").text())
     }
+
+</script>
+<!-- 使用ue -->
+<script type="text/javascript">
+
+    /*// 实例化编辑器，这里注意配置项隐藏编辑器并禁用默认的基础功能。
+    var uploadEditor = UE.getEditor("uploadEditor", {
+        isShow: false,
+        focus: false,
+        enableAutoSave: false,
+        autoSyncData: false,
+        autoFloatEnabled:false,
+        wordCount: false,
+        sourceEditor: null,
+        scaleEnabled:true,
+        toolbars: [["insertimage", "attachment"]]
+    });
+
+    // 监听多图上传和上传附件组件的插入动作
+    uploadEditor.ready(function () {
+        uploadEditor.addListener("beforeInsertImage", _beforeInsertImage);
+        uploadEditor.addListener("afterUpfile",_afterUpfile);
+    });
+
+    // 自定义按钮绑定触发多图上传和上传附件对话框事件
+    document.getElementById('j_upload_img_btn').onclick = function () {
+        var dialog = uploadEditor.getDialog("insertimage");
+        dialog.title = '多图上传';
+        dialog.render();
+        dialog.open();
+    };
+
+    document.getElementById('j_upload_file_btn').onclick = function () {
+        var dialog = uploadEditor.getDialog("attachment");
+        dialog.title = '附件上传';
+        dialog.render();
+        dialog.open();
+    };
+
+    // 多图上传动作
+    function _beforeInsertImage(t, result) {
+        debugger;
+        var imageHtml = '';
+        for(var i in result){
+            imageHtml += '<img src="'+result[i].src+'" alt="'+result[i].alt+'" height="150">';
+        }
+        document.getElementById('upload_img_wrap').innerHTML = '<li>'+imageHtml+'</li>';
+    }
+
+    // 附件上传
+    function _afterUpfile(t, filelist) {
+        debugger;
+        var i, item, icon, title,
+            html = '',
+            URL = this.getOpt('UEDITOR_HOME_URL'),
+            iconDir = URL + (URL.substr(URL.length - 1) == '/' ? '':'/') + 'dialogs/attachment/fileTypeImages/';
+        for (i = 0; i < filelist.length; i++) {
+            item = filelist[i];
+            icon = iconDir + getFileIcon(item.url);
+            title = item.title || item.url.substr(item.url.lastIndexOf('/') + 1);
+            html += '<span style="line-height: 16px;">' +
+                '<img style="vertical-align: middle; margin-right: 2px;" src="' + icon + '" _src="' + icon + '" />' +
+                '<a style="font-size:12px; color:#0066cc;" href="' + item.url + '" title="' + title + '">' + title + '</a>' +
+                '</span>';
+        }
+        document.getElementById('upload_file_wrap').innerHTML = html;
+    }*/
 
 </script>
 </html>
