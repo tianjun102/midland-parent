@@ -254,7 +254,7 @@
             'onUploadSuccess': function (file, data, response) {
                 console.log(data);
                 $("#enclosure").attr("value", data);
-                $("#iconImg1").attr("src", "${ctx}assets/UEditor/dialogs/attachment/fileTypeImages/"+getFileIcon(data));
+                $("#iconImg1").attr("src", "${ctx}/assets/UEditor/dialogs/attachment/fileTypeImages/"+getFileIcon(data));
                 $("#fileUrl").html(    '<a style="font-size:12px; color:#0066cc;" title="' + data.substr(data.lastIndexOf('/')+1) + '">' + data.substr(data.lastIndexOf('/')+1) + '</a>' );
             },
             'onQueueComplete': function (queueData) {

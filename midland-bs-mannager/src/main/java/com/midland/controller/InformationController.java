@@ -50,12 +50,13 @@ public class InformationController extends BaseFilter {
 	 **/
 	@RequestMapping("index")
 	public String informationIndex(Information information, Model model,HttpServletRequest request) throws Exception {
-		/*Map<String,String> parem = new HashMap<>();
-		parem.put("flag","city");
-		parem.put("id","*");
-		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
-		List<Area> cityList = cityMap.get("city");
-		model.addAttribute("cityList",cityList);*/
+		Category cate1 = new Category();
+		//查询资讯分类
+		cate1.setType(0);
+		String result = getCategoryTree("",cate1);
+		if(StringUtils.isNotEmpty(result)){
+			model.addAttribute("categoryData",result );
+		}
 		settingService.getAllProvinceList(model);
 		User user = MidlandHelper.getCurrentUser(request);
 		model.addAttribute("cityId",user.getCityId());
@@ -185,6 +186,9 @@ public class InformationController extends BaseFilter {
 	@RequestMapping("list")
 	public String findInformationList(Information information, Model model, HttpServletRequest request) {
 		try {
+			if(information.getCateId()!=null&&information.getCateId()==0){
+				information.setCateId(null);
+			}
 			log.debug("findInformationList  {}",information);
 			MidlandHelper.doPage(request);
 			information.setArticeType(1);
