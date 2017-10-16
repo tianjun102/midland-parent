@@ -34,10 +34,16 @@
 		<result column="agent_phone" property="agentPhone" jdbcType="VARCHAR" />
 		<result column="reset_flag" property="resetFlag" jdbcType="INTEGER" />
 		<result column="assigned_time" property="assignedTime" jdbcType="TIMESTAMP" />
+		<result column="turned" property="turned" jdbcType="VARCHAR" />
+		<result column="build_year" property="buildYear" jdbcType="VARCHAR" />
+		<result column="the_layer" property="theLayer" jdbcType="VARCHAR" />
+		<result column="total_layer" property="totalLayer" jdbcType="VARCHAR" />
+		<result column="other_item" property="otherItem" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,entrust_sn,source,house_type,sell_rent,DATE_FORMAT(entrust_time,'%Y-%m-%d %H:%i:%s')entrust_time,area_name,community_name,address,layout,measure,price,agent_id,agent_name,status,DATE_FORMAT(handle_time,'%Y-%m-%d %H:%i:%s')handle_time,nick_name,renovation,phone,is_delete,broadband,washing_machine,household,fridge,entrust_type,city_id,city_name,area_id,agent_phone,reset_flag,DATE_FORMAT(assigned_time,'%Y-%m-%d %H:%i:%s')assigned_time
+		id,entrust_sn,source,house_type,sell_rent,DATE_FORMAT(entrust_time,'%Y-%m-%d %H:%i:%s')entrust_time,area_name,community_name,address,layout,measure,price,agent_id,agent_name,status,DATE_FORMAT(handle_time,'%Y-%m-%d %H:%i:%s')handle_time,nick_name,renovation,phone,is_delete,broadband,washing_machine,household,fridge,entrust_type,city_id,city_name,area_id,agent_phone,reset_flag,DATE_FORMAT(assigned_time,'%Y-%m-%d %H:%i:%s')assigned_time,turned,build_year,the_layer,total_layer,other_item,remark
 	</sql>
 
 	<select id="selectEntrustById" resultMap="BaseResultMap">
@@ -159,9 +165,27 @@
 			<if test="assignedTime != null">
 				assigned_time,
 			</if>
+			<if test="turned != null">
+				turned,
+			</if>
+			<if test="buildYear != null">
+				build_year,
+			</if>
+			<if test="theLayer != null">
+				the_layer,
+			</if>
+			<if test="totalLayer != null">
+				total_layer,
+			</if>
+			<if test="otherItem != null">
+				other_item,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
 		</trim>
 		values
-		 <trim prefix="(" suffix=")" suffixOverrides="," >
+		<trim prefix="(" suffix=")" suffixOverrides="," >
 			<if test="entrustSn != null">
 				#{entrustSn,jdbcType=VARCHAR},
 			</if>
@@ -251,6 +275,24 @@
 			</if>
 			<if test="assignedTime != null">
 				#{assignedTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="turned != null">
+				#{turned,jdbcType=VARCHAR},
+			</if>
+			<if test="buildYear != null">
+				#{buildYear,jdbcType=VARCHAR},
+			</if>
+			<if test="theLayer != null">
+				#{theLayer,jdbcType=VARCHAR},
+			</if>
+			<if test="totalLayer != null">
+				#{totalLayer,jdbcType=VARCHAR},
+			</if>
+			<if test="otherItem != null">
+				#{otherItem,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
 			</if>
 		</trim>
 	</insert>
@@ -346,26 +388,44 @@
 		<if test="assignedTime != null">
 			assigned_time= #{assignedTime,jdbcType=TIMESTAMP},
 		</if>
+		<if test="turned != null">
+			turned= #{turned,jdbcType=VARCHAR},
+		</if>
+		<if test="buildYear != null">
+			build_year= #{buildYear,jdbcType=VARCHAR},
+		</if>
+		<if test="theLayer != null">
+			the_layer= #{theLayer,jdbcType=VARCHAR},
+		</if>
+		<if test="totalLayer != null">
+			total_layer= #{totalLayer,jdbcType=VARCHAR},
+		</if>
+		<if test="otherItem != null">
+			other_item= #{otherItem,jdbcType=VARCHAR},
+		</if>
+		<if test="remark != null">
+			remark = #{remark,jdbcType=VARCHAR},
+		</if>
 	</sql>
 
 	<sql id="select_option">
 		<if test="id != null">
-			 and id= #{id,jdbcType=INTEGER}
+			and id= #{id,jdbcType=INTEGER}
 		</if>
 		<if test="entrustSn != null">
-			 and entrust_sn= #{entrustSn,jdbcType=VARCHAR}
+			and entrust_sn= #{entrustSn,jdbcType=VARCHAR}
 		</if>
 		<if test="source != null">
-			 and source= #{source,jdbcType=INTEGER}
+			and source= #{source,jdbcType=INTEGER}
 		</if>
 		<if test="houseType != null">
-			 and house_type= #{houseType,jdbcType=INTEGER}
+			and house_type= #{houseType,jdbcType=INTEGER}
 		</if>
 		<if test="sellRent != null">
-			 and sell_rent= #{sellRent,jdbcType=INTEGER}
+			and sell_rent= #{sellRent,jdbcType=INTEGER}
 		</if>
 		<if test="entrustTime != null">
-			 and entrust_time= #{entrustTime,jdbcType=TIMESTAMP}
+			and entrust_time= #{entrustTime,jdbcType=TIMESTAMP}
 		</if>
 		<if test="startTime != null">
 			and entrust_time &gt; #{startTime}
@@ -374,79 +434,97 @@
 			and entrust_time &lt; #{endTime}
 		</if>
 		<if test="areaName != null">
-			 and area_name= #{areaName,jdbcType=VARCHAR}
+			and area_name= #{areaName,jdbcType=VARCHAR}
 		</if>
 		<if test="communityName != null">
-			 and community_name   like '%${communityName}%'
+			and community_name   like '%${communityName}%'
 		</if>
 		<if test="address != null">
-			 and address= #{address,jdbcType=VARCHAR}
+			and address= #{address,jdbcType=VARCHAR}
 		</if>
 		<if test="layout != null">
-			 and layout= #{layout,jdbcType=VARCHAR}
+			and layout= #{layout,jdbcType=VARCHAR}
 		</if>
 		<if test="measure != null">
-			 and measure= #{measure,jdbcType=VARCHAR}
+			and measure= #{measure,jdbcType=VARCHAR}
 		</if>
 		<if test="price != null">
-			 and price= #{price,jdbcType=VARCHAR}
+			and price= #{price,jdbcType=VARCHAR}
 		</if>
 		<if test="agentId != null">
-			 and agent_id= #{agentId,jdbcType=VARCHAR}
+			and agent_id= #{agentId,jdbcType=VARCHAR}
 		</if>
 		<if test="agentName != null">
-			 and agent_name= #{agentName,jdbcType=VARCHAR}
+			and agent_name= #{agentName,jdbcType=VARCHAR}
 		</if>
 		<if test="status != null">
-			 and status= #{status,jdbcType=INTEGER}
+			and status= #{status,jdbcType=INTEGER}
 		</if>
 		<if test="handleTime != null">
-			 and handle_time= #{handleTime,jdbcType=TIMESTAMP}
+			and handle_time= #{handleTime,jdbcType=TIMESTAMP}
 		</if>
 		<if test="nickName != null">
-			 and nick_name  like '%${nickName}%'
+			and nick_name  like '%${nickName}%'
 		</if>
 		<if test="renovation != null">
-			 and renovation= #{renovation,jdbcType=INTEGER}
+			and renovation= #{renovation,jdbcType=INTEGER}
 		</if>
 		<if test="phone != null">
-			 and phone= #{phone,jdbcType=VARCHAR}
+			and phone= #{phone,jdbcType=VARCHAR}
 		</if>
 		<if test="isDelete != null">
-			 and is_delete= #{isDelete,jdbcType=INTEGER}
+			and is_delete= #{isDelete,jdbcType=INTEGER}
 		</if>
 		<if test="broadband != null">
-			 and broadband= #{broadband,jdbcType=INTEGER}
+			and broadband= #{broadband,jdbcType=INTEGER}
 		</if>
 		<if test="washingMachine != null">
-			 and washing_machine= #{washingMachine,jdbcType=INTEGER}
+			and washing_machine= #{washingMachine,jdbcType=INTEGER}
 		</if>
 		<if test="household != null">
-			 and household= #{household,jdbcType=INTEGER}
+			and household= #{household,jdbcType=INTEGER}
 		</if>
 		<if test="fridge != null">
-			 and fridge= #{fridge,jdbcType=INTEGER}
+			and fridge= #{fridge,jdbcType=INTEGER}
 		</if>
 		<if test="entrustType != null">
-			 and entrust_type= #{entrustType,jdbcType=INTEGER}
+			and entrust_type= #{entrustType,jdbcType=INTEGER}
 		</if>
 		<if test="cityId != null">
-			 and city_id= #{cityId,jdbcType=VARCHAR}
+			and city_id= #{cityId,jdbcType=VARCHAR}
 		</if>
 		<if test="cityName != null">
-			 and city_name= #{cityName,jdbcType=VARCHAR}
+			and city_name= #{cityName,jdbcType=VARCHAR}
 		</if>
 		<if test="areaId != null">
-			 and area_id= #{areaId,jdbcType=VARCHAR}
+			and area_id= #{areaId,jdbcType=VARCHAR}
 		</if>
 		<if test="agentPhone != null">
-			 and agent_phone= #{agentPhone,jdbcType=VARCHAR}
+			and agent_phone= #{agentPhone,jdbcType=VARCHAR}
 		</if>
 		<if test="resetFlag != null">
-			 and reset_flag= #{resetFlag,jdbcType=INTEGER}
+			and reset_flag= #{resetFlag,jdbcType=INTEGER}
 		</if>
 		<if test="assignedTime != null">
-			 and assigned_time= #{assignedTime,jdbcType=TIMESTAMP}
+			and assigned_time= #{assignedTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="turned != null">
+			and turned= #{turned,jdbcType=VARCHAR}
+		</if>
+		<if test="buildYear != null">
+			and build_year= #{buildYear,jdbcType=VARCHAR}
+		</if>
+		<if test="theLayer != null">
+			and the_layer= #{theLayer,jdbcType=VARCHAR}
+		</if>
+		<if test="totalLayer != null">
+			and total_layer= #{totalLayer,jdbcType=VARCHAR}
+		</if>
+		<if test="otherItem != null">
+			and other_item= #{otherItem,jdbcType=VARCHAR}
+		</if>
+		<if test="remark != null">
+			AND remark = #{remark,jdbcType=VARCHAR}
 		</if>
 	</sql>
 

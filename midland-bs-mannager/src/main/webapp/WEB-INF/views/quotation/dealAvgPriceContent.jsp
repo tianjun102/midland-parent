@@ -28,7 +28,7 @@
 
     options = {
         title: {
-            text: '折柱混合'
+            text: '成交均价'
         },
 
         tooltip: {
@@ -42,8 +42,6 @@
         },
         toolbox: {
             feature: {
-                dataView: {show: true, readOnly: false},
-                magicType: {show: true, type: ['line', 'bar']},
                 restore: {show: true},
                 saveAsImage: {show: true}
             }

@@ -1,18 +1,17 @@
-package com.midland.controller;
+package com.midland.controller.entrust;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.config.MidlandConfig;
-import com.midland.core.util.HttpUtils;
+import com.midland.web.Contants.Contant;
 import com.midland.web.api.ApiHelper;
 import com.midland.web.api.SmsSender.SmsModel;
 import com.midland.web.enums.ContextEnums;
 import com.midland.web.model.Entrust;
 import com.midland.web.model.EntrustLog;
 import com.midland.web.model.ExportModel;
-import com.midland.web.model.remote.Agent;
 import com.midland.web.model.user.User;
 import com.midland.web.service.EntrustLogService;
 import com.midland.web.service.EntrustService;
@@ -28,7 +27,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,8 +40,8 @@ import java.util.Map;
  * Created by 'ms.x' on 2017/8/1.
  */
 @Controller
-@RequestMapping("/entrust")
-public class EntrustController extends BaseFilter{
+@RequestMapping("/entrust/sale")
+public class EntrustSaleController extends BaseFilter{
 	@Autowired
 	private EntrustService entrustServiceImpl;
 	@Autowired
@@ -56,15 +54,20 @@ public class EntrustController extends BaseFilter{
 	@Autowired
 	private ApiHelper apiHelper;
 	
-	Logger logger = LoggerFactory.getLogger(EntrustController.class);
-	
+	Logger logger = LoggerFactory.getLogger(EntrustSaleController.class);
+
+	/**
+	 * 卖房
+	 * @param request
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/index")
-	public String showAppointIndex(HttpServletRequest request,Model model)
+	public String showEntrustSaleIndex(HttpServletRequest request,Model model)
 	{
 		getSelectParam(model);
-		return "/entrust/entrustIndex";
+		return "/entrustSale/entrustIndex";
 	}
-	
 	
 	@RequestMapping("/delete")
 	@ResponseBody
@@ -84,7 +87,7 @@ public class EntrustController extends BaseFilter{
 	public String toAdd(HttpServletRequest request,Model model) {
 		getSelectParam(model);
 		settingService.getAllProvinceList(model);
-		return "entrust/addEntrust";
+		return "entrustSale/addEntrust";
 	}
 	@RequestMapping("/add")
 	@ResponseBody
@@ -92,6 +95,7 @@ public class EntrustController extends BaseFilter{
 		Map map = new HashMap();
 		try {
 			record.setAssignedTime(MidlandHelper.getCurrentTime());
+			record.setEntrustType(Contant.ENTRUST_SALE);
 			entrustServiceImpl.insertEntrust(record);
 			if (StringUtils.isNotEmpty(record.getAgentPhone() )){//发送短信
 				List<String> list = new ArrayList<>();;
@@ -142,6 +146,7 @@ public class EntrustController extends BaseFilter{
 			pageSize = ContextEnums.PAGESIZE;
 		}
 		User user =MidlandHelper.getCurrentUser(request);
+		record.setEntrustType(Contant.ENTRUST_SALE);
 		record.setCityId(user.getCityId());
 		PageHelper.startPage(Integer.valueOf(pageNo),Integer.valueOf(pageSize));
 		Page<Entrust> result =(Page<Entrust>) entrustServiceImpl.findEntrustList(record);
@@ -149,7 +154,7 @@ public class EntrustController extends BaseFilter{
 		getSelectParam(model);
 		model.addAttribute("paginator", paginator);
 		model.addAttribute("entrusts", result);
-		return "entrust/entrustList";
+		return "entrustSale/entrustList";
 	}
 	
 
@@ -162,7 +167,7 @@ public class EntrustController extends BaseFilter{
 		getSelectParam(model);
 		model.addAttribute("entrust",entrust);
 		model.addAttribute("entrustLogs",entrustLogs);
-		return "entrust/updateEntrust";
+		return "entrustSale/updateEntrust";
 	}
 	
 	

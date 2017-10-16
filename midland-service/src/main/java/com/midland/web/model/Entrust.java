@@ -126,8 +126,40 @@ public class Entrust{
 	 * 分配经纪人时间
 	 **/
 	private String assignedTime;
+	/**
+	 * 房屋朝向,0东，1东南，2南，3西南，4西，5西北，6北，7东北
+	 **/
+	private String turned;
+	/**
+	 * 建造年份
+	 **/
+	private String buildYear;
+	/**
+	 * 所属层
+	 **/
+	private String theLayer;
+	/**
+	 *
+	 **/
+	private String totalLayer;
+	/**
+	 * 其它特色，0满五，1唯一，2精装，3地铁房
+	 **/
+	private String otherItem;
+	/**
+	 * 备注
+	 */
+	private String remark;
 	private String startTime;
 	private String endTime;
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 
 	public String getStartTime() {
 		return startTime;
@@ -393,9 +425,49 @@ public class Entrust{
 		this.assignedTime = assignedTime;
 	}
 
+	public String getTurned() {
+		return turned;
+	}
+
+	public void setTurned(String turned) {
+		this.turned = turned;
+	}
+
+	public String getBuildYear() {
+		return buildYear;
+	}
+
+	public void setBuildYear(String buildYear) {
+		this.buildYear = buildYear;
+	}
+
+	public String getTheLayer() {
+		return theLayer;
+	}
+
+	public void setTheLayer(String theLayer) {
+		this.theLayer = theLayer;
+	}
+
+	public String getTotalLayer() {
+		return totalLayer;
+	}
+
+	public void setTotalLayer(String totalLayer) {
+		this.totalLayer = totalLayer;
+	}
+
+	public String getOtherItem() {
+		return otherItem;
+	}
+
+	public void setOtherItem(String otherItem) {
+		this.otherItem = otherItem;
+	}
+
 	@Override
 	public String toString() {
-		 final StringBuffer sb=new StringBuffer("Entrust{");
+		final StringBuffer sb=new StringBuffer("Entrust{");
 		if (id != null) {
 			sb.append(", \"id\":\"").append(id).append("\"");
 		}
@@ -488,6 +560,21 @@ public class Entrust{
 		}
 		if (assignedTime != null) {
 			sb.append(", \"assignedTime\":\"").append(assignedTime).append("\"");
+		}
+		if (turned != null) {
+			sb.append(", \"turned\":\"").append(turned).append("\"");
+		}
+		if (buildYear != null) {
+			sb.append(", \"buildYear\":\"").append(buildYear).append("\"");
+		}
+		if (theLayer != null) {
+			sb.append(", \"theLayer\":\"").append(theLayer).append("\"");
+		}
+		if (totalLayer != null) {
+			sb.append(", \"totalLayer\":\"").append(totalLayer).append("\"");
+		}
+		if (otherItem != null) {
+			sb.append(", \"otherItem\":\"").append(otherItem).append("\"");
 		}
 		sb.append("}");
 		return sb.toString();

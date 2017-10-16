@@ -63,7 +63,10 @@
 					<option value="3">成交金额</option>
 				</select>
 			</li>
-			<li><input class="public_btn bg1" type="submit" name="inquery" id="inquery" value="查询"/></li>
+			<li><input class="public_btn bg1" type="submit" name="inquery" id="inquery" value="查询"/>
+				<a class="setup"  href="${ctx}/rest/quotation/index" target="contentF">返回</a></li>
+
+			</li>
 		</ul>
 
 
