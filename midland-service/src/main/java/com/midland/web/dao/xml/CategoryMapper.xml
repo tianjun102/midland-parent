@@ -14,10 +14,11 @@
 		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
 		<result column="cate_desc" property="cateDesc" jdbcType="VARCHAR" />
 		<result column="is_show" property="isShow" jdbcType="VARCHAR" />
+		<result column="source" property="source" jdbcType="INTEGER" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,cate_name,status,order_by,parent_id,type,is_delete,city_id,city_name,cate_desc,is_show
+		id,cate_name,status,order_by,parent_id,type,is_delete,city_id,city_name,cate_desc,is_show,source
 	</sql>
 
 	<select id="selectCategoryById" resultMap="BaseResultMap">
@@ -83,6 +84,9 @@
 			<if test="isShow != null">
 				is_show,
 			</if>
+			<if test="source != null">
+				source,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -115,6 +119,9 @@
 			 </if>
 			 <if test="isShow != null">
 				 #{isShow},
+			 </if>
+			 <if test="source != null">
+				 #{source},
 			 </if>
 		</trim>
 	</insert>
@@ -149,6 +156,9 @@
 		</if>
 		<if test="isShow != null">
 			is_show= #{isShow},
+		</if>
+		<if test="source != null">
+			source= #{source},
 		</if>
 	</sql>
 
@@ -185,6 +195,9 @@
 		</if>
 		<if test="isShow != null">
 			and is_show= #{isShow}
+		</if>
+		<if test="source != null">
+			and source= #{source}
 		</if>
 	</sql>
 
@@ -244,6 +257,9 @@
 		</if>
 		<if test="isShow != null">
 			and b.is_show= #{isShow}
+		</if>
+		<if test="source != null">
+			and b.source= #{source}
 		</if>
 		ORDER BY b.order_by ASC
 	</select>

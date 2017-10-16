@@ -42,7 +42,7 @@
                         <input type="hidden" id="id" value="${item.id}"/>
                         <td>${xh.count }</td>
                         <td>${item.cityName }</td>
-                        <td><img src="${item.iconImg }" style="width:40px;height:40px" alt=""></td>
+                        <td> <c:if test="${not empty item.iconImg }"><img src="${item.iconImg }" style="width:40px;height:40px" alt=""></c:if></td>
                         <td> <c:if test="${item.source ==0 }">网站</c:if>
                             <c:if test="${item.source ==1 }">微站</c:if></td>
                         <td>${item.menuName }</td>

@@ -71,6 +71,8 @@ public class SpecialPage{
 	 **/
 	private Integer isShow;
 
+	private String detailsUrl;
+
 
 	public Integer getId() {
 		return id;
@@ -206,6 +208,15 @@ public class SpecialPage{
 
 	public void setIsShow(Integer isShow) {
 		this.isShow = isShow;
+	}
+
+
+	public String getDetailsUrl() {
+		return detailsUrl;
+	}
+
+	public void setDetailsUrl(String detailsUrl) {
+		this.detailsUrl = detailsUrl;
 	}
 
 	@Override

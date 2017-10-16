@@ -67,7 +67,7 @@
                 skin: 'layer-style',
                 area: ['500px','350px'],
                 shadeClose: false, //点击遮罩关闭
-                title:['新增'],
+                title:['新增热搜词'],
                 resize: false,
                 scrollbar:false,
                 content:['${ctx}/rest/hotSearch/to_add', 'no']

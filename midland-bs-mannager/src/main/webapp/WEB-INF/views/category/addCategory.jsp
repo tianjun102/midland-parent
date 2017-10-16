@@ -78,13 +78,13 @@
                     </c:forEach>
                 </select><div style = "font-size:12px; color:#afadad;text-indent: 70px;">(不选择城市则默认全部)</div>
             </li>
-            <%--<li>
-                <span style = "float:left;">类型：</span>
-                <select name="type" id="type" class="dropdown">
-                    <option value="0">市场调研分类</option>
-                    <option value="1">资讯分类</option>
+            <li>
+                <span style = "float:left;">平台：</span>
+                <select name="source" id="source" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <option value="0">网站</option>
+                    <option value="1">微站</option>
                 </select>
-            </li>--%>
+            </li>
             <li><span>父节点：</span><input name="parentName" onclick="showTree()" readonly="readonly"/>
                 <input name="parentId" type="hidden"/>
                 <div style = "font-size:12px; color:#afadad;text-indent: 70px;">(不选父分类则默认一级分类)</div>

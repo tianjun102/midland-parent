@@ -96,11 +96,11 @@
     }
 
     function setCityName(){
-        $("#cityName").val($("#cityId option:selected").text())
+        $("#cityName").val($("#cityId option:selected").text());
     }
 
     function setMenuName(){
-        $("#menuName").val($("#menuId option:selected").text())
+        $("#menuName").val($("#menuId option:selected").text());
     }
 
 </script>
