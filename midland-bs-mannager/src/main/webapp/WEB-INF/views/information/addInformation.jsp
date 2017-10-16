@@ -42,6 +42,9 @@
         top:260px!important;
     }
 
+    .content ul.adminfo li:last-child>a:not(:nth-child(2)) {
+        margin-left: 0px!important;
+    }
 
 </style>
 <div class="box">
