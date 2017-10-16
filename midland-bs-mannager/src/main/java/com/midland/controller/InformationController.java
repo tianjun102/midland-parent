@@ -53,7 +53,7 @@ public class InformationController extends BaseFilter {
 	public String informationIndex(Information information, Model model,HttpServletRequest request) throws Exception {
 		Category cate1 = new Category();
 		//查询资讯分类
-		cate1.setType(0);
+		cate1.setType(1);
 		String result = getCategoryTree("",cate1);
 		if(StringUtils.isNotEmpty(result)){
 			model.addAttribute("categoryData",result );
