@@ -58,7 +58,7 @@
 
 
 <section class="content" style="border:none;">
-    <form action="${ctx}/rest/appoint/update" method="post" id="appointInfoForm">
+    <form action="${ctx}/rest//entrust/rentOut/update" method="post" id="appointInfoForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${entrust.id}">
             <input type="hidden" name="resetFlag" id="resetFlag" value="1">
@@ -221,7 +221,7 @@
 
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/entrust/add",
+            url: "${ctx}/rest/entrust/rentOut/add",
             async: false, // 此处必须同步
             dataType: "json",
             data: data,
