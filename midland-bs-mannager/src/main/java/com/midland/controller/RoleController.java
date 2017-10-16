@@ -96,13 +96,13 @@ public class RoleController extends BaseFilter {
 	 */
 	@RequestMapping(value = "/addRole", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public String addRole(Role role){
+	public Object addRole(Role role){
 		Map<String, Object> map = new HashMap<String, Object>();
     	map.put("flag", 0);
 		if(roleService.insert(role)>0){
 			map.put("flag",1);
 		}
-		return JSONObject.toJSONString(map);
+		return map;
 	}
 
 	/**
@@ -160,14 +160,14 @@ public class RoleController extends BaseFilter {
 	 */
 	@RequestMapping(value = "/saveRoleUser", method = {RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
-	public String saveRoleUser(Integer roleId,String userIds){
+	public Object saveRoleUser(Integer roleId,String userIds){
 		Map<String, Object> map = new HashMap<String, Object>();
     	map.put("flag", 0);
     	int n=roleService.updateRoleUser(roleId,userIds);
     	if(n>0){
     		map.put("flag", 1);
     	}
-    	return JSONObject.toJSONString(map);
+    	return map;
 	}
 
 	/**
@@ -177,13 +177,13 @@ public class RoleController extends BaseFilter {
 	 */
 	@RequestMapping(value = "/editRole", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public String updateRole(Role role){
+	public Object updateRole(Role role){
 		Map<String, Object> map = new HashMap<String, Object>();
     	map.put("flag", 0);
     	if(roleService.modifyRole(role)>0){
     		map.put("flag", 1);
     	}
-    	return JSONObject.toJSONString(map);
+    	return map;
 	}
 
 	/**
@@ -193,7 +193,7 @@ public class RoleController extends BaseFilter {
 	 */
 	@RequestMapping(value = "/deleteRole", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public String deleteRole(Integer roleId){
+	public Object deleteRole(Integer roleId){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("flag", 0);
 		Role role=new Role();
@@ -202,7 +202,7 @@ public class RoleController extends BaseFilter {
 		if(roleService.update(role)>0){
 			map.put("flag",1);
 		}
-		return JSONObject.toJSONString(map);
+		return map;
 	}
 
 	/**
@@ -212,7 +212,7 @@ public class RoleController extends BaseFilter {
 	 */
 	@RequestMapping(value = "/checkRoleUnique", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public String checkRoleUnique(Role role){
+	public Object checkRoleUnique(Role role){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("flag", 1);
 
@@ -222,7 +222,7 @@ public class RoleController extends BaseFilter {
 				map.put("flag", 0);
 			}
 		}
-		return JSONObject.toJSONString(map);
+		return map;
 	}
 
 	
