@@ -163,7 +163,7 @@ public class LiaisonRecordController extends BaseFilter {
 			exportModel.setModelName6(liaisonRecord1.getAddTime());
 			exportModels.add(exportModel);
 		}
-		PoiExcelExport pee = new PoiExcelExport(response,"联络管理","sheet1");
+		PoiExcelExport pee = new PoiExcelExport(response,"联络记录","sheet1");
 		//调用
 		String titleColumn[] = {"modelName1","modelName2","modelName3","modelName4","modelName5","modelName6"};
 		String titleName[] = {"姓名","电话","邮箱","分类","留言","提交时间"};

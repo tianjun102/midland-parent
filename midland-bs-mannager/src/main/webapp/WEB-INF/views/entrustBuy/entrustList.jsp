@@ -52,7 +52,7 @@
                     <tr>
                         <td>${item.entrustSn }</td>
                         <td>${item.areaName }</td>
-                        <td><c:forEach items="${renovations}" var="s">
+                        <td><c:forEach items="${decorations}" var="s">
                             <c:if test="${item.renovation == s.id}">${s.name}</c:if>
                         </c:forEach></td>
 

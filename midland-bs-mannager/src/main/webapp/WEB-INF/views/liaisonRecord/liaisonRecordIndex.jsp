@@ -22,7 +22,7 @@
 		<form action="${ctx }/rest/liaisonRecord/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
-				<li><span>分类：</span>
+				<li><span>主旨：</span>
 					<select name="category" id="category" class="dropdown">
 						<option value="" >全部</option>
 						<c:forEach items="${categorys}" var="item">

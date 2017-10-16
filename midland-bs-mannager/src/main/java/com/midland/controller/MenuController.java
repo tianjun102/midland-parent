@@ -2,6 +2,7 @@ package com.midland.controller;
 
 import com.midland.web.model.Area;
 import com.midland.web.model.Menu;
+import com.midland.web.model.temp.ListDescOtherParam;
 import com.midland.web.model.user.User;
 import com.midland.web.service.JdbcService;
 import com.midland.web.service.MenuService;
@@ -170,12 +171,22 @@ public class MenuController extends BaseFilter  {
 		String primaryParam=String.valueOf(menu.getId());
 		String tableName="menu";
 		String orderByColumn="order_by";
+		ListDescOtherParam obj = new ListDescOtherParam();
+		if (StringUtils.isNotEmpty(menu.getCityId())) {
+			obj.setCityId(menu.getCityId());
+		}else{
+			User currUser = MidlandHelper.getCurrentUser(request);
+			obj.setCityId(currUser.getCityId());
+		}
+		obj.setType(null);
+		obj.setSource(menu.getSource());
 		String orderByParam=String.valueOf(menu.getOrderBy());
 		Map map = new HashMap();
 		try {
-			jdbcService.listDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,sort);
+			jdbcService.menuListDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,obj,sort);
 			map.put("state",0);
 		} catch (Exception e) {
+			log.error("",e);
 			map.put("state",-1);
 		}
 		return map;

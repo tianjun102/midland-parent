@@ -17,7 +17,7 @@
 				<th style="width: 8%">姓名</th>
 				<th style="width: 8%">电话</th>
                 <th style="width: 8%">邮箱</th>
-                <th style="width: 8%">分类</th>
+                <th style="width: 8%">主旨</th>
 				<th style="width: 8%">留言</th>
 				<th style="width: 8%">提交时间</th>
                 <%--<th style="width: 10%">操作</th>--%>

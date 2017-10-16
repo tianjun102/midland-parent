@@ -26,7 +26,7 @@ public class MidlandTask {
 	@Autowired
 	private EntrustService entrustServiceImpl;
 	
-	//委托看房，经纪人重新分配规则，24小时内状态没有修改，发送短信给经纪人及其领导，48小时后没有处理，则关闭此预约，并发送给有指定邮箱
+	//预约看房，经纪人重新分配规则，24小时内状态没有修改，发送短信给经纪人及其领导，48小时后没有处理，则关闭此预约，并发送给有指定邮箱
 	@Scheduled(fixedRate = 3600000)
 	public void scanAppointment() {
 		try {
@@ -58,6 +58,7 @@ public class MidlandTask {
 					if (appointment1.getFlag() == 0) {
 						Appointment appoint = new Appointment();
 						appoint.setFlag(1);//标记为已通知，不需要再次通知
+						appoint.setResetFlag(1);//标记为展示
 						appoint.setId(appointment1.getId());
 						appointmentServiceImpl.updateAppointmentById(appoint);
 						// TODO: 2017/9/19  发送短信给经纪人及其领导，
@@ -102,36 +103,36 @@ public class MidlandTask {
 		}
 	}
 	
-	@Scheduled(fixedRate = 3600000)
-	public void appointReset(){
-		try {
-			Appointment temp = new Appointment();
-			temp.setStatus(0);//
-			temp.setResetFlag(0);//
-			List<Appointment> lists = appointmentServiceImpl.findAppointmentList(temp);
-			for (Appointment appointment1 : lists) {
-				String time = appointment1.getAssignedTime();
-				Date assignTime = MidlandHelper.stringToDate(time);
-				Date date = new Date();
-				Calendar calendar = Calendar.getInstance();
-				calendar.setTime(date);
-				
-				calendar.add(calendar.HOUR, -24);
-				Date time_24 = calendar.getTime();
-				if (time_24.getTime() > assignTime.getTime()) {
-					
-					Appointment app = new Appointment();
-					app.setResetFlag(1);//标记为展示
-					app.setId(appointment1.getId());
-					app.setEntrustTime(null);
-					appointmentServiceImpl.updateAppointmentById(app);
-					
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	@Scheduled(fixedRate = 3600000)
+//	public void appointReset(){
+//		try {
+//			Appointment temp = new Appointment();
+//			temp.setStatus(0);//
+//			temp.setResetFlag(0);//
+//			List<Appointment> lists = appointmentServiceImpl.findAppointmentList(temp);
+//			for (Appointment appointment1 : lists) {
+//				String time = appointment1.getAssignedTime();
+//				Date assignTime = MidlandHelper.stringToDate(time);
+//				Date date = new Date();
+//				Calendar calendar = Calendar.getInstance();
+//				calendar.setTime(date);
+//
+//				calendar.add(calendar.HOUR, -24);
+//				Date time_24 = calendar.getTime();
+//				if (time_24.getTime() > assignTime.getTime()) {
+//
+//					Appointment app = new Appointment();
+//					app.setResetFlag(1);//标记为展示
+//					app.setId(appointment1.getId());
+//					app.setEntrustTime(null);
+//					appointmentServiceImpl.updateAppointmentById(app);
+//
+//				}
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 	
 }
