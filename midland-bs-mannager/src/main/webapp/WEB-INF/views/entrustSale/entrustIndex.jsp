@@ -32,7 +32,7 @@
 				<span>委托记录列表</span>
 				<a class = "setup"  target="contentF" onclick="addEntrust()">新增</a>
 			</p>
-		<form action="${ctx }/rest/entrust/page" method="POST" id="searchForm"
+		<form action="${ctx }/rest/entrust/sale/page" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
 				<li><span>小区名：</span><input type="text" name="communityName" id="communityName" placeholder="请输入小区名" /></li>
@@ -95,7 +95,7 @@
                 title:['委托'],
                 resize: false,
                 scrollbar:false,
-                content:['${ctx}/rest/entrust/to_add', 'no']
+                content:['${ctx}/rest/entrust/sale/to_add', 'no']
             });
         }
 
@@ -103,7 +103,7 @@
         function export1(){
             var data = $("#searchForm").serialize();
 
-            window.location.href="${ctx}/rest/entrust/export?"+data;
+            window.location.href="${ctx}/rest/entrust/sale/export?"+data;
         }
 		 window.onload = function(){
              $('#searchForm').submit();

@@ -58,7 +58,7 @@
 
 
 <section class="content" style="border:none;">
-    <form action="${ctx}/rest/entrust/rentIn/update" method="post" id="appointInfoForm">
+    <form action="${ctx}/rest/entrust/rentIn/add" method="post" id="appointInfoForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${entrust.id}">
             <input type="hidden" name="resetFlag" id="resetFlag" value="1">
@@ -217,7 +217,7 @@
             ||!checkPhone('','phone','')){
             return;
         }
-        var data = $("#appointInfoForm").serialize();
+        var data = $("#addEntrustRentInForm").serialize();
 
         $.ajax({
             type: "post",

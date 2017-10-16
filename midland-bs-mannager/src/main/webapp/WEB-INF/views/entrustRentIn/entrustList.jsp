@@ -113,7 +113,7 @@
 
     function toRedistribute(id) {
         //重新分配经纪人时，保存的地址
-        var url = "${ctx}/rest/entrust/rentIn/reset_agent";
+        var url = "${ctx}/rest/entrust/reset_agent";
         layer.open({
             type: 2,
             title: ['重新分配经纪人'],
@@ -169,7 +169,7 @@
             title: ['委托详情'],
             shade: 0.3,
             area: ['1000px', '700px'],
-            content: ['${ctx}/rest/entrust/to_update?entrustId=' + appointId , 'no']
+            content: ['${ctx}/rest/entrust/rentIn/to_update?entrustId=' + appointId , 'no']
         });
     }
 </script>

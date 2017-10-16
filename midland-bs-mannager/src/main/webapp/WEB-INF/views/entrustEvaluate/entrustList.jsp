@@ -137,7 +137,7 @@
             yes: function(index){
                 $.ajax({
                     type: "post",
-                    url: "${ctx}/rest/entrust/update?id="+id+"&isDelete=1",
+                    url: "${ctx}/rest/entrust/evaluate/update?id="+id+"&isDelete=1",
                     cache:false,
                     async:false, // 此处必须同步
                     dataType: "json",
@@ -167,7 +167,7 @@
             title: ['委托详情'],
             shade: 0.3,
             area: ['1000px', '700px'],
-            content: ['${ctx}/rest/entrust/to_update?entrustId=' + appointId , 'no']
+            content: ['${ctx}/rest/entrust/evaluate/to_update?entrustId=' + appointId , 'no']
         });
     }
 </script>
