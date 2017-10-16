@@ -62,55 +62,33 @@
     <form action="${ctx}/rest/entrust/buy/update" method="post" id="appointInfoForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${entrust.id}">
-            <li class="col-md-6"><span>预约编号：</span><input type="text" name="entrustSn" id="entrustSn" disabled="disabled"
+            <li class="col-md-6"><span>委托编号：</span><input type="text" name="entrustSn" id="entrustSn" disabled="disabled"
                                                           value="${entrust.entrustSn}"/>
             </li>
             <li class="col-md-6"><span>委托时间：</span><input type="text" name="entrustTime" id="entrustTime" disabled="disabled"
                                                           value="${entrust.entrustTime}" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" maxlength="50"/><span
                     class="_star">*</span>
             </li>
-            <li class="col-md-6"><span>委托人：</span><input type="text" name="nickName" id="nickName"  onblur="notEmpty('nickName','nickName','')"
+            <li class="col-md-6"><span>联系人：</span><input type="text" name="nickName" id="nickName"  onblur="notEmpty('nickName','nickName','')"
                                                         value="${entrust.nickName}"/>
             </li>
             <li class="col-md-6"><span>手机号码：</span><input type="text" name="phone" id="phone" onblur="checkPhone('','phone','')"
                                                           value="${entrust.phone}"
                                                           maxlength="50"/><span class="_star">*</span></li>
-            <li class="col-md-6"><span>分类：</span>
-                <select name="sellRent" id="sellRent" class="dropdown">
-                    <c:forEach items="${sellRents}" var="s">
-                        <option value="${s.id}" <c:if test="${s.id==entrust.sellRent}">selected</c:if>>
-                                ${s.name}
-                        </option>
-                    </c:forEach>
-                </select>
-                <span class="_star">*</span>
+
+            <li class="col-md-6"><span>意向区域：</span><input type="text" name="areaName" id="areaName"  onblur="notEmpty('areaName','areaName','')" value="${entrust.areaName}"/>
             </li>
-
-            <li class="col-md-6"><span>委托类型：</span>
-                <select name="houseType" id="houseType" class="dropdown">
-
-                    <c:forEach items="${houses}" var="s">
-                        <option value="${s.id}" <c:if test="${s.id==entrust.houseType}">selected</c:if>>
-                                ${s.name}
-                        </option>
-                    </c:forEach>
-
-                </select>
-            </li>
-
-            <li class="col-md-6"><span>区域：</span><input type="text" name="areaName" id="areaName"  onblur="notEmpty('areaName','areaName','')" value="${entrust.areaName}"/>
-            </li>
-            <li class="col-md-6"><span>小区：</span><input type="text" name="communityName" id="communityName"  onblur="notEmpty('communityName','communityName','')"
+            <li class="col-md-6"><span>意向小区：</span><input type="text" name="communityName" id="communityName"  onblur="notEmpty('communityName','communityName','')"
                                                         value="${entrust.communityName}" maxlength="50"/><span
                     class="_star">*</span></li>
-            <li class="col-md-6"><span>地址：</span><input type="text" name="address" id="address"  onblur="notEmpty('address','address','')"
-                                                        value="${entrust.address}"/>
+
             </li>
-            <li class="col-md-6"><span>户型：</span><input type="text" name="layout" id="layout"  onblur="notEmpty('layout','layout','')"
+
+            <li class="col-md-6"><span>意向户型：</span><input type="text" name="layout" id="layout"  onblur="notEmpty('layout','layout','')"
                                                         value="${entrust.layout}"/>
 
             </li>
-            <li class="col-md-6"><span>面积：</span><input type="text" name="measure" id="measure"  onblur="notEmpty('measure','measure','');InitInput.setNumber(this,9,2,2)"
+            <li class="col-md-6"><span>意向面积：</span><input type="text" name="measure" id="measure"  onblur="notEmpty('measure','measure','');InitInput.setNumber(this,9,2,2)"
                                                         value="${entrust.measure}"
                                                         maxlength="50"/>㎡<span class="_star">*</span></li>
             <li class="col-md-6"><span>装修：</span>
@@ -125,27 +103,7 @@
                 </select>
 
             </li>
-            <li class="col-md-6"><span>配套：</span>
-                <div class="peitao">
-                    <span><input onchange="lick(this,'household')"  type="checkbox"
-                                 <c:if test="${entrust.household == 1}">checked</c:if> ><em>带家电</em>
-                        <input type="hidden" name="household" id="household" value="${entrust.household}">
-                    </span>
-                    <span><input onchange="lick(this,'broadband')"  type="checkbox"
-                                 <c:if test="${entrust.broadband == 1}">checked</c:if> ><em>宽带</em>
-                    <input type="hidden" name="broadband" id="broadband" value="${entrust.broadband}">
-                    </span>
-                    <span><input onchange="lick(this,'fridge')"  type="checkbox"
-                                 <c:if test="${entrust.fridge == 1}">checked</c:if> ><em>冰箱</em>
 
-                    <input type="hidden" name="fridge" id="fridge" value="${entrust.fridge}">
-                    </span>
-                    <span><input onchange="lick(this,'washingMachine')"  type="checkbox"
-                                 <c:if test="${entrust.washingMachine == 1}">checked</c:if> ><em>洗衣机</em>
-                    <input type="hidden" name="washingMachine" id="washingMachine" value="${entrust.washingMachine}">
-                    </span>
-                </div>
-            </li>
             <li class="col-md-6"><span>状态：</span>
                 <select name="status" id="status" class="dropdown">
 
@@ -157,6 +115,8 @@
 
                 </select>
             </li>
+
+
             <li class="col-md-11"><span>备注：</span>
                 <textarea name="remark" id="remark"
                           style="width:calc(100% - 120px);height:50px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;"></textarea>

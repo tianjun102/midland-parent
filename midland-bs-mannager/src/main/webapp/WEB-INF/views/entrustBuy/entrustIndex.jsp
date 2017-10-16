@@ -36,19 +36,8 @@
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
 				<li><span>小区名：</span><input type="text" name="communityName" id="communityName" placeholder="请输入小区名" /></li>
-				<li><span>委托人：</span><input type="text" name="nickName" id="nickName" placeholder="请输入委托人" /></li>
+				<li><span>联系人：</span><input type="text" name="nickName" id="nickName" placeholder="请输入联系人" /></li>
 				<li><span>手机号码：</span><input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>
-				<li>
-					<span>分类：</span>
-					<select name="sellRent" id="sellRent" class="dropdown">
-						<option value="">全部</option>
-						<c:forEach items="${sellRents}" var="s" >
-							<option value="${s.id}">
-									${s.name}
-							</option>
-						</c:forEach>
-					</select>
-				</li>
 				<li><span>状态：</span>
 					<select name="status" id="status" class="dropdown">
 						<option value="">全部</option>
