@@ -38,7 +38,6 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				<col width="7%" >
 				<col width="7%" >
 				<col width="7%" >
-				<col width="10%" >
 				<col width="15%" >
 				<col width="15%" >
 				<col width="6%" >
@@ -51,7 +50,6 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							<th>平台</th>
 							<th>模块</th>
 							<th>位置</th>
-							<th>编号</th>
 							<th>上线时间</th>
 							<th>下线时间</th>
 							<th>点击量</th>
@@ -78,7 +76,6 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 								<c:if test="${banner.position==2}">位置三</c:if>
 								<c:if test="${banner.position==3}">位置四</c:if>
 							</td>
-							<td>${banner.id}</td>
 							<td>${banner.startTime}</td>
 							<td>${banner.endTime}</td>
 							<td>${banner.clikNum}</td>
