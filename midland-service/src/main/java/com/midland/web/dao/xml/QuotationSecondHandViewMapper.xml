@@ -4,7 +4,6 @@
 
     <resultMap id="BaseResultMap" type="com.midland.web.model.QuotationSecondHandView">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="ring_ratio" property="ringRatio" jdbcType="VARCHAR"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
         <result column="is_delete" property="isDelete" jdbcType="INTEGER"/>
         <result column="city_name" property="cityName" jdbcType="VARCHAR"/>
@@ -21,11 +20,13 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-		id,data_time,type,city_id,area_id,deal_num,deal_acreage,pre_num,pre_acreage
+		id,DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s')update_time,is_delete,city_name,area_name,slice_name,data_time,type,city_id,area_id,deal_num,deal_acreage,pre_num,pre_acreage
 	</sql>
 
     <select id="toolTip" parameterType="com.midland.web.model.QuotationSecondHandView" resultMap="BaseResultMap">
-        SELECT * from quotation_second_hand_view
+        SELECT
+        <include refid="Base_Column_List" />
+        from quotation_second_hand_view
         where 1=1
         <include refid="select_option" />
     </select>
