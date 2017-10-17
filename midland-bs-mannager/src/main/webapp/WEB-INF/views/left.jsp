@@ -140,6 +140,7 @@
 						<shiro:hasPermission name="filmLibraryList">
 							<a id = "enterPromotionIndex" href="${ctx}/rest/filmLibrary/index" target="contentF"><span>片库管理</span></a>
 						</shiro:hasPermission>
+
 					</dd>
 				</dl>
 			</shiro:hasPermission>
@@ -362,6 +363,9 @@
 
 					<shiro:hasPermission name="siteMapCate">
 						<a id = "feedbackIndex" href="${ctx}/rest/category/index?type=4" target="contentF"><span>网站地图分类管理</span></a>
+					</shiro:hasPermission>
+					<shiro:hasPermission name="siteMapCate">
+						<a id = "feedbackIndex" href="${ctx}/rest/setting/time/index" target="contentF"><span>经纪人响应时间</span></a>
 					</shiro:hasPermission>
 
 						<a id = "system7" href="${ctx}/rest/user/toModifyPwdPage" target="contentF"><span>修改密码</span></a>

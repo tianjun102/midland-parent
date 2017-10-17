@@ -7,4 +7,8 @@ public interface RedisService {
 	void setAnswerAuditFlag(int value);
 	
 	Integer getAnswerAuditFlag();
+
+	Integer getValue(String key);
+
+	void setValue(String key, Integer value);
 }

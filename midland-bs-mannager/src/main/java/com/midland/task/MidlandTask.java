@@ -25,7 +25,8 @@ public class MidlandTask {
 	private AppointmentService appointmentServiceImpl;
 	@Autowired
 	private EntrustService entrustServiceImpl;
-	
+	@Autowired
+	private TaskConfig taskConfig;
 	//预约看房，经纪人重新分配规则，24小时内状态没有修改，发送短信给经纪人及其领导，48小时后没有处理，则关闭此预约，并发送给有指定邮箱
 	@Scheduled(fixedRate = 3600000)
 	public void scanAppointment() {
@@ -40,10 +41,10 @@ public class MidlandTask {
 				Calendar calendar = Calendar.getInstance();
 				calendar.setTime(date);
 				//后退48小时；current-48;
-				calendar.add(Calendar.HOUR, -48);
+				calendar.add(Calendar.HOUR, -taskConfig.getAppointClose());
 				Date time_48 = calendar.getTime();
 				//后退24小时；current-48+24;
-				calendar.add(calendar.HOUR, 24);
+				calendar.add(calendar.HOUR, taskConfig.getAppointmentWarn());
 				Date time_24 = calendar.getTime();
 				if (time_48.getTime() > appointTime.getTime()) {
 					//超过48小时,48小时后没有处理，则关闭此预约，并发送给有指定邮箱

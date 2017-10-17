@@ -17,10 +17,12 @@ public class RedisServiceImpl implements RedisService {
 	
 	@Override
 	public void setAnswerAuditFlag(int value){
+
 		baseRedisTemplate.saveValue(Contant.answerAuditKey,value);
 	}
 	@Override
 	public Integer getAnswerAuditFlag(){
+
 		Integer result = (Integer)baseRedisTemplate.getValueByKey(Contant.answerAuditKey);
 		if (result == null){
 			//如果没有获取到值，说明还未设置，直接设置为“未开启”
@@ -29,4 +31,15 @@ public class RedisServiceImpl implements RedisService {
 		}
 		return result;
 	}
+
+	@Override
+	public Integer getValue(String key){
+		return  (Integer)baseRedisTemplate.getValueByKey(key);
+	}
+
+	@Override
+	public void setValue(String key,Integer value){
+		baseRedisTemplate.saveValue(key,value);
+	}
+
 }
