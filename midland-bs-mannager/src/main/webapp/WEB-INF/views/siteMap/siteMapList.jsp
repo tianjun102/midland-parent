@@ -15,10 +15,10 @@
         <thead>
             <tr>
 				<th style="width: 10%">序号</th>
-				<th style="width: 10%">模块名称</th>
+				<%--<th style="width: 10%">模块名称</th>--%>
 				<th style="width: 10%">城市</th>
-				<th style="width: 10%">分类</th>
-                <th style="width: 40%">操作</th>
+				<th style="width: 10%">模块名称</th>
+                <th style="width: 20%">操作</th>
             </tr>
         </thead>
         <tbody>
@@ -28,7 +28,7 @@
                     <tr>
 						<input type="hidden" id="id" value="${item.id}"/>
 						<td>${xh.count}</td>
-						<td>${item.modeName}</td>
+						<%--<td>${item.modeName}</td>--%>
 						<td>${item.cityName}</td>
 						<td>${item.cateName}</td>
 						<td>

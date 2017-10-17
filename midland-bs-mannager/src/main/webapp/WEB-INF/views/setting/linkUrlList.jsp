@@ -117,7 +117,7 @@ function takeblacklist(userId){
 			  skin: 'layer-style',
 			  area: ['350px','200px'],
 			  shadeClose: false, //点击遮罩关闭
-			  title:['删除热门关注'],
+			  title:['删除友情链接'],
 			  resize: false,
 			  scrollbar:false,
 			  content:
