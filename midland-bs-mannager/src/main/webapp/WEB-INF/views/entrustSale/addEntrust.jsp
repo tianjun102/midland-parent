@@ -72,7 +72,7 @@
             <li class="col-md-6"><span>委托人：</span><input type="text" name="nickName" id="nickName" onblur="notEmpty('nickName','nickName','')"
                                                         value="${entrust.nickName}"/>
             </li>
-            <li class="col-md-6"><span>来源：</span>
+            <li class="col-md-6"><span>平台：</span>
                 <select name="source" id="source" class="dropdown">
                 <c:forEach items="${sources}" var="s">
                     <option value="${s.id}">

@@ -8,7 +8,7 @@ public class Questions {
      */
     private String questionsTitle;
     /**
-     * 来源
+     * 平台
      */
     private Integer source;
     /**

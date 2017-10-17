@@ -17,7 +17,7 @@
 				<th style="width: 20%">评论</th>
 				<th style="width: 8%">用户</th>
 				<th style="width: 8%">状态</th>
-				<th style="width: 8%">来源</th>
+				<th style="width: 8%">平台</th>
                 <th style="width: 10%">操作</th>
             </tr>
         </thead>

@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 
 @Component
+@SuppressWarnings("all")
 public class BaseRedisTemplate<V, HK> implements IBaseRedisTemplate<V, HK> {
 
 	@Autowired

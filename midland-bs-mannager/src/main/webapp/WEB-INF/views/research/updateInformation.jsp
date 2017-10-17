@@ -134,7 +134,7 @@
                     <span>标题：</span>
                     <input type="text" id="title" name="title" value="${item.title}" />
                 </li>
-                <li><span>来源：</span><input name="source" id="source" type="text" value="${item.source}" />
+                <li><span>平台：</span><input name="source" id="source" type="text" value="${item.source}" />
                 </li>
                 <li><span>附件：</span>
                     <div style="float: left;">

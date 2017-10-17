@@ -18,7 +18,7 @@
 				<th style="width: 8%">手机号</th>
 				<th style="width: 8%">反馈内容</th>
 				<th style="width: 8%">反馈时间</th>
-                <th style="width: 8%">来源</th>
+                <th style="width: 8%">平台</th>
                 <th style="width: 10%">操作</th>
             </tr>
         </thead>

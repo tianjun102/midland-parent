@@ -37,7 +37,7 @@
 				<li><span>昵称：</span><input type="text" name="username" id="username" placeholder="请输入用户名" /></li>
 				<li><span>手机号码：</span><input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>
 				<li><span>实名状态：</span><input type="text" name="auditStatus" id="auditStatus" placeholder="请输入实名状态" /></li>
-				<li><span>注册来源：</span>
+				<li><span>平台：</span>
 					<select name="source" id="source" class="dropdown">
 						<option value="" >请选择</option>
 						<c:forEach items="${sources}" var="s">

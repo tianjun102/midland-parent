@@ -164,7 +164,7 @@ public class FeedbackController extends BaseFilter {
 			exportModels.add(exportModel);
 		}
 		String titleColumn[] = {"modelName1","modelName2","modelName3","modelName4","modelName5"};
-		String titleName[] = {"用户昵称","手机号码","来源","反馈类容","反馈时间"};
+		String titleName[] = {"用户昵称","手机号码","平台","反馈类容","反馈时间"};
 		int titleSize[] = {13,13,13,13,20};
 		//其他设置 set方法可全不调用
 		pee.wirteExcel(titleColumn, titleName, titleSize, exportModels,request);

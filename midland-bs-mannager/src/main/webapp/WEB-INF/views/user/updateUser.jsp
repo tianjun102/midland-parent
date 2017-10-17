@@ -17,7 +17,7 @@
 			<li><span>用户名：</span><input style = "width:264px;" type="text" name="username" disabled="true" id="username" value="${user.username}" onblur="checkUserName();" maxlength="50"/><span class="_star">*</span></li>
 			<li><span>用户名称：</span><input style = "width:264px;" type="text" name="userCnName" id="userCnName" value="${user.userCnName}" maxlength="50"/><span class="_star">*</span></li>
 			<li style = "display:flex;align-items:center">
-				<span>来源：</span>
+				<span>平台：</span>
 				<select name="source" id="source" class="dropdown">
 					<c:forEach items="${sources}" var="s">
 						<option value="${s.id}" <c:if test="${s.id == user.source}">selected="selected"</c:if>>

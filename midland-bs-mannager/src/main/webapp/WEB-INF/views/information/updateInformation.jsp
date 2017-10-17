@@ -91,7 +91,7 @@
                     <span>标题：</span>
                     <input type="text" id="title" name="title" value="${item.title}" onfocus="checkSelect('cateParentid|cateId','请填写一级分类！|请填写二级分类！')" onblur="notEmpty('title','title','标题不能为空！');" />
                 </li>
-                <li><span>来源：</span><input name="source" id="source" type="text" value="${item.source}" />
+                <li><span>平台：</span><input name="source" id="source" type="text" value="${item.source}" />
                 </li>
                 <li><span>附件：</span>
                     <div style="float: left;">
