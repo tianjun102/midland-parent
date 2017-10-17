@@ -19,7 +19,7 @@ public class Popular{
 	 **/
 	private String name;
 	/**
-	 * 来源 1=网站；2=微站
+	 * 平台 1=网站；2=微站
 	 **/
 	private Integer source;
 	/**

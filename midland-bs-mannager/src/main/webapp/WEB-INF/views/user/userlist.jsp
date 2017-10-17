@@ -19,7 +19,7 @@
             <th style="width: 7%">用户名</th>
             <th style="width: 10%">手机号码</th>
             <th style="width: 15%">注册时间</th>
-            <th style="width: 6%">注册来源</th>
+            <th style="width: 6%">平台</th>
             <th style="width: 6%">实名状态</th>
             <th style="width: 7%">审核人</th>
             <th style="width: 15%">审核时间</th>

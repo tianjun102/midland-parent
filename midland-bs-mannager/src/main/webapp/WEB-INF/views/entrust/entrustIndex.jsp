@@ -59,7 +59,7 @@
 						</c:forEach>
 					</select>
 				</li>
-				<li><span>来源：</span>
+				<li><span>平台：</span>
 					<select name="source" id="source" class="dropdown">
 						<option value="">全部</option>
 						<c:forEach items="${sources}" var="s1" >

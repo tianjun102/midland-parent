@@ -11,7 +11,7 @@ public class Entrust{
 	 **/
 	private String entrustSn;
 	/**
-	 * 网站来源；0=网站；1=微站；
+	 * 平台；0=网站；1=微站；
 	 **/
 	private Integer source;
 	/**

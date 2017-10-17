@@ -19,7 +19,7 @@
             <th style=""></th>
             <th style="">序号</th>
             <th style="">问题主题</th>
-            <th style="">来源</th>
+            <th style="">平台</th>
             <th style="">提问时间</th>
             <th style="">提问人昵称</th>
             <th style="">提问人手机号</th>

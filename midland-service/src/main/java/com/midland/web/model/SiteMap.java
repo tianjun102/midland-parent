@@ -51,7 +51,7 @@ public class SiteMap{
 	 **/
 	private Integer isShow;
 	/**
-	 * 平台来源
+	 * 平台
 	 **/
 	private Integer source;
 
