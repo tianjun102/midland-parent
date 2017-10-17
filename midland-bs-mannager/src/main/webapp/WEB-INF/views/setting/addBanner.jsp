@@ -89,7 +89,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 					<div style="float: left;">
 						<input type="hidden" name="bannerImg" id="bannerImg" value="${item.iconImg}">
 
-						<%--<img style="margin-bottom: 10px;max-width:200px;max-height:200px" id="iconImg1" src="${item.iconImg}">--%>
+						<img style="margin-bottom: 10px;max-width:200px;max-height:200px" id="iconImg1"
+							 src="${item.iconImg}">
 						<input type="file" name="file_upload" id="file_upload"/>
 					</div>
 				</li>
@@ -359,12 +360,12 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
         $('#file_upload').uploadify({
             'swf': '${ctx }/assets/scripts/uploadify/uploadify.swf',
             'uploader': '${ctx }/rest/upload/img',
-            'multi': true,// 是否支持多个文件上传
+            'multi': false,// 是否支持多个文件上传
             'buttonText': '上传图片',
             'onUploadSuccess': function (file, data, response) {
-                console.log(data)
-				$("#file_upload").before("<img style='margin-bottom: 10px;max-width:200px;max-height:200px'  src='"+data+"'>")
-                $("#bannerImg").attr("value", data+"||"+$("#bannerImg").val());
+                console.log(data);
+                $("#bannerImg").attr("value", data);
+                $("#iconImg1").attr("src", "${fileUrl}"+data);
             },
             'onQueueComplete': function (queueData) {
                 if (queueData.uploadsSuccessful < 1) {

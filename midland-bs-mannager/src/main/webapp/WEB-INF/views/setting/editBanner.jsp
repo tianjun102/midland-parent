@@ -89,10 +89,9 @@
 				<li><span>图片：</span>
 					<div style="float: left;">
 						<input type="hidden" name="bannerImg" id="bannerImg" value="${banner.bannerImg}">
-						<c:forEach var="bannerImg" items="${fn:split(banner.bannerImg,'||')}">
-							<img style="margin-bottom: 10px;max-width:200px;max-height:200px"
-								 src="http://localhost/${bannerImg}">
-						</c:forEach>
+
+						<img style="margin-bottom: 10px;max-width:200px;max-height:200px" id="iconImg1"
+							 src="http://localhost/${banner.bannerImg}">
 						<input type="file" name="file_upload" id="file_upload"/>
 					</div>
 				</li>
@@ -362,12 +361,12 @@
         $('#file_upload').uploadify({
             'swf': '${ctx }/assets/scripts/uploadify/uploadify.swf',
             'uploader': '${ctx }/rest/upload/img',
-            'multi': true,// 是否支持多个文件上传
+            'multi': false,// 是否支持多个文件上传
             'buttonText': '上传图片',
             'onUploadSuccess': function (file, data, response) {
                 console.log(data);
-                $("#file_upload").before("<img style='margin-bottom: 10px;max-width:200px;max-height:200px'  src='"+data+"'>")
-                $("#bannerImg").attr("value", data+"||"+$("#bannerImg").val());
+                $("#bannerImg").attr("value", data);
+                $("#iconImg1").attr("src", "${fileUrl}"+data);
             },
             'onQueueComplete': function (queueData) {
                 if (queueData.uploadsSuccessful < 1) {
