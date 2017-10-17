@@ -1,6 +1,7 @@
 package com.midland.controller;
 
 import com.midland.base.BaseFilter;
+import com.midland.core.util.DateUtils;
 import com.midland.web.model.Area;
 import com.midland.web.model.RecruitManager;
 import com.midland.web.service.RecruitManagerService;
@@ -123,6 +124,9 @@ public class RecruitManagerController extends BaseFilter {
 	@ResponseBody
 	public Object updateRecruitManagerById(RecruitManager recruitManager) throws Exception {
 		Map<String,Object> map = new HashMap<>();
+		if(recruitManager.getReleaseStatus()!=null&&recruitManager.getReleaseStatus()==0){
+			recruitManager.setReleaseTime(DateUtils.nowDateToStringYYMMDDHHmmss());
+		}
 		try {
 			log.debug("updateRecruitManagerById  {}",recruitManager);
 			recruitManagerServiceImpl.updateRecruitManagerById(recruitManager);

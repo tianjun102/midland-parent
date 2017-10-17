@@ -19,7 +19,7 @@
 				<th style="width: 8%">联系方式</th>
 				<th style="width: 8%">岗位</th>
 				<th style="width: 8%">邮箱</th>
-				<th style="width: 8%">接受时间</th>
+				<th style="width: 8%">接收时间</th>
                 <th style="width: 8%">工作城市</th>
                 <th style="width: 10%">操作</th>
             </tr>

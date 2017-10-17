@@ -221,10 +221,13 @@
 					</dt>
 					<dd>
 						<shiro:hasPermission name="resumeManagerList">
-							<a id = "report1" href="${ctx}/rest/resumeManager/index" target="contentF"><span>简历信息</span></a>
+							<a id = "report1" href="${ctx}/rest/resumeManager/index" target="contentF"><span>简历管理</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="recruitList">
 							<a id = "report1" href="${ctx}/rest/recruitManager/index" target="contentF"><span>招聘管理</span></a>
+						</shiro:hasPermission>
+						<shiro:hasPermission name="resumeManageEmail">
+							<a id = "feedbackIndex" href="${ctx}/rest/feedbackEmail/index?emailType=2" target="contentF"><span>配置接收邮箱</span></a>
 						</shiro:hasPermission>
 					</dd>
 				</dl>
@@ -354,7 +357,7 @@
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="feedbackEmail">
-						<a id = "feedbackIndex" href="${ctx}/rest/feedbackEmail/index" target="contentF"><span>反馈邮箱</span></a>
+						<a id = "feedbackIndex" href="${ctx}/rest/feedbackEmail/index?emailType=1" target="contentF"><span>反馈邮箱</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="siteMapList">

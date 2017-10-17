@@ -218,10 +218,10 @@
 			 and work_lift= #{workLift,jdbcType=INTEGER}
 		</if>
 		<if test="startTime != null">
-			 and start_time= #{startTime,jdbcType=VARCHAR}
+			 and release_time>= #{startTime,jdbcType=VARCHAR}
 		</if>
 		<if test="endTime != null">
-			 and end_time= #{endTime,jdbcType=VARCHAR}
+			 and #{endTime,jdbcType=VARCHAR} >= release_time
 		</if>
 		<if test="releaseStatus != null">
 			 and release_status= #{releaseStatus,jdbcType=INTEGER}

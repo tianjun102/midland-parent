@@ -25,10 +25,10 @@
 					<input type="text" name="post" id="post" placeholder="请输入岗位" /></li>
 				</li>
 				<li><span>姓名：</span>
-					<input type="text" name="deliverer" id="deliverer" placeholder="请输入岗位" /></li>
+					<input type="text" name="deliverer" id="deliverer" placeholder="请输入姓名" /></li>
 				</li>
 				<li><span>联系方式：</span>
-					<input type="text" name="phone" id="phone" placeholder="请输入岗位" /></li>
+					<input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>
 				</li>
 				<li>
 					<span>上传时间：</span>

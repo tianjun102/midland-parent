@@ -16,10 +16,10 @@
             <tr>
                 <th style="width: 8%">编号</th>
 				<th style="width: 8%">招聘类别</th>
-				<th style="width: 8%">工作地点</th>
+				<th style="width: 8%">城市</th>
 				<th style="width: 8%">招聘岗位</th>
-				<th style="width: 8%">发布状态</th>
-				<th style="width: 10%">发布时间</th>
+				<th style="width: 8%">上线状态</th>
+				<th style="width: 10%">上线时间</th>
                 <th style="width: 15%">操作</th>
             </tr>
         </thead>
@@ -33,11 +33,13 @@
 						<td><c:if test="${item.type==1}">校招</c:if><c:if test="${item.type==2}">社招</c:if></td>
                         <td>${item.cityName}</td>
 						<td>${item.post}</td>
-                        <td><c:if test="${item.releaseStatus==0}">已发布</c:if><c:if test="${item.releaseStatus==1}">未发布</c:if></td>
+                        <td><c:if test="${item.releaseStatus==0}">已上线</c:if><c:if test="${item.releaseStatus==1}">已下线</c:if></td>
                         <td>${item.releaseTime}</td>
 						<td>
                             <a target="contentF" class="edit_img" href="${ctx}/rest/recruitManager/to_update?id=${item.id}"></a>
                             <a target="contentF" class="delete_img" onclick="delete1(${item.id })"></a>
+                            <c:if test="${empty item.releaseStatus or item.releaseStatus==1}"><a target="contentF" onclick="updateStatus(${item.id},${item.releaseStatus});">上线</a></c:if>
+                            <c:if test="${item.releaseStatus==0}"><a target="contentF" onclick="updateStatus(${item.id},${item.releaseStatus});">下线</a></c:if>
                         </td>
                     </tr>
                 </c:forEach>
@@ -66,12 +68,12 @@
             skin: 'layer-style',
             area: ['350px','200px'],
             shadeClose: false, //点击遮罩关闭
-            title:['删除市场调研'],
+            title:['删除招聘信息'],
             resize: false,
             scrollbar:false,
             content:
             '<section class = "content" style = "border:none; height:100%;">'+
-            '<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">您确定要删除当前市场调研吗?</p>'+
+            '<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">您确定要删除当前招聘信息吗?</p>'+
             '</section>',
             btn:['确定','取消'],
             yes: function(index){
@@ -108,6 +110,38 @@
             content: ['${ctx}/rest/recruitManager/to_update?id='+id,'no']
         });
     }
+
+   //修改发布状态
+   function updateStatus(id,status){
+       if(status==1){
+           status=0;
+       }else if(status == 0){
+           status = 1;
+       }else if(status ==null){
+           status=0;
+       }
+       $.ajax({
+           type: "post",
+           url: "${ctx}/rest/recruitManager/update?releaseStatus="+status+"&id="+id,
+           async: false, // 此处必须同步
+           dataType: "json",
+
+           success: function (data) {
+               if (data.state==0){
+                   if(status==null||status==0){
+                       layer.msg("上线成功！", {icon: 1});
+                   }else if(status==1){
+                       layer.msg("下线成功！", {icon: 1});
+                   }
+                   $('#searchForm').submit();
+               }
+           },
+           error: function () {
+               layer.msg("操作失败！", {icon: 2});
+           }
+       })
+
+   }
 
 
 </script>

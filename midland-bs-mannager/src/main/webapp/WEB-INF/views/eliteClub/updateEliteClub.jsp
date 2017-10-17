@@ -6,7 +6,7 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <%@include file="../layout/tablib.jsp"%>
-
+<%@include file="../layout/source.jsp"%>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
@@ -41,7 +41,7 @@
             <ul class = "adminfo row">
 
                 <li><span>城市：</span>
-                    <select onchange="setCityName();" name="cityId" id="cityId" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <select onchange="setCityName();" name="cityId" id="cityId" style="height: 38px;width: 180px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <option value="">全部</option>
                         <c:forEach items="${cityList}" var="city">
                             <option <c:if test="${item.cityId==city.id}">selected="selected"</c:if> value="${city.id}">${city.name}</option>
@@ -51,7 +51,7 @@
                 </li>
                 <li>
                     <span>活动时间：</span>
-                    <input type="text" name="adTime" class="Wdate half" id="time3" value="${item.adTime}" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd'})" />
+                    <input type="text" name="adTime" class="Wdate half" style="width: 180px;!important;" id="time3" value="${item.adTime}" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd'})" />
                 </li>
                 <li><span>图片：</span>
                     <div style="float: left;">

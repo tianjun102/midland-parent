@@ -53,6 +53,7 @@ public class FeedbackEmailController extends BaseFilter {
 		model.addAttribute("cityList",cityList);*/
 		settingService.getAllProvinceList(model);
 		User user = MidlandHelper.getCurrentUser(request);
+		model.addAttribute("emailType",feedbackEmail.getEmailType());
 		model.addAttribute("cityId",user.getCityId());
 		return "feedbackEmail/feedbackEmailIndex";
 	}
@@ -67,6 +68,7 @@ public class FeedbackEmailController extends BaseFilter {
 		parem.put("id","*");
 		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
 		List<Area> cityList = cityMap.get("city");
+		model.addAttribute("emailType",feedbackEmail.getEmailType());
 		model.addAttribute("cityList",cityList);
 		return "feedbackEmail/addFeedbackEmail";
 	}

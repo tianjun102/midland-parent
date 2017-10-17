@@ -18,7 +18,7 @@
 				<th style="width: 8%">预览图片</th>
                 <th style="width: 8%">状态</th>
 				<th style="width: 8%">活动名称</th>
-				<th style="width: 8%">出游时间</th>
+				<th style="width: 8%">活动时间</th>
                 <th style="width: 10%">操作</th>
             </tr>
         </thead>
@@ -29,7 +29,7 @@
                     <tr>
 						<input type="hidden" id="id" value="${item.id}"/>
 						<td>${xh.count}</td>
-						<td>${item.imgUrl}</td>
+						<td><img src="${item.imgUrl }" style="width:40px;height:40px" alt=""></td>
                         <td><c:if test="${item.isShow==0}">显示</c:if><c:if test="${item.isShow==1}">隐藏</c:if></td>
                         <td>${item.adName}</td>
                         <td>${item.adTime}</td>
@@ -60,21 +60,48 @@
 <script type="text/javascript">
 
     function delete1(id){
-        $.ajax({
-            type: "post",
-            url: "${ctx}/rest/eliteClub/update?id="+id+"&isDelete=1",
-            async: false, // 此处必须同步
-            dataType: "json",
 
-            success: function (data) {
-                if (data.state==0){
-                    $('#searchForm').submit();
-                }
-            },
-            error: function () {
-                layer.msg("操作失败！", {icon: 2});
+
+
+        layer.open({
+            type: 1,
+            skin: 'layer-style',
+            area: ['350px','200px'],
+            shadeClose: false, //点击遮罩关闭
+            title:['删除资讯'],
+            resize: false,
+            scrollbar:false,
+            content:
+            '<section class = "content" style = "border:none; height:100%;">'+
+            '<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">您确定要删除当前资讯吗?</p>'+
+            '</section>',
+            btn:['确定','取消'],
+            yes: function(index){
+                $.ajax({
+                    type: "post",
+                    url: "${ctx}/rest/eliteClub/update?id="+id+"&isDelete=1",
+                    async: false, // 此处必须同步
+                    dataType: "json",
+
+                    success: function (data) {
+                        if(data.state==0){
+                            layer.msg("删除成功！",{icon:1});
+                            setTimeout(function(){$("#searchForm").submit();},1000);
+                        }else{
+                            layer.msg("删除失败！！",{icon:7});
+                        }
+                        layer.close(index);
+                    },
+                    error: function () {
+                        layer.msg("操作失败！", {icon: 2});
+                    }
+                });
             }
-        })
+            ,success: function (layero) {
+                var btn = layero.find('.layui-layer-btn');
+                btn.css('text-align', 'center');
+            }
+        });
     }
 
     function to_edit(id){
