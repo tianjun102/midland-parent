@@ -14,6 +14,7 @@
     <table class="table table-bordered table-add">
         <thead>
             <tr>
+                <th style="width: 10%">编号</th>
                 <th style="width: 10%">城市</th>
                 <th style="width: 20%">热搜词</th>
 				<th style="width: 10%">模块</th>
@@ -25,6 +26,7 @@
             <c:when test="${!empty requestScope.items }">
                 <c:forEach items="${requestScope.items }" var="item" varStatus="xh">
                     <tr>
+                        <td>${xh.count}</td>
 						<td>${item.cityName}</td>
                         <td>${item.keywords}</td>
                         <td>${item.menuName}</td>
@@ -76,7 +78,7 @@
     function to_edit(id){
         layer.open({
             type: 2,
-            title: ['修改'],
+            title: ['修改热搜词'],
             shade: 0.3,
             area: ['500px', '350px'],
             content: ['${ctx}/rest/hotSearch/to_update?id='+id,'no']

@@ -41,6 +41,9 @@
             text-indent: 10px;
             outline-color: #0099e0;
         }
+        .content ul.adminfo li:last-child>a:not(:nth-child(2)) {
+            margin-left: 0px!important;
+        }
 
     </style>
     <script type="text/javascript">

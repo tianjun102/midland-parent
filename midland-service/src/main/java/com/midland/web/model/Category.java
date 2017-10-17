@@ -49,6 +49,8 @@ public class Category{
 
 	private Integer isShow;
 
+	private Integer source;
+
 
 	public Integer getId() {
 		return id;
@@ -152,6 +154,14 @@ public class Category{
 
 	public void setIsShow(Integer isShow) {
 		this.isShow = isShow;
+	}
+
+	public Integer getSource() {
+		return source;
+	}
+
+	public void setSource(Integer source) {
+		this.source = source;
 	}
 
 	@Override

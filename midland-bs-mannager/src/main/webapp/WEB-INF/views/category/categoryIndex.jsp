@@ -21,15 +21,14 @@
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<input type="hidden" name="type" value="${type}">
 			<ul class = "userinfo row">
-				<%--<li>
-					<span style = "float:left;">城市：</span>
-					<select name="cityId" id="cityId" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+				<li>
+					<span style = "float:left;">平台：</span>
+					<select name="source" id="source" style="height: 38px;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
 						<option value="">全部</option>
-						<c:forEach items="${cityList}" var="city">
-							<option value="${city.id}">${city.name}</option>
-						</c:forEach>
+						<option value="0">网站</option>
+						<option value="1">微站</option>
 					</select>
-				</li>--%>
+				</li>
 				<%@include file="../layout/sherchArea.jsp" %>
 				<li><input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/></li>
 			</ul>
@@ -48,7 +47,7 @@
             layer.open({
                 type: 2,
                 skin: 'layer-style',
-                area: ['420px','370px'],
+                area: ['400px','420px'],
                 shadeClose: false, //点击遮罩关闭
                 title:['新增分类'],
                 resize: false,

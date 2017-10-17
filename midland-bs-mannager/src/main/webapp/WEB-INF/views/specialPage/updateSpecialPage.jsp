@@ -27,6 +27,12 @@
         .layui-layer-msg{
             top:260px!important;
         }
+        .content ul.adminfo li>span {
+            width: 100px!important;
+        }
+        ._star {
+            text-align: left!important;
+        }
     </style>
 </head>
 <body >
@@ -67,25 +73,25 @@
                     </select>
                     <span class = "_star ">*</span>
                 </li>
-                <li><span>标题：</span>
-                    <input id="title" name="title" maxlength="255" type="text" value="${item.title}" onblur="notEmpty('title','title','模块名称不能为空！');">
-                    <span class = "_star ">*</span>
-                </li>
-                <li><span>描述：</span>
-                    <input id="description" name="description" maxlength="255" type="text" value="${item.description}" onblur="notEmpty('description','description','模块名称不能为空！');">
-                    <span class = "_star ">*</span>
-                </li>
-                <li><span>均价：</span>
-                    <input type="text" name="price" id="price" value="${item.price}" onblur="notEmpty('price','price','均价不能为空！');" onfocus="InitInput.setNumber(this,9,2,2);"/>
-                    <span class = "_star ">*</span>
-                </li>
-                <li><span>地址：</span>
-                    <input type="text" name="address" id="address" value="${item.address}" onblur="notEmpty('address','address','地址不能为空！');"/>
-                    <span class = "_star ">*</span>
-                </li>
-                <li><span>地铁描述：</span>
-                    <input type="text" name="subwayDistance" id="subwayDistance" value="${item.subwayDistance}"/>
-                </li>
+                <%--              <li><span>标题：</span>
+                                 <input id="title" name="title" maxlength="255" type="text" value="${item.title}" onblur="notEmpty('title','title','模块名称不能为空！');">
+                                 <span class = "_star ">*</span>
+                             </li>
+                             <li><span>描述：</span>
+                                 <input id="description" name="description" maxlength="255" type="text" value="${item.description}" onblur="notEmpty('description','description','模块名称不能为空！');">
+                                 <span class = "_star ">*</span>
+                             </li>
+                             <li><span>均价：</span>
+                                 <input type="text" name="price" id="price" value="${item.price}" onblur="notEmpty('price','price','均价不能为空！');" onfocus="InitInput.setNumber(this,9,2,2);"/>
+                                 <span class = "_star ">*</span>
+                             </li>
+                             <li><span>地址：</span>
+                                 <input type="text" name="address" id="address" value="${item.address}" onblur="notEmpty('address','address','地址不能为空！');"/>
+                                 <span class = "_star ">*</span>
+                             </li>
+                             <li><span>地铁描述：</span>
+                                 <input type="text" name="subwayDistance" id="subwayDistance" value="${item.subwayDistance}"/>
+                             </li>--%>
                 <li><span>图片：</span>
                     <div style="float: left;">
                         <input type="hidden" name="imgUrl" id="imgUrl" value="${item.imgUrl}">
@@ -95,8 +101,13 @@
                         <input type="file" name="file_upload" id="file_upload"/>
                     </div>
                 </li>
-                <li id="picLike"><span>图片链接：</span>
+                <li id="picLike"><span>列表接口链接：</span>
                     <input id="linkUrl" name="linkUrl" onblur="checkUrl('linkUrl','linkUrl','链接格式不正确！')" maxlength="255" type="text" value="${item.linkUrl}">
+                    <span class = "_star ">*</span>
+                </li>
+                <li><span>列表详情链接：</span>
+                    <input id="detailsUrl" name="detailsUrl" onblur="checkUrl('detailsUrl','detailsUrl','链接格式不正确！')" maxlength="255" type="text" value="${item.detailsUrl}">
+                    <span class = "_star ">*</span>
                 </li>
                 <li><span>图片说明：</span><input type="text" name="imgDesc" value="${item.imgDesc}"></li>
             </ul>
@@ -197,7 +208,7 @@
 
 
     function subumintSpecialPage(){
-        if(!(notEmpty('modeName','modeName','模块名称不能为空！')&&notEmpty('title','title','标题名称不能为空！')&&notEmpty('description','description','描述不能为空！')&&notEmpty('price','price','均价不能为空！')&&notEmpty('address','address','地址不能为空！')&&checkUrl('linkUrl','linkUrl','链接格式不正确！'))){
+        if(!(notEmpty('modeName','modeName','模块名称不能为空！')&&checkUrl('linkUrl','linkUrl','链接格式不正确！')&&checkUrl('detailsUrl','detailsUrl','链接格式不正确！'))){
             return;
         }
         var data = $("#formId").serialize();

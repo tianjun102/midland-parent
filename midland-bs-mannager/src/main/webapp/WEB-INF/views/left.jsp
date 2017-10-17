@@ -313,12 +313,12 @@
 						<a id = "system2" href="${ctx}/rest/setting/showPopularIndex" target="contentF"><span>热门关注管理</span></a>
 					</shiro:hasPermission>
 
-					<shiro:hasPermission name="linkUrlList">
-						<a id = "system2" href="${ctx}/rest/setting/showlinkUrlIndex" target="contentF"><span>友情链接管理</span></a>
+					<shiro:hasPermission name="popularCateList">
+						<a id = "system2" href="${ctx}/rest/category/index?type=3" target="contentF"><span>热门关注分类管理</span></a>
 					</shiro:hasPermission>
 
-					<shiro:hasPermission name="popularCateList">
-						<a id = "system2" href="${ctx}/rest/category/index?type=3" target="contentF"><span>友情链接分类管理</span></a>
+					<shiro:hasPermission name="linkUrlList">
+						<a id = "system2" href="${ctx}/rest/setting/showlinkUrlIndex" target="contentF"><span>友情链接管理</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="bannerList">

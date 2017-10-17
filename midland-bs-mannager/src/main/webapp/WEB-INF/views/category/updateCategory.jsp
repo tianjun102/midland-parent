@@ -102,13 +102,13 @@
             <li>
                 <span>分类名称：</span><input style="width:250px;" type="text" name="cateName" id="cateName" value="${item.cateName}" onblur="notEmpty('cateName','cateName','分类名称不能为空！');" maxlength="50"/>
             </li>
-            <%--<li>
-                <span style = "float:left;">类型：</span>
-                <select name="type" id="type" class="dropdown">
-                    <option <c:if test="${item.type == '0'}"> selected = 'selected'</c:if> value="0">市场调研分类</option>
-                    <option <c:if test="${item.type == '1'}"> selected = 'selected'</c:if> value="1">资讯分类</option>
+            <li>
+                <span style = "float:left;">平台：</span>
+                <select name="source" id="source" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <option <c:if test="${item.source == '0'}"> selected = 'selected'</c:if> value="0">网站</option>
+                    <option <c:if test="${item.source == '1'}"> selected = 'selected'</c:if> value="1">微站</option>
                 </select>
-            </li>--%>
+            </li>
             <li style="padding-top:30px;">
                 <span></span>
                 <a target="contentF" class="public_btn bg2" id="save" onclick="saveData()">保存</a>
