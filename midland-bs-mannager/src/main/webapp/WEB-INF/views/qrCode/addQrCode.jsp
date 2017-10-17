@@ -39,7 +39,7 @@
                 <div style="float: left;">
                     <input type="hidden" name="imgUrl" id="imgUrl" value="">
 
-                    <img style="margin-bottom: 10px;max-width:200px;max-height:200px" id="iconImg1"
+                    <img style="margin-bottom: 10px;max-width:100px;max-height:100px" id="iconImg1"
                          src="${item.iconImg}">
                     <input type="file" name="file_upload" id="file_upload"/>
                 </div>

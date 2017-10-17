@@ -39,6 +39,7 @@
 						<td>
                             <a class="edit_img" target="contentF" title="编辑" onclick="to_edit(${item.id })"></a>
                             <a class="delete_img" target="contentF" title="删除" onclick="delete1(${item.id })"></a>
+                            <a <c:if test="${item.isShow==0}">class="onoff_img"</c:if> <c:if test="${item.isShow==1}">class="offon_img"</c:if> target="contentF" onclick="updateCate(${item.isShow},${item.id })"></a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -113,6 +114,26 @@
         });
     }
 
+    //启用，禁用
+    function updateCate(isShow,id){
+        if(isShow==1){
+            isShow=0;
+        }else if(isShow == 0){
+            isShow = 1;
+        }
+
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/qrCode/update?isShow="+isShow+"&id="+id,
+            async:false, // 此处必须同步
+            dataType: "json",
+            data:"",
+            success: function(data){
+
+                $('#searchForm').submit();
+            }
+        });
+    }
 
 </script>
 </body>
