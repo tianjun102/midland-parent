@@ -19,7 +19,7 @@ public class Entrust{
 	 **/
 	private Integer houseType;
 	/**
-	 * 0=租；1=售
+	 * 0=租；1=售 废弃
 	 **/
 	private Integer sellRent;
 	/**

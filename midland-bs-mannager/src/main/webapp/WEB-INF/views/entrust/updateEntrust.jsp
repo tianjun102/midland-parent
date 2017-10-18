@@ -62,59 +62,31 @@
     <form action="${ctx}/rest/appoint/update" method="post" id="appointInfoForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${entrust.id}">
-            <li class="col-md-6"><span>预约编号：</span><input type="text" name="entrustSn" id="entrustSn" disabled="disabled"
+            <li class="col-md-6"><span>委托编号：</span><input type="text" name="entrustSn" id="entrustSn" disabled="disabled"
                                                           value="${entrust.entrustSn}"/>
             </li>
             <li class="col-md-6"><span>委托时间：</span><input type="text" name="entrustTime" id="entrustTime" disabled="disabled"
                                                           value="${entrust.entrustTime}" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" maxlength="50"/><span
                     class="_star">*</span>
             </li>
-            <li class="col-md-6"><span>委托人：</span><input type="text" name="nickName" id="nickName"  onblur="notEmpty('nickName','nickName','')"
-                                                        value="${entrust.nickName}"/>
+            <li class="col-md-6"><span>联系人：</span><input type="text" name="nickName" id="nickName"  onblur="notEmpty('nickName','nickName','')" disabled="disabled"
+                                                         value="${entrust.nickName}"/>
             </li>
-            <li class="col-md-6"><span>手机号码：</span><input type="text" name="phone" id="phone" onblur="checkPhone('','phone','')"
+            <li class="col-md-6"><span>手机号码：</span><input type="text" name="phone" id="phone" onblur="checkPhone('','phone','')" disabled="disabled"
                                                           value="${entrust.phone}"
                                                           maxlength="50"/><span class="_star">*</span></li>
-            <li class="col-md-6"><span>分类：</span>
-                <select name="sellRent" id="sellRent" class="dropdown">
-                    <c:forEach items="${sellRents}" var="s">
-                        <option value="${s.id}" <c:if test="${s.id==entrust.sellRent}">selected</c:if>>
+            <li class="col-md-6"><span>房屋类型：</span>
+                <select name="houseType" id="houseType" class="dropdown" disabled="disabled">
+                    <c:forEach items="${houses}" var="s">
+                        <option value="${s.id}" <c:if test="${s.id==entrust.houseType}">selected</c:if>>
                                 ${s.name}
                         </option>
                     </c:forEach>
                 </select>
                 <span class="_star">*</span>
             </li>
-
-            <li class="col-md-6"><span>委托类型：</span>
-                <select name="houseType" id="houseType" class="dropdown">
-
-                    <c:forEach items="${houses}" var="s">
-                        <option value="${s.id}" <c:if test="${s.id==entrust.houseType}">selected</c:if>>
-                                ${s.name}
-                        </option>
-                    </c:forEach>
-
-                </select>
-            </li>
-
-            <li class="col-md-6"><span>区域：</span><input type="text" name="areaName" id="areaName"  onblur="notEmpty('areaName','areaName','')" value="${entrust.areaName}"/>
-            </li>
-            <li class="col-md-6"><span>小区：</span><input type="text" name="communityName" id="communityName"  onblur="notEmpty('communityName','communityName','')"
-                                                        value="${entrust.communityName}" maxlength="50"/><span
-                    class="_star">*</span></li>
-            <li class="col-md-6"><span>地址：</span><input type="text" name="address" id="address"  onblur="notEmpty('address','address','')"
-                                                        value="${entrust.address}"/>
-            </li>
-            <li class="col-md-6"><span>户型：</span><input type="text" name="layout" id="layout"  onblur="notEmpty('layout','layout','')"
-                                                        value="${entrust.layout}"/>
-
-            </li>
-            <li class="col-md-6"><span>面积：</span><input type="text" name="measure" id="measure"  onblur="notEmpty('measure','measure','');InitInput.setNumber(this,9,2,2)"
-                                                        value="${entrust.measure}"
-                                                        maxlength="50"/>㎡<span class="_star">*</span></li>
-            <li class="col-md-6"><span>装修：</span>
-                <select name="renovation" id="renovation" class="dropdown">
+            <li class="col-md-6"><span>装修情况：</span>
+                <select name="renovation" id="renovation" class="dropdown" disabled="disabled">
 
                     <c:forEach items="${decorations}" var="s">
                         <option value="${s.id}" <c:if test="${s.id==entrust.renovation}">selected</c:if>>
@@ -125,6 +97,44 @@
                 </select>
 
             </li>
+            <li class="col-md-6"><span>意向区域：</span><input type="text" name="areaName" id="areaName" disabled="disabled" onblur="notEmpty('areaName','areaName','')" value="${entrust.areaName}"/>
+            </li>
+            <li class="col-md-6"><span>意向小区：</span><input type="text" name="communityName" id="communityName" disabled="disabled" onblur="notEmpty('communityName','communityName','')"
+                                                          value="${entrust.communityName}" maxlength="50"/><span
+                    class="_star">*</span></li>
+
+            <li class="col-md-6"><span>意向户型：</span><input type="text" name="layout" id="layout" disabled="disabled"  onblur="notEmpty('layout','layout','')"
+                                                          value="${entrust.layout}"/>
+
+            </li>
+            <li class="col-md-6"><span>意向面积：</span><input type="text" name="measure" id="measure" disabled="disabled"  onblur="notEmpty('measure','measure','');InitInput.setNumber(this,9,2,2)"
+                                                          value="${entrust.measure}"
+                                                          maxlength="50"/>㎡<span class="_star">*</span></li>
+            <li class="col-md-6"><span>平台：</span>
+                <select name="source" id="source" class="dropdown" disabled="disabled">
+                    <c:forEach items="${sources}" var="s1" >
+                        <option value="${s1.id}" <c:if test="${entrust.source==s1.id}">selected</c:if>>
+                                ${s1.name}
+                        </option>
+                    </c:forEach>
+                </select>
+                <span class="_star">*</span>
+            </li>
+            <li class="col-md-6"><span>状态：</span>
+                <select name="status" id="status" class="dropdown">
+
+                    <c:forEach items="${statusList}" var="s">
+                        <option value="${s.id}" <c:if test="${s.id==entrust.status}">selected</c:if>>
+                                ${s.name}
+                        </option>
+                    </c:forEach>
+
+                </select>
+            </li>
+            <li class="col-md-6"><span>经纪人：</span><input type="text" name="measure" id="agentName" disabled="disabled"  value="${entrust.agentName}" maxlength="50"/></li>
+            <li class="col-md-6"><span>处理时间：</span><input type="text" name="communityName" id="handleTime" disabled="disabled" onblur="notEmpty('communityName','communityName','')"
+                                                          value="${entrust.handleTime}" maxlength="50"/><span
+                    class="_star">*</span></li>
             <li class="col-md-6"><span>配套：</span>
                 <div class="peitao">
                     <span><input onchange="lick(this,'household')"  type="checkbox"
@@ -146,17 +156,7 @@
                     </span>
                 </div>
             </li>
-            <li class="col-md-6"><span>状态：</span>
-                <select name="status" id="status" class="dropdown">
 
-                    <c:forEach items="${statusList}" var="s">
-                        <option value="${s.id}" <c:if test="${s.id==entrust.status}">selected</c:if>>
-                                ${s.name}
-                        </option>
-                    </c:forEach>
-
-                </select>
-            </li>
             <li class="col-md-11"><span>备注：</span>
                 <textarea name="remark" id="remark"
                           style="width:calc(100% - 120px);height:50px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;"></textarea>
@@ -228,58 +228,6 @@
                 layer.msg("保存失败！", {icon: 2});
             }
         });
-    }
-    //检查手机号格式
-    function checkPhone() {
-
-        var phone0 = $("#ph").val();
-        var reg = /^1[3,4,5,7,8]\d{9}$/;
-        var phone = $("input[name='phone']").val();
-        if (phone.trim() == '') {
-            layer.tips("手机号不能为空！", "input[name='phone']", {tips: 1});
-            return false;
-        }
-        if (!reg.test(phone)) {
-            layer.tips("手机号格式有误,请核对!", "input[name='phone']", {tips: 3});
-            return false;
-        }
-        if (phone0 == phone) {
-            return true;
-        }
-
-        var a = true;
-        $.ajax({
-            type: "post",
-            url: "${ctx }/rest/user/checkPhoneUnique",
-            async: false, // 此处必须同步
-            dataType: "json",
-            data: {"phone": phone},
-            success: function (xmlobj) {
-                if (xmlobj.flag == 1) {
-                    layer.tips("当前手机号码已被使用，请更换手机号码！", "input[name='phone']", {tips: 1});
-                    a = false;
-                } else {
-                    a = true;
-                }
-            }
-        });
-        return a;
-    }
-
-    //检查邮箱格式
-    function checkEmail() {
-        var reg = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
-        var email = $("input[name='email']").val();
-        if (email.trim() == '') {
-            //layer.tips("邮箱不能为空！", "input[name='email']",{tips:3});
-            return true;
-        }
-        if (!reg.test(email)) {
-            layer.tips("邮箱格式有误,请核对!", "input[name='email']", {tips: 3});
-            //$("input[name='email']").focus();
-            return false;
-        }
-        return true;
     }
 
     //取消

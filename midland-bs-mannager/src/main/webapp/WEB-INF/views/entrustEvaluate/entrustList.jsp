@@ -44,7 +44,6 @@
             <th style="width: auto">所属楼层</th>
             <th style="width: auto">总楼层数</th>
             <th style="width: auto">其他特色</th>
-            <th style="width: auto">备注</th>
             <th style="width: auto">评估时间</th>
             <th style="width: auto">经纪人</th>
             <th style="width: auto">状态</th>
@@ -74,7 +73,6 @@
                         <td>${item.theLayer }</td>
                         <td>${item.totalLayer }</td>
                         <td>${item.otherItem }</td>
-                        <td>${item.remark }</td>
                         <td>${item.handleTime }</td>
                         <td>${item.agentName }</td>
                         <td><c:forEach items="${statusList}" var="s">

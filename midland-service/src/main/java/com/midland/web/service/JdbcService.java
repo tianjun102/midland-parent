@@ -125,7 +125,9 @@ public class JdbcService {
     public void listDesc(String primaryKeyName, String id, String orderByColumn, String tableName, String orderByParam, ListDescOtherParam obj,int sort) {
         if (sort == 0) {
             Map map = stickly(primaryKeyName, id, orderByColumn, tableName);
-            doExchangeDescNum(primaryKeyName, id, orderByColumn, orderByParam, tableName, map);
+            String primaryKeyId = String.valueOf(map.get(primaryKeyName));
+            String descNumResult = String.valueOf(map.get(orderByColumn));
+            updateSql(primaryKeyName, primaryKeyId, orderByColumn, tableName, descNumResult);
         } else if (sort == 1) {
             Map map = shiftUp(primaryKeyName, id, orderByColumn, tableName, orderByParam,obj);
             doExchangeDescNum(primaryKeyName, id, orderByColumn, orderByParam, tableName, map);
@@ -149,6 +151,19 @@ public class JdbcService {
         updateSql(primaryKeyName, primaryKeyId, orderByColumn, tableName, "-99999");
         updateSql(primaryKeyName, id, orderByColumn, tableName, descNumResult);
         updateSql(primaryKeyName, primaryKeyId, orderByColumn, tableName, orderByParam);
+
+
+    }
+ private void doStickly(String primaryKeyName, String id, String orderByColumn, String orderByParam, String tableName, Map map) {
+        if (map == null) {
+            log.warn("上移下移排序，第一条不能上移，最后一条不能下移");
+            return;
+        }
+        String primaryKeyId = String.valueOf(map.get(primaryKeyName));
+        //要交换的排序号
+
+        String descNumResult = String.valueOf(map.get(orderByColumn));
+        updateSql(primaryKeyName, primaryKeyId, orderByColumn, tableName, "-99999");
 
 
     }

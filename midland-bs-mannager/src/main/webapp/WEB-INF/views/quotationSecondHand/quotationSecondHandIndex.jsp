@@ -26,10 +26,7 @@
               onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
             <input type="hidden" name="isNew" id="isNew" value="${isNew}"/>
             <ul class="userinfo row">
-                <%@include file="../menu/area.jsp" %>
-                <li><span>区域：</span>
-                    <input type="text" name="areaName" id="areaName" placeholder="请输入区域"/></li>
-                </li>
+                <%@include file="../quotationSecondHand/dist.jsp" %>
                 <li><span>类型：</span>
                     <select name="type" id="type" class="dropdown">
                         <option value="">全部</option>
