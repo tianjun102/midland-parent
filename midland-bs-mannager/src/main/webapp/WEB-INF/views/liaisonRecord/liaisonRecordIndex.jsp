@@ -22,6 +22,15 @@
 		<form action="${ctx }/rest/liaisonRecord/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
+				<li><span>姓名：</span>
+					<input type="text" name="name" id="name" placeholder="请输入姓名" /></li>
+				</li>
+				<li><span>电话：</span>
+					<input type="text" name="phone" id="phone" placeholder="请输入电话" /></li>
+				</li>
+				<li><span>邮箱：</span>
+					<input type="text" name="email" id="email" placeholder="请输入邮箱" /></li>
+				</li>
 				<li><span>主旨：</span>
 					<select name="category" id="category" class="dropdown">
 						<option value="" >全部</option>

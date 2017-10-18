@@ -159,7 +159,7 @@
 			 and title like '%${title}%'
 		</if>
 		<if test="housesId != null">
-			 and houses_id= #{housesId,jdbcType=VARCHAR}
+			 and houses_id like '%${housesId}%'
 		</if>
 		<if test="introduction != null">
 			 and introduction= #{introduction,jdbcType=LONGVARCHAR}

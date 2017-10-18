@@ -136,6 +136,8 @@ public class LiaisonRecordController extends BaseFilter {
 			MidlandHelper.doPage(request);
 			Page<LiaisonRecord> result = (Page<LiaisonRecord>)liaisonRecordServiceImpl.findLiaisonRecordList(liaisonRecord);
 			Paginator paginator=result.getPaginator();
+			List<ParamObject> list = JsonMapReader.getMap("liaisonRecord_category");
+			model.addAttribute("categorys",list);
 			model.addAttribute("paginator",paginator);
 			model.addAttribute("items",result);
 		} catch(Exception e) {

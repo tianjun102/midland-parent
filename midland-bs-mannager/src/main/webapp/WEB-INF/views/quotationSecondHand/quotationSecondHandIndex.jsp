@@ -28,7 +28,7 @@
             <ul class="userinfo row">
                 <%@include file="../menu/area.jsp" %>
                 <li><span>区域：</span>
-                    <input type="text" name="phone" id="phone" placeholder="请输入手机号码"/></li>
+                    <input type="text" name="areaName" id="areaName" placeholder="请输入区域"/></li>
                 </li>
                 <li><span>类型：</span>
                     <select name="type" id="type" class="dropdown">
