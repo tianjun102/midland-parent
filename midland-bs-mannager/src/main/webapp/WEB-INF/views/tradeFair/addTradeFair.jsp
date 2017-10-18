@@ -17,10 +17,16 @@
             $('#file_upload').uploadify({
                 'swf': '${ctx }/assets/scripts/uploadify/uploadify.swf',
                 'uploader': '${ctx }/rest/upload/img',
-                'multi': false,// 是否支持多个文件上传
+                'multi': true,// 是否支持多个文件上传
                 'onUploadSuccess': function (file, data, response) {
-                    $("#imgUrl").attr("value", data);
-                    $("#iconImg1").attr("src", data);
+                    /*$("#imgUrl").attr("value", data);
+                    $("#iconImg1").attr("src", data);*/
+
+                    console.log(data)
+                    $("#file_upload").before("<img style='margin-bottom: 10px;max-width:200px;max-height:200px'  src='"+data+"'>")
+                    $("#imgUrl").attr("value", data+"||"+$("#imgUrl").val());
+
+
                 },
                 'onQueueComplete': function (queueData) {
                     if (queueData.uploadsSuccessful < 1) {
@@ -49,7 +55,7 @@
                 <div style="float: left;">
                     <input type="hidden" name="imgUrl" id="imgUrl" >
 
-                    <img style="margin-bottom: 10px;max-width:80px;max-height:80px" id="iconImg1" >
+                    <%--<img style="margin-bottom: 10px;max-width:80px;max-height:80px" id="iconImg1" >--%>
                     <input type="file" name="file_upload" id="file_upload"/>
                 </div>
             </li>
