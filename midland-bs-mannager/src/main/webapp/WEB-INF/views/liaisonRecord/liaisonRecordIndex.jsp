@@ -54,6 +54,7 @@
 						id="time2" name="endTime" /></li>
 				<li>
 					<input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/>
+					<a class="left" onclick="cantactSetting()" >联络人设置</a>
 				</li>
 			</ul>
 			</form>
@@ -64,6 +65,10 @@
 	
 	
 	<script type="text/javascript">
+
+		function cantactSetting() {
+            window.open("${ctx}/rest/liaisonRecordEmail/index","contentF");
+        }
 
         function exportLiaison(){
             var data = $("#searchForm").serialize();

@@ -78,12 +78,12 @@ public class QuotationSecondHandController extends BaseFilter {
 	 *
 	 **/
 	@RequestMapping("toolsTip")
-	public String toolsTip(QuotationSecondHandView obj,String distName,String distId,String url,String showType, Model model) throws Exception {
-		if (StringUtils.isEmpty(distId)&&StringUtils.isEmpty(distName)){
+	public String toolsTip(QuotationSecondHandView obj,String areaId,String areaName,String url,String showType, Model model) throws Exception {
+		if (StringUtils.isEmpty(areaId)&&StringUtils.isEmpty(areaName)){
 			obj.setAreaId("0");
 		}else{
-			obj.setAreaId(distId);
-			obj.setAreaName(distName);
+			obj.setAreaId(areaId);
+			obj.setAreaName(areaName);
 		}
 		if (StringUtils.isEmpty(obj.getCityId())){
 			obj.setCityId("085");
@@ -165,7 +165,7 @@ public class QuotationSecondHandController extends BaseFilter {
 	
 	@RequestMapping("list")
 	public String list(QuotationSecondHandView obj, Model model,HttpServletRequest request) throws Exception {
-		if (StringUtils.isEmpty(obj.getAreaId())){
+		if (StringUtils.isEmpty(obj.getAreaId())&&StringUtils.isEmpty(obj.getAreaName())){
 			obj.setAreaId("0");
 		}
 		if (StringUtils.isEmpty(obj.getCityId())){

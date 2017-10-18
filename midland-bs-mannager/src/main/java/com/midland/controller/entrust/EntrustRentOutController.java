@@ -122,7 +122,7 @@ public class EntrustRentOutController extends BaseFilter{
 	}
 	
 	private void getSelectParam(Model model) {
-		List<ParamObject> paramObjects = JsonMapReader.getMap("entrust_sellRent");
+		List<ParamObject> paramObjects = JsonMapReader.getMap("entrust_type");
 		;
 		model.addAttribute("sellRents",paramObjects);
 		List<ParamObject> paramObjects1 = JsonMapReader.getMap("appointment_status");
@@ -176,7 +176,7 @@ public class EntrustRentOutController extends BaseFilter{
 	
 	@RequestMapping("/update")
 	@ResponseBody
-	public Object updateByPrimaryKeySelective(Entrust entrust,String remark, HttpServletRequest request) {
+	public Object updateByPrimaryKeySelective(Entrust entrust,String dealRemark, HttpServletRequest request) {
 		Map map = new HashMap();
 		try {
 			if (entrust.getStatus()!=null && 1 !=entrust.getStatus()){
@@ -188,10 +188,10 @@ public class EntrustRentOutController extends BaseFilter{
 			User user = (User)request.getSession().getAttribute("userInfo");
 			
 			EntrustLog appointLog = new EntrustLog();
-			if (StringUtils.isEmpty(remark)){
+			if (StringUtils.isEmpty(dealRemark)){
 				appointLog.setRemark("无");
 			}else{
-				appointLog.setRemark(remark);
+				appointLog.setRemark(dealRemark);
 			}
 			
 			appointLog.setEntrustId(entrust.getId());
@@ -258,7 +258,7 @@ public class EntrustRentOutController extends BaseFilter{
 			exportModel.setModelName4(appointment1.getPhone());
 			List<ParamObject> houseTypes = JsonMapReader.getMap("appointment_houseType");
 			exportModel.setModelName5(MidlandHelper.getNameById(appointment1.getHouseType(), houseTypes));
-			List<ParamObject> sellRents = JsonMapReader.getMap("entrust_sellRent");
+			List<ParamObject> sellRents = JsonMapReader.getMap("entrust_type");
 			exportModel.setModelName6(MidlandHelper.getNameById(appointment1.getSellRent(), sellRents));
 			exportModel.setModelName7(appointment1.getEntrustTime());
 			exportModel.setModelName8(appointment1.getAreaName());

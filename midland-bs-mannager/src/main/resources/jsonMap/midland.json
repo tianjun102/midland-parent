@@ -102,7 +102,33 @@
       "name": "出租"
     }
   ],
-  "entrust_sellRent": [
+
+  "entrust_house_type": [
+    {
+      "id": "0",
+      "name": "新房"
+    },
+    {
+      "id": "1",
+      "name": "二手房"
+    },
+    {
+      "id": "2",
+      "name": "写字楼"
+    },
+    {
+      "id": "3",
+      "name": "商铺"
+    },
+    {
+      "id": "4",
+      "name": "其它"
+    }
+  ],
+
+
+
+  "entrust_type": [
     {
       "id": "0",
       "name": "出租"

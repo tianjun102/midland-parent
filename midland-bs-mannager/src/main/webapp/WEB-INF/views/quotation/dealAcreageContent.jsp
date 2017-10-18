@@ -82,7 +82,7 @@
         ],
         series: [
             {
-                name:'面积',
+                name:'成交面积',
                 type:'bar',
                 data:${acreageList},
 				barWidth:'20',
