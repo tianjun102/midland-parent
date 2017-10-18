@@ -49,6 +49,7 @@
 				</li>
 			</ul>
 			</form>
+			<a target="contentF" onclick="batchDowload();" href="#" <%--href="${ctx}/rest/resumeManager/batDownload"--%>>批量下载</a>
 			<div id="listDiv"></div>
 		</section>
 	</div>
