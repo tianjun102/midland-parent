@@ -47,12 +47,30 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				<%@include file="../layout/sherchArea.jsp" %>
 				<li>
 					<span style = "float:left;">平台：</span>
-					<select name="source" id="source" class="dropdown">
+					<select name="source" id="source" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
 						<option value="">全部</option>
 						<option value="1">网站</option>
 						<option value="2">微站</option>
 					</select>
 				</li>
+					<li><span>模块：</span>
+						<select name="model" id="model" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+							<option value="">全部</option>
+							<option value="0">首页</option>
+							<option value="1">新房</option>
+							<option value="2">二手房</option>
+							<option value="3">租房</option>
+						</select>
+					</li>
+					<li><span>位置：</span>
+						<select name="position" id="position" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+							<option value="">全部</option>
+							<option value="0">位置１</option>
+							<option value="1">位置２</option>
+							<option value="2">位置３</option>
+							<option value="3">位置４</option>
+						</select>
+					</li>
 				<li><input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/></li>
 			</ul>
 		    <div id="listDiv"></div> 

@@ -58,14 +58,10 @@
         <input type="hidden" name="id" id="id" value="${item.id}" >
         <input type="hidden" name="cityName" id="cityName" value="${item.cityName}" >
         <ul class="userinfo row">
-            <li><span>关键字：</span>
-                <input type="text" name="name" id="name" value="${item.name}" onblur="notEmpty('name','name','关键字不能为空！')"/>
-                <span class = "_star ">*</span>
-            </li>
             <li><span>平台：</span>
                 <select name="source" id="source" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option <c:if test="${item.source==0}">selected="selected"</c:if> value="0">网站</option>
-                    <option <c:if test="${item.source==1}">selected="selected"</c:if> value="1">微站</option>
+                    <%--<option <c:if test="${item.source==1}">selected="selected"</c:if> value="1">微站</option>--%>
                 </select>
                 <span class = "_star ">*</span>
             </li>
@@ -91,8 +87,8 @@
                 </select>
                 <span class = "_star ">*</span>
             </li>--%>
-            <li><span>类型：</span><input class="vipcate" id="cateName" name="cateName" value="${item.cateName}" onclick="showTree()" readonly="readonly"/>
-                <input name="cateId" value="${item.cateName}" type="hidden"/><label style="color: red" class = "_star " >*</label>
+            <li><span>模块：</span><input class="vipcate" id="cateName" name="cateName" value="${item.cateName}" onclick="showTree()" readonly="readonly"/>
+                <input name="cateId" value="${item.cateId}" type="hidden"/><label style="color: red" class = "_star " >*</label>
 
             </li>
             <li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >
@@ -102,11 +98,14 @@
                 <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: 305px;" onclick="hideTree()">
             </li>
 
-            <li>
+            <%--<li>
                 <span>模块名称：</span><input type="text" name="modeName" id="modeName" value="${item.modeName}" onblur="notEmpty('modeName','modeName','模块名称不能为空！')" >
                 <span class = "_star ">*</span>
+            </li>--%>
+            <li><span>关键字：</span>
+                <input type="text" name="name" id="name" value="${item.name}" onblur="notEmpty('name','name','关键字不能为空！')"/>
+                <span class = "_star ">*</span>
             </li>
-
             <li><span>链接：</span>
                 <input type="text" name="linkUrl" id="linkUrl" value="${item.linkUrl}" onblur="checkUrl('linkUrl','linkUrl','链接格式不正确！')" />
                 <span class = "_star ">*</span>
@@ -125,7 +124,7 @@
 <script type="text/javascript">
     //保存数据
     function updateData() {
-        if(!(notEmpty('name','name','关键字不能为空！')&&checkSelect("source|cityId","平台不能为空！城市不能为空！")&&notEmpty('cateName','cateName','类型不能为空！')&&notEmpty('modeName','modeName','模块名称不能为空！')&&checkUrl('linkUrl','linkUrl','链接格式不正确！'))){
+        if(!(notEmpty('name','name','关键字不能为空！')&&checkSelect("source|cityId","平台不能为空！城市不能为空！")&&notEmpty('cateName','cateName','模块不能为空！')&&checkUrl('linkUrl','linkUrl','链接格式不正确！'))){
             return;
         }
         var data = $("#dataForm").serialize();

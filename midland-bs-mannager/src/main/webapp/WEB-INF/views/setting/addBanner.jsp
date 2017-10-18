@@ -94,12 +94,12 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 						<input type="file" name="file_upload" id="file_upload"/>
 					</div>
 				</li>
+				<li><span>图片说明：</span><input type="text" name="imgDesc"></li>
 				<!-- <li><span>小图：</span><img  src="" width="120px" height="100px" alt=""><input type="file" name="file2" id="file2" onchange="previewImg(this)"></li> -->
 				<li id="picLike"><span>图片链接：</span>
 				<input id="bannerLinkurl" name="bannerLinkurl" maxlength="255" type="text" onblur="checkUrl('bannerLinkurl','bannerLinkurl','网址格式不正确！')" value="">
 				</li>
 				<li id="textArea" style="display: none;"><span>页面内容：</span><textarea style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;float: right" name="detail" id="myEditor" rows="" cols=""></textarea></li>
-				<li><span>图片说明：</span><input type="text" name="imgDesc"></li>
 			</ul>
 	       	<ul class = "adminfo row">
 	       		<li>

@@ -30,6 +30,10 @@
 					</select>
 				</li>
 				<%@include file="../layout/sherchArea.jsp" %>
+				<li>
+					<span style = "float:left;">分类名称：</span>
+					<input type="text" name="cateName" style="width: 150px;" value="" placeholder="请输入分类名称" >
+				</li>
 				<li><input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/></li>
 			</ul>
 			</form>
