@@ -19,7 +19,7 @@
             <li><span style = "float:left;">邮件标题：</span>
             <input name="title" value="" id="title">
             </li>
-            <li><span style = "float:left;">回复类容：</span> <!-- <textarea name="custNote" id="custNote" rows="" cols="" placeholder="备注说明"></textarea> -->
+            <li><span style = "float:left;">回复内容：</span> <!-- <textarea name="custNote" id="custNote" rows="" cols="" placeholder="备注说明"></textarea> -->
                 <textarea id="reply" name="reply"
                           style="width: 265px; height: 110px; resize: none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;"
                           rows="" cols="">${item.reply}</textarea></li>

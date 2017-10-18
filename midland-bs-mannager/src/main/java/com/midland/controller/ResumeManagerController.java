@@ -7,10 +7,13 @@ import com.midland.web.model.ResumeManager;
 import com.midland.web.service.ResumeManagerService;
 import com.midland.web.service.SettingService;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.tools.zip.ZipEntry;
+import org.apache.tools.zip.ZipOutputStream;
 import org.slf4j.Logger;
 
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.*;
+import java.net.URLEncoder;
 import java.util.Map;
 import java.util.HashMap;
 import org.slf4j.LoggerFactory;
@@ -195,4 +198,133 @@ public class ResumeManagerController extends BaseFilter {
 		}
 
 	}
+
+
+     /*
+      * 批量下载另存为
+      */
+	 @RequestMapping("/batDownload")
+	 @ResponseBody
+     public void batDownload(String filePaths, String fileNames, HttpServletRequest request,HttpServletResponse response) {
+		/*if(StringUtils.isEmpty(filePaths)) {
+			filePaths = "D:/upload/1.txt|D:/upload/2.doc|D:/upload/3.xls";
+		}
+		if(StringUtils.isEmpty(fileNames)){
+			fileNames = "1.txt|2.doc|3.xls";
+		}*/
+
+	 	String tmpFileName = "所有简历.zip";
+        byte[] buffer = new byte[1024];
+         String strZipPath = ("home/upload/work/"+tmpFileName);
+         try {
+             ZipOutputStream out = new ZipOutputStream(new FileOutputStream(strZipPath));
+			             String[] files=filePaths.split(",",-1);
+			             String[] names=fileNames.split(",",-1);
+			             // 下载的文件集合
+			             for (int i = 0; i < files.length; i++) {
+				                 FileInputStream fis = new FileInputStream((files[i]));
+				                 out.putNextEntry(new ZipEntry(names[i]));
+				                  //设置压缩文件内的字符编码，不然会变成乱码
+				                 out.setEncoding("GBK");
+				                 int len;
+				                 // 读入需要下载的文件的内容，打包到zip文件
+				                while ((len = fis.read(buffer)) > 0) {
+					                     out.write(buffer, 0, len);
+					                 }
+				                 out.closeEntry();
+				                 fis.close();
+				             }
+			              out.close();
+			              saveAs("work/"+tmpFileName, tmpFileName,response);
+
+			         } catch (Exception e) {
+			             e.printStackTrace();
+			         }
+		     }
+
+
+	/*
+     * 另存为
+     */
+       public void saveAs(String filePath, String fileName,HttpServletResponse response) {
+
+		         try {
+			             File file = new File(filePath);
+			             // 设置文件MIME类型
+					 		response.setContentType(getMIMEType(file));
+			             // 设置Content-Disposition
+					 		response.setHeader(
+					                     "Content-Disposition",
+					                     "attachment;filename="
+					                             + URLEncoder.encode(fileName, "UTF-8"));
+			             // 获取目标文件的绝对路径
+			             String fullFileName = ("d:/upload/" + filePath);
+			             // System.out.println(fullFileName);
+			             // 读取文件
+			             InputStream ins = new FileInputStream(fullFileName);
+			            // 放到缓冲流里面
+			             BufferedInputStream bins = new BufferedInputStream(ins);
+			             // 获取文件输出IO流
+			            // 读取目标文件，通过response将目标文件写到客户端
+			             OutputStream outs = response.getOutputStream();
+			             BufferedOutputStream bouts = new BufferedOutputStream(outs);
+			             // 写文件
+			              int bytesRead = 0;
+			              byte[] buffer = new byte[8192];
+			              // 开始向网络传输文件流
+			             while ((bytesRead = bins.read(buffer, 0, 8192)) != -1) {
+				                  bouts.write(buffer, 0, bytesRead);
+				              }
+			              bouts.flush();// 这里一定要调用flush()方法
+			              ins.close();
+			              bins.close();
+			              outs.close();
+			              bouts.close();
+			         } catch (Exception e) {
+			             e.printStackTrace();
+			         }
+		     }
+
+
+	private final String[][] MIME_MapTable = {
+			            // {后缀名， MIME类型}
+			             { ".doc", "application/msword" },
+			             { ".docx",
+			                     "application/vnd.openxmlformats-officedocument.wordprocessingml.document" },
+			             { ".xls", "application/vnd.ms-excel" },
+			             { ".xlsx",
+			                     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" },
+			             { ".pdf", "application/pdf" },
+			             { ".ppt", "application/vnd.ms-powerpoint" },
+			             { ".pptx",
+			                     "application/vnd.openxmlformats-officedocument.presentationml.presentation" },
+			             { ".txt", "text/plain" }, { ".wps", "application/vnd.ms-works" },
+			             { "", "*/*" } };
+
+
+             /**
+		       * 根据文件后缀名获得对应的MIME类型。
+		       *
+		       * @param file
+		       */
+			private String getMIMEType(File file) {
+		         String type = "*/*";
+		         String fName = file.getName();
+		         // 获取后缀名前的分隔符"."在fName中的位置。
+		         int dotIndex = fName.lastIndexOf(".");
+		         if (dotIndex < 0) {
+			             return type;
+			         }
+		         /* 获取文件的后缀名 */
+		         String end = fName.substring(dotIndex, fName.length()).toLowerCase();
+		         if (end == "")
+			             return type;
+		         // 在MIME和文件类型的匹配表中找到对应的MIME类型。
+		         for (int i = 0; i < MIME_MapTable.length; i++) {
+			             if (end.equals(MIME_MapTable[i][0]))
+				                 type = MIME_MapTable[i][1];
+			         }
+		         return type;
+		     }
+
 }

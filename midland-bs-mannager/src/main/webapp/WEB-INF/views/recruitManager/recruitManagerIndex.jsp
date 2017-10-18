@@ -8,7 +8,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-
+<style type="text/css">
+	.dropdown {
+		width: 150px!important;
+	}
+</style>
 </head>
 <body>
 	
@@ -23,7 +27,7 @@
 		<form action="${ctx }/rest/recruitManager/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
-				<li><span>工作地点：</span>
+				<li><span>城市：</span>
 					<select name="cityId" id="cityId" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
 						<option value="" >全部</option>
 						<c:forEach items="${cityList}" var="item">
@@ -45,8 +49,11 @@
 						<option value="1" >未发布</option>
 					</select>
 				</li>
-				<li><span>手机号码：</span>
-					<input type="text" name="phone" id="phone" placeholder="请输入手机号码" />
+				<li><span>岗位：</span>
+					<input style="width: 150px;" type="text" name="post" id="post" placeholder="请输入岗位" />
+				</li>
+				<li>
+					<span>发布时间：</span><input class="Wdate half" id="time1" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time2\')}'})" name="startTime"/> <em class="gang">-</em><input class="Wdate half" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'time1\')}'})" id="time2" name="endTime"/>
 				</li>
 				<li>
 					<input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/>

@@ -25,8 +25,8 @@
 					<span style = "float:left;">状态：</span>
 					<select name="isShow" id="isShow" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
 						<option value="">全部</option>
-						<option value="0">上线</option>
-						<option value="1">下线</option>
+						<option value="0">显示</option>
+						<option value="1">隐藏</option>
 					</select>
 				</li>
 				<%--<li><span>城市：</span>

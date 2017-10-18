@@ -76,33 +76,35 @@
                         <option value="4">写字楼</option>
                         <option value="5">商铺</option>
                         <option value="6">小区</option>
+                        <option value="7">经纪人</option>
+                        <option value="8">外销网</option>
+                        <option value="9">市场研究</option>
+                        <option value="10">资讯</option>
                     </select>
                 </li>
                 <li><span>META关键词：</span>
                     <input type="text" name="metaLable" id="metaLable" value=""/>
                 </li>
-                <li><span>CNZZ状态：</span>
-                    <%--<input type="hidden" name="metaShow" id="metaShow" value=""/>--%>
-                    <span style="width: 50px;"> 开启&nbsp; </span><input type="radio" name="metaShow" value="1">
-                    <span style="width: 50px;"> 关闭&nbsp; </span><input type="radio" name="metaShow" value="0">
-                </li>
-                <li><span>百度计量状态：</span>
-                    <%--<input type="hidden" name="baiduShow" id="baiduShow" value=""/>--%>
-                   <span style="width: 50px;"> 开启&nbsp; </span><input type="radio" name="baiduShow" value="1">
-                   <span style="width: 50px;"> 关闭&nbsp; </span><input type="radio" name="baiduShow" value="0">
-                </li>
                 <li><span>META描述：</span>
                     <input type="text" name="metaDesc" id="metaDesc" value=""/>
                 </li>
                 <li><span>标题：</span>
-                    <input type="text" name="title" id="title" value=""/>
+                <input type="text" name="title" id="title" value=""/>
+                </li>
+                <li><span>CNZZ状态：</span>
+            <%--<input type="hidden" name="metaShow" id="metaShow" value=""/>--%>
+                <span style="width: 50px;"> 开启&nbsp; </span><input type="radio" name="metaShow" value="1">
+                <span style="width: 50px;"> 关闭&nbsp; </span><input type="radio" name="metaShow" value="0">
                 </li>
                 <li id="cnzzPc"><span>CNZZ配置：</span><textarea style="width: 87%;min-height: 250px;resize:none; outline-color: #0099e0;float: right" name="cnzzCode" id="myEditor" rows="" cols=""></textarea></li>
-                <li id="baiduPc"><span>百度计量代码：</span><textarea style="width: 87%;min-height: 250px;resize:none; outline-color: #0099e0;float: right" name="baiduCode" id="myEditor1" rows="" cols=""></textarea></li>
-
                 <li id="cnzzWechat" style="display: none"><span>CNZZ微站配置：</span><textarea style="width: 87%;min-height: 250px;resize:none; outline-color: #0099e0;float: right" name="cnzzCodeWechat" id="myEditor2" rows="" cols=""></textarea></li>
+                <li><span>百度计量状态：</span>
+                    <%--<input type="hidden" name="baiduShow" id="baiduShow" value=""/>--%>
+                    <span style="width: 50px;"> 开启&nbsp; </span><input type="radio" name="baiduShow" value="1">
+                    <span style="width: 50px;"> 关闭&nbsp; </span><input type="radio" name="baiduShow" value="0">
+                </li>
+                <li id="baiduPc"><span>百度计量代码：</span><textarea style="width: 87%;min-height: 250px;resize:none; outline-color: #0099e0;float: right" name="baiduCode" id="myEditor1" rows="" cols=""></textarea></li>
                 <li id="baiduWechat" style="display: none"><span>百度计量微站代码：</span><textarea style="width: 87%;min-height: 250px;resize:none; outline-color: #0099e0;float: right;" name="baiduCodeWechat" id="myEditor3" rows="" cols=""></textarea></li>
-
             </ul>
             <ul class = "adminfo row">
                 <li>

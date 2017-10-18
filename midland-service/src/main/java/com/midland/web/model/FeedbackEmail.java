@@ -34,6 +34,10 @@ public class FeedbackEmail{
 	 * 城市名称
 	 **/
 	private String cityName;
+	/**
+	 * 1=反馈邮箱；2=招聘接收邮箱
+	 **/
+	private Integer emailType;
 
 
 	public Integer getId() {
@@ -98,6 +102,14 @@ public class FeedbackEmail{
 
 	public void setCityName(String cityName) {
 		this.cityName = cityName;
+	}
+
+	public Integer getEmailType() {
+		return emailType;
+	}
+
+	public void setEmailType(Integer emailType) {
+		this.emailType = emailType;
 	}
 
 	@Override

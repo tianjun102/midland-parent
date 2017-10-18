@@ -15,6 +15,7 @@
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/feedbackEmail/add" method="post" id="dataForm">
+        <input type="hidden" name="emailType" value="${emailType}">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <li>

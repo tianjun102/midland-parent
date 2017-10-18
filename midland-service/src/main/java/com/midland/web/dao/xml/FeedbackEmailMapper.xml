@@ -11,10 +11,11 @@
 		<result column="phone" property="phone" jdbcType="VARCHAR" />
 		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
 		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+		<result column="email_type" property="emailType" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,city_id,email,type,contact_person,phone,is_delete,city_name
+		id,city_id,email,type,contact_person,phone,is_delete,city_name,email_type
 	</sql>
 
 	<select id="selectFeedbackEmailById" resultMap="BaseResultMap">
@@ -67,6 +68,9 @@
 			<if test="cityName != null">
 				city_name,
 			</if>
+			<if test="emailType != null">
+				email_type,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -90,6 +94,9 @@
 			</if>
 			<if test="cityName != null">
 				#{cityName,jdbcType=VARCHAR},
+			</if>
+			<if test="emailType != null">
+				 #{emailType},
 			</if>
 		</trim>
 	</insert>
@@ -115,6 +122,9 @@
 		</if>
 		<if test="cityName != null">
 			city_name= #{cityName,jdbcType=VARCHAR},
+		</if>
+		<if test="emailType != null">
+			email_type= #{emailType},
 		</if>
 	</sql>
 
@@ -142,6 +152,9 @@
 		</if>
 		<if test="cityName != null">
 			 and city_name= #{cityName,jdbcType=VARCHAR}
+		</if>
+		<if test="emailType != null">
+			 and email_type= #{emailType}
 		</if>
 	</sql>
 

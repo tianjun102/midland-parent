@@ -16,11 +16,13 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
-				<span>反馈邮箱</span>
+				<c:if test="${emailType==2}"><span>简历接收邮箱</span></c:if>
+				<c:if test="${emailType==1}"><span>反馈邮箱</span></c:if>
 				<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>
 			</p>
 		<form action="${ctx }/rest/feedbackEmail/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
+			<input type="hidden" name="emailType" value="${emailType}">
 			<ul class = "userinfo row">
 				<%--<li><span>地区：</span>
 					<select name="cityId" id="cityId" class="dropdown">
@@ -65,7 +67,7 @@
                 title:['新增'],
                 resize: false,
                 scrollbar:false,
-                content:['${ctx}/rest/feedbackEmail/to_add', 'no']
+                content:['${ctx}/rest/feedbackEmail/to_add?emailType=${emailType}', 'no']
             });
         }
 		 window.onload = function(){

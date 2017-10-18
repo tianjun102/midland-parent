@@ -42,7 +42,7 @@
             <ul class = "adminfo row">
 
                 <li><span>城市：</span>
-                    <select onchange="setCityName();" name="cityId" id="cityId" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <select onchange="setCityName();" name="cityId" id="cityId" style="height: 38px;width: 180px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <option value="">全部</option>
                         <c:forEach items="${cityList}" var="city">
                             <option value="${city.id}">${city.name}</option>
@@ -52,7 +52,7 @@
                 </li>
                 <li>
                     <span>活动时间：</span>
-                    <input type="text" name="adTime" class="Wdate half" id="time3" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd'})" />
+                    <input type="text" name="adTime" class="Wdate half" style="width: 180px!important;" id="time3" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
                 </li>
                 <li><span>图片：</span>
                     <div style="float: left;">

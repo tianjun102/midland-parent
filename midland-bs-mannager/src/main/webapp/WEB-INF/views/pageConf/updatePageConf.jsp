@@ -77,31 +77,34 @@
                         <option <c:if test="${item.model =='4'}">selected="selected"</c:if> value="4">写字楼</option>
                         <option <c:if test="${item.model =='5'}">selected="selected"</c:if> value="5">商铺</option>
                         <option <c:if test="${item.model =='6'}">selected="selected"</c:if> value="6">小区</option>
+                        <option <c:if test="${item.model =='7'}">selected="selected"</c:if> value="7">经纪人</option>
+                        <option <c:if test="${item.model =='8'}">selected="selected"</c:if> value="8">外销网</option>
+                        <option <c:if test="${item.model =='9'}">selected="selected"</c:if> value="9">市场研究</option>
+                        <option <c:if test="${item.model =='10'}">selected="selected"</c:if> value="9">资讯</option>
                     </select>
                 </li>
                 <li><span>META关键词：</span>
-                    <input type="text" name="metaLable" id="metaLable" value="${item.metaLable}"/>
-                </li>
-                <li><span>CNZZ状态：</span>
-                    <%--<input type="text" name="metaShow" id="metaShow" value="${item.metaShow}"/>--%>
-                    <span style="width: 50px;"> 开启&nbsp; </span><input <c:if test="${item.metaShow=='1'}">checked="checked"</c:if> type="radio" name="metaShow" value="1">
-                    <span style="width: 50px;"> 关闭&nbsp; </span><input <c:if test="${item.metaShow=='0'}">checked="checked"</c:if> type="radio" name="metaShow" value="0">
-                </li>
-                <li><span>百度计量状态：</span>
-                    <%--<input type="text" name="baiduShow" id="baiduShow" value="${item.baiduShow}"/>--%>
-                    <span style="width: 50px;"> 开启&nbsp; </span><input <c:if test="${item.baiduShow=='1'}">checked="checked"</c:if>  type="radio" name="baiduShow" value="1">
-                    <span style="width: 50px;"> 关闭&nbsp; </span><input <c:if test="${item.baiduShow=='0'}">checked="checked"</c:if> type="radio" name="baiduShow" value="0">
+                <input type="text" name="metaLable" id="metaLable" value="${item.metaLable}"/>
                 </li>
                 <li><span>META描述：</span>
                     <input type="text" name="metaDesc" id="metaDesc" value="${item.metaDesc}"/>
                 </li>
                 <li><span>标题：</span>
-                    <input type="text" name="title" id="title" value="${item.title}"/>
+                <input type="text" name="title" id="title" value="${item.title}"/>
+                </li>
+                <li><span>CNZZ状态：</span>
+            <%--<input type="text" name="metaShow" id="metaShow" value="${item.metaShow}"/>--%>
+                <span style="width: 50px;"> 开启&nbsp; </span><input <c:if test="${item.metaShow=='1'}">checked="checked"</c:if> type="radio" name="metaShow" value="1">
+                <span style="width: 50px;"> 关闭&nbsp; </span><input <c:if test="${item.metaShow=='0'}">checked="checked"</c:if> type="radio" name="metaShow" value="0">
                 </li>
                 <li id="cnzzPc" <c:if test="${item.source=='1'}">style='display: none'</c:if> ><span>CNZZ配置：</span><textarea style="width: 87%;min-height: 250px;resize:none; outline-color: #0099e0;float: right" name="cnzzCode" id="myEditor" rows="" cols="">${item.cnzzCode}</textarea></li>
-                <li id="baiduPc" <c:if test="${item.source=='1'}">style='display: none'</c:if> ><span>百度计量代码：</span><textarea style="width: 87%;min-height: 250px;resize:none; outline-color: #0099e0;float: right" name="baiduCode" id="myEditor1" rows="" cols="">${item.baiduCode}</textarea></li>
-
                 <li id="cnzzWechat" <c:if test="${item.source=='0'}">style='display: none'</c:if> ><span>CNZZ微站配置：</span><textarea style="width: 87%;min-height: 250px;resize:none; outline-color: #0099e0;float: right" name="cnzzCodeWechat" id="myEditor2" rows="" cols="">${item.cnzzCodeWechat}</textarea></li>
+                <li><span>百度计量状态：</span>
+                    <%--<input type="text" name="baiduShow" id="baiduShow" value="${item.baiduShow}"/>--%>
+                    <span style="width: 50px;"> 开启&nbsp; </span><input <c:if test="${item.baiduShow=='1'}">checked="checked"</c:if>  type="radio" name="baiduShow" value="1">
+                    <span style="width: 50px;"> 关闭&nbsp; </span><input <c:if test="${item.baiduShow=='0'}">checked="checked"</c:if> type="radio" name="baiduShow" value="0">
+                </li>
+                <li id="baiduPc" <c:if test="${item.source=='1'}">style='display: none'</c:if> ><span>百度计量代码：</span><textarea style="width: 87%;min-height: 250px;resize:none; outline-color: #0099e0;float: right" name="baiduCode" id="myEditor1" rows="" cols="">${item.baiduCode}</textarea></li>
                 <li id="baiduWechat" <c:if test="${item.source=='0'}">style='display: none'</c:if> ><span>百度计量微站代码：</span><textarea style="width: 87%;min-height: 250px;resize:none; outline-color: #0099e0;float: right;" name="baiduCodeWechat" id="myEditor3" rows="" cols="">${item.baiduCodeWechat}</textarea></li>
 
             </ul>

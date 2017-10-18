@@ -44,7 +44,8 @@
                             <a target="contentF" title="删除" class="delete_img" onclick="deleteInfrmateion(${item.id })"></a>
                             <a target="contentF" onclick="sort(${item.id },${item.orderBy},1)">上移</a>
                             <a target="contentF" onclick="sort(${item.id },${item.orderBy},2)">下移</a>
-                            <c:if test="${empty item.status}"><a target="contentF" onclick="updateStatus(${item.id});">发布</a></c:if>
+                            <c:if test="${empty item.status or item.status==1}"><a target="contentF" onclick="updateStatus(${item.id},${item.status});">发布</a></c:if>
+                            <c:if test="${item.status==0}"><a target="contentF" onclick="updateStatus(${item.id},${item.status});">下线</a></c:if>
                         </td>
                     </tr>
                 </c:forEach>
@@ -145,16 +146,27 @@
     }
 
     //修改发布状态
-    function updateStatus(id){
+    function updateStatus(id,status){
+        if(status==1){
+            status=0;
+        }else if(status == 0){
+            status = 1;
+        }else if(status ==null){
+            status=0;
+        }
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/information/update?status=0"+"&id="+id,
+            url: "${ctx}/rest/information/update?status="+status+"&id="+id,
             async: false, // 此处必须同步
             dataType: "json",
 
             success: function (data) {
                 if (data.state==0){
-                    layer.msg("发布成功！", {icon: 1});
+                    if(status==null||status==0){
+                        layer.msg("发布成功！", {icon: 1});
+                    }else if(status==1){
+                        layer.msg("下线成功！", {icon: 1});
+                    }
                     $('#searchForm').submit();
                 }
             },

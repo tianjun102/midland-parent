@@ -27,7 +27,7 @@
             <input type="hidden" name="cityName" id="cityName" value="${item.cityName}" >
             <ul class = "adminfo row">
                 <li><span>招聘类型：</span>
-                    <select name="type" id="type" class="dropdown" >
+                    <select name="type" id="type" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" >
                         <option value="" class="label">请选择</option>
                         <option <c:if test="${item.type==1}">selected="selected"</c:if> value="1">校招</option>
                         <option <c:if test="${item.type==2}">selected="selected"</c:if> value="2">社招</option>
@@ -76,7 +76,7 @@
                     </select>
                     <span class = "_star ">*</span>
                 </li>
-                <li><span>发布状态：</span>
+                <li><span>上线状态：</span>
                     <select name="releaseStatus" id="releaseStatus" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <option <c:if test="${item.releaseStatus==0}">selected="selected"</c:if> value="0">上线</option>
                         <option <c:if test="${item.releaseStatus==1}">selected="selected"</c:if> value="1">下线</option>

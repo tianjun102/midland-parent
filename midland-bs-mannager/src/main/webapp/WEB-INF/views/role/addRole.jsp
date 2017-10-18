@@ -14,8 +14,8 @@
 <section class="content" style="border:none;">
 	<form action="" method="post" id="addFrom">
 	<ul class = "userinfo row">
-			<li><span>角色代码：</span><input style = "width:264px;" type="text" name="roleSign" id="roleSign"  onblur="checkRoleCode();" maxlength="128"/><span class="_star">*</span></li>
-			<li><span>角色名称：</span><input style = "width:264px;" type="text" name="roleName" id="roleName" onblur="checkRoleName();" maxlength="32"/><span class="_star">*</span></li>
+			<li><span>角色代码：</span><input style = "width:264px;" type="text" name="roleSign" id="roleSign"  onblur="checkRoleCode();" maxlength="128"/><span class="_star">*</span><div style = "font-size:12px; color:#afadad;text-indent: 70px;">(角色代码唯一)</div></li>
+			<li><span>角色名称：</span><input style = "width:264px;" type="text" name="roleName" id="roleName" onblur="checkRoleName();" maxlength="32"/><span class="_star">*</span><div style = "font-size:12px; color:#afadad;text-indent: 70px;">(角色名称唯一)</div></li>
 			<li><span>角色描述：</span><input style = "width:264px;" type="text" name="description" id="description" maxlength="256"/></li>
 			<%-- <li style = "display:flex;align-items:center">
 				<span>类型：</span>
