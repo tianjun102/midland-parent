@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@include file="../layout/tablib.jsp" %>
+<%@include file="../layout/source.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,30 +16,26 @@
     <form action="${ctx}/rest/liaisonRecordEmail/add" method="post" id="dataForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
-            <li><span>category：</span>
-               <input type="text" name="category" id="category" ß/>
+            <%@include file="../menu/area.jsp" %>
+            <li><span>主指：</span>
+                <select name="category" id="category" class="dropdown">
+                    <c:forEach items="${categorys}" var="s">
+                        <option value="${s.id}" <c:if test="${s.id == item.category}">selected="selected"</c:if>>
+                                ${s.name}
+                        </option>
+                    </c:forEach>
+                </select>
             </li>
-            <li><span>cityId：</span>
-               <input type="text" name="cityId" id="cityId" ß/>
+            <li><span>联络人：</span>
+                <input type="text" name="contactName" id="contactName" />
             </li>
-            <li><span>cityName：</span>
-               <input type="text" name="cityName" id="cityName" ß/>
+            <li><span>邮箱：</span>
+                <input type="text" name="email" id="email" />
             </li>
-            <li><span>email：</span>
-               <input type="text" name="email" id="email" ß/>
+            <li><span>手机：</span>
+                <input type="text" name="phone" id="phone" />
             </li>
-            <li><span>phone：</span>
-               <input type="text" name="phone" id="phone" ß/>
-            </li>
-            <li><span>contactId：</span>
-               <input type="text" name="contactId" id="contactId" ß/>
-            </li>
-            <li><span>isDelete：</span>
-               <input type="text" name="isDelete" id="isDelete" ß/>
-            </li>
-            <li><span>contactName：</span>
-               <input type="text" name="contactName" id="contactName" ß/>
-            </li>
+
             <li>
                 <span></span>
                 <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">更新</a>

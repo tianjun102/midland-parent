@@ -142,7 +142,7 @@
 			 and city_name= #{cityName,jdbcType=VARCHAR}
 		</if>
 		<if test="email != null">
-			 and email= #{email,jdbcType=VARCHAR}
+			 and email like '%${email}%'
 		</if>
 		<if test="phone != null">
 			 and phone= #{phone,jdbcType=VARCHAR}
@@ -154,7 +154,7 @@
 			 and is_delete= #{isDelete,jdbcType=INTEGER}
 		</if>
 		<if test="contactName != null">
-			 and contact_name= #{contactName,jdbcType=VARCHAR}
+			 and contact_name  like '%${contactName}%'
 		</if>
 	</sql>
 

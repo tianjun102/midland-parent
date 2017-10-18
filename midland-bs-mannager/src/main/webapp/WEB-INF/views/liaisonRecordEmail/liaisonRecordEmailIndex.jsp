@@ -7,7 +7,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-
+<style type="text/css">
+	.content ul.userinfo li>span {
+		float: left;
+		display: inline-block;
+		width: 90px;
+		height: 38px;
+		line-height: 38px;
+		text-align: right;
+		font-size: 14px;
+		color: rgb( 102, 102, 102 );
+	}
+</style>
 </head>
 <body>
 	
@@ -22,13 +33,12 @@
 		<form action="${ctx }/rest/liaisonRecordEmail/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
-				<li><span>select：</span>
-					<select name="cityId" id="cityId" class="dropdown">
-						<option value="" >全部</option>
-						<c:forEach items="${citys}" var="item">
-						<option value="${item.id}" >${item.name}</option>
-						</c:forEach>
-					</select>
+				<%@include file="../menu/area.jsp" %>
+				<li><span>联络人：</span>
+					<input type="text" name="contactName" id="contactName" placeholder="请输入联络人" /></li>
+				</li>
+				<li><span>邮箱：</span>
+					<input type="text" name="email" id="email" placeholder="请输入邮箱" /></li>
 				</li>
 				<li><span>手机号码：</span>
 					<input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>
@@ -48,7 +58,7 @@
             layer.open({
                 type: 2,
                 skin: 'layer-style',
-                area: ['500px','700px'],
+                area: ['500px','500px'],
                 shadeClose: false, //点击遮罩关闭
                 title:['新增'],
                 resize: false,

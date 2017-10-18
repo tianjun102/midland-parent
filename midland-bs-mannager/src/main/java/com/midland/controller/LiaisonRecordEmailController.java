@@ -3,6 +3,9 @@ package com.midland.controller;
 import com.midland.web.model.LiaisonRecordEmail;
 import com.midland.web.service.LiaisonRecordEmailService;
 import com.midland.base.BaseFilter;
+import com.midland.web.service.SettingService;
+import com.midland.web.util.JsonMapReader;
+import com.midland.web.util.ParamObject;
 import org.slf4j.Logger;
 import java.util.Map;
 import java.util.HashMap;
@@ -25,12 +28,17 @@ public class LiaisonRecordEmailController extends BaseFilter  {
 	private Logger log = LoggerFactory.getLogger(LiaisonRecordEmailController.class);
 	@Autowired
 	private LiaisonRecordEmailService liaisonRecordEmailServiceImpl;
+@Autowired
+	private SettingService settingService;
 
 	/**
 	 * 
 	 **/
 	@RequestMapping("index")
 	public String liaisonRecordEmailIndex(LiaisonRecordEmail liaisonRecordEmail,Model model) throws Exception {
+		settingService.getAllProvinceList(model);
+		List<ParamObject> obj  = JsonMapReader.getMap("liaisonRecord_category");
+		model.addAttribute("categorys",obj);
 		return "liaisonRecordEmail/liaisonRecordEmailIndex";
 	}
 
@@ -39,6 +47,9 @@ public class LiaisonRecordEmailController extends BaseFilter  {
 	 **/
 	@RequestMapping("to_add")
 	public String toAddLiaisonRecordEmail(LiaisonRecordEmail liaisonRecordEmail,Model model) throws Exception {
+		settingService.getAllProvinceList(model);
+		List<ParamObject> obj  = JsonMapReader.getMap("liaisonRecord_category");
+		model.addAttribute("categorys",obj);
 		return "liaisonRecordEmail/addLiaisonRecordEmail";
 	}
 
@@ -94,6 +105,9 @@ public class LiaisonRecordEmailController extends BaseFilter  {
 	public String toUpdateLiaisonRecordEmail(Integer id,Model model) throws Exception {
 		LiaisonRecordEmail result = liaisonRecordEmailServiceImpl.selectLiaisonRecordEmailById(id);
 		model.addAttribute("item",result);
+		settingService.getAllProvinceList(model);
+		List<ParamObject> obj  = JsonMapReader.getMap("liaisonRecord_category");
+		model.addAttribute("categorys",obj);
 		return "liaisonRecordEmail/updateLiaisonRecordEmail";
 	}
 
@@ -125,6 +139,8 @@ public class LiaisonRecordEmailController extends BaseFilter  {
 			MidlandHelper.doPage(request);
 			Page<LiaisonRecordEmail> result = (Page<LiaisonRecordEmail>)liaisonRecordEmailServiceImpl.findLiaisonRecordEmailList(liaisonRecordEmail);
 			Paginator paginator=result.getPaginator();
+			List<ParamObject> obj  = JsonMapReader.getMap("liaisonRecord_category");
+			model.addAttribute("categorys",obj);
 			model.addAttribute("paginator",paginator);
 			model.addAttribute("items",result);
 		} catch(Exception e) {

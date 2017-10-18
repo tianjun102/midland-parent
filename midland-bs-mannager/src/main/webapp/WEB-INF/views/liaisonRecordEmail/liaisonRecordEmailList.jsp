@@ -6,6 +6,15 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
+    <style type="text/css">
+        .table-add tr td a {
+            display: inline-block;
+            width: 35px;
+            height: 20px;
+            margin: 0 5px;
+            background-size: contain!important;
+        }
+    </style>
 </head>
 <body>
 
@@ -32,7 +41,9 @@
                         <td>${item.contactName}</td>
                         <td>${item.email}</td>
                         <td>${item.phone}</td>
-                        <td>${item.category}</td>
+                        <td> <c:forEach items="${categorys}" var="s">
+                            <c:if test="${item.category == s.id}">${s.name}</c:if>
+                        </c:forEach></td>
 						<td>
                             <a target="contentF" onclick="to_edit(${item.id })">编辑</a>
                             <a target="contentF" onclick="delete1(${item.id })">删除</a>
