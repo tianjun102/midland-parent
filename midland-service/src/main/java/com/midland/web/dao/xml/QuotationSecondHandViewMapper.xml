@@ -52,7 +52,7 @@
             and area_id= #{areaId,jdbcType=VARCHAR}
         </if>
         <if test="areaName != null">
-            and area_name= #{areaName,jdbcType=VARCHAR}
+            and area_name like  '%${areaName}%'
         </if>
 
     </sql>

@@ -96,12 +96,11 @@
                         <td>${item.handleTime }</td>
                         <td>
                             <c:if test="${item.resetFlag==1}">
-                                <a target="contentF" class="edit_img" title="重新分配经纪人"
+                                <a target="contentF" class="search_img" title="重新分配经纪人"
                                    onclick="toRedistribute(${item.id })"></a>
                             </c:if>
 
-                            <a target="contentF" title="编辑"
-                               onclick="toUpdateAppointment(${item.id})">编辑</a>
+                            <a target="contentF" class="edit_img" title="编辑" onclick="toUpdateAppointment(${item.id})"></a>
                         </td>
                     </tr>
                 </c:forEach>

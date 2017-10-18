@@ -67,7 +67,7 @@
 			 and city_name= #{cityName,jdbcType=VARCHAR}
 		</if>
 		<if test="areaName != null">
-			 and area_name= #{areaName,jdbcType=VARCHAR}
+			and area_name like  '%${areaName}%'
 		</if>
 		<if test="sliceName != null">
 			 and slice_name= #{sliceName,jdbcType=VARCHAR}

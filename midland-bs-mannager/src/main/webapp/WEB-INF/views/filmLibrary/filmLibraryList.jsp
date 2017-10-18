@@ -61,8 +61,16 @@
                         <td>${item.housesId }</td>
                         <td>${item.operatorName }</td>
                         <td>
-                            <a class="setup" target="contentF" href="${ctx}/rest/filmLibrary/to_update?id=${item.id}">编辑</a>
-                            <a target="contentF" style="width: 40px" onclick="delete1(${item.id })">删除</a>
+                            <c:choose>
+                                <c:when test="${item.isShow==0}">
+                                    <a target="contentF" class="onoff_img" title="状态：显示" onclick="hiddenOrShow(${item.id },1)"></a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a target="contentF" class="offon_img" title="状态：隐藏" onclick="hiddenOrShow(${item.id },0)"></a>
+                                </c:otherwise>
+                            </c:choose>
+                            <a target="contentF" class="edit_img" title="编辑" href="${ctx}/rest/filmLibrary/to_update?id=${item.id}"></a>
+                            <a target="contentF" style="width: 40px"  class="delete_img" title="删除"  onclick="delete1(${item.id })"></a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -84,7 +92,24 @@
 </c:if>
 
 <script type="text/javascript">
+    function hiddenOrShow(id, flag){
+        //0隐藏，1显示
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/filmLibrary/update?id="+id+"&isShow="+flag,
+            async: false, // 此处必须同步
+            dataType: "json",
 
+            success: function (data) {
+                if (data.state==0){
+                    $('#searchForm').submit();
+                }
+            },
+            error: function () {
+                layer.msg("操作失败！", {icon: 2});
+            }
+        })
+    }
     function delete1(id){
         $.ajax({
             type: "post",

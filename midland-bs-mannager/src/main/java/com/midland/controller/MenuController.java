@@ -155,6 +155,8 @@ public class MenuController extends BaseFilter  {
 			MidlandHelper.doPage(request);
 			Page<Menu> result = (Page<Menu>)menuServiceImpl.findMenuList(menu);
 			Paginator paginator=result.getPaginator();
+			List<ParamObject> sources = JsonMapReader.getMap("source");
+			model.addAttribute("sources",sources);
 			model.addAttribute("paginator",paginator);
 			model.addAttribute("items",result);
 		} catch(Exception e) {

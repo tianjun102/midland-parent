@@ -63,14 +63,14 @@
                         <td>
                             <c:choose>
                                 <c:when test="${item.isShow==0}">
-                                    <a target="contentF" onclick="hiddenOrShow(${item.id },1)">显示</a>
+                                    <a target="contentF" class="onoff_img" title="状态：显示" onclick="hiddenOrShow(${item.id },1)"></a>
                                 </c:when>
                                 <c:otherwise>
-                                    <a target="contentF" onclick="hiddenOrShow(${item.id },0)">隐藏</a>
+                                    <a target="contentF" class="offon_img" title="状态：隐藏" onclick="hiddenOrShow(${item.id },0)"></a>
                                 </c:otherwise>
                             </c:choose>
-                            <a target="contentF" onclick="to_edit(${item.id })">编辑</a>
-                            <a target="contentF" onclick="delete1(${item.id })">删除</a>
+                            <a target="contentF"   class="edit_img" title="编辑" onclick="to_edit(${item.id })"></a>
+                            <a target="contentF"  class="delete_img" title="删除" onclick="delete1(${item.id })"></a>
                         </td>
                     </tr>
                 </c:forEach>

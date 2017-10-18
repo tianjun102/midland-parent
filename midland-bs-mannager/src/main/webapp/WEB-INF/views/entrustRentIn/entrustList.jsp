@@ -87,8 +87,8 @@
                                 <a target="contentF" onclick="toRedistribute(${item.id })">分配</a>
                             </c:if>
 
-                            <a target="contentF" onclick="toUpdateEntrust(${item.id })">修改</a>
-                            <a target="contentF" class="delete_img" onclick="deleteEntrust(${item.id })"></a>
+                            <a target="contentF" class="edit_img" title="编辑" onclick="toUpdateEntrust(${item.id })"></a>
+                            <a target="contentF"  class="delete_img" title="删除"  onclick="deleteEntrust(${item.id })"></a>
                         </td>
                     </tr>
                 </c:forEach>

@@ -8,7 +8,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-
+	<style type="text/css">
+		.content ul.userinfo li>span{
+			float: left;
+			display: inline-block;
+			width: 90px;
+			height: 38px;
+			line-height: 38px;
+			text-align: right;
+			font-size: 14px;
+			color: rgb( 102, 102, 102 );
+		}
+	</style>
 
 </head>
 <body>
@@ -24,10 +35,10 @@
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
 				<li><span>楼盘id：</span>
-					<input type="text" name="housesId" id="housesId" placeholder="请输入名称" /></li>
+					<input type="text" name="housesId" id="housesId" placeholder="请输入楼盘id" /></li>
 				</li>
 				<li><span>楼盘名称：</span>
-					<input type="text" name="title" id="title" placeholder="请输入名称" /></li>
+					<input type="text" name="title" id="title" placeholder="请输入楼盘名称" /></li>
 				</li>
 				<li><span>状态：</span>
 					<select name="isShow" id="isShow" class="dropdown">

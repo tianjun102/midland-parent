@@ -156,6 +156,9 @@
 					<shiro:hasPermission name="questionsList">
 						<a id = "showOrderInfoIndex" href="${ctx}/rest/questions/index" target="contentF"><span>问答管理</span></a>
 					</shiro:hasPermission>
+					<shiro:hasPermission name="questionsList">
+						<a id = "showOrderInfoIndex" href="${ctx}/rest//leaveMsg/index" target="contentF"><span>留言管理</span></a>
+					</shiro:hasPermission>
 				</dd>
 			</dl>
 		</shiro:hasPermission>

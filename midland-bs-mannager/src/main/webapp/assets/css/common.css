@@ -433,6 +433,9 @@ input.date {
 .table-add tr td a.edit_img {
 	background: url(../img/edit_default.png) no-repeat center center;
 }
+.table-add tr td a.search_img {
+	background: url(../img/portlet-reload-icon.png) no-repeat center center;
+}
 .table-add tr td a.edit_img:hover {
 	background: url(../img/edit_active.png) no-repeat center center;
 }

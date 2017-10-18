@@ -32,7 +32,9 @@
 						<td>${item.name}</td>
 						<td>${item.phone}</td>
                         <td>${item.email}</td>
-                        <td>${item.category}</td>
+                        <td><c:forEach items="${categorys}" var="s">
+                            <c:if test="${item.category == s.id}">${s.name}</c:if>
+                        </c:forEach></td>
 						<td>${item.leavingMessage}</td>
 						<td>${item.addTime}</td>
 						<%--<td>--%>

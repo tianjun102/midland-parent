@@ -8,7 +8,25 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-
+<style type="text/css">
+	.content ul.userinfo li>span {
+		float: left;
+		display: inline-block;
+		width: 90px;
+		height: 38px;
+		line-height: 38px;
+		text-align: right;
+		font-size: 14px;
+		color: rgb( 102, 102, 102 );
+	}
+	.table-add tr td a {
+		display: inline-block;
+		width: 35px;
+		height: 20px;
+		margin: 0 5px;
+		background-size: contain!important;
+	}
+</style>
 </head>
 <body>
 	
@@ -22,8 +40,8 @@
 		<form action="${ctx }/rest/leaveMsg/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
-				<li><span>名称：</span>
-					<input type="text" name="userName" id="userName" placeholder="请输入名称" /></li>
+				<li><span>用户名称：</span>
+					<input type="text" name="userName" id="userName" placeholder="请输入用户名称" /></li>
 				</li>
 				<li><span>手机号码：</span>
 					<input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>

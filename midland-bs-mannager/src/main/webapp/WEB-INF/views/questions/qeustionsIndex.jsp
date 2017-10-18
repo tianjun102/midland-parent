@@ -61,7 +61,7 @@
                     <input type="text" name="questionPhone" id="questionPhone" placeholder="请输入手机号码"/>
                 </li>
                 <li>
-                    <span>平台：</span>
+                    <span>来源：</span>
                     <select name="source" id="source" class="dropdown">
                         <option value="">请选择</option>
                         <c:forEach items="${sources}" var="s">
