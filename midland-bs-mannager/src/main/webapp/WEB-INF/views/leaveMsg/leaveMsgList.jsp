@@ -14,10 +14,11 @@
     <table class="table table-bordered table-add">
         <thead>
             <tr>
-				<th style="width: 8%">留言</th>
-				<th style="width: 8%">留言时间</th>
-				<th style="width: 8%">用户</th>
+
+				<th style="width: 8%">用户名称</th>
 				<th style="width: 8%">手机号</th>
+                <th style="width: 8%">留言</th>
+                <th style="width: 8%">留言时间</th>
                 <th style="width: 10%">操作</th>
             </tr>
         </thead>
@@ -27,10 +28,10 @@
                 <c:forEach items="${requestScope.items }" var="item" varStatus="xh">
                     <tr>
 						<input type="hidden" id="id" value="${item.id}"/>
-						<td>${item.message}</td>
-						<td>${item.addTime}</td>
 						<td>${item.userName}</td>
 						<td>${item.phone}</td>
+                        <td>${item.message}</td>
+                        <td>${item.addTime}</td>
 						<td>
                             <a target="contentF" onclick="to_edit(${item.id })">回复</a>
                             <a target="contentF" onclick="delete1(${item.id })">删除</a>

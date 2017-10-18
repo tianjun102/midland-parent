@@ -133,7 +133,7 @@
 			 and id= #{id,jdbcType=INTEGER}
 		</if>
 		<if test="message != null">
-			 and message= #{message,jdbcType=LONGVARCHAR}
+			 and message like '%${message}'
 		</if>
 		<if test="addTime != null">
 			 and add_time= #{addTime,jdbcType=TIMESTAMP}
