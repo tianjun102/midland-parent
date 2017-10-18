@@ -82,6 +82,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							<td>
 								<a target="contentF" class = "edit_img" title = "编辑" href="${ctx}/rest/setting/enterEditBanner?id=${banner.id}"></a>
 								<a onclick="deleteBanner(${banner.id})"  class = "delete_img" title = "删除"></a>
+								<a target="contentF" onclick="sort(${banner.id },${banner.orderBy},1)">上移</a>
+								<a target="contentF" onclick="sort(${banner.id },${banner.orderBy},2)">下移</a>
 								<!-- <a href="javascript:;" target="contentFrame" class = "admin_img" title = "管理图片"></a> -->
 							</td>
 						</tr>
@@ -113,6 +115,25 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			}
 		})
 	})
+
+    //排序
+    function sort(id,orderById,sort) {
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/setting/bannerSort?sort="+sort+"&orderBy="+orderById+"&id="+id,
+            async: false, // 此处必须同步
+            dataType: "json",
+
+            success: function (data) {
+                if (data.state==0){
+                    $('#searchForm').submit();
+                }
+            },
+            error: function () {
+                layer.msg("操作失败！", {icon: 2});
+            }
+        })
+    }
 	
 
 	</script>

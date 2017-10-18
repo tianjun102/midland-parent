@@ -71,6 +71,19 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							<option value="3">位置４</option>
 						</select>
 					</li>
+					<li><span>位置：</span>
+						<select name="enabled" id="enabled" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+							<option value="">全部</option>
+							<option value="0">关闭</option>
+							<option value="1">开放</option>
+						</select>
+					</li>
+					<li><span>上线时间：</span><input  class="Wdate half" id="time1"
+												  onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time2\')}'})"
+												  name="startTime" /> <em class = "gang">-</em><input
+							class="Wdate half"
+							onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'time1\')}'})"
+							id="time2" name="endTime" /></li>
 				<li><input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/></li>
 			</ul>
 		    <div id="listDiv"></div> 

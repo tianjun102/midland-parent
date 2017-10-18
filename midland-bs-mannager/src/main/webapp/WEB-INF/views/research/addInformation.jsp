@@ -18,7 +18,7 @@
 <head>
     <base href="<%=basePath%>">
     <meta charset="utf-8" />
-    <title>添加资讯</title>
+    <title>添加市场调究</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
@@ -105,7 +105,7 @@
 <div class="box">
     <section class = "content">
         <p class = "detail-title">
-            <span>添加资讯</span>
+            <span>添加市场调究</span>
         </p>
         <form id="formId" action="" method="post" enctype="multipart/form-data" method="post">
             <ul class = "adminfo row">

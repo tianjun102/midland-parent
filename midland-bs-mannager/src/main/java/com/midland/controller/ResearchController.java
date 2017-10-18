@@ -215,7 +215,7 @@ public class ResearchController extends BaseFilter {
 		String orderByColumn="order_by";
 		ListDescOtherParam obj = new ListDescOtherParam();
 		obj.setCityId(null);
-		obj.setType(null);
+		obj.setType("artice_type=0");
 		obj.setSource(null);
 		String orderByParam=String.valueOf(information.getOrderBy());
 		jdbcService.listDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,obj,sort);

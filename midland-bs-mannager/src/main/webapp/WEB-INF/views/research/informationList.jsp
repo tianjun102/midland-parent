@@ -18,10 +18,10 @@
             <th style="width: 10%">缩列图</th>
             <th style="width: 20%">标题</th>
             <th style="width: 10%">城市</th>
-            <th style="width: 10%">点击量</th>
+            <th style="width: 5%">点击量</th>
             <th style="width: 15%">发布日期</th>
             <th style="width: 5%">平台</th>
-            <th style="width: 25%">操作</th>
+            <th style="width: 40%">操作</th>
         </tr>
         </thead>
         <tbody>
@@ -44,6 +44,7 @@
                             <a target="contentF" class="delete_img" title="删除" onclick="deleteInfrmateion(${item.id })"></a>
                             <a target="contentF" onclick="sort(${item.id },${item.orderBy},1)">上移</a>
                             <a target="contentF" onclick="sort(${item.id },${item.orderBy},2)">下移</a>
+                            <a target="contentF" onclick="sort(${item.id },${item.orderBy},0)">置顶</a>
                             <c:if test="${empty item.status}"><a target="contentF" onclick="updateStatus(${item.id});">发布</a></c:if>
                         </td>
                     </tr>

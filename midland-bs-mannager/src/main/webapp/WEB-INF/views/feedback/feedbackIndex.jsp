@@ -31,8 +31,8 @@
 						onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'time1\')}'})"
 						id="time2" name="endTime"/>
 				</li>
-				<li><span>手机号码：</span>
-					<input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>
+				<li><span>联系方式：</span>
+					<input type="text" name="phone" id="phone" placeholder="请输入手机号码或邮箱" /></li>
 				</li>
 				<li><input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/></li>
 			</ul>

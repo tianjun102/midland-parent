@@ -37,7 +37,7 @@
                 </p>
             </li>
             <li><span>链接名：</span><input style="width:274px;" type="text" name="linkName" value="${linkUrlManager.linkName}" id="linkName" onblur="notEmpty('linkName','linkName','链接名不能为空！');" maxlength="50"/><span class="_star">*</span></li>
-            <li style="display:flex;align-items:center">
+            <li>
                 <span style = "float:left;">平台：</span>
                 <select name="source" id="source" class="dropdown">
                     <option <c:if test="${linkUrlManager.source eq 1}">selected='selected' </c:if> value="1">网站</option>
@@ -74,7 +74,7 @@
                 data: data,
                 success: function (data) {
                     if (data.flag == 1) {
-                        layer.msg("新增成功！！！", {icon: 1});
+                        layer.msg("修改成功！！！", {icon: 1});
                         $('#save').removeAttr("onclick");
                         setTimeout(function () {
                             parent.location.reload();

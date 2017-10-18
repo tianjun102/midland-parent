@@ -16,10 +16,11 @@
 		<result column="operator_id" property="operatorId" jdbcType="INTEGER" />
 		<result column="operator_name" property="operatorName" jdbcType="VARCHAR" />
 		<result column="source" property="source" jdbcType="INTEGER" />
+		<result column="type" property="type" jdbcType="INTEGER" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,nick_name,phone,feedback_content,add_time,status,remark,is_delete,purpose,user_id,operator_id,operator_name,source
+		id,nick_name,phone,feedback_content,add_time,status,remark,is_delete,purpose,user_id,operator_id,operator_name,source,type
 	</sql>
 
 	<select id="selectFeedbackById" resultMap="BaseResultMap">
@@ -87,6 +88,9 @@
 			<if test="source != null">
 				source,
 			</if>
+			<if test="type != null">
+				type,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -125,6 +129,9 @@
 			</if>
 			 <if test="source != null">
 				 #{source,jdbcType=INTEGER},
+			 </if>
+			 <if test="type != null">
+				 #{type,jdbcType=INTEGER},
 			 </if>
 		</trim>
 	</insert>
@@ -165,6 +172,9 @@
 		</if>
 		<if test="source != null">
 			source= #{source,jdbcType=INTEGER},
+		</if>
+		<if test="type != null">
+			type= #{type,jdbcType=INTEGER},
 		</if>
 	</sql>
 
@@ -213,6 +223,9 @@
 		</if>
 		<if test="source != null">
 			and source= #{source,jdbcType=INTEGER}
+		</if>
+		<if test="type != null">
+			and type= #{type,jdbcType=INTEGER}
 		</if>
 	</sql>
 

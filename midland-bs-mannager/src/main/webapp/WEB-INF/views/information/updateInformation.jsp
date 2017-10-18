@@ -49,7 +49,7 @@
 <div class="box">
     <section class = "content">
         <p class = "detail-title">
-            <span>添加资讯</span>
+            <span>修改资讯</span>
         </p>
         <form id="formId" action="${ctx}/rest/banner/addBanner" method="post" enctype="multipart/form-data" method="post">
             <ul class = "adminfo row">

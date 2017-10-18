@@ -21,10 +21,11 @@
 		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
 		<result column="city_name" property="cityName" jdbcType="INTEGER" />
 		<result column="type" property="type" jdbcType="INTEGER" />
+		<result column="order_by" property="orderBy" jdbcType="INTEGER" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,banner_img,banner_linkurl,img_desc,sort_order,enabled,city_id,source,model,DATE_FORMAT(start_time,'%Y-%m-%d %H:%i:%s') start_time,DATE_FORMAT(end_time,'%Y-%m-%d %H:%i:%s') end_time,position,video_url,detail,is_delete,city_name,clik_num,type
+		id,banner_img,banner_linkurl,img_desc,sort_order,enabled,city_id,source,model,DATE_FORMAT(start_time,'%Y-%m-%d %H:%i:%s') start_time,DATE_FORMAT(end_time,'%Y-%m-%d %H:%i:%s') end_time,position,video_url,detail,is_delete,city_name,clik_num,type,order_by
 	</sql>
 
 	<select id="selectById" resultMap="BaseResultMap">
@@ -51,9 +52,13 @@
 		where 
 		is_delete=0
 		<include refid="select_option" />
+		ORDER BY order_by ASC
 	</select>
 
 	<insert id="insertBanner" parameterType="com.midland.web.model.Banner">
+		<selectKey resultType="INTEGER" order="BEFORE" keyProperty="orderBy">
+			SELECT count(0)+1 as orderBy from banner
+		</selectKey>
 		insert into banner
 		<trim prefix="(" suffix=")" suffixOverrides="," >
 			<if test="bannerImg != null">
@@ -106,6 +111,9 @@
 			</if>
 			<if test="type != null">
 				type,
+			</if>
+			<if test="orderBy != null">
+				order_by,
 			</if>
 		</trim>
 		values
@@ -160,6 +168,9 @@
 			 </if>
 			 <if test="type != null">
 				 #{type,jdbcType=INTEGER},
+			 </if>
+			 <if test="orderBy != null">
+				 #{orderBy},
 			 </if>
 		</trim>
 	</insert>
@@ -216,6 +227,9 @@
 		<if test="type != null">
 			type= #{type,jdbcType=INTEGER},
 		</if>
+		<if test="orderBy != null">
+			order_by= #{orderBy},
+		</if>
 	</sql>
 
 	<sql id="select_option">
@@ -247,10 +261,10 @@
 			 and model= #{model,jdbcType=VARCHAR}
 		</if>
 		<if test="startTime != null">
-			 and start_time= #{startTime,jdbcType=TIMESTAMP}
+			 and start_time>= #{startTime,jdbcType=TIMESTAMP}
 		</if>
 		<if test="endTime != null">
-			 and end_time= #{endTime,jdbcType=TIMESTAMP}
+			 and #{endTime,jdbcType=TIMESTAMP} >= end_time
 		</if>
 		<if test="position != null">
 			 and position= #{position,jdbcType=VARCHAR}
@@ -272,6 +286,9 @@
 		</if>
 		<if test="type != null">
 			and type= #{type,jdbcType=INTEGER}
+		</if>
+		<if test="orderBy != null">
+			and order_by= #{orderBy}
 		</if>
 	</sql>
 
