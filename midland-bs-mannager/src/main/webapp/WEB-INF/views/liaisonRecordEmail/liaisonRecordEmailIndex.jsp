@@ -45,6 +45,7 @@
 				</li>
 				<li>
 					<input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/>
+					<a href="${ctx}/rest//liaisonRecord//index" target="contentF" >返回</a>
 				</li>
 			</ul>
 			</form>

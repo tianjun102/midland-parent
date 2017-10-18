@@ -92,7 +92,7 @@
             type: 2,
             title: ['修改'],
             shade: 0.3,
-            area: ['500px', '700px'],
+            area: ['500px', '500px'],
             content: ['${ctx}/rest/liaisonRecordEmail/to_update?id='+id,'no']
         });
     }
