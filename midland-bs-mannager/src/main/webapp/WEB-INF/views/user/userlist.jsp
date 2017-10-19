@@ -67,15 +67,16 @@
 
                                 <%--</c:otherwise>--%>
                                 <%--</c:choose>--%>
-                            <a target="contentF" style="width: 100px;" onclick="viewRealRegistration(${cust.id })">
-                                <c:choose>
-                                    <c:when  test="${cust.auditStatus==0}">
-                                        审核实名信息
-                                    </c:when>
-                                    <c:otherwise>
-                                        查看实名信息
-                                    </c:otherwise>
-                                </c:choose>
+                            <a target="contentF"
+                                    <c:choose>
+                                        <c:when  test="${cust.auditStatus==0}">
+                                            title="审核实名信息" class="check_img"
+                                        </c:when>
+                                        <c:otherwise>
+                                            title="查看实名信息" class="see_img"
+                                        </c:otherwise>
+                                    </c:choose>
+                                 onclick="viewRealRegistration(${cust.id })">
                             </a>
                         </td>
                     </tr>

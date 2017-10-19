@@ -34,8 +34,8 @@
                         <td>${item.message}</td>
                         <td>${item.addTime}</td>
 						<td>
-                            <a target="contentF" onclick="to_edit(${item.id })">回复</a>
-                            <a target="contentF" onclick="delete1(${item.id })">删除</a>
+                            <a target="contentF" title="回复" class="reply_img" onclick="to_edit(${item.id })"></a>
+                            <a target="contentF"　title="删除" class="delete_img" onclick="delete1(${item.id })"></a>
                         </td>
                     </tr>
                 </c:forEach>

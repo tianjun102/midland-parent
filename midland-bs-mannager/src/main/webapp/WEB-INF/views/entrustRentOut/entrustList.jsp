@@ -84,7 +84,7 @@
                         <td>${item.handleTime }</td>
                         <td>
                             <c:if test="${item.resetFlag==1}">
-                                <a target="contentF" onclick="toRedistribute(${item.id })">分配</a>
+                                <a target="contentF" class="arrange_img" title="分配" onclick="toRedistribute(${item.id })"></a>
                             </c:if>
 
                             <a target="contentF" class="edit_img" title="编辑" onclick="toUpdateEntrust(${item.id })"></a>

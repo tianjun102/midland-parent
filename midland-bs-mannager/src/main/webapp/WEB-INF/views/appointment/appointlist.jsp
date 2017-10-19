@@ -96,7 +96,7 @@
                         <td>${item.handleTime }</td>
                         <td>
                             <c:if test="${item.resetFlag==1}">
-                                <a target="contentF" class="search_img" title="重新分配经纪人"
+                                <a target="contentF" class="arrange_img" title="重新分配经纪人"
                                    onclick="toRedistribute(${item.id })"></a>
                             </c:if>
 

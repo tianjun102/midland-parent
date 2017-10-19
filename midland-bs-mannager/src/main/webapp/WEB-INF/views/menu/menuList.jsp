@@ -61,8 +61,8 @@
                                     <a target="contentF" class="offon_img" title="状态：隐藏" onclick="hiddenOrShow(${item.id },0)"></a>
                                 </c:otherwise>
                             </c:choose>
-                            <a target="contentF" onclick="sort(${item.id },${item.orderBy},1)">上移</a>
-                            <a target="contentF" onclick="sort(${item.id },${item.orderBy},2)">下移</a>
+                            <a target="contentF" title="上移" class="up_img" onclick="sort(${item.id },${item.orderBy},1)"></a>
+                            <a target="contentF" title="下移" class="down_img" onclick="sort(${item.id },${item.orderBy},2)"></a>
                         </td>
                     </tr>
                 </c:forEach>
