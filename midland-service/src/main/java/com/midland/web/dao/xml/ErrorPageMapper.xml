@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.midland.web.dao.ErrorPageMapper">
+
+ 	<resultMap id="BaseResultMap" type="com.midland.web.model.ErrorPage" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="page_404" property="page404" jdbcType="LONGVARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id,page_404
+	</sql>
+
+	<select id="selectErrorPageById" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from error_page
+		 where id= #{id}
+	</select>
+
+	<delete id="deleteErrorPageById" >
+		delete from error_page
+		 where id= #{id}
+	</delete>
+
+	<update id="updateErrorPageById" >
+		update error_page 
+		<set>
+		<include refid="update_option"/>
+		</set>
+
+		 where id= #{id}
+	</update>
+
+	<select id="findErrorPageList" parameterType="com.midland.web.model.ErrorPage" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from error_page
+		where 
+		is_delete=0
+		<include refid="select_option" />
+	</select>
+
+	<insert id="insertErrorPage" parameterType="com.midland.web.model.ErrorPage">
+		insert into error_page
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="page404 != null">
+				page_404,
+			</if>
+		</trim>
+		values
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="page404 != null">
+				#{page404,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<sql id="update_option">
+		<if test="page404 != null">
+			page_404= #{page404,jdbcType=LONGVARCHAR},
+		</if>
+	</sql>
+
+	<sql id="select_option">
+		<if test="id != null">
+			 and id= #{id,jdbcType=INTEGER}
+		</if>
+		<if test="page404 != null">
+			 and page_404= #{page404,jdbcType=LONGVARCHAR}
+		</if>
+	</sql>
+
+</mapper>
