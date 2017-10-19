@@ -65,10 +65,17 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							<td>${banner.cityName}</td>
 							<td><c:if test="${banner.source =='0'}">网站</c:if><c:if test="${banner.source =='1'}">微站</c:if></td>
 							<td>
-								<c:if test="${banner.model==0}">首页</c:if>
-								<c:if test="${banner.model==1}">新房</c:if>
-								<c:if test="${banner.model==2}">二手房</c:if>
-								<c:if test="${banner.model==3}">租房</c:if>
+                                <c:if test="${banner.model=='0'}">首页</c:if>
+                                <c:if test="${banner.model=='1'}">新房</c:if> value="1">
+                                <c:if test="${banner.model=='2'}">市场研究</c:if>
+                                <c:if test="${banner.model=='3'}">资讯</c:if> value="3">
+                                <c:if test="${banner.model=='4'}">地产新闻</c:if>
+                                <c:if test="${banner.model=='5'}">美联资讯</c:if>
+                                <c:if test="${banner.model=='6'}">购房指南</c:if>
+                                <c:if test="${banner.model=='7'}">新政解读</c:if>
+                                <c:if test="${banner.model=='8'}">人物专访</c:if>
+                                <c:if test="${banner.model=='9'}">购房资格</c:if>
+                                <c:if test="${banner.model=='10'}">关于我们</c:if>
 							</td>
 							<td>
 								<c:if test="${banner.position==0}">位置一</c:if>
