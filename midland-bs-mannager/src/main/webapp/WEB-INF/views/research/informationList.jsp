@@ -14,7 +14,7 @@
     <table class="table table-bordered table-add">
         <thead>
         <tr>
-            <th style="width: 5%"></th>
+            <th style="width: 5%">编号</th>
             <th style="width: 10%">缩列图</th>
             <th style="width: 20%">标题</th>
             <th style="width: 10%">城市</th>

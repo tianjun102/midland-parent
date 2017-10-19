@@ -14,6 +14,7 @@
     <table class="table table-bordered table-add">
         <thead>
             <tr>
+                <th style="width: 8%">编号</th>
 				<th style="width: 8%">用户昵称</th>
                 <th style="width: 8%">反馈类型</th>
 				<th style="width: 8%">联系方式</th>
@@ -29,6 +30,7 @@
                 <c:forEach items="${requestScope.items }" var="item" varStatus="xh">
                     <tr>
 						<input type="hidden" id="id" value="${item.id}"/>
+                        <td>${xh.count}</td>
 						<td>${item.nickName}</td>
                         <td>
                             <c:if test="${item.type==0}">咨询</c:if>

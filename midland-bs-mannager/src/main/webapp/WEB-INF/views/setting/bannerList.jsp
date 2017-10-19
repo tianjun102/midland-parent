@@ -32,18 +32,20 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
 			<div class = "table-responsive m40">
 				<table class="table table-bordered table-add">
+				<col width="5%" >
 				<col width="10%" >
-				<col width="7%" >
-				<col width="7%" >
-				<col width="7%" >
-				<col width="7%" >
-				<col width="7%" >
+				<col width="6%" >
+				<col width="6%" >
+				<col width="6%" >
+				<col width="6%" >
+				<col width="6%" >
 				<col width="15%" >
 				<col width="15%" >
 				<col width="6%" >
-				<col width="20%" >
+				<col width="22%" >
 	 				<thead>
 						<tr>
+							<th>编号</th>
 							<th>轮播图</th>
 							<th>状态</th>
 							<th>城市</th>
@@ -57,18 +59,18 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 						</tr>
 					</thead>
 					<tbody>
-					<c:forEach items="${bannerList}" var="banner">
+					<c:forEach items="${bannerList}" var="banner" varStatus="xh">
 						<tr>
-							<%-- <td>${banner.id}</td> --%>
+							<td>${xh.count}</td>
 							<td><img style="height: 36px;" src="${fileUrl}${banner.bannerImg}" class="suo"/></td>
 							<td><c:if test="${banner.enabled =='0'}">关闭</c:if><c:if test="${banner.enabled =='1'}">开放</c:if></td>
 							<td>${banner.cityName}</td>
 							<td><c:if test="${banner.source =='0'}">网站</c:if><c:if test="${banner.source =='1'}">微站</c:if></td>
 							<td>
                                 <c:if test="${banner.model=='0'}">首页</c:if>
-                                <c:if test="${banner.model=='1'}">新房</c:if> value="1">
+                                <c:if test="${banner.model=='1'}">新房</c:if>
                                 <c:if test="${banner.model=='2'}">市场研究</c:if>
-                                <c:if test="${banner.model=='3'}">资讯</c:if> value="3">
+                                <c:if test="${banner.model=='3'}">资讯</c:if>
                                 <c:if test="${banner.model=='4'}">地产新闻</c:if>
                                 <c:if test="${banner.model=='5'}">美联资讯</c:if>
                                 <c:if test="${banner.model=='6'}">购房指南</c:if>
@@ -89,8 +91,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							<td>
 								<a target="contentF" class = "edit_img" title = "编辑" href="${ctx}/rest/setting/enterEditBanner?id=${banner.id}"></a>
 								<a onclick="deleteBanner(${banner.id})"  class = "delete_img" title = "删除"></a>
-								<a target="contentF" onclick="sort(${banner.id },${banner.orderBy},1)">上移</a>
-								<a target="contentF" onclick="sort(${banner.id },${banner.orderBy},2)">下移</a>
+								<a class="up_img" title="上移" target="contentF" onclick="sort(${banner.id },${banner.orderBy},1)"></a>
+								<a class="down_img" title="下移" target="contentF" onclick="sort(${banner.id },${banner.orderBy},2)"></a>
 								<!-- <a href="javascript:;" target="contentFrame" class = "admin_img" title = "管理图片"></a> -->
 							</td>
 						</tr>

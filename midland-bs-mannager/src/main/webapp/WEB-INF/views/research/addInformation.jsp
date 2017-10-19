@@ -141,7 +141,7 @@
                     <span>标题：</span>
                     <input type="text" name="title" id="title"  onblur="notEmpty('title','title','标题不能为空！');"  onfocus="notEmpty('vipcate','vipcate','请填写市场分类！')"  />
                 </li>
-                <li><span>平台：</span><input name="source" id="source" type="text">
+                <li><span>来源：</span><input name="source" id="source" type="text">
                 </li>
                 <li><span>附件：</span>
                     <div style="float: left;">

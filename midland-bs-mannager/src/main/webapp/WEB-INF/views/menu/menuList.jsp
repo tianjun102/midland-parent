@@ -23,7 +23,7 @@
     <table class="table table-bordered table-add">
         <thead>
         <tr>
-            <th style="width: 3%"></th>
+            <th style="width: 3%">编号</th>
             <th style="width: 3%">城市</th>
             <th style="width: 3%">图标</th>
             <th style="width: 3%">平台</th>

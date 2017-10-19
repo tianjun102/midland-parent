@@ -48,6 +48,7 @@
 					</select>
 				</li>
 				<li><span>标题：</span><input type="text" name="title" id="title" placeholder="请输入标题" /></li>
+				<li><span>来源：</span><input name="source" id="source" type="text" placeholder="请输入来源">
 				<li>
 					<span>发布时间：</span><input class="Wdate half" id="time1"
 											 onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time2\')}'})"

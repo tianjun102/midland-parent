@@ -14,7 +14,7 @@
     <table class="table table-bordered table-add">
         <thead>
             <tr>
-
+                <th style="width: 8%">编号</th>
 				<th style="width: 8%">用户名称</th>
 				<th style="width: 8%">手机号</th>
                 <th style="width: 8%">留言</th>
@@ -28,6 +28,7 @@
                 <c:forEach items="${requestScope.items }" var="item" varStatus="xh">
                     <tr>
 						<input type="hidden" id="id" value="${item.id}"/>
+                        <td>${xh.count}</td>
 						<td>${item.userName}</td>
 						<td>${item.phone}</td>
                         <td>${item.message}</td>
