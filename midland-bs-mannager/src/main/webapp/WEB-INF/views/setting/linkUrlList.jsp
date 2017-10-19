@@ -14,7 +14,7 @@
 				<table class="table table-bordered table-add">
 	 				<thead>
 						<tr>
-							<th style="width: 5%">序号</th>
+							<th style="width: 5%">编号</th>
 							<th style="width: 5%">城市</th>
 							<th style="width: 5%">平台</th>
 							<th style="width: 5%">名称</th>
@@ -35,8 +35,8 @@
 								</td>
 								<td>${linkUrl.linkName}</td>
 								<td>
-									<a target="contentF" onclick="sort(${linkUrl.id },${linkUrl.orderBy},1)">上移</a>
-									<a target="contentF" onclick="sort(${linkUrl.id },${linkUrl.orderBy},2)">下移</a>
+									<a target="contentF" title="上移" class="up_img" onclick="sort(${linkUrl.id },${linkUrl.orderBy},1)"></a>
+									<a target="contentF" title="下移" class="down_img" onclick="sort(${linkUrl.id },${linkUrl.orderBy},2)"></a>
 									<a onclick="preUpdate(${linkUrl.id })" target="contentF" class = "edit_img" title = "编辑"></a>
 									<a target="contentF" class = "delete_img" title = "删除" onclick="isDelete(${linkUrl.id })"></a>
 									<a <c:if test="${linkUrl.isShow==0}">class="onoff_img"</c:if> <c:if test="${linkUrl.isShow==1}">class="offon_img"</c:if> target="contentF" onclick="updateLinkUrl(${linkUrl.isShow},${linkUrl.id })"></a>

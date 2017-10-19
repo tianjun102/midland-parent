@@ -14,7 +14,7 @@
     <table class="table table-bordered table-add">
         <thead>
             <tr>
-				<th style="width: 10%">序号</th>
+				<th style="width: 10%">编号</th>
 				<%--<th style="width: 10%">模块名称</th>--%>
 				<th style="width: 10%">城市</th>
 				<th style="width: 10%">模块名称</th>
@@ -34,8 +34,8 @@
 						<td>
                             <a class="edit_img" target="contentF" onclick="to_edit(${item.id })"></a>
                             <a class="delete_img" target="contentF" onclick="delete1(${item.id })"></a>
-                            <a target="contentF" onclick="sort(${item.id },${item.orderBy},1)">上移</a>
-                            <a target="contentF" onclick="sort(${item.id },${item.orderBy},2)">下移</a>
+                            <a target="contentF" title="上移" class="up_img" onclick="sort(${item.id },${item.orderBy},1)"></a>
+                            <a target="contentF" title="下移" class="down_img" onclick="sort(${item.id },${item.orderBy},2)"></a>
                             <a href="javascript:;" target="contentF"
                                <c:if test="${item.isShow == 1}">class = "offon_img" title = "隐藏"</c:if>
                                <c:if test="${item.isShow == 0}">class = "onoff_img"  title = "显示"</c:if>

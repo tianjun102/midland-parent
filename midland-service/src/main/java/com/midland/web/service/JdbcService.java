@@ -45,13 +45,13 @@ public class JdbcService {
         StringBuffer sb = new StringBuffer("SELECT ").append(primaryKeyName + ",").append(orderByColumn)
                 .append(" from ").append(tableName).append(" where ").append("is_delete = 0 and ");
         if (StringUtils.isNotEmpty(obj.getCityId())) {
-            sb.append("city_id=").append(obj.getCityId()).append(" and");
+            sb.append("city_id=").append(obj.getCityId()).append(" and ");
         }
         if (StringUtils.isNotEmpty(obj.getType())) {
-            sb.append("type=").append(obj.getType()).append(" and");
+            sb.append(obj.getType()).append(" and ");
         }
-        if (obj.getSource()==null) {
-            sb.append("source=").append(obj.getSource()).append(" and");
+        if (obj.getSource()!=null) {
+            sb.append("source=").append(obj.getSource()).append(" and ");
         }
         sb.append(orderByColumn)
                 .append("<").append(orderByParam).append(" order by ")
@@ -74,13 +74,14 @@ public class JdbcService {
         StringBuffer sb = new StringBuffer("SELECT ").append(primaryKeyName + ",").append(orderByColumn)
                 .append(" from ").append(tableName).append(" where ").append("is_delete = 0 and ");
         if (StringUtils.isNotEmpty(obj.getCityId())) {
-            sb.append("city_id=").append(obj.getCityId()).append(" and");
+            sb.append("city_id=").append(obj.getCityId()).append(" and ");
         }
         if (StringUtils.isNotEmpty(obj.getType())) {
-            sb.append("type=").append(obj.getType()).append(" and");
+            //artice_type=0
+            sb.append(obj.getType()).append(" and ");
         }
-        if (obj.getSource()==null) {
-            sb.append("source=").append(obj.getSource()).append(" and");
+        if (obj.getSource()!=null) {
+            sb.append("source=").append(obj.getSource()).append(" and ");
         }
                 sb.append(orderByColumn)
                 .append(">").append(orderByParam).append(" order by ")
@@ -213,7 +214,8 @@ public class JdbcService {
             sb.append("city_id=").append(obj.getCityId()).append(" and ");
         }
         if (StringUtils.isNotEmpty(obj.getType())) {
-            sb.append("type=").append(obj.getType()).append(" and ");
+            //artice_type=0
+            sb.append(obj.getType()).append(" and ");
         }
         if (obj.getSource()!=null) {
             sb.append("source=").append(obj.getSource()).append(" and ");
@@ -242,7 +244,8 @@ public class JdbcService {
             sb.append("city_id=").append(obj.getCityId()).append(" and ");
         }
         if (StringUtils.isNotEmpty(obj.getType())) {
-            sb.append("type=").append(obj.getType()).append(" and ");
+            //artice_type=0
+            sb.append(obj.getType()).append(" and ");
         }
         if (obj.getSource()!=null) {
             sb.append("source=").append(obj.getSource()).append(" and ");

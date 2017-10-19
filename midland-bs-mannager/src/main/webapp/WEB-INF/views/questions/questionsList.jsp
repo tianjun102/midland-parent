@@ -16,16 +16,16 @@
     <table class="table table-bordered table-add">
         <thead>
         <tr>
-            <th style=""></th>
-            <th style="">序号</th>
-            <th style="">问题主题</th>
-            <th style="">平台</th>
-            <th style="">提问时间</th>
-            <th style="">提问人昵称</th>
-            <th style="">提问人手机号</th>
-            <th style="">审核人</th>
-            <th style="">状态</th>
-            <th style="">操作</th>
+            <th style="width: 5%"></th>
+            <th style="width: 5%">序号</th>
+            <th style="width: 10%">问题主题</th>
+            <th style="width: 5%">平台</th>
+            <th style="width: 15%">提问时间</th>
+            <th style="width: 10%">提问人昵称</th>
+            <th style="width: 10%">提问人手机号</th>
+            <th style="width: 8%">审核人</th>
+            <th style="width: 5%">状态</th>
+            <th style="width: 20%">操作</th>
         </tr>
         </thead>
         <tbody>
@@ -52,13 +52,13 @@
                         <td>
                             <c:choose>
                                 <c:when test="${item.status==0}">
-                                    <a style="width: auto;" target="contentF" onclick="toAudit(${item.id })">审核</a>
+                                    <a  class="check_img" title="审核" target="contentF" onclick="toAudit(${item.id })"></a>
                                 </c:when>
                                 <c:otherwise>
-                                    <a style="width: auto;" target="contentF" href="${ctx}/rest/questions/to_view?id=${item.id}">查看问题</a>
+                                    <a  class="see_img" title="查看问题" target="contentF" href="${ctx}/rest/questions/to_view?id=${item.id}"></a>
                                 </c:otherwise>
                             </c:choose>
-                            <a style="width: auto;" target="contentF" href="${ctx}/rest/questions/to_repeat?id=${item.id}">回答</a>
+                            <a  target="contentF" class="reply_img" title="回答" href="${ctx}/rest/questions/to_repeat?id=${item.id}"></a>
                         </td>
                     </tr>
                 </c:forEach>

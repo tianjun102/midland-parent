@@ -23,13 +23,14 @@
 			<p class = "detail-title">
 				<span>市场调究管理</span>
 				<a class = "setup"  target="contentF" href="${ctx}/rest/research/to_add">新增</a>
+				<a style="margin-right: 10px;" class = "setup"  target="contentF" href="${ctx}/rest/category/index?type=0">分类管理</a>
 			</p>
 		<form action="${ctx }/rest/research/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
 				<%@include file="../layout/sherchArea.jsp" %>
 				<li><span>类别：</span><input style="width: 243px;" class="vipcate" id="vipcate"  name="vipcate" onclick="showTree()" readonly="readonly"/>
-					<input name="cateId" type="hidden"/><label style="color: red" class = "_star " >*</label>
+					<input name="cateId" type="hidden"/>
 
 				</li>
 				<li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >
@@ -47,6 +48,7 @@
 					</select>
 				</li>
 				<li><span>标题：</span><input type="text" name="title" id="title" placeholder="请输入标题" /></li>
+				<li><span>来源：</span><input name="source" id="source" type="text" placeholder="请输入来源">
 				<li>
 					<span>发布时间：</span><input class="Wdate half" id="time1"
 											 onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time2\')}'})"

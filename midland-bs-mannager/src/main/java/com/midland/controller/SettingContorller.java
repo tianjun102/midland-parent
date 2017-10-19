@@ -448,5 +448,23 @@ public class SettingContorller extends BaseFilter {
         return map;
     }
 
+    @RequestMapping("bannerSort")
+    @ResponseBody
+    public Map bannerSort(Banner banner, int sort, Model model, HttpServletRequest request) throws Exception {
+        String primaryKeyName="id";
+        String primaryParam=String.valueOf(banner.getId());
+        String tableName="banner";
+        String orderByColumn="order_by";
+        ListDescOtherParam obj = new ListDescOtherParam();
+        obj.setCityId(null);
+        obj.setType(null);
+        obj.setSource(null);
+        String orderByParam=String.valueOf(banner.getOrderBy());
+        jdbcService.listDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,obj,sort);
+        Map map = new HashMap();
+        map.put("state",0);
+        return map;
+    }
+
 
 }

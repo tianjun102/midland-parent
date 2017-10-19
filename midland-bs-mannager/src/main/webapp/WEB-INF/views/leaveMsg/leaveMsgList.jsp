@@ -14,7 +14,7 @@
     <table class="table table-bordered table-add">
         <thead>
             <tr>
-
+                <th style="width: 8%">编号</th>
 				<th style="width: 8%">用户名称</th>
 				<th style="width: 8%">手机号</th>
                 <th style="width: 8%">留言</th>
@@ -28,13 +28,14 @@
                 <c:forEach items="${requestScope.items }" var="item" varStatus="xh">
                     <tr>
 						<input type="hidden" id="id" value="${item.id}"/>
+                        <td>${xh.count}</td>
 						<td>${item.userName}</td>
 						<td>${item.phone}</td>
                         <td>${item.message}</td>
                         <td>${item.addTime}</td>
 						<td>
-                            <a target="contentF" onclick="to_edit(${item.id })">回复</a>
-                            <a target="contentF" onclick="delete1(${item.id })">删除</a>
+                            <a target="contentF" title="回复" class="reply_img" onclick="to_edit(${item.id })"></a>
+                            <a target="contentF"　title="删除" class="delete_img" onclick="delete1(${item.id })"></a>
                         </td>
                     </tr>
                 </c:forEach>

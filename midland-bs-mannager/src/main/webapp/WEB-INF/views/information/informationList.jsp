@@ -14,14 +14,14 @@
     <table class="table table-bordered table-add">
         <thead>
         <tr>
-            <th style="width: 5%"></th>
+            <th style="width: 5%">编号</th>
             <th style="width: 10%">缩列图</th>
             <th style="width: 20%">标题</th>
             <th style="width: 10%">城市</th>
-            <th style="width: 10%">点击量</th>
+            <th style="width: 5%">点击量</th>
             <th style="width: 15%">发布日期</th>
             <th style="width: 5%">平台</th>
-            <th style="width: 25%">操作</th>
+            <th style="width: 40%">操作</th>
         </tr>
         </thead>
         <tbody>
@@ -39,13 +39,14 @@
                         <td>${item.releaseTime }</td>
                         <td><c:if test="${item.platform==0}">网站</c:if><c:if test="${item.platform==1}">微站</c:if> </td>
                         <td>
-                            <a target="contentF" onclick="to_comment(${item.id});" >评论</a>
+                            <a target="contentF" title="评论" class="comment_img" onclick="to_comment(${item.id});" ></a>
                             <a target="contentF" title="编辑" class="edit_img" href="${ctx}/rest/information/to_update?id=${item.id}"></a>
                             <a target="contentF" title="删除" class="delete_img" onclick="deleteInfrmateion(${item.id })"></a>
-                            <a target="contentF" onclick="sort(${item.id },${item.orderBy},1)">上移</a>
-                            <a target="contentF" onclick="sort(${item.id },${item.orderBy},2)">下移</a>
-                            <c:if test="${empty item.status or item.status==1}"><a target="contentF" onclick="updateStatus(${item.id},${item.status});">发布</a></c:if>
-                            <c:if test="${item.status==0}"><a target="contentF" onclick="updateStatus(${item.id},${item.status});">下线</a></c:if>
+                            <a target="contentF" title="上移" class="up_img" onclick="sort(${item.id },${item.orderBy},1)"></a>
+                            <a target="contentF" title="下移" class="down_img" onclick="sort(${item.id },${item.orderBy},2)"></a>
+                            <a target="contentF" title="置顶" class="stick_img" onclick="sort(${item.id },${item.orderBy},0)"></a>
+                            <c:if test="${empty item.status or item.status==1}"><a target="contentF" title="发布" class="lineup_img" onclick="updateStatus(${item.id},${item.status});"></a></c:if>
+                            <c:if test="${item.status==0}"><a target="contentF" title="下线" class="linedown_img" onclick="updateStatus(${item.id},${item.status});"></a></c:if>
                         </td>
                     </tr>
                 </c:forEach>

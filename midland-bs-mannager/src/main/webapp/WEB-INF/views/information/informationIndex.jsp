@@ -22,6 +22,7 @@
 			<p class = "detail-title">
 				<span>资讯管理</span>
 				<a class = "setup"  target="contentF" href="${ctx}/rest/information/to_add">新增</a>
+				<a style="margin-right: 10px;" class = "setup"  target="contentF" href="${ctx}/rest/category/index?type=1">分类管理</a>
 			</p>
 		<form action="${ctx }/rest/information/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
@@ -29,7 +30,7 @@
 
 				<%@include file="../layout/sherchArea.jsp" %>
 				<li><span>类别：</span><input style="width: 243px;" class="vipcate" id="vipcate"  name="vipcate" onclick="showTree()" readonly="readonly"/>
-					<input name="cateId" type="hidden"/><label style="color: red" class = "_star " >*</label>
+					<input name="cateId" type="hidden"/>
 
 				</li>
 				<li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >

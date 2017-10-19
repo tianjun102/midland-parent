@@ -14,8 +14,10 @@
     <table class="table table-bordered table-add">
         <thead>
             <tr>
+                <th style="width: 8%">编号</th>
 				<th style="width: 8%">用户昵称</th>
-				<th style="width: 8%">手机号</th>
+                <th style="width: 8%">反馈类型</th>
+				<th style="width: 8%">联系方式</th>
 				<th style="width: 8%">反馈内容</th>
 				<th style="width: 8%">反馈时间</th>
                 <th style="width: 8%">平台</th>
@@ -28,7 +30,14 @@
                 <c:forEach items="${requestScope.items }" var="item" varStatus="xh">
                     <tr>
 						<input type="hidden" id="id" value="${item.id}"/>
+                        <td>${xh.count}</td>
 						<td>${item.nickName}</td>
+                        <td>
+                            <c:if test="${item.type==0}">咨询</c:if>
+                            <c:if test="${item.type==1}">建议</c:if>
+                            <c:if test="${item.type==2}">投诉</c:if>
+                            <c:if test="${item.type==3}">其它</c:if>
+                        </td>
 						<td>${item.phone}</td>
 						<td>${item.feedbackContent}</td>
 						<td>${item.addTime}</td>

@@ -78,7 +78,7 @@
         <input type="hidden" name="id" id="id" value="${popular.id}">
         <ul class="userinfo row">
             <li><span>链接名：</span><input style="width:274px;" type="text" value="${popular.name}" onblur="notEmpty('name','name','链接名不能为空！');" name="name" id="name" maxlength="50"/><span class="_star">*</span></li>
-            <li style="display:flex;align-items:center">
+            <li>
                 <span style = "float:left;">平台：</span>
                 <select name="source" id="source" style="height: 38px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option value="">全部</option>
@@ -103,7 +103,7 @@
                 </div>
                 <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: 323px;" onclick="hideTree()">
             </li>
-            <li style="display:flex;align-items:center">
+            <li>
                 <span style = "float:left;">模块：</span>
                 <select name="menuId" id="menuId" style="height: 38px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option <c:if test="${popular.source =='1'}">selected = 'selected'</c:if> value="1">首页</option>
@@ -223,7 +223,7 @@
                 },
                 success: function (data) {
                     if (data.flag == 1) {
-                        layer.msg("新增成功！！！", {icon: 1});
+                        layer.msg("修改成功！！！", {icon: 1});
                         $('#save').removeAttr("onclick");
                         setTimeout(function () {
                             parent.location.reload();

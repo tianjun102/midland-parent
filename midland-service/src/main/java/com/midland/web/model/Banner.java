@@ -73,6 +73,8 @@ public class Banner{
 
 	private Integer type;
 
+	private Integer orderBy;
+
 	public Integer getId() {
 		return id;
 	}
@@ -215,6 +217,14 @@ public class Banner{
 
 	public void setType(Integer type) {
 		this.type = type;
+	}
+
+	public Integer getOrderBy() {
+		return orderBy;
+	}
+
+	public void setOrderBy(Integer orderBy) {
+		this.orderBy = orderBy;
 	}
 
 	@Override

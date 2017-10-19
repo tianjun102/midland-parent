@@ -14,7 +14,7 @@
     <table class="table table-bordered table-add">
         <thead>
             <tr>
-				<th style="width: 8%">序号</th>
+				<th style="width: 8%">编号</th>
 				<th style="width: 8%">城市名称</th>
                 <th style="width: 8%">平台</th>
 				<th style="width: 8%">页面</th>
@@ -44,8 +44,13 @@
                             <c:if test="${item.model =='5'}">商铺</c:if>
                             <c:if test="${item.model =='6'}">小区</c:if>
                         </td>
-						<td>${item.baiduShow}</td>
-                        <td>${item.metaShow}</td>
+                        <td><c:if test="${item.baiduShow==1}">开启</c:if>
+                            <c:if test="${item.baiduShow==0}">关闭</c:if>
+                        </td>
+                        <td>
+                            <c:if test="${item.metaShow==0}">关闭</c:if>
+                            <c:if test="${item.metaShow==1}">开启</c:if>
+                        </td>
 						<td>
                             <a class="edit_img" target="contentF" href="${ctx}/rest/pageConf/to_update?id=${item.id}"></a>
                             <a class="delete_img" target="contentF" onclick="delete1(${item.id })"></a>

@@ -567,6 +567,87 @@ input.date {
 .table-add tr td a.examine_img:hover {
 	background: url(../img/examine_active.png) no-repeat center center;
 }
+/**icon分配小图标**/
+.table-add tr td a.arrange_img {
+	 background: url(../img/icon/arrange-2.png) no-repeat center center;
+ }
+.table-add tr td a.arrange_img:hover {
+	background: url(../img/icon/arrange-1.png) no-repeat center center;
+}
+/**icon评论小图标**/
+.table-add tr td a.comment_img {
+	background: url(../img/icon/comment-2.png) no-repeat center center;
+}
+.table-add tr td a.comment_img:hover {
+	background: url(../img/icon/comment-1.png) no-repeat center center;
+}
+/**icon下移小图标**/
+.table-add tr td a.down_img {
+	background: url(../img/icon/down-2.png) no-repeat center center;
+}
+.table-add tr td a.down_img:hover {
+	background: url(../img/icon/down-1.png) no-repeat center center;
+}
+/**icon上移小图标**/
+.table-add tr td a.up_img {
+	background: url(../img/icon/up-2.png) no-repeat center center;
+}
+.table-add tr td a.up_img:hover {
+	background: url(../img/icon/up-1.png) no-repeat center center;
+}
+/**icon下线小图标**/
+.table-add tr td a.linedown_img {
+	background: url(../img/icon/linedown-2.png) no-repeat center center;
+}
+.table-add tr td a.linedown_img:hover {
+	background: url(../img/icon/linedown-1.png) no-repeat center center;
+}
+/**icon上线小图标**/
+.table-add tr td a.lineup_img {
+	background: url(../img/icon/lineup-2.png) no-repeat center center;
+}
+.table-add tr td a.lineup_img:hover {
+	background: url(../img/icon/lineup-1.png) no-repeat center center;
+}
+/**数据恢复小图标**/
+.table-add tr td a.recove_img {
+	background: url(../img/icon/recove-2.png) no-repeat center center;
+}
+.table-add tr td a.recove_img:hover {
+	background: url(../img/icon/recove-1.png) no-repeat center center;
+}
+/**回复小图标**/
+.table-add tr td a.reply_img {
+	background: url(../img/icon/reply-2.png) no-repeat center center;
+}
+.table-add tr td a.reply_img:hover {
+	background: url(../img/icon/reply-1.png) no-repeat center center;
+}
+/**置顶小图标**/
+.table-add tr td a.stick_img {
+	background: url(../img/icon/stick-2.png) no-repeat center center;
+}
+.table-add tr td a.stick_img:hover {
+	background: url(../img/icon/stick-1.png) no-repeat center center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .table-add tr td.blockup{
 	color: #999;
 }

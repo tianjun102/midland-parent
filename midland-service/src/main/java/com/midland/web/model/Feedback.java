@@ -61,6 +61,10 @@ public class Feedback{
 	 * 0=网站；1=微站
 	 **/
 	private Integer source;
+	/**
+	 * 0=资讯；1=建议；2=投诉；3=其他
+	 **/
+	private Integer type;
 	
 	
 	public String getStartTime() {
@@ -181,6 +185,14 @@ public class Feedback{
 
 	public void setSource(Integer source) {
 		this.source = source;
+	}
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
 	}
 
 	@Override

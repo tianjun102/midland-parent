@@ -40,8 +40,8 @@
 						<td>${item.addTime}</td>
                         <td>${item.cityName}</td>
 						<td>
-                            <a target="contentF" onclick="to_edit(${item.id })">回复</a>
-                            <a target="contentF" href="${ctx}/rest/resumeManager/fileDownload">下载</a>
+                            <a target="contentF" title="回复" class="reply_img" onclick="to_edit(${item.id })"></a>
+                            <a target="contentF" title="下载简历" class="updown_img" href="${ctx}/rest/resumeManager/fileDownload"></a>
                             <a target="contentF" class="delete_img" onclick="delete1(${item.id })"></a>
                         </td>
                     </tr>

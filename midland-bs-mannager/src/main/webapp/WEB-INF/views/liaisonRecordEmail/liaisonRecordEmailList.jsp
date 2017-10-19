@@ -23,6 +23,7 @@
     <table class="table table-bordered table-add">
         <thead>
             <tr>
+                <th style="width: 8%">编号</th>
 				<th style="width: 8%">城市</th>
                 <th style="width: 8%">联络人</th>
 				<th style="width: 8%">邮箱</th>
@@ -37,6 +38,7 @@
                 <c:forEach items="${requestScope.items }" var="item" varStatus="xh">
                     <tr>
 						<input type="hidden" id="id" value="${item.id}"/>
+                        <td>${xh.count}</td>
                         <td>${item.cityName}</td>
                         <td>${item.contactName}</td>
                         <td>${item.email}</td>

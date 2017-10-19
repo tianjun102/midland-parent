@@ -14,6 +14,7 @@
     <table class="table table-bordered table-add">
         <thead>
             <tr>
+                <th style="width: 8%">编号</th>
 				<th style="width: 20%">评论</th>
 				<th style="width: 8%">用户</th>
 				<th style="width: 8%">状态</th>
@@ -27,14 +28,15 @@
                 <c:forEach items="${requestScope.items }" var="item" varStatus="xh">
                     <tr>
 						<input type="hidden" id="id" value="${item.id}"/>
+                        <td>${xh.count}</td>
 						<td>${item.comment}</td>
 						<td>${item.user}</td>
 						<td>${item.status}</td>
 						<td>${item.source}</td>
 						<td>
-                            <a target="contentF" onclick="editStatus(${item.id },0)">审核通过</a>
-                            <a target="contentF" onclick="editStatus(${item.id },1)">审核拒绝</a>
-                            <a target="contentF" onclick="delete1(${item.id })">删除</a>
+                            <a target="contentF" class="confirm_img" title="审核通过" onclick="editStatus(${item.id },0)"></a>
+                            <a target="contentF" class="reset_img" title="审核拒绝" onclick="editStatus(${item.id },1)"></a>
+                            <a target="contentF" class="delete_img" title="删除" onclick="delete1(${item.id })"></a>
                         </td>
                     </tr>
                 </c:forEach>

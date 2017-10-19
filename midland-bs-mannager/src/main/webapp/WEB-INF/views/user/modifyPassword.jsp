@@ -76,7 +76,7 @@
 			var bool = false;
 			var oldPwd = $("#oldPwd").val();
 			if (oldPwd == "" || oldPwd == null) {
-				$("#checkOldPwdMsg").text("原密码不能为空!");
+                layer.tips("原密码不能为空!", "input[name='oldPwd']", {tips: 1});
 				return bool;
 			}
 
@@ -93,7 +93,7 @@
 						$("#checkOldPwdMsg").text("*");
 						bool = true;
 					} else {
-						$("#checkOldPwdMsg").text("原密码错误！");
+                        layer.tips("原密码错误!", "input[name='oldPwd']", {tips: 1});
 						bool = false;
 					}
 				}
@@ -114,16 +114,16 @@
 			var oldPwd = $("#oldPwd").val();
 			var newPwd = $("#newPwd").val();
 			if (newPwd == "" || newPwd == null) {
-				$("#checkNewPwdMsg").text("新密码不能为空!");
+                layer.tips("新密码不能为空!", "input[name='newPwd']", {tips: 1});
 				return false;
 			} else if (newPwd.length <8) {
-				$("#checkNewPwdMsg").text("密码不能小于8位数！");
+                layer.tips("密码不能小于8位数!", "input[name='newPwd']", {tips: 1});
 				return false;
 			} else if (newPwd.length > 20) {
-				$("#checkNewPwdMsg").text("密码不能大于20位数！");
+                layer.tips("密码不能大于20位数!", "input[name='newPwd']", {tips: 1});
 				return false;
 			} else if (!reg.test(newPwd)) {
-				$("#checkNewPwdMsg").text("请输入正确格式的密码!");
+                layer.tips("请输入正确格式的密码!", "input[name='newPwd']", {tips: 1});
 				return false;
 			}
 
@@ -138,11 +138,11 @@
 			}
 
 			if (flag < 2) {
-				$("#checkNewPwdMsg").text("请使用8-20位字母/数字/符号的至少两种组合的密码!");
+                layer.tips("请使用8-20位字母/数字/符号的至少两种组合的密码!", "input[name='newPwd']", {tips: 1});
 				return false;
 			}
 			if (oldPwd == newPwd) {
-				$("#checkNewPwdMsg").text("新密码与原密码一致!");
+                layer.tips("新密码与原密码一致!", "input[name='newPwd']", {tips: 1});
 				return false;
 			}
 			return true;
@@ -153,11 +153,11 @@
 			var newPwd1 = $("#newPwd").val();
 			var confirmPwd = $("#confirmPwd").val();
 			if (confirmPwd == "" || confirmPwd == null) {
-				$("#checkConfirmPwdMsg").text("确认密码不能为空!");
+                layer.tips("确认密码不能为空!", "input[name='confirmPwd']", {tips: 1});
 				return false;
 			}
 			if (newPwd1 != confirmPwd) {
-				$("#checkConfirmPwdMsg").text("两次输入密码不一致!");
+                layer.tips("两次输入密码不一致!", "input[name='confirmPwd']", {tips: 1});
 				return false;
 			}
 			return true;

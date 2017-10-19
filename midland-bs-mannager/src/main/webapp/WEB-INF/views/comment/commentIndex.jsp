@@ -20,13 +20,13 @@
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<input type="hidden" name="informationId" value="${comment.informationId}">
 			<li><span>城市：</span>
-				<p>${information.cityName}</p>
+				<p style="display: inline">${information.cityName}</p>
 			</li>
 			<li><span>标题：</span>
-				<p>${information.title}</p>
+				<p style="display: inline">${information.title}</p>
 			</li>
 			<li><span>发布时间：</span>
-				<p>${information.releaseTime}</p>
+				<p style="display: inline">${information.releaseTime}</p>
 			</li>
 			<ul class = "userinfo row">
 				<%--<li><span>select：</span>

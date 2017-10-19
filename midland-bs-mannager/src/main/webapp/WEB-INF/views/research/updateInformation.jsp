@@ -18,7 +18,7 @@
 <head>
     <base href="<%=basePath%>">
     <meta charset="utf-8" />
-    <title>添加资讯</title>
+    <title>添加市场调究</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
@@ -102,7 +102,7 @@
 <div class="box">
     <section class = "content">
         <p class = "detail-title">
-            <span>添加资讯</span>
+            <span>修改市场调究</span>
         </p>
         <form id="formId" action="${ctx}/rest/banner/addBanner" method="post" enctype="multipart/form-data" method="post">
             <ul class = "adminfo row">
@@ -138,7 +138,7 @@
                     <span>标题：</span>
                     <input type="text" id="title" name="title" value="${item.title}" />
                 </li>
-                <li><span>平台：</span><input name="source" id="source" type="text" value="${item.source}" />
+                <li><span>来源：</span><input name="source" id="source" type="text" value="${item.source}" />
                 </li>
                 <li><span>附件：</span>
                     <div style="float: left;">

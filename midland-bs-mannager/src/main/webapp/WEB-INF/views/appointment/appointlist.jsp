@@ -53,14 +53,14 @@
     <table class="table table-bordered table-add">
         <thead>
         <tr>
-            <th style="width:auto">委托编号</th>
+            <th style="width:auto">预约编号</th>
             <th style="width:auto">平台</th>
             <th style="width:auto">预约人</th>
             <th style="width:auto">电话</th>
             <th style="width:auto">性别</th>
             <th style="width:auto">类型</th>
             <th style="width:auto">分类</th>
-            <th style="width:auto">委托时间</th>
+            <th style="width:auto">预约时间</th>
             <th style="width:auto">所属区域</th>
             <th style="width:auto">小区名</th>
             <th style="width:auto">门牌地址</th>
@@ -110,7 +110,7 @@
                         <td>${item.handleTime }</td>
                         <td>
                             <c:if test="${item.resetFlag==1}">
-                                <a target="contentF" class="search_img" title="重新分配经纪人"
+                                <a target="contentF" class="arrange_img" title="重新分配经纪人"
                                    onclick="toRedistribute(${item.id })"></a>
                             </c:if>
 

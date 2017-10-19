@@ -31,7 +31,7 @@
     <table class="table table-bordered table-add">
         <thead>
         <tr>
-            <th style="width: 8%"></th>
+            <th style="width: 8%">编号</th>
             <th style="width: 15%">预览图</th>
             <th style="width: 10%">状态</th>
             <th style="width: 32%">楼盘名称</th>

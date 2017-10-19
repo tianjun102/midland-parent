@@ -14,7 +14,7 @@
     <table class="table table-bordered table-add">
         <thead>
             <tr>
-				<th style="width: 8%">序号</th>
+				<th style="width: 8%">编号</th>
 				<th style="width: 8%">平台</th>
 				<th style="width: 8%">模块名称</th>
 				<th style="width: 8%">城市</th>

@@ -31,10 +31,10 @@
                         <td>${item.keywords}</td>
                         <td>${item.menuName}</td>
 						<td>
-                            <a class="edit_img" target="contentF" onclick="to_edit(${item.id })"></a>
-                            <a class="delete_img" target="contentF" onclick="delete1(${item.id })"></a>
-                            <a target="contentF" onclick="sort(${item.id },${item.orderBy},1)">上移</a>
-                            <a target="contentF" onclick="sort(${item.id },${item.orderBy},2)">下移</a>
+                            <a class="edit_img" title="编辑" target="contentF" onclick="to_edit(${item.id })"></a>
+                            <a class="delete_img" title="删除" target="contentF" onclick="delete1(${item.id })"></a>
+                            <a target="contentF" class="up_img" title="上移" onclick="sort(${item.id },${item.orderBy},1)"></a>
+                            <a target="contentF" class="down_img" title="下移" onclick="sort(${item.id },${item.orderBy},2)"></a>
                         </td>
                     </tr>
                 </c:forEach>
