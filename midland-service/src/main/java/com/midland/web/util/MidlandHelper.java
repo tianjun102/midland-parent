@@ -3,6 +3,7 @@ package com.midland.web.util;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
+import com.midland.core.util.DateUtils;
 import com.midland.web.enums.ContextEnums;
 import com.midland.web.model.user.User;
 import org.apache.commons.lang3.StringUtils;
@@ -30,7 +31,11 @@ public class MidlandHelper {
 		BigDecimal bigDecimal = new BigDecimal(s);
 		return bigDecimal.toPlainString();
 	}
-	
+	public static String formatMonth(String time){
+		Date tempTime = DateUtils.parseStringToDateYYMMDD(time);
+		DateFormat format = new SimpleDateFormat(MONTH);
+		return format.format(tempTime);
+	}
 	
 	public static String getCurrentTime(){
 		long intTime = System.currentTimeMillis();
@@ -41,6 +46,34 @@ public class MidlandHelper {
 		DateFormat format = new SimpleDateFormat(COMMON_DATE);
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(time);
+		calendar.add(Calendar.MONTH,amount);
+		return format.format(calendar.getTime());
+	}
+
+	public static String getFormatMonth(Date time ,Integer amount){
+		DateFormat format = new SimpleDateFormat(MONTH);
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(time);
+		calendar.add(Calendar.MONTH,amount);
+		return format.format(calendar.getTime());
+	}
+
+	public static String getFormatPreMonth(String yyMMddtime ,Integer amount){
+		Date tempTime = DateUtils.parseStringToDateYYMMDD(yyMMddtime);
+		DateFormat format = new SimpleDateFormat(COMMON_DATE);;
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(tempTime);
+		calendar.add(Calendar.MONTH,amount);
+		return format.format(calendar.getTime());
+	}
+
+	public static String getFormatyyMMToMonth(String time ,Integer amount){
+		StringBuffer sb =  new StringBuffer(time);
+		sb.append("-01");
+		Date tempTime = DateUtils.parseStringToDateYYMMDD(sb.toString());
+		DateFormat format = new SimpleDateFormat(MONTH);
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(tempTime);
 		calendar.add(Calendar.MONTH,amount);
 		return format.format(calendar.getTime());
 	}
@@ -89,7 +122,6 @@ public class MidlandHelper {
 		}else{
 			return null;
 		}
-
 		List lists = JSON.parseObject(messageStr,List.class);
 		for (Object obj : lists){
 			T t = JSON.parseObject(obj.toString(),clazz);
@@ -97,7 +129,36 @@ public class MidlandHelper {
 		}
 		return resList;
 	}
-
+	/**
+	 *
+	 * @param str
+	 * @param clazz
+	 * @param <T>
+	 * @return
+	 */
+	public static <T> List getAgentPojoList(String str, Class<T> clazz)  {
+		List resList = new ArrayList<T>();
+		JSONObject rootJsonObject = null;
+		try {;
+			rootJsonObject = JSON.parseObject(str);
+		}catch (Exception e){
+			return null;
+		}
+		String messageStr;
+		if(rootJsonObject!=null && rootJsonObject.getString("STATE").equals("SUCCESS")){
+			messageStr = rootJsonObject.getString("DATA");
+		}else{
+			return null;
+		}
+		JSONObject jsonObject = JSONObject.parseObject(messageStr);
+		messageStr = jsonObject.getString("EBDATA");
+		List lists = JSON.parseObject(messageStr,List.class);
+		for (Object obj : lists){
+			T t = JSON.parseObject(obj.toString(),clazz);
+			resList.add(t);
+		}
+		return resList;
+	}
 
 	/**
 	 *
@@ -175,3 +236,4 @@ public class MidlandHelper {
 	}
 	
 }
+

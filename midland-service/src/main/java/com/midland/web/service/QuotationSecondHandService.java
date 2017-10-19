@@ -31,4 +31,5 @@ public interface QuotationSecondHandService {
 	 **/
 	List<QuotationSecondHand> findQuotationSecondHandList(QuotationSecondHand quotationSecondHand) throws Exception;
 
+    QuotationSecondHand findQuotationSecondHand(QuotationSecondHand quotationSecondHand) throws Exception;
 }

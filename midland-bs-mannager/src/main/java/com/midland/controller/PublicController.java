@@ -5,6 +5,7 @@
 package com.midland.controller;
 
 import com.github.pagehelper.Paginator;
+import com.midland.base.BaseFilter;
 import com.midland.config.MidlandConfig;
 import com.midland.core.util.HttpUtils;
 import com.midland.web.model.remote.Agent;
@@ -22,7 +23,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/public")
-public class PublicController {
+public class PublicController extends BaseFilter{
 	
 	@Autowired
 	private MidlandConfig midlandConfig;
@@ -59,7 +60,7 @@ public class PublicController {
 		map1.put("pageSize",pageSize);
 		map1.put("pageNo",pageNo);
 		String data = HttpUtils.get(midlandConfig.getAgentPage(), map1);
-		List result = MidlandHelper.getPojoList(data, Agent.class);
+		List result = MidlandHelper.getAgentPojoList(data, Agent.class);
 		Paginator paginator = new Paginator(Integer.valueOf(pageNo),Integer.valueOf(pageSize),100);
 		model.addAttribute("paginator", paginator);
 		model.addAttribute("agents", result);

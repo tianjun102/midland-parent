@@ -63,6 +63,18 @@ public class Footer{
 	 **/
 	private Integer isDelete;
 
+/**
+	 * 外销网 联系我们
+	 **/
+	private String contactUs;
+
+	public String getContactUs() {
+		return contactUs;
+	}
+
+	public void setContactUs(String contactUs) {
+		this.contactUs = contactUs;
+	}
 
 	public Integer getId() {
 		return id;

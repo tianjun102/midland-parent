@@ -6,11 +6,12 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
+
 </head>
 <body>
 
 
-<div class="table-responsive m40">
+<div class="table-responsive m40" style="max-height: 300px;overflow: auto;"  id='table-cont'>
     <table class="table table-bordered table-add">
         <thead>
         <tr>
@@ -20,7 +21,7 @@
             <th style="width: 10%">手机号码</th>
             <th style="width: 5%">门店</th>
             <%--<th style="width: 10%">店铺地址</th>--%>
-            <th style="width: 4%">服务类型</th>
+            <th style="width: 4%;white-space: nowrap" >服务类型</th>
             <th style="width: 5%">服务区域</th>
             <th style="width: 10%">职称</th>
         </tr>
@@ -31,14 +32,14 @@
                 <c:forEach items="${requestScope.agents }" var="cust" varStatus="xh">
                     <tr>
                         <td><input name="radio" type="radio" value="${cust.id }"/></td>
-                        <td>${cust.jobNum }</td>
-                        <td>${cust.name }</td>
-                        <td>${cust.phone }</td>
-                        <td>${cust.storeName }</td>
+                        <td nowrap="nowrap">${cust.jobNum }</td>
+                        <td nowrap="nowrap">${cust.name }</td>
+                        <td nowrap="nowrap">${cust.phone }</td>
+                        <td nowrap="nowrap">${cust.storeName }</td>
                         <%--<td> ${cust.photoUrl}</td>--%>
-                        <td>${cust.serviceType }</td>
-                        <td>${cust.serviceAreaName }</td>
-                        <td>${cust.post }</td>
+                        <td nowrap="nowrap">${cust.serviceType }</td>
+                        <td nowrap="nowrap">${cust.serviceAreaName }</td>
+                        <td nowrap="nowrap">${cust.post }</td>
 
                     </tr>
                 </c:forEach>
@@ -68,6 +69,21 @@
 </ul>
 
 <script type="text/javascript">
+    $(function () {
+        var tableCont = document.querySelector('#table-cont');
+        /**
+         * scroll handle
+         * @param {event} e -- scroll event
+         */
+        function scrollHandle (e){
+            var scrollTop = this.scrollTop;
+            this.querySelector('thead').style.transform = 'translateY(' + scrollTop + 'px)';
+        }
+
+        tableCont.addEventListener('scroll',scrollHandle);
+    })
+
+
     function saveData(id){
         var id = $("#id").val();
         var url = $("#url").val();

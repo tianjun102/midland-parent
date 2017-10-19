@@ -13,7 +13,28 @@
 
 <link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css" />
 <link rel="stylesheet" href="${ctx }/assets/css/common.css">
-
+<style type="text/css">
+	.content ul.userinfo li>span {
+		float: left;
+		display: inline-block;
+		width: 90px;
+		height: 38px;
+		line-height: 38px;
+		text-align: right;
+		font-size: 14px;
+		color: rgb( 102, 102, 102 );
+	}
+	.content ul.userinfo li:not(:last-child) input {
+		float: left;
+		width: 180px;
+		height: 38px;
+		line-height: 38px;
+		border: 1px solid #dbe2e6;
+		border-radius: 4px;
+		text-indent: 10px;
+		outline-color: #0099e0;
+	}
+</style>
 </head>
 <body>
 	
@@ -21,12 +42,11 @@
 	<!--预约看房重新分配经纪人-->
 	<div class="box"> 
 		<section class = "content">
-		<form action="${ctx }/rest/public/redistribute_page" method="POST" id="searchForm"
-				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
+		<form action="${ctx }/rest/public/redistribute_page" method="POST" id="searchForm" onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
-				<li><input type="hidden" id="id" value="${id}"/></li>
-				<li><input type="hidden" id="url" value="${url}"/></li>
-				<li><span style="width: 90px;">工号：</span><input type="text" name="jobNum" id="jobNum" placeholder="请输入工号" /></li>
+				<input type="hidden" id="id" value="${id}"/>
+				<input type="hidden" id="url" value="${url}"/>
+				<li><span >工号：</span><input type="text" name="jobNum" id="jobNum" placeholder="请输入工号" /></li>
 				<li><span>名称：</span><input type="text" name="name" id="name" placeholder="请输入名称" /></li>
 				<li><span>手机号码：</span><input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>
 				<li><span>门店：</span><input type="text" name="storeName" id="storeName" placeholder="请输入所属门店" /></li>

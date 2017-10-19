@@ -26,7 +26,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-		id,data_time,type,city_id,area_id,slice_id,deal_num,deal_acreage,price,sold_num,sold_area,ring_ratio,DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s')update_time,is_new,is_delete,city_name,area_name,slice_name,house_acreage,deal_price
+		id,date_format(str_to_date(data_time, '%Y-%m'),'%Y-%m')data_time,type,city_id,area_id,slice_id,deal_num,deal_acreage,price,sold_num,sold_area,ring_ratio,DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s')update_time,is_new,is_delete,city_name,area_name,slice_name,house_acreage,deal_price
 	</sql>
 
     <select id="tooltip" resultType="Map">
@@ -391,7 +391,13 @@
             and id= #{id,jdbcType=INTEGER}
         </if>
         <if test="dataTime != null">
-            and data_time= #{dataTime,jdbcType=TIMESTAMP}
+            and date_format(str_to_date(data_time, '%Y-%m'),'%Y-%m')= #{dataTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="startTime != null">
+            and data_time &gt; #{startTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="endTime != null">
+            and data_time &lt; #{endTime,jdbcType=TIMESTAMP}
         </if>
         <if test="type != null">
             and type= #{type,jdbcType=INTEGER}
@@ -436,7 +442,7 @@
             and city_name= #{cityName,jdbcType=VARCHAR}
         </if>
         <if test="areaName != null">
-            and area_name= #{areaName,jdbcType=VARCHAR}
+            and area_name like  '%${areaName}%'
         </if>
         <if test="sliceName != null">
             and slice_name= #{sliceName,jdbcType=VARCHAR}

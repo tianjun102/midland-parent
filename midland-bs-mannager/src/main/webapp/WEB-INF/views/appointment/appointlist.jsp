@@ -15,12 +15,25 @@
             border-radius: 2px;
             color: #fff;
         }
+        .content ul.userinfo li:not(:last-child) input {
+            float: left;
+            width: 200px;
+            height: 38px;
+            line-height: 38px;
+            border: 1px solid #dbe2e6;
+            border-radius: 4px;
+            text-indent: 10px;
+            outline-color: #0099e0;
+        }
         .table-add tr td a {
             display: inline-block;
             width: 38px;!important;
             height: 20px;
             margin: 0 5px;
             background-size: contain!important;
+        }
+        th,td{
+            padding: 0 10px;
         }
         td
         {
@@ -30,12 +43,13 @@
         {
             white-space: nowrap;
         }
+
     </style>
 </head>
 <body>
 
 
-<div class="table-responsive m40">
+<div class="table-responsive m40" style="max-height: 430px;overflow: auto;"  id='table-cont'>
     <table class="table table-bordered table-add">
         <thead>
         <tr>
@@ -122,16 +136,30 @@
 </c:if>
 
 <script type="text/javascript">
-    //删除
+
+    $(function () {
+        var tableCont = document.querySelector('#table-cont');
+        /**
+         * scroll handle
+         * @param {event} e -- scroll event
+         */
+        function scrollHandle (e){
+            var scrollTop = this.scrollTop;
+            this.querySelector('thead').style.transform = 'translateY(' + scrollTop + 'px)';
+        }
+
+        tableCont.addEventListener('scroll',scrollHandle);
+    })
     //修改
     function toRedistribute(id) {
         //重新分配经纪人时，保存的地址
         var url = "${ctx}/rest/appoint/reset_agent";
+       // window.open("${ctx}/rest/public/toRedistribute?id=" + id + "&url=" + url, "contentF");
         layer.open({
             type: 2,
             title: ['重新分配经纪人'],
             shade: 0.3,
-            area: ['1300px', '700px'],
+            area: ['1400px', '650px'],
             content: ['${ctx}/rest/public/toRedistribute?id=' + id + "&url=" + url, 'no']
         });
     }
@@ -142,7 +170,7 @@
             type: 2,
             title: ['预约详情'],
             shade: 0.3,
-            area: ['1000px', '700px'],
+            area: ['1000px', '650px'],
             content: ['${ctx}/rest/appoint/to_update?appointId=' + appointId, 'no']
         });
     }
