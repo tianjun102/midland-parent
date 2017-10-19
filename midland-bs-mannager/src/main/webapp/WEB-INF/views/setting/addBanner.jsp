@@ -71,8 +71,15 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 					<select name="model" id="model" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
 						<option value="0">首页</option>
 						<option value="1">新房</option>
-						<option value="2">二手房</option>
-						<option value="3">租房</option>
+						<option value="2">市场研究</option>
+						<option value="3">资讯</option>
+						<option value="4">地产新闻</option>
+						<option value="5">美联资讯</option>
+						<option value="6">购房指南</option>
+						<option value="7">新政解读</option>
+						<option value="8">人物专访</option>
+						<option value="9">购房资格</option>
+						<option value="10">关于我们</option>
 					</select>
 					<span class = "_star ">*</span>
 				</li>

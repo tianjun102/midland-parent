@@ -72,8 +72,15 @@
 					<select name="model" id="model" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
 						<option <c:if test="${banner.model=='0'}"> selected='selected' </c:if> value="0">首页</option>
 						<option <c:if test="${banner.model=='1'}"> selected='selected' </c:if> value="1">新房</option>
-						<option <c:if test="${banner.model=='2'}"> selected='selected' </c:if> value="2">二手房</option>
-						<option <c:if test="${banner.model=='3'}"> selected='selected' </c:if> value="3">租房</option>
+						<option <c:if test="${banner.model=='2'}"> selected='selected' </c:if> value="2">市场研究</option>
+						<option <c:if test="${banner.model=='3'}"> selected='selected' </c:if> value="3">资讯</option>
+						<option <c:if test="${banner.model=='4'}"> selected='selected' </c:if> value="4">地产新闻</option>
+						<option <c:if test="${banner.model=='5'}"> selected='selected' </c:if> value="5">美联资讯</option>
+						<option <c:if test="${banner.model=='6'}"> selected='selected' </c:if> value="6">购房指南</option>
+						<option <c:if test="${banner.model=='7'}"> selected='selected' </c:if> value="7">新政解读</option>
+						<option <c:if test="${banner.model=='8'}"> selected='selected' </c:if> value="8">人物专访</option>
+						<option <c:if test="${banner.model=='9'}"> selected='selected' </c:if> value="9">购房资格</option>
+						<option <c:if test="${banner.model=='10'}"> selected='selected' </c:if> value="10">关于我们</option>
 					</select>
 					<span class = "_star ">*</span>
 				</li>
