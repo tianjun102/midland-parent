@@ -14,6 +14,7 @@
     <table class="table table-bordered table-add">
         <thead>
             <tr>
+                <th style="width: 8%"><a href="#" onclick="checkall()" >全选</a> / <a href="#" onclick="delcheckall()" >取消</a></th>
                 <th style="width: 8%">编号</th>
 				<th style="width: 8%">用户昵称</th>
                 <th style="width: 8%">反馈类型</th>
@@ -30,6 +31,7 @@
                 <c:forEach items="${requestScope.items }" var="item" varStatus="xh">
                     <tr>
 						<input type="hidden" id="id" value="${item.id}"/>
+                        <td><input type="checkbox" name="pid" value="${item.id}"></td>
                         <td>${xh.count}</td>
 						<td>${item.nickName}</td>
                         <td>
@@ -68,21 +70,43 @@
 <script type="text/javascript">
 
     function delete1(id){
-        $.ajax({
-            type: "post",
-            url: "${ctx}/rest/feedback/update?id="+id+"&isDelete=1",
-            async: false, // 此处必须同步
-            dataType: "json",
-
-            success: function (data) {
-                if (data.state==0){
-                    $('#searchForm').submit();
-                }
-            },
-            error: function () {
-                layer.msg("操作失败！", {icon: 2});
+        layer.open({
+            type: 1,
+            skin: 'layer-style',
+            area: ['350px','200px'],
+            shadeClose: false, //点击遮罩关闭
+            title:['删除Banner'],
+            resize: false,
+            scrollbar:false,
+            content:
+            '<section class = "content" style = "border:none; height:100%;">'+
+            '<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">您确定要删除反馈意见吗?</p>'+
+            '</section>',
+            btn:['确定','取消'],
+            yes: function(index){
+                $.ajax({
+                    type: "post",
+                    url: "${ctx}/rest/feedback/update?id="+id+"&isDelete=1",
+                    cache:false,
+                    async:false, // 此处必须同步
+                    dataType: "json",
+                    success: function(data){
+                        if(data.state==0){
+                            layer.msg("删除成功！",{icon:1});
+                            setTimeout(function(){$("#searchForm").submit();},1000);
+                        }else{
+                            layer.msg("删除失败！！",{icon:7});
+                        }
+                        layer.close(index);
+                    }
+                });
             }
-        })
+            ,success: function (layero) {
+                var btn = layero.find('.layui-layer-btn');
+                btn.css('text-align', 'center');
+            }
+        });
+
     }
 
     function to_edit(id){
@@ -94,6 +118,47 @@
             content: ['${ctx}/rest/feedback/to_update?id='+id,'no']
         });
     }
+
+    function checkall(){
+        $("input[name='pid']").each(function(){
+            this.checked=true;
+        });
+    }
+
+
+
+    function delcheckall(){
+        $("input[name='pid']").each(function(){
+            this.checked=false;
+        });
+    }
+
+    function batchDelete(status) {
+        var ids = [];
+        $("input[name='pid']").each(function(){
+            if(this.checked){
+                ids.push($(this).val());
+            }
+        });
+
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/feedback/batchUpdate?ids="+ids+"&isDelete="+status,
+            async: false, // 此处必须同步
+            dataType: "json",
+
+            success: function (data) {
+                if (data.state==0){
+                    layer.msg("操作成功！", {icon: 1});
+                    $('#searchForm').submit();
+                }
+            },
+            error: function () {
+                layer.msg("操作失败！", {icon: 2});
+            }
+        })
+    }
+
 
 
 </script>

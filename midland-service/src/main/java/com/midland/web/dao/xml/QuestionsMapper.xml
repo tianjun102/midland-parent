@@ -14,12 +14,12 @@
     <result column="fabulous" property="fabulous" jdbcType="INTEGER" />
     <result column="questions_area" property="questionsArea" jdbcType="LONGVARCHAR" />
     <result column="audit_remark" property="auditRemark" jdbcType="LONGVARCHAR" />
-
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
   </resultMap>
 
   <sql id="Base_Column_List" >
     id, questions_title, source, DATE_FORMAT(question_time,'%Y-%m-%d %H:%i:%s')question_time, question_name, question_phone, auditor,
-    status, click_num, fabulous,questions_area,audit_remark
+    status, click_num, fabulous,questions_area,audit_remark,is_delete
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -32,7 +32,7 @@
     select
     <include refid="Base_Column_List" />
     from questions
-    where 1=1
+    where is_delete=0
     <include refid="select_option"/>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
@@ -85,6 +85,9 @@
       <if test="auditRemark != null" >
         audit_remark,
       </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -123,6 +126,9 @@
       <if test="auditRemark != null" >
         #{auditRemark,jdbcType=LONGVARCHAR},
       </if>
+      <if test="isDelete != null" >
+        #{isDelete},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.midland.web.model.Questions" >
@@ -160,6 +166,9 @@
       </if>
       <if test="auditRemark != null" >
         audit_remark = #{auditRemark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -207,6 +216,9 @@
     </if>
     <if test="auditRemark != null" >
       and audit_remark = #{auditRemark,jdbcType=LONGVARCHAR}
+    </if>
+    <if test="isDelete != null" >
+      and is_delete = #{isDelete}
     </if>
   </sql>
 

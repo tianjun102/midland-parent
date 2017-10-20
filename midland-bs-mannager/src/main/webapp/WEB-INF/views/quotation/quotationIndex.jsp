@@ -20,9 +20,6 @@
 
             <a class="setup" target="contentF" onclick="toAddPage()">新增</a>
         </p>
-
-        <a class="left" target="contentF" href="${ctx}/rest/quotation/toolsTip_index">生成预览</a>
-
         <form action="${ctx }/rest/quotation/list" method="POST" id="searchForm"
               onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
             <input type="hidden" name="isNew" id="isNew" value="${isNew}"/>
@@ -42,10 +39,14 @@
                 </li>
                 <li>
                     <input class="public_btn bg1" type="submit" name="inquery" id="inquery" value="查询"/>
-                    <a class="left" onclick="import1()" >导入</a> <a class="setup" href="#" onclick="export1()">导出</a>
                 </li>
             </ul>
         </form>
+        <input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;margin-top: 10px;" onclick="batchDelete(1)" class = "public_btn bg1" type="submit"  value = "批量删除"/>
+        <input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" onclick="batchDelete(0)" class = "public_btn bg1" type="submit"  value = "批量恢复"/>
+        <input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" onclick="import1()" class = "public_btn bg1" type="submit"  value = "导入"/>
+        <input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" onclick="export1()" class = "public_btn bg1" type="submit"  value = "导出"/>
+        <input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" onclick="window.open('${ctx}/rest/quotation/toolsTip_index','contentF')" class = "public_btn bg1" type="submit"  value = "生成预览"/>
         <div id="listDiv"></div>
 
     </section>

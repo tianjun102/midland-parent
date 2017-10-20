@@ -141,6 +141,32 @@
         window.location.href="${ctx}/rest/resumeManager/batDownload?filePaths="+fileUrls+"&fileNames="+fileNames;
     }
 
+    function batchDelete(status) {
+        var ids = [];
+        $("input[name='pid']").each(function(){
+            if(this.checked){
+                ids.push($(this).val());
+            }
+        });
+
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/resumeManager/batchUpdate?ids="+ids+"&isDelete="+status,
+            async: false, // 此处必须同步
+            dataType: "json",
+
+            success: function (data) {
+                if (data.state==0){
+                    layer.msg("操作成功！", {icon: 1});
+                    $('#searchForm').submit();
+                }
+            },
+            error: function () {
+                layer.msg("操作失败！", {icon: 2});
+            }
+        })
+    }
+
 
 </script>
 </body>

@@ -31,6 +31,7 @@
     <table class="table table-bordered table-add">
         <thead>
         <tr>
+            <th style="width: auto"><a href="#" onclick="checkall()" >全选</a> / <a href="#" onclick="delcheckall()" >取消</a></th>
             <th style="width: auto">委托编号</th>
             <th style="width: auto">平台</th>
             <th style="width: auto">委托人</th>
@@ -57,6 +58,7 @@
                 <c:forEach items="${requestScope.entrusts }" var="item"
                            varStatus="xh">
                     <tr>
+                        <td><input type="checkbox" name="pid" value="${item.id}"></td>
                         <td>${item.entrustSn }</td>
                         <td><c:forEach items="${sources}" var="s">
                             <c:if test="${item.source == s.id}">${s.name}</c:if>
@@ -171,6 +173,46 @@
             area: ['1000px', '700px'],
             content: ['${ctx}/rest/entrust/rentIn/to_update?entrustId=' + appointId , 'no']
         });
+    }
+
+    function checkall(){
+        $("input[name='pid']").each(function(){
+            this.checked=true;
+        });
+    }
+
+
+
+    function delcheckall(){
+        $("input[name='pid']").each(function(){
+            this.checked=false;
+        });
+    }
+
+    function batchDelete(status) {
+        var ids = [];
+        $("input[name='pid']").each(function(){
+            if(this.checked){
+                ids.push($(this).val());
+            }
+        });
+
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/entrust/batchUpdate?ids="+ids+"&isDelete="+status,
+            async: false, // 此处必须同步
+            dataType: "json",
+
+            success: function (data) {
+                if (data.state==0){
+                    layer.msg("操作成功！", {icon: 1});
+                    $('#searchForm').submit();
+                }
+            },
+            error: function () {
+                layer.msg("操作失败！", {icon: 2});
+            }
+        })
     }
 </script>
 </body>

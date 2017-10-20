@@ -14,7 +14,8 @@
     <table class="table table-bordered table-add">
         <thead>
             <tr>
-				<th style="width: 10%">编号</th>
+                <th style="width: 8%"><a href="#" onclick="checkall()" >全选</a> / <a href="#" onclick="delcheckall()" >取消</a></th>
+                <th style="width: 10%">编号</th>
 				<%--<th style="width: 10%">模块名称</th>--%>
 				<th style="width: 10%">城市</th>
 				<th style="width: 10%">模块名称</th>
@@ -27,7 +28,8 @@
                 <c:forEach items="${requestScope.items }" var="item" varStatus="xh">
                     <tr>
 						<input type="hidden" id="id" value="${item.id}"/>
-						<td>${xh.count}</td>
+                        <td><input type="checkbox" name="pid" value="${item.id}"></td>
+                        <td>${xh.count}</td>
 						<%--<td>${item.modeName}</td>--%>
 						<td>${item.cityName}</td>
 						<td>${item.cateName}</td>
@@ -191,6 +193,47 @@
             });
         }
     }
+
+    function checkall(){
+        $("input[name='pid']").each(function(){
+            this.checked=true;
+        });
+    }
+
+
+
+    function delcheckall(){
+        $("input[name='pid']").each(function(){
+            this.checked=false;
+        });
+    }
+
+    function batchDelete(status) {
+        var ids = [];
+        $("input[name='pid']").each(function(){
+            if(this.checked){
+                ids.push($(this).val());
+            }
+        });
+
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/siteMap/batchUpdate?ids="+ids+"&isDelete="+status,
+            async: false, // 此处必须同步
+            dataType: "json",
+
+            success: function (data) {
+                if (data.state==0){
+                    layer.msg("操作成功！", {icon: 1});
+                    $('#searchForm').submit();
+                }
+            },
+            error: function () {
+                layer.msg("操作失败！", {icon: 2});
+            }
+        })
+    }
+
 
 
 </script>

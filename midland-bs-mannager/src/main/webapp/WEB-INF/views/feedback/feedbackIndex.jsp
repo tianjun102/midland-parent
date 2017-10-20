@@ -32,12 +32,20 @@
 						id="time2" name="endTime"/>
 				</li>
 				<li><span>联系方式：</span>
-					<input type="text" name="phone" id="phone" placeholder="请输入手机号码或邮箱" /></li>
+					<input type="text" style="width: 180px!important;" name="phone" id="phone" placeholder="请输入手机号码或邮箱" /></li>
+				</li>
+				<li><span>用户名：</span>
+					<input type="text" style="width: 150px!important;" name="nickName" id="nickName" placeholder="请输入用户名" /></li>
+				</li>
+				<li><span>反馈类容：</span>
+					<input type="text" style="width: 150px!important;" name="feedbackContent" id="feedbackContent" placeholder="请输入反馈类容" /></li>
 				</li>
 				<li><input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/></li>
 			</ul>
 			</form>
-			<a href="/rest/feedback/export">导出</a>
+			<input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;margin-top: 10px;" onclick="batchDelete(1)" class = "public_btn bg1" type="submit"  value = "批量删除"/>
+			<input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" onclick="batchDelete(0)" class = "public_btn bg1" type="submit"  value = "批量恢复"/>
+			<input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" onclick="window.open('${ctx}/rest/feedback/export','contentF')" class = "public_btn bg1" type="submit"  value = "导出"/>
 			<div id="listDiv"></div>
 		</section>
 	</div>

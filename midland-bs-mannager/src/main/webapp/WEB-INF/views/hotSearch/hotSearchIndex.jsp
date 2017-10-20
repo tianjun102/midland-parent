@@ -54,7 +54,9 @@
 				</li>
 			</ul>
 			</form>
-			<a href="/rest/hotSearch/export" target="contentF">导出</a>
+			<input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;margin-top: 10px;" onclick="batchDelete(1)" class = "public_btn bg1" type="submit"  value = "批量删除"/>
+			<input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" onclick="batchDelete(0)" class = "public_btn bg1" type="submit"  value = "批量恢复"/>
+			<input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" onclick="window.open('${ctx}/rest/hotSearch/export','contentF')" class = "public_btn bg1" type="submit"  value = "导出"/>
 			<div id="listDiv"></div>
 		</section>
 	</div>

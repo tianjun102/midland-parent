@@ -71,7 +71,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							<option value="3">位置４</option>
 						</select>
 					</li>
-					<li><span>位置：</span>
+					<li><span>状态：</span>
 						<select name="enabled" id="enabled" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
 							<option value="">全部</option>
 							<option value="0">关闭</option>
@@ -86,6 +86,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							id="time2" name="endTime" /></li>
 				<li><input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/></li>
 			</ul>
+			<input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;margin-top: 10px;" onclick="batchDelete(1)" class = "public_btn bg1" type="submit"  value = "批量删除"/>
+			<input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" onclick="batchDelete(0)" class = "public_btn bg1" type="submit"  value = "批量恢复"/>
 		    <div id="listDiv"></div> 
 		</section>
 		</form>

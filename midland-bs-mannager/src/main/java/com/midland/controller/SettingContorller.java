@@ -479,7 +479,7 @@ public class SettingContorller extends BaseFilter {
     /**
      * 批量更新
      **/
-    @RequestMapping("batchUpdate")
+    @RequestMapping("batchUpdateBanner")
     @ResponseBody
     public Object batchUpdateBanner(String ids,Banner banner) throws Exception {
         List<Banner> commentList = new ArrayList<>();
@@ -505,7 +505,7 @@ public class SettingContorller extends BaseFilter {
     /**
      * 批量更新
      **/
-    @RequestMapping("batchUpdate")
+    @RequestMapping("batchUpdatePopular")
     @ResponseBody
     public Object batchUpdatePopular(String ids,Popular popular) throws Exception {
         List<Popular> commentList = new ArrayList<>();
@@ -532,7 +532,7 @@ public class SettingContorller extends BaseFilter {
     /**
      * 批量更新
      **/
-    @RequestMapping("batchUpdate")
+    @RequestMapping("batchUpdatelinkUrl")
     @ResponseBody
     public Object batchUpdatelinkUrl(String ids,LinkUrlManager linkUrlManager) throws Exception {
         List<LinkUrlManager> commentList = new ArrayList<>();
