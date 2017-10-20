@@ -53,7 +53,7 @@
                     </c:forEach>
                 </select>
             </li>
-            <%@include file="../menu/area.jsp" %>
+            <%@include file="sheet.jsp" %>
             <li ><span>成交套数：</span>
                <input type="text" name="dealNum" id="dealNum" value="${item.dealNum}"/>
             </li>
@@ -75,7 +75,6 @@
     //保存数据
     function updateData() {
         var data = $("#dataForm").serialize();
-        debugger;
         $.ajax({
             type: "post",
             url: "${ctx}/rest/quotationSecondHand/update",

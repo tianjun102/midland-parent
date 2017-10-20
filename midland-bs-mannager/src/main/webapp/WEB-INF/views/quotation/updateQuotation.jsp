@@ -50,7 +50,7 @@
                     </c:forEach>
                 </select>
             </li>
-            <%@include file="../menu/area.jsp" %>
+            <%@include file="../quotationSecondHand/sheet.jsp" %>
             <li class="col-sm-6 col-md-6 col-lg-6"><span>成交套数：</span>
                <input type="text" name="dealNum" id="dealNum" value="${item.dealNum}"/>
             </li>

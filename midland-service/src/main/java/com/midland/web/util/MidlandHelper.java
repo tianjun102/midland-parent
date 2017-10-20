@@ -150,8 +150,8 @@ public class MidlandHelper {
 		}else{
 			return null;
 		}
-		JSONObject jsonObject = JSONObject.parseObject(messageStr);
-		messageStr = jsonObject.getString("EBDATA");
+		//JSONObject jsonObject = JSONObject.parseObject(messageStr);
+		//messageStr = jsonObject.getString("EBDATA");
 		List lists = JSON.parseObject(messageStr,List.class);
 		for (Object obj : lists){
 			T t = JSON.parseObject(obj.toString(),clazz);

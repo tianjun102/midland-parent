@@ -1,15 +1,21 @@
 package com.midland.task;
 
+import com.midland.web.api.ApiHelper;
+import com.midland.web.api.SmsSender.SmsModel;
 import com.midland.web.model.Appointment;
 import com.midland.web.model.Entrust;
 import com.midland.web.service.AppointmentService;
 import com.midland.web.service.EntrustService;
 import com.midland.web.util.MidlandHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -27,12 +33,17 @@ public class MidlandTask {
 	private EntrustService entrustServiceImpl;
 	@Autowired
 	private TaskConfig taskConfig;
+	@Autowired
+	private ApiHelper apiHelper;
+
+
 	//预约看房，经纪人重新分配规则，24小时内状态没有修改，发送短信给经纪人及其领导，48小时后没有处理，则关闭此预约，并发送给有指定邮箱
 	@Scheduled(fixedRate = 1000)
 	public void scanAppointment() {
 		long timeTemp = System.currentTimeMillis();
-		if (timeTemp-taskConfig.getTaskFirstTime()>taskConfig.getTaskInterval()*3600000) {
-			taskConfig.setTaskFirstTime(timeTemp);
+		//System.out.println(timeTemp-taskConfig.getTaskAppointFirstTime());
+		if (timeTemp-taskConfig.getTaskAppointFirstTime()>taskConfig.getTaskInterval()*3600000) {
+			taskConfig.setTaskAppointFirstTime(timeTemp);
 			try {
 				Appointment temp = new Appointment();
 				temp.setStatus(0);//0说明预约未处理
@@ -52,16 +63,26 @@ public class MidlandTask {
 					calendar1.setTime(date);
 					calendar1.add(calendar.SECOND, Double.valueOf(-taskConfig.getAppointmentWarn() * 3600).intValue());
 					Date time_24 = calendar1.getTime();
-
-					if (time_48.getTime() > appointTime.getTime()) {
+					long ti=appointTime.getTime()-time_48.getTime() ;
+					long te=appointTime.getTime()-time_24.getTime() ;
+					//System.out.println("关闭"+ti);
+					//System.out.println("告警"+te);
+					if (ti<0) {
 						//超过48小时,48小时后没有处理，则关闭此预约，并发送给有指定邮箱
 						Appointment appoint = new Appointment();
 						appoint.setStatus(3);
 						appoint.setId(appointment1.getId());
 						appointmentServiceImpl.updateAppointmentById(appoint);
+
+						SimpleMailMessage message = new SimpleMailMessage();
+						message.setFrom("3332932@qq.com");
+						message.setTo("2621541472@qq.com");
+						message.setSubject("主题：预约关闭");
+						message.setText("您的预约超时未处理，现已关闭，预约编号："+appointment1.getAppointSn());
+						apiHelper.emailSender("scanAppointment",message);
 						// TODO: 2017/9/19  发送给有指定邮箱
 						System.out.println("发送给有指定邮箱，关闭");
-					} else if (time_24.getTime() > appointTime.getTime()) {
+					} else if (te<0) {
 						//超过24小时,24小时内状态没有修改，发送短信给经纪人及其领导，
 						if (appointment1.getFlag() == 0) {
 							Appointment appoint = new Appointment();
@@ -69,7 +90,18 @@ public class MidlandTask {
 							appoint.setResetFlag(1);//标记为展示
 							appoint.setId(appointment1.getId());
 							appointmentServiceImpl.updateAppointmentById(appoint);
-							// TODO: 2017/9/19  发送短信给经纪人及其领导，
+							String SGIN=null;
+							try {
+								SGIN = URLEncoder.encode("预约超时未处理","GBK");
+							} catch (UnsupportedEncodingException e) {
+								e.printStackTrace();
+							}
+							List list = new ArrayList();
+							list.add("sdfef");
+							list.add("dfef");
+							list.add(SGIN);
+							SmsModel smsModel = new SmsModel("17666106709","2029157",list);
+							apiHelper.smsSender("dsfs",smsModel);
 							System.out.println("发送短信给经纪人及其领导，告警");
 						}
 					}
@@ -81,11 +113,11 @@ public class MidlandTask {
 	}
 	
 	//委托记录可重新分配经纪人，建议设置提醒功能，若指定时间内已分配的业务员未跟进（还未从已分配状态变为看房中），后台可重新分配。
-	@Scheduled(fixedRate = 1000)
+	@Scheduled(fixedRate = 3600000)
 	public void entrustReset(){
 		long timeTemp = System.currentTimeMillis();
-		if (timeTemp-taskConfig.getTaskFirstTime()>taskConfig.getTaskInterval()*3600000) {
-			taskConfig.setTaskFirstTime(timeTemp);
+		if (timeTemp-taskConfig.getTaskEntrustFirstTime()>taskConfig.getTaskInterval()*3600000) {
+			taskConfig.setTaskEntrustFirstTime(timeTemp);
 			try {
 				Entrust temp = new Entrust();
 				temp.setStatus(1);//1看房中，
