@@ -68,8 +68,7 @@
 				<li><input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/></li>
 			</ul>
 			</form>
-			<a href="#" onclick="exportUsers()">导出</a>
-
+			<input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;margin-top: 10px;" onclick="exportUsers()" class = "public_btn bg1" type="submit"  value = "导出"/>
 			<div id="listDiv"></div>
 		</section>
 	</div>

@@ -258,19 +258,19 @@ public class QuestionsController extends BaseFilter {
 	 **/
 	@RequestMapping("batchUpdate")
 	@ResponseBody
-	public Object batchUpdate(String ids,Answer answer) throws Exception {
-		List<Answer> commentList = new ArrayList<>();
+	public Object batchUpdate(String ids,Questions questions) throws Exception {
+		List<Questions> commentList = new ArrayList<>();
 		String[] ides=ids.split(",",-1);
 		for (String id:ides ){
-			Answer comment1 = new Answer();
+			Questions comment1 = new Questions();
 			comment1.setId(Integer.valueOf(id));
-			comment1.setIsDelete(answer.getIsDelete());
+			comment1.setIsDelete(questions.getIsDelete());
 			commentList.add(comment1);
 		}
 		Map<String,Object> map = new HashMap<>();
 		try {
 			log.debug("updateAnswerById  {}",commentList);
-			answerServiceImpl.batchUpdate(commentList);
+			questionsServiceImpl.batchUpdate(commentList);
 			map.put("state",0);
 		} catch(Exception e) {
 			log.error("updateAnswerById  {}",commentList,e);

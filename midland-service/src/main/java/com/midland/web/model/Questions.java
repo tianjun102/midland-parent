@@ -47,6 +47,8 @@ public class Questions {
     private String endTime;
     
     private String auditRemark;
+
+    private Integer isDelete;
     
     public String getAuditRemark() {
         return auditRemark;
@@ -158,5 +160,13 @@ public class Questions {
 
     public void setQuestionsArea(String questionsArea) {
         this.questionsArea = questionsArea == null ? null : questionsArea.trim();
+    }
+
+    public Integer getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(Integer isDelete) {
+        this.isDelete = isDelete;
     }
 }

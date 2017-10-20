@@ -327,5 +327,31 @@ public class EntrustController extends BaseFilter{
 		//其他设置 set方法可全不调用
 		pee.wirteExcel(titleColumn, titleName, titleSize, exportModels,request);
 	}
-	
+
+	/**
+	 * 批量更新
+	 **/
+	@RequestMapping("batchUpdate")
+	@ResponseBody
+	public Object batchUpdate(String ids,Entrust entrust) throws Exception {
+		List<Entrust> commentList = new ArrayList<>();
+		String[] ides=ids.split(",",-1);
+		for (String id:ides ){
+			Entrust comment1 = new Entrust();
+			comment1.setId(Integer.valueOf(id));
+			comment1.setIsDelete(entrust.getIsDelete());
+			commentList.add(comment1);
+		}
+		Map<String,Object> map = new HashMap<>();
+		try {
+			logger.debug("updateEntrustById  {}",commentList);
+			entrustServiceImpl.batchUpdate(commentList);
+			map.put("state",0);
+		} catch(Exception e) {
+			logger.error("updateEntrustById  {}",commentList,e);
+			map.put("state",-1);
+		}
+		return map;
+	}
+
 }

@@ -84,6 +84,8 @@
                     <input class="public_btn bg1" type="submit" name="inquery" id="inquery" value="查询"/></li>
             </ul>
         </form>
+        <input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;margin-top: 10px;" onclick="batchDelete(1)" class = "public_btn bg1" type="submit"  value = "批量删除"/>
+        <input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" onclick="batchDelete(0)" class = "public_btn bg1" type="submit"  value = "批量恢复"/>
         <div id="listDiv"></div>
     </section>
 </div>

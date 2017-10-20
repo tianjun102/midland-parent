@@ -32,19 +32,21 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
 			<div class = "table-responsive m40">
 				<table class="table table-bordered table-add">
+				<col width="8%">
 				<col width="5%" >
-				<col width="10%" >
+				<col width="8%" >
 				<col width="6%" >
 				<col width="6%" >
 				<col width="6%" >
 				<col width="6%" >
 				<col width="6%" >
-				<col width="15%" >
-				<col width="15%" >
+				<col width="13%" >
+				<col width="13%" >
 				<col width="6%" >
-				<col width="22%" >
+				<col width="30%" >
 	 				<thead>
 						<tr>
+							<th><a href="#" onclick="checkall()" >全选</a> / <a href="#" onclick="delcheckall()" >取消</a></th>
 							<th>编号</th>
 							<th>轮播图</th>
 							<th>状态</th>
@@ -61,6 +63,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 					<tbody>
 					<c:forEach items="${bannerList}" var="banner" varStatus="xh">
 						<tr>
+							<td><input type="checkbox" name="pid" value="${banner.id}"></td>
 							<td>${xh.count}</td>
 							<td><img style="height: 36px;" src="${fileUrl}${banner.bannerImg}" class="suo"/></td>
 							<td><c:if test="${banner.enabled =='0'}">关闭</c:if><c:if test="${banner.enabled =='1'}">开放</c:if></td>
@@ -143,7 +146,46 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
             }
         })
     }
-	
+
+    function checkall(){
+        $("input[name='pid']").each(function(){
+            this.checked=true;
+        });
+    }
+
+
+
+    function delcheckall(){
+        $("input[name='pid']").each(function(){
+            this.checked=false;
+        });
+    }
+
+    function batchDelete(status) {
+        var ids = [];
+        $("input[name='pid']").each(function(){
+            if(this.checked){
+                ids.push($(this).val());
+            }
+        });
+
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/setting/batchUpdateBanner?ids="+ids+"&isDelete="+status,
+            async: false, // 此处必须同步
+            dataType: "json",
+
+            success: function (data) {
+                if (data.state==0){
+                    layer.msg("操作成功！", {icon: 1});
+                    $('#searchForm').submit();
+                }
+            },
+            error: function () {
+                layer.msg("操作失败！", {icon: 2});
+            }
+        })
+    }
 
 	</script>
 	</body>

@@ -87,6 +87,15 @@ public class QrCodeServiceImpl implements QrCodeService {
 
 	@Override
 	public void batchUpdate(List<QrCode> qrCodeList) throws Exception {
-
+		try {
+			log.debug("popularList  {}",qrCodeList);
+			int result = qrCodeMapper.batchUpdate(qrCodeList);
+			if (result < 1) {
+				throw new Exception("qrCodeList失败");
+			}
+		} catch(Exception e) {
+			log.error("qrCodeList  {}",qrCodeList,e);
+			throw e;
+		}
 	}
 }

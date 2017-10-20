@@ -22,6 +22,6 @@ public interface QuotationMapper {
 	List<Quotation> findQuotationList(Quotation quotation);
 	List<Map> tooltip(Quotation quotation);
 
-	int batchUpdate(@Param("quotationsList") List<Quotation> quotationList);
+	int batchUpdate(@Param("quotationList") List<Quotation> quotationList);
 
 }

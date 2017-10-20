@@ -11,12 +11,12 @@
 
 
 <div class="table-responsive m40">
-    <a target="contentF" onclick="deletelist()">删除</a>
+    <%--<a target="contentF" onclick="deletelist()">删除</a>--%>
 
     <table class="table table-bordered table-add">
         <thead>
         <tr>
-            <th style="width: 5%"></th>
+            <th style="width: auto"><a href="#" onclick="checkall()" >全选</a> / <a href="#" onclick="delcheckall()" >取消</a></th>
             <th style="width: 5%">序号</th>
             <th style="width: 10%">问题主题</th>
             <th style="width: 5%">平台</th>
@@ -34,7 +34,7 @@
                 <c:forEach items="${requestScope.questions }" var="item"
                            varStatus="xh">
                     <tr>
-                        <td><input name="checkbox" id="checkbox" type="checkbox" value="${item.id }"/></td>
+                        <td><input type="checkbox" name="pid" value="${item.id}"></td>
                         <td>${xh.count }</td>
                         <td>${item.questionsTitle }</td>
                         <td> <c:if test="${item.source ==0 }">网站</c:if>
@@ -132,6 +132,46 @@ function toAudit(id) {
             area: ['1000px', '700px'],
             content: ['${ctx}/rest/questions/toAudit?id=' + id , 'no']
         });
+    }
+
+    function checkall(){
+        $("input[name='pid']").each(function(){
+            this.checked=true;
+        });
+    }
+
+
+
+    function delcheckall(){
+        $("input[name='pid']").each(function(){
+            this.checked=false;
+        });
+    }
+
+    function batchDelete(status) {
+        var ids = [];
+        $("input[name='pid']").each(function(){
+            if(this.checked){
+                ids.push($(this).val());
+            }
+        });
+
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/questions/batchUpdate?ids="+ids+"&isDelete="+status,
+            async: false, // 此处必须同步
+            dataType: "json",
+
+            success: function (data) {
+                if (data.state==0){
+                    layer.msg("操作成功！", {icon: 1});
+                    $('#searchForm').submit();
+                }
+            },
+            error: function () {
+                layer.msg("操作失败！", {icon: 2});
+            }
+        })
     }
 </script>
 </body>
