@@ -29,4 +29,6 @@ public interface EliteVipService {
 	 **/
 	List<EliteVip> findEliteVipList(EliteVip eliteVip) throws Exception;
 
+	void batchUpdate(List<EliteVip> eliteVipList) throws Exception;
+
 }

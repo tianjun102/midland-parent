@@ -29,4 +29,6 @@ public interface SiteMapService {
 	 **/
 	List<SiteMap> findSiteMapList(SiteMap siteMap) throws Exception;
 
+	void batchUpdate(List<SiteMap> siteMapList) throws Exception;
+
 }

@@ -84,4 +84,18 @@ public class FeedbackServiceImpl implements FeedbackService {
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<Feedback> feedbackList) throws Exception {
+		try {
+			log.debug("updateFeedbackById  {}",feedbackList);
+			int result = feedbackMapper.batchUpdate(feedbackList);
+			if (result < 1) {
+				throw new Exception("updateFeedbackById失败");
+			}
+		} catch(Exception e) {
+			log.error("updateFeedbackById  {}",feedbackList,e);
+			throw e;
+		}
+	}
 }

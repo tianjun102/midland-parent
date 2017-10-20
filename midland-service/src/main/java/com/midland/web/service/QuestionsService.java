@@ -19,4 +19,5 @@ public interface QuestionsService {
     Questions selectByPrimaryKey(Integer id);
     List<Questions> questionPage(Questions questions);
     int updateByPrimaryKeySelective(Questions record);
+    void batchUpdate(List<Questions> questionsList) throws Exception;
 }

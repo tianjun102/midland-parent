@@ -84,4 +84,18 @@ public class PageConfServiceImpl implements PageConfService {
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<PageConf> pageConfList) throws Exception {
+		try {
+			log.debug("updatePageConfById  {}",pageConfList);
+			int result = pageConfMapper.batchUpdate(pageConfList);
+			if (result < 1) {
+				throw new Exception("updatePageConfById失败");
+			}
+		} catch(Exception e) {
+			log.error("updatePageConfById  {}",pageConfList,e);
+			throw e;
+		}
+	}
 }

@@ -1,6 +1,8 @@
 package com.midland.web.dao;
 
+import com.midland.web.model.EliteVip;
 import com.midland.web.model.EntrustLog;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,5 +19,7 @@ public interface EntrustLogMapper {
 	int insertEntrustLog(EntrustLog entrustLog);
 
 	List<EntrustLog> findEntrustLogList(EntrustLog entrustLog);
+
+	int batchUpdate(@Param("entrustLogList") List<EntrustLog> entrustLogList);
 
 }

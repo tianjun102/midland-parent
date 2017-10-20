@@ -1,6 +1,8 @@
 package com.midland.web.dao;
 
+import com.midland.web.model.PageConf;
 import com.midland.web.model.Popular;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,5 +18,7 @@ public interface PopularMapper {
 	int insertPopular(Popular popular);
 
 	List<Popular> findPopularList(Popular popular);
+
+	int batchUpdate(@Param("popularList") List<Popular> popularList);
 
 }

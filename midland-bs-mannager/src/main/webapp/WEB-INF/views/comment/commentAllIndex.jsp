@@ -2,41 +2,43 @@
 	pageEncoding="UTF-8"%>
 <%@include file="../layout/tablib.jsp"%>
 <%@include file="../layout/source.jsp"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 	
 	
-	<!--委托列表界面-->
-	<div class="box"> 
+	<!--列表界面-->
+	<div class="box">
 		<section class = "content">
-			<p class = "detail-title">
-				<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>
+			<p class="detail-title">
+				<span>评论列表</span>
 			</p>
-		<form action="${ctx }/rest//category/list" method="POST" id="searchForm"
+		<form action="${ctx }/rest/comment/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
-			<input type="hidden" name="type" value="${type}">
+			<input type="hidden" name="informationId" value="${comment.informationId}">
 			<ul class = "userinfo row">
-				<li>
-					<span style = "float:left;">平台：</span>
-					<select name="source" id="source" style="height: 38px;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
-						<option value="">全部</option>
-						<option value="0">网站</option>
-						<option value="1">微站</option>
-					</select>
+				<li><span>评论类容：</span>
+					<input type="text" name="comment" id="comment" placeholder="请输入评论类容" /></li>
 				</li>
-				<%@include file="../layout/sherchArea.jsp" %>
 				<li>
-					<span style = "float:left;">分类名称：</span>
-					<input type="text" name="cateName" style="width: 150px;" value="" placeholder="请输入分类名称" >
+					<span>评论时间：</span><input class="Wdate half" id="time1"
+											 onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time2\')}'})"
+											 name="startTime"/> <em class="gang">-</em><input
+						class="Wdate half"
+						onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'time1\')}'})"
+						id="time2" name="endTime"/>
 				</li>
 				<li><input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/></li>
 			</ul>
 			</form>
+			<input style="width: 70px;height: 30px;line-height: 30px!important;" onclick="batchUpdate(0)" class = "public_btn bg1" type="submit"  value = "批量通过"/>
+			<input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" onclick="batchUpdate(1)" class = "public_btn bg1" type="submit"  value = "批量拒绝"/>
 			<input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" onclick="batchDelete(1)" class = "public_btn bg1" type="submit"  value = "批量删除"/>
 			<input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" onclick="batchDelete(0)" class = "public_btn bg1" type="submit"  value = "批量恢复"/>
 			<div id="listDiv"></div>
@@ -45,27 +47,22 @@
 	
 	
 	<script type="text/javascript">
-
-
-
-
         function toAddPage(){
             layer.open({
                 type: 2,
                 skin: 'layer-style',
-                area: ['400px','420px'],
+                area: ['500px','700px'],
                 shadeClose: false, //点击遮罩关闭
-                title:['新增分类'],
+                title:['新增'],
                 resize: false,
                 scrollbar:false,
-                content:['${ctx}/rest/category/to_add?type=${type}', 'no']
+                content:['${ctx}/rest/comment/to_add', 'no']
             });
         }
 		 window.onload = function(){
              $('#searchForm').submit();
 		}
 	</script>
-	<!-- 本页私有js -->
-
+	<script type="text/javascript" src="${ctx}/assets/scripts/layer/layer.js"></script>
 </body>
 </html>

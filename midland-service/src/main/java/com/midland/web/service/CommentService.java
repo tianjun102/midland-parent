@@ -29,4 +29,9 @@ public interface CommentService {
 	 **/
 	List<Comment> findCommentList(Comment comment) throws Exception;
 
+	/**
+	 * 主键更新
+	 **/
+	void batchUpdate(List<Comment> commentList) throws Exception;
+
 }

@@ -1,6 +1,8 @@
 package com.midland.web.dao;
 
+import com.midland.web.model.SiteMap;
 import com.midland.web.model.SpecialPage;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,5 +18,7 @@ public interface SpecialPageMapper {
 	int insertSpecialPage(SpecialPage specialPage);
 
 	List<SpecialPage> findSpecialPageList(SpecialPage specialPage);
+
+	int batchUpdate(@Param("specialPageList") List<SpecialPage> specialPageList);
 
 }

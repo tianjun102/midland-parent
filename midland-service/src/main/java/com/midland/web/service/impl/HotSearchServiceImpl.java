@@ -84,4 +84,18 @@ public class HotSearchServiceImpl implements HotSearchService {
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<HotSearch> hotSearchList) throws Exception {
+		try {
+			log.debug("updateHotSearchById  {}",hotSearchList);
+			int result = hotSearchMapper.batchUpdate(hotSearchList);
+			if (result < 1) {
+				throw new Exception("updateFeedbackById失败");
+			}
+		} catch(Exception e) {
+			log.error("updateHotSearchById  {}",hotSearchList,e);
+			throw e;
+		}
+	}
 }

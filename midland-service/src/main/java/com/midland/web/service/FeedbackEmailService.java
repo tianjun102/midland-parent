@@ -29,4 +29,5 @@ public interface FeedbackEmailService {
 	 **/
 	List<FeedbackEmail> findFeedbackEmailList(FeedbackEmail feedbackEmail) throws Exception;
 
+	void batchUpdate(List<FeedbackEmail> feedbackEmailList) throws Exception;
 }

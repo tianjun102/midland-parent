@@ -33,4 +33,6 @@ public interface CategoryService {
 
 	Category selectCategoryParentNameById(Integer id);
 
+	void batchUpdate(List<Category> categoryList) throws Exception;
+
 }

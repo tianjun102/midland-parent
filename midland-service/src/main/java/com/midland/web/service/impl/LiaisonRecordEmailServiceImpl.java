@@ -84,4 +84,18 @@ public class LiaisonRecordEmailServiceImpl implements LiaisonRecordEmailService 
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<LiaisonRecordEmail> liaisonRecordEmailList) throws Exception {
+		try {
+			log.debug("updateLiaisonRecordEmailById  {}",liaisonRecordEmailList);
+			int result = liaisonRecordEmailMapper.batchUpdate(liaisonRecordEmailList);
+			if (result < 1) {
+				throw new Exception("updateFeedbackById失败");
+			}
+		} catch(Exception e) {
+			log.error("updateLiaisonRecordEmailById  {}",liaisonRecordEmailList,e);
+			throw e;
+		}
+	}
 }

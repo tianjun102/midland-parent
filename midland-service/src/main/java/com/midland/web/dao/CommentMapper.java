@@ -1,6 +1,7 @@
 package com.midland.web.dao;
 
 import com.midland.web.model.Comment;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,5 +17,7 @@ public interface CommentMapper {
 	int insertComment(Comment comment);
 
 	List<Comment> findCommentList(Comment comment);
+
+	int batchUpdate(@Param("commentList") List<Comment> commentList);
 
 }

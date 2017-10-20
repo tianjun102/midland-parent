@@ -10,10 +10,12 @@
 		<result column="source" property="source" jdbcType="INTEGER" />
 		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
 		<result column="information_id" property="informationId" jdbcType="INTEGER" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+		<result column="comment_time" property="commentTime" jdbcType="TIMESTAMP" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,comment,user,status,source,is_delete,information_id
+		id,comment,user,status,source,is_delete,information_id,type,comment_time
 	</sql>
 
 	<select id="selectCommentById" resultMap="BaseResultMap">
@@ -33,6 +35,40 @@
 		</set>
 
 		 where id= #{id}
+	</update>
+
+	<update id="batchUpdate" parameterType="java.util.List">
+		<foreach collection="commentList" item="item" index="index" open="" close="" separator=";">
+		update comment
+		<set>
+			<if test="item.comment != null">
+				comment= #{item.comment,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="item.user != null">
+				user= #{item.user,jdbcType=VARCHAR},
+			</if>
+			<if test="item.status != null">
+				status= #{item.status,jdbcType=INTEGER},
+			</if>
+			<if test="item.source != null">
+				source= #{item.source,jdbcType=INTEGER},
+			</if>
+			<if test="item.isDelete != null">
+				is_delete= #{item.isDelete,jdbcType=INTEGER},
+			</if>
+			<if test="item.informationId != null">
+				information_id= #{item.informationId,jdbcType=INTEGER},
+			</if>
+			<if test="item.type != null">
+				type= #{item.type,jdbcType=INTEGER},
+			</if>
+			<if test="item.commentTime != null">
+				comment_time= #{item.commentTime},
+			</if>
+		</set>
+
+		where id= #{item.id}
+		</foreach>
 	</update>
 
 	<select id="findCommentList" parameterType="com.midland.web.model.Comment" resultMap="BaseResultMap">
@@ -63,6 +99,12 @@
 			<if test="informationId != null">
 				information_id,
 			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="commentTime != null">
+				comment_time,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -84,6 +126,12 @@
 			<if test="informationId != null">
 				#{informationId,jdbcType=INTEGER},
 			</if>
+			<if test="type != null">
+				 #{type,jdbcType=INTEGER},
+			</if>
+			 <if test="commentTime != null">
+				 #{commentTime},
+			 </if>
 		</trim>
 	</insert>
 
@@ -105,6 +153,12 @@
 		</if>
 		<if test="informationId != null">
 			information_id= #{informationId,jdbcType=INTEGER},
+		</if>
+		<if test="type != null">
+			type= #{type,jdbcType=INTEGER},
+		</if>
+		<if test="commentTime != null">
+			comment_time= #{commentTime},
 		</if>
 	</sql>
 
@@ -129,6 +183,18 @@
 		</if>
 		<if test="informationId != null">
 			 and information_id= #{informationId,jdbcType=INTEGER}
+		</if>
+		<if test="type != null">
+			 and type= #{type,jdbcType=INTEGER}
+		</if>
+		<if test="commentTime != null">
+			and comment_time= #{commentTime}
+		</if>
+		<if test="startTime != null">
+			and comment_time>= #{startTime}
+		</if>
+		<if test="endTime != null">
+			and #{endTime}>= comment_time
 		</if>
 	</sql>
 

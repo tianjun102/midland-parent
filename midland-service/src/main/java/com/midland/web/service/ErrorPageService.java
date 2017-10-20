@@ -29,4 +29,6 @@ public interface ErrorPageService {
 	 **/
 	List<ErrorPage> findErrorPageList(ErrorPage errorPage) throws Exception;
 
+	void batchUpdate(List<ErrorPage> errorPageList) throws Exception;
+
 }

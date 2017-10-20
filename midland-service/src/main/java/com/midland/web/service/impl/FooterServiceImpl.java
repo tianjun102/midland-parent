@@ -92,4 +92,18 @@ public class FooterServiceImpl implements FooterService {
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<Footer> footerList) throws Exception {
+		try {
+			log.debug("updateFooterById  {}",footerList);
+			int result = footerMapper.batchUpdate(footerList);
+			if (result < 1) {
+				throw new Exception("updateFeedbackById失败");
+			}
+		} catch(Exception e) {
+			log.error("updateFooterById  {}",footerList,e);
+			throw e;
+		}
+	}
 }

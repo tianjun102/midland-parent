@@ -1,6 +1,8 @@
 package com.midland.web.dao;
 
+import com.midland.web.model.AppointLog;
 import com.midland.web.model.Appointment;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,5 +18,7 @@ public interface AppointmentMapper {
 	int insertAppointment(Appointment appointment);
 
 	List<Appointment> findAppointmentList(Appointment appointment);
+
+	int batchUpdate(@Param("appointmentList") List<Appointment> appointmentList);
 
 }

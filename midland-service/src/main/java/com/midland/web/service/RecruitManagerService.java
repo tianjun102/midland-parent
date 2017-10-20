@@ -29,4 +29,5 @@ public interface RecruitManagerService {
 	 **/
 	List<RecruitManager> findRecruitManagerList(RecruitManager recruitManager) throws Exception;
 
+	void batchUpdate(List<RecruitManager> recruitManagerList) throws Exception;
 }

@@ -29,4 +29,6 @@ public interface PageConfService {
 	 **/
 	List<PageConf> findPageConfList(PageConf pageConf) throws Exception;
 
+	void batchUpdate(List<PageConf> pageConfList) throws Exception;
+
 }

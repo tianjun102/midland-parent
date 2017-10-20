@@ -84,4 +84,18 @@ public class LeaveMsgServiceImpl implements LeaveMsgService {
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<LeaveMsg> leaveMsgList) throws Exception {
+		try {
+			log.debug("updateLeaveMsgById  {}",leaveMsgList);
+			int result = leaveMsgMapper.batchUpdate(leaveMsgList);
+			if (result < 1) {
+				throw new Exception("updateFeedbackById失败");
+			}
+		} catch(Exception e) {
+			log.error("updateLeaveMsgById  {}",leaveMsgList,e);
+			throw e;
+		}
+	}
 }

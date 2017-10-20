@@ -84,4 +84,18 @@ public class TradeFairServiceImpl implements TradeFairService {
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<TradeFair> tradeFairList) throws Exception {
+		try {
+			log.debug("batchUpdateTradeFair  {}",tradeFairList);
+			int result = tradeFairMapper.batchUpdate(tradeFairList);
+			if (result < 1) {
+				throw new Exception("batchUpdateTradeFair失败");
+			}
+		} catch(Exception e) {
+			log.error("batchUpdateTradeFair  {}",tradeFairList,e);
+			throw e;
+		}
+	}
 }

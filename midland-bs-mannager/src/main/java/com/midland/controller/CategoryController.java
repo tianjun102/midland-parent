@@ -218,6 +218,32 @@ public class CategoryController extends BaseFilter {
 		  return cateList;
 	}
 
+	/**
+	 * 批量更新
+	 **/
+	@RequestMapping("batchUpdate")
+	@ResponseBody
+	public Object batchUpdate(String ids,Category category) throws Exception {
+		List<Category> commentList = new ArrayList<>();
+		String[] ides=ids.split(",",-1);
+		for (String id:ides ){
+			Category comment1 = new Category();
+			comment1.setId(Integer.valueOf(id));
+			comment1.setIsDelete(category.getIsDelete());
+			commentList.add(comment1);
+		}
+		Map<String,Object> map = new HashMap<>();
+		try {
+			log.debug("updateCategoryById  {}",commentList);
+			categoryServiceImpl.batchUpdate(commentList);
+			map.put("state",0);
+		} catch(Exception e) {
+			log.error("updateCategoryById  {}",commentList,e);
+			map.put("state",-1);
+		}
+		return map;
+	}
+
 }
 
 

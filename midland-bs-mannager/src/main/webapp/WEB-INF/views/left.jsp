@@ -381,6 +381,10 @@
 						<a id = "feedbackIndex" href="${ctx}/rest/errorPage/index" target="contentF"><span>错误页面配置</span></a>
 					</shiro:hasPermission>
 
+					<shiro:hasPermission name="commentMannager">
+						<a id = "feedbackIndex" href="${ctx}/rest/comment/index" target="contentF"><span>评论管理</span></a>
+					</shiro:hasPermission>
+
 						<a id = "system7" href="${ctx}/rest/user/toModifyPwdPage" target="contentF"><span>修改密码</span></a>
 						<a id = "system8" href="${ctx}/rest/user/about" target="contentF"><span>关于平台</span></a>
 				</dd>

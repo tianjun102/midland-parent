@@ -29,4 +29,6 @@ public interface LiaisonRecordService {
 	 **/
 	List<LiaisonRecord> findLiaisonRecordList(LiaisonRecord liaisonRecord);
 
+	void batchUpdate(List<LiaisonRecord> liaisonRecordList) throws Exception;
+
 }

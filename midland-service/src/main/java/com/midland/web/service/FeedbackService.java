@@ -29,4 +29,6 @@ public interface FeedbackService {
 	 **/
 	List<Feedback> findFeedbackList(Feedback feedback) throws Exception;
 
+	void batchUpdate(List<Feedback> feedbackList) throws Exception;
+
 }

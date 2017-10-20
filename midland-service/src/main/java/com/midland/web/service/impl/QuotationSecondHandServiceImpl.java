@@ -98,6 +98,20 @@ public class QuotationSecondHandServiceImpl implements QuotationSecondHandServic
 		}
 	}
 
+	@Override
+	public void batchUpdate(List<QuotationSecondHand> quotationSecondHandList) throws Exception {
+		try {
+			log.debug("batchUpdate  {}",quotationSecondHandList);
+			int result = quotationSecondHandMapper.batchUpdate(quotationSecondHandList);
+			if (result < 1) {
+				throw new Exception("QuotationbatchUpdate失败");
+			}
+		} catch(Exception e) {
+			log.error("QuotationbatchUpdate  {}",quotationSecondHandList,e);
+			throw e;
+		}
+	}
+
 	/**
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
 	 **/

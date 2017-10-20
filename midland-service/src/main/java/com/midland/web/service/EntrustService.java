@@ -29,4 +29,6 @@ public interface EntrustService {
 	 **/
 	List<Entrust> findEntrustList(Entrust entrust) throws Exception;
 
+	void batchUpdate(List<Entrust> entrustList) throws Exception;
+
 }

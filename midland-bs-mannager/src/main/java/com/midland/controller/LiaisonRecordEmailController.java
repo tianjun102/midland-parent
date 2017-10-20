@@ -7,6 +7,8 @@ import com.midland.web.service.SettingService;
 import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.ParamObject;
 import org.slf4j.Logger;
+
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import org.slf4j.LoggerFactory;
@@ -149,5 +151,31 @@ public class LiaisonRecordEmailController extends BaseFilter  {
 			model.addAttribute("items",null);
 		}
 		return "liaisonRecordEmail/liaisonRecordEmailList";
+	}
+
+	/**
+	 * 批量更新
+	 **/
+	@RequestMapping("batchUpdate")
+	@ResponseBody
+	public Object batchUpdate(String ids,LiaisonRecordEmail liaisonRecordEmail) throws Exception {
+		List<LiaisonRecordEmail> commentList = new ArrayList<>();
+		String[] ides=ids.split(",",-1);
+		for (String id:ides ){
+			LiaisonRecordEmail comment1 = new LiaisonRecordEmail();
+			comment1.setId(Integer.valueOf(id));
+			comment1.setIsDelete(liaisonRecordEmail.getIsDelete());
+			commentList.add(comment1);
+		}
+		Map<String,Object> map = new HashMap<>();
+		try {
+			log.debug("updateCategoryById  {}",commentList);
+			liaisonRecordEmailServiceImpl.batchUpdate(commentList);
+			map.put("state",0);
+		} catch(Exception e) {
+			log.error("updateCategoryById  {}",commentList,e);
+			map.put("state",-1);
+		}
+		return map;
 	}
 }

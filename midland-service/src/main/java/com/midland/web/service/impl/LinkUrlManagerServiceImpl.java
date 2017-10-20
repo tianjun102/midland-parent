@@ -84,4 +84,18 @@ public class LinkUrlManagerServiceImpl implements LinkUrlManagerService {
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<LinkUrlManager> linkUrlManagerList) throws Exception {
+		try {
+			log.debug("updateLinkUrlManagerById  {}",linkUrlManagerList);
+			int result = linkUrlManagerMapper.batchUpdate(linkUrlManagerList);
+			if (result < 1) {
+				throw new Exception("updateLinkUrlManagerById失败");
+			}
+		} catch(Exception e) {
+			log.error("updateLinkUrlManagerById  {}",linkUrlManagerList,e);
+			throw e;
+		}
+	}
 }

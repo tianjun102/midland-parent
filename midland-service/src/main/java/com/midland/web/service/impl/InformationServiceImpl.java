@@ -84,4 +84,18 @@ public class InformationServiceImpl implements InformationService {
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<Information> informationList) throws Exception {
+		try {
+			log.debug("updateInformationById  {}",informationList);
+			int result = informationMapper.batchUpdate(informationList);
+			if (result < 1) {
+				throw new Exception("updateFeedbackById失败");
+			}
+		} catch(Exception e) {
+			log.error("updateInformationById  {}",informationList,e);
+			throw e;
+		}
+	}
 }

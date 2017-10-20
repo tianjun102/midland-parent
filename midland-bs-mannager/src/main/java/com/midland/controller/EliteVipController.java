@@ -2,10 +2,14 @@ package com.midland.controller;
 
 import com.midland.base.BaseFilter;
 import com.midland.web.model.Category;
+import com.midland.web.model.EliteClub;
 import com.midland.web.model.EliteVip;
 import com.midland.web.service.EliteVipService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import org.slf4j.LoggerFactory;
@@ -147,5 +151,31 @@ public class EliteVipController extends BaseFilter {
 			model.addAttribute("items",null);
 		}
 		return "eliteVip/eliteVipList";
+	}
+
+	/**
+	 * 批量更新
+	 **/
+	@RequestMapping("batchUpdate")
+	@ResponseBody
+	public Object batchUpdate(String ids,EliteVip eliteVip) throws Exception {
+		List<EliteVip> commentList = new ArrayList<>();
+		String[] ides=ids.split(",",-1);
+		for (String id:ides ){
+			EliteVip comment1 = new EliteVip();
+			comment1.setId(Integer.valueOf(id));
+			comment1.setIsDelete(eliteVip.getIsDelete());
+			commentList.add(comment1);
+		}
+		Map<String,Object> map = new HashMap<>();
+		try {
+			log.debug("updateCategoryById  {}",commentList);
+			eliteVipServiceImpl.batchUpdate(commentList);
+			map.put("state",0);
+		} catch(Exception e) {
+			log.error("updateCategoryById  {}",commentList,e);
+			map.put("state",-1);
+		}
+		return map;
 	}
 }

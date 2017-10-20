@@ -1,6 +1,8 @@
 package com.midland.web.dao;
 
+import com.midland.web.model.Popular;
 import com.midland.web.model.QrCode;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,5 +18,7 @@ public interface QrCodeMapper {
 	int insertQrCode(QrCode qrCode);
 
 	List<QrCode> findQrCodeList(QrCode qrCode);
+
+	int batchUpdate(@Param("qrCodeList") List<QrCode> qrCodeList);
 
 }

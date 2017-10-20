@@ -1,6 +1,7 @@
 package com.midland.web.dao;
 
 import com.midland.web.model.EliteClub;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,5 +17,7 @@ public interface EliteClubMapper {
 	int insertEliteClub(EliteClub eliteClub);
 
 	List<EliteClub> findEliteClubList(EliteClub eliteClub);
+
+	int batchUpdate(@Param("eliteClubList") List<EliteClub> eliteClubList);
 
 }

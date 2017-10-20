@@ -84,4 +84,18 @@ public class AppointmentServiceImpl implements AppointmentService {
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<Appointment> appointmentList) throws Exception {
+		try {
+			log.debug("updateAppointmentById  {}",appointmentList);
+			int result = appointmentMapper.batchUpdate(appointmentList);
+			if (result < 1) {
+				throw new Exception("updateAppointLogById失败");
+			}
+		} catch(Exception e) {
+			log.error("updateAppointmentById  {}",appointmentList,e);
+			throw e;
+		}
+	}
 }

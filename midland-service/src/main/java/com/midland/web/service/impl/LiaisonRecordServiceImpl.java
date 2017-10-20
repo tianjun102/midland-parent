@@ -84,4 +84,18 @@ public class LiaisonRecordServiceImpl implements LiaisonRecordService {
 			return null;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<LiaisonRecord> liaisonRecordList) throws Exception {
+		try {
+			log.debug("updateLiaisonRecordById  {}",liaisonRecordList);
+			int result = liaisonRecordMapper.batchUpdate(liaisonRecordList);
+			if (result < 1) {
+				throw new Exception("updateFeedbackById失败");
+			}
+		} catch(Exception e) {
+			log.error("updateLiaisonRecordById  {}",liaisonRecordList,e);
+			throw e;
+		}
+	}
 }

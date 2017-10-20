@@ -1,5 +1,6 @@
 package com.midland.web.service;
 
+import com.midland.web.model.Answer;
 import com.midland.web.model.AppointLog;
 import java.util.List;
 public interface AppointLogService {
@@ -30,5 +31,7 @@ public interface AppointLogService {
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
 	 **/
 	List<AppointLog> findAppointLogList(AppointLog appointLog) throws Exception;
+
+	void batchUpdate(List<AppointLog> appointLogList) throws Exception;
 
 }

@@ -29,4 +29,6 @@ public interface TradeFairService {
 	 **/
 	List<TradeFair> findTradeFairList(TradeFair tradeFair) throws Exception;
 
+	void batchUpdate(List<TradeFair> tradeFairList) throws Exception;
+
 }

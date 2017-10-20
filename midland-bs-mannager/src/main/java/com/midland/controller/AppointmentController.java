@@ -19,6 +19,7 @@ import com.midland.web.model.user.User;
 import com.midland.web.service.AppointLogService;
 import com.midland.web.service.AppointmentService;
 import com.midland.web.service.DingJiangService;
+import com.midland.web.service.impl.TradeFairServiceImpl;
 import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
 import com.midland.web.util.ParamObject;
@@ -46,6 +47,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/appoint")
 public class AppointmentController extends BaseFilter {
+	private Logger log = LoggerFactory.getLogger(AppointmentController.class);
 	@Autowired
 	private AppointmentService appointmentServiceImpl;
 	@Autowired
@@ -269,6 +271,32 @@ public class AppointmentController extends BaseFilter {
 		int titleSize[] = {13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13};
 		//其他设置 set方法可全不调用
 		pee.wirteExcel(titleColumn, titleName, titleSize, exportModels,request);
+	}
+
+	/**
+	 * 批量更新
+	 **/
+	@RequestMapping("batchUpdate")
+	@ResponseBody
+	public Object batchUpdate(String ids,Appointment appointment) throws Exception {
+		List<Appointment> commentList = new ArrayList<>();
+		String[] ides=ids.split(",",-1);
+		for (String id:ides ){
+			Appointment comment1 = new Appointment();
+			comment1.setId(Integer.valueOf(id));
+			comment1.setIsDelete(appointment.getIsDelete());
+			commentList.add(comment1);
+		}
+		Map<String,Object> map = new HashMap<>();
+		try {
+			log.debug("updateAppointmentById  {}",commentList);
+			appointmentServiceImpl.batchUpdate(commentList);
+			map.put("state",0);
+		} catch(Exception e) {
+			log.error("updateAppointmentById  {}",commentList,e);
+			map.put("state",-1);
+		}
+		return map;
 	}
 	
 	

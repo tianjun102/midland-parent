@@ -84,4 +84,18 @@ public class FeedbackEmailServiceImpl implements FeedbackEmailService {
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<FeedbackEmail> feedbackEmailList) throws Exception {
+		try {
+			log.debug("updateFeedbackEmailById  {}",feedbackEmailList);
+			int result = feedbackEmailMapper.batchUpdate(feedbackEmailList);
+			if (result < 1) {
+				throw new Exception("updateFeedbackEmailById失败");
+			}
+		} catch(Exception e) {
+			log.error("updateFeedbackEmailById  {}",feedbackEmailList,e);
+			throw e;
+		}
+	}
 }

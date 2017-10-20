@@ -1,6 +1,8 @@
 package com.midland.web.dao;
 
+import com.midland.web.model.TradeFair;
 import com.midland.web.model.user.UserBlackLog;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,4 +20,6 @@ public interface UserBlackLogMapper {
     int updateByPrimaryKeySelective(UserBlackLog record);
 
     int updateByPrimaryKey(UserBlackLog record);
+
+    int batchUpdate(@Param("userBlackLogList") List<UserBlackLog> userBlackLogList);
 }

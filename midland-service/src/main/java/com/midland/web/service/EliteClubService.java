@@ -29,4 +29,6 @@ public interface EliteClubService {
 	 **/
 	List<EliteClub> findEliteClubList(EliteClub eliteClub) throws Exception;
 
+	void batchUpdate(List<EliteClub> eliteClubList) throws Exception;
+
 }

@@ -84,4 +84,18 @@ public class EliteClubServiceImpl implements EliteClubService {
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<EliteClub> eliteClubList) throws Exception {
+		try {
+			log.debug("updateEliteClubById  {}",eliteClubList);
+			int result = eliteClubMapper.batchUpdate(eliteClubList);
+			if (result < 1) {
+				throw new Exception("updateAppointLogById失败");
+			}
+		} catch(Exception e) {
+			log.error("updateEliteClubById  {}",eliteClubList,e);
+			throw e;
+		}
+	}
 }

@@ -1,6 +1,7 @@
 package com.midland.controller;
 
 import com.midland.web.model.Area;
+import com.midland.web.model.LiaisonRecordEmail;
 import com.midland.web.model.Menu;
 import com.midland.web.model.temp.ListDescOtherParam;
 import com.midland.web.model.user.User;
@@ -12,6 +13,8 @@ import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.ParamObject;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
+
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import org.slf4j.LoggerFactory;
@@ -189,6 +192,32 @@ public class MenuController extends BaseFilter  {
 			map.put("state",0);
 		} catch (Exception e) {
 			log.error("",e);
+			map.put("state",-1);
+		}
+		return map;
+	}
+
+	/**
+	 * 批量更新
+	 **/
+	@RequestMapping("batchUpdate")
+	@ResponseBody
+	public Object batchUpdate(String ids,Menu menu) throws Exception {
+		List<Menu> commentList = new ArrayList<>();
+		String[] ides=ids.split(",",-1);
+		for (String id:ides ){
+			Menu comment1 = new Menu();
+			comment1.setId(Integer.valueOf(id));
+			comment1.setIsDelete(menu.getIsDelete());
+			commentList.add(comment1);
+		}
+		Map<String,Object> map = new HashMap<>();
+		try {
+			log.debug("updateCategoryById  {}",commentList);
+			menuServiceImpl.batchUpdate(commentList);
+			map.put("state",0);
+		} catch(Exception e) {
+			log.error("updateCategoryById  {}",commentList,e);
 			map.put("state",-1);
 		}
 		return map;

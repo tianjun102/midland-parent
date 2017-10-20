@@ -1,6 +1,8 @@
 package com.midland.web.dao;
 
+import com.midland.web.model.ResumeManager;
 import com.midland.web.model.SiteMap;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,5 +18,7 @@ public interface SiteMapMapper {
 	int insertSiteMap(SiteMap siteMap);
 
 	List<SiteMap> findSiteMapList(SiteMap siteMap);
+
+	int batchUpdate(@Param("siteMapList") List<SiteMap> siteMapList);
 
 }

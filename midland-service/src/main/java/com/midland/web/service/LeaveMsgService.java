@@ -29,4 +29,6 @@ public interface LeaveMsgService {
 	 **/
 	List<LeaveMsg> findLeaveMsgList(LeaveMsg leaveMsg) throws Exception;
 
+	void batchUpdate(List<LeaveMsg> leaveMsgList) throws Exception;
+
 }

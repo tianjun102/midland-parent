@@ -31,4 +31,6 @@ public interface EntrustLogService {
 	 **/
 	List<EntrustLog> findEntrustLogList(EntrustLog entrustLog) throws Exception;
 
+	void batchUpdate(List<EntrustLog> entrustLogList) throws Exception;
+
 }

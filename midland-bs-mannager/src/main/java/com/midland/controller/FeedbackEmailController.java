@@ -3,6 +3,7 @@ package com.midland.controller;
 import com.midland.base.BaseFilter;
 import com.midland.web.model.Area;
 import com.midland.web.model.ExportModel;
+import com.midland.web.model.Feedback;
 import com.midland.web.model.FeedbackEmail;
 import com.midland.web.model.user.User;
 import com.midland.web.service.FeedbackEmailService;
@@ -192,6 +193,32 @@ public class FeedbackEmailController extends BaseFilter {
 		int titleSize[] = {13,13,13,13};
 		//其他设置 set方法可全不调用
 		pee.wirteExcel(titleColumn, titleName, titleSize, exportModels,request);
+	}
+
+	/**
+	 * 批量更新
+	 **/
+	@RequestMapping("batchUpdate")
+	@ResponseBody
+	public Object batchUpdate(String ids,FeedbackEmail feedbackEmail) throws Exception {
+		List<FeedbackEmail> commentList = new ArrayList<>();
+		String[] ides=ids.split(",",-1);
+		for (String id:ides ){
+			FeedbackEmail comment1 = new FeedbackEmail();
+			comment1.setId(Integer.valueOf(id));
+			comment1.setIsDelete(feedbackEmail.getIsDelete());
+			commentList.add(comment1);
+		}
+		Map<String,Object> map = new HashMap<>();
+		try {
+			log.debug("updateCategoryById  {}",commentList);
+			feedbackEmailServiceImpl.batchUpdate(commentList);
+			map.put("state",0);
+		} catch(Exception e) {
+			log.error("updateCategoryById  {}",commentList,e);
+			map.put("state",-1);
+		}
+		return map;
 	}
 
 }
