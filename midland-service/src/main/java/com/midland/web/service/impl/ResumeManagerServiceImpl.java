@@ -84,4 +84,18 @@ public class ResumeManagerServiceImpl implements ResumeManagerService {
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<ResumeManager> resumeManagerList) throws Exception {
+		try {
+			log.debug("ResumeManagerbatchUpdate  {}",resumeManagerList);
+			int result = resumeManagerMapper.batchUpdate(resumeManagerList);
+			if (result < 1) {
+				throw new Exception("RecruitManagerbatchUpdate失败");
+			}
+		} catch(Exception e) {
+			log.error("ResumeManagerbatchUpdate  {}",resumeManagerList,e);
+			throw e;
+		}
+	}
 }

@@ -104,4 +104,18 @@ public class QuotationServiceImpl implements QuotationService {
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<Quotation> quotationList) throws Exception {
+		try {
+			log.debug("QuotationbatchUpdate  {}",quotationList);
+			int result = quotationMapper.batchUpdate(quotationList);
+			if (result < 1) {
+				throw new Exception("QuotationbatchUpdate失败");
+			}
+		} catch(Exception e) {
+			log.error("QuotationbatchUpdate  {}",quotationList,e);
+			throw e;
+		}
+	}
 }

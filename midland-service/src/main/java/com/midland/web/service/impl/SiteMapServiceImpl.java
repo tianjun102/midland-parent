@@ -84,4 +84,18 @@ public class SiteMapServiceImpl implements SiteMapService {
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<SiteMap> siteMapList) throws Exception {
+		try {
+			log.debug("batchUpdateSiteMap  {}",siteMapList);
+			int result = siteMapMapper.batchUpdate(siteMapList);
+			if (result < 1) {
+				throw new Exception("batchUpdateSiteMap失败");
+			}
+		} catch(Exception e) {
+			log.error("batchUpdateSiteMap  {}",siteMapList,e);
+			throw e;
+		}
+	}
 }

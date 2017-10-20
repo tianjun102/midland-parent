@@ -31,4 +31,6 @@ public interface FooterService {
 	 **/
 	List<Footer> findFooterList(Footer footer) throws Exception;
 
+	void batchUpdate(List<Footer> footerList) throws Exception;
+
 }

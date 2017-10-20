@@ -350,4 +350,30 @@ public class QuotationController extends BaseFilter {
 		pee.wirteExcel(titleColumn, titleName, titleSize, exportModels,request);
 	}
 
+	/**
+	 * 批量更新
+	 **/
+	@RequestMapping("batchUpdate")
+	@ResponseBody
+	public Object batchUpdate(String ids,Quotation quotation) throws Exception {
+		List<Quotation> commentList = new ArrayList<>();
+		String[] ides=ids.split(",",-1);
+		for (String id:ides ){
+			Quotation comment1 = new Quotation();
+			comment1.setId(Integer.valueOf(id));
+			comment1.setIsDelete(quotation.getIsDelete());
+			commentList.add(comment1);
+		}
+		Map<String,Object> map = new HashMap<>();
+		try {
+			log.debug("updateCategoryById  {}",commentList);
+			quotationServiceImpl.batchUpdate(commentList);
+			map.put("state",0);
+		} catch(Exception e) {
+			log.error("updateCategoryById  {}",commentList,e);
+			map.put("state",-1);
+		}
+		return map;
+	}
+
 }

@@ -29,4 +29,5 @@ public interface ResumeManagerService {
 	 **/
 	List<ResumeManager> findResumeManagerList(ResumeManager resumeManager) throws Exception;
 
+	void batchUpdate(List<ResumeManager> resumeManagerList) throws Exception;
 }

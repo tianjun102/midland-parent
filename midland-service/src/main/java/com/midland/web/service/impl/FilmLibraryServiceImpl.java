@@ -84,4 +84,18 @@ public class FilmLibraryServiceImpl implements FilmLibraryService {
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<FilmLibrary> filmLibraryList) throws Exception {
+		try {
+			log.debug("updateFilmLibraryById  {}",filmLibraryList);
+			int result = filmLibraryMapper.batchUpdate(filmLibraryList);
+			if (result < 1) {
+				throw new Exception("updateFeedbackById失败");
+			}
+		} catch(Exception e) {
+			log.error("updateFilmLibraryById  {}",filmLibraryList,e);
+			throw e;
+		}
+	}
 }

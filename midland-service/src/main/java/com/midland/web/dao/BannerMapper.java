@@ -1,9 +1,10 @@
 package com.midland.web.dao;
 
 import com.midland.web.model.Banner;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
+
 @Repository
 public interface BannerMapper {
 
@@ -17,4 +18,5 @@ public interface BannerMapper {
 
 	List<Banner> findBannerList(Banner banner);
 
+	int batchUpdate(@Param("bannerList") List<Banner> bannerList);
 }

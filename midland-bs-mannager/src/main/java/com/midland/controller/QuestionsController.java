@@ -38,6 +38,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/questions")
 public class QuestionsController extends BaseFilter {
+
+	private Logger log = LoggerFactory.getLogger(QuestionsController.class);
 	@Autowired
 	private QuestionsService questionsServiceImpl;
 	
@@ -246,6 +248,32 @@ public class QuestionsController extends BaseFilter {
 			
 		} catch (Exception e) {
 			logger.error("updateAnswer : {}",answer,e);
+			map.put("state",-1);
+		}
+		return map;
+	}
+
+	/**
+	 * 批量更新
+	 **/
+	@RequestMapping("batchUpdate")
+	@ResponseBody
+	public Object batchUpdate(String ids,Answer answer) throws Exception {
+		List<Answer> commentList = new ArrayList<>();
+		String[] ides=ids.split(",",-1);
+		for (String id:ides ){
+			Answer comment1 = new Answer();
+			comment1.setId(Integer.valueOf(id));
+			comment1.setIsDelete(answer.getIsDelete());
+			commentList.add(comment1);
+		}
+		Map<String,Object> map = new HashMap<>();
+		try {
+			log.debug("updateAnswerById  {}",commentList);
+			answerServiceImpl.batchUpdate(commentList);
+			map.put("state",0);
+		} catch(Exception e) {
+			log.error("updateAnswerById  {}",commentList,e);
 			map.put("state",-1);
 		}
 		return map;

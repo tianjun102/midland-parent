@@ -29,4 +29,6 @@ public interface HotSearchService {
 	 **/
 	List<HotSearch> findHotSearchList(HotSearch hotSearch) throws Exception;
 
+	void batchUpdate(List<HotSearch> hotSearchList) throws Exception;
+
 }

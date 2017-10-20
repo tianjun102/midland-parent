@@ -1,6 +1,8 @@
 package com.midland.web.dao;
 
+import com.midland.web.model.LiaisonRecord;
 import com.midland.web.model.LinkUrlManager;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,5 +18,7 @@ public interface LinkUrlManagerMapper {
 	int insertLinkUrlManager(LinkUrlManager linkUrlManager);
 
 	List<LinkUrlManager> findLinkUrlManagerList(LinkUrlManager linkUrlManager);
+
+	int batchUpdate(@Param("linkUrlManagerList") List<LinkUrlManager> linkUrlManagerList);
 
 }

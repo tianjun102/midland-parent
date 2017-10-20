@@ -29,4 +29,6 @@ public interface AnswerService {
 	 **/
 	List<Answer> findAnswerList(Answer answer) throws Exception;
 
+	void batchUpdate(List<Answer> answerList) throws Exception;
+
 }

@@ -26,6 +26,7 @@ import java.util.*;
 
 @Service
 public class SettingServiceImpl implements SettingService {
+    private Logger log = LoggerFactory.getLogger(SettingServiceImpl.class);
 
     private final Logger logger= LoggerFactory.getLogger(SettingServiceImpl.class);
     @Autowired
@@ -245,6 +246,21 @@ public class SettingServiceImpl implements SettingService {
         return areaMap;
     }
 
+    @Override
+    public void batchUpdatePopular(List<Popular> popularList) throws Exception {
+        try {
+            log.debug("batchUpdatePopular  {}",popularList);
+            int result = popularMapper.batchUpdate(popularList);
+            if (result < 1) {
+                throw new Exception("batchUpdatePopular失败");
+            }
+        } catch(Exception e) {
+            log.error("batchUpdatePopular  {}",popularList,e);
+            throw e;
+        }
+
+    }
+
     /**
      * 友情链接列表实现方法
      * @param linkUrlManager
@@ -271,6 +287,20 @@ public class SettingServiceImpl implements SettingService {
     }
 
     @Override
+    public void batchUpdateLinkUrl(List<LinkUrlManager> linkUrlManagerList) throws Exception {
+        try {
+            log.debug("batchUpdateLinkUrl  {}",linkUrlManagerList);
+            int result = linkUrlMapper.batchUpdate(linkUrlManagerList);
+            if (result < 1) {
+                throw new Exception("batchUpdateLinkUrl失败");
+            }
+        } catch(Exception e) {
+            log.error("batchUpdateLinkUrl  {}",linkUrlManagerList,e);
+            throw e;
+        }
+    }
+
+    @Override
     public List<Banner> findBannerList(Banner banner) {
         return bannerMapper.findBannerList(banner);
     }
@@ -288,6 +318,21 @@ public class SettingServiceImpl implements SettingService {
     @Override
     public int insertBanner(Banner banner) {
         return bannerMapper.insertBanner(banner);
+    }
+
+    @Override
+    public void batchUpdateBanner(List<Banner> bannerList) throws Exception {
+        try {
+            log.debug("batchUpdateBanner  {}",bannerList);
+            int result = bannerMapper.batchUpdate(bannerList);
+            if (result < 1) {
+                throw new Exception("batchUpdateBanner失败");
+            }
+        } catch(Exception e) {
+            log.error("batchUpdateBanner  {}",bannerList,e);
+            throw e;
+        }
+
     }
 
 

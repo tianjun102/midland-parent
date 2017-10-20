@@ -84,4 +84,18 @@ public class ErrorPageServiceImpl implements ErrorPageService {
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<ErrorPage> errorPageList) throws Exception {
+		try {
+			log.debug("updateErrorPageById  {}",errorPageList);
+			int result = errorPageMapper.batchUpdate(errorPageList);
+			if (result < 1) {
+				throw new Exception("updateAppointLogById失败");
+			}
+		} catch(Exception e) {
+			log.error("updateErrorPageById  {}",errorPageList,e);
+			throw e;
+		}
+	}
 }

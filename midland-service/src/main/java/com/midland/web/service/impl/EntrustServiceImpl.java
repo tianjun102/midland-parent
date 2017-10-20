@@ -84,4 +84,18 @@ public class EntrustServiceImpl implements EntrustService {
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<Entrust> entrustList) throws Exception {
+		try {
+			log.debug("updateEntrustById  {}",entrustList);
+			int result = entrustMapper.batchUpdate(entrustList);
+			if (result < 1) {
+				throw new Exception("updateAppointLogById失败");
+			}
+		} catch(Exception e) {
+			log.error("updateEntrustById  {}",entrustList,e);
+			throw e;
+		}
+	}
 }

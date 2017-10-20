@@ -1,6 +1,7 @@
 package com.midland.web.dao;
 
 import com.midland.web.model.Answer;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,5 +17,7 @@ public interface AnswerMapper {
 	int insertAnswer(Answer answer);
 
 	List<Answer> findAnswerList(Answer answer);
+
+	int batchUpdate(@Param("answerList") List<Answer> answerList);
 
 }

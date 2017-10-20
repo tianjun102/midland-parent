@@ -40,6 +40,8 @@ public interface SettingService {
 	
 	public Map<String, List<Area>> queryAreaByRedis(Map<String, String> parem);
 
+    void batchUpdatePopular(List<Popular> popularList) throws Exception;
+
     /**
      * 友情链接
      * @param linkUrlManager
@@ -54,6 +56,8 @@ public interface SettingService {
 
     public int insertLinkUrlManage(LinkUrlManager linkUrlManager);
 
+    void batchUpdateLinkUrl(List<LinkUrlManager> linkUrlManagerList) throws Exception;
+
 
     /**
      * Banner管理
@@ -66,5 +70,7 @@ public interface SettingService {
     public int updateBanner(Banner banner);
 
     public int insertBanner(Banner banner);
+
+    void batchUpdateBanner(List<Banner> bannerList) throws Exception;
 
 }

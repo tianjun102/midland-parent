@@ -1,6 +1,8 @@
 package com.midland.web.dao;
 
+import com.midland.web.model.Questions;
 import com.midland.web.model.Quotation;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,5 +21,7 @@ public interface QuotationMapper {
 
 	List<Quotation> findQuotationList(Quotation quotation);
 	List<Map> tooltip(Quotation quotation);
+
+	int batchUpdate(@Param("quotationsList") List<Quotation> quotationList);
 
 }

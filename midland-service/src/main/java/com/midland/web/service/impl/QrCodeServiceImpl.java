@@ -84,4 +84,9 @@ public class QrCodeServiceImpl implements QrCodeService {
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<QrCode> qrCodeList) throws Exception {
+
+	}
 }

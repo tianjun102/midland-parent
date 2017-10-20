@@ -29,4 +29,6 @@ public interface SpecialPageService {
 	 **/
 	List<SpecialPage> findSpecialPageList(SpecialPage specialPage) throws Exception;
 
+	void batchUpdate(List<SpecialPage> specialPageList) throws Exception;
+
 }

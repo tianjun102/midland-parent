@@ -92,4 +92,18 @@ public class AppointLogServiceImpl implements AppointLogService {
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<AppointLog> appointLogList) throws Exception {
+		try {
+			log.debug("updateAppointLogById  {}",appointLogList);
+			int result = appointLogMapper.batchUpdate(appointLogList);
+			if (result < 1) {
+				throw new Exception("updateAppointLogById失败");
+			}
+		} catch(Exception e) {
+			log.error("updateAnswerById  {}",appointLogList,e);
+			throw e;
+		}
+	}
 }

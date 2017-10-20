@@ -35,4 +35,7 @@ public interface QuotationService {
 	 **/
 	List<Quotation> findQuotationList(Quotation quotation) throws Exception;
 
+	void batchUpdate(List<Quotation> quotationList) throws Exception;
+
+
 }

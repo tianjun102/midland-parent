@@ -90,4 +90,18 @@ public class MenuServiceImpl implements MenuService {
 		Integer result = menuMapper.getMaxOrderBy();
 		return result==null?0:result+1;
 	}
+
+	@Override
+	public void batchUpdate(List<Menu> menuList) throws Exception {
+		try {
+			log.debug("updateMenuById  {}",menuList);
+			int result = menuMapper.batchUpdate(menuList);
+			if (result < 1) {
+				throw new Exception("updateMenuById失败");
+			}
+		} catch(Exception e) {
+			log.error("updateMenuById  {}",menuList,e);
+			throw e;
+		}
+	}
 }

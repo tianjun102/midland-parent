@@ -1,6 +1,8 @@
 package com.midland.web.dao;
 
+import com.midland.web.model.QrCode;
 import com.midland.web.model.Questions;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,5 +15,6 @@ public interface QuestionsMapper {
     Questions selectByPrimaryKey(Integer id);
     List<Questions> questionPage(Questions questions);
     int updateByPrimaryKeySelective(Questions record);
+    int batchUpdate(@Param("questionsList") List<Questions> questionsList);
 
 }

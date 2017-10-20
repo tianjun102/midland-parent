@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 
 import java.io.*;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import org.slf4j.LoggerFactory;
@@ -326,5 +327,31 @@ public class ResumeManagerController extends BaseFilter {
 			         }
 		         return type;
 		     }
+
+	/**
+	 * 批量更新
+	 **/
+	@RequestMapping("batchUpdate")
+	@ResponseBody
+	public Object batchUpdate(String ids,ResumeManager resumeManager) throws Exception {
+		List<ResumeManager> commentList = new ArrayList<>();
+		String[] ides=ids.split(",",-1);
+		for (String id:ides ){
+			ResumeManager comment1 = new ResumeManager();
+			comment1.setId(Integer.valueOf(id));
+			comment1.setIsDelete(resumeManager.getIsDelete());
+			commentList.add(comment1);
+		}
+		Map<String,Object> map = new HashMap<>();
+		try {
+			log.debug("updateCategoryById  {}",commentList);
+			resumeManagerServiceImpl.batchUpdate(commentList);
+			map.put("state",0);
+		} catch(Exception e) {
+			log.error("updateCategoryById  {}",commentList,e);
+			map.put("state",-1);
+		}
+		return map;
+	}
 
 }

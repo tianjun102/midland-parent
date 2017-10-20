@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -463,6 +464,85 @@ public class SettingContorller extends BaseFilter {
         jdbcService.listDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,obj,sort);
         Map map = new HashMap();
         map.put("state",0);
+        return map;
+    }
+
+    /**
+     * 批量更新
+     **/
+    @RequestMapping("batchUpdate")
+    @ResponseBody
+    public Object batchUpdateBanner(String ids,Banner banner) throws Exception {
+        List<Banner> commentList = new ArrayList<>();
+        String[] ides=ids.split(",",-1);
+        for (String id:ides ){
+            Banner comment1 = new Banner();
+            comment1.setId(Integer.valueOf(id));
+            comment1.setIsDelete(banner.getIsDelete());
+            commentList.add(comment1);
+        }
+        Map<String,Object> map = new HashMap<>();
+        try {
+            logger.debug("updateCategoryById  {}",commentList);
+            settingService.batchUpdateBanner(commentList);
+            map.put("state",0);
+        } catch(Exception e) {
+            logger.error("updateCategoryById  {}",commentList,e);
+            map.put("state",-1);
+        }
+        return map;
+    }
+
+    /**
+     * 批量更新
+     **/
+    @RequestMapping("batchUpdate")
+    @ResponseBody
+    public Object batchUpdatePopular(String ids,Popular popular) throws Exception {
+        List<Popular> commentList = new ArrayList<>();
+        String[] ides=ids.split(",",-1);
+        for (String id:ides ){
+            Popular comment1 = new Popular();
+            comment1.setId(Integer.valueOf(id));
+            comment1.setIsDelete(popular.getIsDelete());
+            commentList.add(comment1);
+        }
+        Map<String,Object> map = new HashMap<>();
+        try {
+            logger.debug("updateCategoryById  {}",commentList);
+            settingService.batchUpdatePopular(commentList);
+            map.put("state",0);
+        } catch(Exception e) {
+            logger.error("updateCategoryById  {}",commentList,e);
+            map.put("state",-1);
+        }
+        return map;
+    }
+
+
+    /**
+     * 批量更新
+     **/
+    @RequestMapping("batchUpdate")
+    @ResponseBody
+    public Object batchUpdatelinkUrl(String ids,LinkUrlManager linkUrlManager) throws Exception {
+        List<LinkUrlManager> commentList = new ArrayList<>();
+        String[] ides=ids.split(",",-1);
+        for (String id:ides ){
+            LinkUrlManager comment1 = new LinkUrlManager();
+            comment1.setId(Integer.valueOf(id));
+            comment1.setIsDelete(linkUrlManager.getIsDelete());
+            commentList.add(comment1);
+        }
+        Map<String,Object> map = new HashMap<>();
+        try {
+            logger.debug("updateCategoryById  {}",commentList);
+            settingService.batchUpdateLinkUrl(commentList);
+            map.put("state",0);
+        } catch(Exception e) {
+            logger.error("updateCategoryById  {}",commentList,e);
+            map.put("state",-1);
+        }
         return map;
     }
 

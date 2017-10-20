@@ -1,6 +1,8 @@
 package com.midland.web.dao;
 
+import com.midland.web.model.Footer;
 import com.midland.web.model.HotSearch;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,5 +18,7 @@ public interface HotSearchMapper {
 	int insertHotSearch(HotSearch hotSearch);
 
 	List<HotSearch> findHotSearchList(HotSearch hotSearch);
+
+	int batchUpdate(@Param("hotSearchList") List<HotSearch> hotSearchList);
 
 }

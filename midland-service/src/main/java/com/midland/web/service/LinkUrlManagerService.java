@@ -29,4 +29,5 @@ public interface LinkUrlManagerService {
 	 **/
 	List<LinkUrlManager> findLinkUrlManagerList(LinkUrlManager linkUrlManager) throws Exception;
 
+	void batchUpdate(List<LinkUrlManager> linkUrlManagerList) throws Exception;
 }

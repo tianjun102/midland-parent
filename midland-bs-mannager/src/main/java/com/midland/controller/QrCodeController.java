@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -161,5 +162,31 @@ public class QrCodeController extends BaseFilter {
 			model.addAttribute("items",null);
 		}
 		return "qrCode/qrCodeList";
+	}
+
+	/**
+	 * 批量更新
+	 **/
+	@RequestMapping("batchUpdate")
+	@ResponseBody
+	public Object batchUpdate(String ids,QrCode qrCode) throws Exception {
+		List<QrCode> commentList = new ArrayList<>();
+		String[] ides=ids.split(",",-1);
+		for (String id:ides ){
+			QrCode comment1 = new QrCode();
+			comment1.setId(Integer.valueOf(id));
+			comment1.setIsDelete(qrCode.getIsDelete());
+			commentList.add(comment1);
+		}
+		Map<String,Object> map = new HashMap<>();
+		try {
+			log.debug("updateCategoryById  {}",commentList);
+			qrCodeServiceImpl.batchUpdate(commentList);
+			map.put("state",0);
+		} catch(Exception e) {
+			log.error("updateCategoryById  {}",commentList,e);
+			map.put("state",-1);
+		}
+		return map;
 	}
 }

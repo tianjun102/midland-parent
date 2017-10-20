@@ -29,4 +29,6 @@ public interface BannerService {
 	 **/
 	List<Banner> findBannerList(Banner banner) throws Exception;
 
+	void batchUpdate(List<Banner> bannerList) throws Exception;
+
 }

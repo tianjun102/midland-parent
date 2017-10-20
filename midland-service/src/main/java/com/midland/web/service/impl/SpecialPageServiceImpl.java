@@ -84,4 +84,18 @@ public class SpecialPageServiceImpl implements SpecialPageService {
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<SpecialPage> specialPageList) throws Exception {
+		try {
+			log.debug("batchUpdateSpecialPage  {}",specialPageList);
+			int result = specialPageMapper.batchUpdate(specialPageList);
+			if (result < 1) {
+				throw new Exception("batchUpdateSpecialPage失败");
+			}
+		} catch(Exception e) {
+			log.error("batchUpdateSpecialPage  {}",specialPageList,e);
+			throw e;
+		}
+	}
 }

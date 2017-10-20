@@ -1,6 +1,8 @@
 package com.midland.web.dao;
 
+import com.midland.web.model.Banner;
 import com.midland.web.model.Category;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,5 +24,7 @@ public interface CategoryMapper {
 	List<Category> findCategoryParentNameList(Category category);
 
 	Category selectCategoryParentById(Integer category);
+
+	int batchUpdate(@Param("categoryList") List<Category> categoryList);
 
 }

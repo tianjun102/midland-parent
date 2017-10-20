@@ -84,4 +84,18 @@ public class AnswerServiceImpl implements AnswerService {
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<Answer> answerList) throws Exception {
+		try {
+			log.debug("updateAnswerById  {}",answerList);
+			int result = answerMapper.batchUpdate(answerList);
+			if (result < 1) {
+				throw new Exception("updateCommentById失败");
+			}
+		} catch(Exception e) {
+			log.error("updateAnswerById  {}",answerList,e);
+			throw e;
+		}
+	}
 }

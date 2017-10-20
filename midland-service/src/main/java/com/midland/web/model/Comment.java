@@ -30,6 +30,16 @@ public class Comment{
 	 * 关联资讯表id
 	 **/
 	private Integer informationId;
+	/**
+	 * 0=资讯；1=委托；2=预约
+	 **/
+	private Integer type;
+
+	private String commentTime;
+
+	private String startTime;
+
+	private String endTime;
 
 
 	public Integer getId() {
@@ -86,6 +96,38 @@ public class Comment{
 
 	public void setInformationId(Integer informationId) {
 		this.informationId = informationId;
+	}
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	public String getCommentTime() {
+		return commentTime;
+	}
+
+	public void setCommentTime(String commentTime) {
+		this.commentTime = commentTime;
+	}
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
 	}
 
 	@Override

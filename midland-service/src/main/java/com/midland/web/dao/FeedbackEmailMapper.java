@@ -1,6 +1,8 @@
 package com.midland.web.dao;
 
+import com.midland.web.model.ErrorPage;
 import com.midland.web.model.FeedbackEmail;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,4 +19,5 @@ public interface FeedbackEmailMapper {
 
 	List<FeedbackEmail> findFeedbackEmailList(FeedbackEmail feedbackEmail);
 
+	int batchUpdate(@Param("feedbackEmailList") List<FeedbackEmail> feedbackEmailList);
 }

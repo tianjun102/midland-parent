@@ -84,4 +84,18 @@ public class CommentServiceImpl implements CommentService {
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<Comment> commentList) throws Exception {
+		try {
+			log.debug("updateCommentById  {}",commentList);
+			int result = commentMapper.batchUpdate(commentList);
+			if (result < 1) {
+				throw new Exception("updateCommentById失败");
+			}
+		} catch(Exception e) {
+			log.error("updateCommentById  {}",commentList,e);
+			throw e;
+		}
+	}
 }

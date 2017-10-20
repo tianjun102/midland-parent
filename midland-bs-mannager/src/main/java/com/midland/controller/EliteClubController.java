@@ -8,6 +8,7 @@ import com.midland.web.service.EliteClubService;
 import com.midland.web.service.SettingService;
 import org.slf4j.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
@@ -160,5 +161,31 @@ public class EliteClubController extends BaseFilter {
 			model.addAttribute("items",null);
 		}
 		return "eliteClub/eliteClubList";
+	}
+
+	/**
+	 * 批量更新
+	 **/
+	@RequestMapping("batchUpdate")
+	@ResponseBody
+	public Object batchUpdate(String ids,EliteClub eliteClub) throws Exception {
+		List<EliteClub> commentList = new ArrayList<>();
+		String[] ides=ids.split(",",-1);
+		for (String id:ides ){
+			EliteClub comment1 = new EliteClub();
+			comment1.setId(Integer.valueOf(id));
+			comment1.setIsDelete(eliteClub.getIsDelete());
+			commentList.add(comment1);
+		}
+		Map<String,Object> map = new HashMap<>();
+		try {
+			log.debug("updateCategoryById  {}",commentList);
+			eliteClubServiceImpl.batchUpdate(commentList);
+			map.put("state",0);
+		} catch(Exception e) {
+			log.error("updateCategoryById  {}",commentList,e);
+			map.put("state",-1);
+		}
+		return map;
 	}
 }

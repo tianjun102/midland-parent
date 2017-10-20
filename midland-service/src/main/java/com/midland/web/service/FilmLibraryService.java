@@ -29,4 +29,6 @@ public interface FilmLibraryService {
 	 **/
 	List<FilmLibrary> findFilmLibraryList(FilmLibrary filmLibrary) throws Exception;
 
+	void batchUpdate(List<FilmLibrary> filmLibraryList) throws Exception;
+
 }

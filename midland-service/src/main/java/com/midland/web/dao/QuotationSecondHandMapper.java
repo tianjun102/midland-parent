@@ -1,6 +1,8 @@
 package com.midland.web.dao;
 
+import com.midland.web.model.Quotation;
 import com.midland.web.model.QuotationSecondHand;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,5 +19,7 @@ public interface QuotationSecondHandMapper {
 	int insertQuotationSecondHandBatch(List list);
 
 	List<QuotationSecondHand> findQuotationSecondHandList(QuotationSecondHand quotationSecondHand);
+
+	int batchUpdate(@Param("quotationSecondHandList") List<QuotationSecondHand> quotationSecondHandList);
 
 }

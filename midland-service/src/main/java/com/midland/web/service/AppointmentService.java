@@ -1,5 +1,6 @@
 package com.midland.web.service;
 
+import com.midland.web.model.AppointLog;
 import com.midland.web.model.Appointment;
 import java.util.List;
 public interface AppointmentService {
@@ -28,5 +29,7 @@ public interface AppointmentService {
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
 	 **/
 	List<Appointment> findAppointmentList(Appointment appointment) throws Exception;
+
+	void batchUpdate(List<Appointment> appointmentList) throws Exception;
 
 }

@@ -104,4 +104,18 @@ public class CategoryServiceImpl implements CategoryService {
 			throw e;
 		}
     }
+
+	@Override
+	public void batchUpdate(List<Category> categoryList) throws Exception {
+		try {
+			log.debug("updateCategoryById  {}",categoryList);
+			int result = categoryMapper.batchUpdate(categoryList);
+			if (result < 1) {
+				throw new Exception("updateAppointLogById失败");
+			}
+		} catch(Exception e) {
+			log.error("updateCategoryById  {}",categoryList,e);
+			throw e;
+		}
+	}
 }

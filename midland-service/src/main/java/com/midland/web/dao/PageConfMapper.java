@@ -1,6 +1,8 @@
 package com.midland.web.dao;
 
+import com.midland.web.model.Menu;
 import com.midland.web.model.PageConf;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,5 +18,7 @@ public interface PageConfMapper {
 	int insertPageConf(PageConf pageConf);
 
 	List<PageConf> findPageConfList(PageConf pageConf);
+
+	int batchUpdate(@Param("pageConfList") List<PageConf> pageConfList);
 
 }

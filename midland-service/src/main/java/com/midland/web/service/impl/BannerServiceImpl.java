@@ -84,4 +84,18 @@ public class BannerServiceImpl implements BannerService {
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<Banner> bannerList) throws Exception {
+		try {
+			log.debug("updateBannerById  {}",bannerList);
+			int result = bannerMapper.batchUpdate(bannerList);
+			if (result < 1) {
+				throw new Exception("updateAppointLogById失败");
+			}
+		} catch(Exception e) {
+			log.error("updateBannerById  {}",bannerList,e);
+			throw e;
+		}
+	}
 }

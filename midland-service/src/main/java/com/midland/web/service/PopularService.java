@@ -29,4 +29,6 @@ public interface PopularService {
 	 **/
 	List<Popular> findPopularList(Popular popular) throws Exception;
 
+	void batchUpdate(List<Popular> popularList) throws Exception;
+
 }

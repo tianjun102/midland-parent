@@ -29,4 +29,6 @@ public interface QrCodeService {
 	 **/
 	List<QrCode> findQrCodeList(QrCode qrCode) throws Exception;
 
+	void batchUpdate(List<QrCode> qrCodeList) throws Exception;
+
 }

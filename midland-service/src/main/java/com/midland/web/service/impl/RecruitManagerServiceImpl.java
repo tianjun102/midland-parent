@@ -84,4 +84,18 @@ public class RecruitManagerServiceImpl implements RecruitManagerService {
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<RecruitManager> recruitManagerList) throws Exception {
+		try {
+			log.debug("RecruitManagerbatchUpdate  {}",recruitManagerList);
+			int result = recruitManagerMapper.batchUpdate(recruitManagerList);
+			if (result < 1) {
+				throw new Exception("RecruitManagerbatchUpdate失败");
+			}
+		} catch(Exception e) {
+			log.error("RecruitManagerbatchUpdate  {}",recruitManagerList,e);
+			throw e;
+		}
+	}
 }

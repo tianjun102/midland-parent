@@ -29,4 +29,6 @@ public interface InformationService {
 	 **/
 	List<Information> findInformationList(Information information) throws Exception;
 
+	void batchUpdate(List<Information> informationList) throws Exception;
+
 }

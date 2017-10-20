@@ -84,4 +84,18 @@ public class PopularServiceImpl implements PopularService {
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<Popular> popularList) throws Exception {
+		try {
+			log.debug("popularList  {}",popularList);
+			int result = popularMapper.batchUpdate(popularList);
+			if (result < 1) {
+				throw new Exception("popularList失败");
+			}
+		} catch(Exception e) {
+			log.error("popularList  {}",popularList,e);
+			throw e;
+		}
+	}
 }

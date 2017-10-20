@@ -1,6 +1,8 @@
 package com.midland.web.dao;
 
+import com.midland.web.model.LinkUrlManager;
 import com.midland.web.model.Menu;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,5 +20,8 @@ public interface MenuMapper {
 	Integer getMaxOrderBy();
 
 	List<Menu> findMenuList(Menu menu);
+
+	int batchUpdate(@Param("menuList") List<Menu> menuList);
+
 
 }

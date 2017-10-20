@@ -31,6 +31,8 @@ public interface MenuService {
 
 	int getMaxOrderBy();
 
+	void batchUpdate(List<Menu> menuList) throws Exception;
+
 
 
 }

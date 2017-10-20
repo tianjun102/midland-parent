@@ -84,4 +84,18 @@ public class EliteVipServiceImpl implements EliteVipService {
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<EliteVip> eliteVipList) throws Exception {
+		try {
+			log.debug("updateEliteVipById  {}",eliteVipList);
+			int result = eliteVipMapper.batchUpdate(eliteVipList);
+			if (result < 1) {
+				throw new Exception("updateAppointLogById失败");
+			}
+		} catch(Exception e) {
+			log.error("updateEliteVipById  {}",eliteVipList,e);
+			throw e;
+		}
+	}
 }

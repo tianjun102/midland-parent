@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -36,10 +38,14 @@ public class CommentController extends BaseFilter {
 	 **/
 	@RequestMapping("index")
 	public String commentIndex(Comment comment, Model model) throws Exception {
+		if(comment.getInformationId()==null){
+			return "comment/commentAllIndex";
+		}
 		Information information = new Information();
 		information = informationService.selectInformationById(comment.getInformationId());
 		model.addAttribute("comment",comment);
 		model.addAttribute("information",information);
+
 		return "comment/commentIndex";
 	}
 
@@ -142,5 +148,32 @@ public class CommentController extends BaseFilter {
 			model.addAttribute("items",null);
 		}
 		return "comment/commentList";
+	}
+
+	/**
+	 * 更新
+	 **/
+	@RequestMapping("batchUpdate")
+	@ResponseBody
+	public Object batchUpdate(String ids,Comment comment) throws Exception {
+		List<Comment> commentList = new ArrayList<>();
+		String[] ides=ids.split(",",-1);
+		for (String id:ides ){
+			Comment comment1 = new Comment();
+			comment1.setId(Integer.valueOf(id));
+			comment1.setStatus(comment.getStatus());
+			comment1.setIsDelete(comment.getIsDelete());
+			commentList.add(comment1);
+		}
+		Map<String,Object> map = new HashMap<>();
+		try {
+			log.debug("updateCommentById  {}",commentList);
+			commentServiceImpl.batchUpdate(commentList);
+			map.put("state",0);
+		} catch(Exception e) {
+			log.error("updateCommentById  {}",commentList,e);
+			map.put("state",-1);
+		}
+		return map;
 	}
 }
