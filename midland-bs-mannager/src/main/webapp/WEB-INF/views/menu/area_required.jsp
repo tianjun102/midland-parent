@@ -10,12 +10,12 @@
 <body>
 
 <li style="display:flex;align-items:center"><span>省：</span> <!-- 省 -->
-    <label></label> <input type="hidden" name="provinceId">
-    <input type="hidden" name="regionSn"> <input type="hidden"
-                                                 name="provinceName">
+    <label></label>
+    <input type="hidden" name="provinceId">
+    <input type="hidden" name="regionSn">
+    <input type="hidden"  name="provinceName">
     <!-- 第一次进页面加载省 -->
-    <select id="provinces" onchange="initProvince()"
-            style="height: 38px;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+    <select id="provinces" onchange="initProvince()" style="height: 38px;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;"  >
         <option>请选择</option>
         <option value="">全部</option>
         <c:forEach items="${provinceList}" var="province">
@@ -28,10 +28,9 @@
     &nbsp;&nbsp;
     <p id="city" style="display: inline-block;height: 38px;">
         <span>市：</span>
-        <label></label> <input type="hidden" name="cityId" id="cityId" value="${cityId}">
+        <label></label> <input type="hidden" name="cityId" id="cityId" value="${cityId}"  onfocus="checkSelect('cityId','请选择市级')">
         <input type="hidden" name="cityName" id="cityName">
-        <select id="citys" onchange="initCity()"
-                style="height: 38px;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+        <select id="citys" onchange="initCity()" style="height: 38px;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;"  onblur="checkSelect('citys','')">
             <c:choose>
                 <c:when test="${not empty item.cityId}">
                     <option value="${item.cityId}">${item.cityName}</option>
@@ -54,7 +53,6 @@
 
             /*$("input[name=provinceId]").val(addrId);
             $("input[name=provinceName]").val(addName);*/
-            debugger;
             if(addrId==null||addrId==""){
                 $("#cityId").val("");
                 $("#cityName").val("");

@@ -58,6 +58,7 @@ function checkEmail(id,name,msg) {
 }
 
 function checkSelect(ids,msgs){
+    alert(1);
     var  idArr= new Array();
     var  msgArr= new Array();
     idArr = ids.split("|");
