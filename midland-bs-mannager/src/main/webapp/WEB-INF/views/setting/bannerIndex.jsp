@@ -71,7 +71,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							<option value="3">位置４</option>
 						</select>
 					</li>
-					<li><span>位置：</span>
+					<li><span>状态：</span>
 						<select name="enabled" id="enabled" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
 							<option value="">全部</option>
 							<option value="0">关闭</option>
