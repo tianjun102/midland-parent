@@ -28,79 +28,91 @@ public class MidlandTask {
 	@Autowired
 	private TaskConfig taskConfig;
 	//预约看房，经纪人重新分配规则，24小时内状态没有修改，发送短信给经纪人及其领导，48小时后没有处理，则关闭此预约，并发送给有指定邮箱
-	@Scheduled(fixedRate = 3600000)
+	@Scheduled(fixedRate = 1000)
 	public void scanAppointment() {
-		try {
-			Appointment temp = new Appointment();
-			temp.setStatus(0);//0说明预约未处理
-			List<Appointment> lists = appointmentServiceImpl.findAppointmentList(temp);
-			for (Appointment appointment1 : lists) {
-				String time = appointment1.getAppointmentTime();
-				Date appointTime = MidlandHelper.stringToDate(time);
-				Date date = new Date();
-				Calendar calendar = Calendar.getInstance();
-				calendar.setTime(date);
-				//后退48小时；current-48;
-				calendar.add(Calendar.HOUR, -taskConfig.getAppointClose());
-				Date time_48 = calendar.getTime();
-				//后退24小时；current-48+24;
-				calendar.add(calendar.HOUR, taskConfig.getAppointmentWarn());
-				Date time_24 = calendar.getTime();
-				if (time_48.getTime() > appointTime.getTime()) {
-					//超过48小时,48小时后没有处理，则关闭此预约，并发送给有指定邮箱
-					Appointment appoint = new Appointment();
-					appoint.setStatus(3);
-					appoint.setId(appointment1.getId());
-					appointmentServiceImpl.updateAppointmentById(appoint);
-					// TODO: 2017/9/19  发送给有指定邮箱
-					System.out.println(222);
-				} else if (time_24.getTime() > appointTime.getTime()) {
-					//超过24小时,24小时内状态没有修改，发送短信给经纪人及其领导，
-					if (appointment1.getFlag() == 0) {
+		long timeTemp = System.currentTimeMillis();
+		if (timeTemp-taskConfig.getTaskFirstTime()>taskConfig.getTaskInterval()*3600000) {
+			taskConfig.setTaskFirstTime(timeTemp);
+			try {
+				Appointment temp = new Appointment();
+				temp.setStatus(0);//0说明预约未处理
+				List<Appointment> lists = appointmentServiceImpl.findAppointmentList(temp);
+				for (Appointment appointment1 : lists) {
+					String time = appointment1.getAppointmentTime();
+					Date appointTime = MidlandHelper.stringToDate(time);
+					Date date = new Date();
+					//后退48小时；current-48;
+					Calendar calendar = Calendar.getInstance();
+					calendar.setTime(date);
+					calendar.add(Calendar.SECOND, Double.valueOf(-taskConfig.getAppointClose() * 3600).intValue());
+					Date time_48 = calendar.getTime();
+
+					//后退24小时；current-24;
+					Calendar calendar1 = Calendar.getInstance();
+					calendar1.setTime(date);
+					calendar1.add(calendar.SECOND, Double.valueOf(-taskConfig.getAppointmentWarn() * 3600).intValue());
+					Date time_24 = calendar1.getTime();
+
+					if (time_48.getTime() > appointTime.getTime()) {
+						//超过48小时,48小时后没有处理，则关闭此预约，并发送给有指定邮箱
 						Appointment appoint = new Appointment();
-						appoint.setFlag(1);//标记为已通知，不需要再次通知
-						appoint.setResetFlag(1);//标记为展示
+						appoint.setStatus(3);
 						appoint.setId(appointment1.getId());
 						appointmentServiceImpl.updateAppointmentById(appoint);
-						// TODO: 2017/9/19  发送短信给经纪人及其领导，
-						System.out.println(111);
+						// TODO: 2017/9/19  发送给有指定邮箱
+						System.out.println("发送给有指定邮箱，关闭");
+					} else if (time_24.getTime() > appointTime.getTime()) {
+						//超过24小时,24小时内状态没有修改，发送短信给经纪人及其领导，
+						if (appointment1.getFlag() == 0) {
+							Appointment appoint = new Appointment();
+							appoint.setFlag(1);//标记为已通知，不需要再次通知
+							appoint.setResetFlag(1);//标记为展示
+							appoint.setId(appointment1.getId());
+							appointmentServiceImpl.updateAppointmentById(appoint);
+							// TODO: 2017/9/19  发送短信给经纪人及其领导，
+							System.out.println("发送短信给经纪人及其领导，告警");
+						}
 					}
 				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 	
 	//委托记录可重新分配经纪人，建议设置提醒功能，若指定时间内已分配的业务员未跟进（还未从已分配状态变为看房中），后台可重新分配。
-	@Scheduled(fixedRate = 3600000)
+	@Scheduled(fixedRate = 1000)
 	public void entrustReset(){
-		try {
-			Entrust temp = new Entrust();
-			temp.setStatus(1);//1看房中，
-			temp.setResetFlag(0);//1看房中，且是还没展示“重新分配”按钮的数据
-			List<Entrust> lists = entrustServiceImpl.findEntrustList(temp);
-			for (Entrust entrust1 : lists) {
-				String time = entrust1.getAssignedTime();
-				Date assignTime = MidlandHelper.stringToDate(time);
-				Date date = new Date();
-				Calendar calendar = Calendar.getInstance();
-				calendar.setTime(date);
-				
-				calendar.add(calendar.HOUR, -24);
-				Date time_24 = calendar.getTime();
-				if (time_24.getTime() > assignTime.getTime()) {
-					
-					Entrust entrust = new Entrust();
-					entrust.setResetFlag(1);//标记为展示
-					entrust.setId(entrust1.getId());
-					entrust.setEntrustTime(null);
-					entrustServiceImpl.updateEntrustById(entrust);
-						
+		long timeTemp = System.currentTimeMillis();
+		if (timeTemp-taskConfig.getTaskFirstTime()>taskConfig.getTaskInterval()*3600000) {
+			taskConfig.setTaskFirstTime(timeTemp);
+			try {
+				Entrust temp = new Entrust();
+				temp.setStatus(1);//1看房中，
+				temp.setResetFlag(0);//1看房中，且是还没展示“重新分配”按钮的数据
+				List<Entrust> lists = entrustServiceImpl.findEntrustList(temp);
+				for (Entrust entrust1 : lists) {
+					String time = entrust1.getAssignedTime();
+					Date assignTime = MidlandHelper.stringToDate(time);
+					Date date = new Date();
+					Calendar calendar = Calendar.getInstance();
+					calendar.setTime(date);
+
+					calendar.add(calendar.HOUR, -24);
+					Date time_24 = calendar.getTime();
+					if (time_24.getTime() > assignTime.getTime()) {
+
+						Entrust entrust = new Entrust();
+						entrust.setResetFlag(1);//标记为展示
+						entrust.setId(entrust1.getId());
+						entrust.setEntrustTime(null);
+						entrustServiceImpl.updateEntrustById(entrust);
+
+					}
 				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 	

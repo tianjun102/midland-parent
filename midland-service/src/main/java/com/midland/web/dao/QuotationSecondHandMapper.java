@@ -11,6 +11,8 @@ public interface QuotationSecondHandMapper {
 
 	QuotationSecondHand selectQuotationSecondHandById(Integer quotationSecondHand);
 
+	QuotationSecondHand selectQuotationSecondHand(QuotationSecondHand quotationSecondHand);
+
 	int deleteQuotationSecondHandById(Integer quotationSecondHand);
 
 	int updateQuotationSecondHandById(QuotationSecondHand quotationSecondHand);

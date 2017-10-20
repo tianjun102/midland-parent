@@ -17,11 +17,12 @@
 		<result column="elite_desc" property="eliteDesc" jdbcType="LONGVARCHAR" />
 		<result column="member_ship" property="memberShip" jdbcType="LONGVARCHAR" />
 		<result column="development" property="development" jdbcType="LONGVARCHAR" />
+		<result column="contact_us" property="contactUs" jdbcType="LONGVARCHAR" />
 		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,registration_protocol,disclaimer,record_number,recruitment,about_us,privacy,service_area,trading_process,isexport,purpose,elite_desc,member_ship,development,is_delete
+		id,registration_protocol,disclaimer,record_number,recruitment,about_us,privacy,service_area,trading_process,isexport,purpose,elite_desc,member_ship,development,contact_us,is_delete
 	</sql>
 
 	<select id="selectFooterById" resultMap="BaseResultMap">
@@ -99,6 +100,9 @@
 			<if test="isDelete != null">
 				is_delete,
 			</if>
+			<if test="contactUs != null">
+				contact_us,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -144,6 +148,9 @@
 			<if test="isDelete != null">
 				#{isDelete,jdbcType=INTEGER},
 			</if>
+			 <if test="contact_us != null">
+				#{contactUs},
+			</if>
 		</trim>
 	</insert>
 
@@ -161,6 +168,7 @@
 			elite_desc= #{eliteDesc,jdbcType=LONGVARCHAR},
 			member_ship= #{memberShip,jdbcType=LONGVARCHAR},
 			development= #{development,jdbcType=LONGVARCHAR},
+			contact_us= #{contactUs,jdbcType=LONGVARCHAR},
 		<if test="isDelete != null">
 			is_delete= #{isDelete,jdbcType=INTEGER},
 		</if>

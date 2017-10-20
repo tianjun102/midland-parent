@@ -42,7 +42,8 @@ public class SettingContorller extends BaseFilter {
     private MidlandConfig midlandConfig;
     @Autowired
     private JdbcService jdbcService;
-
+    @Autowired
+    private TaskConfig taskConfig;
     // 进入热门关注首页面
     @RequestMapping(value = "showPopularIndex", method = {RequestMethod.GET, RequestMethod.POST})
     public String showPopularIndex(Model model, HttpServletRequest request) {
@@ -424,23 +425,26 @@ public class SettingContorller extends BaseFilter {
 
     @RequestMapping(value = "time/index")
     public String timeSetting(Model model, HttpServletRequest request, Banner banner) {
+
+        model.addAttribute("item",taskConfig);
         return "setting/timeSetting";
     }
 
     @RequestMapping(value = "setTime")
     @ResponseBody
-    public Object timeSet(HttpServletRequest request) {
+    public Object timeSet(HttpServletRequest request,TaskConfig taskConfig) {
         Map map = new HashMap();
         try {
-            String appointmentWarnStr = request.getParameter("appointmentWarn");
-            String appointCloseStr = request.getParameter("appointClose");
-            TaskConfig taskConfig = new TaskConfig();
-            if (appointCloseStr != null) {
-                taskConfig.setAppointClose(Integer.valueOf(appointCloseStr));
+            Double appointmentWarn = taskConfig.getAppointmentWarn();
+            Double appointClose = taskConfig.getAppointClose();
+            if(appointmentWarn ==null){
+                appointmentWarn=0.5;
             }
-            if (appointmentWarnStr != null) {
-                taskConfig.setAppointmentWarn(Integer.valueOf(appointmentWarnStr));
+            if(appointClose ==null){
+                appointClose=0.5;
             }
+            taskConfig.setAppointClose(appointClose);
+            taskConfig.setAppointmentWarn(appointmentWarn);
             map.put("state", 0);
         } catch (Exception e) {
             logger.error("",e);

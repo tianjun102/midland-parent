@@ -156,11 +156,11 @@ public class QuotationController extends BaseFilter {
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
 	 **/
 	@RequestMapping("list")
-	public String findQuotationList(QuotationView quotation, Model model, HttpServletRequest request) {
+	public String findQuotationList(Quotation quotation, Model model, HttpServletRequest request) {
 		try {
 			log.debug("findQuotationList  {}", quotation);
 			MidlandHelper.doPage(request);
-			Page<QuotationView> result = (Page<QuotationView>) quotationViewServiceImpl.findQuotationViewList(quotation);
+			Page<Quotation> result = (Page<Quotation>) quotationServiceImpl.findQuotationList(quotation);
 			Paginator paginator = result.getPaginator();
 			List<ParamObject> paramObjects = JsonMapReader.getMap("quotation_type");
 			model.addAttribute("types", paramObjects);
@@ -191,7 +191,7 @@ public class QuotationController extends BaseFilter {
 	
 	
 	@RequestMapping("toolsTip")
-	public String showTooltip(Integer id, QuotationView obj,String distName,String distId,String url,String showType, Model model) throws Exception {
+	public String showTooltip(Integer id, Quotation obj,String distName,String distId,String url,String showType, Model model) throws Exception {
 		if (StringUtils.isEmpty(distId)&&StringUtils.isEmpty(distName)){
 			obj.setAreaId("0");
 		}else{
@@ -229,54 +229,119 @@ public class QuotationController extends BaseFilter {
 		double listMin=0;
 		double ratioMax=0;
 		double ratioMin=0;
-		List<QuotationView> result = quotationViewServiceImpl.findQuotationViewList(obj);
-		for (QuotationView view : result){
+		List<Quotation> result = quotationServiceImpl.findQuotationList(obj);
+		obj.setStartTime(MidlandHelper.getFormatPreMonth(obj.getStartTime(),-1));
+		obj.setEndTime(MidlandHelper.getFormatPreMonth(obj.getEndTime(),-1));
+		List<Quotation> listTemp = quotationServiceImpl.findQuotationList(obj);
+		for (Quotation view : result){
 			month.add(view.getDataTime());
 			//（当前月数据-上个月数据)/上个月数据=当月环比
 			
 			if ("0".equals(showType)){
+				Quotation res = null;
+				for (Quotation quoTemp:listTemp){
+					if (view.getDataTime().equals(MidlandHelper.getFormatyyMMToMonth(quoTemp.getDataTime(),+1))){
+						res=quoTemp;
+					}
+				}
+				Double preNum = null;
+				if (res != null&& res.getDealNum()!=null) {
+					preNum = Double.valueOf(res.getDealNum());
+				}
 				numList.add(view.getDealNum());
-				Double ratio = QuotationUtil.getRatio(Double.valueOf(view.getDealNum()),view.getPreDealNum());
+				Double ratio = QuotationUtil.getRatio(Double.valueOf(view.getDealNum()),preNum);
 				numRatioList.add(ratio);
 				listMax=QuotationUtil.getMax(listMax,view.getDealNum());
 				ratioMax=QuotationUtil.getMax(ratioMax,ratio);
 				ratioMin=QuotationUtil.getMin(ratioMin,ratio);
 				
 			}else if ("1".equals(showType)){
+				Quotation res = null;
+				for (Quotation quoTemp:listTemp){
+					if (view.getDataTime().equals(MidlandHelper.getFormatyyMMToMonth(quoTemp.getDataTime(),+1))){
+						res=quoTemp;
+					}
+				}
+				Double preDealAcreage = null;
+				if (res != null&& res.getDealAcreage()!=null) {
+					preDealAcreage = Double.valueOf(res.getDealAcreage());
+				}
 				acreageList.add(view.getDealAcreage());
-				Double ratio =QuotationUtil.getRatio(Double.valueOf(view.getDealAcreage()),view.getPreDealAcreage());
+				Double ratio =QuotationUtil.getRatio(Double.valueOf(view.getDealAcreage()),preDealAcreage);
 				acreageRatioList.add(ratio);
 				listMax=QuotationUtil.getMax(listMax,Double.valueOf(view.getDealAcreage()));
 				ratioMax=QuotationUtil.getMax(ratioMax,ratio);
 				ratioMin=QuotationUtil.getMin(ratioMin,ratio);
 				
 			}else if ("2".equals(showType)){
+				Quotation res = null;
+				for (Quotation quoTemp:listTemp){
+					if (view.getDataTime().equals(MidlandHelper.getFormatyyMMToMonth(quoTemp.getDataTime(),+1))){
+						res=quoTemp;
+					}
+				}
+				Double prePrice = null;
+				if (res != null&& res.getPrice()!=null) {
+					prePrice = Double.valueOf(res.getPrice());
+				}
 				dealAvgPriceList.add(view.getPrice());
-				Double ratio =QuotationUtil.getRatio(Double.valueOf(view.getPrice()),view.getPrePrice());
+				Double ratio =QuotationUtil.getRatio(Double.valueOf(view.getPrice()),prePrice);
 				dealAvgPriceRatioList.add(ratio);
 				listMax=QuotationUtil.getMax(listMax,Double.valueOf(view.getPrice()));
 				ratioMax=QuotationUtil.getMax(ratioMax,ratio);
 				ratioMin=QuotationUtil.getMin(ratioMin,ratio);
 				
 			}else if ("3".equals(showType)&&view.getDealPrice()!=null){
-				Double ratio =QuotationUtil.getRatio(Double.valueOf(view.getDealPrice()),view.getPreDealPrice());
+				Quotation res = null;
+				for (Quotation quoTemp:listTemp){
+					if (view.getDataTime().equals(MidlandHelper.getFormatyyMMToMonth(quoTemp.getDataTime(),+1))){
+						res=quoTemp;
+					}
+				}
+				Double preDealPrice = null;
+				if (res != null&& res.getDealPrice()!=null) {
+					preDealPrice = Double.valueOf(res.getDealPrice());
+				}
 				turnVolumeList.add(view.getDealPrice());
+				Double ratio =QuotationUtil.getRatio(Double.valueOf(view.getDealPrice()),preDealPrice);
+
 				turnVolumeRatioList.add(ratio);
 				listMax=QuotationUtil.getMax(listMax,Double.valueOf(view.getDealPrice()));
 				ratioMax=QuotationUtil.getMax(ratioMax,ratio);
 				ratioMin=QuotationUtil.getMin(ratioMin,ratio);
 				
 			}else if ("4".equals(showType)&&view.getSoldNum()!=null) {
+				Quotation res = null;
+				for (Quotation quoTemp:listTemp){
+					if (view.getDataTime().equals(MidlandHelper.getFormatyyMMToMonth(quoTemp.getDataTime(),+1))){
+						res=quoTemp;
+					}
+				}
+				Double preSoldNum = null;
+				if (res != null&& res.getSoldNum()!=null) {
+					preSoldNum = Double.valueOf(res.getSoldNum());
+				}
 				soldNumList.add(view.getSoldNum());
-				Double ratio =QuotationUtil.getRatio(Double.valueOf(view.getSoldNum()), view.getPreSoldNum());
+				Double ratio =QuotationUtil.getRatio(Double.valueOf(view.getSoldNum()), preSoldNum);
 				soldNumRatioList.add(ratio);
 				listMax=QuotationUtil.getMax(listMax,view.getSoldNum());
 				ratioMax=QuotationUtil.getMax(ratioMax,ratio);
 				ratioMin=QuotationUtil.getMin(ratioMin,ratio);
 				
 			}else if ("5".equals(showType)&&view.getSoldArea()!=null) {
-				Double ratio =QuotationUtil.getRatio(Double.valueOf(view.getSoldArea()),view.getPreSoldArea());
+				Quotation res = null;
+				for (Quotation quoTemp:listTemp){
+					if (view.getDataTime().equals(MidlandHelper.getFormatyyMMToMonth(quoTemp.getDataTime(),+1))){
+						res=quoTemp;
+					}
+				}
+				Double preSoldArea = null;
+				if (res != null&& res.getSoldArea()!=null) {
+					preSoldArea = Double.valueOf(res.getSoldArea());
+				}
 				soldAcreageList.add(view.getSoldArea());
+				Double ratio =QuotationUtil.getRatio(Double.valueOf(view.getSoldArea()),preSoldArea);
+
 				soldAcreageRatioList.add(ratio);
 				listMax=QuotationUtil.getMax(listMax,Double.valueOf(view.getSoldArea()));
 				ratioMax=QuotationUtil.getMax(ratioMax,ratio);

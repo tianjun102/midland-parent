@@ -111,4 +111,18 @@ public class QuotationSecondHandServiceImpl implements QuotationSecondHandServic
 			throw e;
 		}
 	}
+
+	/**
+	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
+	 **/
+	@Override
+	public QuotationSecondHand findQuotationSecondHand(QuotationSecondHand quotationSecondHand) throws Exception {
+		try {
+			log.debug("findQuotationSecondHand  {}",quotationSecondHand);
+			return quotationSecondHandMapper.selectQuotationSecondHand(quotationSecondHand);
+		} catch(Exception e) {
+			log.error("findQuotationSecondHand  {}",quotationSecondHand,e);
+			throw e;
+		}
+	}
 }

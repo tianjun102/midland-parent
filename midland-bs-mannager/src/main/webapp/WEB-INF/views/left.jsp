@@ -131,6 +131,9 @@
 						<shiro:hasPermission name="tradingProcessList">
 							<a id = "enterPromotionIndex" href="${ctx}/rest/tradingProcess/index" target="contentF"><span>买卖流程</span></a>
 						</shiro:hasPermission>
+						<shiro:hasPermission name="tradingProcessList">
+							<a id = "enterPromotionIndex" href="${ctx}/rest/tradingProcess/index" target="contentF"><span>买卖流程</span></a>
+						</shiro:hasPermission>
 						<shiro:hasPermission name="filmLibraryList">
 							<a id = "enterPromotionIndex" href="${ctx}/rest/liaisonRecord/index" target="contentF"><span>联络管理</span></a>
 						</shiro:hasPermission>

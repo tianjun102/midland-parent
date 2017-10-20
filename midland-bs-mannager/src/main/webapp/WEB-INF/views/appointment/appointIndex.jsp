@@ -23,6 +23,16 @@
 			font-size: 14px;
 			color: rgb( 102, 102, 102 );
 		}
+		.dropdown {
+			height: 38px;
+			line-height: 38px;
+			width: 200px;
+			display: inline-table;
+			border-width: 1px !important;
+			border-style: solid !important;
+			border-color: rgb(219, 226, 230) !important;
+			border-image: initial !important;
+		}
 	</style>
 </head>
 <body>
@@ -79,10 +89,12 @@
 						onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'time1\')}'})"
 						id="time2" name="endTime" /></li>
 
-				<li><input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/></li>
+				<li><input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/>
+					<a href="#" onclick="export1()">导出</a>
+				</li>
 			</ul>
 			</form>
-			<a href="#" onclick="export1()">导出</a>
+
 
 			<div id="listDiv"></div>
 		</section>
