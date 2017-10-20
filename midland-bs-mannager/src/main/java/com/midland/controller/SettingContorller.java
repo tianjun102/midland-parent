@@ -432,19 +432,24 @@ public class SettingContorller extends BaseFilter {
 
     @RequestMapping(value = "setTime")
     @ResponseBody
-    public Object timeSet(HttpServletRequest request,TaskConfig taskConfig) {
+    public Object timeSet(HttpServletRequest request) {
         Map map = new HashMap();
         try {
-            Double appointmentWarn = taskConfig.getAppointmentWarn();
-            Double appointClose = taskConfig.getAppointClose();
+            Double appointmentWarn = request.getParameter("appointmentWarn")==null?null:Double.valueOf(request.getParameter("appointmentWarn"));
+            Double appointClose = request.getParameter("appointClose")==null?null:Double.valueOf(request.getParameter("appointClose"));
+            Double taskInterval = request.getParameter("taskInterval")==null?null:Double.valueOf(request.getParameter("taskInterval"));
             if(appointmentWarn ==null){
                 appointmentWarn=0.5;
             }
             if(appointClose ==null){
                 appointClose=0.5;
             }
+            if (taskInterval ==null){
+                taskInterval = 0.5;
+            }
             taskConfig.setAppointClose(appointClose);
             taskConfig.setAppointmentWarn(appointmentWarn);
+            taskConfig.setTaskInterval(taskInterval);
             map.put("state", 0);
         } catch (Exception e) {
             logger.error("",e);
