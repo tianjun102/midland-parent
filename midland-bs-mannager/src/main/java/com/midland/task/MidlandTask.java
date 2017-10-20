@@ -41,14 +41,18 @@ public class MidlandTask {
 					String time = appointment1.getAppointmentTime();
 					Date appointTime = MidlandHelper.stringToDate(time);
 					Date date = new Date();
+					//后退48小时；current-48;
 					Calendar calendar = Calendar.getInstance();
 					calendar.setTime(date);
-					//后退48小时；current-48;
 					calendar.add(Calendar.SECOND, Double.valueOf(-taskConfig.getAppointClose() * 3600).intValue());
 					Date time_48 = calendar.getTime();
-					//后退24小时；current-48+24;
-					calendar.add(calendar.MINUTE, Double.valueOf(taskConfig.getAppointmentWarn() * 3600).intValue());
-					Date time_24 = calendar.getTime();
+
+					//后退24小时；current-24;
+					Calendar calendar1 = Calendar.getInstance();
+					calendar1.setTime(date);
+					calendar1.add(calendar.SECOND, Double.valueOf(-taskConfig.getAppointmentWarn() * 3600).intValue());
+					Date time_24 = calendar1.getTime();
+
 					if (time_48.getTime() > appointTime.getTime()) {
 						//超过48小时,48小时后没有处理，则关闭此预约，并发送给有指定邮箱
 						Appointment appoint = new Appointment();
@@ -56,7 +60,7 @@ public class MidlandTask {
 						appoint.setId(appointment1.getId());
 						appointmentServiceImpl.updateAppointmentById(appoint);
 						// TODO: 2017/9/19  发送给有指定邮箱
-						System.out.println(222);
+						System.out.println("发送给有指定邮箱，关闭");
 					} else if (time_24.getTime() > appointTime.getTime()) {
 						//超过24小时,24小时内状态没有修改，发送短信给经纪人及其领导，
 						if (appointment1.getFlag() == 0) {
@@ -66,7 +70,7 @@ public class MidlandTask {
 							appoint.setId(appointment1.getId());
 							appointmentServiceImpl.updateAppointmentById(appoint);
 							// TODO: 2017/9/19  发送短信给经纪人及其领导，
-							System.out.println(111);
+							System.out.println("发送短信给经纪人及其领导，告警");
 						}
 					}
 				}
