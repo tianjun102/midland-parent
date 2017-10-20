@@ -16,6 +16,11 @@
                 'method': 'get',
                 'multi': false,// 是否支持多个文件上传
                 'onUploadStart': function (file) {
+                    debugger;
+                    if(!checkSelect('cityId','')){
+                        alert("请选择城市");
+                        return false;
+                    }
                     $("#file_upload").uploadify("settings", "formData", {
                         'cityId': $("input[name='cityId']").val(),
                         'cityName': unicode($("input[name='cityName']").val().trim()),
@@ -24,11 +29,11 @@
 
                 },
                 'onUploadSuccess': function (file, data, response) {
-
+                    //alert(1);
                 },
                 'onQueueComplete': function (queueData) {
                     if (queueData.uploadsSuccessful < 1) {
-                        alert('文件上传失败');
+                       // alert('文件上传失败');
                     }
                 }
 
@@ -57,7 +62,7 @@
 </head>
 <body>
 <section class="content" style="border:none;">
-    <%@include file="../menu/area.jsp" %>
+    <%@include file="../menu/area_required.jsp" %>
     <li>
         <div style="width: 250px;float: left;">
             <img style="margin-bottom: 10px;max-width:80px;max-height:80px" id="iconImg1">

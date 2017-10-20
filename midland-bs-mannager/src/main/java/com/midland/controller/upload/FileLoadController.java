@@ -2,6 +2,7 @@ package com.midland.controller.upload;
 
 import com.midland.core.util.AppSetting;
 import com.midland.web.Contants.Contant;
+import com.midland.web.MidlandException.IllegalCityException;
 import com.midland.web.model.Area;
 import com.midland.web.model.Quotation;
 import com.midland.web.service.QuotationSecondHandService;
@@ -76,17 +77,24 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 	}
 	
 	@RequestMapping(value = "excel_read", produces = "application/json")
-	public void imports(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public Object imports(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Workbook wb = null;
 		InputStream is = null;
+		Map map = new HashMap();
 		try {
 			FileItem fileItem = getUploadFileItem(request, response);
 			is = fileItem.getInputStream();
 			wb = getWorkbook(fileItem, is);
 			quotationExcelReader(request, wb);
+			map.put("state",-1);
 		} catch (Exception e) {
+			if (e instanceof IllegalCityException){
+				map.put("state",1);//城市为空
+			}else{
+				map.put("state",-1);
+			}
 			logger.error("", e);
-			throw e;
+
 		} finally {
 			if (wb != null) {
 				//wb.close();
@@ -94,6 +102,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 			if (is != null) {
 				is.close();
 			}
+			return map;
 		}
 	}
 	
@@ -268,7 +277,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 		String houseType = null;
 		String distName = null;
 		if (StringUtils.isEmpty(cityId) || StringUtils.isEmpty(cityName)) {
-			throw new Exception("请选择城市");
+			throw new IllegalCityException("请选择城市");
 		}
 		int rowSize = sheet.getLastRowNum() + 1;
 		List<String> dealNum = null;//成交套数
