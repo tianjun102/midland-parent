@@ -33,12 +33,12 @@ public class RedisServiceImpl implements RedisService {
 	}
 
 	@Override
-	public Integer getValue(String key){
-		return  (Integer)baseRedisTemplate.getValueByKey(key);
+	public Object getValue(String key){
+		return  baseRedisTemplate.getValueByKey(key);
 	}
 
 	@Override
-	public void setValue(String key,Integer value){
+	public void setValue(String key,Object value){
 		baseRedisTemplate.saveValue(key,value);
 	}
 
