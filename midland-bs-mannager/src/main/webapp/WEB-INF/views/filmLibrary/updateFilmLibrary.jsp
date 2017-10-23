@@ -119,6 +119,8 @@
             <li>
                 <span></span>
                 <a target="contentF" class="public_btn bg2" id="save" onclick="saveData()">保存</a>
+                <a style="margin-left: 20px" class="public_btn bg3" id="cancel" onclick="closeWin();">取消</a>
+
             </li>
         </ul>
 
@@ -159,8 +161,8 @@
 
     //取消
     function closeWin() {
-        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-        parent.layer.close(index);
+        window.open("${ctx}/rest/filmLibrary/index","contentF")
+
     }
 
 

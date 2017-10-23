@@ -14,7 +14,9 @@ import com.midland.web.model.temp.ListDescOtherParam;
 import com.midland.web.model.user.User;
 import com.midland.web.service.JdbcService;
 import com.midland.web.service.SettingService;
+import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
+import com.midland.web.util.ParamObject;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -322,6 +324,8 @@ public class SettingContorller extends BaseFilter {
         model.addAttribute("cityList",cityList);*/
         settingService.getAllProvinceList(model);
         User user = MidlandHelper.getCurrentUser(request);
+        List<ParamObject> obj = JsonMapReader.getMap("source");
+        model.addAttribute("sources",obj);
         model.addAttribute("cityId", user.getCityId());
         return "setting/bannerIndex";
     }
