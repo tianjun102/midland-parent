@@ -34,7 +34,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				<table class="table table-bordered table-add">
 				<col width="8%">
 				<col width="5%" >
-				<col width="8%" >
+				<col width="7%" >
 				<col width="6%" >
 				<col width="6%" >
 				<col width="6%" >
@@ -43,7 +43,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				<col width="13%" >
 				<col width="13%" >
 				<col width="6%" >
-				<col width="30%" >
+				<col width="32%" >
 	 				<thead>
 						<tr>
 							<th><a target="contentF" href="javascript:void (0)" onclick="checkall()" >全选</a> / <a target="contentF" href="javascript:void (0)" onclick="delcheckall()" >取消</a></th>
@@ -66,7 +66,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							<td><input type="checkbox" name="pid" value="${banner.id}"></td>
 							<td>${xh.count}</td>
 							<td><img style="height: 36px;" src="${fileUrl}${banner.bannerImg}" class="suo"/></td>
-							<td><c:if test="${banner.enabled =='0'}">关闭</c:if><c:if test="${banner.enabled =='1'}">开放</c:if></td>
+							<td><c:if test="${banner.enabled =='0'}">开放</c:if><c:if test="${banner.enabled =='1'}">关闭</c:if></td>
 							<td>${banner.cityName}</td>
 							<td><c:if test="${banner.source =='0'}">网站</c:if><c:if test="${banner.source =='1'}">微站</c:if></td>
 							<td>
@@ -96,6 +96,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 								<a onclick="deleteBanner(${banner.id})"  class = "delete_img" title = "删除"></a>
 								<a class="up_img" title="上移" target="contentF" onclick="sort(${banner.id },${banner.orderBy},1)"></a>
 								<a class="down_img" title="下移" target="contentF" onclick="sort(${banner.id },${banner.orderBy},2)"></a>
+								<a <c:if test="${banner.enabled==0}">class="onoff_img"</c:if> <c:if test="${banner.enabled==1}">class="offon_img"</c:if> target="contentF" onclick="updateEnabled(${banner.enabled},${banner.id })"></a>
 								<!-- <a href="javascript:;" target="contentFrame" class = "admin_img" title = "管理图片"></a> -->
 							</td>
 						</tr>
@@ -185,6 +186,27 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                 layer.msg("操作失败！", {icon: 2});
             }
         })
+    }
+
+    //启用，禁用
+    function updateEnabled(isShow,id){
+        if(isShow==1){
+            isShow=0;
+        }else if(isShow == 0){
+            isShow = 1;
+        }
+
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/setting/editBanner?enabled="+isShow+"&id="+id,
+            async:false, // 此处必须同步
+            dataType: "json",
+            data:"",
+            success: function(data){
+
+                $('#searchForm').submit();
+            }
+        });
     }
 
 	</script>
