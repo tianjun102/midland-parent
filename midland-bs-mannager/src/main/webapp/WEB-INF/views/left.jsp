@@ -389,6 +389,14 @@
 						<a id = "feedbackIndex" href="${ctx}/rest/comment/index" target="contentF"><span>评论管理</span></a>
 					</shiro:hasPermission>
 
+					<shiro:hasPermission name="loanTypeList">
+						<a id = "feedbackIndex" href="${ctx}/rest/loanType/index" target="contentF"><span>利率列表</span></a>
+					</shiro:hasPermission>
+
+					<shiro:hasPermission name="discountList">
+						<a id = "feedbackIndex" href="${ctx}/rest/discount/index" target="contentF"><span>折扣列表</span></a>
+					</shiro:hasPermission>
+
 						<a id = "system7" href="${ctx}/rest/user/toModifyPwdPage" target="contentF"><span>修改密码</span></a>
 						<a id = "system8" href="${ctx}/rest/user/about" target="contentF"><span>关于平台</span></a>
 				</dd>

@@ -17,9 +17,10 @@
                 <th style="width: 8%"><a href="#" onclick="checkall()" >全选</a> / <a href="#" onclick="delcheckall()" >取消</a></th>
                 <th style="width: 8%">编号</th>
 				<th style="width: 8%">平台</th>
+                <th style="width: 8%">状态</th>
 				<th style="width: 8%">模块名称</th>
 				<th style="width: 8%">城市</th>
-                <th style="width: 10%">操作</th>
+                <th style="width: 15%">操作</th>
             </tr>
         </thead>
         <tbody>
@@ -34,9 +35,15 @@
                             <c:if test="${item.source == '0'}">网站</c:if>
                             <c:if test="${item.source == '1'}">微站</c:if>
                         </td>
+                        <td>
+                            <c:if test="${item.isShow == '0'}">显示</c:if>
+                            <c:if test="${item.isShow == '1'}">隐藏</c:if>
+                        </td>
 						<td>${item.modeName}</td>
 						<td>${item.cityName}</td>
 						<td>
+                            <a class="up_img" title="上移" target="contentF" onclick="sort(${item.id },${item.orderBy},1)"></a>
+                            <a class="down_img" title="下移" target="contentF" onclick="sort(${item.id },${item.orderBy},2)"></a>
                             <a class="edit_img" title="编辑" target="contentF" href="${ctx}/rest/specialPage/to_update?id=${item.id}"></a>
                             <a class="delete_img" title="删除" target="contentF" onclick="delete1(${item.id })"></a>
                             <a <c:if test="${item.isShow==0}">class="onoff_img"</c:if> <c:if test="${item.isShow==1}">class="offon_img"</c:if> target="contentF" onclick="updateSpecial(${item.isShow},${item.id })"></a>
@@ -163,6 +170,25 @@
             success: function (data) {
                 if (data.state==0){
                     layer.msg("操作成功！", {icon: 1});
+                    $('#searchForm').submit();
+                }
+            },
+            error: function () {
+                layer.msg("操作失败！", {icon: 2});
+            }
+        })
+    }
+
+    //排序
+    function sort(id,orderById,sort) {
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/specialPage/sort?sort="+sort+"&orderBy="+orderById+"&id="+id,
+            async: false, // 此处必须同步
+            dataType: "json",
+
+            success: function (data) {
+                if (data.state==0){
                     $('#searchForm').submit();
                 }
             },

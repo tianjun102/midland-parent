@@ -5,7 +5,9 @@ import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.web.model.Area;
 import com.midland.web.model.SpecialPage;
+import com.midland.web.model.temp.ListDescOtherParam;
 import com.midland.web.model.user.User;
+import com.midland.web.service.JdbcService;
 import com.midland.web.service.SettingService;
 import com.midland.web.service.SpecialPageService;
 import com.midland.web.util.MidlandHelper;
@@ -33,6 +35,8 @@ public class SpecialPageController extends BaseFilter {
 	private SpecialPageService specialPageServiceImpl;
 	@Autowired
 	private SettingService settingService;
+	@Autowired
+	private JdbcService jdbcService;
 
 	/**
 	 * 
@@ -187,6 +191,24 @@ public class SpecialPageController extends BaseFilter {
 			log.error("updateCategoryById  {}",commentList,e);
 			map.put("state",-1);
 		}
+		return map;
+	}
+
+	@RequestMapping("sort")
+	@ResponseBody
+	public Map listDesc(SpecialPage specialPage, int sort, Model model, HttpServletRequest request) throws Exception {
+		String primaryKeyName = "id";
+		String primaryParam = String.valueOf(specialPage.getId());
+		String tableName = "special_page";
+		String orderByColumn = "order_by";
+		ListDescOtherParam obj = new ListDescOtherParam();
+		obj.setCityId(null);
+		obj.setType(null);
+		obj.setSource(null);
+		String orderByParam = String.valueOf(specialPage.getOrderBy());
+		jdbcService.listDesc(primaryKeyName, primaryParam, orderByColumn, tableName, orderByParam, obj, sort);
+		Map map = new HashMap();
+		map.put("state", 0);
 		return map;
 	}
 }
