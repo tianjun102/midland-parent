@@ -804,7 +804,58 @@ public class UserController extends BaseFilter {
 	    //其他设置 set方法可全不调用
 	    pee.wirteExcel(titleColumn, titleName, titleSize, exportModels,request);
     }
-    
+
+
+	/**
+	 * 查询前台用户
+	 * @return
+	 */
+	@RequestMapping(value = "/bsUserInfo", method = {RequestMethod.GET,RequestMethod.POST})
+	public String userInfo(Integer userId,Model model,HttpServletRequest request){
+		User userInfo = userService.selectById(userId);
+		model.addAttribute("user",userInfo);
+		Role role=new Role();
+		role.setState(1);
+		List<Role> roles=roleService.selectRoleList(role);//所有角色
+		List<Role> userRoles= roleService.selectRolesByUserId(userId);//用户的角色
+		model.addAttribute("roles",roles);
+		model.addAttribute("userRoles",userRoles);
+		return "user/bsUserInfo";
+	}
+
+	/**
+	 * 前台用户列表查询
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping(value = "/bsUserList", method = {RequestMethod.GET,RequestMethod.POST})
+	public String bsUserList(User user, Model model, HttpServletRequest request){
+		user.setUserType(2);
+		User currUser = MidlandHelper.getCurrentUser(request);
+		if (StringUtils.isEmpty(user.getCityId())){
+			user.setCityId(currUser.getCityId());
+		}
+		getUserList(user,model, request);
+		List<ParamObject> map = JsonMapReader.getMap("audit_status");
+		model.addAttribute("auditSatusList",map);
+		return "user/bsUserList";
+	}
+
+	/**
+	 * 进入用户列表搜索页面
+	 * @param user
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/bsUserIndex", method = {RequestMethod.GET,RequestMethod.POST})
+	public String bsUserIndex(User user, Model model, HttpServletRequest request){
+		List<ParamObject> sources = JsonMapReader.getMap("source");
+		model.addAttribute("sources",sources);
+		return "user/bsUserIndex";
+	}
+
+
     
     
     

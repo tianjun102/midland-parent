@@ -342,6 +342,10 @@
 						<a id = "system4" href="${ctx}/rest/user/userIndex" target="contentF"><span>用户列表</span></a>
 					</shiro:hasPermission>
 
+					<shiro:hasPermission name="bsUserList">
+						<a id = "system4" href="${ctx}/rest/user/bsUserIndex" target="contentF"><span>前台用户列表</span></a>
+					</shiro:hasPermission>
+
 					<shiro:hasPermission name="rolelist">
 						<a id = "system5" href="${ctx}/rest/role/roleIndex" target="contentF"><span>角色列表</span></a>
 					</shiro:hasPermission>
