@@ -176,4 +176,33 @@ public class LoanTypeController extends BaseFilter {
 		}
 		return map;
 	}
+
+	/**
+	 * 新增
+	 **/
+	@RequestMapping("addDesc")
+	@ResponseBody
+	public Object addDesc(LoanType loanType) throws Exception {
+		Map<String,Object> map = new HashMap<>();
+		try {
+			log.debug("addIntoMidland {}",loanType);
+			if(loanType.getId()!=null){
+				loanTypeServiceImpl.updateLoanTypeById(loanType);
+			}else {
+				loanTypeServiceImpl.insertLoanType(loanType);
+			}
+			map.put("state",0);
+		} catch(Exception e) {
+			log.error("addIntoMidland异常 {}",loanType,e);
+			map.put("state",-1);
+		}
+		return map;
+	}
+
+	@RequestMapping("descIndex")
+	public String descIndex(LoanType loanType,Model model,HttpServletRequest request) throws Exception {
+		loanType = loanTypeServiceImpl.findLoanType(loanType);
+		model.addAttribute("items",loanType);
+		return "loanType/descIndex";
+	}
 }
