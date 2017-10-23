@@ -35,17 +35,15 @@
             <th style="width: auto">委托编号</th>
             <th style="width: auto">平台</th>
             <th style="width: auto">委托人</th>
-            <th style="width: auto">电话</th>
+            <th style="width: auto">手机号码</th>
             <th style="width: auto">类型</th>
             <th style="width: auto">分类</th>
             <th style="width: auto">委托时间</th>
             <th style="width: auto">所属区域</th>
             <th style="width: auto">小区名</th>
-            <th style="width: auto">门牌地址</th>
             <th style="width: auto">户型</th>
             <th style="width: auto">面积</th>
             <th style="width: auto">售价/租价</th>
-            <th style="width: auto">预约时间</th>
             <th style="width: auto">经纪人</th>
             <th style="width: auto">状态</th>
             <th style="width: auto">处理时间</th>
@@ -74,11 +72,9 @@
                         <td>${item.entrustTime }</td>
                         <td>${item.areaName }</td>
                         <td>${item.communityName }</td>
-                        <td>${item.address }</td>
                         <td>${item.layout }</td>
                         <td>${item.measure }</td>
                         <td>${item.price }</td>
-                        <td>${item.entrustTime }</td>
                         <td>${item.agentName }</td>
                         <td><c:forEach items="${statusList}" var="s">
                             <c:if test="${item.status == s.id}">${s.name}</c:if>

@@ -16,7 +16,7 @@
 <div class="box">
     <section class="content">
         <p class="detail-title">
-            <span>新房详情</span>
+            <span>新房信息管理</span>
 
             <a class="setup" target="contentF" onclick="toAddPage()">新增</a>
         </p>

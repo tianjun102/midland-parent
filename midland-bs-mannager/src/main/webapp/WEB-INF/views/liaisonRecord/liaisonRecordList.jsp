@@ -16,7 +16,7 @@
             <tr>
                 <th style="width: 8%">编号</th>
 				<th style="width: 8%">姓名</th>
-				<th style="width: 8%">电话</th>
+				<th style="width: 8%">手机号码</th>
                 <th style="width: 8%">邮箱</th>
                 <th style="width: 8%">主旨</th>
 				<th style="width: 8%">留言</th>

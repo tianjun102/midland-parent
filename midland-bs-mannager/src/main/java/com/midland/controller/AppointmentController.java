@@ -267,7 +267,7 @@ public class AppointmentController extends BaseFilter {
 			exportModels.add(exportModel);
 		}
 		String titleColumn[] = {"modelName1", "modelName2", "modelName3", "modelName4", "modelName5", "modelName6", "modelName7", "modelName8", "modelName9", "modelName10", "modelName11", "modelName12", "modelName13", "modelName14", "modelName15", "modelName16", "modelName17"};
-		String titleName[] = {"委托编号", "平台", "称呼", "电话", "类型", "分类", "委托时间", "所属区域", "小区名", "门牌地址", "户型", "面积", "售价/租价", "预约时间", "经纪人", "状态", "处理时间"};
+		String titleName[] = {"委托编号", "平台", "称呼", "手机号码", "类型", "分类", "委托时间", "所属区域", "小区名", "门牌地址", "户型", "面积", "售价/租价", "预约时间", "经纪人", "状态", "处理时间"};
 		int titleSize[] = {13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13};
 		//其他设置 set方法可全不调用
 		pee.wirteExcel(titleColumn, titleName, titleSize, exportModels,request);

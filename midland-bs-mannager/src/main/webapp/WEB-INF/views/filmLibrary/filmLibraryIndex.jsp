@@ -7,7 +7,40 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
+    <style type="text/css">
+        .content ul.userinfo li>span {
+            float: left;
+            display: inline-block;
+            width: 90px;
+            height: 38px;
+            line-height: 38px;
+            text-align: right;
+            font-size: 14px;
+            color: rgb( 102, 102, 102 );
+        }
+        .dropdown {
+            position: relative;
+            width: 150px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            background: #fff;
+            border-radius: 3px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+        .content ul.userinfo li:not(:last-child) input {
+            float: left;
+            width: 200px;
+            height: 38px;
+            line-height: 38px;
+            border: 1px solid #dbe2e6;
+            border-radius: 4px;
+            text-indent: 10px;
+            outline-color: #0099e0;
+        }
 
+    </style>
 </head>
 <body>
 
@@ -23,6 +56,12 @@
               onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
             <ul class="userinfo row">
                 <%@include file="../menu/area.jsp" %>
+                <li><span>楼盘id：</span>
+                    <input type="text" name="housesId" id="housesId" placeholder="请输入楼盘id" /></li>
+                </li>
+                <li><span>楼盘名称：</span>
+                    <input type="text" name="title" id="title" placeholder="请输入楼盘名称" /></li>
+                </li>
                 <li><span>状态：</span>
                     <select name="isShow" id="isShow" class="dropdown">
                         <option value="">全部</option>

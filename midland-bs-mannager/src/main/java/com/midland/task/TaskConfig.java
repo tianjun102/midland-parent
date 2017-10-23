@@ -42,10 +42,37 @@ public class TaskConfig {
     private String taskEntrustFirstTimeKey ="taskEntrustFirstTimeKey";
 
 
+
+    /**
+     * 委托未处理告警间隔时间
+     */
+    private Double entrustWarn;
+    private String entrustWarnKey ="entrustWarnKey";
+
     @Autowired
     private RedisService redisServiceImpl;
 
 
+
+
+    public Double getEntrustWarn(){
+        if (entrustWarn == null){
+            Object value = redisServiceImpl.getValue(entrustWarnKey);
+            if (value == null){
+                redisServiceImpl.setValue(entrustWarnKey,initTime);;
+                entrustWarn = initTime;
+            }else{
+                entrustWarn =Double.valueOf(String.valueOf(value));
+            }
+        }
+        return entrustWarn;
+    }
+
+
+    public void setEntrustWarn(Double entrustWarn) {
+        this.entrustWarn = entrustWarn;
+        redisServiceImpl.setValue(entrustWarnKey, entrustWarn);
+    }
 
     public Long getTaskEntrustFirstTime(){
         if (taskEntrustFirstTime == null){

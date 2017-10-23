@@ -26,6 +26,16 @@
 		margin: 0 5px;
 		background-size: contain!important;
 	}
+	.content ul.userinfo li:not(:last-child) input {
+		float: left;
+		width: 175px;
+		height: 38px;
+		line-height: 38px;
+		border: 1px solid #dbe2e6;
+		border-radius: 4px;
+		text-indent: 10px;
+		outline-color: #0099e0;
+	}
 </style>
 </head>
 <body>
@@ -47,12 +57,15 @@
 				<li><span>手机号码：</span>
 					<input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>
 				</li>
-				<li><span>留言时间：</span><input class="Wdate half" id="time1"
+				<li><span>邮箱：</span>
+					<input type="text" name="email" id="email" placeholder="请输入邮箱" /></li>
+				</li>
+				<li><span>留言时间：</span><input class="Wdate half" id="time1" style="width:140;"
 										  onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time2\')}'})"
 										  name="startTime" /> <em class = "gang">-</em><input
 						class="Wdate half"
 						onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'time1\')}'})"
-						id="time2" name="endTime" /></li>
+						id="time2"  style="width:140;" name="endTime" /></li>
 				<li>
 				<li>
 					<input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/>

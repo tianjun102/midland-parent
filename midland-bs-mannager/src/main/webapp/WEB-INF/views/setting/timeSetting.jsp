@@ -37,6 +37,11 @@
                        onblur="notEmpty('appointClose','appointClose','');InitInput.setNumber(this,9,2,2)"
                        value="${item.appointClose}"><span>小时</span>
             </li>
+            <li class="col-md-6"><span>在线委托告警时间：</span>
+                <input type="text" name="entrustWarn" id="entrustWarn"
+                       onblur="notEmpty('entrustWarn','entrustWarn','');InitInput.setNumber(this,9,2,2)"
+                       value="${item.entrustWarn}"><span>小时</span>
+            </li>
             <li class="col-md-6"><span>任务执行间隔时间：</span>
                 <input type="text" name="taskInterval" id="taskInterval"
                        onblur="notEmpty('taskInterval','taskInterval','');InitInput.setNumber(this,9,2,2)"

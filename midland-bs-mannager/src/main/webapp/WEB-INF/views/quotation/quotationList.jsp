@@ -108,23 +108,50 @@
         tableCont.addEventListener('scroll',scrollHandle);
     })
 
-    function delete1(id){
-        $.ajax({
-            type: "post",
-            url: "${ctx}/rest/quotation/update?id="+id+"&isDelete=1",
-            async: false, // 此处必须同步
-            dataType: "json",
 
-            success: function (data) {
-                if (data.state==0){
-                    $('#searchForm').submit();
-                }
-            },
-            error: function () {
-                layer.msg("操作失败！", {icon: 2});
+    function delete1(id){
+        layer.open({
+            type: 1,
+            skin: 'layer-style',
+            area: ['350px', '200px'],
+            shadeClose: false, //点击遮罩关闭
+            title: ['编辑'],
+            resize: false,
+            scrollbar: false,
+            content:
+            '<section class = "content" style = "border:none; height:100%;">' +
+            '<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">确定要删除么?</p>' +
+            '</section>',
+            btn: ['确定', '取消'],
+            yes: function (index) {
+                var data = $("#formId").serialize();
+                $.ajax({
+                    type: "post",
+                    url: "${ctx}/rest/quotation/update?id="+id+"&isDelete=1",
+                    async: false, // 此处必须同步
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.state==0){
+                            layer.msg("删除成功！",{icon:1});
+                            setTimeout(function(){$("#searchForm").submit();},1000);
+                        }else{
+                            layer.msg("删除失败！",{icon:1});
+                        }
+                        layer.close(index);
+                    },
+                    error: function () {
+                        layer.msg("操作失败！", {icon: 2});
+                    }
+                })
             }
-        })
+            , success: function (layero) {
+                var btn = layero.find('.layui-layer-btn');
+                btn.css('text-align', 'center');
+            }
+        });
     }
+
+
 
     function to_edit(id){
         layer.open({

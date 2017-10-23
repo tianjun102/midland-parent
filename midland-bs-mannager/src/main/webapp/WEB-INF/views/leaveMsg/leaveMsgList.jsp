@@ -17,9 +17,12 @@
                 <th style="width: 8%"><a href="#" onclick="checkall()" >全选</a> / <a href="#" onclick="delcheckall()" >取消</a></th>
                 <th style="width: 8%">编号</th>
 				<th style="width: 8%">用户名称</th>
-				<th style="width: 8%">手机号</th>
+				<th style="width: 8%">手机号码</th>
+				<th style="width: 8%">邮箱</th>
                 <th style="width: 8%">留言</th>
+                <th style="width: 8%">回复内容</th>
                 <th style="width: 8%">留言时间</th>
+                <th style="width: 8%">状态</th>
                 <th style="width: 10%">操作</th>
             </tr>
         </thead>
@@ -33,10 +36,17 @@
                         <td>${xh.count}</td>
 						<td>${item.userName}</td>
 						<td>${item.phone}</td>
+						<td>${item.email}</td>
+
                         <td>${item.message}</td>
-                        <td>${item.addTime}</td>
+                        <td>${item.replyMsg}</td>
+                        <td style="white-space: nowrap">${item.addTime}</td>
+                        <td><c:choose>
+                            <c:when test="${not empty item.replyMsg}">已回复</c:when>
+                            <c:otherwise>未回复</c:otherwise>
+                        </c:choose> </td>
 						<td>
-                            <a target="contentF" title="回复" class="reply_img" onclick="to_edit(${item.id })"></a>
+                            <a target="contentF" title="回复" class="reply_img" href="${ctx}/rest/leaveMsg/to_update?id=${item.id}"></a>
                             <a target="contentF"　title="删除" class="delete_img" onclick="delete1(${item.id })"></a>
                         </td>
                     </tr>
@@ -76,16 +86,6 @@
                 layer.msg("操作失败！", {icon: 2});
             }
         })
-    }
-
-    function to_edit(id){
-        layer.open({
-            type: 2,
-            title: ['修改'],
-            shade: 0.3,
-            area: ['500px', '550px'],
-            content: ['${ctx}/rest/leaveMsg/to_update?id='+id,'no']
-        });
     }
 
 

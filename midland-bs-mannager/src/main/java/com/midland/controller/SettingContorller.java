@@ -442,6 +442,7 @@ public class SettingContorller extends BaseFilter {
             Double appointmentWarn = request.getParameter("appointmentWarn")==null?null:Double.valueOf(request.getParameter("appointmentWarn"));
             Double appointClose = request.getParameter("appointClose")==null?null:Double.valueOf(request.getParameter("appointClose"));
             Double taskInterval = request.getParameter("taskInterval")==null?null:Double.valueOf(request.getParameter("taskInterval"));
+            Double entrustWarn = request.getParameter("entrustWarn")==null?null:Double.valueOf(request.getParameter("entrustWarn"));
             if(appointmentWarn ==null){
                 appointmentWarn=0.5;
             }
@@ -451,9 +452,13 @@ public class SettingContorller extends BaseFilter {
             if (taskInterval ==null){
                 taskInterval = 0.5;
             }
+            if (entrustWarn ==null){
+                entrustWarn = 0.5;
+            }
             taskConfig.setAppointClose(appointClose);
             taskConfig.setAppointmentWarn(appointmentWarn);
             taskConfig.setTaskInterval(taskInterval);
+            taskConfig.setEntrustWarn(entrustWarn);
             map.put("state", 0);
         } catch (Exception e) {
             logger.error("",e);
