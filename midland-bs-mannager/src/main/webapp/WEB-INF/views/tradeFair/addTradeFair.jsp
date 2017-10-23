@@ -75,7 +75,7 @@
                 <input type="text" name="housesId" id="housesId" />
             </li>
 
-            <li><span>标题：</span>
+            <li><span>楼盘名称：</span>
                 <input type="text" name="title" id="title" />
             </li>
             <li><span>简介：</span>

@@ -8,7 +8,9 @@ import com.midland.web.model.FilmLibrary;
 import com.midland.web.model.user.User;
 import com.midland.web.service.FilmLibraryService;
 import com.midland.web.service.SettingService;
+import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
+import com.midland.web.util.ParamObject;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,6 +44,8 @@ public class FilmLibraryController extends BaseFilter {
 	public String filmLibraryIndex(FilmLibrary filmLibrary, Model model) throws Exception {
 		List<Area> list = settingService.queryAllCityByRedis();
 		settingService.getAllProvinceList(model);
+		List<ParamObject> obj = JsonMapReader.getMap("film_type");
+		model.addAttribute("filmTypes",obj);
 		model.addAttribute("citys",list);
 		return "filmLibrary/filmLibraryIndex";
 	}
@@ -151,6 +155,8 @@ public class FilmLibraryController extends BaseFilter {
 			MidlandHelper.doPage(request);
 			Page<FilmLibrary> result = (Page<FilmLibrary>)filmLibraryServiceImpl.findFilmLibraryList(filmLibrary);
 			Paginator paginator=result.getPaginator();
+			List<ParamObject> obj = JsonMapReader.getMap("film_type");
+			model.addAttribute("filmTypes",obj);
 			model.addAttribute("paginator",paginator);
 			model.addAttribute("items",result);
 		} catch(Exception e) {

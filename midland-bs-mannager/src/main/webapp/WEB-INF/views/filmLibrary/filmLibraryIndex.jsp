@@ -11,7 +11,7 @@
         .content ul.userinfo li>span {
             float: left;
             display: inline-block;
-            width: 90px;
+            width: 85px;
             height: 38px;
             line-height: 38px;
             text-align: right;
@@ -20,7 +20,7 @@
         }
         .dropdown {
             position: relative;
-            width: 150px;
+            width: 100px;
             border: 1px solid #ccc;
             cursor: pointer;
             background: #fff;
@@ -31,7 +31,7 @@
         }
         .content ul.userinfo li:not(:last-child) input {
             float: left;
-            width: 200px;
+            width: 140px;
             height: 38px;
             line-height: 38px;
             border: 1px solid #dbe2e6;
@@ -61,6 +61,17 @@
                 </li>
                 <li><span>楼盘名称：</span>
                     <input type="text" name="title" id="title" placeholder="请输入楼盘名称" /></li>
+                </li>
+                <li>
+                    <span>分类：</span>
+                    <select name="filmType" id="filmType" class="dropdown">
+                        <option value="">全部</option>
+                        <c:forEach items="${filmTypes}" var="s" >
+                            <option value="${s.id}">
+                                    ${s.name}
+                            </option>
+                        </c:forEach>
+                    </select>
                 </li>
                 <li><span>状态：</span>
                     <select name="isShow" id="isShow" class="dropdown">
