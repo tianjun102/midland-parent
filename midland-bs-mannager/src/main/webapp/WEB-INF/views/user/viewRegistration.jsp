@@ -20,7 +20,7 @@
 		<input type="hidden" name="id" id="id" value="${user.id}">
 		<input type="hidden" name="ph" id="ph" value="${user.phone}">
 		<li><span>用户名：</span><input type="text" name="userName" id="userName" value="${user.username}" disabled="true"/></li>
-		<li><span>身份证号：</span><input type="text" name="identification" id="identification" value="${user.identification}" maxlength="50"/><span style="text-align: left!important;" class="_star">*</span></li>
+		<li><span>身份证号：</span><input type="text" name="identification" id="identification" value="${user.identification}" disabled="true" maxlength="50"/><span style="text-align: left!important;" class="_star">*</span></li>
 		<li><span>邮箱：</span><input type="text" name="email" id="email" value="${user.email}" disabled="true"/></li>
 		<li><span>真实姓名：</span><input type="text" name="actualName" id="actualName" value="${user.actualName}" disabled="true"/></li>
 		<li><span>身份证图片：</span><img style="width: 90px;height: 90px;" src="${user.idcartImg}"  maxlength="50"/></li>
