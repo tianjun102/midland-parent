@@ -15,7 +15,7 @@
                                                      name="provinceName">
         <!-- 第一次进页面加载省 -->
         <select id="provinces" onchange="initProvince()"
-                style="height: 38px;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                style="height: 38px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;">
             <option>请选择</option>
             <option value="">全部</option>
             <c:forEach items="${provinceList}" var="province">
