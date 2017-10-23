@@ -28,13 +28,24 @@
 	}
 	.content ul.userinfo li:not(:last-child) input {
 		float: left;
-		width: 175px;
+		width: 140px;
 		height: 38px;
 		line-height: 38px;
 		border: 1px solid #dbe2e6;
 		border-radius: 4px;
 		text-indent: 10px;
 		outline-color: #0099e0;
+	}
+	.dropdown {
+		position: relative;
+		width: 100px;
+		border: 1px solid #ccc;
+		cursor: pointer;
+		background: #fff;
+		border-radius: 3px;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		user-select: none;
 	}
 </style>
 </head>
@@ -57,15 +68,25 @@
 				<li><span>手机号码：</span>
 					<input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>
 				</li>
+				<li><span>类型：</span>
+					<select name="type" id="type" class="dropdown">
+						<option value="">全部</option>
+						<c:forEach items="${leaveMsgTypes}" var="s1" >
+							<option value="${s1.id}">
+									${s1.name}
+							</option>
+						</c:forEach>
+					</select>
+				</li>
 				<li><span>邮箱：</span>
 					<input type="text" name="email" id="email" placeholder="请输入邮箱" /></li>
 				</li>
-				<li><span>留言时间：</span><input class="Wdate half" id="time1" style="width:140;"
+				<li><span>留言时间：</span><input class="Wdate half" id="time1" style="width: 130px;"
 										  onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time2\')}'})"
 										  name="startTime" /> <em class = "gang">-</em><input
 						class="Wdate half"
 						onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'time1\')}'})"
-						id="time2"  style="width:140;" name="endTime" /></li>
+						id="time2"  style="width: 130px;" name="endTime" /></li>
 				<li>
 				<li>
 					<input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/>

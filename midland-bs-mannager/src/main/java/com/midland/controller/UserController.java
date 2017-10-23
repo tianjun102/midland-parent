@@ -788,22 +788,25 @@ public class UserController extends BaseFilter {
 
 		for (User user1: dataList){
 			ExportModel exportModel = new ExportModel();
-			exportModel.setModelName2(user1.getUsername());
-			exportModel.setModelName3(user1.getUserCnName());
-			exportModel.setModelName4(user1.getPhone());
-			exportModel.setModelName5(user1.getEmail());
-			exportModel.setModelName6(user1.getCityName());
+			exportModel.setModelName1(user1.getUsername());
+			exportModel.setModelName2(user1.getUserCnName());
+			exportModel.setModelName3(user1.getPhone());
+			exportModel.setModelName4(user1.getCreateTime());
 			List<ParamObject> sources = JsonMapReader.getMap("source");
-			exportModel.setModelName7(MidlandHelper.getNameById(user1.getSource(), sources));
-			List<ParamObject> userTypes = JsonMapReader.getMap("audit_status");
-			exportModel.setModelName8(MidlandHelper.getNameById(user1.getAuditStatus(), userTypes));
+			exportModel.setModelName5(MidlandHelper.getNameById(user1.getSource(), sources));
+			List<ParamObject> auditSatus = JsonMapReader.getMap("audit_status");
+			exportModel.setModelName6(MidlandHelper.getNameById(user1.getAuditStatus(), auditSatus));
+			exportModel.setModelName7(user1.getAuditName());
+			exportModel.setModelName8(user1.getAuditTime());
+
+
 			exportModels.add(exportModel);
 		}
 	    PoiExcelExport pee = new PoiExcelExport(response,"用户","sheet1");
 	    //调用
-	    String titleColumn[] = {"modelName2","modelName3","modelName4","modelName5","modelName6","modelName7","modelName8"};
-	    String titleName[] = {"用户名","昵称","联系方式","邮箱","城市","平台","审核状态"};
-	    int titleSize[] = {13,13,13,13,13,13,13};
+	    String titleColumn[] = {"modelName1","modelName2","modelName3","modelName4","modelName5","modelName6","modelName7","modelName8"};
+	    String titleName[] = {"用户名","昵称","手机号码","注册时间","平台","实名状态","审核人","审核时间"};
+	    int titleSize[] = {13,13,13,13,13,13,13,13};
 	    //其他设置 set方法可全不调用
 	    pee.wirteExcel(titleColumn, titleName, titleSize, exportModels,request);
     }

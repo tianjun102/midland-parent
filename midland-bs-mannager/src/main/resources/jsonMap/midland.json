@@ -17,7 +17,7 @@
       "name": "商铺"
     }
   ],
-"decoration": [
+  "decoration": [
     {
       "id": "0",
       "name": "豪装"
@@ -35,7 +35,6 @@
       "name": "毛坯"
     }
   ],
-
   "appointment_status": [
     {
       "id": "0",
@@ -53,9 +52,7 @@
       "id": "3",
       "name": "已关闭"
     }
-
   ],
-
   "entrust_status": [
     {
       "id": "0",
@@ -102,7 +99,6 @@
       "name": "出租"
     }
   ],
-
   "entrust_house_type": [
     {
       "id": "0",
@@ -125,9 +121,6 @@
       "name": "其它"
     }
   ],
-
-
-
   "entrust_type": [
     {
       "id": "0",
@@ -150,7 +143,6 @@
       "name": "估价"
     }
   ],
-
   "quotation_type": [
     {
       "id": "1",
@@ -160,7 +152,6 @@
       "id": "0",
       "name": "商业"
     },
-
     {
       "id": "2",
       "name": "其它"
@@ -186,12 +177,12 @@
     {
       "id": "3",
       "name": "客户服务"
-    },{
+    },
+    {
       "id": "4",
       "name": "其它"
     }
   ],
-
   "source": [
     {
       "id": "0",
@@ -202,7 +193,6 @@
       "name": "微站"
     }
   ],
-  
   "quotation_houseType_acreage_range": [
     {
       "id": "0",
@@ -217,7 +207,6 @@
       "name": "144㎡以上"
     }
   ],
-
   "audit_status": [
     {
       "id": "0",
@@ -236,8 +225,6 @@
       "name": "拒绝"
     }
   ],
-
-
   "turned": [
     {
       "id": "0",
@@ -270,6 +257,20 @@
     {
       "id": "7",
       "name": "东北"
+    }
+  ],
+  "leaveMsg_type": [
+    {
+      "id": "0",
+      "name": "求购 "
+    },
+    {
+      "id": "1",
+      "name": "求租"
+    },
+    {
+      "id": "2",
+      "name": "其他"
     }
   ]
 }

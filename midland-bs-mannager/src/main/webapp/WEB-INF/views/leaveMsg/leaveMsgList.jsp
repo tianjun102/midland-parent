@@ -19,6 +19,7 @@
 				<th style="width: 8%">用户名称</th>
 				<th style="width: 8%">手机号码</th>
 				<th style="width: 8%">邮箱</th>
+                <th style="width: 8%">类型</th>
                 <th style="width: 8%">留言</th>
                 <th style="width: 8%">回复内容</th>
                 <th style="width: 8%">留言时间</th>
@@ -37,6 +38,11 @@
 						<td>${item.userName}</td>
 						<td>${item.phone}</td>
 						<td>${item.email}</td>
+						<td>
+                            <c:forEach items="${leaveMsgTypes}" var="s">
+                                <c:if test="${item.type == s.id}">${s.name}</c:if>
+                            </c:forEach>
+                        </td>
 
                         <td>${item.message}</td>
                         <td>${item.replyMsg}</td>

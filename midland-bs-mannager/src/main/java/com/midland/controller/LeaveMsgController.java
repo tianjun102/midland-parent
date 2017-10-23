@@ -5,7 +5,9 @@ import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.web.model.LeaveMsg;
 import com.midland.web.service.LeaveMsgService;
+import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
+import com.midland.web.util.ParamObject;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +37,8 @@ public class LeaveMsgController extends BaseFilter {
 	 **/
 	@RequestMapping("index")
 	public String leaveMsgIndex(LeaveMsg leaveMsg, Model model) throws Exception {
+		List<ParamObject> obj = JsonMapReader.getMap("leaveMsg_type");
+		model.addAttribute("leaveMsgTypes",obj);
 		return "leaveMsg/leaveMsgIndex";
 	}
 
@@ -133,6 +137,8 @@ public class LeaveMsgController extends BaseFilter {
 			MidlandHelper.doPage(request);
 			Page<LeaveMsg> result = (Page<LeaveMsg>)leaveMsgServiceImpl.findLeaveMsgList(leaveMsg);
 			Paginator paginator=result.getPaginator();
+			List<ParamObject> obj = JsonMapReader.getMap("leaveMsg_type");
+			model.addAttribute("leaveMsgTypes",obj);
 			model.addAttribute("paginator",paginator);
 			model.addAttribute("items",result);
 		} catch(Exception e) {
