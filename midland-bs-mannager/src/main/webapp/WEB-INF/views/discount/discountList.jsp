@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@include file="../layout/tablib.jsp" %>
+<%@include file="../layout/source.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,13 +15,10 @@
     <table class="table table-bordered table-add">
         <thead>
             <tr>
-                <th style="width: 8%"><a href="#" onclick="checkall()" >全选</a> / <a href="#" onclick="delcheckall()" >取消</a></th>
-                <th style="width: 8%">编号</th>
-				<th style="width: 8%">平台</th>
-                <th style="width: 8%">状态</th>
-				<th style="width: 8%">模块名称</th>
-				<th style="width: 8%">城市</th>
-                <th style="width: 15%">操作</th>
+                <th style="width: 10%"><a href="#" onclick="checkall()" >全选</a> / <a href="#" onclick="delcheckall()" >全部取消</a></th>
+                <th style="width: 8%">选项名</th>
+				<th style="width: 8%">折扣值</th>
+                <th style="width: 10%">操作</th>
             </tr>
         </thead>
         <tbody>
@@ -30,23 +28,11 @@
                     <tr>
 						<input type="hidden" id="id" value="${item.id}"/>
                         <td><input type="checkbox" name="pid" value="${item.id}"></td>
-                        <td>${xh.count}</td>
+						<td>${item.name}</td>
+						<td>${item.discountVal}</td>
 						<td>
-                            <c:if test="${item.source == '0'}">网站</c:if>
-                            <c:if test="${item.source == '1'}">微站</c:if>
-                        </td>
-                        <td>
-                            <c:if test="${item.isShow == '0'}">显示</c:if>
-                            <c:if test="${item.isShow == '1'}">隐藏</c:if>
-                        </td>
-						<td>${item.modeName}</td>
-						<td>${item.cityName}</td>
-						<td>
-                            <a class="up_img" title="上移" target="contentF" onclick="sort(${item.id },${item.orderBy},1)"></a>
-                            <a class="down_img" title="下移" target="contentF" onclick="sort(${item.id },${item.orderBy},2)"></a>
-                            <a class="edit_img" title="编辑" target="contentF" href="${ctx}/rest/specialPage/to_update?id=${item.id}"></a>
+                            <a class="edit_img" title="编辑" target="contentF" onclick="to_edit(${item.id })"></a>
                             <a class="delete_img" title="删除" target="contentF" onclick="delete1(${item.id })"></a>
-                            <a <c:if test="${item.isShow==0}">class="onoff_img"</c:if> <c:if test="${item.isShow==1}">class="offon_img"</c:if> target="contentF" onclick="updateSpecial(${item.isShow},${item.id })"></a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -75,18 +61,18 @@
             skin: 'layer-style',
             area: ['350px','200px'],
             shadeClose: false, //点击遮罩关闭
-            title:['删除Banner'],
+            title:['删除分类'],
             resize: false,
             scrollbar:false,
             content:
             '<section class = "content" style = "border:none; height:100%;">'+
-            '<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">您确定要删除当前配置吗?</p>'+
+            '<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">您确定要删除?</p>'+
             '</section>',
             btn:['确定','取消'],
             yes: function(index){
                 $.ajax({
                     type: "post",
-                    url: "${ctx}/rest/specialPage/update?id="+id+"&isDelete=1",
+                    url: "${ctx}/rest/discount/update?id="+id+"&isDelete=1",
                     cache:false,
                     async:false, // 此处必须同步
                     dataType: "json",
@@ -106,6 +92,7 @@
                 btn.css('text-align', 'center');
             }
         });
+
     }
 
     function to_edit(id){
@@ -113,31 +100,11 @@
             type: 2,
             title: ['修改'],
             shade: 0.3,
-            area: ['500px', '700px'],
-            content: ['${ctx}/rest/specialPage/to_update?id='+id,'no']
+            area: ['500px', '300px'],
+            content: ['${ctx}/rest/discount/to_update?id='+id,'no']
         });
     }
 
-    //启用，禁用
-    function updateSpecial(isShow,id){
-        if(isShow==1){
-            isShow=0;
-        }else if(isShow == 0){
-            isShow = 1;
-        }
-
-        $.ajax({
-            type: "post",
-            url: "${ctx}/rest/specialPage/update?isShow="+isShow+"&id="+id,
-            async:false, // 此处必须同步
-            dataType: "json",
-            data:"",
-            success: function(data){
-
-                $('#searchForm').submit();
-            }
-        });
-    }
 
     function checkall(){
         $("input[name='pid']").each(function(){
@@ -163,7 +130,7 @@
 
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/specialPage/batchUpdate?ids="+ids+"&isDelete="+status,
+            url: "${ctx}/rest/discount/batchUpdate?ids="+ids+"&isDelete="+status,
             async: false, // 此处必须同步
             dataType: "json",
 
@@ -179,24 +146,6 @@
         })
     }
 
-    //排序
-    function sort(id,orderById,sort) {
-        $.ajax({
-            type: "post",
-            url: "${ctx}/rest/specialPage/sort?sort="+sort+"&orderBy="+orderById+"&id="+id,
-            async: false, // 此处必须同步
-            dataType: "json",
-
-            success: function (data) {
-                if (data.state==0){
-                    $('#searchForm').submit();
-                }
-            },
-            error: function () {
-                layer.msg("操作失败！", {icon: 2});
-            }
-        })
-    }
 
 </script>
 </body>

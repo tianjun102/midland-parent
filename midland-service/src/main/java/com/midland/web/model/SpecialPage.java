@@ -73,6 +73,8 @@ public class SpecialPage{
 
 	private String detailsUrl;
 
+	private Integer orderBy;
+
 
 	public Integer getId() {
 		return id;
@@ -217,6 +219,14 @@ public class SpecialPage{
 
 	public void setDetailsUrl(String detailsUrl) {
 		this.detailsUrl = detailsUrl;
+	}
+
+	public Integer getOrderBy() {
+		return orderBy;
+	}
+
+	public void setOrderBy(Integer orderBy) {
+		this.orderBy = orderBy;
 	}
 
 	@Override
