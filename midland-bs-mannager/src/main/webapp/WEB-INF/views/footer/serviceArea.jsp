@@ -44,7 +44,6 @@
             <ul class="adminfo row">
 
                 <li id="textArea" style="display: block;">
-                    <span>页面内容：</span>
                     <textarea style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;"
                               name="serviceArea" id="myEditor" rows="" cols="">${item.serviceArea}</textarea>
                 </li>

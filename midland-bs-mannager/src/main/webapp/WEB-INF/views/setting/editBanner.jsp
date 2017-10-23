@@ -107,7 +107,7 @@
 				<li id="picLike"><span>图片链接：</span>
 					<input id="bannerLinkurl" name="bannerLinkurl" maxlength="255" onblur="checkUrl('bannerLinkurl','bannerLinkurl','网址格式不正确！')" type="text" value="${banner.bannerLinkurl}">
 				</li>
-				<li id="textArea" <c:if test="${banner.type =='2'}"> style="display: none;" </c:if> ><span>页面内容：</span><textarea style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;" name="detail" id="myEditor" rows="" cols="">${banner.detail}</textarea></li>
+				<li id="textArea" <c:if test="${banner.type =='2'}"> style="display: none;" </c:if> ><textarea style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;" name="detail" id="myEditor" rows="" cols="">${banner.detail}</textarea></li>
 			</ul>
 			<ul class = "adminfo row">
 				<li>
