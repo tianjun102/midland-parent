@@ -60,7 +60,13 @@ public class OtherController extends BaseFilter {
 		model.addAttribute("item", footer);
 		return "footer/aboutUs";
 	}
-	
+		@RequestMapping("/contactUs/index")
+	public String contactUsIndex(HttpServletRequest request, Model model) {
+		Footer footer = footerServiceImpl.getFooter();
+		model.addAttribute("item", footer);
+		return "footer/contactUs";
+	}
+
 	
 	@RequestMapping("/tradingProcess/index")
 	public String tradingProcessIndex(HttpServletRequest request, Model model) {

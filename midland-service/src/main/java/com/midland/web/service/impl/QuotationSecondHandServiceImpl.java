@@ -98,6 +98,21 @@ public class QuotationSecondHandServiceImpl implements QuotationSecondHandServic
 		}
 	}
 
+/**
+	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
+	 **/
+	@Override
+	public List<QuotationSecondHand> findQuotationSecondHandListTemp(QuotationSecondHand quotationSecondHand,List<String> list) throws Exception {
+		try {
+			log.debug("findQuotationSecondHandList  {}",quotationSecondHand);
+			return quotationSecondHandMapper.findQuotationSecondHandListTemp(quotationSecondHand,list);
+		} catch(Exception e) {
+			log.error("findQuotationSecondHandList  {}",quotationSecondHand,e);
+			throw e;
+		}
+	}
+
+
 	@Override
 	public void batchUpdate(List<QuotationSecondHand> quotationSecondHandList) throws Exception {
 		try {

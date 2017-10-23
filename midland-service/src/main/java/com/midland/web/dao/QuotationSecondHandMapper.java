@@ -21,6 +21,7 @@ public interface QuotationSecondHandMapper {
 	int insertQuotationSecondHandBatch(List list);
 
 	List<QuotationSecondHand> findQuotationSecondHandList(QuotationSecondHand quotationSecondHand);
+	List<QuotationSecondHand> findQuotationSecondHandListTemp(QuotationSecondHand quotationSecondHand,List<String> list);
 
 	int batchUpdate(@Param("quotationSecondHandList") List<QuotationSecondHand> quotationSecondHandList);
 
