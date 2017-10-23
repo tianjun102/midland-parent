@@ -14,7 +14,7 @@
 	<div class="box" style = "min-width:auto;">
 		<section class = "content" style = "width:auto;">
 			<p class = "detail-title">
-				<span>关于平台</span>
+				<span>系统管理>>关于平台</span>
 			</p>
 			<dl class="about">
 				<dt>

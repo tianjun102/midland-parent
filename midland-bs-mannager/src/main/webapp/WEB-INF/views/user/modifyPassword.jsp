@@ -24,7 +24,7 @@
 	<div class="box">
 		<section class = "content">
 			<p class = "detail-title">
-				<span>密码修改</span>
+				<span>系统管理>>密码修改</span>
 				<%-- <a class = "setup" href="${ctx }/rest/user/contentIndex" target="contentF">返回</a> --%>
 			</p>
 		<form action="${ctx}/rest/user/submit" method="post" id="searchFrom">	

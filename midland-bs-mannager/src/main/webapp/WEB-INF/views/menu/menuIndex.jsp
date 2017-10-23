@@ -32,7 +32,7 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
-				<span>菜单管理列表</span>
+				<span>系统管理>>菜单管理列表</span>
 				<a class = "setup"  target="contentF" onclick="addMenu()">新增</a>
 			</p>
 		<form action="${ctx }/rest/menu/list" method="POST" id="searchForm"

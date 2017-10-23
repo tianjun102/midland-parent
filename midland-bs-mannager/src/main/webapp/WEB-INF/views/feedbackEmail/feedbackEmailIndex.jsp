@@ -16,8 +16,8 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
-				<c:if test="${emailType==2}"><span>简历接收邮箱</span></c:if>
-				<c:if test="${emailType==1}"><span>反馈邮箱</span></c:if>
+				<c:if test="${emailType==2}"><span>招聘管理>>简历接收邮箱</span></c:if>
+				<c:if test="${emailType==1}"><span>系统设置>>反馈邮箱</span></c:if>
 				<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>
 			</p>
 		<form action="${ctx }/rest/feedbackEmail/list" method="POST" id="searchForm"

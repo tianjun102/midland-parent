@@ -36,7 +36,7 @@
 <div class="box">
     <section class="content">
         <p class="detail-title">
-            <span>服务范围</span>
+            <span>外销网管理>>服务范围</span>
         </p>
         <form id="formId" action="${ctx}/rest/banner/addBanner" method="post" enctype="multipart/form-data"
               method="post">

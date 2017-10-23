@@ -17,6 +17,7 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
+				<span>精英会>>精英会会员管理</span>
 				<a class = "setup"  target="contentF" href="${ctx}/rest/eliteVip/to_add">新增</a>
 			</p>
 		<form action="${ctx }/rest/eliteVip/list" method="POST" id="searchForm"

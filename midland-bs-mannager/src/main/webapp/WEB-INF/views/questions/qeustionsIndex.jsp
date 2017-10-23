@@ -38,7 +38,7 @@
 <div class="box">
     <section class="content">
         <p class="detail-title">
-            <span>问答记录列表</span>
+            <span>买房助手>>问答记录列表</span>
             <c:choose>
                 <c:when test="${auditFlag==0}">
                     <a class = "setup" target="contentF" onclick="openOrCloseAudit(1)">开启审核</a>

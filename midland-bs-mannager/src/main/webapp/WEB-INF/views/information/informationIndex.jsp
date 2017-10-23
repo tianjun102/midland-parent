@@ -20,7 +20,7 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
-				<span>资讯管理</span>
+				<span>资讯管理>>资讯列表</span>
 				<a class = "setup"  target="contentF" href="${ctx}/rest/information/to_add">新增</a>
 				<a style="margin-right: 10px;" class = "setup"  target="contentF" href="${ctx}/rest/category/index?type=1">分类管理</a>
 			</p>

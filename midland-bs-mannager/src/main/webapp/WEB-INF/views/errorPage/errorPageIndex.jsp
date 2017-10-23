@@ -21,7 +21,7 @@
 <div class="box">
 	<section class = "content">
 		<p class = "detail-title">
-				<span>404页面设置</span>
+				<span>系统设置>>404页面设置</span>
 		</p>
 		<form id="dataForm" action="${ctx}/rest/banner/addBanner" method="post" enctype="multipart/form-data" method="post">
 			<input type="hidden" name="id" id="id" value="${items.id}" >

@@ -21,7 +21,7 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
-				<span>招聘管理</span>
+				<span>招聘管理>>招聘列表</span>
 				<a class = "setup"  target="contentF" href="${ctx}/rest/recruitManager/to_add">新增</a>
 			</p>
 		<form action="${ctx }/rest/recruitManager/list" method="POST" id="searchForm"
