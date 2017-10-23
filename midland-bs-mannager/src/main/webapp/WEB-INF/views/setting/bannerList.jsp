@@ -46,7 +46,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				<col width="30%" >
 	 				<thead>
 						<tr>
-							<th><a href="#" onclick="checkall()" >全选</a> / <a href="#" onclick="delcheckall()" >取消</a></th>
+							<th><a target="contentF" href="javascript:void (0)" onclick="checkall()" >全选</a> / <a target="contentF" href="javascript:void (0)" onclick="delcheckall()" >取消</a></th>
 							<th>编号</th>
 							<th>轮播图</th>
 							<th>状态</th>
