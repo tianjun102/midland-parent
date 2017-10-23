@@ -57,8 +57,8 @@ public class PTest {
 		list.add("sdfef");
 		list.add("dfef");
 		list.add(SGIN);
-		SmsModel smsModel = new SmsModel("135765456789","2029157",list);
-		
+		SmsModel smsModel = new SmsModel("18218727210","2029157",list);
+
 		apiHelper.smsSender("dsfs",smsModel);
 	}
 	

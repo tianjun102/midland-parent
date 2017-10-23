@@ -48,7 +48,7 @@
 
             <li class="col-sm-6 col-md-6 col-lg-6"> <span>地区：</span>
                 <p id="district" style="display: inline-block;height: 38px;">
-                    <label ></label> <input type="hidden" value="" name="distId"> <input type="hidden" value="" name="distName">
+                    <label ></label> <input type="hidden" value="" name="areaId"> <input type="hidden" value="" name="areaName">
                     <select id="districts" onchange="initDistrict()" style="height: 100%;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <c:choose>
                             <c:when test="${not empty item.areaId}">
@@ -64,7 +64,7 @@
 
                 <p id="sheet" style="display: inline-block;height: 38px;">
                     <span>片区：</span>
-                    <label ></label> <input type="hidden" value="" name="sheetId"> <input type="hidden" value="" name="sheetName">
+                    <label ></label> <input type="hidden" value="" name="sliceId"> <input type="hidden" value="" name="sliceName">
                     <select id="sheets" onchange="initSheet()" style="height: 100%;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <c:choose>
                             <c:when test="${not empty item.sliceId}">
@@ -84,21 +84,10 @@
     function initProvince() {
         var addrId = $("#provinces option:selected").val();
         var addName = $("#provinces option:selected").text();
+        $("#citys").html("<option  >请选择</option>");
         $("#districts").html("<option  >请选择</option>");
-        /*if ("请选择" == addName) {
-            //下级改变成请选择
-            $("#citys option:selected").text(addName);
-            $("#districts option:selected").text(addName);
-            $("#citys").html("<option  >请选择</option>");
+        $("#sheets").html("<option  >请选择</option>");
 
-            $("input[name=provinceId]").val("");
-            $("input[name=provinceName]").val("");
-            $("input[name='cityId']").val("");
-            $("input[name='cityName']").val("");
-            $("input[name='distId']").val("");
-            $("input[name='distName']").val("");
-            return;
-        }*/
         $("input[name=provinceId]").val(addrId);
         $("input[name=provinceName]").val(addName);
 
@@ -132,8 +121,8 @@
             //其值及其下级值变成空
             $("input[name='cityId']").val("");
             $("input[name='cityName']").val("");
-            $("input[name='distId']").val("");
-            $("input[name='distName']").val("");
+            $("input[name='areaId']").val("");
+            $("input[name='areaName']").val("");
             return;
         }
         $("input[name='cityId']").val(addrId);
@@ -165,12 +154,12 @@
             //下级改变成请选择
             $("#districts option:selected").text(addName);
             //其值及其下级值变成空
-            $("input[name='distId']").val("");
-            $("input[name='distName']").val("");
+            $("input[name='areaId']").val("");
+            $("input[name='areaName']").val("");
             return;
         }
-        $("input[name='distId']").val(addrId);
-        $("input[name='distName']").val(addName);
+        $("input[name='areaId']").val(addrId);
+        $("input[name='areaName']").val(addName);
 
         $.ajax({
             type : "post",
@@ -200,12 +189,12 @@
             //下级改变成请选择
             $("#sheets option:selected").text(addName);
             //其值及其下级值变成空
-            $("input[name='sheetId']").val("");
-            $("input[name='sheetName']").val("");
+            $("input[name='sliceId']").val("");
+            $("input[name='sliceName']").val("");
             return;
         }
-        $("input[name='sheetId']").val(addrId);
-        $("input[name='sheetName']").val(addName);
+        $("input[name='sliceId']").val(addrId);
+        $("input[name='sliceName']").val(addName);
 
     }
 

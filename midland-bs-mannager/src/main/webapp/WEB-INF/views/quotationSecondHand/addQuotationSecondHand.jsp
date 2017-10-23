@@ -32,7 +32,7 @@
 </head>
 <body>
 <section class="content" style="border:none;">
-    <form action="${ctx}/rest/quotationSecondHand/update" method="post" id="dataForm">
+    <form action="${ctx}/rest/quotationSecondHand/add" method="post" id="dataForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <li class="col-sm-6 col-md-6 col-lg-6"><span>数据时间：</span>
@@ -49,7 +49,7 @@
                     </c:forEach>
                 </select>
             </li>
-            <%@include file="../layout/sheet.jsp" %>
+            <%@include file="sheet.jsp" %>
             <li class="col-sm-6 col-md-6 col-lg-6"><span>成交套数：</span>
                 <input type="text" name="dealNum" id="dealNum" value="${item.dealNum}"/>
             </li>
@@ -73,7 +73,7 @@
         debugger;
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/quotationSecondHand/update",
+            url: "${ctx}/rest/quotationSecondHand/add",
             async: false, // 此处必须同步
             dataType: "json",
             data: data,

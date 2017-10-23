@@ -30,34 +30,64 @@ public class TaskConfig {
     private Double initTaskInterval=0.5;
 
     /**
-     * 任务上次执行的时间
+     * 预约管理-任务上次执行的时间
      */
-    private Long taskFirstTime;
-    private String taskFirstTimeKey ="taskFirstTimeKey";
+    private Long taskAppointFirstTime;
+    private String taskAppointFirstTimeKey ="taskAppointFirstTimeKey";
+
+    /**
+     * 委托管理-任务上次执行的时间
+     */
+    private Long taskEntrustFirstTime;
+    private String taskEntrustFirstTimeKey ="taskEntrustFirstTimeKey";
+
 
     @Autowired
     private RedisService redisServiceImpl;
 
 
 
-    public Long getTaskFirstTime(){
-        if (taskFirstTime == null){
-            Object value = redisServiceImpl.getValue(taskFirstTimeKey);
+    public Long getTaskEntrustFirstTime(){
+        if (taskEntrustFirstTime == null){
+            Object value = redisServiceImpl.getValue(taskEntrustFirstTimeKey);
             if (value == null){
-                long intTime = System.currentTimeMillis();
-                redisServiceImpl.setValue(taskFirstTimeKey,intTime );
-                taskFirstTime = intTime;
+                long intTime = System.currentTimeMillis();;
+                redisServiceImpl.setValue(taskEntrustFirstTimeKey,intTime );
+                taskEntrustFirstTime = intTime;
             }else{
-                taskFirstTime =Long.valueOf(String.valueOf(value));
+                taskEntrustFirstTime =Long.valueOf(String.valueOf(value));
             }
         }
-        return taskFirstTime;
+        return taskEntrustFirstTime;
     }
 
 
-    public void setTaskFirstTime(Long taskFirstTime) {
-        this.taskFirstTime = taskFirstTime;
-        redisServiceImpl.setValue(taskFirstTimeKey, taskFirstTime);
+    public void setTaskEntrustFirstTime(Long taskEntrustFirstTime) {
+        this.taskEntrustFirstTime = taskEntrustFirstTime;
+        redisServiceImpl.setValue(taskEntrustFirstTimeKey, taskEntrustFirstTime);
+    }
+
+
+
+
+    public Long getTaskAppointFirstTime(){
+        if (taskAppointFirstTime == null){
+            Object value = redisServiceImpl.getValue(taskAppointFirstTimeKey);
+            if (value == null){
+                long intTime = System.currentTimeMillis();
+                redisServiceImpl.setValue(taskAppointFirstTimeKey,intTime );
+                taskAppointFirstTime = intTime;
+            }else{
+                taskAppointFirstTime =Long.valueOf(String.valueOf(value));
+            }
+        }
+        return taskAppointFirstTime;
+    }
+
+
+    public void setTaskAppointFirstTime(Long taskAppointFirstTime) {
+        this.taskAppointFirstTime = taskAppointFirstTime;
+        redisServiceImpl.setValue(taskAppointFirstTimeKey, taskAppointFirstTime);
     }
 
 
