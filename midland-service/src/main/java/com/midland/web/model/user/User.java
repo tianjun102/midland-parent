@@ -103,6 +103,8 @@ public class User {
     private String flag;
     private String cityId;
     private String cityName;
+
+    private String actualName;
 	
 	public String getCityId() {
 		return cityId;
@@ -353,7 +355,15 @@ public class User {
 	public void setFlag(String flag) {
 		this.flag = flag;
 	}
-	
+
+	public String getActualName() {
+		return actualName;
+	}
+
+	public void setActualName(String actualName) {
+		this.actualName = actualName;
+	}
+
 	@Override
 	public String toString() {
 		final StringBuffer sb = new StringBuffer("User{");

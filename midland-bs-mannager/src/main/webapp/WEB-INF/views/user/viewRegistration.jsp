@@ -7,7 +7,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${ctx }/assets/css/common.css">
-
+<style type="text/css">
+	.content ul.userinfo li>span {
+		width: 90px!important;
+	}
+</style>
 </head>
 <body>
 <section class = "content" style = "border:none;">
@@ -16,7 +20,9 @@
 		<input type="hidden" name="id" id="id" value="${user.id}">
 		<input type="hidden" name="ph" id="ph" value="${user.phone}">
 		<li><span>用户名：</span><input type="text" name="userName" id="userName" value="${user.username}" disabled="true"/></li>
-		<li><span>身份证号码：</span><input type="text" name="identification" id="identification" value="${user.identification}" maxlength="50"/><span class="_star">*</span></li>
+		<li><span>身份证号：</span><input type="text" name="identification" id="identification" value="${user.identification}" disabled="true" maxlength="50"/><span style="text-align: left!important;" class="_star">*</span></li>
+		<li><span>邮箱：</span><input type="text" name="email" id="email" value="${user.email}" disabled="true"/></li>
+		<li><span>真实姓名：</span><input type="text" name="actualName" id="actualName" value="${user.actualName}" disabled="true"/></li>
 		<li><span>身份证图片：</span><img style="width: 90px;height: 90px;" src="${user.idcartImg}"  maxlength="50"/></li>
 		<li><img style="width: 90px;height: 90px;" src="${user.idcartImg1}"  maxlength="50"/></li>
 		<c:if test="${user.auditStatus == 0}" >
