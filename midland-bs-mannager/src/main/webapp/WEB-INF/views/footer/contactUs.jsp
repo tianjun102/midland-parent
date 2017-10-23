@@ -38,7 +38,7 @@
         <p class="detail-title">
             <span>联系我们</span>
         </p>
-        <form id="formId" action="${ctx}/rest/banner/addBanner" method="post" enctype="multipart/form-data"
+        <form id="formId" action="${ctx}/rest//contactUs/index" method="post" enctype="multipart/form-data"
               method="post">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <ul class="adminfo row">

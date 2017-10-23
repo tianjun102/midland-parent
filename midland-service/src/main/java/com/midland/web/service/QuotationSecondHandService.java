@@ -31,6 +31,8 @@ public interface QuotationSecondHandService {
 	 **/
 	List<QuotationSecondHand> findQuotationSecondHandList(QuotationSecondHand quotationSecondHand) throws Exception;
 
-	void batchUpdate(List<QuotationSecondHand> quotationSecondHandList) throws Exception;
+    List<QuotationSecondHand> findQuotationSecondHandListTemp(QuotationSecondHand quotationSecondHand, List<String> list) throws Exception;
+
+    void batchUpdate(List<QuotationSecondHand> quotationSecondHandList) throws Exception;
     QuotationSecondHand findQuotationSecondHand(QuotationSecondHand quotationSecondHand) throws Exception;
 }

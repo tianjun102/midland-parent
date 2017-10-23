@@ -45,13 +45,159 @@
 
     <select id="findQuotationSecondHandList" parameterType="com.midland.web.model.QuotationSecondHand"
             resultMap="BaseResultMap">
+        SELECT
+        `a`.`id` AS `id`,
+        `a`.`city_id` AS `city_id`,
+        `a`.`area_id` AS `area_id`,
+        `a`.`type` AS `type`,
+        `a`.`slice_id` AS `slice_id`,
+        `a`.`update_time` AS `update_time`,
+        `a`.`is_delete` AS `is_delete`,
+        `a`.`city_name` AS `city_name`,
+        `a`.`area_name` AS `area_name`,
+        `a`.`slice_name` AS `slice_name`,
+        date_format(
+        str_to_date(`a`.`data_time`, '%Y-%m'),
+        '%Y-%m'
+        ) AS `data_time`,
+        `a`.`deal_num` AS `deal_num`,
+        `a`.`deal_acreage` AS `deal_acreage`,
+        (
+        SELECT
+        sum(
+        `quotation_second_hand`.`deal_num`
+        ) AS `deal_num`
+        FROM
+        `quotation_second_hand`
+        WHERE
+        (
+        (
+        `a`.`city_id` = `quotation_second_hand`.`city_id`
+        )
+        AND (
+        `a`.`area_id` = `quotation_second_hand`.`area_id`
+        )
+        AND (
+        `a`.`type` = `quotation_second_hand`.`type`
+        )
+        AND (
+        date_format(
+        str_to_date(`a`.`data_time`, '%Y-%m'),
+        '%Y%m'
+        ) = date_format(
+        (
+        str_to_date(
+        `quotation_second_hand`.`data_time`,
+        '%Y-%m-%d'
+        ) + INTERVAL 1 MONTH
+        ),
+        '%Y%m'
+        )
+        )
+        )
+        ) AS `pre_num`,
+        (
+        SELECT
+        sum(
+        `quotation_second_hand`.`deal_acreage`
+        ) AS `deal_acreage`
+        FROM
+        `quotation_second_hand`
+        WHERE
+        (
+        (
+        `a`.`city_id` = `quotation_second_hand`.`city_id`
+        )
+        AND (
+        `a`.`area_id` = `quotation_second_hand`.`area_id`
+        )
+        AND (
+        `a`.`type` = `quotation_second_hand`.`type`
+        )
+        AND (
+        date_format(
+        str_to_date(`a`.`data_time`, '%Y-%m'),
+        '%Y%m'
+        ) = date_format(
+        (
+        str_to_date(
+        `quotation_second_hand`.`data_time`,
+        '%Y-%m-%d'
+        ) + INTERVAL 1 MONTH
+        ),
+        '%Y%m'
+        )
+        )
+        )
+        ) AS `pre_acreage`
+        FROM
+        `quotation_second_hand` `a` where 1=1
+        <include refid="select_option" />
+        GROUP BY
+        `a`.`data_time`,
+        `a`.`city_id`,
+        `a`.`area_id`,
+        `a`.`type`
+    </select>
+
+
+    <select id="findQuotationSecondHandListTemp" parameterType="com.midland.web.model.QuotationSecondHand" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from quotation_second_hand
         where
         is_delete=0
-        <include refid="select_option"/>
+        <if test="startTime != null">
+            and data_time &gt; #{startTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="endTime != null">
+            and data_time &lt; #{endTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="type != null">
+            and type= #{type,jdbcType=INTEGER}
+        </if>
+        <if test="cityId != null">
+            and city_id= #{cityId,jdbcType=VARCHAR}
+        </if>
+        <if test="areaId != null">
+            and area_id= #{areaId,jdbcType=VARCHAR}
+        </if>
+        <if test="sliceId != null">
+            and slice_id= #{sliceId,jdbcType=VARCHAR}
+        </if>
+        <if test="dealNum != null">
+            and deal_num= #{dealNum,jdbcType=INTEGER}
+        </if>
+        <if test="dealAcreage != null">
+            and deal_acreage= #{dealAcreage,jdbcType=VARCHAR}
+        </if>
+        <if test="ringRatio != null">
+            and ring_ratio= #{ringRatio,jdbcType=VARCHAR}
+        </if>
+        <if test="updateTime != null">
+            and update_time= #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+
+        <if test="cityName != null">
+            and city_name= #{cityName,jdbcType=VARCHAR}
+        </if>
+        <if test="areaName != null">
+            and area_name like  '%${areaName}%'
+        </if>
+        <if test="sliceName != null">
+            and slice_name= #{sliceName,jdbcType=VARCHAR}
+        </if>
+        <if test="list.size>0">
+            AND date_format(str_to_date(data_time, '%Y-%m'),'%Y-%m') in
+            <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+
     </select>
+
+
+
     <select id="selectQuotationSecondHand" parameterType="com.midland.web.model.QuotationSecondHand" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
