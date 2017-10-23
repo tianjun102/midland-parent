@@ -56,7 +56,7 @@
             <th style="width:auto">预约编号</th>
             <th style="width:auto">平台</th>
             <th style="width:auto">预约人</th>
-            <th style="width:auto">电话</th>
+            <th style="width:auto">手机号码</th>
             <th style="width:auto">性别</th>
             <th style="width:auto">类型</th>
             <th style="width:auto">分类</th>

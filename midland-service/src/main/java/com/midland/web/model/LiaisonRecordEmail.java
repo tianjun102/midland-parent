@@ -23,7 +23,7 @@ public class LiaisonRecordEmail{
 	 **/
 	private String email;
 	/**
-	 * 电话
+	 * 手机号码
 	 **/
 	private String phone;
 	/**

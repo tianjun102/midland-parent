@@ -42,7 +42,7 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
-				<span>预约管理>>看房记录列表</span>
+				<span>预约管理>>预约记录列表</span>
 				<%--<a class = "setup"  target="contentF" onclick="addAppointment()">新增</a>--%>
 			</p>
 		<form action="${ctx }/rest/appoint/page" method="POST" id="searchForm"

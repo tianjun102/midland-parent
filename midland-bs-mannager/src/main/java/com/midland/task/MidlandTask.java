@@ -130,7 +130,7 @@ public class MidlandTask {
 					Calendar calendar = Calendar.getInstance();
 					calendar.setTime(date);
 
-					calendar.add(calendar.HOUR, -24);
+					calendar.add(calendar.SECOND, Double.valueOf(-taskConfig.getEntrustWarn() * 3600).intValue());
 					Date time_24 = calendar.getTime();
 					if (time_24.getTime() > assignTime.getTime()) {
 

@@ -71,7 +71,7 @@
             skin: 'layer-style',
             area: ['350px','200px'],
             shadeClose: false, //点击遮罩关闭
-            title:['删除Banner'],
+            title:['删除二维码'],
             resize: false,
             scrollbar:false,
             content:

@@ -12,10 +12,12 @@
 		<result column="reply_msg" property="replyMsg" jdbcType="LONGVARCHAR" />
 		<result column="type" property="type" jdbcType="INTEGER" />
 		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="reply_time" property="replyTime" jdbcType="TIMESTAMP" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,message,DATE_FORMAT(add_time,'%Y-%m-%d %H:%i:%s')add_time,user_id,user_name,phone,reply_msg,type,is_delete
+		id,message,add_time,user_id,user_name,phone,reply_msg,type,is_delete,email,reply_time
 	</sql>
 
 	<select id="selectLeaveMsgById" resultMap="BaseResultMap">
@@ -71,6 +73,12 @@
 			<if test="isDelete != null">
 				is_delete,
 			</if>
+			<if test="email != null">
+				email,
+			</if>
+			<if test="replyTime != null">
+				reply_time,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -97,6 +105,12 @@
 			</if>
 			<if test="isDelete != null">
 				#{isDelete,jdbcType=INTEGER},
+			</if>
+			<if test="email != null">
+				#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="replyTime != null">
+				#{replyTime,jdbcType=TIMESTAMP},
 			</if>
 		</trim>
 	</insert>
@@ -126,6 +140,12 @@
 		<if test="isDelete != null">
 			is_delete= #{isDelete,jdbcType=INTEGER},
 		</if>
+		<if test="email != null">
+			email= #{email,jdbcType=VARCHAR},
+		</if>
+		<if test="replyTime != null">
+			reply_time= #{replyTime,jdbcType=TIMESTAMP},
+		</if>
 	</sql>
 
 	<sql id="select_option">
@@ -133,7 +153,7 @@
 			 and id= #{id,jdbcType=INTEGER}
 		</if>
 		<if test="message != null">
-			 and message like '%${message}'
+			and message like '%${message}'
 		</if>
 		<if test="addTime != null">
 			 and add_time= #{addTime,jdbcType=TIMESTAMP}
@@ -148,7 +168,7 @@
 			 and user_id= #{userId,jdbcType=INTEGER}
 		</if>
 		<if test="userName != null">
-			 and user_name= #{userName,jdbcType=VARCHAR}
+			and user_name like '%${userName}'
 		</if>
 		<if test="phone != null">
 			 and phone= #{phone,jdbcType=VARCHAR}
@@ -162,8 +182,13 @@
 		<if test="isDelete != null">
 			 and is_delete= #{isDelete,jdbcType=INTEGER}
 		</if>
+		<if test="email != null">
+			 and email= #{email,jdbcType=VARCHAR}
+		</if>
+		<if test="replyTime != null">
+			 and reply_time= #{replyTime,jdbcType=TIMESTAMP}
+		</if>
 	</sql>
-
 	<update id="batchUpdate" parameterType="java.util.List">
 		<foreach collection="leaveMsgList" item="item" index="index" open="" close="" separator=";">
 			update leave_msg
@@ -175,5 +200,4 @@
 			where id= #{item.id}
 		</foreach>
 	</update>
-
 </mapper>

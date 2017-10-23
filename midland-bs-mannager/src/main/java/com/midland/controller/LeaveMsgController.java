@@ -5,7 +5,10 @@ import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.web.model.LeaveMsg;
 import com.midland.web.service.LeaveMsgService;
+import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
+import com.midland.web.util.ParamObject;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +37,8 @@ public class LeaveMsgController extends BaseFilter {
 	 **/
 	@RequestMapping("index")
 	public String leaveMsgIndex(LeaveMsg leaveMsg, Model model) throws Exception {
+		List<ParamObject> obj = JsonMapReader.getMap("leaveMsg_type");
+		model.addAttribute("leaveMsgTypes",obj);
 		return "leaveMsg/leaveMsgIndex";
 	}
 
@@ -98,7 +103,7 @@ public class LeaveMsgController extends BaseFilter {
 	public String toUpdateLeaveMsg(Integer id,Model model) throws Exception {
 		LeaveMsg result = leaveMsgServiceImpl.selectLeaveMsgById(id);
 		model.addAttribute("item",result);
-		return "leaveMsg/updateLeaveMsg";
+		return "leaveMsg/repeat";
 	}
 
 	/**
@@ -110,6 +115,9 @@ public class LeaveMsgController extends BaseFilter {
 		Map<String,Object> map = new HashMap<>();
 		try {
 			log.debug("updateLeaveMsgById  {}",leaveMsg);
+			if (StringUtils.isEmpty(leaveMsg.getReplyMsg())){
+				leaveMsg.setReplyMsg("");
+			}
 			leaveMsgServiceImpl.updateLeaveMsgById(leaveMsg);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -129,6 +137,8 @@ public class LeaveMsgController extends BaseFilter {
 			MidlandHelper.doPage(request);
 			Page<LeaveMsg> result = (Page<LeaveMsg>)leaveMsgServiceImpl.findLeaveMsgList(leaveMsg);
 			Paginator paginator=result.getPaginator();
+			List<ParamObject> obj = JsonMapReader.getMap("leaveMsg_type");
+			model.addAttribute("leaveMsgTypes",obj);
 			model.addAttribute("paginator",paginator);
 			model.addAttribute("items",result);
 		} catch(Exception e) {

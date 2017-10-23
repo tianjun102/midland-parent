@@ -10,25 +10,37 @@
     <title>Insert title here</title>
     <script type="text/javascript">
     </script>
-
+<style type="text/css">
+    .content ul.userinfo li>span {
+        float: left;
+        display: inline-block;
+        width: 90px;
+        height: 38px;
+        line-height: 38px;
+        text-align: right;
+        font-size: 14px;
+        color: rgb( 102, 102, 102 );
+    }
+</style>
 </head>
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/leaveMsg/update" method="post" id="dataForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
+            <li><span>用户：</span>
+                <input type="text" disabled="disabled" id="userName" value="${item.userName}"/>
+            </li>
+            <li><span>手机号码：</span>
+                <input type="text" disabled="disabled" id="phone" value="${item.phone}"/>
+            </li>
+            <li><span>邮箱：</span>
+                <input type="text" disabled="disabled" id="email" value="${item.email}"/>
+            </li>
             <li><span>留言：</span>
                <input type="text"  disabled="disabled" id="message" value="${item.message}"/>
             </li>
-            <li><span>留言时间：</span>
-               <input type="text"  disabled="disabled" id="addTime" value="${item.addTime}"/>
-            </li>
-            <li><span>留言人：</span>
-               <input type="text" disabled="disabled" id="userName" value="${item.userName}"/>
-            </li>
-            <li><span>电话：</span>
-               <input type="text" disabled="disabled" id="phone" value="${item.phone}"/>
-            </li>
+
             <li><span>回复：</span>
                 <textarea style="width: 250px;height: 100px;" type="text" name="replyMsg" id="replyMsg" >${item.replyMsg}</textarea>
             </li>

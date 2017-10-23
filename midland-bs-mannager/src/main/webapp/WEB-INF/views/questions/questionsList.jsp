@@ -35,7 +35,7 @@
                            varStatus="xh">
                     <tr>
                         <td><input type="checkbox" name="pid" value="${item.id}"></td>
-                        <td>${xh.count }</td>
+                        <td>${xh.count}</td>
                         <td>${item.questionsTitle }</td>
                         <td> <c:if test="${item.source ==0 }">网站</c:if>
                             <c:if test="${item.source ==1 }">微站</c:if></td>

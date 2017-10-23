@@ -38,25 +38,39 @@ public class LeaveMsg{
 	 * 删除：0未删除，1已删除
 	 **/
 	private Integer isDelete;
+	/**
+	 * 邮箱
+	 **/
+	private String email;
+	private String replyTime;
+
 	private String startTime;
 	private String endTime;
-	
+
+	public String getReplyTime() {
+		return replyTime;
+	}
+
+	public void setReplyTime(String replyTime) {
+		this.replyTime = replyTime;
+	}
+
 	public String getStartTime() {
 		return startTime;
 	}
-	
+
 	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
-	
+
 	public String getEndTime() {
 		return endTime;
 	}
-	
+
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -129,6 +143,14 @@ public class LeaveMsg{
 		this.isDelete = isDelete;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	@Override
 	public String toString() {
 		 final StringBuffer sb=new StringBuffer("LeaveMsg{");
@@ -159,6 +181,10 @@ public class LeaveMsg{
 		if (isDelete != null) {
 			sb.append(", \"isDelete\":\"").append(isDelete).append("\"");
 		}
+		if (email != null) {
+			sb.append(", \"email\":\"").append(email).append("\"");
+		}
+		sb.append("}");
 		return sb.toString();
 	}
 }

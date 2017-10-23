@@ -11,7 +11,7 @@
 </head>
 <body>
 <!--关于平台界面-->
-	<div class="box" style = "min-width:auto;">
+	<div class="box" style = "width:auto;">
 		<section class = "content" style = "width:auto;">
 			<p class = "detail-title">
 				<span>系统管理>>关于平台</span>

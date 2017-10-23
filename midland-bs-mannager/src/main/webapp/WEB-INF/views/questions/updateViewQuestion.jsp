@@ -60,6 +60,7 @@
         <table class="table table-bordered table-add">
             <thead>
             <tr>
+                <th style="width: 8%">编号</th>
                 <th>回答内容</th>
                 <th>回答时间</th>
                 <th>经纪人姓名</th>
@@ -74,6 +75,7 @@
                                varStatus="xh">
                         <tr>
                             <input type="hidden" id="answerId" value="${item.id}" />
+                            <td>${xh.count}</td>
                             <td>${item.answerArea }</td>
                             <td>${item.answerTime }</td>
                             <td>${item.answerName }</td>

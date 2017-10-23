@@ -21,7 +21,9 @@
 
         <div>
             <span>内容：</span>
-            <textarea style="margin: 0px; width: 555px; height: 142px;" disabled="disabled">${answer.answerArea}</textarea>
+
+            <%--<textarea style="margin: 0px; width: 555px; height: 142px;" disabled="disabled">${answer.answerArea}</textarea>--%>
+            <div style="display:inline-block;width: 552px;height: 138px;border: 1px solid #ccc;overflow: hidden;overflow-y: auto;background: #ccc;">${answer.answerArea}</div>
         </div>
 
         <form id="formId" action="${ctx}/rest/questions/update" method="post" enctype="multipart/form-data"
@@ -46,59 +48,50 @@
 </div>
 
 <script type="text/javascript">
-
-
     function audit(id,status) {
-        var data = $("#formId").serialize();
+        layer.open({
+            type: 1,
+            skin: 'layer-style',
+            area: ['350px', '200px'],
+            shadeClose: false, //点击遮罩关闭
+            title: ['编辑'],
+            resize: false,
+            scrollbar: false,
+            content:
+            '<section class = "content" style = "border:none; height:100%;">' +
+            '<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">确定操作?</p>' +
+            '</section>',
+            btn: ['确定', '取消'],
+            yes: function (index) {
+                var data = $("#formId").serialize();
+                $.ajax({
+                    type: "post",
+                    url: "${ctx}/rest/questions/updateAnswer?auditStatus="+status,
+                    cache: false,
+                    async: false, // 此处必须同步
+                    dataType: "json",
+                    data:data,
+                    success: function (obj) {
+                        if (obj.state == 0) {
+                            layer.msg("成功！", {icon: 5});
+                            parent.window.location.reload();
+                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                            parent.layer.close(index);
+                        }
+                        if (obj.state == -1) {
+                            layer.msg("失败！！", {icon: 7});
+                        }
 
-        $.ajax({
-            type: "post",
-            url: "${ctx}/rest/questions/updateAnswer?auditStatus="+status,
-            cache: false,
-            async: false, // 此处必须同步
-            dataType: "json",
-            data:data,
-            success: function (obj) {
-                if (obj.state == 0) {
-                    layer.msg("成功！", {icon: 5});
-                    parent.window.location.reload();
-                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                    parent.layer.close(index);
-                }
-                if (obj.state == -1) {
-                    layer.msg("失败！！", {icon: 7});
-                }
-
+                    }
+                });
+            }
+            , success: function (layero) {
+                var btn = layero.find('.layui-layer-btn');
+                btn.css('text-align', 'center');
             }
         });
-    }
-
-    //取消
-    function closeWin() {
-        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-        layer.closeAll();
-    }
 
 
-    function rejust(userId) {
-        $.ajax({
-            type: "post",
-            url: "${ctx}/rest/user/audit?id=" + userId + '&auditStatus=3' + '&auditRemark=' + $('#auditRemark').val(),
-            cache: false,
-            async: false, // 此处必须同步
-            dataType: "json",
-            success: function (obj) {
-                if (obj.state == 0) {
-                    layer.msg("成功！", {icon: 5});
-                    parent.window.location.reload();
-                    parent.layer.closeAll();
-                }
-                if (obj.state == -1) {
-                    layer.msg("失败！！", {icon: 7});
-                }
-
-            }
-        });
     }
 
 </script>

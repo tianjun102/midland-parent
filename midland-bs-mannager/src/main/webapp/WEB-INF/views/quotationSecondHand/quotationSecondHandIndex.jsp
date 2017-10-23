@@ -16,7 +16,7 @@
 <div class="box">
     <section class="content">
         <p class="detail-title">
-            <span>详情信息管理>>二手房详情</span>
+            <span>详情信息管理>>二手房信息管理</span>
             <a class="setup" target="contentF" onclick="toAddPage()">新增</a>
         </p>
         <form action="${ctx }/rest/quotationSecondHand/list" method="POST" id="searchForm"
