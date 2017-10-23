@@ -38,6 +38,7 @@
             <th style="width: 32%">楼盘名称</th>
             <th style="width: 10%">楼盘ID</th>
             <th style="width: 15%">录盘人</th>
+            <th style="width: 15%">类型</th>
             <th style="width: 10%">操作</th>
         </tr>
         </thead>
@@ -62,6 +63,9 @@
                         <td>${item.introduction }</td>
                         <td>${item.housesId }</td>
                         <td>${item.operatorName }</td>
+                        <td><c:forEach items="${filmTypes}" var="s">
+                            <c:if test="${s.id==item.filmType}">${s.name}</c:if>
+                        </c:forEach> </td>
                         <td>
                             <c:choose>
                                 <c:when test="${item.isShow==0}">
