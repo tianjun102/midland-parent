@@ -24,6 +24,29 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
         <meta content="" name="description" />
         <meta content="" name="author" />
         <meta name="MobileOptimized" content="320">
+		<style type="text/css">
+			.dropdown {
+				position: relative;
+				width: 150px;
+				border: 1px solid #ccc;
+				cursor: pointer;
+				background: #fff;
+				border-radius: 3px;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				user-select: none;
+			}
+			.content ul.userinfo li>span {
+				float: left;
+				display: inline-block;
+				width: 90px;
+				height: 38px;
+				line-height: 38px;
+				text-align: right;
+				font-size: 14px;
+				color: rgb( 102, 102, 102 );
+			}
+		</style>
     </head>
     <body >
       	<!--活动管理界面-->
@@ -47,10 +70,13 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				<%@include file="../layout/sherchArea.jsp" %>
 				<li>
 					<span style = "float:left;">平台：</span>
-					<select name="source" id="source" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+					<select name="source" id="source" class="dropdown">
 						<option value="">全部</option>
-						<option value="1">网站</option>
-						<option value="2">微站</option>
+						<c:forEach items="${sources}" var="s1" >
+							<option value="${s1.id}">
+									${s1.name}
+							</option>
+						</c:forEach>
 					</select>
 				</li>
 					<li><span>模块：</span>

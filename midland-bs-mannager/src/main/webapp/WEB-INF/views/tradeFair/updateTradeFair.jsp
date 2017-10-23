@@ -9,6 +9,18 @@
     <title>Insert title here</title>
     <link rel="stylesheet" type="text/css" href="${ctx }/assets/scripts/uploadify/uploadify.css">
     <script type="text/javascript" src="${ctx }/assets/scripts/uploadify/jquery.uploadify.min.js"></script>
+    <style type="text/css">
+        .content ul.userinfo li>span {
+            float: left;
+            display: inline-block;
+            width: 90px;
+            height: 38px;
+            line-height: 38px;
+            text-align: right;
+            font-size: 14px;
+            color: rgb( 102, 102, 102 );
+        }
+    </style>
     <script type="text/javascript">
         $(function () {
             $('#file_upload').uploadify({
@@ -74,6 +86,9 @@
             <li>
                 <span></span>
                 <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">保存</a>
+                <a style="margin-left: 20px" class="public_btn bg3" id="cancel" onclick="closeWin();">取消</a>
+
+
             </li>
         </ul>
 
