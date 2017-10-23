@@ -350,7 +350,12 @@
             AND password = #{password,jdbcType=CHAR}
         </if>
         <if test="userType != null">
-            AND user_type = #{userType,jdbcType=INTEGER}
+            <if test="userType == -1">
+                AND user_type IN (0,1)
+            </if>
+            <if test="userType != -1">
+                AND user_type = #{userType,jdbcType=INTEGER}
+            </if>
         </if>
         <if test="state != null">
             AND state = #{state,jdbcType=INTEGER}

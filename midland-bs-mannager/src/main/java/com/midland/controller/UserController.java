@@ -245,6 +245,9 @@ public class UserController extends BaseFilter {
     	if (StringUtils.isEmpty(user.getCityId())){
 			user.setCityId(currUser.getCityId());
 		}
+		if(user.getUserType()==null){
+    		user.setUserType(-1);
+		}
 	    getUserList(user,model, request);
 		List<ParamObject> map = JsonMapReader.getMap("audit_status");
 		model.addAttribute("auditSatusList",map);
