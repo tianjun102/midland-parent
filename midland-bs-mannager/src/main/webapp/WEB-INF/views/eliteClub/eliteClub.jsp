@@ -43,7 +43,6 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			<ul class = "adminfo row">
 
 				<li id="textArea" style="display: block;">
-					<span>页面内容：</span>
 					<textarea style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;"
 							  <c:if test="${flag==0}">name="purpose"</c:if>
 							  <c:if test="${flag==1}">name="eliteDesc"</c:if>

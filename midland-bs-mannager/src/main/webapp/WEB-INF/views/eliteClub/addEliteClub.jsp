@@ -68,7 +68,7 @@
                 <li><span>活动主题：</span><input type="text" id="adTitle" name="adTitle"></li>
                 <li><span>活动地点：</span><input type="text" id="adAddress" name="adAddress"></li>
 
-                <li id="textArea" style=""><span>页面内容：</span><textarea style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;float: right" name="detail" id="myEditor" rows="" cols=""></textarea></li>
+                <li id="textArea" style=""><textarea style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;float: right" name="detail" id="myEditor" rows="" cols=""></textarea></li>
 
             </ul>
 

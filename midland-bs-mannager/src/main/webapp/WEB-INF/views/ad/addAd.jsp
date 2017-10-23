@@ -79,7 +79,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				<li id="picLike"><span>图片链接：</span>
 				<input id="adId" name="adLinkurl" type="text" value="" > 
 				</li>
-				<li id="textArea" style="display: none;"><span>页面内容：</span><textarea style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;" name="adInfo" id="myEditor" rows="" cols=""></textarea></li>
+				<li id="textArea" style="display: none;"><textarea style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;" name="adInfo" id="myEditor" rows="" cols=""></textarea></li>
 				<li id="searchbatton" style="display: none;"><span>产品信息：</span>&nbsp;&nbsp;<input onclick="searchProduct(1)" style="width: 100px;text-indent: 0px; float:left;" class = "public_btn bg1" type="button" name="inquery" id="inquery" value = "查询商品"/></li>
 				<li id="catInfo" style="display: none;"><span>分类：</span>
 				<div style="display:inline-block" id="catName">
