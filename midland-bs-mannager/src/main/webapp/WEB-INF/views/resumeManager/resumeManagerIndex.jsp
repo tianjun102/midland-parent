@@ -16,7 +16,7 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
-				<span>简历管理</span>
+				<span>招聘管理>>简历管理</span>
 			</p>
 		<form action="${ctx }/rest/resumeManager/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">

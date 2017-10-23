@@ -16,7 +16,7 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
-				<span>页面配置管理</span>
+				<span>系统管理>>页面配置管理</span>
 				<a class = "setup"  target="contentF" href="${ctx}/rest/pageConf/to_add">新增</a>
 			</p>
 		<form action="${ctx }/rest/pageConf/list" method="POST" id="searchForm"

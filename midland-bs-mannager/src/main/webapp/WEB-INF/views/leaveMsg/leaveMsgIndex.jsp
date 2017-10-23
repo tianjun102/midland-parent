@@ -35,7 +35,7 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
-				<span>留言管理</span>
+				<span>行情信息管理>>留言管理</span>
 				<%--<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>--%>
 			</p>
 		<form action="${ctx }/rest/leaveMsg/list" method="POST" id="searchForm"

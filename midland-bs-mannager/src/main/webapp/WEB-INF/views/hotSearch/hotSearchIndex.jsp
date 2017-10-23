@@ -16,7 +16,7 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
-				<span>搜索管理</span>
+				<span>搜索管理>>搜索列表</span>
 				<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>
 			</p>
 		<form action="${ctx }/rest/hotSearch/list" method="POST" id="searchForm"

@@ -31,7 +31,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 	<form id="searchForm" action="${ctx}/rest/setting/bannerList" method="post" onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 		<section class = "content">
 			<p class = "detail-title">
-				<span>Banner管理</span>
+				<span>系统管理>>Banner管理</span>
 				<a class = "setup" href="${ctx}/rest/setting/enterBanner" target="contentF">添加Banner</a>
 			</p>
 			<ul class = "userinfo row">

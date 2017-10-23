@@ -21,7 +21,7 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
-				<span>市场调究管理</span>
+				<span>市场调究管理>>市场调究列表</span>
 				<a class = "setup"  target="contentF" href="${ctx}/rest/research/to_add">新增</a>
 				<a style="margin-right: 10px;" class = "setup"  target="contentF" href="${ctx}/rest/category/index?type=0">分类管理</a>
 			</p>

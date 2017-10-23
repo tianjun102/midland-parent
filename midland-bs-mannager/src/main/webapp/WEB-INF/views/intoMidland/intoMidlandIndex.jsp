@@ -22,13 +22,13 @@
 		<section class = "content">
 			<p class = "detail-title">
 				<span>
-					<c:if test="${flag==1}">公司介绍</c:if>
-					<c:if test="${flag==2}">公司历程</c:if>
-					<c:if test="${flag==3}">公司荣誉</c:if>
-					<c:if test="${flag==4}">公司培训</c:if>
-					<c:if test="${flag==5}">公司文化</c:if>
-					<c:if test="${flag==6}">晋升福利</c:if>
-					<c:if test="${flag==7}">联系我们</c:if></span>
+					<c:if test="${flag==1}">走进美联>>公司介绍</c:if>
+					<c:if test="${flag==2}">走进美联>>公司历程</c:if>
+					<c:if test="${flag==3}">走进美联>>公司荣誉</c:if>
+					<c:if test="${flag==4}">走进美联>>公司培训</c:if>
+					<c:if test="${flag==5}">走进美联>>公司文化</c:if>
+					<c:if test="${flag==6}">走进美联>>晋升福利</c:if>
+					<c:if test="${flag==7}">走进美联>>联系我们</c:if></span>
 			</p>
 			<form id="dataForm" action="${ctx}/rest/banner/addBanner" method="post" enctype="multipart/form-data" method="post">
 				<input type="hidden" name="id" id="id" value="${items.id}" >

@@ -36,7 +36,7 @@
 <div class="box">
     <section class="content">
         <p class="detail-title">
-            <span>联系我们</span>
+            <span>外销网管理>>联系我们</span>
         </p>
         <form id="formId" action="${ctx}/rest//contactUs/index" method="post" enctype="multipart/form-data"
               method="post">

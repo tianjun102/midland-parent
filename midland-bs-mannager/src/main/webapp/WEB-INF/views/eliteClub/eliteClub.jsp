@@ -32,10 +32,10 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		<section class = "content">
 			<p class = "detail-title">
 				<span>
-					<c:if test="${flag==0}">精英会宗旨</c:if>
-					<c:if test="${flag==1}">精英会简介</c:if>
-					<c:if test="${flag==2}">入会资格</c:if>
-					<c:if test="${flag==3}">发展前瞻</c:if>
+					<c:if test="${flag==0}">精英会>>精英会宗旨</c:if>
+					<c:if test="${flag==1}">精英会>>精英会简介</c:if>
+					<c:if test="${flag==2}">精英会>>入会资格</c:if>
+					<c:if test="${flag==3}">精英会>>发展前瞻</c:if>
 				</span>
 			</p>
 		<form id="formId" action="${ctx}/rest/banner/addBanner" method="post" enctype="multipart/form-data" method="post">

@@ -17,7 +17,7 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
-				<span>反馈管理列表</span>
+				<span>系统设置>>反馈管理列表</span>
 				<%--<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>--%>
 			</p>
 		<form action="${ctx }/rest/feedback/list" method="POST" id="searchForm"

@@ -17,6 +17,7 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
+				<span>外销网管理>>联络列表</span>
 				<%--<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>--%>
 			</p>
 		<form action="${ctx }/rest/liaisonRecord/list" method="POST" id="searchForm"

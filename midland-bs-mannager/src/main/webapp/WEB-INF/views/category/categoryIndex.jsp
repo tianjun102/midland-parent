@@ -15,6 +15,11 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
+			<span><c:if test="${type==0}">市场调究管理>>分类管理</c:if>
+				  <c:if test="${type==1}">资讯管理>>分类管理</c:if>
+				  <c:if test="${type==2}">精英会>>分类管理</c:if>
+				  <c:if test="${type==3}">系统管理>>热门关注分类管理</c:if>
+				  <c:if test="${type==4}">系统管理>>网站地图分类管理</c:if></span>
 				<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>
 			</p>
 		<form action="${ctx }/rest//category/list" method="POST" id="searchForm"

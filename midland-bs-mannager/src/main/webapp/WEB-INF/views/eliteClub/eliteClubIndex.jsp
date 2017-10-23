@@ -16,6 +16,7 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
+				<span>精英会>>精英会活动</span>
 				<a class = "setup"  target="contentF" href="${ctx}/rest/eliteClub/to_add">新增</a>
 			</p>
 		<form action="${ctx }/rest/eliteClub/list" method="POST" id="searchForm"

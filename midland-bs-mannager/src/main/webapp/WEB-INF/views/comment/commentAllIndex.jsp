@@ -17,7 +17,7 @@
 	<div class="box">
 		<section class = "content">
 			<p class="detail-title">
-				<span>评论列表</span>
+				<span>系统管理>>评论列表</span>
 			</p>
 		<form action="${ctx }/rest/comment/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">

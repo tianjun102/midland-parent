@@ -29,7 +29,7 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
-				<span>租房委托列表</span>
+				<span>委托管理>>租房委托列表</span>
 				<a class = "setup"  target="contentF" onclick="addEntrust()">新增</a>
 			</p>
 		<form action="${ctx }/rest/entrust/rentIn/page" method="POST" id="searchForm"
