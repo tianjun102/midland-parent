@@ -26,6 +26,7 @@
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<input type="hidden" name="type" value="${type}">
 			<ul class = "userinfo row">
+				<c:if test="${type!=2}">
 				<li>
 					<span style = "float:left;">平台：</span>
 					<select name="source" id="source" style="height: 38px;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
@@ -34,6 +35,7 @@
 						<option value="1">微站</option>
 					</select>
 				</li>
+				</c:if>
 				<%@include file="../layout/sherchArea.jsp" %>
 				<li>
 					<span style = "float:left;">分类名称：</span>
