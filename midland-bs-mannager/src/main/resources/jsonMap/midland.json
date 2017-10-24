@@ -99,6 +99,22 @@
       "name": "出租"
     }
   ],
+
+  "entrust_rent_out_sellRent": [
+    {
+      "id": "0",
+      "name": "合租"
+    },
+    {
+      "id": "1",
+      "name": "整租"
+    },
+    {
+      "id": "2",
+      "name": "床位"
+    }
+  ],
+
   "entrust_house_type": [
     {
       "id": "0",

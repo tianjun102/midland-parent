@@ -119,9 +119,8 @@ public class EntrustRentOutController extends BaseFilter{
 	}
 	
 	private void getSelectParam(Model model) {
-		List<ParamObject> paramObjects = JsonMapReader.getMap("entrust_type");
-		;
-		model.addAttribute("sellRents",paramObjects);
+		List<ParamObject> rentOutSellRent = JsonMapReader.getMap("entrust_rent_out_sellRent");
+		model.addAttribute("sellRents",rentOutSellRent);
 		List<ParamObject> paramObjects1 = JsonMapReader.getMap("appointment_status");
 		model.addAttribute("statusList",paramObjects1);
 		List<ParamObject> paramObjects2 = JsonMapReader.getMap("source");
@@ -181,6 +180,7 @@ public class EntrustRentOutController extends BaseFilter{
 	public Object updateByPrimaryKeySelective(Entrust entrust,String dealRemark, HttpServletRequest request) {
 		Map map = new HashMap();
 		try {
+			entrust.setOtherFacilities(MidlandHelper.dropEmpty(entrust.getOtherFacilities()));
 			if (entrust.getStatus()!=null && 1 !=entrust.getStatus()){
 				//如果委托状态不是已分配，隐藏重新分配按钮
 				entrust.setResetFlag(0);
