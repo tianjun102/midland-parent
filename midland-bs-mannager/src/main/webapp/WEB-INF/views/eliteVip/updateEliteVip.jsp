@@ -150,7 +150,6 @@
     //保存数据
     function updateData() {
         var data = $("#formId").serialize();
-        debugger;
         $.ajax({
             type: "post",
             url: "${ctx}/rest/eliteVip/update",

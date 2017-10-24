@@ -16,11 +16,7 @@
                 'method': 'get',
                 'multi': false,// 是否支持多个文件上传
                 'onUploadStart': function (file) {
-                    debugger;
-                    if(!checkSelect('cityId','')){
-                        alert("请选择城市");
-                        return false;
-                    }
+
                     $("#file_upload").uploadify("settings", "formData", {
                         'cityId': $("input[name='cityId']").val(),
                         'cityName': unicode($("input[name='cityName']").val().trim()),
@@ -28,13 +24,13 @@
                     });
 
                 },
-                'onUploadSuccess': function (file, data, response) {
-                    //alert(1);
-                },
-                'onQueueComplete': function (queueData) {
-                    if (queueData.uploadsSuccessful < 1) {
-                       // alert('文件上传失败');
+                'onUploadSuccess': function (fileObj, data, response) {
+                    if (data=="成功"){
+                        $("#file_upload-queue").html(data);
+                    }else{
+                        $("#file_upload-queue").html('<span class="_star">'+data+'</span>');
                     }
+
                 }
 
                 // Your options here

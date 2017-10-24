@@ -52,7 +52,6 @@
     UE.getEditor('myEditor');
     function saveData() {
         var data = $("#dataForm").serialize();
-        debugger;
         $.ajax({
             type: "post",
             url: "${ctx}/rest/errorPage/add",

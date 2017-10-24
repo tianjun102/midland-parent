@@ -30,7 +30,7 @@
 		<section class = "content">
 			<p class = "detail-title">
 				<span>委托管理>>租房委托列表</span>
-				<a class = "setup"  target="contentF" onclick="addEntrust()">新增</a>
+				<%--<a class = "setup"  target="contentF" onclick="addEntrust()">新增</a>--%>
 			</p>
 		<form action="${ctx }/rest/entrust/rentIn/page" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
@@ -39,7 +39,7 @@
 				<li><span>委托人：</span><input type="text" name="nickName" id="nickName" placeholder="请输入委托人" /></li>
 				<li><span>手机号码：</span><input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>
 				<li>
-					<span>分类：</span>
+					<span>出租方式：</span>
 					<select name="sellRent" id="sellRent" class="dropdown">
 						<option value="">全部</option>
 						<c:forEach items="${sellRents}" var="s" >

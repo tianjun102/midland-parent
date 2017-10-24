@@ -63,7 +63,6 @@
     function updateData() {
         if(notEmpty('keywords','keywords','搜索词不能为空！')&&checkSelect('menuId','请选择模块！')){
         var data = $("#dataForm").serialize();
-        debugger;
         $.ajax({
             type: "post",
             url: "${ctx}/rest/hotSearch/update",

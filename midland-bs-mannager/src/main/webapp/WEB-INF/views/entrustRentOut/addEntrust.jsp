@@ -85,7 +85,7 @@
                                                           value="${entrust.phone}"
                                                           maxlength="50" onblur="checkPhone('','phone','')"/><span class="_star">*</span></li>
             <%@include file="area.jsp" %>
-            <li class="col-md-6"><span>分类：</span>
+            <li class="col-md-6"><span>出租方式：</span>
                 <select name="sellRent" id="sellRent" class="dropdown">
                     <c:forEach items="${sellRents}" var="s">
                         <option value="${s.id}" <c:if test="${s.id==entrust.sellRent}">selected</c:if>>
@@ -96,7 +96,7 @@
                 <span class="_star">*</span>
             </li>
 
-            <li class="col-md-6"><span>委托类型：</span>
+            <li class="col-md-6"><span>房屋类型：</span>
                 <select name="houseType" id="houseType" class="dropdown">
 
                     <c:forEach items="${houses}" var="s">

@@ -3,6 +3,7 @@ package com.midland.controller.upload;
 import com.midland.core.util.AppSetting;
 import com.midland.web.Contants.Contant;
 import com.midland.web.MidlandException.IllegalCityException;
+import com.midland.web.MidlandException.IllegalDocumentException;
 import com.midland.web.model.Area;
 import com.midland.web.model.Quotation;
 import com.midland.web.service.QuotationSecondHandService;
@@ -25,6 +26,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -77,7 +79,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 	}
 	
 	@RequestMapping(value = "excel_read", produces = "application/json")
-	public Object imports(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void imports(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Workbook wb = null;
 		InputStream is = null;
 		Map map = new HashMap();
@@ -86,15 +88,19 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 			is = fileItem.getInputStream();
 			wb = getWorkbook(fileItem, is);
 			quotationExcelReader(request, wb);
-			map.put("state",-1);
+			response.getWriter().print("成功");
 		} catch (Exception e) {
 			if (e instanceof IllegalCityException){
-				map.put("state",1);//城市为空
-			}else{
-				map.put("state",-1);
+				response.getWriter().print(e.getMessage());
+			}else if (e instanceof DuplicateKeyException){
+				response.getWriter().print("请勿重复导入");
+			}else if (e instanceof IllegalDocumentException){
+				response.getWriter().print(e.getMessage());
+			}
+			else{
+				response.getWriter().print("失败");
 			}
 			logger.error("", e);
-
 		} finally {
 			if (wb != null) {
 				//wb.close();
@@ -102,7 +108,6 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 			if (is != null) {
 				is.close();
 			}
-			return map;
 		}
 	}
 	
@@ -124,7 +129,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 		} else if (fileType.equals("xlsx")) {
 			wb = new XSSFWorkbook(is);
 		} else {
-			throw new Exception("读取的不是excel文件");
+			throw new IllegalDocumentException("读取的不是excel文件");
 		}
 		return wb;
 	}
@@ -162,7 +167,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 		String houseType = null;
 		
 		if (StringUtils.isEmpty(cityId) || StringUtils.isEmpty(cityName)) {
-			throw new Exception("请选择城市");
+			throw new IllegalCityException("请选择城市");
 		}
 		int rowSize = sheet.getLastRowNum() + 1;
 		List<String> areaList = null;
@@ -237,7 +242,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 						if (dateMonth != null) {
 							quotation.setDataTime(dateMonth + month + day);
 						} else {
-							throw new Exception("日期错误");
+							throw new IllegalDocumentException("日期错误");
 						}
 						quotation.setUpdateTime(MidlandHelper.getCurrentTime());
 						quotation.setType(houseTypeId);
@@ -303,10 +308,10 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 					}
 					dateMonth = String.valueOf(Double.valueOf(cell.toString()).intValue());
 					if (dateMonth==null){
-						throw new Exception("日期错误");
+						throw new IllegalDocumentException("日期错误");
 					}
 				}else {
-					throw new Exception("日期错误");
+					throw new IllegalDocumentException("日期错误");
 				}
 			}
 			int row_27 = j % 27;
@@ -360,6 +365,9 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 						area.setName("全市");
 					} else {
 						area = getArea(cityId, distName);
+						if (area == null){
+							throw new IllegalDocumentException("数据与选择的城市不匹配");
+						}
 					}
 					if (j > 0 && j % 4 == 0) {
 						int length = dealNum.size() < 12 ? dealNum.size() : 12;
@@ -391,7 +399,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 								} else if (houseType.equals("办公楼")) {
 									houseTypeId = 3;
 								} else {
-									throw new Exception("房源类型错误：" + houseType);
+									throw new IllegalDocumentException("房源类型错误：" + houseType);
 								}
 								int i = x + 1;
 								String month = "-" + i;
@@ -400,7 +408,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 								if (dateMonth != null) {
 									quotation.setDataTime(dateMonth + month + day);
 								} else {
-									throw new Exception("日期错误");
+									throw new IllegalDocumentException("日期错误");
 								}
 								quotation.setHouseAcreage(houseAcreage);
 								quotation.setUpdateTime(MidlandHelper.getCurrentTime());
@@ -464,6 +472,9 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 						area.setName("全市");
 					} else {
 						area = getArea(cityId, distName);
+						if (area == null){
+							throw new IllegalDocumentException("数据与选择的城市不匹配");
+						}
 					}
 					if (j > 13 && (j-12) % 5 == 0) {
 						int length = dealNum.size() < 12 ? dealNum.size() : 12;
@@ -484,7 +495,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 								} else if (houseType.equals("办公楼")) {
 									houseTypeId = 3;
 								} else {
-									throw new Exception("房源类型错误：" + houseType);
+									throw new IllegalDocumentException("房源类型错误：" + houseType);
 								}
 								int i = x + 1;
 								String month = "-" + i;
@@ -493,7 +504,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 								if (dateMonth != null) {
 									quotation.setDataTime(dateMonth + month + day);
 								} else {
-									throw new Exception("日期错误");
+									throw new IllegalDocumentException("日期错误");
 								}
 								quotation.setUpdateTime(MidlandHelper.getCurrentTime());
 								quotation.setType(houseTypeId);
@@ -531,7 +542,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 		} else if (houseType.equals("办公")) {
 			houseTypeId = 3;
 		} else {
-			throw new Exception("房源类型错误：" + houseType);
+			throw new IllegalDocumentException("房源类型错误：" + houseType);
 		}
 		return houseTypeId;
 	}
@@ -548,7 +559,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 			houseTypeId = 3;
 			;
 		} else {
-			throw new Exception("房源类型错误：" + houseType);
+			throw new IllegalDocumentException("房源类型错误：" + houseType);
 		}
 		return houseTypeId;
 	}

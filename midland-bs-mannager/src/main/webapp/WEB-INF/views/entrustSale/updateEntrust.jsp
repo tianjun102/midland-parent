@@ -125,27 +125,6 @@
                 </select>
 
             </li>
-            <li class="col-md-6"><span>配套：</span>
-                <div class="peitao">
-                    <span><input onchange="lick(this,'household')"  type="checkbox"
-                                 <c:if test="${entrust.household == 1}">checked</c:if> ><em>带家电</em>
-                        <input type="hidden" name="household" id="household" value="${entrust.household}">
-                    </span>
-                    <span><input onchange="lick(this,'broadband')"  type="checkbox"
-                                 <c:if test="${entrust.broadband == 1}">checked</c:if> ><em>宽带</em>
-                    <input type="hidden" name="broadband" id="broadband" value="${entrust.broadband}">
-                    </span>
-                    <span><input onchange="lick(this,'fridge')"  type="checkbox"
-                                 <c:if test="${entrust.fridge == 1}">checked</c:if> ><em>冰箱</em>
-
-                    <input type="hidden" name="fridge" id="fridge" value="${entrust.fridge}">
-                    </span>
-                    <span><input onchange="lick(this,'washingMachine')"  type="checkbox"
-                                 <c:if test="${entrust.washingMachine == 1}">checked</c:if> ><em>洗衣机</em>
-                    <input type="hidden" name="washingMachine" id="washingMachine" value="${entrust.washingMachine}">
-                    </span>
-                </div>
-            </li>
             <li class="col-md-6"><span>状态：</span>
                 <select name="status" id="status" class="dropdown">
 
@@ -165,10 +144,10 @@
             <li class="col-md-11"><span>处理记录：</span>
                 <textarea name="record" id="record" disabled="disabled"
                           style="width:calc(100% - 120px);height:150px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;">
-<c:forEach items="${entrustLogs}" var="s">    状态    ： <c:forEach items="${statusList}" var="m"><c:if test="${m.id==s.state}">${m.name}</c:if> </c:forEach>
-    时间    ：${s.logTime}
-    操作人：${s.operatorName}
-    备注    ：${s.remark}
+<c:forEach items="${entrustLogs}" var="s">状态    ： <c:forEach items="${statusList}" var="m"><c:if test="${m.id==s.state}">${m.name}</c:if> </c:forEach>
+时间    ：${s.logTime}
+操作人：${s.operatorName}
+备注    ：${s.remark}
 
 
 </c:forEach>

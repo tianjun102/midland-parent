@@ -216,7 +216,6 @@
             success: function (data) {
                 if(data.state==0){
                     layer.msg("保存成功！",{icon:1});
-                    debugger;
                     setTimeout(function(){window.open("${ctx}/rest/research/index","contentF");},2000);
                 } else {
                     layer.msg("新增失败！", {icon: 2});
@@ -343,7 +342,6 @@
 
     // 附件上传
     function _afterUpfile(t, filelist) {
-        debugger;
         var i, item, icon, title,
             html = '',
             URL = this.getOpt('UEDITOR_HOME_URL'),

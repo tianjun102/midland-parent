@@ -31,10 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by 'ms.x' on 2017/8/1.
@@ -121,9 +118,8 @@ public class EntrustRentInController extends BaseFilter{
 	}
 	
 	private void getSelectParam(Model model) {
-		List<ParamObject> paramObjects = JsonMapReader.getMap("entrust_type");
-		;
-		model.addAttribute("sellRents",paramObjects);
+		List<ParamObject> rentOutSellRent = JsonMapReader.getMap("entrust_rent_out_sellRent");
+		model.addAttribute("sellRents",rentOutSellRent);;
 		List<ParamObject> paramObjects1 = JsonMapReader.getMap("appointment_status");
 		model.addAttribute("statusList",paramObjects1);
 		List<ParamObject> paramObjects2 = JsonMapReader.getMap("source");
@@ -164,7 +160,12 @@ public class EntrustRentInController extends BaseFilter{
 	public String toUpdateAppointment(int entrustId, Model model) {
 		Entrust entrust=entrustServiceImpl.selectEntrustById(entrustId);
 		List<EntrustLog> entrustLogs = entrustLogServiceImpl.selectEntrustLogByEntrustId(entrustId);
-		
+		List<ParamObject> obj = JsonMapReader.getMap("other_facilities");
+		model.addAttribute("facilities",obj);
+		String faclities =entrust.getOtherFacilities();
+		String[] tempFacilities = faclities.split(",");
+		List<String> list = Arrays.asList(tempFacilities);
+		model.addAttribute("otherFacilities",list);
 		getSelectParam(model);
 		model.addAttribute("entrust",entrust);
 		model.addAttribute("entrustLogs",entrustLogs);
@@ -178,6 +179,7 @@ public class EntrustRentInController extends BaseFilter{
 	public Object updateByPrimaryKeySelective(Entrust entrust,String dealRemark, HttpServletRequest request) {
 		Map map = new HashMap();
 		try {
+			entrust.setOtherFacilities(MidlandHelper.dropEmpty(entrust.getOtherFacilities()));
 			if (entrust.getStatus()!=null && 1 !=entrust.getStatus()){
 				//如果委托状态不是已分配，隐藏重新分配按钮
 				entrust.setResetFlag(0);
@@ -207,8 +209,10 @@ public class EntrustRentInController extends BaseFilter{
 		}
 		return map;
 	}
-	
-	
+
+
+
+
 	/**
 	 * 重新分配经纪人，把经纪人更新到委托记录里
 	 * @param record

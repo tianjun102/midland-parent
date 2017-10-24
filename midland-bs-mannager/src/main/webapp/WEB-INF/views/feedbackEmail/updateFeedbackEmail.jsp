@@ -64,7 +64,6 @@
             return;
         }
         var data = $("#dataForm").serialize();
-        debugger;
         $.ajax({
             type: "post",
             url: "${ctx}/rest/feedbackEmail/update",

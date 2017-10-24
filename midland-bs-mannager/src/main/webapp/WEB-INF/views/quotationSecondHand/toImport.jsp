@@ -25,14 +25,22 @@
                     });
 
                 },
-                'onUploadSuccess': function (file, data, response) {
-
-                },
-                'onQueueComplete': function (queueData) {
-                    if (queueData.uploadsSuccessful < 1) {
-                        alert('文件上传失败');
+                'onUploadSuccess': function (fileObj, data, response) {
+                    if (data=="成功"){
+                        $("#file_upload-queue").html(data);
+                    }else{
+                        $("#file_upload-queue").html('<span class="_star">'+data+'</span>');
                     }
+
                 }
+//                'onUploadSuccess': function (file, data, response) {
+//
+//                },
+//                'onQueueComplete': function (queueData) {
+//                    if (queueData.uploadsSuccessful < 1) {
+//                        alert('文件上传失败');
+//                    }
+//                }
 
                 // Your options here
             });

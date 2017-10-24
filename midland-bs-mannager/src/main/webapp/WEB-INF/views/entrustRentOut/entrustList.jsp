@@ -36,8 +36,8 @@
             <th style="width: auto">平台</th>
             <th style="width: auto">委托人</th>
             <th style="width: auto">手机号码</th>
-            <th style="width: auto">类型</th>
-            <th style="width: auto">分类</th>
+            <th style="width: auto">房屋类型</th>
+            <th style="width: auto">出租方式</th>
             <th style="width: auto">委托时间</th>
             <th style="width: auto">所属区域</th>
             <th style="width: auto">小区名</th>

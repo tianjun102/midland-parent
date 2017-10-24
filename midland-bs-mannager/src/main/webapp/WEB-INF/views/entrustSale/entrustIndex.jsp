@@ -29,8 +29,8 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
-				<span>委托管理>>委托记录列表</span>
-				<a class = "setup"  target="contentF" onclick="addEntrust()">新增</a>
+				<span>委托管理>>卖房委托列表</span>
+				<%--<a class = "setup"  target="contentF" onclick="addEntrust()">新增</a>--%>
 			</p>
 		<form action="${ctx }/rest/entrust/sale/page" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">

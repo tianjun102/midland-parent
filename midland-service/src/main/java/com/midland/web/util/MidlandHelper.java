@@ -252,6 +252,25 @@ public class MidlandHelper {
 			return temp.substring(0,temp.length()-2);
 		}
 	}
+
+	public static String dropEmpty(String str) {
+		StringBuffer sb = new StringBuffer();
+		if (str != null) {
+			String[] temp = str.split(",");
+			int i = 0;
+			for (String st : temp) {
+				if (StringUtils.isNotEmpty(st)) {
+					if (i == 0) {
+						sb.append(st);
+					} else {
+						sb.append(",").append(st);
+					}
+					i++;
+				}
+			}
+		}
+		return sb.toString();
+	}
 	
 }
 

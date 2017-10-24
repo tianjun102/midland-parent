@@ -67,7 +67,7 @@ public class SettingServiceImpl implements SettingService {
     public Map<String, List<Area>> queryCityByRedis(Map<String, String> parem) {
         return getStringListMap(parem);
     }
-    
+
     /**
      * 查询所有省份
      * @param model
@@ -134,16 +134,22 @@ public class SettingServiceImpl implements SettingService {
         
         return null;
     }
-    
-    
-    
+
+
+    /**
+     * 城市id查询区域
+     * @param cityId
+     * @return
+     */
     @Override
     public List<Area> getAreaByCityId(String cityId){
-        Map param = new HashMap();
-        param.put("flag","area");
-        param.put("id",cityId);
-        Map result = queryCityByRedis(param);
-        return (List<Area>)result.get("area");
+
+        Map parem = new HashMap();
+        parem.put("flag", "area");
+        parem.put("id",cityId);
+        Map areaList = queryAreaByRedis(parem);
+        List<Area> result = (List<Area>)areaList.get("area");
+        return result;
     }
     
     @Override
@@ -156,17 +162,7 @@ public class SettingServiceImpl implements SettingService {
         }
         return null;
     }
-    @Override
-    public Area getDistByCityIdAndDistId(String cityId, String distId){
-        List<Area> areas = getAreaByCityId(cityId);
-        for (Area area:areas){
-            if (area.getId().equals(distId)){
-                return area;
-            }
-        }
-        return null;
-    }
-    
+
     private Map<String, List<Area>> getStringListMap(Map<String, String> parem) {
         //先在缓存中查询
         Map<String, List<Area>> areaMap = this.getArea(parem.get("flag"),parem.get("id"),parem.get("parentId"));
