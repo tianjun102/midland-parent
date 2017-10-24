@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.midland.core.util.DateUtils;
 import com.midland.web.enums.ContextEnums;
+import com.midland.web.model.user.Agenter;
 import com.midland.web.model.user.User;
 import org.apache.commons.lang3.StringUtils;
 
@@ -24,9 +25,9 @@ public class MidlandHelper {
 	
 	private static final String COMMON_DATE = "yyyy-MM-dd hh:mm:ss";
 	private static final String MONTH = "yyyy-MM";
-	
-	
-	
+
+
+
 	public static String scientificNotation(String s){
 		BigDecimal bigDecimal = new BigDecimal(s);
 		return bigDecimal.toPlainString();
@@ -128,6 +129,23 @@ public class MidlandHelper {
 			resList.add(t);
 		}
 		return resList;
+	}
+
+	public static Agenter getPojo(String str)  {
+		JSONObject rootJsonObject = null;
+		try {
+			rootJsonObject = JSON.parseObject(str);
+		}catch (Exception e){
+			return null;
+		}
+		String messageStr;
+		if(rootJsonObject!=null && rootJsonObject.getString("STATE").equals("SUCCESS")){
+			messageStr = rootJsonObject.getString("DATA");
+		}else{
+			return null;
+		}
+		Agenter lists = JSON.parseObject(messageStr,Agenter.class);
+		return lists;
 	}
 	/**
 	 *

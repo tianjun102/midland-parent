@@ -105,6 +105,8 @@ public class User {
     private String cityName;
 
     private String actualName;
+
+    private String isSuper;
 	
 	public String getCityId() {
 		return cityId;
@@ -362,6 +364,14 @@ public class User {
 
 	public void setActualName(String actualName) {
 		this.actualName = actualName;
+	}
+
+	public String getIsSuper() {
+		return isSuper;
+	}
+
+	public void setIsSuper(String isSuper) {
+		this.isSuper = isSuper;
 	}
 
 	@Override

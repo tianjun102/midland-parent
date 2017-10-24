@@ -36,6 +36,12 @@ public class EliteVipController extends BaseFilter {
 	 **/
 	@RequestMapping("index")
 	public String eliteVipIndex(EliteVip eliteVip,Model model) throws Exception {
+		Category category = new Category();
+		category.setType(2);
+		String result = getCategoryTree("",category);
+		if(StringUtils.isNotEmpty(result)){
+			model.addAttribute("categoryData",result );
+		}
 		return "eliteVip/eliteVipIndex";
 	}
 
@@ -139,6 +145,10 @@ public class EliteVipController extends BaseFilter {
 	@RequestMapping("list")
 	public String findEliteVipList(EliteVip eliteVip,Model model, HttpServletRequest request) {
 		try {
+			if(eliteVip.getCateId()!=null&&eliteVip.getCateId()==0){
+				eliteVip.setCateId(null);
+				eliteVip.setCateName(null);
+			}
 			log.debug("findEliteVipList  {}",eliteVip);
 			MidlandHelper.doPage(request);
 			Page<EliteVip> result = (Page<EliteVip>)eliteVipServiceImpl.findEliteVipList(eliteVip);

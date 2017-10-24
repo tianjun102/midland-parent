@@ -6,14 +6,17 @@ import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.config.MidlandConfig;
 import com.midland.core.util.ApplicationUtils;
+import com.midland.core.util.HttpUtils;
 import com.midland.core.util.MD5Util;
 import com.midland.core.util.SmsUtil;
 import com.midland.web.model.Area;
 import com.midland.web.model.ExportModel;
 import com.midland.web.model.role.Role;
+import com.midland.web.model.user.Agenter;
 import com.midland.web.model.user.User;
 import com.midland.web.security.PermissionSign;
 import com.midland.web.security.RoleSign;
+import com.midland.web.security.SysContext;
 import com.midland.web.service.MenuService;
 import com.midland.web.service.RoleService;
 import com.midland.web.service.SettingService;
@@ -93,6 +96,8 @@ public class UserController extends BaseFilter {
     public String login(@Valid User user, BindingResult result, Model model, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
     	String username=URLEncoder.encode(request.getParameter("username"),"utf-8");
     	String password=request.getParameter("password");
+		SysContext.setRequest((HttpServletRequest) request);
+		SysContext.setResponse((HttpServletResponse) response);
     	 String flag=request.getParameter("remember");//记住密码
     	 String userType = request.getParameter("userType");
         try {
@@ -129,9 +134,36 @@ public class UserController extends BaseFilter {
             // 身份验证
             subject.login(token);
             // 验证成功在Session中保存用户信息
+			Map<String,String> parem = new HashMap<>();
+			parem.put("userName",username);
+			parem.put("password",password);
+			String data = HttpUtils.get("http://218.18.9.171:8183/dingjian/website/api/agenter/login", parem);
+			Map userMap =  (Map)JSONObject.parse(data);
+			if ("SUCCESS".equals(userMap.get("STATE"))) {
+				String dataDtail = HttpUtils.get("http://218.18.9.171:8183/dingjian/website/api/agenter/detail?id=" + userMap.get("agenterId"), null);
+				Agenter agenterList = MidlandHelper.getPojo(dataDtail);
+				if (agenterList != null) {
+					User agenterUser = new User();
+					agenterUser.setPhone(agenterList.getPhone());
+					agenterUser.setUsername(username);
+					agenterUser.setPassword(password);
+					agenterUser.setUserCnName(agenterList.getName());
+					agenterUser.setCityName(agenterList.getStoreName());
+					List<Role> roles = roleService.selectRolesByUserId(88888);
+					agenterUser.setRoles(roles);
+					request.getSession().setAttribute("userInfo", agenterUser);
+					return "redirect:/";
+				}
+			}
             final User authUserInfo = userService.selectByUsername(user.getUsername());
             
             List<Role> roles=roleService.selectRolesByUserId(authUserInfo.getId());
+			for (Role role:roles){
+				if (role.getRoleType()!=null&&role.getRoleType()==0){
+					//超级管理员
+					authUserInfo.setIsSuper("1");
+				}
+			}
             authUserInfo.setRoles(roles);
             request.getSession().setAttribute("userInfo", authUserInfo);
         } catch (AuthenticationException e) {

@@ -61,7 +61,7 @@ public class HttpUtils {
 					param.append("&");
 				} else {
 					param.append("?");
-					flag = false;
+					flag = true;
 				}
 				param.append(entry.getKey()).append("=");
 				

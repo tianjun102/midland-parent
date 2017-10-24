@@ -78,6 +78,7 @@
                     </c:forEach>
                 </select><div style = "font-size:12px; color:#afadad;text-indent: 70px;">(不选择城市则默认全部)</div>
             </li>
+            <c:if test="${type!=2}">
             <li>
                 <span style = "float:left;">平台：</span>
                 <select name="source" id="source" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
@@ -85,6 +86,7 @@
                     <option value="1">微站</option>
                 </select>
             </li>
+            </c:if>
             <li><span>父节点：</span><input name="parentName" onclick="showTree()" readonly="readonly"/>
                 <input name="parentId" type="hidden"/>
                 <div style = "font-size:12px; color:#afadad;text-indent: 70px;">(不选父分类则默认一级分类)</div>

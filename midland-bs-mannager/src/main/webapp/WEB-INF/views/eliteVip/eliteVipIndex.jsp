@@ -2,13 +2,55 @@
 	pageEncoding="UTF-8"%>
 <%@include file="../layout/tablib.jsp"%>
 <%@include file="../layout/source.jsp"%>
-
+<%@include file="../layout/zTree.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="${ctx}/assets/css/ztree/css/demo.css">
+<link rel="stylesheet" href="${ctx }/assets/css/common.css">
+<link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css"/>
+	<script type="text/javascript">
 
+        var setting = {
+            check: {
+                enable: true,
+                chkboxType: { "Y": "sp", "N": "sp" }
+
+
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                beforeClick: beforeClick
+            }
+        };
+        var catProNodes =[{id:0, pId:0,name:'分类',open:true,nocheck:true,iconSkin:"pIcon01"},${categoryData}];
+
+
+        $(document).ready(function(){
+            $.fn.zTree.init($("#categoryTree"), setting, catProNodes);
+        });
+
+        function beforeClick(treeId, treeNode, clickFlag) {
+            $("input[name='cateId']").val(treeNode.id);
+            $("input[name='cateName']").val(treeNode.name);
+            $("#showDiv").hide();
+        }
+
+        function showTree(event){
+            $("#showDiv").show();
+        }
+
+        function hideTree(event){
+            $("#showDiv").hide();
+        }
+
+	</script>
 </head>
 <body>
 	
@@ -31,8 +73,27 @@
 						</c:forEach>
 					</select>
 				</li>--%>
-				<li><span>会员名称：</span>
-					<input type="text" name="cname" id="cname" placeholder="请输入会员名称" /></li>
+				<li><span>会员分类：</span><input class="vipcate" name="cateName" onclick="showTree()" readonly="readonly"/>
+					<input name="cateId" type="hidden"/><label style="color: red" class = "_star " >*</label>
+
+				</li>
+				<li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >
+					<div class="zTreeDemoBackground left" style  = "position:absolute;top: -10px;"   onblur="test(event)">
+						<ul id="categoryTree" class="ztree" style  = "width:235px; height: 140px!important;margin-left: -350px!important;margin-top: 70px!important;"></ul>
+					</div>
+					<img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: 290px;left:-63px;top: 60px;" onclick="hideTree()">
+				</li>
+				<li><span>中文名：</span>
+					<input type="text" name="cname" id="cname" placeholder="请输入会员中文名称"/></li>
+				</li>
+				<li><span>英文名：</span>
+					<input type="text" name="ename" id="ename" placeholder="请输入会员英文名称" /></li>
+				</li>
+				<li><span>会员级别：</span>
+					<input type="text" name="level" id="level" placeholder="请输入会员级别" /></li>
+				</li>
+				<li><span>所属地区：</span>
+					<input type="text" name="address" id="address" placeholder="请输入会员所属地区" /></li>
 				</li>
 				<li>
 					<input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/>
