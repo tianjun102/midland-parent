@@ -41,7 +41,7 @@
 	<select id="findLoanTypeList" parameterType="com.midland.web.model.LoanType" resultMap="BaseResultMap">
 		select <include refid="Base_Column_List" /> from loan_type
 		where 
-		is_delete=0
+		is_delete=0 AND description IS NULL
 		<include refid="select_option" />
 	</select>
 
@@ -182,5 +182,9 @@
 			where id= #{item.id}
 		</foreach>
 	</update>
+
+	<select id="findLoanType" resultMap="BaseResultMap" parameterType="com.midland.web.model.LoanType">
+		SELECT <include refid="Base_Column_List" /> from loan_type WHERE description is not null
+	</select>
 
 </mapper>

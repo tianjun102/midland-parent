@@ -19,4 +19,6 @@ public interface LoanTypeMapper {
 
 	int batchUpdate(@Param("loanTypeList") List<LoanType> loanTypeList);
 
+	LoanType findLoanType(LoanType loanType);
+
 }

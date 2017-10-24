@@ -31,4 +31,6 @@ public interface LoanTypeService {
 
 	void batchUpdate(List<LoanType> loanTypeList) throws Exception;
 
+	LoanType findLoanType(LoanType loanType)  throws Exception;
+
 }

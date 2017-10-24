@@ -98,4 +98,15 @@ public class LoanTypeServiceImpl implements LoanTypeService {
 			throw e;
 		}
 	}
+
+	@Override
+	public LoanType findLoanType(LoanType loanType) throws Exception {
+		try {
+			log.info("loanType  {}",loanType);
+			return loanTypeMapper.findLoanType(loanType);
+		} catch(Exception e) {
+			log.error("loanType  {}",loanType,e);
+			throw e;
+		}
+	}
 }
