@@ -11,7 +11,7 @@ public class Entrust{
 	 **/
 	private String entrustSn;
 	/**
-	 * 平台；0=网站；1=微站；
+	 * 网站来源；0=网站；1=微站；
 	 **/
 	private Integer source;
 	/**
@@ -19,7 +19,7 @@ public class Entrust{
 	 **/
 	private Integer houseType;
 	/**
-	 * 0=租；1=售 废弃
+	 * 0=租；1=售
 	 **/
 	private Integer sellRent;
 	/**
@@ -83,21 +83,9 @@ public class Entrust{
 	 **/
 	private Integer isDelete;
 	/**
-	 * 宽带 ： 0没有，1有
+	 * 其他设备：0冰箱,1电视,2空调,3宽带,4家具,5厨房,6热水器,7洗衣机,8暖气,9阳台,10煤气
 	 **/
-	private Integer broadband;
-	/**
-	 * 洗衣机：0没有，1有
-	 **/
-	private Integer washingMachine;
-	/**
-	 * 家电：0没有，1有
-	 **/
-	private Integer household;
-	/**
-	 * 冰箱：0没有，1有
-	 **/
-	private Integer fridge;
+	private String otherFacilities;
 	/**
 	 * 买房委托类型：0我要买房，1我要卖房，2我要出租，3我要租房，4我要估价
 	 **/
@@ -139,7 +127,7 @@ public class Entrust{
 	 **/
 	private String theLayer;
 	/**
-	 *
+	 * 
 	 **/
 	private String totalLayer;
 	/**
@@ -148,18 +136,13 @@ public class Entrust{
 	private String otherItem;
 	/**
 	 * 备注
-	 */
+	 **/
 	private String remark;
+
 	private String startTime;
+
 	private String endTime;
 
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
 
 	public String getStartTime() {
 		return startTime;
@@ -337,36 +320,12 @@ public class Entrust{
 		this.isDelete = isDelete;
 	}
 
-	public Integer getBroadband() {
-		return broadband;
+	public String getOtherFacilities() {
+		return otherFacilities;
 	}
 
-	public void setBroadband(Integer broadband) {
-		this.broadband = broadband;
-	}
-
-	public Integer getWashingMachine() {
-		return washingMachine;
-	}
-
-	public void setWashingMachine(Integer washingMachine) {
-		this.washingMachine = washingMachine;
-	}
-
-	public Integer getHousehold() {
-		return household;
-	}
-
-	public void setHousehold(Integer household) {
-		this.household = household;
-	}
-
-	public Integer getFridge() {
-		return fridge;
-	}
-
-	public void setFridge(Integer fridge) {
-		this.fridge = fridge;
+	public void setOtherFacilities(String otherFacilities) {
+		this.otherFacilities = otherFacilities;
 	}
 
 	public Integer getEntrustType() {
@@ -465,9 +424,17 @@ public class Entrust{
 		this.otherItem = otherItem;
 	}
 
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
 	@Override
 	public String toString() {
-		final StringBuffer sb=new StringBuffer("Entrust{");
+		 final StringBuffer sb=new StringBuffer("Entrust{");
 		if (id != null) {
 			sb.append(", \"id\":\"").append(id).append("\"");
 		}
@@ -528,17 +495,8 @@ public class Entrust{
 		if (isDelete != null) {
 			sb.append(", \"isDelete\":\"").append(isDelete).append("\"");
 		}
-		if (broadband != null) {
-			sb.append(", \"broadband\":\"").append(broadband).append("\"");
-		}
-		if (washingMachine != null) {
-			sb.append(", \"washingMachine\":\"").append(washingMachine).append("\"");
-		}
-		if (household != null) {
-			sb.append(", \"household\":\"").append(household).append("\"");
-		}
-		if (fridge != null) {
-			sb.append(", \"fridge\":\"").append(fridge).append("\"");
+		if (otherFacilities != null) {
+			sb.append(", \"otherFacilities\":\"").append(otherFacilities).append("\"");
 		}
 		if (entrustType != null) {
 			sb.append(", \"entrustType\":\"").append(entrustType).append("\"");
@@ -575,6 +533,9 @@ public class Entrust{
 		}
 		if (otherItem != null) {
 			sb.append(", \"otherItem\":\"").append(otherItem).append("\"");
+		}
+		if (remark != null) {
+			sb.append(", \"remark\":\"").append(remark).append("\"");
 		}
 		sb.append("}");
 		return sb.toString();

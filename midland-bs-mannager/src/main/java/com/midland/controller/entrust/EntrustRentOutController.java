@@ -31,10 +31,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by 'ms.x' on 2017/8/1.
@@ -165,7 +162,12 @@ public class EntrustRentOutController extends BaseFilter{
 	public String toUpdateAppointment(int entrustId, Model model) {
 		Entrust entrust=entrustServiceImpl.selectEntrustById(entrustId);
 		List<EntrustLog> entrustLogs = entrustLogServiceImpl.selectEntrustLogByEntrustId(entrustId);
-		
+		List<ParamObject> obj = JsonMapReader.getMap("other_facilities");
+		model.addAttribute("facilities",obj);
+		String faclities =entrust.getOtherFacilities();
+		String[] tempFacilities = faclities.split(",");
+		List<String> list = Arrays.asList(tempFacilities);
+		model.addAttribute("otherFacilities",list);
 		getSelectParam(model);
 		model.addAttribute("entrust",entrust);
 		model.addAttribute("entrustLogs",entrustLogs);

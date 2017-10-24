@@ -125,30 +125,9 @@
                 </select>
 
             </li>
-            <li class="col-md-6"><span>配套：</span>
-                <div class="peitao">
-                    <span><input onchange="lick(this,'household')"  type="checkbox"
-                                 <c:if test="${entrust.household == 1}">checked</c:if> ><em>带家电</em>
-                        <input type="hidden" name="household" id="household" value="${entrust.household}">
-                    </span>
-                    <span><input onchange="lick(this,'broadband')"  type="checkbox"
-                                 <c:if test="${entrust.broadband == 1}">checked</c:if> ><em>宽带</em>
-                    <input type="hidden" name="broadband" id="broadband" value="${entrust.broadband}">
-                    </span>
-                    <span><input onchange="lick(this,'fridge')"  type="checkbox"
-                                 <c:if test="${entrust.fridge == 1}">checked</c:if> ><em>冰箱</em>
 
-                    <input type="hidden" name="fridge" id="fridge" value="${entrust.fridge}">
-                    </span>
-                    <span><input onchange="lick(this,'washingMachine')"  type="checkbox"
-                                 <c:if test="${entrust.washingMachine == 1}">checked</c:if> ><em>洗衣机</em>
-                    <input type="hidden" name="washingMachine" id="washingMachine" value="${entrust.washingMachine}">
-                    </span>
-                </div>
-            </li>
             <li class="col-md-6"><span>状态：</span>
                 <select name="status" id="status" class="dropdown">
-
                     <c:forEach items="${statusList}" var="s">
                         <option value="${s.id}" <c:if test="${s.id==entrust.status}">selected</c:if>>
                                 ${s.name}
@@ -156,6 +135,23 @@
                     </c:forEach>
 
                 </select>
+            </li>
+            <li class="col-md-11"><span>配套：</span>
+                <div class="peitao">
+                    <c:forEach items="${facilities}" var="s">
+                        <span><input type="checkbox" name="" onchange="setVal(this,${s.id})"
+                        <c:forEach items="${otherFacilities}" var="t">
+                                     <c:if test="${s.id == t}">checked</c:if>
+                        </c:forEach>
+                        ><em>${s.name}</em>
+                            <input type="hidden" name="otherFacilities"
+                            <c:forEach items="${otherFacilities}" var="t">
+                                <c:if test="${s.id == t}">value="${s.id}"</c:if>
+                            </c:forEach>
+                            >
+                        </span>
+                    </c:forEach>
+                </div>
             </li>
             <li class="col-md-11"><span>备注：</span>
                 <textarea name="remark" id="remark"
@@ -187,15 +183,6 @@
 
 <script type="text/javascript">
 
-    function lick(be,id) {
-        if ($(be).is(':checked')) {
-            $('#'+id).val(1);
-        } else {
-            $('#'+id).val(0);
-        }
-    }
-
-
     //保存数据
     function updateData() {
         if(!notEmpty('nickName','nickName','')||!notEmpty('areaName','areaName','')
@@ -203,9 +190,7 @@
             ||!checkPhone('','phone','')){
             return;
         }
-
         var data = $("#appointInfoForm").serialize();
-
         $.ajax({
             type: "post",
             url: "${ctx}/rest/entrust/rentIn/update",
@@ -234,6 +219,13 @@
     function closeWin() {
         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
         parent.layer.close(index);
+    }
+    function  setVal(ths,val) {
+        if(ths.checked){
+            $(ths).next().next().val(val)
+        }else{
+            $(ths).next().next().val("")
+        }
     }
 </script>
 <script type="text/javascript" src="${ctx}/assets/scripts/jquery.min.js"></script>
