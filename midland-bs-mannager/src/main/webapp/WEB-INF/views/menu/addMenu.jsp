@@ -42,7 +42,7 @@
 
             <li style="display:flex;align-items:center">
                 <span>平台：</span>
-                <select name="source" id="source" class="dropdown">
+                <select name="source" id="source" class="dropdown" onchange="fieldChange()">
                     <c:forEach items="${sources}" var="s">
                         <option value="${s.id}" <c:if test="${s.id == item.source}">selected="selected"</c:if>>
                                 ${s.name}
@@ -50,7 +50,15 @@
                     </c:forEach>
                 </select>
             </li>
-
+            <li style="display: none" id="acreageShow">
+                <span style="width:90px">菜单分类：</span>
+                <select name="" id="parentIdTemp" class="dropdown" onchange="chooseParent()">
+                    <c:forEach items="${menuTypes}" var="s">
+                        <option value="${s.id}">${s.name}</option>
+                    </c:forEach>
+                </select>
+                <input type="text" id="parentId" name="menuTypeId" value="0">
+            </li>
             <li><span>菜单名：</span>
                 <input type="text" name="menuName" id="menuName" value="${item.menuName}"/>
             </li>
@@ -78,14 +86,26 @@
 
 <script type="text/javascript">
 
-    function setCityName() {
-        if($("#cityId").find("option:selected").text()=="请选择"){
-            $("#cityName").val("");
+    function fieldChange() {
+        var j = $("#source option:selected").val()
+        if (j==0){
+            $("#acreageShow").css('display','none');
 
-        }else{
-            $("#cityName").val($("#cityId").find("option:selected").text());
+        }else if (j==1){
+            $("#acreageShow").css('display','block');
         }
     }
+
+    function chooseParent() {
+        $("#parentId").val($("#parentIdTemp option:selected").val())
+        if ($("#parentIdTemp option:selected").text()=="根节点"){
+            $("#parentName").val()
+        }else{
+            $("#parentName").val($("#parentIdTemp option:selected").text())
+        }
+    }
+
+
 
     //保存数据
     function updateData() {

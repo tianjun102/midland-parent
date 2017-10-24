@@ -3,11 +3,13 @@ package com.midland.controller;
 import com.midland.web.model.Area;
 import com.midland.web.model.LiaisonRecordEmail;
 import com.midland.web.model.Menu;
+import com.midland.web.model.MenuType;
 import com.midland.web.model.temp.ListDescOtherParam;
 import com.midland.web.model.user.User;
 import com.midland.web.service.JdbcService;
 import com.midland.web.service.MenuService;
 import com.midland.base.BaseFilter;
+import com.midland.web.service.MenuTypeService;
 import com.midland.web.service.SettingService;
 import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.ParamObject;
@@ -37,6 +39,8 @@ public class MenuController extends BaseFilter  {
 	@Autowired
 	private MenuService menuServiceImpl;
 	@Autowired
+	private MenuTypeService menuTypeServiceImpl;
+	@Autowired
 	private SettingService settingService;
 	@Autowired
 	private JdbcService jdbcService;
@@ -60,6 +64,8 @@ public class MenuController extends BaseFilter  {
 		settingService.getAllProvinceList(model);
 		List<ParamObject> sources = JsonMapReader.getMap("source");
 		model.addAttribute("sources",sources);
+		List<MenuType> res = menuTypeServiceImpl.findRootMenuTypeList1();
+		model.addAttribute("menuTypes",res);
 		return "menu/addMenu";
 	}
 
