@@ -54,7 +54,6 @@
 
             /*$("input[name=provinceId]").val(addrId);
             $("input[name=provinceName]").val(addName);*/
-            debugger;
             if(addrId==null||addrId==""){
                 $("#cityId").val("");
                 $("#cityName").val("");

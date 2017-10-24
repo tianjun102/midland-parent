@@ -114,7 +114,6 @@
     //保存数据
     function updateData() {
         var data = $("#dataForm").serialize();
-        debugger;
         $.ajax({
             type: "post",
             url: "${ctx}/rest/appointment/add",

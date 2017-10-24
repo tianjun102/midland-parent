@@ -76,7 +76,6 @@ function checkSelect(ids,msgs){
 }
 
 function checkUrl(id,name,msg){
-    debugger;
     var urlString = $("#"+id).val();
     if(urlString==null || urlString.trim() == ''){
         layer.tips("网址不能为空！", "input[name='"+name+"']",{tips:3});

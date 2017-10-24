@@ -35,9 +35,6 @@ public interface SettingService {
 	List<Area> getAreaByCityId(String cityId);
 	
 	Area getDistByCityIdAndDistName(String cityId, String distName);
-	
-	Area getDistByCityIdAndDistId(String cityId, String distId);
-	
 	public Map<String, List<Area>> queryAreaByRedis(Map<String, String> parem);
 
     void batchUpdatePopular(List<Popular> popularList) throws Exception;
