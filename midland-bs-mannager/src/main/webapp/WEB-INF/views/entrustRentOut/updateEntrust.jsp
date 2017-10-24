@@ -75,7 +75,7 @@
             <li class="col-md-6"><span>手机号码：</span><input type="text" name="phone" id="phone" onblur="checkPhone('','phone','')"
                                                           value="${entrust.phone}"
                                                           maxlength="50"/><span class="_star">*</span></li>
-            <li class="col-md-6"><span>出租方式：</span>
+            <li class="col-md-6"><span>分类：</span>
                 <select name="sellRent" id="sellRent" class="dropdown">
                     <c:forEach items="${sellRents}" var="s">
                         <option value="${s.id}" <c:if test="${s.id==entrust.sellRent}">selected</c:if>>
@@ -86,7 +86,7 @@
                 <span class="_star">*</span>
             </li>
 
-            <li class="col-md-6"><span>房屋类型：</span>
+            <li class="col-md-6"><span>委托类型：</span>
                 <select name="houseType" id="houseType" class="dropdown">
 
                     <c:forEach items="${houses}" var="s">
@@ -125,17 +125,6 @@
                 </select>
 
             </li>
-            <li class="col-md-6"><span>状态：</span>
-                <select name="status" id="status" class="dropdown">
-
-                    <c:forEach items="${statusList}" var="s">
-                        <option value="${s.id}" <c:if test="${s.id==entrust.status}">selected</c:if>>
-                                ${s.name}
-                        </option>
-                    </c:forEach>
-
-                </select>
-            </li>
             <li class="col-md-11"><span>配套：</span>
                 <div class="peitao">
                     <c:forEach items="${facilities}" var="s">
@@ -153,21 +142,33 @@
                     </c:forEach>
                 </div>
             </li>
+            <li class="col-md-6"><span>状态：</span>
+                <select name="status" id="status" class="dropdown">
 
+                    <c:forEach items="${statusList}" var="s">
+                        <option value="${s.id}" <c:if test="${s.id==entrust.status}">selected</c:if>>
+                                ${s.name}
+                        </option>
+                    </c:forEach>
+
+                </select>
+            </li>
             <li class="col-md-11"><span>备注：</span>
                 <textarea name="remark" id="remark"
                           style="width:calc(100% - 120px);height:50px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;"></textarea>
             </li>
             </li>
             <li class="col-md-11"><span>处理记录：</span>
-                <textarea name="record" id="record"  style="width:calc(100% - 120px);height:150px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;">
-<c:forEach items="${entrustLogs}" var="s">状态   ：<c:forEach items="${statusList}" var="m"><c:if test="${m.id==s.state}">${m.name}</c:if></c:forEach>
-时间   ：${s.logTime}
-操作人：${s.operatorName}
-备注   ：${s.remark}
+                <textarea name="record" id="record" disabled="disabled"
+                          style="width:calc(100% - 120px);height:150px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;">
+<c:forEach items="${entrustLogs}" var="s">    状态    ： <c:forEach items="${statusList}" var="m"><c:if test="${m.id==s.state}">${m.name}</c:if> </c:forEach>
+    时间    ：${s.logTime}
+    操作人：${s.operatorName}
+    备注    ：${s.remark}
+
 
 </c:forEach>
-                </textarea>
+                </textarea></li>
             </li>
             <li class="col-md-6">
                 <span></span>
