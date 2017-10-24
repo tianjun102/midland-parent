@@ -119,7 +119,7 @@ public class EntrustRentInController extends BaseFilter{
 	
 	private void getSelectParam(Model model) {
 		List<ParamObject> rentOutSellRent = JsonMapReader.getMap("entrust_rent_out_sellRent");
-		model.addAttribute("sellRents",rentOutSellRent);
+		model.addAttribute("sellRents",rentOutSellRent);;
 		List<ParamObject> paramObjects1 = JsonMapReader.getMap("appointment_status");
 		model.addAttribute("statusList",paramObjects1);
 		List<ParamObject> paramObjects2 = JsonMapReader.getMap("source");
