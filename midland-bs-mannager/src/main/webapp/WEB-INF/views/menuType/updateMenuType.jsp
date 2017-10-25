@@ -28,7 +28,7 @@
     <form action="${ctx}/rest/menuType/update" method="post" id="dataForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
-            <li class="col-md-6"><span>上级分类：</span>
+            <li ><span>上级分类：</span>
                 <select name="" id="parentIdTemp" class="dropdown" onchange="chooseParent()">
                     <c:forEach items="${rootMentTypes}" var="s">
                         <c:choose>

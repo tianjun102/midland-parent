@@ -18,7 +18,7 @@
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
 
-            <li class="col-md-6"><span>父分类：</span>
+            <li ><span>父分类：</span>
                 <select name="" id="parentIdTemp" class="dropdown" onchange="chooseParent()">
                     <c:forEach items="${rootMentTypes}" var="s">
                         <option value="${s.id}">${s.name}</option>

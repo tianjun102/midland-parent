@@ -16,6 +16,7 @@
 		margin: 0 5px;
 		background-size: contain!important;
 	}
+
 </style>
 </head>
 <body>
@@ -30,16 +31,12 @@
 		<form action="${ctx }/rest/menuType/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
-				<li><span>select：</span>
-					<select name="cityId" id="cityId" class="dropdown">
-						<option value="" >全部</option>
-						<c:forEach items="${citys}" var="item">
-						<option value="${item.id}" >${item.name}</option>
-						</c:forEach>
-					</select>
+				<li><span style="width: 100px">分类名称：</span>
+					<input type="text" name="name" id="name" placeholder="请输入分类名称" /></li>
+
 				</li>
-				<li><span style="width: 90px">手机号码：</span>
-					<input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>
+				<li><span style="width: 120px">上级分类名称：</span>
+					<input type="text" name="parentName" id="parentName" placeholder="请输入上级分类名称" /></li>
 				</li>
 				<li>
 					<input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/>
