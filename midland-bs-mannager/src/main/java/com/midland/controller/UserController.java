@@ -405,7 +405,7 @@ public class UserController extends BaseFilter {
 	@RequestMapping(value = "/toUpdatePage", method = {RequestMethod.GET,RequestMethod.POST})
 	public String toUpdatePage(Model model,int userId,HttpServletRequest request){
 		User userInfo = userService.selectById(userId);
-		model.addAttribute("user", userInfo);
+		model.addAttribute("item", userInfo);
 		List<ParamObject> sources = JsonMapReader.getMap("source");
 		model.addAttribute("sources",sources);
 		return "user/updateUser";
@@ -426,6 +426,9 @@ public class UserController extends BaseFilter {
 		    user.setPhone(null);
 		
 	    }
+	    if (StringUtils.isEmpty(user.getEmail())){
+    		user.setEmail("");
+		}
     	if(userService.modifyUser(user)>0){
 		    map.put("state", 0);
 		    map.put("message", "success");

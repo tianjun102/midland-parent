@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="${ctx }/assets/css/common.css">
 <style type="text/css">
 	.content ul.userinfo li>span {
-		width: 90px!important;
+		width: 100px!important;
 	}
 </style>
 </head>

@@ -8,30 +8,55 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+	<style type="text/css">
+		.content ul.userinfo li>span {
+			float: left;
+			display: inline-block;
+			width: 90px;
+			height: 38px;
+			line-height: 38px;
+			text-align: right;
+			font-size: 14px;
+			color: rgb( 102, 102, 102 );
+		}
+		.dropdown {
+			position: relative;
+			width: 264px;
+			border: 1px solid #ccc;
+			cursor: pointer;
+			background: #fff;
+			border-radius: 3px;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			user-select: none;
+		}
+	</style>
 </head>
 <body>
 <section class="content" style="border:none;">
 	<form action="" method="post" id="addFrom">
 	<ul class = "userinfo row">
-			<input style = "width:264px;" type="hidden" name="id" id="id" value="${user.id}" />
-			<li><span>用户名：</span><input style = "width:264px;" type="text" name="username" disabled="true" id="username" value="${user.username}" onblur="checkUserName();" maxlength="50"/><span class="_star">*</span></li>
-			<li><span>用户名称：</span><input style = "width:264px;" type="text" name="userCnName" id="userCnName" value="${user.userCnName}" maxlength="50"/><span class="_star">*</span></li>
+			<input style = "width:264px;" type="hidden" name="id" id="id" value="${item.id}" />
+			<li><span>用户名：</span><input style = "width:264px;" type="text" name="username" disabled="true" id="username" value="${item.username}" onblur="checkUserName();" maxlength="50"/></li>
+			<li><span>用户名称：</span><input style = "width:264px;" type="text" name="userCnName" id="userCnName" onblur="notEmpty('userCnName','userCnName','用户昵称不能为空')" value="${item.userCnName}" maxlength="50"/><span class="_star">*</span></li>
 			<li style = "display:flex;align-items:center">
 				<span>平台：</span>
-				<select name="source" id="source" class="dropdown">
+				<select name="source" id="source" class="dropdown"  style="width: 264px">
 					<c:forEach items="${sources}" var="s">
-						<option value="${s.id}" <c:if test="${s.id == user.source}">selected="selected"</c:if>>
+						<option value="${s.id}" <c:if test="${s.id == item.source}">selected="selected"</c:if>>
 								${s.name}
 						</option>
 					</c:forEach>
 				</select>
+				<span class="_star">*</span>
 			</li>
-			<li><span>手机号码：</span><input style = "width:264px;" type="text" name="phone" disabled="true" id="phone" value="${user.phone}" onblur="checkPhone();"/><span class="_star">*</span></li>
-			<li><span>邮箱：</span><input style = "width:264px;" type="text" name="email" id="email" value="${user.email}" onblur="checkEmail();"/></li>
+		<%@include file="../menu/area_required.jsp" %><span class="_star">*</span>
+			<li><span>手机号码：</span><input style = "width:264px;" type="text" name="phone" disabled="true" id="phone" value="${item.phone}" onblur="checkPhone();"/></li>
+			<li><span>邮箱：</span><input style = "width:264px;" type="text" name="email" id="email" value="${item.email}" onblur="checkEmail();"/></li>
 
 			<li style = "padding-top:30px;">
 				<span></span>
-				<a target="contentF" class = "public_btn bg2" id="save" onclick="saveData()">保存</a>  
+				<a target="contentF" class = "public_btn bg2" id="save" onclick="saveData()">保存</a>
 				<a style="margin-left: 20px" class = "public_btn bg3" id="cancel" onclick="closeWin();">取消</a>
 			</li>
 		</ul>
@@ -40,10 +65,13 @@
 </section>	
 <script type="text/javascript">
 	function saveData() {
-	
-		if (checkUserName()&&
-				checkPhone()&&
-				checkEmail()) {
+debugger;
+        if (checkUserName() &&
+			notEmpty('userCnName','userCnName','用户昵称不能为空')&&
+			checkSelect('citys','请选择市级') &&
+            checkPhone() &&
+            checkEmail()
+		) {
 			var id = $("#id").val();
 			var username = $("#username").val();
 			var userCnName = $("input[name='userCnName']").val();
@@ -84,6 +112,7 @@
 	
 	
 	function checkUserName(){
+	    debugger;
 		var regUserName = /^[a-zA-Z0-9_]{6,20}$/;
 		var userName = $("#username").val();
 		if(userName==null || userName.trim() =="" ){
@@ -117,6 +146,7 @@
 	
 	//检查手机号格式
 	function checkPhone() {
+        debugger;
 		var reg = /^1[3,4,5,7,8]\d{9}$/;
 		var phone = $("input[name='phone']").val();
 		if (phone.trim() == '') {
@@ -149,6 +179,7 @@
 	
 	//检查邮箱格式
 	function checkEmail() {
+        debugger;
 		var reg =  /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 		var email = $("input[name='email']").val();
 		if (email.trim() == '') {
