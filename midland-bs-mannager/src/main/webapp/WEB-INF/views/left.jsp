@@ -335,6 +335,10 @@
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="menuList">
+						<a id = "system1" href="${ctx}/rest/menuType/index" target="contentF"><span>菜单分类管理</span></a>
+					</shiro:hasPermission>
+
+					<shiro:hasPermission name="menuList">
 						<a id = "system1" href="${ctx}/rest/menu/index" target="contentF"><span>菜单管理</span></a>
 					</shiro:hasPermission>
 

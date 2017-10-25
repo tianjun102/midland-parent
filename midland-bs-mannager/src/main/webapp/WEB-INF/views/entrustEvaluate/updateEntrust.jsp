@@ -149,10 +149,14 @@
             </li>
             <li class="col-md-11"><span>处理记录：</span>
                 <textarea name="record" id="record" disabled="disabled"  style="width:calc(100% - 120px);height:150px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;">
-<c:forEach items="${entrustLogs}" var="s">状态   ：<c:forEach items="${statusList}" var="m"> <c:if  test="${m.id==s.state}">${m.name}</c:if></c:forEach>
-时间   ：${s.logTime}
-操作人：${s.operatorName}
-备注   ：${s.remark}
+<c:forEach items="${entrustLogs}" var="s"> 状态 ：
+    <c:forEach items="${statusList}" var="m">
+        <c:if  test="${m.id==s.state}">${m.name}
+        </c:if>
+    </c:forEach>
+    时间 ：${s.logTime}
+    操作人：${s.operatorName}
+    备注 ：${s.remark}
 </c:forEach>
                 </textarea>
             </li>

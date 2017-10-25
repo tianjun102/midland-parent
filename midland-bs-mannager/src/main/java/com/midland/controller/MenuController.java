@@ -3,11 +3,13 @@ package com.midland.controller;
 import com.midland.web.model.Area;
 import com.midland.web.model.LiaisonRecordEmail;
 import com.midland.web.model.Menu;
+import com.midland.web.model.MenuType;
 import com.midland.web.model.temp.ListDescOtherParam;
 import com.midland.web.model.user.User;
 import com.midland.web.service.JdbcService;
 import com.midland.web.service.MenuService;
 import com.midland.base.BaseFilter;
+import com.midland.web.service.MenuTypeService;
 import com.midland.web.service.SettingService;
 import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.ParamObject;
@@ -65,6 +67,8 @@ public class MenuController extends BaseFilter  {
 		settingService.getAllProvinceList(model);
 		List<ParamObject> sources = JsonMapReader.getMap("source");
 		model.addAttribute("sources",sources);
+		List<MenuType> res = menuTypeServiceImpl.findRootMenuTypeList1();
+		model.addAttribute("menuTypes",res);
 		User user = MidlandHelper.getCurrentUser(request);
 		if(user.getIsSuper()==null){
 			model.addAttribute("cityId",user.getCityId());
@@ -125,7 +129,7 @@ public class MenuController extends BaseFilter  {
 	 * 
 	 **/
 	@RequestMapping("to_update")
-	public String toUpdateMenu(Integer id,Model model,HttpServletRequest request) throws Exception {
+	public String toUpdateMenu(Integer id,Model model) throws Exception {
 		settingService.getAllProvinceList(model);
 
 		Menu result = menuServiceImpl.selectMenuById(id);
@@ -133,12 +137,7 @@ public class MenuController extends BaseFilter  {
 		List<ParamObject> sources = JsonMapReader.getMap("source");
 		model.addAttribute("sources",sources);
 		settingService.getAllProvinceList(model);
-		User user = MidlandHelper.getCurrentUser(request);
-		if(user.getIsSuper()==null){
-			model.addAttribute("cityId",user.getCityId());
-			model.addAttribute("cityName",user.getCityName());
-		}
-		model.addAttribute("isSuper",user.getIsSuper());
+
 		return "menu/updateMenu";
 	}
 
