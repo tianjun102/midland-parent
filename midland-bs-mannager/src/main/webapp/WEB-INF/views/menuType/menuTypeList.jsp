@@ -28,6 +28,7 @@
 				<th style="width: 8%">类型id</th>
 				<th style="width: 8%">类型名称</th>
 				<th style="width: 8%">父类型名称</th>
+				<th style="width: 8%">城市</th>
                 <th style="width: 10%">操作</th>
             </tr>
         </thead>
@@ -40,6 +41,7 @@
 						<td>${item.id}</td>
 						<td>${item.name}</td>
 						<td>${item.parentName}</td>
+						<td>${item.cityName}</td>
 						<td>
                             <a target="contentF" onclick="to_edit(${item.id })">编辑</a>
                             <a target="contentF" onclick="delete1(${item.id })">删除</a>

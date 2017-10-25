@@ -31,6 +31,7 @@
 		<form action="${ctx }/rest/menuType/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
+				<%@include file="../menu/area_required.jsp" %>
 				<li><span style="width: 100px">分类名称：</span>
 					<input type="text" name="name" id="name" placeholder="请输入分类名称" /></li>
 

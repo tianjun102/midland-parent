@@ -3,6 +3,7 @@ package com.midland.controller;
 import com.midland.web.model.MenuType;
 import com.midland.web.service.MenuTypeService;
 import com.midland.base.BaseFilter;
+import com.midland.web.service.SettingService;
 import org.slf4j.Logger;
 import java.util.Map;
 import java.util.HashMap;
@@ -25,12 +26,16 @@ public class MenuTypeController extends BaseFilter  {
 	private Logger log = LoggerFactory.getLogger(MenuTypeController.class);
 	@Autowired
 	private MenuTypeService menuTypeServiceImpl;
+@Autowired
+	private SettingService settingService;
 
 	/**
 	 * 
 	 **/
 	@RequestMapping("index")
 	public String menuTypeIndex(MenuType menuType,Model model) throws Exception {
+		settingService.getAllProvinceList(model);
+
 		return "menuType/menuTypeIndex";
 	}
 
@@ -39,6 +44,7 @@ public class MenuTypeController extends BaseFilter  {
 	 **/
 	@RequestMapping("to_add")
 	public String toAddMenuType(MenuType menuType,Model model) throws Exception {
+		settingService.getAllProvinceList(model);
 		List<MenuType> rootMentType = menuTypeServiceImpl.findRootMenuTypeList();
 		model.addAttribute("rootMentTypes",rootMentType);
 		return "menuType/addMenuType";
@@ -94,6 +100,7 @@ public class MenuTypeController extends BaseFilter  {
 	 **/
 	@RequestMapping("to_update")
 	public String toUpdateMenuType(Integer id,Model model) throws Exception {
+		settingService.getAllProvinceList(model);
 		MenuType result = menuTypeServiceImpl.selectMenuTypeById(id);
 		List<MenuType> rootMentType = menuTypeServiceImpl.findRootMenuTypeList();
 		model.addAttribute("rootMentTypes",rootMentType);

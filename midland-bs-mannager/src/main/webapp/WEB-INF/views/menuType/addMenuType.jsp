@@ -17,7 +17,7 @@
     <form action="${ctx}/rest/menuType/add" method="post" id="dataForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
-
+            <%@include file="../menu/area_required.jsp" %>
             <li ><span>父分类：</span>
                 <select name="" id="parentIdTemp" class="dropdown" onchange="chooseParent()">
                     <c:forEach items="${rootMentTypes}" var="s">
@@ -29,7 +29,7 @@
             </li>
 
             <li><span>名称：</span>
-               <input type="text" name="name" id="name" ß/>
+               <input type="text" name="name" id="name" onblur="notEmpty('name','name','')"/>
             </li>
             <li>
                 <span></span>
@@ -54,6 +54,10 @@
 
     //保存数据
     function updateData() {
+
+        if (!checkSelect('citys','请选择市级')||!notEmpty('name','name','')){
+            return;
+        }
         var data = $("#dataForm").serialize();
         debugger;
         $.ajax({
