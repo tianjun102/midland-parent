@@ -10,25 +10,42 @@
     <title>Insert title here</title>
     <script type="text/javascript">
     </script>
-
+    <style type="text/css">
+        .content ul.userinfo li > span {
+            float: left;
+            display: inline-block;
+            width: 90px;
+            height: 38px;
+            line-height: 38px;
+            text-align: right;
+            font-size: 14px;
+            color: rgb(102, 102, 102);
+        }
+    </style>
 </head>
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/menuType/update" method="post" id="dataForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
-            <li><span>name：</span>
+            <li class="col-md-6"><span>上级分类：</span>
+                <select name="" id="parentIdTemp" class="dropdown" onchange="chooseParent()">
+                    <c:forEach items="${rootMentTypes}" var="s">
+                        <c:choose>
+                            <c:when test="${s.id ==item.id}"></c:when>
+                            <c:otherwise>
+                                <option value="${s.id}" <c:if test="${item.parentId==s.id}">selected</c:if>>${s.name}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </select>
+                <input type="hidden" id="parentId" name="parentId" value="${item.parentId}">
+                <input type="hidden" id="parentName" name="parentName" value="${item.parentName}">
+            </li>
+            <li><span>名称：</span>
                <input type="text" name="name" id="name" value="${item.name}"/>
             </li>
-            <li><span>parentId：</span>
-               <input type="text" name="parentId" id="parentId" value="${item.parentId}"/>
-            </li>
-            <li><span>parentName：</span>
-               <input type="text" name="parentName" id="parentName" value="${item.parentName}"/>
-            </li>
-            <li><span>isDelete：</span>
-               <input type="text" name="isDelete" id="isDelete" value="${item.isDelete}"/>
-            </li>
+
             <li>
                 <span></span>
                 <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">更新</a>
@@ -40,6 +57,15 @@
 </section>
 
 <script type="text/javascript">
+
+    function chooseParent() {
+        $("#parentId").val($("#parentIdTemp option:selected").val())
+        if ($("#parentIdTemp option:selected").text()=="分类"){
+            $("#parentName").val(" ")
+        }else{
+            $("#parentName").val($("#parentIdTemp option:selected").text())
+        }
+    }
     //保存数据
     function updateData() {
         var data = $("#dataForm").serialize();

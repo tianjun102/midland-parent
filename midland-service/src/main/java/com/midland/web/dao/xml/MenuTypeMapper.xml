@@ -38,6 +38,13 @@
 		where
 		is_delete=0 AND parent_id=0
 	</select>
+	<select id="findMenuTypeTree" parameterType="com.midland.web.model.MenuType" resultMap="BaseResultMap">
+		SELECT b.*,(SELECT name from menu_type a where a.id=b.parent_id ) as parent_name
+		FROM `menu_type` b
+		where
+		is_delete=0
+		<include refid="select_option"/>
+	</select>
 
 	<select id="findMenuTypeList" parameterType="com.midland.web.model.MenuType" resultMap="BaseResultMap">
 		select <include refid="Base_Column_List" /> from menu_type

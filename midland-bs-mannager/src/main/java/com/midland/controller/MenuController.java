@@ -1,5 +1,6 @@
 package com.midland.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.midland.web.model.Area;
 import com.midland.web.model.LiaisonRecordEmail;
 import com.midland.web.model.Menu;
@@ -64,8 +65,8 @@ public class MenuController extends BaseFilter  {
 		settingService.getAllProvinceList(model);
 		List<ParamObject> sources = JsonMapReader.getMap("source");
 		model.addAttribute("sources",sources);
-		List<MenuType> res = menuTypeServiceImpl.findRootMenuTypeList1();
-		model.addAttribute("menuTypes",res);
+		String res = menuTypeServiceImpl.findRootMenuTypeTree(new MenuType());
+		model.addAttribute("menuTypes", res);
 		return "menu/addMenu";
 	}
 
@@ -128,7 +129,8 @@ public class MenuController extends BaseFilter  {
 		List<ParamObject> sources = JsonMapReader.getMap("source");
 		model.addAttribute("sources",sources);
 		settingService.getAllProvinceList(model);
-
+		String res = menuTypeServiceImpl.findRootMenuTypeTree(new MenuType());
+		model.addAttribute("menuTypes", res);
 		return "menu/updateMenu";
 	}
 

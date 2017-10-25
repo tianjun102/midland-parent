@@ -45,7 +45,7 @@
 
     function chooseParent() {
         $("#parentId").val($("#parentIdTemp option:selected").val())
-        if ($("#parentIdTemp option:selected").text()=="根节点"){
+        if ($("#parentIdTemp option:selected").text()=="分类"){
             $("#parentName").val()
         }else{
             $("#parentName").val($("#parentIdTemp option:selected").text())

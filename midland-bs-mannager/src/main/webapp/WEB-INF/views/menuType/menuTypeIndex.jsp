@@ -9,16 +9,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-	.content ul.userinfo li>span {
-		float: left;
-		display: inline-block;
-		width: 90px;
-		height: 38px;
-		line-height: 38px;
-		text-align: right;
-		font-size: 14px;
-		color: rgb( 102, 102, 102 );
-	}
 	.table-add tr td a {
 		display: inline-block;
 		width: 35px;
@@ -48,7 +38,7 @@
 						</c:forEach>
 					</select>
 				</li>
-				<li><span>手机号码：</span>
+				<li><span style="width: 90px">手机号码：</span>
 					<input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>
 				</li>
 				<li>

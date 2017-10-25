@@ -11,8 +11,8 @@
 
 <li style="display:flex;align-items:center"><span>省：</span> <!-- 省 -->
     <label></label> <input type="hidden" name="provinceId">
-    <input type="hidden" name="regionSn"> <input type="hidden"
-                                                 name="provinceName">
+    <input type="hidden" name="regionSn">
+    <input type="hidden"  name="provinceName">
     <!-- 第一次进页面加载省 -->
     <select id="provinces" onchange="initProvince()"
             style="height: 38px;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">

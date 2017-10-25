@@ -54,7 +54,31 @@ public class Menu{
 	 * 城市名称
 	 **/
 	private String cityName;
+	/**
+	 * 微站菜单类型Id
+	 */
+	private Integer menuTypeId;
+	/**
+	 * 微站菜单类型名称
+	 */
+	private String menuTypeName;
 
+
+	public Integer getMenuTypeId() {
+		return menuTypeId;
+	}
+
+	public void setMenuTypeId(Integer menuTypeId) {
+		this.menuTypeId = menuTypeId;
+	}
+
+	public String getMenuTypeName() {
+		return menuTypeName;
+	}
+
+	public void setMenuTypeName(String menuTypeName) {
+		this.menuTypeName = menuTypeName;
+	}
 
 	public Integer getId() {
 		return id;

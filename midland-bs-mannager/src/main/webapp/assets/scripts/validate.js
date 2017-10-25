@@ -58,6 +58,9 @@ function checkEmail(id,name,msg) {
 }
 
 function checkSelect(ids,msgs){
+    if (msgs==null||msgs==""){
+        msgs = "不能为空";
+    }
     var  idArr= new Array();
     var  msgArr= new Array();
     idArr = ids.split("|");
@@ -76,11 +79,18 @@ function checkSelect(ids,msgs){
 
 function checkUrl(id,name,msg){
     var urlString = $("#"+id).val();
+
     if(urlString==null || urlString.trim() == ''){
-        layer.tips("网址不能为空！", "input[name='"+name+"']",{tips:3});
+        if (msg==null||msg==""){
+            msg = "网址不能为空！";
+        }
+        layer.tips(msg, "input[name='"+name+"']",{tips:3});
         return false;
     }
     if(urlString!=""){
+        if (msg==null||msg==""){
+            msg = "网址格式不正确！";
+        }
         var reg=/(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/g;
         if(!reg.test(urlString)){
             layer.tips(msg, "input[name='"+name+"']",{tips:3});

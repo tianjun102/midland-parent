@@ -15,12 +15,14 @@
 		<result column="position" property="position" jdbcType="INTEGER" />
 		<result column="parent_id" property="parentId" jdbcType="INTEGER" />
 		<result column="source" property="source" jdbcType="INTEGER" />
+		<result column="menu_type_id" property="menuTypeId" jdbcType="INTEGER" />
+		<result column="menu_type_name" property="menuTypeName" jdbcType="VARCHAR" />
 		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
 
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,icon_img,city_id,menu_name,click_num,order_by,url,is_show,position,parent_id,source,is_delete,city_name
+		id,icon_img,city_id,menu_name,click_num,order_by,url,is_show,position,parent_id,source,is_delete,city_name,menu_type_id,menu_type_name
 	</sql>
 
 	<select id="selectMenuById" resultMap="BaseResultMap">
@@ -94,6 +96,12 @@
 			<if test="cityName != null">
 				city_name,
 			</if>
+			<if test="menuTypeId != null">
+				menu_type_id,
+			</if>
+			<if test="menuTypeName != null">
+				menu_type_name,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -133,6 +141,12 @@
 			<if test="cityName != null">
 				#{cityName,jdbcType=VARCHAR},
 			</if>
+			 <if test="menuTypeId != null">
+				#{menuTypeId},
+			 </if>
+			 <if test="menuTypeName != null">
+				#{menuTypeName},
+			 </if>
 		</trim>
 	</insert>
 
@@ -172,6 +186,12 @@
 		</if>
 		<if test="cityName != null">
 			city_name= #{cityName,jdbcType=VARCHAR},
+		</if>
+		<if test="menuTypeId != null">
+			 menu_type_id= #{menuTypeId},
+		</if>
+		<if test="menuTypeName != null">
+			 menu_type_name= #{menuTypeName},
 		</if>
 	</sql>
 
@@ -214,6 +234,12 @@
 		</if>
 		<if test="cityName != null">
 			 and city_name= #{cityName,jdbcType=VARCHAR}
+		</if>
+		<if test="menuTypeId != null">
+			and menu_type_id= #{menuTypeId}
+		</if>
+		<if test="menuTypeName != null">
+			and menu_type_name like '%${menuTypeName}%'
 		</if>
 	</sql>
 
