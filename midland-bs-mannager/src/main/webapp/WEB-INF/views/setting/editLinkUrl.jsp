@@ -28,7 +28,7 @@
                 <span>城市：</span>
                 <p style="display: inline-block;height: 38px;">
                     <input type="hidden" name="cityName" id="cityName" value="${linkUrlManager.cityName}">
-                    <select onchange="SetcityNam();" name="cityId" id="cityId" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <select onchange="SetcityNam();" name="cityId" id="cityId" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
                         <option value="">全部</option>
                         <c:forEach items="${cityList}" var="city">
                         <option <c:if test="${linkUrlManager.cityId == city.id}"> selected = 'selected' </c:if>   value="${city.id}">${city.name}</option>

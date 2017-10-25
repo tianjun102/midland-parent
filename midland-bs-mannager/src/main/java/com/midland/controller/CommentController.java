@@ -5,6 +5,7 @@ import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.web.model.Comment;
 import com.midland.web.model.Information;
+import com.midland.web.model.user.User;
 import com.midland.web.service.CommentService;
 import com.midland.web.service.InformationService;
 import com.midland.web.util.MidlandHelper;
@@ -37,7 +38,7 @@ public class CommentController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("index")
-	public String commentIndex(Comment comment, Model model) throws Exception {
+	public String commentIndex(Comment comment, Model model,HttpServletRequest request) throws Exception {
 		if(comment.getInformationId()==null){
 			return "comment/commentAllIndex";
 		}
@@ -45,7 +46,8 @@ public class CommentController extends BaseFilter {
 		information = informationService.selectInformationById(comment.getInformationId());
 		model.addAttribute("comment",comment);
 		model.addAttribute("information",information);
-
+		User user = MidlandHelper.getCurrentUser(request);
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "comment/commentIndex";
 	}
 

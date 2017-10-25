@@ -47,7 +47,10 @@ public class PageConfController extends BaseFilter {
 		model.addAttribute("cityList",cityList);*/
 		settingService.getAllProvinceList(model);
 		User user = MidlandHelper.getCurrentUser(request);
-		model.addAttribute("cityId",user.getCityId());
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "pageConf/pageConfIndex";
 	}
 
@@ -55,13 +58,19 @@ public class PageConfController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("to_add")
-	public String toAddPageConf(PageConf pageConf, Model model) throws Exception {
+	public String toAddPageConf(PageConf pageConf, Model model,HttpServletRequest request) throws Exception {
 		Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
 		parem.put("id","*");
 		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
 		List<Area> cityList = cityMap.get("city");
 		model.addAttribute("cityList",cityList);
+		User user = MidlandHelper.getCurrentUser(request);
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+			model.addAttribute("cityName",user.getCityName());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "pageConf/addPageConf";
 	}
 
@@ -114,7 +123,7 @@ public class PageConfController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("to_update")
-	public String toUpdatePageConf(Integer id,Model model) throws Exception {
+	public String toUpdatePageConf(Integer id,Model model,HttpServletRequest request) throws Exception {
 		Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
 		parem.put("id","*");
@@ -123,6 +132,12 @@ public class PageConfController extends BaseFilter {
 		PageConf result = pageConfServiceImpl.selectPageConfById(id);
 		model.addAttribute("cityList",cityList);
 		model.addAttribute("item",result);
+		User user = MidlandHelper.getCurrentUser(request);
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+			model.addAttribute("cityName",user.getCityName());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "pageConf/updatePageConf";
 	}
 

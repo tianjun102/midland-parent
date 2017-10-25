@@ -38,7 +38,9 @@ public class FeedbackController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("index")
-	public String feedbackIndex(Feedback feedback, Model model) throws Exception {
+	public String feedbackIndex(Feedback feedback, Model model,HttpServletRequest request) throws Exception {
+		User user = MidlandHelper.getCurrentUser(request);
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "feedback/feedbackIndex";
 	}
 

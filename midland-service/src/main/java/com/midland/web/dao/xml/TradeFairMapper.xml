@@ -41,8 +41,10 @@
 
 	<select id="findTradeFairList" parameterType="com.midland.web.model.TradeFair" resultMap="BaseResultMap">
 		select <include refid="Base_Column_List" /> from trade_fair
-		where 
-		is_delete=0
+		where  1=1
+		<if test="isDelete == null">
+			and is_delete=0
+		</if>
 		<include refid="select_option" />
 	</select>
 

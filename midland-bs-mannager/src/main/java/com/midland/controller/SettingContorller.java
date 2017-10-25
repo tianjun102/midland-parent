@@ -57,7 +57,10 @@ public class SettingContorller extends BaseFilter {
         model.addAttribute("cityList",cityList);*/
         settingService.getAllProvinceList(model);
         User user = MidlandHelper.getCurrentUser(request);
-        model.addAttribute("cityId", user.getCityId());
+        if(user.getIsSuper()==null){
+            model.addAttribute("cityId",user.getCityId());
+        }
+        model.addAttribute("isSuper",user.getIsSuper());
         return "setting/showPopularIndex";
     }
 
@@ -90,6 +93,12 @@ public class SettingContorller extends BaseFilter {
         if (StringUtils.isNotEmpty(result)) {
             model.addAttribute("categoryData", result);
         }
+        User user = MidlandHelper.getCurrentUser(request);
+        if(user.getIsSuper()==null){
+            model.addAttribute("cityId",user.getCityId());
+            model.addAttribute("cityName",user.getCityName());
+        }
+        model.addAttribute("isSuper",user.getIsSuper());
         return "setting/addPopular";
     }
 
@@ -165,6 +174,12 @@ public class SettingContorller extends BaseFilter {
         }
         model.addAttribute("sheetList", sheetLst == null ? null : sheetLst.get("sheet"));
         model.addAttribute("popular", popular);
+        User user = MidlandHelper.getCurrentUser(request);
+        if(user.getIsSuper()==null){
+            model.addAttribute("cityId",user.getCityId());
+            model.addAttribute("cityName",user.getCityName());
+        }
+        model.addAttribute("isSuper",user.getIsSuper());
         return "setting/editPopular";
     }
 
@@ -207,7 +222,11 @@ public class SettingContorller extends BaseFilter {
         model.addAttribute("cityList",cityList);*/
         settingService.getAllProvinceList(model);
         User user = MidlandHelper.getCurrentUser(request);
-        model.addAttribute("cityId", user.getCityId());
+        if(user.getIsSuper()==null){
+            model.addAttribute("cityId",user.getCityId());
+            model.addAttribute("cityName",user.getCityName());
+        }
+        model.addAttribute("isSuper",user.getIsSuper());
         return "setting/linkUrlMannagerIndex";
     }
 
@@ -259,6 +278,12 @@ public class SettingContorller extends BaseFilter {
         Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
         List<Area> cityList = cityMap.get("city");
         model.addAttribute("cityList", cityList);
+        User user = MidlandHelper.getCurrentUser(request);
+        if(user.getIsSuper()==null){
+            model.addAttribute("cityId",user.getCityId());
+            model.addAttribute("cityName",user.getCityName());
+        }
+        model.addAttribute("isSuper",user.getIsSuper());
         return "setting/addLinkUrl";
     }
 
@@ -284,6 +309,12 @@ public class SettingContorller extends BaseFilter {
         model.addAttribute("cityList", cityList);
         linkUrlManager = settingService.findLinkUrlManager(linkUrlManager);
         model.addAttribute("linkUrlManager", linkUrlManager);
+        User user = MidlandHelper.getCurrentUser(request);
+        if(user.getIsSuper()==null){
+            model.addAttribute("cityId",user.getCityId());
+            model.addAttribute("cityName",user.getCityName());
+        }
+        model.addAttribute("isSuper",user.getIsSuper());
         return "setting/editLinkUrl";
     }
 
@@ -322,11 +353,14 @@ public class SettingContorller extends BaseFilter {
         Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
         List<Area> cityList = cityMap.get("city");
         model.addAttribute("cityList",cityList);*/
-        settingService.getAllProvinceList(model);
-        User user = MidlandHelper.getCurrentUser(request);
         List<ParamObject> obj = JsonMapReader.getMap("source");
         model.addAttribute("sources",obj);
-        model.addAttribute("cityId", user.getCityId());
+        User user = MidlandHelper.getCurrentUser(request);
+        if(user.getIsSuper()==null){
+            model.addAttribute("cityId",user.getCityId());
+            model.addAttribute("cityName",user.getCityName());
+        }
+        model.addAttribute("isSuper",user.getIsSuper());
         return "setting/bannerIndex";
     }
 
@@ -356,7 +390,12 @@ public class SettingContorller extends BaseFilter {
         Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
         List<Area> cityList = cityMap.get("city");
         model.addAttribute("cityList", cityList);
-
+        User user = MidlandHelper.getCurrentUser(request);
+        if(user.getIsSuper()==null){
+            model.addAttribute("cityId",user.getCityId());
+            model.addAttribute("cityName",user.getCityName());
+        }
+        model.addAttribute("isSuper",user.getIsSuper());
         return "setting/addBanner";
     }
 
@@ -390,6 +429,12 @@ public class SettingContorller extends BaseFilter {
         model.addAttribute("cityList", cityList);
         banner = settingService.findBanner(banner);
         model.addAttribute("banner", banner);
+        User user = MidlandHelper.getCurrentUser(request);
+        if(user.getIsSuper()==null){
+            model.addAttribute("cityId",user.getCityId());
+            model.addAttribute("cityName",user.getCityName());
+        }
+        model.addAttribute("isSuper",user.getIsSuper());
         return "/setting/editBanner";
     }
 

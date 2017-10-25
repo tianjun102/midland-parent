@@ -28,14 +28,17 @@
     &nbsp;&nbsp;
     <p id="city" style="display: inline-block;height: 38px;">
         <span>市：</span>
-        <label></label> <input type="hidden" name="cityId" id="cityId" value="${cityId}">
-        <input type="hidden" name="cityName" id="cityName">
+        <label></label> <c:if test="${not empty isSuper}"><input type="hidden" name="cityId" id="cityId" value="${cityId}"></c:if>
+        <c:if test="${not empty isSuper}"><input type="hidden" name="cityName" id="cityName"></c:if>
+        <c:if test="${empty isSuper}"><input type="hidden" name="cityId"  value="${cityId}"></c:if>
+        <c:if test="${empty isSuper}"><input type="hidden" name="cityName"  value="${cityName}"></c:if>
         <select id="citys" onchange="initCity()"
                 <c:if test="${not empty isSuper}"> style="height: 38px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;"</c:if>   <c:if test="${empty isSuper}">style="height: 38px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;background-color: #dddfe2;" disabled="disabled"</c:if>　>
+            <c:if test="${empty isSuper}"><option selected="selected" value="${cityId}">${cityName}</option></c:if>
             <option value="">请选择</option>
         </select>
     </p>
-
+</li>
 <script type="text/javascript">
 
     //省级赋值

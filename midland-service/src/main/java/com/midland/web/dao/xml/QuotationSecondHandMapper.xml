@@ -48,8 +48,10 @@
         select
         <include refid="Base_Column_List"/>
         from quotation_second_hand
-        where
-        is_delete=0
+        where 1=1
+        <if test="isDelete == null">
+            and is_delete=0
+        </if>
         <include refid="select_option"/>
     </select>
 

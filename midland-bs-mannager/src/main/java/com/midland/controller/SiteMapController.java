@@ -52,7 +52,11 @@ public class SiteMapController extends BaseFilter {
 		model.addAttribute("cityList",cityList);*/
 		settingService.getAllProvinceList(model);
 		User user = MidlandHelper.getCurrentUser(request);
-		model.addAttribute("cityId",user.getCityId());
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+			model.addAttribute("cityName",user.getCityName());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "siteMap/siteMapIndex";
 	}
 
@@ -60,7 +64,7 @@ public class SiteMapController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("to_add")
-	public String toAddSiteMap(SiteMap siteMap,Model model) throws Exception {
+	public String toAddSiteMap(SiteMap siteMap,Model model,HttpServletRequest request) throws Exception {
 		Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
 		parem.put("id","*");
@@ -73,6 +77,12 @@ public class SiteMapController extends BaseFilter {
 			model.addAttribute("categoryData",resultCate );
 		}
 		model.addAttribute("cityList",cityList);
+		User user = MidlandHelper.getCurrentUser(request);
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+			model.addAttribute("cityName",user.getCityName());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "siteMap/addSiteMap";
 	}
 
@@ -125,7 +135,7 @@ public class SiteMapController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("to_update")
-	public String toUpdateSiteMap(Integer id,Model model) throws Exception {
+	public String toUpdateSiteMap(Integer id,Model model,HttpServletRequest request) throws Exception {
 		SiteMap result = siteMapServiceImpl.selectSiteMapById(id);
 		Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
@@ -140,6 +150,12 @@ public class SiteMapController extends BaseFilter {
 		}
 		model.addAttribute("cityList",cityList);
 		model.addAttribute("item",result);
+		User user = MidlandHelper.getCurrentUser(request);
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+			model.addAttribute("cityName",user.getCityName());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "siteMap/updateSiteMap";
 	}
 

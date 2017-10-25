@@ -45,10 +45,15 @@ public class MenuController extends BaseFilter  {
 	 * 
 	 **/
 	@RequestMapping("index")
-	public String menuIndex(Menu menu,Model model) throws Exception {
+	public String menuIndex(Menu menu,Model model,HttpServletRequest request) throws Exception {
 		settingService.getAllProvinceList(model);
 		List<ParamObject> sources = JsonMapReader.getMap("source");
 		model.addAttribute("sources",sources);
+		User user = MidlandHelper.getCurrentUser(request);
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "menu/menuIndex";
 	}
 
@@ -56,10 +61,16 @@ public class MenuController extends BaseFilter  {
 	 * 
 	 **/
 	@RequestMapping("to_add")
-	public String toAddMenu(Menu menu,Model model) throws Exception {
+	public String toAddMenu(Menu menu,Model model,HttpServletRequest request) throws Exception {
 		settingService.getAllProvinceList(model);
 		List<ParamObject> sources = JsonMapReader.getMap("source");
 		model.addAttribute("sources",sources);
+		User user = MidlandHelper.getCurrentUser(request);
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+			model.addAttribute("cityName",user.getCityName());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "menu/addMenu";
 	}
 
@@ -114,7 +125,7 @@ public class MenuController extends BaseFilter  {
 	 * 
 	 **/
 	@RequestMapping("to_update")
-	public String toUpdateMenu(Integer id,Model model) throws Exception {
+	public String toUpdateMenu(Integer id,Model model,HttpServletRequest request) throws Exception {
 		settingService.getAllProvinceList(model);
 
 		Menu result = menuServiceImpl.selectMenuById(id);
@@ -122,7 +133,12 @@ public class MenuController extends BaseFilter  {
 		List<ParamObject> sources = JsonMapReader.getMap("source");
 		model.addAttribute("sources",sources);
 		settingService.getAllProvinceList(model);
-
+		User user = MidlandHelper.getCurrentUser(request);
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+			model.addAttribute("cityName",user.getCityName());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "menu/updateMenu";
 	}
 

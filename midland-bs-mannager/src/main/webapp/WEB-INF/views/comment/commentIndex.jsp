@@ -19,6 +19,7 @@
 		<form action="${ctx }/rest/comment/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<input type="hidden" name="informationId" value="${comment.informationId}">
+			<ul class = "userinfo row">
 			<li><span>城市：</span>
 				<p style="display: inline">${information.cityName}</p>
 			</li>
@@ -28,7 +29,7 @@
 			<li><span>发布时间：</span>
 				<p style="display: inline">${information.releaseTime}</p>
 			</li>
-			<ul class = "userinfo row">
+
 				<%--<li><span>select：</span>
 					<select name="cityId" id="cityId" class="dropdown">
 						<option value="" >全部</option>

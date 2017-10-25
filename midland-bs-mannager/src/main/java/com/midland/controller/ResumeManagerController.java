@@ -4,6 +4,7 @@ import com.midland.base.BaseFilter;
 import com.midland.web.api.ApiHelper;
 import com.midland.web.model.Area;
 import com.midland.web.model.ResumeManager;
+import com.midland.web.model.user.User;
 import com.midland.web.service.ResumeManagerService;
 import com.midland.web.service.SettingService;
 import org.apache.commons.io.IOUtils;
@@ -53,13 +54,13 @@ public class ResumeManagerController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("index")
-	public String resumeManagerIndex(ResumeManager resumeManager,Model model) throws Exception {
-		Map<String,String> parem = new HashMap<>();
-		parem.put("flag","city");
-		parem.put("id","*");
-		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
-		List<Area> cityList = cityMap.get("city");
-		model.addAttribute("cityList",cityList);
+	public String resumeManagerIndex(ResumeManager resumeManager,Model model,HttpServletRequest request) throws Exception {
+		settingService.getAllProvinceList(model);
+		User user = MidlandHelper.getCurrentUser(request);
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "resumeManager/resumeManagerIndex";
 	}
 
@@ -67,13 +68,19 @@ public class ResumeManagerController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("to_add")
-	public String toAddResumeManager(ResumeManager resumeManager,Model model) throws Exception {
+	public String toAddResumeManager(ResumeManager resumeManager,Model model,HttpServletRequest request) throws Exception {
 		Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
 		parem.put("id","*");
 		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
 		List<Area> cityList = cityMap.get("city");
 		model.addAttribute("cityList",cityList);
+		User user = MidlandHelper.getCurrentUser(request);
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+			model.addAttribute("cityName",user.getCityName());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "resumeManager/addResumeManager";
 	}
 

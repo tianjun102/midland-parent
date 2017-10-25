@@ -44,9 +44,11 @@ public class EliteClubController extends BaseFilter {
 		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
 		List<Area> cityList = cityMap.get("city");
 		model.addAttribute("cityList",cityList);*/
-		settingService.getAllProvinceList(model);
 		User user = MidlandHelper.getCurrentUser(request);
-		model.addAttribute("cityId",user.getCityId());
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "eliteClub/eliteClubIndex";
 	}
 
@@ -54,13 +56,19 @@ public class EliteClubController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("to_add")
-	public String toAddEliteClub(EliteClub eliteClub,Model model) throws Exception {
+	public String toAddEliteClub(EliteClub eliteClub,Model model,HttpServletRequest request) throws Exception {
 		Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
 		parem.put("id","*");
 		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
 		List<Area> cityList = cityMap.get("city");
 		model.addAttribute("cityList",cityList);
+		User user = MidlandHelper.getCurrentUser(request);
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+			model.addAttribute("cityName",user.getCityName());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "eliteClub/addEliteClub";
 	}
 
@@ -113,7 +121,7 @@ public class EliteClubController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("to_update")
-	public String toUpdateEliteClub(Integer id,Model model) throws Exception {
+	public String toUpdateEliteClub(Integer id,Model model,HttpServletRequest request) throws Exception {
 		EliteClub result = eliteClubServiceImpl.selectEliteClubById(id);
 		Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
@@ -122,6 +130,12 @@ public class EliteClubController extends BaseFilter {
 		List<Area> cityList = cityMap.get("city");
 		model.addAttribute("cityList",cityList);
 		model.addAttribute("item",result);
+		User user = MidlandHelper.getCurrentUser(request);
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+			model.addAttribute("cityName",user.getCityName());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "eliteClub/updateEliteClub";
 	}
 

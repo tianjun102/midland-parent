@@ -43,8 +43,10 @@
 
 	<select id="findSiteMapList" parameterType="com.midland.web.model.SiteMap" resultMap="BaseResultMap">
 		select <include refid="Base_Column_List" /> from site_map
-		where 
-		is_delete=0
+		where  1=1
+		<if test="isDelete == null">
+			and is_delete=0
+		</if>
 		<include refid="select_option" />
 		ORDER BY order_by ASC
 	</select>

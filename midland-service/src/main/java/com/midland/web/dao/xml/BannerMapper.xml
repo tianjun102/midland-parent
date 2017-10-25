@@ -49,8 +49,10 @@
 
 	<select id="findBannerList" parameterType="com.midland.web.model.Banner" resultMap="BaseResultMap">
 		select <include refid="Base_Column_List" /> from banner
-		where 
-		is_delete=0
+		where  1=1
+		<if test="isDelete == null">
+			and is_delete=0
+		</if>
 		<include refid="select_option" />
 		ORDER BY order_by ASC
 	</select>

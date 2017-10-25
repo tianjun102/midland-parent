@@ -41,7 +41,7 @@
             <%@include file="area.jsp" %>
             <li style="display:flex;align-items:center">
                 <span>平台：</span>
-                <select name="source" id="source" class="dropdown">
+                <select name="source" id="source" class="dropdown" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
                     <c:forEach items="${sources}" var="s">
                         <option value="${s.id}" <c:if test="${s.id == item.source}">selected="selected"</c:if>>
                                 ${s.name}

@@ -46,7 +46,7 @@
             <input type="hidden" name="id" id="id" value="${item.id}">
             <ul class = "adminfo row">
                 <li><span>城市：</span>
-                    <select onchange="setCityName();" name="cityId" id="cityId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <select onchange="setCityName();" name="cityId" id="cityId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
                         <option value="">全部</option>
                         <c:forEach items="${cityList}" var="city">
                             <option <c:if test="${item.cityId == city.id}">selected = 'selected'</c:if> value="${city.id}">${city.name}</option>

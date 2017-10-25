@@ -45,8 +45,10 @@
 
 	<select id="findPageConfList" parameterType="com.midland.web.model.PageConf" resultMap="BaseResultMap">
 		select <include refid="Base_Column_List" /> from page_conf
-		where 
-		is_delete=0
+		where  1=1
+		<if test="isDelete == null">
+			and is_delete=0
+		</if>
 		<include refid="select_option" />
 	</select>
 

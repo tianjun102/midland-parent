@@ -69,7 +69,10 @@
         <include refid="Base_Column_List"/>
         from quotation
         where
-        is_delete=0
+        1=1
+        <if test="isDelete == null">
+            and is_delete=0
+        </if>
         <include refid="select_option"/>
     </select>
 
