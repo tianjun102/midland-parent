@@ -213,7 +213,7 @@ DROP TABLE IF EXISTS `entrust`;
 CREATE TABLE `entrust` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '委托表主键id；',
   `entrust_sn` varchar(11) DEFAULT NULL COMMENT '委托编号',
-  `source` int(11) DEFAULT NULL COMMENT '网站来源；0=网站；1=微站；',
+  `source` int(11) DEFAULT NULL COMMENT '平台；0=网站；1=微站；',
   `house_type` int(11) DEFAULT NULL COMMENT '房屋类型；0=住宅；1=公寓；2=写字楼；3=商铺',
   `sell_rent` int(11) DEFAULT NULL COMMENT '0=租；1=售',
   `entrust_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '委托时间',
@@ -346,7 +346,7 @@ CREATE TABLE `information` (
   `cate_parentId` int(11) DEFAULT NULL COMMENT '分类父id',
   `type` varchar(11) DEFAULT NULL COMMENT '楼盘类型；住宅；商铺等',
   `title` varchar(255) DEFAULT NULL COMMENT '标题',
-  `source` varchar(100) DEFAULT NULL COMMENT '来源',
+  `source` varchar(100) DEFAULT NULL COMMENT '平台',
   `enclosure` varchar(255) DEFAULT NULL COMMENT '附件地址',
   `meta_keywords` varchar(500) DEFAULT NULL COMMENT 'meta关键字',
   `meta_desc` varchar(500) DEFAULT NULL COMMENT 'meta描述',
@@ -417,7 +417,7 @@ CREATE TABLE `menu` (
   `isshow` int(2) DEFAULT NULL COMMENT '是否开启',
   `position` int(2) DEFAULT NULL COMMENT 'position=1顶部；position=0底部',
   `parent_id` int(11) DEFAULT NULL COMMENT '父节点id',
-  `source` int(2) DEFAULT NULL COMMENT '平台来源 0=网站；1=微站',
+  `source` int(2) DEFAULT NULL COMMENT '平台 0=网站；1=微站',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -483,7 +483,7 @@ CREATE TABLE `qr_code` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id 二维码管理表',
   `img_url` varchar(255) DEFAULT NULL COMMENT '二维码连接',
   `city_id` varchar(11) DEFAULT NULL COMMENT '城市id',
-  `source` int(11) DEFAULT NULL COMMENT '平台 来源',
+  `source` int(11) DEFAULT NULL COMMENT '平台',
   `name` varchar(100) DEFAULT NULL COMMENT '名称',
   `isshow` int(2) DEFAULT NULL COMMENT '是否开放',
   PRIMARY KEY (`id`)

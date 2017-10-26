@@ -280,7 +280,7 @@
     }
 
     function subumintBanner(){
-        if(!(notEmpty('startTime','startTime','开始时间不能为空！')&&notEmpty('endTime','endTime','结束时间不能为空！')&&checkSelect("source|model|position","来源不能为空！|模块不能为空！|位置不能为空！"))){
+        if(!(notEmpty('startTime','startTime','开始时间不能为空！')&&notEmpty('endTime','endTime','结束时间不能为空！')&&checkSelect("source|model|position","平台不能为空！|模块不能为空！|位置不能为空！"))){
             return;
         }
         if($("#picLike").attr("style")!='display: none;'){
