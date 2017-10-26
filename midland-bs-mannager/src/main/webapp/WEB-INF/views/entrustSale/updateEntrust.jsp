@@ -9,6 +9,15 @@
     <title>Insert title here</title>
 
     <style type="text/css">
+        section.content{
+            padding: 0 13px 0 30px;
+        }
+        .content ul.userinfo{
+            height: 657px;
+            overflow: hidden;
+            overflow-y: scroll;
+            padding: 15px 0 25px;
+        }
         .content ul.userinfo > li {
             margin-left: 0;
             padding-top: 8px;
@@ -62,32 +71,24 @@
     <form action="${ctx}/rest//entrust/sale/update" method="post" id="appointInfoForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${entrust.id}">
-            <li class="col-md-6"><span>预约编号：</span><input type="text" name="entrustSn" id="entrustSn" disabled="disabled"
-                                                          value="${entrust.entrustSn}"/>
+            <li class="col-md-6"><span>预约编号：</span>
+                <input type="text" name="entrustSn" id="entrustSn" disabled="disabled" value="${entrust.entrustSn}"/>
             </li>
-            <li class="col-md-6"><span>委托时间：</span><input type="text" name="entrustTime" id="entrustTime" disabled="disabled"
-                                                          value="${entrust.entrustTime}" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" maxlength="50"/><span
-                    class="_star">*</span>
+            <li class="col-md-6"><span>委托时间：</span>
+                <input type="text" name="entrustTime" id="entrustTime" disabled="disabled" value="${entrust.entrustTime}" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" maxlength="50"/>
+
             </li>
-            <li class="col-md-6"><span>委托人：</span><input type="text" name="nickName" id="nickName"  onblur="notEmpty('nickName','nickName','')"
-                                                        value="${entrust.nickName}"/>
+            <li class="col-md-6"><span>委托人：</span>
+                <input type="text" name="nickName" id="nickName"  onblur="notEmpty('nickName','nickName','')" value="${entrust.nickName}"/><span  class="_star">*</span></li>
             </li>
-            <li class="col-md-6"><span>手机号码：</span><input type="text" name="phone" id="phone" onblur="checkPhone('','phone','')"
-                                                          value="${entrust.phone}"
-                                                          maxlength="50"/><span class="_star">*</span></li>
-            <li class="col-md-6"><span>分类：</span>
-                <select name="sellRent" id="sellRent" class="dropdown">
-                    <c:forEach items="${sellRents}" var="s">
-                        <option value="${s.id}" <c:if test="${s.id==entrust.sellRent}">selected</c:if>>
-                                ${s.name}
-                        </option>
-                    </c:forEach>
-                </select>
+            <li class="col-md-6"><span>手机号码：</span>
+                <input type="text" name="phone" id="phone" onblur="checkPhone('','phone','')" value="${entrust.phone}" maxlength="50"/>
                 <span class="_star">*</span>
             </li>
 
-            <li class="col-md-6"><span>委托类型：</span>
-                <select name="houseType" id="houseType" class="dropdown">
+
+            <li class="col-md-6"><span>房屋类型：</span>
+                <select name="houseType" id="houseType" class="dropdown" disabled="disabled"  disabled="disabled">
 
                     <c:forEach items="${houses}" var="s">
                         <option value="${s.id}" <c:if test="${s.id==entrust.houseType}">selected</c:if>>
@@ -97,34 +98,35 @@
 
                 </select>
             </li>
-
-            <li class="col-md-6"><span>区域：</span><input type="text" name="areaName" id="areaName"  onblur="notEmpty('areaName','areaName','')" value="${entrust.areaName}"/>
-            </li>
-            <li class="col-md-6"><span>小区：</span><input type="text" name="communityName" id="communityName"  onblur="notEmpty('communityName','communityName','')"
-                                                        value="${entrust.communityName}" maxlength="50"/><span
-                    class="_star">*</span></li>
-            <li class="col-md-6"><span>地址：</span><input type="text" name="address" id="address"  onblur="notEmpty('address','address','')"
-                                                        value="${entrust.address}"/>
-            </li>
-            <li class="col-md-6"><span>户型：</span><input type="text" name="layout" id="layout"  onblur="notEmpty('layout','layout','')"
-                                                        value="${entrust.layout}"/>
-
-            </li>
-            <li class="col-md-6"><span>面积：</span><input type="text" name="measure" id="measure"  onblur="notEmpty('measure','measure','');InitInput.setNumber(this,9,2,2)"
-                                                        value="${entrust.measure}"
-                                                        maxlength="50"/>㎡<span class="_star">*</span></li>
-            <li class="col-md-6"><span>装修：</span>
-                <select name="renovation" id="renovation" class="dropdown">
-
+            <li class="col-md-6"><span>装修情况：</span>
+                <select name="renovation" id="renovation" class="dropdown" disabled="disabled">
                     <c:forEach items="${decorations}" var="s">
                         <option value="${s.id}" <c:if test="${s.id==entrust.renovation}">selected</c:if>>
                                 ${s.name}
                         </option>
                     </c:forEach>
-
                 </select>
+            </li>
+            <li class="col-md-6"><span>区域：</span>
+                <input type="text" name="areaName"  disabled="disabled" id="areaName"  onblur="notEmpty('areaName','areaName','')" value="${entrust.areaName}"/>
+            </li>
+            <li class="col-md-6"><span>小区：</span>
+                <input type="text" name="communityName"  disabled="disabled" id="communityName"  onblur="notEmpty('communityName','communityName','')" value="${entrust.communityName}" maxlength="50"/>
+            </li>
+
+
+            <li class="col-md-6"><span>户型：</span>
+                <input type="text" name="layout" id="layout"  disabled="disabled" onblur="notEmpty('layout','layout','')"  value="${entrust.layout}"/>
 
             </li>
+            <li class="col-md-6"><span>面积：</span>
+                <input type="text" name="measure" id="measure"  disabled="disabled" onblur="notEmpty('measure','measure','');InitInput.setNumber(this,9,2,2)"  value="${entrust.measure}" maxlength="50"/>㎡
+            </li>
+
+            <li class="col-md-6"><span>出售价位：</span>
+                <input type="text" name="price" id="price"  disabled="disabled"  onblur="notEmpty('price','price','');InitInput.setNumber(this,9,2,2)" value="${entrust.price}" maxlength="50"/>
+            </li>
+
             <li class="col-md-6"><span>状态：</span>
                 <select name="status" id="status" class="dropdown">
 
@@ -136,17 +138,18 @@
 
                 </select>
             </li>
-            <li class="col-md-11"><span>备注：</span>
-                <textarea name="remark" id="remark"
-                          style="width:calc(100% - 120px);height:50px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;"></textarea>
+            <li class="col-md-11"><span>用户备注：</span>
+                <textarea name="remark" id="remark" style="width:calc(100% - 120px);height:50px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;" disabled="disabled"></textarea>
+            <li class="col-md-11"><span>处理备注：</span>
+                <textarea name="remark" id="dealRemark" style="width:calc(100% - 120px);height:50px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;"></textarea>
             </li>
             </li>
             <li class="col-md-11"><span>处理记录：</span>
                 <textarea name="record" id="record" disabled="disabled"
                           style="width:calc(100% - 120px);height:150px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;">
-<c:forEach items="${entrustLogs}" var="s">状态    ： <c:forEach items="${statusList}" var="m"><c:if test="${m.id==s.state}">${m.name}</c:if> </c:forEach>
+<c:forEach items="${entrustLogs}" var="s">状态    ：<c:forEach items="${statusList}" var="m"><c:if test="${m.id==s.state}">${m.name}</c:if> </c:forEach>
 时间    ：${s.logTime}
-操作人：${s.operatorName}
+操作人： ${s.operatorName}
 备注    ：${s.remark}
 
 
@@ -177,36 +180,32 @@
 
     //保存数据
     function updateData() {
-        if(!notEmpty('nickName','nickName','')||!notEmpty('areaName','areaName','')
-            ||!notEmpty('communityName','communityName','')||!notEmpty('address','address','')||!notEmpty('layout','layout','')||!notEmpty('measure','measure','')
-            ||!checkPhone('','phone','')){
-            return;
-        }
+        if (notEmpty('nickName', 'nickName', '') && checkPhone('phone', 'phone', '')) {
+            var data = $("#appointInfoForm").serialize();
 
-        var data = $("#appointInfoForm").serialize();
+            $.ajax({
+                type: "post",
+                url: "${ctx}/rest/entrust/sale/update",
+                async: false, // 此处必须同步
+                dataType: "json",
+                data: data,
+                success: function (data) {
+                    if (data.state == 0) {
+                        layer.msg("保存成功！！！", {icon: 1});
+                        $('#save').removeAttr("onclick");
+                        setTimeout(function () {
+                            parent.location.reload();
+                        }, 1000);
 
-        $.ajax({
-            type: "post",
-            url: "${ctx}/rest/entrust/sale/update",
-            async: false, // 此处必须同步
-            dataType: "json",
-            data: data,
-            success: function (data) {
-                if (data.state == 0) {
-                    layer.msg("保存成功！！！", {icon: 1});
-                    $('#save').removeAttr("onclick");
-                    setTimeout(function () {
-                        parent.location.reload();
-                    }, 1000);
-
-                } else {
+                    } else {
+                        layer.msg("保存失败！", {icon: 2});
+                    }
+                },
+                error: function () {
                     layer.msg("保存失败！", {icon: 2});
                 }
-            },
-            error: function () {
-                layer.msg("保存失败！", {icon: 2});
-            }
-        });
+            });
+        }
     }
 
 

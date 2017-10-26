@@ -81,7 +81,7 @@
             layer.open({
                 type: 2,
                 skin: 'layer-style',
-                area: ['1000px', '750px'],
+                area: ['1000px', '700px'],
                 shadeClose: false, //点击遮罩关闭
                 title:['委托'],
                 resize: false,

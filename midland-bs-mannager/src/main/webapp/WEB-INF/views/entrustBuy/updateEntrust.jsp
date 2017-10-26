@@ -9,6 +9,15 @@
     <title>Insert title here</title>
 
     <style type="text/css">
+        section.content{
+            padding: 0 13px 0 30px;
+        }
+        .content ul.userinfo{
+            height: 657px;
+            overflow: hidden;
+            overflow-y: scroll;
+            padding: 15px 0 25px;
+        }
         .content ul.userinfo > li {
             margin-left: 0;
             padding-top: 8px;
@@ -70,10 +79,12 @@
                 <input type="text" name="entrustTime" id="entrustTime"  disabled="disabled" value="${entrust.entrustTime}" maxlength="50"/>
             </li>
             <li class="col-md-6"><span>联系人：</span>
-                <input type="text" name="nickName" id="nickName" disabled="disabled" value="${entrust.nickName}"/>
+                <input type="text" name="nickName" id="nickName" value="${entrust.nickName}"  onblur="notEmpty('nickName','nickName','')"/>
+                <span class="_star">*</span>
             </li>
             <li class="col-md-6"><span>手机号码：</span>
-                <input type="text" name="phone" id="phone" disabled="disabled" value="${entrust.phone}"  maxlength="50"/>
+                <input type="text" name="phone" id="phone" value="${entrust.phone}"  onblur="checkPhone('','phone','')"  maxlength="50"/>
+                <span class="_star">*</span>
              </li>
             <li class="col-md-6"><span>房屋类型：</span>
                 <select name="houseType" id="houseType" class="dropdown" disabled="disabled">
@@ -138,10 +149,11 @@
             </li>
             <li class="col-md-11"><span>处理记录：</span>
                 <textarea name="record" id="record"  style="width:calc(100% - 120px);height:150px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;">
-<c:forEach items="${entrustLogs}" var="s">       状态 ：<c:forEach items="${statusList}" var="m"><c:if test="${m.id==s.state}">${m.name}</c:if></c:forEach>
-      时间 ：${s.logTime}
-    操作人：${s.operatorName}
-      备注 ：${s.remark}
+<c:forEach items="${entrustLogs}" var="s">状态    ：<c:forEach items="${statusList}" var="m"><c:if test="${m.id==s.state}">${m.name}</c:if></c:forEach>
+时间    ：${s.logTime}
+操作人：${s.operatorName}
+备注    ：${s.remark}
+
 </c:forEach>
                 </textarea>
             </li>
@@ -161,7 +173,7 @@
 
     //保存数据
     function updateData() {
-
+        if (checkPhone('','phone','')&&notEmpty('nickName','nickName','')){
         var data = $("#appointInfoForm").serialize();
 
         $.ajax({
@@ -186,6 +198,7 @@
                 layer.msg("保存失败！", {icon: 2});
             }
         });
+        }
     }
 
     //取消

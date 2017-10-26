@@ -347,11 +347,11 @@
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="userList">
-						<a id = "system4" href="${ctx}/rest/user/userIndex" target="contentF"><span>用户管理</span></a>
+						<a id = "system4" href="${ctx}/rest/user/userIndex" target="contentF"><span>后台用户管理</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="bsUserList">
-						<a id = "system4" href="${ctx}/rest/user/bsUserIndex" target="contentF"><span>前台用户列表</span></a>
+						<a id = "system4" href="${ctx}/rest/user/bsUserIndex" target="contentF"><span>前台用户管理</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="rolelist">
