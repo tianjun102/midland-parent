@@ -67,7 +67,6 @@
             <th style="width:auto">户型</th>
             <th style="width:auto">面积</th>
             <th style="width:auto">售价/租价</th>
-            <th style="width:auto">预约时间</th>
             <th style="width:auto">经纪人</th>
             <th style="width:auto">状态</th>
             <th style="width:auto">处理时间</th>
@@ -102,7 +101,6 @@
                         <td>${item.layout }</td>
                         <td>${item.measure }</td>
                         <td>${item.price }</td>
-                        <td>${item.entrustTime }</td>
                         <td>${item.agentName }</td>
                         <td><c:forEach items="${statusList}" var="s">
                             <c:if test="${item.status == s.id}">${s.name}</c:if>

@@ -10,7 +10,7 @@
 </head>
 <body>
 
-            <li class=""><span>省：</span> <!-- 省 -->
+            <li class=""><span style="width: 30px;">省：</span> <!-- 省 -->
                 <p id="province" style="display: inline-block;height: 38px;">
                     <input type="hidden"  name="provinceId">
                     <input type="hidden" name="regionSn"> <input type="hidden"
