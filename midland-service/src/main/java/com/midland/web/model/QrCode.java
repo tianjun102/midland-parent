@@ -15,7 +15,7 @@ public class QrCode{
 	 **/
 	private String cityId;
 	/**
-	 * 平台 来源
+	 * 平台
 	 **/
 	private Integer source;
 	/**

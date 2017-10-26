@@ -24,7 +24,7 @@ public class Information{
 	 **/
 	private String title;
 	/**
-	 * 来源
+	 * 平台
 	 **/
 	private String source;
 	/**

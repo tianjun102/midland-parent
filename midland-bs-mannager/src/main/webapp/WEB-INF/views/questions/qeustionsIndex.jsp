@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@include file="../layout/tablib.jsp" %>
+<%@include file="../layout/source.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,7 +19,7 @@
         }
         .content ul.userinfo li:not(:last-child) input{
             float: left;
-            width: 250px;
+            width: 180px;
             height: 38px;
             line-height: 38px;
             text-indent: 10px;
@@ -28,6 +29,14 @@
             border-color: rgb(219, 226, 230);
             border-image: initial;
             border-radius: 4px;
+        }
+        .dropdown {
+            height: 38px;
+            line-height: 38px;
+            border: 1px solid #dbe2e6!important;
+            width: 150px;
+            display: inline-table!important;
+            /* float: left; */
         }
     </style>
 </head>
@@ -61,7 +70,7 @@
                     <input type="text" name="questionPhone" id="questionPhone" placeholder="请输入手机号码"/>
                 </li>
                 <li>
-                    <span>来源：</span>
+                    <span>平台：</span>
                     <select name="source" id="source" class="dropdown">
                         <option value="">请选择</option>
                         <c:forEach items="${sources}" var="s">

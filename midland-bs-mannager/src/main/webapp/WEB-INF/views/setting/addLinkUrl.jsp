@@ -65,7 +65,7 @@
 </section>
 <script type="text/javascript">
     function saveData() {
-        if(notEmpty('linkName','linkName','链接名不能为空！')&&checkSelect("source","来源不能为空！")&&notEmpty('linkUrl','linkUrl','链接名不能为空！')&&notEmpty('contacts','contacts','链接名不能为空！')&&checkPhone('phone','phone','手机格式不正确！')){
+        if(notEmpty('linkName','linkName','链接名不能为空！')&&checkSelect("source","平台不能为空！")&&notEmpty('linkUrl','linkUrl','链接名不能为空！')&&notEmpty('contacts','contacts','链接名不能为空！')&&checkPhone('phone','phone','手机格式不正确！')){
            var data = $("#addFrom").serialize();
 
             $.ajax({
