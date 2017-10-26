@@ -27,7 +27,7 @@
 <body>
 
 
-<div class="table-responsive m40">
+<div class="table-responsive m40"   style="max-height: 480px;overflow: auto;"  id='table-cont'>
     <table class="table table-bordered table-add">
         <thead>
         <tr>
@@ -108,7 +108,19 @@
 </c:if>
 
 <script type="text/javascript">
+    $(function () {
+        var tableCont = document.querySelector('#table-cont');
+        /**
+         * scroll handle
+         * @param {event} e -- scroll event
+         */
+        function scrollHandle (e){
+            var scrollTop = this.scrollTop;
+            this.querySelector('thead').style.transform = 'translateY(' + scrollTop + 'px)';
+        }
 
+        tableCont.addEventListener('scroll',scrollHandle);
+    })
     function toRedistribute(id) {
         //重新分配经纪人时，保存的地址
         var url = "${ctx}/rest/entrust/reset_agent";
