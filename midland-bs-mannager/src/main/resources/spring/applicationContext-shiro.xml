@@ -21,6 +21,8 @@
                 /rest/user/checkLink = anon
                 /rest/user/sendSms = anon
                 /rest/user/checkVcode = anon
+                /rest/user/checkVcode = anon
+                /rest/user/vcode/** = anon
                 <!-- 其他资源需要认证 -->
                 /** = authc
             </value>

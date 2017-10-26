@@ -105,7 +105,7 @@ top.location.href = location.href;
 								<span class="warn-area"	id="warnArea"></span>
 							</div>
 							<input type="button" value="登录" id="logsub" />
-							<p class = "forget"><a href="javascript:;">忘记密码?</a><%--<span id="qqLoginBtn"></span>--%></p>
+							<p class = "forget"><a onclick="forget();" href="javascript:;">忘记密码?</a><%--<span id="qqLoginBtn"></span>--%></p>
 						</form>
 					</div>
 				</div>
@@ -275,9 +275,18 @@ top.location.href = location.href;
 			}
 		}
 
-        /*QC.Login({
-            btnId:"qqLoginBtn"    //插入按钮的节点id
-        });*/
+        function forget(){
+                layer.open({
+                    type: 2,
+                    skin: 'layer-style',
+                    area: ['500','300px'],
+                    shadeClose: false, //点击遮罩关闭
+                    title:['评论'],
+                    resize: true,
+                    scrollbar: true,
+                    content:['${ctx}/rest/user/vcode/toVcode', ]
+                });
+        }
 	</script>
 
 </body>

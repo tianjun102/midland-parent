@@ -74,6 +74,15 @@ public class UserServiceImpl extends GenericServiceImpl<User, Integer> implement
     }
 
 	@Override
+	public User selectByUser(User user) {
+		List<User> list = userMapper.selectByExample(user);
+		if(list!=null&&list.size()>0){
+			return list.get(0);
+		}
+		return null;
+	}
+
+	@Override
 	public List<User> selectUserList(User user) {
         List<User> list = userMapper.selectByExample(user);
 		return list;

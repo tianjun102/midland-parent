@@ -115,7 +115,7 @@
 
             <li style="display:flex;align-items:center">
                 <span>平台：</span>
-                <select name="source" id="source" class="dropdown" onchange="fieldChange()">
+                <select name="source" id="source" class="dropdown" <c:if test="${empty isSuper}">disabled="disabled"</c:if> onchange="fieldChange()">
                     <c:forEach items="${sources}" var="s">
                         <option value="${s.id}" <c:if test="${s.id == item.source}">selected="selected"</c:if>>
                                 ${s.name}

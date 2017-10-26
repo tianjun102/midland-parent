@@ -67,4 +67,6 @@ public interface UserService extends GenericService<User, Integer> {
 	int updateUserRole(Integer userId, String userRoles);
 	
 	List<User> selectUsersByRoleId(Integer roleId);
+
+	User selectByUser(User user);
 }

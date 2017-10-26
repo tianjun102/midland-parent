@@ -9,6 +9,9 @@ import com.midland.core.util.ApplicationUtils;
 import com.midland.core.util.HttpUtils;
 import com.midland.core.util.MD5Util;
 import com.midland.core.util.SmsUtil;
+import com.midland.web.api.SmsSender.SmsClient;
+import com.midland.web.api.SmsSender.SmsModel;
+import com.midland.web.api.SmsSender.SmsResult;
 import com.midland.web.model.Area;
 import com.midland.web.model.ExportModel;
 import com.midland.web.model.role.Role;
@@ -83,6 +86,9 @@ public class UserController extends BaseFilter {
 
     @Autowired
     private MidlandConfig midlandConfig;
+
+	@Autowired
+	private SmsClient smsClient;
     
     /**
      * 用户登录
@@ -897,7 +903,112 @@ public class UserController extends BaseFilter {
 	}
 
 
-    
+	@RequestMapping(value = "/vcode/toVcode", method = {RequestMethod.GET,RequestMethod.POST})
+	public String toVcode(User user, Model model, HttpServletRequest request){
+		List<ParamObject> sources = JsonMapReader.getMap("source");
+		model.addAttribute("sources",sources);
+		return "user/toVcode";
+	}
+
+
+	/**
+	 * 发送短信
+	 * @param username
+	 * @return
+	 */
+	@RequestMapping(value = "/vcode/sendSms")
+	@ResponseBody
+	public Map vcodeSendSms(String phone){
+		User user = new User();
+		user.setPhone(phone);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("flag", 0);
+
+		String vcode = SmsUtil.createRandomVcode();//验证码
+		String mobile="";
+		String key="midland:vcode:"+phone;
+		user=userService.selectByUser(user);
+		if(user!=null){
+			mobile=user.getPhone();
+			if(mobile!=null && mobile.length()>0){
+				String SGIN = null;
+				try {
+					SGIN = URLEncoder.encode("美联房产查档","GBK");
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+				List list = new ArrayList();
+				list.add(vcode);
+				list.add("5");
+				list.add(SGIN);
+				SmsModel smsModel = new SmsModel("13600158343","2029157",list);
+				ValueOperations<String, Object> vo = redisTemplate.opsForValue();
+				vo.set(key, vcode);
+				redisTemplate.expire(key, 5,TimeUnit.MINUTES);//15分钟过期
+				try {
+					SmsResult result = smsClient.execute(smsModel);
+					if (result.getResultCode().equals("100")){
+						map.put("flag", 1);
+						map.put("id",user.getId());
+						map.put("msg", "发送成功!");
+					}else {
+						map.put("id",user.getId());
+						map.put("msg", "短信发送失败，请稍后再试!");
+					}
+				} catch (Exception e) {
+						map.put("id",user.getId());
+						map.put("msg", "短信发送失败，请稍后再试!");
+				}
+
+			}else{
+				map.put("msg", "该用户名未绑定有效的手机号码!");
+			}
+		}else{
+			map.put("msg", "无效的手机号!");
+		}
+		return map;
+	}
+
+
+	/**
+	 * 验证码校验
+	 * @param vcode
+	 * @return
+	 */
+	@RequestMapping(value = "/vcode/checkVcode", method = {RequestMethod.GET,RequestMethod.POST})
+	@ResponseBody
+	public  Object checkVcode_(String phone,String vcode){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("flag", 0);
+		String key="midland:vcode:"+phone;
+		ValueOperations<String, Object> vo = redisTemplate.opsForValue();
+		String redisVcode=vo.get(key).toString();
+		if(redisVcode.equals(vcode)){
+			map.put("flag", 1);
+		}
+		return map;
+	}
+
+	/**
+	 * 重置密码
+	 * @param userId
+	 * @return
+	 */
+	@RequestMapping(value = "/vcode/resetPwd", method = {RequestMethod.GET,RequestMethod.POST})
+	@ResponseBody
+	public Object resetPassword_(Integer userId){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("flag", 0);
+		if(userId!=null){
+			User user=new User();
+			user.setId(userId);
+			user.setPassword(ApplicationUtils.sha256Hex(com.midland.web.security.Resource.DEFAULT_PASSWORD));
+			if(userService.update(user)>0){
+				map.put("flag", 1);
+			}
+		}
+		return map;
+	}
     
     
 }
