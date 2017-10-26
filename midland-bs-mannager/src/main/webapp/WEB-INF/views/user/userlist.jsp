@@ -24,7 +24,6 @@
             <th style="width: 6%">实名状态</th>
             <th style="width: 7%">审核人</th>
             <th style="width: 15%">审核时间</th>
-            <%--<th style="width: 10%">用户类型</th>--%>
             <th style="width: 25%">操作</th>
         </tr>
         </thead>
@@ -48,27 +47,10 @@
                         </c:forEach></td>
                         <td>${cust.auditName }</td>
                         <td>${cust.auditTime }</td>
-                            <%--<td>--%>
-                            <%--<c:if test="${cust.userType==0}">智者汇</c:if> --%>
-                            <%--<c:if test="${cust.userType==1}">渠道服务商</c:if>--%>
-                            <%--</td>--%>
                         <td>
-                                <%--<a onclick="preUpdate(${cust.id })" target="contentF" class = "edit_img" title = "编辑"></a>--%>
                             <a onclick="userRole(${cust.id },'${cust.userCnName }')" target="contentF" class="uList_img"
                                title="角色列表"></a>
-                                <%--<a href="#" onclick="isReset(${cust.id })" target="contentF" class = "reset_img" title = "重置密码"></a>--%>
-                                <%--<a target="contentF" class = "delete_img" title = "删除" onclick="isDelete(${cust.id })" --%>
-
                             <a target="contentF" onclick="alterUser(${cust.id })" class="edit_img" title="编辑"></a>
-                                <%--<c:choose>--%>
-                                <%--<c:when test="${cust.isBlack==0}">--%>
-                                <%--<a target="contentF" onclick="takeInblacklist(${cust.id })">加入黑名单</a>--%>
-                                <%--</c:when>--%>
-                                <%--<c:otherwise>--%>
-                                <%--<a target="contentF" onclick="takeOutblacklist(${cust.id })">撤销黑名单</a>--%>
-
-                                <%--</c:otherwise>--%>
-                                <%--</c:choose>--%>
                             <a target="contentF"
                                     <c:choose>
                                         <c:when  test="${cust.auditStatus==0}">
@@ -78,7 +60,8 @@
                                             title="查看实名信息" class="see_img"
                                         </c:otherwise>
                                     </c:choose>
-                                 onclick="viewRealRegistration(${cust.id })">
+
+                                    href="${ctx}/rest/user/findUser?userId=${cust.id}&flag=1"
                             </a>
                         </td>
                     </tr>
