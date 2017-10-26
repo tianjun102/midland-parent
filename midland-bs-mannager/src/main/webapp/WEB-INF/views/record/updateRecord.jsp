@@ -21,33 +21,22 @@
 <!--预约看房重新分配经纪人-->
 <div class="box">
     <section class="content">
-        <div style="margin-bottom: 10px;">
-            <span style="padding-right: 15px;">提问人：${questions.questionName}</span>
-            <span style="padding-right: 15px;">手机号码：${questions.questionPhone}</span>
-            <span>提问时间：${questions.questionTime}</span>
-        </div>
-        <div style="margin-bottom: 10px;word-wrap: break-word;">
-            <span>提问主题：${questions.questionsTitle}</span>
-        </div>
-        <div>
-            <span style="word-wrap: break-word;">提问内容：${questions.questionsArea}</span>
-        </div>
 
-        <form id="formId" action="${ctx}/rest/questions/update" method="post" enctype="multipart/form-data"
+        <form id="formId" action="${ctx}/rest/record/update" method="post" enctype="multipart/form-data"
               method="post">
-            <input type="hidden" name="questionsId" id="questionsId" value="${questions.id}">
+            <input type="hidden" name="id" id="id" value="${item.id}">
             <ul class="adminfo row">
-
+                <%@include file="../menu/area_required.jsp" %>
                 <li id="textArea" style="display: block;">
                     <textarea style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;"
-                              name="answerArea" id="myEditor" rows="" cols="">${item.disclaimer}</textarea>
+                              name="record" id="myEditor" rows="" cols="">${item.record}</textarea>
                 </li>
 
                 <ul class="adminfo row">
                     <li>
                         <span></span>
                         <a onclick="subumintBanner();" target="contentF" class="public_btn bg2">保存</a>
-                        <a style="margin-left: 20px" href="${ctx}/rest/questions/index" target="contentF"
+                        <a style="margin-left: 20px" href="${ctx}/rest/record/index" target="contentF"
                            class="public_btn bg3" id="cancel">取消</a>
                     </li>
                 </ul>
@@ -65,10 +54,14 @@
 
 
     function subumintBanner() {
+
+        if (!checkSelect('citys','请选择市级')){
+            return;
+        }
         var data = $("#formId").serialize();
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/questions/repeat",
+            url: "${ctx}/rest/record/update",
             async: false, // 此处必须同步
             dataType: "json",
             data: data,
@@ -76,9 +69,13 @@
                 if (data.state == 0) {
                     layer.msg("保存成功！", {icon: 1});
                     setTimeout(function () {
-                        setTimeout(function(){window.open("${ctx}/rest/questions/index","contentF");},1000);
+                        setTimeout(function(){window.open("${ctx}/rest/record/index","contentF");},1000);
                     }, 1000);
-                } else {
+                }else if (data.state == 1){
+                    layer.msg("该城市已经有备案", {icon: 2});
+                }
+
+                else {
                     layer.msg("保存失败！", {icon: 2});
                 }
             },
@@ -94,38 +91,6 @@
     window.onload = function () {
         $('#searchForm').submit();
     }
-
-
-    function deleteAnswer() {
-        var data = $("#answerId").val();
-        update(data);
-
-    }
-    function update(data) {
-        $.ajax({
-            type: "post",
-            url: "${ctx}/rest/questions/answer/delete",
-            async: false, // 此处必须同步
-            dataType: "json",
-            data: "id=" + data,
-            success: function (data) {
-                if (data.state == 0) {
-                    layer.msg("删除成功！！！", {icon: 1});
-                    $('#save').removeAttr("onclick");
-                    setTimeout(function () {
-                        parent.location.reload();
-                    }, 1000);
-
-                } else {
-                    layer.msg("删除失败！", {icon: 2});
-                }
-            },
-            error: function () {
-                layer.msg("删除失败！", {icon: 2});
-            }
-        });
-    }
-
 
 </script>
 <!-- 本页私有js -->

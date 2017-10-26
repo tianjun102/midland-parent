@@ -3,7 +3,7 @@ package com.midland.web.model;
 
 public class MenuType{
 	/**
-	 * 
+	 * parent_id为0时是根节点
 	 **/
 	private Integer id;
 	/**
@@ -22,6 +22,14 @@ public class MenuType{
 	 * 逻辑删除，0未删除，1已删除
 	 **/
 	private Integer isDelete;
+	/**
+	 * 城市id
+	 **/
+	private String cityId;
+	/**
+	 * 城市名称
+	 **/
+	private String cityName;
 
 
 	public Integer getId() {
@@ -64,6 +72,22 @@ public class MenuType{
 		this.isDelete = isDelete;
 	}
 
+	public String getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(String cityId) {
+		this.cityId = cityId;
+	}
+
+	public String getCityName() {
+		return cityName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
 	@Override
 	public String toString() {
 		 final StringBuffer sb=new StringBuffer("MenuType{");
@@ -81,6 +105,12 @@ public class MenuType{
 		}
 		if (isDelete != null) {
 			sb.append(", \"isDelete\":\"").append(isDelete).append("\"");
+		}
+		if (cityId != null) {
+			sb.append(", \"cityId\":\"").append(cityId).append("\"");
+		}
+		if (cityName != null) {
+			sb.append(", \"cityName\":\"").append(cityName).append("\"");
 		}
 		sb.append("}");
 		return sb.toString();

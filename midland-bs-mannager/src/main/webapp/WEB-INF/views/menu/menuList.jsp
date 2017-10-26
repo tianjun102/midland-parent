@@ -29,6 +29,7 @@
             <th style="width: 3%">图标</th>
             <th style="width: 3%">平台</th>
             <th style="width: 3%">名称</th>
+            <th style="width: 5%">类型</th>
             <th style="width: 5%">点击量</th>
 
             <th style="width: 25%">操作</th>
@@ -49,6 +50,7 @@
                             <c:if test="${item.source == s.id}">${s.name}</c:if>
                         </c:forEach></td>
                         <td>${item.menuName }</td>
+                        <td>${item.menuTypeName }</td>
                         <td>${item.clickNum }</td>
 
                         <td>

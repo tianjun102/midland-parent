@@ -67,14 +67,14 @@ public class MenuController extends BaseFilter  {
 		settingService.getAllProvinceList(model);
 		List<ParamObject> sources = JsonMapReader.getMap("source");
 		model.addAttribute("sources",sources);
-		List<MenuType> res = menuTypeServiceImpl.findRootMenuTypeList1();
-		model.addAttribute("menuTypes",res);
 		User user = MidlandHelper.getCurrentUser(request);
 		if(user.getIsSuper()==null){
 			model.addAttribute("cityId",user.getCityId());
 			model.addAttribute("cityName",user.getCityName());
 		}
 		model.addAttribute("isSuper",user.getIsSuper());
+		String res = menuTypeServiceImpl.findRootMenuTypeTree(new MenuType());
+		model.addAttribute("menuTypes", res);
 		return "menu/addMenu";
 	}
 
@@ -137,7 +137,8 @@ public class MenuController extends BaseFilter  {
 		List<ParamObject> sources = JsonMapReader.getMap("source");
 		model.addAttribute("sources",sources);
 		settingService.getAllProvinceList(model);
-
+		String res = menuTypeServiceImpl.findRootMenuTypeTree(new MenuType());
+		model.addAttribute("menuTypes", res);
 		return "menu/updateMenu";
 	}
 

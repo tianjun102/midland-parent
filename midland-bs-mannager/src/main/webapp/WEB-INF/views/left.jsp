@@ -319,6 +319,10 @@
 				<dd>
 
 					<shiro:hasPermission name="popularList">
+						<a id = "record" href="${ctx}/rest/record/index" target="contentF"><span>备案</span></a>
+					</shiro:hasPermission>
+
+					<shiro:hasPermission name="popularList">
 						<a id = "system2" href="${ctx}/rest/setting/showPopularIndex" target="contentF"><span>热门关注管理</span></a>
 					</shiro:hasPermission>
 
@@ -343,11 +347,11 @@
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="userList">
-						<a id = "system4" href="${ctx}/rest/user/userIndex" target="contentF"><span>用户列表</span></a>
+						<a id = "system4" href="${ctx}/rest/user/userIndex" target="contentF"><span>后台用户管理</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="bsUserList">
-						<a id = "system4" href="${ctx}/rest/user/bsUserIndex" target="contentF"><span>前台用户列表</span></a>
+						<a id = "system4" href="${ctx}/rest/user/bsUserIndex" target="contentF"><span>前台用户管理</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="rolelist">
@@ -404,6 +408,8 @@
 					<shiro:hasPermission name="descIndexList">
 						<a id = "feedbackIndex" href="${ctx}/rest/loanType/descIndex" target="contentF"><span>计算器说明</span></a>
 					</shiro:hasPermission>
+
+
 
 
 						<a id = "system7" href="${ctx}/rest/user/toModifyPwdPage" target="contentF"><span>修改密码</span></a>

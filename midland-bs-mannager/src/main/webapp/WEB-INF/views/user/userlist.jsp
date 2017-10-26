@@ -17,6 +17,7 @@
         <tr>
             <th style="width: 5%">序号</th>
             <th style="width: 7%">用户名</th>
+            <th style="width: 7%">用户昵称</th>
             <th style="width: 10%">手机号码</th>
             <th style="width: 15%">注册时间</th>
             <th style="width: 6%">平台</th>
@@ -35,6 +36,7 @@
                     <tr>
                         <td>${xh.count }</td>
                         <td>${cust.username }</td>
+                        <td>${cust.userCnName }</td>
                         <td>${cust.phone }</td>
                         <td>${cust.createTime }</td>
                         <td><c:if test="${cust.source ==0 }">网站</c:if>

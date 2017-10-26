@@ -96,7 +96,7 @@ public class MenuTypeServiceImpl implements MenuTypeService {
 			}
 			MenuType menuType = new MenuType();
 			menuType.setId(0);
-			menuType.setName("根节点");
+			menuType.setName("分类");
 			result.add(0,menuType);
 			return result;
 		} catch(Exception e) {
@@ -108,6 +108,33 @@ public class MenuTypeServiceImpl implements MenuTypeService {
 	public List<MenuType> findRootMenuTypeList1() throws Exception {
 		try {
 			return menuTypeMapper.findRootMenuTypeList();
+		} catch(Exception e) {
+			log.error("findMenuTypeList  ",e);
+			throw e;
+		}
+	}
+	@Override
+	public String findRootMenuTypeTree(MenuType menuType) throws Exception {
+		try {
+			List<MenuType> list =  menuTypeMapper.findMenuTypeTree(menuType);
+
+			StringBuffer ret = new StringBuffer("");
+			if (list != null   &&  list.size()>0) {
+				for (int i = 0; i < list.size(); i++) {
+					MenuType cat = list.get(i);
+					ret.append("{id:").append(cat.getId()).append(", pId:").append(cat.getParentId())
+							.append(", name:'").append(cat.getName()).append("',open:true,nocheck:true");
+
+					if(!("0".equals(cat.getParentId().toString()))){
+						ret.append(",iconSkin:'pIcon03'");
+					}
+
+					ret.append("},");
+				}
+				return ret.substring(0, ret.length() - 1);
+			}
+
+			return "";
 		} catch(Exception e) {
 			log.error("findMenuTypeList  ",e);
 			throw e;

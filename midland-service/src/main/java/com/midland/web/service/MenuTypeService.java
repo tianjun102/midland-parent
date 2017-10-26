@@ -32,4 +32,7 @@ public interface MenuTypeService {
     List<MenuType> findRootMenuTypeList() throws Exception;
 
     List<MenuType> findRootMenuTypeList1() throws Exception;
+
+
+	String findRootMenuTypeTree(MenuType menuType) throws Exception;
 }

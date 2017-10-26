@@ -9,6 +9,15 @@
     <title>Insert title here</title>
 
     <style type="text/css">
+        section.content{
+            padding: 0 13px 0 30px;
+        }
+        .content ul.userinfo{
+            height: 606px;
+            overflow: hidden;
+            overflow-y: scroll;
+            padding: 15px 0 25px;
+        }
         .content ul.userinfo > li {
             margin-left: 0;
             padding-top: 8px;
@@ -72,10 +81,12 @@
                                                           maxlength="50"/>
             </li>
             <li class="col-md-6"><span>联系人：</span>
-                <input type="text" name="nickName" id="nickName" disabled="disabled" value="${entrust.nickName}"/>
+                <input type="text" name="nickName" id="nickName"  value="${entrust.nickName}" onblur="notEmpty('nickName','nickName','')" />
+                <span class="_star">*</span>
             </li>
             <li class="col-md-6"><span>手机号码：</span>
-                <input type="text" name="phone" id="phone" disabled="disabled" value="${entrust.phone}" maxlength="50"/>
+                <input type="text" name="phone" id="phone"  onblur="checkPhone('','phone','')" value="${entrust.phone}" maxlength="50"/>
+                <span class="_star">*</span>
             </li>
             <li class="col-md-6"><span>房屋朝向：</span>
                 <select name="turned" id="turned" class="dropdown" disabled="disabled">
@@ -128,8 +139,7 @@
                 <input type="text" name="measure" id="agentName" disabled="disabled"  value="${entrust.agentName}" maxlength="50"/>
             </li>
             <li class="col-md-6"><span>处理时间：</span>
-                <input type="text" name="communityName" id="handleTime" disabled="disabled" onblur="notEmpty('communityName','communityName','')"
-                                                          value="${entrust.handleTime}" maxlength="50"/>
+                <input type="text" name="communityName" id="handleTime" disabled="disabled" onblur="notEmpty('communityName','communityName','')" value="${entrust.handleTime}" maxlength="50"/>
             </li>
             <li class="col-md-6"><span>状态：</span>
                 <select name="status" id="status" class="dropdown">

@@ -1,14 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@include file="../layout/tablib.jsp" %>
-<%@include file="../layout/source.jsp" %>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
     <style type="text/css">
+        .content ul.userinfo li>span {
+            float: left;
+            display: inline-block;
+            width: 90px;
+            height: 38px;
+            line-height: 38px;
+            text-align: right;
+            font-size: 14px;
+            color: rgb( 102, 102, 102 );
+        }
         .table-add tr td a {
             display: inline-block;
             width: 35px;
@@ -25,10 +33,11 @@
     <table class="table table-bordered table-add">
         <thead>
             <tr>
-				<th style="width: 8%">类型id</th>
-				<th style="width: 8%">类型名称</th>
-				<th style="width: 8%">父类型名称</th>
-				<th style="width: 8%">城市</th>
+                <th style="width: 8%">城市</th>
+                <th style="width: 8%">备案</th>
+				<th style="width: 8%">创建日期</th>
+				<th style="width: 8%">最近更新日期</th>
+				<th style="width: 8%">显示/隐藏</th>
                 <th style="width: 10%">操作</th>
             </tr>
         </thead>
@@ -38,12 +47,23 @@
                 <c:forEach items="${requestScope.items }" var="item" varStatus="xh">
                     <tr>
 						<input type="hidden" id="id" value="${item.id}"/>
-						<td>${item.id}</td>
-						<td>${item.name}</td>
-						<td>${item.parentName}</td>
 						<td>${item.cityName}</td>
+						<td>${item.record}</td>
+                        <td>${item.addTime}</td>
+                        <td>${item.updateTime}</td>
+						<td><c:if test="${item.isShow==1}">隐藏</c:if>
+                            <c:if test="${item.isShow==0}">显示</c:if>
+                        </td>
 						<td>
-                            <a target="contentF" onclick="to_edit(${item.id })">编辑</a>
+                            <a target="contentF" href="${ctx}/rest/record/to_update?id=${item.id}" >编辑</a>
+                            <c:choose>
+                                <c:when test="${item.isShow==0}">
+                                    <a target="contentF" class="onoff_img" title="状态：显示" onclick="hiddenOrShow(${item.id },1)"></a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a target="contentF" class="offon_img" title="状态：隐藏" onclick="hiddenOrShow(${item.id },0)"></a>
+                                </c:otherwise>
+                            </c:choose>
                             <a target="contentF" onclick="delete1(${item.id })">删除</a>
                         </td>
                     </tr>
@@ -67,10 +87,31 @@
 
 <script type="text/javascript">
 
+    function hiddenOrShow(id, flag){
+        //0隐藏，1显示
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/record/update?id="+id+"&isShow="+flag,
+            async: false, // 此处必须同步
+            dataType: "json",
+
+            success: function (data) {
+                if (data.state==0){
+                    $('#searchForm').submit();
+                }
+            },
+            error: function () {
+                layer.msg("操作失败！", {icon: 2});
+            }
+        })
+    }
+
+
+
     function delete1(id){
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/menuType/update?id="+id+"&isDelete=1",
+            url: "${ctx}/rest/record/update?id="+id+"&isDelete=1",
             async: false, // 此处必须同步
             dataType: "json",
 
@@ -90,8 +131,8 @@
             type: 2,
             title: ['修改'],
             shade: 0.3,
-            area: ['500px', '300px'],
-            content: ['${ctx}/rest/menuType/to_update?id='+id,'no']
+            area: ['500px', '700px'],
+            content: ['${ctx}/rest/record/to_update?id='+id,'no']
         });
     }
 
