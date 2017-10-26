@@ -54,8 +54,10 @@ public class FeedbackEmailController extends BaseFilter {
 		model.addAttribute("cityList",cityList);*/
 		settingService.getAllProvinceList(model);
 		User user = MidlandHelper.getCurrentUser(request);
-		model.addAttribute("emailType",feedbackEmail.getEmailType());
-		model.addAttribute("cityId",user.getCityId());
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "feedbackEmail/feedbackEmailIndex";
 	}
 
@@ -63,7 +65,7 @@ public class FeedbackEmailController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("to_add")
-	public String toAddFeedbackEmail(FeedbackEmail feedbackEmail,Model model) throws Exception {
+	public String toAddFeedbackEmail(FeedbackEmail feedbackEmail,Model model,HttpServletRequest request) throws Exception {
 		Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
 		parem.put("id","*");
@@ -71,6 +73,12 @@ public class FeedbackEmailController extends BaseFilter {
 		List<Area> cityList = cityMap.get("city");
 		model.addAttribute("emailType",feedbackEmail.getEmailType());
 		model.addAttribute("cityList",cityList);
+		User user = MidlandHelper.getCurrentUser(request);
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+			model.addAttribute("cityName",user.getCityName());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "feedbackEmail/addFeedbackEmail";
 	}
 
@@ -123,7 +131,7 @@ public class FeedbackEmailController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("to_update")
-	public String toUpdateFeedbackEmail(Integer id,Model model) throws Exception {
+	public String toUpdateFeedbackEmail(Integer id,Model model,HttpServletRequest request) throws Exception {
 		FeedbackEmail result = feedbackEmailServiceImpl.selectFeedbackEmailById(id);
 		Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
@@ -132,6 +140,12 @@ public class FeedbackEmailController extends BaseFilter {
 		List<Area> cityList = cityMap.get("city");
 		model.addAttribute("cityList",cityList);
 		model.addAttribute("item",result);
+		User user = MidlandHelper.getCurrentUser(request);
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+			model.addAttribute("cityName",user.getCityName());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "feedbackEmail/updateFeedbackEmail";
 	}
 

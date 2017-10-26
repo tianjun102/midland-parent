@@ -28,16 +28,16 @@
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
 
-				<%@include file="../layout/sherchArea.jsp" %>
+
 				<li><span>类别：</span><input style="width: 243px;" class="vipcate" id="vipcate"  name="vipcate" onclick="showTree()" readonly="readonly"/>
 					<input name="cateId" type="hidden"/>
 
 				</li>
 				<li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >
-					<div class="zTreeDemoBackground left" style  = "position:absolute;left: -272px;top:50px;"   onblur="test(event)">
+					<div class="zTreeDemoBackground left" style  = "position:absolute;left: -263px;top:50px;"   onblur="test(event)">
 						<ul id="categoryTree" class="ztree" style  = "width:235px; height: 140px!important;"></ul>
 					</div>
-					<img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: -54px;margin-top: 62px;" onclick="hideTree()">
+					<img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: -46px;margin-top: 60px;" onclick="hideTree()">
 				</li>
 				<li>
 					<span style = "float:left;">状态：</span>
@@ -47,6 +47,15 @@
 						<option value="1">下架</option>
 					</select>
 				</li>
+				<c:if test="${not empty isSuper}">
+				<li>
+					<span style = "float:left;">是否删除：</span>
+					<select name="isDelete" id="isDelete" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+						<option value="0">未删除</option>
+						<option value="1">已删除</option>
+					</select>
+				</li>
+				</c:if>
 				<li><span>标题：</span><input type="text" name="title" id="title" placeholder="请输入标题" /></li>
 				<li>
 					<span>发布时间：</span><input class="Wdate half" id="time1"
@@ -56,6 +65,7 @@
 						onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'time1\')}'})"
 						id="time2" name="endTime"/>
 				</li>
+				<%@include file="../layout/sherchArea.jsp" %>
 				<li><input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/></li>
 			</ul>
 			</form>

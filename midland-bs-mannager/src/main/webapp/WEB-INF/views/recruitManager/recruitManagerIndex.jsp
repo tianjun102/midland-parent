@@ -27,14 +27,7 @@
 		<form action="${ctx }/rest/recruitManager/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
-				<li><span>城市：</span>
-					<select name="cityId" id="cityId" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
-						<option value="" >全部</option>
-						<c:forEach items="${cityList}" var="item">
-						<option value="${item.id}" >${item.name}</option>
-						</c:forEach>
-					</select>
-				</li>
+				<%@include file="../layout/sherchArea.jsp" %>
 				<li><span>类别：</span>
 					<select name="type" id="type" class="dropdown">
 						<option value="" >全部</option>
@@ -55,13 +48,22 @@
 				<li>
 					<span>发布时间：</span><input class="Wdate half" id="time1" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time2\')}'})" name="startTime"/> <em class="gang">-</em><input class="Wdate half" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'time1\')}'})" id="time2" name="endTime"/>
 				</li>
+				<c:if test="${not empty isSuper}">
+					<li>
+						<span style = "float:left;">是否删除：</span>
+						<select name="isDelete" id="isDelete" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+							<option value="0">未删除</option>
+							<option value="1">已删除</option>
+						</select>
+					</li>
+				</c:if>
 				<li>
 					<input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/>
 				</li>
 			</ul>
 			</form>
 			<input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;margin-top: 10px;" onclick="batchDelete(1)" class = "public_btn bg1" type="submit"  value = "批量删除"/>
-			<input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" onclick="batchDelete(0)" class = "public_btn bg1" type="submit"  value = "批量恢复"/>
+			<c:if test="${not empty isSuper}"><input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" onclick="batchDelete(0)" class = "public_btn bg1" type="submit"  value = "批量恢复"/></c:if>
 			<div id="listDiv"></div>
 		</section>
 	</div>

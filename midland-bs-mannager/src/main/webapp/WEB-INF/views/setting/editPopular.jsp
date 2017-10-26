@@ -118,7 +118,7 @@
                     <input type="hidden" name="regionSn"> <input type="hidden" value="${popular.provinceName}"  name="provinceName">
                     <!-- 第一次进页面加载省 -->
                     <select id="provinces" onchange="initProvince()"
-                            style="height: 100%;width: 65px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                            style="height: 100%;width: 65px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
                         <option>请选择</option>
                         <c:forEach items="${provinceList}" var="province">
                             <option <c:if test="${popular.provinceId == province.parentId}">selected = 'selected'</c:if>  value="${province.parentId}">
@@ -132,7 +132,7 @@
                     <span>市：</span>
                     <label for="pop-15"></label> <input value="${popular.cityId}" type="hidden" name="cityId">
                     <input type="hidden" value="${popular.cityName}" name="cityName">
-                    <select id="citys" onchange="initCity()" style="height: 100%;width: 65px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <select id="citys" onchange="initCity()" style="height: 100%;width: 65px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
                         <option value="">请选择</option>
                         <c:forEach items="${cityList}" var="city">
                             <option <c:if test="${city.id == popular.cityId}">selected = 'selected'</c:if>  value="${city.id}">
@@ -145,7 +145,7 @@
                 <p id="district" style="display: inline-block;height: 38px;">
                     <span>地区：</span>
                     <label for="pop-16"></label> <input type="hidden" value="${popular.areaId}" name="distId"> <input type="hidden" value="${popular.areaName}" name="distName">
-                        <select id="districts" onchange="initDistrict()" style="height: 100%;width: 65px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                        <select id="districts" onchange="initDistrict()" style="height: 100%;width: 65px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
                             <option value="">请选择</option>
                             <c:forEach items="${areaList}" var="area">
                             <option <c:if test="${area.id == popular.areaId}"> selected = 'selected'</c:if> value="${area.id}">${area.name}</option>

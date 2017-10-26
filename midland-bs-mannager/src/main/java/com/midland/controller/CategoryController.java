@@ -50,8 +50,10 @@ public class CategoryController extends BaseFilter {
 		/*model.addAttribute("cityList",cityList);*/
 		settingService.getAllProvinceList(model);
 		User user = MidlandHelper.getCurrentUser(request);
-		model.addAttribute("type",category.getType());
-		model.addAttribute("cityId",user.getCityId());
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "category/categoryIndex";
 	}
 
@@ -59,7 +61,7 @@ public class CategoryController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("to_add")
-	public String toAddCategory(Category category, Model model) throws Exception {
+	public String toAddCategory(Category category, Model model,HttpServletRequest request) throws Exception {
 		Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
 		parem.put("id","*");
@@ -69,6 +71,12 @@ public class CategoryController extends BaseFilter {
 		if(StringUtils.isNotEmpty(result)){
 			model.addAttribute("categoryData",result );
 		}
+		User user = MidlandHelper.getCurrentUser(request);
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+			model.addAttribute("cityName",user.getCityName());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		model.addAttribute("cityList",cityList);
 		model.addAttribute("type",category.getType());
 		return "category/addCategory";
@@ -123,7 +131,7 @@ public class CategoryController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("to_update")
-	public String toUpdateCategory(Integer id,Model model) throws Exception {
+	public String toUpdateCategory(Integer id,Model model,HttpServletRequest request) throws Exception {
 		/*Category category = new Category();
 		category.setParentId(0);*/
 		Map<String,String> parem = new HashMap<>();
@@ -140,6 +148,12 @@ public class CategoryController extends BaseFilter {
 			model.addAttribute("categoryData",cateResult);
 		}
 		/*model.addAttribute("cateList",cateList);*/
+		User user = MidlandHelper.getCurrentUser(request);
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+			model.addAttribute("cityName",user.getCityName());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		model.addAttribute("cityList",cityList);
 		model.addAttribute("item",result);
 		return "category/updateCategory";

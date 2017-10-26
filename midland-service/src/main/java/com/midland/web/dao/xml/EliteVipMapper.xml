@@ -42,8 +42,10 @@
 
 	<select id="findEliteVipList" parameterType="com.midland.web.model.EliteVip" resultMap="BaseResultMap">
 		select <include refid="Base_Column_List" /> from elite_vip
-		where 
-		is_delete=0
+		where  1=1
+		<if test="isDelete == null">
+			and is_delete=0
+		</if>
 		<include refid="select_option" />
 	</select>
 

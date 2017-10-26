@@ -41,8 +41,10 @@
 
 	<select id="findLeaveMsgList" parameterType="com.midland.web.model.LeaveMsg" resultMap="BaseResultMap">
 		select <include refid="Base_Column_List" /> from leave_msg
-		where 
-		is_delete=0
+		where  1=1
+		<if test="isDelete == null">
+			and is_delete=0
+		</if>
 		<include refid="select_option" />
 	</select>
 

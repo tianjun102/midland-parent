@@ -1,6 +1,5 @@
 package com.midland.controller;
 
-import com.alibaba.fastjson.JSONArray;
 import com.midland.web.model.Area;
 import com.midland.web.model.LiaisonRecordEmail;
 import com.midland.web.model.Menu;
@@ -40,8 +39,6 @@ public class MenuController extends BaseFilter  {
 	@Autowired
 	private MenuService menuServiceImpl;
 	@Autowired
-	private MenuTypeService menuTypeServiceImpl;
-	@Autowired
 	private SettingService settingService;
 	@Autowired
 	private JdbcService jdbcService;
@@ -50,10 +47,15 @@ public class MenuController extends BaseFilter  {
 	 * 
 	 **/
 	@RequestMapping("index")
-	public String menuIndex(Menu menu,Model model) throws Exception {
+	public String menuIndex(Menu menu,Model model,HttpServletRequest request) throws Exception {
 		settingService.getAllProvinceList(model);
 		List<ParamObject> sources = JsonMapReader.getMap("source");
 		model.addAttribute("sources",sources);
+		User user = MidlandHelper.getCurrentUser(request);
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "menu/menuIndex";
 	}
 
@@ -61,10 +63,16 @@ public class MenuController extends BaseFilter  {
 	 * 
 	 **/
 	@RequestMapping("to_add")
-	public String toAddMenu(Menu menu,Model model) throws Exception {
+	public String toAddMenu(Menu menu,Model model,HttpServletRequest request) throws Exception {
 		settingService.getAllProvinceList(model);
 		List<ParamObject> sources = JsonMapReader.getMap("source");
 		model.addAttribute("sources",sources);
+		User user = MidlandHelper.getCurrentUser(request);
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+			model.addAttribute("cityName",user.getCityName());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		String res = menuTypeServiceImpl.findRootMenuTypeTree(new MenuType());
 		model.addAttribute("menuTypes", res);
 		return "menu/addMenu";

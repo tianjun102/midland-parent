@@ -44,12 +44,14 @@
             <span>添加特殊模块</span>
         </p>
         <form id="formId" action="${ctx}/rest/specialPage/add" method="post" enctype="multipart/form-data" method="post">
-            <input type="hidden" name="cityName" id="cityName" value="" >
+            <input type="hidden" name="cityName" id="cityName" value="${cityName}" >
+            <c:if test="${empty isSuper}"><input type="hidden" name="cityId"  value="${cityId}"></c:if>
             <ul class = "adminfo row">
                 <li><span>城市：</span>
-                    <select onchange="setCityName();" name="cityId" id="cityId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <select onchange="setCityName();" name="cityId" id="cityId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
                         <option value="">全部</option>
                         <c:forEach items="${cityList}" var="city">
+                            <c:if test="${empty isSuper}"><option selected="selected" value="${cityId}">${cityName}</option></c:if>
                             <option value="${city.id}">${city.name}</option>
                         </c:forEach>
                     </select>

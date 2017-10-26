@@ -4,6 +4,7 @@ import com.midland.base.BaseFilter;
 import com.midland.web.model.Category;
 import com.midland.web.model.EliteClub;
 import com.midland.web.model.EliteVip;
+import com.midland.web.model.user.User;
 import com.midland.web.service.EliteVipService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -35,13 +36,15 @@ public class EliteVipController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("index")
-	public String eliteVipIndex(EliteVip eliteVip,Model model) throws Exception {
+	public String eliteVipIndex(EliteVip eliteVip,Model model,HttpServletRequest request) throws Exception {
 		Category category = new Category();
 		category.setType(2);
 		String result = getCategoryTree("",category);
 		if(StringUtils.isNotEmpty(result)){
 			model.addAttribute("categoryData",result );
 		}
+		User user = MidlandHelper.getCurrentUser(request);
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "eliteVip/eliteVipIndex";
 	}
 

@@ -51,7 +51,10 @@ public class SpecialPageController extends BaseFilter {
 		model.addAttribute("cityList",cityList);*/
 		settingService.getAllProvinceList(model);
 		User user = MidlandHelper.getCurrentUser(request);
-		model.addAttribute("cityId",user.getCityId());
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "specialPage/specialPageIndex";
 	}
 
@@ -59,13 +62,19 @@ public class SpecialPageController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("to_add")
-	public String toAddSpecialPage(SpecialPage specialPage, Model model) throws Exception {
+	public String toAddSpecialPage(SpecialPage specialPage, Model model,HttpServletRequest request) throws Exception {
 		Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
 		parem.put("id","*");
 		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
 		List<Area> cityList = cityMap.get("city");
 		model.addAttribute("cityList",cityList);
+		User user = MidlandHelper.getCurrentUser(request);
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+			model.addAttribute("cityName",user.getCityName());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "specialPage/addSpecialPage";
 	}
 
@@ -118,7 +127,7 @@ public class SpecialPageController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("to_update")
-	public String toUpdateSpecialPage(Integer id,Model model) throws Exception {
+	public String toUpdateSpecialPage(Integer id,Model model,HttpServletRequest request) throws Exception {
 		Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
 		parem.put("id","*");
@@ -127,6 +136,12 @@ public class SpecialPageController extends BaseFilter {
 		SpecialPage result = specialPageServiceImpl.selectSpecialPageById(id);
 		model.addAttribute("cityList",cityList);
 		model.addAttribute("item",result);
+		User user = MidlandHelper.getCurrentUser(request);
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+			model.addAttribute("cityName",user.getCityName());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "specialPage/updateSpecialPage";
 	}
 

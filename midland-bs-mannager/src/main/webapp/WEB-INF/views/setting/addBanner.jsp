@@ -36,7 +36,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				<span>添加Banner</span>
 			</p>
 		<form id="formId" action="${ctx}/rest/banner/addBanner" method="post" enctype="multipart/form-data" method="post">
-			<input type="hidden" name="cityName" id="cityName" value="" >
+			<input type="hidden" name="cityName" id="cityName" value="${cityName}" >
+			<c:if test="${empty isSuper}"><input type="hidden" name="cityId"  value="${cityId}"></c:if>
 			<ul class = "adminfo row">
 				<li><span>展示方式：</span>
 				<select name="type" id="selectType" class="dropdown" onchange="selectTypes();">
@@ -53,9 +54,10 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 					<input type="text" name="endTime" id="endTime" class="Wdate half"  onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'startTime\')}'})"/>
 				</li>
 				<li><span>城市：</span>
-					<select onchange="setCityName();" name="cityId" id="cityId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+					<select onchange="setCityName();" name="cityId" id="cityId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
 						<option value="">全部</option>
 						<c:forEach items="${cityList}" var="city">
+							<c:if test="${empty isSuper}"><option selected="selected" value="${cityId}">${cityName}</option></c:if>
 							<option value="${city.id}">${city.name}</option>
 						</c:forEach>
 					</select>

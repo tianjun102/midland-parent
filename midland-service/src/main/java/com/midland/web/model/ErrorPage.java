@@ -11,6 +11,8 @@ public class ErrorPage{
 	 **/
 	private String page404;
 
+	private Integer isDelete;
+
 
 	public Integer getId() {
 		return id;
@@ -26,6 +28,14 @@ public class ErrorPage{
 
 	public void setPage404(String page404) {
 		this.page404 = page404;
+	}
+
+	public Integer getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(Integer isDelete) {
+		this.isDelete = isDelete;
 	}
 
 	@Override

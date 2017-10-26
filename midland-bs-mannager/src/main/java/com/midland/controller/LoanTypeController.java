@@ -40,7 +40,10 @@ public class LoanTypeController extends BaseFilter {
 	public String loanTypeIndex(LoanType loanType,Model model,HttpServletRequest request) throws Exception {
 		settingService.getAllProvinceList(model);
 		User user = MidlandHelper.getCurrentUser(request);
-		model.addAttribute("cityId",user.getCityId());
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "loanType/loanTypeIndex";
 	}
 
@@ -48,10 +51,16 @@ public class LoanTypeController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("to_add")
-	public String toAddLoanType(LoanType loanType,Model model) throws Exception {
+	public String toAddLoanType(LoanType loanType,Model model,HttpServletRequest request) throws Exception {
 		List<Area> list = settingService.queryAllCityByRedis();
 		model.addAttribute("citys",list);
 		settingService.getAllProvinceList(model);
+		User user = MidlandHelper.getCurrentUser(request);
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+			model.addAttribute("cityName",user.getCityName());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "loanType/addLoanType";
 	}
 
@@ -104,12 +113,18 @@ public class LoanTypeController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("to_update")
-	public String toUpdateLoanType(Integer id,Model model) throws Exception {
+	public String toUpdateLoanType(Integer id,Model model,HttpServletRequest request) throws Exception {
 		LoanType result = loanTypeServiceImpl.selectLoanTypeById(id);
 		model.addAttribute("item",result);
 		List<Area> list = settingService.queryAllCityByRedis();
 		model.addAttribute("citys",list);
 		settingService.getAllProvinceList(model);
+		User user = MidlandHelper.getCurrentUser(request);
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+			model.addAttribute("cityName",user.getCityName());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "loanType/updateLoanType";
 	}
 

@@ -39,8 +39,10 @@
 
 	<select id="findQrCodeList" parameterType="com.midland.web.model.QrCode" resultMap="BaseResultMap">
 		select <include refid="Base_Column_List" /> from qr_code
-		where 
-		is_delete=0
+		where  1=1
+		<if test="isDelete == null">
+			and is_delete=0
+		</if>
 		<include refid="select_option" />
 	</select>
 

@@ -67,7 +67,10 @@ public class ResearchController extends BaseFilter {
 		}
 		settingService.getAllProvinceList(model);
 		User user = MidlandHelper.getCurrentUser(request);
-		model.addAttribute("cityId",user.getCityId());
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "research/informationIndex";
 	}
 
@@ -75,7 +78,7 @@ public class ResearchController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("to_add")
-	public String toAddInformation(Information information, Model model) throws Exception {
+	public String toAddInformation(Information information, Model model,HttpServletRequest request) throws Exception {
 		Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
 		parem.put("id","*");
@@ -89,6 +92,12 @@ public class ResearchController extends BaseFilter {
 		}
 		List<Area> cityList = cityMap.get("city");
 		model.addAttribute("cityList",cityList);
+		User user = MidlandHelper.getCurrentUser(request);
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+			model.addAttribute("cityName",user.getCityName());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "research/addInformation";
 	}
 
@@ -142,7 +151,7 @@ public class ResearchController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("to_update")
-	public String toUpdateInformation(Integer id,Model model) throws Exception {
+	public String toUpdateInformation(Integer id,Model model,HttpServletRequest request) throws Exception {
 		Information result = informationServiceImpl.selectInformationById(id);
 		Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
@@ -158,6 +167,12 @@ public class ResearchController extends BaseFilter {
 		List<Area> cityList = cityMap.get("city");
 		model.addAttribute("item",result);
 		model.addAttribute("cityList",cityList);
+		User user = MidlandHelper.getCurrentUser(request);
+		if(user.getIsSuper()==null){
+			model.addAttribute("cityId",user.getCityId());
+			model.addAttribute("cityName",user.getCityName());
+		}
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "research/updateInformation";
 	}
 
