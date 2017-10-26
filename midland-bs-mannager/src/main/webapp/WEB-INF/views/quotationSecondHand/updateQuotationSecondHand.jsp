@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@include file="../layout/tablib.jsp" %>
-<%@include file="../layout/source.jsp"%>
+<%@include file="../layout/source.jsp" %>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -11,7 +11,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Insert title here</title>
     <style type="text/css">
-        .content ul.userinfo>li {margin-left: 0!important;}
+        .content ul.userinfo > li {
+            margin-left: 0 !important;
+        }
+
         .content ul.userinfo li > span {
             float: left;
             display: inline-block;
@@ -22,12 +25,12 @@
             font-size: 14px;
             color: rgb(102, 102, 102);
         }
-        td
-        {
+
+        td {
             white-space: nowrap;
         }
-        th
-        {
+
+        th {
             white-space: nowrap;
         }
     </style>
@@ -39,29 +42,32 @@
     <form action="${ctx}/rest/quotationSecondHand/update" method="post" id="dataForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
-            <li ><span>数据时间：</span>
-                <input class="Wdate half" id="time1" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd'})"
-                                        name="dataTime" value="${item.dataTime}" style="
+            <li><span>数据时间：</span>
+                <input class="Wdate half" id="time1"
+                       onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd'})"
+                       onblur="notEmpty('time1','dataTime','日期不能为空')" name="dataTime"
+                       value="${item.dataTime}" style="
     width: 250px;
 "/>
             </li>
-            <li ><span>类型：</span>
+            <li><span>类型：</span>
                 <select name="type" id="type" class="dropdown">
-                    <option value="" >全部</option>
+                    <option value="">全部</option>
                     <c:forEach items="${types}" var="type">
-                    <option value="${type.id}" <c:if test="${type.id==item.type}">selected</c:if> >${type.name}</option>
+                        <option value="${type.id}"
+                                <c:if test="${type.id==item.type}">selected</c:if> >${type.name}</option>
                     </c:forEach>
                 </select>
             </li>
-            <%@include file="sheet.jsp" %>
-            <li ><span>成交套数：</span>
-               <input type="text" name="dealNum" id="dealNum" value="${item.dealNum}"/>
+            <%@include file="sheet_required.jsp" %>
+            <li><span>成交套数：</span>
+                <input type="text" name="dealNum" id="dealNum" value="${item.dealNum}"/>
             </li>
-            <li ><span>成交面积：</span>
-               <input type="text" name="dealAcreage" id="dealAcreage" value="${item.dealAcreage}"/>
+            <li><span>成交面积：</span>
+                <input type="text" name="dealAcreage" id="dealAcreage" value="${item.dealAcreage}"/>
             </li>
 
-            <li >
+            <li>
                 <span></span>
                 <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">更新</a>
                 <a style="margin-left: 20px" class="public_btn bg3" id="cancel" onclick="closeWin();">取消</a>
@@ -74,29 +80,31 @@
 <script type="text/javascript">
     //保存数据
     function updateData() {
-        var data = $("#dataForm").serialize();
-        $.ajax({
-            type: "post",
-            url: "${ctx}/rest/quotationSecondHand/update",
-            async: false, // 此处必须同步
-            dataType: "json",
-            data: data,
-            success: function (data) {
-                if (data.state == 0) {
-                    layer.msg("保存成功！！！", {icon: 1});
-                    $('#save').removeAttr("onclick");
-                    setTimeout(function () {
-                        parent.location.reload();
-                    }, 1000);
+        if (notEmpty('time1', 'dataTime', '日期不能为空') && checkSelect('districts', '请选择区级')) {
+            var data = $("#dataForm").serialize();
+            $.ajax({
+                type: "post",
+                url: "${ctx}/rest/quotationSecondHand/update",
+                async: false, // 此处必须同步
+                dataType: "json",
+                data: data,
+                success: function (data) {
+                    if (data.state == 0) {
+                        layer.msg("保存成功！！！", {icon: 1});
+                        $('#save').removeAttr("onclick");
+                        setTimeout(function () {
+                            parent.location.reload();
+                        }, 1000);
 
-                } else {
+                    } else {
+                        layer.msg("保存失败！", {icon: 2});
+                    }
+                },
+                error: function () {
                     layer.msg("保存失败！", {icon: 2});
                 }
-            },
-            error: function () {
-                layer.msg("保存失败！", {icon: 2});
-            }
-        });
+            });
+        }
     }
 
     //取消

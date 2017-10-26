@@ -49,7 +49,7 @@
 <body>
 
 
-<div class="table-responsive m40" style="max-height: 430px;overflow: auto;"  id='table-cont'>
+<div class="table-responsive m40" style="max-height: 470px;overflow: auto;"  id='table-cont'>
     <table class="table table-bordered table-add">
         <thead>
         <tr>

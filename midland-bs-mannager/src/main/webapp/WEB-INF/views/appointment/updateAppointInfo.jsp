@@ -46,11 +46,12 @@
             <li class="col-md-6"><span>预约时间：</span>
                 <input type="text" name="appointmentTime" id="appointmentTime"  disabled="disabled"
                                                           value="${appointment.appointmentTime}" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})"
-                                                           maxlength="50"/><span
-                    class="_star">*</span>
+                                                           maxlength="50"/>
+
             </li>
             <li class="col-md-6"><span>预约人：</span><input type="text" name="nickName" id="nickName" onblur="notEmpty('nickName','nickName','')"
                                                         value="${appointment.nickName}"/>
+                <span class="_star">*</span>
             </li>
             <li class="col-md-6"><span>手机号码：</span><input type="text" name="phone" id="phone" onblur="checkPhone('','phone','')"
                                                           value="${appointment.phone}"
@@ -63,7 +64,6 @@
                         </option>
                     </c:forEach>
                 </select>
-                <span class="_star">*</span>
             </li>
             <li class="col-md-6"><span>预约类型：</span>
                 <select name="houseType"  disabled="disabled" id="houseType" class="dropdown">
@@ -80,8 +80,7 @@
             <li class="col-md-6"><span>区域：</span><input type="text"  disabled="disabled" name="areaName" id="areaName" value="${appointment.areaName}"/>
             </li>
             <li class="col-md-6"><span>小区：</span><input type="text" name="communityName"  disabled="disabled" id="communityName"
-                                                        value="${appointment.communityName}" maxlength="50"/><span
-                    class="_star">*</span></li>
+                                                        value="${appointment.communityName}" maxlength="50"/>
             <li class="col-md-6"><span>地址：</span><input type="text"  disabled="disabled" name="address" id="address"
                                                         value="${appointment.address}"/>
             </li>
@@ -91,7 +90,7 @@
             </li>
             <li class="col-md-6"><span>面积：</span><input type="text"  disabled="disabled" name="measure" id="measure"
                                                         value="${appointment.measure}"
-                                                        maxlength="50"/>㎡<span class="_star">*</span></li>
+                                                        maxlength="50"/>㎡</li>
             <li class="col-md-6"><span>装修：</span>
                 <select name="decoration" id="decoration"  disabled="disabled" class="dropdown">
 
@@ -117,17 +116,16 @@
             </li>
 
             <li class="col-md-11"><span>备注：</span>
-                <textarea name="remark" id="remark"
-                          style="width:calc(100% - 120px);height:50px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;"></textarea>
+                <textarea name="remark" id="remark" style="width:calc(100% - 120px);height:50px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;"></textarea>
             </li>
             </li>
             <li class="col-md-11"><span>处理记录：</span>
                 <textarea name="record" id="record" disabled="disabled"
                           style="width:calc(100% - 120px);height:150px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;">
-<c:forEach items="${appointLogs}" var="s">    状态    ： <c:forEach items="${statusList}" var="m"><c:if test="${m.id==s.state}">${m.name}</c:if> </c:forEach>
-    时间    ：${s.logTime}
-    操作人：${s.operatorName}
-    备注    ：${s.remark}
+<c:forEach items="${appointLogs}" var="s">状态    ： <c:forEach items="${statusList}" var="m"><c:if test="${m.id==s.state}">${m.name}</c:if> </c:forEach>
+时间    ：${s.logTime}
+操作人：${s.operatorName}
+备注    ：${s.remark}
 
 
 </c:forEach>
@@ -157,6 +155,7 @@
             dataType: "json",
             data: data,
             success: function (data) {
+                debugger;
                 if (data.state == 0) {
                     layer.msg("保存成功！！！", {icon: 1});
                     $('#save').removeAttr("onclick");

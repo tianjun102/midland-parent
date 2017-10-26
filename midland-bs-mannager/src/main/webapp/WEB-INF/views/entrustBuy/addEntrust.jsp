@@ -66,8 +66,8 @@
                                                           value="${entrust.entrustSn}"/>
             </li>
             <li class="col-md-6"><span>委托时间：</span><input type="text" name="entrustTime" id="entrustTime" onblur="notEmpty('entrustTime','entrustTime','')"
-                                                          value="${entrust.entrustTime}" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" maxlength="50"/><span
-                    class="_star">*</span>
+                                                          value="${entrust.entrustTime}" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" maxlength="50"/>
+                <span  class="_star">*</span>
             </li>
             <li class="col-md-6"><span>委托人：</span><input type="text" name="nickName" id="nickName" onblur="notEmpty('nickName','nickName','')"
                                                         value="${entrust.nickName}"/>

@@ -305,7 +305,7 @@ section.content p.detail-title .left:hover {
 .content ul.userinfo>li {
 	float: left;
 	margin-left: 20px;
-	padding-top: 20px;
+	padding-top: 10px;
 	/* display: flex; */
 }
 .content ul.userinfo li>span {
@@ -396,7 +396,7 @@ input.date {
 	border: 1px solid #b6b6b6;
 }
 .m40 {
-	margin-top: 30px;
+	margin-top: 10px;
 }
 .table-add tr{
 	height: 40px;

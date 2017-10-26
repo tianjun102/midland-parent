@@ -82,7 +82,7 @@
         //向后台发送处理数据
         $.ajax({
             type: "POST", //用POST方式传输
-            dataType: "text", //数据格式:JSON
+            dataType: "JSON", //数据格式:JSON
             url: '${ctx}/rest/user/vcode/sendSms?phone='+phone, //目标地址
             data: "",
             error: function (XMLHttpRequest, textStatus, errorThrown) {
