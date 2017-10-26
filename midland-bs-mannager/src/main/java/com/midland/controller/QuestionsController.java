@@ -14,6 +14,7 @@ import com.midland.web.model.user.User;
 import com.midland.web.service.AnswerService;
 import com.midland.web.service.QuestionsService;
 import com.midland.web.service.RedisService;
+import com.midland.web.service.SettingService;
 import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
 import com.midland.web.util.ParamObject;
@@ -42,7 +43,9 @@ public class QuestionsController extends BaseFilter {
 	private Logger log = LoggerFactory.getLogger(QuestionsController.class);
 	@Autowired
 	private QuestionsService questionsServiceImpl;
-	
+	@Autowired
+	private SettingService settingService;
+
 	@Autowired
 	private AnswerService answerServiceImpl;
 	@Autowired
@@ -53,6 +56,9 @@ public class QuestionsController extends BaseFilter {
 	
 	@RequestMapping("/index")
 	public String showAppointIndex(HttpServletRequest request,Model model) {
+		User user = MidlandHelper.getCurrentUser(request);
+		model.addAttribute("isSuper",user.getIsSuper());
+		settingService.getAllProvinceList(model);
 		List<ParamObject> sources = JsonMapReader.getMap("source");
 		model.addAttribute("sources",sources);
 		model.addAttribute("auditFlag",redisServiceImpl.getAnswerAuditFlag());
@@ -147,14 +153,13 @@ public class QuestionsController extends BaseFilter {
 	
 	
 	@RequestMapping("/page")
-	public String questionPage(Model model, Questions record, String pageNo, String pageSize) {
-		if(pageNo==null||pageNo.equals("")){
-			pageNo = ContextEnums.PAGENO;
+	public String questionPage(Model model, Questions record,HttpServletRequest request) {
+		User user = MidlandHelper.getCurrentUser(request);
+		model.addAttribute("isSuper",user.getIsSuper());
+		if(!Contant.isSuper.equals(user.getIsSuper())){//不是超级管理员，只能看属性城市的相关信息
+			record.setCityId(user.getCityId());
 		}
-		if(pageSize==null||pageSize.equals("")){
-			pageSize = ContextEnums.PAGESIZE;
-		}
-		PageHelper.startPage(Integer.valueOf(pageNo),Integer.valueOf(pageSize));
+		MidlandHelper.doPage(request);
 		Page<Questions> result = (Page<Questions>) questionsServiceImpl.questionPage(record);
 		model.addAttribute("paginator", result.getPaginator());
 		model.addAttribute("questions", result.getResult());

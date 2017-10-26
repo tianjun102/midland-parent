@@ -8,7 +8,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>美联物业 - 关于平台</title>
     <link rel="stylesheet" href="${ctx }/assets/css/common.css">
-
+    <style type="text/css">
+        .dropdown {
+            height: 38px;
+            line-height: 38px;
+            width: 120px !important;
+            display: inline-table;
+            border-width: 1px !important;
+            border-style: solid !important;
+            border-top-style: solid;
+            border-right-style: solid;
+            border-bottom-style: solid;
+            border-left-style: solid;
+            border-color: rgb(219, 226, 230) !important;
+            border-image: initial !important;
+        }
+    </style>
 </head>
 <body>
 <!--关于平台界面-->
@@ -41,7 +56,7 @@
                 </select>
             </li>
             <li><input class="public_btn bg1" type="submit" name="inquery" id="inquery" value="查询"/>
-                <a class="setup"  href="${ctx}/rest/quotationSecondHand/index" target="contentF">返回</a></li>
+                <a   style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" class = "public_btn bg1"  href="${ctx}/rest/quotationSecondHand/index" target="contentF">返回</a></li>
 
         </ul>
 

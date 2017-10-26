@@ -142,9 +142,12 @@ public class EntrustRentInController extends BaseFilter{
 		if(pageSize==null||pageSize.equals("")){
 			pageSize = ContextEnums.PAGESIZE;
 		}
-		User user =MidlandHelper.getCurrentUser(request);
+		User user = MidlandHelper.getCurrentUser(request);
+		model.addAttribute("isSuper",user.getIsSuper());
+		if(!Contant.isSuper.equals(user.getIsSuper())){//不是超级管理员，只能看属性城市的相关信息
+			record.setCityId(user.getCityId());
+		}
 		record.setEntrustType(Contant.ENTRUST_RENT_IN);
-		record.setCityId(user.getCityId());
 		PageHelper.startPage(Integer.valueOf(pageNo),Integer.valueOf(pageSize));
 		Page<Entrust> result =(Page<Entrust>) entrustServiceImpl.findEntrustList(record);
 		Paginator paginator = result.getPaginator();

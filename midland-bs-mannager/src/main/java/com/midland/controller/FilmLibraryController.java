@@ -3,6 +3,7 @@ package com.midland.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.Area;
 import com.midland.web.model.FilmLibrary;
 import com.midland.web.model.user.User;
@@ -149,8 +150,10 @@ public class FilmLibraryController extends BaseFilter {
 		try {
 			log.debug("findFilmLibraryList  {}",filmLibrary);
 			User user = MidlandHelper.getCurrentUser(request);
-			if (StringUtils.isEmpty(filmLibrary.getCityId())){
+			model.addAttribute("isSuper",user.getIsSuper());
+			if(!Contant.isSuper.equals(user.getIsSuper())){//不是超级管理员，只能看属性城市的相关信息
 				filmLibrary.setCityId(user.getCityId());
+
 			}
 			MidlandHelper.doPage(request);
 			Page<FilmLibrary> result = (Page<FilmLibrary>)filmLibraryServiceImpl.findFilmLibraryList(filmLibrary);

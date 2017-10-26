@@ -22,7 +22,6 @@
         </p>
         <form action="${ctx }/rest/quotation/list" method="POST" id="searchForm"
               onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
-            <input type="hidden" name="isNew" id="isNew" value="${isNew}"/>
             <ul class="userinfo row">
 
                 <%@include file="../quotationSecondHand/dist.jsp" %>

@@ -1,5 +1,6 @@
 package com.midland.controller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.Area;
 import com.midland.web.model.LiaisonRecordEmail;
 import com.midland.web.model.Menu;
@@ -169,8 +170,9 @@ public class MenuController extends BaseFilter  {
 	public String findMenuList(Menu menu,Model model, HttpServletRequest request) {
 		try {
 			log.debug("findMenuList  {}",menu);
-			if (StringUtils.isEmpty(menu.getCityId())){
-				User user = MidlandHelper.getCurrentUser(request);
+			User user = MidlandHelper.getCurrentUser(request);
+			model.addAttribute("isSuper",user.getIsSuper());
+			if(!Contant.isSuper.equals(user.getIsSuper())){//不是超级管理员，只能看属性城市的相关信息
 				menu.setCityId(user.getCityId());
 			}
 			MidlandHelper.doPage(request);

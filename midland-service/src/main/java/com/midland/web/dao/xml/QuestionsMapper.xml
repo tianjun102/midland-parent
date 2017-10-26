@@ -15,11 +15,13 @@
     <result column="questions_area" property="questionsArea" jdbcType="LONGVARCHAR" />
     <result column="audit_remark" property="auditRemark" jdbcType="LONGVARCHAR" />
     <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+    <result column="city_id" property="cityId" jdbcType="VARCHAR" />
+    <result column="city_name" property="cityName" jdbcType="VARCHAR" />
   </resultMap>
 
   <sql id="Base_Column_List" >
     id, questions_title, source, DATE_FORMAT(question_time,'%Y-%m-%d %H:%i:%s')question_time, question_name, question_phone, auditor,
-    status, click_num, fabulous,questions_area,audit_remark,is_delete
+    status, click_num, fabulous,questions_area,audit_remark,is_delete,city_id,city_name
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -91,6 +93,12 @@
       <if test="isDelete != null" >
         is_delete,
       </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+      <if test="cityName != null" >
+        city_name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -132,6 +140,12 @@
       <if test="isDelete != null" >
         #{isDelete},
       </if>
+      <if test="cityId != null" >
+        #{city_id},
+      </if>
+      <if test="cityName != null" >
+        #{city_name},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.midland.web.model.Questions" >
@@ -172,6 +186,12 @@
       </if>
       <if test="isDelete != null" >
         is_delete = #{isDelete},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId},
+      </if>
+      <if test="cityName != null" >
+        city_name = #{cityName},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -222,6 +242,12 @@
     </if>
     <if test="isDelete != null" >
       and is_delete = #{isDelete}
+    </if>
+    <if test="cityId != null" >
+      and city_id = #{cityId}
+    </if>
+    <if test="cityName != null" >
+      and city_name = #{cityName}
     </if>
   </sql>
 

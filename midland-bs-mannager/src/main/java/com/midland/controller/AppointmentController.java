@@ -6,6 +6,7 @@ import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.config.MidlandConfig;
 import com.midland.core.util.HttpUtils;
+import com.midland.web.Contants.Contant;
 import com.midland.web.api.ApiHelper;
 import com.midland.web.api.SmsSender.SmsClient;
 import com.midland.web.api.SmsSender.SmsModel;
@@ -139,8 +140,11 @@ public class AppointmentController extends BaseFilter {
 			pageSize = ContextEnums.PAGESIZE;
 		}
 		User user = MidlandHelper.getCurrentUser(request);
+		model.addAttribute("isSuper",user.getIsSuper());
+		if(!Contant.isSuper.equals(user.getIsSuper())){//不是超级管理员，只能看属性城市的相关信息
+			record.setCityId(user.getCityId());
+		}
 		//只展示用户所属城市的信息
-		record.setCityId(user.getCityId());
 		PageHelper.startPage(Integer.valueOf(pageNo), Integer.valueOf(pageSize));
 		Page<Appointment> result = (Page<Appointment>) appointmentServiceImpl.findAppointmentList(record);
 		Paginator paginator = result.getPaginator();

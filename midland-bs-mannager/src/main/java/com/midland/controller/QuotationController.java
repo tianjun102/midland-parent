@@ -5,7 +5,9 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.controller.PublicUtils.QuotationUtil;
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.*;
+import com.midland.web.model.user.User;
 import com.midland.web.service.QuotationService;
 import com.midland.web.service.QuotationViewService;
 import com.midland.web.service.SettingService;
@@ -40,14 +42,12 @@ public class QuotationController extends BaseFilter {
 	 *
 	 **/
 	@RequestMapping("index")
-	public String quotationIndex(Quotation quotation, Model model) throws Exception {
+	public String quotationIndex(Quotation quotation, Model model,HttpServletRequest request) throws Exception {
 		List<ParamObject> paramObjects = JsonMapReader.getMap("quotation_type");
 		model.addAttribute("types", paramObjects);
-		model.addAttribute("isNew", quotation.getIsNew());
-		List<Area> list = settingService.queryAllCityByRedis();
 		settingService.getAllProvinceList(model);
-		
-		model.addAttribute("citys",list);
+		User user = MidlandHelper.getCurrentUser(request);
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "quotation/quotationIndex";
 	}
 
@@ -160,6 +160,11 @@ public class QuotationController extends BaseFilter {
 	public String findQuotationList(Quotation quotation, Model model, HttpServletRequest request) {
 		try {
 			log.debug("findQuotationList  {}", quotation);
+			User user = MidlandHelper.getCurrentUser(request);
+			model.addAttribute("isSuper",user.getIsSuper());
+			if(!Contant.isSuper.equals(user.getIsSuper())){//不是超级管理员，只能看属性城市的相关信息
+				quotation.setCityId(user.getCityId());
+			}
 			MidlandHelper.doPage(request);
 			Page<Quotation> result = (Page<Quotation>) quotationServiceImpl.findQuotationList(quotation);
 			Paginator paginator = result.getPaginator();

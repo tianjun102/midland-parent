@@ -3,8 +3,11 @@ package com.midland.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.LeaveMsg;
+import com.midland.web.model.user.User;
 import com.midland.web.service.LeaveMsgService;
+import com.midland.web.service.SettingService;
 import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
 import com.midland.web.util.ParamObject;
@@ -31,12 +34,17 @@ public class LeaveMsgController extends BaseFilter {
 	private Logger log = LoggerFactory.getLogger(LeaveMsgController.class);
 	@Autowired
 	private LeaveMsgService leaveMsgServiceImpl;
+@Autowired
+	private SettingService settingService;
 
 	/**
 	 * 
 	 **/
 	@RequestMapping("index")
-	public String leaveMsgIndex(LeaveMsg leaveMsg, Model model) throws Exception {
+	public String leaveMsgIndex(LeaveMsg leaveMsg, Model model,HttpServletRequest request) throws Exception {
+		User user = MidlandHelper.getCurrentUser(request);
+		model.addAttribute("isSuper",user.getIsSuper());
+		settingService.getAllProvinceList(model);
 		List<ParamObject> obj = JsonMapReader.getMap("leaveMsg_type");
 		model.addAttribute("leaveMsgTypes",obj);
 		return "leaveMsg/leaveMsgIndex";
@@ -134,6 +142,11 @@ public class LeaveMsgController extends BaseFilter {
 	public String findLeaveMsgList(LeaveMsg leaveMsg, Model model, HttpServletRequest request) {
 		try {
 			log.debug("findLeaveMsgList  {}",leaveMsg);
+			User user = MidlandHelper.getCurrentUser(request);
+			model.addAttribute("isSuper",user.getIsSuper());
+			if(!Contant.isSuper.equals(user.getIsSuper())){//不是超级管理员，只能看属性城市的相关信息
+				leaveMsg.setCityId(user.getCityId());
+			}
 			MidlandHelper.doPage(request);
 			Page<LeaveMsg> result = (Page<LeaveMsg>)leaveMsgServiceImpl.findLeaveMsgList(leaveMsg);
 			Paginator paginator=result.getPaginator();
