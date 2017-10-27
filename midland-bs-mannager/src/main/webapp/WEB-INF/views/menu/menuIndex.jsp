@@ -72,11 +72,14 @@
 					</select>
 				</li>
 				<c:if test="${not empty isSuper}">
-					<li>
-						<span style = "float:left;">是否删除：</span>
-						<select name="isDelete" id="isDelete" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
-							<option value="0">未删除</option>
-							<option value="1">已删除</option>
+					<li><span>是否删除：</span>
+						<select name="isDelete" id="isDelete" class="dropdown" >
+							<option value="">全部</option>
+							<c:forEach items="${isDeletes}" var="s1" >
+								<option value="${s1.id}"  <c:if test="${s1.id==0}">selected</c:if>>
+										${s1.name}
+								</option>
+							</c:forEach>
 						</select>
 					</li>
 				</c:if>

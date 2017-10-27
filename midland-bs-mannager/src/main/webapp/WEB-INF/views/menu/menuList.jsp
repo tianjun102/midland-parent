@@ -31,6 +31,7 @@
             <th style="width: 3%">名称</th>
             <th style="width: 5%">类型</th>
             <th style="width: 5%">点击量</th>
+            <th style="width: 5%">删除状态</th>
 
             <th style="width: 25%">操作</th>
         </tr>
@@ -52,6 +53,11 @@
                         <td>${item.menuName }</td>
                         <td>${item.menuTypeName }</td>
                         <td>${item.clickNum }</td>
+                        <td>
+                            <c:forEach items="${isDeletes}" var="s1">
+                                <c:if test="${s1.id==item.isDelete}">${s1.name}</c:if>
+                            </c:forEach>
+                        </td>
 
                         <td>
 
@@ -92,7 +98,7 @@
     function delete1(id){
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/menu/delete?id="+id+"&isDelete=1",
+            url: "${ctx}/rest/menu/update?id="+id+"&isDelete=1",
             async: false, // 此处必须同步
             dataType: "json",
 

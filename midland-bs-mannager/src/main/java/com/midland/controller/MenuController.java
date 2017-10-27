@@ -55,10 +55,9 @@ public class MenuController extends BaseFilter  {
 		List<ParamObject> sources = JsonMapReader.getMap("source");
 		model.addAttribute("sources",sources);
 		User user = MidlandHelper.getCurrentUser(request);
-		if(user.getIsSuper()==null){
-			model.addAttribute("cityId",user.getCityId());
-		}
 		model.addAttribute("isSuper",user.getIsSuper());
+		List<ParamObject> obj = JsonMapReader.getMap("is_delete");
+		model.addAttribute("isDeletes",obj);
 		return "menu/menuIndex";
 	}
 
@@ -178,6 +177,8 @@ public class MenuController extends BaseFilter  {
 			MidlandHelper.doPage(request);
 			Page<Menu> result = (Page<Menu>)menuServiceImpl.findMenuList(menu);
 			Paginator paginator=result.getPaginator();
+			List<ParamObject> obj = JsonMapReader.getMap("is_delete");
+			model.addAttribute("isDeletes",obj);
 			List<ParamObject> sources = JsonMapReader.getMap("source");
 			model.addAttribute("sources",sources);
 			model.addAttribute("paginator",paginator);
