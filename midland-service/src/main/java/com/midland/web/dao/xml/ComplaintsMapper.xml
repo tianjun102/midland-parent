@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.midland.web.dao.ComplaintsMapper">
+
+ 	<resultMap id="BaseResultMap" type="com.midland.web.model.Complaints" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="wx_name" property="wxName" jdbcType="VARCHAR" />
+		<result column="wx_num" property="wxNum" jdbcType="VARCHAR" />
+		<result column="open_id" property="openId" jdbcType="VARCHAR" />
+		<result column="detail" property="detail" jdbcType="LONGVARCHAR" />
+		<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+		<result column="department" property="department" jdbcType="INTEGER" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id,wx_name,wx_num,open_id,detail,add_time,department,type,is_delete
+	</sql>
+
+	<select id="selectComplaintsById" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from complaints
+		 where id= #{id}
+	</select>
+
+	<delete id="deleteComplaintsById" >
+		delete from complaints
+		 where id= #{id}
+	</delete>
+
+	<update id="updateComplaintsById" >
+		update complaints 
+		<set>
+		<include refid="update_option"/>
+		</set>
+
+		 where id= #{id}
+	</update>
+
+	<select id="findComplaintsList" parameterType="com.midland.web.model.Complaints" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from complaints
+		where 
+		is_delete=0
+		<include refid="select_option" />
+	</select>
+
+	<insert id="insertComplaints" parameterType="com.midland.web.model.Complaints">
+		insert into complaints
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="wxName != null">
+				wx_name,
+			</if>
+			<if test="wxNum != null">
+				wx_num,
+			</if>
+			<if test="openId != null">
+				open_id,
+			</if>
+			<if test="detail != null">
+				detail,
+			</if>
+			<if test="addTime != null">
+				add_time,
+			</if>
+			<if test="department != null">
+				department,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="isDelete != null">
+				is_delete,
+			</if>
+		</trim>
+		values
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="wxName != null">
+				#{wxName,jdbcType=VARCHAR},
+			</if>
+			<if test="wxNum != null">
+				#{wxNum,jdbcType=VARCHAR},
+			</if>
+			<if test="openId != null">
+				#{openId,jdbcType=VARCHAR},
+			</if>
+			<if test="detail != null">
+				#{detail,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="addTime != null">
+				#{addTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="department != null">
+				#{department,jdbcType=INTEGER},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="isDelete != null">
+				#{isDelete,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+
+	<sql id="update_option">
+		<if test="wxName != null">
+			wx_name= #{wxName,jdbcType=VARCHAR},
+		</if>
+		<if test="wxNum != null">
+			wx_num= #{wxNum,jdbcType=VARCHAR},
+		</if>
+		<if test="openId != null">
+			open_id= #{openId,jdbcType=VARCHAR},
+		</if>
+		<if test="detail != null">
+			detail= #{detail,jdbcType=LONGVARCHAR},
+		</if>
+		<if test="addTime != null">
+			add_time= #{addTime,jdbcType=TIMESTAMP},
+		</if>
+		<if test="department != null">
+			department= #{department,jdbcType=INTEGER},
+		</if>
+		<if test="type != null">
+			type= #{type,jdbcType=INTEGER},
+		</if>
+		<if test="isDelete != null">
+			is_delete= #{isDelete,jdbcType=INTEGER},
+		</if>
+	</sql>
+
+	<sql id="select_option">
+		<if test="id != null">
+			 and id= #{id,jdbcType=INTEGER}
+		</if>
+		<if test="wxName != null">
+			 and wx_name= #{wxName,jdbcType=VARCHAR}
+		</if>
+		<if test="wxNum != null">
+			 and wx_num= #{wxNum,jdbcType=VARCHAR}
+		</if>
+		<if test="openId != null">
+			 and open_id= #{openId,jdbcType=VARCHAR}
+		</if>
+		<if test="detail != null">
+			 and detail= #{detail,jdbcType=LONGVARCHAR}
+		</if>
+		<if test="addTime != null">
+			 and add_time= #{addTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="department != null">
+			 and department= #{department,jdbcType=INTEGER}
+		</if>
+		<if test="type != null">
+			 and type= #{type,jdbcType=INTEGER}
+		</if>
+		<if test="isDelete != null">
+			 and is_delete= #{isDelete,jdbcType=INTEGER}
+		</if>
+	</sql>
+
+</mapper>
