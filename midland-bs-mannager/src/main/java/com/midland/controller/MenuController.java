@@ -234,11 +234,11 @@ public class MenuController extends BaseFilter  {
 		}
 		Map<String,Object> map = new HashMap<>();
 		try {
-			log.debug("updateCategoryById  {}",commentList);
+			log.debug("batchUpdate  {}",commentList);
 			menuServiceImpl.batchUpdate(commentList);
 			map.put("state",0);
 		} catch(Exception e) {
-			log.error("updateCategoryById  {}",commentList,e);
+			log.error("batchUpdate  {}",commentList,e);
 			map.put("state",-1);
 		}
 		return map;

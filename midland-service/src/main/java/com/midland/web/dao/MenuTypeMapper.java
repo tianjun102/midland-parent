@@ -19,5 +19,5 @@ public interface MenuTypeMapper {
 
 	List<MenuType> findRootMenuTypeList();
 	List<MenuType> findMenuTypeTree(MenuType menuType);
-
+	int batchUpdate(List<MenuType> list);
 }

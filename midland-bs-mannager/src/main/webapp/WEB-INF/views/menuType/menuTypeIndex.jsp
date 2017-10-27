@@ -9,14 +9,31 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-	.table-add tr td a {
-		display: inline-block;
-		width: 35px;
-		height: 20px;
-		margin: 0 5px;
-		background-size: contain!important;
+	.content ul.userinfo li:not(:last-child) input {
+		float: left;
+		width: 150px!important;
+		height: 38px;
+		line-height: 38px;
+		text-indent: 10px;
+		outline-color: rgb(0, 153, 224);
+		border-width: 1px;
+		border-style: solid;
+		border-color: rgb(219, 226, 230);
+		border-image: initial;
+		border-radius: 4px;
 	}
 
+	.dropdown {
+		position: relative;
+		width: 150px!important;
+		border: 1px solid #ccc;
+		cursor: pointer;
+		background: #fff;
+		border-radius: 3px;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		user-select: none;
+	}
 </style>
 </head>
 <body>
@@ -39,11 +56,29 @@
 				<li><span style="width: 120px">上级分类名称：</span>
 					<input type="text" name="parentName" id="parentName" placeholder="请输入上级分类名称" /></li>
 				</li>
+				<c:if test="${not empty isSuper}">
+					<li><span style="width: 100px">是否删除：</span>
+						<select name="isDelete" id="isDelete" class="dropdown" style="width: 90px">
+							<option value="">全部</option>
+							<c:forEach items="${isDeletes}" var="s1" >
+								<option value="${s1.id}"  <c:if test="${s1.id==0}">selected</c:if>>
+										${s1.name}
+								</option>
+							</c:forEach>
+						</select>
+					</li>
+				</c:if>
 				<li>
 					<input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/>
 				</li>
 			</ul>
 			</form>
+			<input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;margin-top: 10px;"
+				   onclick="batchDelete(1)" class="public_btn bg1" type="submit" value="批量删除"/>
+			<c:if test="${not empty isSuper}"><input
+					style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" onclick="batchDelete(0)"
+					class="public_btn bg1" type="submit" value="批量恢复"/>
+			</c:if>
 			<div id="listDiv"></div>
 		</section>
 	</div>

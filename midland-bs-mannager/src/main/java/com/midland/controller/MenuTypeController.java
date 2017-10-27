@@ -1,13 +1,17 @@
 package com.midland.controller;
 
 import com.midland.web.Contants.Contant;
+import com.midland.web.model.Menu;
 import com.midland.web.model.MenuType;
 import com.midland.web.model.user.User;
 import com.midland.web.service.MenuTypeService;
 import com.midland.base.BaseFilter;
 import com.midland.web.service.SettingService;
-import org.apache.commons.lang3.StringUtils;
+import com.midland.web.util.JsonMapReader;
+import com.midland.web.util.ParamObject;
 import org.slf4j.Logger;
+
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import org.slf4j.LoggerFactory;
@@ -40,6 +44,8 @@ public class MenuTypeController extends BaseFilter  {
 		settingService.getAllProvinceList(model);
 		User user = MidlandHelper.getCurrentUser(request);
 		model.addAttribute("isSuper",user.getIsSuper());
+		List<ParamObject> obj = JsonMapReader.getMap("is_delete");
+		model.addAttribute("isDeletes",obj);
 		return "menuType/menuTypeIndex";
 	}
 
@@ -141,10 +147,13 @@ public class MenuTypeController extends BaseFilter  {
 			model.addAttribute("isSuper",user.getIsSuper());
 			if(!Contant.isSuper.equals(user.getIsSuper())){//不是超级管理员，只能看属性城市的相关信息
 				menuType.setCityId(user.getCityId());
+				menuType.setIsDelete(Contant.isNotDelete);
 			}
 			MidlandHelper.doPage(request);
 			Page<MenuType> result = (Page<MenuType>)menuTypeServiceImpl.findMenuTypeList(menuType);
 			Paginator paginator=result.getPaginator();
+			List<ParamObject> obj = JsonMapReader.getMap("is_delete");
+			model.addAttribute("isDeletes",obj);
 			model.addAttribute("paginator",paginator);
 			model.addAttribute("items",result);
 		} catch(Exception e) {
@@ -154,4 +163,30 @@ public class MenuTypeController extends BaseFilter  {
 		}
 		return "menuType/menuTypeList";
 	}
+	/**
+	 * 批量更新
+	 **/
+	@RequestMapping("batchUpdate")
+	@ResponseBody
+	public Object batchUpdate(String ids,MenuType menuType) throws Exception {
+		List<MenuType> commentList = new ArrayList<>();
+		String[] ides=ids.split(",",-1);
+		for (String id:ides ){
+			MenuType comment1 = new MenuType();
+			comment1.setId(Integer.valueOf(id));
+			comment1.setIsDelete(menuType.getIsDelete());
+			commentList.add(comment1);
+		}
+		Map<String,Object> map = new HashMap<>();
+		try {
+			log.debug("batchUpdate  {}",commentList);
+			menuTypeServiceImpl.batchUpdate(commentList);
+			map.put("state",0);
+		} catch(Exception e) {
+			log.error("batchUpdate  {}",commentList,e);
+			map.put("state",-1);
+		}
+		return map;
+	}
+
 }

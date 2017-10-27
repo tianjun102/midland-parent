@@ -35,4 +35,6 @@ public interface MenuTypeService {
 
 
 	String findRootMenuTypeTree(MenuType menuType) throws Exception;
+
+    void batchUpdate(List<MenuType> list);
 }
