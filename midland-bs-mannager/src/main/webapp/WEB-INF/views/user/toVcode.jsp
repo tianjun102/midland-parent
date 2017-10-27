@@ -107,7 +107,7 @@
             url: '${ctx}/rest/user/vcode/checkVcode?phone='+phone+"&vcode="+vCode, //目标地址
             data: "" ,
             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                layer.msg("发送失败，请检查手机号码！",{icon:2});
+                layer.msg("验证码错误！",{icon:2});
             },
             success: function (msg){
                 if(msg.flag==1){
