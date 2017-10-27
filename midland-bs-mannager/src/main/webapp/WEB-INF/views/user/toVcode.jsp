@@ -111,14 +111,14 @@
             },
             success: function (msg){
                 if(msg.flag==1){
-                    $("#id1").show();
-                    $("#id2").show();
-                    $("#id3").show();
-                    layer.msg("验证码正确！",{icon:1});
-                }else {
+                    $("#id4").show();
+                    $("#id5").show();
+                    $("#id6").show();
                     $("#id1").hide();
                     $("#id2").hide();
                     $("#id3").hide();
+                    layer.msg("验证码正确！",{icon:1});
+                }else {
                     layer.msg("验证码错误！",{icon:2});
                 }
             }
@@ -134,7 +134,7 @@
             var newPwd=$("#newPwd").val();
             $.ajax({
                 type : "post",
-                url : "${ctx}/rest/user/vcode/updatePwd?newPwd="+newPwd+"id="+id,
+                url : "${ctx}/rest/user/vcode/updatePwd?newPwd="+newPwd+"&id="+id,
                 async : false, // 此处必须同步
                 dataType : "json",
                 data : "",
@@ -145,6 +145,9 @@
                     } else {
                         layer.msg("修改失败！",{icon:7});
                     }
+                },
+                error : function(data) {
+                    layer.msg("修改失败！",{icon:7});
                 }
             });
 
