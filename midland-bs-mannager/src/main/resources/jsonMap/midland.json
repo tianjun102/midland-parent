@@ -99,7 +99,6 @@
       "name": "出租"
     }
   ],
-
   "entrust_rent_out_sellRent": [
     {
       "id": "0",
@@ -114,7 +113,6 @@
       "name": "床位"
     }
   ],
-
   "entrust_house_type": [
     {
       "id": "0",
@@ -303,7 +301,7 @@
       "name": "写字楼"
     }
   ],
-  "other_facilities":[
+  "other_facilities": [
     {
       "id": "0",
       "name": "冰箱"
@@ -348,6 +346,15 @@
       "id": "10",
       "name": "煤气"
     }
-
+  ],
+  "is_delete": [
+    {
+      "id": "0",
+      "name": "正常"
+    },
+    {
+      "id": "1",
+      "name": "删除"
+    }
   ]
 }

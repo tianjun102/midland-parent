@@ -84,7 +84,7 @@
             <li class="col-md-6"><span>手机号码：</span><input type="text" name="phone" id="phone"
                                                           value="${entrust.phone}"
                                                           maxlength="50" onblur="checkPhone('','phone','')"/><span class="_star">*</span></li>
-            <%@include file="area.jsp" %>
+            <%@include file="../menu/area.jsp" %>
             <li class="col-md-6"><span>分类：</span>
                 <select name="sellRent" id="sellRent" class="dropdown">
                     <c:forEach items="${sellRents}" var="s">

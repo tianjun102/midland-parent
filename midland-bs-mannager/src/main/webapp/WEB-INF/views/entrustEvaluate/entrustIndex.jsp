@@ -19,6 +19,17 @@
 			font-size: 14px;
 			color: rgb( 102, 102, 102 );
 		}
+		.dropdown {
+			  position: relative;
+			  width: 200px;
+			  border: 1px solid #ccc;
+			  cursor: pointer;
+			  background: #fff;
+			  border-radius: 3px;
+			  -webkit-user-select: none;
+			  -moz-user-select: none;
+			  user-select: none;
+		  }
 	</style>
 
 </head>
@@ -58,6 +69,18 @@
 						</c:forEach>
 					</select>
 				</li>
+				<c:if test="${not empty isSuper}">
+					<li><span>是否删除：</span>
+						<select name="isDelete" id="isDelete" class="dropdown" >
+							<option value="">全部</option>
+							<c:forEach items="${isDeletes}" var="s1" >
+								<option value="${s1.id}"  <c:if test="${s1.id==0}">selected</c:if>>
+										${s1.name}
+								</option>
+							</c:forEach>
+						</select>
+					</li>
+				</c:if>
 				<li><span>委托时间：</span><input  class="Wdate half" id="time1"
 										onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time2\')}'})"
 										name="startTime" /> <em class = "gang">-</em><input
@@ -69,7 +92,9 @@
 			</ul>
 			</form>
 			<input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;margin-top: 10px;" onclick="batchDelete(1)" class = "public_btn bg1" type="submit"  value = "批量删除"/>
-			<input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" onclick="batchDelete(0)" class = "public_btn bg1" type="submit"  value = "批量恢复"/>
+			<c:if test="${not empty isSuper}">
+				<input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" onclick="batchDelete(0)" class = "public_btn bg1" type="submit"  value = "批量恢复"/>
+			</c:if>
 			<input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" class = "public_btn bg1" onclick="export1()" type="submit"  value = "导出"/>
 			<div id="listDiv"></div>
 		</section>

@@ -64,6 +64,8 @@ public class EntrustRentOutController extends BaseFilter{
 	public String showRentOutIndex(HttpServletRequest request,Model model)
 	{
 		getSelectParam(model);
+		User user = MidlandHelper.getCurrentUser(request);
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "/entrustRentOut/entrustIndex";
 	}
 
@@ -131,6 +133,8 @@ public class EntrustRentOutController extends BaseFilter{
 		model.addAttribute("statusList",paramObjects4);
 		List<ParamObject> paramObjects5 = JsonMapReader.getMap("decoration");
 		model.addAttribute("decorations", paramObjects5);
+		List<ParamObject> ojb = JsonMapReader.getMap("is_delete");
+		model.addAttribute("isDeletes",ojb);
 		
 	}
 	
@@ -147,7 +151,9 @@ public class EntrustRentOutController extends BaseFilter{
 		model.addAttribute("isSuper",user.getIsSuper());
 		if(!Contant.isSuper.equals(user.getIsSuper())){//不是超级管理员，只能看属性城市的相关信息
 			record.setCityId(user.getCityId());
+			record.setIsDelete(Contant.isNotDelete);
 		}
+
 		record.setEntrustType(Contant.ENTRUST_RENT_OUT);
 		PageHelper.startPage(Integer.valueOf(pageNo),Integer.valueOf(pageSize));
 		Page<Entrust> result =(Page<Entrust>) entrustServiceImpl.findEntrustList(record);

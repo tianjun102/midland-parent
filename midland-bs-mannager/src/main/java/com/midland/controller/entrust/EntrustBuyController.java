@@ -66,6 +66,8 @@ public class EntrustBuyController extends BaseFilter{
 	public String showEntrustBuyIndex(HttpServletRequest request,Model model)
 	{
 		getSelectParam(model);
+		User user = MidlandHelper.getCurrentUser(request);
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "/entrustBuy/entrustIndex";
 	}
 	@RequestMapping("/delete")
@@ -132,6 +134,8 @@ public class EntrustBuyController extends BaseFilter{
 		model.addAttribute("statusList",paramObjects4);
 		List<ParamObject> paramObjects5 = JsonMapReader.getMap("decoration");
 		model.addAttribute("decorations", paramObjects5);
+		List<ParamObject> ojb = JsonMapReader.getMap("is_delete");
+		model.addAttribute("isDeletes",ojb);
 		
 	}
 	
@@ -148,7 +152,9 @@ public class EntrustBuyController extends BaseFilter{
 		model.addAttribute("isSuper",user.getIsSuper());
 		if(!Contant.isSuper.equals(user.getIsSuper())){//不是超级管理员，只能看属性城市的相关信息
 			record.setCityId(user.getCityId());
+			record.setIsDelete(Contant.isNotDelete);
 		}
+
 		record.setEntrustType(Contant.ENTRUST_BUY);
 		PageHelper.startPage(Integer.valueOf(pageNo),Integer.valueOf(pageSize));
 		Page<Entrust> result =(Page<Entrust>) entrustServiceImpl.findEntrustList(record);
