@@ -42,9 +42,13 @@ public class FilmLibraryController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("index")
-	public String filmLibraryIndex(FilmLibrary filmLibrary, Model model) throws Exception {
+	public String filmLibraryIndex(FilmLibrary filmLibrary, Model model,HttpServletRequest request) throws Exception {
 		List<Area> list = settingService.queryAllCityByRedis();
 		settingService.getAllProvinceList(model);
+		User user = MidlandHelper.getCurrentUser(request);
+		model.addAttribute("isSuper",user.getIsSuper());
+		List<ParamObject> obj1 = JsonMapReader.getMap("is_delete");
+		model.addAttribute("isDeletes",obj1);
 		List<ParamObject> obj = JsonMapReader.getMap("film_type");
 		model.addAttribute("filmTypes",obj);
 		model.addAttribute("citys",list);
@@ -153,8 +157,9 @@ public class FilmLibraryController extends BaseFilter {
 			model.addAttribute("isSuper",user.getIsSuper());
 			if(!Contant.isSuper.equals(user.getIsSuper())){//不是超级管理员，只能看属性城市的相关信息
 				filmLibrary.setCityId(user.getCityId());
-
 			}
+			List<ParamObject> obj1 = JsonMapReader.getMap("is_delete");
+			model.addAttribute("isDeletes",obj1);
 			MidlandHelper.doPage(request);
 			Page<FilmLibrary> result = (Page<FilmLibrary>)filmLibraryServiceImpl.findFilmLibraryList(filmLibrary);
 			Paginator paginator=result.getPaginator();
