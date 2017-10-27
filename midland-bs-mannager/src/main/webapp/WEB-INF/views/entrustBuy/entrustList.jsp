@@ -22,6 +22,7 @@
         {
             white-space: nowrap;
         }
+
     </style>
 </head>
 <body>
@@ -47,6 +48,7 @@
             <th style="width: auto">委托时间</th>
             <th style="width: auto">处理时间</th>
             <th style="width: auto">状态</th>
+            <th style="width: auto">是否删除</th>
 
             <th style="width: auto">操作</th>
         </tr>
@@ -82,7 +84,11 @@
                         <td><c:forEach items="${statusList}" var="s">
                             <c:if test="${item.status == s.id}">${s.name}</c:if>
                         </c:forEach></td>
-
+                        <td>
+                            <c:forEach items="${isDeletes}" var="s1" >
+                                <c:if test="${s1.id==item.isDelete}">${s1.name}</c:if>
+                            </c:forEach>
+                        </td>
                         <td>
                             <c:if test="${item.resetFlag==1}">
                                 <a target="contentF" class="arrange_img" title="分配" onclick="toRedistribute(${item.id })"></a>

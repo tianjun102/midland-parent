@@ -34,7 +34,7 @@
         <input type="hidden" name="showType" id="showType" value="${showType}"/>
         <ul class="userinfo row">
             <li>
-                <%@include file="../quotation/dist.jsp" %>
+                <%@include file="../menu/dist.jsp" %>
             </li>
             <%--<li><span>区域：</span>--%>
                 <%--<input type="text" name="areaName">--%>

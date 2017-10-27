@@ -36,9 +36,10 @@ public class MenuTypeController extends BaseFilter  {
 	 * 
 	 **/
 	@RequestMapping("index")
-	public String menuTypeIndex(MenuType menuType,Model model) throws Exception {
+	public String menuTypeIndex(MenuType menuType,Model model,HttpServletRequest request) throws Exception {
 		settingService.getAllProvinceList(model);
-
+		User user = MidlandHelper.getCurrentUser(request);
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "menuType/menuTypeIndex";
 	}
 

@@ -15,6 +15,14 @@ public class Contant {
 	 */
 	public static final String isSuper = "1";
 
+	/**
+	 *  系统数据逻辑删除：0正常，1删除
+	 */
+	public static final int isNotDelete=0;
+	/**
+	 *  系统数据逻辑删除：0正常，1删除
+	 */
+	public static final int isDelete=1;
 
 
 	public static final int ENTRUST_BUY=0;
