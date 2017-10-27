@@ -140,4 +140,9 @@ public class MenuTypeServiceImpl implements MenuTypeService {
 			throw e;
 		}
 	}
+
+	@Override
+	public void batchUpdate(List<MenuType> list){
+		menuTypeMapper.batchUpdate(list);
+	}
 }

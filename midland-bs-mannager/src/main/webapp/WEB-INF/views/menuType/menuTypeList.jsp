@@ -25,10 +25,12 @@
     <table class="table table-bordered table-add">
         <thead>
             <tr>
-				<th style="width: 8%">类型id</th>
+                <th style="width: 8%"><a href="#" onclick="checkall()" >全选</a> / <a href="#" onclick="delcheckall()" >取消</a></th>
+                <th style="width: 8%">类型id</th>
 				<th style="width: 8%">类型名称</th>
 				<th style="width: 8%">父类型名称</th>
 				<th style="width: 8%">城市</th>
+				<th style="width: 8%">删除状态</th>
                 <th style="width: 10%">操作</th>
             </tr>
         </thead>
@@ -37,14 +39,25 @@
             <c:when test="${!empty requestScope.items }">
                 <c:forEach items="${requestScope.items }" var="item" varStatus="xh">
                     <tr>
-						<input type="hidden" id="id" value="${item.id}"/>
+                        <td><input type="checkbox" name="pid" value="${item.id}"></td>
+                        <input type="hidden" id="id" value="${item.id}"/>
 						<td>${item.id}</td>
 						<td>${item.name}</td>
 						<td>${item.parentName}</td>
 						<td>${item.cityName}</td>
+                        <td>
+                            <c:forEach items="${isDeletes}" var="s1">
+                                <c:if test="${s1.id==item.isDelete}">${s1.name}</c:if>
+                            </c:forEach>
+                        </td>
 						<td>
-                            <a target="contentF" onclick="to_edit(${item.id })">编辑</a>
-                            <a target="contentF" onclick="delete1(${item.id })">删除</a>
+                            <a target="contentF" onclick="to_edit(${item.id })"  class="edit_img"></a>
+                            <c:if test="${item.isDelete==0}">
+                                <a target="contentF" onclick="deleteOrRecover(${item.id },1)" class="delete_img"></a>
+                            </c:if>
+                            <c:if test="${item.isDelete==1}">
+                                <a target="contentF" class="recove_img" onclick="deleteOrRecover(${item.id },0)"></a>
+                            </c:if>
                         </td>
                     </tr>
                 </c:forEach>
@@ -67,10 +80,49 @@
 
 <script type="text/javascript">
 
-    function delete1(id){
+
+    function checkall(){
+        $("input[name='pid']").each(function(){
+            this.checked=true;
+        });
+    }
+
+    function batchDelete(status) {
+        var ids = [];
+        $("input[name='pid']").each(function(){
+            if(this.checked){
+                ids.push($(this).val());
+            }
+        });
+
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/menuType/update?id="+id+"&isDelete=1",
+            url: "${ctx}/rest/menuType/batchUpdate?ids="+ids+"&isDelete="+status,
+            async: false, // 此处必须同步
+            dataType: "json",
+
+            success: function (data) {
+                if (data.state==0){
+                    layer.msg("操作成功！", {icon: 1});
+                    $('#searchForm').submit();
+                }
+            },
+            error: function () {
+                layer.msg("操作失败！", {icon: 2});
+            }
+        })
+    }
+
+    function delcheckall(){
+        $("input[name='pid']").each(function(){
+            this.checked=false;
+        });
+    }
+
+    function deleteOrRecover(id, flag){
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/menuType/update?id="+id+"&isDelete="+flag,
             async: false, // 此处必须同步
             dataType: "json",
 
