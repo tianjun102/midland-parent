@@ -28,7 +28,7 @@
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
 
-
+				<%@include file="../layout/sherchArea.jsp" %>
 				<li><span>类别：</span><input style="width: 243px;" class="vipcate" id="vipcate"  name="vipcate" onclick="showTree()" readonly="readonly"/>
 					<input name="cateId" type="hidden"/>
 
@@ -65,7 +65,7 @@
 						onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'time1\')}'})"
 						id="time2" name="endTime"/>
 				</li>
-				<%@include file="../layout/sherchArea.jsp" %>
+
 				<li><input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/></li>
 			</ul>
 			</form>

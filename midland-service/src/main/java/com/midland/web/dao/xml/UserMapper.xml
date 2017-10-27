@@ -499,5 +499,12 @@
         </if>
     </sql>
 
+    <select id="queryUserForPhone" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where phone = #{phone,jdbcType=VARCHAR}
+    </select>
+
 
 </mapper>

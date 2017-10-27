@@ -1009,6 +1009,26 @@ public class UserController extends BaseFilter {
 		}
 		return map;
 	}
+
+	/**
+	 * 修改密码提交保存
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/vcode/updatePwd", method = {RequestMethod.GET,RequestMethod.POST})
+	@ResponseBody
+	public Object updatePwd_(HttpServletRequest request,String newPwd ,String id){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("flag", 0);
+		User user=new User();
+		user.setPassword(ApplicationUtils.sha256Hex(newPwd));
+		user.setId(Integer.valueOf(id));
+		int n=userService.update(user);
+		if(n>0){
+			map.put("flag", 1);
+		}
+		return map;
+	}
     
     
 }
