@@ -281,7 +281,7 @@ top.location.href = location.href;
                     skin: 'layer-style',
                     area: ['500','300px'],
                     shadeClose: false, //点击遮罩关闭
-                    title:['评论'],
+                    title:['找回密码'],
                     resize: true,
                     scrollbar: true,
                     content:['${ctx}/rest/user/vcode/toVcode', ]

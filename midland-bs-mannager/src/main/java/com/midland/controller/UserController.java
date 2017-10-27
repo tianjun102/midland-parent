@@ -602,7 +602,7 @@ public class UserController extends BaseFilter {
      */
     @RequestMapping(value = "/updatePwd", method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String updatePwd(HttpServletRequest request,HttpSession session){
+    public Object updatePwd(HttpServletRequest request,HttpSession session){
     	Map<String, Object> map = new HashMap<String, Object>();
     	map.put("flag", 0);
     	String newPwd=request.getParameter("newPwd");
@@ -618,7 +618,7 @@ public class UserController extends BaseFilter {
         if(n>0){
         	map.put("flag", 1);
         }
-    	return JSONObject.toJSONString(map);
+    	return map;
     }
     
     /**
@@ -923,7 +923,10 @@ public class UserController extends BaseFilter {
 		user.setPhone(phone);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("flag", 0);
-
+		if(StringUtils.isEmpty(phone)){
+			map.put("msg", "手机号不能为空！");
+			return map;
+		}
 		String vcode = SmsUtil.createRandomVcode();//验证码
 		String mobile="";
 		String key="midland:vcode:"+phone;
@@ -1006,6 +1009,26 @@ public class UserController extends BaseFilter {
 			if(userService.update(user)>0){
 				map.put("flag", 1);
 			}
+		}
+		return map;
+	}
+
+	/**
+	 * 修改密码提交保存
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/vcode/updatePwd", method = {RequestMethod.GET,RequestMethod.POST})
+	@ResponseBody
+	public Object updatePwd_(HttpServletRequest request,String newPwd ,String id){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("flag", 0);
+		User user=new User();
+		user.setPassword(ApplicationUtils.sha256Hex(newPwd));
+		user.setId(Integer.valueOf(id));
+		int n=userService.update(user);
+		if(n>0){
+			map.put("flag", 1);
 		}
 		return map;
 	}

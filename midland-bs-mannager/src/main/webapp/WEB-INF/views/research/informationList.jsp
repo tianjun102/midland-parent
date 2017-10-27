@@ -89,7 +89,7 @@
             yes: function(index){
                 $.ajax({
                     type: "post",
-                    url: "${ctx}/rest/research/delete?id="+id,
+                    url: "${ctx}/rest/research/update?id="+id+"&isDelete=1",
                     cache:false,
                     async:false, // 此处必须同步
                     dataType: "json",

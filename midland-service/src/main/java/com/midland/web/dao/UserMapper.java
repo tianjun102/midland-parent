@@ -72,5 +72,7 @@ public interface UserMapper extends GenericDao<User, Integer> {
 	List<User> selectUsersByRoleId(Integer roleId);
 
 	int deleteUserRoleBatchById(List<UserRole> list);
+
+	User queryUserForPhone(String phone);
 	
 }

@@ -15,51 +15,36 @@
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/smsConfig/add" method="post" id="dataForm">
         <ul class="userinfo row">
-            <input type="hidden" name="id" id="id" value="${item.id}">
-            <li><span>手机号码：</span>
+            <input type="hidden" name="id" id="id" value="">
+            <li id="id1"><span>手机号码：</span>
                 <input type="text" name="phone" id="phone" />
             </li>
-            <li><span>验证码：</span>
+            <li id="id2"><span>验证码：</span>
                <input type="text" name="vCode" id="vCode" />  <input style="width: 110px!important;" id="btnSendCode" type="button" value="发送验证码" onclick="sendMessage()" />
             </li>
-            <li>
+            <li id="id3">
                 <span></span>
                 <a target="contentF" class="public_btn bg2" id="save" onclick="checkVcode()">下一步</a>
                 <%--<a style="margin-left: 20px" class="public_btn bg3" id="cancel" onclick="closeWin();">取消</a>--%>
             </li>
+
+            <li id="id4" style="display: none"><span>新密码：</span><input style="width: 300px;" type="password" name="newPwd" id="newPwd" onblur="checkNewPwd();"/>
+                <label class="_star" id="checkNewPwdMsg">*</label>
+            </li>
+            <li id="id5" style="display: none"><span>确认密码：</span><input style="width: 300px;" type="password" name="confirmPwd" id="confirmPwd" onblur="checkConfirmPwd();"/>
+                <label class="_star" id="checkConfirmPwdMsg">*</label>
+            </li>
+            <li id="id6" style="display: none">
+                <span></span>
+                <a target="_top" class = "public_btn bg2" id="confirm" onclick="saveData();">确认</a>
+            </li>
+
         </ul>
 
     </form>
 </section>
 
 <script type="text/javascript">
-    //保存数据
-    /*function updateData() {
-        var data = $("#dataForm").serialize();
-        debugger;
-        $.ajax({
-            type: "post",
-            url: "${ctx}/rest/smsConfig/add",
-            async: false, // 此处必须同步
-            dataType: "json",
-            data: data,
-            success: function (data) {
-                if (data.state == 0) {
-                    layer.msg("保存成功！！！", {icon: 1});
-                    $('#save').removeAttr("onclick");
-                    setTimeout(function () {
-                        parent.location.reload();
-                    }, 1000);
-
-                } else {
-                    layer.msg("保存失败！", {icon: 2});
-                }
-            },
-            error: function () {
-                layer.msg("保存失败！", {icon: 2});
-            }
-        });
-    }*/
 
     //取消
     function closeWin() {
@@ -82,7 +67,7 @@
         //向后台发送处理数据
         $.ajax({
             type: "POST", //用POST方式传输
-            dataType: "JSON", //数据格式:JSON
+            dataType: "json", //数据格式:JSON
             url: '${ctx}/rest/user/vcode/sendSms?phone='+phone, //目标地址
             data: "",
             error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -92,6 +77,7 @@
                 debugger;
                 if(msg.flag==1){
                     layer.msg("发送成功！",{icon:1});
+                    $("#id").val(msg.id);
                 }else {
                     layer.msg("发送失败，请检查手机号码！",{icon:2});
                 }
@@ -117,7 +103,7 @@
         var vCode = $("#vCode").val();
         $.ajax({
             type: "POST", //用POST方式传输
-            dataType: "text", //数据格式:JSON
+            dataType: "json", //数据格式:JSON
             url: '${ctx}/rest/user/vcode/checkVcode?phone='+phone+"&vcode="+vCode, //目标地址
             data: "" ,
             error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -125,12 +111,106 @@
             },
             success: function (msg){
                 if(msg.flag==1){
-                    layer.msg("发送成功！",{icon:1});
+                    $("#id4").show();
+                    $("#id5").show();
+                    $("#id6").show();
+                    $("#id1").hide();
+                    $("#id2").hide();
+                    $("#id3").hide();
+                    layer.msg("验证码正确！",{icon:1});
                 }else {
-                    layer.msg("发送失败，请检查手机号码！",{icon:2});
+                    layer.msg("验证码错误！",{icon:2});
                 }
             }
         });
+    }
+
+
+
+    function saveData() {
+
+        if (checkNewPwd() && checkConfirmPwd()) {
+            var id = $("#id").val();
+            var newPwd=$("#newPwd").val();
+            $.ajax({
+                type : "post",
+                url : "${ctx}/rest/user/vcode/updatePwd?newPwd="+newPwd+"&id="+id,
+                async : false, // 此处必须同步
+                dataType : "json",
+                data : "",
+                success : function(data) {
+                    if (data.flag == 1) {
+                        layer.msg("修改成功,请重新登陆！",{icon:1});
+                        setTimeout(function(){closeWin();},2000);
+                    } else {
+                        layer.msg("修改失败！",{icon:7});
+                    }
+                },
+                error : function(data) {
+                    layer.msg("修改失败！",{icon:7});
+                }
+            });
+
+        }
+    }
+
+
+    function checkNewPwd() {
+        var reg = /^[a-zA-Z0-9!@#$%^&*()_+|{}?><\.\-\]\\[\/]*$/;//密码格式校验
+
+        var regex1 = /[0-9]+/;
+        var regex2 = /[a-zA-Z]+/;
+        var regex3 = /[!@#$%^&*()_+|{}?><\.\-\]\\[\/]+$/;
+
+        var flag = 0;
+
+        $("#checkNewPwdMsg").text("*");
+        var oldPwd = $("#oldPwd").val();
+        var newPwd = $("#newPwd").val();
+        if (newPwd == "" || newPwd == null) {
+            $("#checkNewPwdMsg").text("新密码不能为空!");
+            return false;
+        } else if (newPwd.length <8) {
+            $("#checkNewPwdMsg").text("密码不能小于8位数！");
+            return false;
+        } else if (newPwd.length > 20) {
+            $("#checkNewPwdMsg").text("密码不能大于20位数！");
+            return false;
+        } else if (!reg.test(newPwd)) {
+            $("#checkNewPwdMsg").text("请输入正确格式的密码!");
+            return false;
+        }
+
+        if (regex1.test(newPwd)) {
+            flag++;
+        }
+        if (regex2.test(newPwd)) {
+            flag++;
+        }
+        if (regex3.test(newPwd)) {
+            flag++;
+        }
+
+        if (flag < 2) {
+            $("#checkNewPwdMsg").text("请使用8-20位字母/数字/符号的至少两种组合的密码!");
+            return false;
+        }
+        return true;
+    }
+
+    function checkConfirmPwd() {
+        $("#checkConfirmPwdMsg").text("*");
+        var newPwd1 = $("#newPwd").val();
+        var confirmPwd = $("#confirmPwd").val();
+        if (confirmPwd == "" || confirmPwd == null) {
+            $("#checkConfirmPwdMsg").text("确认密码不能为空!");
+            return false;
+        }
+        if (newPwd1 != confirmPwd) {
+            $("#checkConfirmPwdMsg").text("两次输入密码不一致!");
+            return false;
+        }
+        return true;
     }
 
 
