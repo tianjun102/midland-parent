@@ -10,6 +10,11 @@ public class Contant {
 	public static final int answerAuditOpen = 1;//开启问答审核
 	public static final int answerAuditClose = 0;//关闭问答审核,默认关闭
 
+	/**
+	 * 超级管理员标识
+	 */
+	public static final String isSuper = "1";
+
 
 
 	public static final int ENTRUST_BUY=0;

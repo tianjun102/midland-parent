@@ -6,6 +6,7 @@ import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.controller.PublicUtils.QuotationUtil;
 import com.midland.core.util.DateUtils;
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.Area;
 import com.midland.web.model.ExportModel;
 import com.midland.web.model.QuotationSecondHand;
@@ -47,14 +48,13 @@ public class QuotationSecondHandController extends BaseFilter {
      *
      **/
     @RequestMapping("index")
-    public String quotationSecondHandIndex(QuotationSecondHand quotationSecondHand, Model model) throws Exception {
+    public String quotationSecondHandIndex(QuotationSecondHand quotationSecondHand, Model model,HttpServletRequest request) throws Exception {
         List<ParamObject> paramObjects = JsonMapReader.getMap("quotation_type");
         model.addAttribute("types", paramObjects);
-        model.addAttribute("isNew", "0");
-        List<Area> list = settingService.queryAllCityByRedis();
         settingService.getAllProvinceList(model);
+        User user = MidlandHelper.getCurrentUser(request);
+        model.addAttribute("isSuper",user.getIsSuper());
 
-        model.addAttribute("citys", list);
         return "quotationSecondHand/quotationSecondHandIndex";
     }
 
@@ -186,8 +186,10 @@ public class QuotationSecondHandController extends BaseFilter {
 
     @RequestMapping("list")
     public String list(QuotationSecondHand obj, Model model, HttpServletRequest request) throws Exception {
-        if (StringUtils.isEmpty(obj.getCityId())) {
-            User user = MidlandHelper.getCurrentUser(request);
+
+        User user = MidlandHelper.getCurrentUser(request);
+        model.addAttribute("isSuper",user.getIsSuper());
+        if(!Contant.isSuper.equals(user.getIsSuper())){//不是超级管理员，只能看属性城市的相关信息
             obj.setCityId(user.getCityId());
         }
         MidlandHelper.doPage(request);

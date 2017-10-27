@@ -42,18 +42,23 @@ public class LeaveMsg{
 	 * 邮箱
 	 **/
 	private String email;
+	/**
+	 * 回复时间
+	 **/
 	private String replyTime;
+	/**
+	 * 城市id
+	 **/
+	private String cityId;
+	/**
+	 * 城市名称
+	 **/
+	private String cityName;
 
 	private String startTime;
+
 	private String endTime;
 
-	public String getReplyTime() {
-		return replyTime;
-	}
-
-	public void setReplyTime(String replyTime) {
-		this.replyTime = replyTime;
-	}
 
 	public String getStartTime() {
 		return startTime;
@@ -151,6 +156,30 @@ public class LeaveMsg{
 		this.email = email;
 	}
 
+	public String getReplyTime() {
+		return replyTime;
+	}
+
+	public void setReplyTime(String replyTime) {
+		this.replyTime = replyTime;
+	}
+
+	public String getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(String cityId) {
+		this.cityId = cityId;
+	}
+
+	public String getCityName() {
+		return cityName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
 	@Override
 	public String toString() {
 		 final StringBuffer sb=new StringBuffer("LeaveMsg{");
@@ -183,6 +212,15 @@ public class LeaveMsg{
 		}
 		if (email != null) {
 			sb.append(", \"email\":\"").append(email).append("\"");
+		}
+		if (replyTime != null) {
+			sb.append(", \"replyTime\":\"").append(replyTime).append("\"");
+		}
+		if (cityId != null) {
+			sb.append(", \"cityId\":\"").append(cityId).append("\"");
+		}
+		if (cityName != null) {
+			sb.append(", \"cityName\":\"").append(cityName).append("\"");
 		}
 		sb.append("}");
 		return sb.toString();

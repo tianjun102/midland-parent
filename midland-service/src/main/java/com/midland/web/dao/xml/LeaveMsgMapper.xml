@@ -14,10 +14,12 @@
 		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
 		<result column="email" property="email" jdbcType="VARCHAR" />
 		<result column="reply_time" property="replyTime" jdbcType="TIMESTAMP" />
+		<result column="city_id" property="cityId" jdbcType="VARCHAR" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,message,add_time,user_id,user_name,phone,reply_msg,type,is_delete,email,reply_time
+		id,message,date_format(str_to_date(add_time, '%Y-%m'),'%Y-%m')add_time,user_id,user_name,phone,reply_msg,type,is_delete,email,reply_time,city_id,city_name
 	</sql>
 
 	<select id="selectLeaveMsgById" resultMap="BaseResultMap">
@@ -41,10 +43,8 @@
 
 	<select id="findLeaveMsgList" parameterType="com.midland.web.model.LeaveMsg" resultMap="BaseResultMap">
 		select <include refid="Base_Column_List" /> from leave_msg
-		where  1=1
-		<if test="isDelete == null">
-			and is_delete=0
-		</if>
+		where 
+		is_delete=0
 		<include refid="select_option" />
 	</select>
 
@@ -81,6 +81,12 @@
 			<if test="replyTime != null">
 				reply_time,
 			</if>
+			<if test="cityId != null">
+				city_id,
+			</if>
+			<if test="cityName != null">
+				city_name,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -113,6 +119,12 @@
 			</if>
 			<if test="replyTime != null">
 				#{replyTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="cityId != null">
+				#{cityId,jdbcType=VARCHAR},
+			</if>
+			<if test="cityName != null">
+				#{cityName,jdbcType=VARCHAR},
 			</if>
 		</trim>
 	</insert>
@@ -147,6 +159,12 @@
 		</if>
 		<if test="replyTime != null">
 			reply_time= #{replyTime,jdbcType=TIMESTAMP},
+		</if>
+		<if test="cityId != null">
+			city_id= #{cityId,jdbcType=VARCHAR},
+		</if>
+		<if test="cityName != null">
+			city_name= #{cityName,jdbcType=VARCHAR},
 		</if>
 	</sql>
 
@@ -185,12 +203,20 @@
 			 and is_delete= #{isDelete,jdbcType=INTEGER}
 		</if>
 		<if test="email != null">
-			 and email= #{email,jdbcType=VARCHAR}
+			and email like '%${email}'
 		</if>
 		<if test="replyTime != null">
 			 and reply_time= #{replyTime,jdbcType=TIMESTAMP}
 		</if>
+		<if test="cityId != null">
+			 and city_id= #{cityId,jdbcType=VARCHAR}
+		</if>
+		<if test="cityName != null">
+			 and city_name= #{cityName,jdbcType=VARCHAR}
+		</if>
 	</sql>
+
+
 	<update id="batchUpdate" parameterType="java.util.List">
 		<foreach collection="leaveMsgList" item="item" index="index" open="" close="" separator=";">
 			update leave_msg

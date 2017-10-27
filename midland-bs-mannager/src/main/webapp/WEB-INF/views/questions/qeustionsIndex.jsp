@@ -61,6 +61,7 @@
         <form action="${ctx }/rest/questions/page" method="POST" id="searchForm"
               onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
             <ul class="userinfo row">
+                <%@include file="../menu/area.jsp" %>
                 <li>
                     <span>问题主题：</span>
                     <input type="text" name="questionsTitle" id="questionsTitle" placeholder="请输入问题主题"/>

@@ -10,15 +10,15 @@
 </head>
 <body>
 
-            <li class="col-sm-6 col-md-6 col-lg-6"><span style="width: 30px;">省：</span> <!-- 省 -->
+            <li class=""><span style="width: 30px;">省：</span> <!-- 省 -->
                 <p id="province" style="display: inline-block;height: 38px;">
                     <input type="hidden"  name="provinceId">
                     <input type="hidden" name="regionSn"> <input type="hidden"
                                                                  name="provinceName">
                     <!-- 第一次进页面加载省 -->
-                    <select id="provinces" onchange="initProvince()"
-                            style="height: 100%;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
-                        <option>请选择</option>
+                    <select id="provinces" name="provinces" onchange="initProvince()"
+                            style="height: 100%;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" onblur="checkSelect('provinces','请选择省级')">
+                        <option value="">请选择</option>
                         <c:forEach items="${provinceList}" var="province">
                             <option
                                     value="${province.parentId}">${province.parentName}
@@ -30,9 +30,9 @@
                 &nbsp;&nbsp;
                 <p id="city" style="display: inline-block;height: 38px;">
                     <span>市：</span>
-                    <label ></label> <input type="hidden" name="cityId">
+                    <input type="hidden" name="cityId">
                     <input type="hidden" name="cityName">
-                    <select id="citys" onchange="initCity()" style="height: 100%;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <select id="citys" name="citys" onchange="initCity()" style="height: 100%;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" onblur="checkSelect('citys','请选择市级')">
                         <c:choose>
                             <c:when test="${not empty item.cityId}">
                                 <option value="${item.cityId}">${item.cityName}</option>
@@ -46,10 +46,10 @@
 
             </li>
 
-            <li class="col-sm-6 col-md-6 col-lg-6"> <span>地区：</span>
+            <li class=""> <span>地区：</span>
                 <p id="district" style="display: inline-block;height: 38px;">
-                    <label ></label> <input type="hidden" value="" name="areaId"> <input type="hidden" value="" name="areaName">
-                    <select id="districts" onchange="initDistrict()" style="height: 100%;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <input type="hidden" value="" name="areaId"> <input type="hidden" value="" name="areaName">
+                    <select id="districts" name="districts"  onchange="initDistrict()" style="height: 100%;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" onblur="checkSelect('districts','请选择区级')">
                         <c:choose>
                             <c:when test="${not empty item.areaId}">
                                 <option value="${item.areaId}">${item.areaName}</option>
@@ -64,8 +64,9 @@
 
                 <p id="sheet" style="display: inline-block;height: 38px;">
                     <span>片区：</span>
-                    <label ></label> <input type="hidden" value="" name="sliceId"> <input type="hidden" value="" name="sliceName">
-                    <select id="sheets" onchange="initSheet()" style="height: 100%;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <input type="hidden" value="" name="sliceId">
+                    <input type="hidden" value="" name="sliceName">
+                    <select id="sheets" name="sheets" onchange="initSheet()" style="height: 100%;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <c:choose>
                             <c:when test="${not empty item.sliceId}">
                                 <option value="${item.sliceId}">${item.sliceName}</option>
@@ -76,6 +77,7 @@
                         </c:choose>
                     </select>
                 </p>
+                <span  class="_star">*</span>
             </li>
 
 <script type="text/javascript">
@@ -84,9 +86,9 @@
     function initProvince() {
         var addrId = $("#provinces option:selected").val();
         var addName = $("#provinces option:selected").text();
-        $("#citys").html("<option  >请选择</option>");
-        $("#districts").html("<option  >请选择</option>");
-        $("#sheets").html("<option  >请选择</option>");
+        $("#citys").html("<option value='' >请选择</option>");
+        $("#districts").html("<option  value=''>请选择</option>");
+        $("#sheets").html("<option  value=''>请选择</option>");
 
         $("input[name=provinceId]").val(addrId);
         $("input[name=provinceName]").val(addName);
@@ -117,7 +119,7 @@
         if ("请选择" == addName) {
             //下级改变成请选择
             $("#districts option:selected").text(addName);
-            $("#districts").html("<option  >请选择</option>");
+            $("#districts").html("<option  value=''>请选择</option>");
             //其值及其下级值变成空
             $("input[name='cityId']").val("");
             $("input[name='cityName']").val("");

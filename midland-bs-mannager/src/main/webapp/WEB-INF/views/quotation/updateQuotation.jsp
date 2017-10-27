@@ -36,13 +36,13 @@
     <form action="${ctx}/rest/quotation/update" method="post" id="dataForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
-            <li class="col-sm-6 col-md-6 col-lg-6"><span>数据时间：</span>
+            <li class=""><span>数据时间：</span>
                 <input class="Wdate half" id="time1" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd'})"
-                                        name="dataTime" value="${item.dataTime}" style="
+                       onblur="notEmpty('time1','dataTime','日期不能为空')"  name="dataTime" value="${item.dataTime}" style="
     width: 250px;
 "/>
             </li>
-            <li class="col-sm-6 col-md-6 col-lg-6"><span>类型：</span>
+            <li class=""><span>类型：</span>
                 <select name="type" id="type" class="dropdown">
                     <option value="" >全部</option>
                     <c:forEach items="${types}" var="type">
@@ -50,20 +50,20 @@
                     </c:forEach>
                 </select>
             </li>
-            <%@include file="../quotationSecondHand/sheet.jsp" %>
-            <li class="col-sm-6 col-md-6 col-lg-6"><span>成交套数：</span>
+            <%@include file="../quotationSecondHand/sheet_required.jsp" %>
+            <li class=""><span>成交套数：</span>
                <input type="text" name="dealNum" id="dealNum" value="${item.dealNum}"/>
             </li>
-            <li class="col-sm-6 col-md-6 col-lg-6"><span>成交面积：</span>
+            <li class=""><span>成交面积：</span>
                <input type="text" name="dealAcreage" id="dealAcreage" value="${item.dealAcreage}"/>
             </li>
-            <li class="col-sm-6 col-md-6 col-lg-6"><span>成交均价：</span>
+            <li class=""><span>成交均价：</span>
                <input type="text" name="price" id="price" value="${item.price}"/>
             </li>
-            <li class="col-sm-6 col-md-6 col-lg-6"><span>可售套数：</span>
+            <li class=""><span>可售套数：</span>
                <input type="text" name="soldNum" id="soldNum" value="${item.soldNum}"/>
             </li>
-            <li class="col-sm-6 col-md-6 col-lg-6"><span>可售面积：</span>
+            <li class=""><span>可售面积：</span>
                <input type="text" name="soldArea" id="soldArea" value="${item.soldArea}"/>
             </li>
             <li class="col-sm-12 col-md-12 col-lg-12">
@@ -79,6 +79,7 @@
 <script type="text/javascript">
     //保存数据
     function updateData() {
+        if (notEmpty('time1','dataTime','日期不能为空')&&checkSelect('districts','请选择区级')){
         var data = $("#dataForm").serialize();
         $.ajax({
             type: "post",
@@ -102,6 +103,7 @@
                 layer.msg("保存失败！", {icon: 2});
             }
         });
+        }
     }
 
     //取消

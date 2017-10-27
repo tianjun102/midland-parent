@@ -10,8 +10,8 @@
 </head>
 <body>
 
-<li style="display:flex;align-items:center"><span>省：</span> <!-- 省 -->
-    <label></label> <input type="hidden" name="provinceId">
+<li style="display:flex;align-items:center"><span style="width: 30px;">省：</span> <!-- 省 -->
+    <input type="hidden" name="provinceId">
     <input type="hidden" name="regionSn"> <input type="hidden"
                                                  name="provinceName">
     <!-- 第一次进页面加载省 -->

@@ -14,7 +14,6 @@ function　checkLetterNum(id,name,msg){
 }
 
 function　notEmpty(id,name,msg){
-    debugger;
     var value = $("#"+id).val();
     if (value == null || value.trim() == "") {
         if(msg == null|| msg==""){
@@ -59,7 +58,6 @@ function checkEmail(id,name,msg) {
 }
 
 function checkSelect(ids,msgs){
-    debugger;
     if (msgs==null||msgs==""){
         msgs = "不能为空";
     }

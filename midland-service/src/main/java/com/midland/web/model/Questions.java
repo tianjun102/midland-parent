@@ -1,172 +1,257 @@
 package com.midland.web.model;
 
-public class Questions {
-    private Integer id;
-    
-    /**
-     * 问题标题
-     */
-    private String questionsTitle;
-    /**
-     * 平台
-     */
-    private Integer source;
-    /**
-     * 提问时间
-     */
-    private String questionTime;
-    /**
-     * 提问人昵称
-     */
-    private String questionName;
-    /**
-     * 提问人手机号
-     */
-    private String questionPhone;
-    /**
-     * 审核人
-     */
-    private String auditor;
-    /**
-     * 状态
-     */
-    private Integer status;
-    /**
-     * 点击数
-     */
-    private Integer clickNum;
-    /**
-     *
-     */
-    private Integer fabulous;
-    /**
-     * 提问内容
-     */
-    private String questionsArea;
-    private String startTime;
-    private String endTime;
-    
-    private String auditRemark;
 
-    private Integer isDelete;
-    
-    public String getAuditRemark() {
-        return auditRemark;
-    }
-    
-    public void setAuditRemark(String auditRemark) {
-        this.auditRemark = auditRemark;
-    }
-    
-    public String getStartTime() {
-        return startTime;
-    }
-    
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-    
-    public String getEndTime() {
-        return endTime;
-    }
-    
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-    }
-    
-    public Integer getId() {
-        return id;
-    }
+public class Questions{
+	/**
+	 * 问题主键
+	 **/
+	private Integer id;
+	/**
+	 * 提问主题
+	 **/
+	private String questionsTitle;
+	/**
+	 * '0=网站；1=微站'
+	 **/
+	private Integer source;
+	/**
+	 * 提问时间
+	 **/
+	private String questionTime;
+	/**
+	 * 
+	 **/
+	private String questionName;
+	/**
+	 * 提问手机
+	 **/
+	private String questionPhone;
+	/**
+	 * 审核人
+	 **/
+	private String auditor;
+	/**
+	 * 提问类容
+	 **/
+	private String questionsArea;
+	/**
+	 * 0=待审核；1=审核通过；2=审核失败
+	 **/
+	private Integer status;
+	/**
+	 * 点击量
+	 **/
+	private Integer clickNum;
+	/**
+	 * 点赞
+	 **/
+	private Integer fabulous;
+	/**
+	 * 审核备注
+	 **/
+	private String auditRemark;
+	/**
+	 * 0未删除，1删除
+	 **/
+	private Integer isDelete;
+	/**
+	 * 城市id
+	 **/
+	private String cityId;
+	/**
+	 * 城市名称
+	 **/
+	private String cityName;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	private String startTime;
 
-    public String getQuestionsTitle() {
-        return questionsTitle;
-    }
+	private String endTime;
 
-    public void setQuestionsTitle(String questionsTitle) {
-        this.questionsTitle = questionsTitle == null ? null : questionsTitle.trim();
-    }
+	public String getStartTime() {
+		return startTime;
+	}
 
-    public Integer getSource() {
-        return source;
-    }
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
 
-    public void setSource(Integer source) {
-        this.source = source;
-    }
+	public String getEndTime() {
+		return endTime;
+	}
 
-    public String getQuestionTime() {
-        return questionTime;
-    }
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
 
-    public void setQuestionTime(String questionTime) {
-        this.questionTime = questionTime;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public String getQuestionName() {
-        return questionName;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setQuestionName(String questionName) {
-        this.questionName = questionName == null ? null : questionName.trim();
-    }
+	public String getQuestionsTitle() {
+		return questionsTitle;
+	}
 
-    public String getQuestionPhone() {
-        return questionPhone;
-    }
+	public void setQuestionsTitle(String questionsTitle) {
+		this.questionsTitle = questionsTitle;
+	}
 
-    public void setQuestionPhone(String questionPhone) {
-        this.questionPhone = questionPhone == null ? null : questionPhone.trim();
-    }
+	public Integer getSource() {
+		return source;
+	}
 
-    public String getAuditor() {
-        return auditor;
-    }
+	public void setSource(Integer source) {
+		this.source = source;
+	}
 
-    public void setAuditor(String auditor) {
-        this.auditor = auditor == null ? null : auditor.trim();
-    }
+	public String getQuestionTime() {
+		return questionTime;
+	}
 
-    public Integer getStatus() {
-        return status;
-    }
+	public void setQuestionTime(String questionTime) {
+		this.questionTime = questionTime;
+	}
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
+	public String getQuestionName() {
+		return questionName;
+	}
 
-    public Integer getClickNum() {
-        return clickNum;
-    }
+	public void setQuestionName(String questionName) {
+		this.questionName = questionName;
+	}
 
-    public void setClickNum(Integer clickNum) {
-        this.clickNum = clickNum;
-    }
+	public String getQuestionPhone() {
+		return questionPhone;
+	}
 
-    public Integer getFabulous() {
-        return fabulous;
-    }
+	public void setQuestionPhone(String questionPhone) {
+		this.questionPhone = questionPhone;
+	}
 
-    public void setFabulous(Integer fabulous) {
-        this.fabulous = fabulous;
-    }
+	public String getAuditor() {
+		return auditor;
+	}
 
-    public String getQuestionsArea() {
-        return questionsArea;
-    }
+	public void setAuditor(String auditor) {
+		this.auditor = auditor;
+	}
 
-    public void setQuestionsArea(String questionsArea) {
-        this.questionsArea = questionsArea == null ? null : questionsArea.trim();
-    }
+	public String getQuestionsArea() {
+		return questionsArea;
+	}
 
-    public Integer getIsDelete() {
-        return isDelete;
-    }
+	public void setQuestionsArea(String questionsArea) {
+		this.questionsArea = questionsArea;
+	}
 
-    public void setIsDelete(Integer isDelete) {
-        this.isDelete = isDelete;
-    }
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public Integer getClickNum() {
+		return clickNum;
+	}
+
+	public void setClickNum(Integer clickNum) {
+		this.clickNum = clickNum;
+	}
+
+	public Integer getFabulous() {
+		return fabulous;
+	}
+
+	public void setFabulous(Integer fabulous) {
+		this.fabulous = fabulous;
+	}
+
+	public String getAuditRemark() {
+		return auditRemark;
+	}
+
+	public void setAuditRemark(String auditRemark) {
+		this.auditRemark = auditRemark;
+	}
+
+	public Integer getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(Integer isDelete) {
+		this.isDelete = isDelete;
+	}
+
+	public String getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(String cityId) {
+		this.cityId = cityId;
+	}
+
+	public String getCityName() {
+		return cityName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
+	@Override
+	public String toString() {
+		 final StringBuffer sb=new StringBuffer("Questions{");
+		if (id != null) {
+			sb.append(", \"id\":\"").append(id).append("\"");
+		}
+		if (questionsTitle != null) {
+			sb.append(", \"questionsTitle\":\"").append(questionsTitle).append("\"");
+		}
+		if (source != null) {
+			sb.append(", \"source\":\"").append(source).append("\"");
+		}
+		if (questionTime != null) {
+			sb.append(", \"questionTime\":\"").append(questionTime).append("\"");
+		}
+		if (questionName != null) {
+			sb.append(", \"questionName\":\"").append(questionName).append("\"");
+		}
+		if (questionPhone != null) {
+			sb.append(", \"questionPhone\":\"").append(questionPhone).append("\"");
+		}
+		if (auditor != null) {
+			sb.append(", \"auditor\":\"").append(auditor).append("\"");
+		}
+		if (questionsArea != null) {
+			sb.append(", \"questionsArea\":\"").append(questionsArea).append("\"");
+		}
+		if (status != null) {
+			sb.append(", \"status\":\"").append(status).append("\"");
+		}
+		if (clickNum != null) {
+			sb.append(", \"clickNum\":\"").append(clickNum).append("\"");
+		}
+		if (fabulous != null) {
+			sb.append(", \"fabulous\":\"").append(fabulous).append("\"");
+		}
+		if (auditRemark != null) {
+			sb.append(", \"auditRemark\":\"").append(auditRemark).append("\"");
+		}
+		if (isDelete != null) {
+			sb.append(", \"isDelete\":\"").append(isDelete).append("\"");
+		}
+		if (cityId != null) {
+			sb.append(", \"cityId\":\"").append(cityId).append("\"");
+		}
+		if (cityName != null) {
+			sb.append(", \"cityName\":\"").append(cityName).append("\"");
+		}
+		sb.append("}");
+		return sb.toString();
+	}
 }

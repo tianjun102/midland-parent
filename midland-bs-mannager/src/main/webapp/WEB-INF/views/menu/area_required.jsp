@@ -6,10 +6,13 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>省市区</title>
+    <style type="text/css">
+
+    </style>
 </head>
 <body>
 
-<li style="display:flex;align-items:center"><span>省：</span> <!-- 省 -->
+<li style="display:flex;align-items:center"><span style="width: 30px;">省：</span> <!-- 省 -->
     <label></label>
     <input type="hidden" name="provinceId">
     <input type="hidden" name="regionSn">

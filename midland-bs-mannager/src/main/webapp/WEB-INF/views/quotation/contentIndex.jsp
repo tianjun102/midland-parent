@@ -12,7 +12,7 @@
 		.dropdown {
 			height: 38px;
 			line-height: 38px;
-			width: 200px !important;
+			width: 120px !important;
 			display: inline-table;
 			border-width: 1px !important;
 			border-style: solid !important;
@@ -36,7 +36,7 @@
 		<input type="hidden" name="showType" id="showType" value="${showType}"/>
 		<ul class="userinfo row">
 			<li>
-				<%@include file="../quotation/dist.jsp" %>
+				<%@include file="../quotationSecondHand/dist.jsp" %>
 			</li>
 			<li>
 				<span>类型：</span>
@@ -64,7 +64,7 @@
 				</select>
 			</li>
 			<li><input class="public_btn bg1" type="submit" name="inquery" id="inquery" value="查询"/>
-				<a class="setup"  href="${ctx}/rest/quotation/index" target="contentF">返回</a></li>
+				<a  style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" class = "public_btn bg1"  href="${ctx}/rest/quotation/index" target="contentF">返回</a></li>
 
 			</li>
 		</ul>

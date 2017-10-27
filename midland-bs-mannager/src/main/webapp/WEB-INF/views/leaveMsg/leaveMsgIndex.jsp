@@ -62,6 +62,7 @@
 		<form action="${ctx }/rest/leaveMsg/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
+				<%@include file="../menu/area.jsp" %>
 				<li><span>用户名称：</span>
 					<input type="text" name="userName" id="userName" placeholder="请输入用户名称" /></li>
 				</li>

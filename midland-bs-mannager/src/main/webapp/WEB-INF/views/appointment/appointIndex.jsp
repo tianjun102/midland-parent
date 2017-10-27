@@ -33,13 +33,14 @@
 			border-color: rgb(219, 226, 230) !important;
 			border-image: initial !important;
 		}
+
 	</style>
 </head>
 <body>
 	
 	
 	<!--用户列表界面-->
-	<div class="box"> 
+	<div class="box">
 		<section class = "content">
 			<p class = "detail-title">
 				<span>预约管理>>预约记录列表</span>
@@ -90,7 +91,7 @@
 						id="time2" name="endTime" /></li>
 
 				<li><input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/>
-					<a href="#" onclick="export1()">导出</a>
+					<a href="#" style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" class="public_btn bg1" onclick="export1()">导出</a>
 				</li>
 			</ul>
 			</form>

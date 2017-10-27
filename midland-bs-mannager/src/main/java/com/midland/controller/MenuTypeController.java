@@ -1,9 +1,12 @@
 package com.midland.controller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.MenuType;
+import com.midland.web.model.user.User;
 import com.midland.web.service.MenuTypeService;
 import com.midland.base.BaseFilter;
 import com.midland.web.service.SettingService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import java.util.Map;
 import java.util.HashMap;
@@ -133,6 +136,11 @@ public class MenuTypeController extends BaseFilter  {
 	public String findMenuTypeList(MenuType menuType,Model model, HttpServletRequest request) {
 		try {
 			log.info("findMenuTypeList  {}",menuType);
+			User user = MidlandHelper.getCurrentUser(request);
+			model.addAttribute("isSuper",user.getIsSuper());
+			if(!Contant.isSuper.equals(user.getIsSuper())){//不是超级管理员，只能看属性城市的相关信息
+				menuType.setCityId(user.getCityId());
+			}
 			MidlandHelper.doPage(request);
 			Page<MenuType> result = (Page<MenuType>)menuTypeServiceImpl.findMenuTypeList(menuType);
 			Paginator paginator=result.getPaginator();

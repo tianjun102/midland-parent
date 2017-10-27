@@ -23,6 +23,25 @@
 			font-size: 14px;
 			color: rgb( 102, 102, 102 );
 		}
+		.dropdown {
+			height: 38px;
+			line-height: 38px;
+			border: 1px solid #dbe2e6!important;
+			width: 150px;
+			display: inline-table!important;
+			/* float: left; */
+		}
+
+		.content ul.userinfo li:not(:last-child) input {
+			float: left;
+			width: 150px;
+			height: 38px;
+			line-height: 38px;
+			border: 1px solid #dbe2e6;
+			border-radius: 4px;
+			text-indent: 10px;
+			outline-color: #0099e0;
+		}
 	</style>
 </head>
 <body>
