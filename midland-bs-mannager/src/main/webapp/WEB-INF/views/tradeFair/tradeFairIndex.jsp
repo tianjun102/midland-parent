@@ -19,6 +19,17 @@
 			font-size: 14px;
 			color: rgb( 102, 102, 102 );
 		}
+		.dropdown {
+			position: relative;
+			width: 150px!important;
+			border: 1px solid #ccc;
+			cursor: pointer;
+			background: #fff;
+			border-radius: 3px;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			user-select: none;
+		}
 	</style>
 
 </head>
@@ -49,11 +60,27 @@
 
 					</select>
 				</li>
+				<c:if test="${not empty isSuper}">
+					<li><span>是否删除：</span>
+						<select name="isDelete" id="isDelete" class="dropdown">
+							<option value="">全部</option>
+							<c:forEach items="${isDeletes}" var="s1">
+								<option value="${s1.id}" <c:if test="${s1.id==0}">selected</c:if>>
+										${s1.name}
+								</option>
+							</c:forEach>
+						</select>
+					</li>
+				</c:if>
 				<li><input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/></li>
 			</ul>
 			</form>
-			<input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;margin-top: 10px;" onclick="batchDelete(1)" class = "public_btn bg1" type="submit"  value = "批量删除"/>
-			<input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" onclick="batchDelete(0)" class = "public_btn bg1" type="submit"  value = "批量恢复"/>
+			<input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;margin-top: 10px;"
+				   onclick="batchDelete(1)" class="public_btn bg1" type="submit" value="批量删除"/>
+			<c:if test="${not empty isSuper}"><input
+					style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" onclick="batchDelete(0)"
+					class="public_btn bg1" type="submit" value="批量恢复"/>
+			</c:if>
 			<div id="listDiv"></div>
 		</section>
 	</div>

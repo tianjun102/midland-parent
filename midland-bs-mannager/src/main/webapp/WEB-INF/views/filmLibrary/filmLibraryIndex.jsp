@@ -56,14 +56,14 @@
               onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
             <ul class="userinfo row">
                 <%@include file="../menu/area.jsp" %>
-                <li><span>楼盘id：</span>
+                <li><span style="width: 80px;">楼盘id：</span>
                     <input type="text" name="housesId" id="housesId" placeholder="请输入楼盘id" /></li>
                 </li>
                 <li><span>楼盘名称：</span>
                     <input type="text" name="title" id="title" placeholder="请输入楼盘名称" /></li>
                 </li>
                 <li>
-                    <span>分类：</span>
+                    <span style="width: 60px;">分类：</span>
                     <select name="filmType" id="filmType" class="dropdown">
                         <option value="">全部</option>
                         <c:forEach items="${filmTypes}" var="s" >
@@ -73,7 +73,7 @@
                         </c:forEach>
                     </select>
                 </li>
-                <li><span>状态：</span>
+                <li><span style="width: 60px;">状态：</span>
                     <select name="isShow" id="isShow" class="dropdown">
                         <option value="">全部</option>
                         <option value="0">显示</option>
@@ -81,6 +81,18 @@
 
                     </select>
                 </li>
+                <c:if test="${not empty isSuper}">
+                    <li><span>是否删除：</span>
+                        <select name="isDelete" id="isDelete" class="dropdown">
+                            <option value="">全部</option>
+                            <c:forEach items="${isDeletes}" var="s1">
+                                <option value="${s1.id}" <c:if test="${s1.id==0}">selected</c:if>>
+                                        ${s1.name}
+                                </option>
+                            </c:forEach>
+                        </select>
+                    </li>
+                </c:if>
                 <li><input class="public_btn bg1" type="submit" name="inquery" id="inquery" value="查询"/></li>
             </ul>
         </form>

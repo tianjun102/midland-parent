@@ -6,7 +6,9 @@ import com.midland.base.BaseFilter;
 import com.midland.web.model.TradeFair;
 import com.midland.web.model.user.User;
 import com.midland.web.service.TradeFairService;
+import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
+import com.midland.web.util.ParamObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +36,11 @@ public class TradeFairController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("index")
-	public String tradeFairIndex(TradeFair tradeFair, Model model) throws Exception {
+	public String tradeFairIndex(TradeFair tradeFair, Model model,HttpServletRequest request) throws Exception {
+		User user = MidlandHelper.getCurrentUser(request);
+		model.addAttribute("isSuper",user.getIsSuper());
+		List<ParamObject> obj = JsonMapReader.getMap("is_delete");
+		model.addAttribute("isDeletes",obj);
 		return "tradeFair/tradeFairIndex";
 	}
 
@@ -43,7 +49,7 @@ public class TradeFairController extends BaseFilter {
 	 **/
 	@RequestMapping("to_add")
 	public String toAddTradeFair(TradeFair tradeFair, Model model) throws Exception {
-		
+
 		return "tradeFair/addTradeFair";
 	}
 
@@ -133,6 +139,10 @@ public class TradeFairController extends BaseFilter {
 			MidlandHelper.doPage(request);
 			Page<TradeFair> result = (Page<TradeFair>)tradeFairServiceImpl.findTradeFairList(tradeFair);
 			Paginator paginator=result.getPaginator();
+			User user = MidlandHelper.getCurrentUser(request);
+			model.addAttribute("isSuper",user.getIsSuper());
+			List<ParamObject> obj = JsonMapReader.getMap("is_delete");
+			model.addAttribute("isDeletes",obj);
 			model.addAttribute("paginator",paginator);
 			model.addAttribute("items",result);
 		} catch(Exception e) {

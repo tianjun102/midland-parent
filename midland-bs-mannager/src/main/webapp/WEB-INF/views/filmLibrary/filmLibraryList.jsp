@@ -40,6 +40,7 @@
             <th style="width: 10%">楼盘ID</th>
             <th style="width: 15%">录盘人</th>
             <th style="width: 15%">类型</th>
+            <th style="width: 15%">删除状态</th>
             <th style="width: 10%">操作</th>
         </tr>
         </thead>
@@ -69,6 +70,11 @@
                             <c:if test="${s.id==item.filmType}">${s.name}</c:if>
                         </c:forEach> </td>
                         <td>
+                            <c:forEach items="${isDeletes}" var="s1">
+                                <c:if test="${s1.id==item.isDelete}">${s1.name}</c:if>
+                            </c:forEach>
+                        </td>
+                        <td>
                             <c:choose>
                                 <c:when test="${item.isShow==0}">
                                     <a target="contentF" class="onoff_img" title="状态：显示" onclick="hiddenOrShow(${item.id },1)"></a>
@@ -78,7 +84,12 @@
                                 </c:otherwise>
                             </c:choose>
                             <a target="contentF" class="edit_img" title="编辑" href="${ctx}/rest/filmLibrary/to_update?id=${item.id}"></a>
-                            <a target="contentF" style="width: 40px"  class="delete_img" title="删除"  onclick="delete1(${item.id })"></a>
+                            <c:if test="${item.isDelete==0}">
+                                <a target="contentF" onclick="deleteOrRecover(${item.id },1)" class="delete_img"></a>
+                            </c:if>
+                            <c:if test="${item.isDelete==1}">
+                                <a target="contentF" class="recove_img" onclick="deleteOrRecover(${item.id },0)"></a>
+                            </c:if>
                         </td>
                     </tr>
                 </c:forEach>
@@ -118,10 +129,10 @@
             }
         })
     }
-    function delete1(id){
+    function deleteOrRecover(id,flag){
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/filmLibrary/update?id="+id+"&isDelete=1",
+            url: "${ctx}/rest/filmLibrary/update?id="+id+"&isDelete="+flag,
             async: false, // 此处必须同步
             dataType: "json",
 
