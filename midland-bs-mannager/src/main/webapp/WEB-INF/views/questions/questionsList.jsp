@@ -59,6 +59,7 @@
                                 </c:otherwise>
                             </c:choose>
                             <a  target="contentF" class="reply_img" title="回答" href="${ctx}/rest/questions/to_repeat?id=${item.id}"></a>
+                            <a  target="contentF" class="delete_img" title="删除" onclick="deleteQuestions(${item.id},1)"></a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -172,6 +173,47 @@ function toAudit(id) {
                 layer.msg("操作失败！", {icon: 2});
             }
         })
+    }
+
+    function deleteQuestions(id,flag){
+
+        layer.open({
+            type: 1,
+            skin: 'layer-style',
+            area: ['350px','200px'],
+            shadeClose: false, //点击遮罩关闭
+            title:['删除片库'],
+            resize: false,
+            scrollbar:false,
+            content:
+            '<section class = "content" style = "border:none; height:100%;">'+
+            '<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">您确定要删除吗?</p>'+
+            '</section>',
+            btn:['确定','取消'],
+            yes: function(index){
+                $.ajax({
+                    type: "post",
+                    url: "${ctx}/rest/questions/update?id="+id+"&isDelete="+flag,
+                    cache:false,
+                    async:false, // 此处必须同步
+                    dataType: "json",
+                    success: function(data){
+                        if(data.state==0){
+                            layer.msg("删除成功！",{icon:1});
+                            setTimeout(function(){$("#searchForm").submit();},1000);
+                        }else{
+                            layer.msg("删除失败！！",{icon:7});
+                        }
+                        layer.close(index);
+                    }
+                });
+            }
+            ,success: function (layero) {
+                var btn = layero.find('.layui-layer-btn');
+                btn.css('text-align', 'center');
+            }
+        });
+
     }
 </script>
 </body>
