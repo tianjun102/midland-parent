@@ -238,6 +238,7 @@
             'uploader': '${ctx }/rest/upload/img',
             'multi': false,// 是否支持多个文件上传
             'buttonText': '上传图片',
+            'fileTypeExts':'*.jpg;*.png;*.bmp;*.tiff;*.gif',
             'onUploadSuccess': function (file, data, response) {
                 console.log(data);
                 $("#imgUrl").attr("value", data);

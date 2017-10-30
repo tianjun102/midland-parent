@@ -53,6 +53,7 @@ public class CategoryController extends BaseFilter {
 		if(user.getIsSuper()==null){
 			model.addAttribute("cityId",user.getCityId());
 		}
+		model.addAttribute("type",category.getType());
 		model.addAttribute("isSuper",user.getIsSuper());
 		return "category/categoryIndex";
 	}
