@@ -53,7 +53,7 @@
                         </c:choose> </td>
 						<td>
                             <a target="contentF" title="回复" class="reply_img" href="${ctx}/rest/leaveMsg/to_update?id=${item.id}"></a>
-                            <a target="contentF"　title="删除" class="delete_img" onclick="delete1(${item.id })"></a>
+                            <a target="contentF" title="删除" class="delete_img" onclick="delete1(${item.id })"></a>
                         </td>
                     </tr>
                 </c:forEach>

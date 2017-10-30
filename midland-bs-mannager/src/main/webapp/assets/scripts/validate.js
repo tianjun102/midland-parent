@@ -1,5 +1,5 @@
 //判断0-9 a-z 并且包含下划线的字母数子
-function　checkLetterNum(id,name,msg){
+function checkLetterNum(id,name,msg){
     var regLetterNum = /^[a-zA-Z0-9_]{6,20}$/;
     var value = $("#id").val();
     if (value == null || value.trim() == "") {
@@ -13,7 +13,7 @@ function　checkLetterNum(id,name,msg){
     return true;
 }
 
-function　notEmpty(id,name,msg){
+function notEmpty(id,name,msg){
     var value = $("#"+id).val();
     if (value == null || value.trim() == "") {
         if(msg == null|| msg==""){
