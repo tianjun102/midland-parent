@@ -353,6 +353,7 @@ public class SettingContorller extends BaseFilter {
         Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
         List<Area> cityList = cityMap.get("city");
         model.addAttribute("cityList",cityList);*/
+        settingService.getAllProvinceList(model);
         List<ParamObject> obj = JsonMapReader.getMap("source");
         model.addAttribute("sources",obj);
         User user = MidlandHelper.getCurrentUser(request);
