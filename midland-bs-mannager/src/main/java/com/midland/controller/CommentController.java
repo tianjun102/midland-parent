@@ -42,8 +42,7 @@ public class CommentController extends BaseFilter {
 		if(comment.getInformationId()==null){
 			return "comment/commentAllIndex";
 		}
-		Information information = new Information();
-		information = informationService.selectInformationById(comment.getInformationId());
+		Information information = informationService.selectInformationById(comment.getInformationId());
 		model.addAttribute("comment",comment);
 		model.addAttribute("information",information);
 		User user = MidlandHelper.getCurrentUser(request);

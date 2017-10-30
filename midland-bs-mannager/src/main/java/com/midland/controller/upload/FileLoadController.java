@@ -82,7 +82,6 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 	public void imports(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Workbook wb = null;
 		InputStream is = null;
-		Map map = new HashMap();
 		try {
 			FileItem fileItem = getUploadFileItem(request, response);
 			is = fileItem.getInputStream();
@@ -647,7 +646,11 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 			}
 			File file = new File(storePath);
 			if (!file.exists()) {
-				file.mkdirs();
+				try {
+					file.mkdirs();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 			File uploadedFile = new File(storePath + fileName);
 			if (!uploadedFile.exists()) {

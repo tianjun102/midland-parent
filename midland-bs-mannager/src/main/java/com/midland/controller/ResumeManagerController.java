@@ -187,14 +187,11 @@ public class ResumeManagerController extends BaseFilter {
 	@ResponseBody
 	public void fileDownload(String filePath, HttpServletRequest request,
 							   HttpServletResponse response) {
-		Map result = new HashMap();
-
-		File file = new File("D://bg_new.jpg");
-		if (!file.exists()) {
-			System.out.println("文件不存在");
-		}
-
 		try {
+			File file = new File("D://bg_new.jpg");
+			if (!file.exists()) {
+				System.out.println("文件不存在");
+			}
 			response.reset(); //设置ContentType
 			response.setContentType("application/octet-stream; charset=utf-8");
 			String fileName = new String(file.getName().getBytes("utf-8"), "ISO-8859-1"); //处理中文文件名中文乱码问题

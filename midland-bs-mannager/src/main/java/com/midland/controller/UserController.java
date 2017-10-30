@@ -668,12 +668,13 @@ public class UserController extends BaseFilter {
     	//http://localhost:8080/webmvc/rest/user/sendMail
     	basePath=basePath.substring(0,basePath.lastIndexOf("/")+1);
     	String resetPassHref = basePath  + "checkLink?sid="+ digitalSignature +"&userName="+un;
-    	String emailContent = "请勿回复本邮件.点击下面的链接,重设密码<br/><a href="
-                + resetPassHref + " target='_BLANK'>" + resetPassHref
-                + "</a>  或者    <a href=" + resetPassHref
-                + " target='_BLANK'>点击我重新设置密码</a>"
-                + "<br/>tips:本邮件超过30分钟,链接将会失效，需要重新申请'找回密码'" + key
-                + "\t" + digitalSignature;
+		StringBuffer sb = new StringBuffer();
+		sb.append("请勿回复本邮件.点击下面的链接,重设密码<br/><a href=")
+				.append(resetPassHref).append(" target='_BLANK'>")
+				.append(resetPassHref).append("</a>  或者    <a href=")
+				.append(resetPassHref).append(" target='_BLANK'>点击我重新设置密码</a>")
+				.append("<br/>tips:本邮件超过30分钟,链接将会失效，需要重新申请'找回密码'")
+				.append("\t").append(digitalSignature);
 
 	    
         SmsUtil.send("13602825350", "xcv12345678");
