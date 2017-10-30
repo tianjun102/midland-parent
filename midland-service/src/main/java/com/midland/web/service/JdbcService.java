@@ -101,7 +101,7 @@ public class JdbcService {
      */
     public Map stickly(String primaryKeyName, String id, String orderByColumn, String tableName) {
         StringBuffer sb = new StringBuffer("SELECT ").append(primaryKeyName + ",").append(orderByColumn)
-                .append("-1 from ").append(tableName).append(" order by ")
+                .append("-1 as order_by from ").append(tableName).append(" order by ")
                 .append(orderByColumn).append(" asc limit 1");
         return querySql(sb.toString());
     }
@@ -125,9 +125,8 @@ public class JdbcService {
     public void listDesc(String primaryKeyName, String id, String orderByColumn, String tableName, String orderByParam, ListDescOtherParam obj,int sort) {
         if (sort == 0) {
             Map map = stickly(primaryKeyName, id, orderByColumn, tableName);
-            String primaryKeyId = String.valueOf(map.get(primaryKeyName));
             String descNumResult = String.valueOf(map.get(orderByColumn));
-            updateSql(primaryKeyName, primaryKeyId, orderByColumn, tableName, descNumResult);
+            updateSql(primaryKeyName, id, orderByColumn, tableName, descNumResult);
         } else if (sort == 1) {
             Map map = shiftUp(primaryKeyName, id, orderByColumn, tableName, orderByParam,obj);
             doExchangeDescNum(primaryKeyName, id, orderByColumn, orderByParam, tableName, map);
@@ -148,7 +147,7 @@ public class JdbcService {
         //要交换的排序号
 
         String descNumResult = String.valueOf(map.get(orderByColumn));
-        updateSql(primaryKeyName, primaryKeyId, orderByColumn, tableName, "-99999");
+        updateSql(primaryKeyName, primaryKeyId, orderByColumn, tableName, "-99999999");
         updateSql(primaryKeyName, id, orderByColumn, tableName, descNumResult);
         updateSql(primaryKeyName, primaryKeyId, orderByColumn, tableName, orderByParam);
 
@@ -163,7 +162,7 @@ public class JdbcService {
         //要交换的排序号
 
         String descNumResult = String.valueOf(map.get(orderByColumn));
-        updateSql(primaryKeyName, primaryKeyId, orderByColumn, tableName, "-99999");
+        updateSql(primaryKeyName, primaryKeyId, orderByColumn, tableName, "-99999999");
 
 
     }

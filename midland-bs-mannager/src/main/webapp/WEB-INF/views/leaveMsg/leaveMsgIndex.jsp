@@ -30,7 +30,7 @@
 
         .content ul.userinfo li:not(:last-child) input {
             float: left;
-            width: 140px;
+            width: 190px;
             height: 38px;
             line-height: 38px;
             border: 1px solid #dbe2e6;
@@ -41,7 +41,7 @@
 
         .dropdown {
             position: relative;
-            width: 100px;
+            width: 150px;
             border: 1px solid #ccc;
             cursor: pointer;
             background: #fff;
@@ -85,21 +85,21 @@
                 <li><span>邮箱：</span>
                     <input type="text" name="email" id="email" placeholder="请输入邮箱"/></li>
                 </li>
-                <li><span>留言时间：</span><input class="Wdate half" id="time1" style="width: 130px;"
-                                             onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time2\')}'})"
-                                             name="startTime"/> <em class="gang">-</em><input
-                        class="Wdate half"
-                        onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'time1\')}'})"
-                        id="time2" style="width: 130px;" name="endTime"/></li>
+                <li><span>留言时间：</span>
+                    <input class="Wdate half" id="time1" style="width: 130px;" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time2\')}'})"
+                                             name="startTime"/> <em class="gang">-</em>
+                    <input  class="Wdate half" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'time1\')}'})"
+                        id="time2" style="width: 130px;" name="endTime"/>
+                </li>
                 <li>
                     <input class="public_btn bg1" type="submit" name="inquery" id="inquery" value="查询"/>
                 </li>
             </ul>
         </form>
-        <input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;margin-top: 10px;"
-               onclick="batchDelete(1)" class="public_btn bg1" type="submit" value="批量删除"/>
-        <input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" onclick="batchDelete(0)"
-               class="public_btn bg1" type="submit" value="批量恢复"/>
+        <input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;margin-top: 10px;" onclick="batchDelete(1)" class="public_btn bg1" type="submit" value="批量删除"/>
+        <c:if test="${not empty isSuper}">
+            <input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" onclick="batchDelete(0)" class="public_btn bg1" type="submit" value="批量恢复"/>
+        </c:if>
         <div id="listDiv"></div>
     </section>
 </div>
