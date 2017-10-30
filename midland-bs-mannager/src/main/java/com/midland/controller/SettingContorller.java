@@ -72,11 +72,10 @@ public class SettingContorller extends BaseFilter {
         if (pageNo == null || pageNo.equals("")) {
             pageNo = ContextEnums.PAGENO;
         }
-        Map<String, Object> map = new HashMap<>();
         if (pageSize == null || pageSize.equals("")) {
             pageSize = ContextEnums.PAGESIZE;
         }
-        PageHelper.startPage(Integer.valueOf(pageNo), Integer.valueOf(pageSize));
+        MidlandHelper.doPage(request);
         Page<Popular> PopularList = (Page<Popular>) settingService.findPopularList(popular);
         model.addAttribute("popularList", PopularList);
         model.addAttribute("paginator", PopularList.getPaginator());
@@ -233,16 +232,8 @@ public class SettingContorller extends BaseFilter {
     // 进入友情链接列表页
     @RequestMapping(value = "showlinkUrlList", method = {RequestMethod.GET, RequestMethod.POST})
     public String showlinkUrlList(Model model, HttpServletRequest request, LinkUrlManager linkUrlManager) {
-        String pageSize = request.getParameter("pageSize");
-        String pageNo = request.getParameter("pageNo");
-        if (pageNo == null || pageNo.equals("")) {
-            pageNo = ContextEnums.PAGENO;
-        }
-        Map<String, Object> map = new HashMap<>();
-        if (pageSize == null || pageSize.equals("")) {
-            pageSize = ContextEnums.PAGESIZE;
-        }
-        PageHelper.startPage(Integer.valueOf(pageNo), Integer.valueOf(pageSize));
+
+        MidlandHelper.doPage(request);
         Page<LinkUrlManager> linkUrlList = (Page<LinkUrlManager>) settingService.findLinkUrlList(linkUrlManager);
         model.addAttribute("linkUrlList", linkUrlList);
         model.addAttribute("paginator", linkUrlList.getPaginator());

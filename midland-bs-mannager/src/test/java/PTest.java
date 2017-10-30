@@ -69,14 +69,22 @@ public class PTest {
 		StringBuffer sbs= new StringBuffer();
 		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 		connection.setRequestMethod("GET");
-		BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-		String line=null;
-		while((line = in.readLine()) != null){
-			sbs.append(line);
+		BufferedReader in = null;
+		try {
+			in = new BufferedReader(new InputStreamReader(url.openStream(),"utf-8"));
+			String line=null;
+			while((line = in.readLine()) != null){
+				sbs.append(line);
+			}
+			System.out.println(sbs.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (in != null) {
+				in.close();
+				connection.disconnect();
+			}
 		}
-		
-		connection.disconnect();
-		System.out.println(sbs.toString());
 	}
 	
 	@Test
