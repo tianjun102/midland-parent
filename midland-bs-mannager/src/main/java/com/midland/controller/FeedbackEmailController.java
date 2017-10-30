@@ -58,6 +58,7 @@ public class FeedbackEmailController extends BaseFilter {
 			model.addAttribute("cityId",user.getCityId());
 		}
 		model.addAttribute("isSuper",user.getIsSuper());
+		model.addAttribute("emailType",feedbackEmail.getEmailType());
 		return "feedbackEmail/feedbackEmailIndex";
 	}
 
