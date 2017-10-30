@@ -101,7 +101,7 @@ public class JdbcService {
      */
     public Map stickly(String primaryKeyName, String id, String orderByColumn, String tableName) {
         StringBuffer sb = new StringBuffer("SELECT ").append(primaryKeyName + ",").append(orderByColumn)
-                .append("-1 from ").append(tableName).append(" order by ")
+                .append("-1 as order_by from ").append(tableName).append(" order by ")
                 .append(orderByColumn).append(" asc limit 1");
         return querySql(sb.toString());
     }
