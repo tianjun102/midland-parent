@@ -271,11 +271,7 @@
 	<select id="selectCategoryParentById"  resultType="com.midland.web.model.Category">
 		SELECT b.*,(SELECT cate_name from category a where a.id=b.parent_id ) as parent_name
 		FROM `category` b
-		where 1=1
-		<if test="isDelete == null">
-			and b.is_delete=0
-		</if>
-			and b.id= #{id,jdbcType=INTEGER}
+		where b.is_delete=0 and b.id= #{id,jdbcType=INTEGER}
 	</select>
 
 	<update id="batchUpdate" parameterType="java.util.List">

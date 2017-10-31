@@ -126,22 +126,45 @@
 
 
     function deleteOrRecover(id,flag){
-        $.ajax({
-            type: "post",
-            url: "${ctx}/rest/tradeFair/update?id="+id+"&isDelete="+flag,
-            async: false, // 此处必须同步
-            dataType: "json",
 
-            success: function (data) {
-                if (data.state==0){
-                    layer.msg("删除成功！", {icon: 2});
-                    $('#searchForm').submit();
-                }
-            },
-            error: function () {
-                layer.msg("操作失败！", {icon: 2});
+
+        layer.open({
+            type: 1,
+            skin: 'layer-style',
+            area: ['350px','200px'],
+            shadeClose: false, //点击遮罩关闭
+            title:['删除楼盘展销会'],
+            resize: false,
+            scrollbar:false,
+            content:
+            '<section class = "content" style = "border:none; height:100%;">'+
+            '<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">您确定要删除吗?</p>'+
+            '</section>',
+            btn:['确定','取消'],
+            yes: function(index){
+                $.ajax({
+                    type: "post",
+                    url: "${ctx}/rest/tradeFair/update?id="+id+"&isDelete="+flag,
+                    cache:false,
+                    async:false, // 此处必须同步
+                    dataType: "json",
+                    success: function(data){
+                        if(data.state==0){
+                            layer.msg("删除成功！",{icon:1});
+                            setTimeout(function(){$("#searchForm").submit();},1000);
+                        }else{
+                            layer.msg("删除失败！！",{icon:7});
+                        }
+                        layer.close(index);
+                    }
+                });
             }
-        })
+            ,success: function (layero) {
+                var btn = layero.find('.layui-layer-btn');
+                btn.css('text-align', 'center');
+            }
+        });
+
     }
 
     function to_edit(id){
