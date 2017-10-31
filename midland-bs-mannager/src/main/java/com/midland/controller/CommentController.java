@@ -40,6 +40,8 @@ public class CommentController extends BaseFilter {
 	@RequestMapping("index")
 	public String commentIndex(Comment comment, Model model,HttpServletRequest request) throws Exception {
 		if(comment.getInformationId()==null){
+			User user = MidlandHelper.getCurrentUser(request);
+			model.addAttribute("isSuper",user.getIsSuper());
 			return "comment/commentAllIndex";
 		}
 		Information information = informationService.selectInformationById(comment.getInformationId());
