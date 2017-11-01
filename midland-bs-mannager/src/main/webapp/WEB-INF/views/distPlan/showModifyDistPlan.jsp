@@ -39,8 +39,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		<style>
 		._displan {
 			width: 250px;
-			height: 38px;
-			line-height: 38px;
+			height: 28px;
+			line-height: 28px;
 			border: 1px solid #dbe2e6;
 			border-radius: 4px;
 			text-indent: 10px;
@@ -50,8 +50,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		/* #showTable>tr>td:first-child {
 			display: inline-block;
 			width: 70px;
-			height: 38px;
-			line-height: 38px;
+			height: 28px;
+			line-height: 28px;
 			text-align: right;
 			font-size: 14px;
 			color: rgb( 102, 102, 102 );

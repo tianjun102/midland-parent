@@ -88,7 +88,7 @@
 			<li><span>联系人：</span><input type="text" name="contactName" id="contactName" value="${custAddr.contactName }" maxlength="50"/><span class="_star">*</span></li>
 			<li><span>联系电话：</span><input type="text" name="contactPhone" id="contactPhone" value="${custAddr.contactPhone }" onblur="checkPhone();"/><span class="_star">*</span></li>
 			<li><span>收货地址：</span> <!-- 省 -->
-				<p id="province" style = "display: inline-block; height: 38px;">
+				<p id="province" style = "display: inline-block; height: 28px;">
 						<label for="pop-14"></label> 
 						<input type="hidden" name="provinceId" value="${custAddr.provinceId }">
 						<input type="hidden" name="regionSn">
@@ -102,7 +102,7 @@
 							</c:forEach>
 						</select>
 					</p> <!-- 市 -->
-					<p id="city" style = "display: inline-block; height: 38px; margin-left: 20px;">
+					<p id="city" style = "display: inline-block; height: 28px; margin-left: 20px;">
 						<label for="pop-15"></label> 
 						<input type="hidden" name="cityId" value="${custAddr.cityId }">
 						<input type="hidden" name="cityName"> 
@@ -120,7 +120,7 @@
 						</select>
 					</p>
 
-					<p id="district" style = "display: inline-block; height: 38px; margin-left: 20px;">
+					<p id="district" style = "display: inline-block; height: 28px; margin-left: 20px;">
 						<label for="pop-16"></label> 
 						<input type="hidden"  name="distId" value="${custAddr.distId }"> 
 						<input type="hidden"  name="distName"> 
@@ -180,7 +180,7 @@
 				<span class="_star">*</span>
 			</li>
 			<li><span>经营产品：</span>
-				<div id="cbox" class="cbox" style="display: inline-block; line-height: 38px;"><c:if test="${!empty enterProds }">
+				<div id="cbox" class="cbox" style="display: inline-block; line-height: 28px;"><c:if test="${!empty enterProds }">
 						<c:forEach items="${enterProds }" var="rost">
 							
 							<label><input  type="checkbox" name="enterProd" value="${rost.propValues }"

@@ -59,14 +59,14 @@
         <input type="hidden" name="cityName" id="cityName" value="${item.cityName}" >
         <ul class="userinfo row">
             <li><span>平台：</span>
-                <select name="source" id="source" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                <select name="source" id="source" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option <c:if test="${item.source==0}">selected="selected"</c:if> value="0">网站</option>
                     <%--<option <c:if test="${item.source==1}">selected="selected"</c:if> value="1">微站</option>--%>
                 </select>
                 <span class = "_star ">*</span>
             </li>
             <li><span>城市：</span>
-                <select onchange="setCityName();" name="cityId" id="cityId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
+                <select onchange="setCityName();" name="cityId" id="cityId" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
                     <option value="">全部</option>
                     <c:forEach items="${cityList}" var="city">
                         <option <c:if test="${item.cityId==city.id}">selected="selected"</c:if> value="${city.id}">${city.name}</option>
@@ -77,7 +77,7 @@
 
             <%--<li><span>分类：</span>
                 <input type="hidden" name="cateName" id="cateName" value="">
-                <select onchange="setCateName();" name="cateId" id="cateId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                <select onchange="setCateName();" name="cateId" id="cateId" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option value="">全部</option>
                     <option <c:if test="${item.cateId==0}">selected="selected"</c:if> value="0">新房</option>
                     <option <c:if test="${item.cateId==1}">selected="selected"</c:if> value="1">二手房</option>

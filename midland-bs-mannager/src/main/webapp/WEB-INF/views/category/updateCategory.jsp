@@ -72,42 +72,43 @@
             <li>
                 <span style = "float:left;">城市：</span>
                 <input type="hidden" name="cityName" id="cityName" value="${item.cityName}">
-                <select onchange="setCityName()" name="cityId" id="cityId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
+                <select onchange="setCityName()" name="cityId" id="cityId" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
                     <option value="">全部</option>
                     <c:forEach items="${cityList}" var="city">
                         <option <c:if test="${item.cityId == city.id}"> selected = 'selected'</c:if> value="${city.id}">${city.name}</option>
                     </c:forEach>
+                </select><div style = "font-size:12px; color:#afadad;text-indent: 70px;">(不选择城市则默认全部)</div>
+            </li>
+            <li>
+                <span style = "float:left;">平台：</span>
+                <select name="source" id="source" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <option <c:if test="${item.source == '0'}"> selected = 'selected'</c:if> value="0">网站</option>
+                    <option <c:if test="${item.source == '1'}"> selected = 'selected'</c:if> value="1">微站</option>
                 </select>
+                <div style = "font-size:12px; color:#afadad;text-indent: 70px;height: 18px;"></div>
             </li>
             <%--<li>
                 <span>父分类：</span>
-                <select name="parentId" id="parentId" style="height: 38px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                <select name="parentId" id="parentId" style="height: 28px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option value="">全部</option>
                     <c:forEach items="${cateList}" var="cate">
                     <option <c:if test="${cate.id==item.parentId}">selected="selected"</c:if> value="${cate.id}">${cate.cateName}</option>
                     </c:forEach>
                 </select>
             </li>--%>
-            <li><span>父节点：</span><input value="${item.parentName}" name="parentName" onclick="showTree()" readonly="readonly"/>
+            <li><span>父节点：</span><input style="width: 250px!important;" value="${item.parentName}" name="parentName" onclick="showTree()" readonly="readonly"/>
                 <input value="${item.parentId}" name="parentId" type="hidden"/><label style="color: red" class = "_star " >*</label>
-
+                <div style = "font-size:12px; color:#afadad;text-indent: 70px;">(不选父分类则默认一级分类)</div>
             </li>
             <li  id="showDiv" style="display: none;padding-top: 0px;position:relative;" >
-                <div class="zTreeDemoBackground left" style  = "position:absolute; left: -278px; top: 52px;"   onblur="test(event)">
+                <div class="zTreeDemoBackground left" style  = "position:absolute; left: 72px; top: -29px;"   onblur="test(event)">
                     <ul id="categoryTree" class="ztree" style  = "width:235px; height: 140px!important;"></ul>
                 </div>
-                <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: -60px; top: 63px;" onclick="hideTree()">
+                <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: 290px; top: -18px;" onclick="hideTree()">
             </li>
 
             <li>
                 <span>分类名称：</span><input style="width:250px;" type="text" name="cateName" id="cateName" value="${item.cateName}" onblur="notEmpty('cateName','cateName','分类名称不能为空！');" maxlength="50"/>
-            </li>
-            <li>
-                <span style = "float:left;">平台：</span>
-                <select name="source" id="source" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
-                    <option <c:if test="${item.source == '0'}"> selected = 'selected'</c:if> value="0">网站</option>
-                    <option <c:if test="${item.source == '1'}"> selected = 'selected'</c:if> value="1">微站</option>
-                </select>
             </li>
             <li style="padding-top:30px;">
                 <span></span>

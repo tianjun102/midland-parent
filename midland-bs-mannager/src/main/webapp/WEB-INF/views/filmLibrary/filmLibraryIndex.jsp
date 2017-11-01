@@ -12,8 +12,8 @@
             float: left;
             display: inline-block;
             width: 85px;
-            height: 38px;
-            line-height: 38px;
+            height: 28px;
+            line-height: 28px;
             text-align: right;
             font-size: 14px;
             color: rgb( 102, 102, 102 );
@@ -32,8 +32,8 @@
         .content ul.userinfo li:not(:last-child) input {
             float: left;
             width: 140px;
-            height: 38px;
-            line-height: 38px;
+            height: 28px;
+            line-height: 28px;
             border: 1px solid #dbe2e6;
             border-radius: 4px;
             text-indent: 10px;
@@ -97,9 +97,9 @@
             </ul>
         </form>
 
-        <input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;margin-top: 10px;" onclick="batchDelete(1)" class = "public_btn bg1" type="submit"  value = "批量删除"/>
+        <input style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;margin-top: 10px;" onclick="batchDelete(1)" class = "public_btn bg1" type="submit"  value = "批量删除"/>
         <c:if test="${not empty isSuper}">
-            <input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" onclick="batchDelete(0)" class = "public_btn bg1" type="submit"  value = "批量恢复"/>
+            <input style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;" onclick="batchDelete(0)" class = "public_btn bg1" type="submit"  value = "批量恢复"/>
         </c:if>
         <div id="listDiv"></div>
     </section>

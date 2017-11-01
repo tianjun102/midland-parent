@@ -39,9 +39,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 	
 	</script>
 </head>
-	<frameset rows= "100px,*" frameborder="0" border="0">
+	<frameset rows= "80px,*" frameborder="0" border="0">
 		<frame name="headFrame" src="${ctx}/rest/user/head" noresize/>
-		<frameset cols="240px,*" frameborder="0" border="0">
+		<frameset cols="280px,*" frameborder="0" border="0">
 			<frame name = "leftFrame" src = "${ctx}/rest/user/left" scrolling = "yes"/>
 			<frame style = "background:#eff2f6;" name = "contentF" src = "" scrolling = "yes" id = "now"/>
 		</frameset>

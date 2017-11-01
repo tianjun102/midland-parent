@@ -12,8 +12,8 @@
 	.content ul.userinfo li:not(:last-child) input {
 		float: left;
 		width: 150px!important;
-		height: 38px;
-		line-height: 38px;
+		height: 28px;
+		line-height: 28px;
 		text-indent: 10px;
 		outline-color: rgb(0, 153, 224);
 		border-width: 1px;
@@ -73,10 +73,10 @@
 				</li>
 			</ul>
 			</form>
-			<input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;margin-top: 10px;"
+			<input style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;margin-top: 10px;"
 				   onclick="batchDelete(1)" class="public_btn bg1" type="submit" value="批量删除"/>
 			<c:if test="${not empty isSuper}"><input
-					style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" onclick="batchDelete(0)"
+					style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;" onclick="batchDelete(0)"
 					class="public_btn bg1" type="submit" value="批量恢复"/>
 			</c:if>
 			<div id="listDiv"></div>

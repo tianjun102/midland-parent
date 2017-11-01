@@ -74,8 +74,6 @@
 					</select>
 				</li>--%>
 				<li><span>会员分类：</span><input class="vipcate" name="cateName" onclick="showTree()" readonly="readonly"/>
-					<input name="cateId" type="hidden"/><label style="color: red" class = "_star " >*</label>
-
 				</li>
 				<li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >
 					<div class="zTreeDemoBackground left" style  = "position:absolute;top: -10px;"   onblur="test(event)">
@@ -98,7 +96,7 @@
 				<c:if test="${not empty isSuper}">
 					<li>
 						<span style = "float:left;">是否删除：</span>
-						<select name="isDelete" id="isDelete" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+						<select name="isDelete" id="isDelete" style="height: 28px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
 							<option value="0">未删除</option>
 							<option value="1">已删除</option>
 						</select>
@@ -109,8 +107,8 @@
 				</li>
 			</ul>
 			</form>
-			<input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;margin-top: 10px;" onclick="batchDelete(1)" class = "public_btn bg1" type="submit"  value = "批量删除"/>
-			<c:if test="${not empty isSuper}"><input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" onclick="batchDelete(0)" class = "public_btn bg1" type="submit"  value = "批量恢复"/></c:if>
+			<input style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;margin-top: 10px;" onclick="batchDelete(1)" class = "public_btn bg1" type="submit"  value = "批量删除"/>
+			<c:if test="${not empty isSuper}"><input style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;" onclick="batchDelete(0)" class = "public_btn bg1" type="submit"  value = "批量恢复"/></c:if>
 			<div id="listDiv"></div>
 		</section>
 	</div>

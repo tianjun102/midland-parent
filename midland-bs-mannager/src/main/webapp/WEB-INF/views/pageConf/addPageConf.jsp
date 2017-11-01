@@ -29,8 +29,8 @@
             float: left;
             display: inline-block;
             width: 130px;
-            height: 38px;
-            line-height: 38px;
+            height: 28px;
+            line-height: 28px;
             text-align: right;
             font-size: 14px;
             color: rgb(102, 102, 102);
@@ -52,7 +52,7 @@
             <c:if test="${empty isSuper}"><input type="hidden" name="cityId"  value="${cityId}"></c:if>
             <ul class = "adminfo row">
                 <li><span>城市：</span>
-                    <select onchange="setCityName();" name="cityId" id="cityId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
+                    <select onchange="setCityName();" name="cityId" id="cityId" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
                         <c:if test="${empty isSuper}"><option selected="selected" value="${cityId}">${cityName}</option></c:if>
                         <option value="">全部</option>
                         <c:forEach items="${cityList}" var="city">
@@ -62,7 +62,7 @@
                     <span class = "_star ">*</span>
                 </li>
                 <li><span>平台：</span>
-                    <select name="source" id="source" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" onchange="selectSource()">
+                    <select name="source" id="source" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" onchange="selectSource()">
                         <option value="0">网站</option>
                         <option value="1">微站</option>
                     </select>
@@ -70,7 +70,7 @@
                 </li>
                 <li><span>页面：</span>
                     <%--<input type="text" name="model" id="model" value=""/>--%>
-                    <select name="model" id="model" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <select name="model" id="model" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <option value="0">首页</option>
                         <option value="1">新房</option>
                         <option value="2">二手房</option>

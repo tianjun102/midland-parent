@@ -56,8 +56,8 @@
             float: left;
             display: inline-block;
             width: 90px;
-            height: 38px;
-            line-height: 38px;
+            height: 28px;
+            line-height: 28px;
             text-align: right;
             font-size: 14px;
             color: rgb( 102, 102, 102 );

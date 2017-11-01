@@ -18,8 +18,8 @@
 		float: left;
 		display: inline-block;
 		width: 90px;
-		height: 38px;
-		line-height: 38px;
+		height: 28px;
+		line-height: 28px;
 		text-align: right;
 		font-size: 14px;
 		color: rgb( 102, 102, 102 );
@@ -27,8 +27,8 @@
 	.content ul.userinfo li:not(:last-child) input {
 		float: left;
 		width: 180px;
-		height: 38px;
-		line-height: 38px;
+		height: 28px;
+		line-height: 28px;
 		border: 1px solid #dbe2e6;
 		border-radius: 4px;
 		text-indent: 10px;

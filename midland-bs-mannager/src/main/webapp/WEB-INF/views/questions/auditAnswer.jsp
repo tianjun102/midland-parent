@@ -23,7 +23,7 @@
             <span>内容：</span>
 
             <%--<textarea style="margin: 0px; width: 555px; height: 142px;" disabled="disabled">${answer.answerArea}</textarea>--%>
-            <div style="display:inline-block;width: 552px;height: 138px;border: 1px solid #ccc;overflow: hidden;overflow-y: auto;background: #ccc;">${answer.answerArea}</div>
+            <div style="display:inline-block;width: 552px;height: 128px;border: 1px solid #ccc;overflow: hidden;overflow-y: auto;background: #ccc;">${answer.answerArea}</div>
         </div>
 
         <form id="formId" action="${ctx}/rest/questions/update" method="post" enctype="multipart/form-data"
@@ -31,7 +31,7 @@
             <input type="hidden" name="id" id="id" value="${answer.id}">
 
             <span>备注：</span>
-            <textarea style="margin: 0px; width: 552px; height: 138px;" name="auditRemark"></textarea>
+            <textarea style="margin: 0px; width: 552px; height: 128px;" name="auditRemark"></textarea>
 
             <ul class="adminfo row">
                 <li>

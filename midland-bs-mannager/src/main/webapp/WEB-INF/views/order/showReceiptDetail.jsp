@@ -52,7 +52,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			
 			<li>
 				<span>地址：</span>
-					<p id="province" style = "display:inline-block; height:38px; line-height:38px;">
+					<p id="province" style = "display:inline-block; height:28px; line-height:28px;">
 						<label for="pop-14"></label> 
 						<input type="hidden" name="province"  value="${order.province}"/>
 						<input type="hidden" name="regionSn">
@@ -67,7 +67,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							</c:forEach>
 						</select>
 					</p> <!-- 市 -->
-					<p id="city" style = "display:inline-block; height:38px; line-height:38px; margin-left: 20px;">
+					<p id="city" style = "display:inline-block; height:28px; line-height:28px; margin-left: 20px;">
 						<label for="pop-15"></label> 
 						<input type="hidden" name="city"  value="${order.city}">
 						<input type="hidden" name="cityName"> 
@@ -84,7 +84,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							</c:if>
 						</select>
 					</p>
-					<p id="district" style = "display:inline-block; height:38px; line-height:38px; margin-left: 20px;">
+					<p id="district" style = "display:inline-block; height:28px; line-height:28px; margin-left: 20px;">
 						<label for="pop-16"></label> 
 						<input type="hidden" name="district"  value="${order.district}"> 
 						<input type="hidden" name="distName"> 

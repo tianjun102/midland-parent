@@ -9,14 +9,14 @@
 </head>
 <body>
 
-<li style="display:flex;align-items:center"><span style="width: 30px;">省：</span> <!-- 省 -->
+<li style="display:flex;align-items:center"><span>省：</span> <!-- 省 -->
     <label></label>
     <input type="hidden" name="provinceId">
     <input type="hidden" name="regionSn">
     <input type="hidden"  name="provinceName">
     <!-- 第一次进页面加载省 -->
     <select id="provinces" onchange="initProvince()"
-            <c:if test="${not empty isSuper}"> style="height: 38px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;"</c:if>   <c:if test="${empty isSuper}">style="height: 38px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;background-color: #dddfe2;" disabled="disabled"</c:if>>
+            <c:if test="${not empty isSuper}"> style="height: 28px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;"</c:if>   <c:if test="${empty isSuper}">style="height: 28px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;background-color: #dddfe2;" disabled="disabled"</c:if>>
         <option>请选择</option>
         <option value="">全部</option>
         <c:forEach items="${provinceList}" var="province">
@@ -27,13 +27,13 @@
     </select>
     <!-- 市 -->
     &nbsp;&nbsp;
-    <p id="city" style="display: inline-block;height: 38px;">
+    <p id="city" style="display: inline-block;height: 28px;">
         <span>市：</span>
         <label></label> <input type="hidden" name="cityId" id="cityId" value="${cityId}">
         <input type="hidden" name="cityName" id="cityName" value="${cityName}">
         <select id="citys" onchange="initCity()"
                 <c:if test="${not empty isSuper}">
-                    style="height: 38px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;"</c:if>   <c:if test="${empty isSuper}">style="height: 38px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;background-color: #dddfe2;" disabled="disabled"</c:if>>
+                    style="height: 28px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;"</c:if>   <c:if test="${empty isSuper}">style="height: 28px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;background-color: #dddfe2;" disabled="disabled"</c:if>>
             <c:choose>
                 <c:when test="${not empty item.cityId}">
                     <option value="${item.cityId}">${item.cityName}</option>

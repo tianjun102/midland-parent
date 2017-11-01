@@ -12,7 +12,7 @@
     <style type="text/css">
         .table-add tr td a {
             display: inline-block;
-            width: 38px;!important;
+            width: 28px;!important;
             height: 20px;
             margin: 0 5px;
             background-size: contain!important;

@@ -24,7 +24,7 @@
 
 .dropdown{
 	position: relative;
-	width: 250px;
+	width: 120px;
 	border: 1px solid #ccc;
 	cursor: pointer;
 	background: #fff;
@@ -102,10 +102,11 @@
 .dropdown .selected,
 .dropdown li{
 	display: block;
+	height: 26px;
+	line-height: 26px;
 	font-size: 14px;
-	line-height: 1;
 	color: #000;
-	padding: 12px;
+	padding: 0 10px;
 	/* overflow: hidden; */
 	white-space: nowrap;
 }
@@ -115,7 +116,7 @@
 }
 
 .dropdown .selected::after{
-	border:1px solid #dbe2e6;
+	/*border:1px solid #dbe2e6;*/
 	content: '';
 	position: absolute;
 	right: 0;
@@ -124,7 +125,7 @@
 	width: 36px;
 	border-left: 1px solid #dbe2e6;
 	border-radius: 0 2px 2px 0;
-	box-shadow: inset -55px 0 25px -20px #fff;
+	box-shadow: inset -55px 0 28px -20px #fff;
 }
 
 /* DROP DOWN WRAPPER */
@@ -188,7 +189,7 @@
 
 .dropdown li{
 	list-style: none;
-	padding: 8px 12px;
+	/*padding: 8px 12px;*/
 }
 
 /* .focus class is also added on hover */

@@ -29,8 +29,8 @@
             float: left;
             display: inline-block;
             width: 130px;
-            height: 38px;
-            line-height: 38px;
+            height: 28px;
+            line-height: 28px;
             text-align: right;
             font-size: 14px;
             color: rgb(102, 102, 102);
@@ -52,7 +52,7 @@
             <input type="hidden" name="cityName" id="cityName" value="${item.cityName}" >
             <ul class = "adminfo row">
                 <li><span>城市：</span>
-                    <select onchange="setCityName();" name="cityId" id="cityId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
+                    <select onchange="setCityName();" name="cityId" id="cityId" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
                         <option value="">全部</option>
                         <c:forEach items="${cityList}" var="city">
                             <option <c:if test="${item.cityId == city.id}">selected = 'selected'</c:if> value="${city.id}">${city.name}</option>
@@ -61,7 +61,7 @@
                     <span class = "_star ">*</span>
                 </li>
                 <li><span>平台：</span>
-                    <select name="source" id="source" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" onchange="selectSource()">
+                    <select name="source" id="source" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" onchange="selectSource()">
                         <option <c:if test="${item.source =='0'}">selected="selected"</c:if> value="0">网站</option>
                         <option <c:if test="${item.source =='1'}">selected="selected"</c:if> value="1">微站</option>
                     </select>
@@ -69,7 +69,7 @@
                 </li>
                 <li><span>页面：</span>
                     <%--<input type="text" name="model" id="model" value="${item.model}"/>--%>
-                    <select name="model" id="model" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" onchange="selectSource()">
+                    <select name="model" id="model" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" onchange="selectSource()">
                         <option <c:if test="${item.model =='0'}">selected="selected"</c:if> value="0">首页</option>
                         <option <c:if test="${item.model =='1'}">selected="selected"</c:if> value="1">新房</option>
                         <option <c:if test="${item.model =='2'}">selected="selected"</c:if> value="2">二手房</option>

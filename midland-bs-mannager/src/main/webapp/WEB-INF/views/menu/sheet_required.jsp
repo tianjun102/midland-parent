@@ -10,8 +10,8 @@
 </head>
 <body>
 
-            <li class=""><span style="width: 30px;">省：</span> <!-- 省 -->
-                <p id="province" style="display: inline-block;height: 38px;">
+            <li class=""><span>省：</span> <!-- 省 -->
+                <p id="province" style="display: inline-block;height: 28px;">
                     <input type="hidden"  name="provinceId">
                     <input type="hidden" name="regionSn"> <input type="hidden"
                                                                  name="provinceName">
@@ -28,7 +28,7 @@
                 </p>
                 <!-- 市 -->
                 &nbsp;&nbsp;
-                <p id="city" style="display: inline-block;height: 38px;">
+                <p id="city" style="display: inline-block;height: 28px;">
                     <span>市：</span>
                     <input type="hidden" name="cityId">
                     <input type="hidden" name="cityName">
@@ -47,7 +47,7 @@
             </li>
 
             <li class=""> <span>地区：</span>
-                <p id="district" style="display: inline-block;height: 38px;">
+                <p id="district" style="display: inline-block;height: 28px;">
                     <input type="hidden" value="" name="areaId"> <input type="hidden" value="" name="areaName">
                     <select id="districts" name="districts"  onchange="initDistrict()" style="height: 100%;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" onblur="checkSelect('districts','请选择区级')">
                         <c:choose>
@@ -62,7 +62,7 @@
                 </p>
                 <!-- 片区 -->
 
-                <p id="sheet" style="display: inline-block;height: 38px;">
+                <p id="sheet" style="display: inline-block;height: 28px;">
                     <span>片区：</span>
                     <input type="hidden" value="" name="sliceId">
                     <input type="hidden" value="" name="sliceName">

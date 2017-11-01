@@ -7,31 +7,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
     <style type="text/css">
-        .table-add tr td a.house-detail {
-            width: auto;
-            height: auto;
-            padding: 2px 3px;
-            background-color: #00aeee;
-            border-radius: 2px;
-            color: #fff;
-        }
-        .content ul.userinfo li:not(:last-child) input {
-            float: left;
-            width: 200px;
-            height: 38px;
-            line-height: 38px;
-            border: 1px solid #dbe2e6;
-            border-radius: 4px;
-            text-indent: 10px;
-            outline-color: #0099e0;
-        }
-        .table-add tr td a {
-            display: inline-block;
-            width: 38px;!important;
-            height: 20px;
-            margin: 0 5px;
-            background-size: contain!important;
-        }
         th,td{
             padding: 0 10px;
         }

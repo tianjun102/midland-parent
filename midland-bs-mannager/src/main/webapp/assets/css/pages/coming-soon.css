@@ -82,7 +82,7 @@ body {
 
 #defaultCountdown span.countdown_amount {
 	display: inline-block;
-	font-size: 38px !important;
+	font-size: 28px !important;
 	padding: 15px !important;
 	font-weight: 300;
 }

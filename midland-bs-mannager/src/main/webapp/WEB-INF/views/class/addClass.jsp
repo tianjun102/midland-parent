@@ -70,7 +70,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				<li><span>栏目名称：</span><input maxlength="50" type="text" name="className"><span class = "_star ">*</span></li>
 				<li id="category" style="display: none;" >
 					<span>产品分类：</span>
-					<select style = "width:250px;height:38px;border-radius: 4px;border: 1px solid #dbe2e6;" id="categoryId">
+					<select style = "width:250px;height:28px;border-radius: 4px;border: 1px solid #dbe2e6;" id="categoryId">
 			       		<c:forEach items="${categoryList}" var="categoryList">
 			       		<option value="${categoryList.catId}">${categoryList.catName}</option>
 			       		</c:forEach>

@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="${ctx }/assets/css/common.css">
     <style type="text/css">
         .dropdown {
-            height: 38px;
-            line-height: 38px;
+            height: 28px;
+            line-height: 28px;
             width: 120px !important;
             display: inline-table;
             border-width: 1px !important;
@@ -56,7 +56,7 @@
                 </select>
             </li>
             <li><input class="public_btn bg1" type="submit" name="inquery" id="inquery" value="查询"/>
-                <a   style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" class = "public_btn bg1"  href="${ctx}/rest/quotationSecondHand/index" target="contentF">返回</a></li>
+                <a   style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;" class = "public_btn bg1"  href="${ctx}/rest/quotationSecondHand/index" target="contentF">返回</a></li>
 
         </ul>
 

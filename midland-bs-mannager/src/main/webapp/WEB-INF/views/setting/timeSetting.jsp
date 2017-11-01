@@ -13,8 +13,8 @@
             float: left;
             display: inline-block;
             width: 160px;
-            height: 38px;
-            line-height: 38px;
+            height: 28px;
+            line-height: 28px;
             text-align: left;
             font-size: 14px;
             color: rgb(102, 102, 102);

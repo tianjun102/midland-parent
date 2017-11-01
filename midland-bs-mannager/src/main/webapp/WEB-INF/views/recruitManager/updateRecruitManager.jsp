@@ -27,7 +27,7 @@
             <input type="hidden" name="cityName" id="cityName" value="${item.cityName}" >
             <ul class = "adminfo row">
                 <li><span>招聘类型：</span>
-                    <select name="type" id="type" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" >
+                    <select name="type" id="type" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" >
                         <option value="" class="label">请选择</option>
                         <option <c:if test="${item.type==1}">selected="selected"</c:if> value="1">校招</option>
                         <option <c:if test="${item.type==2}">selected="selected"</c:if> value="2">社招</option>
@@ -35,7 +35,7 @@
                     <span class = "_star ">*</span>
                 </li>
                 <li><span>城市：</span>
-                    <select onchange="setCityName();" name="cityId" id="cityId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <select onchange="setCityName();" name="cityId" id="cityId" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <option value="">全部</option>
                         <c:forEach items="${cityList}" var="city">
                             <option <c:if test="${item.cityId==city.id}">selected="selected"</c:if> value="${city.id}">${city.name}</option>
@@ -56,7 +56,7 @@
                     <input id="recruitersNum" name="recruitersNum" maxlength="255" type="text" value="${item.recruitersNum}">
                 </li>
                 <li><span>学历要求：</span>
-                    <select name="education" id="education" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <select name="education" id="education" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <option <c:if test="${item.education==0}">selected="selected"</c:if> value="0">不限</option>
                         <option <c:if test="${item.education==1}">selected="selected"</c:if> value="1">高中</option>
                         <option <c:if test="${item.education==2}">selected="selected"</c:if> value="2">大专</option>
@@ -66,7 +66,7 @@
                     <span class = "_star ">*</span>
                 </li>
                 <li><span>工作年限：</span>
-                    <select name="workLift" id="workLift" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <select name="workLift" id="workLift" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <option <c:if test="${item.workLift==0}">selected="selected"</c:if> value="0">不限</option>
                         <option <c:if test="${item.workLift==1}">selected="selected"</c:if> value="1">应届毕业生</option>
                         <option <c:if test="${item.workLift==2}">selected="selected"</c:if> value="2">1-3年</option>
@@ -77,7 +77,7 @@
                     <span class = "_star ">*</span>
                 </li>
                 <li><span>上线状态：</span>
-                    <select name="releaseStatus" id="releaseStatus" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <select name="releaseStatus" id="releaseStatus" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <option <c:if test="${item.releaseStatus==0}">selected="selected"</c:if> value="0">上线</option>
                         <option <c:if test="${item.releaseStatus==1}">selected="selected"</c:if> value="1">下线</option>
                     </select>

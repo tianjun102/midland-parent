@@ -22,8 +22,8 @@
 button.showbtn {
 	float: right;
 	width: 80px;
-	height: 38px;
-	line-height: 38px;
+	height: 28px;
+	line-height: 28px;
 	text-align: center;
 	background-color: #a0a9ba;
 	color: #fff;

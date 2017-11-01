@@ -8,7 +8,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	.content ul.userinfo>li {
+		float: none!important;
+	}
+	.content ul.userinfo li>span {
+		float: none!important;
+	}
 
+</style>
 </head>
 <body>
 	

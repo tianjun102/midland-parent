@@ -27,7 +27,7 @@
             <input type="hidden" name="cityName" id="cityName" value="" >
             <ul class = "adminfo row">
                 <li><span>招聘类型：</span>
-                    <select name="type" id="type" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" >
+                    <select name="type" id="type" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" >
                         <option value="" class="label">请选择</option>
                         <option value="1">校招</option>
                         <option value="2">社招</option>
@@ -35,7 +35,7 @@
                     <span class = "_star ">*</span>
                 </li>
                 <li><span>城市：</span>
-                    <select onchange="setCityName();" name="cityId" id="cityId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <select onchange="setCityName();" name="cityId" id="cityId" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <option value="">全部</option>
                         <c:forEach items="${cityList}" var="city">
                             <option value="${city.id}">${city.name}</option>
@@ -56,7 +56,7 @@
                     <input id="recruitersNum" name="recruitersNum" maxlength="255" type="text" value="">
                 </li>
                 <li><span>学历要求：</span>
-                    <select name="education" id="education" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <select name="education" id="education" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <option value="0">不限</option>
                         <option value="1">高中</option>
                         <option value="2">大专</option>
@@ -66,7 +66,7 @@
                     <span class = "_star ">*</span>
                 </li>
                 <li><span>工作年限：</span>
-                    <select name="workLift" id="workLift" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <select name="workLift" id="workLift" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <option value="0">不限</option>
                         <option value="1">应届毕业生</option>
                         <option value="2">1-3年</option>
@@ -77,7 +77,7 @@
                     <span class = "_star ">*</span>
                 </li>
                 <li><span>上线状态：</span>
-                    <select name="releaseStatus" id="releaseStatus" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <select name="releaseStatus" id="releaseStatus" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <option value="0">上线</option>
                         <option value="1">下线</option>
                     </select>

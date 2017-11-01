@@ -2,7 +2,7 @@
 #scrollUp {
 	bottom: 20px;
 	right: 20px;
-	height: 38px;  /* Height of image */
-	width: 38px; /* Width of image */
+	height: 28px;  /* Height of image */
+	width: 28px; /* Width of image */
 	background: url(../../img/top.png) no-repeat;
 }

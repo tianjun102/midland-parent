@@ -24,7 +24,7 @@
 			<ul class = "userinfo row">
 				<%--<li>
 					<span style = "float:left;">城市：</span>
-					<select name="cityId" id="cityId" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+					<select name="cityId" id="cityId" style="height: 28px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
 						<option value="">全部</option>
 						<c:forEach items="${cityList}" var="city">
 							<option value="${city.id}">${city.name}</option>
@@ -43,7 +43,7 @@
 				<c:if test="${not empty isSuper}">
 					<li>
 						<span style = "float:left;">是否删除：</span>
-						<select name="isDelete" id="isDelete" style="height: 38px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+						<select name="isDelete" id="isDelete" style="height: 28px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
 							<option value="0">未删除</option>
 							<option value="1">已删除</option>
 						</select>
@@ -54,8 +54,8 @@
 				</li>
 			</ul>
 			</form>
-			<input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;margin-top: 10px;" onclick="batchDelete(1)" class = "public_btn bg1" type="submit"  value = "批量删除"/>
-			<c:if test="${not empty isSuper}"><input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" onclick="batchDelete(0)" class = "public_btn bg1" type="submit"  value = "批量恢复"/></c:if>
+			<input style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;margin-top: 10px;" onclick="batchDelete(1)" class = "public_btn bg1" type="submit"  value = "批量删除"/>
+			<c:if test="${not empty isSuper}"><input style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;" onclick="batchDelete(0)" class = "public_btn bg1" type="submit"  value = "批量恢复"/></c:if>
 			<div id="listDiv"></div>
 		</section>
 	</div>

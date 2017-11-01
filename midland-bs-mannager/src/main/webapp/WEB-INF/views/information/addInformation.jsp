@@ -31,8 +31,8 @@
         float: left;
         display: inline-block;
         width: 100px;
-        height: 38px;
-        line-height: 38px;
+        height: 28px;
+        line-height: 28px;
         text-align: right;
         font-size: 14px;
         color: rgb(102, 102, 102);
@@ -58,7 +58,7 @@
                     <span style = "float:left;">城市：</span>
                     <c:if test="${empty isSuper}"><input type="hidden" name="cityId"  value="${cityId}"></c:if>
                     <input type="hidden" name="cityName" id="cityName" value="${cityName}">
-                    <select onchange="setCityName()" name="cityId" id="cityId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}"> disabled="disabled"</c:if> >
+                    <select onchange="setCityName()" name="cityId" id="cityId" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}"> disabled="disabled"</c:if> >
                         <option value="">全部</option>
                         <c:forEach items="${cityList}" var="city">
                             <c:if test="${empty isSuper}"><option selected="selected" value="${cityId}">${cityName}</option></c:if>
@@ -68,7 +68,7 @@
                 </li>
                 <li><span>一级分类：</span>
                     <input type="hidden" name="cateParentName" id="cateParentName" value="">
-                    <select name="cateParentid" id="cateParentid" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <%--class="dropdown"--%> onchange="setChildCateName();">
+                    <select name="cateParentid" id="cateParentid" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <%--class="dropdown"--%> onchange="setChildCateName();">
                         <option value="" class="label">请选择</option>
                         <c:forEach items="${cateList}" var="cate">
                             <option value="${cate.id}">${cate.cateName}</option>
@@ -78,13 +78,13 @@
                 </li>
                 <li><span>二级分类：</span>
                     <input type="hidden" name="cateName" id="cateName" value="">
-                    <select name="cateId" id="cateId" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <%--class="dropdown"--%> onchange="setCateName();">
+                    <select name="cateId" id="cateId" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <%--class="dropdown"--%> onchange="setCateName();">
                         <option value="" class="label">请选择</option>
                     </select>
                     <span class = "_star ">*</span>
                 </li>
                 <li><span>平台：</span>
-                    <select name="platform" id="platform" style="height: 38px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <select name="platform" id="platform" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <option value="0" >网站</option>
                         <option value="1" >微站</option>
                     </select>

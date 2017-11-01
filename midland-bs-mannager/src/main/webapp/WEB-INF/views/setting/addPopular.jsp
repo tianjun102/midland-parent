@@ -23,8 +23,8 @@
         }
         .vipcate{
             width: 274px!important;;
-            height: 38px;
-            line-height: 38px;
+            height: 28px;
+            line-height: 28px;
             border: 1px solid #dbe2e6;
             border-radius: 4px;
             text-indent: 10px;
@@ -79,7 +79,7 @@
             <li><span>链接名：</span><input style="width:274px;" type="text" onblur="notEmpty('name','name','链接名不能为空！');" name="name" id="name" maxlength="50"/><span class="_star">*</span></li>
             <li>
                 <span style = "float:left;">平台：</span>
-                <select name="source" id="source" style="height: 38px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" >
+                <select name="source" id="source" style="height: 28px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" >
                     <option value="">全部</option>
                     <option value="1">网站</option>
                     <option value="2">微站</option>
@@ -106,7 +106,7 @@
             </li>
             <li>
                 <span style = "float:left;">模块：</span>
-                <select name="menuId" id="menuId" style="height: 38px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                <select name="menuId" id="menuId" style="height: 28px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option value="1">首页</option>
                     <option value="2">新房</option>
                     <option value="3">新二手房</option>
@@ -115,7 +115,7 @@
             </li>
 
             <li><span>省：</span> <!-- 省 -->
-                <p id="province" style="display: inline-block;height: 38px;">
+                <p id="province" style="display: inline-block;height: 28px;">
                     <label for="pop-14"></label> <input type="hidden" name="provinceId">
                     <input type="hidden" name="regionSn"> <input type="hidden"
                                                                  name="provinceName">
@@ -131,7 +131,7 @@
                     </select>
                 </p>
                 <!-- 市 -->
-                <p id="city" style="display: inline-block;height: 38px;">
+                <p id="city" style="display: inline-block;height: 28px;">
                     <span>市：</span>
                     <label for="pop-15"></label> <input type="hidden" name="cityId">
                     <input type="hidden" name="cityName">
@@ -140,7 +140,7 @@
                     </select>
                 </p>
 
-                <p id="district" style="display: inline-block;height: 38px;">
+                <p id="district" style="display: inline-block;height: 28px;">
                     <span>地区：</span>
                     <label for="pop-16"></label> <input type="hidden" value="" name="distId"> <input type="hidden" value="" name="distName">
                     <select id="districts" onchange="initDistrict()" style="height: 100%;width: 65px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
@@ -152,7 +152,7 @@
             <li>
                 <!-- 片区 -->
                 <span>片区：</span>
-                <p id="sheet" style="display: inline-block;height: 38px;">
+                <p id="sheet" style="display: inline-block;height: 28px;">
                     <label for="pop-16"></label> <input type="hidden" value="" name="sheetId"> <input type="hidden" value="" name="sheetName">
                     <select id="sheets" onchange="initSheet()" style="height: 100%;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <option value="">请选择</option>

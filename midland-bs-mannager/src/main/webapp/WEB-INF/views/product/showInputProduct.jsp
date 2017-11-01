@@ -36,8 +36,8 @@
 <!-- END HEAD -->
 <style>
 #redBtn {
-	height: 38px;
-	line-height: 38px;
+	height: 28px;
+	line-height: 28px;
 	border: 1px solid #dbe2e6;
 	border-radius: 4px;
 	text-indent: 10px;
@@ -155,7 +155,7 @@
 				</li>
 				<li><span>产品属性：</span>
 				<div id="showDiv" style='width: 35%; overflow:hidden;'>
-						<span style = "height:38px; line-height:38px;">请选择分类</span>
+						<span style = "height:28px; line-height:28px;">请选择分类</span>
 					</div></li>
 				<li><span>产品描述：</span>
 				<textarea name="prodDetails" id="myEditor"

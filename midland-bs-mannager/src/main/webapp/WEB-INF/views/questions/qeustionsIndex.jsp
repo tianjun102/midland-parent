@@ -20,8 +20,8 @@
         .content ul.userinfo li:not(:last-child) input{
             float: left;
             width: 180px;
-            height: 38px;
-            line-height: 38px;
+            height: 28px;
+            line-height: 28px;
             text-indent: 10px;
             outline-color: rgb(0, 153, 224);
             border-width: 1px;
@@ -31,8 +31,8 @@
             border-radius: 4px;
         }
         .dropdown {
-            height: 38px;
-            line-height: 38px;
+            height: 28px;
+            line-height: 28px;
             border: 1px solid #dbe2e6!important;
             width: 150px;
             display: inline-table!important;
@@ -94,9 +94,9 @@
                     <input class="public_btn bg1" type="submit" name="inquery" id="inquery" value="查询"/></li>
             </ul>
         </form>
-        <input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;margin-top: 10px;" onclick="batchDelete(1)" class = "public_btn bg1" type="submit"  value = "批量删除"/>
+        <input style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;margin-top: 10px;" onclick="batchDelete(1)" class = "public_btn bg1" type="submit"  value = "批量删除"/>
         <c:if test="${not empty isSuper}">
-             <input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" onclick="batchDelete(0)" class = "public_btn bg1" type="submit"  value = "批量恢复"/>
+             <input style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;" onclick="batchDelete(0)" class = "public_btn bg1" type="submit"  value = "批量恢复"/>
         </c:if>
         <div id="listDiv"></div>
     </section>

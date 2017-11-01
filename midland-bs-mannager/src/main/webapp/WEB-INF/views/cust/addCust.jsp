@@ -99,7 +99,7 @@
 				id="contactPhone" onblur="checkPhone();" /><span
 				class="_star">*</span></li>
 			<li><span>收货地址：</span> <!-- 省 -->
-				<p id="province" style="display: inline-block;height: 38px;">
+				<p id="province" style="display: inline-block;height: 28px;">
 					<label for="pop-14"></label> <input type="hidden" name="provinceId">
 					<input type="hidden" name="regionSn"> <input type="hidden"
 						name="provinceName">
@@ -113,7 +113,7 @@
 						</c:forEach>
 					</select>
 				</p> <!-- 市 -->
-				<p id="city" style="margin-left: 20px; display: inline-block; height: 38px;">
+				<p id="city" style="margin-left: 20px; display: inline-block; height: 28px;">
 					<label for="pop-15"></label> <input type="hidden" name="cityId">
 					<input type="hidden" name="cityName"> <select id="citys"
 						onchange="initCity()" style="height: 100%; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
@@ -121,7 +121,7 @@
 					</select>
 				</p>
 				<p id="district"
-					style="margin-left: 20px; display: inline-block; height: 38px;">
+					style="margin-left: 20px; display: inline-block; height: 28px;">
 					<label for="pop-16"></label> <input type="hidden" value=""
 						name="distId"> <input type="hidden" value=""
 						name="distName"> <select id="districts"
@@ -176,7 +176,7 @@
 			</li>
 			<li><span>经营产品：</span>
 				<div id="cbox" class="cbox"
-					style="display: inline-block; line-height: 38px;">
+					style="display: inline-block; line-height: 28px;">
 					<c:if test="${!empty enterProds }">
 						<c:forEach items="${enterProds }" var="rost">
 							<label> <input style="" type="checkbox" name="enterProd"

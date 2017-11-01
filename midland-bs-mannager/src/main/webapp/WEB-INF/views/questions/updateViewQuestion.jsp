@@ -17,15 +17,15 @@
             float: left;
             display: inline-block;
             width: 90px;
-            height: 38px;
-            line-height: 38px;
+            height: 28px;
+            line-height: 28px;
             text-align: right;
             font-size: 14px;
             color: rgb( 102, 102, 102 );
         }
         .table-add tr td a {
             display: inline-block;
-            width: 38px;!important;
+            width: 28px;!important;
             height: 20px;
             margin: 0 5px;
             background-size: contain!important;

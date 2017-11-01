@@ -12,8 +12,8 @@
 		float: left;
 		display: inline-block;
 		width: 100px;
-		height: 38px;
-		line-height: 38px;
+		height: 28px;
+		line-height: 28px;
 		text-align: right;
 		font-size: 14px;
 		color: rgb( 102, 102, 102 );
@@ -21,8 +21,8 @@
 	.content ul.adminfo li input[type=text] {
 		float: left;
 		width: 400px;
-		height: 38px;
-		line-height: 38px;
+		height: 28px;
+		line-height: 28px;
 		border: 1px solid #dbe2e6;
 		border-radius: 4px;
 		text-indent: 10px;

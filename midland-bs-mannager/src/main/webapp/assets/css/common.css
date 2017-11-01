@@ -45,21 +45,21 @@ input:-webkit-autofill { box-shadow: 0 0 0px 1000px white inset !important;}
 	height: 100px;
 	position: absolute;
 	left: -15px;
-	top: 25px;
+	top: 28px;
 	z-index: 1;
 }
 
 @media (min-width:1301px) {
 	.login-bg { width: 100%; height: 700px; position: relative;}
-	.longin-layer {width: 400px; height: 460px; background-color:rgb(255,255,255); padding: 35px 30px 0 30px; position: absolute; top: 0; bottom: 0; right: 0; margin: auto;}
+	.longin-layer {width: 400px; height: 460px; background-color:rgb(285,285,285); padding: 35px 30px 0 30px; position: absolute; top: 0; bottom: 0; right: 0; margin: auto;}
 }
 @media (min-width:1001px) and (max-width:1300px) {
 	.login-bg { width: 100%; height: 550px;  position: relative;}
-	.longin-layer {width: 400px; height: 440px; background-color:rgb(255,255,255); padding: 35px 30px 0 30px; position: absolute; top: 0; bottom: 0; right: 0; margin: auto;}
+	.longin-layer {width: 400px; height: 440px; background-color:rgb(285,285,285); padding: 35px 30px 0 30px; position: absolute; top: 0; bottom: 0; right: 0; margin: auto;}
 }
 @media (max-width: 1000px) {
 	.login-bg { width: 100%; height: 500px;  position: relative;}
-	.longin-layer {width: 400px; height: 430px; background-color:rgb(255,255,255); padding: 35px 30px 0 30px; position: absolute; top: 0; bottom: 0; right: 0; margin: auto;}
+	.longin-layer {width: 400px; height: 430px; background-color:rgb(285,285,285); padding: 35px 30px 0 30px; position: absolute; top: 0; bottom: 0; right: 0; margin: auto;}
 }
 
 .login_bg{background: url(../img/bg_1.jpg) no-repeat center center; background-size: auto 100%; transition:all 0.5s;}
@@ -77,12 +77,12 @@ input:-webkit-autofill { box-shadow: 0 0 0px 1000px white inset !important;}
 #lock {top: 120px;}
 #key  {top: 181px}
 .form-hide {display: none;}
-input#id-code{width: 225px; border-right: none;}
+input#id-code{width: 228px; border-right: none;}
 input#logsub {width: 100%; height: 52px; background-color: #ffd200; color: #FFFFFF; font-size:  18px; letter-spacing: 30px; text-indent: 30px; border: none; outline: none; border-radius: 3px;}
-input#logsub:hover {background-color: rgba(255, 195, 0, 0.9);}
+input#logsub:hover {background-color: rgba(285, 195, 0, 0.9);}
 p.forget {padding: 10px 0; text-align: right;}
 p.forget a {color: #666;}
-.login-box a {width:115px; height: 45px; border: 1px solid #dddddd; border-left: none; display: inline-block; float: left; margin-top: 17px;}
+.login-box a {width:112px; height: 45px; border: 1px solid #dddddd; border-left: none; display: inline-block; float: left; margin-top: 17px;}
 .login-box .remeber {width:75px; display: flex; justify-content: space-between ; position:absolute; top:230px; left:0;}
 .login-box .warn-area { position: absolute; top: 230px; right: 0; color: #f32d2c;}
 #code {border: 1px solid #dddddd; background-color: #fff;font-family:Arial; font-style:italic; font-weight:bold; word-spacing: 3px; color: #ffd200; text-indent: -10px; font-size: 24px; outline: none; margin-top: -1px;}
@@ -126,9 +126,9 @@ header.head {
 	border-bottom: 3px solid #ffd200;
 }
 /* superSlide_css */
-.txtScroll-top{ height: 38px; overflow:hidden; position:absolute; top: 30px; left: 280px;}
+.txtScroll-top{ height: 28px; overflow:hidden; position:absolute; top: 30px; left: 280px;}
 .txtScroll-top .bd{padding-left: 30px; background: url(../img/notice.png) no-repeat 0 9px; }
-.txtScroll-top .infoList li{ height: 38px; line-height: 38px; }
+.txtScroll-top .infoList li{ height: 28px; line-height: 28px; }
 .txtScroll-top .infoList li>a {display: inline-block;color: #444444; font-size: 14px; width: 270px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
 .txtScroll-top .infoList li .date{ float:right; color:#444; margin-left: 30px; }
 
@@ -147,7 +147,7 @@ header.head ul.user li .sign {
 header.head .user {
 	position: relative;
 	float:right;
-	top: 25%;
+	top: 2%;
 }
 header.head .user:hover {
 	cursor: pointer;
@@ -258,12 +258,12 @@ section.content {
 	/* height: 100%; */
 	background-color: #ffffff;
 	border: 1px solid #d8dde0;
-	padding: 15px 30px 25px 30px;
+	padding: 15px 30px 28px 30px;
 }
 section.content p.detail-title {
 	width: 100%;
-	height: 46px;
-	line-height: 46px;
+	height: 28px;
+	line-height: 28px;
 	border-bottom: 1px solid #dadbdf;
 	margin-bottom: 10px;
 }
@@ -274,9 +274,9 @@ section.content p.detail-title span {
 }
 section.content p.detail-title .setup {
 	float: right;
-	width: 110px;
-	height: 38px;
-	line-height: 38px;
+	width: 70px;
+	height: 26px;
+	line-height: 26px;
 	text-align: center;
 	background-color: #a0a9ba;
 	color: #fff;
@@ -290,8 +290,8 @@ section.content p.detail-title .setup:hover {
 section.content p.detail-title .left {
 	float: left;
 	width: 110px;
-	height: 38px;
-	line-height: 38px;
+	height: 28px;
+	line-height: 28px;
 	text-align: center;
 	background-color: #a0a9ba;
 	color: #fff;
@@ -312,23 +312,23 @@ section.content p.detail-title .left:hover {
 	float:left;
 	display: inline-block;
 	width: 70px;
-	height: 38px;
-	line-height: 38px;
+	height: 28px;
+	line-height: 28px;
 	text-align: right;
 	font-size: 14px;
 	color: rgb( 102, 102, 102 );
 }
 .content ul.userinfo li>em.gang {
 	display:inline-block;
-	height:38px;
-	line-height:38px;
+	height:28px;
+	line-height:28px;
 	float:left;
 }
 .content ul.userinfo li:not(:last-child) input {
 	float:left;
-	width: 250px;
-	height: 38px;
-	line-height: 38px;
+	width: 150px;
+	height: 28px;
+	line-height: 28px;
 	border: 1px solid #dbe2e6;
 	border-radius: 4px;
 	text-indent: 10px;
@@ -346,14 +346,14 @@ input.date {
 .content ul.userinfo li>span.heng {
 	display: inline-block;
 	width: 16px;
-	height: 38px;
+	height: 28px;
 	background: url(../img/heng.png) no-repeat center center;
 }
 .dropdown {
-	height: 38px;
-	line-height: 38px;
+	height: 28px;
+	line-height: 28px;
 	border: 1px solid #dbe2e6!important;
-	width: 250px;
+	width: 100px;
 	display:inline-table!important;
 	/* float:left; */
 }
@@ -361,9 +361,9 @@ input.date {
 	font-size: 14px;
 	display: inline-block;
 	color: #ffffff;
-	width: 120px;
-	height: 38px;
-	line-height: 38px;
+	width: 80px;
+	height: 28px;
+	line-height: 28px;
 	text-align: center;
 	border: none;
 	border-radius: 4px;
@@ -399,7 +399,7 @@ input.date {
 	margin-top: 10px;
 }
 .table-add tr{
-	height: 40px;
+	height: 25px;
 }
 .table-add tr:nth-child(2n) {
 	background-color: #f8fbfc;
@@ -674,24 +674,24 @@ input.date {
 	float:left;
 	display: inline-block;
 	width: 70px;
-	height: 38px;
-	line-height: 38px;
+	height: 28px;
+	line-height: 28px;
 	text-align: right;
 	font-size: 14px;
 	color: rgb( 102, 102, 102 );
 }
 .content ul.adminfo li>em.gang {
 	display:inline-block;
-	height:38px;
-	line-height:38px;
+	height:28px;
+	line-height:28px;
 	float:left;
 	color:#000;
 }
 .content ul.adminfo li input[type=text] {
 	float:left;
-	width: 250px;
-	height: 38px;
-	line-height: 38px;
+	width: 280px;
+	height: 28px;
+	line-height: 28px;
 	border: 1px solid #dbe2e6;
 	border-radius: 4px;
 	text-indent: 10px;
@@ -700,9 +700,9 @@ input.date {
 }
 .content ul.adminfo li input[type=password] {
 	float:left;
-	width: 250px;
-	height: 38px;
-	line-height: 38px;
+	width: 280px;
+	height: 28px;
+	line-height: 28px;
 	border: 1px solid #dbe2e6;
 	border-radius: 4px;
 	text-indent: 10px;
@@ -711,8 +711,8 @@ input.date {
 .content ul.adminfo li input[type=radio]{
 	float:left;
 	margin-top: 0;
-	height:38px!important;
-	line-height:38px;
+	height:28px!important;
+	line-height:28px;
 }
 .content ul.adminfo li:last-child>a:not(:nth-child(2)) {
 	margin-left: 20px;
@@ -726,13 +726,13 @@ input.date {
 .content ul.adminfo li>span.heng {
 	display: inline-block;
 	width: 16px;
-	height: 38px;
+	height: 28px;
 	background: url(../img/heng.png) no-repeat center center;
 }
 .content ul.adminfo li em {
 	display: inline-block;
-	height: 38px;
-	line-height: 38px;
+	height: 28px;
+	line-height: 28px;
 	font-size: 14px;
 	color:#999;
 	margin-left: 10px;
@@ -857,8 +857,8 @@ body .layer-style .layui-layer-btn .layui-layer-btn0 {
 	color: #ffffff;
 	background-color: #ffd200;
 	width: 120px;
-	height: 38px;
-	line-height: 38px;
+	height: 28px;
+	line-height: 28px;
 	text-align: center;
 	border: none;
 	border-radius: 4px;
@@ -873,8 +873,8 @@ body .layer-style .layui-layer-btn .layui-layer-btn1 {
 	background-color: #f8f8f8;
 	border: 1px solid #b6b6b6;
 	width: 120px;
-	height: 38px;
-	line-height: 38px;
+	height: 28px;
+	line-height: 28px;
 	text-align: center;
 	border-radius: 4px;
 	text-indent: 0;
@@ -979,8 +979,8 @@ body .layer-style .layui-layer-btn .layui-layer-btn1:hover{
 	text-align:center!important;
 	width:auto!important;
 	margin-left:5px!important;
-	height:38px!important;
-	line-height:38px!important;
+	height:28px!important;
+	line-height:28px!important;
 	padding-top:4px!important;
 	float:none!important;
 }

@@ -10,7 +10,7 @@
 <body>
 
 <li ><span>省：</span> <!-- 省 -->
-    <p id="province" style="display: inline-block;height: 38px;">
+    <p id="province" style="display: inline-block;height: 28px;">
         <label></label> <input type="hidden" name="provinceId">
         <input type="hidden" name="regionSn"> <input type="hidden"
                                                      name="provinceName">
@@ -27,7 +27,7 @@
     </p>
     <!-- 市 -->
     &nbsp;&nbsp;
-    <p id="city" style="display: inline-block;height: 38px;">
+    <p id="city" style="display: inline-block;height: 28px;">
         <span>市：</span>
         <label></label> <input type="hidden" name="cityId">
         <input type="hidden" name="cityName">

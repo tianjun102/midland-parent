@@ -34,8 +34,8 @@
         }
         .vipcate{
             width: 250px;
-            height: 38px;
-            line-height: 38px;
+            height: 28px;
+            line-height: 28px;
             border: 1px solid #dbe2e6;
             border-radius: 4px;
             text-indent: 10px;

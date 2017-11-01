@@ -7,34 +7,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-
-<link rel="stylesheet" href="${ctx }/assets/css/bootstrap.min.css">
-
-<link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css" />
-<link rel="stylesheet" href="${ctx }/assets/css/common.css">
-	<style type="text/css">
-		.content ul.userinfo li>span{
-			float: left;
-			display: inline-block;
-			width: 90px;
-			height: 38px;
-			line-height: 38px;
-			text-align: right;
-			font-size: 14px;
-			color: rgb( 102, 102, 102 );
-		}
-		.dropdown {
-			height: 38px;
-			line-height: 38px;
-			width: 200px;
-			display: inline-table;
-			border-width: 1px !important;
-			border-style: solid !important;
-			border-color: rgb(219, 226, 230) !important;
-			border-image: initial !important;
-		}
-
-	</style>
 </head>
 <body>
 	
@@ -91,7 +63,7 @@
 						id="time2" name="endTime" /></li>
 
 				<li><input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/>
-					<a href="#" style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;" class="public_btn bg1" onclick="export1()">导出</a>
+					<a href="#" class="public_btn bg1" onclick="export1()">导出</a>
 				</li>
 			</ul>
 			</form>

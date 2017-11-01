@@ -13,8 +13,8 @@
 		float: left;
 		display: inline-block;
 		width: 90px;
-		height: 38px;
-		line-height: 38px;
+		height: 28px;
+		line-height: 28px;
 		text-align: right;
 		font-size: 14px;
 		color: rgb( 102, 102, 102 );
@@ -68,7 +68,7 @@
 				<li><input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/></li>
 			</ul>
 			</form>
-			<input style="margin-left: 20px;width: 70px;height: 30px;line-height: 30px!important;margin-top: 10px;" onclick="exportUsers()" class = "public_btn bg1" type="submit"  value = "导出"/>
+			<input style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;margin-top: 10px;" onclick="exportUsers()" class = "public_btn bg1" type="submit"  value = "导出"/>
 			<div id="listDiv"></div>
 		</section>
 	</div>

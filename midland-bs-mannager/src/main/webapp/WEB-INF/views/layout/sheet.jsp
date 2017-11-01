@@ -11,7 +11,7 @@
 <body>
 
             <li class="col-sm-6 col-md-6 col-lg-6"><span>省：</span> <!-- 省 -->
-                <p id="province" style="display: inline-block;height: 38px;">
+                <p id="province" style="display: inline-block;height: 28px;">
                     <label ></label> <input type="hidden"  name="provinceId">
                     <input type="hidden" name="regionSn"> <input type="hidden"
                                                                  name="provinceName">
@@ -28,7 +28,7 @@
                 </p>
                 <!-- 市 -->
                 &nbsp;&nbsp;
-                <p id="city" style="display: inline-block;height: 38px;">
+                <p id="city" style="display: inline-block;height: 28px;">
                     <span>市：</span>
                     <label ></label> <input type="hidden" name="cityId">
                     <input type="hidden" name="cityName">
@@ -47,7 +47,7 @@
             </li>
 
             <li class="col-sm-6 col-md-6 col-lg-6"> <span>地区：</span>
-                <p id="district" style="display: inline-block;height: 38px;">
+                <p id="district" style="display: inline-block;height: 28px;">
                     <label ></label> <input type="hidden" value="" name="distId"> <input type="hidden" value="" name="distName">
                     <select id="districts" onchange="initDistrict()" style="height: 100%;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <c:choose>
@@ -62,7 +62,7 @@
                 </p>
                 <!-- 片区 -->
 
-                <p id="sheet" style="display: inline-block;height: 38px;">
+                <p id="sheet" style="display: inline-block;height: 28px;">
                     <span>片区：</span>
                     <label ></label> <input type="hidden" value="" name="sheetId"> <input type="hidden" value="" name="sheetName">
                     <select id="sheets" onchange="initSheet()" style="height: 100%;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
