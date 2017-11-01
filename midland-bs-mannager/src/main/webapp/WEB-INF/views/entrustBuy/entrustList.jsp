@@ -100,9 +100,11 @@
 </c:if>
 
 <script type="text/javascript">
-
     $(function () {
+        var headIndex = $("#headIndex").height();
+        $("#table-cont").css({maxHeight:allHeight-headIndex-100-17});
         var tableCont = document.querySelector('#table-cont');
+        debugger;
         /**
          * scroll handle
          * @param {event} e -- scroll event

@@ -18,7 +18,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 </head>
 	<body>
 	<!--头部结构-->
-	<header class = "head">
+	<header class = "head" >
 		<c:if test="${user.userType==0}">
 			<a href="${ctx}/rest/user/contentIndex" target="contentF"><img src="${ctx}/assets/img/logo.png" alt="智者汇" /></a>
 		</c:if>

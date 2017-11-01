@@ -28,6 +28,12 @@
         {
             white-space: nowrap;
         }
+        .listButton{
+            margin-left: 20px;
+            width: 70px;height: 28px;
+            line-height: 28px!important;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
