@@ -1,37 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="../layout/tablib.jsp"%>
-<%@include file="../layout/source.jsp"%>
+<%@include file="../entrust/entrustJS.jsp"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-	<style type="text/css">
-		.content ul.userinfo li>span{
-			float: left;
-			display: inline-block;
-			width: 90px;
-			height: 28px;
-			line-height: 28px;
-			text-align: right;
-			font-size: 14px;
-			color: rgb( 102, 102, 102 );
-		}
-		.dropdown {
-			  position: relative;
-			  width: 200px;
-			  border: 1px solid #ccc;
-			  cursor: pointer;
-			  background: #fff;
-			  border-radius: 3px;
-			  -webkit-user-select: none;
-			  -moz-user-select: none;
-			  user-select: none;
-		  }
-	</style>
-
 </head>
 <body>
 	

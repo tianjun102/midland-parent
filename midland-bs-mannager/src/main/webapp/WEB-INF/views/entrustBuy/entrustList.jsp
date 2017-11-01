@@ -6,29 +6,12 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
-    <style type="text/css">
-        .table-add tr td a {
-            display: inline-block;
-            width: 28px;!important;
-            height: 20px;
-            margin: 0 5px;
-            background-size: contain!important;
-        }
-        td
-        {
-            white-space: nowrap;
-        }
-        th
-        {
-            white-space: nowrap;
-        }
 
-    </style>
 </head>
 <body>
 
 
-<div class="table-responsive m40" style="max-height: 480px;overflow: auto;"  id='table-cont'>
+<div class="table-responsive m40" id='table-cont'>
     <table class="table table-bordered table-add">
         <thead>
         <tr>
