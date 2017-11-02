@@ -95,7 +95,6 @@
     }
 
 </script>
-<script type="text/javascript" src="${ctx}/assets/scripts/jquery.min.js"></script>
-<script type="text/javascript" src="${ctx}/assets/scripts/layer/layer.js"></script>
+
 </body>
 </html>

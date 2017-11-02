@@ -1,56 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%@include file="../layout/tablib.jsp" %>
-<%@include file="../layout/source.jsp" %>
-
+<%@include file="../indexJS.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
-    <style type="text/css">
-        .content ul.userinfo li > span {
-            float: left;
-            display: inline-block;
-            width: 90px;
-            height: 28px;
-            line-height: 28px;
-            text-align: right;
-            font-size: 14px;
-            color: rgb(102, 102, 102);
-        }
-
-        .table-add tr td a {
-            display: inline-block;
-            width: 35px;
-            height: 20px;
-            margin: 0 5px;
-            background-size: contain !important;
-        }
-
-        .content ul.userinfo li:not(:last-child) input {
-            float: left;
-            width: 190px;
-            height: 28px;
-            line-height: 28px;
-            border: 1px solid #dbe2e6;
-            border-radius: 4px;
-            text-indent: 10px;
-            outline-color: #0099e0;
-        }
-
-        .dropdown {
-            position: relative;
-            width: 150px;
-            border: 1px solid #ccc;
-            cursor: pointer;
-            background: #fff;
-            border-radius: 3px;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-    </style>
 </head>
 <body>
 
@@ -58,6 +13,7 @@
 <!--列表界面-->
 <div class="box">
     <section class="content">
+        <div id="headIndex">
         <p class="detail-title">
             <span>行情信息管理>>留言管理</span>
             <%--<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>--%>
@@ -100,12 +56,16 @@
         <c:if test="${not empty isSuper}">
             <input style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;" onclick="batchDelete(0)" class="public_btn bg1" type="submit" value="批量恢复"/>
         </c:if>
+        </div>
         <div id="listDiv"></div>
     </section>
 </div>
 
 
 <script type="text/javascript">
+
+    var allHeight = $(window).height();
+
     function toAddPage() {
         layer.open({
             type: 2,

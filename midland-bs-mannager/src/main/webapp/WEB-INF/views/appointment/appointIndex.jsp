@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="../layout/tablib.jsp"%>
-<%@include file="../layout/source.jsp"%>
+<%@include file="../indexJS.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,6 +13,7 @@
 	<!--用户列表界面-->
 	<div class="box">
 		<section class = "content">
+			<div id="headIndex">
 			<p class = "detail-title">
 				<span>预约管理>>预约记录列表</span>
 				<%--<a class = "setup"  target="contentF" onclick="addAppointment()">新增</a>--%>
@@ -67,7 +67,7 @@
 				</li>
 			</ul>
 			</form>
-
+			</div>
 
 			<div id="listDiv"></div>
 		</section>
@@ -75,6 +75,8 @@
 	
 	
 	<script type="text/javascript">
+
+        var allHeight = $(window).height();
         function export1(){
             var data = $("#searchForm").serialize();
 
