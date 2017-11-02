@@ -188,8 +188,8 @@
             type: 2,
             title: ['委托详情'],
             shade: 0.3,
-            area: ['1000px', '700px'],
-            content: ['${ctx}/rest/entrust/rentOut/to_update?entrustId=' + appointId , 'no']
+            area: ['1000px', allHeight-30+'px'],
+            content: ['${ctx}/rest/entrust/rentOut/to_update?entrustId=' + appointId , 'yes']
         });
     }
 
