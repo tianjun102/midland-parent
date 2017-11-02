@@ -6,28 +6,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
-    <style type="text/css">
-        .table-add tr td a {
-            display: inline-block;
-            width: 28px;!important;
-            height: 20px;
-            margin: 0 5px;
-            background-size: contain!important;
-        }
-        td
-        {
-            white-space: nowrap;
-        }
-        th
-        {
-            white-space: nowrap;
-        }
-    </style>
 </head>
 <body>
 
 
-<div class="table-responsive m40">
+<div class="table-responsive m40" id='table-cont'>
     <table class="table table-bordered table-add">
         <thead>
         <tr>
@@ -54,7 +37,7 @@
                         <td><input type="checkbox" name="pid" value="${item.id}"></td>
                         <td>${xh.count }</td>
                         <td>${item.cityName }</td>
-                        <td><img src="${item.imgUrl }" style="width:40px;height:40px" alt=""></td>
+                        <td><img src="${item.imgUrl }" style="width:30px;height:30px" alt=""></td>
                         <td><c:choose>
                             <c:when test="${item.isShow==0 }">
                                 显示
@@ -111,6 +94,25 @@
 </c:if>
 
 <script type="text/javascript">
+
+    $(function () {
+        var headIndex = $("#headIndex").height();
+        $("#table-cont").css({maxHeight:allHeight-headIndex-100-17});
+        var tableCont = document.querySelector('#table-cont');
+        /**
+         * scroll handle
+         * @param {event} e -- scroll event
+         */
+        function scrollHandle (e){
+            var scrollTop = this.scrollTop;
+            this.querySelector('thead').style.transform = 'translateY(' + scrollTop + 'px)';
+        }
+
+        tableCont.addEventListener('scroll',scrollHandle);
+    })
+
+
+
     function hiddenOrShow(id, flag){
         //0隐藏，1显示
         $.ajax({

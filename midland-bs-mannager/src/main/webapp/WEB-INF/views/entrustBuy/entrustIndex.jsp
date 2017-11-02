@@ -77,7 +77,6 @@
 
 <script type="text/javascript">
     var allHeight = $(window).height();
-    var headIndex = $("#headIndex").height();
 
     function addEntrust() {
         layer.open({

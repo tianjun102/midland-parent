@@ -1,0 +1,112 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@include file="../layout/tablib.jsp" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>省市区</title>
+</head>
+<body>
+
+<li style="display:flex;align-items:center"><span style="float: left;
+    display: inline-block;
+    width: 60px;
+    height: 28px;
+    line-height: 28px;
+    text-align: right;
+    font-size: 14px;
+    color: rgb( 102, 102, 102 );">省：</span> <!-- 省 -->
+    <label></label>
+    <input type="hidden" name="provinceId">
+    <input type="hidden" name="regionSn">
+    <input type="hidden"  name="provinceName">
+    <!-- 第一次进页面加载省 -->
+    <select id="provinces" onchange="initProvince()"
+            <c:if test="${not empty isSuper}"> style="height: 28px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;"</c:if>   <c:if test="${empty isSuper}">style="height: 28px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;background-color: #dddfe2;" disabled="disabled"</c:if>>
+        <option>请选择</option>
+        <option value="">全部</option>
+        <c:forEach items="${provinceList}" var="province">
+            <option
+                    value="${province.parentId}">${province.parentName}
+            </option>
+        </c:forEach>
+    </select>
+    <!-- 市 -->
+    &nbsp;&nbsp;
+    <p id="city" style="display: inline-block;height: 28px;">
+        <span>市：</span>
+        <label></label> <input type="hidden" name="cityId" id="cityId" value="${cityId}">
+        <input type="hidden" name="cityName" id="cityName" value="${cityName}">
+        <select id="citys" onchange="initCity()"
+                <c:if test="${not empty isSuper}">
+                    style="height: 28px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;"</c:if>   <c:if test="${empty isSuper}">style="height: 28px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;background-color: #dddfe2;" disabled="disabled"</c:if>>
+            <c:choose>
+                <c:when test="${not empty item.cityId}">
+                    <option value="${item.cityId}">${item.cityName}</option>
+                </c:when>
+                <c:otherwise>
+                    <option value="">请选择</option>
+                </c:otherwise>
+            </c:choose>
+
+        </select>
+    </p>
+
+    <script type="text/javascript">
+
+        //省级赋值
+        function initProvince() {
+            var addrId = $("#provinces option:selected").val();
+            var addName = $("#provinces option:selected").text();
+            /*$("#districts").html("<option  >请选择</option>");*/
+
+            /*$("input[name=provinceId]").val(addrId);
+            $("input[name=provinceName]").val(addName);*/
+            if(addrId==null||addrId==""){
+                $("#cityId").val("");
+                $("#cityName").val("");
+                $("#citys").html("<option  >请选择</option>");
+                return;
+            }
+            $.ajax({
+                type: "post",
+                url: "${ctx}/rest/setting/seleAddress?flag=city&id=" + addrId,
+                async: false, // 此处必须同步
+                dataType: "json",
+                data: "",
+                success: function (data) {
+                    $("#citys").html("<option  >请选择</option>");
+
+                    data.result.forEach(function (list) {
+                        $("#citys").append(
+                            "<option value=" + list.id + " >" + list.name + "</option>");
+                    })
+                }
+            });
+        }
+
+
+        //市级赋值
+        function initCity() {
+            var addrId = $("#citys option:selected").val();
+            var addName = $("#citys option:selected").text();
+            if ("请选择" == addName) {
+                //下级改变成请选择
+                $("#districts option:selected").text(addName);
+                $("#districts").html("<option  >请选择</option>");
+                //其值及其下级值变成空
+                $("input[name='cityId']").val("");
+                $("input[name='cityName']").val("");
+                $("input[name='distId']").val("");
+                $("input[name='distName']").val("");
+                return;
+            }
+            $("input[name='cityId']").val(addrId);
+            $("input[name='cityName']").val(addName);
+        }
+
+    </script>
+
+</body>
+</html>

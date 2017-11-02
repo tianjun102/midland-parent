@@ -6,20 +6,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
-    <style type="text/css">
-        th,td{
-            padding: 0 10px;
-        }
-        td
-        {
-            white-space: nowrap;
-        }
-        th
-        {
-            white-space: nowrap;
-        }
-
-    </style>
 </head>
 <body>
 
@@ -111,6 +97,8 @@
 <script type="text/javascript">
 
     $(function () {
+        var headIndex = $("#headIndex").height();
+        $("#table-cont").css({maxHeight:allHeight-headIndex-100-17});
         var tableCont = document.querySelector('#table-cont');
         /**
          * scroll handle

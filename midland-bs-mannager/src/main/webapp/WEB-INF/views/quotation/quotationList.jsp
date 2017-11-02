@@ -8,24 +8,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
-
-    <style type="text/css">
-        .table-add tr td a {
-            display: inline-block;
-            width: 28px;!important;
-            height: 20px;
-            margin: 0 5px;
-            background-size: contain!important;
-        }
-        td
-        {
-            white-space: nowrap;
-        }
-        th
-        {
-            white-space: nowrap;
-        }
-    </style>
 </head>
 <body>
 <div class="table-responsive m40"  style="max-height: 480px;overflow: auto;"  id='table-cont'>
@@ -95,6 +77,8 @@
 <script type="text/javascript">
 
     $(function () {
+        var headIndex = $("#headIndex").height();
+        $("#table-cont").css({maxHeight:allHeight-headIndex-100-17});
         var tableCont = document.querySelector('#table-cont');
         /**
          * scroll handle

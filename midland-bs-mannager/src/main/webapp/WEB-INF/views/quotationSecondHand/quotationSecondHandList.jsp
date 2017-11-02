@@ -7,31 +7,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
-    <style type="text/css">
-        .table-add tr td a.house-detail {
-            width: auto;
-            height: auto;
-            padding: 2px 3px;
-            background-color: #00aeee;
-            border-radius: 2px;
-            color: #fff;
-        }
-        .table-add tr td a {
-            display: inline-block;
-            width: 28px;!important;
-            height: 20px;
-            margin: 0 5px;
-            background-size: contain!important;
-        }
-        td
-        {
-            white-space: nowrap;
-        }
-        th
-        {
-            white-space: nowrap;
-        }
-    </style>
 </head>
 <body>
 <div class="table-responsive m40"  style="max-height: 480px;overflow: auto;"  id='table-cont'>
@@ -65,16 +40,6 @@
                     </c:forEach></td>
                     <td>${item.dealNum}</td>
                     <td>${item.dealAcreage}</td>
-                    <%--<td>--%>
-                        <%--<c:choose>--%>
-                            <%--<c:when test="${item.ringRatio<0}">--%>
-                                <%--${item.ringRatio < 0 ? -item.ringRatio:item.ringRatio}--%>
-                            <%--</c:when>--%>
-                            <%--<c:otherwise>--%>
-
-                            <%--</c:otherwise>--%>
-                        <%--</c:choose>--%>
-                        <%--</td>--%>
                     <td>${item.dataTime}</td>
                     <td>${item.updateTime}</td>
                     <td>
@@ -103,6 +68,8 @@
 <script type="text/javascript">
 
     $(function () {
+        var headIndex = $("#headIndex").height();
+        $("#table-cont").css({maxHeight:allHeight-headIndex-100-17});
         var tableCont = document.querySelector('#table-cont');
         /**
          * scroll handle
