@@ -26,7 +26,7 @@ public class ResumeManager{
 	/**
 	 * 投递时间
 	 **/
-	private Date addTime;
+	private String addTime;
 	/**
 	 * 附件地址
 	 **/
@@ -95,11 +95,11 @@ public class ResumeManager{
 		this.email = email;
 	}
 
-	public Date getAddTime() {
+	public String getAddTime() {
 		return addTime;
 	}
 
-	public void setAddTime(Date addTime) {
+	public void setAddTime(String addTime) {
 		this.addTime = addTime;
 	}
 

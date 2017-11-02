@@ -106,7 +106,7 @@
             type: 2,
             title: ['修改'],
             shade: 0.3,
-            area: ['500px', '500px'],
+            area: ['400px','350px'],
             content: ['${ctx}/rest/feedbackEmail/to_update?id='+id,'no']
         });
     }

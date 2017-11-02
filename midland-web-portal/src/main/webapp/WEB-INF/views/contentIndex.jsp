@@ -22,6 +22,7 @@
 			<dt style = "font-size:28px; color:#d20000; margin-top:45px; margin-bottom:30px; text-align:center;">美联物业首页面</dt>
 			<dt style = "text-align:center;">
 				<a href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=101432824&redirect_uri=http://10.58.189.10:8085/thirdParty/callback/qq&state=1&scope=get_user_info,get_info">请使用你的QQ账号登陆</a>
+				<a href="javascript:void(0);" onclick="loginWeiXin();">请使用你的微信账号登陆</a>
 				<span id="qqLoginBtn"></span>
 			</dt>
 			</dl>
@@ -34,4 +35,8 @@
    /* QC.Login({
         btnId:"qqLoginBtn"    //插入按钮的节点id
     });*/
+
+   function loginWeiXin(){
+	window.open("https://open.weixin.qq.com/connect/qrconnect?appid=wxece8a39111954f91&redirect_uri="+encodeURI('http://localhost:8085/thirdParty/contentIndex')+"&response_type=code&scope=snsapi_login&state=3d6be0a4035d839573b04816624a415e#wechat_redirect");
+   }
 </script>

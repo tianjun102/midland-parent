@@ -32,18 +32,18 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
 			<div class = "table-responsive m40">
 				<table class="table table-bordered table-add">
-				<col width="8%">
-				<col width="5%" >
+				<col width="7%">
+				<col width="4%" >
 				<col width="7%" >
 				<col width="6%" >
 				<col width="6%" >
 				<col width="6%" >
 				<col width="6%" >
 				<col width="6%" >
-				<col width="13%" >
-				<col width="13%" >
-				<col width="6%" >
-				<col width="32%" >
+				<col width="12%" >
+				<col width="12%" >
+				<col width="5%" >
+				<col width="33%" >
 	 				<thead>
 						<tr>
 							<th><a target="contentF" href="javascript:void (0)" onclick="checkall()" >全选</a> / <a target="contentF" href="javascript:void (0)" onclick="delcheckall()" >取消</a></th>

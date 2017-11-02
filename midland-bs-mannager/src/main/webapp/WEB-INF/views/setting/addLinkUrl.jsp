@@ -28,7 +28,7 @@
                 <p style="display: inline-block;height: 28px;">
                     <input type="hidden" name="cityName" id="cityName" value="${cityName}">
                     <c:if test="${empty isSuper}"><input type="hidden" name="cityId"  value="${cityId}"></c:if>
-                    <select onchange="SetcityNam();" name="cityId" id="cityId" style="height: 28px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
+                    <select onchange="SetcityNam();" name="cityId" id="cityId" style="height: 28px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
                         <option value="">全部</option>
                         <c:forEach items="${cityList}" var="city">
                             <c:if test="${empty isSuper}"><option selected="selected" value="${cityId}">${cityName}</option></c:if>
@@ -52,7 +52,7 @@
             <li><span>联系方式：</span><input style="width:274px;" type="text" name="phone" id="phone" onblur="checkPhone('phone','phone','手机格式不正确！');" maxlength="50"/><span class="_star">*</span></li>
             <li><span>备注：</span> <textarea name="remarks"
                                              id="remarks"
-                                             style="width: 55%; height: 50px; resize: none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;"></textarea>
+                                             style="width: 61%; height: 50px; resize: none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;"></textarea>
                 </li>
             <li style="padding-top:30px;">
                 <span></span>

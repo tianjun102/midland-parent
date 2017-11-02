@@ -34,7 +34,7 @@
                 </select>
             </li>
             <li><span>名称：</span>
-                <input type="text" name="name" id="name" value="" onblur="notEmpty('name','name','名称不能为空！')"/>
+                <input type="text" style="width: 250px!important;" name="name" id="name" value="" onblur="notEmpty('name','name','名称不能为空！')"/>
                 <span class = "_star ">*</span>
             </li>
             <li><span>图片：</span>
