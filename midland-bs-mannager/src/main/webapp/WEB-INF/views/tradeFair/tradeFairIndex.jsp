@@ -1,43 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="../layout/tablib.jsp"%>
-<%@include file="../layout/source.jsp"%>
+<%@include file="../indexJS.jsp"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-	<style type="text/css">
-		.content ul.userinfo li>span{
-			float: left;
-			display: inline-block;
-			width: 90px;
-			height: 28px;
-			line-height: 28px;
-			text-align: right;
-			font-size: 14px;
-			color: rgb( 102, 102, 102 );
-		}
-		.dropdown {
-			position: relative;
-			width: 150px!important;
-			border: 1px solid #ccc;
-			cursor: pointer;
-			background: #fff;
-			border-radius: 3px;
-			-webkit-user-select: none;
-			-moz-user-select: none;
-			user-select: none;
-		}
-	</style>
 
 </head>
 <body>
 	
 	
-	<!--委托列表界面-->
-	<div class="box"> 
+	<div class="box">
 		<section class = "content">
 			<p class = "detail-title">
 				<span>外销网管理>>楼盘展销会</span>

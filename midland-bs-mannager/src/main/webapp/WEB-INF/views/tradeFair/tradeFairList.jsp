@@ -7,13 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
     <style type="text/css">
-        .table-add tr td a {
-            display: inline-block;
-            width: 25px;!important;
-            height: 20px;
-            margin: 0 5px;
-            background-size: contain!important;
-        }
+
         td
         {
             white-space: nowrap;
@@ -51,7 +45,7 @@
                         <input type="hidden" id="id" value="${item.id}"/>
                         <td><input type="checkbox" name="pid" value="${item.id}"></td>
                         <td>${xh.count }</td>
-                        <td><img src="${item.imgUrl }" style="width:40px;height:40px" alt=""></td>
+                        <td><img src="${item.imgUrl }" style="width:30px;height:30px" alt=""></td>
                         <td><c:choose>
                             <c:when test="${item.isShow==0 }">
                                 显示

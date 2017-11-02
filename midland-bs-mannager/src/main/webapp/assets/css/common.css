@@ -181,9 +181,9 @@ nav.nav {
 }
 nav.nav dl dt {
 	width: 100%;
-	height: 50px;
+	height: 35px;
 	border-left: 4px solid #eff2f6;
-	line-height: 50px;
+	line-height: 35px;
 	text-indent: 63px;
 	position: relative;
 }
@@ -197,8 +197,8 @@ nav.nav dl dt {
 }
 nav.nav dl dt a {
 	display: block;
-	height: 50px;
-	line-height: 50px;
+	height: 35px;
+	line-height: 35px;
 	font-size: 14px;
 	font-weight: bolder;
 	color: #33363b;
@@ -224,15 +224,15 @@ nav.nav dl dd a:hover {
 .other-list {
 	display: block;
 	width: 100%;
-	height: 40px;
-	line-height: 40px;
+	height: 35px;
+	line-height: 35px;
 	color: #404145;
 }
 .current-list {
 	display: block;
 	width: 100%;
-	height: 40px;
-	line-height: 40px;
+	height: 35px;
+	line-height: 35px;
 	color: #ffd200!important;
 	background-color: #fff;
 	border-right: 1px solid #d8dde0;
