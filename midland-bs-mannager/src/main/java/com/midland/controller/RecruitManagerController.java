@@ -116,6 +116,12 @@ public class RecruitManagerController extends BaseFilter {
 	@RequestMapping("to_update")
 	public String toUpdateRecruitManager(Integer id,Model model) throws Exception {
 		RecruitManager result = recruitManagerServiceImpl.selectRecruitManagerById(id);
+		Map<String,String> parem = new HashMap<>();
+		parem.put("flag","city");
+		parem.put("id","*");
+		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
+		List<Area> cityList = cityMap.get("city");
+		model.addAttribute("cityList",cityList);
 		model.addAttribute("item",result);
 		return "recruitManager/updateRecruitManager";
 	}

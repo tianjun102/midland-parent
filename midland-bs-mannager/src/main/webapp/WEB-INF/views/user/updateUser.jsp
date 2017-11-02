@@ -30,6 +30,10 @@
 			-moz-user-select: none;
 			user-select: none;
 		}
+
+		.content ul.userinfo>li {
+			padding-top: 20px;
+		}
 	</style>
 </head>
 <body>

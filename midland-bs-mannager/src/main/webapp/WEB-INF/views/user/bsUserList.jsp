@@ -127,7 +127,7 @@
             type: 2,
             title: ['编辑用户'],
             shade: 0.3,
-            area: ['500px', '500px'],
+            area: ['500px', '450px'],
             content: ['${ctx}/rest/user/toUpdatePage?userId=' + userId, 'no']
         });
     }

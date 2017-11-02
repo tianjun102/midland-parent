@@ -94,7 +94,7 @@
 			layer.open({
 				type: 2,
 				skin: 'layer-style',
-				area: ['500px','500px'],
+				area: ['500px','450px'],
 				shadeClose: false, //点击遮罩关闭
 				title:['创建用户'],
 				resize: false,

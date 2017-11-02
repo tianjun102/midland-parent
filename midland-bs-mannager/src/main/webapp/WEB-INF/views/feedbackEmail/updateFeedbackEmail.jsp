@@ -11,7 +11,11 @@
     <title>Insert title here</title>
     <script type="text/javascript">
     </script>
-
+    <style type="text/css">
+        .dropdown {
+            width: 150px!important;
+        }
+    </style>
 </head>
 <body>
 <section class="content" style="border:none;">
@@ -21,7 +25,7 @@
             <li>
                 <span style = "float:left;">城市：</span>
                 <input type="hidden" name="cityName" id="cityName" value="${item.cityName}">
-                <select onchange="setCityName()" name="cityId" id="cityId" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
+                <select onchange="setCityName()" name="cityId" id="cityId" style="height: 28px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
                     <option value="">全部</option>
                     <c:forEach items="${cityList}" var="city">
                         <option <c:if test="${city.id==item.cityId}">selected="selected"</c:if> value="${city.id}">${city.name}</option>

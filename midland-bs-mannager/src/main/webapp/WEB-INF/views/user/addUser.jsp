@@ -105,7 +105,7 @@
                 </c:if>
                 </div>
             </li> --%>
-            <li style="padding-top:30px;">
+            <li style="padding-top:50px;">
                 <span></span>
                 <a target="contentF" class="public_btn bg2" id="save" onclick="saveData()">保存</a>
                 <a style="margin-left: 20px" class="public_btn bg3" id="cancel" onclick="closeWin();">取消</a>

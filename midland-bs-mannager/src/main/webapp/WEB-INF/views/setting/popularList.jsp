@@ -205,7 +205,7 @@ function takeblacklist(userId){
 			type: 2,
 			title: ['修改热门关注'],
 			shade: 0.3,
-			area: ['500px', '600px'],
+			area: ['500px', '500px'],
 			content: ['${ctx}/rest/setting/toEditPage?id='+Id,'no']
 			});
 	}

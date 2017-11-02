@@ -87,7 +87,7 @@
                 </select>
                 <span class = "_star ">*</span>
             </li>--%>
-            <li><span>模块：</span><input class="vipcate" id="cateName" name="cateName" value="${item.cateName}" onclick="showTree()" readonly="readonly"/>
+            <li><span>模块：</span><input style="width: 250px!important;" class="vipcate" id="cateName" name="cateName" value="${item.cateName}" onclick="showTree()" readonly="readonly"/>
                 <input name="cateId" value="${item.cateId}" type="hidden"/><label style="color: red" class = "_star " >*</label>
 
             </li>
@@ -103,11 +103,11 @@
                 <span class = "_star ">*</span>
             </li>--%>
             <li><span>关键字：</span>
-                <input type="text" name="name" id="name" value="${item.name}" onblur="notEmpty('name','name','关键字不能为空！')"/>
+                <input style="width: 250px!important;" type="text" name="name" id="name" value="${item.name}" onblur="notEmpty('name','name','关键字不能为空！')"/>
                 <span class = "_star ">*</span>
             </li>
             <li><span>链接：</span>
-                <input type="text" name="linkUrl" id="linkUrl" value="${item.linkUrl}" onblur="checkUrl('linkUrl','linkUrl','链接格式不正确！')" />
+                <input style="width: 250px!important;" type="text" name="linkUrl" id="linkUrl" value="${item.linkUrl}" onblur="checkUrl('linkUrl','linkUrl','链接格式不正确！')" />
                 <span class = "_star ">*</span>
             </li>
 

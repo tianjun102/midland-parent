@@ -17,7 +17,7 @@
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,deliverer,phone,post,email,add_time,enclosure_url,city_id,city_name,is_delete,reply
+		id,deliverer,phone,post,email,DATE_FORMAT(add_time,'%Y-%m-%d %H:%i:%s') add_time,enclosure_url,city_id,city_name,is_delete,reply
 	</sql>
 
 	<select id="selectResumeManagerById" resultMap="BaseResultMap">
