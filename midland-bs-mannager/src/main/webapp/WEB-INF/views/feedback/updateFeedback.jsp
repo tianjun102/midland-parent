@@ -11,7 +11,21 @@
     <title>Insert title here</title>
     <script type="text/javascript">
     </script>
-
+<style type="text/css">
+    .content ul.userinfo li:not(:last-child) input {
+        float: left;
+        width: 250px;
+        height: 28px;
+        line-height: 28px;
+        border: 1px solid #dbe2e6;
+        border-radius: 4px;
+        text-indent: 10px;
+        outline-color: #0099e0;
+    }
+    .dropdown {
+        width: 250px;
+    }
+</style>
 </head>
 <body>
 <section class="content" style="border:none;">
