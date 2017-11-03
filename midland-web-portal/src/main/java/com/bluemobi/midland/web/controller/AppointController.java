@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping(value = "/appoint")
 public class AppointController {
-    @Resource
+    /*@Resource
     private AppointmentService appointmentServiceImpl;
     @RequestMapping("/rest")
     public Object addAppoint(@RequestBody Appointment obj){
@@ -28,5 +28,5 @@ public class AppointController {
             result.setMsg("success");
         }
         return  result;
-    }
+    }*/
 }

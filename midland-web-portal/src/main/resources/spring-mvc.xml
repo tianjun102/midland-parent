@@ -12,7 +12,7 @@
 	<!-- 扫描controller（controller层注入） -->
 	<context:component-scan base-package="com.bluemobi.midland.web.controller" />
 	<context:component-scan base-package="com.bluemobi.midland.web.annocontroller" />
-	<context:component-scan base-package="com.midland" />
+	<!--<context:component-scan base-package="com.midland" />-->
 	<mvc:annotation-driven />
 	<!-- 配置使Spring采用CGLIB代理 -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
