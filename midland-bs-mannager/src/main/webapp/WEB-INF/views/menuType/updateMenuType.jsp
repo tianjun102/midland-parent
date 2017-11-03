@@ -8,8 +8,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
-    <script type="text/javascript">
-    </script>
     <style type="text/css">
         .content ul.userinfo li > span {
             float: left;
@@ -26,7 +24,7 @@
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/menuType/update" method="post" id="dataForm">
-        <ul class="userinfo row">
+        <ul class="userinfo updinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <%@include file="../menu/area_required.jsp" %>
             <li ><span>上级分类：</span>

@@ -8,14 +8,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
-    <script type="text/javascript">
-    </script>
-
 </head>
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/menuType/add" method="post" id="dataForm">
-        <ul class="userinfo row">
+        <ul class="userinfo updinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <%@include file="../menu/area_required.jsp" %>
             <li ><span>父分类：</span>
@@ -26,10 +23,12 @@
                 </select>
                 <input type="hidden" id="parentId" name="parentId" value="0">
                 <input type="hidden" id="parentName" name="parentName">
+                <label style="color: red" class = "_star " >*</label>
             </li>
 
             <li><span>名称：</span>
                <input type="text" name="name" id="name" onblur="notEmpty('name','name','')"/>
+                <label style="color: red" class = "_star " >*</label>
             </li>
             <li>
                 <span></span>

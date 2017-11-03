@@ -24,7 +24,13 @@ public class Result<T> {
 	private Long len;
 	private String token;
 	private String code_url;
+	/**
+	 * 请求接口返回状态值
+	 */
 	private Integer code;
+	/**
+	 * 接口请求结果信息
+	 */
 	private String msg;
 	private Paginator paginator;
 	private T model;
