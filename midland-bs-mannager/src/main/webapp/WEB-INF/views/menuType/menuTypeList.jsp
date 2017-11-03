@@ -147,7 +147,7 @@
             type: 2,
             title: ['修改'],
             shade: 0.3,
-            area: ['500px', '300px'],
+            area: ['470px', '300px'],
             content: ['${ctx}/rest/menuType/to_update?id=' + id, 'no']
         });
     }

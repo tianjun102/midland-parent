@@ -77,7 +77,7 @@
                         </c:choose>
                     </select>
                 </p>
-                <span  class="_star">*</span>
+                <label style="color: red" class = "_star " >*</label>
             </li>
 
 <script type="text/javascript">
