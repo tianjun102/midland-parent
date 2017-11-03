@@ -26,7 +26,7 @@
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/quotation/update" method="post" id="dataForm">
-        <ul class="userinfo row">
+        <ul class="userinfo updinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <li class=""><span>数据时间：</span>
                 <input class="Wdate half" id="time1" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd'})"

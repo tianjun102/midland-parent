@@ -655,7 +655,39 @@ input.date {
 	color: #d20000;
 }
 
-
+/***********弹出框更新页面样式updInfo***********/
+.content ul.updInfo > li{
+	float: none;
+	width: 100%;
+}
+.content ul.updInfo li>span{
+	float: none;
+	width: auto;
+	min-width: 80px;
+}
+.content ul.updInfo li:not(:last-child) input{
+	float: none;
+	width: 250px;
+}
+.updInfo .dropdown{
+	width: 250px;
+}
+.updInfo .dropdown .selected::after{
+	box-shadow: none;
+}
+.updInfo .textarea-sm{
+	width: 250px;
+	height: 100px;
+	border: 1px solid #dbe2e6;
+	vertical-align: text-top;
+}
+.updInfo .fileupload{
+	display: inline-block;
+}
+.updInfo  .uploadify,
+.updInfo .uploadify-queue{
+	margin-bottom: 0;
+}
 
 /******* 二级页面样式 *******/
 

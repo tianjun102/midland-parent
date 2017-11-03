@@ -14,7 +14,7 @@
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/liaisonRecordEmail/update" method="post" id="dataForm">
-        <ul class="userinfo row">
+        <ul class="userinfo updInfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <%@include file="../menu/area.jsp" %>
             <li><span>主指：</span>

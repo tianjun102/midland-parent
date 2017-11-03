@@ -142,7 +142,7 @@
             type: 2,
             title: ['修改'],
             shade: 0.3,
-            area: ['500px','660px'],
+            area: ['500px', '450px'],
             content: ['${ctx}/rest/quotation/to_update?id='+id,'no']
         });
     }

@@ -106,7 +106,7 @@
             type: 2,
             title: ['修改'],
             shade: 0.3,
-            area: ['500px','500px'],
+            area: ['450px','400px'],
             content: ['${ctx}/rest/quotationSecondHand/to_update?id='+id,'no']
         });
     }

@@ -65,11 +65,12 @@
 <script type="text/javascript">
 
     var allHeight = $(window).height();
+
     function toAddPage() {
         layer.open({
             type: 2,
             skin: 'layer-style',
-            area: ['450px', '520px'],
+            area: ['450px', '420px'],
             shadeClose: false, //点击遮罩关闭
             title: ['新增楼盘信息'],
             resize: false,

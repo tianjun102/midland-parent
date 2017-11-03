@@ -7,18 +7,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
-    <style type="text/css">
-        .content ul.userinfo li>span {
-            float: left;
-            display: inline-block;
-            width: 90px;
-            height: 28px;
-            line-height: 28px;
-            text-align: right;
-            font-size: 14px;
-            color: rgb( 102, 102, 102 );
-        }
-    </style>
     <script type="text/javascript">
         $(function () {
             $('#file_upload').uploadify({
@@ -48,9 +36,9 @@
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/tradeFair/update" method="post" id="dataForm">
-        <ul class="userinfo row">
+        <ul class="userinfo updInfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
-            <li style="display:flex;align-items:center">
+            <li>
                 <span>类型：</span>
                 <select name="tradeType" id="tradeType" class="dropdown">
                     <option value="0" <c:if test="${item.tradeType==0}">selected</c:if> >楼盘展销会</option>
@@ -58,13 +46,10 @@
                 </select>
             </li>
             <li><span>图片上传：</span>
-                <div style="float: left;">
+                <div class="fileupload">
                     <input type="hidden" name="imgUrl" id="imgUrl" value="${item.imgUrl}">
-
-                    <%--<img style="margin-bottom: 10px;max-width:80px;max-height:80px" id="iconImg1"
-                         src="${item.imgUrl}">--%>
                     <c:forEach var="imgUrl" items="${fn:split(item.imgUrl,'||')}">
-                        <img style="margin-bottom: 10px;max-width:200px;max-height:200px"
+                        <img style="max-width:200px;max-height:200px"
                              src="${ctx}/${imgUrl}">
                     </c:forEach>
                     <input type="file" name="file_upload" id="file_upload"/>
@@ -78,7 +63,7 @@
                 <input type="text" name="title" id="title" value="${item.title}"/>
             </li>
             <li><span>简介：</span>
-                <textarea rows="" cols="" style="width: 250px;height: 100px;border: 1px solid #dbe2e6;" name="introduction" id="introduction">${item.introduction}</textarea>
+                <textarea class="textarea-sm" rows="" cols="" name="introduction" id="introduction">${item.introduction}</textarea>
             </li>
 
             <li>
