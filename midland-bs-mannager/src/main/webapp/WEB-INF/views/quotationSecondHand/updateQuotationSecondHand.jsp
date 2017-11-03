@@ -10,37 +10,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Insert title here</title>
-    <style type="text/css">
-        .content ul.userinfo > li {
-            margin-left: 0 !important;
-        }
-
-        .content ul.userinfo li > span {
-            float: left;
-            display: inline-block;
-            width: 90px;
-            height: 28px;
-            line-height: 28px;
-            text-align: right;
-            font-size: 14px;
-            color: rgb(102, 102, 102);
-        }
-
-        td {
-            white-space: nowrap;
-        }
-
-        th {
-            white-space: nowrap;
-        }
-    </style>
-
-
 </head>
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/quotationSecondHand/update" method="post" id="dataForm">
-        <ul class="userinfo row">
+        <ul class="userinfo updinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <li><span>数据时间：</span>
                 <input class="Wdate half" id="time1"

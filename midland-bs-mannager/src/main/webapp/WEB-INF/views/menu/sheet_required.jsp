@@ -17,7 +17,7 @@
                                                                  name="provinceName">
                     <!-- 第一次进页面加载省 -->
                     <select id="provinces" name="provinces" onchange="initProvince()"
-                            style="height: 100%;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" onblur="checkSelect('provinces','请选择省级')">
+                            style="height: 100%;width: 102px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" onblur="checkSelect('provinces','请选择省级')">
                         <option value="">请选择</option>
                         <c:forEach items="${provinceList}" var="province">
                             <option
@@ -32,7 +32,7 @@
                     <span>市：</span>
                     <input type="hidden" name="cityId">
                     <input type="hidden" name="cityName">
-                    <select id="citys" name="citys" onchange="initCity()" style="height: 100%;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" onblur="checkSelect('citys','请选择市级')">
+                    <select id="citys" name="citys" onchange="initCity()" style="height: 100%;width: 102px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" onblur="checkSelect('citys','请选择市级')">
                         <c:choose>
                             <c:when test="${not empty item.cityId}">
                                 <option value="${item.cityId}">${item.cityName}</option>
@@ -49,7 +49,7 @@
             <li class=""> <span>地区：</span>
                 <p id="district" style="display: inline-block;height: 28px;">
                     <input type="hidden" value="" name="areaId"> <input type="hidden" value="" name="areaName">
-                    <select id="districts" name="districts"  onchange="initDistrict()" style="height: 100%;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" onblur="checkSelect('districts','请选择区级')">
+                    <select id="districts" name="districts"  onchange="initDistrict()" style="height: 100%;width: 102px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" onblur="checkSelect('districts','请选择区级')">
                         <c:choose>
                             <c:when test="${not empty item.areaId}">
                                 <option value="${item.areaId}">${item.areaName}</option>
@@ -66,7 +66,7 @@
                     <span>片区：</span>
                     <input type="hidden" value="" name="sliceId">
                     <input type="hidden" value="" name="sliceName">
-                    <select id="sheets" name="sheets" onchange="initSheet()" style="height: 100%;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <select id="sheets" name="sheets" onchange="initSheet()" style="height: 100%;width: 102px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <c:choose>
                             <c:when test="${not empty item.sliceId}">
                                 <option value="${item.sliceId}">${item.sliceName}</option>
@@ -137,6 +137,7 @@
             data : "",
             success : function(data) {
                 $("#districts").html("<option value='' >请选择</option>");
+                $("#districts").html("<option value='0' >全市</option>");
                 data.result.forEach(function(list) {
                     $("#districts").append(
                         "<option value="+list.id+" >"

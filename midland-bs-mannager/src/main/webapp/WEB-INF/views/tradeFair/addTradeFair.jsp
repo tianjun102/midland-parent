@@ -13,16 +13,7 @@
     <script type="text/javascript" src="${ctx }/assets/scripts/jquery.min.js"></script>
     <script type="text/javascript" src="${ctx }/assets/scripts/uploadify/jquery.uploadify.min.js"></script>
     <style type="text/css">
-        .content ul.userinfo li>span {
-            float: left;
-            display: inline-block;
-            width: 90px;
-            height: 28px;
-            line-height: 28px;
-            text-align: right;
-            font-size: 14px;
-            color: rgb( 102, 102, 102 );
-        }
+
     </style>
     <script type="text/javascript">
         $(function () {
@@ -55,7 +46,7 @@
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/tradeFair/add" method="post" id="dataForm">
-        <ul class="userinfo row">
+        <ul class="userinfo updInfo row">
             <li style="display:flex;align-items:center">
                 <span>类型：</span>
                 <select name="tradeType" id="tradeType" class="dropdown">
@@ -64,10 +55,11 @@
                 </select>
             </li>
             <li><span>图片上传：</span>
-                <div style="float: left;">
-                    <input type="hidden" name="imgUrl" id="imgUrl" >
-
-                    <%--<img style="margin-bottom: 10px;max-width:80px;max-height:80px" id="iconImg1" >--%>
+                <div class="fileupload">
+                    <input type="hidden" name="imgUrl" id="imgUrl" value="${item.imgUrl}">
+                    <c:forEach var="imgUrl" items="${fn:split(item.imgUrl,'||')}">
+                        <img style="max-width:200px;max-height:200px" src="${ctx}/${imgUrl}">
+                    </c:forEach>
                     <input type="file" name="file_upload" id="file_upload"/>
                 </div>
             </li>
