@@ -1,11 +1,11 @@
 package com.bluemobi.midland.web.service;
 
-import java.util.Map;
-
-import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
-import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.bluemobi.midland.web.commons.exception.ServiceException;
 import com.bluemobi.midland.web.model.User;
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
+import com.github.miemiedev.mybatis.paginator.domain.PageList;
+
+import java.util.Map;
 
 /**
  * @Title: UserService.java
@@ -79,7 +79,7 @@ public interface UserService {
 	 * @param pageBounds 分页对象
 	 * @return
 	 */
-	PageList<User> findBycreateByPage(Map<String, String> map,PageBounds pageBounds);
+	PageList<User> findBycreateByPage(Map<String, String> map, PageBounds pageBounds);
 	
 	/**
 	 * 根据子级额户查询父级用户ID

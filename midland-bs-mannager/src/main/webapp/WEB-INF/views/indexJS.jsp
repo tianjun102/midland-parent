@@ -20,12 +20,14 @@
             -moz-user-select: none;
             user-select: none;
         }
-        td,th
+        td
         {
-            padding: 3px 8px;
             white-space: nowrap;
         }
-        .table-add tr td a.house-detail{width: auto;}
+        th
+        {
+            white-space: nowrap;
+        }
         .listButton{
             margin-left: 20px;
             width: 70px;height: 28px;

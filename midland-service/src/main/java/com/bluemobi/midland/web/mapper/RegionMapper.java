@@ -1,5 +1,6 @@
 package com.bluemobi.midland.web.mapper;
 
+
 import com.bluemobi.midland.web.model.Region;
 
 public interface RegionMapper {

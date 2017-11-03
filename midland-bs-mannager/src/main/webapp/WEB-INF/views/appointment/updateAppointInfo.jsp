@@ -8,6 +8,32 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
+    <style type="text/css">
+        .content ul.userinfo > li {
+            margin-left: 0;
+            padding-top: 8px;
+        }
+
+        .content ul.userinfo li > span,
+        .content ul.userinfo li:not(:last-child) input,
+        .content ul.userinfo ._star,
+        .content ul.userinfo .dropdown {
+            height: 30px !important;
+            line-height: 30px !important;
+            vertical-align: middle;
+        }
+        .content ul.userinfo li>span{
+            float: left;
+            display: inline-block;
+            width: 90px;
+            height: 28px;
+            line-height: 28px;
+            text-align: right;
+            font-size: 14px;
+            color: rgb( 102, 102, 102 );
+        }
+
+    </style>
 </head>
 <body>
 <section class="content" style="border:none;">
@@ -116,13 +142,6 @@
 </section>
 
 <script type="text/javascript">
-
-    $(function () {
-        var allHeight = $(window).height();
-        //$("#userinfo").css({maxHeight:allHeight+100});
-        debugger;
-    })
-
     //保存数据
     function updateData() {
         if (!notEmpty('nickName','nickName','')||!checkPhone('','phone','')){
@@ -161,7 +180,5 @@
         parent.layer.close(index);
     }
 </script>
-<script type="text/javascript" src="${ctx}/assets/scripts/jquery.min.js"></script>
-<script type="text/javascript" src="${ctx}/assets/scripts/layer/layer.js"></script>
 </body>
 </html>

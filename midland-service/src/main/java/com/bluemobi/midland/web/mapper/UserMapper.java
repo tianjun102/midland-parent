@@ -1,14 +1,12 @@
 package com.bluemobi.midland.web.mapper;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
-
-import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
-import com.github.miemiedev.mybatis.paginator.domain.PageList;
-import com.github.miemiedev.mybatis.paginator.domain.Paginator;
 import com.bluemobi.midland.web.commons.core.generic.GenericDao;
 import com.bluemobi.midland.web.model.User;
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
+import com.github.miemiedev.mybatis.paginator.domain.PageList;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface UserMapper extends GenericDao<User, Integer> {
 
@@ -54,7 +52,7 @@ public interface UserMapper extends GenericDao<User, Integer> {
 	 * @param pageBounds 分页对象
 	 * @return
 	 */
-	PageList<User>  queryUserList(User user,PageBounds pageBounds);
+	PageList<User>  queryUserList(User user, PageBounds pageBounds);
 	
 	/**
 	 * 根据子级额户查询父级用户ID

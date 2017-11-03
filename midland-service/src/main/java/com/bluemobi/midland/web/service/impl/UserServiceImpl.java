@@ -1,23 +1,22 @@
 package com.bluemobi.midland.web.service.impl;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
-import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.bluemobi.midland.web.commons.core.util.ApplicationUtils;
 import com.bluemobi.midland.web.commons.core.util.DateUtils;
 import com.bluemobi.midland.web.commons.exception.ServiceException;
 import com.bluemobi.midland.web.mapper.UserMapper;
 import com.bluemobi.midland.web.model.User;
 import com.bluemobi.midland.web.service.UserService;
+import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
+import com.github.miemiedev.mybatis.paginator.domain.PageList;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 /**   
 * @Title: UserServiceImpl.java
@@ -29,7 +28,7 @@ import com.bluemobi.midland.web.service.UserService;
 @Service
 public class UserServiceImpl implements UserService {
 
-	private static Logger logger = Logger.getLogger(UserServiceImpl.class);
+	private static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
 	@Resource
 	private UserMapper userMapper;

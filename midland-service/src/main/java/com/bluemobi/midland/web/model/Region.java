@@ -1,7 +1,6 @@
 package com.bluemobi.midland.web.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class Region implements Serializable {
 	

@@ -461,17 +461,7 @@
 			<artifactId>commons-email</artifactId>
 			<version>1.4</version>
 		</dependency>
-		<dependency>
-			<groupId>com.github.miemiedev</groupId>
-			<artifactId>mybatis-paginator</artifactId>
-			<version>${mybatis-paginator-version}</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>slf4j-api</artifactId>
-					<groupId>org.slf4j</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-redis</artifactId>

@@ -1,8 +1,8 @@
 package com.bluemobi.midland.web.commons.core.util;
 
-import java.util.UUID;
-
 import org.apache.commons.codec.digest.DigestUtils;
+
+import java.util.UUID;
 
 /**
  * ApplicationUtils : 程序工具类，提供大量的便捷方法

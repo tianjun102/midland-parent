@@ -1,4 +1,4 @@
-package com.bluemobi.midland.web.paycontroller;
+package com.bluemobi.midland.web.annocontroller;
 import com.midland.core.entity.ThirdPartyUser;
 import com.midland.core.util.ThirdPartyLoginHelper;
 import org.apache.commons.lang3.StringUtils;

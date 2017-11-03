@@ -1,11 +1,10 @@
 package com.bluemobi.midland.web.commons;
 
-import java.util.List;
-import java.util.Map;
-
+import com.github.miemiedev.mybatis.paginator.domain.Paginator;
 import org.springframework.stereotype.Component;
 
-import com.github.miemiedev.mybatis.paginator.domain.Paginator;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Title: Result.java
