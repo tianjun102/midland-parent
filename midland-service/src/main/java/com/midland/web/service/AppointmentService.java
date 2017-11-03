@@ -1,7 +1,7 @@
 package com.midland.web.service;
 
-import com.midland.web.model.AppointLog;
 import com.midland.web.model.Appointment;
+
 import java.util.List;
 public interface AppointmentService {
 

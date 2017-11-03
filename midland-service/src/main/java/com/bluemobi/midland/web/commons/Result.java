@@ -1,6 +1,6 @@
 package com.bluemobi.midland.web.commons;
 
-import com.github.miemiedev.mybatis.paginator.domain.Paginator;
+import com.github.pagehelper.Paginator;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
