@@ -196,7 +196,7 @@
             type: 2,
             title: ['委托详情'],
             shade: 0.3,
-            area: ['1000px', allHeight-30+'px'],
+            area: ['1000px', allHeight-80+'px'],
             content: ['${ctx}/rest/entrust/evaluate/to_update?entrustId=' + appointId, 'yes']
         });
     }
