@@ -121,7 +121,7 @@
             title: ['重新分配经纪人'],
             shade: 0.3,
             area: ['1400px', '650px'],
-            content: ['${ctx}/rest/public/toRedistribute?id=' + id + "&url=" + url, 'no']
+            content: ['${ctx}/rest/public/toRedistribute?id=' + id + "&url=" + url]
         });
     }
 
@@ -131,8 +131,8 @@
             type: 2,
             title: ['预约详情'],
             shade: 0.3,
-            area: ['1000px', '650px'],
-            content: ['${ctx}/rest/appoint/to_update?appointId=' + appointId, 'no']
+            area: ['1000px', allHeight-30+'px'],
+            content: ['${ctx}/rest/appoint/to_update?appointId=' + appointId]
         });
     }
 </script>
