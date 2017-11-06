@@ -37,8 +37,13 @@
         });
 
         function beforeClick(treeId, treeNode, clickFlag) {
-            $("input[name='cateId']").val(treeNode.id);
-            $("input[name='cateName']").val(treeNode.name);
+            if(treeNode.id==0){
+                $("input[name='cateId']").val("");
+                $("input[name='cateName']").val("");
+            }else{
+                $("input[name='cateId']").val(treeNode.id);
+                $("input[name='cateName']").val(treeNode.name);
+            }
             $("#showDiv").hide();
         }
 

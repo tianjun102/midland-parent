@@ -2,13 +2,16 @@
 	pageEncoding="UTF-8"%>
 <%@include file="../layout/tablib.jsp"%>
 <%@include file="../layout/source.jsp"%>
-
+<%@include file="../layout/zTree.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-
+	<link rel="stylesheet" href="${ctx}/assets/css/ztree/css/demo.css">
+	<link rel="stylesheet" href="${ctx }/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css" />
+	<link rel="stylesheet" href="${ctx }/assets/css/common.css">
 </head>
 <body>
 	
@@ -44,12 +47,22 @@
 				<c:if test="${not empty isSuper}">
 					<li>
 						<span style = "float:left;">是否删除：</span>
-						<select name="isDelete" id="isDelete" style="height: 28px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+						<select name="isDelete" id="isDelete" style="height: 28px;width: 100px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
 							<option value="0">未删除</option>
 							<option value="1">已删除</option>
 						</select>
 					</li>
 				</c:if>
+				<li><span>类别：</span><input style="width: 243px;" class="vipcate" id="vipcate"  name="vipcate" onclick="showTree()" readonly="readonly"/>
+					<input name="cateId" type="hidden"/>
+
+				</li>
+				<li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >
+					<div class="zTreeDemoBackground left" style  = "position:absolute;left: -263px;top:29px;"   onblur="test(event)">
+						<ul id="categoryTree" class="ztree" style  = "width:235px; height: 140px!important;"></ul>
+					</div>
+					<img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: -46px;margin-top: 40px;" onclick="hideTree()">
+				</li>
 				<li>
 					<input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/>
 				</li>
@@ -80,5 +93,46 @@
 		}
 	</script>
 	<script type="text/javascript" src="${ctx}/assets/scripts/layer/layer.js"></script>
+	<script type="text/javascript">
+
+        var setting = {
+            check: {
+                enable: true,
+                chkboxType: { "Y": "sp", "N": "sp" }
+
+
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                beforeClick: beforeClick
+            }
+        };
+        var catProNodes =[{id:0, pId:0,name:'分类',open:true,nocheck:true,iconSkin:"pIcon01"},${categoryData}];
+
+
+        $(document).ready(function(){
+            $.fn.zTree.init($("#categoryTree"), setting, catProNodes);
+        });
+
+        function beforeClick(treeId, treeNode, clickFlag) {
+            $("input[name='cateId']").val(treeNode.id);
+            $("input[name='cateName']").val(treeNode.name);
+            $("input[name='vipcate']").val(treeNode.name);
+            $("#showDiv").hide();
+        }
+
+        function showTree(event){
+            $("#showDiv").show();
+        }
+
+        function hideTree(event){
+            $("#showDiv").hide();
+        }
+
+	</script>
 </body>
 </html>

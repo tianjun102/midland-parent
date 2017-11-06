@@ -19,10 +19,11 @@
 		<result column="area_name" property="areaName" jdbcType="VARCHAR" />
 		<result column="sheet_name" property="sheetName" jdbcType="VARCHAR" />
 		<result column="cate_name" property="cateName" jdbcType="VARCHAR" />
+		<result column="is_show" property="isShow" jdbcType="INTEGER" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,cate_id,menu_id,name,source,url,province_id,city_id,area_id,sheet_id,is_delete,province_name,city_name,area_name,sheet_name,cate_name
+		id,cate_id,menu_id,name,source,url,province_id,city_id,area_id,sheet_id,is_delete,province_name,city_name,area_name,sheet_name,cate_name,is_show
 	</sql>
 
 	<select id="selectById" resultMap="BaseResultMap">
@@ -101,6 +102,9 @@
 			<if test="cateName != null">
 				cate_name,
 			</if>
+			<if test="isShow != null">
+				is_show,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -148,6 +152,9 @@
 			</if>
 			<if test="cateName != null">
 				#{cateName,jdbcType=VARCHAR},
+			</if>
+			<if test="isShow != null">
+				 #{isShow},
 			</if>
 		</trim>
 	</insert>
@@ -197,6 +204,9 @@
 		</if>
 		<if test="cateName != null">
 			cate_name= #{cateName,jdbcType=VARCHAR},
+		</if>
+		<if test="isShow != null">
+			is_show= #{isShow},
 		</if>
 	</sql>
 
@@ -248,6 +258,9 @@
 		</if>
 		<if test="cateName != null">
 			 and cate_name= #{cateName,jdbcType=VARCHAR}
+		</if>
+		<if test="isShow != null">
+			 and is_show= #{isShow}
 		</if>
 	</sql>
 

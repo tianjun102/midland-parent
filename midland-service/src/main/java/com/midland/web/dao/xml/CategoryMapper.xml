@@ -15,10 +15,11 @@
 		<result column="cate_desc" property="cateDesc" jdbcType="VARCHAR" />
 		<result column="is_show" property="isShow" jdbcType="VARCHAR" />
 		<result column="source" property="source" jdbcType="INTEGER" />
+		<result column="link_url" property="link_url" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,cate_name,status,order_by,parent_id,type,is_delete,city_id,city_name,cate_desc,is_show,source
+		id,cate_name,status,order_by,parent_id,type,is_delete,city_id,city_name,cate_desc,is_show,source,link_url
 	</sql>
 
 	<select id="selectCategoryById" resultMap="BaseResultMap">
@@ -89,6 +90,9 @@
 			<if test="source != null">
 				source,
 			</if>
+			<if test="linkUrl != null">
+				link_url,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -124,6 +128,9 @@
 			 </if>
 			 <if test="source != null">
 				 #{source},
+			 </if>
+			 <if test="linkUrl != null">
+				 #{linkUrl},
 			 </if>
 		</trim>
 	</insert>
@@ -162,6 +169,9 @@
 		<if test="source != null">
 			source= #{source},
 		</if>
+		<if test="linkUrl != null">
+			link_url= #{linkUrl},
+		</if>
 	</sql>
 
 	<sql id="select_option">
@@ -169,7 +179,7 @@
 			 and id= #{id,jdbcType=INTEGER}
 		</if>
 		<if test="cateName != null">
-			 and cate_name= #{cateName,jdbcType=VARCHAR}
+			 and cate_name like CONCAT(CONCAT('%', #{cateName}), '%')
 		</if>
 		<if test="status != null">
 			 and status= #{status,jdbcType=INTEGER}
@@ -200,6 +210,9 @@
 		</if>
 		<if test="source != null">
 			and source= #{source}
+		</if>
+		<if test="linkUrl != null">
+			and link_url= #{linkUrl}
 		</if>
 	</sql>
 
@@ -233,7 +246,7 @@
 			and b.id= #{id,jdbcType=INTEGER}
 		</if>
 		<if test="cateName != null">
-			and b.cate_name= #{cateName,jdbcType=VARCHAR}
+			and b.cate_name like CONCAT(CONCAT('%', #{cateName}), '%')
 		</if>
 		<if test="status != null">
 			and b.status= #{status,jdbcType=INTEGER}
@@ -264,6 +277,9 @@
 		</if>
 		<if test="source != null">
 			and b.source= #{source}
+		</if>
+		<if test="linkUrl != null">
+			and b.link_url= #{linkUrl}
 		</if>
 		ORDER BY b.order_by ASC
 	</select>

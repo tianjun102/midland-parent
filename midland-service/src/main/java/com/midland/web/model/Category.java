@@ -51,6 +51,7 @@ public class Category{
 
 	private Integer source;
 
+	private String linkUrl;
 
 	public Integer getId() {
 		return id;
@@ -162,6 +163,14 @@ public class Category{
 
 	public void setSource(Integer source) {
 		this.source = source;
+	}
+
+	public String getLinkUrl() {
+		return linkUrl;
+	}
+
+	public void setLinkUrl(String linkUrl) {
+		this.linkUrl = linkUrl;
 	}
 
 	@Override

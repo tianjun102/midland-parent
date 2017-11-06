@@ -54,7 +54,7 @@
 				</dt>
 				<dd>
 					<shiro:hasPermission name="appointList">
-						<a id = "areaIndex" href="${ctx}/rest/appoint/index" target="contentF"><span>预约记录</span></a>
+						<a id = "left1" href="${ctx}/rest/appoint/index" target="contentF"><span>预约记录</span></a>
 					</shiro:hasPermission>
 				</dd>
 			</dl>
@@ -69,10 +69,10 @@
 				</dt>
 				<dd>
 					<shiro:hasPermission name="categoryList">
-						<a id = "showCategoryIndex" href="${ctx}/rest/category/index?type=1" target="contentF"><span>分类</span></a>
+						<a id = "left2" href="${ctx}/rest/category/index?type=1" target="contentF"><span>分类</span></a>
 					</shiro:hasPermission>
 					<shiro:hasPermission name="informationList">
-						<a id = "showProductIndex" href="${ctx}/rest/information/index" target="contentF"><span>资讯列表</span></a>
+						<a id = "left3" href="${ctx}/rest/information/index" target="contentF"><span>资讯列表</span></a>
 					</shiro:hasPermission>
 				</dd>
 			</dl>
@@ -87,19 +87,19 @@
 				</dt>
 				<dd>
 					<shiro:hasPermission name="entrustList">
-						<a id = "enterPromotionIndex" href="${ctx}/rest/entrust/buy/index" target="contentF"><span>买房委托</span></a>
+						<a id = "left4" href="${ctx}/rest/entrust/buy/index" target="contentF"><span>买房委托</span></a>
 					</shiro:hasPermission>
 					<shiro:hasPermission name="entrustList">
-						<a id = "enterPromotionIndex" href="${ctx}/rest/entrust/sale/index" target="contentF"><span>卖房委托</span></a>
+						<a id = "left5" href="${ctx}/rest/entrust/sale/index" target="contentF"><span>卖房委托</span></a>
 					</shiro:hasPermission>
 					<shiro:hasPermission name="entrustList">
-						<a id = "enterPromotionIndex" href="${ctx}/rest/entrust/rentOut/index" target="contentF"><span>出租委托</span></a>
+						<a id = "left6" href="${ctx}/rest/entrust/rentOut/index" target="contentF"><span>出租委托</span></a>
 					</shiro:hasPermission>
 					<shiro:hasPermission name="entrustList">
-						<a id = "enterPromotionIndex" href="${ctx}/rest/entrust/rentIn/index" target="contentF"><span>租房委托</span></a>
+						<a id = "left7" href="${ctx}/rest/entrust/rentIn/index" target="contentF"><span>租房委托</span></a>
 					</shiro:hasPermission>
 					<shiro:hasPermission name="entrustList">
-						<a id = "enterPromotionIndex" href="${ctx}/rest/entrust/evaluate/index" target="contentF"><span>估价委托</span></a>
+						<a id = "left8" href="${ctx}/rest/entrust/evaluate/index" target="contentF"><span>估价委托</span></a>
 					</shiro:hasPermission>
 				</dd>
 			</dl>
@@ -114,34 +114,34 @@
 					</dt>
 					<dd>
 						<shiro:hasPermission name="serviceAreaList">
-							<a id = "enterPromotionIndex" href="${ctx}/rest/privacy/index" target="contentF"><span>隐私政策管理</span></a>
+							<a id = "left9" href="${ctx}/rest/privacy/index" target="contentF"><span>隐私政策管理</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="serviceAreaList">
-							<a id = "enterPromotionIndex" href="${ctx}/rest/disclaimer/index" target="contentF"><span>免责声明</span></a>
+							<a id = "left10" href="${ctx}/rest/disclaimer/index" target="contentF"><span>免责声明</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="serviceAreaList">
-							<a id = "enterPromotionIndex" href="${ctx}/rest/registrationProtocol/index" target="contentF"><span>注册协议</span></a>
+							<a id = "left11" href="${ctx}/rest/registrationProtocol/index" target="contentF"><span>注册协议</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="serviceAreaList">
-							<a id = "enterPromotionIndex" href="${ctx}/rest/serviceArea/index" target="contentF"><span>服务范围</span></a>
+							<a id = "left12" href="${ctx}/rest/serviceArea/index" target="contentF"><span>服务范围</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="aboutUsList">
-							<a id = "enterPromotionIndex" href="${ctx}/rest/aboutUs/index" target="contentF"><span>关于我们</span></a>
+							<a id = "left13" href="${ctx}/rest/aboutUs/index" target="contentF"><span>关于我们</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="tradingProcessList">
-							<a id = "enterPromotionIndex" href="${ctx}/rest/tradingProcess/index" target="contentF"><span>买卖流程</span></a>
+							<a id = "left14" href="${ctx}/rest/tradingProcess/index" target="contentF"><span>买卖流程</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="tradingProcessList">
-							<a id = "enterPromotionIndex" href="${ctx}/rest/contactUs/index" target="contentF"><span>联系我们</span></a>
+							<a id = "left15" href="${ctx}/rest/contactUs/index" target="contentF"><span>联系我们</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="filmLibraryList">
-							<a id = "enterPromotionIndex" href="${ctx}/rest/liaisonRecord/index" target="contentF"><span>联络管理</span></a>
+							<a id = "left16" href="${ctx}/rest/liaisonRecord/index" target="contentF"><span>联络管理</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="tradeFairList">
-							<a id = "enterPromotionIndex" href="${ctx}/rest/tradeFair/index" target="contentF"><span>楼盘展销会</span></a>
+							<a id = "left17" href="${ctx}/rest/tradeFair/index" target="contentF"><span>楼盘展销会</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="filmLibraryList">
-							<a id = "enterPromotionIndex" href="${ctx}/rest/filmLibrary/index" target="contentF"><span>片库管理</span></a>
+							<a id = "left18" href="${ctx}/rest/filmLibrary/index" target="contentF"><span>片库管理</span></a>
 						</shiro:hasPermission>
 
 					</dd>
@@ -157,10 +157,10 @@
 				</dt>
 				<dd>
 					<shiro:hasPermission name="questionsList">
-						<a id = "showOrderInfoIndex" href="${ctx}/rest/questions/index" target="contentF"><span>问答管理</span></a>
+						<a id = "left19" href="${ctx}/rest/questions/index" target="contentF"><span>问答管理</span></a>
 					</shiro:hasPermission>
 					<shiro:hasPermission name="questionsList">
-						<a id = "showOrderInfoIndex" href="${ctx}/rest//leaveMsg/index" target="contentF"><span>留言管理</span></a>
+						<a id = "left20" href="${ctx}/rest//leaveMsg/index" target="contentF"><span>留言管理</span></a>
 					</shiro:hasPermission>
 				</dd>
 			</dl>
@@ -175,10 +175,10 @@
 				</dt>
 				<dd>
 					<shiro:hasPermission name="quotationNew">
-						<a id = "settlementIndex" target="contentF" href="${ctx}/rest/quotation/index"><span>新房信息管理</span></a>
+						<a id = "left21" target="contentF" href="${ctx}/rest/quotation/index"><span>新房信息管理</span></a>
 					</shiro:hasPermission>
 					<shiro:hasPermission name="quotationOld">
-						<a id = "settlementIndex" target="contentF" href="${ctx}/rest/quotationSecondHand/index"><span>二手房信息管理</span></a>
+						<a id = "left22" target="contentF" href="${ctx}/rest/quotationSecondHand/index"><span>二手房信息管理</span></a>
 					</shiro:hasPermission>
 				</dd>
 			</dl>
@@ -193,7 +193,7 @@
 					</dt>
 					<dd>
 						<shiro:hasPermission name="hotSearchList">
-							<a id = "report1" href="${ctx}/rest/hotSearch/index" target="contentF"><span>搜索列表</span></a>
+							<a id = "left23" href="${ctx}/rest/hotSearch/index" target="contentF"><span>搜索列表</span></a>
 						</shiro:hasPermission>
 					</dd>
 				</dl>
@@ -208,10 +208,10 @@
 				</dt>
 				<dd>
 					<shiro:hasPermission name="researchList">
-						<a id = "report1" href="${ctx}/rest/research/index" target="contentF"><span>市场调究列表</span></a>
+						<a id = "left24" href="${ctx}/rest/research/index" target="contentF"><span>市场调究列表</span></a>
 					</shiro:hasPermission>
 					<shiro:hasPermission name="categoryList">
-						<a id = "showCategoryIndex" href="${ctx}/rest/category/index?type=0" target="contentF"><span>分类</span></a>
+						<a id = "left25" href="${ctx}/rest/category/index?type=0" target="contentF"><span>分类</span></a>
 					</shiro:hasPermission>
 				</dd>
 			</dl>
@@ -227,13 +227,13 @@
 					</dt>
 					<dd>
 						<shiro:hasPermission name="resumeManagerList">
-							<a id = "report1" href="${ctx}/rest/resumeManager/index" target="contentF"><span>简历管理</span></a>
+							<a id = "left26" href="${ctx}/rest/resumeManager/index" target="contentF"><span>简历管理</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="recruitList">
-							<a id = "report1" href="${ctx}/rest/recruitManager/index" target="contentF"><span>招聘管理</span></a>
+							<a id = "left27" href="${ctx}/rest/recruitManager/index" target="contentF"><span>招聘管理</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="resumeManageEmail">
-							<a id = "feedbackIndex" href="${ctx}/rest/feedbackEmail/index?emailType=2" target="contentF"><span>配置接收邮箱</span></a>
+							<a id = "left28" href="${ctx}/rest/feedbackEmail/index?emailType=2" target="contentF"><span>配置接收邮箱</span></a>
 						</shiro:hasPermission>
 					</dd>
 				</dl>
@@ -249,25 +249,25 @@
 					</dt>
 					<dd>
 						<shiro:hasPermission name="intoMidlandList">
-							<a id = "report1" href="${ctx}/rest/intoMidland/index?flag=1" target="contentF"><span>公司介绍</span></a>
+							<a id = "left29" href="${ctx}/rest/intoMidland/index?flag=1" target="contentF"><span>公司介绍</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="researchList">
-							<a id = "report1" href="${ctx}/rest/intoMidland/index?flag=2" target="contentF"><span>公司历程</span></a>
+							<a id = "left30" href="${ctx}/rest/intoMidland/index?flag=2" target="contentF"><span>公司历程</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="researchList">
-							<a id = "report1" href="${ctx}/rest/intoMidland/index?flag=3" target="contentF"><span>公司荣誉</span></a>
+							<a id = "left31" href="${ctx}/rest/intoMidland/index?flag=3" target="contentF"><span>公司荣誉</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="researchList">
-							<a id = "report1" href="${ctx}/rest/intoMidland/index?flag=4" target="contentF"><span>公司培训</span></a>
+							<a id = "left32" href="${ctx}/rest/intoMidland/index?flag=4" target="contentF"><span>公司培训</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="researchList">
-							<a id = "report1" href="${ctx}/rest/intoMidland/index?flag=5" target="contentF"><span>公司文化</span></a>
+							<a id = "left33" href="${ctx}/rest/intoMidland/index?flag=5" target="contentF"><span>公司文化</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="researchList">
-							<a id = "report1" href="${ctx}/rest/intoMidland/index?flag=6" target="contentF"><span>晋升福利</span></a>
+							<a id = "left34" href="${ctx}/rest/intoMidland/index?flag=6" target="contentF"><span>晋升福利</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="researchList">
-							<a id = "report1" href="${ctx}/rest/intoMidland/index?flag=7" target="contentF"><span>联系我们</span></a>
+							<a id = "left35" href="${ctx}/rest/intoMidland/index?flag=7" target="contentF"><span>联系我们</span></a>
 						</shiro:hasPermission>
 					</dd>
 				</dl>
@@ -284,25 +284,25 @@
 					</dt>
 					<dd>
 						<shiro:hasPermission name="purpose">
-							<a id = "report1" href="${ctx}/rest/elite/index?flag=0" target="contentF"><span>精英会宗旨</span></a>
+							<a id = "left36" href="${ctx}/rest/elite/index?flag=0" target="contentF"><span>精英会宗旨</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="eliteDesc">
-							<a id = "report1" href="${ctx}/rest/elite/index?flag=1" target="contentF"><span>精英会简介</span></a>
+							<a id = "left37" href="${ctx}/rest/elite/index?flag=1" target="contentF"><span>精英会简介</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="memberShip">
-							<a id = "report1" href="${ctx}/rest/elite/index?flag=2" target="contentF"><span>入会资格</span></a>
+							<a id = "left38" href="${ctx}/rest/elite/index?flag=2" target="contentF"><span>入会资格</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="development">
-							<a id = "report1" href="${ctx}/rest/elite/index?flag=3" target="contentF"><span>发展前瞻</span></a>
+							<a id = "left39" href="${ctx}/rest/elite/index?flag=3" target="contentF"><span>发展前瞻</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="eliteAd">
-							<a id = "report1" href="${ctx}/rest/eliteClub/index" target="contentF"><span>精英会活动</span></a>
+							<a id = "left40" href="${ctx}/rest/eliteClub/index" target="contentF"><span>精英会活动</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="eliteVip">
-							<a id = "report1" href="${ctx}/rest/eliteVip/index" target="contentF"><span>精英会员管理</span></a>
+							<a id = "left41" href="${ctx}/rest/eliteVip/index" target="contentF"><span>精英会员管理</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="eliteCate">
-							<a id = "showCategoryIndex" href="${ctx}/rest/category/index?type=2" target="contentF"><span>会员分类管理</span></a>
+							<a id = "left42" href="${ctx}/rest/category/index?type=2" target="contentF"><span>会员分类管理</span></a>
 						</shiro:hasPermission>
 					</dd>
 				</dl>
@@ -319,101 +319,101 @@
 				<dd>
 
 					<shiro:hasPermission name="popularList">
-						<a id = "record" href="${ctx}/rest/record/index" target="contentF"><span>备案</span></a>
+						<a id = "left43" href="${ctx}/rest/record/index" target="contentF"><span>备案</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="popularList">
-						<a id = "system2" href="${ctx}/rest/setting/showPopularIndex" target="contentF"><span>热门关注管理</span></a>
+						<a id = "left44" href="${ctx}/rest/setting/showPopularIndex" target="contentF"><span>热门关注管理</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="popularCateList">
-						<a id = "system2" href="${ctx}/rest/category/index?type=3" target="contentF"><span>热门关注分类管理</span></a>
+						<a id = "left45" href="${ctx}/rest/category/index?type=3" target="contentF"><span>热门关注分类管理</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="linkUrlList">
-						<a id = "system2" href="${ctx}/rest/setting/showlinkUrlIndex" target="contentF"><span>友情链接管理</span></a>
+						<a id = "left46" href="${ctx}/rest/setting/showlinkUrlIndex" target="contentF"><span>友情链接管理</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="bannerList">
-						<a id = "system2" href="${ctx}/rest/setting/bannerIndex" target="contentF"><span>Banner管理</span></a>
+						<a id = "left47" href="${ctx}/rest/setting/bannerIndex" target="contentF"><span>Banner管理</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="menuList">
-						<a id = "system1" href="${ctx}/rest/menuType/index" target="contentF"><span>菜单分类管理</span></a>
+						<a id = "left48" href="${ctx}/rest/menuType/index" target="contentF"><span>菜单分类管理</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="menuList">
-						<a id = "system1" href="${ctx}/rest/menu/index" target="contentF"><span>菜单管理</span></a>
+						<a id = "left49" href="${ctx}/rest/menu/index" target="contentF"><span>菜单管理</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="userList">
-						<a id = "system4" href="${ctx}/rest/user/userIndex" target="contentF"><span>后台用户管理</span></a>
+						<a id = "left50" href="${ctx}/rest/user/userIndex" target="contentF"><span>后台用户管理</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="bsUserList">
-						<a id = "system4" href="${ctx}/rest/user/bsUserIndex" target="contentF"><span>前台用户管理</span></a>
+						<a id = "left51" href="${ctx}/rest/user/bsUserIndex" target="contentF"><span>前台用户管理</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="rolelist">
-						<a id = "system5" href="${ctx}/rest/role/roleIndex" target="contentF"><span>角色列表</span></a>
+						<a id = "left52" href="${ctx}/rest/role/roleIndex" target="contentF"><span>角色列表</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="specialPageList">
-						<a id = "system6" href="${ctx}/rest/specialPage/index" target="contentF"><span>首页特殊模块配置</span></a>
+						<a id = "left53" href="${ctx}/rest/specialPage/index" target="contentF"><span>首页特殊模块配置</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="qrCodeList">
-						<a id = "system6" href="${ctx}/rest/qrCode/index" target="contentF"><span>二维码管理</span></a>
+						<a id = "left54" href="${ctx}/rest/qrCode/index" target="contentF"><span>二维码管理</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="pageConfList">
-						<a id = "system6" href="${ctx}/rest/pageConf/index" target="contentF"><span>页面配置</span></a>
+						<a id = "left55" href="${ctx}/rest/pageConf/index" target="contentF"><span>页面配置</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="feedbackList">
-						<a id = "feedbackIndex" href="${ctx}/rest/feedback/index" target="contentF"><span>反馈管理</span></a>
+						<a id = "left56" href="${ctx}/rest/feedback/index" target="contentF"><span>反馈管理</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="feedbackEmail">
-						<a id = "feedbackIndex" href="${ctx}/rest/feedbackEmail/index?emailType=1" target="contentF"><span>反馈邮箱</span></a>
+						<a id = "left57" href="${ctx}/rest/feedbackEmail/index?emailType=1" target="contentF"><span>反馈邮箱</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="siteMapList">
-						<a id = "feedbackIndex" href="${ctx}/rest/siteMap/index" target="contentF"><span>网站地图管理</span></a>
+						<a id = "left58" href="${ctx}/rest/siteMap/index" target="contentF"><span>网站地图管理</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="siteMapCate">
-						<a id = "feedbackIndex" href="${ctx}/rest/category/index?type=4" target="contentF"><span>网站地图分类管理</span></a>
+						<a id = "left60" href="${ctx}/rest/category/index?type=4" target="contentF"><span>网站地图分类管理</span></a>
 					</shiro:hasPermission>
 					<shiro:hasPermission name="siteMapCate">
-						<a id = "feedbackIndex" href="${ctx}/rest/setting/time/index" target="contentF"><span>经纪人响应时间</span></a>
+						<a id = "left61" href="${ctx}/rest/setting/time/index" target="contentF"><span>经纪人响应时间</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="errorPage">
-						<a id = "feedbackIndex" href="${ctx}/rest/errorPage/index" target="contentF"><span>错误页面配置</span></a>
+						<a id = "left62" href="${ctx}/rest/errorPage/index" target="contentF"><span>错误页面配置</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="commentMannager">
-						<a id = "feedbackIndex" href="${ctx}/rest/comment/index" target="contentF"><span>评论管理</span></a>
+						<a id = "left63" href="${ctx}/rest/comment/index" target="contentF"><span>评论管理</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="loanTypeList">
-						<a id = "feedbackIndex" href="${ctx}/rest/loanType/index" target="contentF"><span>利率列表</span></a>
+						<a id = "left64" href="${ctx}/rest/loanType/index" target="contentF"><span>利率列表</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="discountList">
-						<a id = "feedbackIndex" href="${ctx}/rest/discount/index" target="contentF"><span>折扣列表</span></a>
+						<a id = "left65" href="${ctx}/rest/discount/index" target="contentF"><span>折扣列表</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="descIndexList">
-						<a id = "feedbackIndex" href="${ctx}/rest/loanType/descIndex" target="contentF"><span>计算器说明</span></a>
+						<a id = "left66" href="${ctx}/rest/loanType/descIndex" target="contentF"><span>计算器说明</span></a>
 					</shiro:hasPermission>
 
 
 
 
-						<a id = "system7" href="${ctx}/rest/user/toModifyPwdPage" target="contentF"><span>修改密码</span></a>
-						<a id = "system8" href="${ctx}/rest/user/about" target="contentF"><span>关于平台</span></a>
+						<a id = "left67" href="${ctx}/rest/user/toModifyPwdPage" target="contentF"><span>修改密码</span></a>
+						<a id = "left68" href="${ctx}/rest/user/about" target="contentF"><span>关于平台</span></a>
 				</dd>
 			</dl>
 		</shiro:hasPermission>

@@ -45,9 +45,9 @@
                 </li>
                 <li>
                     <span>上线时间：</span>
-                    <input type="text" value="${item.startTime}" name="startTime" class="Wdate half" id="time3" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time4\')}'})" />
+                    <input type="text" value="${fn:substring(item.startTime,0 , 10)}" name="startTime" class="Wdate half" id="time3" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time4\')}'})" />
                     <em class = "gang">-</em>
-                    <input type="text" value="${item.endTime}" name="endTime" class="Wdate half" id="time4" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'time3\')}'})"/>
+                    <input type="text" value="${fn:substring(item.endTime,0 , 10)}" name="endTime" class="Wdate half" id="time4" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'time3\')}'})"/>
                 </li>
                 <li><span>招聘岗位：</span>
                     <input id="post" name="post" maxlength="255" type="text" value="${item.post}">
@@ -95,7 +95,7 @@
                 <li>
                     <span></span>
                     <a onclick="updateData();" target="contentF" class = "public_btn bg2">保存</a>
-                    <a style="margin-left: 20px" href="${ctx}/rest/banner/bannerindex" target="contentF" class="public_btn bg3" id="cancel">取消</a>
+                    <a style="margin-left: 20px" href="${ctx}/rest/recruitManager/index" target="contentF" class="public_btn bg3" id="cancel">取消</a>
                 </li>
             </ul>
         </form>
