@@ -153,7 +153,7 @@ public class FeedbackController extends BaseFilter {
 	@RequestMapping("/export")
 	public void userInfoExportExcel(Feedback feedback, HttpServletResponse response, HttpServletRequest request) throws Exception {
 		List<Feedback> dataList = feedbackServiceImpl.findFeedbackList(feedback);
-		PoiExcelExport pee = new PoiExcelExport(response,"热搜词","sheet1");
+		PoiExcelExport pee = new PoiExcelExport(response,"反馈","sheet1");
 		//调用
 		List<ExportModel> exportModels=new ArrayList<>();
 		for (Feedback feedback1:dataList){

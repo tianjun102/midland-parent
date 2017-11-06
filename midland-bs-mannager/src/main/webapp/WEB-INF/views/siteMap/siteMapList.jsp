@@ -37,7 +37,12 @@
                         <td>${item.name}</td>
 						<td>
                             <a class="edit_img" target="contentF" onclick="to_edit(${item.id })"></a>
-                            <a class="delete_img" target="contentF" onclick="delete1(${item.id })"></a>
+                            <c:if test="${item.isDelete==0}">
+                                <a target="contentF" title="删除" onclick="delete1(${item.id },1)" class="delete_img"></a>
+                            </c:if>
+                            <c:if test="${item.isDelete==1}">
+                                <a target="contentF" class="recove_img" title="恢复" onclick="delete1(${item.id },0)"></a>
+                            </c:if>
                             <a target="contentF" title="上移" class="up_img" onclick="sort(${item.id },${item.orderBy},1)"></a>
                             <a target="contentF" title="下移" class="down_img" onclick="sort(${item.id },${item.orderBy},2)"></a>
                             <a href="javascript:;" target="contentF"
@@ -67,12 +72,11 @@
 
 <script type="text/javascript">
 
-    function delete1(id){
-
-
-
-
-
+    function delete1(id,isDelete){
+        var msg = "您确定要删除当前数据吗？";
+        if(isDelete==0){
+            msg = "您确定要恢复当前数据吗？"
+        }
         layer.open({
             type: 1,
             skin: 'layer-style',
@@ -83,13 +87,13 @@
             scrollbar:false,
             content:
             '<section class = "content" style = "border:none; height:100%;">'+
-            '<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">您确定要删除吗?</p>'+
+            '<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">'+msg+'</p>'+
             '</section>',
             btn:['确定','取消'],
             yes: function(index){
                 $.ajax({
                     type: "post",
-                    url: "${ctx}/rest/siteMap/update?id="+id+"&isDelete=1",
+                    url: "${ctx}/rest/siteMap/update?id="+id+"&isDelete="+isDelete,
                     cache:false,
                     async:false, // 此处必须同步
                     dataType: "json",

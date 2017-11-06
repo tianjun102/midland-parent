@@ -46,7 +46,12 @@
                         <td><c:if test="${item.source==0}">网站</c:if><c:if test="${item.source==1}">微站</c:if></td>
                         <td>
                             <a class="edit_img" target="contentF" onclick="to_edit(${item.id })"></a>
-                            <a class="delete_img" target="contentF" onclick="delete1(${item.id })"></a>
+                            <c:if test="${item.isDelete==0}">
+                                <a target="contentF" onclick="delete1(${item.id },1)" class="delete_img"></a>
+                            </c:if>
+                            <c:if test="${item.isDelete==1}">
+                                <a target="contentF" class="recove_img" title="恢复" onclick="delete1(${item.id },0)"></a>
+                            </c:if>
                         </td>
                     </tr>
                 </c:forEach>
@@ -69,7 +74,11 @@
 
 <script type="text/javascript">
 
-    function delete1(id){
+    function delete1(id,isDelete){
+        var msg = "您确定要删除当前分类吗？";
+        if(isDelete==0){
+            msg = "您确定要恢复当前分类吗？"
+        }
         layer.open({
             type: 1,
             skin: 'layer-style',
@@ -86,7 +95,7 @@
             yes: function(index){
                 $.ajax({
                     type: "post",
-                    url: "${ctx}/rest/feedback/update?id="+id+"&isDelete=1",
+                    url: "${ctx}/rest/feedback/update?id="+id+"&isDelete="+isDelete,
                     cache:false,
                     async:false, // 此处必须同步
                     dataType: "json",

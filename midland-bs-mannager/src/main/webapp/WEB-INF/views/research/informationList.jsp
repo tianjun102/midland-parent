@@ -43,7 +43,12 @@
                         <td>
                             <a target="contentF" title="评论" class="comment_img" onclick="to_comment(${item.id});" ></a>
                             <a target="contentF" title="编辑" class="edit_img"  href="${ctx}/rest/research/to_update?id=${item.id}"></a>
-                            <a target="contentF" class="delete_img" title="删除" onclick="deleteInfrmateion(${item.id })"></a>
+                            <c:if test="${item.isDelete==0}">
+                                <a target="contentF" onclick="deleteInfrmateion(${item.id },1)" class="delete_img"></a>
+                            </c:if>
+                            <c:if test="${item.isDelete==1}">
+                                <a target="contentF" class="recove_img" title="恢复" onclick="deleteInfrmateion(${item.id },0)"></a>
+                            </c:if>
                             <a target="contentF" title="上移" class="up_img" onclick="sort(${item.id },${item.orderBy},1)"></a>
                             <a target="contentF" title="下移" class="down_img" onclick="sort(${item.id },${item.orderBy},2)"></a>
                             <a target="contentF" title="置顶" class="stick_img" onclick="sort(${item.id },${item.orderBy},0)"></a>
@@ -72,7 +77,11 @@
 <script type="text/javascript">
 
 
-    function deleteInfrmateion(id){
+    function deleteInfrmateion(id,isDelete){
+        var msg = "您确定要删除当前数据吗？";
+        if(isDelete==0){
+            msg = "您确定要恢复当前数据吗？"
+        }
         layer.open({
             type: 1,
             skin: 'layer-style',
@@ -83,13 +92,13 @@
             scrollbar:false,
             content:
             '<section class = "content" style = "border:none; height:100%;">'+
-            '<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">您确定要删除当前市场调研吗?</p>'+
+            '<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">'+msg+'</p>'+
             '</section>',
             btn:['确定','取消'],
             yes: function(index){
                 $.ajax({
                     type: "post",
-                    url: "${ctx}/rest/research/update?id="+id+"&isDelete=1",
+                    url: "${ctx}/rest/research/update?id="+id+"&isDelete="+isDelete,
                     cache:false,
                     async:false, // 此处必须同步
                     dataType: "json",

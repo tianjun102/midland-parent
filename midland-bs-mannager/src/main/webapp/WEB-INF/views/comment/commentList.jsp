@@ -45,7 +45,12 @@
 						<td>
                             <a target="contentF" class="confirm_img" title="审核通过" onclick="editStatus(${item.id },0)"></a>
                             <a target="contentF" class="reset_img" title="审核拒绝" onclick="editStatus(${item.id },1)"></a>
-                            <a target="contentF" class="delete_img" title="删除" onclick="delete1(${item.id })"></a>
+                            <c:if test="${item.isDelete==0}">
+                                <a target="contentF" onclick="delete1(${item.id },1)" class="delete_img"></a>
+                            </c:if>
+                            <c:if test="${item.isDelete==1}">
+                                <a target="contentF" class="recove_img" title="恢复" onclick="delete1(${item.id },0)"></a>
+                            </c:if>
                         </td>
                     </tr>
                 </c:forEach>
@@ -68,15 +73,16 @@
 
 <script type="text/javascript">
 
-    function delete1(id){
+    function delete1(id,isDelete){
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/comment/update?id="+id+"&isDelete=1",
+            url: "${ctx}/rest/comment/update?id="+id+"&isDelete="+isDelete,
             async: false, // 此处必须同步
             dataType: "json",
 
             success: function (data) {
                 if (data.state==0){
+                    layer.msg("操作成功！", {icon: 1});
                     $('#searchForm').submit();
                 }
             },
