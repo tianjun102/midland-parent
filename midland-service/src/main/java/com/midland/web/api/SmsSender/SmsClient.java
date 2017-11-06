@@ -12,8 +12,6 @@ import java.util.Map;
  */
 @SuppressWarnings("all")
 public class SmsClient {
-	
-	
 	public void SmsClient(SmsModel smsModel) {
 		this.phones=smsModel.getPhones();
 		this.fields=smsModel.getFields();

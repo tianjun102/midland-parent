@@ -30,8 +30,6 @@
             </list>
         </property>
     </bean>
-
-
     <bean id="setting"
           class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="locations">
@@ -42,7 +40,6 @@
         <!-- 设置编码格式 -->
         <property name="fileEncoding" value="UTF-8"></property>
     </bean>
-
     <!-- dataSource 配置 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <!-- 基本属性 url、user、password -->
@@ -78,18 +75,15 @@
         <!-- 配置监控统计拦截的filters -->
         <property name="filters" value="stat"/>
     </bean>
-
     <!-- mybatis文件配置，扫描所有mapper文件 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" p:dataSource-ref="dataSource"
           p:configLocation="classpath:spring/mybatis-config.xml"
           p:mapperLocations="classpath:com/midland/web/dao/xml/*.xml"/>
-
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" p:basePackage="com.midland.web.dao"
+          p:sqlSessionFactoryBeanName="sqlSessionFactory"/>
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource" ref="dataSource"></property>
     </bean>
-    <!-- spring与mybatis整合配置，扫描所有dao -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" p:basePackage="com.midland.web.dao"
-          p:sqlSessionFactoryBeanName="sqlSessionFactory"/>
 
     <!-- 对dataSource 数据源进行事务管理 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
