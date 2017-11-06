@@ -108,7 +108,16 @@
                 <select name="menuId" id="menuId" style="height: 28px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option <c:if test="${popular.source =='1'}">selected = 'selected'</c:if> value="1">首页</option>
                     <option <c:if test="${popular.source =='2'}">selected = 'selected'</c:if> value="2">新房</option>
-                    <option <c:if test="${popular.source =='3'}">selected = 'selected'</c:if> value="2">新二手房</option>
+                    <option <c:if test="${popular.source =='3'}">selected = 'selected'</c:if> value="3">新二手房</option>
+                    <option <c:if test="${popular.source =='4'}">selected = 'selected'</c:if> value="4">租房</option>
+                    <option <c:if test="${popular.source =='5'}">selected = 'selected'</c:if> value="5">写字楼</option>
+                    <option <c:if test="${popular.source =='6'}">selected = 'selected'</c:if> value="6">商铺</option>
+                    <option <c:if test="${popular.source =='7'}">selected = 'selected'</c:if> value="7">小区</option>
+                    <option <c:if test="${popular.source =='8'}">selected = 'selected'</c:if> value="8">经纪人</option>
+                    <option <c:if test="${popular.source =='9'}">selected = 'selected'</c:if> value="9">外销网</option>
+                    <option <c:if test="${popular.source =='10'}">selected = 'selected'</c:if> value="10">市场调究</option>
+                    <option <c:if test="${popular.source =='11'}">selected = 'selected'</c:if> value="11">资讯</option>
+                    <option <c:if test="${popular.source =='12'}">selected = 'selected'</c:if> value="12">问答</option>
                 </select>
             </li>
 
