@@ -110,6 +110,15 @@
                     <option value="1">首页</option>
                     <option value="2">新房</option>
                     <option value="3">新二手房</option>
+                    <option value="4">租房</option>
+                    <option value="5">写字楼</option>
+                    <option value="6">商铺</option>
+                    <option value="7">小区</option>
+                    <option value="8">经纪人</option>
+                    <option value="9">外销网</option>
+                    <option value="10">市场调究</option>
+                    <option value="11">资讯</option>
+                    <option value="12">问答</option>
                 </select>
                 <span class="_star">*</span>
             </li>

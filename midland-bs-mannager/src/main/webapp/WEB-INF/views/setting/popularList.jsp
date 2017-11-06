@@ -41,6 +41,15 @@
 									<c:if test="${popular.menuId==1}">首页</c:if>
 									<c:if test="${popular.menuId==2}">新房</c:if>
 									<c:if test="${popular.menuId==3}">二手房</c:if>
+									<c:if test="${popular.menuId==4}">租房</c:if>
+									<c:if test="${popular.menuId==5}">写字楼</c:if>
+									<c:if test="${popular.menuId==6}">商铺</c:if>
+									<c:if test="${popular.menuId==7}">小区</c:if>
+									<c:if test="${popular.menuId==8}">经纪人</c:if>
+									<c:if test="${popular.menuId==9}">外销网</c:if>
+									<c:if test="${popular.menuId==10}">市场调究</c:if>
+									<c:if test="${popular.menuId==11}">资讯</c:if>
+									<c:if test="${popular.menuId==12}">问答</c:if>
 								</td>
 								<td>${popular.cateName}</td>
 								<td>${popular.name}</td>
