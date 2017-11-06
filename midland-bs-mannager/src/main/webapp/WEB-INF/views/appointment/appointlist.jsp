@@ -26,7 +26,7 @@
             <th style="width:auto">小区名</th>
             <th style="width:auto">门牌地址</th>
             <th style="width:auto">户型</th>
-            <th style="width:auto">面积</th>
+            <th style="width:auto">建筑面积</th>
             <th style="width:auto">售价/租价</th>
             <th style="width:auto">经纪人</th>
             <th style="width:auto">状态</th>
