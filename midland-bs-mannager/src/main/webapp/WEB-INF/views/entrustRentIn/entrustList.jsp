@@ -6,23 +6,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
-    <style type="text/css">
-        .table-add tr td a {
-            display: inline-block;
-            width: 28px;!important;
-            height: 20px;
-            margin: 0 5px;
-            background-size: contain!important;
-        }
-        td
-        {
-            white-space: nowrap;
-        }
-        th
-        {
-            white-space: nowrap;
-        }
-    </style>
 </head>
 <body>
 
@@ -186,8 +169,8 @@
             type: 2,
             title: ['委托详情'],
             shade: 0.3,
-            area: ['1000px', '700px'],
-            content: ['${ctx}/rest/entrust/rentIn/to_update?entrustId=' + appointId , 'no']
+            area: ['1000px',allHeight-80+'px'],
+            content: ['${ctx}/rest/entrust/rentIn/to_update?entrustId=' + appointId , 'yes']
         });
     }
 

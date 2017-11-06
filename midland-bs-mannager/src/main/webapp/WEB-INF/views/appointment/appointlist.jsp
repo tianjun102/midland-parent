@@ -131,8 +131,8 @@
             type: 2,
             title: ['预约详情'],
             shade: 0.3,
-            area: ['1000px', '650px'],
-            content: ['${ctx}/rest/appoint/to_update?appointId=' + appointId, 'no']
+            area: ['1000px', allHeight-30+'px'],
+            content: ['${ctx}/rest/appoint/to_update?appointId=' + appointId]
         });
     }
 </script>
