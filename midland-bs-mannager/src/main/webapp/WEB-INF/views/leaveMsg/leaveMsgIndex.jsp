@@ -15,7 +15,7 @@
     <section class="content">
         <div id="headIndex">
         <p class="detail-title">
-            <span>行情信息管理>>留言管理</span>
+            <span>买房助手>>留言管理</span>
             <%--<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>--%>
         </p>
         <form action="${ctx }/rest/leaveMsg/list" method="POST" id="searchForm"

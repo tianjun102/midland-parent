@@ -1,6 +1,7 @@
 package com.midland.controller;
 
 import com.midland.web.model.Record;
+import com.midland.web.model.user.User;
 import com.midland.web.service.RecordService;
 import com.midland.base.BaseFilter;
 import com.midland.web.service.SettingService;
@@ -34,8 +35,10 @@ public class RecordController extends BaseFilter  {
 	 * 
 	 **/
 	@RequestMapping("index")
-	public String recordIndex(Record record,Model model) throws Exception {
+	public String recordIndex(Record record,Model model,HttpServletRequest request) throws Exception {
 		settingService.getAllProvinceList(model);
+		User user = MidlandHelper.getCurrentUser(request);
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "record/recordIndex";
 	}
 
@@ -45,6 +48,7 @@ public class RecordController extends BaseFilter  {
 	@RequestMapping("to_add")
 	public String toAddRecord(Record record,Model model) throws Exception {
 		settingService.getAllProvinceList(model);
+
 		return "record/addRecord";
 	}
 

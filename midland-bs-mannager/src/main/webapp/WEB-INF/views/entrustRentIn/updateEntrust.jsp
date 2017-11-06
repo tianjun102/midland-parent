@@ -10,35 +10,7 @@
 
     <style type="text/css">
 
-        section.content{
-            padding: 0 13px 0 30px;
-        }
-        .content ul.userinfo{
-            height: 657px;
-            overflow: hidden;
-            overflow-y: scroll;
-            padding: 15px 0 25px;
-        }
-        .content ul.userinfo > li {
-            margin-left: 0;
-            padding-top: 8px;
-        }
 
-        .content ul.userinfo li > span,
-        .content ul.userinfo li:not(:last-child) input,
-        .content ul.userinfo ._star,
-        .content ul.userinfo .dropdown {
-            height: 30px !important;
-            line-height: 30px !important;
-            vertical-align: middle;
-        }
-
-        .content ul.userinfo li input[type=checkbox] {
-            float: none;
-            width: auto !important;
-            height: auto !important;
-            margin-right: 3px;
-        }
 
         .peitao {
             height: 30px;
@@ -52,16 +24,7 @@
         .peitao > span em {
             vertical-align: middle;
         }
-        .content ul.userinfo li>span{
-            float: left;
-            display: inline-block;
-            width: 90px;
-            height: 28px;
-            line-height: 28px;
-            text-align: right;
-            font-size: 14px;
-            color: rgb( 102, 102, 102 );
-        }
+
     </style>
 
 </head>

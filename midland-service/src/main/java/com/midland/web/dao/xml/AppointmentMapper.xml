@@ -353,7 +353,7 @@
 			 and nick_name  like '%${nickName}%'
 		</if>
 		<if test="phone != null">
-			 and phone= #{phone,jdbcType=VARCHAR}
+			 and phone  like '%${phone}%'
 		</if>
 		<if test="houseType != null">
 			 and house_type= #{houseType,jdbcType=INTEGER}

@@ -55,6 +55,8 @@ public class QuotationSecondHandController extends BaseFilter {
         User user = MidlandHelper.getCurrentUser(request);
         model.addAttribute("isSuper",user.getIsSuper());
 
+        List<ParamObject> ojb = JsonMapReader.getMap("is_delete");
+        model.addAttribute("isDeletes",ojb);
         return "quotationSecondHand/quotationSecondHandIndex";
     }
 

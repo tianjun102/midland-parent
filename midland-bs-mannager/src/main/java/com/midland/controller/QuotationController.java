@@ -48,6 +48,8 @@ public class QuotationController extends BaseFilter {
 		settingService.getAllProvinceList(model);
 		User user = MidlandHelper.getCurrentUser(request);
 		model.addAttribute("isSuper",user.getIsSuper());
+		List<ParamObject> ojb = JsonMapReader.getMap("is_delete");
+		model.addAttribute("isDeletes",ojb);
 		return "quotation/quotationIndex";
 	}
 
