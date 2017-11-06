@@ -19,6 +19,7 @@
 				<%--<th style="width: 10%">模块名称</th>--%>
 				<th style="width: 10%">城市</th>
 				<th style="width: 10%">模块名称</th>
+                <th style="width: 10%">关键字</th>
                 <th style="width: 20%">操作</th>
             </tr>
         </thead>
@@ -33,6 +34,7 @@
 						<%--<td>${item.modeName}</td>--%>
 						<td>${item.cityName}</td>
 						<td>${item.cateName}</td>
+                        <td>${item.name}</td>
 						<td>
                             <a class="edit_img" target="contentF" onclick="to_edit(${item.id })"></a>
                             <a class="delete_img" target="contentF" onclick="delete1(${item.id })"></a>

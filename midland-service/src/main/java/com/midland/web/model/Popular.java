@@ -65,6 +65,8 @@ public class Popular{
 
 	private String cateName;
 
+	private Integer isShow;
+
 
 	public Integer getId() {
 		return id;
@@ -192,6 +194,14 @@ public class Popular{
 
 	public void setCateName(String cateName) {
 		this.cateName = cateName;
+	}
+
+	public Integer getIsShow() {
+		return isShow;
+	}
+
+	public void setIsShow(Integer isShow) {
+		this.isShow = isShow;
 	}
 
 	@Override

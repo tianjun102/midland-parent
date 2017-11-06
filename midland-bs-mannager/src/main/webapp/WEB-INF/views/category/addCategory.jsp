@@ -103,6 +103,9 @@
             <li>
                 <span>分类名称：</span><input style="width:250px;" type="text" name="cateName" id="cateName" onblur="notEmpty('cateName','cateName','分类名称不能为空！');" maxlength="50"/>
             </li>
+            <li>
+                <span>网站链接：</span><input style="width:250px;" type="text" name="linkUrl" id="linkUrl" onblur="checkUrl('linkUrl','linkUrl','网站链接格式不正确！');" maxlength="50"/>
+            </li>
             <li style="padding-top:30px;">
                 <span></span>
                 <a target="contentF" class="public_btn bg2" id="save" onclick="saveData()">保存</a>
@@ -114,7 +117,7 @@
 </section>
 <script type="text/javascript">
     function saveData() {
-        if(notEmpty('cateName','cateName','分类名称不能为空！')){
+        if(notEmpty('cateName','cateName','分类名称不能为空！')&&checkUrl('linkUrl','linkUrl','网站链接格式不正确！')){
         var data = $("#addFrom").serialize();
         $.ajax({
             type: "post",

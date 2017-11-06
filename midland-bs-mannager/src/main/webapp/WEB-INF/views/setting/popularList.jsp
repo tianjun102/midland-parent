@@ -16,12 +16,12 @@
 						<tr>
 							<th style="width: 8%"><a href="#" onclick="checkall()" >全选</a> / <a href="#" onclick="delcheckall()" >取消</a></th>
 							<th style="width: 5%">编号</th>
-							<th style="width: 5%">城市</th>
-							<th style="width: 10%">平台</th>
+							<th style="width: 8%">城市</th>
+							<th style="width: 5%">平台</th>
 							<th style="width: 5%">模块</th>
 							<th style="width: 10%">分类</th>
-							<th style="width: 4%">名称</th>
-							<th style="width: 5%">操作</th>
+							<th style="width: 10%">名称</th>
+							<th style="width: 15%">操作</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -56,6 +56,7 @@
 								<td>
 									<a onclick="preUpdate(${popular.id })" target="contentF" class = "edit_img" title = "编辑"></a>
 									<a target="contentF" class = "delete_img" title = "删除" onclick="isDelete(${popular.id })"></a>
+									<a <c:if test="${popular.isShow==0}">class="onoff_img"</c:if> <c:if test="${popular.isShow==1}">class="offon_img"</c:if> target="contentF" onclick="updatePopular(${popular.isShow},${popular.id })"></a>
 								  </td>
 							</tr>
 						</c:forEach>
@@ -358,6 +359,27 @@ function takeblacklist(userId){
                 layer.msg("操作失败！", {icon: 2});
             }
         })
+    }
+
+    //启用，禁用
+    function updatePopular(isShow,id){
+        if(isShow==1){
+            isShow=0;
+        }else if(isShow == 0){
+            isShow = 1;
+        }
+
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/setting/saveEditPopular?isShow="+isShow+"&id="+id,
+            async:false, // 此处必须同步
+            dataType: "json",
+            data:"",
+            success: function(data){
+
+                $('#searchForm').submit();
+            }
+        });
     }
 
 </script>

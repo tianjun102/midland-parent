@@ -44,12 +44,13 @@ public class SiteMapController extends BaseFilter {
 	 **/
 	@RequestMapping("index")
 	public String siteMapIndex(SiteMap siteMap,Model model,HttpServletRequest request) throws Exception {
-		/*Map<String,String> parem = new HashMap<>();
-		parem.put("flag","city");
-		parem.put("id","*");
-		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
-		List<Area> cityList = cityMap.get("city");
-		model.addAttribute("cityList",cityList);*/
+		Category cate1 = new Category();
+		//查询资讯分类
+		cate1.setType(4);
+		String result = getCategoryTree("",cate1);
+		if(StringUtils.isNotEmpty(result)){
+			model.addAttribute("categoryData",result );
+		}
 		settingService.getAllProvinceList(model);
 		User user = MidlandHelper.getCurrentUser(request);
 		if(user.getIsSuper()==null){
@@ -183,6 +184,9 @@ public class SiteMapController extends BaseFilter {
 	@RequestMapping("list")
 	public String findSiteMapList(SiteMap siteMap,Model model, HttpServletRequest request) {
 		try {
+			if(siteMap.getCateId()!=null&&siteMap.getCateId()==0){
+				siteMap.setCateId(null);
+			}
 			log.debug("findSiteMapList  {}",siteMap);
 			MidlandHelper.doPage(request);
 			Page<SiteMap> result = (Page<SiteMap>)siteMapServiceImpl.findSiteMapList(siteMap);

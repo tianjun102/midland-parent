@@ -37,8 +37,13 @@
         });
 
         function beforeClick(treeId, treeNode, clickFlag) {
-            $("input[name='cateId']").val(treeNode.id);
-            $("input[name='cateName']").val(treeNode.name);
+            if(treeNode.id==0){
+                $("input[name='cateId']").val("");
+                $("input[name='cateName']").val("");
+            }else{
+                $("input[name='cateId']").val(treeNode.id);
+                $("input[name='cateName']").val(treeNode.name);
+            }
             $("#showDiv").hide();
         }
 
@@ -125,7 +130,7 @@
 <script type="text/javascript">
     //保存数据
     function updateData() {
-        if(!(notEmpty('name','name','关键字不能为空！')&&checkSelect("source|cityId","平台不能为空！城市不能为空！")&&notEmpty('cateName','cateName','模块不能为空！')&&checkUrl('linkUrl','linkUrl','链接格式不正确！'))){
+        if(!(notEmpty('name','name','关键字不能为空！')&&checkSelect("source|cityId","平台不能为空！|城市不能为空！")&&notEmpty('cateName','cateName','模块不能为空！')&&checkUrl('linkUrl','linkUrl','链接格式不正确！'))){
             return;
         }
         var data = $("#dataForm").serialize();
