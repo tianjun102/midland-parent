@@ -27,6 +27,7 @@
                 'swf': '${ctx }/assets/scripts/uploadify/uploadify.swf',
                 'uploader': '${ctx }/rest/upload/img',
                 'multi': true,// 是否支持多个文件上传
+                'buttonText': '上传文件',
                 'onUploadSuccess': function (file, data, response) {
                     /*$("#imgUrl").attr("value", data);
                     $("#iconImg1").attr("src", data);*/

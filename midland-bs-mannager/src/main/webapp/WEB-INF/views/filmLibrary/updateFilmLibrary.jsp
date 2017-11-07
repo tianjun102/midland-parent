@@ -25,6 +25,7 @@
                 'swf': '${ctx }/assets/scripts/uploadify/uploadify.swf',
                 'uploader': '${ctx }/rest/upload/img',
                 'multi': false,// 是否支持多个文件上传
+                'buttonText': '上传文件',
                 'onUploadSuccess': function (file, data, response) {
                     $("#imgUrl").attr("value", data);
                     $("#iconImg1").attr("src", data);
@@ -42,6 +43,7 @@
                 'swf': '${ctx }/assets/scripts/uploadify/uploadify.swf',
                 'uploader': '${ctx }/rest/upload/img',
                 'multi': false,// 是否支持多个文件上传
+                'buttonText': '上传文件',
                 'onUploadSuccess': function (file, data, response) {
                     $("#videoUrl").attr("value", data);
                     $("#videoUrl1").attr("src", "${ctx}/assets/UEditor/dialogs/attachment/fileTypeImages/"+getFileIcon(data));
