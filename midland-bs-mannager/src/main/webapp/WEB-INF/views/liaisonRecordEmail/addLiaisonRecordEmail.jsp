@@ -30,10 +30,10 @@
                 <input type="text" name="contactName" id="contactName" />
             </li>
             <li><span>邮箱：</span>
-                <input type="text" name="email" id="email" />
+                <input type="text" name="email" id="email" onblur="checkEmail('email','email','');"/>
             </li>
             <li><span>手机：</span>
-                <input type="text" name="phone" id="phone" />
+                <input type="text" name="phone" id="phone" onblur="checkPhone('phone','phone','');"/>
             </li>
 
             <li>
@@ -49,29 +49,33 @@
 <script type="text/javascript">
     //保存数据
     function updateData() {
-        var data = $("#dataForm").serialize();
-        $.ajax({
-            type: "post",
-            url: "${ctx}/rest/liaisonRecordEmail/add",
-            async: false, // 此处必须同步
-            dataType: "json",
-            data: data,
-            success: function (data) {
-                if (data.state == 0) {
-                    layer.msg("保存成功！！！", {icon: 1});
-                    $('#save').removeAttr("onclick");
-                    setTimeout(function () {
-                        parent.location.reload();
-                    }, 1000);
+        if (checkEmail('email', 'email', '')&& checkPhone('phone', 'phone', '')) {
 
-                } else {
+
+            var data = $("#dataForm").serialize();
+            $.ajax({
+                type: "post",
+                url: "${ctx}/rest/liaisonRecordEmail/add",
+                async: false, // 此处必须同步
+                dataType: "json",
+                data: data,
+                success: function (data) {
+                    if (data.state == 0) {
+                        layer.msg("保存成功！！！", {icon: 1});
+                        $('#save').removeAttr("onclick");
+                        setTimeout(function () {
+                            parent.location.reload();
+                        }, 1000);
+
+                    } else {
+                        layer.msg("保存失败！", {icon: 2});
+                    }
+                },
+                error: function () {
                     layer.msg("保存失败！", {icon: 2});
                 }
-            },
-            error: function () {
-                layer.msg("保存失败！", {icon: 2});
-            }
-        });
+            });
+        }
     }
 
     //取消

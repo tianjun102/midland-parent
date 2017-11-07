@@ -135,7 +135,7 @@
 							<a id = "left15" href="${ctx}/rest/contactUs/index" target="contentF"><span>联系我们</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="filmLibraryList">
-							<a id = "left16" href="${ctx}/rest/liaisonRecord/index" target="contentF"><span>联络管理</span></a>
+							<a id = "left16" href="${ctx}/rest/liaisonRecord/index" target="contentF"><span>联络记录</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="tradeFairList">
 							<a id = "left17" href="${ctx}/rest/tradeFair/index" target="contentF"><span>楼盘展销会</span></a>

@@ -7,6 +7,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
 </head>
+<
+<style type="text/css">
+    .table-add tr td .house-detail {
+         width: auto;
+    }
+</style>
 <body>
 
 

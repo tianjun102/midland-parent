@@ -70,10 +70,10 @@
                             <a target="contentF" class="edit_img" title="编辑" href="${ctx}/rest/filmLibrary/to_update?id=${item.id}"></a>
                             </c:if>
                             <c:if test="${item.isDelete==0}">
-                                <a target="contentF" onclick="deleteOrRecover(${item.id },1)" class="delete_img"></a>
+                                <a target="contentF" onclick="delete12(${item.id },1)" class="delete_img"></a>
                             </c:if>
                             <c:if test="${item.isDelete==1}">
-                                <a target="contentF" class="recove_img" onclick="deleteOrRecover(${item.id },0)"></a>
+                                <a target="contentF" class="recove_img" onclick="recover1(${item.id },0)"></a>
                             </c:if>
                         </td>
                     </tr>
@@ -133,7 +133,7 @@
             }
         })
     }
-    function deleteOrRecover(id,flag){
+    function delete12(id, flag){
 
         layer.open({
             type: 1,
@@ -171,6 +171,26 @@
                 btn.css('text-align', 'center');
             }
         });
+    }
+
+        function recover1(id, flag){
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/filmLibrary/update?id="+id+"&isDelete="+flag,
+            cache:false,
+            async:false, // 此处必须同步
+            dataType: "json",
+            success: function(data){
+                if(data.state==0){
+                    layer.msg("操作成功！",{icon:1});
+                    setTimeout(function(){$("#searchForm").submit();},1000);
+                }else{
+                    layer.msg("操作失败！！",{icon:7});
+                }
+                layer.close(index);
+            }
+        });
+
 
     }
 

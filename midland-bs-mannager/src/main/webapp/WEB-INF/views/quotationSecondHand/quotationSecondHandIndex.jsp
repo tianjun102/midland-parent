@@ -51,17 +51,11 @@
 
                 </ul>
             </form>
-            <input style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;margin-top: 10px;"
-                   onclick="batchDelete(1)" class="public_btn bg1" type="submit" value="批量删除"/>
-            <input style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;"
-                   onclick="batchDelete(0)" class="public_btn bg1" type="submit" value="批量恢复"/>
-            <input style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;" onclick="import1()"
-                   class="public_btn bg1" type="submit" value="导入"/>
-            <input style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;" onclick="export1()"
-                   class="public_btn bg1" type="submit" value="导出"/>
-            <input style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;"
-                   onclick="window.open('${ctx}/rest/quotationSecondHand/toolsTip_index','contentF')"
-                   class="public_btn bg1" type="submit" value="生成预览"/>
+            <input  class="public_btn bg1 listButton" type="submit" onclick="batchDelete(1)"   value="批量删除"/>
+            <input  class="public_btn bg1 listButton" type="submit" onclick="batchDelete(0)"   value="批量恢复"/>
+            <input  class="public_btn bg1 listButton" type="submit" onclick="import1()"   value="导入"/>
+            <input  class="public_btn bg1 listButton" type="submit" onclick="export1()"   value="导出"/>
+            <input  class="public_btn bg1 listButton" type="submit" onclick="window.open('${ctx}/rest/quotationSecondHand/toolsTip_index','contentF')" value="生成预览"/>
         </div>
         <div id="listDiv"></div>
 
