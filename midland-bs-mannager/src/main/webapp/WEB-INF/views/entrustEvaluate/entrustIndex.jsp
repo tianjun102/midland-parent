@@ -73,7 +73,7 @@
             <c:if test="${not empty isSuper}">
                 <input onclick="batchDelete(0)" class="public_btn bg1 listButton" type="submit" value="批量恢复"/>
             </c:if>
-            <input class="public_btn bg1" onclick="export1()" type="submit" value="导出"/>
+            <input class="public_btn bg1  listButton" onclick="export1()" type="submit" value="导出"/>
         </div>
         <div id="listDiv"></div>
     </section>

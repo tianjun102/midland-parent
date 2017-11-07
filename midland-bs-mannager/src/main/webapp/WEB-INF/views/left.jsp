@@ -114,7 +114,7 @@
 					</dt>
 					<dd>
 						<shiro:hasPermission name="serviceAreaList">
-							<a id = "left9" href="${ctx}/rest/privacy/index" target="contentF"><span>隐私政策管理</span></a>
+							<a id = "left9" href="${ctx}/rest/privacy/index" target="contentF"><span>隐私政策</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="serviceAreaList">
 							<a id = "left10" href="${ctx}/rest/disclaimer/index" target="contentF"><span>免责声明</span></a>

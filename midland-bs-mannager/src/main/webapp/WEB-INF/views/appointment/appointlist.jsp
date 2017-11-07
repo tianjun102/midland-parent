@@ -120,7 +120,7 @@
             type: 2,
             title: ['重新分配经纪人'],
             shade: 0.3,
-            area: ['1000px',  allHeight-100+'px'],
+            area: ['1000px',  allHeight-20+'px'],
             content: ['${ctx}/rest/public/toRedistribute?id=' + id + "&url=" + url, 'no']
         });
     }

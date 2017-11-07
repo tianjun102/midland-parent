@@ -55,11 +55,11 @@
 						id="time2" name="endTime" /></li>
 				<li>
 					<input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/>
-					<a class="left" onclick="cantactSetting()" >联络人设置</a>
 				</li>
 			</ul>
 			</form>
-			<a href="#" onclick="exportLiaison()">导出</a>
+			<a class="public_btn bg1  listButton" onclick="cantactSetting()" >联络人设置</a>
+			<a href="#" class="public_btn bg1  listButton" onclick="exportLiaison()">导出</a>
 			<div id="listDiv"></div>
 		</section>
 	</div>
