@@ -304,7 +304,7 @@ section.content p.detail-title .left:hover {
 }
 .content ul.userinfo>li {
 	float: left;
-	padding-left: 20px;
+	margin-left: 20px;
 	padding-top: 10px;
 	/* display: flex; */
 }
