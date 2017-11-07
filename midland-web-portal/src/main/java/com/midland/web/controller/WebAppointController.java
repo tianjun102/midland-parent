@@ -1,5 +1,6 @@
 package com.midland.web.controller;
 
+import com.midland.web.commons.FastJsonUtils;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
 import com.midland.web.model.Appointment;
@@ -15,8 +16,9 @@ import javax.annotation.Resource;
 public class WebAppointController {
     @Resource
     private AppointmentService appointmentServiceImpl;
-    @RequestMapping("/rest")
-    public Object addAppoint(@RequestBody Appointment obj){
+    @RequestMapping(value="rest", produces="text/html;charset=UTF-8")
+    public Object addAppoint(){
+        Appointment obj = new Appointment();
         Result result = new Result();
         try {
             appointmentServiceImpl.insertAppointment(obj);
@@ -26,6 +28,6 @@ public class WebAppointController {
             result.setCode(ResultStatusUtils.STATUS_CODE_200);
             result.setMsg("success");
         }
-        return  result;
+        return  FastJsonUtils.toJSONStr(result);
     }
 }
