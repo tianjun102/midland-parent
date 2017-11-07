@@ -104,7 +104,7 @@
                 </div>
             </li>
             <li><span>视频时长：</span>
-                <input type="text" name="duration" id="duration" />
+                <input type="text" name="duration" id="duration" onblur="notEmpty('duration','duration','');InitInput.setNumber(this,9,2,2)"/>
             </li>
             <li><span>图片上传：</span>
                 <div style="width: 250px;float: left;">

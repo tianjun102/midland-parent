@@ -104,7 +104,7 @@
             <li class="col-md-11"><span>用户备注：</span>
                 <textarea name="remark" id="remark" style="width:calc(100% - 120px);height:50px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;" disabled="disabled"></textarea>
             <li class="col-md-11"><span>处理备注：</span>
-                <textarea name="remark" id="dealRemark" style="width:calc(100% - 120px);height:50px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;"></textarea>
+                <textarea name="dealRemark" id="dealRemark" style="width:calc(100% - 120px);height:50px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;"></textarea>
             </li>
             </li>
             <li class="col-md-11"><span>处理记录：</span>
