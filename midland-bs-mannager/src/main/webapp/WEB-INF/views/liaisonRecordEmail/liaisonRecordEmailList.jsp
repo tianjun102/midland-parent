@@ -47,7 +47,7 @@
                             <c:if test="${item.category == s.id}">${s.name}</c:if>
                         </c:forEach></td>
 						<td>
-                            <a target="contentF" onclick="to_edit(${item.id })">编辑</a>
+                            <a target="contentF" class="edit_img" onclick="to_edit(${item.id })"></a>
                             <c:if test="${item.isDelete==0}">
                                 <a target="contentF" onclick="delete1(${item.id },1)" class="delete_img"></a>
                             </c:if>

@@ -13,6 +13,9 @@
                 'swf': '${ctx }/assets/scripts/uploadify/uploadify.swf',
                 'uploader': '${ctx }/rest/upload/img',
                 'multi': false,// 是否支持多个文件上传
+                'buttonText': '上传文件',
+                'fileTypeExts': '*.bmp,*.jpg,*.png,*.tiff,*.gif,*.pcx,*.tga,*.exif,*.fpx,*.svg,*.psd,*.cdr,*.pcd,*.dxf,*.ufo,*.eps,*.ai,*.raw,*.WMF',
+                'onSelectError' : uploadify_onSelectError,
                 'onUploadSuccess': function (file, data, response) {
                     $("#imgUrl").attr("value", data);
                     $("#iconImg1").attr("src", data);
@@ -51,6 +54,7 @@
 
 
         var uploadify_onSelectError = function(file, errorCode, errorMsg) {
+            debugger;
             var msgText = "上传失败\n";
             switch (errorCode) {
                 case SWFUpload.QUEUE_ERROR.QUEUE_LIMIT_EXCEEDED:
@@ -78,7 +82,13 @@
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/filmLibrary/add" method="post" id="dataForm">
         <ul class="adminfo row">
-
+            <li style="display:flex;align-items:center">
+                <span>类型：</span>
+                <select name="filmType" id="filmType" class="dropdown">
+                    <option value="0">楼盘展销会</option>
+                    <option value="1">看楼团</option>
+                </select>
+            </li>
             <%@include file="../menu/area.jsp" %>
 
             <li><span>楼盘ID：</span>
@@ -104,7 +114,7 @@
                 </div>
             </li>
             <li><span>视频时长：</span>
-                <input type="text" name="duration" id="duration" onblur="notEmpty('duration','duration','');InitInput.setNumber(this,9,2,2)"/>
+                <input type="text" name="duration" id="duration" onblur="InitInput.setTime('duration','duration','时间格式不正确')"/>
             </li>
             <li><span>图片上传：</span>
                 <div style="width: 250px;float: left;">

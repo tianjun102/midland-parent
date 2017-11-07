@@ -1,6 +1,7 @@
 package com.midland.controller;
 
 import com.midland.web.model.LiaisonRecordEmail;
+import com.midland.web.model.user.User;
 import com.midland.web.service.LiaisonRecordEmailService;
 import com.midland.base.BaseFilter;
 import com.midland.web.service.SettingService;
@@ -37,7 +38,9 @@ public class LiaisonRecordEmailController extends BaseFilter  {
 	 * 
 	 **/
 	@RequestMapping("index")
-	public String liaisonRecordEmailIndex(LiaisonRecordEmail liaisonRecordEmail,Model model) throws Exception {
+	public String liaisonRecordEmailIndex(LiaisonRecordEmail liaisonRecordEmail,Model model,HttpServletRequest request) throws Exception {
+		User user = MidlandHelper.getCurrentUser(request);
+		model.addAttribute("isSuper",user.getIsSuper());
 		settingService.getAllProvinceList(model);
 		List<ParamObject> obj  = JsonMapReader.getMap("liaisonRecord_category");
 		model.addAttribute("categorys",obj);
@@ -48,8 +51,10 @@ public class LiaisonRecordEmailController extends BaseFilter  {
 	 * 
 	 **/
 	@RequestMapping("to_add")
-	public String toAddLiaisonRecordEmail(LiaisonRecordEmail liaisonRecordEmail,Model model) throws Exception {
+	public String toAddLiaisonRecordEmail(LiaisonRecordEmail liaisonRecordEmail,Model model,HttpServletRequest request) throws Exception {
 		settingService.getAllProvinceList(model);
+		User user = MidlandHelper.getCurrentUser(request);
+		model.addAttribute("isSuper",user.getIsSuper());
 		List<ParamObject> obj  = JsonMapReader.getMap("liaisonRecord_category");
 		model.addAttribute("categorys",obj);
 		return "liaisonRecordEmail/addLiaisonRecordEmail";
@@ -104,7 +109,9 @@ public class LiaisonRecordEmailController extends BaseFilter  {
 	 * 
 	 **/
 	@RequestMapping("to_update")
-	public String toUpdateLiaisonRecordEmail(Integer id,Model model) throws Exception {
+	public String toUpdateLiaisonRecordEmail(Integer id,Model model,HttpServletRequest request) throws Exception {
+		User user = MidlandHelper.getCurrentUser(request);
+		model.addAttribute("isSuper",user.getIsSuper());
 		LiaisonRecordEmail result = liaisonRecordEmailServiceImpl.selectLiaisonRecordEmailById(id);
 		model.addAttribute("item",result);
 		settingService.getAllProvinceList(model);

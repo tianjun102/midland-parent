@@ -52,9 +52,9 @@
                 </li>
             </ul>
         </form>
-        <input style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;margin-top: 10px;" onclick="batchDelete(1)" class="public_btn bg1" type="submit" value="批量删除"/>
+        <input  onclick="batchDelete(1)" class="public_btn bg1 listButton" type="submit" value="批量删除"/>
         <c:if test="${not empty isSuper}">
-            <input style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;" onclick="batchDelete(0)" class="public_btn bg1" type="submit" value="批量恢复"/>
+            <input  onclick="batchDelete(0)" class="public_btn bg1 listButton" type="submit" value="批量恢复"/>
         </c:if>
         </div>
         <div id="listDiv"></div>

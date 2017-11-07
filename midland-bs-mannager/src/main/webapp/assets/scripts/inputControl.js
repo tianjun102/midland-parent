@@ -210,6 +210,17 @@ InitInput = {
 		});
 		
 	},
+	setTime : function(name,id,msg){
+		if (msg == null){
+            msg="时间格式不正确"
+		}
+		var time =/^(20|21|22|23|[0-1]\d):[0-5]\d:[0-5]\d$/;
+        var regExp = new RegExp(time);
+        var value=$('#'+id).val();
+        if(!regExp.test(value)){
+            layer.tips(msg, "input[name='"+name+"']", {tips: 1});
+        }
+	},
 	
 	/*
     * description: //规定只允许输入整数

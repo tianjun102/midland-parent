@@ -59,10 +59,12 @@ public class FilmLibraryController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("to_add")
-	public String toAddFilmLibrary(FilmLibrary filmLibrary, Model model) throws Exception {
+	public String toAddFilmLibrary(FilmLibrary filmLibrary, Model model,HttpServletRequest request) throws Exception {
 		List<Area> list = settingService.queryAllCityByRedis();
 		model.addAttribute("citys",list);
 		settingService.getAllProvinceList(model);
+		User user = MidlandHelper.getCurrentUser(request);
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "filmLibrary/addFilmLibrary";
 	}
 
@@ -118,13 +120,14 @@ public class FilmLibraryController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("to_update")
-	public String toUpdateFilmLibrary(Integer id,Model model) throws Exception {
+	public String toUpdateFilmLibrary(Integer id,Model model,HttpServletRequest request) throws Exception {
 		FilmLibrary result = filmLibraryServiceImpl.selectFilmLibraryById(id);
 		model.addAttribute("item",result);
 		List<Area> list = settingService.queryAllCityByRedis();
 		model.addAttribute("citys",list);
 		settingService.getAllProvinceList(model);
-
+		User user = MidlandHelper.getCurrentUser(request);
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "filmLibrary/updateFilmLibrary";
 	}
 
