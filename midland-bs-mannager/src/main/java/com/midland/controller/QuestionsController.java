@@ -62,6 +62,8 @@ public class QuestionsController extends BaseFilter {
 		List<ParamObject> sources = JsonMapReader.getMap("source");
 		model.addAttribute("sources",sources);
 		model.addAttribute("auditFlag",redisServiceImpl.getAnswerAuditFlag());
+		List<ParamObject> obj = JsonMapReader.getMap("is_delete");
+		model.addAttribute("isDeletes",obj);
 		return "/questions/qeustionsIndex";
 	}
 	@RequestMapping("/audit_answer")

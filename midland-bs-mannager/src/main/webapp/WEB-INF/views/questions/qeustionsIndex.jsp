@@ -49,6 +49,18 @@
                             </c:forEach>
                         </select>
                     </li>
+                    <c:if test="${not empty isSuper}">
+                        <li><span>是否删除：</span>
+                            <select name="isDelete" id="isDelete" class="dropdown">
+                                <option value="">全部</option>
+                                <c:forEach items="${isDeletes}" var="s1">
+                                    <option value="${s1.id}" <c:if test="${s1.id==0}">selected</c:if>>
+                                            ${s1.name}
+                                    </option>
+                                </c:forEach>
+                            </select>
+                        </li>
+                    </c:if>
                     <li>
                         <span>提问时间：</span>
                         <input class="Wdate half" id="time1"
@@ -59,6 +71,7 @@
                             id="time2" name="endTime"/></li>
 
                     <li>
+
                         <input class="public_btn bg1" type="submit" name="inquery" id="inquery" value="查询"/></li>
                 </ul>
             </form>
