@@ -93,10 +93,7 @@
 
 
     function export1() {
-
-        return;
         var data = $("#searchForm").serialize();
-
         window.location.href = "${ctx}/rest/entrust/buy/export?" + data;
     }
 

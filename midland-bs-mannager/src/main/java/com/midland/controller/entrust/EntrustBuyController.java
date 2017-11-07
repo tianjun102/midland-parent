@@ -249,8 +249,14 @@ public class EntrustBuyController extends BaseFilter{
 	
 	@RequestMapping("/export")
 	public void userInfoExportExcel(Entrust entrust,HttpServletRequest request, HttpServletResponse response) throws Exception {
-		User user =MidlandHelper.getCurrentUser(request);
-		entrust.setCityId(user.getCityId());
+
+		User user = MidlandHelper.getCurrentUser(request);
+		if(!Contant.isSuper.equals(user.getIsSuper())){//不是超级管理员，只能看属性城市的相关信息
+			entrust.setCityId(user.getCityId());
+			entrust.setIsDelete(Contant.isNotDelete);
+		}
+
+		entrust.setEntrustType(Contant.ENTRUST_BUY);
 		List<Entrust> dataList = entrustServiceImpl.findEntrustList(entrust);
 		PoiExcelExport pee = new PoiExcelExport(response,"委托记录","sheet1");
 		//调用
