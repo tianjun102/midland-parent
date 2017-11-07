@@ -38,7 +38,9 @@
                         <td><c:if test="${item.releaseStatus==0}">已上线</c:if><c:if test="${item.releaseStatus==1}">已下线</c:if></td>
                         <td>${item.releaseTime}</td>
 						<td>
+                            <c:if test="${item.isDelete==0}">
                             <a target="contentF" class="edit_img" href="${ctx}/rest/recruitManager/to_update?id=${item.id}"></a>
+                            </c:if>
                             <c:if test="${item.isDelete==0}">
                                 <a target="contentF" onclick="delete1(${item.id },1)" class="delete_img"></a>
                             </c:if>
@@ -176,7 +178,10 @@
                ids.push($(this).val());
            }
        });
-
+       if(ids.length==0){
+           layer.msg("请选择所操作的数据！", {icon: 2})
+           return;
+       }
        $.ajax({
            type: "post",
            url: "${ctx}/rest/recruitManager/batchUpdate?ids="+ids+"&isDelete="+status,

@@ -43,7 +43,9 @@
                     <td>${item.dataTime}</td>
                     <td>${item.updateTime}</td>
                     <td>
+                        <c:if test="${item.isDelete==0}">
                         <a target="contentF"  class="edit_img" title="编辑" onclick="to_edit(${item.id })"></a>
+                        </c:if>
                         <a target="contentF" class="delete_img" title="删除" onclick="delete1(${item.id })"></a>
                     </td>
                 </tr>
@@ -132,7 +134,10 @@
                 ids.push($(this).val());
             }
         });
-
+        if(ids.length==0){
+            layer.msg("请选择所操作的数据！", {icon: 2})
+            return;
+        }
         $.ajax({
             type: "post",
             url: "${ctx}/rest/quotationSecondHand/batchUpdate?ids="+ids+"&isDelete="+status,

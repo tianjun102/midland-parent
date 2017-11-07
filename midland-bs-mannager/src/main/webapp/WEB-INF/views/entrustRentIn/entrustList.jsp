@@ -73,8 +73,9 @@
                             <c:if test="${item.resetFlag==1}">
                                 <a target="contentF" class="arrange_img" title="分配" onclick="toRedistribute(${item.id })"></a>
                             </c:if>
-
+                            <c:if test="${item.isDelete==0}">
                             <a target="contentF" class="edit_img" title="编辑" onclick="toUpdateEntrust(${item.id })"></a>
+                            </c:if>
                             <a target="contentF"  class="delete_img" title="删除"  onclick="deleteEntrust(${item.id })"></a>
                         </td>
                     </tr>
@@ -195,7 +196,10 @@
                 ids.push($(this).val());
             }
         });
-
+        if(ids.length==0){
+            layer.msg("请选择所操作的数据！", {icon: 2})
+            return;
+        }
         $.ajax({
             type: "post",
             url: "${ctx}/rest/entrust/batchUpdate?ids="+ids+"&isDelete="+status,

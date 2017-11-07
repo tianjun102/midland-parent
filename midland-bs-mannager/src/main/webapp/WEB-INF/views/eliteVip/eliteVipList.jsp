@@ -41,7 +41,9 @@
 						<td>${item.address}</td>
 						<td>${item.post}</td>
 						<td>
+                            <c:if test="${item.isDelete==0}">
                             <a class="edit_img" target="contentF" href="${ctx}/rest/eliteVip/to_update?id=${item.id}"></a>
+                            </c:if>
                             <c:if test="${item.isDelete==0}">
                                 <a target="contentF" onclick="delete1(${item.id },1)" class="delete_img"></a>
                             </c:if>
@@ -119,7 +121,10 @@
                 ids.push($(this).val());
             }
         });
-
+        if(ids.length==0){
+            layer.msg("请选择所操作的数据！", {icon: 2})
+            return;
+        }
         $.ajax({
             type: "post",
             url: "${ctx}/rest/eliteVip/batchUpdate?ids="+ids+"&isDelete="+status,

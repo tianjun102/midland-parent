@@ -60,7 +60,9 @@
                                     <a target="contentF" class="offon_img" title="状态：隐藏" onclick="hiddenOrShow(${item.id },0)"></a>
                                 </c:otherwise>
                             </c:choose>
+                            <c:if test="${item.isDelete==0}">
                             <a target="contentF"   class="edit_img" title="编辑" onclick="to_edit(${item.id })"></a>
+                            </c:if>
                             <c:if test="${item.isDelete==0}">
                                 <a target="contentF" onclick="deleteOrRecover(${item.id },1)" class="delete_img"></a>
                             </c:if>
@@ -198,7 +200,10 @@
                 ids.push($(this).val());
             }
         });
-
+        if(ids.length==0){
+            layer.msg("请选择所操作的数据！", {icon: 2})
+            return;
+        }
         $.ajax({
             type: "post",
             url: "${ctx}/rest/tradeFair/batchUpdate?ids="+ids+"&isDelete="+status,

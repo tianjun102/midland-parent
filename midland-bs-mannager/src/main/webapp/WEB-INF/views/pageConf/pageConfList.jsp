@@ -54,7 +54,9 @@
                             <c:if test="${item.metaShow==1}">开启</c:if>
                         </td>
 						<td>
+                            <c:if test="${item.isDelete==0}">
                             <a class="edit_img" target="contentF" href="${ctx}/rest/pageConf/to_update?id=${item.id}"></a>
+                            </c:if>
                             <c:if test="${item.isDelete==0}">
                                 <a target="contentF" onclick="delete1(${item.id },1)" class="delete_img"></a>
                             </c:if>
@@ -158,7 +160,10 @@
                 ids.push($(this).val());
             }
         });
-
+        if(ids.length==0){
+            layer.msg("请选择所操作的数据！", {icon: 2})
+            return;
+        }
         $.ajax({
             type: "post",
             url: "${ctx}/rest/pageConf/batchUpdate?ids="+ids+"&isDelete="+status,

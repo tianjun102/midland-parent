@@ -27,7 +27,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		</c:if>
 		<div class="txtScroll-top">
 		<c:if test="${user.userType==0}">
-			<div class="bd">
+			<%--<div class="bd">
 				<ul class="infoList">
 				<c:choose>
 				<c:when test="${!empty requestScope.list }">
@@ -40,11 +40,11 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				</c:otherwise>
 				</c:choose>
 				</ul>
-			</div>
+			</div>--%>
 		</c:if>
 		
 		<c:if test="${user.userType==1}">
-			<div class="bd">
+			<%--<div class="bd">
 				<ul class="infoList">
 				<c:choose>
 				<c:when test="${!empty requestScope.list }">
@@ -57,7 +57,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				</c:otherwise>
 				</c:choose>
 				</ul>
-			</div>
+			</div>--%>
 		</c:if>
 		
 		</div>

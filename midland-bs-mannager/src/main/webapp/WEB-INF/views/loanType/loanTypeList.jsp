@@ -33,7 +33,9 @@
 						<td>${item.rate}</td>
 						<td>${item.cityName}</td>
 						<td>
+                            <c:if test="${item.isDelete==0}">
                             <a class="edit_img" title="编辑" target="contentF" onclick="to_edit(${item.id })"></a>
+                            </c:if>
                             <c:if test="${item.isDelete==0}">
                                 <a target="contentF" onclick="delete1(${item.id },1)" class="delete_img"></a>
                             </c:if>
@@ -137,7 +139,10 @@
                 ids.push($(this).val());
             }
         });
-
+        if(ids.length==0){
+            layer.msg("请选择所操作的数据！", {icon: 2})
+            return;
+        }
         $.ajax({
             type: "post",
             url: "${ctx}/rest/loanType/batchUpdate?ids="+ids+"&isDelete="+status,

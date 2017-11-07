@@ -39,7 +39,9 @@
 								<td>
 									<a target="contentF" title="上移" class="up_img" onclick="sort(${linkUrl.id },${linkUrl.orderBy},1)"></a>
 									<a target="contentF" title="下移" class="down_img" onclick="sort(${linkUrl.id },${linkUrl.orderBy},2)"></a>
+									<c:if test="${item.isDelete==0}">
 									<a onclick="preUpdate(${linkUrl.id })" target="contentF" class = "edit_img" title = "编辑"></a>
+									</c:if>
 									<c:if test="${linkUrl.isDelete==0}">
 										<a target="contentF" title="删除" onclick="isDelete(${linkUrl.id },1)" class="delete_img"></a>
 									</c:if>
@@ -377,7 +379,10 @@ function takeblacklist(userId){
                 ids.push($(this).val());
             }
         });
-
+        if(ids.length==0){
+            layer.msg("请选择所操作的数据！", {icon: 2})
+            return;
+        }
         $.ajax({
             type: "post",
             url: "${ctx}/rest/setting/batchUpdatelinkUrl?ids="+ids+"&isDelete="+status,

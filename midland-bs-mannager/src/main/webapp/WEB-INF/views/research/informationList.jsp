@@ -42,7 +42,9 @@
                         <td><c:if test="${item.platform==0}">网站</c:if><c:if test="${item.platform==1}">微站</c:if> </td>
                         <td>
                             <a target="contentF" title="评论" class="comment_img" onclick="to_comment(${item.id});" ></a>
+                            <c:if test="${item.isDelete==0}">
                             <a target="contentF" title="编辑" class="edit_img"  href="${ctx}/rest/research/to_update?id=${item.id}"></a>
+                            </c:if>
                             <c:if test="${item.isDelete==0}">
                                 <a target="contentF" onclick="deleteInfrmateion(${item.id },1)" class="delete_img"></a>
                             </c:if>
@@ -206,7 +208,10 @@
                 ids.push($(this).val());
             }
         });
-
+        if(ids.length==0){
+            layer.msg("请选择所操作的数据！", {icon: 2})
+            return;
+        }
         $.ajax({
             type: "post",
             url: "${ctx}/rest/information/batchUpdate?ids="+ids+"&isDelete="+status,
