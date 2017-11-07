@@ -7,20 +7,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
-    <link rel="stylesheet" type="text/css" href="${ctx }/assets/scripts/uploadify/uploadify.css">
-    <script type="text/javascript" src="${ctx }/assets/scripts/uploadify/jquery.uploadify.min.js"></script>
-    <style type="text/css">
-        .content ul.adminfo li>span{
-            float: left;
-            display: inline-block;
-            width: 90px;
-            height: 28px;
-            line-height: 28px;
-            text-align: right;
-            font-size: 14px;
-            color: rgb( 102, 102, 102 );
-        }
-    </style>
     <script type="text/javascript">
         $(function () {
             $('#file_upload').uploadify({
@@ -44,6 +30,8 @@
                 'swf': '${ctx }/assets/scripts/uploadify/uploadify.swf',
                 'uploader': '${ctx }/rest/upload/img',
                 'multi': false,// 是否支持多个文件上传
+                'fileTypeExts': '*.rm;*.rmvb;*.wmv;*.avi;*.mp4;*.3gp;*.mkv',
+                'onSelectError' : uploadify_onSelectError,
                 'onUploadSuccess': function (file, data, response) {
                     $("#videoUrl").attr("value", data);
                     $("#videoUrl1").attr("src", "${ctx}/assets/UEditor/dialogs/attachment/fileTypeImages/"+getFileIcon(data));
@@ -59,6 +47,29 @@
             });
         })
 
+
+
+        var uploadify_onSelectError = function(file, errorCode, errorMsg) {
+            var msgText = "上传失败\n";
+            switch (errorCode) {
+                case SWFUpload.QUEUE_ERROR.QUEUE_LIMIT_EXCEEDED:
+                    //this.queueData.errorMsg = "每次最多上传 " + this.settings.queueSizeLimit + "个文件";
+                    msgText += "每次最多上传 " + this.settings.queueSizeLimit + "个文件";
+                    break;
+                case SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT:
+                    msgText += "文件大小超过限制( " + this.settings.fileSizeLimit + " )";
+                    break;
+                case SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE:
+                    msgText += "文件大小为0";
+                    break;
+                case SWFUpload.QUEUE_ERROR.INVALID_FILETYPE:
+                    msgText += "文件格式不正确，仅限 " + this.settings.fileTypeExts;
+                    break;
+                default:
+                    msgText += "错误代码：" + errorCode + "\n" + errorMsg;
+            }
+            alert(msgText);
+        };
     </script>
 
 </head>

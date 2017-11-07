@@ -66,7 +66,7 @@
             </form>
             <input onclick="batchDelete(1)" class="public_btn bg1 listButton" type="submit" value="批量删除"/>
             <c:if test="${not empty isSuper}">
-                <input onclick="batchDelete(0)" class="public_btn bg1" type="submit" value="批量恢复"/>
+                <input onclick="batchDelete(0)" class="public_btn bg1  listButton" type="submit" value="批量恢复"/>
             </c:if>
             <input onclick="export1()" class="public_btn bg1 listButton" type="submit" value="导出"/>
         </div>

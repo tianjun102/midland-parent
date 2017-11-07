@@ -263,15 +263,14 @@ public class AppointmentController extends BaseFilter {
 			exportModel.setModelName11(appointment1.getLayout());
 			exportModel.setModelName12(appointment1.getMeasure());
 			exportModel.setModelName13(appointment1.getPrice());
-			exportModel.setModelName14(appointment1.getEntrustTime());
-			exportModel.setModelName15(appointment1.getAgentName());
+			exportModel.setModelName14(appointment1.getAgentName());
 			List<ParamObject> statusList = JsonMapReader.getMap("appointment_status");
-			exportModel.setModelName16(MidlandHelper.getNameById(appointment1.getStatus(), statusList));
-			exportModel.setModelName17(appointment1.getHandleTime());
+			exportModel.setModelName15(MidlandHelper.getNameById(appointment1.getStatus(), statusList));
+			exportModel.setModelName16(appointment1.getHandleTime());
 			exportModels.add(exportModel);
 		}
-		String titleColumn[] = {"modelName1", "modelName2", "modelName3", "modelName4", "modelName5", "modelName6", "modelName7", "modelName8", "modelName9", "modelName10", "modelName11", "modelName12", "modelName13", "modelName14", "modelName15", "modelName16", "modelName17"};
-		String titleName[] = {"委托编号", "平台", "称呼", "手机号码", "类型", "分类", "委托时间", "所属区域", "小区名", "门牌地址", "户型", "面积", "售价/租价", "预约时间", "经纪人", "状态", "处理时间"};
+		String titleColumn[] = {"modelName1", "modelName2", "modelName3", "modelName4", "modelName5", "modelName6", "modelName7", "modelName8", "modelName9", "modelName10", "modelName11", "modelName12", "modelName13", "modelName14", "modelName15", "modelName16"};
+		String titleName[] = {"预约编号", "平台", "称呼", "手机号码", "类型", "分类", "预约时间", "所属区域", "小区名", "门牌地址", "户型", "面积", "售价/租价", "经纪人", "状态", "处理时间"};
 		int titleSize[] = {13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13};
 		//其他设置 set方法可全不调用
 		pee.wirteExcel(titleColumn, titleName, titleSize, exportModels,request);
