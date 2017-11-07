@@ -39,8 +39,15 @@
 								<td>
 									<a target="contentF" title="上移" class="up_img" onclick="sort(${linkUrl.id },${linkUrl.orderBy},1)"></a>
 									<a target="contentF" title="下移" class="down_img" onclick="sort(${linkUrl.id },${linkUrl.orderBy},2)"></a>
+									<c:if test="${item.isDelete==0}">
 									<a onclick="preUpdate(${linkUrl.id })" target="contentF" class = "edit_img" title = "编辑"></a>
-									<a target="contentF" class = "delete_img" title = "删除" onclick="isDelete(${linkUrl.id })"></a>
+									</c:if>
+									<c:if test="${linkUrl.isDelete==0}">
+										<a target="contentF" title="删除" onclick="isDelete(${linkUrl.id },1)" class="delete_img"></a>
+									</c:if>
+									<c:if test="${linkUrl.isDelete==1}">
+										<a target="contentF" class="recove_img" title="恢复" onclick="isDelete(${linkUrl.id },0)"></a>
+									</c:if>
 									<a <c:if test="${linkUrl.isShow==0}">class="onoff_img"</c:if> <c:if test="${linkUrl.isShow==1}">class="offon_img"</c:if> target="contentF" onclick="updateLinkUrl(${linkUrl.isShow},${linkUrl.id })"></a>
 								  </td>
 							</tr>
@@ -113,7 +120,11 @@ function takeblacklist(userId){
 
 
 
-	function isDelete(Id){
+	function isDelete(Id,isDelete){
+        var msg = "您确定要删除当前数据吗？";
+        if(isDelete==0){
+            msg = "您确定要恢复当前数据吗？"
+        }
 		layer.open({
 			  type: 1,
 			  skin: 'layer-style',
@@ -130,7 +141,7 @@ function takeblacklist(userId){
 			  yes: function(index){
 				  $.ajax({ 
 						type: "post", 
-						url: "${ctx}/rest/setting/deleteLinkUrl?id="+Id,
+						url: "${ctx}/rest/setting/deleteLinkUrl?id="+Id+"&isDelete="+isDelete,
 						cache:false, 
 						async:false, // 此处必须同步
 						dataType: "json",
@@ -368,7 +379,10 @@ function takeblacklist(userId){
                 ids.push($(this).val());
             }
         });
-
+        if(ids.length==0){
+            layer.msg("请选择所操作的数据！", {icon: 2})
+            return;
+        }
         $.ajax({
             type: "post",
             url: "${ctx}/rest/setting/batchUpdatelinkUrl?ids="+ids+"&isDelete="+status,

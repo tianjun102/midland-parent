@@ -36,7 +36,15 @@
 			<ul class = "userinfo row">
 				<li><span>用户名：</span><input type="text" name="username" id="username" placeholder="请输入用户名" /></li>
 				<li><span>手机号码：</span><input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>
-				<li><span>实名状态：</span><input type="text" name="auditStatus" id="auditStatus" placeholder="请输入实名状态" /></li>
+				<li><span>实名状态：</span>
+					<select name="auditStatus" id="auditStatus" class="dropdown">
+						<option value="" >请选择</option>
+						<option value="0" >未审核</option>
+						<option value="1" >审核中</option>
+						<option value="2" >已审核</option>
+						<option value="3" >拒绝</option>
+					</select>
+				</li>
 				<li><span>平台：</span>
 					<select name="source" id="source" class="dropdown">
 						<option value="" >请选择</option>

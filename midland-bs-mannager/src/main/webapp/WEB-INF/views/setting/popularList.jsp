@@ -54,8 +54,15 @@
 								<td>${popular.cateName}</td>
 								<td>${popular.name}</td>
 								<td>
+									<c:if test="${item.isDelete==0}">
 									<a onclick="preUpdate(${popular.id })" target="contentF" class = "edit_img" title = "编辑"></a>
-									<a target="contentF" class = "delete_img" title = "删除" onclick="isDelete(${popular.id })"></a>
+									</c:if>
+									<c:if test="${popular.isDelete==0}">
+										<a target="contentF" title="删除" onclick="isDelete(${popular.id },1)" class="delete_img"></a>
+									</c:if>
+									<c:if test="${popular.isDelete==1}">
+										<a target="contentF" class="recove_img" title="恢复" onclick="isDelete(${popular.id },0)"></a>
+									</c:if>
 									<a <c:if test="${popular.isShow==0}">class="onoff_img"</c:if> <c:if test="${popular.isShow==1}">class="offon_img"</c:if> target="contentF" onclick="updatePopular(${popular.isShow},${popular.id })"></a>
 								  </td>
 							</tr>
@@ -128,7 +135,11 @@ function takeblacklist(userId){
 
 
 
-	function isDelete(Id){
+	function isDelete(Id,isDelete){
+        var msg = "您确定要删除当前数据吗？";
+        if(isDelete==0){
+            msg = "您确定要恢复当前数据吗？"
+        }
 		layer.open({
 			  type: 1,
 			  skin: 'layer-style',
@@ -139,13 +150,13 @@ function takeblacklist(userId){
 			  scrollbar:false,
 			  content:
 			 	'<section class = "content" style = "border:none; height:100%;">'+
-							'<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">您确定要删除吗?</p>'+
+							'<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">'+msg+'</p>'+
 				'</section>',
 			  btn:['确定','取消'],
 			  yes: function(index){
 				  $.ajax({ 
 						type: "post", 
-						url: "${ctx}/rest/setting/deletePopular?id="+Id,
+						url: "${ctx}/rest/setting/deletePopular?id="+Id+"&isDelete="+isDelete,
 						cache:false, 
 						async:false, // 此处必须同步
 						dataType: "json",
@@ -342,7 +353,10 @@ function takeblacklist(userId){
                 ids.push($(this).val());
             }
         });
-
+        if(ids.length==0){
+            layer.msg("请选择所操作的数据！", {icon: 2})
+            return;
+        }
         $.ajax({
             type: "post",
             url: "${ctx}/rest/setting/batchUpdatePopular?ids="+ids+"&isDelete="+status,

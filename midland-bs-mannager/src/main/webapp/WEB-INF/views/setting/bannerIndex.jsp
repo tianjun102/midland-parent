@@ -100,8 +100,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 					<li><span>状态：</span>
 						<select name="enabled" id="enabled" style="height: 28px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
 							<option value="">全部</option>
-							<option value="0">关闭</option>
-							<option value="1">开放</option>
+							<option value="1">关闭</option>
+							<option value="0">开放</option>
 						</select>
 					</li>
 					<li><span>上线时间：</span><input  class="Wdate half" id="time1"
@@ -134,7 +134,11 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
     	$('#searchForm').submit();
     }) 
     
-    	function deleteBanner(id){
+    	function deleteBanner(id,isDelete){
+            var msg = "您确定要删除当前数据吗？";
+            if(isDelete==0){
+                msg = "您确定要恢复当前数据吗？"
+            }
     	layer.open({
 			  type: 1,
 			  skin: 'layer-style',
@@ -145,13 +149,13 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			  scrollbar:false,
 			  content:
 				 	'<section class = "content" style = "border:none; height:100%;">'+
-						'<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">您确定要删除当前Banner吗?</p>'+
+						'<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">'+msg+'</p>'+
 					'</section>',
 			  btn:['确定','取消'],
 			  yes: function(index){
 				  $.ajax({ 
 						type: "post", 
-						url: "${ctx}/rest/setting/deleteBanner?id="+id,
+						url: "${ctx}/rest/setting/deleteBanner?id="+id+"&isDelete="+isDelete,
 						cache:false, 
 						async:false, // 此处必须同步
 						dataType: "json",

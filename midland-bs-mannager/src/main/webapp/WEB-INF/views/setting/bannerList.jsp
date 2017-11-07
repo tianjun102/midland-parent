@@ -92,8 +92,15 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							<td>${banner.endTime}</td>
 							<td>${banner.clikNum}</td>
 							<td>
+								<c:if test="${item.isDelete==0}">
 								<a target="contentF" class = "edit_img" title = "编辑" href="${ctx}/rest/setting/enterEditBanner?id=${banner.id}"></a>
-								<a onclick="deleteBanner(${banner.id})"  class = "delete_img" title = "删除"></a>
+								</c:if>
+								<c:if test="${banner.isDelete==0}">
+									<a target="contentF" title="删除" onclick="deleteBanner(${banner.id },1)" class="delete_img"></a>
+								</c:if>
+								<c:if test="${banner.isDelete==1}">
+									<a target="contentF" class="recove_img" title="恢复" onclick="deleteBanner(${banner.id },0)"></a>
+								</c:if>
 								<a class="up_img" title="上移" target="contentF" onclick="sort(${banner.id },${banner.orderBy},1)"></a>
 								<a class="down_img" title="下移" target="contentF" onclick="sort(${banner.id },${banner.orderBy},2)"></a>
 								<a <c:if test="${banner.enabled==0}">class="onoff_img"</c:if> <c:if test="${banner.enabled==1}">class="offon_img"</c:if> target="contentF" onclick="updateEnabled(${banner.enabled},${banner.id })"></a>
@@ -169,7 +176,10 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                 ids.push($(this).val());
             }
         });
-
+        if(ids.length==0){
+            layer.msg("请选择所操作的数据！", {icon: 2})
+            return;
+        }
         $.ajax({
             type: "post",
             url: "${ctx}/rest/setting/batchUpdateBanner?ids="+ids+"&isDelete="+status,

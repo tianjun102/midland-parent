@@ -154,7 +154,9 @@ public class ResumeManagerController extends BaseFilter {
 			message.setTo("977543176@qq.com");
 			message.setSubject(resumeManager.getTitle());
 			message.setText(resumeManager.getReply());
-			apiHelper.emailSender("sendSimpleMail",message);
+			if(resumeManager.getIsDelete()==null) {
+				apiHelper.emailSender("sendSimpleMail", message);
+			}
 			map.put("state",0);
 		} catch(Exception e) {
 			log.error("updateResumeManagerById  {}",resumeManager,e);

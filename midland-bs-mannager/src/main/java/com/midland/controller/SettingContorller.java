@@ -200,7 +200,6 @@ public class SettingContorller extends BaseFilter {
     @ResponseBody
     public Object deletePopular(Model model, HttpServletRequest request, Popular popular) {
         Map<String, String> parem = new HashMap<>();
-        popular.setIsDelete(1);
         Integer num = settingService.updatePopular(popular);
         if (num > 0) {
             parem.put("flag", "1");
@@ -326,7 +325,6 @@ public class SettingContorller extends BaseFilter {
     @ResponseBody
     public Object deleteLinkUrl(Model model, HttpServletRequest request, LinkUrlManager linkUrlManager) {
         Map<String, String> parem = new HashMap<>();
-        linkUrlManager.setIsDelete(1);
         Integer num = settingService.updateLinkUrlManager(linkUrlManager);
         if (num > 0) {
             parem.put("flag", "1");
@@ -456,7 +454,6 @@ public class SettingContorller extends BaseFilter {
     @ResponseBody
     public Object deleteBanner(Model model, HttpServletRequest request, Banner banner) {
         Map<String, Object> map = new HashMap<>();
-        banner.setIsDelete(1);
         Integer num = settingService.updateBanner(banner);
         if (num > 0) {
             map.put("result", "ok");

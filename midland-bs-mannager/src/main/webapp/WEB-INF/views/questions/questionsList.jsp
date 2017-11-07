@@ -59,7 +59,12 @@
                                 </c:otherwise>
                             </c:choose>
                             <a  target="contentF" class="reply_img" title="回答" href="${ctx}/rest/questions/to_repeat?id=${item.id}"></a>
-                            <a  target="contentF" class="delete_img" title="删除" onclick="deleteQuestions(${item.id},1)"></a>
+                            <c:if test="${item.isDelete==0}">
+                                <a target="contentF" onclick="deleteQuestions(${item.id },1)" class="delete_img"></a>
+                            </c:if>
+                            <c:if test="${item.isDelete==1}">
+                                <a target="contentF" class="recove_img" title="恢复" onclick="deleteQuestions(${item.id },0)"></a>
+                            </c:if>
                         </td>
                     </tr>
                 </c:forEach>
@@ -170,7 +175,10 @@ function toAudit(id) {
                 ids.push($(this).val());
             }
         });
-
+        if(ids.length==0){
+            layer.msg("请选择所操作的数据！", {icon: 2})
+            return;
+        }
         $.ajax({
             type: "post",
             url: "${ctx}/rest/questions/batchUpdate?ids="+ids+"&isDelete="+status,
@@ -190,7 +198,10 @@ function toAudit(id) {
     }
 
     function deleteQuestions(id,flag){
-
+        var msg = "您确定要删除当前数据吗？";
+        if(flag==0){
+            msg = "您确定要恢复当前数据吗？"
+        }
         layer.open({
             type: 1,
             skin: 'layer-style',
@@ -201,7 +212,7 @@ function toAudit(id) {
             scrollbar:false,
             content:
             '<section class = "content" style = "border:none; height:100%;">'+
-            '<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">您确定要删除吗?</p>'+
+            '<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">'+msg+'</p>'+
             '</section>',
             btn:['确定','取消'],
             yes: function(index){

@@ -29,7 +29,7 @@
 		<section class = "content">
 			<p class = "detail-title">
 				<span>系统管理>>前端用户管理</span>
-				<a class = "setup"  target="contentF" onclick="toAddPage()">创建用户</a>
+				<%--<a class = "setup"  target="contentF" onclick="toAddPage()">创建用户</a>--%>
 			</p>
 		<form action="${ctx }/rest//user/bsUserList" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">

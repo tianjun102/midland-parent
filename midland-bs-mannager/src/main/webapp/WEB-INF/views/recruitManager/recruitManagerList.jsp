@@ -38,8 +38,15 @@
                         <td><c:if test="${item.releaseStatus==0}">已上线</c:if><c:if test="${item.releaseStatus==1}">已下线</c:if></td>
                         <td>${item.releaseTime}</td>
 						<td>
+                            <c:if test="${item.isDelete==0}">
                             <a target="contentF" class="edit_img" href="${ctx}/rest/recruitManager/to_update?id=${item.id}"></a>
-                            <a target="contentF" class="delete_img" onclick="delete1(${item.id })"></a>
+                            </c:if>
+                            <c:if test="${item.isDelete==0}">
+                                <a target="contentF" onclick="delete1(${item.id },1)" class="delete_img"></a>
+                            </c:if>
+                            <c:if test="${item.isDelete==1}">
+                                <a target="contentF" class="recove_img" title="恢复" onclick="delete1(${item.id },0)"></a>
+                            </c:if>
                             <c:if test="${empty item.releaseStatus or item.releaseStatus==1}"><a target="contentF" title="上线" class="lineup_img" onclick="updateStatus(${item.id},${item.releaseStatus});"></a></c:if>
                             <c:if test="${item.releaseStatus==0}"><a target="contentF" title="下线" class="linedown_img" onclick="updateStatus(${item.id},${item.releaseStatus});"></a></c:if>
                         </td>
@@ -64,7 +71,11 @@
 
 <script type="text/javascript">
 
-   function delete1(id){
+   function delete1(id,isDelete){
+       var msg = "您确定要删除当前数据吗？";
+       if(isDelete==0){
+           msg = "您确定要恢复当前数据吗？"
+       }
         layer.open({
             type: 1,
             skin: 'layer-style',
@@ -75,13 +86,13 @@
             scrollbar:false,
             content:
             '<section class = "content" style = "border:none; height:100%;">'+
-            '<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">您确定要删除当前招聘信息吗?</p>'+
+            '<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">'+msg+'</p>'+
             '</section>',
             btn:['确定','取消'],
             yes: function(index){
                 $.ajax({
                     type: "post",
-                    url: "${ctx}/rest/recruitManager/update?id="+id+"&isDelete=1",
+                    url: "${ctx}/rest/recruitManager/update?id="+id+"&isDelete="+isDelete,
                     cache:false,
                     async:false, // 此处必须同步
                     dataType: "json",
@@ -167,7 +178,10 @@
                ids.push($(this).val());
            }
        });
-
+       if(ids.length==0){
+           layer.msg("请选择所操作的数据！", {icon: 2})
+           return;
+       }
        $.ajax({
            type: "post",
            url: "${ctx}/rest/recruitManager/batchUpdate?ids="+ids+"&isDelete="+status,

@@ -32,7 +32,9 @@
 						<td>${item.discountVal}</td>
 						<td>
                             <a class="edit_img" title="编辑" target="contentF" onclick="to_edit(${item.id })"></a>
+                            <c:if test="${item.isDelete==0}">
                             <a class="delete_img" title="删除" target="contentF" onclick="delete1(${item.id })"></a>
+                            </c:if>
                         </td>
                     </tr>
                 </c:forEach>
@@ -127,7 +129,10 @@
                 ids.push($(this).val());
             }
         });
-
+        if(ids.length==0){
+            layer.msg("请选择所操作的数据！", {icon: 2})
+            return;
+        }
         $.ajax({
             type: "post",
             url: "${ctx}/rest/discount/batchUpdate?ids="+ids+"&isDelete="+status,

@@ -41,8 +41,15 @@
 						<td>${item.address}</td>
 						<td>${item.post}</td>
 						<td>
+                            <c:if test="${item.isDelete==0}">
                             <a class="edit_img" target="contentF" href="${ctx}/rest/eliteVip/to_update?id=${item.id}"></a>
-                            <a class="delete_img" target="contentF" onclick="delete1(${item.id })"></a>
+                            </c:if>
+                            <c:if test="${item.isDelete==0}">
+                                <a target="contentF" onclick="delete1(${item.id },1)" class="delete_img"></a>
+                            </c:if>
+                            <c:if test="${item.isDelete==1}">
+                                <a target="contentF" class="recove_img" onclick="delete1(${item.id },0)"></a>
+                            </c:if>
                         </td>
                     </tr>
                 </c:forEach>
@@ -65,10 +72,10 @@
 
 <script type="text/javascript">
 
-    function delete1(id){
+    function delete1(id,isDelete){
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/eliteVip/update?id="+id+"&isDelete=1",
+            url: "${ctx}/rest/eliteVip/update?id="+id+"&isDelete="+isDelete,
             async: false, // 此处必须同步
             dataType: "json",
 
@@ -114,7 +121,10 @@
                 ids.push($(this).val());
             }
         });
-
+        if(ids.length==0){
+            layer.msg("请选择所操作的数据！", {icon: 2})
+            return;
+        }
         $.ajax({
             type: "post",
             url: "${ctx}/rest/eliteVip/batchUpdate?ids="+ids+"&isDelete="+status,

@@ -15,6 +15,7 @@
                 'uploader': '${ctx }/rest/upload/excel_read',
                 'method': 'get',
                 'multi': false,// 是否支持多个文件上传
+                'buttonText': '上传文件',
                 'onUploadStart': function (file) {
 
                     $("#file_upload").uploadify("settings", "formData", {
