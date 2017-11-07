@@ -63,7 +63,7 @@
                                 <a target="contentF" onclick="deleteQuestions(${item.id },1)" class="delete_img"></a>
                             </c:if>
                             <c:if test="${item.isDelete==1}">
-                                <a target="contentF" class="recove_img" title="恢复" onclick="deleteQuestions(${item.id },0)"></a>
+                                <a target="contentF" class="recove_img" title="恢复" onclick="recover(${item.id },0)"></a>
                             </c:if>
                         </td>
                     </tr>
@@ -239,6 +239,31 @@ function toAudit(id) {
             }
         });
 
+    }
+
+
+    function recover(id,flag){
+        var msg = "您确定要删除当前数据吗？";
+        if(flag==0){
+            msg = "您确定要恢复当前数据吗？"
+        }
+
+                $.ajax({
+                    type: "post",
+                    url: "${ctx}/rest/questions/update?id="+id+"&isDelete="+flag,
+                    cache:false,
+                    async:false, // 此处必须同步
+                    dataType: "json",
+                    success: function(data){
+                        if(data.state==0){
+                            layer.msg("操作成功！",{icon:1});
+                            setTimeout(function(){$("#searchForm").submit();},1000);
+                        }else{
+                            layer.msg("操作失败！！",{icon:7});
+                        }
+                        layer.close(index);
+                    }
+                });
     }
 </script>
 </body>
