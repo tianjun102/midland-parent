@@ -90,12 +90,16 @@ function ajaxGet(url, target, callback) {
     });
 }
 function submitSearchRequest(formId,target){
+    var pageNo = GetQueryString("pageNo",$("#"+target).attr("url"));
     $("#"+formId+" input[type='text']").each(function(){
         $(this).val($.trim($(this).val()).replace(new RegExp("'","gm"),"").replace(new RegExp("%","gm"),""));
     });
     var formSerialize=$("#"+formId).serialize();
     var url=$("#"+formId).attr("action");
     url=getRandedURL(url);
+    if(pageNo!=null){
+        url = url+"&pageNo="+pageNo;
+    }
     $.get(url,formSerialize,function(data, textStatus) {
         commonSuccessCallback(target,data);
         $("#"+target).attr("url",url+"&"+formSerialize);
@@ -161,3 +165,15 @@ function getFileIcon(url){
     return maps[ext] ? maps[ext]:maps['txt'];
 }
 
+
+function GetQueryString(name,url)
+{
+    if(url==undefined){
+        return null;
+    }
+    var index = url.indexOf("?");
+    var data=url.substring(index,url.length);
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    var r = data.substr(1).match(reg);
+    if(r!=null)return  unescape(r[2]); return null;
+}
