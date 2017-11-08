@@ -659,7 +659,7 @@ input.date {
 /***********弹出框更新页面样式updInfo***********/
 .content ul.updInfo > li{
 	float: none;
-	width: 100%;
+	/*width:	 100%;*/
 }
 .content ul.updInfo li>span{
 	float: none;
@@ -684,6 +684,7 @@ input.date {
 }
 .updInfo .fileupload{
 	display: inline-block;
+	width: 250px;
 }
 .updInfo  .uploadify,
 .updInfo .uploadify-queue{

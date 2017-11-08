@@ -73,6 +73,7 @@
                     msgText += "错误代码：" + errorCode + "\n" + errorMsg;
             }
             alert(msgText);
+            return;
         };
     </script>
 

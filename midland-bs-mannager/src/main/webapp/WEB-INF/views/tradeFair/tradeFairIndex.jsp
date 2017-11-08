@@ -72,7 +72,7 @@
             title: ['新增楼盘信息'],
             resize: false,
             scrollbar: false,
-            content: ['${ctx}/rest/tradeFair/to_add', 'no']
+            content: ['${ctx}/rest/tradeFair/to_add', 'yes']
         });
     }
 

@@ -34,7 +34,9 @@
                         <input type="hidden" id="id" value="${item.id}"/>
                         <td><input type="checkbox" name="pid" value="${item.id}"></td>
                         <td>${xh.count }</td>
-                        <td><img src="${item.imgUrl }" style="width:30px;height:30px" alt=""></td>
+                        <td><c:forEach items="${item.imgUrlList }" var="s">
+                            <img src="${s }" style="width:30px;padding: 0 3px;" alt="">
+                        </c:forEach> </td>
                         <td><c:choose>
                             <c:when test="${item.isShow==0 }">
                                 显示
@@ -195,7 +197,7 @@
             title: ['修改'],
             shade: 0.3,
             area: ['450px', '420px'],
-            content: ['${ctx}/rest/tradeFair/to_update?id='+id,'no']
+            content: ['${ctx}/rest/tradeFair/to_update?id='+id,'yes']
         });
     }
 

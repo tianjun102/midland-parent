@@ -115,9 +115,8 @@
 	</insert>
 
 	<sql id="update_option">
-		<if test="imgUrl != null">
-			img_url= #{imgUrl,jdbcType=VARCHAR},
-		</if>
+
+		img_url= #{imgUrl,jdbcType=VARCHAR},
 		<if test="title != null">
 			title= #{title,jdbcType=VARCHAR},
 		</if>
@@ -155,10 +154,10 @@
 			 and img_url= #{imgUrl,jdbcType=VARCHAR}
 		</if>
 		<if test="title != null">
-			 and title like '%${title}%'
+			 and title like CONCAT(CONCAT('%', #{title}), '%')
 		</if>
 		<if test="housesId != null">
-			 and houses_id like '%${housesId}%'
+			 and houses_id like CONCAT(CONCAT('%', #{housesId}), '%')
 		</if>
 		<if test="introduction != null">
 			 and introduction= #{introduction,jdbcType=LONGVARCHAR}

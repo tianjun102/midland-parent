@@ -1,19 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@include file="../layout/tablib.jsp" %>
-<%@include file="../layout/source.jsp"%>
+<%@include file="../layout/source.jsp" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
-    <link rel="stylesheet" href="${ctx }/assets/css/common.css">
-    <link rel="stylesheet" type="text/css" href="${ctx }/assets/scripts/uploadify/uploadify.css">
-    <script type="text/javascript" src="${ctx }/assets/scripts/jquery.min.js"></script>
-    <script type="text/javascript" src="${ctx }/assets/scripts/uploadify/jquery.uploadify.min.js"></script>
     <style type="text/css">
-
+        .fileupload .fileupload-item {
+            display: inline-block;
+            position: relative;
+            width: 110px;
+            height: 64px;
+            margin: 10px 10px 0 0;
+            overflow: hidden;
+            border: 1px solid #ccc;
+        }
+        .fileupload-item img{
+            max-width:100%;
+            max-height:100%;
+        }
+        .fileupload-item .xclose{
+            display: block;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+            text-align: center;
+            background: rgba(0,0,0,.7);
+            font-size: 14px;
+            color: #ddd;
+            cursor: pointer;
+        }
     </style>
     <script type="text/javascript">
         $(function () {
@@ -26,9 +48,28 @@
                     /*$("#imgUrl").attr("value", data);
                     $("#iconImg1").attr("src", data);*/
 
-                    console.log(data)
-                    $("#file_upload").before("<img style='margin-bottom: 10px;max-width:200px;max-height:200px'  src='"+data+"'>")
-                    $("#imgUrl").attr("value", data+"||"+$("#imgUrl").val());
+                    $(".fileupload").append("<span class='fileupload-item'><img src='" + data + "'><i class='xclose'>×</i></span>")
+                    $("#imgUrl").attr("value", data + "||" + $("#imgUrl").val());
+
+                    $(".xclose").on("click",function () {
+                        var temp="";
+                        var $this = $(this);
+                        var $parent = $this.parent("span");
+                        var imgsrcs = $("#imgUrl").val();
+                        var imgsrc = $parent.find("img").attr("src");
+                        var imgArray = imgsrcs.split("||");
+                        for (var i=0;i<imgArray.length;i++){
+                            debugger;
+                            if(imgArray[i].match(imgsrc)){
+                                continue;
+                            }
+                            if (imgArray[i]!=""&&imgArray!=null){
+                                temp+=imgArray[i]+"||";
+                            }
+                        }
+                        $("#imgUrl").val(temp);
+                        $parent.remove();
+                    });
 
 
                 },
@@ -40,6 +81,10 @@
 
                 // Your options here
             });
+
+            function uploadClose() {
+
+            }
         })
     </script>
 
@@ -55,24 +100,22 @@
                     <option value="1">看楼团</option>
                 </select>
             </li>
-            <li><span>图片上传：</span>
+            <li><span style="vertical-align: top;">图片上传：</span>
                 <div class="fileupload">
                     <input type="hidden" name="imgUrl" id="imgUrl" value="${item.imgUrl}">
-                    <c:forEach var="imgUrl" items="${fn:split(item.imgUrl,'||')}">
-                        <img style="max-width:200px;max-height:200px" src="${ctx}/${imgUrl}">
-                    </c:forEach>
                     <input type="file" name="file_upload" id="file_upload"/>
                 </div>
             </li>
             <li><span>楼盘ID：</span>
-                <input type="text" name="housesId" id="housesId" />
+                <input type="text" name="housesId" id="housesId"/>
             </li>
 
             <li><span>楼盘名称：</span>
-                <input type="text" name="title" id="title" />
+                <input type="text" name="title" id="title"/>
             </li>
             <li><span>简介：</span>
-                <textarea rows="" cols="" style="width: 250px;height: 100px;border: 1px solid #dbe2e6;" name="introduction" id="introduction"></textarea>
+                <textarea rows="" cols="" style="width: 250px;height: 100px;border: 1px solid #dbe2e6;"
+                          name="introduction" id="introduction"></textarea>
             </li>
 
             <li>
