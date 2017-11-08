@@ -103,10 +103,10 @@
             <li>
                 <span>分类名称：</span><input style="width:250px;" type="text" name="cateName" id="cateName" onblur="notEmpty('cateName','cateName','分类名称不能为空！');" maxlength="50"/>
             </li>
-            <li>
+            <li style="margin-top: 20px!important;">
                 <span>网站链接：</span><input style="width:250px;" type="text" name="linkUrl" id="linkUrl" onblur="checkUrl('linkUrl','linkUrl','网站链接格式不正确！');" maxlength="50"/>
             </li>
-            <li style="padding-top:30px;">
+            <li style="padding-top:20px;">
                 <span></span>
                 <a target="contentF" class="public_btn bg2" id="save" onclick="saveData()">保存</a>
                 <a style="margin-left: 20px" class="public_btn bg3" id="cancel" onclick="closeWin();">取消</a>
