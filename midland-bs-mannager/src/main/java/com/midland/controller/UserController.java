@@ -943,7 +943,7 @@ public class UserController extends BaseFilter {
 				List list = new ArrayList();
 				list.add(vcode);
 				list.add("5");
-				SmsModel smsModel = new SmsModel("13600158343","54711",list);
+				SmsModel smsModel = new SmsModel(mobile,"54711",list);
 				ValueOperations<String, Object> vo = redisTemplate.opsForValue();
 				vo.set(key, vcode);
 				redisTemplate.expire(key, 5,TimeUnit.MINUTES);//15分钟过期
