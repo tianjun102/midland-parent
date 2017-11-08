@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@include file="../layout/tablib.jsp" %>
-<%@include file="../layout/source.jsp"%>
+<%@include file="../layout/source.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,7 +15,7 @@
                 'multi': false,// 是否支持多个文件上传
                 'buttonText': '上传文件',
                 'fileTypeExts': '*.bmp,*.jpg,*.png,*.tiff,*.gif,*.pcx,*.tga,*.exif,*.fpx,*.svg,*.psd,*.cdr,*.pcd,*.dxf,*.ufo,*.eps,*.ai,*.raw,*.WMF',
-                'onSelectError' : uploadify_onSelectError,
+                'onSelectError': uploadify_onSelectError,
                 'onUploadSuccess': function (file, data, response) {
                     $("#imgUrl").attr("value", data);
                     $("#iconImg1").attr("src", data);
@@ -34,12 +34,12 @@
                 'uploader': '${ctx }/rest/upload/img',
                 'multi': false,// 是否支持多个文件上传
                 'fileTypeExts': '*.rm;*.rmvb;*.wmv;*.avi;*.mp4;*.3gp;*.mkv',
-                'onSelectError' : uploadify_onSelectError,
+                'onSelectError': uploadify_onSelectError,
                 'buttonText': '上传文件',
                 'onUploadSuccess': function (file, data, response) {
                     $("#videoUrl").attr("value", data);
-                    $("#videoUrl1").attr("src", "${ctx}/assets/UEditor/dialogs/attachment/fileTypeImages/"+getFileIcon(data));
-                    $("#fileUrl").html(    '<a style="font-size:12px; color:#0066cc;"  title="' + data.substr(data.lastIndexOf('/')+1) + '">' + data.substr(data.lastIndexOf('/')+1) + '</a>' );
+                    $("#videoUrl1").attr("src", "${ctx}/assets/UEditor/dialogs/attachment/fileTypeImages/" + getFileIcon(data));
+                    $("#fileUrl").html('<a style="font-size:12px; color:#0066cc;"  title="' + data.substr(data.lastIndexOf('/') + 1) + '">' + data.substr(data.lastIndexOf('/') + 1) + '</a>');
                 },
                 'onQueueComplete': function (queueData) {
                     if (queueData.uploadsSuccessful < 1) {
@@ -52,8 +52,7 @@
         })
 
 
-
-        var uploadify_onSelectError = function(file, errorCode, errorMsg) {
+        var uploadify_onSelectError = function (file, errorCode, errorMsg) {
             debugger;
             var msgText = "上传失败\n";
             switch (errorCode) {
@@ -96,31 +95,34 @@
             </li>
 
             <li><span>楼盘名称：</span>
-                <input type="text" name="housesName" id="housesName" onblur="notEmpty('housesName','housesName','')" />
+                <input type="text" name="housesName" id="housesName" onblur="notEmpty('housesName','housesName','')"/>
             </li>
             <li><span>图片描述：</span>
-                <textarea rows="" cols="" style="width: 250px;height: 70px;border: 1px solid #dbe2e6;" name="imgDesc" id="imgDesc" ></textarea>
+                <textarea rows="" cols="" style="width: 250px;height: 70px;border: 1px solid #dbe2e6;" name="imgDesc"
+                          id="imgDesc"></textarea>
             </li>
-                <li><span>简介：</span>
-                    <textarea rows="" cols="" style="width: 250px;height: 70px;border: 1px solid #dbe2e6;" name="introduction" id="introduction"></textarea>
-                </li>
+            <li><span>简介：</span>
+                <textarea rows="" cols="" style="width: 250px;height: 70px;border: 1px solid #dbe2e6;"
+                          name="introduction" id="introduction"></textarea>
+            </li>
             <li><span>视频上传：</span>
                 <div style="float: left;">
                     <input type="file" name="file_upload1" id="file_upload1"/>
                     <img style="margin-bottom: -2px;max-width:200px;max-height:200px" id="videoUrl1"
                          src="${item.iconImg}">
                     <span id="fileUrl"></span>
-                    <input type="hidden" name="videoUrl" id="videoUrl" >
+                    <input type="hidden" name="videoUrl" id="videoUrl">
                 </div>
             </li>
             <li><span>视频时长：</span>
-                <input type="text" name="duration" id="duration" onblur="InitInput.setTime('duration','duration','时间格式不正确')"/>
+                <input type="text" name="duration" id="duration" placeholder="格式要求00:00:00"
+                       onblur="InitInput.setTime('duration','duration','时间格式不正确')"/>
             </li>
             <li><span>图片上传：</span>
                 <div style="width: 250px;float: left;">
-                    <input type="hidden" name="imgUrl" id="imgUrl" >
+                    <input type="hidden" name="imgUrl" id="imgUrl">
 
-                    <img style="margin-bottom: 10px;max-width:80px;max-height:80px" id="iconImg1" >
+                    <img style="margin-bottom: 10px;max-width:80px;max-height:80px" id="iconImg1">
                     <input type="file" name="file_upload" id="file_upload"/>
                 </div>
             </li>
@@ -137,45 +139,46 @@
 </section>
 
 <script type="text/javascript">
-    $("#cityId").change(function(){
+    $("#cityId").change(function () {
         $("#cityName").val($("#cityId").find("option:selected").text());
     })
-
 
 
     //保存数据
     function saveData() {
         var data = $("#dataForm").serialize();
-        if (!notEmpty('housesId','housesId','')||!notEmpty('housesName','housesName','')){
-            return;
-        }
-        $.ajax({
-            type: "post",
-            url: "${ctx}/rest/filmLibrary/add",
-            async: false, // 此处必须同步
-            dataType: "json",
-            data: data,
-            success: function (data) {
-                if (data.state == 0) {
-                    layer.msg("保存成功！！！", {icon: 1});
-                    $('#save').removeAttr("onclick");
-                    setTimeout(function () {
-                        window.open("${ctx}/rest/filmLibrary/index","contentF");
-                    }, 1000);
+        if (notEmpty('housesId', 'housesId', '') && notEmpty('housesName', 'housesName', '')
+            && InitInput.setTime('duration', 'duration', '时间格式不正确')) {
 
-                } else {
+
+            $.ajax({
+                type: "post",
+                url: "${ctx}/rest/filmLibrary/add",
+                async: false, // 此处必须同步
+                dataType: "json",
+                data: data,
+                success: function (data) {
+                    if (data.state == 0) {
+                        layer.msg("保存成功！！！", {icon: 1});
+                        $('#save').removeAttr("onclick");
+                        setTimeout(function () {
+                            window.open("${ctx}/rest/filmLibrary/index", "contentF");
+                        }, 1000);
+
+                    } else {
+                        layer.msg("保存失败！", {icon: 2});
+                    }
+                },
+                error: function () {
                     layer.msg("保存失败！", {icon: 2});
                 }
-            },
-            error: function () {
-                layer.msg("保存失败！", {icon: 2});
-            }
-        });
+            });
+        }
     }
 
     //取消
     function closeWin() {
-        window.open("${ctx}/rest/filmLibrary/index","contentF")
+        window.open("${ctx}/rest/filmLibrary/index", "contentF")
     }
 
 

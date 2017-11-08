@@ -16,7 +16,7 @@
                 'multi': false,// 是否支持多个文件上传
                 'buttonText': '上传文件',
                 'fileTypeExts': '*.bmp,*.jpg,*.png,*.tiff,*.gif,*.pcx,*.tga,*.exif,*.fpx,*.svg,*.psd,*.cdr,*.pcd,*.dxf,*.ufo,*.eps,*.ai,*.raw,*.WMF',
-                'onSelectError' : uploadify_onSelectError,
+                'onSelectError': uploadify_onSelectError,
                 'onUploadSuccess': function (file, data, response) {
                     $("#imgUrl").attr("value", data);
                     $("#iconImg1").attr("src", data);
@@ -36,11 +36,11 @@
                 'multi': false,// 是否支持多个文件上传
                 'buttonText': '上传文件',
                 'fileTypeExts': '*.rm;*.rmvb;*.wmv;*.avi;*.mp4;*.3gp;*.mkv',
-                'onSelectError' : uploadify_onSelectError,
+                'onSelectError': uploadify_onSelectError,
                 'onUploadSuccess': function (file, data, response) {
                     $("#videoUrl").attr("value", data);
-                    $("#videoUrl1").attr("src", "${ctx}/assets/UEditor/dialogs/attachment/fileTypeImages/"+getFileIcon(data));
-                    $("#fileUrl").html(    '<a style="font-size:12px; color:#0066cc;"  title="' + data.substr(data.lastIndexOf('/')+1) + '">' + data.substr(data.lastIndexOf('/')+1) + '</a>' );
+                    $("#videoUrl1").attr("src", "${ctx}/assets/UEditor/dialogs/attachment/fileTypeImages/" + getFileIcon(data));
+                    $("#fileUrl").html('<a style="font-size:12px; color:#0066cc;"  title="' + data.substr(data.lastIndexOf('/') + 1) + '">' + data.substr(data.lastIndexOf('/') + 1) + '</a>');
                 },
                 'onQueueComplete': function (queueData) {
                     if (queueData.uploadsSuccessful < 1) {
@@ -52,8 +52,8 @@
             });
 
             var data = '${item.videoUrl}';
-            $("#videoUrl1").attr("src", "${ctx}/assets/UEditor/dialogs/attachment/fileTypeImages/"+getFileIcon(data));
-            $("#fileUrl").html(    '<a style="font-size:12px; color:#0066cc;"  title="' + data.substr(data.lastIndexOf('/')+1) + '">' + data.substr(data.lastIndexOf('/')+1) + '</a>' );
+            $("#videoUrl1").attr("src", "${ctx}/assets/UEditor/dialogs/attachment/fileTypeImages/" + getFileIcon(data));
+            $("#fileUrl").html('<a style="font-size:12px; color:#0066cc;"  title="' + data.substr(data.lastIndexOf('/') + 1) + '">' + data.substr(data.lastIndexOf('/') + 1) + '</a>');
         })
 
     </script>
@@ -77,11 +77,11 @@
             </li>
 
             <li><span>楼盘名称：</span>
-                <input type="text" name="housesName" id="housesName" value="${item.housesName}" >
-                </li>
-                <li><span>图片描述：</span>
-                    <textarea rows="" cols="" style="width: 250px;height: 70px;border: 1px solid #dbe2e6;"
-                name="imgDesc" id="imgDesc">${item.imgDesc}</textarea>
+                <input type="text" name="housesName" id="housesName" value="${item.housesName}">
+            </li>
+            <li><span>图片描述：</span>
+                <textarea rows="" cols="" style="width: 250px;height: 70px;border: 1px solid #dbe2e6;"
+                          name="imgDesc" id="imgDesc">${item.imgDesc}</textarea>
             </li>
             <li><span>简介：</span>
                 <textarea rows="" cols="" style="width: 250px;height: 70px;border: 1px solid #dbe2e6;"
@@ -98,7 +98,8 @@
                 </div>
             </li>
             <li><span>视频时长：</span>
-                <input type="text" name="duration" id="duration" value="${item.duration}"/>
+                <input type="text" name="duration" id="duration" value="${item.duration}" placeholder="格式要求00:00:00"
+                       onblur="InitInput.setTime('duration','duration','时间格式不正确')"/>
             </li>
             <li><span>图片上传：</span>
                 <div style="width: 250px;float: left;">
@@ -128,30 +129,36 @@
 
     //保存数据
     function saveData() {
-        var data = $("#dataForm").serialize();
+        if (notEmpty('housesId', 'housesId', '') && notEmpty('housesName', 'housesName', '')
+            && InitInput.setTime('duration', 'duration', '时间格式不正确')) {
+            var data = $("#dataForm").serialize();
 
-        $.ajax({
-            type: "post",
-            url: "${ctx}/rest/filmLibrary/update",
-            async: false, // 此处必须同步
-            dataType: "json",
-            data: data,
-            success: function (data) {
-                if (data.state == 0) {
-                    layer.msg("保存成功！！！", {icon: 1});
-                    $('#save').removeAttr("onclick");
-                    setTimeout(function(){window.open("${ctx}/rest/filmLibrary/index","contentF");},1000);
+            $.ajax({
+                type: "post",
+                url: "${ctx}/rest/filmLibrary/update",
+                async: false, // 此处必须同步
+                dataType: "json",
+                data: data,
+                success: function (data) {
+                    if (data.state == 0) {
+                        layer.msg("保存成功！！！", {icon: 1});
+                        $('#save').removeAttr("onclick");
+                        setTimeout(function () {
+                            window.open("${ctx}/rest/filmLibrary/index", "contentF");
+                        }, 1000);
 
-                } else {
+                    } else {
+                        layer.msg("保存失败！", {icon: 2});
+                    }
+                },
+                error: function () {
                     layer.msg("保存失败！", {icon: 2});
                 }
-            },
-            error: function () {
-                layer.msg("保存失败！", {icon: 2});
-            }
-        });
+            });
+        }
     }
-    var uploadify_onSelectError = function(file, errorCode, errorMsg) {
+
+    var uploadify_onSelectError = function (file, errorCode, errorMsg) {
         debugger;
         var msgText = "上传失败\n";
         switch (errorCode) {
@@ -173,9 +180,10 @@
         }
         alert(msgText);
     };
+
     //取消
     function closeWin() {
-        window.open("${ctx}/rest/filmLibrary/index","contentF")
+        window.open("${ctx}/rest/filmLibrary/index", "contentF")
 
     }
 
