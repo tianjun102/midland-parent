@@ -4,7 +4,7 @@
     	<div style = "overflow:hidden; line-height:30px;">
        <%--  显示[${paginator.startRow}]到[${paginator.endRow}]条数据，总共[${paginator.totalCount}]条数据,当前第[${paginator.page}/${paginator.totalPages}]页 --%>
       <!-- 每页显示多少记录 --> 
-     &nbsp;每页显示： <select style="width: 90px;height: 30px; display:inline-block!important;" id="pageSize" onchange="setPageSize(${paginator.page},'${target}');">
+     &nbsp;每页显示： <select style="width: 90px;height: 30px; display:inline-block!important;border-radius: 4px;" id="pageSize" onchange="setPageSize(${paginator.page},'${target}');">
         <option <c:if test="${paginator.limit==5}">selected="selected"</c:if> value="5" >5条</option>
         <option <c:if test="${paginator.limit==10}">selected="selected"</c:if> value="10" >10条</option>
         <option <c:if test="${paginator.limit==20}">selected="selected"</c:if> value="20" >20条</option>

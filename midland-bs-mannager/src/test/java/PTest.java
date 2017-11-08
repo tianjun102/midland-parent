@@ -1,3 +1,5 @@
+import com.github.qcloudsms.SmsSingleSender;
+import com.github.qcloudsms.SmsSingleSenderResult;
 import com.midland.config.MidlandConfig;
 import com.midland.core.util.HttpUtils;
 import com.midland.web.api.ApiHelper;
@@ -106,6 +108,31 @@ public class PTest {
 		message.setSubject("主题：简单邮件1");
 		message.setText("简单邮件内容1");
 		apiHelper.emailSender("sendSimpleMail",message);
+	}
+
+
+	@Test
+	public void sendTxSms() throws Exception {
+
+		/*try {
+			SmsSingleSender sender = new SmsSingleSender(1400048150, "cf34fd4134eb80f7accac8a37329a873");
+			ArrayList<String> params = new ArrayList<String>();
+			params.add("1234");
+			params.add("2");
+			SmsSingleSenderResult   result = sender.sendWithParam("86", "13600158343", 54711, params, "", "", "");
+			System.out.println(result.errMsg);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}*/
+
+
+		try {
+			SmsSingleSender sender = new   SmsSingleSender(1400048150, "cf34fd4134eb80f7accac8a37329a873");
+			SmsSingleSenderResult result = sender.send(1, "86", "13600158343", "【美联物业】验证码测试1234", "", "");
+			System.out.print(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

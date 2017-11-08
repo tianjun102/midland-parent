@@ -20,21 +20,19 @@
                 <input type="text" name="phone" id="phone" />
             </li>
             <li id="id2"><span>验证码：</span>
-               <input type="text" name="vCode" id="vCode" />  <input style="width: 110px!important;" id="btnSendCode" type="button" value="发送验证码" onclick="sendMessage()" />
+               <input type="text" name="vCode" id="vCode" />  <input style="width: 110px!important;margin-left: 10px;" id="btnSendCode" type="button" value="发送验证码" onclick="sendMessage()" />
             </li>
             <li id="id3">
                 <span></span>
-                <a target="contentF" class="public_btn bg2" id="save" onclick="checkVcode()">下一步</a>
+                <a target="contentF" style="margin-top: 5px;" class="public_btn bg2" id="save" onclick="checkVcode()">下一步</a>
                 <%--<a style="margin-left: 20px" class="public_btn bg3" id="cancel" onclick="closeWin();">取消</a>--%>
             </li>
 
-            <li id="id4" style="display: none"><span>新密码：</span><input style="width: 300px;" type="password" name="newPwd" id="newPwd" onblur="checkNewPwd();"/>
-                <label class="_star" id="checkNewPwdMsg">*</label>
+            <li id="id4" style="display: none"><span>新密码：</span><input style="width: 150px;" type="password" name="newPwd" id="newPwd" onblur="checkNewPwd();"/>
             </li>
-            <li id="id5" style="display: none"><span>确认密码：</span><input style="width: 300px;" type="password" name="confirmPwd" id="confirmPwd" onblur="checkConfirmPwd();"/>
-                <label class="_star" id="checkConfirmPwdMsg">*</label>
+            <li id="id5" style="display: none"><span>确认密码：</span><input style="width: 150px;" type="password" name="confirmPwd" id="confirmPwd" onblur="checkConfirmPwd();"/>
             </li>
-            <li id="id6" style="display: none">
+            <li id="id6" style="display: none;margin-top: 5px;">
                 <span></span>
                 <a target="_top" class = "public_btn bg2" id="confirm" onclick="saveData();">确认</a>
             </li>
@@ -164,20 +162,19 @@
 
         var flag = 0;
 
-        $("#checkNewPwdMsg").text("*");
         var oldPwd = $("#oldPwd").val();
         var newPwd = $("#newPwd").val();
         if (newPwd == "" || newPwd == null) {
-            $("#checkNewPwdMsg").text("新密码不能为空!");
+            layer.tips("新密码不能为空", "input[name='newPwd']", {tips: 1});
             return false;
         } else if (newPwd.length <8) {
-            $("#checkNewPwdMsg").text("密码不能小于8位数！");
+            layer.tips("密码不能小于8位数！", "input[name='newPwd']", {tips: 1});
             return false;
         } else if (newPwd.length > 20) {
-            $("#checkNewPwdMsg").text("密码不能大于20位数！");
+            layer.tips("密码不能大于20位数！", "input[name='newPwd']", {tips: 1});
             return false;
         } else if (!reg.test(newPwd)) {
-            $("#checkNewPwdMsg").text("请输入正确格式的密码!");
+            layer.tips("请输入正确格式的密码！", "input[name='newPwd']", {tips: 1});
             return false;
         }
 
@@ -192,22 +189,21 @@
         }
 
         if (flag < 2) {
-            $("#checkNewPwdMsg").text("请使用8-20位字母/数字/符号的至少两种组合的密码!");
+            layer.tips("请使用8-20位字母/数字/符号的至少两种组合的密码!", "input[name='newPwd']", {tips: 1});
             return false;
         }
         return true;
     }
 
     function checkConfirmPwd() {
-        $("#checkConfirmPwdMsg").text("*");
         var newPwd1 = $("#newPwd").val();
         var confirmPwd = $("#confirmPwd").val();
         if (confirmPwd == "" || confirmPwd == null) {
-            $("#checkConfirmPwdMsg").text("确认密码不能为空!");
+            layer.tips("确认密码不能为空", "input[name='confirmPwd']", {tips: 1});
             return false;
         }
         if (newPwd1 != confirmPwd) {
-            $("#checkConfirmPwdMsg").text("两次输入密码不一致!");
+            layer.tips("两次输入密码不一致!", "input[name='confirmPwd']", {tips: 1});
             return false;
         }
         return true;

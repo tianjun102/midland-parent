@@ -3,6 +3,8 @@ package com.midland.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
+import com.github.qcloudsms.SmsSingleSender;
+import com.github.qcloudsms.SmsSingleSenderResult;
 import com.midland.base.BaseFilter;
 import com.midland.config.MidlandConfig;
 import com.midland.core.util.ApplicationUtils;
@@ -89,6 +91,9 @@ public class UserController extends BaseFilter {
 
 	@Autowired
 	private SmsClient smsClient;
+
+	@Autowired
+	private SmsSingleSender sender;
     
     /**
      * 用户登录
@@ -935,23 +940,17 @@ public class UserController extends BaseFilter {
 		if(user!=null){
 			mobile=user.getPhone();
 			if(mobile!=null && mobile.length()>0){
-				String SGIN = null;
-				try {
-					SGIN = URLEncoder.encode("美联房产查档","GBK");
-				} catch (UnsupportedEncodingException e) {
-					e.printStackTrace();
-				}
 				List list = new ArrayList();
 				list.add(vcode);
 				list.add("5");
-				list.add(SGIN);
-				SmsModel smsModel = new SmsModel("13600158343","2029157",list);
+				SmsModel smsModel = new SmsModel("13600158343","54711",list);
 				ValueOperations<String, Object> vo = redisTemplate.opsForValue();
 				vo.set(key, vcode);
 				redisTemplate.expire(key, 5,TimeUnit.MINUTES);//15分钟过期
 				try {
-					SmsResult result = smsClient.execute(smsModel);
-					if (result.getResultCode().equals("100")){
+					SmsSingleSenderResult result = sender.sendWithParam("86", smsModel.getPhones(),Integer.valueOf(smsModel.getTpId()) , (ArrayList<String>) smsModel.getFieldsList(), "", "", "");
+
+					if (result.errMsg.equals("OK")){
 						map.put("flag", 1);
 						map.put("id",user.getId());
 						map.put("msg", "发送成功!");

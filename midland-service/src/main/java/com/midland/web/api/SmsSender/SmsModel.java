@@ -2,6 +2,7 @@ package com.midland.web.api.SmsSender;
 
 import com.midland.web.util.MidlandHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,6 +33,8 @@ public class SmsModel {
 	 * 用户指定模板类容填充字段多个使用||隔开
 	 */
 	private List<String> fieldsList;
+
+	private ArrayList<String> parems;
 	
 	public void setFieldsList(List<String> fieldsList) {
 		this.fieldsList = fieldsList;
@@ -44,7 +47,10 @@ public class SmsModel {
 	public void setPhones(String phones) {
 		this.phones = phones;
 	}
-	
+
+	public List<String> getFieldsList() {
+		return fieldsList;
+	}
 
 	public String getTpId() {
 		return tpId;
@@ -60,5 +66,14 @@ public class SmsModel {
 		
 		return MidlandHelper.getSmsField(fieldsList);
 	}
-	
+
+	public ArrayList<String> getParems() {
+		return parems;
+	}
+
+	public void setParems(ArrayList<String> parems) {
+		this.parems = parems;
+	}
+
+
 }
