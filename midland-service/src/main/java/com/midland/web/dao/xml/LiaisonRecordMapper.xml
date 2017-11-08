@@ -145,7 +145,7 @@
 			 and id= #{id,jdbcType=INTEGER}
 		</if>
 		<if test="name != null">
-			 and name like '%${name}%'
+			 and name like CONCAT(CONCAT('%', #{name}), '%')
 		</if>
 		<if test="phone != null">
 			 and phone= #{phone,jdbcType=VARCHAR}
@@ -175,7 +175,7 @@
 			 and user_id= #{userId,jdbcType=INTEGER}
 		</if>
 		<if test="email != null">
-			 and email  like '%${email}%'
+			 and email  like CONCAT(CONCAT('%', #{email}), '%')
 		</if>
 	</sql>
 

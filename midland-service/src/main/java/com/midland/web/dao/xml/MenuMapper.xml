@@ -208,7 +208,7 @@
             and city_id= #{cityId,jdbcType=VARCHAR}
         </if>
         <if test="menuName != null">
-            and menu_name like '%${menuName}%'
+            and menu_name like CONCAT(CONCAT('%', #{menuName}), '%')
         </if>
         <if test="clickNum != null">
             and click_num= #{clickNum,jdbcType=INTEGER}
@@ -241,7 +241,7 @@
             and menu_type_id= #{menuTypeId}
         </if>
         <if test="menuTypeName != null">
-            and menu_type_name like '%${menuTypeName}%'
+            and menu_type_name like CONCAT(CONCAT('%', #{menuTypeName}), '%')
         </if>
     </sql>
 

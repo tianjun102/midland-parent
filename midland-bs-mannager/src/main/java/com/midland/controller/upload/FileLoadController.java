@@ -637,7 +637,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 			
 			String storePath;
 			String opposite;
-			if (isMacOSX()) {
+			if (isWindows()) {
 				opposite = "/store/";
 				storePath = System.getProperty("test.webapp") + opposite;
 			} else {
@@ -677,6 +677,9 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 	
 	public static boolean isMacOSX() {
 		return OS.indexOf("mac") >= 0 && OS.indexOf("os") > 0 && OS.indexOf("x") > 0;
+	}
+	public static boolean isWindows(){
+		return OS.toLowerCase().startsWith("win");
 	}
 	
 	@Override

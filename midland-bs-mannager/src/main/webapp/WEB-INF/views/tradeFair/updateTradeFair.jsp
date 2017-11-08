@@ -10,15 +10,34 @@
     <link rel="stylesheet" type="text/css" href="${ctx }/assets/scripts/uploadify/uploadify.css">
     <script type="text/javascript" src="${ctx }/assets/scripts/uploadify/jquery.uploadify.min.js"></script>
     <style type="text/css">
-        .content ul.userinfo li>span {
-            float: left;
+        .fileupload .fileupload-item {
             display: inline-block;
-            width: 90px;
-            height: 28px;
-            line-height: 28px;
-            text-align: right;
+            position: relative;
+            width: 110px;
+            height: 64px;
+            margin: 10px 10px 0 0;
+            overflow: hidden;
+            border: 1px solid #ccc;
+        }
+
+        .fileupload-item img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .fileupload-item .xclose {
+            display: block;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+            text-align: center;
+            background: rgba(0, 0, 0, .7);
             font-size: 14px;
-            color: rgb( 102, 102, 102 );
+            color: #ddd;
+            cursor: pointer;
         }
     </style>
     <script type="text/javascript">
@@ -29,11 +48,10 @@
                 'multi': true,// 是否支持多个文件上传
                 'buttonText': '上传文件',
                 'onUploadSuccess': function (file, data, response) {
-                    /*$("#imgUrl").attr("value", data);
-                    $("#iconImg1").attr("src", data);*/
-                    console.log(data);
-                    $("#file_upload").before("<img style='margin-bottom: 10px;max-width:200px;max-height:200px'  src='"+data+"'>")
-                    $("#imgUrl").attr("value", data+"||"+$("#imgUrl").val());
+                    $(".fileupload").append("<span class='fileupload-item'><img src='" + data + "'><i class='xclose'>×</i></span>")
+                    $("#imgUrl").attr("value", data + "||" + $("#imgUrl").val());
+
+
 
                 },
                 'onQueueComplete': function (queueData) {
@@ -56,18 +74,21 @@
             <li>
                 <span>类型：</span>
                 <select name="tradeType" id="tradeType" class="dropdown">
-                    <option value="0" <c:if test="${item.tradeType==0}">selected</c:if> >楼盘展销会</option>
-                    <option value="1" <c:if test="${item.tradeType==1}">selected</c:if> >看楼团</option>
+                    <option value="0"
+                            <c:if test="${item.tradeType==0}">selected</c:if> >楼盘展销会
+                    </option>
+                    <option value="1"
+                            <c:if test="${item.tradeType==1}">selected</c:if> >看楼团
+                    </option>
                 </select>
             </li>
-            <li><span>图片上传：</span>
+            <li><span style="vertical-align: top;">图片上传：</span>
                 <div class="fileupload">
                     <input type="hidden" name="imgUrl" id="imgUrl" value="${item.imgUrl}">
-                    <c:forEach var="imgUrl" items="${fn:split(item.imgUrl,'||')}">
-                        <img style="max-width:200px;max-height:200px"
-                             src="${ctx}/${imgUrl}">
-                    </c:forEach>
                     <input type="file" name="file_upload" id="file_upload"/>
+                    <c:forEach items="${item.imgUrlList }" var="s">
+                        <span class='fileupload-item'><img src='${s}'><i class='xclose'>×</i></span>
+                    </c:forEach>
                 </div>
             </li>
             <li><span>楼盘ID：</span>
@@ -78,7 +99,8 @@
                 <input type="text" name="title" id="title" value="${item.title}"/>
             </li>
             <li><span>简介：</span>
-                <textarea class="textarea-sm" rows="" cols="" name="introduction" id="introduction">${item.introduction}</textarea>
+                <textarea class="textarea-sm" rows="" cols="" name="introduction"
+                          id="introduction">${item.introduction}</textarea>
             </li>
 
             <li>
@@ -95,6 +117,27 @@
 
 <script type="text/javascript">
     //保存数据
+
+
+
+    $(".fileupload").delegate(".xclose","click", function () {
+        var temp = "";
+        var $this = $(this);
+        var $parent = $this.parent("span");
+        var imgsrcs = $("#imgUrl").val();
+        var imgsrc = $parent.find("img").attr("src");
+        var imgArray = imgsrcs.split("||");
+        for (var i = 0; i < imgArray.length; i++) {
+            if (imgArray[i].match(imgsrc)) {
+                continue;
+            }
+            if (imgArray[i] != "" && imgArray != null) {
+                temp += imgArray[i] + "||";
+            }
+        }
+        $("#imgUrl").val(temp);
+        $parent.remove();
+    });
     function updateData() {
         var data = $("#dataForm").serialize();
         $.ajax({

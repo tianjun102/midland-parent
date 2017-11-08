@@ -9,6 +9,7 @@ import com.midland.web.service.TradeFairService;
 import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
 import com.midland.web.util.ParamObject;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/tradeFair/")
@@ -107,6 +105,13 @@ public class TradeFairController extends BaseFilter {
 	@RequestMapping("to_update")
 	public String toUpdateTradeFair(Integer id,Model model) throws Exception {
 		TradeFair result = tradeFairServiceImpl.selectTradeFairById(id);
+		if (result!=null){
+			if (StringUtils.isNotEmpty(result.getImgUrl())){
+				String[] array = result.getImgUrl().split("\\|\\|");
+				List<String> imglist = Arrays.asList(array);
+				result.setImgUrlList(imglist);
+			}
+		}
 		model.addAttribute("item",result);
 		return "tradeFair/updateTradeFair";
 	}
@@ -137,14 +142,25 @@ public class TradeFairController extends BaseFilter {
 		try {
 			log.debug("findTradeFairList  {}",tradeFair);
 			MidlandHelper.doPage(request);
+			List<TradeFair> tempResultList = new ArrayList<>();
 			Page<TradeFair> result = (Page<TradeFair>)tradeFairServiceImpl.findTradeFairList(tradeFair);
+			for (TradeFair temp : result){
+				if (StringUtils.isNotEmpty(temp.getImgUrl())){
+					String[] array = temp.getImgUrl().split("\\|\\|");
+					List<String> imglist = Arrays.asList(array);
+					temp.setImgUrlList(imglist);
+				}
+				tempResultList.add(temp);
+			}
+
+
 			Paginator paginator=result.getPaginator();
 			User user = MidlandHelper.getCurrentUser(request);
 			model.addAttribute("isSuper",user.getIsSuper());
 			List<ParamObject> obj = JsonMapReader.getMap("is_delete");
 			model.addAttribute("isDeletes",obj);
 			model.addAttribute("paginator",paginator);
-			model.addAttribute("items",result);
+			model.addAttribute("items",tempResultList);
 		} catch(Exception e) {
 			log.error("findTradeFairList  {}",tradeFair,e);
 			model.addAttribute("paginator",null);

@@ -1,6 +1,8 @@
 package com.midland.web.model;
 
 
+import java.util.List;
+
 public class TradeFair{
 	/**
 	 * 楼盘展销会主键id
@@ -10,6 +12,9 @@ public class TradeFair{
 	 * 楼盘图片连接
 	 **/
 	private String imgUrl;
+
+
+	private List<String> imgUrlList;
 	/**
 	 * 楼盘名称
 	 **/
@@ -47,6 +52,14 @@ public class TradeFair{
 	 **/
 	private Integer tradeType;
 
+
+	public List<String> getImgUrlList() {
+		return imgUrlList;
+	}
+
+	public void setImgUrlList(List<String> imgUrlList) {
+		this.imgUrlList = imgUrlList;
+	}
 
 	public Integer getId() {
 		return id;
