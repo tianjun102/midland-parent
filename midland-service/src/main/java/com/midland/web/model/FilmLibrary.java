@@ -57,7 +57,7 @@ public class FilmLibrary{
 	/**
 	 * 视频时长
 	 **/
-	private Double duration;
+	private String duration;
 	/**
 	 * 显示，0显示，1隐藏
 	 **/
@@ -172,11 +172,11 @@ public class FilmLibrary{
 		this.operatorName = operatorName;
 	}
 
-	public Double getDuration() {
+	public String getDuration() {
 		return duration;
 	}
 
-	public void setDuration(Double duration) {
+	public void setDuration(String duration) {
 		this.duration = duration;
 	}
 

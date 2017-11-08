@@ -16,7 +16,7 @@
 		<result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
 		<result column="operator_id" property="operatorId" jdbcType="INTEGER" />
 		<result column="operator_name" property="operatorName" jdbcType="VARCHAR" />
-		<result column="duration" property="duration" jdbcType="DECIMAL" />
+		<result column="duration" property="duration" jdbcType="VARCHAR" />
 		<result column="is_show" property="isShow" jdbcType="INTEGER" />
 		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
 	</resultMap>
@@ -138,7 +138,7 @@
 				#{operatorName,jdbcType=VARCHAR},
 			</if>
 			<if test="duration != null">
-				#{duration,jdbcType=DECIMAL},
+				#{duration,jdbcType=VARCHAR},
 			</if>
 			<if test="isShow != null">
 				#{isShow,jdbcType=INTEGER},
@@ -187,7 +187,7 @@
 			operator_name= #{operatorName,jdbcType=VARCHAR},
 		</if>
 		<if test="duration != null">
-			duration= #{duration,jdbcType=DECIMAL},
+			duration= #{duration,jdbcType=VARCHAR},
 		</if>
 		<if test="isShow != null">
 			is_show= #{isShow,jdbcType=INTEGER},
@@ -238,7 +238,7 @@
 			 and operator_name= #{operatorName,jdbcType=VARCHAR}
 		</if>
 		<if test="duration != null">
-			 and duration= #{duration,jdbcType=DECIMAL}
+			 and duration= #{duration,jdbcType=VARCHAR}
 		</if>
 		<if test="isShow != null">
 			 and is_show= #{isShow,jdbcType=INTEGER}
