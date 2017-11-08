@@ -60,14 +60,6 @@
     <c:set var="target" value="listDiv"/>
     <%@include file="pagination.jsp" %>
 </c:if>
-<ul class = "userinfo row">
-    <li style="padding-top:30px;">
-        <span></span>
-        <a target="contentF" class="public_btn bg2" id="save" onclick="saveData()">确定</a>
-        <a style="margin-left: 20px" class="public_btn bg3" id="cancel" onclick="closeWin();">取消</a>
-    </li>
-</ul>
-
 <script type="text/javascript">
     $(function () {
         var tableCont = document.querySelector('#table-cont');
