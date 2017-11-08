@@ -66,7 +66,7 @@ public class HttpUtils {
 				param.append(entry.getKey()).append("=");
 				
 				try {
-					param.append(URLEncoder.encode(entry.getValue(), DEFAULT_CHARSET));
+					param.append(URLEncoder.encode(entry.getValue()==null?"":entry.getValue(), DEFAULT_CHARSET));
 				} catch (UnsupportedEncodingException e) {
 					//编码失败
 				}
