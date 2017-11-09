@@ -1,7 +1,7 @@
 package com.midland.web.annocontroller;
 
-import com.midland.web.model.Appointment;
-import com.midland.web.service.AppointmentService;
+import com.midland.web.model.QrCode;
+import com.midland.web.service.QrCodeService;
 import com.midland.base.BaseFilter;
 import org.slf4j.Logger;
 import com.midland.web.commons.Result;
@@ -19,26 +19,26 @@ import com.midland.web.util.MidlandHelper;
 import javax.servlet.http.HttpServletRequest;
 @RestController
 @SuppressWarnings("all")
-@RequestMapping("/appointment/")
-public class AppointmentRestController extends BaseFilter  {
+@RequestMapping("/qrCode/")
+public class QrCodeRestController extends BaseFilter  {
 
-	private Logger log = LoggerFactory.getLogger(AppointmentRestController.class);
+	private Logger log = LoggerFactory.getLogger(QrCodeRestController.class);
 	@Autowired
-	private AppointmentService appointmentServiceImpl;
+	private QrCodeService qrCodeServiceImpl;
 
 	/**
 	 * 新增
 	 **/
 	@RequestMapping("add")
-	public Object addAppointment(@RequestBody Appointment obj) throws Exception {
+	public Object addQrCode(@RequestBody QrCode obj) throws Exception {
 		 Result result=new Result();
 		try {
-			log.info("addAppointment {}",obj);
-			appointmentServiceImpl.insertAppointment(obj);
+			log.info("addQrCode {}",obj);
+			qrCodeServiceImpl.insertQrCode(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
 		} catch(Exception e) {
-			log.error("addAppointment异常 {}",obj,e);
+			log.error("addQrCode异常 {}",obj,e);
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);
 			result.setMsg("service error");
 		}
@@ -49,17 +49,17 @@ public class AppointmentRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getAppointmentById(Map map) {
+	public Object getQrCodeById(Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");
-			log.info("getAppointmentById  {}",id);
-			Appointment appointment = appointmentServiceImpl.selectAppointmentById(id);
+			log.info("getQrCodeById  {}",id);
+			QrCode qrCode = qrCodeServiceImpl.selectQrCodeById(id);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
-			result.setModel(appointment);
+			result.setModel(qrCode);
 		} catch(Exception e) {
-			log.error("getAppointment异常 {}",map,e);
+			log.error("getQrCode异常 {}",map,e);
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);
 			result.setMsg("service error");
 		}
@@ -70,15 +70,15 @@ public class AppointmentRestController extends BaseFilter  {
 	 * 更新
 	 **/
 	@RequestMapping("update")
-	public Object updateAppointmentById(@RequestBody Appointment obj) throws Exception {
+	public Object updateQrCodeById(@RequestBody QrCode obj) throws Exception {
 		 Result result=new Result();
 		try {
-			log.info("updateAppointmentById  {}",obj);
-			appointmentServiceImpl.updateAppointmentById(obj);
+			log.info("updateQrCodeById  {}",obj);
+			qrCodeServiceImpl.updateQrCodeById(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
 		} catch(Exception e) {
-			log.error("updateAppointmentById  {}",obj,e);
+			log.error("updateQrCodeById  {}",obj,e);
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);
 			result.setMsg("service error");
 		}
@@ -89,19 +89,19 @@ public class AppointmentRestController extends BaseFilter  {
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
 	 **/
 	@RequestMapping("list")
-	public Object findAppointmentList(@RequestBody Appointment  obj, HttpServletRequest request) {
+	public Object findQrCodeList(@RequestBody QrCode  obj, HttpServletRequest request) {
 		 Result result=new Result();
 		try {
-			log.info("findAppointmentList  {}",obj);
+			log.info("findQrCodeList  {}",obj);
 			MidlandHelper.doPage(request);
-			Page<Appointment> list = (Page<Appointment>)appointmentServiceImpl.findAppointmentList(obj);
+			Page<QrCode> list = (Page<QrCode>)qrCodeServiceImpl.findQrCodeList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
 			result.setList(list);
 			result.setPaginator(paginator);
 		} catch(Exception e) {
-			log.error("findAppointmentList  {}",obj,e);
+			log.error("findQrCodeList  {}",obj,e);
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);
 			result.setMsg("service error");
 		}

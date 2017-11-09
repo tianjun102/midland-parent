@@ -1,7 +1,7 @@
 package com.midland.web.annocontroller;
 
-import com.midland.web.model.Appointment;
-import com.midland.web.service.AppointmentService;
+import com.midland.web.model.Information;
+import com.midland.web.service.InformationService;
 import com.midland.base.BaseFilter;
 import org.slf4j.Logger;
 import com.midland.web.commons.Result;
@@ -19,26 +19,26 @@ import com.midland.web.util.MidlandHelper;
 import javax.servlet.http.HttpServletRequest;
 @RestController
 @SuppressWarnings("all")
-@RequestMapping("/appointment/")
-public class AppointmentRestController extends BaseFilter  {
+@RequestMapping("/information/")
+public class InformationRestController extends BaseFilter  {
 
-	private Logger log = LoggerFactory.getLogger(AppointmentRestController.class);
+	private Logger log = LoggerFactory.getLogger(InformationRestController.class);
 	@Autowired
-	private AppointmentService appointmentServiceImpl;
+	private InformationService informationServiceImpl;
 
 	/**
 	 * 新增
 	 **/
 	@RequestMapping("add")
-	public Object addAppointment(@RequestBody Appointment obj) throws Exception {
+	public Object addInformation(@RequestBody Information obj) throws Exception {
 		 Result result=new Result();
 		try {
-			log.info("addAppointment {}",obj);
-			appointmentServiceImpl.insertAppointment(obj);
+			log.info("addInformation {}",obj);
+			informationServiceImpl.insertInformation(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
 		} catch(Exception e) {
-			log.error("addAppointment异常 {}",obj,e);
+			log.error("addInformation异常 {}",obj,e);
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);
 			result.setMsg("service error");
 		}
@@ -49,17 +49,17 @@ public class AppointmentRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getAppointmentById(Map map) {
+	public Object getInformationById(Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");
-			log.info("getAppointmentById  {}",id);
-			Appointment appointment = appointmentServiceImpl.selectAppointmentById(id);
+			log.info("getInformationById  {}",id);
+			Information information = informationServiceImpl.selectInformationById(id);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
-			result.setModel(appointment);
+			result.setModel(information);
 		} catch(Exception e) {
-			log.error("getAppointment异常 {}",map,e);
+			log.error("getInformation异常 {}",map,e);
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);
 			result.setMsg("service error");
 		}
@@ -70,15 +70,15 @@ public class AppointmentRestController extends BaseFilter  {
 	 * 更新
 	 **/
 	@RequestMapping("update")
-	public Object updateAppointmentById(@RequestBody Appointment obj) throws Exception {
+	public Object updateInformationById(@RequestBody Information obj) throws Exception {
 		 Result result=new Result();
 		try {
-			log.info("updateAppointmentById  {}",obj);
-			appointmentServiceImpl.updateAppointmentById(obj);
+			log.info("updateInformationById  {}",obj);
+			informationServiceImpl.updateInformationById(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
 		} catch(Exception e) {
-			log.error("updateAppointmentById  {}",obj,e);
+			log.error("updateInformationById  {}",obj,e);
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);
 			result.setMsg("service error");
 		}
@@ -89,19 +89,19 @@ public class AppointmentRestController extends BaseFilter  {
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
 	 **/
 	@RequestMapping("list")
-	public Object findAppointmentList(@RequestBody Appointment  obj, HttpServletRequest request) {
+	public Object findInformationList(@RequestBody Information  obj, HttpServletRequest request) {
 		 Result result=new Result();
 		try {
-			log.info("findAppointmentList  {}",obj);
+			log.info("findInformationList  {}",obj);
 			MidlandHelper.doPage(request);
-			Page<Appointment> list = (Page<Appointment>)appointmentServiceImpl.findAppointmentList(obj);
+			Page<Information> list = (Page<Information>)informationServiceImpl.findInformationList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
 			result.setList(list);
 			result.setPaginator(paginator);
 		} catch(Exception e) {
-			log.error("findAppointmentList  {}",obj,e);
+			log.error("findInformationList  {}",obj,e);
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);
 			result.setMsg("service error");
 		}

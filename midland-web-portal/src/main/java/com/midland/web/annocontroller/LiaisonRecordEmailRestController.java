@@ -1,7 +1,7 @@
 package com.midland.web.annocontroller;
 
-import com.midland.web.model.Appointment;
-import com.midland.web.service.AppointmentService;
+import com.midland.web.model.LiaisonRecordEmail;
+import com.midland.web.service.LiaisonRecordEmailService;
 import com.midland.base.BaseFilter;
 import org.slf4j.Logger;
 import com.midland.web.commons.Result;
@@ -19,26 +19,26 @@ import com.midland.web.util.MidlandHelper;
 import javax.servlet.http.HttpServletRequest;
 @RestController
 @SuppressWarnings("all")
-@RequestMapping("/appointment/")
-public class AppointmentRestController extends BaseFilter  {
+@RequestMapping("/liaisonRecordEmail/")
+public class LiaisonRecordEmailRestController extends BaseFilter  {
 
-	private Logger log = LoggerFactory.getLogger(AppointmentRestController.class);
+	private Logger log = LoggerFactory.getLogger(LiaisonRecordEmailRestController.class);
 	@Autowired
-	private AppointmentService appointmentServiceImpl;
+	private LiaisonRecordEmailService liaisonRecordEmailServiceImpl;
 
 	/**
 	 * 新增
 	 **/
 	@RequestMapping("add")
-	public Object addAppointment(@RequestBody Appointment obj) throws Exception {
+	public Object addLiaisonRecordEmail(@RequestBody LiaisonRecordEmail obj) throws Exception {
 		 Result result=new Result();
 		try {
-			log.info("addAppointment {}",obj);
-			appointmentServiceImpl.insertAppointment(obj);
+			log.info("addLiaisonRecordEmail {}",obj);
+			liaisonRecordEmailServiceImpl.insertLiaisonRecordEmail(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
 		} catch(Exception e) {
-			log.error("addAppointment异常 {}",obj,e);
+			log.error("addLiaisonRecordEmail异常 {}",obj,e);
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);
 			result.setMsg("service error");
 		}
@@ -49,17 +49,17 @@ public class AppointmentRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getAppointmentById(Map map) {
+	public Object getLiaisonRecordEmailById(Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");
-			log.info("getAppointmentById  {}",id);
-			Appointment appointment = appointmentServiceImpl.selectAppointmentById(id);
+			log.info("getLiaisonRecordEmailById  {}",id);
+			LiaisonRecordEmail liaisonRecordEmail = liaisonRecordEmailServiceImpl.selectLiaisonRecordEmailById(id);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
-			result.setModel(appointment);
+			result.setModel(liaisonRecordEmail);
 		} catch(Exception e) {
-			log.error("getAppointment异常 {}",map,e);
+			log.error("getLiaisonRecordEmail异常 {}",map,e);
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);
 			result.setMsg("service error");
 		}
@@ -70,15 +70,15 @@ public class AppointmentRestController extends BaseFilter  {
 	 * 更新
 	 **/
 	@RequestMapping("update")
-	public Object updateAppointmentById(@RequestBody Appointment obj) throws Exception {
+	public Object updateLiaisonRecordEmailById(@RequestBody LiaisonRecordEmail obj) throws Exception {
 		 Result result=new Result();
 		try {
-			log.info("updateAppointmentById  {}",obj);
-			appointmentServiceImpl.updateAppointmentById(obj);
+			log.info("updateLiaisonRecordEmailById  {}",obj);
+			liaisonRecordEmailServiceImpl.updateLiaisonRecordEmailById(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
 		} catch(Exception e) {
-			log.error("updateAppointmentById  {}",obj,e);
+			log.error("updateLiaisonRecordEmailById  {}",obj,e);
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);
 			result.setMsg("service error");
 		}
@@ -89,19 +89,19 @@ public class AppointmentRestController extends BaseFilter  {
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
 	 **/
 	@RequestMapping("list")
-	public Object findAppointmentList(@RequestBody Appointment  obj, HttpServletRequest request) {
+	public Object findLiaisonRecordEmailList(@RequestBody LiaisonRecordEmail  obj, HttpServletRequest request) {
 		 Result result=new Result();
 		try {
-			log.info("findAppointmentList  {}",obj);
+			log.info("findLiaisonRecordEmailList  {}",obj);
 			MidlandHelper.doPage(request);
-			Page<Appointment> list = (Page<Appointment>)appointmentServiceImpl.findAppointmentList(obj);
+			Page<LiaisonRecordEmail> list = (Page<LiaisonRecordEmail>)liaisonRecordEmailServiceImpl.findLiaisonRecordEmailList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
 			result.setList(list);
 			result.setPaginator(paginator);
 		} catch(Exception e) {
-			log.error("findAppointmentList  {}",obj,e);
+			log.error("findLiaisonRecordEmailList  {}",obj,e);
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);
 			result.setMsg("service error");
 		}

@@ -1,7 +1,7 @@
 package com.midland.web.annocontroller;
 
-import com.midland.web.model.Appointment;
-import com.midland.web.service.AppointmentService;
+import com.midland.web.model.LinkUrlManager;
+import com.midland.web.service.LinkUrlManagerService;
 import com.midland.base.BaseFilter;
 import org.slf4j.Logger;
 import com.midland.web.commons.Result;
@@ -19,26 +19,26 @@ import com.midland.web.util.MidlandHelper;
 import javax.servlet.http.HttpServletRequest;
 @RestController
 @SuppressWarnings("all")
-@RequestMapping("/appointment/")
-public class AppointmentRestController extends BaseFilter  {
+@RequestMapping("/linkUrlManager/")
+public class LinkUrlManagerRestController extends BaseFilter  {
 
-	private Logger log = LoggerFactory.getLogger(AppointmentRestController.class);
+	private Logger log = LoggerFactory.getLogger(LinkUrlManagerRestController.class);
 	@Autowired
-	private AppointmentService appointmentServiceImpl;
+	private LinkUrlManagerService linkUrlManagerServiceImpl;
 
 	/**
 	 * 新增
 	 **/
 	@RequestMapping("add")
-	public Object addAppointment(@RequestBody Appointment obj) throws Exception {
+	public Object addLinkUrlManager(@RequestBody LinkUrlManager obj) throws Exception {
 		 Result result=new Result();
 		try {
-			log.info("addAppointment {}",obj);
-			appointmentServiceImpl.insertAppointment(obj);
+			log.info("addLinkUrlManager {}",obj);
+			linkUrlManagerServiceImpl.insertLinkUrlManager(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
 		} catch(Exception e) {
-			log.error("addAppointment异常 {}",obj,e);
+			log.error("addLinkUrlManager异常 {}",obj,e);
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);
 			result.setMsg("service error");
 		}
@@ -49,17 +49,17 @@ public class AppointmentRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getAppointmentById(Map map) {
+	public Object getLinkUrlManagerById(Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");
-			log.info("getAppointmentById  {}",id);
-			Appointment appointment = appointmentServiceImpl.selectAppointmentById(id);
+			log.info("getLinkUrlManagerById  {}",id);
+			LinkUrlManager linkUrlManager = linkUrlManagerServiceImpl.selectById(id);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
-			result.setModel(appointment);
+			result.setModel(linkUrlManager);
 		} catch(Exception e) {
-			log.error("getAppointment异常 {}",map,e);
+			log.error("getLinkUrlManager异常 {}",map,e);
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);
 			result.setMsg("service error");
 		}
@@ -70,15 +70,15 @@ public class AppointmentRestController extends BaseFilter  {
 	 * 更新
 	 **/
 	@RequestMapping("update")
-	public Object updateAppointmentById(@RequestBody Appointment obj) throws Exception {
+	public Object updateLinkUrlManagerById(@RequestBody LinkUrlManager obj) throws Exception {
 		 Result result=new Result();
 		try {
-			log.info("updateAppointmentById  {}",obj);
-			appointmentServiceImpl.updateAppointmentById(obj);
+			log.info("updateLinkUrlManagerById  {}",obj);
+			linkUrlManagerServiceImpl.updateById(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
 		} catch(Exception e) {
-			log.error("updateAppointmentById  {}",obj,e);
+			log.error("updateLinkUrlManagerById  {}",obj,e);
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);
 			result.setMsg("service error");
 		}
@@ -89,19 +89,19 @@ public class AppointmentRestController extends BaseFilter  {
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
 	 **/
 	@RequestMapping("list")
-	public Object findAppointmentList(@RequestBody Appointment  obj, HttpServletRequest request) {
+	public Object findLinkUrlManagerList(@RequestBody LinkUrlManager  obj, HttpServletRequest request) {
 		 Result result=new Result();
 		try {
-			log.info("findAppointmentList  {}",obj);
+			log.info("findLinkUrlManagerList  {}",obj);
 			MidlandHelper.doPage(request);
-			Page<Appointment> list = (Page<Appointment>)appointmentServiceImpl.findAppointmentList(obj);
+			Page<LinkUrlManager> list = (Page<LinkUrlManager>)linkUrlManagerServiceImpl.findLinkUrlManagerList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
 			result.setList(list);
 			result.setPaginator(paginator);
 		} catch(Exception e) {
-			log.error("findAppointmentList  {}",obj,e);
+			log.error("findLinkUrlManagerList  {}",obj,e);
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);
 			result.setMsg("service error");
 		}

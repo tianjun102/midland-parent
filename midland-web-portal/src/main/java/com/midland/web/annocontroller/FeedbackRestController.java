@@ -1,7 +1,7 @@
 package com.midland.web.annocontroller;
 
-import com.midland.web.model.Appointment;
-import com.midland.web.service.AppointmentService;
+import com.midland.web.model.Feedback;
+import com.midland.web.service.FeedbackService;
 import com.midland.base.BaseFilter;
 import org.slf4j.Logger;
 import com.midland.web.commons.Result;
@@ -19,26 +19,26 @@ import com.midland.web.util.MidlandHelper;
 import javax.servlet.http.HttpServletRequest;
 @RestController
 @SuppressWarnings("all")
-@RequestMapping("/appointment/")
-public class AppointmentRestController extends BaseFilter  {
+@RequestMapping("/feedback/")
+public class FeedbackRestController extends BaseFilter  {
 
-	private Logger log = LoggerFactory.getLogger(AppointmentRestController.class);
+	private Logger log = LoggerFactory.getLogger(FeedbackRestController.class);
 	@Autowired
-	private AppointmentService appointmentServiceImpl;
+	private FeedbackService feedbackServiceImpl;
 
 	/**
 	 * 新增
 	 **/
 	@RequestMapping("add")
-	public Object addAppointment(@RequestBody Appointment obj) throws Exception {
+	public Object addFeedback(@RequestBody Feedback obj) throws Exception {
 		 Result result=new Result();
 		try {
-			log.info("addAppointment {}",obj);
-			appointmentServiceImpl.insertAppointment(obj);
+			log.info("addFeedback {}",obj);
+			feedbackServiceImpl.insertFeedback(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
 		} catch(Exception e) {
-			log.error("addAppointment异常 {}",obj,e);
+			log.error("addFeedback异常 {}",obj,e);
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);
 			result.setMsg("service error");
 		}
@@ -49,17 +49,17 @@ public class AppointmentRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getAppointmentById(Map map) {
+	public Object getFeedbackById(Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");
-			log.info("getAppointmentById  {}",id);
-			Appointment appointment = appointmentServiceImpl.selectAppointmentById(id);
+			log.info("getFeedbackById  {}",id);
+			Feedback feedback = feedbackServiceImpl.selectFeedbackById(id);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
-			result.setModel(appointment);
+			result.setModel(feedback);
 		} catch(Exception e) {
-			log.error("getAppointment异常 {}",map,e);
+			log.error("getFeedback异常 {}",map,e);
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);
 			result.setMsg("service error");
 		}
@@ -70,15 +70,15 @@ public class AppointmentRestController extends BaseFilter  {
 	 * 更新
 	 **/
 	@RequestMapping("update")
-	public Object updateAppointmentById(@RequestBody Appointment obj) throws Exception {
+	public Object updateFeedbackById(@RequestBody Feedback obj) throws Exception {
 		 Result result=new Result();
 		try {
-			log.info("updateAppointmentById  {}",obj);
-			appointmentServiceImpl.updateAppointmentById(obj);
+			log.info("updateFeedbackById  {}",obj);
+			feedbackServiceImpl.updateFeedbackById(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
 		} catch(Exception e) {
-			log.error("updateAppointmentById  {}",obj,e);
+			log.error("updateFeedbackById  {}",obj,e);
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);
 			result.setMsg("service error");
 		}
@@ -89,19 +89,19 @@ public class AppointmentRestController extends BaseFilter  {
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
 	 **/
 	@RequestMapping("list")
-	public Object findAppointmentList(@RequestBody Appointment  obj, HttpServletRequest request) {
+	public Object findFeedbackList(@RequestBody Feedback  obj, HttpServletRequest request) {
 		 Result result=new Result();
 		try {
-			log.info("findAppointmentList  {}",obj);
+			log.info("findFeedbackList  {}",obj);
 			MidlandHelper.doPage(request);
-			Page<Appointment> list = (Page<Appointment>)appointmentServiceImpl.findAppointmentList(obj);
+			Page<Feedback> list = (Page<Feedback>)feedbackServiceImpl.findFeedbackList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
 			result.setList(list);
 			result.setPaginator(paginator);
 		} catch(Exception e) {
-			log.error("findAppointmentList  {}",obj,e);
+			log.error("findFeedbackList  {}",obj,e);
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);
 			result.setMsg("service error");
 		}
