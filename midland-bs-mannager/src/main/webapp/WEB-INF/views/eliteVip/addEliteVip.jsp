@@ -150,7 +150,7 @@
                 <li>
                     <span></span>
                     <a onclick="updateData();" target="contentF" class = "public_btn bg2">保存</a>
-                    <a style="margin-left: 20px" href="${ctx}/rest/eliteClub/index" target="contentF" class="public_btn bg3" id="cancel">取消</a>
+                    <a style="margin-left: 20px" href="${ctx}/rest/eliteVip/index" target="contentF" class="public_btn bg3" id="cancel">取消</a>
                 </li>
             </ul>
         </form>

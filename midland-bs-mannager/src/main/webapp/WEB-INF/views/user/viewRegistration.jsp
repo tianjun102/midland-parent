@@ -90,11 +90,11 @@
                     dataType: "json",
                     success: function(obj){
                         if(obj.state==0){
-                            layer.msg("成功！",{icon:5});
+                            layer.msg("审核成功！",{icon:1});
                             window.open("${ctx}/rest/user/userIndex","contentF");
                         }
                         if(obj.state==-1){
-                            layer.msg("失败！！",{icon:7});
+                            layer.msg("审核失败！！",{icon:7});
                         }
 
                     }

@@ -11,6 +11,7 @@ import com.midland.core.util.ApplicationUtils;
 import com.midland.core.util.HttpUtils;
 import com.midland.core.util.MD5Util;
 import com.midland.core.util.SmsUtil;
+import com.midland.web.Contants.Contant;
 import com.midland.web.api.SmsSender.SmsClient;
 import com.midland.web.api.SmsSender.SmsModel;
 import com.midland.web.api.SmsSender.SmsResult;
@@ -285,8 +286,10 @@ public class UserController extends BaseFilter {
     @RequestMapping(value = "/userList", method = {RequestMethod.GET,RequestMethod.POST})
     public String selectUserList(User user, Model model, HttpServletRequest request){
     	User currUser = MidlandHelper.getCurrentUser(request);
-    	if (StringUtils.isEmpty(user.getCityId())){
-			user.setCityId(currUser.getCityId());
+		if(!Contant.isSuper.equals(user.getIsSuper())) {//不是超级管理员，只能看属性城市的相关信息
+			if (StringUtils.isEmpty(user.getCityId())) {
+				user.setCityId(currUser.getCityId());
+			}
 		}
 		if(user.getUserType()==null){
     		user.setUserType(-1);
