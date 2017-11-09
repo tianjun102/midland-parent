@@ -7,10 +7,10 @@
 %>
 <body>
 <c:if test="${not empty pageNo}">
-    <input type="text" name="pageNo" value="${pageNo}"/>
+    <input type="hidden" name="pageNo" value="${pageNo}"/>
 </c:if>
 <c:if test="${not empty pageSize}">
-    <input type="text" name="pageSize" value="${pageSize}"/>
+    <input type="hidden" name="pageSize" value="${pageSize}"/>
 </c:if>
 </body>
 

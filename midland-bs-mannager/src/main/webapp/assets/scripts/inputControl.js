@@ -219,7 +219,9 @@ InitInput = {
         var value=$('#'+id).val();
         if(!regExp.test(value)){
             layer.tips(msg, "input[name='"+name+"']", {tips: 1});
+            return false;
         }
+        return true;
 	},
 	
 	/*

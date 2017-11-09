@@ -147,8 +147,12 @@
     //保存数据
     function saveData() {
         var data = $("#dataForm").serialize();
-        if (notEmpty('housesId', 'housesId', '') && notEmpty('housesName', 'housesName', '')
-            && InitInput.setTime('duration', 'duration', '时间格式不正确')) {
+        console.log(notEmpty('housesId', 'housesId', ''));
+        console.log(notEmpty('housesName', 'housesName', ''));
+        console.log(InitInput.setTime('duration','duration','时间格式不正确'));
+        if (notEmpty('housesId', 'housesId', '')
+            && notEmpty('housesName', 'housesName', '')
+            && InitInput.setTime('duration','duration','时间格式不正确')) {
 
 
             $.ajax({
