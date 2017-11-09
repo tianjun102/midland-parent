@@ -16,7 +16,7 @@ public class PublicController {
     public Object test(){
         Map map = new HashMap();
         map.put("state","0");
-        map.put("msg","success");
+        map.put("msg","成功");
         return map;
     }
 

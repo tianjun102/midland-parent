@@ -1,6 +1,10 @@
 package com.midland.web.model;
 
 
+import org.springframework.transaction.annotation.Transactional;
+
+import java.beans.Transient;
+
 public class Questions{
 	/**
 	 * 问题主键
@@ -66,6 +70,15 @@ public class Questions{
 	private String startTime;
 
 	private String endTime;
+
+
+	private String descName;
+	public String getDescName() {
+		return descName;
+	}
+	public void setDescName(String descName) {
+		this.descName = descName;
+	}
 
 	public String getStartTime() {
 		return startTime;

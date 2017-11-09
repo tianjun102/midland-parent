@@ -39,6 +39,9 @@
       and is_delete=0
     </if>
     <include refid="select_option"/>
+    <if test="descName !=null">
+      order by ${descName} DESC
+    </if>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from questions

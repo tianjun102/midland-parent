@@ -1,6 +1,5 @@
 package com.midland.web.dao;
 
-import com.midland.web.model.QrCode;
 import com.midland.web.model.Questions;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
