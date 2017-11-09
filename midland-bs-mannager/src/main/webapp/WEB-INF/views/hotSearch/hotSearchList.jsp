@@ -67,9 +67,9 @@
 <script type="text/javascript">
 
     function delete1(id,isDelete){
-        var msg = "您确定要删除当前分类吗？";
+        var msg = "您确定要删除当前数据吗？";
         if(isDelete==0){
-            msg = "您确定要恢复当前分类吗？"
+            msg = "您确定要恢复当前数据吗？"
         }
         layer.open({
             type: 1,
@@ -93,10 +93,18 @@
                     dataType: "json",
                     success: function(data){
                         if(data.state==0){
-                            layer.msg("删除成功！",{icon:1});
+                            if(isDelete==0){
+                                layer.msg("恢复成功！",{icon:1});
+                            }else{
+                                layer.msg("删除成功！",{icon:1});
+                            }
                             setTimeout(function(){$("#searchForm").submit();},1000);
                         }else{
-                            layer.msg("删除失败！！",{icon:7});
+                            if(isDelete==0){
+                                layer.msg("恢复成功！",{icon:7});
+                            }else{
+                                layer.msg("删除成功！",{icon:7});
+                            }
                         }
                         layer.close(index);
                     }
