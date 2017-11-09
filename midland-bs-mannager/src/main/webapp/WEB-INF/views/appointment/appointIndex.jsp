@@ -78,8 +78,6 @@
 
 <script type="text/javascript">
 
-    var allHeight = $(window).height();
-
     function export1() {
         var data = $("#searchForm").serialize();
 

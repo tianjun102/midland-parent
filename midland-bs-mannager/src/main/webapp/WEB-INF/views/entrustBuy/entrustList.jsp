@@ -125,7 +125,7 @@
             type: 2,
             title: ['重新分配经纪人'],
             shade: 0.3,
-            area: ['1000px', allHeight-100+'px'],
+            area: ['1000px', '500px'],
             content: ['${ctx}/rest/public/toRedistribute?id=' + id+"&url="+url , 'no']
         });
     }
@@ -171,13 +171,14 @@
 
 
     function toUpdateEntrust(appointId) {
-        layer.open({
-            type: 2,
-            title: ['委托详情'],
-            shade: 0.3,
-            area: ['1000px', allHeight-100+'px'],
-            content: ['${ctx}/rest/entrust/buy/to_update?entrustId=' + appointId , 'yes']
-        });
+        window.open('${ctx}/rest/entrust/buy/to_update?entrustId=' + appointId ,'contentF');
+        <%--layer.open({--%>
+            <%--type: 2,--%>
+            <%--title: ['委托详情'],--%>
+            <%--shade: 0.3,--%>
+            <%--area: ['1000px', '500px'],--%>
+            <%--content: ['${ctx}/rest/entrust/buy/to_update?entrustId=' + appointId , 'yes']--%>
+        <%--});--%>
     }
 
     function checkall(){

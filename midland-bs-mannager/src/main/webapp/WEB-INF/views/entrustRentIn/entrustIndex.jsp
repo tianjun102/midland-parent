@@ -94,16 +94,17 @@
     var allHeight = $(window).height();
 
     function addEntrust() {
-        layer.open({
-            type: 2,
-            skin: 'layer-style',
-            area: ['1000px', '750px'],
-            shadeClose: false, //点击遮罩关闭
-            title: ['委托'],
-            resize: false,
-            scrollbar: false,
-            content: ['${ctx}/rest/entrust/rentIn/to_add', 'no']
-        });
+        window.open('${ctx}/rest/entrust/rentIn/to_add','contentF');
+        <%--layer.open({--%>
+            <%--type: 2,--%>
+            <%--skin: 'layer-style',--%>
+            <%--area: ['1000px', '750px'],--%>
+            <%--shadeClose: false, //点击遮罩关闭--%>
+            <%--title: ['委托'],--%>
+            <%--resize: false,--%>
+            <%--scrollbar: false,--%>
+            <%--content: ['${ctx}/rest/entrust/rentIn/to_add', 'no']--%>
+        <%--});--%>
     }
 
 

@@ -54,29 +54,17 @@
 				<li><input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/></li>
 			</ul>
 			</form>
+			<a href="#" class="public_btn bg1 listButton" onclick="saveData()">确定</a>
+			<a href="#" class="public_btn bg1 listButton" onclick="closeWin();">取消</a>
 			<div id="listDiv"></div>
 		</section>
 	</div>
 	
 	
 	<script type="text/javascript">
-		/* $(function(){
-			$('#searchForm').submit();
-		}); */
 		 window.onload = function(){
              $('#searchForm').submit();
 		}
-
 	</script>
-	<!-- 本页私有js -->
-	
-	
-	<script type="text/javascript" src="${ctx}/assets/scripts/jquery.min.js"></script>
-	<script type="text/javascript" src="${ctx}/assets/scripts/jquery.easydropdown.js" ></script>
-	<script type="text/javascript" src="${ctx}/assets/scripts/bootstrap.min.js"></script>
-	<script type="text/javascript" src="${ctx}/assets/scripts/layer/layer.js"></script>
-	<script type="text/javascript" src="${ctx}/assets/scripts/common.js"></script>
-	<script type="text/javascript" src="${ctx}/assets/scripts/base.js" ></script>
-	<script src="${ctx}/assets/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
 </body>
 </html>

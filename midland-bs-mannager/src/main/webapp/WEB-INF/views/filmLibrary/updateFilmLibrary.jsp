@@ -15,8 +15,7 @@
                 'uploader': '${ctx }/rest/upload/img',
                 'multi': false,// 是否支持多个文件上传
                 'buttonText': '上传文件',
-                'fileTypeExts': '*.bmp,*.jpg,*.png,*.tiff,*.gif,*.pcx,*.tga,*.exif,*.fpx,*.svg,*.psd,*.cdr,*.pcd,*.dxf,*.ufo,*.eps,*.ai,*.raw,*.WMF',
-                'onSelectError': uploadify_onSelectError,
+                'fileTypeExts': '*.bmp;*.jpg;*.png;*.tiff;*.gif;*.pcx;*.tga;*.exif;*.fpx;*.svg;*.psd;*.cdr;*.pcd;*.dxf;*.ufo;*.eps;*.ai;*.raw;*.WMF',                'onSelectError': uploadify_onSelectError,
                 'onUploadSuccess': function (file, data, response) {
                     $("#imgUrl").attr("value", data);
                     $("#iconImg1").attr("src", data);

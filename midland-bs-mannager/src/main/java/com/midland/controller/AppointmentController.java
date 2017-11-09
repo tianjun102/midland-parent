@@ -29,6 +29,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -203,7 +204,7 @@ public class AppointmentController extends BaseFilter {
 	
 	@RequestMapping("/update")
 	@ResponseBody
-	public Object updateByPrimaryKeySelective(Appointment record, String remark, HttpServletRequest request) {
+	public Object updateAppointment(Appointment record, String remark, HttpServletRequest request) {
 		Map map = new HashMap();
 		try {
 			if (0 != record.getStatus()) {
@@ -218,6 +219,16 @@ public class AppointmentController extends BaseFilter {
 				appointLog.setRemark("无");
 			} else {
 				appointLog.setRemark(remark);
+			}
+			if (record.getStatus()==3){
+				// 关闭状态的数据发邮件到指定接收的多个邮箱
+				SimpleMailMessage message = new SimpleMailMessage();
+				message.setFrom("3332932@qq.com");
+				message.setTo("977543176@qq.com");
+				//message.setTo("dpall@midland.com.cn");
+				message.setSubject("主题：预约已关闭");
+				message.setText("编号为"+record.getAppointSn()+"的预约记录已关闭");
+				apiHelper.emailSender("updateAppointment",message);
 			}
 			appointLog.setAppointId(record.getId());
 			appointLog.setLogTime(MidlandHelper.getCurrentTime());
