@@ -4,9 +4,7 @@ import com.github.pagehelper.Page;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
 import com.midland.web.model.Footer;
-import com.midland.web.model.TradeFair;
 import com.midland.web.service.FooterService;
-import com.midland.web.service.TradeFairService;
 import com.midland.web.util.MidlandHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,8 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 
 @RequestMapping("/foolter/")
 @RestController
-public class FooltRestController {
-    private static Logger logger = LoggerFactory.getLogger(FooltRestController.class);
+public class FooterRestController {
+    private static Logger logger = LoggerFactory.getLogger(FooterRestController.class);
     @Autowired
     private FooterService FooterServiceImpl;
     @RequestMapping("list")
