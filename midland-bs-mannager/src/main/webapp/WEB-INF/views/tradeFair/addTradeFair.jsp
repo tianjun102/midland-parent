@@ -59,7 +59,6 @@
                         var imgsrc = $parent.find("img").attr("src");
                         var imgArray = imgsrcs.split("||");
                         for (var i=0;i<imgArray.length;i++){
-                            debugger;
                             if(imgArray[i].match(imgsrc)){
                                 continue;
                             }

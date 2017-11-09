@@ -158,7 +158,6 @@
     }
 
     var uploadify_onSelectError = function (file, errorCode, errorMsg) {
-        debugger;
         var msgText = "上传失败\n";
         switch (errorCode) {
             case SWFUpload.QUEUE_ERROR.QUEUE_LIMIT_EXCEEDED:

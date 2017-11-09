@@ -118,40 +118,45 @@
 <script type="text/javascript">
     //保存数据
     function updateData() {
-        if (!notEmpty('nickName','nickName','')||!checkPhone('','phone','')){
-            return;
-        }
-        var data = $("#appointInfoForm").serialize();
-        $.ajax({
-            type: "post",
-            url: "${ctx}/rest/appoint/update",
-            async: false, // 此处必须同步
-            dataType: "json",
-            data: data,
-            success: function (data) {
-                debugger;
-                if (data.state == 0) {
-                    layer.msg("保存成功！！！", {icon: 1});
-                    $('#save').removeAttr("onclick");
-                    setTimeout(function () {
-                        parent.location.reload();
-                    }, 1000);
+        if (notEmpty('nickName', 'nickName', '') && checkPhone('', 'phone', '')) {
+            var data = $("#appointInfoForm").serialize();
+            var pageNo = ${pageNo};
+            var pageSize = ${pageSize};
+            var param = "?pageNo="+pageNo+"&pageSize="+pageSize;
+            $.ajax({
+                type: "post",
+                url: "${ctx}/rest/appoint/update",
+                async: false, // 此处必须同步
+                dataType: "json",
+                data: data,
+                success: function (data) {
+                    if (data.state == 0) {
+                        layer.msg("保存成功！！！", {icon: 1});
+                        $('#save').removeAttr("onclick");
+                        setTimeout(function () {
+                            window.open("${ctx}/rest/appoint/index"+param , "contentF");
+                        }, 1000);
 
-                } else {
+                    } else {
+                        layer.msg("保存失败！", {icon: 2});
+                    }
+                },
+                error: function () {
                     layer.msg("保存失败！", {icon: 2});
                 }
-            },
-            error: function () {
-                layer.msg("保存失败！", {icon: 2});
-            }
-        });
+            });
+        }
     }
 
 
     //取消
     function closeWin() {
-        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-        parent.layer.close(index);
+        var pageNo = ${pageNo};
+        var pageSize = ${pageSize};
+        var param = "?pageNo="+pageNo+"&pageSize="+pageSize;
+        window.open("${ctx}/rest/appoint/index"+param , "contentF");
+//        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+//        parent.layer.close(index);
     }
 </script>
 </body>

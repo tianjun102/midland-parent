@@ -69,6 +69,10 @@ public class EntrustEvaluateController extends BaseFilter{
 		User user = MidlandHelper.getCurrentUser(request);
 		model.addAttribute("isSuper",user.getIsSuper());
 		getSelectParam(model);
+		String pageNo = request.getParameter("pageNo");
+		String pageSize = request.getParameter("pageSize");
+		model.addAttribute("pageNo",pageNo);
+		model.addAttribute("pageSize",pageSize);
 		return "/entrustEvaluate/entrustIndex";
 	}
 	
@@ -173,13 +177,17 @@ public class EntrustEvaluateController extends BaseFilter{
 
 	
 	@RequestMapping("/to_update")
-	public String toUpdateAppointment(int entrustId, Model model) {
+	public String toUpdateAppointment(int entrustId, Model model,HttpServletRequest request) {
 		Entrust entrust=entrustServiceImpl.selectEntrustById(entrustId);
 		List<EntrustLog> entrustLogs = entrustLogServiceImpl.selectEntrustLogByEntrustId(entrustId);
 		
 		getSelectParam(model);
 		model.addAttribute("entrust",entrust);
 		model.addAttribute("entrustLogs",entrustLogs);
+		String pageNo = request.getParameter("pageNo");
+		String pageSize = request.getParameter("pageSize");
+		model.addAttribute("pageNo",pageNo);
+		model.addAttribute("pageSize",pageSize);
 		return "entrustEvaluate/updateEntrust";
 	}
 	
@@ -190,7 +198,7 @@ public class EntrustEvaluateController extends BaseFilter{
 	public Object updateByPrimaryKeySelective(Entrust entrust,String dealRemark, HttpServletRequest request) {
 		Map map = new HashMap();
 		try {
-			if (entrust.getStatus()!=null && 1 !=entrust.getStatus()){
+			if (entrust.getStatus()!=null && 1 !=entrust.getStatus()&& 0 !=entrust.getStatus()){
 				//如果委托状态不是已分配，隐藏重新分配按钮
 				entrust.setResetFlag(0);
 			}

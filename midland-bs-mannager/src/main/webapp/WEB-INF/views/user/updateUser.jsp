@@ -69,7 +69,6 @@
 </section>	
 <script type="text/javascript">
 	function saveData() {
-debugger;
         if (checkUserName() &&
 			notEmpty('userCnName','userCnName','用户昵称不能为空')&&
 			checkSelect('citys','请选择市级') &&
@@ -116,7 +115,6 @@ debugger;
 	
 	
 	function checkUserName(){
-	    debugger;
 		var regUserName = /^[a-zA-Z0-9_]{6,20}$/;
 		var userName = $("#username").val();
 		if(userName==null || userName.trim() =="" ){
@@ -150,7 +148,6 @@ debugger;
 	
 	//检查手机号格式
 	function checkPhone() {
-        debugger;
 		var reg = /^1[3,4,5,7,8]\d{9}$/;
 		var phone = $("input[name='phone']").val();
 		if (phone.trim() == '') {
@@ -183,7 +180,6 @@ debugger;
 	
 	//检查邮箱格式
 	function checkEmail() {
-        debugger;
 		var reg =  /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 		var email = $("input[name='email']").val();
 		if (email.trim() == '') {

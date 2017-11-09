@@ -46,6 +46,7 @@
 			<ul class = "userinfo row">
 				<input type="hidden" id="id" value="${id}"/>
 				<input type="hidden" id="url" value="${url}"/>
+				<input type="hidden" id="indexUrl" value="${indexUrl}"/>
 				<li><span >工号：</span><input type="text" name="jobNum" id="jobNum" placeholder="请输入工号" /></li>
 				<li><span>名称：</span><input type="text" name="name" id="name" placeholder="请输入名称" /></li>
 				<li><span>手机号码：</span><input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>

@@ -136,6 +136,9 @@
     function updateData() {
         if (checkPhone('','phone','')&&notEmpty('nickName','nickName','')){
         var data = $("#appointInfoForm").serialize();
+        var pageNo = ${pageNo};
+        var pageSize = ${pageSize};
+        var param = "?pageNo="+pageNo+"&pageSize="+pageSize;
 
         $.ajax({
             type: "post",
@@ -148,7 +151,7 @@
                     layer.msg("保存成功！！！", {icon: 1});
                     $('#save').removeAttr("onclick");
                     setTimeout(function () {
-                        window.open('${ctx}/rest/entrust/buy/index','contentF');
+                        window.open('${ctx}/rest/entrust/buy/index'+param,'contentF');
                     }, 1000);
 
                 } else {
@@ -164,7 +167,10 @@
 
     //取消
     function closeWin() {
-        window.open('${ctx}/rest/entrust/buy/index','contentF');
+        var pageNo = ${pageNo};
+        var pageSize = ${pageSize};
+        var param = "?pageNo="+pageNo+"&pageSize="+pageSize;
+        window.open('${ctx}/rest/entrust/buy/index'+param,'contentF');
 //        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 //        parent.layer.close(index);
     }
