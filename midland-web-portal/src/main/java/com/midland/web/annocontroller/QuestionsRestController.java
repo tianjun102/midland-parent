@@ -107,4 +107,52 @@ public class QuestionsRestController extends BaseFilter  {
 		}
 		return result;
 	}
+	/**
+	 * 热门问题  按点击率降序排
+	 * @param obj
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("hot/list")
+	public Object hotQuestionList(@RequestBody Questions obj, HttpServletRequest request){
+		Result result=new Result();
+		try {
+			MidlandHelper.doPage(request);
+			obj.setDescName("click_num");
+			Page<Questions> list = (Page<Questions>)questionsServiceImpl.questionPage(obj);
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result.setList(list);
+			result.setMsg("success");
+			result.setPaginator(list.getPaginator());
+		} catch (Exception e) {
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result.setMsg("service error");
+			log.error("list",e);
+		}
+		return result;
+	}
+	/**
+	 * 最新问题  按时间降序排
+	 * @param obj
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("newest/list")
+	public Object newestQuestionList(@RequestBody Questions obj, HttpServletRequest request){
+		Result result=new Result();
+		try {
+			MidlandHelper.doPage(request);
+			obj.setDescName("question_time");
+			Page<Questions> list = (Page<Questions>)questionsServiceImpl.questionPage(obj);
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result.setList(list);
+			result.setMsg("success");
+			result.setPaginator(list.getPaginator());
+		} catch (Exception e) {
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result.setMsg("service error");
+			log.error("list",e);
+		}
+		return result;
+	}
 }

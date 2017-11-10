@@ -124,6 +124,19 @@ public class Appointment{
 	 * 委托人性别，0女1男
 	 */
 	private int sex;
+	/**
+	 * 前端用户id
+	 */
+	private Integer webUserId;
+
+
+	public Integer getWebUserId() {
+		return webUserId;
+	}
+
+	public void setWebUserId(Integer webUserId) {
+		this.webUserId = webUserId;
+	}
 
 	public int getSex() {
 		return sex;
@@ -392,6 +405,9 @@ public class Appointment{
 		}
 		if (source != null) {
 			sb.append(", \"source\":\"").append(source).append("\"");
+		}
+		if (webUserId != null) {
+			sb.append(", \"webUserId\":\"").append(webUserId).append("\"");
 		}
 		if (nickName != null) {
 			sb.append(", \"nickName\":\"").append(nickName).append("\"");

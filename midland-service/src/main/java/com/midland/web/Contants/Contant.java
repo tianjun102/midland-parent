@@ -25,9 +25,17 @@ public class Contant {
 	public static final int isDelete=1;
 
 
+	/**
+	 * 委托类型
+	 */
 	public static final int ENTRUST_BUY=0;
 	public static final int ENTRUST_SALE=1;
 	public static final int ENTRUST_RENT_OUT=2;
 	public static final int ENTRUST_RENT_IN=3;
 	public static final int ENTRUST_EVALUATE=4;
+
+	/**
+	 * 预约
+	 */
+	public static final String APPOINT_VCODE_KEY ="appoint:vcode:";
 }
