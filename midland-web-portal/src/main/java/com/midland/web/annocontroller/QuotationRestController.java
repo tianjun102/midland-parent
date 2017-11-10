@@ -1,0 +1,110 @@
+package com.midland.web.annocontroller;
+
+import com.midland.web.model.Quotation;
+import com.midland.web.service.QuotationService;
+import com.midland.base.BaseFilter;
+import org.slf4j.Logger;
+import com.midland.web.commons.Result;
+import com.midland.web.commons.core.util.ResultStatusUtils;
+import java.util.HashMap;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.Paginator;
+import java.util.Map;
+import com.midland.web.util.MidlandHelper;
+import javax.servlet.http.HttpServletRequest;
+@RestController
+@SuppressWarnings("all")
+@RequestMapping("/quotation/")
+public class QuotationRestController extends BaseFilter  {
+
+	private Logger log = LoggerFactory.getLogger(QuotationRestController.class);
+	@Autowired
+	private QuotationService quotationServiceImpl;
+
+	/**
+	 * 新增
+	 **/
+	@RequestMapping("add")
+	public Object addQuotation(@RequestBody Quotation obj) throws Exception {
+		 Result result=new Result();
+		try {
+			log.info("addQuotation {}",obj);
+			quotationServiceImpl.insertQuotation(obj);
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result.setMsg("success");
+		} catch(Exception e) {
+			log.error("addQuotation异常 {}",obj,e);
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result.setMsg("service error");
+		}
+		return result;
+	}
+
+	/**
+	 * 查询
+	 **/
+	@RequestMapping("get")
+	public Object getQuotationById(Map map) {
+		 Result result=new Result();
+		try {
+			Integer id =(Integer)map.get("id");
+			log.info("getQuotationById  {}",id);
+			Quotation quotation = quotationServiceImpl.selectQuotationById(id);
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result.setMsg("success");
+			result.setModel(quotation);
+		} catch(Exception e) {
+			log.error("getQuotation异常 {}",map,e);
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result.setMsg("service error");
+		}
+		return result;
+	}
+
+	/**
+	 * 更新
+	 **/
+	@RequestMapping("update")
+	public Object updateQuotationById(@RequestBody Quotation obj) throws Exception {
+		 Result result=new Result();
+		try {
+			log.info("updateQuotationById  {}",obj);
+			quotationServiceImpl.updateQuotationById(obj);
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result.setMsg("success");
+		} catch(Exception e) {
+			log.error("updateQuotationById  {}",obj,e);
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result.setMsg("service error");
+		}
+		return result;
+	}
+
+	/**
+	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
+	 **/
+	@RequestMapping("list")
+	public Object findQuotationList(@RequestBody Quotation  obj, HttpServletRequest request) {
+		 Result result=new Result();
+		try {
+			log.info("findQuotationList  {}",obj);
+			MidlandHelper.doPage(request);
+			Page<Quotation> list = (Page<Quotation>)quotationServiceImpl.findQuotationList(obj);
+			Paginator paginator=list.getPaginator();
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result.setMsg("success");
+			result.setList(list);
+			result.setPaginator(paginator);
+		} catch(Exception e) {
+			log.error("findQuotationList  {}",obj,e);
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result.setMsg("service error");
+		}
+		return result;
+	}
+}

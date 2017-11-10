@@ -30,13 +30,20 @@ public class PublicController extends BaseFilter{
 	
 	/**
 	 * 用户列表查询（重新分配经纪人）
-	 * @param id
+	 * @param
 	 * @return
 	 */
 	@RequestMapping(value = "/toRedistribute", method = {RequestMethod.GET,RequestMethod.POST})
-	public String toRedistribute(String id, String url, Model model, HttpServletRequest request){
+	public String toRedistribute(Model model, HttpServletRequest request){
+		String id=request.getParameter("id");
+		String url=request.getParameter("url");
+		String indexUrl=request.getParameter("indexUrl");
+		String pageNo=request.getParameter("pageNo") ;
+		String pageSize=request.getParameter("pageSize");
 		model.addAttribute("id",id);
 		model.addAttribute("url",url);
+		String redirectUrl=indexUrl+"?pageNo="+pageNo+"&pageSize="+pageSize;
+		model.addAttribute("indexUrl",redirectUrl);
 		return "layout/redistributeIndex";
 	}
 	

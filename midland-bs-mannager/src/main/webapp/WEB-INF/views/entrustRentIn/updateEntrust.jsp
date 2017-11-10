@@ -165,6 +165,10 @@
             ||!checkPhone('','phone','')){
             return;
         }
+        var pageNo = ${pageNo};
+        var pageSize = ${pageSize};
+        var param = "?pageNo="+pageNo+"&pageSize="+pageSize;
+
         var data = $("#appointInfoForm").serialize();
         $.ajax({
             type: "post",
@@ -177,7 +181,7 @@
                     layer.msg("保存成功！！！", {icon: 1});
                     $('#save').removeAttr("onclick");
                     setTimeout(function () {
-                        parent.location.reload();
+                        window.open('${ctx}/rest/entrust/rentIn/index'+param,'contentF');
                     }, 1000);
 
                 } else {
@@ -192,8 +196,12 @@
     
     //取消
     function closeWin() {
-        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-        parent.layer.close(index);
+        var pageNo = ${pageNo};
+        var pageSize = ${pageSize};
+        var param = "?pageNo="+pageNo+"&pageSize="+pageSize;
+        window.open('${ctx}/rest/entrust/rentIn/index'+param,'contentF');
+//        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+//        parent.layer.close(index);
     }
     function  setVal(ths,val) {
         if(ths.checked){

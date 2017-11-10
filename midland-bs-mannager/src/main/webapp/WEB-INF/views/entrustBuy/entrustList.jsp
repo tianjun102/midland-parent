@@ -105,7 +105,6 @@
         var headIndex = $("#headIndex").height();
         $("#table-cont").css({maxHeight:allHeight-headIndex-100-17});
         var tableCont = document.querySelector('#table-cont');
-        debugger;
         /**
          * scroll handle
          * @param {event} e -- scroll event
@@ -120,14 +119,20 @@
 
     function toRedistribute(id) {
         //重新分配经纪人时，保存的地址
+        var pageNo = ${paginator.page};
+        var pageSize = ${paginator.limit};
+        var param = "&pageNo="+pageNo+"&pageSize="+pageSize;
+        //重新分配经纪人时，保存的地址
         var url = "${ctx}/rest/entrust/reset_agent";
-        layer.open({
-            type: 2,
-            title: ['重新分配经纪人'],
-            shade: 0.3,
-            area: ['1000px', '500px'],
-            content: ['${ctx}/rest/public/toRedistribute?id=' + id+"&url="+url , 'no']
-        });
+        var indexUrl = "${ctx}/rest/entrust/buy/index"
+        window.open("${ctx}/rest/public/toRedistribute?id=" + id+"&url="+url+"&indexUrl="+indexUrl+param, "contentF");
+        <%--layer.open({--%>
+            <%--type: 2,--%>
+            <%--title: ['重新分配经纪人'],--%>
+            <%--shade: 0.3,--%>
+            <%--area: ['1000px', '500px'],--%>
+            <%--content: ['${ctx}/rest/public/toRedistribute?id=' + id+"&url="+url+parame1 , 'no']--%>
+        <%--});--%>
     }
     function deleteEntrust(id) {
         layer.open({
@@ -171,7 +176,10 @@
 
 
     function toUpdateEntrust(appointId) {
-        window.open('${ctx}/rest/entrust/buy/to_update?entrustId=' + appointId ,'contentF');
+        var pageNo = ${paginator.page};
+        var pageSize = ${paginator.limit};
+        var param = "&pageNo="+pageNo+"&pageSize="+pageSize;
+        window.open('${ctx}/rest/entrust/buy/to_update?entrustId=' + appointId+param ,'contentF');
         <%--layer.open({--%>
             <%--type: 2,--%>
             <%--title: ['委托详情'],--%>

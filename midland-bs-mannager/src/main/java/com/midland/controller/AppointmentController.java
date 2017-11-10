@@ -62,7 +62,10 @@ public class AppointmentController extends BaseFilter {
 	@RequestMapping("/index")
 	public String showAppointIndex(HttpServletRequest request, Model model) {
 		getSelectParam(model);
-		
+		String pageNo = request.getParameter("pageNo");
+		String pageSize = request.getParameter("pageSize");
+		model.addAttribute("pageNo",pageNo);
+		model.addAttribute("pageSize",pageSize);
 		return "/appointment/appointIndex";
 	}
 	
@@ -190,7 +193,7 @@ public class AppointmentController extends BaseFilter {
 	
 	
 	@RequestMapping("/to_update")
-	public String toUpdateAppointment(int appointId, Model model) {
+	public String toUpdateAppointment(int appointId, Model model, String pageNo, String pageSize) {
 		Appointment appointment = appointmentServiceImpl.selectAppointmentById(appointId);
 		List<AppointLog> appointLogs = appointLogServiceImpl.selectAppointLogByAppointId(appointId);
 		getSelectParam(model);
@@ -198,6 +201,8 @@ public class AppointmentController extends BaseFilter {
 		model.addAttribute("decorations", paramObjects);
 		model.addAttribute("appointment", appointment);
 		model.addAttribute("appointLogs", appointLogs);
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("pageSize", pageSize);
 		return "appointment/updateAppointInfo";
 	}
 	

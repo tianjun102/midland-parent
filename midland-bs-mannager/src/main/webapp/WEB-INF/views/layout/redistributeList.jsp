@@ -79,6 +79,7 @@
     function saveData(id){
         var id = $("#id").val();
         var url = $("#url").val();
+        var indexUrl = $("#indexUrl").val();
         var intHot = $("input[name='radio']:checked");
         var agentNo = intHot.parent().next().text();
         var agentName = intHot.parent().next().next().text();
@@ -96,7 +97,7 @@
                     layer.msg("分配成功！！！", {icon: 1});
                     $('#save').removeAttr("onclick");
                     setTimeout(function () {
-                        parent.location.reload();
+                        window.open(indexUrl,"contentF");
                     }, 1000);
 
                 } else {
@@ -111,8 +112,10 @@
     }
 
     function closeWin(){
-        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-        parent.layer.close(index);
+        var indexUrl = $("#indexUrl").val();
+        window.open(indexUrl,"contentF");
+//        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+//        parent.layer.close(index);
     }
 </script>
 </body>

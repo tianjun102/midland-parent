@@ -21,6 +21,7 @@
             <form action="${ctx }/rest/appoint/page" method="POST" id="searchForm"
                   onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
                 <ul class="userinfo row">
+                    <%@include file="../layout/pag.jsp" %>
                     <li><span>小区名：</span><input type="text" name="communityName" id="communityName"
                                                 placeholder="请输入小区名"/></li>
                     <li><span>预约人：</span><input type="text" name="nickName" id="nickName" placeholder="请输入预约人"/></li>
@@ -77,7 +78,7 @@
 
 
 <script type="text/javascript">
-
+    var allHeight = $(window).height();
     function export1() {
         var data = $("#searchForm").serialize();
 
