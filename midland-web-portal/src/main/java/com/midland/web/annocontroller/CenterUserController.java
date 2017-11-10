@@ -1,22 +1,33 @@
 package com.midland.web.annocontroller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import com.github.qcloudsms.SmsSingleSender;
+import com.github.qcloudsms.SmsSingleSenderResult;
 import com.midland.core.util.SmsUtil;
+import com.midland.web.api.SmsSender.SmsModel;
 import com.midland.web.commons.core.util.ApplicationUtils;
+import com.midland.web.commons.core.util.ConstantUtils;
 import com.midland.web.commons.core.util.ResultStatusUtils;
+import com.midland.web.commons.exception.ServiceException;
 import com.midland.web.controller.WebCommonsController;
 import com.midland.web.model.WebUser;
+import com.midland.web.model.user.User;
 import com.midland.web.service.WebUserService;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,6 +56,9 @@ public class CenterUserController extends WebCommonsController {
 
     @Resource
 	private RedisTemplate<String, Object> redisTemplate;
+
+	@Autowired
+	private SmsSingleSender sender;
 	
     /**
      * 发送短信
@@ -156,6 +170,96 @@ public class CenterUserController extends WebCommonsController {
         }
     	return JSONObject.toJSONString(result);
     }
+
+
+
+	/**
+	 * 发送短信
+	 * @return
+	 */
+	@RequestMapping(value = "/vcode/sendSms", method ={ RequestMethod.POST,RequestMethod.GET}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public String vcodeSendSms(String phone){
+		Result<WebUser> result1 = new Result<>();
+		WebUser user = new WebUser();
+		user.setPhone(phone);
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("flag", 0);
+		if(StringUtils.isEmpty(phone)){
+			map.put("msg", "手机号不能为空！");
+			result1.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result1.setMsg(Result.resultMsg.SUCCESS.toString());
+			result1.setMap(map);
+			JSONObject.toJSONString(result1);
+		}
+		String vcode = SmsUtil.createRandomVcode();//验证码
+		String mobile="";
+		String key="midland:vcode:"+phone;
+		try {
+			user=webUserServiceImpl.getUserByUsername(phone);
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
+		if(user!=null){
+			mobile=user.getPhone();
+			if(mobile!=null && mobile.length()>0){
+				List list = new ArrayList();
+				list.add(vcode);
+				list.add("5");
+				SmsModel smsModel = new SmsModel(mobile,"54711",list);
+				ValueOperations<String, Object> vo = redisTemplate.opsForValue();
+				vo.set(key, vcode);
+				redisTemplate.expire(key, 5,TimeUnit.MINUTES);//15分钟过期
+				try {
+					SmsSingleSenderResult result = sender.sendWithParam("86", smsModel.getPhones(),Integer.valueOf(smsModel.getTpId()) , (ArrayList<String>) smsModel.getFieldsList(), "", "", "");
+
+					if (result.errMsg.equals("OK")){
+						map.put("flag", 1);
+						map.put("id",user.getId());
+						map.put("msg", "发送成功!");
+						result1.setCode(ResultStatusUtils.STATUS_CODE_200);
+						result1.setMsg(Result.resultMsg.SUCCESS.toString());
+					}else {
+						map.put("id",user.getId());
+						map.put("msg", "短信发送失败，请稍后再试!");
+					}
+				} catch (Exception e) {
+					map.put("id",user.getId());
+					map.put("msg", "短信发送失败，请稍后再试!");
+				}
+
+			}else{
+				map.put("msg", "该用户名未绑定有效的手机号码!");
+			}
+		}else{
+			map.put("msg", "无效的手机号!");
+		}
+		result1.setMap(map);
+		return JSONObject.toJSONString(result1);
+	}
+
+
+	@RequestMapping(value = "/vcode/smsLogin", method = {RequestMethod.GET,RequestMethod.POST})
+	public String smsLogin(HttpServletRequest request,@RequestBody Map<String, String> parem){
+		Result<WebUser> result = new Result<>();
+		String phone = parem.get("phone");
+		String vCode = parem.get("vcode");
+		WebUser userInfo = new WebUser();
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("flag", 0);
+		String key="midland:vcode:"+phone;
+		ValueOperations<String, Object> vo = redisTemplate.opsForValue();
+		String redisVcode=vo.get(key).toString();
+		if(redisVcode.equals(vCode)){
+			map.put("flag", 1);
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result.setMsg(Result.resultMsg.SUCCESS.toString());
+
+		}
+		request.getSession().setAttribute(ConstantUtils.USER_SESSION, userInfo);
+		result.setMap(map);
+		return JSONObject.toJSONString(result);
+	}
+
     
 
 }

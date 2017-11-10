@@ -40,6 +40,12 @@ public class Comment{
 	private String startTime;
 
 	private String endTime;
+	/**
+	 * 点赞数
+	 **/
+	private Integer like;
+
+	private Integer userId;
 
 
 	public Integer getId() {
@@ -128,6 +134,22 @@ public class Comment{
 
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public Integer getLike() {
+		return like;
+	}
+
+	public void setLike(Integer like) {
+		this.like = like;
 	}
 
 	@Override

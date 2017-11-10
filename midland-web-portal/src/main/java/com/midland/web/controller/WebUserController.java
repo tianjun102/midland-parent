@@ -88,14 +88,6 @@ public class WebUserController extends WebCommonsController {
 
 					// 获取用户输入密码进行加密处理
 					String encryptedPwd = ApplicationUtils.sha256Hex(user.getPassword());
-					//pc不允许安装员登录
-					if(userInfo.getUserType()==3&&user.getType()!=null&&!user.getType().equals("")){
-						isError = 1;
-						result.setCode(ResultStatusUtils.STATUS_CODE_203);
-						result.setMsg("安装管理员请登录APP");
-						logger.warn("安装管理员请登录APP");
-						return FastJsonUtils.toJSONStr(result);
-					}
 
 					if (userInfo.getPassword().equals(encryptedPwd)) {
 
