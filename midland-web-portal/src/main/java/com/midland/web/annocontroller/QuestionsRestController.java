@@ -1,8 +1,11 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.Questions;
 import com.midland.web.service.QuestionsService;
 import com.midland.base.BaseFilter;
+import com.midland.web.service.impl.PublicService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
 import com.midland.web.util.MidlandHelper;
 import javax.servlet.http.HttpServletRequest;
 @RestController
@@ -25,7 +30,8 @@ public class QuestionsRestController extends BaseFilter  {
 	private Logger log = LoggerFactory.getLogger(QuestionsRestController.class);
 	@Autowired
 	private QuestionsService questionsServiceImpl;
-
+	@Autowired
+	private PublicService publicServiceImpl;
 	/**
 	 * 新增
 	 **/
@@ -152,6 +158,45 @@ public class QuestionsRestController extends BaseFilter  {
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);
 			result.setMsg("service error");
 			log.error("list",e);
+		}
+		return result;
+	}
+
+
+
+
+
+
+
+
+	@RequestMapping("thumb_up")
+	public Object questionThumbUp(@RequestBody Questions obj){
+		Result result=new Result();
+		try {
+			if (obj.getQuestionAuthorId()==null||obj.getId()==null){
+				result.setCode(ResultStatusUtils.STATUS_CODE_400);
+				result.setMsg("参数错误");
+				return result;
+			}
+			StringBuffer sb = new StringBuffer();
+			sb.append(Contant.QUESTON_THUMB_UP_KEY).append(obj.getId()).append(obj.getQuestionAuthorId());
+			String key = sb.toString();
+			String V = (String) publicServiceImpl.getV(key);
+			if (V==null){
+				publicServiceImpl.setV(key,"1",Contant.timeOutDays, TimeUnit.DAYS);
+				questionsServiceImpl.thumb_up(obj.getId());
+				result.setCode(ResultStatusUtils.STATUS_CODE_200);
+				result.setMsg("success");
+				return result;
+			}else{
+				result.setCode(ResultStatusUtils.STATUS_CODE_202);
+				result.setMsg("7天之内只能点赞一次");
+				return result;
+			}
+		} catch (Exception e) {
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result.setMsg("service error");
+			log.error("thumb_up",e);
 		}
 		return result;
 	}

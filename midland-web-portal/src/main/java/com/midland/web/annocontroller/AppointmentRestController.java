@@ -1,36 +1,31 @@
 package com.midland.web.annocontroller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.Paginator;
+import com.midland.base.BaseFilter;
 import com.midland.core.util.SmsUtil;
 import com.midland.web.Contants.Contant;
 import com.midland.web.api.ApiHelper;
-import com.midland.web.model.Appointment;
-import com.midland.web.service.AppointmentService;
-import com.midland.base.BaseFilter;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
-
-import java.util.ArrayList;
-
+import com.midland.web.model.Appointment;
+import com.midland.web.service.AppointmentService;
+import com.midland.web.service.impl.PublicService;
+import com.midland.web.util.MidlandHelper;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.Paginator;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
-import com.midland.web.util.MidlandHelper;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @SuppressWarnings("all")
@@ -43,7 +38,7 @@ public class AppointmentRestController extends BaseFilter {
     @Autowired
     private ApiHelper apiHelper;
     @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
+    private PublicService publicServiceImpl;
 
     /**
      * 新增
@@ -162,7 +157,7 @@ public class AppointmentRestController extends BaseFilter {
             Integer webUserId = (Integer) map.get("webUserId");
             Appointment obj = new Appointment();
             obj.setWebUserId(webUserId);
-            obj.setStatus(3);//已关闭
+            obj.setStatus(4);//已取消，详见Midland.json的 appointment_status
             log.info("cancelAppointment  {}", obj);
             appointmentServiceImpl.updateAppointmentByWebUserId(obj);
             result.setCode(ResultStatusUtils.STATUS_CODE_200);
@@ -189,9 +184,7 @@ public class AppointmentRestController extends BaseFilter {
             }
             String vcode = SmsUtil.createRandomVcode();//验证码
             String key = Contant.APPOINT_VCODE_KEY + phone;
-            ValueOperations<String, Object> vo = redisTemplate.opsForValue();
-            vo.set(key, vcode);
-            redisTemplate.expire(key, 1, TimeUnit.MINUTES);//15分钟过期
+            publicServiceImpl.setV(key, vcode, 1, TimeUnit.MINUTES);
             List list = new ArrayList();
             list.add(vcode);
             list.add("1");
@@ -203,7 +196,6 @@ public class AppointmentRestController extends BaseFilter {
             result.setCode(ResultStatusUtils.STATUS_CODE_203);
             result.setMsg("发送验证码失败 ");
         }
-
 
     }
 
@@ -219,11 +211,7 @@ public class AppointmentRestController extends BaseFilter {
             String phone = (String) map.get("phone");
             String vcode = (String) map.get("vcode");
             String key = Contant.APPOINT_VCODE_KEY + phone;
-            ValueOperations<String, Object> vo = redisTemplate.opsForValue();
-            if (vo.get(key) == null) {
-                throw new Exception("验证码已过时");
-            }
-            String redisVcode = vo.get(key).toString();
+            String redisVcode = (String) publicServiceImpl.getV(key);
             if (redisVcode.equals(vcode)) {
                 result.setCode(ResultStatusUtils.STATUS_CODE_200);
                 result.setMsg("success");

@@ -56,6 +56,10 @@ public class QuestionsServiceImpl implements QuestionsService {
     public int updateByPrimaryKeySelective(Questions record) {
         return questionsMapper.updateByPrimaryKeySelective(record);
     }
+    @Override
+    public int thumb_up(int id) {
+        return questionsMapper.thumb_up(id);
+    }
 
     @Override
     public void batchUpdate(List<Questions> questionsList) throws Exception {

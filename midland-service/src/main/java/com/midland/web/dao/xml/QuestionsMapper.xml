@@ -17,11 +17,13 @@
     <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
     <result column="city_id" property="cityId" jdbcType="VARCHAR" />
     <result column="city_name" property="cityName" jdbcType="VARCHAR" />
+    <result column="question_author_id" property="questionAuthorId" jdbcType="INTEGER" />
+    <result column="question_author_name" property="questionAuthorName" jdbcType="VARCHAR" />
   </resultMap>
 
   <sql id="Base_Column_List" >
     id, questions_title, source, DATE_FORMAT(question_time,'%Y-%m-%d %H:%i:%s')question_time, question_name, question_phone, auditor,
-    status, click_num, fabulous,questions_area,audit_remark,is_delete,city_id,city_name
+    status, click_num, fabulous,questions_area,audit_remark,is_delete,city_id,city_name,question_author_id,question_author_name
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -102,6 +104,12 @@
       <if test="cityName != null" >
         city_name,
       </if>
+      <if test="questionAuthorId != null" >
+        question_author_id,
+      </if>
+      <if test="questionAuthorName != null" >
+        question_author_name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -144,13 +152,22 @@
         #{isDelete},
       </if>
       <if test="cityId != null" >
-        #{city_id},
+        #{cityId},
       </if>
       <if test="cityName != null" >
-        #{city_name},
+        #{cityName},
+      </if>
+      <if test="questionAuthorId != null" >
+        #{questionAuthorId},
+      </if>
+      <if test="questionAuthorName != null" >
+        #{questionAuthorName},
       </if>
     </trim>
   </insert>
+  <update id="thumb_up">
+    update questions set fabulous = fabulous+1 where id=#{id}
+  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.midland.web.model.Questions" >
     update questions
     <set >
@@ -195,6 +212,12 @@
       </if>
       <if test="cityName != null" >
         city_name = #{cityName},
+      </if>
+      <if test="questionAuthorId != null" >
+        question_author_id = #{questionAuthorId},
+      </if>
+      <if test="questionAuthorName != null" >
+        question_author_name= #{questionAuthorName},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -251,6 +274,12 @@
     </if>
     <if test="cityName != null" >
       and city_name = #{cityName}
+    </if>
+    <if test="questionAuthorId != null" >
+      and question_author_id=#{questionAuthorId}
+    </if>
+    <if test="questionAuthorName != null" >
+      question_author_name = #{questionAuthorName},
     </if>
   </sql>
 

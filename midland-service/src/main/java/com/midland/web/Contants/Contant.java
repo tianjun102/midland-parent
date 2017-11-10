@@ -37,5 +37,11 @@ public class Contant {
 	/**
 	 * 预约
 	 */
-	public static final String APPOINT_VCODE_KEY ="appoint:vcode:";
+	public static final String APPOINT_VCODE_KEY ="midland:appoint:vcode:";
+	/**
+	 * 问答
+	 */
+	public static final String QUESTON_THUMB_UP_KEY ="midland:queston:thumb_up:";
+	public static final int timeOutDays=7;
+
 }

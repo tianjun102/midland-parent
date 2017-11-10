@@ -14,6 +14,7 @@ public interface QuestionsMapper {
     Questions selectByPrimaryKey(Integer id);
     List<Questions> questionPage(Questions questions);
     int updateByPrimaryKeySelective(Questions record);
+    int thumb_up(@Param("id") int id);
     int batchUpdate(@Param("questionsList") List<Questions> questionsList);
 
 }

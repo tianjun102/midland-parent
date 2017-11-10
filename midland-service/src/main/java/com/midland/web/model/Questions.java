@@ -1,10 +1,6 @@
 package com.midland.web.model;
 
 
-import org.springframework.transaction.annotation.Transactional;
-
-import java.beans.Transient;
-
 public class Questions{
 	/**
 	 * 问题主键
@@ -71,8 +67,36 @@ public class Questions{
 
 	private String endTime;
 
-
+	/**
+	 * 按照字段降序排
+	 */
 	private String descName;
+	/**
+	 * 提问人id
+	 */
+	public Integer questionAuthorId;
+	/**
+	 * 提问人名称
+	 */
+	public String questionAuthorName;
+
+
+	public Integer getQuestionAuthorId() {
+		return questionAuthorId;
+	}
+
+	public void setQuestionAuthorId(Integer questionAuthorId) {
+		this.questionAuthorId = questionAuthorId;
+	}
+
+	public String getQuestionAuthorName() {
+		return questionAuthorName;
+	}
+
+	public void setQuestionAuthorName(String questionAuthorName) {
+		this.questionAuthorName = questionAuthorName;
+	}
+
 	public String getDescName() {
 		return descName;
 	}
