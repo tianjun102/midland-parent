@@ -13,6 +13,7 @@ public interface QuestionsMapper {
     int insertSelective(Questions record);
     Questions selectByPrimaryKey(Integer id);
     List<Questions> questionPage(Questions questions);
+    List<Questions> attentionQuestionPage(Questions questions);
     int updateByPrimaryKeySelective(Questions record);
     int thumb_up(@Param("id") int id);
     int page_view(@Param("id") int id);

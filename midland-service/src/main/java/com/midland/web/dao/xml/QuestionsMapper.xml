@@ -45,6 +45,26 @@
       order by ${descName} DESC
     </if>
   </select>
+
+  <select id="attentionQuestionPage" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from questions
+    where  1=1
+    <if test="isDelete == null">
+      and is_delete=0
+    </if>
+    <if test="attentionList != null">
+      and id in
+      <foreach collection="attentionList" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+      </foreach>
+    </if>
+    <include refid="select_option"/>
+    <if test="descName !=null">
+      order by ${descName} DESC
+    </if>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from questions
     where id = #{id,jdbcType=INTEGER}

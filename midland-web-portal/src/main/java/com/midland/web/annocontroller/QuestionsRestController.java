@@ -1,7 +1,9 @@
 package com.midland.web.annocontroller;
 
 import com.midland.web.Contants.Contant;
+import com.midland.web.model.Attention;
 import com.midland.web.model.Questions;
+import com.midland.web.service.AttentionService;
 import com.midland.web.service.QuestionsService;
 import com.midland.base.BaseFilter;
 import com.midland.web.service.impl.PublicService;
@@ -9,6 +11,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
+
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -32,6 +38,8 @@ public class QuestionsRestController extends BaseFilter  {
 	private QuestionsService questionsServiceImpl;
 	@Autowired
 	private PublicService publicServiceImpl;
+	@Autowired
+	private AttentionService attentionServiceImpl;
 	/**
 	 * 新增
 	 **/
@@ -219,5 +227,62 @@ public class QuestionsRestController extends BaseFilter  {
 		}
 		return result;
 	}
+
+	/**
+	 * 问题关注
+	 * @param obj webUserId,otherId
+	 * @return
+	 */
+	@RequestMapping("attention")
+	public Object QuestionAttention(@RequestBody Attention obj){
+		Result result=new Result();
+		try {
+			obj.setType(Contant.ATTENTION_QUESTION);
+			attentionServiceImpl.insertAttention(obj);
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result.setMsg("success");
+		} catch (Exception e) {
+			log.error("QuestionAttention",e);
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result.setMsg("service error");
+		}
+		return result;
+	}
+
+	/**
+	 * 关注问题列表，
+	 * @param obj
+	 * @param request questionAuthorId
+	 * @return
+	 */
+	@RequestMapping("attention/list")
+	public Object attentionQuestionList(@RequestBody Questions obj, HttpServletRequest request){
+		Result result=new Result();
+		try {
+
+			Attention attention = new Attention();
+			attention.setWebUserId(obj.getQuestionAuthorId());
+			List<Attention> attentionList = attentionServiceImpl.findAttentionList(attention);
+			List<Integer> listTemp = new ArrayList<>();
+			for (Attention at: attentionList){
+				listTemp.add(at.getOtherId());
+			}
+			obj.setAttentionList(listTemp);
+			MidlandHelper.doPage(request);
+			obj.setDescName("question_time");
+			Page<Questions> list = (Page<Questions>)questionsServiceImpl.attentionQuestionPage(obj);
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result.setList(list);
+			result.setMsg("success");
+			result.setPaginator(list.getPaginator());
+		} catch (Exception e) {
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result.setMsg("service error");
+			log.error("list",e);
+		}
+		return result;
+	}
+
+
 
 }

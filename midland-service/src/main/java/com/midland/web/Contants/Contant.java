@@ -44,4 +44,10 @@ public class Contant {
 	public static final String QUESTON_THUMB_UP_KEY ="midland:queston:thumb_up:";
 	public static final int timeOutDays=7;
 
+
+	/**
+	 * 关注类型
+	 */
+	public static final int ATTENTION_QUESTION=1;
+
 }

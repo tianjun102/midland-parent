@@ -1,6 +1,8 @@
 package com.midland.web.model;
 
 
+import java.util.List;
+
 public class Questions{
 	/**
 	 * 问题主键
@@ -79,7 +81,18 @@ public class Questions{
 	 * 提问人名称
 	 */
 	public String questionAuthorName;
+	/**
+	 * 被关注的问题id集合
+	 */
+	public List<Integer> attentionList;
 
+	public List<Integer> getAttentionList() {
+		return attentionList;
+	}
+
+	public void setAttentionList(List<Integer> attentionList) {
+		this.attentionList = attentionList;
+	}
 
 	public Integer getQuestionAuthorId() {
 		return questionAuthorId;

@@ -1,0 +1,73 @@
+package com.midland.web.model;
+
+
+public class Attention{
+	/**
+	 * 
+	 **/
+	private Integer id;
+	/**
+	 * 关注的用户id
+	 **/
+	private Integer webUserId;
+	/**
+	 * 关注的类型
+	 **/
+	private Integer type;
+	/**
+	 * 被关注对象的id，如被关注的问题id
+	 **/
+	private Integer otherId;
+
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getWebUserId() {
+		return webUserId;
+	}
+
+	public void setWebUserId(Integer webUserId) {
+		this.webUserId = webUserId;
+	}
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	public Integer getOtherId() {
+		return otherId;
+	}
+
+	public void setOtherId(Integer otherId) {
+		this.otherId = otherId;
+	}
+
+	@Override
+	public String toString() {
+		 final StringBuffer sb=new StringBuffer("Attention{");
+		if (id != null) {
+			sb.append(", \"id\":\"").append(id).append("\"");
+		}
+		if (webUserId != null) {
+			sb.append(", \"webUserId\":\"").append(webUserId).append("\"");
+		}
+		if (type != null) {
+			sb.append(", \"type\":\"").append(type).append("\"");
+		}
+		if (otherId != null) {
+			sb.append(", \"otherId\":\"").append(otherId).append("\"");
+		}
+		sb.append("}");
+		return sb.toString();
+	}
+}
