@@ -171,7 +171,7 @@ public class AppointmentRestController extends BaseFilter {
     }
 
     /**
-     *
+     * 发送验证码
      * @param map,phone
      */
     @RequestMapping("send/code")
@@ -200,7 +200,7 @@ public class AppointmentRestController extends BaseFilter {
     }
 
     /**
-     *
+     * 检验验证码
      * @param map phone,vcode
      * @return
      */
