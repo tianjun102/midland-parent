@@ -163,12 +163,11 @@ public class QuestionsRestController extends BaseFilter  {
 	}
 
 
-
-
-
-
-
-
+	/**
+	 * 点赞
+	 * @param obj
+	 * @return
+	 */
 	@RequestMapping("thumb_up")
 	public Object questionThumbUp(@RequestBody Questions obj){
 		Result result=new Result();
@@ -200,4 +199,25 @@ public class QuestionsRestController extends BaseFilter  {
 		}
 		return result;
 	}
+
+	/**
+	 * 浏览量
+	 * @param obj
+	 * @return
+	 */
+	@RequestMapping("page_view")
+	public Object page_view(@RequestBody Questions obj){
+		Result result=new Result();
+		try {
+			questionsServiceImpl.page_view(obj.getId());
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result.setMsg("success");
+		} catch (Exception e) {
+			log.error("page_view",e);
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result.setMsg("service error");
+		}
+		return result;
+	}
+
 }

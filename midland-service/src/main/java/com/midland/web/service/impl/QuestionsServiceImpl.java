@@ -60,6 +60,10 @@ public class QuestionsServiceImpl implements QuestionsService {
     public int thumb_up(int id) {
         return questionsMapper.thumb_up(id);
     }
+    @Override
+    public int page_view(int id) {
+        return questionsMapper.page_view(id);
+    }
 
     @Override
     public void batchUpdate(List<Questions> questionsList) throws Exception {

@@ -107,4 +107,49 @@ public class AnswerRestController extends BaseFilter  {
 		}
 		return result;
 	}
+
+	/**
+	 * 点赞
+	 */
+	@RequestMapping("thumb_up")
+	public Object thumb_up(@RequestBody Answer  obj, HttpServletRequest request) {
+		Result result=new Result();
+		try {
+			if (obj.getId()==null){
+				result.setCode(ResultStatusUtils.STATUS_CODE_400);
+				result.setMsg("参数错误");
+				return result;
+			}
+			answerServiceImpl.thumb_up(obj.getId());
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result.setMsg("success");
+		} catch (Exception e) {
+			log.error("thumb_up",e);
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result.setMsg("service error");
+		}
+		return result;
+	}
+	/**
+	 * 点赞
+	 */
+	@RequestMapping("thumb_down")
+	public Object thumb_down(@RequestBody Answer  obj, HttpServletRequest request) {
+		Result result=new Result();
+		try {
+			if (obj.getId()==null){
+				result.setCode(ResultStatusUtils.STATUS_CODE_400);
+				result.setMsg("参数错误");
+				return result;
+			}
+			answerServiceImpl.thumb_down(obj.getId());
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result.setMsg("success");
+		} catch (Exception e) {
+			log.error("thumb_up",e);
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result.setMsg("service error");
+		}
+		return result;
+	}
 }

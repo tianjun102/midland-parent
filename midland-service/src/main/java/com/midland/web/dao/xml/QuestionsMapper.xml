@@ -168,6 +168,9 @@
   <update id="thumb_up">
     update questions set fabulous = fabulous+1 where id=#{id}
   </update>
+  <update id="page_view">
+    update questions set click_num = click_num+1 where id=#{id}
+  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.midland.web.model.Questions" >
     update questions
     <set >

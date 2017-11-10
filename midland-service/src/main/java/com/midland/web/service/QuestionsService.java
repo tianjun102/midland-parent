@@ -22,5 +22,7 @@ public interface QuestionsService {
 
     int thumb_up(int id);
 
+    int page_view(int id);
+
     void batchUpdate(List<Questions> questionsList) throws Exception;
 }

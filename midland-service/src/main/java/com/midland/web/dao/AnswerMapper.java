@@ -19,5 +19,7 @@ public interface AnswerMapper {
 	List<Answer> findAnswerList(Answer answer);
 
 	int batchUpdate(@Param("answerList") List<Answer> answerList);
+	int thumb_up(@Param("id") int id);
+	int thumb_down(@Param("id") int id);
 
 }

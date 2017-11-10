@@ -29,6 +29,10 @@ public interface AnswerService {
 	 **/
 	List<Answer> findAnswerList(Answer answer) throws Exception;
 
+    void thumb_up(int id) throws Exception;
+
+	void thumb_down(int id) throws Exception;
+
 	void batchUpdate(List<Answer> answerList) throws Exception;
 
 }
