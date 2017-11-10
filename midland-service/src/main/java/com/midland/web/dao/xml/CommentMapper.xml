@@ -12,10 +12,12 @@
 		<result column="information_id" property="informationId" jdbcType="INTEGER" />
 		<result column="type" property="type" jdbcType="INTEGER" />
 		<result column="comment_time" property="commentTime" jdbcType="TIMESTAMP" />
+		<result column="like" property="like" jdbcType="INTEGER" />
+		<result column="user_id" property="userId" jdbcType="INTEGER" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,comment,user,status,source,is_delete,information_id,type,comment_time
+		id,comment,user,status,source,is_delete,information_id,type,comment_time,like,user_id
 	</sql>
 
 	<select id="selectCommentById" resultMap="BaseResultMap">
@@ -107,6 +109,12 @@
 			<if test="commentTime != null">
 				comment_time,
 			</if>
+			<if test="like != null">
+				like,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -133,6 +141,12 @@
 			</if>
 			 <if test="commentTime != null">
 				 #{commentTime},
+			 </if>
+			 <if test="like != null">
+				 #{like},
+			 </if>
+			 <if test="userId != null">
+				 #{userId},
 			 </if>
 		</trim>
 	</insert>
@@ -161,6 +175,12 @@
 		</if>
 		<if test="commentTime != null">
 			comment_time= #{commentTime},
+		</if>
+		<if test="like != null">
+			like= #{like},
+		</if>
+		<if test="userId != null">
+			user_id= #{userId},
 		</if>
 	</sql>
 
@@ -197,6 +217,12 @@
 		</if>
 		<if test="endTime != null">
 			and #{endTime}>= comment_time
+		</if>
+		<if test="like != null">
+			and #{like}= like
+		</if>
+		<if test="userId != null">
+			and user_id= #{userId}
 		</if>
 	</sql>
 
