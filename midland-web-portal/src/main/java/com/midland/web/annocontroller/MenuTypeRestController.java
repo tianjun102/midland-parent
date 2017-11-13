@@ -31,7 +31,7 @@ public class MenuTypeRestController extends BaseFilter  {
 	 **/
 	@RequestMapping("add")
 	public Object addMenuType(@RequestBody MenuType obj) throws Exception {
-		 Result result=new Result();
+		Result result=new Result();
 		try {
 			log.info("addMenuType {}",obj);
 			menuTypeServiceImpl.insertMenuType(obj);
@@ -49,7 +49,7 @@ public class MenuTypeRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getMenuTypeById(Map map) {
+	public Object getMenuTypeById(@RequestBody Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");

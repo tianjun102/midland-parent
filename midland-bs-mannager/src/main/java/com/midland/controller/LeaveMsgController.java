@@ -34,7 +34,7 @@ public class LeaveMsgController extends BaseFilter {
 	private Logger log = LoggerFactory.getLogger(LeaveMsgController.class);
 	@Autowired
 	private LeaveMsgService leaveMsgServiceImpl;
-@Autowired
+	@Autowired
 	private SettingService settingService;
 
 	/**
@@ -47,6 +47,8 @@ public class LeaveMsgController extends BaseFilter {
 		settingService.getAllProvinceList(model);
 		List<ParamObject> obj = JsonMapReader.getMap("leaveMsg_type");
 		model.addAttribute("leaveMsgTypes",obj);
+		List<ParamObject> ojb = JsonMapReader.getMap("is_delete");
+		model.addAttribute("isDeletes",ojb);
 		return "leaveMsg/leaveMsgIndex";
 	}
 
@@ -146,6 +148,7 @@ public class LeaveMsgController extends BaseFilter {
 			model.addAttribute("isSuper",user.getIsSuper());
 			if(!Contant.isSuper.equals(user.getIsSuper())){//不是超级管理员，只能看属性城市的相关信息
 				leaveMsg.setCityId(user.getCityId());
+				leaveMsg.setIsDelete(Contant.isNotDelete);
 			}
 			MidlandHelper.doPage(request);
 			Page<LeaveMsg> result = (Page<LeaveMsg>)leaveMsgServiceImpl.findLeaveMsgList(leaveMsg);

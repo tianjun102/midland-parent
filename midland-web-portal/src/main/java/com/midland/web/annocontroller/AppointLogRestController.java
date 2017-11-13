@@ -49,7 +49,7 @@ public class AppointLogRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getAppointLogByAppointLogId(Map map) {
+	public Object getAppointLogByAppointLogId(@RequestBody Map map) {
 		 Result result=new Result();
 		try {
 			Integer appointLogId =(Integer)map.get("appointLogId");

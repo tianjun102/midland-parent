@@ -49,7 +49,7 @@ public class CategoryRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getCategoryById(Map map) {
+	public Object getCategoryById(@RequestBody Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");

@@ -49,7 +49,7 @@ public class SiteMapRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getSitemapById(Map map) {
+	public Object getSitemapById(@RequestBody Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");

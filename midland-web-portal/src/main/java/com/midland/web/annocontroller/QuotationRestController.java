@@ -49,7 +49,7 @@ public class QuotationRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getQuotationById(Map map) {
+	public Object getQuotationById(@RequestBody Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");

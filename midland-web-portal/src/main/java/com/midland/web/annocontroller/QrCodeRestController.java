@@ -49,7 +49,7 @@ public class QrCodeRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getQrCodeById(Map map) {
+	public Object getQrCodeById(@RequestBody Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");

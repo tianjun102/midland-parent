@@ -49,7 +49,7 @@ public class SmsConfigRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getSmsConfigById(Map map) {
+	public Object getSmsConfigById(@RequestBody Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");

@@ -49,7 +49,7 @@ public class EntrustLogRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getEntrustLogByEntrustLogId(Map map) {
+	public Object getEntrustLogByEntrustLogId(@RequestBody Map map) {
 		 Result result=new Result();
 		try {
 			Integer entrustLogId =(Integer)map.get("entrustLogId");

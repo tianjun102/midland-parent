@@ -49,7 +49,7 @@ public class EliteVipRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getEliteVipById(Map map) {
+	public Object getEliteVipById(@RequestBody Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");

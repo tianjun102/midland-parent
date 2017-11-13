@@ -49,7 +49,7 @@ public class ErrorPageRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getErrorPageById(Map map) {
+	public Object getErrorPageById(@RequestBody Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");
