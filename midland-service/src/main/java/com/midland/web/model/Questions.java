@@ -1,9 +1,7 @@
 package com.midland.web.model;
 
 
-import org.springframework.transaction.annotation.Transactional;
-
-import java.beans.Transient;
+import java.util.List;
 
 public class Questions{
 	/**
@@ -71,8 +69,47 @@ public class Questions{
 
 	private String endTime;
 
-
+	/**
+	 * 按照字段降序排
+	 */
 	private String descName;
+	/**
+	 * 提问人id
+	 */
+	public Integer questionAuthorId;
+	/**
+	 * 提问人名称
+	 */
+	public String questionAuthorName;
+	/**
+	 * 被关注的问题id集合
+	 */
+	public List<Integer> attentionList;
+
+	public List<Integer> getAttentionList() {
+		return attentionList;
+	}
+
+	public void setAttentionList(List<Integer> attentionList) {
+		this.attentionList = attentionList;
+	}
+
+	public Integer getQuestionAuthorId() {
+		return questionAuthorId;
+	}
+
+	public void setQuestionAuthorId(Integer questionAuthorId) {
+		this.questionAuthorId = questionAuthorId;
+	}
+
+	public String getQuestionAuthorName() {
+		return questionAuthorName;
+	}
+
+	public void setQuestionAuthorName(String questionAuthorName) {
+		this.questionAuthorName = questionAuthorName;
+	}
+
 	public String getDescName() {
 		return descName;
 	}

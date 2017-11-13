@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.Entrust;
 import com.midland.web.service.EntrustService;
 import com.midland.base.BaseFilter;
@@ -27,11 +28,68 @@ public class EntrustRestController extends BaseFilter  {
 	private EntrustService entrustServiceImpl;
 
 	/**
-	 * 新增
+	 * 新增买房委托
 	 **/
-	@RequestMapping("add")
-	public Object addEntrust(@RequestBody Entrust obj) throws Exception {
-		 Result result=new Result();
+	@RequestMapping("buy/add")
+	public Object addBuyEntrust(@RequestBody Entrust obj) throws Exception {
+		obj.setEntrustType(Contant.ENTRUST_BUY);
+		return addEntrust(obj);
+	}
+	@RequestMapping("buy/list")
+	public Object findEntrustBuyList(@RequestBody Entrust  obj, HttpServletRequest request) {
+		return findEntrustList(obj,request);
+	}
+
+	/**
+	 * 新增租房委托
+	 **/
+	@RequestMapping("rentIn/add")
+	public Object addRentInEntrust(@RequestBody Entrust obj) throws Exception {
+		obj.setEntrustType(Contant.ENTRUST_RENT_IN);
+		return addEntrust(obj);
+	}
+	@RequestMapping("rentIn/list")
+	public Object findEntrustRentInList(@RequestBody Entrust  obj, HttpServletRequest request) {
+		return findEntrustList(obj,request);
+	}
+	/**
+	 * 新增出租委托
+	 **/
+	@RequestMapping("rentOut/add")
+	public Object addRentOutEntrust(@RequestBody Entrust obj) throws Exception {
+		obj.setEntrustType(Contant.ENTRUST_RENT_OUT);
+		return addEntrust(obj);
+	}
+	@RequestMapping("rentOut/list")
+	public Object findEntrustRentOutList(@RequestBody Entrust  obj, HttpServletRequest request) {
+		return findEntrustList(obj,request);
+	}
+	/**
+	 * 新增卖房委托
+	 **/
+	@RequestMapping("sale/add")
+	public Object addSaleEntrust(@RequestBody Entrust obj) throws Exception {
+		obj.setEntrustType(Contant.ENTRUST_SALE);
+		return addEntrust(obj);
+	}
+	@RequestMapping("sale/list")
+	public Object findEntrustSaleList(@RequestBody Entrust  obj, HttpServletRequest request) {
+		return findEntrustList(obj,request);
+	}
+	/**
+	 * 新增评估委托
+	 **/
+	@RequestMapping("evaluate/add")
+	public Object addEvaluateEntrust(@RequestBody Entrust obj) throws Exception {
+		obj.setEntrustType(Contant.ENTRUST_EVALUATE);
+		return addEntrust(obj);
+	}
+	@RequestMapping("evaluate/list")
+	public Object findEntrustEvaluateList(@RequestBody Entrust  obj, HttpServletRequest request) {
+		return findEntrustList(obj,request);
+	}
+	private Object addEntrust(Entrust obj) {
+		Result result=new Result();
 		try {
 			log.info("addEntrust {}",obj);
 			entrustServiceImpl.insertEntrust(obj);
@@ -88,8 +146,7 @@ public class EntrustRestController extends BaseFilter  {
 	/**
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
 	 **/
-	@RequestMapping("list")
-	public Object findEntrustList(@RequestBody Entrust  obj, HttpServletRequest request) {
+	public Object findEntrustList(Entrust  obj, HttpServletRequest request) {
 		 Result result=new Result();
 		try {
 			log.info("findEntrustList  {}",obj);

@@ -18,6 +18,14 @@ public interface QuestionsService {
 	int insertSelective(Questions record);
     Questions selectByPrimaryKey(Integer id);
     List<Questions> questionPage(Questions questions);
+
+    List<Questions> attentionQuestionPage(Questions questions);
+
     int updateByPrimaryKeySelective(Questions record);
+
+    int thumb_up(int id);
+
+    int page_view(int id);
+
     void batchUpdate(List<Questions> questionsList) throws Exception;
 }

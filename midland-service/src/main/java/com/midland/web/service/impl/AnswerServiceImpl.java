@@ -84,6 +84,32 @@ public class AnswerServiceImpl implements AnswerService {
 			throw e;
 		}
 	}
+	@Override
+	public void thumb_up(int id) throws Exception {
+		try {
+			log.debug("thumb_up  id={}",id);
+			int result = answerMapper.thumb_up(id);
+			if (result<1){
+				throw new Exception("赞成失败");
+			}
+		} catch(Exception e) {
+			log.error("thumb_up  id={}",id,e);
+			throw e;
+		}
+	}
+	@Override
+	public void thumb_down(int id) throws Exception {
+		try {
+			log.debug("thumb_down  id={}",id);
+			int result = answerMapper.thumb_down(id);
+			if (result<1){
+				throw new Exception("反对失败");
+			}
+		} catch(Exception e) {
+			log.error("thumb_down  id={}",id,e);
+			throw e;
+		}
+	}
 
 	@Override
 	public void batchUpdate(List<Answer> answerList) throws Exception {

@@ -14,6 +14,7 @@ public interface AppointmentMapper {
 	int deleteAppointmentById(Integer appointment);
 
 	int updateAppointmentById(Appointment appointment);
+	int updateAppointmentByWebUserId(Appointment appointment);
 
 	int insertAppointment(Appointment appointment);
 

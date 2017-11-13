@@ -51,10 +51,22 @@ public class QuestionsServiceImpl implements QuestionsService {
     public List<Questions> questionPage(Questions questions) {
         return questionsMapper.questionPage(questions);
     }
-    
+    @Override
+    public List<Questions> attentionQuestionPage(Questions questions) {
+        return questionsMapper.attentionQuestionPage(questions);
+    }
+
     @Override
     public int updateByPrimaryKeySelective(Questions record) {
         return questionsMapper.updateByPrimaryKeySelective(record);
+    }
+    @Override
+    public int thumb_up(int id) {
+        return questionsMapper.thumb_up(id);
+    }
+    @Override
+    public int page_view(int id) {
+        return questionsMapper.page_view(id);
     }
 
     @Override

@@ -29,7 +29,12 @@
 		delete from answer
 		 where id= #{id}
 	</delete>
-
+	<update id="thumb_up">
+		update answer set support_num = support_num+1 where id=#{id}
+	</update>
+	<update id="thumb_down">
+		update answer set against_num = against_num+1 where id=#{id}
+	</update>
 	<update id="updateAnswerById" >
 		update answer 
 		<set>

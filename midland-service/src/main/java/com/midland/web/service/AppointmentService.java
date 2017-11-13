@@ -25,6 +25,9 @@ public interface AppointmentService {
 	 **/
 	void insertAppointment(Appointment appointment) throws Exception;
 
+
+	void updateAppointmentByWebUserId(Appointment appointment) throws Exception;
+
 	/**
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
 	 **/
