@@ -116,6 +116,10 @@
     </mvc:annotation-driven>
     <!-- 支持返回json -->
 
+    <!-- 对模型视图添加前后缀 -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/WEB-INF/views/" p:suffix=".jsp"/>
+
 
     <!-- 配置springMVC处理上传文件的信息 -->
     <bean id="multipartResolver"
