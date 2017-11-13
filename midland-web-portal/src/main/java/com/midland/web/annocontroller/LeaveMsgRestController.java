@@ -1,19 +1,25 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.LeaveMsg;
 import com.midland.web.service.LeaveMsgService;
 import com.midland.base.BaseFilter;
 import org.slf4j.Logger;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
+
+import java.util.List;
 import java.util.Map;
 import com.midland.web.util.MidlandHelper;
 import javax.servlet.http.HttpServletRequest;
@@ -107,4 +113,42 @@ public class LeaveMsgRestController extends BaseFilter  {
 		}
 		return result;
 	}
+
+	/**
+	 * 批量删除
+	 **/
+	@RequestMapping("batchUpdate")
+	public Object batchUpdate(@RequestBody Map map) throws Exception {
+		Result result=new Result();
+		List<LeaveMsg> commentList = new ArrayList<>();
+		Object ids = map.get("id");
+		if (ids instanceof Integer){
+			LeaveMsg comment1 = new LeaveMsg();
+			comment1.setId((Integer) ids);
+			comment1.setIsDelete(Contant.isDelete);
+			commentList.add(comment1);
+		}else{
+			String idStr=(String) ids;
+			String[] ides=idStr.split(",",-1);
+			for (String id:ides ){
+				LeaveMsg comment1 = new LeaveMsg();
+				comment1.setId(Integer.valueOf(id));
+				comment1.setIsDelete(Contant.isDelete);
+				commentList.add(comment1);
+			}
+		}
+
+		try {
+			log.debug("updateAppointmentById  {}",commentList);
+			leaveMsgServiceImpl.batchUpdate(commentList);
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result.setMsg("success");
+		} catch(Exception e) {
+			log.error("updateAppointmentById  {}",commentList,e);
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result.setMsg("service error");
+		}
+		return result;
+	}
+
 }
