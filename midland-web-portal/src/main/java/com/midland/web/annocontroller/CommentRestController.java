@@ -49,7 +49,7 @@ public class CommentRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getCommentById(Map map) {
+	public Object getCommentById(@RequestBody Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");

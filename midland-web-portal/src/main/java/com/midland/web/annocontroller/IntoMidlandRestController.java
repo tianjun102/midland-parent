@@ -49,7 +49,7 @@ public class IntoMidlandRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getIntoMidlandById(Map map) {
+	public Object getIntoMidlandById(@RequestBody Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");

@@ -63,7 +63,7 @@ public class QuestionsRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getQuestionsById(Map map) {
+	public Object getQuestionsById(@RequestBody Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");

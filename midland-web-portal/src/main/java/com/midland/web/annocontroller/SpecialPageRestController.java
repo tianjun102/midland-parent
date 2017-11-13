@@ -49,7 +49,7 @@ public class SpecialPageRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getSpecialPageById(Map map) {
+	public Object getSpecialPageById(@RequestBody Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");

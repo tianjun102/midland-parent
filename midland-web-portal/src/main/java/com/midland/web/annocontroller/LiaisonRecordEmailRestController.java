@@ -49,7 +49,7 @@ public class LiaisonRecordEmailRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getLiaisonRecordEmailById(Map map) {
+	public Object getLiaisonRecordEmailById(@RequestBody Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");

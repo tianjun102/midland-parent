@@ -49,7 +49,7 @@ public class HotSearchRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getHotSearchById(Map map) {
+	public Object getHotSearchById(@RequestBody Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");

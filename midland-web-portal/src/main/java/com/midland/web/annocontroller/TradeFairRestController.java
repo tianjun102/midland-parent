@@ -49,7 +49,7 @@ public class TradeFairRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getTradeFairById(Map map) {
+	public Object getTradeFairById(@RequestBody Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");

@@ -49,7 +49,7 @@ public class ResumeManagerRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getResumeManagerById(Map map) {
+	public Object getResumeManagerById(@RequestBody Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");

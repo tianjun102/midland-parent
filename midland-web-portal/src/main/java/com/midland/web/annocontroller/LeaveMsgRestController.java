@@ -49,7 +49,7 @@ public class LeaveMsgRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getLeaveMsgById(Map map) {
+	public Object getLeaveMsgById(@RequestBody Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");

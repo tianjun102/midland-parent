@@ -49,7 +49,7 @@ public class RecordRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getRecordById(Map map) {
+	public Object getRecordById(@RequestBody Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");

@@ -49,7 +49,7 @@ public class AnswerRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getAnswerById(Map map) {
+	public Object getAnswerById(@RequestBody Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");

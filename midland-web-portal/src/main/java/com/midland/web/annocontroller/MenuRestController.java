@@ -49,7 +49,7 @@ public class MenuRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getMenuById(Map map) {
+	public Object getMenuById(@RequestBody Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");

@@ -49,7 +49,7 @@ public class FooterRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getFooterById(Map map) {
+	public Object getFooterById(@RequestBody Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");

@@ -49,7 +49,7 @@ public class InformationRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getInformationById(Map map) {
+	public Object getInformationById(@RequestBody Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");

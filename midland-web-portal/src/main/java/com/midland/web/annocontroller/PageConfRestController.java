@@ -49,7 +49,7 @@ public class PageConfRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getPageConfById(Map map) {
+	public Object getPageConfById(@RequestBody Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");

@@ -107,7 +107,7 @@ public class EntrustRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getEntrustById(Map map) {
+	public Object getEntrustById(@RequestBody Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");

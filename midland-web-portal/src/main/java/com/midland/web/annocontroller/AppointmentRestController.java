@@ -63,7 +63,7 @@ public class AppointmentRestController extends BaseFilter {
      * 查询
      **/
     @RequestMapping("get")
-    public Object getAppointmentById(Map map) {
+    public Object getAppointmentById(@RequestBody Map map) {
         Result result = new Result();
         try {
             Integer id = (Integer) map.get("id");
