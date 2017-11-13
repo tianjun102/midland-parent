@@ -57,7 +57,7 @@
                                 <a target="contentF" onclick="delete1(${item.id },1)" class="delete_img"></a>
                             </c:if>
                             <c:if test="${item.isDelete==1}">
-                                <a target="contentF" class="recove_img" title="恢复" onclick="delete1(${item.id },0)"></a>
+                                <a target="contentF" class="recove_img" title="恢复" onclick="recover(${item.id },0)"></a>
                             </c:if>
                         </td>
                     </tr>
@@ -99,9 +99,6 @@
 
     function delete1(id,isDelete){
         var msg = "您确定要删除当前分类吗？";
-        if(isDelete==0){
-            msg = "您确定要恢复当前分类吗？"
-        }
         layer.open({
             type: 1,
             skin: 'layer-style',
@@ -141,7 +138,24 @@
 
     }
 
-
+    function recover(id,isDelete){
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/leaveMsg/update?id="+id+"&isDelete="+isDelete,
+            cache:false,
+            async:false, // 此处必须同步
+            dataType: "json",
+            success: function(data){
+                if(data.state==0){
+                    layer.msg("操作成功！",{icon:1});
+                    setTimeout(function(){$("#searchForm").submit();},1000);
+                }else{
+                    layer.msg("操作失败！！",{icon:7});
+                }
+                layer.close(index);
+            }
+        });
+    }
     function checkall(){
         $("input[name='pid']").each(function(){
             this.checked=true;

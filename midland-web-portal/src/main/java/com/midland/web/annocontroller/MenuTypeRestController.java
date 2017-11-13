@@ -31,7 +31,7 @@ public class MenuTypeRestController extends BaseFilter  {
 	 **/
 	@RequestMapping("add")
 	public Object addMenuType(@RequestBody MenuType obj) throws Exception {
-		 Result result=new Result();
+		Result result=new Result();
 		try {
 			log.info("addMenuType {}",obj);
 			menuTypeServiceImpl.insertMenuType(obj);

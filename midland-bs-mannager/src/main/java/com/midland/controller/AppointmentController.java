@@ -136,20 +136,14 @@ public class AppointmentController extends BaseFilter {
 	
 	
 	@RequestMapping("/page")
-	public String appointmentPage(Model model, Appointment record, String pageNo, String pageSize, HttpServletRequest request) throws Exception {
-		if (pageNo == null || pageNo.equals("")) {
-			pageNo = ContextEnums.PAGENO;
-		}
-		if (pageSize == null || pageSize.equals("")) {
-			pageSize = ContextEnums.PAGESIZE;
-		}
+	public String appointmentPage(Model model, Appointment record, HttpServletRequest request) throws Exception {
 		User user = MidlandHelper.getCurrentUser(request);
 		model.addAttribute("isSuper",user.getIsSuper());
 		if(!Contant.isSuper.equals(user.getIsSuper())){//不是超级管理员，只能看属性城市的相关信息
 			record.setCityId(user.getCityId());
 		}
 		//只展示用户所属城市的信息
-		PageHelper.startPage(Integer.valueOf(pageNo), Integer.valueOf(pageSize));
+		MidlandHelper.doPage(request);
 		Page<Appointment> result = (Page<Appointment>) appointmentServiceImpl.findAppointmentList(record);
 		Paginator paginator = result.getPaginator();
 		getSelectParam(model);
