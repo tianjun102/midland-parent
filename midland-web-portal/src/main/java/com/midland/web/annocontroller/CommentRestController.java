@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.commons.core.util.DateUtils;
 import com.midland.web.model.Comment;
 import com.midland.web.service.CommentService;
 import com.midland.base.BaseFilter;
@@ -34,6 +35,7 @@ public class CommentRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addComment {}",obj);
+			obj.setCommentTime(DateUtils.nowDateToStringYYMMDDHHmmss());
 			commentServiceImpl.insertComment(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
@@ -102,6 +104,28 @@ public class CommentRestController extends BaseFilter  {
 			result.setPaginator(paginator);
 		} catch(Exception e) {
 			log.error("findCommentList  {}",obj,e);
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result.setMsg("service error");
+		}
+		return result;
+	}
+
+
+	/**
+	 * 点赞
+	 **/
+	@RequestMapping("like")
+	public Object clickNum(@RequestBody Comment obj) throws Exception {
+		Result result=new Result();
+		try {
+			log.info("updateCommentById  {}",obj);
+			obj = commentServiceImpl.selectCommentById(obj.getId());
+			obj.setLike(obj.getLike()==null?1:obj.getLike()+1);
+			commentServiceImpl.updateCommentById(obj);
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result.setMsg("success");
+		} catch(Exception e) {
+			log.error("updateCommentById  {}",obj,e);
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);
 			result.setMsg("service error");
 		}

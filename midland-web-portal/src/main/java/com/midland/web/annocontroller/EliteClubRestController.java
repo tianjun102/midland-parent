@@ -91,6 +91,7 @@ public class EliteClubRestController extends BaseFilter  {
 	@RequestMapping("list")
 	public Object findEliteClubList(@RequestBody EliteClub  obj, HttpServletRequest request) {
 		 Result result=new Result();
+		 obj.setIsShow(0);
 		try {
 			log.info("findEliteClubList  {}",obj);
 			MidlandHelper.doPage(request);

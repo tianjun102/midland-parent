@@ -20,6 +20,9 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @SuppressWarnings("all")
 @RequestMapping("/banner/")
+/**
+ * banner管理接口
+ **/
 public class BannerRestController extends BaseFilter  {
 
 	private Logger log = LoggerFactory.getLogger(BannerRestController.class);
@@ -92,6 +95,7 @@ public class BannerRestController extends BaseFilter  {
 	public Object findBannerList(@RequestBody Banner  obj, HttpServletRequest request) {
 		 Result result=new Result();
 		try {
+			obj.setEnabled(0);
 			log.info("findBannerList  {}",obj);
 			MidlandHelper.doPage(request);
 			Page<Banner> list = (Page<Banner>)bannerServiceImpl.findBannerList(obj);
@@ -102,6 +106,28 @@ public class BannerRestController extends BaseFilter  {
 			result.setPaginator(paginator);
 		} catch(Exception e) {
 			log.error("findBannerList  {}",obj,e);
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result.setMsg("service error");
+		}
+		return result;
+	}
+
+	/**
+	 * 更新
+	 **/
+	@RequestMapping("clickNum")
+	public Object clickNum(@RequestBody Banner banner) throws Exception {
+		Result result=new Result();
+		try {
+			log.info("updateBannerById  {}",banner);
+			banner = bannerServiceImpl.selectById(banner.getId());
+			Integer clickNum = banner.getClikNum();
+			banner.setClikNum(clickNum==null?1:clickNum+1);
+			bannerServiceImpl.updateById(banner);
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result.setMsg("success");
+		} catch(Exception e) {
+			log.error("updateBannerById  {}",banner,e);
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);
 			result.setMsg("service error");
 		}
