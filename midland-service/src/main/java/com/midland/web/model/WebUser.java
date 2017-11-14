@@ -38,7 +38,12 @@ public class WebUser implements Serializable {
     private String custName;
     
     private String headImg;
-    
+
+    private String qqOpenId;
+
+    private String wxOpenId;
+
+    private String wbOpenId;
     
 
     public String getHeadImg() {
@@ -168,7 +173,29 @@ public class WebUser implements Serializable {
 	public void setCustName(String custName) {
 		this.custName = custName;
 	}
-	
-	
-    
+
+
+    public String getQqOpenId() {
+        return qqOpenId;
+    }
+
+    public void setQqOpenId(String qqOpenId) {
+        this.qqOpenId = qqOpenId;
+    }
+
+    public String getWxOpenId() {
+        return wxOpenId;
+    }
+
+    public void setWxOpenId(String wxOpenId) {
+        this.wxOpenId = wxOpenId;
+    }
+
+    public String getWbOpenId() {
+        return wbOpenId;
+    }
+
+    public void setWbOpenId(String wbOpenId) {
+        this.wbOpenId = wbOpenId;
+    }
 }

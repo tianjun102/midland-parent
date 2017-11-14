@@ -64,6 +64,8 @@ public interface WebUserMapper extends GenericDao<WebUser, Integer> {
 	
 	
 	WebUser selectUserByEntity(WebUser user);
+
+	int addWebUser(WebUser user);
 	
 
 
