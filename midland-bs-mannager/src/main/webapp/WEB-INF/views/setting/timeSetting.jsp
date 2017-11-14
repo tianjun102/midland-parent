@@ -30,22 +30,22 @@
             <li class="col-md-6"><span>预约告警时间：</span>
                 <input type="text" name="appointmentWarn" id="appointmentWarn"
                        onblur="notEmpty('appointmentWarn','appointmentWarn','');InitInput.setNumber(this,9,2,2)"
-                       value="${item.appointmentWarn}"><span>小时</span>
+                       value="${item.appointmentWarn}"><span style="width: 40px;">小时</span>
             </li>
             <li class="col-md-6"><span>预约关闭时间：</span>
                 <input type="text" name="appointClose" id="appointClose"
                        onblur="notEmpty('appointClose','appointClose','');InitInput.setNumber(this,9,2,2)"
-                       value="${item.appointClose}"><span>小时</span>
+                       value="${item.appointClose}"><span style="width: 40px;">小时</span>
             </li>
             <li class="col-md-6"><span>在线委托告警时间：</span>
                 <input type="text" name="entrustWarn" id="entrustWarn"
                        onblur="notEmpty('entrustWarn','entrustWarn','');InitInput.setNumber(this,9,2,2)"
-                       value="${item.entrustWarn}"><span>小时</span>
+                       value="${item.entrustWarn}"><span style="width: 40px;">小时</span>
             </li>
             <li class="col-md-6"><span>任务执行间隔时间：</span>
                 <input type="text" name="taskInterval" id="taskInterval"
                        onblur="notEmpty('taskInterval','taskInterval','');InitInput.setNumber(this,9,2,2)"
-                       value="${item.taskInterval}"><span>小时</span>
+                       value="${item.taskInterval}"><span style="width: 40px;">小时</span>
             </li>
 
             <li class="col-md-6">

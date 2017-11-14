@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.LinkUrlManager;
 import com.midland.web.service.LinkUrlManagerService;
 import com.midland.base.BaseFilter;
@@ -94,6 +95,8 @@ public class LinkUrlManagerRestController extends BaseFilter  {
 		try {
 			log.info("findLinkUrlManagerList  {}",obj);
 			MidlandHelper.doPage(request);
+			obj.setIsShow(Contant.isShow);
+			obj.setIsDelete(Contant.isNotDelete);
 			Page<LinkUrlManager> list = (Page<LinkUrlManager>)linkUrlManagerServiceImpl.findLinkUrlManagerList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

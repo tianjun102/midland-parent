@@ -2,6 +2,7 @@ package com.midland.task;
 
 import com.midland.web.api.ApiHelper;
 import com.midland.web.api.SmsSender.SmsModel;
+import com.midland.web.api.mailSender.MailProperties;
 import com.midland.web.model.Appointment;
 import com.midland.web.model.Entrust;
 import com.midland.web.service.AppointmentService;
@@ -35,6 +36,8 @@ public class MidlandTask {
 	private TaskConfig taskConfig;
 	@Autowired
 	private ApiHelper apiHelper;
+@Autowired
+	private MailProperties mailProperties;
 
 
 	//预约看房，经纪人重新分配规则，24小时内状态没有修改，发送短信给经纪人及其领导，48小时后没有处理，则关闭此预约，并发送给有指定邮箱
@@ -71,12 +74,13 @@ public class MidlandTask {
 						//超过48小时,48小时后没有处理，则关闭此预约，并发送给有指定邮箱
 						Appointment appoint = new Appointment();
 						appoint.setStatus(3);
+						appoint.setResetFlag(0);
 						appoint.setId(appointment1.getId());
 						appointmentServiceImpl.updateAppointmentById(appoint);
 
 						SimpleMailMessage message = new SimpleMailMessage();
-						message.setFrom("3332932@qq.com");
-						message.setTo("2621541472@qq.com");
+						message.setFrom(mailProperties.getUserName());
+						message.setTo("dpall@midland.com.cn");
 						message.setSubject("主题：预约关闭");
 						message.setText("您的预约超时未处理，现已关闭，预约编号："+appointment1.getAppointSn());
 						apiHelper.emailSender("scanAppointment",message);

@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.QrCode;
 import com.midland.web.service.QrCodeService;
 import com.midland.base.BaseFilter;
@@ -94,6 +95,8 @@ public class QrCodeRestController extends BaseFilter  {
 		try {
 			log.info("findQrCodeList  {}",obj);
 			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setIsShow(Contant.isShow);
 			Page<QrCode> list = (Page<QrCode>)qrCodeServiceImpl.findQrCodeList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

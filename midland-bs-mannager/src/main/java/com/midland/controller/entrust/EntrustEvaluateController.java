@@ -69,6 +69,7 @@ public class EntrustEvaluateController extends BaseFilter{
 		User user = MidlandHelper.getCurrentUser(request);
 		model.addAttribute("isSuper",user.getIsSuper());
 		getSelectParam(model);
+		settingService.getAllProvinceList(model);
 		String pageNo = request.getParameter("pageNo");
 		String pageSize = request.getParameter("pageSize");
 		model.addAttribute("pageNo",pageNo);

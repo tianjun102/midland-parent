@@ -23,7 +23,14 @@ public class Contant {
 	 *  系统数据逻辑删除：0正常，1删除
 	 */
 	public static final int isDelete=1;
-
+	/**
+	 *  系统数据显示与隐藏：0显示，1隐藏
+	 */
+	public static final int isNotShow=1;
+	/**
+	 *  系统数据显示与隐藏：0显示，1隐藏
+	 */
+	public static final int isShow=0;
 
 	/**
 	 * 委托类型

@@ -127,7 +127,9 @@
             </li>
             <li class="col-md-6">
                 <span></span>
+                <c:if test="${entrust.status !=5}">
                 <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">更新</a>
+                </c:if>
                 <a style="margin-left: 20px" class="public_btn bg3" id="cancel" onclick="closeWin();">取消</a>
             </li>
         </ul>

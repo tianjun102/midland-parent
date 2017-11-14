@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.Category;
 import com.midland.web.service.CategoryService;
 import com.midland.base.BaseFilter;
@@ -97,6 +98,8 @@ public class CategoryRestController extends BaseFilter  {
 			log.info("findCategoryList  {}",obj);
 			MidlandHelper.doPage(request);
 			/*Page<Category> list = (Page<Category>)categoryServiceImpl.findCategoryList(obj);*/
+            obj.setIsDelete(Contant.isNotDelete);
+            obj.setIsShow(Contant.isShow);
 			List<Category> list= categoryServiceImpl.findleveCategory(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");

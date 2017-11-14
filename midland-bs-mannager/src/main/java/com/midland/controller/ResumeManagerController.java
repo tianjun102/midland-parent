@@ -2,6 +2,7 @@ package com.midland.controller;
 
 import com.midland.base.BaseFilter;
 import com.midland.web.api.ApiHelper;
+import com.midland.web.api.mailSender.MailProperties;
 import com.midland.web.model.Area;
 import com.midland.web.model.ResumeManager;
 import com.midland.web.model.user.User;
@@ -49,6 +50,8 @@ public class ResumeManagerController extends BaseFilter {
 	private SettingService settingService;
 	@Autowired
 	private ApiHelper apiHelper;
+@Autowired
+	private MailProperties mailProperties;
 
 	/**
 	 * 
@@ -150,7 +153,7 @@ public class ResumeManagerController extends BaseFilter {
 			log.debug("updateResumeManagerById  {}",resumeManager);
 			resumeManagerServiceImpl.updateResumeManagerById(resumeManager);
 			SimpleMailMessage message = new SimpleMailMessage();
-			message.setFrom("3332932@qq.com");
+			message.setFrom(mailProperties.getUserName());
 			message.setTo("977543176@qq.com");
 			message.setSubject(resumeManager.getTitle());
 			message.setText(resumeManager.getReply());
