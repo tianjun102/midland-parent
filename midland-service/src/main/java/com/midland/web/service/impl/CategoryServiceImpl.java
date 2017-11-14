@@ -121,6 +121,18 @@ public class CategoryServiceImpl implements CategoryService {
 		}
 	}
 
+	@Override
+	public List<Category> findleveCategory(Category category) throws Exception {
+		try {
+			List<Category> catetList = this.findCategoryList(category);
+			return this.testMune(catetList);
+		}catch (Exception e){
+			log.error("updateCategoryById  {}",category,e);
+			throw e;
+		}
+
+	}
+
 
 	public List<Category> testMune(List<Category> categoryList) {
 

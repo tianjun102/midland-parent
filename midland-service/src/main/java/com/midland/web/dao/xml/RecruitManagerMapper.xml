@@ -249,6 +249,10 @@
 		<if test="isDelete != null">
 			 and is_delete= #{isDelete}
 		</if>
+		<if test="onlineTime != null">
+			and end_time >= #{onlineTime,jdbcType=VARCHAR} and #{onlineTime,jdbcType=VARCHAR} >= start_time
+		</if>
+
 	</sql>
 
 	<update id="batchUpdate" parameterType="java.util.List">

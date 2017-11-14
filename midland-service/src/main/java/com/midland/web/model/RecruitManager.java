@@ -66,6 +66,8 @@ public class RecruitManager{
 
 	private int isDelete;
 
+	private String onlineTime;
+
 
 	public Integer getId() {
 		return id;
@@ -194,6 +196,14 @@ public class RecruitManager{
 
 	public void setIsDelete(int isDelete) {
 		this.isDelete = isDelete;
+	}
+
+	public String getOnlineTime() {
+		return onlineTime;
+	}
+
+	public void setOnlineTime(String onlineTime) {
+		this.onlineTime = onlineTime;
 	}
 
 	@Override

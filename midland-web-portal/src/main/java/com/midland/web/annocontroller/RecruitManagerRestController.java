@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.commons.core.util.DateUtils;
 import com.midland.web.model.RecruitManager;
 import com.midland.web.service.RecruitManagerService;
 import com.midland.base.BaseFilter;
@@ -93,6 +94,7 @@ public class RecruitManagerRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("findRecruitManagerList  {}",obj);
+			obj.setOnlineTime(DateUtils.nowDateToStringYYMMDDHHmmss());
 			MidlandHelper.doPage(request);
 			Page<RecruitManager> list = (Page<RecruitManager>)recruitManagerServiceImpl.findRecruitManagerList(obj);
 			Paginator paginator=list.getPaginator();

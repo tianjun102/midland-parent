@@ -92,6 +92,7 @@ public class LoanTypeRestController extends BaseFilter  {
 	public Object findLoanTypeList(@RequestBody LoanType  obj, HttpServletRequest request) {
 		 Result result=new Result();
 		try {
+			obj.setIsShow(0);
 			log.info("findLoanTypeList  {}",obj);
 			MidlandHelper.doPage(request);
 			Page<LoanType> list = (Page<LoanType>)loanTypeServiceImpl.findLoanTypeList(obj);
@@ -107,4 +108,29 @@ public class LoanTypeRestController extends BaseFilter  {
 		}
 		return result;
 	}
+
+
+	/**
+	 * 计算器说明
+	 **/
+	@RequestMapping("calculator")
+	public Object findLoanType(@RequestBody LoanType  loanType, HttpServletRequest request) {
+		Result result=new Result();
+		try {
+			log.info("findLoanTypeList  {}",loanType);
+			MidlandHelper.doPage(request);
+			loanType = loanTypeServiceImpl.findLoanType(loanType);
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result.setMsg("success");
+			result.setModel(loanType);
+		} catch(Exception e) {
+			log.error("findLoanTypeList  {}",loanType,e);
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result.setMsg("service error");
+		}
+		return result;
+	}
+
+
+
 }

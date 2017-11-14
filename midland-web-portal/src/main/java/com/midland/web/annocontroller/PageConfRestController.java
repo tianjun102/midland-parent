@@ -92,6 +92,8 @@ public class PageConfRestController extends BaseFilter  {
 	public Object findPageConfList(@RequestBody PageConf  obj, HttpServletRequest request) {
 		 Result result=new Result();
 		try {
+			obj.setBaiduShow(0);
+			obj.setMetaShow(0);
 			log.info("findPageConfList  {}",obj);
 			MidlandHelper.doPage(request);
 			Page<PageConf> list = (Page<PageConf>)pageConfServiceImpl.findPageConfList(obj);
