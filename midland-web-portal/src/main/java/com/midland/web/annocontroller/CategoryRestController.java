@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.Category;
 import com.midland.web.service.CategoryService;
 import com.midland.base.BaseFilter;
@@ -94,6 +95,8 @@ public class CategoryRestController extends BaseFilter  {
 		try {
 			log.info("findCategoryList  {}",obj);
 			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setIsShow(Contant.isShow);
 			Page<Category> list = (Page<Category>)categoryServiceImpl.findCategoryList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

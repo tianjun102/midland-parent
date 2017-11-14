@@ -11,6 +11,7 @@ import com.midland.web.api.ApiHelper;
 import com.midland.web.api.SmsSender.SmsClient;
 import com.midland.web.api.SmsSender.SmsModel;
 import com.midland.web.api.SmsSender.SmsResult;
+import com.midland.web.api.mailSender.MailProperties;
 import com.midland.web.enums.ContextEnums;
 import com.midland.web.model.AppointLog;
 import com.midland.web.model.Appointment;
@@ -20,6 +21,7 @@ import com.midland.web.model.user.User;
 import com.midland.web.service.AppointLogService;
 import com.midland.web.service.AppointmentService;
 import com.midland.web.service.DingJiangService;
+import com.midland.web.service.SettingService;
 import com.midland.web.service.impl.TradeFairServiceImpl;
 import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
@@ -56,12 +58,20 @@ public class AppointmentController extends BaseFilter {
 	private AppointLogService appointLogServiceImpl;
 	@Autowired
 	private ApiHelper apiHelper;
-	
+	@Autowired
+	private MailProperties mailProperties;
+@Autowired
+	private SettingService settingServiceImpl;
+
+
 	Logger logger = LoggerFactory.getLogger(AppointmentController.class);
 	
 	@RequestMapping("/index")
 	public String showAppointIndex(HttpServletRequest request, Model model) {
 		getSelectParam(model);
+		User user = MidlandHelper.getCurrentUser(request);
+		model.addAttribute("isSuper",user.getIsSuper());
+		settingServiceImpl.getAllProvinceList(model);
 		String pageNo = request.getParameter("pageNo");
 		String pageSize = request.getParameter("pageSize");
 		model.addAttribute("pageNo",pageNo);
@@ -222,9 +232,8 @@ public class AppointmentController extends BaseFilter {
 			if (record.getStatus()==3){
 				// 关闭状态的数据发邮件到指定接收的多个邮箱
 				SimpleMailMessage message = new SimpleMailMessage();
-				message.setFrom("3332932@qq.com");
-				message.setTo("977543176@qq.com");
-				//message.setTo("dpall@midland.com.cn");
+				message.setFrom(mailProperties.getUserName());
+				message.setTo("dpall@midland.com.cn");
 				message.setSubject("主题：预约已关闭");
 				message.setText("编号为"+record.getAppointSn()+"的预约记录已关闭");
 				apiHelper.emailSender("updateAppointment",message);

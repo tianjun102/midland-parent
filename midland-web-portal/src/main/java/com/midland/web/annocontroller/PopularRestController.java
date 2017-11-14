@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.Popular;
 import com.midland.web.service.PopularService;
 import com.midland.base.BaseFilter;
@@ -94,6 +95,8 @@ public class PopularRestController extends BaseFilter  {
 		try {
 			log.info("findPopularList  {}",obj);
 			MidlandHelper.doPage(request);
+			obj.setIsShow(Contant.isShow);
+			obj.setIsDelete(Contant.isNotDelete);
 			Page<Popular> list = (Page<Popular>)popularServiceImpl.findPopularList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

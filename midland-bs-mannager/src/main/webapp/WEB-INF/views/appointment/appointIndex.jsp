@@ -21,6 +21,7 @@
             <form action="${ctx }/rest/appoint/page" method="POST" id="searchForm"
                   onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
                 <ul class="userinfo row">
+                    <%@include file="../menu/area.jsp" %>
                     <%@include file="../layout/pag.jsp" %>
                     <li><span>小区名：</span><input type="text" name="communityName" id="communityName"
                                                 placeholder="请输入小区名"/></li>

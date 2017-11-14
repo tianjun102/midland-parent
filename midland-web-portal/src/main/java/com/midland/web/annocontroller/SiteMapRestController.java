@@ -3,6 +3,7 @@ package com.midland.web.annocontroller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
+import com.midland.web.Contants.Contant;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
 import com.midland.web.model.SiteMap;
@@ -94,6 +95,8 @@ public class SiteMapRestController extends BaseFilter  {
 		try {
 			log.info("findSitemapList  {}",obj);
 			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setIsShow(Contant.isShow);
 			Page<SiteMap> list = (Page<SiteMap>) siteMapServiceImpl.findSiteMapList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

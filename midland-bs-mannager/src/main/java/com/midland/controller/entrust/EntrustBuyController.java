@@ -66,6 +66,7 @@ public class EntrustBuyController extends BaseFilter{
 	public String showEntrustBuyIndex(HttpServletRequest request,Model model)
 	{
 		getSelectParam(model);
+		settingService.getAllProvinceList(model);
 		User user = MidlandHelper.getCurrentUser(request);
 		model.addAttribute("isSuper",user.getIsSuper());
 		String pageNo = request.getParameter("pageNo");

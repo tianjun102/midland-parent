@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.MenuType;
 import com.midland.web.service.MenuTypeService;
 import com.midland.base.BaseFilter;
@@ -94,6 +95,7 @@ public class MenuTypeRestController extends BaseFilter  {
 		try {
 			log.info("findMenuTypeList  {}",obj);
 			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
 			Page<MenuType> list = (Page<MenuType>)menuTypeServiceImpl.findMenuTypeList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

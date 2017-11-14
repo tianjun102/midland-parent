@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.Feedback;
 import com.midland.web.service.FeedbackService;
 import com.midland.base.BaseFilter;
@@ -94,6 +95,7 @@ public class FeedbackRestController extends BaseFilter  {
 		try {
 			log.info("findFeedbackList  {}",obj);
 			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
 			Page<Feedback> list = (Page<Feedback>)feedbackServiceImpl.findFeedbackList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
