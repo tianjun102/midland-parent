@@ -17,7 +17,7 @@
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,comment,user,status,source,is_delete,information_id,type,comment_time,like,user_id
+		id,comment,user,status,source,is_delete,information_id,type,comment_time,`like`,user_id
 	</sql>
 
 	<select id="selectCommentById" resultMap="BaseResultMap">
@@ -110,7 +110,7 @@
 				comment_time,
 			</if>
 			<if test="like != null">
-				like,
+				`like`,
 			</if>
 			<if test="userId != null">
 				user_id,
@@ -177,7 +177,7 @@
 			comment_time= #{commentTime},
 		</if>
 		<if test="like != null">
-			like= #{like},
+			`like`= #{like},
 		</if>
 		<if test="userId != null">
 			user_id= #{userId},
@@ -219,7 +219,7 @@
 			and #{endTime}>= comment_time
 		</if>
 		<if test="like != null">
-			and #{like}= like
+			and #{like}= `like`
 		</if>
 		<if test="userId != null">
 			and user_id= #{userId}

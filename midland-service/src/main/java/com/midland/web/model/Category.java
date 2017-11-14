@@ -1,6 +1,8 @@
 package com.midland.web.model;
 
 
+import java.util.List;
+
 public class Category{
 	/**
 	 * 
@@ -52,6 +54,8 @@ public class Category{
 	private Integer source;
 
 	private String linkUrl;
+
+	private List<Category> parents;
 
 	public Integer getId() {
 		return id;
@@ -171,6 +175,15 @@ public class Category{
 
 	public void setLinkUrl(String linkUrl) {
 		this.linkUrl = linkUrl;
+	}
+
+
+	public List<Category> getParents() {
+		return parents;
+	}
+
+	public void setParents(List<Category> parents) {
+		this.parents = parents;
 	}
 
 	@Override

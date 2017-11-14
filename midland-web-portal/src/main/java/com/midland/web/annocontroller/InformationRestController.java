@@ -55,6 +55,8 @@ public class InformationRestController extends BaseFilter  {
 			Integer id =(Integer)map.get("id");
 			log.info("getInformationById  {}",id);
 			Information information = informationServiceImpl.selectInformationById(id);
+			information.setClickNum(information.getClickNum()==null?1:information.getClickNum()+1);
+			informationServiceImpl.updateInformationById(information);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
 			result.setModel(information);
@@ -92,6 +94,7 @@ public class InformationRestController extends BaseFilter  {
 	public Object findInformationList(@RequestBody Information  obj, HttpServletRequest request) {
 		 Result result=new Result();
 		try {
+			obj.setStatus(0);
 			log.info("findInformationList  {}",obj);
 			MidlandHelper.doPage(request);
 			Page<Information> list = (Page<Information>)informationServiceImpl.findInformationList(obj);

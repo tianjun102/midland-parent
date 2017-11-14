@@ -35,4 +35,6 @@ public interface CategoryService {
 
 	void batchUpdate(List<Category> categoryList) throws Exception;
 
+	public List<Category> findleveCategory(Category category) throws Exception;
+
 }

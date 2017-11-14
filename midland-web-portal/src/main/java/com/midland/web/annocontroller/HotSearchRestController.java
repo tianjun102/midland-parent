@@ -92,6 +92,7 @@ public class HotSearchRestController extends BaseFilter  {
 	public Object findHotSearchList(@RequestBody HotSearch  obj, HttpServletRequest request) {
 		 Result result=new Result();
 		try {
+			obj.setIsShow(0);
 			log.info("findHotSearchList  {}",obj);
 			MidlandHelper.doPage(request);
 			Page<HotSearch> list = (Page<HotSearch>)hotSearchServiceImpl.findHotSearchList(obj);

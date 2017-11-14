@@ -98,7 +98,9 @@ public class ErrorPageRestController extends BaseFilter  {
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
-			result.setList(list);
+			if (list!=null&&list.size()>=0){
+				result.setModel(list.get(0));
+			}
 			result.setPaginator(paginator);
 		} catch(Exception e) {
 			log.error("findErrorPageList  {}",obj,e);

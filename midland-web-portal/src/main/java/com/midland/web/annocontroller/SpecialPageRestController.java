@@ -93,6 +93,7 @@ public class SpecialPageRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("findSpecialPageList  {}",obj);
+			obj.setIsShow(0);
 			MidlandHelper.doPage(request);
 			Page<SpecialPage> list = (Page<SpecialPage>)specialPageServiceImpl.findSpecialPageList(obj);
 			Paginator paginator=list.getPaginator();
