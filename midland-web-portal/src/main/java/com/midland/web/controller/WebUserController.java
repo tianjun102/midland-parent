@@ -1,6 +1,8 @@
 package com.midland.web.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -10,16 +12,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.github.qcloudsms.SmsSingleSender;
+import com.github.qcloudsms.SmsSingleSenderResult;
 import com.midland.core.util.SmsUtil;
 import com.midland.core.util.UploadImgUtil;
+import com.midland.web.api.SmsSender.SmsModel;
 import com.midland.web.commons.core.util.ApplicationUtils;
 import com.midland.web.commons.core.util.ConstantUtils;
 import com.midland.web.commons.core.util.ResultStatusUtils;
 import com.midland.web.commons.exception.ServiceException;
 import com.midland.web.model.WebUser;
+import com.midland.web.model.user.User;
 import com.midland.web.service.WebUserService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.MediaType;
@@ -56,6 +63,9 @@ public class WebUserController extends WebCommonsController {
 
     @Resource
 	private RedisTemplate<String, Object> redisTemplate;
+
+	@Autowired
+	private SmsSingleSender sender;
     
 
 	/**
@@ -280,18 +290,10 @@ public class WebUserController extends WebCommonsController {
 	 * @return String
 	 */
 	@RequestMapping(value = "/edit", method = { RequestMethod.POST },produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public String editInformtion(@RequestBody Map<String, String> params, HttpServletRequest request) {
-		HttpSession session = request.getSession();
+	public String editInformtion(@RequestBody WebUser user, HttpServletRequest request) {
 		Result<WebUser> result = new Result<>();
 		try {
-			Object obj = session.getAttribute(ConstantUtils.USER_SESSION);
-			if (null != obj) {
-
-				WebUser user = (WebUser) obj;
-
-				user.setPhone(params.get("phone"));
-				user.setEmail(params.get("email"));
-
+			if (null != user) {
 				int i = userService.editUserById(user);
 				result.setNumber(i);
 				result.setCode(ResultStatusUtils.STATUS_CODE_200);
@@ -403,8 +405,8 @@ public class WebUserController extends WebCommonsController {
 			}
 		} catch (Exception e) {
 			result.setCode(ResultStatusUtils.STATUS_CODE_500);
-			result.setMsg("修改头像出错,文件不正确。");
-			logger.error("修改头像出错,文件不正确", e);
+			result.setMsg("用户认证出错,文件不正确。");
+			logger.error("用户认证出错,文件不正确", e);
 		}
 		return FastJsonUtils.toJSONStr(result);
 	}
@@ -440,6 +442,113 @@ public class WebUserController extends WebCommonsController {
 			return FastJsonUtils.toJSONStr(result);
 		}
 		return FastJsonUtils.toJSONStr(result);
+	}
+
+
+
+	/**
+	 * 发送短信
+	 * @param
+	 * @return
+	 */
+	@RequestMapping(value = "/vcode/sendSms")
+	public String vcodeSendSms(String phone){
+		WebUser user = new WebUser();
+		user.setPhone(phone);
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		Result<WebUser> result_ = new Result<>();
+		map.put("flag", 0);
+		if(StringUtils.isEmpty(phone)){
+			map.put("msg", "手机号不能为空！");
+			result_.setMap(map);
+			result_.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result_.setMsg("发送失败！");
+			return FastJsonUtils.toJSONStr(result_);
+		}
+		String vcode = SmsUtil.createRandomVcode();//验证码
+		String mobile="";
+		String key="midland:vcode:"+phone;
+		user=userService.findtUserByEntity(user);
+		if(user!=null){
+			mobile=user.getPhone();
+			if(mobile!=null && mobile.length()>0){
+				List list = new ArrayList();
+				list.add(vcode);
+				list.add("5");
+				SmsModel smsModel = new SmsModel(mobile,"54711",list);
+				ValueOperations<String, Object> vo = redisTemplate.opsForValue();
+				vo.set(key, vcode);
+				redisTemplate.expire(key, 5,TimeUnit.MINUTES);//15分钟过期
+				try {
+					SmsSingleSenderResult result = sender.sendWithParam("86", smsModel.getPhones(),Integer.valueOf(smsModel.getTpId()) , (ArrayList<String>) smsModel.getFieldsList(), "", "", "");
+
+					if (result.errMsg.equals("OK")){
+						map.put("flag", 1);
+						map.put("id",user.getId());
+						map.put("msg", "发送成功!");
+						result_.setMap(map);
+						result_.setCode(ResultStatusUtils.STATUS_CODE_200);
+						result_.setMsg(Result.resultMsg.SUCCESS.toString());
+						return FastJsonUtils.toJSONStr(result_);
+
+					}else {
+						map.put("id",user.getId());
+						map.put("msg", "短信发送失败，请稍后再试!");
+						result_.setMap(map);
+						result_.setCode(ResultStatusUtils.STATUS_CODE_200);
+						result_.setMsg("发送失败！");
+						return FastJsonUtils.toJSONStr(result_);
+					}
+				} catch (Exception e) {
+					map.put("id",user.getId());
+					map.put("msg", "短信发送失败，请稍后再试!");
+				}
+
+			}else{
+				map.put("msg", "该用户名未绑定有效的手机号码!");
+				result_.setMap(map);
+				result_.setCode(ResultStatusUtils.STATUS_CODE_203);
+				result_.setMsg("发送失败！");
+				return FastJsonUtils.toJSONStr(result_);
+			}
+		}else{
+			map.put("msg", "无效的手机号!");
+			result_.setMap(map);
+			result_.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result_.setMsg("发送失败！");
+
+
+		}
+		return FastJsonUtils.toJSONStr(result_);
+	}
+
+
+	/**
+	 * 验证码校验
+	 * @param vcode
+	 * @return
+	 */
+	@RequestMapping(value = "/vcode/checkVcode", method = {RequestMethod.GET,RequestMethod.POST})
+	public  String checkVcode_(String phone,String vcode){
+		Result<WebUser> result_ = new Result<>();
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("flag", 0);
+		String key="midland:vcode:"+phone;
+		ValueOperations<String, Object> vo = redisTemplate.opsForValue();
+		String redisVcode=vo.get(key).toString();
+		if(redisVcode.equals(vcode)){
+			map.put("flag", 1);
+			result_.setMap(map);
+			result_.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result_.setMsg(Result.resultMsg.SUCCESS.toString());
+			return FastJsonUtils.toJSONStr(result_);
+		}else{
+			result_.setMap(map);
+			result_.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result_.setMsg(Result.resultMsg.SUCCESS.toString());
+
+		}
+		return FastJsonUtils.toJSONStr(result_);
 	}
 
 

@@ -28,6 +28,8 @@ public class Reply{
 	 **/
 	private Integer commId;
 
+	private Integer likes;
+
 
 	public Integer getId() {
 		return id;
@@ -75,6 +77,14 @@ public class Reply{
 
 	public void setCommId(Integer commId) {
 		this.commId = commId;
+	}
+
+	public Integer getLikes() {
+		return likes;
+	}
+
+	public void setLikes(Integer likes) {
+		this.likes = likes;
 	}
 
 	@Override
