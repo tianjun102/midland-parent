@@ -8,6 +8,7 @@ import com.midland.web.commons.core.util.ResultStatusUtils;
 import com.midland.web.controller.WebUserController;
 import com.midland.web.service.WebUserService;
 import com.midland.web.service.impl.PublicService;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -65,7 +66,12 @@ public class UserSignUpRestController {
         Result result1 = (Result)checkVCode_(param);
         if (ResultStatusUtils.STATUS_CODE_200 == result1.getCode()) {
             try {
+                String phone = param.get("phone");
                 String password = param.get("password");
+                if (StringUtils.isEmpty(phone)||StringUtils.isEmpty(password)){//phone、password不能为空
+                    result.setCode(ResultStatusUtils.STATUS_CODE_203);
+                    result.setMsg("IllegalArgumentException");
+                }
                 String confirmPassword = param.get("confirmPassword");
                 if (password != null && password.equals(confirmPassword)) {
                     webUserService.addUser(param);
@@ -78,11 +84,11 @@ public class UserSignUpRestController {
             } catch (Exception e) {
                 logger.error("sign_up:", e);
                 result.setCode(ResultStatusUtils.STATUS_CODE_203);
-                result.setMsg("sign up success error");
+                result.setMsg("sign up error");
             }
         }
         result.setCode(ResultStatusUtils.STATUS_CODE_203);
-        result.setMsg("vcode is incorrect");
+        result.setMsg("vCode is incorrect");
         return result;
     }
 

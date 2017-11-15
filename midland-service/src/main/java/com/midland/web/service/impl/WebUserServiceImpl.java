@@ -76,14 +76,13 @@ public class WebUserServiceImpl implements WebUserService {
 	@Override
 	public int addUser(Map<String, String> map) {
 		WebUser user = new WebUser();
-		user.setUsername(getUserCnName(map.get("userCnName"),map.get("createBy")));
-		user.setUserCnName(map.get("userName"));
-		user.setPassword(ApplicationUtils.sha256Hex("888888"));
-		user.setUserType(3);
-		user.setState(1);
+		user.setUsername(map.get("phone"));
+		user.setUserCnName(map.get("phone"));
+		user.setPassword(ApplicationUtils.sha256Hex( map.get("password")));
+		user.setUserType(2);//前端用户
+		user.setState(1);//生效
 		user.setPhone(map.get("phone"));
 		user.setCreateTime(DateUtils.nowDate());
-		user.setCreateBy(map.get("createBy"));
 		return webUserMapper.insertSelective(user);
 	}
 
