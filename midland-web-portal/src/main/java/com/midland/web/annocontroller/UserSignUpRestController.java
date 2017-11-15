@@ -2,7 +2,6 @@ package com.midland.web.annocontroller;
 
 import com.midland.core.util.SmsUtil;
 import com.midland.web.Contants.Contant;
-import com.midland.web.api.ApiHelper;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
 import com.midland.web.controller.WebUserController;
@@ -26,9 +25,6 @@ public class UserSignUpRestController {
 
     @Resource
     private WebUserService webUserService;
-
-    @Resource
-    private ApiHelper apiHelper;
     @Resource
     private PublicService publicServiceImpl;
 
@@ -54,7 +50,7 @@ public class UserSignUpRestController {
     @RequestMapping("checkVCode")
     public Object checkVCode_(@RequestBody Map map) {
         String phone = (String) map.get("phone");
-        String vCode = (String) map.get("vcode");
+        String vCode = (String) map.get("vCode");
         String key = Contant.SIGN_UP_VCODE_KEY + phone;
         return publicServiceImpl.codeCheck(phone,vCode,key);
     }
