@@ -3,6 +3,7 @@ package com.midland.web.commons;
 import com.github.pagehelper.Paginator;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +15,8 @@ import java.util.Map;
  * @date 2017年3月22日 下午3:19:41
  */
 @Component
-public class Result<T> {
+public class Result<T> implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	public enum resultMsg {
 		SUCCESS, FAIL
@@ -105,7 +107,22 @@ public class Result<T> {
 	public void setListMap(List<Map<T, T>> listMap) {
 		this.listMap = listMap;
 	}
-	
-	
 
+
+	@Override
+	public String toString() {
+		return "Result{" +
+				"number=" + number +
+				", len=" + len +
+				", token='" + token + '\'' +
+				", code_url='" + code_url + '\'' +
+				", code=" + code +
+				", msg='" + msg + '\'' +
+				", paginator=" + paginator +
+				", model=" + model +
+				", list=" + list +
+				", map=" + map +
+				", listMap=" + listMap +
+				'}';
+	}
 }

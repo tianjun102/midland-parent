@@ -38,9 +38,29 @@ public class WebUser implements Serializable {
     private String custName;
     
     private String headImg;
-    
-    
 
+    private String qqOpenId;
+
+    private String wxOpenId;
+
+    private String wbOpenId;
+
+    private String blackRemark;
+    /**
+     * 身份证号码
+     */
+    private String identification;
+    /**
+     * 身份证照片url
+     */
+    private String idcartImg;
+    /**
+     * 身份证照片url
+     */
+    private String idcartImg1;
+
+    private String actualName;
+    
     public String getHeadImg() {
 		return headImg;
 	}
@@ -168,7 +188,69 @@ public class WebUser implements Serializable {
 	public void setCustName(String custName) {
 		this.custName = custName;
 	}
-	
-	
-    
+
+
+    public String getQqOpenId() {
+        return qqOpenId;
+    }
+
+    public void setQqOpenId(String qqOpenId) {
+        this.qqOpenId = qqOpenId;
+    }
+
+    public String getWxOpenId() {
+        return wxOpenId;
+    }
+
+    public void setWxOpenId(String wxOpenId) {
+        this.wxOpenId = wxOpenId;
+    }
+
+    public String getWbOpenId() {
+        return wbOpenId;
+    }
+
+    public void setWbOpenId(String wbOpenId) {
+        this.wbOpenId = wbOpenId;
+    }
+
+    public String getBlackRemark() {
+        return blackRemark;
+    }
+
+    public void setBlackRemark(String blackRemark) {
+        this.blackRemark = blackRemark;
+    }
+
+    public String getIdentification() {
+        return identification;
+    }
+
+    public void setIdentification(String identification) {
+        this.identification = identification;
+    }
+
+    public String getIdcartImg() {
+        return idcartImg;
+    }
+
+    public void setIdcartImg(String idcartImg) {
+        this.idcartImg = idcartImg;
+    }
+
+    public String getIdcartImg1() {
+        return idcartImg1;
+    }
+
+    public void setIdcartImg1(String idcartImg1) {
+        this.idcartImg1 = idcartImg1;
+    }
+
+    public String getActualName() {
+        return actualName;
+    }
+
+    public void setActualName(String actualName) {
+        this.actualName = actualName;
+    }
 }

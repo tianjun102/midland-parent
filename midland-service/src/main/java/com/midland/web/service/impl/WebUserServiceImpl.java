@@ -138,7 +138,11 @@ public class WebUserServiceImpl implements WebUserService {
 		// TODO Auto-generated method stub
 		return webUserMapper.selectByPrimaryKey(uid);
 	}
-	
-	
-	
+
+	@Override
+	public Integer addWebUser(WebUser user) {
+		return webUserMapper.addWebUser(user);
+	}
+
+
 }

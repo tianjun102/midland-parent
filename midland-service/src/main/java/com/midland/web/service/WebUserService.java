@@ -99,4 +99,6 @@ public interface WebUserService {
 	
 	//查询用户明细信息
 	WebUser queryUser(Integer uid);
+
+	Integer addWebUser(WebUser user);
 }
