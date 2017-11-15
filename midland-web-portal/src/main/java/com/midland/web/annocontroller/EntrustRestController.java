@@ -35,6 +35,10 @@ public class EntrustRestController extends BaseFilter  {
 		obj.setEntrustType(Contant.ENTRUST_BUY);
 		return addEntrust(obj);
 	}
+	@RequestMapping("list")
+	public Object findList(@RequestBody Entrust  obj, HttpServletRequest request) {
+		return findEntrustList(obj,request);
+	}
 	@RequestMapping("buy/list")
 	public Object findEntrustBuyList(@RequestBody Entrust  obj, HttpServletRequest request) {
 		return findEntrustList(obj,request);
