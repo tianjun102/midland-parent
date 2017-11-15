@@ -101,7 +101,7 @@ public class annoUserController {
     @RequestMapping(value = "/vcode/sendSms")
     public String vcodeSendSms(@RequestBody Map<String, String> parem){
             Result<WebUser> result1 = new Result<>();
-            String vcode = SmsUtil.createRandomVcode();//验证码
+            String vcode = SmsUtil.createRandomVCode();//验证码
             String key="midland:vcode:"+parem.get("phone");
             List list = new ArrayList();
             list.add(vcode);
@@ -147,7 +147,7 @@ public class annoUserController {
             result_.setCode(ResultStatusUtils.STATUS_CODE_203);
             return FastJsonUtils.toJSONStr(result_);
         }
-        String vcode = SmsUtil.createRandomVcode();//验证码
+        String vcode = SmsUtil.createRandomVCode();//验证码
         String mobile="";
         String key="midland:vcode:"+parem.get("phone");
         user=userService.findtUserByEntity(user);

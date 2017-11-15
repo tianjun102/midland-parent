@@ -465,7 +465,7 @@ public class WebUserController extends WebCommonsController {
 			result_.setMsg("发送失败！");
 			return FastJsonUtils.toJSONStr(result_);
 		}
-		String vcode = SmsUtil.createRandomVcode();//验证码
+		String vcode = SmsUtil.createRandomVCode();//验证码
 		String mobile="";
 		String key="midland:vcode:"+phone;
 		user=userService.findtUserByEntity(user);
