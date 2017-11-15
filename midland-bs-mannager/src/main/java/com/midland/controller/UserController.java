@@ -14,7 +14,6 @@ import com.midland.core.util.SmsUtil;
 import com.midland.web.Contants.Contant;
 import com.midland.web.api.SmsSender.SmsClient;
 import com.midland.web.api.SmsSender.SmsModel;
-import com.midland.web.api.SmsSender.SmsResult;
 import com.midland.web.model.Area;
 import com.midland.web.model.ExportModel;
 import com.midland.web.model.role.Role;
@@ -740,7 +739,7 @@ public class UserController extends BaseFilter {
     	Map<String, Object> map = new HashMap<String, Object>();
     	map.put("flag", 0);
     	
-    	String vcode = SmsUtil.createRandomVcode();//验证码
+    	String vcode = SmsUtil.createRandomVCode();//验证码
     	String mobile="";
     	String key="wks:vcode:"+username;
     	String content="";
@@ -936,7 +935,7 @@ public class UserController extends BaseFilter {
 			map.put("msg", "手机号不能为空！");
 			return map;
 		}
-		String vcode = SmsUtil.createRandomVcode();//验证码
+		String vcode = SmsUtil.createRandomVCode();//验证码
 		String mobile="";
 		String key="midland:vcode:"+phone;
 		user=userService.selectByUser(user);

@@ -20,7 +20,6 @@ import com.midland.web.commons.core.util.ResultStatusUtils;
 import com.midland.web.commons.exception.ServiceException;
 import com.midland.web.controller.WebCommonsController;
 import com.midland.web.model.WebUser;
-import com.midland.web.model.user.User;
 import com.midland.web.service.WebUserService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
@@ -78,7 +77,7 @@ public class CenterUserController extends WebCommonsController {
 			return JSONObject.toJSONString(result);
     	}
     	
-    	String vcode = SmsUtil.createRandomVcode();//验证码
+    	String vcode = SmsUtil.createRandomVCode();//验证码
     	String mobile="";
     	String key="wks:vcode:"+parems.get("phone");
     	String content="";
@@ -191,7 +190,7 @@ public class CenterUserController extends WebCommonsController {
 			result1.setMap(map);
 			JSONObject.toJSONString(result1);
 		}
-		String vcode = SmsUtil.createRandomVcode();//验证码
+		String vcode = SmsUtil.createRandomVCode();//验证码
 		String mobile="";
 		String key="midland:vcode:"+phone;
 		try {
