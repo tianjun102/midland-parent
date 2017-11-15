@@ -305,7 +305,7 @@ public class WebUserController extends WebCommonsController {
 		return FastJsonUtils.toJSONStr(result);
 	}
 
-	
+	/*上传图像*/
 	@RequestMapping(value = "/changeHeadImg", method = { RequestMethod.POST },produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public String changeHeadImg(@RequestBody Map<String, String> params,HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -347,6 +347,68 @@ public class WebUserController extends WebCommonsController {
 		}
 		return FastJsonUtils.toJSONStr(result);
 	}
+
+	/**
+	 * 用户认证
+	 * @param params
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "/authUser", method = { RequestMethod.POST },produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public String authUser(@RequestBody Map<String, String> params,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Result<WebUser> result = new Result<>();
+		try {
+			if (params == null ||params.isEmpty()) {
+				result.setCode(ResultStatusUtils.STATUS_CODE_202);
+				result.setMsg("请求参数为空!");
+				return FastJsonUtils.toJSONStr(result);
+			}
+			if(StringUtils.isEmpty(params.get("idcartImg"))){
+				result.setCode(ResultStatusUtils.STATUS_CODE_202);
+				result.setMsg("身份正面为空!");
+				return FastJsonUtils.toJSONStr(result);
+			}
+			if(StringUtils.isEmpty(params.get("idcartImg１"))){
+				result.setCode(ResultStatusUtils.STATUS_CODE_202);
+				result.setMsg("身份反面为空!");
+				return FastJsonUtils.toJSONStr(result);
+			}
+
+			Object obj = session.getAttribute(ConstantUtils.USER_SESSION);
+			if (null != obj) {
+				WebUser user = (WebUser) obj;
+				user.setIdentification(params.get("identification"));
+				user.setActualName(params.get("actualName"));
+				Map<String, String> map = Maps.newHashMap();
+				map.put("path", "/home/upload/");
+				map.put("userName", user.getUsername());
+				map.put("oldImg",user.getIdcartImg());
+				map.put("imgContent",params.get("idcartImg"));
+				String headImg  = UploadImgUtil.GenerateImage(map);
+
+				if(StringUtils.isNotEmpty(headImg)){
+					user.setIdcartImg(headImg);
+				}
+				map.put("imgContent",params.get("idcartImg1"));
+				String headImg1  = UploadImgUtil.GenerateImage(map);
+				if(StringUtils.isNotEmpty(headImg)){
+					user.setIdcartImg(headImg1);
+				}
+
+				int i = userService.editUserById(user);
+				result.setNumber(i);
+				result.setCode(ResultStatusUtils.STATUS_CODE_200);
+				result.setMsg(Result.resultMsg.SUCCESS.toString());
+			}
+		} catch (Exception e) {
+			result.setCode(ResultStatusUtils.STATUS_CODE_500);
+			result.setMsg("修改头像出错,文件不正确。");
+			logger.error("修改头像出错,文件不正确", e);
+		}
+		return FastJsonUtils.toJSONStr(result);
+	}
+
 	/**
 	 * 检查用户名
 	 * 
@@ -380,269 +442,7 @@ public class WebUserController extends WebCommonsController {
 		return FastJsonUtils.toJSONStr(result);
 	}
 
-	/**
-	 * 新增安装员
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "/addInstaller",method = {RequestMethod.POST}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public String addInstaller(@RequestBody Map<String, String> params,HttpServletRequest request) {
-		Result<WebUser> result = new Result<>();
-		if (params == null ||params.isEmpty()) {
-			result.setCode(ResultStatusUtils.STATUS_CODE_202);
-			result.setMsg("请求参数为空!");
-			return FastJsonUtils.toJSONStr(result);
-		}
-		if (StringUtils.isEmpty(params.get("userName"))) {
-			result.setCode(ResultStatusUtils.STATUS_CODE_202);
-			result.setMsg("用户姓名为空!");
-			return FastJsonUtils.toJSONStr(result);
-		}
-		if (StringUtils.isEmpty(params.get("phone"))) {
-			result.setCode(ResultStatusUtils.STATUS_CODE_202);
-			result.setMsg("手机电话为空!");
-			return FastJsonUtils.toJSONStr(result);
-		}
-		WebUser user = (WebUser) request.getSession().getAttribute(ConstantUtils.USER_SESSION);
-		if (null == user) {
-			result.setCode(ResultStatusUtils.STATUS_CODE_303);
-			result.setMsg("用户已退出，请重新登录！");
-			return FastJsonUtils.toJSONStr(result);
-		}else{
-			params.put("userCnName",user.getUsername());
-			params.put("createBy",user.getId().toString());
-		}
-		try {
-			if(userService.addUser(params)>0){
-				result.setCode(ResultStatusUtils.STATUS_CODE_200);
-				result.setMsg("新增用户成功!");
-			}else{
-				result.setCode(ResultStatusUtils.STATUS_CODE_200);
-				result.setMsg("调用成功,但用户未被新增!");
-			}
-		} catch (Exception e) {
-			result.setCode(ResultStatusUtils.STATUS_CODE_500);
-			result.setMsg("新增用户失败!");
-			return FastJsonUtils.toJSONStr(result);
-		}
-		
-		return FastJsonUtils.toJSONStr(result);
-	}
 
-	
-	//获取所有安装员
-	@RequestMapping(value = "/installerList", method = {RequestMethod.POST}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public String installerList(@RequestBody Map<String, String> params,HttpServletRequest request) {
-		Result<WebUser> result = new Result<>();
-		if (params == null ||params.isEmpty()) {
-			result.setCode(ResultStatusUtils.STATUS_CODE_202);
-			result.setMsg("请求参数为空!");
-			return FastJsonUtils.toJSONStr(result);
-		}
-		if (params.get("username") == null) {
-			result.setCode(ResultStatusUtils.STATUS_CODE_202);
-			result.setMsg("姓名为空!");
-			return FastJsonUtils.toJSONStr(result);
-		}
-		if (params.get("phone") == null) {
-			result.setCode(ResultStatusUtils.STATUS_CODE_202);
-			result.setMsg("手机号为空!");
-			return FastJsonUtils.toJSONStr(result);
-		}
-		WebUser user = (WebUser) request.getSession().getAttribute(ConstantUtils.USER_SESSION);
-		if (null == user) {
-			result.setCode(ResultStatusUtils.STATUS_CODE_303);
-			result.setMsg("用户已退出，请重新登录！");
-			return FastJsonUtils.toJSONStr(result);
-		}else{
-			params.put("createBy",user.getId().toString());
-		}
-		try {
-			PageList<WebUser>  items = userService.findBycreateByPage(params, new PageBounds());
-			Paginator paginator = items.getPaginator();
-			Map<Object, Object> map = new HashMap<>();
-			map.put("paginator", paginator);
-			map.put("items", items);
-			result.setMap(map);
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg("查询安装员列表成功!");
-		} catch (Exception e) {
-			result.setCode(ResultStatusUtils.STATUS_CODE_500);
-			result.setMsg("查询安装员列表失败!");
-			return FastJsonUtils.toJSONStr(result);
-		}
-		return FastJsonUtils.toJSONStr(result);
-	}
-	
-	
-	//更改安装员信息  (删除)
-	@RequestMapping(value = "/changeInstaller",method = {RequestMethod.POST}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public String changeInstaller(@RequestBody Map<String, String> params) {
-		Result<WebUser> result = new Result<>();
-		if (params == null ||params.isEmpty()) {
-			result.setCode(ResultStatusUtils.STATUS_CODE_202);
-			result.setMsg("请求参数为空!");
-			return FastJsonUtils.toJSONStr(result);
-		}
-		if (StringUtils.isEmpty(params.get("type"))) {
-			result.setCode(ResultStatusUtils.STATUS_CODE_202);
-			result.setMsg("操作类型为空!");
-			return FastJsonUtils.toJSONStr(result);
-		}
-		if (params.get("id")==null) {
-			result.setCode(ResultStatusUtils.STATUS_CODE_202);
-			result.setMsg("用户id为空!");
-			return FastJsonUtils.toJSONStr(result);
-		}
-		
-		WebUser user = new WebUser();
-		user.setId(Integer.valueOf(params.get("id")));
-		if("delete".equals(params.get("type"))){
-			user.setState(3);
-		}else{
-			if (params.get("userName")==null) {
-				result.setCode(ResultStatusUtils.STATUS_CODE_202);
-				result.setMsg("用户姓名为空!");
-				return FastJsonUtils.toJSONStr(result);
-			}
-			if (params.get("phone")==null) {
-				result.setCode(ResultStatusUtils.STATUS_CODE_202);
-				result.setMsg("手机电话为空!");
-				return FastJsonUtils.toJSONStr(result);
-			}
-			user.setUserCnName(params.get("userName"));
-			user.setPhone(params.get("phone"));
-		}
-		
-		try {
-			if(userService.modifyUser(user)>0){
-				result.setCode(ResultStatusUtils.STATUS_CODE_200);
-				result.setMsg("修改用户成功!");
-			}else{
-				result.setCode(ResultStatusUtils.STATUS_CODE_200);
-				result.setMsg("修改成功,但用户未被新增!");
-			}
-		} catch (Exception e) {
-			result.setCode(ResultStatusUtils.STATUS_CODE_500);
-			result.setMsg("新增用户失败!");
-			return FastJsonUtils.toJSONStr(result);
-		}
-		
-		return FastJsonUtils.toJSONStr(result);
-	}
-	
-	
-	//查询安装员明细
-	@RequestMapping(value = "/installerDetail",method = {RequestMethod.POST}, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public String installerDetail(@RequestBody Map<String, String> params) {
-		Result<WebUser> result = new Result<>();
-		if (params == null ||params.isEmpty()) {
-			result.setCode(ResultStatusUtils.STATUS_CODE_202);
-			result.setMsg("请求参数为空!");
-			return FastJsonUtils.toJSONStr(result);
-		}
-		if (StringUtils.isEmpty(params.get("id"))) {
-			result.setCode(ResultStatusUtils.STATUS_CODE_202);
-			result.setMsg("用户姓名为空!");
-			return FastJsonUtils.toJSONStr(result);
-		}
-		try {
-			WebUser user =  userService.queryUser(Integer.valueOf(params.get("id")));
-			result.setModel(user);
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg("查询用户明细成功!");
-		} catch (Exception e) {
-			result.setCode(ResultStatusUtils.STATUS_CODE_500);
-			result.setMsg("查询用户明细失败!");
-			return FastJsonUtils.toJSONStr(result);
-		}
-		
-		return FastJsonUtils.toJSONStr(result);
-	}
-	
-	
-    /**
-     * 发送短信
-     * @param parems
-     * @return
-     */
-    @RequestMapping(value = "/sendSms",produces = "application/json; charset=UTF-8", method = {RequestMethod.GET,RequestMethod.POST})
-    public String sendSms(@RequestBody Map<String, Object> parems){
-    	Result<WebUser> result = new Result<>();
-    	Map<Object, Object> map = new HashMap<Object, Object>();
-    	map.put("flag", "false");
-    	if(parems.get("phone")==null||parems.get("phone").equals("")){
-        	map.put("msg", "手机号不能为空!");
-			result.setCode(ResultStatusUtils.STATUS_CODE_203);
-			result.setMsg(Result.resultMsg.SUCCESS.toString());
-			return JSONObject.toJSONString(result);
-    	}
-    	String vcode = SmsUtil.createRandomVcode();//验证码
-    	String mobile=parems.get("phone").toString();
-    	String key="wks:vcode:"+parems.get("phone");
-    	String content="";
-		/*User parem = new User();
-		parem.setPhone(parems.get("phone").toString());*/
-		/*User user= userService.findtUserByEntity(parem);*/
-    	/*if(user!=null){*/
-    		/*mobile=user.getPhone();*/
-    		content="您正在找回密码,验证码:"+vcode+",请在15分钟内按页面提示提交验证码,切勿将验证码泄露于他人。";
-    		/*if(mobile!=null && mobile.length()>0){*/
-        		if(SmsUtil.send(mobile, content)){
-            		ValueOperations<String, Object> vo = redisTemplate.opsForValue();
-                	vo.set(key, vcode);
-                	redisTemplate.expire(key, 15,TimeUnit.MINUTES);//15分钟过期
-                	map.put("flag", "true");
-                	map.put("msg", "发送成功!");
-        			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-        			result.setMsg(Result.resultMsg.SUCCESS.toString());
-        			result.setMap(map);
-            	}else{
-            		map.put("msg", "短信发送失败，请稍后再试!");
-        			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-        			result.setMsg(Result.resultMsg.SUCCESS.toString());
-        			result.setMap(map);
-            	}
-        	/*}else{
-        		map.put("msg", "该用户名未绑定有效的手机号码!");
-    			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-    			result.setMsg(Result.resultMsg.SUCCESS.toString());
-    			result.setMap(map);
-        	}*/
-    	/*}else{
-    		map.put("msg", "无效的手机号码!");
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg(Result.resultMsg.SUCCESS.toString());
-			result.setMap(map);
-    	}*/
-    	return JSONObject.toJSONString(result);
-    }
-    
-    /**
-     * 验证码校验
-     * @param parem
-     * @return
-     */
-    @RequestMapping(value = "/checkVcode", method = {RequestMethod.GET,RequestMethod.POST})
-    public  String checkVcode(@RequestBody Map<String, String> parem){
-    	Result<WebUser> result = new Result<>();
-    	Map<Object, Object> map = new HashMap<Object, Object>();
-    	map.put("flag", "false");
-    	String key="wks:vcode:"+parem.get("phone");
-    	ValueOperations<String, Object> vo = redisTemplate.opsForValue();
-    	String redisVcode=vo.get(key).toString();
-    	if(redisVcode.equals(parem.get("vcode"))){
-    		map.put("flag", "true");
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg(Result.resultMsg.SUCCESS.toString());
-			result.setMap(map);
-    	}
-    	return JSONObject.toJSONString(result);
-    }
-
-
-
-    
 
 	
 }

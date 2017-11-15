@@ -18,11 +18,15 @@
 		<result column="wx_open_id" jdbcType="VARCHAR" property="wbOpenId"/>
 		<result column="qq_open_id" jdbcType="VARCHAR" property="qqOpenId"/>
 		<result column="wb_open_id" jdbcType="VARCHAR" property="wbOpenId"/>
+		<result column="actual_name" jdbcType="VARCHAR" property="actualName"/>
+		<result column="identification" jdbcType="VARCHAR" property="identification"/>
+		<result column="idcart_img" jdbcType="VARCHAR" property="idcartImg"/>
+		<result column="idcart_img1" jdbcType="VARCHAR" property="idcartImg1"/>
 	</resultMap>
 	
 	<sql id="Base_Column_List">
 		id, username, user_cn_name, password, user_type, state, email, phone,create_by,
-		create_time,modify_time,head_img,wx_open_id,qq_open_id,wb_open_id
+		create_time,modify_time,head_img,wx_open_id,qq_open_id,wb_open_id,actual_name,identification,idcart_img,idcart_img1
 	</sql>
 	<!-- 验证用户是否存在 -->
 	<select id="authentication" resultType="Integer" parameterType="java.lang.String">
@@ -111,6 +115,27 @@
              <if test="headImg != null">
                 head_img,
             </if>
+			<if test="qqOpenId != null">
+				qq_open_id,
+			</if>
+			<if test="wxOpenId != null">
+				wx_open_id,
+			</if>
+			<if test="wbOpenId != null">
+				wb_open_id,
+			</if>
+			<if test="actualName != null">
+				actual_name,
+			</if>
+			<if test="identification != null">
+				identification,
+			</if>
+			<if test="idcartImg != null">
+				idcart_img,
+			</if>
+			<if test="idcartImg1 != null">
+				idcart_img1,
+			</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -149,6 +174,27 @@
              <if test="headImg != null">
                 #{headImg},
             </if>
+			<if test="qqOpenId != null">
+				#{qqOpenId},
+			</if>
+			<if test="wxOpenId != null">
+				#{wxOpenId},
+			</if>
+			<if test="wbOpenId != null">
+				#{wbOpenId},
+			</if>
+			<if test="actualName != null">
+				#{actualName},
+			</if>
+			<if test="identification != null">
+				#{identification},
+			</if>
+			<if test="idcartImg != null">
+				#{idcartImg},
+			</if>
+			<if test="idcartImg1 != null">
+				#{idcartImg1},
+			</if>
         </trim>
     </insert>
 
@@ -194,6 +240,27 @@
 	       <if test="headImg != null">
               head_Img =   #{headImg},
             </if>
+			<if test="qqOpenId != null">
+				qq_open_id = #{qqOpenId},
+			</if>
+			<if test="wxOpenId != null">
+				wx_open_id = #{wxOpenId},
+			</if>
+			<if test="wbOpenId != null">
+				wb_open_id = #{wbOpenId},
+			</if>
+			<if test="actualName != null">
+				actual_name = #{actualName},
+			</if>
+			<if test="identification != null">
+				identification = #{identification},
+			</if>
+			<if test="idcartImg != null">
+				idcart_img = #{idcartImg},
+			</if>
+			<if test="idcartImg1 != null">
+				idcart_img1 = #{idcartImg1},
+			</if>
 	    </set>
 	    where id = #{id}
 	  </update>
@@ -234,6 +301,18 @@
 		  </if>
 		  <if test="wbOpenId != null">
 			 and wb_open_id = #{wbOpenId}
+		  </if>
+		  <if test="actualName != null">
+			 and actual_name = #{actualName}
+		  </if>
+		  <if test="identification != null">
+			 and identification = #{identification}
+		  </if>
+		  <if test="idcartImg != null">
+			 and idcart_img = #{idcartImg}
+		  </if>
+		  <if test="idcartImg1 != null">
+			 and idcart_img1 = #{idcartImg1}
 		  </if>
 	  </select>
 
@@ -289,6 +368,18 @@
 			<if test="wbOpenId != null">
 				wb_open_id,
 			</if>
+			<if test="actualName != null">
+				actual_name,
+			</if>
+			<if test="identification != null">
+				identification,
+			</if>
+			<if test="idcartImg != null">
+				idcart_img ,
+			</if>
+			<if test="idcartImg1 != null">
+				idcart_img1,
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -335,6 +426,18 @@
 			</if>
 			<if test="wbOpenId != null">
 				#{wbOpenId},
+			</if>
+			<if test="actualName != null">
+				#{actualName},
+			</if>
+			<if test="identification != null">
+				#{identification},
+			</if>
+			<if test="idcartImg != null">
+				#{idcartImg},
+			</if>
+			<if test="idcartImg1 != null">
+				#{idcartImg1},
 			</if>
 		</trim>
 	</insert>
