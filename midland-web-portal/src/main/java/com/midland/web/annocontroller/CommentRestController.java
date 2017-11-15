@@ -32,6 +32,9 @@ public class CommentRestController extends BaseFilter  {
 	 **/
 	@RequestMapping("add")
 	public Object addComment(@RequestBody Comment obj) throws Exception {
+		/**
+		 * type 0=资讯；1=委托；2=预约
+		 **/
 		 Result result=new Result();
 		try {
 			log.info("addComment {}",obj);
@@ -122,6 +125,26 @@ public class CommentRestController extends BaseFilter  {
 			obj = commentServiceImpl.selectCommentById(obj.getId());
 			obj.setLike(obj.getLike()==null?1:obj.getLike()+1);
 			commentServiceImpl.updateCommentById(obj);
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result.setMsg("success");
+		} catch(Exception e) {
+			log.error("updateCommentById  {}",obj,e);
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result.setMsg("service error");
+		}
+		return result;
+	}
+
+
+	/**
+	 * 更新
+	 **/
+	@RequestMapping("delete")
+	public Object deleteCommentById(@RequestBody Comment obj) throws Exception {
+		Result result=new Result();
+		try {
+			log.info("updateCommentById  {}",obj);
+			commentServiceImpl.deleteCommentById(obj.getId());
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
 		} catch(Exception e) {

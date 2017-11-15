@@ -19,6 +19,9 @@ import java.util.Map;
 import com.midland.web.util.MidlandHelper;
 import javax.servlet.http.HttpServletRequest;
 @RestController
+/**
+ * 招聘
+ */
 @SuppressWarnings("all")
 @RequestMapping("/recruitManager/")
 public class RecruitManagerRestController extends BaseFilter  {

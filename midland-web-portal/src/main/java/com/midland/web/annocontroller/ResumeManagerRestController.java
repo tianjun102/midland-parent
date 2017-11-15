@@ -18,6 +18,9 @@ import java.util.Map;
 import com.midland.web.util.MidlandHelper;
 import javax.servlet.http.HttpServletRequest;
 @RestController
+/**
+ * 简历
+ */
 @SuppressWarnings("all")
 @RequestMapping("/resumeManager/")
 public class ResumeManagerRestController extends BaseFilter  {

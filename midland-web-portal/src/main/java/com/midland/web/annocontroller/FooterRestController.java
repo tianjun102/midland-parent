@@ -96,9 +96,11 @@ public class FooterRestController extends BaseFilter  {
 			MidlandHelper.doPage(request);
 			Page<Footer> list = (Page<Footer>)footerServiceImpl.findFooterList(obj);
 			Paginator paginator=list.getPaginator();
+			if(list!=null&&list.size()>=0){
+				result.setModel(list.get(0));
+			}
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
-			result.setList(list);
 			result.setPaginator(paginator);
 		} catch(Exception e) {
 			log.error("findFooterList  {}",obj,e);

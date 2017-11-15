@@ -9,6 +9,7 @@
 		<result column="user" property="user" jdbcType="VARCHAR" />
 		<result column="user_id" property="userId" jdbcType="INTEGER" />
 		<result column="comm_id" property="commId" jdbcType="INTEGER" />
+		<result column="likes" property="likes" jdbcType="INTEGER" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
@@ -59,6 +60,9 @@
 			<if test="commId != null">
 				comm_id,
 			</if>
+			<if test="likes != null">
+				likes,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -77,6 +81,9 @@
 			<if test="commId != null">
 				#{commId,jdbcType=INTEGER},
 			</if>
+			 <if test="likes != null">
+				 #{likes},
+			 </if>
 		</trim>
 	</insert>
 
@@ -95,6 +102,9 @@
 		</if>
 		<if test="commId != null">
 			comm_id= #{commId,jdbcType=INTEGER},
+		</if>
+		<if test="likes != null">
+			likes= #{likes},
 		</if>
 	</sql>
 
@@ -116,6 +126,9 @@
 		</if>
 		<if test="commId != null">
 			 and comm_id= #{commId,jdbcType=INTEGER}
+		</if>
+		<if test="likes != null">
+			 and likes= #{likes}
 		</if>
 	</sql>
 
