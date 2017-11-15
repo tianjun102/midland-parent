@@ -1,6 +1,7 @@
 package com.midland.web.controller;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -12,16 +13,18 @@ import javax.servlet.http.HttpSession;
 
 import com.midland.core.util.SmsUtil;
 import com.midland.core.util.UploadImgUtil;
+import com.midland.web.Contants.Contant;
+import com.midland.web.api.ApiHelper;
 import com.midland.web.commons.core.util.ApplicationUtils;
 import com.midland.web.commons.core.util.ConstantUtils;
 import com.midland.web.commons.core.util.ResultStatusUtils;
 import com.midland.web.commons.exception.ServiceException;
 import com.midland.web.model.WebUser;
 import com.midland.web.service.WebUserService;
+import com.midland.web.service.impl.PublicService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,10 +32,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alibaba.fastjson.JSONObject;
-import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
-import com.github.miemiedev.mybatis.paginator.domain.PageList;
-import com.github.miemiedev.mybatis.paginator.domain.Paginator;
 import com.google.common.collect.Maps;
 import com.midland.web.commons.FastJsonUtils;
 import com.midland.web.commons.Result;
@@ -51,7 +50,12 @@ public class WebUserController extends WebCommonsController {
 	private static Logger logger = Logger.getLogger(WebUserController.class);
 
 	@Resource
-	private WebUserService userService;
+	private WebUserService webUserService;
+
+	@Resource
+	private ApiHelper apiHelper;
+@Resource
+	private PublicService publicServiceImpl;
 
 
     @Resource
@@ -82,7 +86,7 @@ public class WebUserController extends WebCommonsController {
 			// 判断用户名和密码是否为空值
 			if (StringUtils.isNotBlank(user.getUsername()) && StringUtils.isNotBlank(user.getPassword())) {
 
-				WebUser userInfo = userService.getUserByUsername(user.getUsername());
+				WebUser userInfo = webUserService.getUserByUsername(user.getUsername());
 
 				if (null != userInfo) {
 
@@ -99,7 +103,7 @@ public class WebUserController extends WebCommonsController {
 						
 						request.getSession().setAttribute(ConstantUtils.USER_SESSION, userInfo);
 						if (userInfo.getUserType() == 2) {
-							WebUser catUser = userService.findParentUserByChild(userInfo.getUsername());
+							WebUser catUser = webUserService.findParentUserByChild(userInfo.getUsername());
 							if(catUser!=null){
 							userInfo.setParentId(catUser.getId());
 							userInfo.setCustName(catUser.getCustName());
@@ -239,7 +243,7 @@ public class WebUserController extends WebCommonsController {
 		
 		
 		try {
-				int i = userService.editPwdById(ApplicationUtils.sha256Hex(params.get("passWord")), user.getId());
+				int i = webUserService.editPwdById(ApplicationUtils.sha256Hex(params.get("passWord")), user.getId());
 				if (i>0) {
 					result.setCode(ResultStatusUtils.STATUS_CODE_200);
 					result.setMsg("修改密码成功!");
@@ -263,7 +267,7 @@ public class WebUserController extends WebCommonsController {
 	@RequestMapping(value = "/toEdit", method = { RequestMethod.POST },produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public String toEdit(HttpServletRequest request, @RequestBody Map<String,String> params) {
 		Result<WebUser> result = new Result<>();
-		WebUser user = userService.getUserByUserId(Integer.valueOf(params.get("userId")));
+		WebUser user = webUserService.getUserByUserId(Integer.valueOf(params.get("userId")));
 
 		result.setCode(ResultStatusUtils.STATUS_CODE_200);
 		result.setMsg(Result.resultMsg.SUCCESS.toString());
@@ -292,7 +296,7 @@ public class WebUserController extends WebCommonsController {
 				user.setPhone(params.get("phone"));
 				user.setEmail(params.get("email"));
 
-				int i = userService.editUserById(user);
+				int i = webUserService.editUserById(user);
 				result.setNumber(i);
 				result.setCode(ResultStatusUtils.STATUS_CODE_200);
 				result.setMsg(Result.resultMsg.SUCCESS.toString());
@@ -335,7 +339,7 @@ public class WebUserController extends WebCommonsController {
 				if(StringUtils.isNotEmpty(headImg)){
 					user.setHeadImg(headImg);
 				}
-				int i = userService.editUserById(user);
+				int i = webUserService.editUserById(user);
 				result.setNumber(i);
 				result.setCode(ResultStatusUtils.STATUS_CODE_200);
 				result.setMsg(Result.resultMsg.SUCCESS.toString());
@@ -396,7 +400,7 @@ public class WebUserController extends WebCommonsController {
 					user.setIdcartImg(headImg1);
 				}
 
-				int i = userService.editUserById(user);
+				int i = webUserService.editUserById(user);
 				result.setNumber(i);
 				result.setCode(ResultStatusUtils.STATUS_CODE_200);
 				result.setMsg(Result.resultMsg.SUCCESS.toString());
@@ -430,7 +434,7 @@ public class WebUserController extends WebCommonsController {
 		}
 
 		try {
-			int i = userService.authentication(params.get("phone"));
+			int i = webUserService.authentication(params.get("phone"));
 			result.setNumber(i);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("校验手机号成功!");
@@ -442,7 +446,89 @@ public class WebUserController extends WebCommonsController {
 		return FastJsonUtils.toJSONStr(result);
 	}
 
+	/**
+	 * 注册发送验证码
+	 * @param map
+	 */
+	@RequestMapping("send/code")
+	public void sign_up_SendSMS(@RequestBody Map map) {
+		Result result = new Result();
+		try {
+			String phone = (String) map.get("phone");
+			if (StringUtils.isEmpty(phone)) {
+				throw new Exception("手机号码为空");
+			}
+			String vcode = SmsUtil.createRandomVcode();//验证码
+			String key = Contant.SIGN_UP_VCODE_KEY + phone;
+			publicServiceImpl.setV(key, vcode, 1, TimeUnit.MINUTES);
+			List list = new ArrayList();
+			list.add(vcode);
+			list.add("1");
+			apiHelper.smsSender(phone, 54711, list);
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result.setMsg("success");
+		} catch (Exception e) {
+			logger.error("发送验证码失败", e);
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result.setMsg("发送验证码失败 ");
+		}
 
+	}
+
+	/**
+	 * 校验验证码
+	 * @param map
+	 * @return
+	 */
+	@RequestMapping("checkVcode")
+	public Object checkVcode_(@RequestBody Map map) {
+		Result result = new Result();
+		try {
+			String phone = (String) map.get("phone");
+			String vcode = (String) map.get("vcode");
+			String key = Contant.SIGN_UP_VCODE_KEY + phone;
+			String redisVcode = (String) publicServiceImpl.getV(key);
+			if (redisVcode.equals(vcode)) {
+				result.setCode(ResultStatusUtils.STATUS_CODE_200);
+				result.setMsg("success");
+			}else {
+				result.setCode(ResultStatusUtils.STATUS_CODE_203);
+				result.setMsg("error");
+			}
+		} catch (Exception e) {
+			logger.error("checkVcode_", e);
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result.setMsg("error");
+		}
+		return result;
+	}
+
+	@RequestMapping("/sign_up")
+	public Object sign_up(@RequestBody Map<String, String> param) {
+		Result result = new Result();
+		Result result1 = (Result)checkVcode_(param);
+		if (ResultStatusUtils.STATUS_CODE_200 == result1.getCode()) {
+			try {
+				String password = param.get("password");
+				String confirmPassword = param.get("confirmPassword");
+				if (password != null && password.equals(confirmPassword)) {
+					webUserService.addUser(param);
+					result.setCode(ResultStatusUtils.STATUS_CODE_200);
+					result.setMsg("sign up success");
+				} else {
+					result.setCode(ResultStatusUtils.STATUS_CODE_203);
+					result.setMsg("Password and Confirm Password inconsistent!");
+				}
+			} catch (Exception e) {
+				logger.error("sign_up:", e);
+				result.setCode(ResultStatusUtils.STATUS_CODE_203);
+				result.setMsg("sign up success error");
+			}
+		}
+		result.setCode(ResultStatusUtils.STATUS_CODE_203);
+		result.setMsg("vcode is incorrect");
+		return result;
+	}
 
 	
 }
