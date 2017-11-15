@@ -45,13 +45,13 @@ public class SmsUtil {
 	 * 随机生成6位随机验证码
 	 * @return
 	 */
-	public static String createRandomVcode(){
+	public static String createRandomVCode(){
         //验证码
-        String vcode="";
+        String vCode="";
         for (int i = 0; i < 6; i++) {
-            vcode = vcode + (int)(Math.random() * 9);
+            vCode = vCode + (int)(Math.random() * 9);
         }
-        return vcode;
+        return vCode;
     }
  
 }

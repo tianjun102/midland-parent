@@ -12,18 +12,14 @@ import com.midland.web.model.Appointment;
 import com.midland.web.service.AppointmentService;
 import com.midland.web.service.impl.PublicService;
 import com.midland.web.util.MidlandHelper;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -175,28 +171,13 @@ public class AppointmentRestController extends BaseFilter {
      * @param map,phone
      */
     @RequestMapping("send/code")
-    public void appointSendSMS(@RequestBody Map map) {
-        Result result = new Result();
-        try {
-            String phone = (String) map.get("phone");
-            if (StringUtils.isEmpty(phone)) {
-                throw new Exception("手机号码为空");
-            }
-            String vcode = SmsUtil.createRandomVcode();//验证码
-            String key = Contant.APPOINT_VCODE_KEY + phone;
-            publicServiceImpl.setV(key, vcode, 1, TimeUnit.MINUTES);
-            List list = new ArrayList();
-            list.add(vcode);
-            list.add("1");
-            apiHelper.smsSender(phone, 54711, list);
-            result.setCode(ResultStatusUtils.STATUS_CODE_200);
-            result.setMsg("success");
-        } catch (Exception e) {
-            log.error("发送验证码失败", e);
-            result.setCode(ResultStatusUtils.STATUS_CODE_203);
-            result.setMsg("发送验证码失败 ");
-        }
-
+    public Object appointSendSMS(@RequestBody Map map) {
+        String phone = (String) map.get("phone");
+        String key = Contant.APPOINT_VCODE_KEY + phone;
+        int codeEffective=3;
+        String vCode = SmsUtil.createRandomVCode();//验证码
+        int tpId=54711;
+        return publicServiceImpl.sendCode(phone,tpId,vCode,key,codeEffective,TimeUnit.MINUTES);
     }
 
     /**
@@ -206,25 +187,10 @@ public class AppointmentRestController extends BaseFilter {
      */
     @RequestMapping("checkVcode")
     public Object checkVcode_(@RequestBody Map map) {
-        Result result = new Result();
-        try {
-            String phone = (String) map.get("phone");
-            String vcode = (String) map.get("vcode");
-            String key = Contant.APPOINT_VCODE_KEY + phone;
-            String redisVcode = (String) publicServiceImpl.getV(key);
-            if (redisVcode.equals(vcode)) {
-                result.setCode(ResultStatusUtils.STATUS_CODE_200);
-                result.setMsg("success");
-            }else {
-                result.setCode(ResultStatusUtils.STATUS_CODE_203);
-                result.setMsg("error");
-            }
-        } catch (Exception e) {
-            log.error("checkVcode_", e);
-            result.setCode(ResultStatusUtils.STATUS_CODE_203);
-            result.setMsg("error");
-        }
-        return result;
+        String phone = (String) map.get("phone");
+        String vCode = (String) map.get("vcode");
+        String key = Contant.APPOINT_VCODE_KEY + phone;
+        return publicServiceImpl.codeCheck(phone,vCode,key);
     }
 
 }
