@@ -42,14 +42,12 @@ public class Contant {
 	public static final int ENTRUST_EVALUATE=4;
 
 	/**
-	 * 预约
+	 * 发送验证码
 	 */
-	public static final String APPOINT_VCODE_KEY ="midland:appoint:vcode:";
-	/**
-	 * 问答
-	 */
-	public static final String QUESTON_THUMB_UP_KEY ="midland:queston:thumb_up:";
+	public static final String APPOINT_VCODE_KEY ="midland:appoint:vcode:";//预约
+	public static final String QUESTON_THUMB_UP_KEY ="midland:queston:thumb_up:";//问答
 	public static final int timeOutDays=7;
+	public static final String SIGN_UP_VCODE_KEY="midland:sign_up:vcode";
 
 
 	/**
