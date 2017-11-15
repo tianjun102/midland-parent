@@ -52,16 +52,6 @@ public class WebUserController extends WebCommonsController {
 	@Resource
 	private WebUserService webUserService;
 
-	@Resource
-	private ApiHelper apiHelper;
-	@Resource
-	private PublicService publicServiceImpl;
-
-
-    @Resource
-	private RedisTemplate<String, Object> redisTemplate;
-    
-
 	/**
 	 * 用户登录
 	 * 

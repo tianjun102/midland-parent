@@ -187,25 +187,10 @@ public class AppointmentRestController extends BaseFilter {
      */
     @RequestMapping("checkVcode")
     public Object checkVcode_(@RequestBody Map map) {
-        Result result = new Result();
-        try {
-            String phone = (String) map.get("phone");
-            String vcode = (String) map.get("vcode");
-            String key = Contant.APPOINT_VCODE_KEY + phone;
-            String redisVcode = (String) publicServiceImpl.getV(key);
-            if (redisVcode.equals(vcode)) {
-                result.setCode(ResultStatusUtils.STATUS_CODE_200);
-                result.setMsg("success");
-            }else {
-                result.setCode(ResultStatusUtils.STATUS_CODE_203);
-                result.setMsg("error");
-            }
-        } catch (Exception e) {
-            log.error("checkVcode_", e);
-            result.setCode(ResultStatusUtils.STATUS_CODE_203);
-            result.setMsg("error");
-        }
-        return result;
+        String phone = (String) map.get("phone");
+        String vCode = (String) map.get("vcode");
+        String key = Contant.APPOINT_VCODE_KEY + phone;
+        return publicServiceImpl.codeCheck(phone,vCode,key);
     }
 
 }

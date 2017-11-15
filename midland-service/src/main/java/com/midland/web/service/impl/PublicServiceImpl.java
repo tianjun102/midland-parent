@@ -52,6 +52,11 @@ public class PublicServiceImpl implements PublicService {
     public Object codeCheck(String phone, String vCode, String key) {
         Result result = new Result();
         try {
+            if (StringUtils.isEmpty(phone)||StringUtils.isEmpty(vCode)){
+                result.setCode(ResultStatusUtils.STATUS_CODE_400);
+                result.setMsg("IllegalArgumentException");
+                return result;
+            }
             String redisVCode = (String) getV(key);
             if (redisVCode.equals(vCode)) {
                 result.setCode(ResultStatusUtils.STATUS_CODE_200);
