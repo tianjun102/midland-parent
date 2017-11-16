@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.ResumeManager;
 import com.midland.web.service.ResumeManagerService;
 import com.midland.base.BaseFilter;
@@ -37,6 +38,7 @@ public class ResumeManagerRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addResumeManager {}",obj);
+			obj.setIsDelete(Contant.isNotDelete);
 			resumeManagerServiceImpl.insertResumeManager(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
@@ -97,6 +99,7 @@ public class ResumeManagerRestController extends BaseFilter  {
 		try {
 			log.info("findResumeManagerList  {}",obj);
 			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
 			Page<ResumeManager> list = (Page<ResumeManager>)resumeManagerServiceImpl.findResumeManagerList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

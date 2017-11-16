@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.SpecialPage;
 import com.midland.web.service.SpecialPageService;
 import com.midland.base.BaseFilter;
@@ -34,6 +35,8 @@ public class SpecialPageRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addSpecialPage {}",obj);
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setIsShow(Contant.isShow);
 			specialPageServiceImpl.insertSpecialPage(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
@@ -95,6 +98,8 @@ public class SpecialPageRestController extends BaseFilter  {
 			log.info("findSpecialPageList  {}",obj);
 			obj.setIsShow(0);
 			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setIsShow(Contant.isShow);
 			Page<SpecialPage> list = (Page<SpecialPage>)specialPageServiceImpl.findSpecialPageList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

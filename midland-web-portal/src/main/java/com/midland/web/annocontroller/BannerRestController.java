@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.Banner;
 import com.midland.web.service.BannerService;
 import com.midland.base.BaseFilter;
@@ -37,6 +38,7 @@ public class BannerRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addBanner {}",obj);
+			obj.setIsDelete(Contant.isNotDelete);
 			bannerServiceImpl.insertBanner(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");

@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.Record;
 import com.midland.web.service.RecordService;
 import com.midland.base.BaseFilter;
@@ -34,6 +35,9 @@ public class RecordRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addRecord {}",obj);
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setIsShow(Contant.isShow);
+			obj.setAddTime(MidlandHelper.getCurrentTime());
 			recordServiceImpl.insertRecord(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
@@ -94,6 +98,8 @@ public class RecordRestController extends BaseFilter  {
 		try {
 			log.info("findRecordList  {}",obj);
 			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setIsShow(Contant.isShow);
 			Page<Record> list = (Page<Record>)recordServiceImpl.findRecordList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

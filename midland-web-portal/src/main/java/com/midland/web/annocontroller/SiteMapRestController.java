@@ -35,6 +35,8 @@ public class SiteMapRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addSitemap {}",obj);
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setIsShow(Contant.isShow);
 			siteMapServiceImpl.insertSiteMap(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");

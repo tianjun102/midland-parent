@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.Complaints;
 import com.midland.web.service.ComplaintsService;
 import com.midland.base.BaseFilter;
@@ -34,6 +35,8 @@ public class ComplaintsRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addComplaints {}",obj);
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setAddTime(MidlandHelper.getCurrentTime());
 			complaintsServiceImpl.insertComplaints(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
@@ -94,6 +97,7 @@ public class ComplaintsRestController extends BaseFilter  {
 		try {
 			log.info("findComplaintsList  {}",obj);
 			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
 			Page<Complaints> list = (Page<Complaints>)complaintsServiceImpl.findComplaintsList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

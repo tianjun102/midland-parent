@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.Footer;
 import com.midland.web.service.FooterService;
 import com.midland.base.BaseFilter;
@@ -34,6 +35,7 @@ public class FooterRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addFooter {}",obj);
+			obj.setIsDelete(Contant.isNotDelete);
 			footerServiceImpl.insertFooter(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
@@ -94,6 +96,7 @@ public class FooterRestController extends BaseFilter  {
 		try {
 			log.info("findFooterList  {}",obj);
 			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
 			Page<Footer> list = (Page<Footer>)footerServiceImpl.findFooterList(obj);
 			Paginator paginator=list.getPaginator();
 			if(list!=null&&list.size()>=0){

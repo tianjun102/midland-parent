@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.LiaisonRecord;
 import com.midland.web.service.LiaisonRecordService;
 import com.midland.base.BaseFilter;
@@ -34,6 +35,8 @@ public class LiaisonRecordRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addLiaisonRecord {}",obj);
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setIsOntact(0);//未联系
 			liaisonRecordServiceImpl.insertLiaisonRecord(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
@@ -94,6 +97,7 @@ public class LiaisonRecordRestController extends BaseFilter  {
 		try {
 			log.info("findLiaisonRecordList  {}",obj);
 			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
 			Page<LiaisonRecord> list = (Page<LiaisonRecord>)liaisonRecordServiceImpl.findLiaisonRecordList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

@@ -40,10 +40,6 @@ public class EliteClub{
 	 **/
 	private String detail;
 	/**
-	 * 是否开放
-	 **/
-	private Integer isshow;
-	/**
 	 * 0未删除，1删除
 	 **/
 	private Integer isDelete;
@@ -129,14 +125,6 @@ public class EliteClub{
 		this.detail = detail;
 	}
 
-	public Integer getIsshow() {
-		return isshow;
-	}
-
-	public void setIsshow(Integer isshow) {
-		this.isshow = isshow;
-	}
-
 	public Integer getIsDelete() {
 		return isDelete;
 	}
@@ -190,9 +178,6 @@ public class EliteClub{
 		}
 		if (detail != null) {
 			sb.append(", \"detail\":\"").append(detail).append("\"");
-		}
-		if (isshow != null) {
-			sb.append(", \"isshow\":\"").append(isshow).append("\"");
 		}
 		if (isDelete != null) {
 			sb.append(", \"isDelete\":\"").append(isDelete).append("\"");

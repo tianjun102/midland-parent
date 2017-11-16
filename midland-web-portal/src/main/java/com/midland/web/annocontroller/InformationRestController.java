@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.Information;
 import com.midland.web.service.InformationService;
 import com.midland.base.BaseFilter;
@@ -34,6 +35,7 @@ public class InformationRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addInformation {}",obj);
+			obj.setIsDelete(Contant.isNotDelete);
 			informationServiceImpl.insertInformation(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
@@ -94,9 +96,10 @@ public class InformationRestController extends BaseFilter  {
 	public Object findInformationList(@RequestBody Information  obj, HttpServletRequest request) {
 		 Result result=new Result();
 		try {
-			obj.setStatus(0);
+
 			log.info("findInformationList  {}",obj);
 			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
 			Page<Information> list = (Page<Information>)informationServiceImpl.findInformationList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

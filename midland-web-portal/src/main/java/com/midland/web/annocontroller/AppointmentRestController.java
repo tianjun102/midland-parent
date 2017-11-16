@@ -44,6 +44,8 @@ public class AppointmentRestController extends BaseFilter {
         Result result = new Result();
         try {
             log.info("addAppointment {}", obj);
+            obj.setIsDelete(Contant.isNotDelete);
+            obj.setAppointmentTime(MidlandHelper.getCurrentTime());
             appointmentServiceImpl.insertAppointment(obj);
             result.setCode(ResultStatusUtils.STATUS_CODE_200);
             result.setMsg("success");

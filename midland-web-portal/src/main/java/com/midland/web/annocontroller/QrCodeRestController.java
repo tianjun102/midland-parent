@@ -35,6 +35,8 @@ public class QrCodeRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addQrCode {}",obj);
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setIsShow(Contant.isShow);
 			qrCodeServiceImpl.insertQrCode(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");

@@ -40,6 +40,8 @@ public class LeaveMsgRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addLeaveMsg {}",obj);
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setAddTime(MidlandHelper.getCurrentTime());
 			leaveMsgServiceImpl.insertLeaveMsg(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
@@ -100,6 +102,7 @@ public class LeaveMsgRestController extends BaseFilter  {
 		try {
 			log.info("findLeaveMsgList  {}",obj);
 			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
 			Page<LeaveMsg> list = (Page<LeaveMsg>)leaveMsgServiceImpl.findLeaveMsgList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

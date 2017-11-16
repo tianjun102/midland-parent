@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.LoanType;
 import com.midland.web.service.LoanTypeService;
 import com.midland.base.BaseFilter;
@@ -34,6 +35,8 @@ public class LoanTypeRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addLoanType {}",obj);
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setIsShow(Contant.isShow);
 			loanTypeServiceImpl.insertLoanType(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
@@ -92,9 +95,11 @@ public class LoanTypeRestController extends BaseFilter  {
 	public Object findLoanTypeList(@RequestBody LoanType  obj, HttpServletRequest request) {
 		 Result result=new Result();
 		try {
-			obj.setIsShow(0);
+
 			log.info("findLoanTypeList  {}",obj);
 			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setIsShow(Contant.isShow);
 			Page<LoanType> list = (Page<LoanType>)loanTypeServiceImpl.findLoanTypeList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

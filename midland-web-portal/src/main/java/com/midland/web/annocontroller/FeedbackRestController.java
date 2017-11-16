@@ -35,6 +35,8 @@ public class FeedbackRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addFeedback {}",obj);
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setAddTime(MidlandHelper.getCurrentTime());
 			feedbackServiceImpl.insertFeedback(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
@@ -95,6 +97,7 @@ public class FeedbackRestController extends BaseFilter  {
 		try {
 			log.info("findFeedbackList  {}",obj);
 			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
 			obj.setIsDelete(Contant.isNotDelete);
 			Page<Feedback> list = (Page<Feedback>)feedbackServiceImpl.findFeedbackList(obj);
 			Paginator paginator=list.getPaginator();

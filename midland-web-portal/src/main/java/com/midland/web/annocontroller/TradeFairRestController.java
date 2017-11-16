@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.TradeFair;
 import com.midland.web.service.TradeFairService;
 import com.midland.base.BaseFilter;
@@ -34,6 +35,8 @@ public class TradeFairRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addTradeFair {}",obj);
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setIsShow(Contant.isShow);
 			tradeFairServiceImpl.insertTradeFair(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
@@ -94,6 +97,8 @@ public class TradeFairRestController extends BaseFilter  {
 		try {
 			log.info("findTradeFairList  {}",obj);
 			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setIsShow(Contant.isShow);
 			Page<TradeFair> list = (Page<TradeFair>)tradeFairServiceImpl.findTradeFairList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

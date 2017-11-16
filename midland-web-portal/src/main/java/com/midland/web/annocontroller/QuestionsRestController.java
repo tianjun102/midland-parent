@@ -48,6 +48,7 @@ public class QuestionsRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addQuestions {}",obj);
+			obj.setIsDelete(Contant.isNotDelete);
 			questionsServiceImpl.insertSelective(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
@@ -108,6 +109,7 @@ public class QuestionsRestController extends BaseFilter  {
 		try {
 			log.info("findQuestionsList  {}",obj);
 			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
 			Page<Questions> list = (Page<Questions>)questionsServiceImpl.questionPage(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

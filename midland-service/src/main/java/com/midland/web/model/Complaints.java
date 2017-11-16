@@ -26,7 +26,7 @@ public class Complaints{
 	/**
 	 * 
 	 **/
-	private Date addTime;
+	private String addTime;
 	/**
 	 * 1=伊莱特；2饭煲事业部；3精品事业部；4料理事业部；5配件事业部
 	 **/
@@ -81,11 +81,11 @@ public class Complaints{
 		this.detail = detail;
 	}
 
-	public Date getAddTime() {
+	public String getAddTime() {
 		return addTime;
 	}
 
-	public void setAddTime(Date addTime) {
+	public void setAddTime(String addTime) {
 		this.addTime = addTime;
 	}
 

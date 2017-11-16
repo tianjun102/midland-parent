@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.ErrorPage;
 import com.midland.web.service.ErrorPageService;
 import com.midland.base.BaseFilter;
@@ -34,6 +35,7 @@ public class ErrorPageRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addErrorPage {}",obj);
+			obj.setIsDelete(Contant.isNotDelete);
 			errorPageServiceImpl.insertErrorPage(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
@@ -94,6 +96,7 @@ public class ErrorPageRestController extends BaseFilter  {
 		try {
 			log.info("findErrorPageList  {}",obj);
 			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
 			Page<ErrorPage> list = (Page<ErrorPage>)errorPageServiceImpl.findErrorPageList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.Quotation;
 import com.midland.web.service.QuotationService;
 import com.midland.base.BaseFilter;
@@ -34,6 +35,7 @@ public class QuotationRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addQuotation {}",obj);
+			obj.setIsDelete(Contant.isNotDelete);
 			quotationServiceImpl.insertQuotation(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
@@ -94,6 +96,7 @@ public class QuotationRestController extends BaseFilter  {
 		try {
 			log.info("findQuotationList  {}",obj);
 			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
 			Page<Quotation> list = (Page<Quotation>)quotationServiceImpl.findQuotationList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

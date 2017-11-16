@@ -96,6 +96,7 @@ public class EntrustRestController extends BaseFilter  {
 		Result result=new Result();
 		try {
 			log.info("addEntrust {}",obj);
+			obj.setEntrustTime(MidlandHelper.getCurrentTime());
 			entrustServiceImpl.insertEntrust(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");

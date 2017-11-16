@@ -35,6 +35,7 @@ public class MenuTypeRestController extends BaseFilter  {
 		Result result=new Result();
 		try {
 			log.info("addMenuType {}",obj);
+			obj.setIsDelete(Contant.isNotDelete);
 			menuTypeServiceImpl.insertMenuType(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");

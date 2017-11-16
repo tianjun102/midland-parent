@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.HotSearch;
 import com.midland.web.service.HotSearchService;
 import com.midland.base.BaseFilter;
@@ -34,6 +35,8 @@ public class HotSearchRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addHotSearch {}",obj);
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setIsShow(Contant.isShow);
 			hotSearchServiceImpl.insertHotSearch(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
@@ -92,8 +95,9 @@ public class HotSearchRestController extends BaseFilter  {
 	public Object findHotSearchList(@RequestBody HotSearch  obj, HttpServletRequest request) {
 		 Result result=new Result();
 		try {
-			obj.setIsShow(0);
 			log.info("findHotSearchList  {}",obj);
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setIsShow(Contant.isShow);
 			MidlandHelper.doPage(request);
 			Page<HotSearch> list = (Page<HotSearch>)hotSearchServiceImpl.findHotSearchList(obj);
 			Paginator paginator=list.getPaginator();
