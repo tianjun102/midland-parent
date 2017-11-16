@@ -887,8 +887,10 @@ public class UserController extends BaseFilter {
 	public String bsUserList(User user, Model model, HttpServletRequest request){
 		user.setUserType(2);
 		User currUser = MidlandHelper.getCurrentUser(request);
-		if (StringUtils.isEmpty(user.getCityId())){
-			user.setCityId(currUser.getCityId());
+		if(StringUtils.isEmpty(currUser.getIsSuper())) {
+			if (StringUtils.isEmpty(user.getCityId())) {
+				user.setCityId(currUser.getCityId());
+			}
 		}
 		getUserList(user,model, request);
 		List<ParamObject> map = JsonMapReader.getMap("audit_status");
