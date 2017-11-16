@@ -262,12 +262,9 @@
         <include refid="Base_Column_List"/>
         from user
         where state=1
-        <if test="flag==null or flag==''">
-            and user_type=0
-        </if>
-        and (username = #{username,jdbcType=VARCHAR}
-        or phone=#{username,jdbcType=VARCHAR} )
-        and password = #{password,jdbcType=CHAR}
+            and user_type in (0,1)
+            and (username = #{username,jdbcType=VARCHAR} or phone=#{username,jdbcType=VARCHAR} )
+            and password = #{password,jdbcType=CHAR}
     </select>
 
     <!-- 分页条件查询 -->
