@@ -74,6 +74,8 @@ public class annoUserController {
                 Integer id = userService.addWebUser(newUser);
                 newUser.setId(id);
                 result.setModel(newUser);
+                newUser.setUserType(2);
+
             }else{
                 result.setModel(userInfo);
             }
