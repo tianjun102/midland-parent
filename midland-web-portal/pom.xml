@@ -528,5 +528,10 @@
 			<artifactId>midland-service</artifactId>
 			<version>1.1.0</version>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>com.bluemobi</groupId>
+            <artifactId>midland-bs-mannager</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
 </project>

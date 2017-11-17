@@ -4,8 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
-import com.midland.controller.PublicUtils.QuotationUtil;
-import com.midland.core.util.DateUtils;
+import com.midland.web.PublicUtils.QuotationUtil;
 import com.midland.web.Contants.Contant;
 import com.midland.web.model.Area;
 import com.midland.web.model.ExportModel;
@@ -27,7 +26,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.crypto.Data;
 import java.util.*;
 
 @Controller
