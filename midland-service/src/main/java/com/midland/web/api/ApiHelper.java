@@ -46,7 +46,7 @@ public class ApiHelper {
 			if (result.errMsg.equals("OK")){
 				logger.info("smsSender  发送短信成功，{}，{}，{}",phone,tpId,paramList);
 			}else{
-				logger.error("smsSender  发送短信失败，{}，{}，{}",phone,tpId,paramList);
+				logger.error("smsSender  发送短信失败，{}，{}，{}，{}",phone,tpId,paramList,result);
 			}
 		} catch (Exception e) {
 			logger.error("smsSender  发送短信失败，{}，{}，{}",phone,tpId,paramList,e);
