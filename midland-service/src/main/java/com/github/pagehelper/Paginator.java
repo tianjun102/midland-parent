@@ -139,7 +139,7 @@ public class Paginator implements Serializable {
         ArrayList result = new ArrayList();
 
         for(int i = startPageNumber; i <= endPageNumber; ++i) {
-            result.add(new Integer(i));
+            result.add(Integer.valueOf(i));
         }
 
         return (Integer[])result.toArray(new Integer[result.size()]);

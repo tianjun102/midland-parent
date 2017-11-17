@@ -155,6 +155,7 @@ public class UserController extends BaseFilter {
 				Agenter agenterList = MidlandHelper.getPojo(dataDtail);
 				if (agenterList != null) {
 					User agenterUser = new User();
+					agenterUser.setId(userMap.get("agenterId")==null?null:userMap.get("agenterId").toString());
 					agenterUser.setPhone(agenterList.getPhone());
 					agenterUser.setUsername(username);
 					agenterUser.setPassword(password);
