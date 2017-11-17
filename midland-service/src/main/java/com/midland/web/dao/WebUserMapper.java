@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface WebUserMapper extends GenericDao<WebUser, Integer> {
+public interface WebUserMapper extends GenericDao<WebUser, String> {
 
     /**
 	 * 验证该用户手机号唯一性
@@ -37,7 +37,7 @@ public interface WebUserMapper extends GenericDao<WebUser, Integer> {
 	 *            用户ID
 	 * @return int
 	 */
-	int updatePwdById(@Param("newPwd") String newPwd, @Param("id") Integer id);
+	int updatePwdById(@Param("newPwd") String newPwd, @Param("id") String id);
 	
 	/**
 	 * 查询最后添加的安装人员信息
@@ -65,7 +65,7 @@ public interface WebUserMapper extends GenericDao<WebUser, Integer> {
 	
 	WebUser selectUserByEntity(WebUser user);
 
-	int addWebUser(WebUser user);
+	String addWebUser(WebUser user);
 	
 
 

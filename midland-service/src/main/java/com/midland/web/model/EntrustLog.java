@@ -12,7 +12,7 @@ public class EntrustLog{
 	/**
 	 * 操作人id
 	 **/
-	private Integer operatorId;
+	private String operatorId;
 	/**
 	 * 操作人名称
 	 **/
@@ -51,11 +51,11 @@ public class EntrustLog{
 		this.logTime = logTime;
 	}
 
-	public Integer getOperatorId() {
+	public String getOperatorId() {
 		return operatorId;
 	}
 
-	public void setOperatorId(Integer operatorId) {
+	public void setOperatorId(String operatorId) {
 		this.operatorId = operatorId;
 	}
 

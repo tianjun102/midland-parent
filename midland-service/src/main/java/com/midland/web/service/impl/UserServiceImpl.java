@@ -23,7 +23,7 @@ import com.midland.web.service.UserService;
  * @since 2016年7月5日 上午11:54:24
  */
 @Service
-public class UserServiceImpl extends GenericServiceImpl<User, Integer> implements UserService {
+public class UserServiceImpl extends GenericServiceImpl<User, String> implements UserService {
 
     @Resource
     private UserMapper userMapper;
@@ -39,7 +39,7 @@ public class UserServiceImpl extends GenericServiceImpl<User, Integer> implement
     }
 
     @Override
-    public int delete(Integer id) {
+    public int delete(String id) {
         return userMapper.deleteByPrimaryKey(id);
     }
 
@@ -49,12 +49,12 @@ public class UserServiceImpl extends GenericServiceImpl<User, Integer> implement
     }
 
     @Override
-    public User selectById(Integer id) {
+    public User selectById(String id) {
         return userMapper.selectByPrimaryKey(id);
     }
 
     @Override
-    public GenericDao<User, Integer> getDao() {
+    public GenericDao<User, String> getDao() {
         return userMapper;
     }
 
@@ -113,7 +113,7 @@ public class UserServiceImpl extends GenericServiceImpl<User, Integer> implement
 	 * @param userRoles
 	 * @return
 	 */
-	private int insertUserRoleBatch(Integer userId,String userRoles) {
+	private int insertUserRoleBatch(String userId,String userRoles) {
 		if(StringUtils.isNotEmpty(userRoles)){
 			UserRole userRole=null;
 			List<UserRole> list=new ArrayList<UserRole>();
@@ -137,7 +137,7 @@ public class UserServiceImpl extends GenericServiceImpl<User, Integer> implement
 	}
 	
 	@Override
-	public int updateUserRole(Integer userId,String userRoles){
+	public int updateUserRole(String userId,String userRoles){
 		int m=0;
 		List<UserRole> list1=userMapper.findUserRoleByUserId(userId);//已拥有的角色关系
 		

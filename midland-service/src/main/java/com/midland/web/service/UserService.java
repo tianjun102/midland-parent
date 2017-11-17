@@ -11,7 +11,7 @@ import com.midland.web.model.user.User;
  * @author 
  * @since 2016年7月5日 上午11:53:33
  **/
-public interface UserService extends GenericService<User, Integer> {
+public interface UserService extends GenericService<User, String> {
 
     /**
      * 用户验证
@@ -64,7 +64,7 @@ public interface UserService extends GenericService<User, Integer> {
 	 * @param userRoles
 	 * @return
 	 */
-	int updateUserRole(Integer userId, String userRoles);
+	int updateUserRole(String userId, String userRoles);
 	
 	List<User> selectUsersByRoleId(Integer roleId);
 

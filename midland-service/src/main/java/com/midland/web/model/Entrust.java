@@ -73,7 +73,7 @@ public class Entrust{
 	/**
 	 * 委托人
 	 */
-	private Integer userId;
+	private String userId;
 
 	/**
 	 * 0豪装；1精装，2普装，3毛坯
@@ -148,11 +148,11 @@ public class Entrust{
 
 	private String endTime;
 
-	public Integer getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

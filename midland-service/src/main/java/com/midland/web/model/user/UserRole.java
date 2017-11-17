@@ -2,7 +2,7 @@ package com.midland.web.model.user;
 
 public class UserRole {
 	private Integer id;
-	private Integer userId;
+	private String userId;
 	private Integer roleId;
 	public Integer getId() {
 		return id;
@@ -10,10 +10,10 @@ public class UserRole {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getUserId() {
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(Integer userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	public Integer getRoleId() {

@@ -108,13 +108,13 @@ public class WebUserController extends WebCommonsController {
 						}*/
 						
 						request.getSession().setAttribute(ConstantUtils.USER_SESSION, userInfo);
-						if (userInfo.getUserType() == 2) {
+						/*if (userInfo.getUserType() == 2) {
 							WebUser catUser = userService.findParentUserByChild(userInfo.getUsername());
 							if(catUser!=null){
 							userInfo.setParentId(catUser.getId());
 							userInfo.setCustName(catUser.getCustName());
 							}
-						}
+						}*/
 						String sessionId = request.getSession().getId();
 
 						// "1"表示用户勾选记住密码
@@ -273,7 +273,7 @@ public class WebUserController extends WebCommonsController {
 	@RequestMapping(value = "/toEdit", method = { RequestMethod.POST },produces=MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public String toEdit(HttpServletRequest request, @RequestBody Map<String,String> params) {
 		Result<WebUser> result = new Result<>();
-		WebUser user = userService.getUserByUserId(Integer.valueOf(params.get("userId")));
+		WebUser user = userService.getUserByUserId(params.get("userId"));
 
 		result.setCode(ResultStatusUtils.STATUS_CODE_200);
 		result.setMsg(Result.resultMsg.SUCCESS.toString());

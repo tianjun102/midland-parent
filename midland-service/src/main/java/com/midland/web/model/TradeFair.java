@@ -42,7 +42,7 @@ public class TradeFair{
 	/**
 	 * 录盘人
 	 **/
-	private Integer operatorId;
+	private String operatorId;
 	/**
 	 * 录盘人名称
 	 **/
@@ -125,11 +125,11 @@ public class TradeFair{
 		this.description = description;
 	}
 
-	public Integer getOperatorId() {
+	public String getOperatorId() {
 		return operatorId;
 	}
 
-	public void setOperatorId(Integer operatorId) {
+	public void setOperatorId(String operatorId) {
 		this.operatorId = operatorId;
 	}
 

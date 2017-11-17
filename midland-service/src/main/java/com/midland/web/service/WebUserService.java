@@ -33,7 +33,7 @@ public interface WebUserService {
 	 *            用户ID
 	 * @return
 	 */
-	WebUser getUserByUserId(Integer userId);
+	WebUser getUserByUserId(String userId);
 
 	/**
 	 * 根据用户名查询用户信息
@@ -55,7 +55,7 @@ public interface WebUserService {
 	 * @return int
 	 * @throws ServiceException
 	 */
-	int editPwdById(String newPwd, Integer id) throws ServiceException;
+	int editPwdById(String newPwd, String id) throws ServiceException;
 
 	/**
 	 * 修改用户信息
@@ -98,7 +98,7 @@ public interface WebUserService {
 	
 	
 	//查询用户明细信息
-	WebUser queryUser(Integer uid);
+	WebUser queryUser(String uid);
 
-	Integer addWebUser(WebUser user);
+	String addWebUser(WebUser user);
 }

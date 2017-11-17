@@ -62,7 +62,7 @@ public class SecurityRealm extends AuthorizingRealm {
         String data = HttpUtils.get("http://218.18.9.171:8183/dingjian/website/api/agenter/login", parem);
         Map userMap =  (Map)JSONObject.parse(data);
         if(("SUCCESS").equals(userMap.get("STATE"))) {
-            final List<Role> roleInfos1 = roleService.selectRolesByUserId(88888);
+            final List<Role> roleInfos1 = roleService.selectRolesByUserId("88888");
             for (Role role1 : roleInfos1) {
                 authorizationInfo.addRole(role1.getRoleSign());
 

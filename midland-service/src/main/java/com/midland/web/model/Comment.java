@@ -45,7 +45,7 @@ public class Comment{
 	 **/
 	private Integer like;
 
-	private Integer userId;
+	private String userId;
 
 
 	public Integer getId() {
@@ -136,11 +136,11 @@ public class Comment{
 		this.endTime = endTime;
 	}
 
-	public Integer getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

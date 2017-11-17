@@ -49,7 +49,7 @@ public class FilmLibrary{
 	/**
 	 * 录盘人id
 	 **/
-	private Integer operatorId;
+	private String operatorId;
 	/**
 	 * 录盘人名称
 	 **/
@@ -156,11 +156,11 @@ public class FilmLibrary{
 		this.imgUrl = imgUrl;
 	}
 
-	public Integer getOperatorId() {
+	public String getOperatorId() {
 		return operatorId;
 	}
 
-	public void setOperatorId(Integer operatorId) {
+	public void setOperatorId(String operatorId) {
 		this.operatorId = operatorId;
 	}
 

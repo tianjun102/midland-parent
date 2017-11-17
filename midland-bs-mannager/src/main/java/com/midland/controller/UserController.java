@@ -160,7 +160,7 @@ public class UserController extends BaseFilter {
 					agenterUser.setPassword(password);
 					agenterUser.setUserCnName(agenterList.getName());
 					agenterUser.setCityName(agenterList.getStoreName());
-					List<Role> roles = roleService.selectRolesByUserId(88888);
+					List<Role> roles = roleService.selectRolesByUserId("88888");
 					agenterUser.setRoles(roles);
 					request.getSession().setAttribute("userInfo", agenterUser);
 					return "redirect:/";
@@ -359,7 +359,7 @@ public class UserController extends BaseFilter {
      * @return
      */
     @RequestMapping(value = "/findUser", method = {RequestMethod.GET,RequestMethod.POST})
-    public String findUser(Integer userId,Integer flag,Model model,HttpServletRequest request){
+    public String findUser(String userId,Integer flag,Model model,HttpServletRequest request){
     	User userInfo = userService.selectById(userId);
 	    model.addAttribute("user",userInfo);
 	    if(flag == 1){
@@ -382,7 +382,7 @@ public class UserController extends BaseFilter {
      * @return
      */
     @RequestMapping(value = "/userRole", method = {RequestMethod.GET,RequestMethod.POST})
-    public String  userRoleList(Integer userId,Model model,HttpServletRequest request){
+    public String  userRoleList(String userId,Model model,HttpServletRequest request){
     	User userInfo = userService.selectById(userId);
     	Role role=new Role();
     	role.setState(1);
@@ -402,7 +402,7 @@ public class UserController extends BaseFilter {
      */
     @RequestMapping(value = "/saveUserRole", method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public Object saveUserRole(Integer userId,String roleIds){
+    public Object saveUserRole(String userId,String roleIds){
     	Map<String, Object> map = new HashMap<String, Object>();
     	map.put("flag", 0);
     	if(userService.updateUserRole(userId,roleIds)>0){
@@ -416,7 +416,7 @@ public class UserController extends BaseFilter {
 	 * @return
 	 */
 	@RequestMapping(value = "/toUpdatePage", method = {RequestMethod.GET,RequestMethod.POST})
-	public String toUpdatePage(Model model,int userId,HttpServletRequest request){
+	public String toUpdatePage(Model model,String userId,HttpServletRequest request){
 		User userInfo = userService.selectById(userId);
 		model.addAttribute("item", userInfo);
 		List<ParamObject> sources = JsonMapReader.getMap("source");
@@ -514,7 +514,7 @@ public class UserController extends BaseFilter {
      */
     @RequestMapping(value = "/deleteUser", method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String deleteUser(Integer userId){
+    public String deleteUser(String userId){
     	Map<String, Object> map = new HashMap<String, Object>();
     	map.put("flag", 0);
     	User user=new User();
@@ -635,7 +635,7 @@ public class UserController extends BaseFilter {
      */
     @RequestMapping(value = "/resetPwd", method = {RequestMethod.GET,RequestMethod.POST})
     @ResponseBody
-    public String resetPassword(Integer userId){
+    public String resetPassword(String userId){
     	Map<String, Object> map = new HashMap<String, Object>();
     	map.put("flag", 0);
     	if(userId!=null){
@@ -866,7 +866,7 @@ public class UserController extends BaseFilter {
 	 * @return
 	 */
 	@RequestMapping(value = "/bsUserInfo", method = {RequestMethod.GET,RequestMethod.POST})
-	public String userInfo(Integer userId,Model model,HttpServletRequest request){
+	public String userInfo(String userId,Model model,HttpServletRequest request){
 		User userInfo = userService.selectById(userId);
 		model.addAttribute("user",userInfo);
 		Role role=new Role();
@@ -1003,7 +1003,7 @@ public class UserController extends BaseFilter {
 	 */
 	@RequestMapping(value = "/vcode/resetPwd", method = {RequestMethod.GET,RequestMethod.POST})
 	@ResponseBody
-	public Object resetPassword_(Integer userId){
+	public Object resetPassword_(String userId){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("flag", 0);
 		if(userId!=null){
@@ -1029,7 +1029,7 @@ public class UserController extends BaseFilter {
 		map.put("flag", 0);
 		User user=new User();
 		user.setPassword(ApplicationUtils.sha256Hex(newPwd));
-		user.setId(Integer.valueOf(id));
+		user.setId(id);
 		int n=userService.update(user);
 		if(n>0){
 			map.put("flag", 1);

@@ -81,7 +81,7 @@ public class ThirdPartyLoginController {
                         userInfo.setHeadImg(thirdUser.getAvatarUrl());
                         userInfo.setUserType(2);
                         userInfo.setState(1);
-                        Integer id =  userService.addWebUser(userInfo);
+                        String id =  userService.addWebUser(userInfo);
                         userInfo.setId(id);
                         request.getSession().setAttribute(ConstantUtils.USER_SESSION, userInfo);
                     }
