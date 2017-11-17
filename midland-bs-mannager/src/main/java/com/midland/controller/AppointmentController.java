@@ -120,15 +120,7 @@ public class AppointmentController extends BaseFilter {
 		Map map = new HashMap();
 		try {
 			appointmentServiceImpl.insertAppointment(record);
-			if (StringUtils.isNotEmpty(record.getAgentPhone())) {//发送短信
-				List<String> list = new ArrayList<>();
-				list.add("您好");
-				list.add("您好");
-				list.add("您好");
-				;
-				SmsModel smsModel = new SmsModel(record.getAgentPhone(), "2029157", list);
-				apiHelper.smsSender("addAppointment", smsModel);
-			}
+
 			map.put("state", 0);
 			return map;
 		} catch (Exception e) {
@@ -178,15 +170,7 @@ public class AppointmentController extends BaseFilter {
 		try {
 			record.setResetFlag(0);//重新分配经纪人后，隐藏“重新分配按钮”
 			appointmentServiceImpl.updateAppointmentById(record);
-			if (StringUtils.isNotEmpty(record.getAgentPhone())) {//发送短信
-				List<String> list = new ArrayList<>();
-				list.add("您好");
-				;
-				list.add("您好");
-				list.add("您好");
-				SmsModel smsModel = new SmsModel(record.getAgentPhone(), "2029157", list);
-				apiHelper.smsSender("resetAgent", smsModel);
-			}
+
 			map.put("state", 0);
 		} catch (Exception e) {
 			logger.error("resetAgent : {}", record, e);

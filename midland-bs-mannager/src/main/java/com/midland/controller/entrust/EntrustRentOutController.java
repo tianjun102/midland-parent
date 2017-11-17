@@ -103,14 +103,7 @@ public class EntrustRentOutController extends BaseFilter{
 			record.setAssignedTime(MidlandHelper.getCurrentTime());
 			record.setEntrustType(Contant.ENTRUST_RENT_OUT);
 			entrustServiceImpl.insertEntrust(record);
-			if (StringUtils.isNotEmpty(record.getAgentPhone() )){//发送短信
-				List<String> list = new ArrayList<>();;
-				list.add("您好");
-				list.add("您好");
-				list.add("您好");
-				SmsModel smsModel = new SmsModel(record.getAgentPhone(),"2029157",list);
-				apiHelper.smsSender("resetAgent",smsModel);
-			}
+
 			map.put("state",0);
 			return map;
 		} catch (Exception e) {
@@ -244,14 +237,7 @@ public class EntrustRentOutController extends BaseFilter{
 			record.setResetFlag(0);//重新分配经纪人后，隐藏“重新分配按钮”
 			record.setAssignedTime(MidlandHelper.getCurrentTime());
 			entrustServiceImpl.updateEntrustById(record);
-			if (StringUtils.isNotEmpty(record.getAgentPhone() )){//发送短信
-				List<String> list = new ArrayList<>();
-				list.add("您好");
-				list.add("您好");
-				list.add("您好");
-				SmsModel smsModel = new SmsModel(record.getAgentPhone(),"2029157",list);
-				apiHelper.smsSender("resetAgent",smsModel);
-			}
+
 			map.put("state",0);
 		} catch (Exception e) {
 			logger.error("resetAgent : {}",record,e);

@@ -108,8 +108,7 @@ public class EntrustBuyController extends BaseFilter{
 				list.add("您好");
 				list.add("您好");
 				list.add("您好");
-				SmsModel smsModel = new SmsModel(record.getAgentPhone(),"2029157",list);
-				apiHelper.smsSender("resetAgent",smsModel);
+				apiHelper.smsSender(record.getAgentPhone(),12355,list);
 			}
 			map.put("state",0);
 			return map;
@@ -239,14 +238,7 @@ public class EntrustBuyController extends BaseFilter{
 			record.setResetFlag(0);//重新分配经纪人后，隐藏“重新分配按钮”
 			record.setAssignedTime(MidlandHelper.getCurrentTime());
 			entrustServiceImpl.updateEntrustById(record);
-			if (StringUtils.isNotEmpty(record.getAgentPhone() )){//发送短信
-				List<String> list = new ArrayList<>();
-				list.add("您好");
-				list.add("您好");
-				list.add("您好");
-				SmsModel smsModel = new SmsModel(record.getAgentPhone(),"2029157",list);
-				apiHelper.smsSender("resetAgent",smsModel);
-			}
+
 			map.put("state",0);
 		} catch (Exception e) {
 			logger.error("resetAgent : {}",record,e);

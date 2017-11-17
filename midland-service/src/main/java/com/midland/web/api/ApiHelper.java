@@ -20,24 +20,12 @@ import java.util.List;
  */
 @Component
 public class ApiHelper {
-	@Autowired
-	private SmsClient smsClient;
+
 	@Autowired
 	private JavaMailSender javaMailSender;
 	private final Logger logger= LoggerFactory.getLogger(ApiHelper.class);
 	@Autowired
 	private SmsSingleSender sender;
-	public void smsSender(String methodName, SmsModel smsModel){
-		
-		try {
-			SmsResult result = smsClient.execute(smsModel);
-			if (!result.getResultCode().equals("100")){
-				logger.error(methodName+" 发送短信失败，{}",result);
-			}
-		} catch (Exception e) {
-			logger.error(methodName+" 发送短信失败",e);
-		}
-	}
 
 	public void smsSender(String phone, int tpId,List<String> paramList){
 		try {

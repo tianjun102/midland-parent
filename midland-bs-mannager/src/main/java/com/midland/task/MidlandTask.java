@@ -94,18 +94,11 @@ public class MidlandTask {
 							appoint.setResetFlag(1);//标记为展示
 							appoint.setId(appointment1.getId());
 							appointmentServiceImpl.updateAppointmentById(appoint);
-							String SGIN=null;
-							try {
-								SGIN = URLEncoder.encode("预约超时未处理","GBK");
-							} catch (UnsupportedEncodingException e) {
-								e.printStackTrace();
-							}
+
 							List list = new ArrayList();
 							list.add("sdfef");
 							list.add("dfef");
-							list.add(SGIN);
-							SmsModel smsModel = new SmsModel("17666106709","2029157",list);
-							apiHelper.smsSender("dsfs",smsModel);
+							apiHelper.smsSender("17666106709",1251,list);
 							System.out.println("发送短信给经纪人及其领导，告警");
 						}
 					}

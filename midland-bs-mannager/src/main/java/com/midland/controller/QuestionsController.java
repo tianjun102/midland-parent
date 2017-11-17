@@ -248,8 +248,7 @@ public class QuestionsController extends BaseFilter {
 				list.add(remark);
 				list.add("dfef");
 				list.add("qqqq");
-				SmsModel smsModel = new SmsModel(answer1.getAnswerPhone(),"2029157",list);
-				apiHelper.smsSender("updateAnswer",smsModel);
+				apiHelper.smsSender(answer1.getAnswerPhone(),465465,list);
 			}
 			map.put("state",0);
 			

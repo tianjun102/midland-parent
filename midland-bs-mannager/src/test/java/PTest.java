@@ -41,27 +41,13 @@ public class PTest {
 	@Autowired
 	private MidlandConfig midlandConfig;
 	@Autowired
-	private SmsClient smsClient;
-	@Autowired
 	private JavaMailSender javaMailSender;
 	@Autowired
 	private ApiHelper apiHelper;
 	
 	@Test
 	public void dsfs(){
-		String SGIN = null;
-		try {
-			SGIN = URLEncoder.encode("美联房产查档","GBK");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		List list = new ArrayList();
-		list.add("sdfef");
-		list.add("dfef");
-		list.add(SGIN);
-		SmsModel smsModel = new SmsModel("18218727210","2029157",list);
 
-		apiHelper.smsSender("dsfs",smsModel);
 	}
 	
 	@Test
