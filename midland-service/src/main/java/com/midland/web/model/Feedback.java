@@ -44,7 +44,7 @@ public class Feedback{
 	/**
 	 * 操作人
 	 **/
-	private Integer operatorId;
+	private String operatorId;
 	/**
 	 * 操作人用户名
 	 **/
@@ -163,11 +163,11 @@ public class Feedback{
 		this.userId = userId;
 	}
 
-	public Integer getOperatorId() {
+	public String getOperatorId() {
 		return operatorId;
 	}
 
-	public void setOperatorId(Integer operatorId) {
+	public void setOperatorId(String operatorId) {
 		this.operatorId = operatorId;
 	}
 

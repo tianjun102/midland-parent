@@ -55,13 +55,13 @@ public class WebUserServiceImpl implements WebUserService {
 	
 	@Transactional(readOnly=true)
 	@Override
-	public WebUser getUserByUserId(Integer userId) {
+	public WebUser getUserByUserId(String userId) {
 		
 		return webUserMapper.selectByPrimaryKey(userId);
 	}
 
 	@Override
-	public int editPwdById(String newPwd, Integer id) throws ServiceException {
+	public int editPwdById(String newPwd, String id) throws ServiceException {
 		
 		return webUserMapper.updatePwdById(newPwd, id);
 	}
@@ -133,13 +133,13 @@ public class WebUserServiceImpl implements WebUserService {
 	}
 
 	@Override
-	public WebUser queryUser(Integer uid) {
+	public WebUser queryUser(String uid) {
 		// TODO Auto-generated method stub
 		return webUserMapper.selectByPrimaryKey(uid);
 	}
 
 	@Override
-	public Integer addWebUser(WebUser user) {
+	public String addWebUser(WebUser user) {
 		return webUserMapper.addWebUser(user);
 	}
 

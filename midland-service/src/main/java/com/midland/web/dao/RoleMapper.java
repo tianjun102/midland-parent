@@ -50,7 +50,7 @@ public interface RoleMapper extends GenericDao<Role, Integer> {
      * 
      * @return
      */
-    List<Role> selectRolesByUserId(Integer userId);
+    List<Role> selectRolesByUserId(String userId);
     
     /**
      * 分页条件查询

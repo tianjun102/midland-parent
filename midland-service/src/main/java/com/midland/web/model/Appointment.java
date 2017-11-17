@@ -127,14 +127,14 @@ public class Appointment{
 	/**
 	 * 前端用户id
 	 */
-	private Integer webUserId;
+	private String webUserId;
 
 
-	public Integer getWebUserId() {
+	public String getWebUserId() {
 		return webUserId;
 	}
 
-	public void setWebUserId(Integer webUserId) {
+	public void setWebUserId(String webUserId) {
 		this.webUserId = webUserId;
 	}
 

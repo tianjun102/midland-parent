@@ -14,7 +14,7 @@ public class User {
 	/**
 	 * 用户id
 	 */
-    private Integer id;
+    private String id;
 	
 	/**
 	 * 用户名
@@ -253,11 +253,11 @@ public class User {
 		this.idcartImg = idcartImg;
 	}
 	
-	public Integer getId() {
+	public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

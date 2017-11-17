@@ -72,7 +72,7 @@ public class annoUserController {
                 WebUser newUser = new WebUser();
                 newUser.setPhone(phone);
                 newUser.setUsername(MD5Util.MD5Encode(phone, "UTF-8"));
-                Integer id = userService.addWebUser(newUser);
+                String id = userService.addWebUser(newUser);
                 newUser.setId(id);
                 result.setModel(newUser);
             } else {
@@ -245,7 +245,7 @@ public class annoUserController {
         map.put("flag", 0);
         WebUser user = new WebUser();
         user.setPassword(ApplicationUtils.sha256Hex(newPwd));
-        user.setId(Integer.valueOf(id));
+        user.setId(id);
         int n = userService.updateUser(user);
         if (n > 0) {
             map.put("flag", 1);

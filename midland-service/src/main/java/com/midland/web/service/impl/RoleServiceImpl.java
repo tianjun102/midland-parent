@@ -47,7 +47,7 @@ public class RoleServiceImpl extends GenericServiceImpl<Role, Integer> implement
 	}
 
 	@Override
-	public List<Role> selectRolesByUserId(Integer userId) {
+	public List<Role> selectRolesByUserId(String userId) {
 		return roleMapper.selectRolesByUserId(userId);
 	}
 
@@ -225,16 +225,16 @@ public class RoleServiceImpl extends GenericServiceImpl<Role, Integer> implement
 			String[] uids=userIds.split(",");
 			for(int n=0;n<uids.length;n++){//数组转list
 				userRole=new UserRole();
-				userRole.setUserId(Integer.valueOf(uids[n]));
+				userRole.setUserId(uids[n]);
 				userRole.setRoleId(roleId);
 				list2.add(userRole);
 			}
 			
 			for(int i=list2.size()-1;i>=0;i--){
-				Integer userId2=list2.get(i).getUserId();
+				String userId2=list2.get(i).getUserId();
 				
 					for(int j=list1.size()-1;j>=0;j--){
-						Integer userId1=list1.get(j).getUserId();
+						String userId1=list1.get(j).getUserId();
 						
 						if(userId1.compareTo(userId2)==0){
 							list1.remove(j);

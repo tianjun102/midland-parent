@@ -22,7 +22,7 @@ public interface RoleService extends GenericService<Role, Integer> {
      * @param userId
      * @return
      */
-    List<Role> selectRolesByUserId(Integer userId);
+    List<Role> selectRolesByUserId(String userId);
 
 	List<Role> selectRoleList(Role role);
 

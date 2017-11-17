@@ -16,9 +16,9 @@ import java.util.Map;
  * @since 2016年7月5日 上午11:49:57
  **/
 @Repository
-public interface UserMapper extends GenericDao<User, Integer> {
+public interface UserMapper extends GenericDao<User, String> {
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(String id);
 
     int insert(User record);
 
@@ -26,7 +26,7 @@ public interface UserMapper extends GenericDao<User, Integer> {
 
     List<User> selectByExample(User user);
 
-    User selectByPrimaryKey(Integer id);
+    User selectByPrimaryKey(String id);
 	
 
     int updateByPrimaryKeySelective(User record);
@@ -61,7 +61,7 @@ public interface UserMapper extends GenericDao<User, Integer> {
 	 * @param userId
 	 * @return
 	 */
-	List<UserRole> findUserRoleByUserId(@Param("userId") Integer userId);
+	List<UserRole> findUserRoleByUserId(@Param("userId") String userId);
 
 	/**
 	 * 批量删除用户角色关系
