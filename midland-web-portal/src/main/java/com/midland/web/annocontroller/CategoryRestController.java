@@ -37,6 +37,8 @@ public class CategoryRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addCategory {}",obj);
+			obj.setIsShow(Contant.isShow);
+			obj.setIsDelete(Contant.isNotDelete);
 			categoryServiceImpl.insertCategory(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");

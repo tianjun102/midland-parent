@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.FeedbackEmail;
 import com.midland.web.service.FeedbackEmailService;
 import com.midland.base.BaseFilter;
@@ -34,6 +35,7 @@ public class FeedbackEmailRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addFeedbackEmail {}",obj);
+			obj.setIsDelete(Contant.isNotDelete);
 			feedbackEmailServiceImpl.insertFeedbackEmail(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");

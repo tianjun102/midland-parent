@@ -35,6 +35,8 @@ public class LinkUrlManagerRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addLinkUrlManager {}",obj);
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setIsShow(Contant.isShow);
 			linkUrlManagerServiceImpl.insertLinkUrlManager(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");

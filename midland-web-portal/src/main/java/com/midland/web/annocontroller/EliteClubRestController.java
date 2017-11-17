@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.EliteClub;
 import com.midland.web.service.EliteClubService;
 import com.midland.base.BaseFilter;
@@ -34,6 +35,9 @@ public class EliteClubRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addEliteClub {}",obj);
+			obj.setAdTime(MidlandHelper.getCurrentTime());
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setIsShow(Contant.isShow);
 			eliteClubServiceImpl.insertEliteClub(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
@@ -95,6 +99,8 @@ public class EliteClubRestController extends BaseFilter  {
 		try {
 			log.info("findEliteClubList  {}",obj);
 			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setIsShow(Contant.isShow);
 			Page<EliteClub> list = (Page<EliteClub>)eliteClubServiceImpl.findEliteClubList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

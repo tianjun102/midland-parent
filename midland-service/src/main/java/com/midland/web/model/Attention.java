@@ -18,6 +18,10 @@ public class Attention{
 	 * 被关注对象的id，如被关注的问题id
 	 **/
 	private Integer otherId;
+	/**
+	 * 关注时间
+	 **/
+	private String createTime;
 
 
 	public Integer getId() {
@@ -52,6 +56,14 @@ public class Attention{
 		this.otherId = otherId;
 	}
 
+	public String getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+
 	@Override
 	public String toString() {
 		 final StringBuffer sb=new StringBuffer("Attention{");
@@ -66,6 +78,9 @@ public class Attention{
 		}
 		if (otherId != null) {
 			sb.append(", \"otherId\":\"").append(otherId).append("\"");
+		}
+		if (createTime != null) {
+			sb.append(", \"createTime\":\"").append(createTime).append("\"");
 		}
 		sb.append("}");
 		return sb.toString();

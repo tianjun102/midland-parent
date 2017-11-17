@@ -3,6 +3,7 @@ package com.midland.web.annocontroller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
+import com.midland.web.Contants.Contant;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
 import com.midland.web.model.Reply;
@@ -38,6 +39,7 @@ public class ReplyRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addreply {}",obj);
+			obj.setAddtime(MidlandHelper.getCurrentTime());
 			replyServiceImpl.insertReply(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");

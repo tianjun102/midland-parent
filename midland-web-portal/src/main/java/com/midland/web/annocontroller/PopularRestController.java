@@ -35,6 +35,8 @@ public class PopularRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addPopular {}",obj);
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setIsShow(Contant.isShow);
 			popularServiceImpl.insertPopular(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");

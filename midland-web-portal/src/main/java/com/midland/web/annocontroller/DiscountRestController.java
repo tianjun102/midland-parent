@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.Discount;
 import com.midland.web.service.DiscountService;
 import com.midland.base.BaseFilter;
@@ -34,6 +35,8 @@ public class DiscountRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addDiscount {}",obj);
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setIsShow(Contant.isShow);
 			discountServiceImpl.insertDiscount(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");

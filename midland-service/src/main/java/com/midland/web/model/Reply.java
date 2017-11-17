@@ -14,7 +14,7 @@ public class Reply{
 	/**
 	 * 回复时间
 	 **/
-	private Date addtime;
+	private String addtime;
 	/**
 	 * 回复人
 	 **/
@@ -47,11 +47,11 @@ public class Reply{
 		this.detail = detail;
 	}
 
-	public Date getAddtime() {
+	public String getAddtime() {
 		return addtime;
 	}
 
-	public void setAddtime(Date addtime) {
+	public void setAddtime(String addtime) {
 		this.addtime = addtime;
 	}
 

@@ -34,6 +34,7 @@ public class AnswerRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addAnswer {}",obj);
+			obj.setAnswerTime(MidlandHelper.getCurrentTime());
 			answerServiceImpl.insertAnswer(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");

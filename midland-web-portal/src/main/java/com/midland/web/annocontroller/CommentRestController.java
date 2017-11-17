@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.commons.core.util.DateUtils;
 import com.midland.web.model.Comment;
 import com.midland.web.service.CommentService;
@@ -38,7 +39,8 @@ public class CommentRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addComment {}",obj);
-			obj.setCommentTime(DateUtils.nowDateToStringYYMMDDHHmmss());
+			obj.setCommentTime(MidlandHelper.getCurrentTime());
+			obj.setIsDelete(Contant.isNotDelete);
 			commentServiceImpl.insertComment(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
@@ -99,6 +101,7 @@ public class CommentRestController extends BaseFilter  {
 		try {
 			log.info("findCommentList  {}",obj);
 			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
 			Page<Comment> list = (Page<Comment>)commentServiceImpl.findCommentList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

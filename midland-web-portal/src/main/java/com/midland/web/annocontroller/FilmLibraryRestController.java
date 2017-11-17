@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.FilmLibrary;
 import com.midland.web.service.FilmLibraryService;
 import com.midland.base.BaseFilter;
@@ -34,6 +35,8 @@ public class FilmLibraryRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addFilmLibrary {}",obj);
+			obj.setIsShow(Contant.isShow);
+			obj.setIsDelete(Contant.isNotDelete);
 			filmLibraryServiceImpl.insertFilmLibrary(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
@@ -94,6 +97,8 @@ public class FilmLibraryRestController extends BaseFilter  {
 		try {
 			log.info("findFilmLibraryList  {}",obj);
 			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setIsShow(Contant.isShow);
 			Page<FilmLibrary> list = (Page<FilmLibrary>)filmLibraryServiceImpl.findFilmLibraryList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

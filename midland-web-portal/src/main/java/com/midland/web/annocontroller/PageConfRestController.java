@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.PageConf;
 import com.midland.web.service.PageConfService;
 import com.midland.base.BaseFilter;
@@ -34,6 +35,7 @@ public class PageConfRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addPageConf {}",obj);
+			obj.setIsDelete(Contant.isNotDelete);
 			pageConfServiceImpl.insertPageConf(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
@@ -96,6 +98,7 @@ public class PageConfRestController extends BaseFilter  {
 			obj.setMetaShow(0);
 			log.info("findPageConfList  {}",obj);
 			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
 			Page<PageConf> list = (Page<PageConf>)pageConfServiceImpl.findPageConfList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

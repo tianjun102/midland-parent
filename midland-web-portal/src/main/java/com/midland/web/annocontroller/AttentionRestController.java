@@ -34,6 +34,7 @@ public class AttentionRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addAttention {}",obj);
+			obj.setCreateTime(MidlandHelper.getCurrentTime());
 			attentionServiceImpl.insertAttention(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
@@ -49,7 +50,7 @@ public class AttentionRestController extends BaseFilter  {
 	 * 查询
 	 **/
 	@RequestMapping("get")
-	public Object getAttentionById(@RequestBody Map map) {
+	public Object getAttentionById(Map map) {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");

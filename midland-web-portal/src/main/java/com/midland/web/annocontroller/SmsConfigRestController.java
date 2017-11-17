@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.SmsConfig;
 import com.midland.web.service.SmsConfigService;
 import com.midland.base.BaseFilter;
@@ -34,6 +35,7 @@ public class SmsConfigRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addSmsConfig {}",obj);
+			obj.setIsDelete(Contant.isNotDelete);
 			smsConfigServiceImpl.insertSmsConfig(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
@@ -94,6 +96,7 @@ public class SmsConfigRestController extends BaseFilter  {
 		try {
 			log.info("findSmsConfigList  {}",obj);
 			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
 			Page<SmsConfig> list = (Page<SmsConfig>)smsConfigServiceImpl.findSmsConfigList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

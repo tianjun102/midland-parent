@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -44,7 +46,18 @@ public class AppointmentRestController extends BaseFilter {
         Result result = new Result();
         try {
             log.info("addAppointment {}", obj);
+            obj.setIsDelete(Contant.isNotDelete);
+            obj.setAppointmentTime(MidlandHelper.getCurrentTime());
             appointmentServiceImpl.insertAppointment(obj);
+            //发送给预约人的短信：模板id56848，内容：您好！您提交的看房日程由{1}电话{2}帮您带看，该经纪人会尽快联系您安排看房，请保持电话畅通，感谢！
+            List<String> param = new ArrayList<>();
+            param.add(obj.getNickName());
+            param.add(obj.getCommunityName());
+            apiHelper.smsSender(obj.getAgentPhone(),56846,param);
+            //发送给经纪人的知府：模板56846，内容：您好{1}女士/先生忆通过官网约看{2}房源，现已分配由您跟进，请在24小时内与客户进行联系，联系方式请登录管理后台中查询
+            List<String> param1 = new ArrayList<>();
+            param1.add(obj.getCommunityName());
+            apiHelper.smsSender(obj.getPhone(),56845,param1);
             result.setCode(ResultStatusUtils.STATUS_CODE_200);
             result.setMsg("success");
         } catch (Exception e) {

@@ -29,7 +29,7 @@ public class Record{
 	/**
 	 * 是否删除，0未删除，1已删除
 	 **/
-	private String isDelete;
+	private Integer isDelete;
 	/**
 	 * 0显示，1隐藏
 	 **/
@@ -84,11 +84,11 @@ public class Record{
 		this.record = record;
 	}
 
-	public String getIsDelete() {
+	public Integer getIsDelete() {
 		return isDelete;
 	}
 
-	public void setIsDelete(String isDelete) {
+	public void setIsDelete(Integer isDelete) {
 		this.isDelete = isDelete;
 	}
 

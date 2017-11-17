@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.commons.core.util.DateUtils;
 import com.midland.web.model.RecruitManager;
 import com.midland.web.service.RecruitManagerService;
@@ -38,6 +39,7 @@ public class RecruitManagerRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("addRecruitManager {}",obj);
+			obj.setIsDelete(Contant.isNotDelete);
 			recruitManagerServiceImpl.insertRecruitManager(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
@@ -97,8 +99,9 @@ public class RecruitManagerRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			log.info("findRecruitManagerList  {}",obj);
-			obj.setOnlineTime(DateUtils.nowDateToStringYYMMDDHHmmss());
+			obj.setOnlineTime(MidlandHelper.getCurrentTime());
 			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
 			Page<RecruitManager> list = (Page<RecruitManager>)recruitManagerServiceImpl.findRecruitManagerList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
