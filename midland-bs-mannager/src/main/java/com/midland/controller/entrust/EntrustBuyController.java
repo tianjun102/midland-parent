@@ -103,13 +103,7 @@ public class EntrustBuyController extends BaseFilter{
 			record.setAssignedTime(MidlandHelper.getCurrentTime());
 			record.setEntrustType(Contant.ENTRUST_BUY);
 			entrustServiceImpl.insertEntrust(record);
-			if (StringUtils.isNotEmpty(record.getAgentPhone() )){//发送短信
-				List<String> list = new ArrayList<>();;
-				list.add("您好");
-				list.add("您好");
-				list.add("您好");
-				apiHelper.smsSender(record.getAgentPhone(),12355,list);
-			}
+
 			map.put("state",0);
 			return map;
 		} catch (Exception e) {

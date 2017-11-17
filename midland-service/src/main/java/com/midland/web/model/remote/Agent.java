@@ -63,8 +63,32 @@ public class Agent {
 	 * 店铺地址
 	 */
 	private String photoUrl;
-	
-	
+
+	/**
+	 * 领导手机号码
+	 */
+	private String leaderPhone;
+	/**
+	 * 领导邮箱
+	 */
+	private String leaderEmail;
+
+	public String getLeaderPhone() {
+		return leaderPhone;
+	}
+
+	public void setLeaderPhone(String leaderPhone) {
+		this.leaderPhone = leaderPhone;
+	}
+
+	public String getLeaderEmail() {
+		return leaderEmail;
+	}
+
+	public void setLeaderEmail(String leaderEmail) {
+		this.leaderEmail = leaderEmail;
+	}
+
 	public String getPhone() {
 		return phone;
 	}

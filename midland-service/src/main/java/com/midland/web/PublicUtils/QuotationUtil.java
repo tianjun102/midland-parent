@@ -1,4 +1,4 @@
-package com.midland.controller.PublicUtils;
+package com.midland.web.PublicUtils;
 
 import com.midland.web.util.Calculate;
 import com.midland.web.util.MidlandHelper;
