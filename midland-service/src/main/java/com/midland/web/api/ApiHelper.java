@@ -26,7 +26,6 @@ public class ApiHelper {
 	private final Logger logger= LoggerFactory.getLogger(ApiHelper.class);
 	@Autowired
 	private SmsSingleSender sender;
-
 	public void smsSender(String phone, int tpId,List<String> paramList){
 		try {
 			SmsSingleSenderResult result = sender.sendWithParam(null,

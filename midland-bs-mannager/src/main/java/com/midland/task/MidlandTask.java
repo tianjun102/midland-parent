@@ -73,7 +73,7 @@ public class MidlandTask {
 					if (ti<0) {
 						//超过48小时,48小时后没有处理，则关闭此预约，并发送给有指定邮箱
 						Appointment appoint = new Appointment();
-						appoint.setStatus(3);
+						appoint.setStatus(3);//关闭预约
 						appoint.setResetFlag(0);
 						appoint.setId(appointment1.getId());
 						appointmentServiceImpl.updateAppointmentById(appoint);
