@@ -55,7 +55,7 @@
                             <c:if test="${item.isShow==0}">显示</c:if>
                         </td>
 						<td>
-                            <a target="contentF" href="${ctx}/rest/record/to_update?id=${item.id}" >编辑</a>
+                            <a target="contentF" class="edit_img" href="${ctx}/rest/record/to_update?id=${item.id}" ></a>
                             <c:choose>
                                 <c:when test="${item.isShow==0}">
                                     <a target="contentF" class="onoff_img" title="状态：显示" onclick="hiddenOrShow(${item.id },1)"></a>
