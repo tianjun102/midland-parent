@@ -32,6 +32,10 @@ public class Reply{
 
 	private String headImg;
 
+	private String orderByPopularity;
+
+	private String orderByTime;
+
 
 	public Integer getId() {
 		return id;
@@ -95,6 +99,22 @@ public class Reply{
 
 	public void setHeadImg(String headImg) {
 		this.headImg = headImg;
+	}
+
+	public String getOrderByPopularity() {
+		return orderByPopularity;
+	}
+
+	public void setOrderByPopularity(String orderByPopularity) {
+		this.orderByPopularity = orderByPopularity;
+	}
+
+	public String getOrderByTime() {
+		return orderByTime;
+	}
+
+	public void setOrderByTime(String orderByTime) {
+		this.orderByTime = orderByTime;
 	}
 
 	@Override

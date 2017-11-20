@@ -14,7 +14,7 @@
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,detail,addTime,user,user_id,comm_id,head_img
+		id,detail,addTime,user,user_id,comm_id,head_img,likes
 	</sql>
 
 	<select id="selectReplyById" resultMap="BaseResultMap">
@@ -41,6 +41,12 @@
 		where 
 		is_delete=0
 		<include refid="select_option" />
+		<if test="orderByPopularity != null and orderByTime==null ">
+			ORDER BY `likes` DESC
+		</if>
+		<if test="orderByTime != null and orderByPopularity==null ">
+			ORDER BY addTime DESC
+		</if>
 	</select>
 
 	<insert id="insertReply" parameterType="com.midland.web.model.Reply">

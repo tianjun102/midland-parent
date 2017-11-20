@@ -84,6 +84,12 @@
 			and is_delete=0
 		</if>
 		<include refid="select_option" />
+		<if test="orderByPopularity != null and orderByTime==null ">
+			ORDER BY `like` DESC
+		</if>
+		<if test="orderByTime != null and orderByPopularity==null ">
+			ORDER BY comment_time DESC
+		</if>
 	</select>
 
 	<select id="commentTotle" parameterType="com.midland.web.model.Comment" resultType="java.lang.Integer">
@@ -246,7 +252,7 @@
 			and user_id= #{userId}
 		</if>
 		<if test="headImg != null">
-			and head_img= #{headImg},
+			and head_img= #{headImg}
 		</if>
 	</sql>
 
