@@ -53,11 +53,13 @@ public class PublicServiceImpl implements PublicService {
     }
 
     @Override
-    public String getCode(String prefix){
+    public String getCode(String K,String prefix){
         ValueOperations<String, Object> vo = redisTemplate.opsForValue();
         StringBuffer sb = new StringBuffer();
-        sb.append(prefix);
-        sb.append(MidlandHelper.formatCode(vo.increment(Contant.INCREMENT_KEY,1).intValue()));
+        if (StringUtils.isNotEmpty(prefix)) {
+            sb.append(prefix);
+        }
+        sb.append(MidlandHelper.formatCode(vo.increment(K,1).intValue()));
         return sb.toString();
     }
 

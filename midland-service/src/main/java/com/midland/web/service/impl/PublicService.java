@@ -9,9 +9,9 @@ public interface PublicService {
 
     Object getV(String K);
 
-    String getCode(String prefix);
+    String getCode(String K, String prefix);
 
-    Object codeCheck(String phone, String vcode, String key);
+    Object codeCheck(String phone, String vCode, String key);
 
     Object sendCode(String phone, int tpId, String vCode, String key, int codeEffective, TimeUnit timeUnit);
 }
