@@ -39,6 +39,10 @@ public class FilmLibrary{
 	 **/
 	private Integer clickNum;
 	/**
+	 * 按人生排序时用，desc高-低，asc低到高
+	 */
+	private String sort;
+	/**
 	 * 类型，0住宅，1商铺，2写字楼
 	 **/
 	private Integer filmType;
@@ -67,6 +71,13 @@ public class FilmLibrary{
 	 **/
 	private String cityName;
 
+	public String getSort() {
+		return sort;
+	}
+
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
 
 	public Integer getId() {
 		return id;

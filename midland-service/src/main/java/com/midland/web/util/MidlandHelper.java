@@ -12,10 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.text.*;
 import java.util.*;
 
 /**
@@ -25,6 +22,7 @@ public class MidlandHelper {
 	
 	private static final String COMMON_DATE = "yyyy-MM-dd hh:mm:ss";
 	private static final String MONTH = "yyyy-MM";
+	private static final String CODE_FORMAT = "#00000000";
 
 
 
@@ -37,7 +35,11 @@ public class MidlandHelper {
 		DateFormat format = new SimpleDateFormat(MONTH);
 		return format.format(tempTime);
 	}
-	
+	public static String formatCode(Integer time){
+		NumberFormat format = new DecimalFormat(CODE_FORMAT);
+		return format.format(time);
+	}
+
 	public static String getCurrentTime(){
 		long intTime = System.currentTimeMillis();
 		DateFormat format = new SimpleDateFormat(COMMON_DATE);

@@ -48,6 +48,7 @@ public class AppointmentRestController extends BaseFilter {
             log.info("addAppointment {}", obj);
             obj.setIsDelete(Contant.isNotDelete);
             obj.setAppointmentTime(MidlandHelper.getCurrentTime());
+            obj.setAppointSn(publicServiceImpl.getCode("A"));
             appointmentServiceImpl.insertAppointment(obj);
             //发送给预约人的短信：模板id56848，内容：您好！您提交的看房日程由{1}电话{2}帮您带看，该经纪人会尽快联系您安排看房，请保持电话畅通，感谢！
             List<String> param = new ArrayList<>();

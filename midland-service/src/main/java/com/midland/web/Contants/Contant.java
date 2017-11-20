@@ -55,4 +55,10 @@ public class Contant {
 	 */
 	public static final int ATTENTION_QUESTION=1;
 
+
+	/**
+	 *
+	 */
+	public static final String INCREMENT_KEY="midland:increment:key";
+
 }
