@@ -38,8 +38,7 @@
 
 	<select id="findReplyList" parameterType="com.midland.web.model.Reply" resultMap="BaseResultMap">
 		select <include refid="Base_Column_List" /> from reply
-		where 
-		is_delete=0
+		where 1=1
 		<include refid="select_option" />
 		<if test="orderByPopularity != null and orderByTime==null ">
 			ORDER BY `likes` DESC
