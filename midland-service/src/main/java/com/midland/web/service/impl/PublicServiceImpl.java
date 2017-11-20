@@ -5,6 +5,7 @@ import com.midland.web.Contants.Contant;
 import com.midland.web.api.ApiHelper;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
+import com.midland.web.util.MidlandHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +38,10 @@ public class PublicServiceImpl implements PublicService {
             redisTemplate.expire(K, timeout, timeUnit);
         }
     }
+    @Override
+    public void setV(String K, String V) {
+    setV(K, V,null,null);
+}
 
     @Override
     public Object getV(String K) {
@@ -45,6 +50,15 @@ public class PublicServiceImpl implements PublicService {
             return null;
         }
         return vo.get(K);
+    }
+
+    @Override
+    public String getCode(String prefix){
+        ValueOperations<String, Object> vo = redisTemplate.opsForValue();
+        StringBuffer sb = new StringBuffer();
+        sb.append(prefix);
+        sb.append(MidlandHelper.formatCode(vo.increment(Contant.INCREMENT_KEY,1).intValue()));
+        return sb.toString();
     }
 
 
