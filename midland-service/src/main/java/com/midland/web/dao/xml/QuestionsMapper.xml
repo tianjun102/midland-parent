@@ -19,11 +19,12 @@
     <result column="city_name" property="cityName" jdbcType="VARCHAR" />
     <result column="question_author_id" property="questionAuthorId" jdbcType="INTEGER" />
     <result column="question_author_name" property="questionAuthorName" jdbcType="VARCHAR" />
+    <result column="head_img" property="headImg" jdbcType="VARCHAR"/>
   </resultMap>
 
   <sql id="Base_Column_List" >
     id, questions_title, source, DATE_FORMAT(question_time,'%Y-%m-%d %H:%i:%s')question_time, question_name, question_phone, auditor,
-    status, click_num, fabulous,questions_area,audit_remark,is_delete,city_id,city_name,question_author_id,question_author_name
+    status, click_num, fabulous,questions_area,audit_remark,is_delete,city_id,city_name,question_author_id,question_author_name,head_img
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -130,6 +131,9 @@
       <if test="questionAuthorName != null" >
         question_author_name,
       </if>
+      <if test="headImg != null">
+        head_img,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -182,6 +186,9 @@
       </if>
       <if test="questionAuthorName != null" >
         #{questionAuthorName},
+      </if>
+      <if test="headImg != null">
+        #{headImg},
       </if>
     </trim>
   </insert>
@@ -241,6 +248,9 @@
       </if>
       <if test="questionAuthorName != null" >
         question_author_name= #{questionAuthorName},
+      </if>
+      <if test="headImg != null">
+        head_img= #{headImg}
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -302,7 +312,10 @@
       and question_author_id=#{questionAuthorId}
     </if>
     <if test="questionAuthorName != null" >
-      question_author_name = #{questionAuthorName},
+      and question_author_name = #{questionAuthorName}
+    </if>
+    <if test="headImg != null">
+      and head_img= #{headImg}
     </if>
   </sql>
 

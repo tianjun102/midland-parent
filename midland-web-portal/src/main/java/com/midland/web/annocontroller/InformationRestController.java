@@ -100,6 +100,7 @@ public class InformationRestController extends BaseFilter  {
 			log.info("findInformationList  {}",obj);
 			MidlandHelper.doPage(request);
 			obj.setIsDelete(Contant.isNotDelete);
+			obj.setStatus(0);//上架
 			Page<Information> list = (Page<Information>)informationServiceImpl.findInformationList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
