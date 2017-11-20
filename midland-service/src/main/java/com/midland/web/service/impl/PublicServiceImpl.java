@@ -1,7 +1,5 @@
 package com.midland.web.service.impl;
 
-import com.midland.core.util.SmsUtil;
-import com.midland.web.Contants.Contant;
 import com.midland.web.api.ApiHelper;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
@@ -10,15 +8,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -31,15 +28,38 @@ public class PublicServiceImpl implements PublicService {
     private static final Logger logger = LoggerFactory.getLogger(PublicServiceImpl.class);
 
     @Override
-    public void setV(String K, String V, Integer timeout, TimeUnit timeUnit) {
+    public void setV(String K, Object V, Integer timeout, TimeUnit timeUnit) {
         ValueOperations<String, Object> vo = redisTemplate.opsForValue();
         vo.set(K, V);
-        if (timeout == null || timeUnit != null) {
+        if (timeout != null && timeUnit != null) {
+            redisTemplate.expire(K, timeout, timeUnit);
+        }
+    }
+
+    @Override
+    public void listLeftPush(String K, Object V, Integer timeout, TimeUnit timeUnit) {
+        ListOperations<String, Object> vo = redisTemplate.opsForList();
+        vo.leftPush(K,V);
+        if (timeout != null && timeUnit != null) {
             redisTemplate.expire(K, timeout, timeUnit);
         }
     }
     @Override
-    public void setV(String K, String V) {
+    public void listLeftPush(String K, Object V) {
+        listLeftPush(K,V,null,null);
+    }
+    @Override
+    public void listRemove(String K, Object V) {
+        ListOperations<String, Object> vo = redisTemplate.opsForList();
+        vo.remove(K,1,V);
+
+    }
+
+
+
+
+    @Override
+    public void setV(String K, Object V) {
     setV(K, V,null,null);
 }
 
@@ -51,9 +71,17 @@ public class PublicServiceImpl implements PublicService {
         }
         return vo.get(K);
     }
+ @Override
+    public List getList(String K) {
+        ListOperations<String, Object> vo = redisTemplate.opsForList();
+        if (vo == null){
+            return null;
+        }
+        return vo.range(K,0,99);
+    }
 
     @Override
-    public String getCode(String K,String prefix){
+    public String getCode(String K, String prefix){
         ValueOperations<String, Object> vo = redisTemplate.opsForValue();
         StringBuffer sb = new StringBuffer();
         if (StringUtils.isNotEmpty(prefix)) {

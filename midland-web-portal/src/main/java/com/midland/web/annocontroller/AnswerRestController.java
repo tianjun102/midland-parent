@@ -110,7 +110,7 @@ public class AnswerRestController extends BaseFilter  {
 	}
 
 	/**
-	 * 点赞
+	 * 支持
 	 */
 	@RequestMapping("thumb_up")
 	public Object thumb_up(@RequestBody Answer  obj, HttpServletRequest request) {
@@ -132,7 +132,7 @@ public class AnswerRestController extends BaseFilter  {
 		return result;
 	}
 	/**
-	 * 点赞
+	 * 反对
 	 */
 	@RequestMapping("thumb_down")
 	public Object thumb_down(@RequestBody Answer  obj, HttpServletRequest request) {

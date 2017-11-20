@@ -53,7 +53,7 @@ public class Contant {
 	/**
 	 * 关注类型
 	 */
-	public static final int ATTENTION_QUESTION=1;
+	public static final int ATTENTION_QUESTION=1;//关注问题
 
 
 	/**
@@ -63,6 +63,9 @@ public class Contant {
 	/**
 	 * 产生委托类型编号
 	 */
-	public static final String ENTURST_SN_KEY ="midland:entrust:SN:key";
-
+	public static final String ENTRUST_SN_KEY ="midland:entrust:SN:key";
+	/**
+	 * 预约记录临时存放到redis
+	 */
+	public static final String APPOINT_CACHE_KEY="midland:appoint:cache:key";
 }

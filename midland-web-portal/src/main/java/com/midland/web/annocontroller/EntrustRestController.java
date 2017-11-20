@@ -107,7 +107,7 @@ public class EntrustRestController extends BaseFilter  {
 		try {
 			log.info("addEntrust {}",obj);
 			obj.setEntrustTime(MidlandHelper.getCurrentTime());
-			obj.setEntrustSn(publicServiceImpl.getCode(Contant.ENTURST_SN_KEY,"E"));
+			obj.setEntrustSn(publicServiceImpl.getCode(Contant.ENTRUST_SN_KEY,"E"));
 			entrustServiceImpl.insertEntrust(obj);
 			//发送给经纪人的短信：模板56849，内容：您好{1},官网收到委托放盘，{1}{2}{3}，现已分配由您跟进，请尽快与客户进行联系，助您成交！
 

@@ -12,6 +12,7 @@ import com.midland.web.model.Appointment;
 import com.midland.web.service.AppointmentService;
 import com.midland.web.service.impl.PublicService;
 import com.midland.web.util.MidlandHelper;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -50,6 +52,14 @@ public class AppointmentRestController extends BaseFilter {
             obj.setAppointmentTime(MidlandHelper.getCurrentTime());
             obj.setAppointSn(publicServiceImpl.getCode(Contant.APPOINT_SN_KEY,"A"));
             appointmentServiceImpl.insertAppointment(obj);
+            String houseType =String.valueOf(obj.getHouseType());
+            String houseId = String.valueOf(obj.getHouseId());
+            Map mapj = new HashMap();
+            mapj.put("hourseType",houseType);
+            mapj.put("houseId",houseId);
+            StringBuffer sb = new StringBuffer();
+            sb.append(Contant.APPOINT_CACHE_KEY).append(":").append(obj.getWebUserId());
+            publicServiceImpl.listRemove(sb.toString(),mapj);
             //发送给预约人的短信：模板id56848，内容：您好！您提交的看房日程由{1}电话{2}帮您带看，该经纪人会尽快联系您安排看房，请保持电话畅通，感谢！
             List<String> param = new ArrayList<>();
             param.add(obj.getNickName());
@@ -179,6 +189,63 @@ public class AppointmentRestController extends BaseFilter {
         }
         return result;
     }
+
+
+
+    /**
+     * 预约记录添加缓存-类似购物车
+     */
+    @RequestMapping("addCache")
+     public Object cache(@RequestBody Map map,HttpServletRequest request){
+         Result result = new Result();
+         try {
+             String userId = String.valueOf(map.get("userId"));
+             String houseType =String.valueOf(map.get("houseType"));
+             String houseId = String.valueOf( map.get("houseId"));
+             if (StringUtils.isEmpty(userId)||StringUtils.isEmpty(houseType)||StringUtils.isEmpty(houseId)){
+                 throw new IllegalArgumentException("参数不能为空");
+             }
+             Map mapj = new HashMap();
+             mapj.put("hourseType",houseType);
+             mapj.put("houseId",houseId);
+             StringBuffer sb = new StringBuffer();
+             sb.append(Contant.APPOINT_CACHE_KEY).append(":").append(userId);
+             publicServiceImpl.listLeftPush(sb.toString(),mapj);
+             result.setCode(ResultStatusUtils.STATUS_CODE_200);
+             result.setMsg("success");
+         } catch (Exception e) {
+             log.error("cache",e);
+             result.setCode(ResultStatusUtils.STATUS_CODE_203);
+             result.setMsg("service error");
+         }
+         return result;
+     }
+ /**
+     * 预约记录缓存展示-类似购物车
+     */
+    @RequestMapping("cacheList")
+     public Object cacheList(@RequestBody Map map,HttpServletRequest request){
+         Result result = new Result();
+         try {
+             String userId = String.valueOf(map.get("userId"));
+             String houseType =String.valueOf(map.get("houseType"));
+             if (StringUtils.isEmpty(userId)){
+                 throw new IllegalArgumentException("参数不能为空");
+             }
+             Map mapj = new HashMap();
+             mapj.put("hourseType",houseType);
+             StringBuffer sb = new StringBuffer();
+             sb.append(Contant.APPOINT_CACHE_KEY).append(":").append(userId);
+             result.setCode(ResultStatusUtils.STATUS_CODE_200);
+             result.setList(publicServiceImpl.getList(sb.toString()));
+             result.setMsg("success");
+         } catch (Exception e) {
+             log.error("cache",e);
+             result.setCode(ResultStatusUtils.STATUS_CODE_203);
+             result.setMsg("service error");
+         }
+         return result;
+     }
 
     /**
      * 发送验证码
