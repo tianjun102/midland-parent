@@ -86,6 +86,8 @@ public class Questions{
 	 */
 	public List<Integer> attentionList;
 
+	private String headImg;
+
 	public List<Integer> getAttentionList() {
 		return attentionList;
 	}
@@ -251,6 +253,14 @@ public class Questions{
 
 	public void setCityName(String cityName) {
 		this.cityName = cityName;
+	}
+
+	public String getHeadImg() {
+		return headImg;
+	}
+
+	public void setHeadImg(String headImg) {
+		this.headImg = headImg;
 	}
 
 	@Override

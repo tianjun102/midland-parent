@@ -40,6 +40,7 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Controller;
@@ -94,6 +95,7 @@ public class UserController extends BaseFilter {
 
 	@Autowired
 	private SmsSingleSender sender;
+
     
     /**
      * 用户登录
@@ -148,10 +150,10 @@ public class UserController extends BaseFilter {
 			Map<String,String> parem = new HashMap<>();
 			parem.put("userName",username);
 			parem.put("password",password);
-			String data = HttpUtils.get("http://218.18.9.171:8183/dingjian/website/api/agenter/login", parem);
+			String data = HttpUtils.get(midlandConfig.getAgentLogin(), parem);
 			Map userMap =  (Map)JSONObject.parse(data);
 			if ("SUCCESS".equals(userMap.get("STATE"))) {
-				String dataDtail = HttpUtils.get("http://218.18.9.171:8183/dingjian/website/api/agenter/detail?id=" + userMap.get("agenterId"), null);
+				String dataDtail = HttpUtils.get(midlandConfig.getAgentDetail()+"?id=" + userMap.get("agenterId"), null);
 				Agenter agenterList = MidlandHelper.getPojo(dataDtail);
 				if (agenterList != null) {
 					User agenterUser = new User();

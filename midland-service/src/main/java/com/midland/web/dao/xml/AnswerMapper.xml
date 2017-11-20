@@ -14,10 +14,11 @@
 		<result column="audit_status" property="auditStatus" jdbcType="INTEGER" />
 		<result column="answer_phone" property="answerPhone" jdbcType="VARCHAR" />
 		<result column="answer_no" property="answerNo" jdbcType="INTEGER" />
+		<result column="head_img" property="headImg" jdbcType="VARCHAR"/>
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,answer_area,DATE_FORMAT(answer_time,'%Y-%m-%d %H:%i:%s')answer_time,answer_name,against_num,support_num,questions_id,is_delete,audit_status,answer_phone,answer_no
+		id,answer_area,DATE_FORMAT(answer_time,'%Y-%m-%d %H:%i:%s')answer_time,answer_name,against_num,support_num,questions_id,is_delete,audit_status,answer_phone,answer_no,head_img
 	</sql>
 
 	<select id="selectAnswerById" resultMap="BaseResultMap">
@@ -84,6 +85,9 @@
 			<if test="answerNo != null">
 				answer_no,
 			</if>
+			<if test="headImg != null">
+				head_img,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -116,6 +120,9 @@
 			</if>
 			<if test="answerNo != null">
 				#{answerNo,jdbcType=INTEGER},
+			</if>
+			<if test="headImg != null">
+				#{headImg},
 			</if>
 		</trim>
 	</insert>
@@ -150,6 +157,9 @@
 		</if>
 		<if test="answerNo != null">
 			answer_no= #{answerNo,jdbcType=INTEGER},
+		</if>
+		<if test="headImg != null">
+			head_img= #{headImg},
 		</if>
 	</sql>
 
@@ -186,6 +196,9 @@
 		</if>
 		<if test="answerNo != null">
 			 and answer_no= #{answerNo,jdbcType=INTEGER}
+		</if>
+		<if test="headImg != null">
+			 and head_img= #{headImg}
 		</if>
 	</sql>
 

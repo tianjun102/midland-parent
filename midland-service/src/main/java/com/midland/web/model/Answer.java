@@ -47,6 +47,8 @@ public class Answer{
 	 **/
 	private Integer answerNo;
 
+	private String headImg;
+
 
 	public Integer getId() {
 		return id;
@@ -134,6 +136,14 @@ public class Answer{
 
 	public void setAnswerNo(Integer answerNo) {
 		this.answerNo = answerNo;
+	}
+
+	public String getHeadImg() {
+		return headImg;
+	}
+
+	public void setHeadImg(String headImg) {
+		this.headImg = headImg;
 	}
 
 	@Override
