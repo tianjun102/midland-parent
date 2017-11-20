@@ -26,6 +26,11 @@ public class Appointment{
 	 * 0=住宅；1=公寓；2=写字楼；3=商铺
 	 **/
 	private Integer houseType;
+
+	/**
+	 * 房源id
+	 **/
+	private String houseId;
 	/**
 	 * 0=租；1=售
 	 **/
@@ -129,6 +134,13 @@ public class Appointment{
 	 */
 	private String webUserId;
 
+	public String getHouseId() {
+		return houseId;
+	}
+
+	public void setHouseId(String houseId) {
+		this.houseId = houseId;
+	}
 
 	public String getWebUserId() {
 		return webUserId;
