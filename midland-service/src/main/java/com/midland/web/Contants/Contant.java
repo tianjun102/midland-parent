@@ -57,8 +57,12 @@ public class Contant {
 
 
 	/**
-	 *
+	 * 产生预约类型编号
 	 */
-	public static final String INCREMENT_KEY="midland:increment:key";
+	public static final String APPOINT_SN_KEY ="midland:Appointment:SN:key";
+	/**
+	 * 产生委托类型编号
+	 */
+	public static final String ENTURST_SN_KEY ="midland:entrust:SN:key";
 
 }

@@ -5,12 +5,13 @@ import com.midland.web.api.ApiHelper;
 import com.midland.web.model.Entrust;
 import com.midland.web.service.EntrustService;
 import com.midland.base.BaseFilter;
+import com.midland.web.service.impl.PublicService;
 import org.slf4j.Logger;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,8 +32,10 @@ public class EntrustRestController extends BaseFilter  {
 	private Logger log = LoggerFactory.getLogger(EntrustRestController.class);
 	@Autowired
 	private EntrustService entrustServiceImpl;
-@Autowired
+	@Autowired
 	private ApiHelper apiHelper;
+	@Autowired
+	private PublicService publicServiceImpl;
 
 	/**
 	 * 新增买房委托
@@ -104,6 +107,7 @@ public class EntrustRestController extends BaseFilter  {
 		try {
 			log.info("addEntrust {}",obj);
 			obj.setEntrustTime(MidlandHelper.getCurrentTime());
+			obj.setEntrustSn(publicServiceImpl.getCode(Contant.ENTURST_SN_KEY,"E"));
 			entrustServiceImpl.insertEntrust(obj);
 			//发送给经纪人的短信：模板56849，内容：您好{1},官网收到委托放盘，{1}{2}{3}，现已分配由您跟进，请尽快与客户进行联系，助您成交！
 
