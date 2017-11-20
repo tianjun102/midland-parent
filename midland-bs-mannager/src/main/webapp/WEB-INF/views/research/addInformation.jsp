@@ -163,7 +163,10 @@
                     <span>META描述：</span>
                     <input type="text" name="metaDesc"  />
                 </li>
-
+                <li>
+                    <span>作者：</span>
+                    <input type="text" name="author"  />
+                </li>
                 <%--<li>
                     <span>多图上传：</span>
                     <button type="button" id="j_upload_img_btn">多图上传</button>

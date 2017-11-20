@@ -26,10 +26,12 @@
 		<result column="cate_name" property="cateName" jdbcType="VARCHAR" />
 		<result column="status" property="status" jdbcType="VARCHAR" />
 		<result column="platform" property="platform" jdbcType="INTEGER" />
+		<result column="author" property="author" jdbcType="VARCHAR" />
+
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,cate_id,cate_parentId,type,title,source,enclosure,meta_keywords,meta_desc,img_url,img_desc,details,order_by,click_num,is_delete,artice_type,DATE_FORMAT(release_time,'%Y-%m-%d %H:%i:%s') release_time,comment,city_id,city_name,cate_name,status,platform
+		id,cate_id,cate_parentId,type,title,source,enclosure,meta_keywords,meta_desc,img_url,img_desc,details,order_by,click_num,is_delete,artice_type,DATE_FORMAT(release_time,'%Y-%m-%d %H:%i:%s') release_time,comment,city_id,city_name,cate_name,status,platform,author
 	</sql>
 
 	<select id="selectInformationById" resultMap="BaseResultMap">
@@ -133,6 +135,9 @@
 			<if test="platform != null">
 				platform,
 			</if>
+			<if test="author != null">
+				author,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -201,6 +206,9 @@
 			 </if>
 			 <if test="platform != null">
 				 #{platform},
+			 </if>
+			 <if test="author != null">
+				 #{author},
 			 </if>
 		</trim>
 	</insert>
@@ -271,6 +279,9 @@
 		</if>
 		<if test="platform != null">
 			platform = #{platform},
+		</if>
+		<if test="author != null">
+			author = #{author},
 		</if>
 	</sql>
 
@@ -349,6 +360,9 @@
 		</if>
 		<if test="endTime != null">
 			and release_time &lt; #{endTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="author != null">
+			and author = #{author}
 		</if>
 	</sql>
 

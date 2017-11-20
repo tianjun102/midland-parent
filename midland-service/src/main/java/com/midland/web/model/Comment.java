@@ -47,6 +47,8 @@ public class Comment{
 
 	private String userId;
 
+	private String headImg;
+
 
 	public Integer getId() {
 		return id;
@@ -150,6 +152,14 @@ public class Comment{
 
 	public void setLike(Integer like) {
 		this.like = like;
+	}
+
+	public String getHeadImg() {
+		return headImg;
+	}
+
+	public void setHeadImg(String headImg) {
+		this.headImg = headImg;
 	}
 
 	@Override
