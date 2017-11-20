@@ -104,6 +104,8 @@ public class Information{
 
 	private String author;
 
+	private Integer commentNum;
+
 	public Integer getId() {
 		return id;
 	}
@@ -320,6 +322,15 @@ public class Information{
 
 	public void setAuthor(String author) {
 		this.author = author;
+	}
+
+
+	public Integer getCommentNum() {
+		return commentNum;
+	}
+
+	public void setCommentNum(Integer commentNum) {
+		this.commentNum = commentNum;
 	}
 
 	@Override

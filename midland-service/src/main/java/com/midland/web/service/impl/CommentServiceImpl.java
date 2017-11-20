@@ -98,4 +98,16 @@ public class CommentServiceImpl implements CommentService {
 			throw e;
 		}
 	}
+
+	@Override
+	public Integer commentTotle(Comment comment) throws Exception {
+		try {
+			log.debug("commentTotle  {}",comment);
+			int result = commentMapper.commentTotle(comment);
+			return result;
+		} catch(Exception e) {
+			log.error("commentTotle  {}",comment,e);
+			throw e;
+		}
+	}
 }

@@ -86,6 +86,14 @@
 		<include refid="select_option" />
 	</select>
 
+	<select id="commentTotle" parameterType="com.midland.web.model.Comment" resultType="java.lang.Integer">
+		select count(0) from comment
+		where  1=1
+		<if test="informationId == null">
+			and information_id = #{informationId}
+		</if>
+	</select>
+
 	<insert id="insertComment" parameterType="com.midland.web.model.Comment">
 		insert into comment
 		<trim prefix="(" suffix=")" suffixOverrides="," >

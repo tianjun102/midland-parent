@@ -1,7 +1,9 @@
 package com.midland.web.annocontroller;
 
 import com.midland.web.Contants.Contant;
+import com.midland.web.model.Comment;
 import com.midland.web.model.Information;
+import com.midland.web.service.CommentService;
 import com.midland.web.service.InformationService;
 import com.midland.base.BaseFilter;
 import org.slf4j.Logger;
@@ -26,6 +28,8 @@ public class InformationRestController extends BaseFilter  {
 	private Logger log = LoggerFactory.getLogger(InformationRestController.class);
 	@Autowired
 	private InformationService informationServiceImpl;
+	@Autowired
+	private CommentService commentServiceImpl;
 
 	/**
 	 * 新增
@@ -57,6 +61,15 @@ public class InformationRestController extends BaseFilter  {
 			Integer id =(Integer)map.get("id");
 			log.info("getInformationById  {}",id);
 			Information information = informationServiceImpl.selectInformationById(id);
+			Comment comment = new Comment();
+			comment.setInformationId(id);
+			Integer commentNum = 0;
+			try {
+				commentNum = commentServiceImpl.commentTotle(comment);
+			}catch (Exception e){
+				log.info("取评论数出错！");
+			}
+			information.setCommentNum(commentNum);
 			information.setClickNum(information.getClickNum()==null?1:information.getClickNum()+1);
 			informationServiceImpl.updateInformationById(information);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

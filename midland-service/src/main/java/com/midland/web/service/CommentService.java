@@ -34,4 +34,6 @@ public interface CommentService {
 	 **/
 	void batchUpdate(List<Comment> commentList) throws Exception;
 
+	Integer commentTotle(Comment comment) throws Exception;
+
 }

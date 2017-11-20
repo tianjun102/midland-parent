@@ -20,4 +20,6 @@ public interface CommentMapper {
 
 	int batchUpdate(@Param("commentList") List<Comment> commentList);
 
+	int commentTotle(Comment comment);
+
 }
