@@ -10,10 +10,11 @@
 		<result column="user_id" property="userId" jdbcType="INTEGER" />
 		<result column="comm_id" property="commId" jdbcType="INTEGER" />
 		<result column="likes" property="likes" jdbcType="INTEGER" />
+		<result column="head_img" property="headImg" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,detail,addTime,user,user_id,comm_id
+		id,detail,addTime,user,user_id,comm_id,head_img
 	</sql>
 
 	<select id="selectReplyById" resultMap="BaseResultMap">
@@ -63,6 +64,9 @@
 			<if test="likes != null">
 				likes,
 			</if>
+			<if test="headImg != null">
+				head_img,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -83,6 +87,9 @@
 			</if>
 			 <if test="likes != null">
 				 #{likes},
+			 </if>
+			 <if test="headImg != null">
+				 #{headImg},
 			 </if>
 		</trim>
 	</insert>
@@ -105,6 +112,9 @@
 		</if>
 		<if test="likes != null">
 			likes= #{likes},
+		</if>
+		<if test="headImg != null">
+			head_img= #{headImg},
 		</if>
 	</sql>
 
@@ -129,6 +139,9 @@
 		</if>
 		<if test="likes != null">
 			 and likes= #{likes}
+		</if>
+		<if test="headImg != null">
+			 and head_img= #{headImg}
 		</if>
 	</sql>
 

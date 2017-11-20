@@ -158,7 +158,10 @@
                     <span>META描述：</span>
                     <input type="text" name="metaDesc" value="${item.metaDesc}" />
                 </li>
-
+                <li>
+                    <span>作者：</span>
+                    <input type="text" name="author" value="${item.author}"  />
+                </li>
                 <li><span>缩略图：</span>
                     <div style="float: left;">
                         <input type="hidden" name="imgUrl" id="imgUrl" value="${item.imgDesc}">

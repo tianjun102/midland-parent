@@ -102,6 +102,8 @@ public class Information{
 
 	private String endTime;
 
+	private String author;
+
 	public Integer getId() {
 		return id;
 	}
@@ -310,6 +312,14 @@ public class Information{
 
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
 	@Override

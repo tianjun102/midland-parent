@@ -30,6 +30,8 @@ public class Reply{
 
 	private Integer likes;
 
+	private String headImg;
+
 
 	public Integer getId() {
 		return id;
@@ -85,6 +87,14 @@ public class Reply{
 
 	public void setLikes(Integer likes) {
 		this.likes = likes;
+	}
+
+	public String getHeadImg() {
+		return headImg;
+	}
+
+	public void setHeadImg(String headImg) {
+		this.headImg = headImg;
 	}
 
 	@Override
