@@ -16,6 +16,10 @@ public class MidlandConfig {
 	private String areaUrl;
 	@Value("${agentPage}")
 	private String agentPage;
+	@Value("${agentLogin}")
+	private String agentLogin;
+	@Value("${agentDetail}")
+	private String agentDetail;
 	
 	public String getAgentPage() {
 		return agentPage;
@@ -47,5 +51,13 @@ public class MidlandConfig {
 	
 	public void setAreaUrl(String areaUrl) {
 		this.areaUrl = areaUrl;
+	}
+
+	public String getAgentLogin() {
+		return agentLogin;
+	}
+
+	public String getAgentDetail() {
+		return agentDetail;
 	}
 }
