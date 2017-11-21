@@ -3,6 +3,7 @@ package com.midland.web.annocontroller;
 import com.alibaba.fastjson.JSONObject;
 import com.github.qcloudsms.SmsSingleSender;
 import com.github.qcloudsms.SmsSingleSenderResult;
+import com.midland.base.BaseFilter;
 import com.midland.core.entity.ThirdPartyUser;
 import com.midland.core.util.ApplicationUtils;
 import com.midland.core.util.MD5Util;
@@ -35,7 +36,7 @@ import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping(value = "/anno")
-public class annoUserController {
+public class annoUserController extends BaseFilter {
     @Resource
     private WebUserService userService;
 

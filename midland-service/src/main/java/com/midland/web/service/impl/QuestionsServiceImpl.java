@@ -61,6 +61,13 @@ public class QuestionsServiceImpl implements QuestionsService {
         return questionsMapper.updateByPrimaryKeySelective(record);
     }
     @Override
+    public void answerNumCount(Integer id) {
+        int result =  questionsMapper.answerNumCount(id);
+        if (result<1){
+            log.error("统计回答次数失败,问题id={}",id);
+        }
+    }
+    @Override
     public int thumb_up(int id) {
         return questionsMapper.thumb_up(id);
     }

@@ -3,6 +3,7 @@ package com.midland.web.annocontroller;
 import com.midland.web.model.Answer;
 import com.midland.web.service.AnswerService;
 import com.midland.base.BaseFilter;
+import com.midland.web.service.QuestionsService;
 import org.slf4j.Logger;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
@@ -25,6 +26,8 @@ public class AnswerRestController extends BaseFilter  {
 	private Logger log = LoggerFactory.getLogger(AnswerRestController.class);
 	@Autowired
 	private AnswerService answerServiceImpl;
+	@Autowired
+	private QuestionsService questionsServiceImpl;
 
 	/**
 	 * 新增
@@ -36,6 +39,7 @@ public class AnswerRestController extends BaseFilter  {
 			log.info("addAnswer {}",obj);
 			obj.setAnswerTime(MidlandHelper.getCurrentTime());
 			answerServiceImpl.insertAnswer(obj);
+			questionsServiceImpl.answerNumCount(obj.getQuestionsId());
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
 		} catch(Exception e) {
