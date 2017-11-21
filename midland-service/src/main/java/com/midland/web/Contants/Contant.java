@@ -68,4 +68,14 @@ public class Contant {
 	 * 预约记录临时存放到redis
 	 */
 	public static final String APPOINT_CACHE_KEY="midland:appoint:cache:key";
+
+
+	/**
+	 * 短信模板
+	 */
+	public static final int SMS_TEMPLATE_56849=56849;
+	public static final int SMS_TEMPLATE_56848=56848;
+	public static final int SMS_TEMPLATE_56846=56846;
+	public static final int SMS_TEMPLATE_56845=56845;
+	public static final int SMS_TEMPLATE_54711=54711;//发送短信验证码
 }

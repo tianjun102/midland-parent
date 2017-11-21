@@ -64,11 +64,11 @@ public class AppointmentRestController extends BaseFilter {
             List<String> param = new ArrayList<>();
             param.add(obj.getNickName());
             param.add(obj.getCommunityName());
-            apiHelper.smsSender(obj.getAgentPhone(),56846,param);
+            apiHelper.smsSender(obj.getAgentPhone(),Contant.SMS_TEMPLATE_56846,param);
             //发送给经纪人的知府：模板56846，内容：您好{1}女士/先生忆通过官网约看{2}房源，现已分配由您跟进，请在24小时内与客户进行联系，联系方式请登录管理后台中查询
             List<String> param1 = new ArrayList<>();
             param1.add(obj.getCommunityName());
-            apiHelper.smsSender(obj.getPhone(),56845,param1);
+            apiHelper.smsSender(obj.getPhone(),Contant.SMS_TEMPLATE_56845,param1);
             result.setCode(ResultStatusUtils.STATUS_CODE_200);
             result.setMsg("success");
         } catch (Exception e) {
@@ -257,8 +257,7 @@ public class AppointmentRestController extends BaseFilter {
         String key = Contant.APPOINT_VCODE_KEY + phone;
         int codeEffective=3;
         String vCode = SmsUtil.createRandomVCode();//验证码
-        int tpId=54711;
-        return publicServiceImpl.sendCode(phone,tpId,vCode,key,codeEffective,TimeUnit.MINUTES);
+        return publicServiceImpl.sendCode(phone,Contant.SMS_TEMPLATE_54711,vCode,key,codeEffective,TimeUnit.MINUTES);
     }
 
     /**

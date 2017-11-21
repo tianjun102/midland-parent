@@ -39,8 +39,7 @@ public class UserSignUpRestController {
         String key = Contant.SIGN_UP_VCODE_KEY + phone;
         int codeEffective=3;
         String vCode = SmsUtil.createRandomVCode();//验证码
-        int tpId=54711;
-        return publicServiceImpl.sendCode(phone,tpId,vCode,key,codeEffective,TimeUnit.MINUTES);
+        return publicServiceImpl.sendCode(phone,Contant.SMS_TEMPLATE_54711,vCode,key,codeEffective,TimeUnit.MINUTES);
     }
     /**
      * 校验验证码
