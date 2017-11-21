@@ -223,7 +223,7 @@ public class ResumeManagerController extends BaseFilter {
 			fileNames = "1.txt|2.doc|3.xls";
 		}*/
 
-	 	String tmpFileName = "所有简历.zip";
+	 	String tmpFileName = "work.zip";
         byte[] buffer = new byte[1024];
          String strZipPath = ("home/upload/work/"+tmpFileName);
          try {
@@ -245,7 +245,7 @@ public class ResumeManagerController extends BaseFilter {
 				                 fis.close();
 				             }
 			              out.close();
-			              saveAs("work/"+tmpFileName, tmpFileName,response);
+			              saveAs("home/upload/work/"+tmpFileName, tmpFileName,response);
 
 			         } catch (Exception e) {
 			             e.printStackTrace();
@@ -268,7 +268,7 @@ public class ResumeManagerController extends BaseFilter {
 					                     "attachment;filename="
 					                             + URLEncoder.encode(fileName, "UTF-8"));
 			             // 获取目标文件的绝对路径
-			             String fullFileName = ("d:/upload/" + filePath);
+			             String fullFileName = (filePath);
 			             // System.out.println(fullFileName);
 			             // 读取文件
 			             InputStream ins = new FileInputStream(fullFileName);
