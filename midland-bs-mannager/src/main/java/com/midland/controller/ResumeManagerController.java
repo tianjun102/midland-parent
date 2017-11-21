@@ -225,7 +225,7 @@ public class ResumeManagerController extends BaseFilter {
 
 	 	String tmpFileName = "work.zip";
         byte[] buffer = new byte[1024];
-         String strZipPath = ("home/upload/work/"+tmpFileName);
+         String strZipPath = ("/home/upload/work/"+tmpFileName);
          try {
              ZipOutputStream out = new ZipOutputStream(new FileOutputStream(strZipPath));
 			             String[] files=filePaths.split(",",-1);
@@ -245,7 +245,7 @@ public class ResumeManagerController extends BaseFilter {
 				                 fis.close();
 				             }
 			              out.close();
-			              saveAs("home/upload/work/"+tmpFileName, tmpFileName,response);
+			              saveAs("/home/upload/work/"+tmpFileName, tmpFileName,response);
 
 			         } catch (Exception e) {
 			             e.printStackTrace();
