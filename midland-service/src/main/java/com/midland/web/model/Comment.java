@@ -53,6 +53,8 @@ public class Comment{
 
 	private String orderByTime;
 
+	private Integer replyNum;
+
 
 	public Integer getId() {
 		return id;
@@ -180,6 +182,14 @@ public class Comment{
 
 	public void setOrderByTime(String orderByTime) {
 		this.orderByTime = orderByTime;
+	}
+
+	public Integer getReplyNum() {
+		return replyNum;
+	}
+
+	public void setReplyNum(Integer replyNum) {
+		this.replyNum = replyNum;
 	}
 
 	@Override
