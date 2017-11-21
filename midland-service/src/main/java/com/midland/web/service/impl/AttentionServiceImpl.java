@@ -6,6 +6,7 @@ import com.midland.web.service.AttentionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
@@ -24,7 +25,12 @@ public class AttentionServiceImpl implements AttentionService {
 			log.info("insert {}",attention);
 			attentionMapper.insertAttention(attention);
 		} catch(Exception e) {
-			log.error("insertAttention异常 {}",attention,e);
+			if (e instanceof DuplicateKeyException){
+				log.error("insertAttention,不能重复关注 {}",attention);
+			}else{
+				log.error("insertAttention异常 {}",attention,e);
+			}
+
 			throw e;
 		}
 	}

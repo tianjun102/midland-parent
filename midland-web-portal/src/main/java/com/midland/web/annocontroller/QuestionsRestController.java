@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -245,9 +246,15 @@ public class QuestionsRestController extends BaseFilter  {
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
 		} catch (Exception e) {
-			log.error("QuestionAttention",e);
-			result.setCode(ResultStatusUtils.STATUS_CODE_203);
-			result.setMsg("service error");
+			if (e instanceof DuplicateKeyException){
+				log.error("insertAttention,不能重复关注 {}",obj);
+				result.setCode(ResultStatusUtils.STATUS_CODE_203);
+				result.setMsg("不能重复关注");
+			}else{
+				log.error("QuestionAttention",e);
+				result.setCode(ResultStatusUtils.STATUS_CODE_203);
+				result.setMsg("service error");
+			}
 		}
 		return result;
 	}
