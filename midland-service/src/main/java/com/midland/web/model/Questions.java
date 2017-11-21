@@ -87,6 +87,19 @@ public class Questions{
 	public List<Integer> attentionList;
 
 	private String headImg;
+	/**
+	 * 回答次数
+	 */
+	private Integer answerNum;
+
+
+	public Integer getAnswerNum() {
+		return answerNum;
+	}
+
+	public void setAnswerNum(Integer answerNum) {
+		this.answerNum = answerNum;
+	}
 
 	public List<Integer> getAttentionList() {
 		return attentionList;
@@ -310,6 +323,9 @@ public class Questions{
 		}
 		if (cityName != null) {
 			sb.append(", \"cityName\":\"").append(cityName).append("\"");
+		}
+		if (answerNum != null) {
+			sb.append(", \"answerNum\":").append(answerNum);
 		}
 		sb.append("}");
 		return sb.toString();

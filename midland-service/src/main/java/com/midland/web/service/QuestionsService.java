@@ -23,6 +23,8 @@ public interface QuestionsService {
 
     int updateByPrimaryKeySelective(Questions record);
 
+    void answerNumCount(Integer id);
+
     int thumb_up(int id);
 
     int page_view(int id);
