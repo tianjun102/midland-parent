@@ -130,6 +130,7 @@ public class CommentRestController extends BaseFilter  {
 			commentServiceImpl.updateCommentById(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
+			result.setModel(obj);
 		} catch(Exception e) {
 			log.error("updateCommentById  {}",obj,e);
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);

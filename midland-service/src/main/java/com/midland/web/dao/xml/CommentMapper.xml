@@ -15,10 +15,11 @@
 		<result column="like" property="like" jdbcType="INTEGER" />
 		<result column="user_id" property="userId" jdbcType="INTEGER" />
 		<result column="head_img" property="headImg" jdbcType="VARCHAR" />
+		<result column="reply_num" property="replyNum" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,comment,user,status,source,is_delete,information_id,type,comment_time,`like`,user_id,head_img
+		id,comment,user,status,source,is_delete,information_id,type,comment_time,`like`,user_id,head_img,reply_num
 	</sql>
 
 	<select id="selectCommentById" resultMap="BaseResultMap">
@@ -70,6 +71,9 @@
 			</if>
 			<if test="headImg != null">
 				head_img= #{headImg},
+			</if>
+			<if test="replyNum != null">
+				reply_num= #{replyNum},
 			</if>
 		</set>
 
@@ -136,6 +140,9 @@
 			<if test="headImg != null">
 				head_img,
 			</if>
+			<if test="replyNum != null">
+				reply_num,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -171,6 +178,9 @@
 			 </if>
 			 <if test="headImg != null">
 				 #{headImg},
+			 </if>
+			 <if test="replyNum != null">
+				 #{replyNum},
 			 </if>
 		</trim>
 	</insert>
@@ -208,6 +218,9 @@
 		</if>
 		<if test="headImg != null">
 			head_img= #{headImg},
+		</if>
+		<if test="replyNum != null">
+			reply_num= #{replyNum},
 		</if>
 	</sql>
 
@@ -253,6 +266,9 @@
 		</if>
 		<if test="headImg != null">
 			and head_img= #{headImg}
+		</if>
+		<if test="replyNum != null">
+			and reply_num= #{replyNum}
 		</if>
 	</sql>
 

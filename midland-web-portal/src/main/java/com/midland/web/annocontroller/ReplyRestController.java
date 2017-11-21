@@ -6,7 +6,9 @@ import com.midland.base.BaseFilter;
 import com.midland.web.Contants.Contant;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
+import com.midland.web.model.Comment;
 import com.midland.web.model.Reply;
+import com.midland.web.service.CommentService;
 import com.midland.web.service.ReplyService;
 import com.midland.web.util.MidlandHelper;
 import org.slf4j.Logger;
@@ -30,6 +32,8 @@ public class ReplyRestController extends BaseFilter  {
 	private Logger log = LoggerFactory.getLogger(ReplyRestController.class);
 	@Autowired
 	private ReplyService replyServiceImpl;
+	@Autowired
+	private CommentService commentServiceImpl;
 
 	/**
 	 * 新增
@@ -41,6 +45,11 @@ public class ReplyRestController extends BaseFilter  {
 			log.info("addreply {}",obj);
 			obj.setAddtime(MidlandHelper.getCurrentTime());
 			replyServiceImpl.insertReply(obj);
+			Comment comment = commentServiceImpl.selectCommentById(obj.getCommId());
+			if(comment!=null) {
+				comment.setReplyNum(comment.getReplyNum() == null ? 1 : comment.getReplyNum() + 1);
+				commentServiceImpl.updateCommentById(comment);
+			}
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
 		} catch(Exception e) {
