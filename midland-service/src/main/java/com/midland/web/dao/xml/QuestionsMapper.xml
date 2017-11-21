@@ -17,15 +17,15 @@
     <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
     <result column="city_id" property="cityId" jdbcType="VARCHAR" />
     <result column="city_name" property="cityName" jdbcType="VARCHAR" />
-    <result column="question_author_id" property="questionAuthorId" jdbcType="INTEGER" />
-    <result column="question_author_name" property="questionAuthorName" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="answer_num" property="answerNum" jdbcType="INTEGER" />
     <result column="head_img" property="headImg" jdbcType="VARCHAR"/>
   </resultMap>
 
   <sql id="Base_Column_List" >
     id, questions_title, source, DATE_FORMAT(question_time,'%Y-%m-%d %H:%i:%s')question_time, question_name, question_phone, auditor,
-    status, click_num, fabulous,questions_area,audit_remark,is_delete,city_id,city_name,question_author_id,question_author_name,head_img,answer_num
+    status, click_num, fabulous,questions_area,audit_remark,is_delete,city_id,city_name,user_id,user_name,head_img,answer_num
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -126,11 +126,11 @@
       <if test="cityName != null" >
         city_name,
       </if>
-      <if test="questionAuthorId != null" >
-        question_author_id,
+      <if test="userId != null" >
+        user_id,
       </if>
-      <if test="questionAuthorName != null" >
-        question_author_name,
+      <if test="userName != null" >
+        user_name,
       </if>
       <if test="headImg != null">
         head_img,
@@ -185,11 +185,11 @@
       <if test="cityName != null" >
         #{cityName},
       </if>
-      <if test="questionAuthorId != null" >
-        #{questionAuthorId},
+      <if test="userId != null" >
+        #{userId},
       </if>
-      <if test="questionAuthorName != null" >
-        #{questionAuthorName},
+      <if test="userName != null" >
+        #{userName},
       </if>
       <if test="headImg != null">
         #{headImg},
@@ -253,11 +253,11 @@
       <if test="cityName != null" >
         city_name = #{cityName},
       </if>
-      <if test="questionAuthorId != null" >
-        question_author_id = #{questionAuthorId},
+      <if test="userId != null" >
+        user_id = #{userId},
       </if>
-      <if test="questionAuthorName != null" >
-        question_author_name= #{questionAuthorName},
+      <if test="userName != null" >
+        user_name= #{userName},
       </if>
       <if test="headImg != null">
         head_img= #{headImg}
@@ -321,11 +321,11 @@
     <if test="cityName != null" >
       and city_name = #{cityName}
     </if>
-    <if test="questionAuthorId != null" >
-      and question_author_id=#{questionAuthorId}
+    <if test="userId != null" >
+      and user_id=#{userId}
     </if>
-    <if test="questionAuthorName != null" >
-      and question_author_name = #{questionAuthorName}
+    <if test="userName != null" >
+      and user_name = #{userName}
     </if>
     <if test="headImg != null">
       and head_img= #{headImg}

@@ -254,7 +254,7 @@ public class QuestionsRestController extends BaseFilter  {
 	/**
 	 * 关注问题列表，
 	 * @param obj
-	 * @param request questionAuthorId
+	 * @param request userId
 	 * @return
 	 */
 	@RequestMapping("attention/list")
