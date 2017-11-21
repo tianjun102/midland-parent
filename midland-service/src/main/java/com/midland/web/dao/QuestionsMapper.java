@@ -18,6 +18,8 @@ public interface QuestionsMapper {
     int updateByPrimaryKeySelective(Questions record);
     int thumb_up(@Param("id") int id);
     int page_view(@Param("id") int id);
+    int attention_add(@Param("id") int id);
+    int attention_cancel(@Param("id") int id);
     int batchUpdate(@Param("questionsList") List<Questions> questionsList);
 
 }

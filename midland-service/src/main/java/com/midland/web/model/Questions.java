@@ -91,7 +91,34 @@ public class Questions{
 	 * 回答次数
 	 */
 	private Integer answerNum;
+	/**
+	 * 关注次数
+	 */
+	private Integer attentionNum;
 
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public Integer getAttentionNum() {
+		return attentionNum;
+	}
+
+	public void setAttentionNum(Integer attentionNum) {
+		this.attentionNum = attentionNum;
+	}
 
 	public Integer getAnswerNum() {
 		return answerNum;
@@ -107,22 +134,6 @@ public class Questions{
 
 	public void setAttentionList(List<Integer> attentionList) {
 		this.attentionList = attentionList;
-	}
-
-	public Integer getQuestionAuthorId() {
-		return userId;
-	}
-
-	public void setQuestionAuthorId(Integer userId) {
-		this.userId = userId;
-	}
-
-	public String getQuestionAuthorName() {
-		return userName;
-	}
-
-	public void setQuestionAuthorName(String userName) {
-		this.userName = userName;
 	}
 
 	public String getDescName() {
@@ -326,6 +337,9 @@ public class Questions{
 		}
 		if (answerNum != null) {
 			sb.append(", \"answerNum\":").append(answerNum);
+		}
+		if (attentionNum != null) {
+			sb.append(", \"attentionNum\":").append(attentionNum);
 		}
 		sb.append("}");
 		return sb.toString();

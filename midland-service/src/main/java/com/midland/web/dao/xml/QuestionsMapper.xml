@@ -20,12 +20,13 @@
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="answer_num" property="answerNum" jdbcType="INTEGER" />
+    <result column="attention_num" property="attentionNum" jdbcType="INTEGER" />
     <result column="head_img" property="headImg" jdbcType="VARCHAR"/>
   </resultMap>
 
   <sql id="Base_Column_List" >
     id, questions_title, source, DATE_FORMAT(question_time,'%Y-%m-%d %H:%i:%s')question_time, question_name, question_phone, auditor,
-    status, click_num, fabulous,questions_area,audit_remark,is_delete,city_id,city_name,user_id,user_name,head_img,answer_num
+    status, click_num, fabulous,questions_area,audit_remark,is_delete,city_id,city_name,user_id,user_name,head_img,answer_num,attention_num
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -204,6 +205,12 @@
   </update>
   <update id="page_view">
     update questions set click_num = click_num+1 where id=#{id}
+  </update>
+  <update id="attention_add">
+    update questions set attention_num = attention_num+1 where id=#{id}
+  </update>
+  <update id="attention_cancel">
+    update questions set attention_num = attention_num-1 where id=#{id}
   </update>
   <update id="answerNumCount">
     update questions set answer_num = answer_num+1 where id=#{id}

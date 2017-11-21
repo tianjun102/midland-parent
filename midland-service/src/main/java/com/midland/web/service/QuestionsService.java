@@ -29,5 +29,9 @@ public interface QuestionsService {
 
     int page_view(int id);
 
+    int attentionAdd(int id);
+
+    int attentionCancel(int id);
+
     void batchUpdate(List<Questions> questionsList) throws Exception;
 }

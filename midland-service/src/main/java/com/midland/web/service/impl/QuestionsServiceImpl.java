@@ -75,6 +75,14 @@ public class QuestionsServiceImpl implements QuestionsService {
     public int page_view(int id) {
         return questionsMapper.page_view(id);
     }
+ @Override
+    public int attentionAdd(int id) {
+        return questionsMapper.attention_add(id);
+    }
+ @Override
+    public int attentionCancel(int id) {
+        return questionsMapper.attention_cancel(id);
+    }
 
     @Override
     public void batchUpdate(List<Questions> questionsList) throws Exception {

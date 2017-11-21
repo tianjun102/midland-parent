@@ -35,8 +35,7 @@
 
 	<select id="findAttentionList" parameterType="com.midland.web.model.Attention" resultMap="BaseResultMap">
 		select <include refid="Base_Column_List" /> from attention
-		where 
-		is_delete=0
+		where 1=1
 		<include refid="select_option" />
 	</select>
 

@@ -182,13 +182,13 @@ public class QuestionsRestController extends BaseFilter  {
 	public Object questionThumbUp(@RequestBody Questions obj){
 		Result result=new Result();
 		try {
-			if (obj.getQuestionAuthorId()==null||obj.getId()==null){
+			if (obj.getUserId()==null||obj.getId()==null){
 				result.setCode(ResultStatusUtils.STATUS_CODE_400);
 				result.setMsg("参数错误");
 				return result;
 			}
 			StringBuffer sb = new StringBuffer();
-			sb.append(Contant.QUESTON_THUMB_UP_KEY).append(obj.getId()).append(obj.getQuestionAuthorId());
+			sb.append(Contant.QUESTON_THUMB_UP_KEY).append(obj.getId()).append(obj.getUserId());
 			String key = sb.toString();
 			String V = (String) publicServiceImpl.getV(key);
 			if (V==null){
@@ -241,6 +241,7 @@ public class QuestionsRestController extends BaseFilter  {
 		try {
 			obj.setType(Contant.ATTENTION_QUESTION);
 			attentionServiceImpl.insertAttention(obj);
+			questionsServiceImpl.attentionAdd(obj.getOtherId());
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
 		} catch (Exception e) {
@@ -250,6 +251,29 @@ public class QuestionsRestController extends BaseFilter  {
 		}
 		return result;
 	}
+	/**
+	 * 问题关注
+	 * @param obj webUserId,otherId
+	 * @return
+	 */
+	@RequestMapping("attention/cancel")
+	public Object QuestionAttentionCancel(@RequestBody Attention obj){
+		Result result=new Result();
+		try {
+			obj.setType(Contant.ATTENTION_QUESTION);
+			Attention attention = attentionServiceImpl.selectAttentionById(obj.getId());
+			questionsServiceImpl.deleteByPrimaryKey(obj.getId());
+			questionsServiceImpl.attentionCancel(obj.getOtherId());
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result.setMsg("success");
+		} catch (Exception e) {
+			log.error("QuestionAttention",e);
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result.setMsg("service error");
+		}
+		return result;
+	}
+
 
 	/**
 	 * 关注问题列表，
@@ -263,7 +287,7 @@ public class QuestionsRestController extends BaseFilter  {
 		try {
 
 			Attention attention = new Attention();
-			attention.setWebUserId(obj.getQuestionAuthorId());
+			attention.setWebUserId(obj.getUserId());
 			List<Attention> attentionList = attentionServiceImpl.findAttentionList(attention);
 			List<Integer> listTemp = new ArrayList<>();
 			for (Attention at: attentionList){
