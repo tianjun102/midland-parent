@@ -76,11 +76,11 @@ public class Questions{
 	/**
 	 * 提问人id
 	 */
-	public Integer questionAuthorId;
+	public Integer userId;
 	/**
 	 * 提问人名称
 	 */
-	public String questionAuthorName;
+	public String userName;
 	/**
 	 * 被关注的问题id集合
 	 */
@@ -110,19 +110,19 @@ public class Questions{
 	}
 
 	public Integer getQuestionAuthorId() {
-		return questionAuthorId;
+		return userId;
 	}
 
-	public void setQuestionAuthorId(Integer questionAuthorId) {
-		this.questionAuthorId = questionAuthorId;
+	public void setQuestionAuthorId(Integer userId) {
+		this.userId = userId;
 	}
 
 	public String getQuestionAuthorName() {
-		return questionAuthorName;
+		return userName;
 	}
 
-	public void setQuestionAuthorName(String questionAuthorName) {
-		this.questionAuthorName = questionAuthorName;
+	public void setQuestionAuthorName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getDescName() {
