@@ -7,6 +7,7 @@ import com.midland.web.service.AttentionService;
 import com.midland.web.service.QuestionsService;
 import com.midland.base.BaseFilter;
 import com.midland.web.service.impl.PublicService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
@@ -47,6 +48,11 @@ public class QuestionsRestController extends BaseFilter  {
 	public Object addQuestions(@RequestBody Questions obj) throws Exception {
 		 Result result=new Result();
 		try {
+			if (obj.getUserId() == null){
+				result.setCode(ResultStatusUtils.STATUS_CODE_203);
+				result.setMsg("userId不能为空");
+				return result;
+			}
 			log.info("addQuestions {}",obj);
 			obj.setIsDelete(Contant.isNotDelete);
 			questionsServiceImpl.insertSelective(obj);
