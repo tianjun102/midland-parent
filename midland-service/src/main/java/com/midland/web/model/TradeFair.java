@@ -40,10 +40,6 @@ public class TradeFair{
 	 **/
 	private String description;
 	/**
-	 * 图片描述
-	 **/
-	private List<String> descriptionList;
-	/**
 	 * 录盘人
 	 **/
 	private String operatorId;
@@ -55,14 +51,6 @@ public class TradeFair{
 	 * 类型：0楼盘展销会，1看楼团
 	 **/
 	private Integer tradeType;
-
-	public List<String> getDescriptionList() {
-		return descriptionList;
-	}
-
-	public void setDescriptionList(List<String> descriptionList) {
-		this.descriptionList = descriptionList;
-	}
 
 	public List<String> getImgUrlList() {
 		return imgUrlList;
