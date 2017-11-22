@@ -39,7 +39,7 @@ public class FilmLibrary{
 	 **/
 	private Integer clickNum;
 	/**
-	 * 按人生排序时用，desc高-低，asc低到高
+	 * 按人气排序时用，desc高-低，asc低到高
 	 */
 	private String sort;
 	/**
