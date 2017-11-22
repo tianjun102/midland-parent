@@ -39,6 +39,19 @@
 		<include refid="select_option" />
 	</select>
 
+	<select id="findAttentionByList"  parameterType="java.util.List"  resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from attention
+		where 1=1
+		<foreach collection="mapList" item="item" index="index" open="" close="" separator=";">
+			AND web_user_id = #{item.userId}
+			AND type = #{item.type}
+			AND other_id = #{item.otherId}
+		</foreach>
+
+	</select>
+
+
+
 	<insert id="insertAttention" parameterType="com.midland.web.model.Attention">
 		insert into attention
 		<trim prefix="(" suffix=")" suffixOverrides="," >

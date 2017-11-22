@@ -38,6 +38,8 @@ public class AnswerRestController extends BaseFilter  {
 		try {
 			log.info("addAnswer {}",obj);
 			obj.setAnswerTime(MidlandHelper.getCurrentTime());
+			obj.setAuditStatus(0);
+			obj.setAnswerTime(MidlandHelper.getCurrentTime());
 			answerServiceImpl.insertAnswer(obj);
 			questionsServiceImpl.answerNumCount(obj.getQuestionsId());
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

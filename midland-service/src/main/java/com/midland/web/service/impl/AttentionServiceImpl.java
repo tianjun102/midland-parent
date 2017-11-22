@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Map;
+
 @Service
 public class AttentionServiceImpl implements AttentionService {
 
@@ -87,6 +89,16 @@ public class AttentionServiceImpl implements AttentionService {
 			return attentionMapper.findAttentionList(attention);
 		} catch(Exception e) {
 			log.error("findAttentionList  {}",attention,e);
+			throw e;
+		}
+	}
+	@Override
+	public List<Attention> findAttentionByList(List<Map> map) throws Exception {
+		try {
+			log.info("findAttentionByList  {}",map);
+			return attentionMapper.findAttentionByList(map);
+		} catch(Exception e) {
+			log.error("findAttentionByList  {}",map,e);
 			throw e;
 		}
 	}

@@ -7,7 +7,6 @@ import com.midland.web.service.AttentionService;
 import com.midland.web.service.QuestionsService;
 import com.midland.base.BaseFilter;
 import com.midland.web.service.impl.PublicService;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
@@ -112,10 +111,11 @@ public class QuestionsRestController extends BaseFilter  {
 			MidlandHelper.doPage(request);
 			obj.setIsDelete(Contant.isNotDelete);
 			Page<Questions> list = (Page<Questions>)questionsServiceImpl.questionPage(obj);
+			List<Questions>listTemp=getQuestionIsAttention(list);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
-			result.setList(list);
+			result.setList(listTemp);
 			result.setPaginator(paginator);
 		} catch(Exception e) {
 			log.error("findQuestionsList  {}",obj,e);
@@ -137,8 +137,9 @@ public class QuestionsRestController extends BaseFilter  {
 			MidlandHelper.doPage(request);
 			obj.setDescName("click_num");
 			Page<Questions> list = (Page<Questions>)questionsServiceImpl.questionPage(obj);
+			List<Questions>listTemp=getQuestionIsAttention(list);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setList(list);
+			result.setList(listTemp);
 			result.setMsg("success");
 			result.setPaginator(list.getPaginator());
 		} catch (Exception e) {
@@ -148,6 +149,34 @@ public class QuestionsRestController extends BaseFilter  {
 		}
 		return result;
 	}
+
+	private List<Questions> getQuestionIsAttention(Page<Questions> list) throws Exception {
+		List<Map> maplist = new ArrayList<>();
+		for (Questions temp : list){
+            Map map = new HashMap();
+            map.put("userId",temp.getUserId());
+            map.put("type", Contant.ATTENTION_QUESTION);
+            map.put("otherId",temp.getId());
+            maplist.add(map);
+        }
+		List<Attention> attentionList = attentionServiceImpl.findAttentionByList(maplist);
+		List<Questions> list1 = new ArrayList<>();
+		for (Attention a:attentionList){
+            for (Questions temp : list){
+                if (temp.getUserId().equals(a.getWebUserId())&&
+                        Contant.ATTENTION_QUESTION==a.getType()&&
+                        temp.getId().equals(a.getOtherId())){
+                    temp.setIsAttention(true);
+                }else{
+                    temp.setIsAttention(false);
+                }
+                list1.add(temp);
+            }
+
+        }
+        return list1;
+	}
+
 	/**
 	 * 最新问题  按时间降序排
 	 * @param obj
@@ -161,8 +190,10 @@ public class QuestionsRestController extends BaseFilter  {
 			MidlandHelper.doPage(request);
 			obj.setDescName("question_time");
 			Page<Questions> list = (Page<Questions>)questionsServiceImpl.questionPage(obj);
+			List<Questions>listTemp=getQuestionIsAttention(list);
+
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setList(list);
+			result.setList(listTemp);
 			result.setMsg("success");
 			result.setPaginator(list.getPaginator());
 		} catch (Exception e) {

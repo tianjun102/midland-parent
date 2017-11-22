@@ -2,6 +2,8 @@ package com.midland.web.service;
 
 import com.midland.web.model.Attention;
 import java.util.List;
+import java.util.Map;
+
 public interface AttentionService {
 
 	/**
@@ -29,4 +31,5 @@ public interface AttentionService {
 	 **/
 	List<Attention> findAttentionList(Attention attention) throws Exception;
 
+	List<Attention> findAttentionByList(List<Map> map) throws Exception;
 }

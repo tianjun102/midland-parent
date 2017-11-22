@@ -82,9 +82,13 @@ public class Questions{
 	 */
 	public String userName;
 	/**
-	 * 被关注的问题id集合
+	 * 被关注的问题id集合,作为查询条件
 	 */
 	public List<Integer> attentionList;
+	/**
+	 * 该问题是否已被关注
+	 */
+	public boolean isAttention;
 
 	private String headImg;
 	/**
@@ -95,6 +99,14 @@ public class Questions{
 	 * 关注次数
 	 */
 	private Integer attentionNum;
+
+	public boolean getIsAttention() {
+		return isAttention;
+	}
+
+	public void setIsAttention(boolean attention) {
+		isAttention = attention;
+	}
 
 	public Integer getUserId() {
 		return userId;
