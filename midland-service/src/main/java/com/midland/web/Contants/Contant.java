@@ -69,6 +69,8 @@ public class Contant {
 	 */
 	public static final String APPOINT_CACHE_KEY="midland:appoint:cache:key";
 
+	public static final String Colle_CACHE_KEY="midland:colle:cache:key";
+
 
 	/**
 	 * 短信模板

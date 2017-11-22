@@ -149,7 +149,15 @@ public class PublicServiceImpl implements PublicService {
         return result;
     }
 
+    @Override
+    public void removeAll(String K) {
+        try {
+        redisTemplate.delete(K);
+        } catch (Exception e) {
+            logger.error("removeAll：删除失败！", e);
+        }
 
+    }
 
 
 }

@@ -23,4 +23,6 @@ public interface PublicService {
     Object codeCheck(String phone, String vCode, String key);
 
     Object sendCode(String phone, int tpId, String vCode, String key, int codeEffective, TimeUnit timeUnit);
+
+    void removeAll(String K);
 }
