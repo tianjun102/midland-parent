@@ -108,11 +108,8 @@ public class TradeFairRestController extends BaseFilter  {
 					String[] array = temp.getImgUrl().split("\\|\\|");
 					List<String> imgList = Arrays.asList(array);
 					temp.setImgUrlList(imgList);
-				}
-				if (StringUtils.isNotEmpty(temp.getDescription())){
-					String[] array = temp.getDescription().split(",");
-					List<String> descriptionList = Arrays.asList(array);
-					temp.setDescriptionList(descriptionList);
+				}else{
+					temp.setImgUrlList(Collections.EMPTY_LIST);
 				}
 				tempResultList.add(temp);
 			}
