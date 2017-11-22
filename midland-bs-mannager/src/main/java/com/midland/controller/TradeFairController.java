@@ -147,8 +147,8 @@ public class TradeFairController extends BaseFilter {
 			for (TradeFair temp : result){
 				if (StringUtils.isNotEmpty(temp.getImgUrl())){
 					String[] array = temp.getImgUrl().split("\\|\\|");
-					List<String> imglist = Arrays.asList(array);
-					temp.setImgUrlList(imglist);
+					List<String> imgList = Arrays.asList(array);
+					temp.setImgUrlList(imgList);
 				}
 				tempResultList.add(temp);
 			}

@@ -86,7 +86,7 @@ public class Appointment{
 	/**
 	 * 装潢
 	 **/
-	private Short decoration;
+	private String decoration;
 	/**
 	 * 0未删除，1删除
 	 **/
@@ -326,11 +326,11 @@ public class Appointment{
 		this.handleTime = handleTime;
 	}
 
-	public Short getDecoration() {
+	public String getDecoration() {
 		return decoration;
 	}
 
-	public void setDecoration(Short decoration) {
+	public void setDecoration(String decoration) {
 		this.decoration = decoration;
 	}
 

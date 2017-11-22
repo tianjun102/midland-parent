@@ -4,10 +4,13 @@ import com.midland.web.Contants.Contant;
 import com.midland.web.model.TradeFair;
 import com.midland.web.service.TradeFairService;
 import com.midland.base.BaseFilter;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
-import java.util.HashMap;
+
+import java.util.*;
+
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
-import java.util.Map;
 import com.midland.web.util.MidlandHelper;
 import javax.servlet.http.HttpServletRequest;
 @RestController
@@ -100,10 +102,25 @@ public class TradeFairRestController extends BaseFilter  {
 			obj.setIsDelete(Contant.isNotDelete);
 			obj.setIsShow(Contant.isShow);
 			Page<TradeFair> list = (Page<TradeFair>)tradeFairServiceImpl.findTradeFairList(obj);
+			List<TradeFair> tempResultList = new ArrayList<>();
+			for (TradeFair temp : list){
+				if (StringUtils.isNotEmpty(temp.getImgUrl())){
+					String[] array = temp.getImgUrl().split("\\|\\|");
+					List<String> imgList = Arrays.asList(array);
+					temp.setImgUrlList(imgList);
+				}
+				if (StringUtils.isNotEmpty(temp.getDescription())){
+					String[] array = temp.getDescription().split(",");
+					List<String> descriptionList = Arrays.asList(array);
+					temp.setDescriptionList(descriptionList);
+				}
+				tempResultList.add(temp);
+			}
+
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
-			result.setList(list);
+			result.setList(tempResultList);
 			result.setPaginator(paginator);
 		} catch(Exception e) {
 			log.error("findTradeFairList  {}",obj,e);

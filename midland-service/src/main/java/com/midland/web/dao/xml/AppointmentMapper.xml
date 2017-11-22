@@ -23,7 +23,7 @@
         <result column="agent_name" property="agentName" jdbcType="VARCHAR"/>
         <result column="status" property="status" jdbcType="INTEGER"/>
         <result column="handle_time" property="handleTime" jdbcType="TIMESTAMP"/>
-        <result column="decoration" property="decoration" jdbcType="TINYINT"/>
+        <result column="decoration" property="decoration" jdbcType="VARCHAR"/>
         <result column="is_delete" property="isDelete" jdbcType="INTEGER"/>
         <result column="city_id" property="cityId" jdbcType="VARCHAR"/>
         <result column="city_name" property="cityName" jdbcType="VARCHAR"/>
@@ -232,7 +232,7 @@
                 #{handleTime,jdbcType=TIMESTAMP},
             </if>
             <if test="decoration != null">
-                #{decoration,jdbcType=TINYINT},
+                #{decoration,jdbcType=VARCHAR},
             </if>
             <if test="isDelete != null">
                 #{isDelete,jdbcType=INTEGER},
@@ -327,7 +327,7 @@
             handle_time= #{handleTime,jdbcType=TIMESTAMP},
         </if>
         <if test="decoration != null">
-            decoration= #{decoration,jdbcType=TINYINT},
+            decoration= #{decoration,jdbcType=VARCHAR},
         </if>
         <if test="isDelete != null">
             is_delete= #{isDelete,jdbcType=INTEGER},
@@ -430,7 +430,7 @@
             and handle_time= #{handleTime,jdbcType=TIMESTAMP}
         </if>
         <if test="decoration != null">
-            and decoration= #{decoration,jdbcType=TINYINT}
+            and decoration= #{decoration,jdbcType=VARCHAR}
         </if>
         <if test="isDelete != null">
             and is_delete= #{isDelete,jdbcType=INTEGER}
