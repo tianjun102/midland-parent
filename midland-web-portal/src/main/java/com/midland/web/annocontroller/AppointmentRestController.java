@@ -165,6 +165,29 @@ public class AppointmentRestController extends BaseFilter {
         }
         return result;
     }
+    /*
+     * 清空预约记录
+     * @param webUserId
+     */
+    @RequestMapping("delete")
+    public Object deleteAppointment(@RequestBody Map map) {
+        Result result = new Result();
+        try {
+            Integer id = (Integer)map.get("id");
+            Appointment obj = new Appointment();
+            obj.setId(id);
+            obj.setIsDelete(Contant.isDelete);
+            log.info("cleanAppointment  {}", obj);
+            appointmentServiceImpl.updateAppointmentById(obj);
+            result.setCode(ResultStatusUtils.STATUS_CODE_200);
+            result.setMsg("success");
+        } catch (Exception e) {
+            log.error("cleanAppointment  {}", map, e);
+            result.setCode(ResultStatusUtils.STATUS_CODE_203);
+            result.setMsg("service error");
+        }
+        return result;
+    }
 
     /**
      * 取消预约
@@ -174,12 +197,14 @@ public class AppointmentRestController extends BaseFilter {
     public Object cancelAppointment(@RequestBody Map map) {
         Result result = new Result();
         try {
-            String webUserId = (String) map.get("webUserId");
+            String userId = String.valueOf((Integer) map.get("userId"));
+            Integer id = (Integer) map.get("id");
             Appointment obj = new Appointment();
-            obj.setWebUserId(webUserId);
+            obj.setId(id);
+            obj.setWebUserId(userId);
             obj.setStatus(4);//已取消，详见Midland.json的 appointment_status
             log.info("cancelAppointment  {}", obj);
-            appointmentServiceImpl.updateAppointmentByWebUserId(obj);
+            appointmentServiceImpl.updateAppointmentByIdAndWebUserId(obj);
             result.setCode(ResultStatusUtils.STATUS_CODE_200);
             result.setMsg("success");
         } catch (Exception e) {

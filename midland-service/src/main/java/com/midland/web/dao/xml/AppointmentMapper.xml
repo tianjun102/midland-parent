@@ -69,6 +69,17 @@
         where web_user_id=#{webUserId}
     </update>
 
+    <update id="updateAppointmentByIdAndWebUserId">
+        update appointment
+        <set>
+            <include refid="update_option"/>
+        </set>
+        where web_user_id=#{webUserId} AND id=#{id}
+    </update>
+
+
+
+
     <select id="findAppointmentList" parameterType="com.midland.web.model.Appointment" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
