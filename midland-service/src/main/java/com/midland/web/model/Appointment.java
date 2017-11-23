@@ -128,7 +128,7 @@ public class Appointment{
 	/**
 	 * 委托人性别，0女1男
 	 */
-	private int sex;
+	private Integer sex;
 	/**
 	 * 前端用户id
 	 */
@@ -150,11 +150,11 @@ public class Appointment{
 		this.webUserId = webUserId;
 	}
 
-	public int getSex() {
+	public Integer getSex() {
 		return sex;
 	}
 
-	public void setSex(int sex) {
+	public void setSex(Integer sex) {
 		this.sex = sex;
 	}
 

@@ -86,6 +86,22 @@ public class AppointmentServiceImpl implements AppointmentService {
 			throw e;
 		}
 	}
+/**
+	 * 更新,慎用
+	 **/
+	@Override
+	public void updateAppointmentByIdAndWebUserId(Appointment appointment) throws Exception {
+		try {
+			log.debug("updateAppointmentByIdAndWebUserId  {}",appointment);
+			int result = appointmentMapper.updateAppointmentByIdAndWebUserId(appointment);
+			if (result < 1) {
+				throw new Exception("updateAppointmentByIdAndWebUserId失败");
+			}
+		} catch(Exception e) {
+			log.error("updateAppointmentByIdAndWebUserId  {}",appointment,e);
+			throw e;
+		}
+	}
 
 	/**
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）

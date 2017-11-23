@@ -173,7 +173,7 @@ public class AppointmentRestController extends BaseFilter {
     public Object deleteAppointment(@RequestBody Map map) {
         Result result = new Result();
         try {
-            Integer id = Integer.valueOf( (String)map.get("id"));
+            Integer id = (Integer)map.get("id");
             Appointment obj = new Appointment();
             obj.setId(id);
             obj.setIsDelete(Contant.isDelete);
@@ -197,12 +197,14 @@ public class AppointmentRestController extends BaseFilter {
     public Object cancelAppointment(@RequestBody Map map) {
         Result result = new Result();
         try {
-            String webUserId = (String) map.get("webUserId");
+            String userId = String.valueOf((Integer) map.get("userId"));
+            Integer id = (Integer) map.get("id");
             Appointment obj = new Appointment();
-            obj.setWebUserId(webUserId);
+            obj.setId(id);
+            obj.setWebUserId(userId);
             obj.setStatus(4);//已取消，详见Midland.json的 appointment_status
             log.info("cancelAppointment  {}", obj);
-            appointmentServiceImpl.updateAppointmentByWebUserId(obj);
+            appointmentServiceImpl.updateAppointmentByIdAndWebUserId(obj);
             result.setCode(ResultStatusUtils.STATUS_CODE_200);
             result.setMsg("success");
         } catch (Exception e) {
