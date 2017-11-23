@@ -371,7 +371,7 @@ public class WebUserController extends WebCommonsController {
 				result.setMsg("身份正面为空!");
 				return FastJsonUtils.toJSONStr(result);
 			}
-			if(StringUtils.isEmpty(params.get("idcartImg１"))){
+			if(StringUtils.isEmpty(params.get("idcartImg1"))){
 				result.setCode(ResultStatusUtils.STATUS_CODE_202);
 				result.setMsg("身份反面为空!");
 				return FastJsonUtils.toJSONStr(result);
