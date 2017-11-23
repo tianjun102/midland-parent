@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.midland.web.dao.HotHandMapper">
+
+ 	<resultMap id="BaseResultMap" type="com.midland.web.model.HotHand" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="price" property="price" jdbcType="VARCHAR" />
+		<result column="into_time" property="intoTime" jdbcType="TIMESTAMP" />
+		<result column="manager_costs" property="managerCosts" jdbcType="VARCHAR" />
+		<result column="unit_total" property="unitTotal" jdbcType="VARCHAR" />
+		<result column="land_area" property="landArea" jdbcType="VARCHAR" />
+		<result column="parking_num" property="parkingNum" jdbcType="VARCHAR" />
+		<result column="building_type" property="buildingType" jdbcType="VARCHAR" />
+		<result column="property_address" property="propertyAddress" jdbcType="VARCHAR" />
+		<result column="developer" property="developer" jdbcType="VARCHAR" />
+		<result column="building_address" property="buildingAddress" jdbcType="VARCHAR" />
+		<result column="property_management" property="propertyManagement" jdbcType="VARCHAR" />
+		<result column="property_desc" property="propertyDesc" jdbcType="LONGVARCHAR" />
+		<result column="property_advantages" property="propertyAdvantages" jdbcType="LONGVARCHAR" />
+		<result column="position" property="position" jdbcType="VARCHAR" />
+		<result column="supporting" property="supporting" jdbcType="VARCHAR" />
+		<result column="house_name" property="houseName" jdbcType="VARCHAR" />
+		<result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+		<result column="agent_name" property="agentName" jdbcType="VARCHAR" />
+		<result column="agent_id" property="agentId" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id,price,into_time,manager_costs,unit_total,land_area,parking_num,building_type,property_address,developer,building_address,property_management,property_desc,property_advantages,position,supporting,house_name,img_url,agent_name,agent_id,create_time
+	</sql>
+
+	<select id="selectHotHandById" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from hot_hand
+		 where id= #{id}
+	</select>
+
+	<delete id="deleteHotHandById" >
+		delete from hot_hand
+		 where id= #{id}
+	</delete>
+
+	<update id="updateHotHandById" >
+		update hot_hand 
+		<set>
+		<include refid="update_option"/>
+		</set>
+
+		 where id= #{id}
+	</update>
+
+	<select id="findHotHandList" parameterType="com.midland.web.model.HotHand" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from hot_hand
+		where 
+		is_delete=0
+		<include refid="select_option" />
+	</select>
+
+	<insert id="insertHotHand" parameterType="com.midland.web.model.HotHand">
+		insert into hot_hand
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="price != null">
+				price,
+			</if>
+			<if test="intoTime != null">
+				into_time,
+			</if>
+			<if test="managerCosts != null">
+				manager_costs,
+			</if>
+			<if test="unitTotal != null">
+				unit_total,
+			</if>
+			<if test="landArea != null">
+				land_area,
+			</if>
+			<if test="parkingNum != null">
+				parking_num,
+			</if>
+			<if test="buildingType != null">
+				building_type,
+			</if>
+			<if test="propertyAddress != null">
+				property_address,
+			</if>
+			<if test="developer != null">
+				developer,
+			</if>
+			<if test="buildingAddress != null">
+				building_address,
+			</if>
+			<if test="propertyManagement != null">
+				property_management,
+			</if>
+			<if test="propertyDesc != null">
+				property_desc,
+			</if>
+			<if test="propertyAdvantages != null">
+				property_advantages,
+			</if>
+			<if test="position != null">
+				position,
+			</if>
+			<if test="supporting != null">
+				supporting,
+			</if>
+			<if test="houseName != null">
+				house_name,
+			</if>
+			<if test="imgUrl != null">
+				img_url,
+			</if>
+			<if test="agentName != null">
+				agent_name,
+			</if>
+			<if test="agentId != null">
+				agent_id,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+		</trim>
+		values
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="price != null">
+				#{price,jdbcType=VARCHAR},
+			</if>
+			<if test="intoTime != null">
+				#{intoTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="managerCosts != null">
+				#{managerCosts,jdbcType=VARCHAR},
+			</if>
+			<if test="unitTotal != null">
+				#{unitTotal,jdbcType=VARCHAR},
+			</if>
+			<if test="landArea != null">
+				#{landArea,jdbcType=VARCHAR},
+			</if>
+			<if test="parkingNum != null">
+				#{parkingNum,jdbcType=VARCHAR},
+			</if>
+			<if test="buildingType != null">
+				#{buildingType,jdbcType=VARCHAR},
+			</if>
+			<if test="propertyAddress != null">
+				#{propertyAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="developer != null">
+				#{developer,jdbcType=VARCHAR},
+			</if>
+			<if test="buildingAddress != null">
+				#{buildingAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="propertyManagement != null">
+				#{propertyManagement,jdbcType=VARCHAR},
+			</if>
+			<if test="propertyDesc != null">
+				#{propertyDesc,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="propertyAdvantages != null">
+				#{propertyAdvantages,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="position != null">
+				#{position,jdbcType=VARCHAR},
+			</if>
+			<if test="supporting != null">
+				#{supporting,jdbcType=VARCHAR},
+			</if>
+			<if test="houseName != null">
+				#{houseName,jdbcType=VARCHAR},
+			</if>
+			<if test="imgUrl != null">
+				#{imgUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="agentName != null">
+				#{agentName,jdbcType=VARCHAR},
+			</if>
+			<if test="agentId != null">
+				#{agentId,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+
+	<sql id="update_option">
+		<if test="price != null">
+			price= #{price,jdbcType=VARCHAR},
+		</if>
+		<if test="intoTime != null">
+			into_time= #{intoTime,jdbcType=TIMESTAMP},
+		</if>
+		<if test="managerCosts != null">
+			manager_costs= #{managerCosts,jdbcType=VARCHAR},
+		</if>
+		<if test="unitTotal != null">
+			unit_total= #{unitTotal,jdbcType=VARCHAR},
+		</if>
+		<if test="landArea != null">
+			land_area= #{landArea,jdbcType=VARCHAR},
+		</if>
+		<if test="parkingNum != null">
+			parking_num= #{parkingNum,jdbcType=VARCHAR},
+		</if>
+		<if test="buildingType != null">
+			building_type= #{buildingType,jdbcType=VARCHAR},
+		</if>
+		<if test="propertyAddress != null">
+			property_address= #{propertyAddress,jdbcType=VARCHAR},
+		</if>
+		<if test="developer != null">
+			developer= #{developer,jdbcType=VARCHAR},
+		</if>
+		<if test="buildingAddress != null">
+			building_address= #{buildingAddress,jdbcType=VARCHAR},
+		</if>
+		<if test="propertyManagement != null">
+			property_management= #{propertyManagement,jdbcType=VARCHAR},
+		</if>
+		<if test="propertyDesc != null">
+			property_desc= #{propertyDesc,jdbcType=LONGVARCHAR},
+		</if>
+		<if test="propertyAdvantages != null">
+			property_advantages= #{propertyAdvantages,jdbcType=LONGVARCHAR},
+		</if>
+		<if test="position != null">
+			position= #{position,jdbcType=VARCHAR},
+		</if>
+		<if test="supporting != null">
+			supporting= #{supporting,jdbcType=VARCHAR},
+		</if>
+		<if test="houseName != null">
+			house_name= #{houseName,jdbcType=VARCHAR},
+		</if>
+		<if test="imgUrl != null">
+			img_url= #{imgUrl,jdbcType=VARCHAR},
+		</if>
+		<if test="agentName != null">
+			agent_name= #{agentName,jdbcType=VARCHAR},
+		</if>
+		<if test="agentId != null">
+			agent_id= #{agentId,jdbcType=VARCHAR},
+		</if>
+		<if test="createTime != null">
+			create_time= #{createTime,jdbcType=TIMESTAMP},
+		</if>
+	</sql>
+
+	<sql id="select_option">
+		<if test="id != null">
+			 and id= #{id,jdbcType=INTEGER}
+		</if>
+		<if test="price != null">
+			 and price= #{price,jdbcType=VARCHAR}
+		</if>
+		<if test="intoTime != null">
+			 and into_time= #{intoTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="managerCosts != null">
+			 and manager_costs= #{managerCosts,jdbcType=VARCHAR}
+		</if>
+		<if test="unitTotal != null">
+			 and unit_total= #{unitTotal,jdbcType=VARCHAR}
+		</if>
+		<if test="landArea != null">
+			 and land_area= #{landArea,jdbcType=VARCHAR}
+		</if>
+		<if test="parkingNum != null">
+			 and parking_num= #{parkingNum,jdbcType=VARCHAR}
+		</if>
+		<if test="buildingType != null">
+			 and building_type= #{buildingType,jdbcType=VARCHAR}
+		</if>
+		<if test="propertyAddress != null">
+			 and property_address= #{propertyAddress,jdbcType=VARCHAR}
+		</if>
+		<if test="developer != null">
+			 and developer= #{developer,jdbcType=VARCHAR}
+		</if>
+		<if test="buildingAddress != null">
+			 and building_address= #{buildingAddress,jdbcType=VARCHAR}
+		</if>
+		<if test="propertyManagement != null">
+			 and property_management= #{propertyManagement,jdbcType=VARCHAR}
+		</if>
+		<if test="propertyDesc != null">
+			 and property_desc= #{propertyDesc,jdbcType=LONGVARCHAR}
+		</if>
+		<if test="propertyAdvantages != null">
+			 and property_advantages= #{propertyAdvantages,jdbcType=LONGVARCHAR}
+		</if>
+		<if test="position != null">
+			 and position= #{position,jdbcType=VARCHAR}
+		</if>
+		<if test="supporting != null">
+			 and supporting= #{supporting,jdbcType=VARCHAR}
+		</if>
+		<if test="houseName != null">
+			 and house_name= #{houseName,jdbcType=VARCHAR}
+		</if>
+		<if test="imgUrl != null">
+			 and img_url= #{imgUrl,jdbcType=VARCHAR}
+		</if>
+		<if test="agentName != null">
+			 and agent_name= #{agentName,jdbcType=VARCHAR}
+		</if>
+		<if test="agentId != null">
+			 and agent_id= #{agentId,jdbcType=VARCHAR}
+		</if>
+		<if test="createTime != null">
+			 and create_time= #{createTime,jdbcType=TIMESTAMP}
+		</if>
+	</sql>
+
+</mapper>
