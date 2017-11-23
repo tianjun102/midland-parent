@@ -137,7 +137,7 @@ public class annoUserController extends BaseFilter {
      * @return
      */
     @RequestMapping(value = "/forget/sendSms")
-    public String forgetSendSms(@RequestParam Map<String, String> parem) {
+    public String forgetSendSms(@RequestBody Map<String, String> parem) {
         WebUser user = new WebUser();
         user.setPhone(parem.get("phone"));
         Map<Object, Object> map = new HashMap<Object, Object>();
@@ -211,18 +211,18 @@ public class annoUserController extends BaseFilter {
     /**
      * 验证码校验,忘记密码
      *
-     * @param vcode
+     * @param parem
      * @return
      */
     @RequestMapping(value = "/checkVcode", method = {RequestMethod.GET, RequestMethod.POST})
-    public String checkVcode_(String phone, String vcode) {
+    public String checkVcode_(@RequestBody Map<String, String> parem) {
         Map<Object, Object> map = new HashMap<Object, Object>();
         Result<WebUser> result_ = new Result<>();
         map.put("flag", 0);
-        String key = "midland:vcode:" + phone;
+        String key = "midland:vcode:" + parem.get("phone");
         ValueOperations<String, Object> vo = redisTemplate.opsForValue();
         String redisVcode = vo.get(key).toString();
-        if (redisVcode.equals(vcode)) {
+        if (redisVcode.equals(parem.get("vCode"))) {
             map.put("flag", 1);
             result_.setMap(map);
             result_.setMsg(Result.resultMsg.SUCCESS.toString());
