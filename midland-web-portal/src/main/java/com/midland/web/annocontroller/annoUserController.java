@@ -221,6 +221,12 @@ public class annoUserController extends BaseFilter {
         map.put("flag", 0);
         String key = "midland:vcode:" + parem.get("phone");
         ValueOperations<String, Object> vo = redisTemplate.opsForValue();
+        if(vo.get(key)==null){
+            result_.setMap(map);
+            result_.setMsg("验证失败！");
+            result_.setCode(ResultStatusUtils.STATUS_CODE_203);
+            return FastJsonUtils.toJSONStr(result_);
+        }
         String redisVcode = vo.get(key).toString();
         if (redisVcode.equals(parem.get("vCode"))) {
             map.put("flag", 1);
