@@ -128,7 +128,7 @@ public class CenterUserController extends WebCommonsController {
     	Result<WebUser> result = new Result<>();
     	Map<Object, Object> map = new HashMap<Object, Object>();
     	map.put("flag", "false");
-    	String key="wks:vcode:"+parem.get("phone");
+    	String key="midland:vcode:"+parem.get("phone");
     	ValueOperations<String, Object> vo = redisTemplate.opsForValue();
     	String redisVcode=vo.get(key).toString();
     	if(redisVcode.equals(parem.get("vcode"))){
