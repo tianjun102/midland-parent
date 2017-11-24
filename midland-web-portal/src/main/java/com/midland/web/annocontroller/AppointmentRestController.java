@@ -151,7 +151,7 @@ public class AppointmentRestController extends BaseFilter {
     public Object cleanAppointment(@RequestBody Map map) {
         Result result = new Result();
         try {
-            String webUserId = (String) map.get("webUserId");
+            String webUserId = String.valueOf( map.get("userId"));
             Appointment obj = new Appointment();
             obj.setWebUserId(webUserId);
             obj.setIsDelete(Contant.isDelete);
