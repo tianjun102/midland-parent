@@ -8,6 +8,7 @@ import com.midland.web.Contants.Contant;
 import com.midland.web.api.ApiHelper;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
+import com.midland.web.exception.UpdateException;
 import com.midland.web.model.Appointment;
 import com.midland.web.service.AppointmentService;
 import com.midland.web.service.impl.PublicService;
@@ -204,13 +205,19 @@ public class AppointmentRestController extends BaseFilter {
             obj.setWebUserId(userId);
             obj.setStatus(4);//已取消，详见Midland.json的 appointment_status
             log.info("cancelAppointment  {}", obj);
-            appointmentServiceImpl.updateAppointmentByIdAndWebUserId(obj);
+            appointmentServiceImpl.cancelAppointmentByIdAndWebUserId(obj);
             result.setCode(ResultStatusUtils.STATUS_CODE_200);
             result.setMsg("success");
         } catch (Exception e) {
-            log.error("cancelAppointment  {}", map, e);
-            result.setCode(ResultStatusUtils.STATUS_CODE_203);
-            result.setMsg("service error");
+            if (e instanceof UpdateException){
+                log.error("cancelAppointment  {}", map, e);
+                result.setCode(ResultStatusUtils.STATUS_CODE_203);
+                result.setMsg("取消预约失败，参数有误");
+            }else {
+                log.error("cancelAppointment  {}", map, e);
+                result.setCode(ResultStatusUtils.STATUS_CODE_203);
+                result.setMsg("service error");
+            }
         }
         return result;
     }
