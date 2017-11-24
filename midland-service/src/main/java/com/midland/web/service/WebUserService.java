@@ -2,9 +2,9 @@ package com.midland.web.service;
 
 import com.midland.web.commons.exception.ServiceException;
 import com.midland.web.model.WebUser;
-import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
-import com.github.miemiedev.mybatis.paginator.domain.PageList;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -73,14 +73,11 @@ public interface WebUserService {
      * @return
      */
 	int addUser(Map<String, String> map);
-	
-	/**
-	 * 查询安装人员信息
-	 * @param pageBounds 分页对象
-	 * @return
-	 */
-	PageList<WebUser> findBycreateByPage(Map<String, String> map, PageBounds pageBounds);
-	
+
+
+	@Transactional(readOnly=true)
+	List<WebUser> findByCreateByPage(Map<String, String> map);
+
 	/**
 	 * 根据子级额户查询父级用户ID
 	 * @param username 用户名

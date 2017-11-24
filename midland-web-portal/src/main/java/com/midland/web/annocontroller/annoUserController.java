@@ -4,32 +4,28 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.qcloudsms.SmsSingleSender;
 import com.github.qcloudsms.SmsSingleSenderResult;
 import com.midland.base.BaseFilter;
-import com.midland.core.entity.ThirdPartyUser;
 import com.midland.core.util.ApplicationUtils;
 import com.midland.core.util.MD5Util;
 import com.midland.core.util.SmsUtil;
-import com.midland.core.util.ThirdPartyLoginHelper;
-import com.midland.web.Contants.Contant;
 import com.midland.web.api.SmsSender.SmsModel;
 import com.midland.web.commons.FastJsonUtils;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ConstantUtils;
 import com.midland.web.commons.core.util.ResultStatusUtils;
 import com.midland.web.model.WebUser;
-import com.midland.web.model.user.User;
 import com.midland.web.service.WebUserService;
 import com.midland.web.service.impl.PublicService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,7 +54,7 @@ public class annoUserController extends BaseFilter {
      */
     @RequestMapping(value = "/smsLogin", method = {RequestMethod.GET, RequestMethod.POST})
     public String smsLogin(HttpServletRequest request, @RequestBody Map<String, String> parem) {
-        Result<WebUser> result = new Result<>();
+        Result result = new Result();
         String phone = parem.get("phone");
         String vCode = parem.get("vcode");
         WebUser userInfo = new WebUser();
@@ -116,7 +112,7 @@ public class annoUserController extends BaseFilter {
 //        return publicServiceImpl.sendCode(phone,Contant.SMS_TEMPLATE_54711,vCode,key,codeEffective,TimeUnit.MINUTES);
 //
 
-        Result<WebUser> result1 = new Result<>();
+        Result result1 = new Result();
         String vcode = SmsUtil.createRandomVCode();//验证码
         String key = "midland:vcode:" + parem.get("phone");
         List list = new ArrayList();
@@ -154,7 +150,7 @@ public class annoUserController extends BaseFilter {
         WebUser user = new WebUser();
         user.setPhone(parem.get("phone"));
         Map<Object, Object> map = new HashMap<Object, Object>();
-        Result<WebUser> result_ = new Result<>();
+        Result result_ = new Result();
         map.put("flag", 0);
         if (StringUtils.isEmpty(parem.get("phone"))) {
             map.put("msg", "手机号不能为空！");
@@ -230,7 +226,7 @@ public class annoUserController extends BaseFilter {
     @RequestMapping(value = "/checkVcode", method = {RequestMethod.GET, RequestMethod.POST})
     public String checkVcode_(@RequestBody Map<String, String> parem) {
         Map<Object, Object> map = new HashMap<Object, Object>();
-        Result<WebUser> result_ = new Result<>();
+        Result result_ = new Result();
         map.put("flag", 0);
         String key = "midland:vcode:" + parem.get("phone");
         ValueOperations<String, Object> vo = redisTemplate.opsForValue();
@@ -261,7 +257,7 @@ public class annoUserController extends BaseFilter {
     @RequestMapping(value = "/updatePwd", method = {RequestMethod.GET, RequestMethod.POST})
     public String updatePwd_(HttpServletRequest request, String newPwd, String id) {
         Map<Object, Object> map = new HashMap<Object, Object>();
-        Result<WebUser> result_ = new Result<>();
+        Result result_ = new Result();
         map.put("flag", 0);
         WebUser user = new WebUser();
         user.setPassword(ApplicationUtils.sha256Hex(newPwd));

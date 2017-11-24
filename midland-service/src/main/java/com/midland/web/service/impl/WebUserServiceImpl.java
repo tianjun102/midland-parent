@@ -6,8 +6,6 @@ import com.midland.web.commons.exception.ServiceException;
 import com.midland.web.dao.WebUserMapper;
 import com.midland.web.model.WebUser;
 import com.midland.web.service.WebUserService;
-import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
-import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -88,12 +86,12 @@ public class WebUserServiceImpl implements WebUserService {
 
 	@Transactional(readOnly=true)
 	@Override
-	public PageList<WebUser> findBycreateByPage(Map<String, String>  map, PageBounds pageBounds) {
+	public List<WebUser> findByCreateByPage(Map<String, String> map) {
 		WebUser user = new WebUser();
 		user.setCreateBy(map.get("createBy"));
 		user.setUserCnName(map.get("username"));
 		user.setPhone(map.get("phone"));
-		return webUserMapper.queryUserList(user,pageBounds);
+		return webUserMapper.queryUserList(user);
 	}
 
 	@Transactional(readOnly=true)

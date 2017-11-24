@@ -2,9 +2,6 @@ package com.midland.web.api;
 
 import com.github.qcloudsms.SmsSingleSender;
 import com.github.qcloudsms.SmsSingleSenderResult;
-import com.midland.web.api.SmsSender.SmsClient;
-import com.midland.web.api.SmsSender.SmsModel;
-import com.midland.web.api.SmsSender.SmsResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

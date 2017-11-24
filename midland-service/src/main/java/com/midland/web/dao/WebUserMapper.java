@@ -2,8 +2,6 @@ package com.midland.web.dao;
 
 import com.midland.web.commons.core.generic.GenericDao;
 import com.midland.web.model.WebUser;
-import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
-import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -50,10 +48,9 @@ public interface WebUserMapper extends GenericDao<WebUser, String> {
 	
 	/**
 	 * 查询安装人员信息
-	 * @param pageBounds 分页对象
 	 * @return
 	 */
-	PageList<WebUser>  queryUserList(WebUser user, PageBounds pageBounds);
+	List<WebUser>  queryUserList(WebUser user);
 	
 	/**
 	 * 根据子级额户查询父级用户ID
