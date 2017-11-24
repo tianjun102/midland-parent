@@ -12,14 +12,13 @@
 		<result column="ad_title" property="adTitle" jdbcType="VARCHAR" />
 		<result column="ad_address" property="adAddress" jdbcType="VARCHAR" />
 		<result column="detail" property="detail" jdbcType="LONGVARCHAR" />
-		<result column="isshow" property="isshow" jdbcType="INTEGER" />
 		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
 		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
 		<result column="is_show" property="isShow" jdbcType="INTEGER" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,city_id,img_url,img_desc,ad_name,ad_time,ad_title,ad_address,detail,isshow,is_delete,city_name,is_show
+		id,city_id,img_url,img_desc,ad_name,ad_time,ad_title,ad_address,detail,is_delete,city_name,is_show
 	</sql>
 
 	<select id="selectEliteClubById" resultMap="BaseResultMap">
