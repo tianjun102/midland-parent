@@ -1,10 +1,8 @@
 package com.midland.web.dao;
 
 import com.midland.web.model.HotHand;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
-@Repository
+
 public interface HotHandMapper {
 
 	HotHand selectHotHandById(Integer hotHand);

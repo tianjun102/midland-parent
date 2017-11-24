@@ -1,47 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+		 pageEncoding="UTF-8" %>
 <%@include file="../layout/tablib.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Insert title here</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Insert title here</title>
 </head>
 <body>
 
 
 <div class="table-responsive m40">
-    <table class="table table-bordered table-add">
-        <thead>
-            <tr>
-				<th style="width: 8%">price</th>
-				<th style="width: 8%">intoTime</th>
-				<th style="width: 8%">managerCosts</th>
-				<th style="width: 8%">unitTotal</th>
-				<th style="width: 8%">landArea</th>
-				<th style="width: 8%">parkingNum</th>
-				<th style="width: 8%">buildingType</th>
-				<th style="width: 8%">propertyAddress</th>
-				<th style="width: 8%">developer</th>
-				<th style="width: 8%">buildingAddress</th>
-				<th style="width: 8%">propertyManagement</th>
-				<th style="width: 8%">propertyDesc</th>
-				<th style="width: 8%">propertyAdvantages</th>
-				<th style="width: 8%">position</th>
-				<th style="width: 8%">supporting</th>
-				<th style="width: 8%">houseName</th>
-				<th style="width: 8%">imgUrl</th>
-				<th style="width: 8%">agentName</th>
-				<th style="width: 8%">agentId</th>
-				<th style="width: 8%">createTime</th>
-                <th style="width: 10%">操作</th>
-            </tr>
-        </thead>
-        <tbody>
-        <c:choose>
-            <c:when test="${!empty requestScope.items }">
-                <c:forEach items="${requestScope.items }" var="item" varStatus="xh">
-                    <tr>
+	<table class="table table-bordered table-add">
+		<thead>
+		<tr>
+			<th style="width: 8%">均价</th>
+			<th style="width: 8%">入伙日期</th>
+			<th style="width: 8%">管理费用</th>
+			<th style="width: 8%">物业座数</th>
+			<th style="width: 8%">单位总数</th>
+			<th style="width: 8%">装修标准</th>
+			<th style="width: 8%">建筑类型</th>
+			<th style="width: 8%">物业地址</th>
+			<th style="width: 8%">开发商</th>
+			<th style="width: 8%">物业管理</th>
+			<th style="width: 8%">地理位置</th>
+			<th style="width: 10%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<c:choose>
+			<c:when test="${!empty requestScope.items }">
+				<c:forEach items="${requestScope.items }" var="item" varStatus="xh">
+					<tr>
 						<input type="hidden" id="id" value="${item.id}"/>
 						<td>${item.price}</td>
 						<td>${item.intoTime}</td>
@@ -52,38 +43,29 @@
 						<td>${item.buildingType}</td>
 						<td>${item.propertyAddress}</td>
 						<td>${item.developer}</td>
-						<td>${item.buildingAddress}</td>
 						<td>${item.propertyManagement}</td>
-						<td>${item.propertyDesc}</td>
-						<td>${item.propertyAdvantages}</td>
 						<td>${item.position}</td>
-						<td>${item.supporting}</td>
-						<td>${item.houseName}</td>
-						<td>${item.imgUrl}</td>
-						<td>${item.agentName}</td>
-						<td>${item.agentId}</td>
-						<td>${item.createTime}</td>
 						<td>
-                            <a target="contentF" onclick="to_edit(${item.id })">编辑</a>
-                            <a target="contentF" onclick="delete1(${item.id })">删除</a>
-                        </td>
-                    </tr>
-                </c:forEach>
-            </c:when>
-            <c:otherwise>
-                <tr>
-                    <td colspan="14">没有找到数据!</td>
-                </tr>
-            </c:otherwise>
-        </c:choose>
-        </tbody>
-    </table>
+							<a target="contentF" onclick="to_edit(${item.id })">编辑</a>
+							<a target="contentF" onclick="delete1(${item.id })">删除</a>
+						</td>
+					</tr>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<tr>
+					<td colspan="14">没有找到数据!</td>
+				</tr>
+			</c:otherwise>
+		</c:choose>
+		</tbody>
+	</table>
 </div>
 <!-- 分页 -->
 <c:if test="${!empty paginator}">
-    <c:set var="paginator" value="${paginator}"/>
-    <c:set var="target" value="listDiv"/>
-    <%@include file="../layout/pagination.jsp" %>
+	<c:set var="paginator" value="${paginator}"/>
+	<c:set var="target" value="listDiv"/>
+	<%@include file="../layout/pagination.jsp" %>
 </c:if>
 
 <script type="text/javascript">
