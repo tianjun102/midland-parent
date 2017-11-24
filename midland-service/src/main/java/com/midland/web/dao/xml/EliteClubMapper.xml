@@ -76,9 +76,6 @@
 			<if test="detail != null">
 				detail,
 			</if>
-			<if test="isshow != null">
-				isshow,
-			</if>
 			<if test="isDelete != null">
 				is_delete,
 			</if>
@@ -114,9 +111,6 @@
 			</if>
 			<if test="detail != null">
 				#{detail,jdbcType=LONGVARCHAR},
-			</if>
-			<if test="isshow != null">
-				#{isshow,jdbcType=INTEGER},
 			</if>
 			<if test="isDelete != null">
 				#{isDelete,jdbcType=INTEGER},
@@ -154,9 +148,6 @@
 		</if>
 		<if test="detail != null">
 			detail= #{detail,jdbcType=LONGVARCHAR},
-		</if>
-		<if test="isshow != null">
-			isshow= #{isshow,jdbcType=INTEGER},
 		</if>
 		<if test="isDelete != null">
 			is_delete= #{isDelete,jdbcType=INTEGER},
@@ -196,9 +187,6 @@
 		</if>
 		<if test="detail != null">
 			 and detail= #{detail,jdbcType=LONGVARCHAR}
-		</if>
-		<if test="isshow != null">
-			 and isshow= #{isshow,jdbcType=INTEGER}
 		</if>
 		<if test="isDelete != null">
 			 and is_delete= #{isDelete,jdbcType=INTEGER}
