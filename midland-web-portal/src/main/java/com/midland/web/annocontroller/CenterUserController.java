@@ -22,7 +22,8 @@ import com.midland.web.controller.WebCommonsController;
 import com.midland.web.model.WebUser;
 import com.midland.web.service.WebUserService;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -47,7 +48,7 @@ import com.midland.web.commons.Result;
 @RequestMapping(value = "/updateuser")
 public class CenterUserController extends WebCommonsController {
 
-	private static Logger logger = Logger.getLogger(CenterUserController.class);
+	private static Logger logger = LoggerFactory.getLogger(CenterUserController.class);
 
 	@Resource
 	private WebUserService webUserServiceImpl;

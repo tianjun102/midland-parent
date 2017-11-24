@@ -8,7 +8,8 @@ import com.midland.web.controller.WebUserController;
 import com.midland.web.service.WebUserService;
 import com.midland.web.service.impl.PublicService;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping("/sys")
 public class UserSignUpRestController {
 
-    private static Logger logger = Logger.getLogger(WebUserController.class);
+    private static Logger logger = LoggerFactory.getLogger(WebUserController.class);
 
     @Resource
     private WebUserService webUserService;
