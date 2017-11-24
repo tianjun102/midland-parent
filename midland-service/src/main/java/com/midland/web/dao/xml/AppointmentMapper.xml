@@ -66,15 +66,15 @@
         <set>
             <include refid="update_option"/>
         </set>
-        where web_user_id=#{webUserId}
+        where web_user_id= #{webUserId}
     </update>
 
-    <update id="updateAppointmentByIdAndWebUserId">
+    <update id="cancelAppointmentByIdAndWebUserId">
         update appointment
         <set>
             <include refid="update_option"/>
         </set>
-        where web_user_id=#{webUserId} AND id=#{id}
+        where web_user_id=#{webUserId} AND id=#{id} and status = 0
     </update>
 
 

@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -39,55 +40,56 @@ public class PublicServiceImpl implements PublicService {
     @Override
     public void listLeftPush(String K, Object V, Integer timeout, TimeUnit timeUnit) {
         ListOperations<String, Object> vo = redisTemplate.opsForList();
-        vo.leftPush(K,V);
+        vo.leftPush(K, V);
         if (timeout != null && timeUnit != null) {
             redisTemplate.expire(K, timeout, timeUnit);
         }
     }
+
     @Override
     public void listLeftPush(String K, Object V) {
-        listLeftPush(K,V,null,null);
+        listLeftPush(K, V, null, null);
     }
+
     @Override
     public void listRemove(String K, Object V) {
         ListOperations<String, Object> vo = redisTemplate.opsForList();
-        vo.remove(K,1,V);
+        vo.remove(K, 1, V);
 
     }
-
-
 
 
     @Override
     public void setV(String K, Object V) {
-    setV(K, V,null,null);
-}
+        setV(K, V, null, null);
+    }
 
     @Override
     public Object getV(String K) {
         ValueOperations<String, Object> vo = redisTemplate.opsForValue();
-        if (vo == null){
+        if (vo == null) {
             return null;
         }
         return vo.get(K);
     }
- @Override
+
+    @Override
     public List getList(String K) {
         ListOperations<String, Object> vo = redisTemplate.opsForList();
-        if (vo == null){
+        if (vo == null) {
             return null;
         }
-        return vo.range(K,0,99);
+        return vo.range(K, 0, 99);
     }
 
     @Override
-    public String getCode(String K, String prefix){
+    public String getCode(String K, String prefix) {
         ValueOperations<String, Object> vo = redisTemplate.opsForValue();
         StringBuffer sb = new StringBuffer();
         if (StringUtils.isNotEmpty(prefix)) {
             sb.append(prefix);
         }
-        sb.append(MidlandHelper.formatCode(vo.increment(K,1).intValue()));
+        sb.append(MidlandHelper.formatCode(vo.increment(K, 1).intValue()));
         return sb.toString();
     }
 
@@ -96,7 +98,7 @@ public class PublicServiceImpl implements PublicService {
     public Object codeCheck(String phone, String vCode, String key) {
         Result result = new Result();
         try {
-            if (StringUtils.isEmpty(phone)||StringUtils.isEmpty(vCode)){
+            if (StringUtils.isEmpty(phone) || StringUtils.isEmpty(vCode)) {
                 result.setCode(ResultStatusUtils.STATUS_CODE_400);
                 result.setMsg("IllegalArgumentException");
                 return result;
@@ -105,11 +107,13 @@ public class PublicServiceImpl implements PublicService {
             if (redisVCode.equals(vCode)) {
                 result.setCode(ResultStatusUtils.STATUS_CODE_200);
                 result.setMsg("success");
-            }else {
-                result.setCode(ResultStatusUtils.STATUS_CODE_203);;
+            } else {
+                result.setCode(ResultStatusUtils.STATUS_CODE_203);
+                ;
                 result.setMsg("error");
             }
         } catch (Exception e) {
+
             logger.error("codeCheck", e);
             result.setCode(ResultStatusUtils.STATUS_CODE_203);
             result.setMsg("error");
@@ -118,17 +122,16 @@ public class PublicServiceImpl implements PublicService {
     }
 
     /**
-     *
-     * @param phone 手机号
-     * @param tpId 短信模板id   美联提供
-     * @param vCode 验证码
-     * @param key 验证码保存到redis的key值
+     * @param phone         手机号
+     * @param tpId          短信模板id   美联提供
+     * @param vCode         验证码
+     * @param key           验证码保存到redis的key值
      * @param codeEffective 有效时间
-     * @param timeUnit 有效时间单位
+     * @param timeUnit      有效时间单位
      * @return
      */
     @Override
-    public Object sendCode(String phone,int tpId,String vCode,String key,int codeEffective,TimeUnit timeUnit) {
+    public Object sendCode(String phone, int tpId, String vCode, String key, int codeEffective, TimeUnit timeUnit) {
         Result result = new Result();
         try {
             if (StringUtils.isEmpty(phone)) {
@@ -152,7 +155,7 @@ public class PublicServiceImpl implements PublicService {
     @Override
     public void removeAll(String K) {
         try {
-        redisTemplate.delete(K);
+            redisTemplate.delete(K);
         } catch (Exception e) {
             logger.error("removeAll：删除失败！", e);
         }

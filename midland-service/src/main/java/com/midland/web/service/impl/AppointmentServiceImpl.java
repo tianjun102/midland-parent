@@ -1,5 +1,6 @@
 package com.midland.web.service.impl;
 
+import com.midland.web.exception.UpdateException;
 import com.midland.web.model.Appointment;
 import com.midland.web.dao.AppointmentMapper;
 import com.midland.web.service.AppointmentService;
@@ -90,15 +91,15 @@ public class AppointmentServiceImpl implements AppointmentService {
 	 * 更新,慎用
 	 **/
 	@Override
-	public void updateAppointmentByIdAndWebUserId(Appointment appointment) throws Exception {
+	public void cancelAppointmentByIdAndWebUserId(Appointment appointment) throws Exception {
 		try {
-			log.debug("updateAppointmentByIdAndWebUserId  {}",appointment);
-			int result = appointmentMapper.updateAppointmentByIdAndWebUserId(appointment);
+			log.debug("cancelAppointmentByIdAndWebUserId  {}",appointment);
+			int result = appointmentMapper.cancelAppointmentByIdAndWebUserId(appointment);
 			if (result < 1) {
-				throw new Exception("updateAppointmentByIdAndWebUserId失败");
+				throw new UpdateException("cancelAppointmentByIdAndWebUserId失败");
 			}
 		} catch(Exception e) {
-			log.error("updateAppointmentByIdAndWebUserId  {}",appointment,e);
+			log.error("cancelAppointmentByIdAndWebUserId  {}",appointment,e);
 			throw e;
 		}
 	}

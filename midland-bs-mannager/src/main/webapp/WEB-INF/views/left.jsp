@@ -143,6 +143,9 @@
 						<shiro:hasPermission name="filmLibraryList">
 							<a id = "left18" href="${ctx}/rest/filmLibrary/index" target="contentF"><span>片库管理</span></a>
 						</shiro:hasPermission>
+						<shiro:hasPermission name="filmLibraryList">
+							<a id = "left18" href="${ctx}/rest/hotHand/index" target="contentF"><span>热卖一手</span></a>
+						</shiro:hasPermission>
 
 					</dd>
 				</dl>

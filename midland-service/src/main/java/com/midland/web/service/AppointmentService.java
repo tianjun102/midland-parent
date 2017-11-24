@@ -28,7 +28,7 @@ public interface AppointmentService {
 
 	void updateAppointmentByWebUserId(Appointment appointment) throws Exception;
 
-    void updateAppointmentByIdAndWebUserId(Appointment appointment) throws Exception;
+    void cancelAppointmentByIdAndWebUserId(Appointment appointment) throws Exception;
 
     /**
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）

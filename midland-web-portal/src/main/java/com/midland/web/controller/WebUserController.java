@@ -1,48 +1,38 @@
 package com.midland.web.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
+import com.github.qcloudsms.SmsSingleSender;
+import com.github.qcloudsms.SmsSingleSenderResult;
+import com.google.common.collect.Maps;
+import com.midland.core.util.SmsUtil;
+import com.midland.core.util.UploadImgUtil;
+import com.midland.web.api.SmsSender.SmsModel;
+import com.midland.web.commons.FastJsonUtils;
+import com.midland.web.commons.Result;
+import com.midland.web.commons.core.util.ApplicationUtils;
+import com.midland.web.commons.core.util.ConstantUtils;
+import com.midland.web.commons.core.util.ResultStatusUtils;
+import com.midland.web.commons.exception.ServiceException;
+import com.midland.web.model.WebUser;
+import com.midland.web.service.WebUserService;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import com.github.qcloudsms.SmsSingleSender;
-import com.github.qcloudsms.SmsSingleSenderResult;
-import com.midland.core.util.SmsUtil;
-import com.midland.core.util.UploadImgUtil;
-import com.midland.web.api.SmsSender.SmsModel;
-import com.midland.web.commons.core.util.ApplicationUtils;
-import com.midland.web.commons.core.util.ConstantUtils;
-import com.midland.web.commons.core.util.ResultStatusUtils;
-import com.midland.web.commons.exception.ServiceException;
-import com.midland.web.model.WebUser;
-import com.midland.web.model.user.User;
-import com.midland.web.service.WebUserService;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.alibaba.fastjson.JSONObject;
-import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
-import com.github.miemiedev.mybatis.paginator.domain.PageList;
-import com.github.miemiedev.mybatis.paginator.domain.Paginator;
-import com.google.common.collect.Maps;
-import com.midland.web.commons.FastJsonUtils;
-import com.midland.web.commons.Result;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Title: UserController.java
@@ -55,7 +45,7 @@ import com.midland.web.commons.Result;
 @RequestMapping(value = "/user")
 public class WebUserController extends WebCommonsController {
 
-	private static Logger logger = Logger.getLogger(WebUserController.class);
+	private static Logger logger = LoggerFactory.getLogger(WebUserController.class);
 
 	@Resource
 	private WebUserService userService;

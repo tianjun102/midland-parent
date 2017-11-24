@@ -9,6 +9,7 @@ import com.midland.core.util.ApplicationUtils;
 import com.midland.core.util.MD5Util;
 import com.midland.core.util.SmsUtil;
 import com.midland.core.util.ThirdPartyLoginHelper;
+import com.midland.web.Contants.Contant;
 import com.midland.web.api.SmsSender.SmsModel;
 import com.midland.web.commons.FastJsonUtils;
 import com.midland.web.commons.Result;
@@ -17,6 +18,7 @@ import com.midland.web.commons.core.util.ResultStatusUtils;
 import com.midland.web.model.WebUser;
 import com.midland.web.model.user.User;
 import com.midland.web.service.WebUserService;
+import com.midland.web.service.impl.PublicService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -42,6 +44,8 @@ public class annoUserController extends BaseFilter {
 
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
+    @Resource
+    private PublicService publicServiceImpl;
 
     @Autowired
     private SmsSingleSender sender;
@@ -103,6 +107,15 @@ public class annoUserController extends BaseFilter {
      */
     @RequestMapping(value = "/vcode/sendSms")
     public String vcodeSendSms(@RequestBody Map<String, String> parem) {
+
+
+//        String phone = (String) parem.get("phone");
+//        String key = Contant.SIGN_UP_VCODE_KEY + phone;
+//        int codeEffective=3;
+//        String vCode = SmsUtil.createRandomVCode();//验证码
+//        return publicServiceImpl.sendCode(phone,Contant.SMS_TEMPLATE_54711,vCode,key,codeEffective,TimeUnit.MINUTES);
+//
+
         Result<WebUser> result1 = new Result<>();
         String vcode = SmsUtil.createRandomVCode();//验证码
         String key = "midland:vcode:" + parem.get("phone");
