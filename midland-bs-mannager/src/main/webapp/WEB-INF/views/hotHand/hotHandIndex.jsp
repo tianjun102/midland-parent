@@ -43,16 +43,7 @@
 
 <script type="text/javascript">
     function toAddPage(){
-        layer.open({
-            type: 2,
-            skin: 'layer-style',
-            area: ['500px','700px'],
-            shadeClose: false, //点击遮罩关闭
-            title:['新增'],
-            resize: false,
-            scrollbar:false,
-            content:['${ctx}/rest/hotHand/to_add', 'no']
-        });
+        window.open("${ctx}/rest/hotHand/to_add","contentF")
     }
     window.onload = function(){
         $('#searchForm').submit();
