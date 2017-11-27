@@ -1,11 +1,18 @@
 package com.midland.web.annocontroller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.midland.web.model.CommunityAlbum;
 import com.midland.web.model.HotHand;
+import com.midland.web.model.LayoutMap;
+import com.midland.web.service.CommunityAlbumService;
 import com.midland.web.service.HotHandService;
 import com.midland.base.BaseFilter;
+import com.midland.web.service.LayoutMapService;
 import org.slf4j.Logger;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
+
+import java.util.List;
 import java.util.Map;
 import com.midland.web.util.MidlandHelper;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +34,10 @@ public class HotHandRestController extends BaseFilter  {
 	private Logger log = LoggerFactory.getLogger(HotHandRestController.class);
 	@Autowired
 	private HotHandService hotHandServiceImpl;
+@Autowired
+	private CommunityAlbumService communityAlbumServiceImpl;
+@Autowired
+	private LayoutMapService lyoutMapServiceImpl;
 
 	/**
 	 * 新增
@@ -64,6 +77,98 @@ public class HotHandRestController extends BaseFilter  {
 			result.setMsg("service error");
 		}
 		return result;
+	}
+
+	/**
+	 * 查询
+	 **/
+	@RequestMapping("get/info")
+	public Object getHotHandAndLayoutMapById(@RequestBody Map map) {
+		Map result = new HashMap();
+		try {
+			Integer id =(Integer)map.get("id");
+			log.info("getHotHandById  {}",id);
+			HotHand hotHand = hotHandServiceImpl.selectHotHandById(id);
+			CommunityAlbum communityAlbum= new CommunityAlbum();
+			communityAlbum.setHotHandId(hotHand.getId());
+			List<CommunityAlbum> communityAlbumResult =communityAlbumServiceImpl.findCommunityAlbumList(communityAlbum);
+			List<Map> a = new ArrayList<>();
+			List<Map> b = new ArrayList<>();
+			for (CommunityAlbum temp : communityAlbumResult){
+				if (temp.getType()==1){
+					//实景
+					Map mapTemp = new HashMap();
+					mapTemp.put("imgUrl",temp.getImgUrl());
+					mapTemp.put("description",temp.getDescription());
+					a.add(mapTemp);
+
+				}else if (temp.getType()==2){
+					//户型
+					Map mapTemp = new HashMap();
+					mapTemp.put("imgUrl",temp.getImgUrl());
+					mapTemp.put("description",temp.getDescription());
+					a.add(mapTemp);
+				}
+			}
+			LayoutMap layoutMap = new LayoutMap();
+			layoutMap.setHotHandId(hotHand.getId());
+			List<LayoutMap> layoutMapResult = lyoutMapServiceImpl.findLayoutMapList(layoutMap);
+			List<Map> aa = new ArrayList<>();
+			List<Map> bb = new ArrayList<>();
+			List<Map> cc = new ArrayList<>();
+			for (LayoutMap temp : layoutMapResult){
+				if ("0".equals(temp.getType())){
+					//一室
+					Map mapTemp = new HashMap();
+					mapTemp.put("imgUrl",temp.getImgUrl());
+					mapTemp.put("title",temp.getTitle());
+					mapTemp.put("turned",temp.getTurned());
+					mapTemp.put("acreage",temp.getAcreage());
+					mapTemp.put("avgPrice",temp.getAvgPrice());
+					mapTemp.put("saleingNum",temp.getSaleingNum());
+					mapTemp.put("price",temp.getPrice());
+					aa.add(mapTemp);
+
+				}else if ("1".equals(temp.getType())){
+					//二室
+					Map mapTemp = new HashMap();
+					mapTemp.put("imgUrl",temp.getImgUrl());
+					mapTemp.put("title",temp.getTitle());
+					mapTemp.put("turned",temp.getTurned());
+					mapTemp.put("acreage",temp.getAcreage());
+					mapTemp.put("avgPrice",temp.getAvgPrice());
+					mapTemp.put("saleingNum",temp.getSaleingNum());
+					mapTemp.put("price",temp.getPrice());
+					bb.add(mapTemp);
+				}else if ("2".equals(temp.getType())){
+					//三室
+					Map mapTemp = new HashMap();
+					mapTemp.put("imgUrl",temp.getImgUrl());
+					mapTemp.put("title",temp.getTitle());
+					mapTemp.put("turned",temp.getTurned());
+					mapTemp.put("acreage",temp.getAcreage());
+					mapTemp.put("avgPrice",temp.getAvgPrice());
+					mapTemp.put("saleingNum",temp.getSaleingNum());
+					mapTemp.put("price",temp.getPrice());
+					cc.add(mapTemp);
+				}
+			}
+			Map mapResult = new HashMap();
+			mapResult.put("hotHand",hotHand);
+			mapResult.put("outdoorScene",a);
+			mapResult.put("layScene",b);
+			mapResult.put("oneRoom",aa);
+			mapResult.put("twoRoom",bb);
+			mapResult.put("threeRoom",cc);
+			result.put("code",ResultStatusUtils.STATUS_CODE_200);
+			result.put("msg","success");
+			result.put("model",mapResult);
+		} catch(Exception e) {
+			log.error("getHotHand异常 {}",map,e);
+			result.put("code",ResultStatusUtils.STATUS_CODE_203);
+			result.put("msg","service error");
+		}
+		return JSONArray.toJSONString(result);
 	}
 
 	/**

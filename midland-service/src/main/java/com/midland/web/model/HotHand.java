@@ -92,6 +92,7 @@ public class HotHand{
 	private String createTime;
 
 
+
 	public List<String> getImgUrlList() {
 		return imgUrlList;
 	}
