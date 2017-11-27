@@ -1,5 +1,6 @@
 package com.midland.controller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.CommunityAlbum;
 import com.midland.web.service.CommunityAlbumService;
 import com.midland.base.BaseFilter;
@@ -31,6 +32,7 @@ public class CommunityAlbumController extends BaseFilter  {
 	 **/
 	@RequestMapping("index")
 	public String communityAlbumIndex(CommunityAlbum communityAlbum,Model model) throws Exception {
+		model.addAttribute("item",communityAlbum);
 		return "communityAlbum/communityAlbumIndex";
 	}
 
@@ -39,6 +41,7 @@ public class CommunityAlbumController extends BaseFilter  {
 	 **/
 	@RequestMapping("to_add")
 	public String toAddCommunityAlbum(CommunityAlbum communityAlbum,Model model) throws Exception {
+		model.addAttribute("item",communityAlbum);
 		return "communityAlbum/addCommunityAlbum";
 	}
 
@@ -51,6 +54,9 @@ public class CommunityAlbumController extends BaseFilter  {
 		Map<String,Object> map = new HashMap<>();
 		try {
 			log.info("addCommunityAlbum {}",communityAlbum);
+			communityAlbum.setCreateTime(MidlandHelper.getCurrentTime());
+			communityAlbum.setIsDelete(Contant.isNotDelete);
+			communityAlbum.setIsShow(Contant.isShow);
 			communityAlbumServiceImpl.insertCommunityAlbum(communityAlbum);
 			map.put("state",0);
 		} catch(Exception e) {

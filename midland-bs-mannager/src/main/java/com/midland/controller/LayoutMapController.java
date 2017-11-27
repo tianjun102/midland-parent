@@ -1,8 +1,11 @@
 package com.midland.controller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.LayoutMap;
 import com.midland.web.service.LayoutMapService;
 import com.midland.base.BaseFilter;
+import com.midland.web.util.JsonMapReader;
+import com.midland.web.util.ParamObject;
 import org.slf4j.Logger;
 import java.util.Map;
 import java.util.HashMap;
@@ -31,6 +34,9 @@ public class LayoutMapController extends BaseFilter  {
 	 **/
 	@RequestMapping("index")
 	public String layoutMapIndex(LayoutMap layoutMap,Model model) throws Exception {
+		model.addAttribute("item",layoutMap);
+		List<ParamObject> ojbect = JsonMapReader.getMap("turned");
+		model.addAttribute("turneds",ojbect);
 		return "layoutMap/layoutMapIndex";
 	}
 
@@ -39,6 +45,9 @@ public class LayoutMapController extends BaseFilter  {
 	 **/
 	@RequestMapping("to_add")
 	public String toAddLayoutMap(LayoutMap layoutMap,Model model) throws Exception {
+		model.addAttribute("item",layoutMap);
+		List<ParamObject> ojbect = JsonMapReader.getMap("turned");
+		model.addAttribute("turneds",ojbect);
 		return "layoutMap/addLayoutMap";
 	}
 
@@ -51,6 +60,9 @@ public class LayoutMapController extends BaseFilter  {
 		Map<String,Object> map = new HashMap<>();
 		try {
 			log.info("addLayoutMap {}",layoutMap);
+			layoutMap.setCreateTime(MidlandHelper.getCurrentTime());
+			layoutMap.setIsDelete(Contant.isNotDelete);
+			layoutMap.setIsShow(Contant.isShow);
 			layoutMapServiceImpl.insertLayoutMap(layoutMap);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -94,6 +106,8 @@ public class LayoutMapController extends BaseFilter  {
 	public String toUpdateLayoutMap(Integer id,Model model) throws Exception {
 		LayoutMap result = layoutMapServiceImpl.selectLayoutMapById(id);
 		model.addAttribute("item",result);
+		List<ParamObject> ojbect = JsonMapReader.getMap("turned");
+		model.addAttribute("turneds",ojbect);
 		return "layoutMap/updateLayoutMap";
 	}
 
@@ -125,6 +139,8 @@ public class LayoutMapController extends BaseFilter  {
 			MidlandHelper.doPage(request);
 			Page<LayoutMap> result = (Page<LayoutMap>)layoutMapServiceImpl.findLayoutMapList(layoutMap);
 			Paginator paginator=result.getPaginator();
+			List<ParamObject> ojbect = JsonMapReader.getMap("turned");
+			model.addAttribute("turneds",ojbect);
 			model.addAttribute("paginator",paginator);
 			model.addAttribute("items",result);
 		} catch(Exception e) {

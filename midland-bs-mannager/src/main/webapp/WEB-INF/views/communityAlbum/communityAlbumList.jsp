@@ -14,14 +14,12 @@
     <table class="table table-bordered table-add">
         <thead>
             <tr>
-				<th style="width: 8%">type</th>
-				<th style="width: 8%">imgUrl</th>
-				<th style="width: 8%">isDelete</th>
-				<th style="width: 8%">isShow</th>
-				<th style="width: 8%">orderBy</th>
-				<th style="width: 8%">description</th>
-				<th style="width: 8%">hotHandId</th>
-				<th style="width: 8%">createTime</th>
+				<th style="width: 8%">类型</th>
+				<th style="width: 8%">图片</th>
+				<th style="width: 8%">删除状态</th>
+				<th style="width: 8%">显示状态</th>
+				<th style="width: 8%">图片描述</th>
+				<th style="width: 8%">创建时间</th>
                 <th style="width: 10%">操作</th>
             </tr>
         </thead>
@@ -31,13 +29,14 @@
                 <c:forEach items="${requestScope.items }" var="item" varStatus="xh">
                     <tr>
 						<input type="hidden" id="id" value="${item.id}"/>
-						<td>${item.type}</td>
+						<td><c:if test="${item.type ==0}">实景图</c:if>
+                            <c:if test="${item.type ==1}">户型图</c:if></td>
 						<td>${item.imgUrl}</td>
-						<td>${item.isDelete}</td>
-						<td>${item.isShow}</td>
-						<td>${item.orderBy}</td>
+						<td><c:if test="${item.isDelete ==0}">正常</c:if>
+                            <c:if test="${item.isDelete ==1}">删除</c:if></td>
+						<td><c:if test="${item.isShow ==0}">显示</c:if>
+                            <c:if test="${item.isShow ==1}">隐藏</c:if></td>
 						<td>${item.description}</td>
-						<td>${item.hotHandId}</td>
 						<td>${item.createTime}</td>
 						<td>
                             <a target="contentF" onclick="to_edit(${item.id })">编辑</a>

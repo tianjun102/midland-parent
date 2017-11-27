@@ -14,19 +14,17 @@
     <table class="table table-bordered table-add">
         <thead>
             <tr>
-				<th style="width: 8%">imgUrl</th>
-				<th style="width: 8%">type</th>
-				<th style="width: 8%">title</th>
-				<th style="width: 8%">turned</th>
-				<th style="width: 8%">acreage</th>
-				<th style="width: 8%">avgPrice</th>
-				<th style="width: 8%">saleingNum</th>
-				<th style="width: 8%">isDelete</th>
-				<th style="width: 8%">isShow</th>
-				<th style="width: 8%">orderBy</th>
-				<th style="width: 8%">price</th>
-				<th style="width: 8%">hotHandId</th>
-				<th style="width: 8%">createTime</th>
+				<th style="width: 8%">图片</th>
+				<th style="width: 8%">类型</th>
+				<th style="width: 8%">标题</th>
+				<th style="width: 8%">朝向</th>
+				<th style="width: 8%">面积</th>
+				<th style="width: 8%">均价</th>
+				<th style="width: 8%">在售套数</th>
+				<th style="width: 8%">删除状态</th>
+				<th style="width: 8%">显示状态</th>
+				<th style="width: 8%">价格</th>
+				<th style="width: 8%">创建时间</th>
                 <th style="width: 10%">操作</th>
             </tr>
         </thead>
@@ -37,17 +35,22 @@
                     <tr>
 						<input type="hidden" id="id" value="${item.id}"/>
 						<td>${item.imgUrl}</td>
-						<td>${item.type}</td>
+						<td><c:if test="${item.type ==0}">一室</c:if>
+                            <c:if test="${item.type ==1}">二室</c:if>
+                            <c:if test="${item.type ==2}">三室</c:if>
+                        </td>
 						<td>${item.title}</td>
-						<td>${item.turned}</td>
+						<td><c:forEach items="${turneds}" var="s">
+                            <c:if test="${item.turned == s.id}">${s.name}</c:if>
+                        </c:forEach></td>
 						<td>${item.acreage}</td>
 						<td>${item.avgPrice}</td>
 						<td>${item.saleingNum}</td>
-						<td>${item.isDelete}</td>
-						<td>${item.isShow}</td>
-						<td>${item.orderBy}</td>
+                        <td><c:if test="${item.isDelete ==0}">正常</c:if>
+                            <c:if test="${item.isDelete ==1}">删除</c:if></td>
+                        <td><c:if test="${item.isShow ==0}">显示</c:if>
+                            <c:if test="${item.isShow ==1}">隐藏</c:if></td>
 						<td>${item.price}</td>
-						<td>${item.hotHandId}</td>
 						<td>${item.createTime}</td>
 						<td>
                             <a target="contentF" onclick="to_edit(${item.id })">编辑</a>

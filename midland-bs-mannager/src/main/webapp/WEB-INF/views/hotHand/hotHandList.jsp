@@ -55,8 +55,8 @@
 						<td>${item.propertyManagement}</td>
 						<td>${item.position}</td>
 						<td>
-							<a target="contentF" href="${ctx}/rest/communityAlbum/index">小区图片</a>
-							<a target="contentF" href="${ctx}/rest/layoutMap/index">主推户型</a>
+							<a target="contentF" href="${ctx}/rest/communityAlbum/index?hotHandId=${item.id}">小区图片</a>
+							<a target="contentF" href="${ctx}/rest/layoutMap/index?hotHandId=${item.id}">主推户型</a>
 							<a target="contentF" href="${ctx}/rest/hotHand/to_update?id=${item.id}">编辑</a>
 							<a target="contentF" onclick="delete1(${item.id })">删除</a>
 						</td>

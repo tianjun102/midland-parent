@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@include file="../layout/tablib.jsp" %>
+<%@include file="../layout/source.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,29 +16,17 @@
     <form action="${ctx}/rest/communityAlbum/update" method="post" id="dataForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
-            <li><span>type：</span>
-               <input type="text" name="type" id="type" value="${item.type}"/>
+            <li class="col-md-6"><span>类型：</span>
+                <select name="type" id="type" class="dropdown">
+                    <option value="0" <c:if test="${item.type == 0}">selected</c:if> >实景图</option>
+                    <option value="1" <c:if test="${item.type == 1}">selected</c:if> >户型图</option>
+                </select>
             </li>
-            <li><span>imgUrl：</span>
+            <li><span>图片上传：</span>
                <input type="text" name="imgUrl" id="imgUrl" value="${item.imgUrl}"/>
             </li>
-            <li><span>isDelete：</span>
-               <input type="text" name="isDelete" id="isDelete" value="${item.isDelete}"/>
-            </li>
-            <li><span>isShow：</span>
-               <input type="text" name="isShow" id="isShow" value="${item.isShow}"/>
-            </li>
-            <li><span>orderBy：</span>
-               <input type="text" name="orderBy" id="orderBy" value="${item.orderBy}"/>
-            </li>
-            <li><span>description：</span>
+            <li><span>图片描述：</span>
                <input type="text" name="description" id="description" value="${item.description}"/>
-            </li>
-            <li><span>hotHandId：</span>
-               <input type="text" name="hotHandId" id="hotHandId" value="${item.hotHandId}"/>
-            </li>
-            <li><span>createTime：</span>
-               <input type="text" name="createTime" id="createTime" value="${item.createTime}"/>
             </li>
             <li>
                 <span></span>

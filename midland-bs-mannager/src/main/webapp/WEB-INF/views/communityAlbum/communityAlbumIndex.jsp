@@ -16,19 +16,12 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
-				<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>
+				<a class = "setup"  target="contentF" href="${ctx}/rest/communityAlbum/to_add?hotHandId=${item.hotHandId}">新增</a>
 			</p>
 		<form action="${ctx }/rest/communityAlbum/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
-				<li><span>select：</span>
-					<select name="cityId" id="cityId" class="dropdown">
-						<option value="" >全部</option>
-						<c:forEach items="${citys}" var="item">
-						<option value="${item.id}" >${item.name}</option>
-						</c:forEach>
-					</select>
-				</li>
+				<input type="hidden" name="hotHandId" id="hotHandId" value="${item.hotHandId}"/>
 				<li><span>手机号码：</span>
 					<input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>
 				</li>
