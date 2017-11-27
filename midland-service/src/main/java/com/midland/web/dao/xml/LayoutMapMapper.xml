@@ -6,7 +6,11 @@
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
 		<result column="type" property="type" jdbcType="VARCHAR" />
-		<result column="description" property="description" jdbcType="LONGVARCHAR" />
+		<result column="title" property="title" jdbcType="LONGVARCHAR" />
+		<result column="turned" property="turned" jdbcType="INTEGER" />
+		<result column="acreage" property="acreage" jdbcType="VARCHAR" />
+		<result column="avg_price" property="avgPrice" jdbcType="DOUBLE" />
+		<result column="saleing_num" property="saleingNum" jdbcType="INTEGER" />
 		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
 		<result column="is_show" property="isShow" jdbcType="INTEGER" />
 		<result column="order_by" property="orderBy" jdbcType="INTEGER" />
@@ -16,7 +20,7 @@
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,img_url,type,description,is_delete,is_show,order_by,price,hot_hand_id,create_time
+		id,img_url,type,title,turned,acreage,avg_price,saleing_num,is_delete,is_show,order_by,price,hot_hand_id,create_time
 	</sql>
 
 	<select id="selectLayoutMapById" resultMap="BaseResultMap">
@@ -54,8 +58,20 @@
 			<if test="type != null">
 				type,
 			</if>
-			<if test="description != null">
-				description,
+			<if test="title != null">
+				title,
+			</if>
+			<if test="turned != null">
+				turned,
+			</if>
+			<if test="acreage != null">
+				acreage,
+			</if>
+			<if test="avgPrice != null">
+				avg_price,
+			</if>
+			<if test="saleingNum != null">
+				saleing_num,
 			</if>
 			<if test="isDelete != null">
 				is_delete,
@@ -84,8 +100,20 @@
 			<if test="type != null">
 				#{type,jdbcType=VARCHAR},
 			</if>
-			<if test="description != null">
-				#{description,jdbcType=LONGVARCHAR},
+			<if test="title != null">
+				#{title,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="turned != null">
+				#{turned,jdbcType=INTEGER},
+			</if>
+			<if test="acreage != null">
+				#{acreage,jdbcType=VARCHAR},
+			</if>
+			<if test="avgPrice != null">
+				#{avgPrice,jdbcType=DOUBLE},
+			</if>
+			<if test="saleingNum != null">
+				#{saleingNum,jdbcType=INTEGER},
 			</if>
 			<if test="isDelete != null">
 				#{isDelete,jdbcType=INTEGER},
@@ -115,8 +143,20 @@
 		<if test="type != null">
 			type= #{type,jdbcType=VARCHAR},
 		</if>
-		<if test="description != null">
-			description= #{description,jdbcType=LONGVARCHAR},
+		<if test="title != null">
+			title= #{title,jdbcType=LONGVARCHAR},
+		</if>
+		<if test="turned != null">
+			turned= #{turned,jdbcType=INTEGER},
+		</if>
+		<if test="acreage != null">
+			acreage= #{acreage,jdbcType=VARCHAR},
+		</if>
+		<if test="avgPrice != null">
+			avg_price= #{avgPrice,jdbcType=DOUBLE},
+		</if>
+		<if test="saleingNum != null">
+			saleing_num= #{saleingNum,jdbcType=INTEGER},
 		</if>
 		<if test="isDelete != null">
 			is_delete= #{isDelete,jdbcType=INTEGER},
@@ -148,8 +188,20 @@
 		<if test="type != null">
 			 and type= #{type,jdbcType=VARCHAR}
 		</if>
-		<if test="description != null">
-			 and description= #{description,jdbcType=LONGVARCHAR}
+		<if test="title != null">
+			 and title= #{title,jdbcType=LONGVARCHAR}
+		</if>
+		<if test="turned != null">
+			 and turned= #{turned,jdbcType=INTEGER}
+		</if>
+		<if test="acreage != null">
+			 and acreage= #{acreage,jdbcType=VARCHAR}
+		</if>
+		<if test="avgPrice != null">
+			 and avg_price= #{avgPrice,jdbcType=DOUBLE}
+		</if>
+		<if test="saleingNum != null">
+			 and saleing_num= #{saleingNum,jdbcType=INTEGER}
 		</if>
 		<if test="isDelete != null">
 			 and is_delete= #{isDelete,jdbcType=INTEGER}

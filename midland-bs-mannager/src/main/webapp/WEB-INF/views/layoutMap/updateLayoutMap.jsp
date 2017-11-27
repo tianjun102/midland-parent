@@ -21,8 +21,20 @@
             <li><span>type：</span>
                <input type="text" name="type" id="type" value="${item.type}"/>
             </li>
-            <li><span>description：</span>
-               <input type="text" name="description" id="description" value="${item.description}"/>
+            <li><span>title：</span>
+               <input type="text" name="title" id="title" value="${item.title}"/>
+            </li>
+            <li><span>turned：</span>
+               <input type="text" name="turned" id="turned" value="${item.turned}"/>
+            </li>
+            <li><span>acreage：</span>
+               <input type="text" name="acreage" id="acreage" value="${item.acreage}"/>
+            </li>
+            <li><span>avgPrice：</span>
+               <input type="text" name="avgPrice" id="avgPrice" value="${item.avgPrice}"/>
+            </li>
+            <li><span>saleingNum：</span>
+               <input type="text" name="saleingNum" id="saleingNum" value="${item.saleingNum}"/>
             </li>
             <li><span>isDelete：</span>
                <input type="text" name="isDelete" id="isDelete" value="${item.isDelete}"/>

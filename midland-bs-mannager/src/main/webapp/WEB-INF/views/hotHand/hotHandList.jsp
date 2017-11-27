@@ -6,6 +6,15 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Insert title here</title>
+	<style type="text/css">
+		.table-add tr td a {
+			display: inline-block;
+			width: 50px;
+			height: 20px;
+			margin: 0 5px;
+			background-size: contain!important;
+		}
+	</style>
 </head>
 <body>
 
@@ -14,13 +23,13 @@
 	<table class="table table-bordered table-add">
 		<thead>
 		<tr>
+			<th style="width: 8%">建筑类型</th>
+			<th style="width: 8%">物业座数</th>
 			<th style="width: 8%">均价</th>
 			<th style="width: 8%">入伙日期</th>
 			<th style="width: 8%">管理费用</th>
-			<th style="width: 8%">物业座数</th>
 			<th style="width: 8%">单位总数</th>
 			<th style="width: 8%">装修标准</th>
-			<th style="width: 8%">建筑类型</th>
 			<th style="width: 8%">物业地址</th>
 			<th style="width: 8%">开发商</th>
 			<th style="width: 8%">物业管理</th>
@@ -34,19 +43,21 @@
 				<c:forEach items="${requestScope.items }" var="item" varStatus="xh">
 					<tr>
 						<input type="hidden" id="id" value="${item.id}"/>
+						<td>${item.buildingType}</td>
+						<td>${item.unitTotal}</td>
 						<td>${item.price}</td>
 						<td>${item.intoTime}</td>
 						<td>${item.managerCosts}</td>
-						<td>${item.unitTotal}</td>
 						<td>${item.landArea}</td>
 						<td>${item.parkingNum}</td>
-						<td>${item.buildingType}</td>
 						<td>${item.propertyAddress}</td>
 						<td>${item.developer}</td>
 						<td>${item.propertyManagement}</td>
 						<td>${item.position}</td>
 						<td>
-							<a target="contentF" onclick="to_edit(${item.id })">编辑</a>
+							<a target="contentF" href="${ctx}/rest/communityAlbum/index">小区图片</a>
+							<a target="contentF" href="${ctx}/rest/layoutMap/index">主推户型</a>
+							<a target="contentF" href="${ctx}/rest/hotHand/to_update?id=${item.id}">编辑</a>
 							<a target="contentF" onclick="delete1(${item.id })">删除</a>
 						</td>
 					</tr>

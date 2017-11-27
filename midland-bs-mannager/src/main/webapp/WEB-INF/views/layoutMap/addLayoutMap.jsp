@@ -21,8 +21,20 @@
             <li><span>type：</span>
                <input type="text" name="type" id="type" ß/>
             </li>
-            <li><span>description：</span>
-               <input type="text" name="description" id="description" ß/>
+            <li><span>title：</span>
+               <input type="text" name="title" id="title" ß/>
+            </li>
+            <li><span>turned：</span>
+               <input type="text" name="turned" id="turned" ß/>
+            </li>
+            <li><span>acreage：</span>
+               <input type="text" name="acreage" id="acreage" ß/>
+            </li>
+            <li><span>avgPrice：</span>
+               <input type="text" name="avgPrice" id="avgPrice" ß/>
+            </li>
+            <li><span>saleingNum：</span>
+               <input type="text" name="saleingNum" id="saleingNum" ß/>
             </li>
             <li><span>isDelete：</span>
                <input type="text" name="isDelete" id="isDelete" ß/>

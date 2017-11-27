@@ -1,12 +1,93 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@include file="../layout/tablib.jsp" %>
+<%@include file="../layout/source.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
+    <style type="text/css">
+        .fileupload .fileupload-item {
+            display: inline-block;
+            position: relative;
+            width: 110px;
+            height: 64px;
+            margin: 10px 10px 0 0;
+            overflow: hidden;
+            border: 1px solid #ccc;
+        }
+
+        .fileupload-item img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .fileupload-item .xclose {
+            display: block;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+            text-align: center;
+            background: rgba(0, 0, 0, .7);
+            font-size: 14px;
+            color: #ddd;
+            cursor: pointer;
+        }
+    </style>
     <script type="text/javascript">
+
+
+        $(function () {
+            $('#file_upload').uploadify({
+                'swf': '${ctx }/assets/scripts/uploadify/uploadify.swf',
+                'uploader': '${ctx }/rest/upload/img',
+                'multi': true,// 是否支持多个文件上传
+                'buttonText': '上传文件',
+                'onUploadSuccess': function (file, data, response) {
+                    /*$("#imgUrl").attr("value", data);
+                    $("#iconImg1").attr("src", data);*/
+
+                    $(".fileupload").append("<span class='fileupload-item'><img src='" + data + "'><i class='xclose'>×</i></span>")
+                    $("#imgUrl").attr("value", data + "||" + $("#imgUrl").val());
+
+                    $(".xclose").on("click", function () {
+                        var temp = "";
+                        var $this = $(this);
+                        var $parent = $this.parent("span");
+                        var imgsrcs = $("#imgUrl").val();
+                        var imgsrc = $parent.find("img").attr("src");
+                        var imgArray = imgsrcs.split("||");
+                        for (var i = 0; i < imgArray.length; i++) {
+                            if (imgArray[i].match(imgsrc)) {
+                                continue;
+                            }
+                            if (imgArray[i] != "" && imgArray != null) {
+                                temp += imgArray[i] + "||";
+                            }
+                        }
+                        $("#imgUrl").val(temp);
+                        $parent.remove();
+                    });
+
+
+                },
+                'onQueueComplete': function (queueData) {
+                    if (queueData.uploadsSuccessful < 1) {
+                        alert('文件上传失败');
+                    }
+                }
+
+                // Your options here
+            });
+
+            function uploadClose() {
+
+            }
+        })
     </script>
 
 </head>
@@ -15,65 +96,77 @@
     <form action="${ctx}/rest/hotHand/update" method="post" id="dataForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
-            <li><span>price：</span>
+            <li><span>均价：</span>
                <input type="text" name="price" id="price" value="${item.price}"/>
             </li>
-            <li><span>intoTime：</span>
+            <li><span>入伙日期：</span>
                <input type="text" name="intoTime" id="intoTime" value="${item.intoTime}"/>
             </li>
-            <li><span>managerCosts：</span>
+            <li><span>管理费用：</span>
                <input type="text" name="managerCosts" id="managerCosts" value="${item.managerCosts}"/>
             </li>
-            <li><span>unitTotal：</span>
+            <li><span>物业座数：</span>
                <input type="text" name="unitTotal" id="unitTotal" value="${item.unitTotal}"/>
             </li>
-            <li><span>landArea：</span>
+            <li><span>占地面积：</span>
                <input type="text" name="landArea" id="landArea" value="${item.landArea}"/>
             </li>
-            <li><span>parkingNum：</span>
+            <li><span>车位总数：</span>
                <input type="text" name="parkingNum" id="parkingNum" value="${item.parkingNum}"/>
             </li>
-            <li><span>buildingType：</span>
+            <li><span>建筑类型：</span>
                <input type="text" name="buildingType" id="buildingType" value="${item.buildingType}"/>
             </li>
-            <li><span>propertyAddress：</span>
+            <li><span>建筑地址：</span>
                <input type="text" name="propertyAddress" id="propertyAddress" value="${item.propertyAddress}"/>
             </li>
-            <li><span>developer：</span>
+            <li><span>发展商：</span>
                <input type="text" name="developer" id="developer" value="${item.developer}"/>
             </li>
-            <li><span>buildingAddress：</span>
-               <input type="text" name="buildingAddress" id="buildingAddress" value="${item.buildingAddress}"/>
-            </li>
-            <li><span>propertyManagement：</span>
+
+            <li><span>物业管理：</span>
                <input type="text" name="propertyManagement" id="propertyManagement" value="${item.propertyManagement}"/>
             </li>
             <li><span>propertyDesc：</span>
                <input type="text" name="propertyDesc" id="propertyDesc" value="${item.propertyDesc}"/>
             </li>
-            <li><span>propertyAdvantages：</span>
+            <li><span>物业优点：</span>
                <input type="text" name="propertyAdvantages" id="propertyAdvantages" value="${item.propertyAdvantages}"/>
             </li>
-            <li><span>position：</span>
+            <li><span>地理位置：</span>
                <input type="text" name="position" id="position" value="${item.position}"/>
             </li>
-            <li><span>supporting：</span>
+            <li><span>配套信息：</span>
                <input type="text" name="supporting" id="supporting" value="${item.supporting}"/>
             </li>
-            <li><span>houseName：</span>
+            <li><span>房源名：</span>
                <input type="text" name="houseName" id="houseName" value="${item.houseName}"/>
             </li>
-            <li><span>imgUrl：</span>
-               <input type="text" name="imgUrl" id="imgUrl" value="${item.imgUrl}"/>
+            <li><span>图片url：</span></li>
+            <li><span style="vertical-align: top;">图片上传：</span>
+                <div class="fileupload">
+                    <input type="hidden" name="imgUrl" id="imgUrl" value="${item.imgUrl}">
+                    <input type="file" name="file_upload" id="file_upload"/>
+                </div>
             </li>
-            <li><span>agentName：</span>
+            <li><span>经纪人：</span>
                <input type="text" name="agentName" id="agentName" value="${item.agentName}"/>
             </li>
-            <li><span>agentId：</span>
-               <input type="text" name="agentId" id="agentId" value="${item.agentId}"/>
-            </li>
-            <li><span>createTime：</span>
+
+            <li><span>创建时间：</span>
                <input type="text" name="createTime" id="createTime" value="${item.createTime}"/>
+            </li>
+            <li><span>房源描述：</span>
+            <li id="textArea1" style="display: block;">
+                    <textarea style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;"
+                              name="propertyDesc"
+                              id="myEditor1" rows="" cols="">${item.propertyDesc}</textarea>
+            </li>
+            <li><span>物业优点：</span>
+            <li id="textArea2" style="display: block;">
+                    <textarea style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;"
+                              name="propertyAdvantages"
+                              id="myEditor2" rows="" cols="">${item.propertyAdvantages}</textarea>
             </li>
             <li>
                 <span></span>

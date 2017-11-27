@@ -16,7 +16,11 @@
             <tr>
 				<th style="width: 8%">imgUrl</th>
 				<th style="width: 8%">type</th>
-				<th style="width: 8%">description</th>
+				<th style="width: 8%">title</th>
+				<th style="width: 8%">turned</th>
+				<th style="width: 8%">acreage</th>
+				<th style="width: 8%">avgPrice</th>
+				<th style="width: 8%">saleingNum</th>
 				<th style="width: 8%">isDelete</th>
 				<th style="width: 8%">isShow</th>
 				<th style="width: 8%">orderBy</th>
@@ -34,7 +38,11 @@
 						<input type="hidden" id="id" value="${item.id}"/>
 						<td>${item.imgUrl}</td>
 						<td>${item.type}</td>
-						<td>${item.description}</td>
+						<td>${item.title}</td>
+						<td>${item.turned}</td>
+						<td>${item.acreage}</td>
+						<td>${item.avgPrice}</td>
+						<td>${item.saleingNum}</td>
 						<td>${item.isDelete}</td>
 						<td>${item.isShow}</td>
 						<td>${item.orderBy}</td>

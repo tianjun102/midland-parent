@@ -15,9 +15,25 @@ public class LayoutMap{
 	 **/
 	private String type;
 	/**
-	 * 描述
+	 * 标题
 	 **/
-	private String description;
+	private String title;
+	/**
+	 * 房屋朝向,0东，1东南，2南，3西南，4西，5西北，6北，7东北
+	 **/
+	private Integer turned;
+	/**
+	 * 面积
+	 **/
+	private String acreage;
+	/**
+	 * 均价
+	 **/
+	private Double avgPrice;
+	/**
+	 * 在售套数
+	 **/
+	private Integer saleingNum;
 	/**
 	 * 0=正常；1=删除
 	 **/
@@ -68,12 +84,44 @@ public class LayoutMap{
 		this.type = type;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public Integer getTurned() {
+		return turned;
+	}
+
+	public void setTurned(Integer turned) {
+		this.turned = turned;
+	}
+
+	public String getAcreage() {
+		return acreage;
+	}
+
+	public void setAcreage(String acreage) {
+		this.acreage = acreage;
+	}
+
+	public Double getAvgPrice() {
+		return avgPrice;
+	}
+
+	public void setAvgPrice(Double avgPrice) {
+		this.avgPrice = avgPrice;
+	}
+
+	public Integer getSaleingNum() {
+		return saleingNum;
+	}
+
+	public void setSaleingNum(Integer saleingNum) {
+		this.saleingNum = saleingNum;
 	}
 
 	public Integer getIsDelete() {
@@ -136,8 +184,20 @@ public class LayoutMap{
 		if (type != null) {
 			sb.append(", \"type\":\"").append(type).append("\"");
 		}
-		if (description != null) {
-			sb.append(", \"description\":\"").append(description).append("\"");
+		if (title != null) {
+			sb.append(", \"title\":\"").append(title).append("\"");
+		}
+		if (turned != null) {
+			sb.append(", \"turned\":\"").append(turned).append("\"");
+		}
+		if (acreage != null) {
+			sb.append(", \"acreage\":\"").append(acreage).append("\"");
+		}
+		if (avgPrice != null) {
+			sb.append(", \"avgPrice\":\"").append(avgPrice).append("\"");
+		}
+		if (saleingNum != null) {
+			sb.append(", \"saleingNum\":\"").append(saleingNum).append("\"");
 		}
 		if (isDelete != null) {
 			sb.append(", \"isDelete\":\"").append(isDelete).append("\"");
