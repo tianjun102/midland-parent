@@ -33,16 +33,6 @@
                     }
 
                 }
-//                'onUploadSuccess': function (file, data, response) {
-//
-//                },
-//                'onQueueComplete': function (queueData) {
-//                    if (queueData.uploadsSuccessful < 1) {
-//                        alert('文件上传失败');
-//                    }
-//                }
-
-                // Your options here
             });
         })
 

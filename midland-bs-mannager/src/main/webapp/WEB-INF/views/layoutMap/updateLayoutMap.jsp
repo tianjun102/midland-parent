@@ -7,50 +7,17 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
-    <style type="text/css">
-        .fileupload .fileupload-item {
-            display: inline-block;
-            position: relative;
-            width: 110px;
-            height: 64px;
-            margin: 10px 10px 0 0;
-            overflow: hidden;
-            border: 1px solid #ccc;
-        }
-
-        .fileupload-item img {
-            max-width: 100%;
-            max-height: 100%;
-        }
-
-        .fileupload-item .xclose {
-            display: block;
-            position: absolute;
-            right: 0;
-            top: 0;
-            width: 16px;
-            height: 16px;
-            line-height: 16px;
-            text-align: center;
-            background: rgba(0, 0, 0, .7);
-            font-size: 14px;
-            color: #ddd;
-            cursor: pointer;
-        }
-    </style>
     <script type="text/javascript">
         $(function () {
             $('#file_upload').uploadify({
                 'swf': '${ctx }/assets/scripts/uploadify/uploadify.swf',
                 'uploader': '${ctx }/rest/upload/img',
-                'multi': true,// 是否支持多个文件上传
+                'multi': false,// 是否支持多个文件上传
                 'buttonText': '上传文件',
+                'fileTypeExts': '*.bmp;*.jpg;*.png;*.tiff;*.gif;*.pcx;*.tga;*.exif;*.fpx;*.svg;*.psd;*.cdr;*.pcd;*.dxf;*.ufo;*.eps;*.ai;*.raw;*.WMF',                'onSelectError': uploadify_onSelectError,
                 'onUploadSuccess': function (file, data, response) {
-                    $(".fileupload").append("<span class='fileupload-item'><img src='" + data + "'><i class='xclose'>×</i></span>")
-                    $("#imgUrl").attr("value", data + "||" + $("#imgUrl").val());
-
-
-
+                    $("#imgUrl").attr("value", data);
+                    $("#iconImg1").attr("src", data);
                 },
                 'onQueueComplete': function (queueData) {
                     if (queueData.uploadsSuccessful < 1) {
@@ -61,6 +28,7 @@
                 // Your options here
             });
         })
+
     </script>
 
 </head>
@@ -102,11 +70,12 @@
             <li><span>价格：</span>
                <input type="text" name="price" id="price" value="${item.price}"/>
             </li>
-            <li><span style="vertical-align: top;">图片上传：</span>
-                <div class="fileupload">
+            <li><span>图片上传：</span>
+                <div style="width: 250px;float: left;">
                     <input type="hidden" name="imgUrl" id="imgUrl" value="${item.imgUrl}">
+
+                    <img style="margin-bottom: 10px;max-width:80px;max-height:80px" id="iconImg1" src="${item.imgUrl}">
                     <input type="file" name="file_upload" id="file_upload"/>
-                    <span class='fileupload-item'><img src='${item.imgUrl}'><i class='xclose'>×</i></span>
                 </div>
             </li>
             <li>
@@ -167,7 +136,27 @@
             }
         });
     }
-
+    var uploadify_onSelectError = function (file, errorCode, errorMsg) {
+        var msgText = "上传失败\n";
+        switch (errorCode) {
+            case SWFUpload.QUEUE_ERROR.QUEUE_LIMIT_EXCEEDED:
+                //this.queueData.errorMsg = "每次最多上传 " + this.settings.queueSizeLimit + "个文件";
+                msgText += "每次最多上传 " + this.settings.queueSizeLimit + "个文件";
+                break;
+            case SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT:
+                msgText += "文件大小超过限制( " + this.settings.fileSizeLimit + " )";
+                break;
+            case SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE:
+                msgText += "文件大小为0";
+                break;
+            case SWFUpload.QUEUE_ERROR.INVALID_FILETYPE:
+                msgText += "文件格式不正确，仅限 " + this.settings.fileTypeExts;
+                break;
+            default:
+                msgText += "错误代码：" + errorCode + "\n" + errorMsg;
+        }
+        alert(msgText);
+    };
     //取消
     function closeWin() {
         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
