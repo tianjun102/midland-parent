@@ -22,11 +22,16 @@
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
 				<input type="hidden" name="hotHandId" id="hotHandId" value="${item.hotHandId}"/>
-				<li><span>手机号码：</span>
-					<input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>
+				<li class="col-md-6"><span>类型：</span>
+					<select name="type" id="type" class="dropdown">
+						<option value="" >全部</option>
+						<option value="0" <c:if test="${item.type == 0}">selected</c:if> >实景图</option>
+						<option value="1" <c:if test="${item.type == 1}">selected</c:if> >户型图</option>
+					</select>
 				</li>
 				<li>
 					<input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/>
+					<a  style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;" class = "public_btn bg1"  href="${ctx}/rest/hotHand/index" target="contentF">返回</a></li>
 				</li>
 			</ul>
 			</form>

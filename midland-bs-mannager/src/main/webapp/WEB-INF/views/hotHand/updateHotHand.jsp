@@ -100,7 +100,9 @@
                <input type="text" name="price" id="price" value="${item.price}"/>
             </li>
             <li><span>入伙日期：</span>
-               <input type="text" name="intoTime" id="intoTime" value="${item.intoTime}"/>
+                <input type="text" name="intoTime" id="intoTime" onblur="notEmpty('intoTime','intoTime','')"
+                       value="${item.intoTime}" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" maxlength="50"/>
+
             </li>
             <li><span>管理费用：</span>
                <input type="text" name="managerCosts" id="managerCosts" value="${item.managerCosts}"/>
@@ -123,12 +125,8 @@
             <li><span>发展商：</span>
                <input type="text" name="developer" id="developer" value="${item.developer}"/>
             </li>
-
             <li><span>物业管理：</span>
                <input type="text" name="propertyManagement" id="propertyManagement" value="${item.propertyManagement}"/>
-            </li>
-            <li><span>propertyDesc：</span>
-               <input type="text" name="propertyDesc" id="propertyDesc" value="${item.propertyDesc}"/>
             </li>
             <li><span>物业优点：</span>
                <input type="text" name="propertyAdvantages" id="propertyAdvantages" value="${item.propertyAdvantages}"/>
@@ -147,15 +145,15 @@
                 <div class="fileupload">
                     <input type="hidden" name="imgUrl" id="imgUrl" value="${item.imgUrl}">
                     <input type="file" name="file_upload" id="file_upload"/>
+                    <c:forEach items="${item.imgUrlList }" var="s">
+                        <span class='fileupload-item'><img src='${s}'><i class='xclose'>×</i></span>
+                    </c:forEach>
                 </div>
             </li>
             <li><span>经纪人：</span>
                <input type="text" name="agentName" id="agentName" value="${item.agentName}"/>
             </li>
 
-            <li><span>创建时间：</span>
-               <input type="text" name="createTime" id="createTime" value="${item.createTime}"/>
-            </li>
             <li><span>房源描述：</span>
             <li id="textArea1" style="display: block;">
                     <textarea style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;"
@@ -179,6 +177,25 @@
 </section>
 
 <script type="text/javascript">
+
+    $(".fileupload").delegate(".xclose","click", function () {
+        var temp = "";
+        var $this = $(this);
+        var $parent = $this.parent("span");
+        var imgsrcs = $("#imgUrl").val();
+        var imgsrc = $parent.find("img").attr("src");
+        var imgArray = imgsrcs.split("||");
+        for (var i = 0; i < imgArray.length; i++) {
+            if (imgArray[i].match(imgsrc)) {
+                continue;
+            }
+            if (imgArray[i] != "" && imgArray != null) {
+                temp += imgArray[i] + "||";
+            }
+        }
+        $("#imgUrl").val(temp);
+        $parent.remove();
+    });
     //保存数据
     function updateData() {
         var data = $("#dataForm").serialize();
@@ -212,6 +229,63 @@
         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
         parent.layer.close(index);
     }
+</script>
+<script type="text/javascript">
+
+    HasCheked = true;
+    UE.getEditor('myEditor1');
+    UE.getEditor('myEditor2');
+
+
+    function subumintBanner() {
+        layer.open({
+            type: 1,
+            skin: 'layer-style',
+            area: ['350px', '200px'],
+            shadeClose: false, //点击遮罩关闭
+            title: ['编辑'],
+            resize: false,
+            scrollbar: false,
+            content:
+            '<section class = "content" style = "border:none; height:100%;">' +
+            '<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">确定要保存么?</p>' +
+            '</section>',
+            btn: ['确定', '取消'],
+            yes: function (index) {
+
+
+                var data = $("#formId").serialize();
+                $.ajax({
+                    type: "post",
+                    url: "${ctx}/rest/footer/update",
+                    async: false, // 此处必须同步
+                    dataType: "json",
+                    data: data,
+                    success: function (data) {
+                        if (data.state == 0) {
+                            layer.msg("保存成功！", {icon: 1});
+                            window.location.reload();
+                        } else {
+                            layer.msg("保存失败！", {icon: 2});
+                        }
+                    },
+                    error: function () {
+                        layer.msg("保存失败！", {icon: 2});
+                    }
+
+                });
+
+
+            }
+            , success: function (layero) {
+                var btn = layero.find('.layui-layer-btn');
+                btn.css('text-align', 'center');
+            }
+        });
+
+    }
+
+
 </script>
 </body>
 </html>

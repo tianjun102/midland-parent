@@ -3,7 +3,10 @@ package com.midland.controller;
 import com.midland.web.model.HotHand;
 import com.midland.web.service.HotHandService;
 import com.midland.base.BaseFilter;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
+
+import java.util.Arrays;
 import java.util.Map;
 import java.util.HashMap;
 import org.slf4j.LoggerFactory;
@@ -93,6 +96,13 @@ public class HotHandController extends BaseFilter  {
 	@RequestMapping("to_update")
 	public String toUpdateHotHand(Integer id,Model model) throws Exception {
 		HotHand result = hotHandServiceImpl.selectHotHandById(id);
+		if (result!=null){
+			if (StringUtils.isNotEmpty(result.getImgUrl())){
+				String[] array = result.getImgUrl().split("\\|\\|");
+				List<String> imglist = Arrays.asList(array);
+				result.setImgUrlList(imglist);
+			}
+		}
 		model.addAttribute("item",result);
 		return "hotHand/updateHotHand";
 	}

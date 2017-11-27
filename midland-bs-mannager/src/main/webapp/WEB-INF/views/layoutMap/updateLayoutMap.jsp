@@ -7,7 +7,60 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
+    <style type="text/css">
+        .fileupload .fileupload-item {
+            display: inline-block;
+            position: relative;
+            width: 110px;
+            height: 64px;
+            margin: 10px 10px 0 0;
+            overflow: hidden;
+            border: 1px solid #ccc;
+        }
+
+        .fileupload-item img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .fileupload-item .xclose {
+            display: block;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+            text-align: center;
+            background: rgba(0, 0, 0, .7);
+            font-size: 14px;
+            color: #ddd;
+            cursor: pointer;
+        }
+    </style>
     <script type="text/javascript">
+        $(function () {
+            $('#file_upload').uploadify({
+                'swf': '${ctx }/assets/scripts/uploadify/uploadify.swf',
+                'uploader': '${ctx }/rest/upload/img',
+                'multi': true,// 是否支持多个文件上传
+                'buttonText': '上传文件',
+                'onUploadSuccess': function (file, data, response) {
+                    $(".fileupload").append("<span class='fileupload-item'><img src='" + data + "'><i class='xclose'>×</i></span>")
+                    $("#imgUrl").attr("value", data + "||" + $("#imgUrl").val());
+
+
+
+                },
+                'onQueueComplete': function (queueData) {
+                    if (queueData.uploadsSuccessful < 1) {
+                        alert('文件上传失败');
+                    }
+                }
+
+                // Your options here
+            });
+        })
     </script>
 
 </head>
@@ -17,9 +70,7 @@
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <input type="hidden" name="hotHandId" id="hotHandId" value="${item.hotHandId}">
-            <li><span>图片上传：</span>
-               <input type="text" name="imgUrl" id="imgUrl" value="${item.imgUrl}"/>
-            </li>
+
             <li><span>类型：</span>
                 <select name="type" id="type" class="dropdown">
                     <option value="0" <c:if test="${item.type == 0}">selected</c:if> >一室</option>
@@ -51,6 +102,13 @@
             <li><span>价格：</span>
                <input type="text" name="price" id="price" value="${item.price}"/>
             </li>
+            <li><span style="vertical-align: top;">图片上传：</span>
+                <div class="fileupload">
+                    <input type="hidden" name="imgUrl" id="imgUrl" value="${item.imgUrl}">
+                    <input type="file" name="file_upload" id="file_upload"/>
+                    <span class='fileupload-item'><img src='${item.imgUrl}'><i class='xclose'>×</i></span>
+                </div>
+            </li>
             <li>
                 <span></span>
                 <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">更新</a>
@@ -62,6 +120,26 @@
 </section>
 
 <script type="text/javascript">
+
+    $(".fileupload").delegate(".xclose","click", function () {
+        var temp = "";
+        var $this = $(this);
+        var $parent = $this.parent("span");
+        var imgsrcs = $("#imgUrl").val();
+        var imgsrc = $parent.find("img").attr("src");
+        var imgArray = imgsrcs.split("||");
+        for (var i = 0; i < imgArray.length; i++) {
+            if (imgArray[i].match(imgsrc)) {
+                continue;
+            }
+            if (imgArray[i] != "" && imgArray != null) {
+                temp += imgArray[i] + "||";
+            }
+        }
+        $("#imgUrl").val(temp);
+        $parent.remove();
+    });
+
     //保存数据
     function updateData() {
         var data = $("#dataForm").serialize();

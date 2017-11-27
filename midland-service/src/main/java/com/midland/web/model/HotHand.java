@@ -1,6 +1,8 @@
 package com.midland.web.model;
 
 
+import java.util.List;
+
 public class HotHand{
 	/**
 	 * 热卖一手主键id
@@ -74,6 +76,8 @@ public class HotHand{
 	 * 图片url
 	 **/
 	private String imgUrl;
+
+	private List<String> imgUrlList;
 	/**
 	 * 经纪人名
 	 **/
@@ -87,6 +91,14 @@ public class HotHand{
 	 **/
 	private String createTime;
 
+
+	public List<String> getImgUrlList() {
+		return imgUrlList;
+	}
+
+	public void setImgUrlList(List<String> imgUrlList) {
+		this.imgUrlList = imgUrlList;
+	}
 
 	public Integer getId() {
 		return id;
