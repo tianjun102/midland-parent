@@ -3,6 +3,7 @@ package com.midland.controller;
 import com.midland.web.model.HotHand;
 import com.midland.web.service.HotHandService;
 import com.midland.base.BaseFilter;
+import com.midland.web.service.SettingService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 
@@ -28,12 +29,14 @@ public class HotHandController extends BaseFilter  {
 	private Logger log = LoggerFactory.getLogger(HotHandController.class);
 	@Autowired
 	private HotHandService hotHandServiceImpl;
-
+	@Autowired
+	private SettingService settingServiceImpl;
 	/**
 	 * 
 	 **/
 	@RequestMapping("index")
 	public String hotHandIndex(HotHand hotHand,Model model) throws Exception {
+		settingServiceImpl.getAllProvinceList(model);
 		return "hotHand/hotHandIndex";
 	}
 
@@ -42,6 +45,7 @@ public class HotHandController extends BaseFilter  {
 	 **/
 	@RequestMapping("to_add")
 	public String toAddHotHand(HotHand hotHand,Model model) throws Exception {
+		settingServiceImpl.getAllProvinceList(model);
 		return "hotHand/addHotHand";
 	}
 
@@ -103,6 +107,7 @@ public class HotHandController extends BaseFilter  {
 				result.setImgUrlList(imglist);
 			}
 		}
+		settingServiceImpl.getAllProvinceList(model);
 		model.addAttribute("item",result);
 		return "hotHand/updateHotHand";
 	}

@@ -96,6 +96,7 @@
     <form action="${ctx}/rest/hotHand/update" method="post" id="dataForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
+            <%@include file="../menu/area_required.jsp" %>
             <li><span>均价：</span>
                <input type="text" name="price" id="price" value="${item.price}"/>
             </li>
@@ -199,6 +200,10 @@
     });
     //保存数据
     function updateData() {
+        if (!checkSelect('citys','请选择市级')){
+            return;
+        }
+
         var data = $("#dataForm").serialize();
         debugger;
         $.ajax({

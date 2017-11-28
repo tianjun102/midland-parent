@@ -20,6 +20,7 @@
 		<form action="${ctx }/rest/hotHand/list" method="POST" id="searchForm"
 			  onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
+				<%@include file="../menu/indexArea.jsp" %>
 				<li><span>select：</span>
 					<select name="cityId" id="cityId" class="dropdown">
 						<option value="" >全部</option>

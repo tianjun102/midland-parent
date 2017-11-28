@@ -90,8 +90,24 @@ public class HotHand{
 	 * 创建时间
 	 **/
 	private String createTime;
+	private String cityId;
+	private String cityName;
 
+	public String getCityId() {
+		return cityId;
+	}
 
+	public void setCityId(String cityId) {
+		this.cityId = cityId;
+	}
+
+	public String getCityName() {
+		return cityName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
 
 	public List<String> getImgUrlList() {
 		return imgUrlList;
@@ -334,6 +350,10 @@ public class HotHand{
 		}
 		if (createTime != null) {
 			sb.append(", \"createTime\":\"").append(createTime).append("\"");
+		}if (cityId != null) {
+			sb.append(", \"cityId\":\"").append(cityId).append("\"");
+		}if (cityName != null) {
+			sb.append(", \"cityName\":\"").append(cityName).append("\"");
 		}
 		sb.append("}");
 		return sb.toString();
