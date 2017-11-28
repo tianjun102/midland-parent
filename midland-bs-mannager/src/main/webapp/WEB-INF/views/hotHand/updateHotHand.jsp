@@ -140,9 +140,13 @@
             <li><span>房源名：</span>
                <input type="text" name="houseName" id="houseName" value="${item.houseName}"/>
             </li>
-            <li><span>图片url：</span></li>
-            <li><span style="vertical-align: top;">图片上传：</span>
-                <div class="fileupload">
+            <li><span>经纪人：</span>
+               <input type="text" name="agentName" id="agentName" value="${item.agentName}"/>
+            </li>
+            <li style="width: 100%;">
+                <span>图片url：</span>
+                <%--<span style="vertical-align: top;">图片上传：</span>--%>
+                <div class="fileupload" style="margin-left: 70px;font-size: 0;">
                     <input type="hidden" name="imgUrl" id="imgUrl" value="${item.imgUrl}">
                     <input type="file" name="file_upload" id="file_upload"/>
                     <c:forEach items="${item.imgUrlList }" var="s">
@@ -150,12 +154,9 @@
                     </c:forEach>
                 </div>
             </li>
-            <li><span>经纪人：</span>
-               <input type="text" name="agentName" id="agentName" value="${item.agentName}"/>
-            </li>
 
-            <li><span>房源描述：</span>
-            <li id="textArea1" style="display: block;">
+            <li id="textArea1" style="width: 100%;">
+                <span style="display: block;float: none;">房源描述：</span>
                     <textarea style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;"
                               name="propertyDesc"
                               id="myEditor1" rows="" cols="">${item.propertyDesc}</textarea>
