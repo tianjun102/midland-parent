@@ -13,6 +13,8 @@ public interface CommunityAlbumMapper {
 
 	int updateCommunityAlbumById(CommunityAlbum communityAlbum);
 
+	int getMaxOrderBy(CommunityAlbum communityAlbum);
+
 	int insertCommunityAlbum(CommunityAlbum communityAlbum);
 
 	List<CommunityAlbum> findCommunityAlbumList(CommunityAlbum communityAlbum);

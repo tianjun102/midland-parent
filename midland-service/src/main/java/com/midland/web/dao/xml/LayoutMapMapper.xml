@@ -23,6 +23,11 @@
 		id,img_url,type,title,turned,acreage,avg_price,saleing_num,is_delete,is_show,order_by,price,hot_hand_id,create_time
 	</sql>
 
+	<select id="getMaxOrderBy" resultType="java.lang.Integer">
+		select order_by from layout_map where hot_hand_id=#{hotHandId}
+		order by order_by desc limit 1;
+	</select>
+
 	<select id="selectLayoutMapById" resultMap="BaseResultMap">
 		select <include refid="Base_Column_List" /> from layout_map
 		 where id= #{id}
@@ -47,6 +52,7 @@
 		where 
 		is_delete=0
 		<include refid="select_option" />
+		order by order_by desc
 	</select>
 
 	<insert id="insertLayoutMap" parameterType="com.midland.web.model.LayoutMap">

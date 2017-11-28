@@ -59,6 +59,10 @@
 							<a target="contentF" href="${ctx}/rest/layoutMap/index?hotHandId=${item.id}">主推户型</a>
 							<a target="contentF" href="${ctx}/rest/hotHand/to_update?id=${item.id}">编辑</a>
 							<a target="contentF" onclick="delete1(${item.id })">删除</a>
+							<a target="contentF" title="上移" class="up_img"
+							   onclick="sort(${item.id },${item.orderBy},2)"></a>
+							<a target="contentF" title="下移" class="down_img"
+							   onclick="sort(${item.id },${item.orderBy},1)"></a>
 						</td>
 					</tr>
 				</c:forEach>
@@ -80,6 +84,30 @@
 </c:if>
 
 <script type="text/javascript">
+
+    //排序
+    function sort(id, orderById, sort) {
+        var data = $("#searchForm").serialize();
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/hotHand/sort?sort=" + sort + "&orderBy=" + orderById + "&id=" + id,
+            async: false, // 此处必须同步
+            dataType: "json",
+            data: data,
+            success: function (data) {
+                if (data.state == 0) {
+                    $('#searchForm').submit();
+                } else {
+                    layer.msg("操作频繁！", {icon: 2});
+                }
+            },
+            error: function () {
+                layer.msg("操作失败！", {icon: 2});
+            }
+        })
+    }
+
+
 
     function delete1(id){
         $.ajax({

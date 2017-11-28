@@ -1,7 +1,10 @@
 package com.midland.controller;
 
 import com.midland.web.Contants.Contant;
+import com.midland.web.model.CommunityAlbum;
 import com.midland.web.model.LayoutMap;
+import com.midland.web.model.temp.ListDescOtherParam;
+import com.midland.web.service.JdbcService;
 import com.midland.web.service.LayoutMapService;
 import com.midland.base.BaseFilter;
 import com.midland.web.util.JsonMapReader;
@@ -28,7 +31,8 @@ public class LayoutMapController extends BaseFilter  {
 	private Logger log = LoggerFactory.getLogger(LayoutMapController.class);
 	@Autowired
 	private LayoutMapService layoutMapServiceImpl;
-
+	@Autowired
+	private JdbcService jdbcService;
 	/**
 	 * 
 	 **/
@@ -63,6 +67,8 @@ public class LayoutMapController extends BaseFilter  {
 			layoutMap.setCreateTime(MidlandHelper.getCurrentTime());
 			layoutMap.setIsDelete(Contant.isNotDelete);
 			layoutMap.setIsShow(Contant.isShow);
+			int maxOrderBy = layoutMapServiceImpl.getMaxOrderBy(layoutMap.getHotHandId());
+			layoutMap.setOrderBy(maxOrderBy);
 			layoutMapServiceImpl.insertLayoutMap(layoutMap);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -149,5 +155,25 @@ public class LayoutMapController extends BaseFilter  {
 			model.addAttribute("items",null);
 		}
 		return "layoutMap/layoutMapList";
+	}
+
+	@RequestMapping("sort")
+	@ResponseBody
+	public Map listDesc(LayoutMap layoutMap, int sort, Model model, HttpServletRequest request) throws Exception {
+		String primaryKeyName="id";
+		String primaryParam=String.valueOf(layoutMap.getId());
+		String tableName="layout_map";
+		String orderByColumn="order_by";
+		ListDescOtherParam obj = new ListDescOtherParam();
+		String orderByParam=String.valueOf(layoutMap.getOrderBy());
+		Map map = new HashMap();
+		try {
+			jdbcService.otherListDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,obj,sort);
+			map.put("state",0);
+		} catch (Exception e) {
+			log.error("",e);
+			map.put("state",-1);
+		}
+		return map;
 	}
 }

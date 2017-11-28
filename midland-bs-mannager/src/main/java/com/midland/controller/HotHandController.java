@@ -1,8 +1,11 @@
 package com.midland.controller;
 
 import com.midland.web.model.HotHand;
+import com.midland.web.model.temp.ListDescOtherParam;
+import com.midland.web.model.user.User;
 import com.midland.web.service.HotHandService;
 import com.midland.base.BaseFilter;
+import com.midland.web.service.JdbcService;
 import com.midland.web.service.SettingService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -31,12 +34,17 @@ public class HotHandController extends BaseFilter  {
 	private HotHandService hotHandServiceImpl;
 	@Autowired
 	private SettingService settingServiceImpl;
+	@Autowired
+	private JdbcService jdbcService;
+
 	/**
 	 * 
 	 **/
 	@RequestMapping("index")
-	public String hotHandIndex(HotHand hotHand,Model model) throws Exception {
+	public String hotHandIndex(HotHand hotHand,Model model,HttpServletRequest request) throws Exception {
 		settingServiceImpl.getAllProvinceList(model);
+		User user = MidlandHelper.getCurrentUser(request);
+		model.addAttribute("isSuper",user.getIsSuper());
 		return "hotHand/hotHandIndex";
 	}
 
@@ -58,6 +66,8 @@ public class HotHandController extends BaseFilter  {
 		Map<String,Object> map = new HashMap<>();
 		try {
 			log.info("addHotHand {}",hotHand);
+			int maxOrderBy = hotHandServiceImpl.getMaxOrderBy();
+			hotHand.setOrderBy(maxOrderBy);
 			hotHandServiceImpl.insertHotHand(hotHand);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -138,6 +148,10 @@ public class HotHandController extends BaseFilter  {
 		try {
 			log.info("findHotHandList  {}",hotHand);
 			MidlandHelper.doPage(request);
+			User user = MidlandHelper.getCurrentUser(request);
+			if (",".equals(hotHand.getCityId())||StringUtils.isEmpty(hotHand.getCityId())){
+				hotHand.setCityId(user.getCityId());
+			}
 			Page<HotHand> result = (Page<HotHand>)hotHandServiceImpl.findHotHandList(hotHand);
 			Paginator paginator=result.getPaginator();
 			model.addAttribute("paginator",paginator);
@@ -149,4 +163,32 @@ public class HotHandController extends BaseFilter  {
 		}
 		return "hotHand/hotHandList";
 	}
+
+	@RequestMapping("sort")
+	@ResponseBody
+	public Map listDesc(HotHand hotHand, int sort, Model model, HttpServletRequest request) throws Exception {
+		String primaryKeyName="id";
+		String primaryParam=String.valueOf(hotHand.getId());
+		String tableName="hot_hand";
+		String orderByColumn="order_by";
+		ListDescOtherParam obj = new ListDescOtherParam();
+		if (",".equals(hotHand.getCityId())||StringUtils.isEmpty(hotHand.getCityId())){
+			User currUser = MidlandHelper.getCurrentUser(request);
+			obj.setCityId(currUser.getCityId());
+
+		}else{
+			obj.setCityId(hotHand.getCityId());
+		}
+		String orderByParam=String.valueOf(hotHand.getOrderBy());
+		Map map = new HashMap();
+		try {
+			jdbcService.otherListDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,obj,sort);
+			map.put("state",0);
+		} catch (Exception e) {
+			log.error("",e);
+			map.put("state",-1);
+		}
+		return map;
+	}
+
 }

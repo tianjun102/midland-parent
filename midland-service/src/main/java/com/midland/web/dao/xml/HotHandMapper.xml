@@ -23,14 +23,21 @@
         <result column="supporting" property="supporting" jdbcType="VARCHAR"/>
         <result column="house_name" property="houseName" jdbcType="VARCHAR"/>
         <result column="img_url" property="imgUrl" jdbcType="VARCHAR"/>
+        <result column="order_by" property="orderBy" jdbcType="INTEGER" />
         <result column="agent_name" property="agentName" jdbcType="VARCHAR"/>
         <result column="agent_id" property="agentId" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-		id,price,DATE_FORMAT(into_time,'%Y-%m-%d %H:%i:%s')into_time,manager_costs,unit_total,land_area,parking_num,building_type,property_address,developer,building_address,property_management,property_desc,property_advantages,position,supporting,house_name,img_url,agent_name,agent_id,DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s')create_time
+		id,price,DATE_FORMAT(into_time,'%Y-%m-%d %H:%i:%s')into_time,manager_costs,unit_total,land_area,parking_num,building_type,property_address,developer,building_address,property_management,property_desc,property_advantages,position,supporting,house_name,img_url,agent_name,agent_id,DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s')create_time,order_by
 	</sql>
+
+    <select id="getMaxOrderBy" resultType="java.lang.Integer">
+        select order_by from hot_hand
+        order by order_by desc limit 1;
+    </select>
+
 
     <select id="selectHotHandById" resultMap="BaseResultMap">
         select
@@ -60,6 +67,7 @@
         where
         is_delete=0
         <include refid="select_option"/>
+        order by order_by desc
     </select>
 
     <insert id="insertHotHand" parameterType="com.midland.web.model.HotHand">
@@ -131,6 +139,9 @@
             <if test="cityName != null">
                 city_name,
             </if>
+            <if test="orderBy != null">
+                order_by,
+            </if>
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -199,6 +210,9 @@
             </if>
             <if test="cityName != null">
                 #{cityName,jdbcType=VARCHAR},
+            </if>
+            <if test="orderBy != null">
+                #{orderBy,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -282,6 +296,12 @@
         <if test="intoTime != null">
             and into_time= #{intoTime,jdbcType=TIMESTAMP}
         </if>
+        <if test="startTime != null">
+            and into_time &gt; #{startTime}
+        </if>
+        <if test="endTime != null">
+            and into_time &lt; #{endTime}
+        </if>
         <if test="managerCosts != null">
             and manager_costs= #{managerCosts,jdbcType=VARCHAR}
         </if>
@@ -301,7 +321,7 @@
             and property_address= #{propertyAddress,jdbcType=VARCHAR}
         </if>
         <if test="developer != null">
-            and developer= #{developer,jdbcType=VARCHAR}
+            and developer like CONCAT(CONCAT('%', #{developer}), '%')
         </if>
         <if test="buildingAddress != null">
             and building_address= #{buildingAddress,jdbcType=VARCHAR}
@@ -316,7 +336,7 @@
             and property_advantages= #{propertyAdvantages,jdbcType=LONGVARCHAR}
         </if>
         <if test="position != null">
-            and position= #{position,jdbcType=VARCHAR}
+            and position like CONCAT(CONCAT('%', #{position}), '%')
         </if>
         <if test="supporting != null">
             and supporting= #{supporting,jdbcType=VARCHAR}

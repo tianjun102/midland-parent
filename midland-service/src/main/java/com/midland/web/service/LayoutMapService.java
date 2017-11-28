@@ -4,7 +4,9 @@ import com.midland.web.model.LayoutMap;
 import java.util.List;
 public interface LayoutMapService {
 
-	/**
+    int getMaxOrderBy(Integer hotHandId);
+
+    /**
 	 * 主键查询
 	 **/
 	LayoutMap selectLayoutMapById(Integer id);

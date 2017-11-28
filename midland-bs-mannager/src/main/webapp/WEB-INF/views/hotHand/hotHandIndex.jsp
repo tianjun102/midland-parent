@@ -20,18 +20,19 @@
 		<form action="${ctx }/rest/hotHand/list" method="POST" id="searchForm"
 			  onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
-				<%@include file="../menu/indexArea.jsp" %>
-				<li><span>select：</span>
-					<select name="cityId" id="cityId" class="dropdown">
-						<option value="" >全部</option>
-						<c:forEach items="${citys}" var="item">
-							<option value="${item.id}" >${item.name}</option>
-						</c:forEach>
-					</select>
+				<%@include file="../menu/area.jsp" %>
+				<li><span>开发商：</span>
+					<input type="text" name="developer" id="developer" placeholder="请输入开发商" /></li>
 				</li>
-				<li><span>手机号码：</span>
-					<input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>
+				<li><span>地理位置：</span>
+					<input type="text" name="position" id="position" placeholder="请输入地理位置" /></li>
 				</li>
+				<li><span>入伙时间：</span><input class="Wdate half" id="time1"
+											 onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time2\')}'})"
+											 name="startTime" /> <em class = "gang">-</em><input
+						class="Wdate half"
+						onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'time1\')}'})"
+						id="time2" name="endTime" /></li>
 				<li>
 					<input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/>
 				</li>

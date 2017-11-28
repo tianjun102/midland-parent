@@ -1,5 +1,6 @@
 package com.midland.web.service.impl;
 
+import com.midland.web.model.CommunityAlbum;
 import com.midland.web.model.HotHand;
 import com.midland.web.dao.HotHandMapper;
 import com.midland.web.service.HotHandService;
@@ -28,7 +29,11 @@ public class HotHandServiceImpl implements HotHandService {
 			throw e;
 		}
 	}
-
+	@Override
+	public int getMaxOrderBy() {
+		Integer result = hotHandMapper.getMaxOrderBy();
+		return result==null?0:result+1;
+	}
 	/**
 	 * 查询
 	 **/

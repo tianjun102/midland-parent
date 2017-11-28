@@ -4,7 +4,9 @@ import com.midland.web.model.HotHand;
 import java.util.List;
 public interface HotHandService {
 
-	/**
+    int getMaxOrderBy();
+
+    /**
 	 * 主键查询
 	 **/
 	HotHand selectHotHandById(Integer id);

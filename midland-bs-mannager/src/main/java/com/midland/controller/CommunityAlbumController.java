@@ -2,8 +2,13 @@ package com.midland.controller;
 
 import com.midland.web.Contants.Contant;
 import com.midland.web.model.CommunityAlbum;
+import com.midland.web.model.HotHand;
+import com.midland.web.model.temp.ListDescOtherParam;
+import com.midland.web.model.user.User;
 import com.midland.web.service.CommunityAlbumService;
 import com.midland.base.BaseFilter;
+import com.midland.web.service.JdbcService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import java.util.Map;
 import java.util.HashMap;
@@ -26,7 +31,8 @@ public class CommunityAlbumController extends BaseFilter  {
 	private Logger log = LoggerFactory.getLogger(CommunityAlbumController.class);
 	@Autowired
 	private CommunityAlbumService communityAlbumServiceImpl;
-
+	@Autowired
+	private JdbcService jdbcService;
 	/**
 	 * 
 	 **/
@@ -57,6 +63,8 @@ public class CommunityAlbumController extends BaseFilter  {
 			communityAlbum.setCreateTime(MidlandHelper.getCurrentTime());
 			communityAlbum.setIsDelete(Contant.isNotDelete);
 			communityAlbum.setIsShow(Contant.isShow);
+			int maxOrderBy = communityAlbumServiceImpl.getMaxOrderBy(communityAlbum.getHotHandId());
+			communityAlbum.setOrderBy(maxOrderBy);
 			communityAlbumServiceImpl.insertCommunityAlbum(communityAlbum);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -139,5 +147,25 @@ public class CommunityAlbumController extends BaseFilter  {
 			model.addAttribute("items",null);
 		}
 		return "communityAlbum/communityAlbumList";
+	}
+
+	@RequestMapping("sort")
+	@ResponseBody
+	public Map listDesc(CommunityAlbum communityAlbum, int sort, Model model, HttpServletRequest request) throws Exception {
+		String primaryKeyName="id";
+		String primaryParam=String.valueOf(communityAlbum.getId());
+		String tableName="community_album";
+		String orderByColumn="order_by";
+		ListDescOtherParam obj = new ListDescOtherParam();
+		String orderByParam=String.valueOf(communityAlbum.getOrderBy());
+		Map map = new HashMap();
+		try {
+			jdbcService.otherListDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,obj,sort);
+			map.put("state",0);
+		} catch (Exception e) {
+			log.error("",e);
+			map.put("state",-1);
+		}
+		return map;
 	}
 }
