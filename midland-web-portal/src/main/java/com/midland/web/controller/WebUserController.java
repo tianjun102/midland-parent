@@ -28,10 +28,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -329,6 +326,9 @@ public class WebUserController extends WebCommonsController {
 				}
 				int i = userService.editUserById(user);
 				result.setNumber(i);
+				Map<Object,Object> resultMap = new HashMap<Object,Object>();
+				resultMap.put("headImg",headImg);
+				result.setMap(resultMap);
 				result.setCode(ResultStatusUtils.STATUS_CODE_200);
 				result.setMsg(Result.resultMsg.SUCCESS.toString());
 			}
