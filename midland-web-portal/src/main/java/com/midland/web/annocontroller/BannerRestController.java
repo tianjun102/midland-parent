@@ -10,6 +10,7 @@ import com.midland.web.commons.core.util.ResultStatusUtils;
 import java.util.HashMap;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import com.github.pagehelper.Paginator;
 import java.util.Map;
 import com.midland.web.util.MidlandHelper;
 import javax.servlet.http.HttpServletRequest;
+@CrossOrigin(origins = "*", maxAge = 360)
 @RestController
 @SuppressWarnings("all")
 @RequestMapping("/banner/")

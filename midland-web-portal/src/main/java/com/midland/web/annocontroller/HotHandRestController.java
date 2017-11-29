@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
+import com.midland.web.Contants.Contant;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
 import com.midland.web.model.CommunityAlbum;
@@ -12,7 +13,9 @@ import com.midland.web.model.LayoutMap;
 import com.midland.web.service.CommunityAlbumService;
 import com.midland.web.service.HotHandService;
 import com.midland.web.service.LayoutMapService;
+import com.midland.web.service.impl.PublicService;
 import com.midland.web.util.MidlandHelper;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @SuppressWarnings("all")
@@ -38,7 +38,8 @@ public class HotHandRestController extends BaseFilter {
     private CommunityAlbumService communityAlbumServiceImpl;
     @Autowired
     private LayoutMapService lyoutMapServiceImpl;
-
+    @Autowired
+    private PublicService publicServiceImpl;
 
     /**
      * 新增
@@ -90,25 +91,31 @@ public class HotHandRestController extends BaseFilter {
             Integer id = (Integer) map.get("id");
             log.info("getHotHandById  {}", id);
             HotHand hotHand = hotHandServiceImpl.selectHotHandById(id);
+            if (StringUtils.isNotEmpty(hotHand.getImgUrl())){
+                String[] array = hotHand.getImgUrl().split("\\|\\|");
+                List<String> imgList = Arrays.asList(array);
+                hotHand.setImgUrlList(imgList);
+            }else{
+                hotHand.setImgUrlList(Collections.EMPTY_LIST);
+            }
             CommunityAlbum communityAlbum = new CommunityAlbum();
             communityAlbum.setHotHandId(hotHand.getId());
             List<CommunityAlbum> communityAlbumResult = communityAlbumServiceImpl.findCommunityAlbumList(communityAlbum);
             List<Map> a = new ArrayList<>();
             List<Map> b = new ArrayList<>();
             for (CommunityAlbum temp : communityAlbumResult) {
-                if (temp.getType() == 1) {
+                if (temp.getType() == 0) {
                     //实景
                     Map mapTemp = new HashMap();
                     mapTemp.put("imgUrl", temp.getImgUrl());
                     mapTemp.put("description", temp.getDescription());
                     a.add(mapTemp);
-
-                } else if (temp.getType() == 2) {
+                } else if (temp.getType() == 1) {
                     //户型
                     Map mapTemp = new HashMap();
                     mapTemp.put("imgUrl", temp.getImgUrl());
                     mapTemp.put("description", temp.getDescription());
-                    a.add(mapTemp);
+                    b.add(mapTemp);
                 }
             }
             LayoutMap layoutMap = new LayoutMap();
@@ -171,7 +178,6 @@ public class HotHandRestController extends BaseFilter {
         }
         return JSONArray.toJSONString(result);
     }
-
     /**
      * 更新
      **/

@@ -69,9 +69,15 @@ public class Contant {
 	 */
 	public static final String APPOINT_CACHE_KEY="midland:appoint:cache:key";
 
-	public static final String Colle_CACHE_KEY="midland:colle:cache:key";
+	/**
+	 * 收藏功能的redis  KEY
+	 */
+	public static final String COLLE_CACHE_KEY ="midland:colle:cache:key";
 
-
+	/**
+	 * 外销网类型的houseType
+	 */
+	public static final Integer OUT_SALE_CACHE_KEY=-1;
 	/**
 	 * 短信模板
 	 */
