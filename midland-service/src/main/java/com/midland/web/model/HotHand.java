@@ -112,30 +112,14 @@ public class HotHand {
     private List<String> imgUrlList;
     private String startTime;
     private String endTime;
-
-    public List<String> getImgUrlList() {
-        return imgUrlList;
-    }
-
-    public void setImgUrlList(List<String> imgUrlList) {
-        this.imgUrlList = imgUrlList;
-    }
-
-    public String getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-    }
+    /**
+     * 特色
+     */
+    private String feature;
+    /**
+     * 主推户型
+     */
+    private String recommend;
 
     public Integer getId() {
         return id;
@@ -233,11 +217,11 @@ public class HotHand {
         this.developer = developer;
     }
 
-    public Integer getdecoration() {
+    public Integer getDecoration() {
         return decoration;
     }
 
-    public void setdecoration(Integer decoration) {
+    public void setDecoration(Integer decoration) {
         this.decoration = decoration;
     }
 
@@ -343,6 +327,46 @@ public class HotHand {
 
     public void setIsShow(Integer isShow) {
         this.isShow = isShow;
+    }
+
+    public List<String> getImgUrlList() {
+        return imgUrlList;
+    }
+
+    public void setImgUrlList(List<String> imgUrlList) {
+        this.imgUrlList = imgUrlList;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getFeature() {
+        return feature;
+    }
+
+    public void setFeature(String feature) {
+        this.feature = feature;
+    }
+
+    public String getRecommend() {
+        return recommend;
+    }
+
+    public void setRecommend(String recommend) {
+        this.recommend = recommend;
     }
 
     @Override

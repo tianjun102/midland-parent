@@ -108,6 +108,12 @@
             <li><span>管理费用：</span>
                <input type="text" name="managerCosts" id="managerCosts" value="${item.managerCosts}"/>
             </li>
+            <li><span>主推户型：</span>
+                <input type="text" name="recommend" id="recommend" value="${item.recommend}"/>
+            </li>
+            <li><span>特色：</span>
+                <input type="text" name="feature" id="feature" value="${item.feature}"/>
+            </li>
             <li><span>物业座数：</span>
                <input type="text" name="unitTotal" id="unitTotal" value="${item.unitTotal}"/>
             </li>
