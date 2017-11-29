@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="../layout/tablib.jsp"%>
+<%@include file="../layout/tablib.jsp" %>
+<%@include file="../layout/source.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,24 +16,22 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
-				<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>
+				<a class = "setup"  target="contentF" href="${ctx}/rest/communityAlbum/to_add?hotHandId=${item.hotHandId}">新增</a>
 			</p>
 		<form action="${ctx }/rest/communityAlbum/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
-				<li><span>select：</span>
-					<select name="cityId" id="cityId" class="dropdown">
+				<input type="hidden" name="hotHandId" id="hotHandId" value="${item.hotHandId}"/>
+				<li class="col-md-6"><span>类型：</span>
+					<select name="type" id="type" class="dropdown">
 						<option value="" >全部</option>
-						<c:forEach items="${citys}" var="item">
-						<option value="${item.id}" >${item.name}</option>
-						</c:forEach>
+						<option value="0" <c:if test="${item.type == 0}">selected</c:if> >实景图</option>
+						<option value="1" <c:if test="${item.type == 1}">selected</c:if> >户型图</option>
 					</select>
-				</li>
-				<li><span>手机号码：</span>
-					<input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>
 				</li>
 				<li>
 					<input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/>
+					<a  style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;" class = "public_btn bg1"  href="${ctx}/rest/hotHand/index" target="contentF">返回</a></li>
 				</li>
 			</ul>
 			</form>
@@ -46,7 +45,7 @@
             layer.open({
                 type: 2,
                 skin: 'layer-style',
-                area: ['500px','700px'],
+                area: ['500px','500px'],
                 shadeClose: false, //点击遮罩关闭
                 title:['新增'],
                 resize: false,

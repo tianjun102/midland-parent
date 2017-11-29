@@ -4,6 +4,8 @@ import com.midland.web.model.CommunityAlbum;
 import java.util.List;
 public interface CommunityAlbumService {
 
+	int getMaxOrderBy(Integer hotHandId);
+
 	/**
 	 * 主键查询
 	 **/

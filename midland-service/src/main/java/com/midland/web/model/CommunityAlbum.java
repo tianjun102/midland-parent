@@ -7,7 +7,7 @@ public class CommunityAlbum{
 	 **/
 	private Integer id;
 	/**
-	 * 图片类型 1=实景图；2=户型图
+	 * 图片类型 0=实景图；1=户型图
 	 **/
 	private Integer type;
 	/**

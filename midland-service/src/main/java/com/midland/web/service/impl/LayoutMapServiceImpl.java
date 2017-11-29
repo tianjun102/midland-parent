@@ -1,5 +1,6 @@
 package com.midland.web.service.impl;
 
+import com.midland.web.model.CommunityAlbum;
 import com.midland.web.model.LayoutMap;
 import com.midland.web.dao.LayoutMapMapper;
 import com.midland.web.service.LayoutMapService;
@@ -27,6 +28,14 @@ public class LayoutMapServiceImpl implements LayoutMapService {
 			log.error("insertLayoutMap异常 {}",layoutMap,e);
 			throw e;
 		}
+	}
+
+	@Override
+	public int getMaxOrderBy(Integer hotHandId) {
+		LayoutMap layoutMap = new LayoutMap();
+		layoutMap.setHotHandId(hotHandId);
+		Integer result = layoutMapMapper.getMaxOrderBy(layoutMap);
+		return result==null?0:result+1;
 	}
 
 	/**

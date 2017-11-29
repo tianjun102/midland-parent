@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@include file="../layout/tablib.jsp" %>
+<%@include file="../layout/source.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,35 +13,39 @@
 </head>
 <body>
 <section class="content" style="border:none;">
-    <form action="${ctx}/rest/layoutMap/add" method="post" id="dataForm">
+    <form action="${ctx}/rest/layoutMap/update" method="post" id="dataForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
-            <li><span>imgUrl：</span>
-               <input type="text" name="imgUrl" id="imgUrl" ß/>
+            <input type="hidden" name="hotHandId" id="hotHandId" value="${item.hotHandId}">
+            <li><span>图片上传：</span>
+                <input type="text" name="imgUrl" id="imgUrl" value="${item.imgUrl}"/>
             </li>
-            <li><span>type：</span>
-               <input type="text" name="type" id="type" ß/>
+            <li><span>类型：</span>
+                <input type="text" name="type" id="type" value="${item.type}"/>
             </li>
-            <li><span>description：</span>
-               <input type="text" name="description" id="description" ß/>
+            <li><span>标题：</span>
+                <input type="text" name="title" id="title" value="${item.title}"/>
             </li>
-            <li><span>isDelete：</span>
-               <input type="text" name="isDelete" id="isDelete" ß/>
+            <li><span>朝向：</span>
+                <select name="turned" id="turned" class="dropdown" disabled="disabled">
+                    <c:forEach items="${turneds}" var="s">
+                        <option value="${s.id}" <c:if test="${s.id==entrust.turned}">selected</c:if>>
+                                ${s.name}
+                        </option>
+                    </c:forEach>
+                </select>
             </li>
-            <li><span>isShow：</span>
-               <input type="text" name="isShow" id="isShow" ß/>
+            <li><span>面积：</span>
+                <input type="text" name="acreage" id="acreage" value="${item.acreage}"/>
             </li>
-            <li><span>orderBy：</span>
-               <input type="text" name="orderBy" id="orderBy" ß/>
+            <li><span>均价：</span>
+                <input type="text" name="avgPrice" id="avgPrice" value="${item.avgPrice}"/>
             </li>
-            <li><span>price：</span>
-               <input type="text" name="price" id="price" ß/>
+            <li><span>在售套数：</span>
+                <input type="text" name="saleingNum" id="saleingNum" value="${item.saleingNum}"/>
             </li>
-            <li><span>hotHandId：</span>
-               <input type="text" name="hotHandId" id="hotHandId" ß/>
-            </li>
-            <li><span>createTime：</span>
-               <input type="text" name="createTime" id="createTime" ß/>
+            <li><span>价格：</span>
+                <input type="text" name="price" id="price" value="${item.price}"/>
             </li>
             <li>
                 <span></span>

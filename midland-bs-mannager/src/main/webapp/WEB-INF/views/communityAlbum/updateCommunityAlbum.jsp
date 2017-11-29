@@ -1,43 +1,57 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@include file="../layout/tablib.jsp" %>
+<%@include file="../layout/source.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
     <script type="text/javascript">
-    </script>
+        $(function () {
+            $('#file_upload').uploadify({
+                'swf': '${ctx }/assets/scripts/uploadify/uploadify.swf',
+                'uploader': '${ctx }/rest/upload/img',
+                'multi': false,// 是否支持多个文件上传
+                'buttonText': '上传文件',
+                'fileTypeExts': '*.bmp;*.jpg;*.png;*.tiff;*.gif;*.pcx;*.tga;*.exif;*.fpx;*.svg;*.psd;*.cdr;*.pcd;*.dxf;*.ufo;*.eps;*.ai;*.raw;*.WMF',                'onSelectError': uploadify_onSelectError,
+                'onUploadSuccess': function (file, data, response) {
+                    $("#imgUrl").attr("value", data);
+                    $("#iconImg1").attr("src", data);
+                },
+                'onQueueComplete': function (queueData) {
+                    if (queueData.uploadsSuccessful < 1) {
+                        alert('文件上传失败');
+                    }
+                }
 
+                // Your options here
+            });
+       })
+
+    </script>
 </head>
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/communityAlbum/update" method="post" id="dataForm">
-        <ul class="userinfo row">
+        <ul class="userinfo updInfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
-            <li><span>type：</span>
-               <input type="text" name="type" id="type" value="${item.type}"/>
+            <li ><span>类型：</span>
+                <select name="type" id="type" class="dropdown">
+                    <option value="0" <c:if test="${item.type == 0}">selected</c:if> >实景图</option>
+                    <option value="1" <c:if test="${item.type == 1}">selected</c:if> >户型图</option>
+                </select>
             </li>
-            <li><span>imgUrl：</span>
-               <input type="text" name="imgUrl" id="imgUrl" value="${item.imgUrl}"/>
+            <li><span>图片上传：</span>
+                <div style="width: 250px;float: left;">
+                    <input type="hidden" name="imgUrl" id="imgUrl" value="${item.imgUrl}">
+
+                    <img style="margin-bottom: 10px;max-width:80px;max-height:80px" id="iconImg1" src="${item.imgUrl}">
+                    <input type="file" name="file_upload" id="file_upload"/>
+                </div>
             </li>
-            <li><span>isDelete：</span>
-               <input type="text" name="isDelete" id="isDelete" value="${item.isDelete}"/>
-            </li>
-            <li><span>isShow：</span>
-               <input type="text" name="isShow" id="isShow" value="${item.isShow}"/>
-            </li>
-            <li><span>orderBy：</span>
-               <input type="text" name="orderBy" id="orderBy" value="${item.orderBy}"/>
-            </li>
-            <li><span>description：</span>
+            <li><span>图片描述：</span>
                <input type="text" name="description" id="description" value="${item.description}"/>
-            </li>
-            <li><span>hotHandId：</span>
-               <input type="text" name="hotHandId" id="hotHandId" value="${item.hotHandId}"/>
-            </li>
-            <li><span>createTime：</span>
-               <input type="text" name="createTime" id="createTime" value="${item.createTime}"/>
             </li>
             <li>
                 <span></span>
@@ -77,6 +91,28 @@
             }
         });
     }
+
+    var uploadify_onSelectError = function (file, errorCode, errorMsg) {
+        var msgText = "上传失败\n";
+        switch (errorCode) {
+            case SWFUpload.QUEUE_ERROR.QUEUE_LIMIT_EXCEEDED:
+                //this.queueData.errorMsg = "每次最多上传 " + this.settings.queueSizeLimit + "个文件";
+                msgText += "每次最多上传 " + this.settings.queueSizeLimit + "个文件";
+                break;
+            case SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT:
+                msgText += "文件大小超过限制( " + this.settings.fileSizeLimit + " )";
+                break;
+            case SWFUpload.QUEUE_ERROR.ZERO_BYTE_FILE:
+                msgText += "文件大小为0";
+                break;
+            case SWFUpload.QUEUE_ERROR.INVALID_FILETYPE:
+                msgText += "文件格式不正确，仅限 " + this.settings.fileTypeExts;
+                break;
+            default:
+                msgText += "错误代码：" + errorCode + "\n" + errorMsg;
+        }
+        alert(msgText);
+    };
 
     //取消
     function closeWin() {

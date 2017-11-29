@@ -12,6 +12,7 @@ public interface HotHandMapper {
 	int updateHotHandById(HotHand hotHand);
 
 	int insertHotHand(HotHand hotHand);
+	int getMaxOrderBy();
 
 	List<HotHand> findHotHandList(HotHand hotHand);
 

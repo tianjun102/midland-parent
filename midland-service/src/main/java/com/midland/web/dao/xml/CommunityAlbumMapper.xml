@@ -18,6 +18,11 @@
 		id,type,img_url,is_delete,is_show,order_by,description,hot_hand_id,create_time
 	</sql>
 
+	<select id="getMaxOrderBy" resultType="java.lang.Integer">
+		select order_by from community_album where hot_hand_id=#{hotHandId}
+		order by order_by desc limit 1;
+	</select>
+
 	<select id="selectCommunityAlbumById" resultMap="BaseResultMap">
 		select <include refid="Base_Column_List" /> from community_album
 		 where id= #{id}
@@ -42,6 +47,7 @@
 		where 
 		is_delete=0
 		<include refid="select_option" />
+		ORDER BY order_by desc
 	</select>
 
 	<insert id="insertCommunityAlbum" parameterType="com.midland.web.model.CommunityAlbum">

@@ -7,13 +7,17 @@
 		<result column="price" property="price" jdbcType="VARCHAR" />
 		<result column="into_time" property="intoTime" jdbcType="TIMESTAMP" />
 		<result column="manager_costs" property="managerCosts" jdbcType="VARCHAR" />
+		<result column="city_id" property="cityId" jdbcType="VARCHAR" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
 		<result column="unit_total" property="unitTotal" jdbcType="VARCHAR" />
 		<result column="land_area" property="landArea" jdbcType="VARCHAR" />
 		<result column="parking_num" property="parkingNum" jdbcType="VARCHAR" />
 		<result column="building_type" property="buildingType" jdbcType="VARCHAR" />
 		<result column="property_address" property="propertyAddress" jdbcType="VARCHAR" />
 		<result column="developer" property="developer" jdbcType="VARCHAR" />
-		<result column="building_address" property="buildingAddress" jdbcType="VARCHAR" />
+		<result column="decoration" property="decoration" jdbcType="INTEGER" />
+		<result column="recommend" property="recommend" jdbcType="VARCHAR" />
+		<result column="feature" property="feature" jdbcType="VARCHAR" />
 		<result column="property_management" property="propertyManagement" jdbcType="VARCHAR" />
 		<result column="property_desc" property="propertyDesc" jdbcType="LONGVARCHAR" />
 		<result column="property_advantages" property="propertyAdvantages" jdbcType="LONGVARCHAR" />
@@ -24,10 +28,13 @@
 		<result column="agent_name" property="agentName" jdbcType="VARCHAR" />
 		<result column="agent_id" property="agentId" jdbcType="VARCHAR" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+		<result column="order_by" property="orderBy" jdbcType="INTEGER" />
+		<result column="is_show" property="isShow" jdbcType="INTEGER" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,price,into_time,manager_costs,unit_total,land_area,parking_num,building_type,property_address,developer,building_address,property_management,property_desc,property_advantages,position,supporting,house_name,img_url,agent_name,agent_id,create_time
+		id,price,DATE_FORMAT(into_time,'%Y-%m-%d %H:%i:%s')into_time,manager_costs,city_id,city_name,unit_total,land_area,parking_num,building_type,property_address,developer,decoration,property_management,property_desc,property_advantages,position,supporting,house_name,img_url,agent_name,agent_id,DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s')create_time,is_delete,order_by,is_show,feature,recommend
 	</sql>
 
 	<select id="selectHotHandById" resultMap="BaseResultMap">
@@ -54,7 +61,14 @@
 		where 
 		is_delete=0
 		<include refid="select_option" />
+		ORDER BY order_by desc
 	</select>
+
+	<select id="getMaxOrderBy" resultType="java.lang.Integer">
+		select order_by from hot_hand
+		order by order_by desc limit 1;
+	</select>
+
 
 	<insert id="insertHotHand" parameterType="com.midland.web.model.HotHand">
 		insert into hot_hand
@@ -67,6 +81,12 @@
 			</if>
 			<if test="managerCosts != null">
 				manager_costs,
+			</if>
+			<if test="cityId != null">
+				city_id,
+			</if>
+			<if test="cityName != null">
+				city_name,
 			</if>
 			<if test="unitTotal != null">
 				unit_total,
@@ -86,8 +106,8 @@
 			<if test="developer != null">
 				developer,
 			</if>
-			<if test="buildingAddress != null">
-				building_address,
+			<if test="decoration != null">
+				decoration,
 			</if>
 			<if test="propertyManagement != null">
 				property_management,
@@ -119,6 +139,22 @@
 			<if test="createTime != null">
 				create_time,
 			</if>
+			<if test="isDelete != null">
+				is_delete,
+			</if>
+			<if test="orderBy != null">
+				order_by,
+			</if>
+			<if test="isShow != null">
+				is_show,
+			</if>
+			<if test="feature != null">
+				feature,
+			</if>
+			<if test="recommend != null">
+				recommend,
+			</if>
+
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -130,6 +166,12 @@
 			</if>
 			<if test="managerCosts != null">
 				#{managerCosts,jdbcType=VARCHAR},
+			</if>
+			<if test="cityId != null">
+				#{cityId,jdbcType=VARCHAR},
+			</if>
+			<if test="cityName != null">
+				#{cityName,jdbcType=VARCHAR},
 			</if>
 			<if test="unitTotal != null">
 				#{unitTotal,jdbcType=VARCHAR},
@@ -149,8 +191,8 @@
 			<if test="developer != null">
 				#{developer,jdbcType=VARCHAR},
 			</if>
-			<if test="buildingAddress != null">
-				#{buildingAddress,jdbcType=VARCHAR},
+			<if test="decoration != null">
+				#{decoration,jdbcType=INTEGER},
 			</if>
 			<if test="propertyManagement != null">
 				#{propertyManagement,jdbcType=VARCHAR},
@@ -182,6 +224,21 @@
 			<if test="createTime != null">
 				#{createTime,jdbcType=TIMESTAMP},
 			</if>
+			<if test="isDelete != null">
+				#{isDelete,jdbcType=INTEGER},
+			</if>
+			<if test="orderBy != null">
+				#{orderBy,jdbcType=INTEGER},
+			</if>
+			<if test="isShow != null">
+				#{isShow,jdbcType=INTEGER},
+			</if>
+			 <if test="feature != null">
+				#{feature,jdbcType=VARCHAR},
+			</if>
+			<if test="recommend != null">
+				#{recommend,jdbcType=VARCHAR},
+			</if>
 		</trim>
 	</insert>
 
@@ -194,6 +251,12 @@
 		</if>
 		<if test="managerCosts != null">
 			manager_costs= #{managerCosts,jdbcType=VARCHAR},
+		</if>
+		<if test="cityId != null">
+			city_id= #{cityId,jdbcType=VARCHAR},
+		</if>
+		<if test="cityName != null">
+			city_name= #{cityName,jdbcType=VARCHAR},
 		</if>
 		<if test="unitTotal != null">
 			unit_total= #{unitTotal,jdbcType=VARCHAR},
@@ -213,8 +276,8 @@
 		<if test="developer != null">
 			developer= #{developer,jdbcType=VARCHAR},
 		</if>
-		<if test="buildingAddress != null">
-			building_address= #{buildingAddress,jdbcType=VARCHAR},
+		<if test="decoration != null">
+			decoration= #{decoration,jdbcType=INTEGER},
 		</if>
 		<if test="propertyManagement != null">
 			property_management= #{propertyManagement,jdbcType=VARCHAR},
@@ -246,6 +309,22 @@
 		<if test="createTime != null">
 			create_time= #{createTime,jdbcType=TIMESTAMP},
 		</if>
+		<if test="isDelete != null">
+			is_delete= #{isDelete,jdbcType=INTEGER},
+		</if>
+		<if test="orderBy != null">
+			order_by= #{orderBy,jdbcType=INTEGER},
+		</if>
+		<if test="isShow != null">
+			is_show= #{isShow,jdbcType=INTEGER},
+		</if>
+		<if test="feature != null">
+			feature= #{feature,jdbcType=VARCHAR},
+		</if>
+		<if test="recommend != null">
+			recommend= #{recommend,jdbcType=VARCHAR},
+		</if>
+
 	</sql>
 
 	<sql id="select_option">
@@ -258,14 +337,26 @@
 		<if test="intoTime != null">
 			 and into_time= #{intoTime,jdbcType=TIMESTAMP}
 		</if>
+		<if test="startTime != null">
+			and into_time &gt; #{startTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="endTime != null">
+			and into_time &lt; #{endTime,jdbcType=TIMESTAMP}
+		</if>
 		<if test="managerCosts != null">
 			 and manager_costs= #{managerCosts,jdbcType=VARCHAR}
+		</if>
+		<if test="cityId != null">
+			 and city_id= #{cityId,jdbcType=VARCHAR}
+		</if>
+		<if test="cityName != null">
+			 and city_name= #{cityName,jdbcType=VARCHAR}
 		</if>
 		<if test="unitTotal != null">
 			 and unit_total= #{unitTotal,jdbcType=VARCHAR}
 		</if>
 		<if test="landArea != null">
-			 and land_area= #{landArea,jdbcType=VARCHAR}
+			and land_area like CONCAT(CONCAT('%', #{landArea}), '%')
 		</if>
 		<if test="parkingNum != null">
 			 and parking_num= #{parkingNum,jdbcType=VARCHAR}
@@ -274,16 +365,16 @@
 			 and building_type= #{buildingType,jdbcType=VARCHAR}
 		</if>
 		<if test="propertyAddress != null">
-			 and property_address= #{propertyAddress,jdbcType=VARCHAR}
+			and property_address like CONCAT(CONCAT('%', #{propertyAddress}), '%')
 		</if>
 		<if test="developer != null">
-			 and developer= #{developer,jdbcType=VARCHAR}
+			and developer like CONCAT(CONCAT('%', #{developer}), '%')
 		</if>
-		<if test="buildingAddress != null">
-			 and building_address= #{buildingAddress,jdbcType=VARCHAR}
+		<if test="decoration != null">
+			and decoration like CONCAT(CONCAT('%', #{decoration}), '%')
 		</if>
 		<if test="propertyManagement != null">
-			 and property_management= #{propertyManagement,jdbcType=VARCHAR}
+			and property_management like CONCAT(CONCAT('%', #{propertyManagement}), '%')
 		</if>
 		<if test="propertyDesc != null">
 			 and property_desc= #{propertyDesc,jdbcType=LONGVARCHAR}
@@ -292,10 +383,10 @@
 			 and property_advantages= #{propertyAdvantages,jdbcType=LONGVARCHAR}
 		</if>
 		<if test="position != null">
-			 and position= #{position,jdbcType=VARCHAR}
+			and position like CONCAT(CONCAT('%', #{position}), '%')
 		</if>
 		<if test="supporting != null">
-			 and supporting= #{supporting,jdbcType=VARCHAR}
+			and supporting like CONCAT(CONCAT('%', #{supporting}), '%')
 		</if>
 		<if test="houseName != null">
 			 and house_name= #{houseName,jdbcType=VARCHAR}
@@ -311,6 +402,21 @@
 		</if>
 		<if test="createTime != null">
 			 and create_time= #{createTime,jdbcType=TIMESTAMP}
+		</if>
+		<if test="isDelete != null">
+			 and is_delete= #{isDelete,jdbcType=INTEGER}
+		</if>
+		<if test="orderBy != null">
+			 and order_by= #{orderBy,jdbcType=INTEGER}
+		</if>
+		<if test="isShow != null">
+			 and is_show= #{isShow,jdbcType=INTEGER}
+		</if>
+		<if test="feature != null">
+			and feature= #{feature,jdbcType=VARCHAR},
+		</if>
+		<if test="recommend != null">
+			AND recommend= #{recommend,jdbcType=VARCHAR},
 		</if>
 	</sql>
 

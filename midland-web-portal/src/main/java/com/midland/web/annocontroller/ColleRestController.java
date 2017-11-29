@@ -1,17 +1,12 @@
 package com.midland.web.annocontroller;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
-import com.midland.core.util.SmsUtil;
 import com.midland.web.Contants.Contant;
 import com.midland.web.api.ApiHelper;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
-import com.midland.web.model.Appointment;
 import com.midland.web.service.AppointmentService;
 import com.midland.web.service.impl.PublicService;
-import com.midland.web.util.MidlandHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,11 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 @RestController
 @SuppressWarnings("all")
@@ -53,7 +45,7 @@ public class ColleRestController extends BaseFilter {
             String houseType =String.valueOf(map.get("houseType"));
             String houseId = String.valueOf( map.get("houseId"));
             StringBuffer sb = new StringBuffer();
-            sb.append(Contant.Colle_CACHE_KEY).append(":"+houseType+":").append(userId);
+            sb.append(Contant.COLLE_CACHE_KEY).append(":"+houseType+":").append(userId);
             publicServiceImpl.removeAll(sb.toString());
             log.info("cancelAppointment  {}", map);
             result.setCode(ResultStatusUtils.STATUS_CODE_200);
@@ -82,7 +74,7 @@ public class ColleRestController extends BaseFilter {
             mapj.put("houseId",houseId);
             mapj.put("userId",userId);
             StringBuffer sb = new StringBuffer();
-            sb.append(Contant.Colle_CACHE_KEY).append(":"+houseType+":").append(userId);
+            sb.append(Contant.COLLE_CACHE_KEY).append(":"+houseType+":").append(userId);
             publicServiceImpl.listRemove(sb.toString(),mapj);
             log.info("cancelAppointment  {}", map);
             result.setCode(ResultStatusUtils.STATUS_CODE_200);
@@ -116,7 +108,7 @@ public class ColleRestController extends BaseFilter {
              mapj.put("houseId",houseId);
              mapj.put("userId",userId);
              StringBuffer sb = new StringBuffer();
-             sb.append(Contant.Colle_CACHE_KEY).append(":"+houseType+":").append(userId);
+             sb.append(Contant.COLLE_CACHE_KEY).append(":"+houseType+":").append(userId);
              publicServiceImpl.listLeftPush(sb.toString(),mapj);
              result.setCode(ResultStatusUtils.STATUS_CODE_200);
              result.setMsg("success");
@@ -142,7 +134,7 @@ public class ColleRestController extends BaseFilter {
              Map mapj = new HashMap();
              mapj.put("hourseType",houseType);
              StringBuffer sb = new StringBuffer();
-             sb.append(Contant.Colle_CACHE_KEY).append(":"+houseType+":").append(userId);
+             sb.append(Contant.COLLE_CACHE_KEY).append(":"+houseType+":").append(userId);
              result.setCode(ResultStatusUtils.STATUS_CODE_200);
              result.setList(publicServiceImpl.getList(sb.toString()));
              result.setMsg("success");

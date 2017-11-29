@@ -29,6 +29,16 @@ public class CommunityAlbumServiceImpl implements CommunityAlbumService {
 		}
 	}
 
+
+	@Override
+	public int getMaxOrderBy(Integer hotHandId) {
+		CommunityAlbum communityAlbum = new CommunityAlbum();
+		communityAlbum.setHotHandId(hotHandId);
+		Integer result = communityAlbumMapper.getMaxOrderBy(communityAlbum);
+		return result==null?0:result+1;
+	}
+
+
 	/**
 	 * 查询
 	 **/
