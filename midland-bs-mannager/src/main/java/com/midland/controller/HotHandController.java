@@ -1,5 +1,6 @@
 package com.midland.controller;
 
+import com.midland.web.model.Appointment;
 import com.midland.web.model.HotHand;
 import com.midland.web.model.temp.ListDescOtherParam;
 import com.midland.web.model.user.User;
@@ -187,6 +188,25 @@ public class HotHandController extends BaseFilter  {
 		} catch (Exception e) {
 			log.error("",e);
 			map.put("state",-1);
+		}
+		return map;
+	}
+	/**
+	 * 重新分配经纪人，把经纪人更新到预约记录里
+	 *
+	 * @param record
+	 * @return
+	 */
+	@RequestMapping("/reset_agent")
+	@ResponseBody
+	public Object resetAgent(HotHand record) {
+		Map map = new HashMap();
+		try {
+			hotHandServiceImpl.updateHotHandById(record);
+			map.put("state", 0);
+		} catch (Exception e) {
+			log.error("resetAgent : {}", record, e);
+			map.put("state", -1);
 		}
 		return map;
 	}

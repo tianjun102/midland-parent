@@ -98,79 +98,86 @@
     <form action="${ctx}/rest/hotHand/add" method="post" id="dataForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
+            <%@include file="../menu/area_required.jsp" %>
             <li><span>均价：</span>
-                <input type="text" name="price" id="price" ß/>
+                <input type="text" name="price" id="price" value="${item.price}"/>
             </li>
             <li><span>入伙日期：</span>
-                <input type="text" name="intoTime" id="intoTime" ß/>
+                <input type="text" name="intoTime" id="intoTime" onblur="notEmpty('intoTime','intoTime','')"
+                       value="${item.intoTime}" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" maxlength="50"/>
+
             </li>
             <li><span>管理费用：</span>
-                <input type="text" name="managerCosts" id="managerCosts" ß/>
+                <input type="text" name="managerCosts" id="managerCosts" value="${item.managerCosts}"/>
+            </li>
+            <li><span>主推户型：</span>
+                <input type="text" name="recommend" id="recommend" value="${item.recommend}"/>
+            </li>
+            <li><span>特色：</span>
+                <input type="text" name="feature" id="feature" value="${item.feature}"/>
             </li>
             <li><span>物业座数：</span>
-                <input type="text" name="unitTotal" id="unitTotal" ß/>
+                <input type="text" name="unitTotal" id="unitTotal" value="${item.unitTotal}"/>
             </li>
             <li><span>占地面积：</span>
-                <input type="text" name="landArea" id="landArea" ß/>
+                <input type="text" name="landArea" id="landArea" value="${item.landArea}"/>
             </li>
             <li><span>车位总数：</span>
-                <input type="text" name="parkingNum" id="parkingNum" ß/>
+                <input type="text" name="parkingNum" id="parkingNum" value="${item.parkingNum}"/>
             </li>
             <li><span>建筑类型：</span>
-                <input type="text" name="buildingType" id="buildingType" ß/>
+                <input type="text" name="buildingType" id="buildingType" value="${item.buildingType}"/>
             </li>
             <li><span>建筑地址：</span>
-                <input type="text" name="propertyAddress" id="propertyAddress" ß/>
+                <input type="text" name="propertyAddress" id="propertyAddress" value="${item.propertyAddress}"/>
             </li>
             <li><span>发展商：</span>
-                <input type="text" name="developer" id="developer" ß/>
+                <input type="text" name="developer" id="developer" value="${item.developer}"/>
             </li>
             <li><span>物业管理：</span>
-                <input type="text" name="propertyManagement" id="propertyManagement" ß/>
+                <input type="text" name="propertyManagement" id="propertyManagement" value="${item.propertyManagement}"/>
             </li>
-
             <li><span>物业优点：</span>
-                <input type="text" name="propertyAdvantages" id="propertyAdvantages" ß/>
+                <input type="text" name="propertyAdvantages" id="propertyAdvantages" value="${item.propertyAdvantages}"/>
             </li>
             <li><span>地理位置：</span>
-                <input type="text" name="position" id="position" ß/>
+                <input type="text" name="position" id="position" value="${item.position}"/>
             </li>
             <li><span>配套信息：</span>
-                <input type="text" name="supporting" id="supporting" ß/>
+                <input type="text" name="supporting" id="supporting" value="${item.supporting}"/>
             </li>
             <li><span>房源名：</span>
-                <input type="text" name="houseName" id="houseName" ß/>
+                <input type="text" name="houseName" id="houseName" value="${item.houseName}"/>
             </li>
-            <li><span>图片url：</span></li>
-            <li><span style="vertical-align: top;">图片上传：</span>
-                <div class="fileupload">
+
+            <li><span>经纪人：</span>
+                <input type="text" name="agentName" id="agentName" value="${item.agentName}"/>
+            </li>
+            <li style="width: 100%;">
+                <span>图片url：</span>
+                <%--<span style="vertical-align: top;">图片上传：</span>--%>
+                <div class="fileupload" style="margin-left: 70px;font-size: 0;">
                     <input type="hidden" name="imgUrl" id="imgUrl" value="${item.imgUrl}">
                     <input type="file" name="file_upload" id="file_upload"/>
+                    <c:forEach items="${item.imgUrlList }" var="s">
+                        <span class='fileupload-item'><img src='${s}'><i class='xclose'>×</i></span>
+                    </c:forEach>
                 </div>
             </li>
 
-            <li><span>房源描述：</span>
-            <li id="textArea1" style="display: block;">
-                    <textarea style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;"
-                              name="propertyDesc"
-                              id="myEditor1" rows="" cols="">${item.propertyDesc}</textarea>
+            <li id="textArea1" style="width: 100%;">
+                <span style="display: block;float: none;">房源描述：</span>
+                <textarea style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;" name="propertyDesc" id="myEditor1" rows="" cols="">${item.propertyDesc}</textarea>
             </li>
             <li><span>物业优点：</span>
             <li id="textArea2" style="display: block;">
-                    <textarea style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;"
-                              name="propertyAdvantages"
-                              id="myEditor2" rows="" cols="">${item.propertyAdvantages}</textarea>
+                    <textarea style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;" name="propertyAdvantages" id="myEditor2" rows="" cols="">${item.propertyAdvantages}</textarea>
             </li>
-
-            <ul class="adminfo row">
-                <li>
-                    <span></span>
-                    <a onclick="subumintBanner();" target="contentF" class="public_btn bg2">保存</a>
-                    <a style="margin-left: 20px" href="${ctx}/rest/banner/bannerindex" target="contentF"
-                       class="public_btn bg3" id="cancel">取消</a>
-                </li>
-            </ul>
-
+            <li>
+                <span></span>
+                <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">更新</a>
+                <a style="margin-left: 20px" class="public_btn bg3" id="cancel" onclick="closeWin();">取消</a>
+            </li>
         </ul>
 
     </form>
@@ -216,56 +223,6 @@
     HasCheked = true;
     UE.getEditor('myEditor1');
     UE.getEditor('myEditor2');
-
-
-    function subumintBanner() {
-        layer.open({
-            type: 1,
-            skin: 'layer-style',
-            area: ['350px', '200px'],
-            shadeClose: false, //点击遮罩关闭
-            title: ['编辑'],
-            resize: false,
-            scrollbar: false,
-            content:
-            '<section class = "content" style = "border:none; height:100%;">' +
-            '<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">确定要保存么?</p>' +
-            '</section>',
-            btn: ['确定', '取消'],
-            yes: function (index) {
-
-
-                var data = $("#formId").serialize();
-                $.ajax({
-                    type: "post",
-                    url: "${ctx}/rest/footer/update",
-                    async: false, // 此处必须同步
-                    dataType: "json",
-                    data: data,
-                    success: function (data) {
-                        if (data.state == 0) {
-                            layer.msg("保存成功！", {icon: 1});
-                            window.location.reload();
-                        } else {
-                            layer.msg("保存失败！", {icon: 2});
-                        }
-                    },
-                    error: function () {
-                        layer.msg("保存失败！", {icon: 2});
-                    }
-
-                });
-
-
-            }
-            , success: function (layero) {
-                var btn = layero.find('.layui-layer-btn');
-                btn.css('text-align', 'center');
-            }
-        });
-
-    }
-
 
 </script>
 </body>
