@@ -160,7 +160,11 @@
     </properties>
 
     <dependencies>
-
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session</artifactId>
+            <version>1.3.1.RELEASE</version>
+        </dependency>
         <dependency>
             <groupId>com.github.qcloudsms</groupId>
             <artifactId>sms</artifactId>

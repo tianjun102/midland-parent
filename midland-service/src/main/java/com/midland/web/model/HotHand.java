@@ -121,6 +121,17 @@ public class HotHand {
      */
     private String recommend;
 
+    private Integer sort;
+
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
+
     public Integer getId() {
         return id;
     }

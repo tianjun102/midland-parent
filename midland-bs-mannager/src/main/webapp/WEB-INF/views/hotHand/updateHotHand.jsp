@@ -98,7 +98,8 @@
             <input type="hidden" name="id" id="id" value="${item.id}">
             <%@include file="../menu/area_required.jsp" %>
             <li><span>均价：</span>
-               <input type="text" name="price" id="price" value="${item.price}"/>
+               <input type="text" name="price" id="price" value="${item.price} "
+                      onblur="InitInput.setNumber(this,9,2,2)"/>
             </li>
             <li><span>入伙日期：</span>
                 <input type="text" name="intoTime" id="intoTime" onblur="notEmpty('intoTime','intoTime','')"
@@ -106,46 +107,57 @@
 
             </li>
             <li><span>管理费用：</span>
-               <input type="text" name="managerCosts" id="managerCosts" value="${item.managerCosts}"/>
+               <input type="text" name="managerCosts" id="managerCosts" value="${item.managerCosts}"
+                      onblur="InitInput.setNumber(this,9,2,2)"/>
             </li>
             <li><span>主推户型：</span>
-                <input type="text" name="recommend" id="recommend" value="${item.recommend}"/>
+                <input type="text" name="recommend" id="recommend" value="${item.recommend}"
+                       />
             </li>
             <li><span>特色：</span>
-                <input type="text" name="feature" id="feature" value="${item.feature}"/>
+                <input type="text" name="feature" id="feature" value="${item.feature}" />
             </li>
             <li><span>物业座数：</span>
-               <input type="text" name="unitTotal" id="unitTotal" value="${item.unitTotal}"/>
+               <input type="text" name="unitTotal" id="unitTotal" value="${item.unitTotal}"
+                      onblur="InitInput.setNumber(this,9,0,0)"/>
             </li>
             <li><span>占地面积：</span>
-               <input type="text" name="landArea" id="landArea" value="${item.landArea}"/>
+               <input type="text" name="landArea" id="landArea" value="${item.landArea}"
+                      onblur="InitInput.setNumber(this,9,2,2)"/>
             </li>
             <li><span>车位总数：</span>
-               <input type="text" name="parkingNum" id="parkingNum" value="${item.parkingNum}"/>
+               <input type="text" name="parkingNum" id="parkingNum" value="${item.parkingNum}"
+                      onblur="InitInput.setNumber(this,9,0,0)"/>
             </li>
             <li><span>建筑类型：</span>
-               <input type="text" name="buildingType" id="buildingType" value="${item.buildingType}"/>
+               <input type="text" name="buildingType" id="buildingType" value="${item.buildingType}"
+                      />
             </li>
             <li><span>建筑地址：</span>
-               <input type="text" name="propertyAddress" id="propertyAddress" value="${item.propertyAddress}"/>
+               <input type="text" name="propertyAddress" id="propertyAddress" value="${item.propertyAddress}"
+                      />
             </li>
             <li><span>发展商：</span>
-               <input type="text" name="developer" id="developer" value="${item.developer}"/>
+               <input type="text" name="developer" id="developer" value="${item.developer}"
+                      onblur="notEmpty('developer','developer','')"/>
             </li>
             <li><span>物业管理：</span>
                <input type="text" name="propertyManagement" id="propertyManagement" value="${item.propertyManagement}"/>
             </li>
             <li><span>物业优点：</span>
-               <input type="text" name="propertyAdvantages" id="propertyAdvantages" value="${item.propertyAdvantages}"/>
+               <input type="text" name="propertyAdvantages" id="propertyAdvantages" value="${item.propertyAdvantages}"
+                     />
             </li>
             <li><span>地理位置：</span>
-               <input type="text" name="position" id="position" value="${item.position}"/>
+               <input type="text" name="position" id="position" value="${item.position}"
+                      />
             </li>
             <li><span>配套信息：</span>
                <input type="text" name="supporting" id="supporting" value="${item.supporting}"/>
             </li>
             <li><span>房源名：</span>
-               <input type="text" name="houseName" id="houseName" value="${item.houseName}"/>
+               <input type="text" name="houseName" id="houseName" value="${item.houseName}"
+                      />
             </li>
             <li><span>经纪人：</span>
                <input type="text" name="agentName" id="agentName" value="${item.agentName}"/>

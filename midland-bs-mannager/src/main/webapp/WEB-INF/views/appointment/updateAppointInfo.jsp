@@ -14,7 +14,8 @@
     <form action="${ctx}/rest/appoint/update" method="post" id="appointInfoForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${appointment.id}">
-            <li class="col-md-6"><span>预约编号：</span><input type="text" name="appointSn" id="appointSn" readonly="readonly"
+            <li class="col-md-6"><span>预约编号：</span>
+                <input type="text" name="appointSn" id="appointSn" readonly="readonly"
                                                           value="${appointment.appointSn}"/>
             </li>
             <li class="col-md-6"><span>预约时间：</span>

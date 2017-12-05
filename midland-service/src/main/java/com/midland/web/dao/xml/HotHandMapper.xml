@@ -61,7 +61,10 @@
 		where 
 		is_delete=0
 		<include refid="select_option" />
-		ORDER BY order_by desc
+		<if test="sort==null or sort == 1">
+			ORDER BY order_by desc
+		</if>
+
 	</select>
 
 	<select id="getMaxOrderBy" resultType="java.lang.Integer">
@@ -389,7 +392,7 @@
 			and supporting like CONCAT(CONCAT('%', #{supporting}), '%')
 		</if>
 		<if test="houseName != null">
-			 and house_name= #{houseName,jdbcType=VARCHAR}
+			and house_name like CONCAT(CONCAT('%', #{houseName}), '%')
 		</if>
 		<if test="imgUrl != null">
 			 and img_url= #{imgUrl,jdbcType=VARCHAR}
@@ -413,10 +416,10 @@
 			 and is_show= #{isShow,jdbcType=INTEGER}
 		</if>
 		<if test="feature != null">
-			and feature= #{feature,jdbcType=VARCHAR},
+			and feature like CONCAT(CONCAT('%', #{feature}), '%')
 		</if>
 		<if test="recommend != null">
-			AND recommend= #{recommend,jdbcType=VARCHAR},
+			and recommend like CONCAT(CONCAT('%', #{recommend}), '%')
 		</if>
 	</sql>
 
