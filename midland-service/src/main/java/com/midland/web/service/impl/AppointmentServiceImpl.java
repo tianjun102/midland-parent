@@ -119,6 +119,17 @@ public class AppointmentServiceImpl implements AppointmentService {
 	}
 
 	@Override
+	public List<Appointment> getUnCommentList(Appointment appointment) throws Exception {
+		try {
+			log.debug("getUnCommentList  {}",appointment);
+			return appointmentMapper.getUnCommentList(appointment);
+		} catch(Exception e) {
+			log.error("getUnCommentList  {}",appointment,e);
+			throw e;
+		}
+	}
+
+	@Override
 	public void batchUpdate(List<Appointment> appointmentList) throws Exception {
 		try {
 			log.debug("updateAppointmentById  {}",appointmentList);

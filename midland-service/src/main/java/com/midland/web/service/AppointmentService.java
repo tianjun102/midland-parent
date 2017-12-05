@@ -35,6 +35,8 @@ public interface AppointmentService {
 	 **/
 	List<Appointment> findAppointmentList(Appointment appointment) throws Exception;
 
-	void batchUpdate(List<Appointment> appointmentList) throws Exception;
+    List<Appointment> getUnCommentList(Appointment appointment) throws Exception;
+
+    void batchUpdate(List<Appointment> appointmentList) throws Exception;
 
 }

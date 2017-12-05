@@ -31,7 +31,7 @@ public class Comment{
 	 **/
 	private Integer informationId;
 	/**
-	 * 0=资讯；1=委托；2=预约
+	 * 0=资讯(点评文章)；1=委托（点评经纪人）；2=预约（点评经纪人）
 	 **/
 	private Integer type;
 

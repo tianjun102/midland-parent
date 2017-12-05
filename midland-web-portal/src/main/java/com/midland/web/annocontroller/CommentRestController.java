@@ -2,7 +2,9 @@ package com.midland.web.annocontroller;
 
 import com.midland.web.Contants.Contant;
 import com.midland.web.commons.core.util.DateUtils;
+import com.midland.web.model.Appointment;
 import com.midland.web.model.Comment;
+import com.midland.web.service.AppointmentService;
 import com.midland.web.service.CommentService;
 import com.midland.base.BaseFilter;
 import org.slf4j.Logger;
@@ -27,6 +29,8 @@ public class CommentRestController extends BaseFilter  {
 	private Logger log = LoggerFactory.getLogger(CommentRestController.class);
 	@Autowired
 	private CommentService commentServiceImpl;
+	@Autowired
+	private AppointmentService appointmentServiceImpl;
 
 	/**
 	 * 新增
@@ -116,6 +120,26 @@ public class CommentRestController extends BaseFilter  {
 		return result;
 	}
 
+	//未点评接口
+	@RequestMapping("/unComment")
+	public Object getUnCommentList(@RequestBody Appointment appointment,HttpServletRequest request) throws Exception {
+		Result result = new Result();
+		try {
+			MidlandHelper.doPage(request);
+			Page resultPage = (Page)appointmentServiceImpl.getUnCommentList(appointment);
+			Paginator paginator = resultPage.getPaginator();
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result.setMsg("success");
+			result.setList(resultPage.getResult());
+			result.setPaginator(paginator);
+			return result;
+		} catch(Exception e) {
+			log.error("getUnCommentList",e);
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result.setMsg("service error");
+			return result;
+		}
+	}
 
 	/**
 	 * 点赞
