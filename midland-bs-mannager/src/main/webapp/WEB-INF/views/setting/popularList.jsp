@@ -54,7 +54,7 @@
 								<td>${popular.cateName}</td>
 								<td>${popular.name}</td>
 								<td>
-									<c:if test="${item.isDelete==0}">
+									<c:if test="${popular.isDelete==0}">
 									<a onclick="preUpdate(${popular.id })" target="contentF" class = "edit_img" title = "编辑"></a>
 									</c:if>
 									<c:if test="${popular.isDelete==0}">
