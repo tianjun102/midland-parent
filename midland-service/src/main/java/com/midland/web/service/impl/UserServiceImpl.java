@@ -115,15 +115,15 @@ public class UserServiceImpl extends GenericServiceImpl<User, String> implements
 	 */
 	private int insertUserRoleBatch(String userId,String userRoles) {
 		if(StringUtils.isNotEmpty(userRoles)){
-			UserRole userRole=null;
 			List<UserRole> list=new ArrayList<UserRole>();
 			String[] roleIds=userRoles.split(",");
-			for(int i=0;i<roleIds.length;i++){//数组转list
-				userRole=new UserRole();
+			Arrays.asList(userRoles.split(",")).forEach((id)->{
+				UserRole userRole=new UserRole();
 				userRole.setUserId(userId);
-				userRole.setRoleId(Integer.valueOf(roleIds[i]));
+				userRole.setRoleId(Integer.valueOf(id));
 				list.add(userRole);
-			}
+			});
+
 			return userMapper.insertUserRoleBatch(list);//批量新增
 		}
 		return 0;
