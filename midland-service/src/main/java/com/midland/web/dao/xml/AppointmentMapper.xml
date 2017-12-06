@@ -40,6 +40,70 @@
 		id,appoint_sn,source,nick_name,web_user_id,phone,house_type,sell_rent,DATE_FORMAT(appointment_time,'%Y-%m-%d %H:%i:%s')appointment_time,area_name,community_name,address,layout,measure,price,DATE_FORMAT(entrust_time,'%Y-%m-%d %H:%i:%s'),agent_id,agent_name,status,DATE_FORMAT(handle_time,'%Y-%m-%d %H:%i:%s')handle_time,decoration,is_delete,city_id,city_name,area_id,flag,agent_phone,view_url,reset_flag,DATE_FORMAT(assigned_time,'%Y-%m-%d %H:%i:%s')assigned_time,sex
 	</sql>
 
+    <select id="getUnCommentList" parameterType="com.midland.web.model.Appointment" resultMap="BaseResultMap">
+        SELECT
+        id,
+        web_user_id AS user_id,
+        agent_id,
+        agent_name,
+        address,
+        layout,
+        measure,
+        agent_phone,
+        community_name,
+        appointment_time as handle_time,
+        decoration,
+        '2' as type
+        FROM
+        appointment
+        WHERE
+        is_delete = 0
+        AND web_user_id = #{webUserId}
+        AND STATUS = 3
+        AND id NOT IN (
+        SELECT
+        information_id
+        FROM
+        `comment`
+        WHERE
+        user_id = #{webUserId}
+        AND type = 2
+        )
+
+
+        UNION
+
+        SELECT
+        id,
+        user_id,
+        agent_id,
+        agent_name,
+        address,
+        layout,
+        measure,
+        agent_phone,
+
+        community_name,
+        entrust_time as handle_time,
+        renovation as decoration,
+        '1' as type
+        FROM
+        entrust
+        WHERE
+        is_delete = 0
+        AND STATUS = 5
+        AND user_id=#{webUserId}
+        AND id NOT IN (
+        SELECT
+        information_id
+        FROM
+        `comment`
+        WHERE
+        user_id = #{webUserId}
+        AND type = 1
+        )
+    </select>
+
     <select id="selectAppointmentById" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

@@ -20,6 +20,7 @@ public interface AppointmentMapper {
 	int insertAppointment(Appointment appointment);
 
 	List<Appointment> findAppointmentList(Appointment appointment);
+	List<Appointment> getUnCommentList(Appointment appointment);
 
 	int batchUpdate(@Param("appointmentList") List<Appointment> appointmentList);
 

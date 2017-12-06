@@ -134,6 +134,22 @@ public class Appointment{
 	 */
 	private String webUserId;
 
+
+	/**
+	 * 评论管理时为了区分是预约未评论还是委托未评论加上去的
+	 * @return
+	 */
+	private int type;
+
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
 	public String getHouseId() {
 		return houseId;
 	}
