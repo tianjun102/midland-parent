@@ -39,6 +39,13 @@
 		 where id= #{id}
 	</select>
 
+	<select id="getByIdList" parameterType="java.util.List"  resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from information where id in
+		<foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+					#{item}
+		</foreach>
+	</select>
+
 	<delete id="deleteInformationById" >
 		delete from information
 		 where id= #{id}
@@ -365,6 +372,10 @@
 			and author = #{author}
 		</if>
 	</sql>
+
+
+
+
 
 	<update id="batchUpdate" parameterType="java.util.List">
 		<foreach collection="informationList" item="item" index="index" open="" close="" separator=";">

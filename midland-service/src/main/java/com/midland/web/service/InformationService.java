@@ -9,7 +9,9 @@ public interface InformationService {
 	 **/
 	Information selectInformationById(Integer id);
 
-	/**
+    List<Information> getByIdList(List<Integer> ids);
+
+    /**
 	 * 主键删除
 	 **/
 	void deleteInformationById(Integer id) throws Exception;
