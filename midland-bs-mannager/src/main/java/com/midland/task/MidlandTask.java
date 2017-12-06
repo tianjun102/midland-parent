@@ -1,10 +1,14 @@
 package com.midland.task;
 
+import com.midland.config.MidlandConfig;
+import com.midland.core.util.HttpUtils;
 import com.midland.web.api.ApiHelper;
 import com.midland.web.api.SmsSender.SmsModel;
 import com.midland.web.api.mailSender.MailProperties;
 import com.midland.web.model.Appointment;
 import com.midland.web.model.Entrust;
+import com.midland.web.model.remote.Agent;
+import com.midland.web.model.user.Agenter;
 import com.midland.web.service.AppointmentService;
 import com.midland.web.service.EntrustService;
 import com.midland.web.util.MidlandHelper;
@@ -16,10 +20,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by 'ms.x' on 2017/9/19.
@@ -36,8 +37,11 @@ public class MidlandTask {
 	private TaskConfig taskConfig;
 	@Autowired
 	private ApiHelper apiHelper;
-@Autowired
+	@Autowired
 	private MailProperties mailProperties;
+
+@Autowired
+	private MidlandConfig midlandConfig;
 
 
 	//预约看房，经纪人重新分配规则，24小时内状态没有修改，发送短信给经纪人及其领导，48小时后没有处理，则关闭此预约，并发送给有指定邮箱
@@ -84,7 +88,6 @@ public class MidlandTask {
 						message.setSubject("主题：预约关闭");
 						message.setText("您的预约超时未处理，现已关闭，预约编号："+appointment1.getAppointSn());
 						apiHelper.emailSender("scanAppointment",message);
-						// TODO: 2017/9/19  发送给有指定邮箱
 						System.out.println("发送给有指定邮箱，关闭");
 					} else if (te<0) {
 						//超过24小时,24小时内状态没有修改，发送短信给经纪人及其领导，
@@ -95,11 +98,20 @@ public class MidlandTask {
 							appoint.setId(appointment1.getId());
 							appointmentServiceImpl.updateAppointmentById(appoint);
 
-							List list = new ArrayList();
-							list.add("sdfef");
-							list.add("dfef");
-							apiHelper.smsSender("17666106709",1251,list);
-							System.out.println("发送短信给经纪人及其领导，告警");
+							Map map1 = new HashMap();
+							map1.put("pageSize","5");
+							map1.put("pageNo","1");
+							String data = HttpUtils.get(midlandConfig.getAgentPage(), map1);
+							List<Agent> result = MidlandHelper.getAgentPojoList(data, Agent.class);
+							result.forEach(a->{
+								List list = new ArrayList();
+								list.add("dfsd");
+								list.add("dfef");
+								apiHelper.smsSender(a.getLeaderPhone(),1251,list);
+								apiHelper.smsSender(a.getPhone(),1234,list);
+							});
+
+
 						}
 					}
 				}

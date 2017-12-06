@@ -73,7 +73,7 @@
                         </c:forEach></td>
                         <td>${item.handleTime }</td>
                         <td>
-                            <c:if test="${item.resetFlag==1}">
+                            <c:if test="${item.resetFlag==1 and item.status !=3}">
                                 <a target="contentF" class="arrange_img" title="重新分配经纪人"
                                    onclick="toRedistribute(${item.id })"></a>
                             </c:if>

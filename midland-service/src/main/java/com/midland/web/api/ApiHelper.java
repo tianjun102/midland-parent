@@ -2,6 +2,7 @@ package com.midland.web.api;
 
 import com.github.qcloudsms.SmsSingleSender;
 import com.github.qcloudsms.SmsSingleSenderResult;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class ApiHelper {
 	private SmsSingleSender sender;
 	public void smsSender(String phone, int tpId,List<String> paramList){
 		try {
+			if (StringUtils.isEmpty(phone)){
+				throw new IllegalArgumentException("phone is null");
+			}
 			SmsSingleSenderResult result = sender.sendWithParam(null,
 					phone,tpId , (ArrayList<String>)paramList, "", "", "");
 			if (result.errMsg.equals("OK")){

@@ -1,3 +1,4 @@
+import com.alibaba.fastjson.JSONArray;
 import com.github.qcloudsms.SmsSingleSender;
 import com.github.qcloudsms.SmsSingleSenderResult;
 import com.midland.config.MidlandConfig;
@@ -6,6 +7,7 @@ import com.midland.web.api.ApiHelper;
 import com.midland.web.api.SmsSender.SmsClient;
 import com.midland.web.api.SmsSender.SmsModel;
 import com.midland.web.model.remote.Agent;
+import com.midland.web.model.user.Agenter;
 import com.midland.web.service.AppointmentService;
 import com.midland.web.util.MidlandHelper;
 import org.junit.Test;
@@ -47,7 +49,11 @@ public class PTest {
 	
 	@Test
 	public void dsfs(){
-
+		Map map1 = new HashMap();
+		map1.put("pageSize","5");
+		map1.put("pageNo","1");
+		String data = HttpUtils.get(midlandConfig.getAgentPage(), map1);
+		List result = MidlandHelper.getAgentPojoList(data, Agent.class);
 	}
 	
 	@Test

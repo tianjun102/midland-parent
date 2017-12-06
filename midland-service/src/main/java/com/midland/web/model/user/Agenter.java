@@ -41,6 +41,26 @@ public class Agenter {
 
 	private String url;
 
+	private String leaderPhone;
+
+	private String leaderEmail;
+
+	public String getLeaderPhone() {
+		return leaderPhone;
+	}
+
+	public void setLeaderPhone(String leaderPhone) {
+		this.leaderPhone = leaderPhone;
+	}
+
+	public String getLeaderEmail() {
+		return leaderEmail;
+	}
+
+	public void setLeaderEmail(String leaderEmail) {
+		this.leaderEmail = leaderEmail;
+	}
+
 	public String getId() {
 		return id;
 	}

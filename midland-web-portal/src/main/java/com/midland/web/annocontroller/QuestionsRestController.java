@@ -169,7 +169,7 @@ public class QuestionsRestController extends BaseFilter  {
 		List<Questions> list1 = new ArrayList<>();
 		for (Attention a:attentionList){
             for (Questions temp : list){
-                if (temp.getUserId().equals(a.getWebUserId())&&
+                if (temp.getUserId()!=null&&temp.getUserId().equals(a.getWebUserId())&&
                         Contant.ATTENTION_QUESTION==a.getType()&&
                         temp.getId().equals(a.getOtherId())){
                     temp.setIsAttention(true);

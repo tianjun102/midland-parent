@@ -192,6 +192,9 @@ public class MidlandHelper {
     public static <T> T getPojo(String str, Class<T> clazz) {
         JSONObject rootJsonObject = JSON.parseObject(str);
         String messageStr = rootJsonObject.getString("data");
+        if (StringUtils.isEmpty(messageStr)){
+            messageStr = rootJsonObject.getString("DATA");
+        }
         T t = JSON.parseObject(messageStr, clazz);
         return t;
     }
