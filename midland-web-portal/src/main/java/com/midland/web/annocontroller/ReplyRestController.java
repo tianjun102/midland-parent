@@ -6,8 +6,10 @@ import com.midland.base.BaseFilter;
 import com.midland.web.Contants.Contant;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
+import com.midland.web.model.CenterMsg;
 import com.midland.web.model.Comment;
 import com.midland.web.model.Reply;
+import com.midland.web.service.CenterMsgService;
 import com.midland.web.service.CommentService;
 import com.midland.web.service.ReplyService;
 import com.midland.web.util.MidlandHelper;
@@ -34,6 +36,9 @@ public class ReplyRestController extends BaseFilter  {
 	private ReplyService replyServiceImpl;
 	@Autowired
 	private CommentService commentServiceImpl;
+	@Autowired
+	private CenterMsgService CenterMsgServiceImpl;
+
 
 	/**
 	 * 新增
@@ -49,7 +54,14 @@ public class ReplyRestController extends BaseFilter  {
 			if(comment!=null) {
 				comment.setReplyNum(comment.getReplyNum() == null ? 1 : comment.getReplyNum() + 1);
 				commentServiceImpl.updateCommentById(comment);
+
 			}
+			CenterMsg centerMsg = new CenterMsg();
+			centerMsg.setType(0);
+			centerMsg.setUserId(comment.getUserId());
+			centerMsg.setTitle(obj.getUser()==null?Contant.TOURISTS+Contant.COMMENT_TITLE:obj.getUser()+Contant.COMMENT_TITLE);
+			centerMsg.setMsg(obj.getDetail());
+			centerMsg.setJumpId(obj.getCommId().toString());
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
 		} catch(Exception e) {

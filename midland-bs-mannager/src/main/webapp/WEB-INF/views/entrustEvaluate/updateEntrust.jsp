@@ -72,6 +72,7 @@
     <form action="${ctx}/rest/entrust/evaluate/update" method="post" id="appointInfoForm">
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${entrust.id}">
+            <input type="hidden" name="oldStatus" id="oldStatus" value="${entrust.status}">
             <li class="col-md-6"><span>委托编号：</span>
                 <input type="text" name="entrustSn" id="entrustSn" disabled="disabled" value="${entrust.entrustSn}"/>
             </li>

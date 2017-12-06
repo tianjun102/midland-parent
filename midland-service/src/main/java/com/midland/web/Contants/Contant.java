@@ -1,5 +1,7 @@
 package com.midland.web.Contants;
 
+import org.apache.xmlbeans.impl.xb.xsdschema.Public;
+
 /**
  * Created by 'ms.x' on 2017/9/7.
  */
@@ -86,4 +88,12 @@ public class Contant {
 	public static final int SMS_TEMPLATE_56846=56846;
 	public static final int SMS_TEMPLATE_56845=56845;
 	public static final int SMS_TEMPLATE_54711=54711;//发送短信验证码
+
+	public static final String ANSWER_TITLE = "回答了我的提问：";
+	public static final String COMMENT_TITLE = "对你的评论进行了回复：";
+	public static final String ENTRUST_TITLE = "您的买房委托，||经纪人已经受理";
+	public static final String APPOINT_TITLE = "您的预约，||经纪人已经受理";
+	public static final String ATTENTION_TITLE = "您关注的||有新增房源动态";
+	public static final String TOURISTS="游客";
+
 }
