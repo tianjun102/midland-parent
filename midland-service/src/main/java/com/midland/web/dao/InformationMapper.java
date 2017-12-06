@@ -16,6 +16,7 @@ public interface InformationMapper {
 	int updateInformationById(Information information);
 
 	int insertInformation(Information information);
+	List<Information> getByIdList(@Param("list") List<Integer> ids);
 
 	List<Information> findInformationList(Information information);
 

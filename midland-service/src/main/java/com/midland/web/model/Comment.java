@@ -54,7 +54,25 @@ public class Comment{
 	private String orderByTime;
 
 	private Integer replyNum;
+	private String informationTitle;
+	private String informationImgUrl;
 
+
+	public String getInformationTitle() {
+		return informationTitle;
+	}
+
+	public void setInformationTitle(String informationTitle) {
+		this.informationTitle = informationTitle;
+	}
+
+	public String getInformationImgUrl() {
+		return informationImgUrl;
+	}
+
+	public void setInformationImgUrl(String informationImgUrl) {
+		this.informationImgUrl = informationImgUrl;
+	}
 
 	public Integer getId() {
 		return id;

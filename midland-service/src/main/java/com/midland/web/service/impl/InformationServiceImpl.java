@@ -37,6 +37,14 @@ public class InformationServiceImpl implements InformationService {
 		log.debug("selectInformationById  {}",id);
 		return informationMapper.selectInformationById(id);
 	}
+/**
+	 * 查询
+	 **/
+@Override
+	public List<Information> getByIdList(List<Integer> ids) {
+		log.debug("selectInformationById  {}",ids);
+		return informationMapper.getByIdList(ids);
+	}
 
 	/**
 	 * 删除
