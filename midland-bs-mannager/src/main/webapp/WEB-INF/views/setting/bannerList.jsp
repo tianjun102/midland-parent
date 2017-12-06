@@ -92,7 +92,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							<td>${banner.endTime}</td>
 							<td>${banner.clikNum}</td>
 							<td>
-								<c:if test="${item.isDelete==0}">
+								<c:if test="${banner.isDelete==0}">
 								<a target="contentF" class = "edit_img" title = "编辑" href="${ctx}/rest/setting/enterEditBanner?id=${banner.id}"></a>
 								</c:if>
 								<c:if test="${banner.isDelete==0}">
