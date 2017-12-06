@@ -235,7 +235,8 @@
                         layer.msg("修改成功！！！", {icon: 1});
                         $('#save').removeAttr("onclick");
                         setTimeout(function () {
-                            parent.location.reload();
+                            $('#searchForm',window.parent.document).submit();
+                            closeWin();
                         }, 1000);
 
                     } else {

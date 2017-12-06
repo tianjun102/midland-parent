@@ -48,7 +48,7 @@
                 <span>链接URL：</span><input style="width:274px;" type="text" name="linkUrl" id="linkUrl" onblur="checkUrl('linkUrl','linkUrl','网址格式不正确！')" value="${linkUrlManager.linkUrl}" /><span class="_star">*</span>
             </li>
             <li><span>联系人：</span><input style="width:274px;" type="text" value="${linkUrlManager.contacts}" name="contacts" id="contacts" onblur="notEmpty('contacts','contacts','联系人不能为空！');" maxlength="50"/><span class="_star">*</span></li>
-            <li><span>联系方式：</span><input style="width:274px;" type="text" value="${linkUrlManager.phone}" name="phone" id="phone" onblur="checkPhone('phone','phone','手机格式不正确！');" maxlength="50"/><span class="_star">*</span></li>
+            <li><span>联系方式：</span><input style="width:274px;" type="text" value="${linkUrlManager.phone}" name="phone" id="phone" onblur="notEmpty('phone','phone','联系方式不能为空！');" maxlength="50"/><span class="_star">*</span></li>
             <li><span>备注：</span> <textarea name="remarks"
                                            id="remarks"
                                            style="width: 61%; height: 50px; resize: none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;">${linkUrlManager.remarks}</textarea>
@@ -64,7 +64,7 @@
 </section>
 <script type="text/javascript">
     function saveData() {
-        if(notEmpty('linkName','linkName','链接名不能为空！')&&checkSelect("source","平台不能为空！")&&notEmpty('linkUrl','linkUrl','链接名不能为空！')&&notEmpty('contacts','contacts','链接名不能为空！')&&checkPhone('phone','phone','手机格式不正确！')){
+        if(notEmpty('linkName','linkName','链接名不能为空！')&&checkSelect("source","平台不能为空！")&&notEmpty('linkUrl','linkUrl','链接名不能为空！')&&notEmpty('contacts','contacts','链接名不能为空！')&&notEmpty('phone','phone','联系方式不能为空！')){
             var data = $("#addFrom").serialize();
             $.ajax({
                 type: "post",
@@ -77,7 +77,8 @@
                         layer.msg("修改成功！！！", {icon: 1});
                         $('#save').removeAttr("onclick");
                         setTimeout(function () {
-                            parent.location.reload();
+                            $('#searchForm',window.parent.document).submit();
+                            closeWin();
                         }, 1000);
 
                     } else {

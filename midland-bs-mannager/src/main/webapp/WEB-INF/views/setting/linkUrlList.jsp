@@ -39,7 +39,7 @@
 								<td>
 									<a target="contentF" title="上移" class="up_img" onclick="sort(${linkUrl.id },${linkUrl.orderBy},1)"></a>
 									<a target="contentF" title="下移" class="down_img" onclick="sort(${linkUrl.id },${linkUrl.orderBy},2)"></a>
-									<c:if test="${item.isDelete==0}">
+									<c:if test="${linkUrl.isDelete==0}">
 									<a onclick="preUpdate(${linkUrl.id })" target="contentF" class = "edit_img" title = "编辑"></a>
 									</c:if>
 									<c:if test="${linkUrl.isDelete==0}">
