@@ -15,13 +15,11 @@ import com.midland.web.api.mailSender.MailProperties;
 import com.midland.web.enums.ContextEnums;
 import com.midland.web.model.AppointLog;
 import com.midland.web.model.Appointment;
+import com.midland.web.model.CenterMsg;
 import com.midland.web.model.ExportModel;
 import com.midland.web.model.remote.Agent;
 import com.midland.web.model.user.User;
-import com.midland.web.service.AppointLogService;
-import com.midland.web.service.AppointmentService;
-import com.midland.web.service.DingJiangService;
-import com.midland.web.service.SettingService;
+import com.midland.web.service.*;
 import com.midland.web.service.impl.TradeFairServiceImpl;
 import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
@@ -60,8 +58,10 @@ public class AppointmentController extends BaseFilter {
 	private ApiHelper apiHelper;
 	@Autowired
 	private MailProperties mailProperties;
-@Autowired
+	@Autowired
 	private SettingService settingServiceImpl;
+	@Autowired
+	private CenterMsgService centerMsgServiceImpl;
 
 
 	Logger logger = LoggerFactory.getLogger(AppointmentController.class);
@@ -200,6 +200,19 @@ public class AppointmentController extends BaseFilter {
 	public Object updateAppointment(Appointment record, String remark, HttpServletRequest request) {
 		Map map = new HashMap();
 		try {
+			String oldStatus = request.getParameter("oldStatus");
+			StringBuilder msg = new StringBuilder();
+			List<ParamObject> mapre = JsonMapReader.getMap("decoration");
+			ParamObject object = JsonMapReader.getObject("decoration",record.getDecoration());
+			msg.append("你意向小区").append(record.getCommunityName()).append(",").append(record.getLayout()).append(",").append("意向面积").append(record.getMeasure()).append(",").append(object.getName()).append("的预约").append(record.getAgentName()).append("经纪人已受理，前去");
+			if(StringUtils.isNotEmpty(oldStatus)&&Integer.valueOf(oldStatus)==record.getStatus()){
+				CenterMsg centermsg = new CenterMsg();
+				centermsg.setType(3);
+				centermsg.setJumpId(record.getId().toString());
+				centermsg.setTitle(Contant.APPOINT_TITLE.replace("||",record.getAgentName()));
+				centermsg.setMsg(msg.toString());
+				centerMsgServiceImpl.insertCenterMsg(centermsg);
+			}
 			if (0 != record.getStatus()) {
 				//如果委托状态不是已分配，隐藏重新分配按钮
 				record.setResetFlag(0);

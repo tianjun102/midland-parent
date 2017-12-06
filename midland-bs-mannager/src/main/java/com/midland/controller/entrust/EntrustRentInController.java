@@ -9,10 +9,12 @@ import com.midland.web.Contants.Contant;
 import com.midland.web.api.ApiHelper;
 import com.midland.web.api.SmsSender.SmsModel;
 import com.midland.web.enums.ContextEnums;
+import com.midland.web.model.CenterMsg;
 import com.midland.web.model.Entrust;
 import com.midland.web.model.EntrustLog;
 import com.midland.web.model.ExportModel;
 import com.midland.web.model.user.User;
+import com.midland.web.service.CenterMsgService;
 import com.midland.web.service.EntrustLogService;
 import com.midland.web.service.EntrustService;
 import com.midland.web.service.SettingService;
@@ -47,10 +49,10 @@ public class EntrustRentInController extends BaseFilter{
 	private MidlandConfig midlandConfig;
 	@Autowired
 	private SettingService settingService;
-
 	@Autowired
 	private ApiHelper apiHelper;
-	
+	@Autowired
+	private CenterMsgService centerMsgServiceImpl;
 	Logger logger = LoggerFactory.getLogger(EntrustRentInController.class);
 
 
@@ -190,6 +192,19 @@ public class EntrustRentInController extends BaseFilter{
 	public Object updateByPrimaryKeySelective(Entrust entrust,String dealRemark, HttpServletRequest request) {
 		Map map = new HashMap();
 		try {
+			String oldStatus = request.getParameter("oldStatus");
+			StringBuilder msg = new StringBuilder();
+			List<ParamObject> mapre = JsonMapReader.getMap("decoration");
+			ParamObject object = JsonMapReader.getObject("decoration",entrust.getRenovation());
+			msg.append("你意向小区").append(entrust.getCommunityName()).append(",").append(entrust.getLayout()).append(",").append("意向面积").append(entrust.getMeasure()).append(",").append(object.getName()).append("的买房委托").append(entrust.getAgentName()).append("经纪人已受理，前去");
+			if(StringUtils.isNotEmpty(oldStatus)&&Integer.valueOf(oldStatus)==entrust.getStatus()){
+				CenterMsg centermsg = new CenterMsg();
+				centermsg.setType(4);
+				centermsg.setJumpId(entrust.getId().toString());
+				centermsg.setTitle(Contant.APPOINT_TITLE.replace("||",entrust.getAgentName()));
+				centermsg.setMsg(msg.toString());
+				centerMsgServiceImpl.insertCenterMsg(centermsg);
+			}
 			entrust.setOtherFacilities(MidlandHelper.dropEmpty(entrust.getOtherFacilities()));
 			if (entrust.getStatus()!=null && 1 !=entrust.getStatus()&& 0 !=entrust.getStatus()){
 				//如果委托状态不是已分配，隐藏重新分配按钮

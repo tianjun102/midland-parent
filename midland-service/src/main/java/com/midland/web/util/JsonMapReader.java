@@ -39,6 +39,16 @@ public class JsonMapReader
         return objects;
     }
 
+    public static ParamObject getObject(String note, Object id){
+        List<ParamObject> re = getMap(note);
+        for (ParamObject o:re){
+            if (o.getId().equals(id)){
+                return o;
+            }
+        }
+        return new ParamObject();
+    }
+
     public void setMap(List<ParamObject> objects) {
         this.objects = objects;
     }

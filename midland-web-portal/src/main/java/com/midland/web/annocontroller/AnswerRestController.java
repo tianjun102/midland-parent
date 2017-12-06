@@ -1,8 +1,12 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.Answer;
+import com.midland.web.model.CenterMsg;
+import com.midland.web.model.Questions;
 import com.midland.web.service.AnswerService;
 import com.midland.base.BaseFilter;
+import com.midland.web.service.CenterMsgService;
 import com.midland.web.service.QuestionsService;
 import org.slf4j.Logger;
 import com.midland.web.commons.Result;
@@ -28,6 +32,8 @@ public class AnswerRestController extends BaseFilter  {
 	private AnswerService answerServiceImpl;
 	@Autowired
 	private QuestionsService questionsServiceImpl;
+	@Autowired
+	private CenterMsgService centerMsgServiceImpl;
 
 	/**
 	 * 新增
@@ -42,6 +48,16 @@ public class AnswerRestController extends BaseFilter  {
 			obj.setAnswerTime(MidlandHelper.getCurrentTime());
 			answerServiceImpl.insertAnswer(obj);
 			questionsServiceImpl.answerNumCount(obj.getQuestionsId());
+			CenterMsg centerMsg = new CenterMsg();
+			centerMsg.setType(1);
+			centerMsg.setJumpId(obj.getQuestionsId().toString());
+			//创建title
+			centerMsg.setTitle(obj.getAnswerName()==null?Contant.TOURISTS+Contant.ANSWER_TITLE:obj.getAnswerName()+Contant.ANSWER_TITLE);
+			//创建msg
+			centerMsg.setMsg(obj.getAnswerArea());
+			Questions questions =  questionsServiceImpl.selectByPrimaryKey(obj.getQuestionsId());
+			centerMsg.setUserId(questions.getUserId()==null?null:questions.getUserId().toString());
+			centerMsgServiceImpl.insertCenterMsg(centerMsg);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
 		} catch(Exception e) {
