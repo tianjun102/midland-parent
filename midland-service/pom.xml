@@ -15,7 +15,7 @@
 		<pluginRepository>
 			<id>nexus</id>
 			<name>nexus</name>
-			<url>http://nexus.oa.irissz.com:8081/nexus/content/groups/public</url>
+			<url>http://mvnrepository.com/</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -28,7 +28,7 @@
 	    <repository>    
 	       <id>nexus</id>    
 	       <name>local private nexus</name>    
-	       <url>http://nexus.oa.irissz.com:8081/nexus/content/groups/public</url>
+	       <url>http://mvnrepository.com/</url>
 	       <releases>    
 	           <enabled>true</enabled>    
 	       </releases>    
@@ -38,7 +38,7 @@
 	    </repository>    
     </repositories>
     <build>
-        <finalName>midland</finalName>
+        <finalName>midland-service</finalName>
         <plugins>
             <!-- Mybatis generator代码生成插件 配置 -->
             <plugin>

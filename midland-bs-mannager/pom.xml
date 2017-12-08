@@ -6,6 +6,9 @@
     <packaging>war</packaging>
     <version>1.0.0</version>
     <name>midland-bs-mannager App</name>
+    <build>
+        <finalName>midland</finalName>
+    </build>
     <parent>
         <groupId>com.bluemobi</groupId>
         <artifactId>midland-parent</artifactId>

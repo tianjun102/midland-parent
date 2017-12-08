@@ -9,6 +9,9 @@
 	<packaging>war</packaging>
 	<version>1.0.0</version>
 	<name>midland-web-portal App</name>
+	<build>
+		<finalName>restApi</finalName>
+	</build>
 	<parent>
 		<groupId>com.bluemobi</groupId>
 		<artifactId>midland-parent</artifactId>
