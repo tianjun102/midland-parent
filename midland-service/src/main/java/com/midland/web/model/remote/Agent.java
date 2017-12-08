@@ -69,9 +69,22 @@ public class Agent {
 	 */
 	private String leaderPhone;
 	/**
+	 * 领导名称
+	 */
+	private String leaderName;
+	/**
 	 * 领导邮箱
 	 */
 	private String leaderEmail;
+
+
+	public String getLeaderName() {
+		return leaderName;
+	}
+
+	public void setLeaderName(String leaderName) {
+		this.leaderName = leaderName;
+	}
 
 	public String getLeaderPhone() {
 		return leaderPhone;

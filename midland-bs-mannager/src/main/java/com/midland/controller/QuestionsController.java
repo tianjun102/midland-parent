@@ -241,15 +241,15 @@ public class QuestionsController extends BaseFilter {
 		try {
 			answerServiceImpl.updateAnswerById(answer);
 			Answer answer1= answerServiceImpl.selectAnswerById(answer.getId());
-			if (answer.getAuditStatus() == 3){
-				//审核不通过，发送短信通知经纪人
-				List list = new ArrayList();
-				String remark = request.getParameter("auditRemark");
-				list.add(remark);
-				list.add("dfef");
-				list.add("qqqq");
-				apiHelper.smsSender(answer1.getAnswerPhone(),465465,list);
-			}
+//			if (answer.getAuditStatus() == 3){
+//				//审核不通过，发送短信通知经纪人
+//				List list = new ArrayList();
+//				String remark = request.getParameter("auditRemark");
+//				list.add(remark);
+//				list.add("dfef");
+//				list.add("qqqq");
+//				apiHelper.smsSender(answer1.getAnswerPhone(),465465,list);
+//			}
 			map.put("state",0);
 			
 		} catch (Exception e) {
