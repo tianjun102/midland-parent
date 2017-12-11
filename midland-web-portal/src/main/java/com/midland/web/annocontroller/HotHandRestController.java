@@ -106,16 +106,20 @@ public class HotHandRestController extends BaseFilter {
             for (CommunityAlbum temp : communityAlbumResult) {
                 if (temp.getType() == 0) {
                     //实景
-                    Map mapTemp = new HashMap();
-                    mapTemp.put("imgUrl", temp.getImgUrl());
-                    mapTemp.put("description", temp.getDescription());
-                    a.add(mapTemp);
+                    if (StringUtils.isNotEmpty(temp.getImgUrl())||StringUtils.isNotEmpty(temp.getDescription())) {
+                        Map mapTemp = new HashMap();
+                        mapTemp.put("imgUrl", temp.getImgUrl());
+                        mapTemp.put("description", temp.getDescription());
+                        a.add(mapTemp);
+                    }
                 } else if (temp.getType() == 1) {
                     //户型
-                    Map mapTemp = new HashMap();
-                    mapTemp.put("imgUrl", temp.getImgUrl());
-                    mapTemp.put("description", temp.getDescription());
-                    b.add(mapTemp);
+                    if (StringUtils.isNotEmpty(temp.getImgUrl())||StringUtils.isNotEmpty(temp.getDescription())) {
+                        Map mapTemp = new HashMap();
+                        mapTemp.put("imgUrl", temp.getImgUrl());
+                        mapTemp.put("description", temp.getDescription());
+                        b.add(mapTemp);
+                    }
                 }
             }
             LayoutMap layoutMap = new LayoutMap();
