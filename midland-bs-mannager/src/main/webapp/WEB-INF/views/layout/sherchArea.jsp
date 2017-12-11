@@ -52,7 +52,7 @@
         if(addrId==null||addrId==""){
             $("#cityId").val("");
             $("#cityName").val("");
-            $("#citys").html("<option value=''  >请选择</option>");
+            $("#citys").html("<option value=''>请选择</option>");
             return;
         }
         $.ajax({
