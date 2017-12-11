@@ -54,6 +54,11 @@ public class PTest {
 		map1.put("pageNo","1");
 		String data = HttpUtils.get(midlandConfig.getAgentPage(), map1);
 		List result = MidlandHelper.getAgentPojoList(data, Agent.class);
+
+		Map map = new HashMap();
+		map1.put("id","000c372c-b14f-48e1-a4ae-ba4d5f8d6771");
+		String data1 = HttpUtils.get(midlandConfig.getAgentDetail(), map);
+		List resul1t = MidlandHelper.getAgentPojoList(data1, Agent.class);
 	}
 	
 	@Test

@@ -16,11 +16,19 @@
 		<result column="user_id" property="userId" jdbcType="INTEGER" />
 		<result column="head_img" property="headImg" jdbcType="VARCHAR" />
 		<result column="reply_num" property="replyNum" jdbcType="VARCHAR" />
+
+		<result column="all_score" property="allScore" jdbcType="INTEGER" />
+		<result column="service_score" property="serviceScore" jdbcType="INTEGER" />
+		<result column="professional_skills" property="professionalSkills" jdbcType="INTEGER" />
+		<result column="market_specialty" property="marketSpecialty" jdbcType="INTEGER" />
+		<result column="agent_name" property="agentName" jdbcType="VARCHAR" />
+		<result column="agent_url" property="agentUrl" jdbcType="VARCHAR" />
+
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,comment,user,status,source,is_delete,information_id,type,comment_time,`like`,user_id,head_img,reply_num
-	</sql>
+		id,comment,user,status,source,is_delete,information_id,type,comment_time,`like`,user_id,head_img,reply_num,all_score,service_score,professional_skills,market_specialty,agent_name,agent_url
+</sql>
 
 	<select id="selectCommentById" resultMap="BaseResultMap">
 		select <include refid="Base_Column_List" /> from comment
@@ -143,6 +151,24 @@
 			<if test="replyNum != null">
 				reply_num,
 			</if>
+			<if test="allScore != null">
+				`all_score`,
+			</if>
+			<if test="serviceScore != null">
+				service_score,
+			</if>
+			<if test="professionalSkills != null">
+				professional_skills,
+			</if>
+			<if test="marketSpecialty != null">
+				market_specialty,
+			</if>
+			<if test="agentName != null">
+				agent_name,
+			</if>
+			<if test="agentUrl != null">
+				agent_url,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -181,6 +207,24 @@
 			 </if>
 			 <if test="replyNum != null">
 				 #{replyNum},
+			 </if>
+			 <if test="allScore != null">
+				 #{allScore},
+			 </if>
+			 <if test="serviceScore != null">
+				 #{serviceScore},
+			 </if>
+			 <if test="professionalSkills != null">
+				 #{professionalSkills},
+			 </if>
+			 <if test="marketSpecialty != null">
+				 #{marketSpecialty},
+			 </if>
+			 <if test="agentName != null">
+				 #{agentName},
+			 </if>
+			 <if test="agentUrl != null">
+				 #{agentUrl},
 			 </if>
 		</trim>
 	</insert>
@@ -221,6 +265,24 @@
 		</if>
 		<if test="replyNum != null">
 			reply_num= #{replyNum},
+		</if>
+		<if test="allScore != null">
+			all_score= #{allScore},
+		</if>
+		<if test="serviceScore != null">
+			service_score= #{serviceScore},
+		</if>
+		<if test="professionalSkills != null">
+			professional_skills= #{professionalSkills},
+		</if>
+		<if test="marketSpecialty != null">
+			market_specialty= #{marketSpecialty},
+		</if>
+		<if test="agentName != null">
+			agent_name= #{agentName},
+		</if>
+		<if test="agentUrl != null">
+			agent_url= #{agentUrl},
 		</if>
 	</sql>
 

@@ -12,6 +12,7 @@ import com.midland.web.model.user.Agenter;
 import com.midland.web.service.AppointmentService;
 import com.midland.web.service.EntrustService;
 import com.midland.web.util.MidlandHelper;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -99,16 +100,16 @@ public class MidlandTask {
 							appointmentServiceImpl.updateAppointmentById(appoint);
 
 							Map map1 = new HashMap();
-							map1.put("pageSize","5");
+							map1.put("pageSize","1");
 							map1.put("pageNo","1");
 							String data = HttpUtils.get(midlandConfig.getAgentPage(), map1);
 							List<Agent> result = MidlandHelper.getAgentPojoList(data, Agent.class);
 							result.forEach(a->{
 								List list = new ArrayList();
-								list.add("dfsd");
-								list.add("dfef");
-								apiHelper.smsSender(a.getLeaderPhone(),1251,list);
-								apiHelper.smsSender(a.getPhone(),1234,list);
+								list.add(a.getLeaderName());
+								list.add(appointment1.getAgentName());
+								if (StringUtils.isEmpty(appointment1.getAgentName()))
+								apiHelper.smsSender(a.getPhone(),63647,list);
 							});
 
 

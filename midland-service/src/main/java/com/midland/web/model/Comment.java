@@ -56,7 +56,61 @@ public class Comment{
 	private Integer replyNum;
 	private String informationTitle;
 	private String informationImgUrl;
+	private Integer allScore;
+	private Integer serviceScore;
+	private Integer professionalSkills;
+	private Integer marketSpecialty;
+	private String agentName;
+	private String agentUrl;
 
+
+	public Integer getAllScore() {
+		return allScore;
+	}
+
+	public void setAllScore(Integer allScore) {
+		this.allScore = allScore;
+	}
+
+	public Integer getServiceScore() {
+		return serviceScore;
+	}
+
+	public void setServiceScore(Integer serviceScore) {
+		this.serviceScore = serviceScore;
+	}
+
+	public Integer getProfessionalSkills() {
+		return professionalSkills;
+	}
+
+	public void setProfessionalSkills(Integer professionalSkills) {
+		this.professionalSkills = professionalSkills;
+	}
+
+	public Integer getMarketSpecialty() {
+		return marketSpecialty;
+	}
+
+	public void setMarketSpecialty(Integer marketSpecialty) {
+		this.marketSpecialty = marketSpecialty;
+	}
+
+	public String getAgentName() {
+		return agentName;
+	}
+
+	public void setAgentName(String agentName) {
+		this.agentName = agentName;
+	}
+
+	public String getAgentUrl() {
+		return agentUrl;
+	}
+
+	public void setAgentUrl(String agentUrl) {
+		this.agentUrl = agentUrl;
+	}
 
 	public String getInformationTitle() {
 		return informationTitle;
