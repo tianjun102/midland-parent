@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import com.alibaba.fastjson.JSONObject;
+import com.midland.config.MidlandConfig;
 import com.midland.core.redis.IBaseRedisTemplate;
 import com.midland.core.util.HttpUtils;
 import com.midland.web.model.LinkUrlManager;
@@ -48,6 +49,9 @@ public class SecurityRealm extends AuthorizingRealm {
     @Autowired
     private IBaseRedisTemplate baseRedisTemplate;
 
+    @Autowired
+    private MidlandConfig midlandConfig;
+
     /**
      * 权限检查
      */
@@ -59,7 +63,7 @@ public class SecurityRealm extends AuthorizingRealm {
         Map<String,String> parem = new HashMap<>();
         parem.put("userName",username);
         parem.put("password",baseRedisTemplate.getValueByKey(username).toString());
-        String data = HttpUtils.get("http://218.18.9.171:8183/dingjian/website/api/agenter/login", parem);
+        String data = HttpUtils.get(midlandConfig.getAgentLogin(), parem);
         Map userMap =  (Map)JSONObject.parse(data);
         if(("SUCCESS").equals(userMap.get("STATE"))) {
             final List<Role> roleInfos1 = roleService.selectRolesByUserId("88888");
@@ -104,7 +108,7 @@ public class SecurityRealm extends AuthorizingRealm {
         Map<String,String> parem = new HashMap<>();
         parem.put("userName",username);
         parem.put("password",oldPassWord);
-        String data = HttpUtils.get("http://218.18.9.171:8183/dingjian/website/api/agenter/login", parem);
+        String data = HttpUtils.get(midlandConfig.getAgentLogin(), parem);
         Map userMap =  (Map)JSONObject.parse(data);
         baseRedisTemplate.saveValue(username,oldPassWord);
         if(("SUCCESS").equals(userMap.get("STATE"))) {
