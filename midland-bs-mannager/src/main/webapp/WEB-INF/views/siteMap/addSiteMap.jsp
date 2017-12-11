@@ -66,7 +66,7 @@
             <li><span>平台：</span>
                 <select name="source" id="source" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option value="0">网站</option>
-                    <%--<option value="1">微站</option>--%>
+                    <option value="1">微站</option>
                 </select>
                 <span class = "_star ">*</span>
             </li>

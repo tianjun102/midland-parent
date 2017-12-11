@@ -33,7 +33,7 @@
                 </select>
             </li>
             <li><span>名称：</span>
-                <input type="text" name="name" id="name" value="${item.name}" onblur="notEmpty('linkName','linkName','名称不能为空！')"/>
+                <input type="text" name="name" style="width: 250px!important;" id="name" value="${item.name}" onblur="notEmpty('linkName','linkName','名称不能为空！')"/>
                 <span class = "_star ">*</span>
             </li>
             <li><span>图片：</span>
@@ -73,7 +73,8 @@
                     layer.msg("修改成功！！！", {icon: 1});
                     $('#save').removeAttr("onclick");
                     setTimeout(function () {
-                        parent.location.reload();
+                        $('#searchForm',window.parent.document).submit();
+                        closeWin();
                     }, 1000);
 
                 } else {
