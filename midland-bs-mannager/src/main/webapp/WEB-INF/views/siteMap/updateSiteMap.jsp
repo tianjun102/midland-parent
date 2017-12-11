@@ -66,7 +66,7 @@
             <li><span>平台：</span>
                 <select name="source" id="source" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option <c:if test="${item.source==0}">selected="selected"</c:if> value="0">网站</option>
-                    <%--<option <c:if test="${item.source==1}">selected="selected"</c:if> value="1">微站</option>--%>
+                    <option <c:if test="${item.source==1}">selected="selected"</c:if> value="1">微站</option>
                 </select>
                 <span class = "_star ">*</span>
             </li>
@@ -144,7 +144,8 @@
                     layer.msg("修改成功！！！", {icon: 1});
                     $('#save').removeAttr("onclick");
                     setTimeout(function () {
-                        parent.location.reload();
+                        $('#searchForm',window.parent.document).submit();
+                        closeWin();
                     }, 1000);
 
                 } else {
