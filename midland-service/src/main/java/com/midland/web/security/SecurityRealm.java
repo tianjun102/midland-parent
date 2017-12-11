@@ -12,6 +12,7 @@ import com.midland.core.util.HttpUtils;
 import com.midland.web.model.LinkUrlManager;
 import com.midland.web.model.user.Agenter;
 import com.midland.web.util.MidlandHelper;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -60,24 +61,26 @@ public class SecurityRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         String username = String.valueOf(principals.getPrimaryPrincipal());
 
-        Map<String,String> parem = new HashMap<>();
-        parem.put("userName",username);
-        parem.put("password",baseRedisTemplate.getValueByKey(username).toString());
-        String data = HttpUtils.get(midlandConfig.getAgentLogin(), parem);
+        Map<String,String> param = new HashMap<>();
+        param.put("userName",username);
+        param.put("password",baseRedisTemplate.getValueByKey(username).toString());
+        String data = HttpUtils.get(midlandConfig.getAgentLogin(), param);
         Map userMap =  (Map)JSONObject.parse(data);
-        if(("SUCCESS").equals(userMap.get("STATE"))) {
-            final List<Role> roleInfos1 = roleService.selectRolesByUserId("88888");
-            for (Role role1 : roleInfos1) {
-                authorizationInfo.addRole(role1.getRoleSign());
+        if (userMap !=null) {
+            if (("SUCCESS").equals(userMap.get("STATE"))) {
+                final List<Role> roleInfos1 = roleService.selectRolesByUserId("88888");
+                for (Role role1 : roleInfos1) {
+                    authorizationInfo.addRole(role1.getRoleSign());
 
-                final List<Permission> permissions1 = permissionService.selectPermissionsByRoleId(role1.getId());
-                for (Permission permission : permissions1) {
-                    // 添加权限
-                    authorizationInfo.addStringPermission(permission.getPermissionSign());
+                    final List<Permission> permissions1 = permissionService.selectPermissionsByRoleId(role1.getId());
+                    for (Permission permission : permissions1) {
+                        // 添加权限
+                        authorizationInfo.addStringPermission(permission.getPermissionSign());
+                    }
                 }
-            }
-            return authorizationInfo;
+                return authorizationInfo;
 
+            }
         }
 
         final User user = userService.selectByUsername(username);
@@ -108,12 +111,15 @@ public class SecurityRealm extends AuthorizingRealm {
         Map<String,String> parem = new HashMap<>();
         parem.put("userName",username);
         parem.put("password",oldPassWord);
-        String data = HttpUtils.get(midlandConfig.getAgentLogin(), parem);
+        String data = null;
+        data = HttpUtils.get(midlandConfig.getAgentLogin(), parem);
         Map userMap =  (Map)JSONObject.parse(data);
         baseRedisTemplate.saveValue(username,oldPassWord);
-        if(("SUCCESS").equals(userMap.get("STATE"))) {
-            SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(username, password, getName());
-            return authenticationInfo;
+        if (userMap != null) {
+            if (("SUCCESS").equals(userMap.get("STATE"))) {
+                SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(username, password, getName());
+                return authenticationInfo;
+            }
         }
         //List<String> areaList = MidlandHelper.getPojoList(data, String.class);
         // 通过数据库进行验证

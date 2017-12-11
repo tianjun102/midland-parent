@@ -12,6 +12,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.SSLContext;
 import java.io.BufferedReader;
@@ -35,6 +37,7 @@ import java.util.Map.Entry;
 @SuppressWarnings("all")
 public class HttpUtils {
 
+	private static final Logger log = LoggerFactory.getLogger(HttpUtils.class);
 	private static final String DEFAULT_CHARSET = "UTF-8";
 	
 	private static final int CONNECT_TIME_OUT = 5000; //链接超时时间3秒
@@ -84,7 +87,7 @@ public class HttpUtils {
 			response = httpClient.execute(httpGet);
 			body = EntityUtils.toString(response.getEntity(), DEFAULT_CHARSET);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("HttpUtils.get",e.getMessage());
 		} finally {
 			if (response != null) {
 				try {

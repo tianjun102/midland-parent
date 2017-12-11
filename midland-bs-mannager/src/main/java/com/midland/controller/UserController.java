@@ -152,21 +152,23 @@ public class UserController extends BaseFilter {
 			parem.put("password",password);
 			String data = HttpUtils.get(midlandConfig.getAgentLogin(), parem);
 			Map userMap =  (Map)JSONObject.parse(data);
-			if ("SUCCESS".equals(userMap.get("STATE"))) {
-				String dataDtail = HttpUtils.get(midlandConfig.getAgentDetail()+"?id=" + userMap.get("agenterId"), null);
-				Agenter agenterList = MidlandHelper.getPojo(dataDtail);
-				if (agenterList != null) {
-					User agenterUser = new User();
-					agenterUser.setId(userMap.get("agenterId")==null?null:userMap.get("agenterId").toString());
-					agenterUser.setPhone(agenterList.getPhone());
-					agenterUser.setUsername(username);
-					agenterUser.setPassword(password);
-					agenterUser.setUserCnName(agenterList.getName());
-					agenterUser.setCityName(agenterList.getStoreName());
-					List<Role> roles = roleService.selectRolesByUserId("88888");
-					agenterUser.setRoles(roles);
-					request.getSession().setAttribute("userInfo", agenterUser);
-					return "redirect:/";
+			if (userMap != null) {
+				if ("SUCCESS".equals(userMap.get("STATE"))) {
+					String dataDtail = HttpUtils.get(midlandConfig.getAgentDetail() + "?id=" + userMap.get("agenterId"), null);
+					Agenter agenterList = MidlandHelper.getPojo(dataDtail);
+					if (agenterList != null) {
+						User agenterUser = new User();
+						agenterUser.setId(userMap.get("agenterId") == null ? null : userMap.get("agenterId").toString());
+						agenterUser.setPhone(agenterList.getPhone());
+						agenterUser.setUsername(username);
+						agenterUser.setPassword(password);
+						agenterUser.setUserCnName(agenterList.getName());
+						agenterUser.setCityName(agenterList.getStoreName());
+						List<Role> roles = roleService.selectRolesByUserId("88888");
+						agenterUser.setRoles(roles);
+						request.getSession().setAttribute("userInfo", agenterUser);
+						return "redirect:/";
+					}
 				}
 			}
             final User authUserInfo = userService.selectByUsername(user.getUsername());
