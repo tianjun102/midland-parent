@@ -59,8 +59,8 @@
 							<a target="contentF" href="${ctx}/rest/layoutMap/index?hotHandId=${item.id}">主推户型</a>
 							<a target="contentF" class="arrange_img" title="重新分配经纪人"
 							   onclick="toRedistribute(${item.id })"></a>
-							<a target="contentF" href="${ctx}/rest/hotHand/to_update?id=${item.id}">编辑</a>
-							<a target="contentF" onclick="delete1(${item.id })">删除</a>
+							<a target="contentF"  class="edit_img" href="${ctx}/rest/hotHand/to_update?id=${item.id}"></a>
+							<a target="contentF" class="delete_img" onclick="delete1(${item.id })"></a>
 							<a target="contentF" title="上移" class="up_img"
 							   onclick="sort(${item.id },${item.orderBy},2)"></a>
 							<a target="contentF" title="下移" class="down_img"

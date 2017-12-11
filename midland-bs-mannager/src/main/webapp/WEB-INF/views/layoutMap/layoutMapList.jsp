@@ -6,6 +6,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
+
 </head>
 <body>
 
@@ -14,18 +15,18 @@
     <table class="table table-bordered table-add">
         <thead>
             <tr>
-				<th style="width: 8%">图片</th>
-				<th style="width: 8%">类型</th>
-				<th style="width: 8%">标题</th>
-				<th style="width: 8%">朝向</th>
-				<th style="width: 8%">面积</th>
-				<th style="width: 8%">均价</th>
-				<th style="width: 8%">在售套数</th>
-				<th style="width: 8%">删除状态</th>
-				<th style="width: 8%">显示状态</th>
-				<th style="width: 8%">价格</th>
-				<th style="width: 8%">创建时间</th>
-                <th style="width: 10%">操作</th>
+				<th style="width: auto">图片</th>
+				<th style="width: auto">类型</th>
+				<th style="width: auto">标题</th>
+				<th style="width: auto">朝向</th>
+				<th style="width: auto">面积</th>
+				<th style="width: auto">均价</th>
+				<th style="width: auto">在售套数</th>
+				<th style="width: auto">删除状态</th>
+				<th style="width: auto">显示状态</th>
+				<th style="width: auto">价格</th>
+				<th style="width: auto">创建时间</th>
+                <th style="width: auto">操作</th>
             </tr>
         </thead>
         <tbody>
@@ -53,8 +54,8 @@
 						<td>${item.price}</td>
 						<td>${item.createTime}</td>
 						<td>
-                            <a target="contentF" onclick="to_edit(${item.id })">编辑</a>
-                            <a target="contentF" onclick="delete1(${item.id })">删除</a>
+                            <a target="contentF" title="编辑" class="edit_img" onclick="to_edit(${item.id })"></a>
+                            <a target="contentF" title="删除" class="delete_img" onclick="delete1(${item.id })"></a>
                             <a target="contentF" title="上移" class="up_img"
                                onclick="sort(${item.id },${item.orderBy},2)"></a>
                             <a target="contentF" title="下移" class="down_img"
@@ -125,7 +126,7 @@
             type: 2,
             title: ['修改'],
             shade: 0.3,
-            area: ['500px', '700px'],
+            area: ['600px', '500px'],
             content: ['${ctx}/rest/layoutMap/to_update?id='+id,'no']
         });
     }

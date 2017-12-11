@@ -2,6 +2,7 @@ package com.midland.task;
 
 import com.midland.config.MidlandConfig;
 import com.midland.core.util.HttpUtils;
+import com.midland.web.Contants.Contant;
 import com.midland.web.api.ApiHelper;
 import com.midland.web.api.SmsSender.SmsModel;
 import com.midland.web.api.mailSender.MailProperties;
@@ -109,7 +110,7 @@ public class MidlandTask {
 								list.add(a.getLeaderName());
 								list.add(appointment1.getAgentName());
 								if (StringUtils.isEmpty(appointment1.getAgentName()))
-								apiHelper.smsSender(a.getPhone(),63647,list);
+								apiHelper.smsSender(a.getPhone(), Contant.SMS_TEMPLATE_63647,list);
 							});
 
 

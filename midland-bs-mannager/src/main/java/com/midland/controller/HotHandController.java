@@ -8,6 +8,8 @@ import com.midland.web.service.HotHandService;
 import com.midland.base.BaseFilter;
 import com.midland.web.service.JdbcService;
 import com.midland.web.service.SettingService;
+import com.midland.web.util.JsonMapReader;
+import com.midland.web.util.ParamObject;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 
@@ -55,6 +57,8 @@ public class HotHandController extends BaseFilter  {
 	@RequestMapping("to_add")
 	public String toAddHotHand(HotHand hotHand,Model model) throws Exception {
 		settingServiceImpl.getAllProvinceList(model);
+		List<ParamObject> bo = JsonMapReader.getMap("decoration");
+		model.addAttribute("decorations",bo);
 		return "hotHand/addHotHand";
 	}
 
@@ -69,6 +73,7 @@ public class HotHandController extends BaseFilter  {
 			log.info("addHotHand {}",hotHand);
 			int maxOrderBy = hotHandServiceImpl.getMaxOrderBy();
 			hotHand.setOrderBy(maxOrderBy);
+			hotHand.setCreateTime(MidlandHelper.getCurrentTime());
 			hotHandServiceImpl.insertHotHand(hotHand);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -119,6 +124,8 @@ public class HotHandController extends BaseFilter  {
 			}
 		}
 		settingServiceImpl.getAllProvinceList(model);
+		List<ParamObject> bo = JsonMapReader.getMap("decoration");
+		model.addAttribute("decorations",bo);
 		model.addAttribute("item",result);
 		return "hotHand/updateHotHand";
 	}

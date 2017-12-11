@@ -7,6 +7,37 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
+    <style type="text/css">
+        .fileupload .fileupload-item {
+            display: inline-block;
+            position: relative;
+            width: 110px;
+            height: 64px;
+            margin: 10px 10px 0 0;
+            overflow: hidden;
+            border: 1px solid #ccc;
+        }
+
+        .fileupload-item img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .fileupload-item .xclose {
+            display: block;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+            text-align: center;
+            background: rgba(0, 0, 0, .7);
+            font-size: 14px;
+            color: #ddd;
+            cursor: pointer;
+        }
+    </style>
     <script type="text/javascript">
         $(function () {
             $('#file_upload').uploadify({
@@ -42,14 +73,15 @@
                     <option value="1" <c:if test="${item.type == 1}">selected</c:if> >户型图</option>
                 </select>
             </li>
-            <li><span>图片上传：</span>
-                <div style="width: 250px;float: left;">
+            <li><span style="vertical-align: top;">图片上传：</span>
+                <div style="width: 250px;display: inline-block;">
                     <input type="hidden" name="imgUrl" id="imgUrl" value="${item.imgUrl}">
 
                     <img style="margin-bottom: 10px;max-width:80px;max-height:80px" id="iconImg1" src="${item.imgUrl}">
                     <input type="file" name="file_upload" id="file_upload"/>
                 </div>
             </li>
+
             <li><span>图片描述：</span>
                <input type="text" name="description" id="description" value="${item.description}"/>
             </li>

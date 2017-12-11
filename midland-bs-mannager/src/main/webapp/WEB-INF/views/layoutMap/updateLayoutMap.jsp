@@ -7,6 +7,19 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
+    <style type="text/css">
+        .dropdown .selected, .dropdown li {
+            display: block;
+            height: 26px;
+            width:150px;
+            line-height: 26px;
+            font-size: 14px;
+            color: #000;
+            padding: 0 10px;
+            /* overflow: hidden; */
+            white-space: nowrap;
+        }
+    </style>
     <script type="text/javascript">
         $(function () {
             $('#file_upload').uploadify({
@@ -39,17 +52,14 @@
             <input type="hidden" name="id" id="id" value="${item.id}">
             <input type="hidden" name="hotHandId" id="hotHandId" value="${item.hotHandId}">
 
-            <li><span>类型：</span>
+            <li class="col-md-4"><span>类型：</span>
                 <select name="type" id="type" class="dropdown">
                     <option value="0" <c:if test="${item.type == 0}">selected</c:if> >一室</option>
                     <option value="1" <c:if test="${item.type == 1}">selected</c:if> >二室</option>
                     <option value="2" <c:if test="${item.type == 2}">selected</c:if> >三室</option>
                 </select>
             </li>
-            <li><span>标题：</span>
-               <input type="text" name="title" id="title" value="${item.title}"/>
-            </li>
-            <li><span>朝向：</span>
+            <li class="col-md-4"><span>朝向：</span>
                 <select name="turned" id="turned" class="dropdown">
                     <c:forEach items="${turneds}" var="s">
                         <option value="${s.id}" <c:if test="${s.id==entrust.turned}">selected</c:if>>
@@ -58,19 +68,23 @@
                     </c:forEach>
                 </select>
             </li>
-            <li><span>面积：</span>
+            <li class="col-md-4"><span>标题：</span>
+               <input type="text" name="title" id="title" value="${item.title}"/>
+            </li>
+
+            <li class="col-md-4"><span>面积：</span>
                <input type="text" name="acreage" id="acreage" value="${item.acreage}"/>
             </li>
-            <li><span>均价：</span>
+            <li class="col-md-4"><span>均价：</span>
                <input type="text" name="avgPrice" id="avgPrice" value="${item.avgPrice}"/>
             </li>
-            <li><span>在售套数：</span>
+            <li class="col-md-4"><span>在售套数：</span>
                <input type="text" name="saleingNum" id="saleingNum" value="${item.saleingNum}"/>
             </li>
-            <li><span>价格：</span>
+            <li class="col-md-4"><span>价格：</span>
                <input type="text" name="price" id="price" value="${item.price}"/>
             </li>
-            <li><span>图片上传：</span>
+            <li class="col-md-4"><span>图片上传：</span>
                 <div style="width: 250px;float: left;">
                     <input type="hidden" name="imgUrl" id="imgUrl" value="${item.imgUrl}">
 

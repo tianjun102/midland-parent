@@ -87,6 +87,7 @@ public class Contant {
 	public static final int SMS_TEMPLATE_56848=56848;
 	public static final int SMS_TEMPLATE_56846=56846;
 	public static final int SMS_TEMPLATE_56845=56845;
+	public static final int SMS_TEMPLATE_63647=63647;//预约记录超过24小时发送短信通知
 	public static final int SMS_TEMPLATE_54711=54711;//发送短信验证码
 
 	public static final String ANSWER_TITLE = "回答了我的提问：";

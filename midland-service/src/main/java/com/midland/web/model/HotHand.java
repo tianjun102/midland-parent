@@ -122,7 +122,19 @@ public class HotHand {
     private String recommend;
 
     private Integer sort;
+    /**
+     * 建筑面积
+     */
+    private Integer buildingArea;
 
+
+    public Integer getBuildingArea() {
+        return buildingArea;
+    }
+
+    public void setBuildingArea(Integer buildingArea) {
+        this.buildingArea = buildingArea;
+    }
 
     public Integer getSort() {
         return sort;

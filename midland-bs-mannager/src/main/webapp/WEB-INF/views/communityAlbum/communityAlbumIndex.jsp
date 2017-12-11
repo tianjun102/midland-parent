@@ -16,7 +16,7 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
-				<a class = "setup"  target="contentF" href="${ctx}/rest/communityAlbum/to_add?hotHandId=${item.hotHandId}">新增</a>
+				<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>
 			</p>
 		<form action="${ctx }/rest/communityAlbum/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
@@ -50,7 +50,7 @@
                 title:['新增'],
                 resize: false,
                 scrollbar:false,
-                content:['${ctx}/rest/communityAlbum/to_add', 'no']
+                content:['${ctx}/rest/communityAlbum/to_add?hotHandId=${item.hotHandId}', 'no']
             });
         }
 		 window.onload = function(){

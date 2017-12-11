@@ -67,8 +67,15 @@
                                                         value="${appointment.measure}"
                                                         maxlength="50"/>㎡</li>
             <li class="col-md-6"><span>装修：</span>
-                <input type="text" name="decoration" id="decoration"  disabled="disabled" value="${appointment.decoration}" />
+                <select name="decoration" id="decoration" class="dropdown" disabled="disabled">
+                    <c:forEach items="${decorations}" var="s">
+                        <option value="${s.id}" <c:if test="${s.id==appointment.decoration}">selected</c:if>>
+                                ${s.name}
+                        </option>
+                    </c:forEach>
+                </select>
             </li>
+
             <li class="col-md-6"><span>状态：</span>
                 <select name="status" id="status" class="dropdown">
 
