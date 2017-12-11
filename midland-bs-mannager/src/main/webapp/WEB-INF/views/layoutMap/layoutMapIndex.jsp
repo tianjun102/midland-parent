@@ -46,7 +46,7 @@
             layer.open({
                 type: 2,
                 skin: 'layer-style',
-                area: ['500px','700px'],
+                area: ['600px','400px'],
                 shadeClose: false, //点击遮罩关闭
                 title:['新增'],
                 resize: false,

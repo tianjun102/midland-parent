@@ -12,7 +12,7 @@ public interface LayoutMapMapper {
 	int deleteLayoutMapById(Integer layoutMap);
 
 	int updateLayoutMapById(LayoutMap layoutMap);
-	int getMaxOrderBy(LayoutMap layoutMap);
+	Integer getMaxOrderBy(LayoutMap layoutMap);
 
 	int insertLayoutMap(LayoutMap layoutMap);
 
