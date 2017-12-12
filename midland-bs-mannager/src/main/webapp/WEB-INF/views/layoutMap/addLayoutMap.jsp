@@ -105,7 +105,7 @@
             </li>
             <li><span>价格：</span>
                 <input type="text" name="price" id="price" value="${item.price}"
-                       onblur="InitInput.setNumber(this,9,2,2)"/>
+                       onblur="InitInput.setNumber(this,9,2,2)"/> 万元
             </li>
             <li><span style="vertical-align: top;">图片上传：</span>
                 <div style="width: 250px;display: inline-block;">
@@ -160,7 +160,7 @@
                         layer.msg("保存成功！！！", {icon: 1});
                         $('#save').removeAttr("onclick");
                         setTimeout(function () {
-                            parent.location.reload();
+                            window.open("${ctx}/rest/layoutMap/index" , "contentF");
                         }, 1000);
 
                     } else {
@@ -198,8 +198,9 @@
 
     //取消
     function closeWin() {
-        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-        parent.layer.close(index);
+//        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+//        parent.layer.close(index);
+        window.open("${ctx}/rest/layoutMap/index" , "contentF");
     }
 </script>
 </body>

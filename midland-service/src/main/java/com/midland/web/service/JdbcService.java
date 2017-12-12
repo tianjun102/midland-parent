@@ -177,15 +177,15 @@ public class JdbcService {
      * @param sort           0置顶，1上移，2下移，这个是页面控制后台逻辑用的，不保存到数据库
      */
     @Transactional(rollbackFor = Exception.class)
-    public void otherListDesc(String primaryKeyName, String id, String orderByColumn, String tableName, String orderByParam, ListDescOtherParam obj,int sort) {
+    public void hotHandListDesc(String primaryKeyName, String id, String orderByColumn, String tableName, String orderByParam, ListDescOtherParam obj, int sort) {
         if (sort == 0) {
             Map map = stickly(primaryKeyName, id, orderByColumn, tableName);
             doExchangeDescNum(primaryKeyName, id, orderByColumn, orderByParam, tableName, map);
         } else if (sort == 1) {
-            Map map = otherShiftUp(primaryKeyName, id, orderByColumn, tableName, orderByParam,obj);
+            Map map = hotHandShiftUp(primaryKeyName, id, orderByColumn, tableName, orderByParam,obj);
             doExchangeDescNum(primaryKeyName, id, orderByColumn, orderByParam, tableName, map);
         } else if (sort == 2) {
-            Map map = otherShiftDown(primaryKeyName, id, orderByColumn, tableName, orderByParam,obj);
+            Map map = hotHandShiftDown(primaryKeyName, id, orderByColumn, tableName, orderByParam,obj);
             doExchangeDescNum(primaryKeyName, id, orderByColumn, orderByParam, tableName, map);
         } else {
             throw new IllegalArgumentException("没有这个sort排序方法");
@@ -202,7 +202,7 @@ public class JdbcService {
      * @param orderByParam
      * @return
      */
-    public Map otherShiftUp(String primaryKeyName, String id, String orderByColumn, String tableName, String orderByParam, ListDescOtherParam obj) {
+    public Map hotHandShiftUp(String primaryKeyName, String id, String orderByColumn, String tableName, String orderByParam, ListDescOtherParam obj) {
         StringBuffer sb = new StringBuffer("SELECT ").append(primaryKeyName + ",").append(orderByColumn)
                 .append(" from ").append(tableName).append(" where ").append("is_delete = 0 and ");
         if (StringUtils.isNotEmpty(obj.getCityId())) {
@@ -214,6 +214,9 @@ public class JdbcService {
         }
         if (obj.getSource()!=null) {
             sb.append("source=").append(obj.getSource()).append(" and ");
+        }
+        if (obj.getHotHandId() != null){
+            sb.append("hot_hand_id=").append(obj.getHotHandId()).append(" and ");
         }
         sb.append(orderByColumn)
                 .append("<").append(orderByParam).append(" order by ")
@@ -232,7 +235,7 @@ public class JdbcService {
      * @param orderByParam
      * @return
      */
-    public Map otherShiftDown(String primaryKeyName, String id, String orderByColumn, String tableName, String orderByParam,ListDescOtherParam obj) {
+    public Map hotHandShiftDown(String primaryKeyName, String id, String orderByColumn, String tableName, String orderByParam, ListDescOtherParam obj) {
         StringBuffer sb = new StringBuffer("SELECT ").append(primaryKeyName + ",").append(orderByColumn)
                 .append(" from ").append(tableName).append(" where ").append("is_delete = 0 and ");
         if (StringUtils.isNotEmpty(obj.getCityId())) {
@@ -244,6 +247,9 @@ public class JdbcService {
         }
         if (obj.getSource()!=null) {
             sb.append("source=").append(obj.getSource()).append(" and ");
+        }
+        if (obj.getHotHandId() != null){
+            sb.append("hot_hand_id=").append(obj.getHotHandId()).append(" and ");
         }
         sb.append(orderByColumn)
                 .append(">").append(orderByParam).append(" order by ")

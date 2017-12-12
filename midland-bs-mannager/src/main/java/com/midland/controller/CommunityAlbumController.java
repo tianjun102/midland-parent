@@ -2,13 +2,10 @@ package com.midland.controller;
 
 import com.midland.web.Contants.Contant;
 import com.midland.web.model.CommunityAlbum;
-import com.midland.web.model.HotHand;
 import com.midland.web.model.temp.ListDescOtherParam;
-import com.midland.web.model.user.User;
 import com.midland.web.service.CommunityAlbumService;
 import com.midland.base.BaseFilter;
 import com.midland.web.service.JdbcService;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import java.util.Map;
 import java.util.HashMap;
@@ -19,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
-import java.util.List;
 import com.midland.web.util.MidlandHelper;
 import org.springframework.ui.Model;
 import javax.servlet.http.HttpServletRequest;
@@ -157,10 +153,11 @@ public class CommunityAlbumController extends BaseFilter  {
 		String tableName="community_album";
 		String orderByColumn="order_by";
 		ListDescOtherParam obj = new ListDescOtherParam();
+		obj.setHotHandId(communityAlbum.getHotHandId());
 		String orderByParam=String.valueOf(communityAlbum.getOrderBy());
 		Map map = new HashMap();
 		try {
-			jdbcService.otherListDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,obj,sort);
+			jdbcService.hotHandListDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,obj,sort);
 			map.put("state",0);
 		} catch (Exception e) {
 			log.error("",e);
