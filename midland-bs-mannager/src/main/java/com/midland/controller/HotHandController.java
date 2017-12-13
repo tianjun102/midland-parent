@@ -1,6 +1,5 @@
 package com.midland.controller;
 
-import com.midland.web.model.Appointment;
 import com.midland.web.model.HotHand;
 import com.midland.web.model.temp.ListDescOtherParam;
 import com.midland.web.model.user.User;
@@ -190,7 +189,7 @@ public class HotHandController extends BaseFilter  {
 		String orderByParam=String.valueOf(hotHand.getOrderBy());
 		Map map = new HashMap();
 		try {
-			jdbcService.otherListDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,obj,sort);
+			jdbcService.hotHandListDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,obj,sort);
 			map.put("state",0);
 		} catch (Exception e) {
 			log.error("",e);

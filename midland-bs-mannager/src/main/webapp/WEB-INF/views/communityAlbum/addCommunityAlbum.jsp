@@ -67,6 +67,7 @@
     <form action="${ctx}/rest/communityAlbum/add" method="post" id="dataForm">
         <ul class="userinfo updInfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
+            <input type="hidden" name="hotHandId" id="hotHandId" value="${item.hotHandId}">
             <li ><span>类型：</span>
                 <select name="type" id="type" class="dropdown">
                     <option value="0" <c:if test="${item.type == 0}">selected</c:if> >实景图</option>

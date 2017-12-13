@@ -14,6 +14,18 @@ public class ListDescOtherParam {
      */
     private Integer source;
 
+    /**
+     * 热卖一手主表的id，
+     */
+    private Integer hotHandId;
+
+    public Integer getHotHandId() {
+        return hotHandId;
+    }
+
+    public void setHotHandId(Integer hotHandId) {
+        this.hotHandId = hotHandId;
+    }
 
     public String getCityId() {
         return cityId;

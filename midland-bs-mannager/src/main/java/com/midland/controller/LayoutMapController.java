@@ -1,7 +1,6 @@
 package com.midland.controller;
 
 import com.midland.web.Contants.Contant;
-import com.midland.web.model.CommunityAlbum;
 import com.midland.web.model.LayoutMap;
 import com.midland.web.model.temp.ListDescOtherParam;
 import com.midland.web.service.JdbcService;
@@ -165,10 +164,11 @@ public class LayoutMapController extends BaseFilter  {
 		String tableName="layout_map";
 		String orderByColumn="order_by";
 		ListDescOtherParam obj = new ListDescOtherParam();
+		obj.setHotHandId(layoutMap.getHotHandId());
 		String orderByParam=String.valueOf(layoutMap.getOrderBy());
 		Map map = new HashMap();
 		try {
-			jdbcService.otherListDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,obj,sort);
+			jdbcService.hotHandListDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,obj,sort);
 			map.put("state",0);
 		} catch (Exception e) {
 			log.error("",e);

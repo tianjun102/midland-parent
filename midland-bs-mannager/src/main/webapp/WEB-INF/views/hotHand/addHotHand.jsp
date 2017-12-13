@@ -138,7 +138,7 @@
             <li class="col-md-5"><span>单位总数：</span>
                 <input type="text" name="unitTotal" id="unitTotal"  value="${item.unitTotal}"/>
             </li>
-            <li class="col-md-5"><span>裝修標準：</span>
+            <li class="col-md-5"><span>裝修标准：</span>
                 <select name="decoration" id="decoration" class="dropdown">
                     <c:forEach items="${decorations}" var="s">
                         <option value="${s.id}" <c:if test="${s.id==item.decoration}">selected</c:if>>

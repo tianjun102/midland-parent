@@ -35,7 +35,7 @@
                 <c:forEach items="${requestScope.items }" var="item" varStatus="xh">
                     <tr>
 						<input type="hidden" id="id" value="${item.id}"/>
-						<td>${item.imgUrl}</td>
+						<td><img src="${item.imgUrl}"  style="width:30px;height:30px" alt=""></td>
 						<td><c:if test="${item.type ==0}">一室</c:if>
                             <c:if test="${item.type ==1}">二室</c:if>
                             <c:if test="${item.type ==2}">三室</c:if>
@@ -54,7 +54,7 @@
 						<td>${item.price}</td>
 						<td>${item.createTime}</td>
 						<td>
-                            <a target="contentF" title="编辑" class="edit_img" onclick="to_edit(${item.id })"></a>
+                            <a target="contentF" title="编辑" class="edit_img" href="${ctx}/rest/layoutMap/to_update?id=${item.id}"></a>
                             <a target="contentF" title="删除" class="delete_img" onclick="delete1(${item.id })"></a>
                             <a target="contentF" title="上移" class="up_img"
                                onclick="sort(${item.id },${item.orderBy},2)"></a>
