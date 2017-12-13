@@ -98,7 +98,7 @@
 						<input type="hidden" name="bannerImg" id="bannerImg" value="${banner.bannerImg}">
 
 						<img style="margin-bottom: 10px;max-width:200px;max-height:200px" id="iconImg1"
-							 src="http://localhost/${banner.bannerImg}">
+							 src="${banner.bannerImg}">
 						<input type="file" name="file_upload" id="file_upload"/>
 					</div>
 				</li>
