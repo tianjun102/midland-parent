@@ -164,10 +164,10 @@
                 </li>
                 <li><span>缩略图：</span>
                     <div style="float: left;">
-                        <input type="hidden" name="imgUrl" id="imgUrl" value="${item.imgDesc}">
+                        <input type="hidden" name="imgUrl" id="imgUrl" value="${item.imgUrl}">
 
                         <img style="margin-bottom: 10px;max-width:200px;max-height:200px" id="iconImg2"
-                             src="${item.imgDesc}">
+                             src="${item.imgUrl}">
                         <input type="file" name="file_upload1" id="file_upload1"/>
                     </div>
                 </li>
