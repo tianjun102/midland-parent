@@ -90,7 +90,7 @@ public class ThirdPartyLoginController {
                     result.setMsg(Result.resultMsg.SUCCESS.toString());
                     result.setModel(userInfo);
                     redirectAttributes.addFlashAttribute("result",result);
-                    return "redirect:http://175.102.18.14:8083/web?token="+sessionId+"&code="+userInfo.getId();
+                    return "redirect:http://43.254.55.177:8083/web?token="+sessionId+"&code="+userInfo.getId();
                     //************结束*************//
                 } else {// 如果未获取到OpenID
                     result.setCode(ResultStatusUtils.STATUS_CODE_203);
@@ -109,7 +109,7 @@ public class ThirdPartyLoginController {
             e.printStackTrace();
         }
 
-        return "redirect:http://175.102.18.14:8083/web?token=error";
+        return "redirect:http://43.254.55.177:8083/web?token=error";
 
     }
 
