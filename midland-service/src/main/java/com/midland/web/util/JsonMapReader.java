@@ -15,11 +15,14 @@ public class JsonMapReader
 {
     private Logger logger = LoggerFactory.getLogger(JsonMapReader.class);
     private static String PAY_CHANNEL = "jsonMap/midland.json";
-    private ObjectMapper mapper = new ObjectMapper();
     private static List<ParamObject> objects = null;
     private static ClassPathResource cpr = null;
 
-    public  void getPayChannelInfo(String pro) {
+    private static String SENSITIVE = "jsonMap/sensitive.json";
+    private static ClassPathResource cpr1 = null;
+    private static List<ParamObject> objects1 = null;
+
+    public  void getInfo(String pro) {
         if (cpr == null){
              cpr = new ClassPathResource(PAY_CHANNEL);
         }
@@ -32,12 +35,32 @@ public class JsonMapReader
             }
         }
     }
+public  void getSensitiveInfo(String pro) {
+        if (cpr1 == null){
+            cpr1 = new ClassPathResource(SENSITIVE);
+        }
+        if (cpr1 != null && cpr1.exists()) {
+            try {
+                String packDeliveries = JsonUtil.getNodeValue(cpr1.getInputStream(), pro);
+                objects1 = JsonUtil.getListValues(packDeliveries, ParamObject.class);
+            } catch (IOException e) {
+                logger.error("", e);
+            }
+        }
+    }
 
-    public static List<ParamObject> getMap(String note) {
+    public static List<ParamObject> getSensitive(String note) {
         JsonMapReader jsonMapReader = new JsonMapReader();
-        jsonMapReader.getPayChannelInfo(note);
+        jsonMapReader.getSensitiveInfo(note);
+        return objects1;
+    }
+
+     public static List<ParamObject> getMap(String note) {
+        JsonMapReader jsonMapReader = new JsonMapReader();
+        jsonMapReader.getInfo(note);
         return objects;
     }
+
 
     public static ParamObject getObject(String note, Object id){
         List<ParamObject> re = getMap(note);
@@ -56,7 +79,7 @@ public class JsonMapReader
 
     public static void main(String[] args) {
         JsonMapReader properties = new JsonMapReader();
-        List<ParamObject> result = properties.getMap("quotation_type");
-        System.out.println(result);
+
+        System.out.println(getMap("sensitive"));
     }
 }
