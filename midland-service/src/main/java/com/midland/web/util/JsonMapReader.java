@@ -1,6 +1,6 @@
 package com.midland.web.util;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -20,7 +20,7 @@ public class JsonMapReader
 
     private static String SENSITIVE = "jsonMap/sensitive.json";
     private static ClassPathResource cpr1 = null;
-    private static List<ParamObject> objects1 = null;
+    private static String objects1 = null;
 
     public  void getInfo(String pro) {
         if (cpr == null){
@@ -41,17 +41,17 @@ public  void getSensitiveInfo(String pro) {
         }
         if (cpr1 != null && cpr1.exists()) {
             try {
-                String packDeliveries = JsonUtil.getNodeValue(cpr1.getInputStream(), pro);
-                objects1 = JsonUtil.getListValues(packDeliveries, ParamObject.class);
+                String object = JsonUtil.getNodeValue(cpr1.getInputStream(), pro);
+                objects1 = object.substring(1,object.length()-1);
             } catch (IOException e) {
                 logger.error("", e);
             }
         }
     }
 
-    public static List<ParamObject> getSensitive(String note) {
-        JsonMapReader jsonMapReader = new JsonMapReader();
-        jsonMapReader.getSensitiveInfo(note);
+    public static String getSensitive(String note) {
+            JsonMapReader jsonMapReader = new JsonMapReader();
+            jsonMapReader.getSensitiveInfo(note);
         return objects1;
     }
 
