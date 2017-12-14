@@ -43,25 +43,30 @@
         <include refid="select_option"/>
     </select>
 
-    <select id="findAttentionByList" parameterType="java.util.List" resultMap="BaseResultMap" >
+    <select id="findAttentionByList" parameterType="java.util.List" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from attention
-        where 1=1 and (
-        <foreach collection="mapList" item="item" index="index" open="(" close=")" separator=")or(">
-          <trim suffixOverrides="AND">
-            <if test="item.userId !=null">
-                 web_user_id = #{item.userId} AND
-            </if>
-            <if test="item.type !=null">
-                 type = #{item.type} AND
-            </if>
-            <if test="item.otherId !=null">
-                 other_id = #{item.otherId} AND
-            </if>
-          </trim>
-        </foreach>
-        )
+        where 1=1
+        <if test="mapList.size>0">
+            and (
+
+
+            <foreach collection="mapList" item="item" index="index" open="(" close=")" separator=")or(">
+                <trim suffixOverrides="AND">
+                    <if test="item.userId !=null">
+                        web_user_id = #{item.userId} AND
+                    </if>
+                    <if test="item.type !=null">
+                        type = #{item.type} AND
+                    </if>
+                    <if test="item.otherId !=null">
+                        other_id = #{item.otherId} AND
+                    </if>
+                </trim>
+            </foreach>
+            )
+        </if>
     </select>
 
 

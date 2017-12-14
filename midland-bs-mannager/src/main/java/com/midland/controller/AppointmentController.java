@@ -165,11 +165,20 @@ public class AppointmentController extends BaseFilter {
 	 */
 	@RequestMapping("/reset_agent")
 	@ResponseBody
-	public Object resetAgent(Appointment record) {
+	public Object resetAgent(Appointment record,HttpServletRequest request) {
 		Map map = new HashMap();
 		try {
 			record.setResetFlag(0);//重新分配经纪人后，隐藏“重新分配按钮”
 			appointmentServiceImpl.updateAppointmentById(record);
+			User user = MidlandHelper.getCurrentUser(request);
+			AppointLog appointLog = new AppointLog();
+			appointLog.setAppointId(record.getId());
+			appointLog.setLogTime(MidlandHelper.getCurrentTime());
+			appointLog.setOperatorId(user.getId());
+			appointLog.setOperatorName(user.getUserCnName());
+			appointLog.setRemark("重新分配经纪人:"+record.getAgentName());
+			appointLog.setState(record.getStatus());
+			appointLogServiceImpl.insertAppointLog(appointLog);
 
 			map.put("state", 0);
 		} catch (Exception e) {
@@ -218,14 +227,10 @@ public class AppointmentController extends BaseFilter {
 				record.setResetFlag(0);
 			}
 			appointmentServiceImpl.updateAppointmentById(record);
-			User user = (User) request.getSession().getAttribute("userInfo");
+			User user = MidlandHelper.getCurrentUser(request);
 			
 			AppointLog appointLog = new AppointLog();
-			if (StringUtils.isEmpty(remark)) {
-				appointLog.setRemark("无");
-			} else {
-				appointLog.setRemark(remark);
-			}
+
 			if (record.getStatus()==3){
 				// 关闭状态的数据发邮件到指定接收的多个邮箱
 				SimpleMailMessage message = new SimpleMailMessage();
@@ -234,6 +239,13 @@ public class AppointmentController extends BaseFilter {
 				message.setSubject("主题：预约已关闭");
 				message.setText("编号为"+record.getAppointSn()+"的预约记录已关闭");
 				apiHelper.emailSender("updateAppointment",message);
+
+				appointLog.setRemark("预约超时未处理，已自动关闭");
+			}
+			if (StringUtils.isEmpty(remark)) {
+				appointLog.setRemark("无");
+			} else {
+				appointLog.setRemark(remark);
 			}
 			appointLog.setAppointId(record.getId());
 			appointLog.setLogTime(MidlandHelper.getCurrentTime());

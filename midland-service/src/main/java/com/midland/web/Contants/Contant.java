@@ -8,9 +8,13 @@ import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 public class Contant {
 	public static final int isNewHouse = 1;
 	public static final int isOldHouse = 0;
+	/**
+	 * 问答
+	 */
 	public static final String answerAuditKey = "isAnswerAudit";
 	public static final int answerAuditOpen = 1;//开启问答审核
 	public static final int answerAuditClose = 0;//关闭问答审核,默认关闭
+	public static final int answerAuditPass = 1;//问答审核通过
 
 	/**
 	 * 超级管理员标识

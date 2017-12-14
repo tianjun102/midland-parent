@@ -186,7 +186,6 @@ public class QrCodeController extends BaseFilter {
     @ResponseBody
     public Object batchUpdate(String ids, QrCode qrCode) throws Exception {
         List<QrCode> commentList = new ArrayList<>();
-        //String[] ides=ids.split(",",-1);
         Arrays.asList(ids.split(",", -1)).forEach((id) -> {
                     QrCode comment1 = new QrCode();
                     comment1.setId(Integer.valueOf(id));

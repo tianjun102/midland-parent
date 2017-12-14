@@ -3,6 +3,7 @@ package com.midland.web.service.impl;
 import com.midland.web.dao.QuestionsMapper;
 import com.midland.web.model.Questions;
 import com.midland.web.service.QuestionsService;
+import com.midland.web.util.MidlandHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,7 @@ public class QuestionsServiceImpl implements QuestionsService {
     
     @Override
     public int insertSelective(Questions record) {
+        record.setQuestionTime(MidlandHelper.getCurrentTime());
         return questionsMapper.insertSelective(record);
     }
     
