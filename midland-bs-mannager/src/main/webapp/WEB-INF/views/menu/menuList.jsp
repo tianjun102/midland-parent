@@ -38,8 +38,8 @@
                         <td><input type="checkbox" name="pid" value="${item.id}"></td>
                         <td>${xh.count }</td>
                         <td>${item.cityName }</td>
-                        <td><c:if test="${not empty item.iconImg }"><img src="${item.iconImg }"
-                                                                         style="width:40px;height:40px" alt=""></c:if>
+                        <td><c:if test="${not empty item.iconImg }">
+                            <img src="${fileUrl}${item.iconImg }"style="width:40px;height:40px" alt=""></c:if>
                         </td>
                         <td><c:forEach items="${sources}" var="s">
                             <c:if test="${item.source == s.id}">${s.name}</c:if>

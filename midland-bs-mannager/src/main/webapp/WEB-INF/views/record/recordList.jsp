@@ -125,9 +125,13 @@
             dataType: "json",
 
             success: function (data) {
-                if (data.state==0){
-                    $('#searchForm').submit();
+                if(data.state==0){
+                    layer.msg("操作成功！",{icon:1});
+                    setTimeout(function(){$("#searchForm").submit();},1000);
+                }else{
+                    layer.msg("操作失败！！",{icon:7});
                 }
+                layer.close(index);
             },
             error: function () {
                 layer.msg("操作失败！", {icon: 2});

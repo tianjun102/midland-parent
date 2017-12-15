@@ -91,10 +91,10 @@
                     dataType: "json",
                     success: function(data){
                         if(data.state==0){
-                            layer.msg("删除成功！",{icon:1});
+                            layer.msg("操作成功！",{icon:1});
                             setTimeout(function(){$("#searchForm").submit();},1000);
                         }else{
-                            layer.msg("删除失败！！",{icon:7});
+                            layer.msg("操作失败！！",{icon:7});
                         }
                         layer.close(index);
                     }

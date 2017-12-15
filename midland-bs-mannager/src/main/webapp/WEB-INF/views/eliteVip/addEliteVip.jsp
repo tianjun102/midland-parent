@@ -97,7 +97,6 @@
             <input type="hidden" name="cityName" id="cityName" value="" >
             <ul class = "adminfo row">
 
-                <input type="hidden" name="cateName" id="cateName">
                 <%--<li><span>会员分类：</span>
                     <select id="cateId" name="cateId" class="dropdown" onchange="setCateName();">
                         <option value="1">会员分类1</option>
