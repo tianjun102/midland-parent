@@ -20,7 +20,18 @@ public class MidlandConfig {
 	private String agentLogin;
 	@Value("${agentDetail}")
 	private String agentDetail;
-	
+
+	@Value("${webSite}")
+	private String webSite;
+
+	public String getWebSite() {
+		return webSite;
+	}
+
+	public void setWebSite(String webSite) {
+		this.webSite = webSite;
+	}
+
 	public String getAgentPage() {
 		return agentPage;
 	}

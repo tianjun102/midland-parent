@@ -131,7 +131,7 @@ public class UserController extends BaseFilter {
                     
             }
             user.setPassword(ApplicationUtils.sha256Hex(password));
-            
+            user.setUsername(username);
             // 已登陆则 跳到首页
             if (subject.isAuthenticated()) {
                 return "redirect:/";

@@ -11,5 +11,5 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form"   uri="http://www.springframework.org/tags/form" %>
 <c:set var="ctx" value="${pageContext['request'].contextPath}"/>
-<c:set var="fileUrl" value="http://175.102.18.14:8083"/>
+<c:set var="fileUrl" value="http://43.254.55.177:8083"/>
 

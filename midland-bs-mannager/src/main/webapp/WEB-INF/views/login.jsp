@@ -33,7 +33,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <meta content="" name="author"/>
 <meta name="MobileOptimized" content="320">
 <%--
-<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="1106342971" data-redirecturi="http://175.102.18.14:8083/wechat/" charset="utf-8"></script>
+<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="1106342971" data-redirecturi="http://43.254.55.177:8083/wechat/" charset="utf-8"></script>
 --%>
 
 <%
