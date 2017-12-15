@@ -25,7 +25,7 @@ public class SensitiveFilter implements HandlerInterceptor {
                 set.add(e1)
         );
         SensitivewordFilter filter = new SensitivewordFilter(set);
-
+        StringBuffer sb = new StringBuffer();
        Map<String, String[]> map =  request.getParameterMap();
         map.entrySet().forEach(item->{
             if(item.getValue() !=null || !item.getValue().equals("")){
@@ -34,11 +34,15 @@ public class SensitiveFilter implements HandlerInterceptor {
                 Set<String> set1 = filter.getSensitiveWord(string, 2);
                 if (set1.size()>0){
                     returnErrorMessage(response,"内容包括违规字："+set1.iterator().next()+",请修正后在保存，谢谢");
+                    sb.append("false");
                 }
             }
         });
-
-        return true;
+        if (sb.toString().equals("false")){
+            return false;
+        }else {
+            return true;
+        }
     }
 
     @Override
