@@ -95,16 +95,20 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 					data:$("#addForm").serialize(),
 					success: function(data){
 						if(data.flag==1){
-							layer.msg("新增成功！",{icon:1});
+							layer.msg("保存成功！",{icon:1});
 							$('#save').removeAttr("onclick");
 							setTimeout(function(){window.open("${ctx}/rest/order/showOrderInfoIndex","contentF");},2000);
 						}else{
-							layer.msg("新增失败！",{icon:2});
+							layer.msg("保存失败！",{icon:2});
 						}
 					},
-					error: function(){
-						layer.msg("新增失败！",{icon:2});
-					}
+                error: function (data) {
+                    if (data.responseText != null) {
+                        layer.msg(data.responseText, {icon: 2});
+                    } else {
+                        layer.msg("保存失败！", {icon: 2});
+                    }
+                }
 						
 				});
     	}

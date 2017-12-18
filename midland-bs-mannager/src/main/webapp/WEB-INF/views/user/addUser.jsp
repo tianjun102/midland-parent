@@ -138,18 +138,22 @@
                 data: $('#addFrom').serialize(),
                 success: function (data) {
                     if (data.flag == 1) {
-                        layer.msg("新增成功！！！", {icon: 1});
+                        layer.msg("保存成功！！！", {icon: 1});
                         $('#save').removeAttr("onclick");
                         setTimeout(function () {
                             parent.location.reload();
                         }, 1000);
 
                     } else {
-                        layer.msg("新增失败！", {icon: 2});
+                        layer.msg("保存失败！", {icon: 2});
                     }
                 },
-                error: function () {
-                    layer.msg("新增失败！", {icon: 2});
+                error: function (data) {
+                    if (data.responseText != null) {
+                        layer.msg(data.responseText, {icon: 2});
+                    } else {
+                        layer.msg("保存失败！", {icon: 2});
+                    }
                 }
 
             });

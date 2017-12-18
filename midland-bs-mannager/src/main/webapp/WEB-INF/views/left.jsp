@@ -391,6 +391,9 @@
 					<shiro:hasPermission name="siteMapCate">
 						<a id = "left61" href="${ctx}/rest/setting/time/index" target="contentF"><span>经纪人响应时间</span></a>
 					</shiro:hasPermission>
+					<shiro:hasPermission name="siteMapCate">
+						<a id = "left61" href="${ctx}/rest/sensitive/index" target="contentF"><span>敏感字符管理</span></a>
+					</shiro:hasPermission>
 
 					<shiro:hasPermission name="errorPage">
 						<a id = "left62" href="${ctx}/rest/errorPage/index" target="contentF"><span>错误页面配置</span></a>

@@ -113,9 +113,13 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							layer.msg("新增失败！",{icon:2});
 						}
 					},
-					error: function(){
-						layer.msg("新增失败！",{icon:2});
-					}
+                error: function (data) {
+                    if (data.responseText != null) {
+                        layer.msg(data.responseText, {icon: 2});
+                    } else {
+                        layer.msg("操作失败！", {icon: 2});
+                    }
+                }
 						
 				});
 			

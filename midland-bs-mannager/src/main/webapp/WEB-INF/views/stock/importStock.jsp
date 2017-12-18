@@ -62,10 +62,14 @@
 		        	  }else{
 		        		  layer.msg("导入出错!!",{icon:2});
 		        	  }
-		          },  
-		          error: function (returndata) {
-		        	  layer.msg("导入出错!!",{icon:2});
-		          }  
+		          },
+                 error: function (data) {
+                     if (data.responseText != null) {
+                         layer.msg(data.responseText, {icon: 2});
+                     } else {
+                         layer.msg("操作失败！", {icon: 2});
+                     }
+                 }
 		     });  
 		}  
    </script>

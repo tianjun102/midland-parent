@@ -89,7 +89,6 @@
                     dataType: "json",
                     data: data,
                     success: function (data) {
-                        alert(data);
                         if (data.state == 0) {
                             layer.msg("保存成功！", {icon: 1});
                             window.location.reload();
@@ -98,8 +97,12 @@
                             layer.msg("保存失败！", {icon: 2});
                         }
                     },
-                    error: function () {
-                        layer.msg("保存失败！", {icon: 2});
+                    error: function (data) {
+                        if (data.responseText != null) {
+                            layer.msg(data.responseText, {icon: 2});
+                        } else {
+                            layer.msg("保存失败！", {icon: 2});
+                        }
                     }
 
                 });

@@ -1,22 +1,23 @@
 package com.midland.web.service.impl;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.api.ApiHelper;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
+import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.SetOperations;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -25,6 +26,8 @@ public class PublicServiceImpl implements PublicService {
     private ApiHelper apiHelper;
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
+    @Autowired
+    private RedisTemplate<String, String> redisStringTemplate;
 
     private static final Logger logger = LoggerFactory.getLogger(PublicServiceImpl.class);
 
@@ -81,6 +84,58 @@ public class PublicServiceImpl implements PublicService {
         }
         return vo.range(K, 0, 99);
     }
+
+    @Override
+    public void moveSet( Object V) throws Exception {
+        SetOperations<String, Object> vo = redisTemplate.opsForSet();
+        Long i =vo.remove(Contant.SENSITIVE_CACHE_KEY, V);
+        if (i<1){
+            throw new Exception("删除敏感词汇失败");
+        }
+    }
+ @Override
+    public void addSet(Object V) throws Exception {
+        SetOperations<String, Object> vo = redisTemplate.opsForSet();
+        Long i =vo.add(Contant.SENSITIVE_CACHE_KEY, V);
+        if (i<1){
+            throw new Exception("新增敏感词汇失败");
+        }
+    }
+
+    @Override
+    public Set<String> getSensitiveSet() {
+        SetOperations<String, String> vo =  redisStringTemplate.opsForSet();
+        if (vo == null) {
+           return Collections.EMPTY_SET;
+        }
+         Set<String> obj =  vo.distinctRandomMembers(Contant.SENSITIVE_CACHE_KEY, 100000);
+        if (obj.size()<1){
+            Set<String> temp = new HashSet<>();
+            Arrays.asList(JsonMapReader.getSensitive("sensitive").split(",")).forEach(e1 ->
+                    temp.add(e1)
+            );
+            putSensitiveSet(temp);
+            obj = temp;
+        }
+        return obj;
+    }
+
+    @Override
+    public void putSensitiveSet(String V) {
+        SetOperations<String, Object> vo = redisTemplate.opsForSet();
+        vo.add(Contant.SENSITIVE_CACHE_KEY, V);
+    }
+    @Override
+    public void putSensitiveSet(Set<String> V) {
+        SetOperations<String, Object> vo = redisTemplate.opsForSet();
+        Iterator<String> iterable=V.iterator();
+        while (iterable.hasNext()){
+            vo.add(Contant.SENSITIVE_CACHE_KEY, iterable.next());
+        }
+
+
+    }
+
 
     @Override
     public String getCode(String K, String prefix) {

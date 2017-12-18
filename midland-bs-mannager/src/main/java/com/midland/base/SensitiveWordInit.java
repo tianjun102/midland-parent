@@ -96,7 +96,7 @@ public class SensitiveWordInit {
         //迭代keyWordSet
         Iterator<String> iterator = keyWordSet.iterator();
         while(iterator.hasNext()){
-            key = iterator.next();    //关键字
+            key = String.valueOf(iterator.next());    //关键字
             nowMap = sensitiveWordMap;
             for(int i = 0 ; i < key.length() ; i++){
                 char keyChar = key.charAt(i);       //转换成char型

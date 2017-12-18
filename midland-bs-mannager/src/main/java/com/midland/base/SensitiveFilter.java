@@ -1,10 +1,13 @@
 package com.midland.base;
 
 import com.alibaba.fastjson.JSONArray;
+import com.midland.web.Contants.Contant;
 import com.midland.web.commons.Result;
+import com.midland.web.service.impl.PublicService;
 import com.midland.web.util.HTMLSpirit;
 import com.midland.web.util.JsonMapReader;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -15,32 +18,32 @@ import java.io.PrintWriter;
 import java.util.*;
 
 public class SensitiveFilter implements HandlerInterceptor {
+    @Autowired
+    private PublicService publicServiceImpl;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object obj) {
-
-
-
-        Set<String> set = new HashSet<>();
-        Arrays.asList(JsonMapReader.getSensitive("sensitive").split(",")).forEach(e1 ->
-                set.add(e1)
-        );
+        Set set = publicServiceImpl.getSensitiveSet();
         SensitivewordFilter filter = new SensitivewordFilter(set);
         StringBuffer sb = new StringBuffer();
-       Map<String, String[]> map =  request.getParameterMap();
-        map.entrySet().forEach(item->{
-            if(item.getValue() !=null || !item.getValue().equals("")){
-                String string = Arrays.toString(item.getValue());
-                string = HTMLSpirit.delHTMLTag(string);
-                Set<String> set1 = filter.getSensitiveWord(string, 2);
-                if (set1.size()>0){
-                    returnErrorMessage(response,"内容包括违规字："+set1.iterator().next()+",请修正后在保存，谢谢");
-                    sb.append("false");
+        Map<String, String[]> map = request.getParameterMap();
+        if (!request.getRequestURI().contains("sensitive/add")) {//对敏感字符管理的请求不要拦截
+            map.entrySet().forEach(item -> {
+                if (item.getValue() != null || !item.getValue().equals("")) {
+                    String string = Arrays.toString(item.getValue());
+                    string = HTMLSpirit.delHTMLTag(string);
+                    Set<String> set1 = filter.getSensitiveWord(string, 2);
+                    if (set1.size() > 0) {
+                        String s = set1.iterator().next();
+                        returnErrorMessage(response, "内容包括违规字：" + s + ",请修正后在保存，谢谢");
+                        sb.append("false");
+                    }
                 }
-            }
-        });
-        if (sb.toString().equals("false")){
+            });
+        }
+        if (sb.toString().equals("false")) {
             return false;
-        }else {
+        } else {
             return true;
         }
     }
@@ -56,7 +59,7 @@ public class SensitiveFilter implements HandlerInterceptor {
     }
 
 
-    private void returnErrorMessage(HttpServletResponse response, String errorMessage)  {
+    private void returnErrorMessage(HttpServletResponse response, String errorMessage) {
 
         try {
             response.setContentType("application/json");
