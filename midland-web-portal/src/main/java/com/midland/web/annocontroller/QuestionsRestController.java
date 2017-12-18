@@ -78,8 +78,15 @@ public class QuestionsRestController extends BaseFilter {
         Result result = new Result();
         try {
             Integer id = (Integer) map.get("id");
+            Integer userId = (Integer) map.get("userId");
+            if (id==null){
+                result.setCode(ResultStatusUtils.STATUS_CODE_202);
+                result.setMsg("id 不能为空");
+                return result;
+            }
             log.info("getQuestionsById  {}", id);
             Questions questions = questionsServiceImpl.selectByPrimaryKey(id);
+            questions.setUserId(userId);
             Questions temp = null;
             if (questions != null) {
                 temp = getQuestionIsAttention(questions);
@@ -125,6 +132,11 @@ public class QuestionsRestController extends BaseFilter {
             MidlandHelper.doPage(request);
             obj.setIsDelete(Contant.isNotDelete);
             obj.setStatus(Contant.answerAuditPass);
+            if (obj.getSort() !=null&&obj.getSort()==1){
+                obj.setDescName("click_num");
+            }else if (obj.getSort() !=null&&obj.getSort()==0){
+                obj.setDescName("question_time");
+            }
             Page<Questions> list = (Page<Questions>) questionsServiceImpl.questionPage(obj);
             List<Questions> listTemp = getQuestionIsAttention(list);
             Paginator paginator = list.getPaginator();

@@ -138,6 +138,9 @@
             <li class="col-md-5"><span>单位总数：</span>
                 <input type="text" name="unitTotal" id="unitTotal"  value="${item.unitTotal}"/>
             </li>
+            <li class="col-md-5"><span>物业座数：</span>
+                <input type="text" name="propertyNum" id="propertyNum"  value="${item.propertyNum}"/>
+            </li>
             <li class="col-md-5"><span>裝修標準：</span>
                 <select name="decoration" id="decoration" class="dropdown">
                     <c:forEach items="${decorations}" var="s">

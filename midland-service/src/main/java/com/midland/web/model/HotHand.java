@@ -33,6 +33,10 @@ public class HotHand {
      **/
     private String unitTotal;
     /**
+     * 物业座数
+     **/
+    private String propertyNum;
+    /**
      * 占地面积
      **/
     private String landArea;
@@ -127,6 +131,14 @@ public class HotHand {
      */
     private Integer buildingArea;
 
+
+    public String getPropertyNum() {
+        return propertyNum;
+    }
+
+    public void setPropertyNum(String propertyNum) {
+        this.propertyNum = propertyNum;
+    }
 
     public Integer getBuildingArea() {
         return buildingArea;

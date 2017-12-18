@@ -100,6 +100,20 @@ public class Questions{
 	 */
 	private Integer attentionNum;
 
+	/**
+	 * 0按时间降序拍，1按点击降序排
+	 */
+	private Integer sort;
+
+
+	public Integer getSort() {
+		return sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = sort;
+	}
+
 	public boolean getIsAttention() {
 		return isAttention;
 	}

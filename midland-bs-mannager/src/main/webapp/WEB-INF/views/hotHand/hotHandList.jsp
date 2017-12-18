@@ -29,6 +29,7 @@
 			<th style="width: 8%">入伙日期</th>
 			<th style="width: 8%">管理费用</th>
 			<th style="width: 8%">单位总数</th>
+			<th style="width: 8%">物业座数</th>
 			<th style="width: 8%">装修标准</th>
 			<th style="width: 8%">物业地址</th>
 			<th style="width: 8%">开发商</th>
@@ -50,6 +51,7 @@
 						<td>${item.managerCosts}</td>
 						<td>${item.landArea}</td>
 						<td>${item.parkingNum}</td>
+						<td>${item.propertyNum}</td>
 						<td>${item.propertyAddress}</td>
 						<td>${item.developer}</td>
 						<td>${item.propertyManagement}</td>
