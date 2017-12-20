@@ -59,6 +59,43 @@ public class LeaveMsg{
 
 	private String endTime;
 
+	/**
+	 * 经纪人名称
+	 */
+	private String agentName;
+	/**
+	 * 经纪人id
+	 */
+	private String agentId;
+	/**
+	 * 经纪人图片
+	 */
+	private String agentUrl;
+
+
+	public String getAgentName() {
+		return agentName;
+	}
+
+	public void setAgentName(String agentName) {
+		this.agentName = agentName;
+	}
+
+	public String getAgentId() {
+		return agentId;
+	}
+
+	public void setAgentId(String agentId) {
+		this.agentId = agentId;
+	}
+
+	public String getAgentUrl() {
+		return agentUrl;
+	}
+
+	public void setAgentUrl(String agentUrl) {
+		this.agentUrl = agentUrl;
+	}
 
 	public String getStartTime() {
 		return startTime;

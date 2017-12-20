@@ -72,6 +72,11 @@ public class CommentRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");
+			if (id==null){
+				result.setCode(ResultStatusUtils.STATUS_CODE_202);
+				result.setMsg("id 不能为空");
+				return result;
+			}
 			log.info("getCommentById  {}",id);
 			Comment comment = commentServiceImpl.selectCommentById(id);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

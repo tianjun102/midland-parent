@@ -61,6 +61,11 @@ public class LeaveMsgRestController extends BaseFilter  {
 		 Result result=new Result();
 		try {
 			Integer id =(Integer)map.get("id");
+			if (id==null){
+				log.debug("getLeaveMsgById id不能为空");
+				result.setCode(ResultStatusUtils.STATUS_CODE_202);
+				result.setMsg("id不能为空");
+			}
 			log.info("getLeaveMsgById  {}",id);
 			LeaveMsg leaveMsg = leaveMsgServiceImpl.selectLeaveMsgById(id);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
@@ -92,6 +97,28 @@ public class LeaveMsgRestController extends BaseFilter  {
 		}
 		return result;
 	}
+
+	@RequestMapping("delete")
+	public Object deleteLeaveMsgById(@RequestBody LeaveMsg obj) throws Exception {
+		Result result=new Result();
+		try {
+			if (obj.getId()==null){
+				log.debug("getLeaveMsgById id不能为空");
+				result.setCode(ResultStatusUtils.STATUS_CODE_202);
+				result.setMsg("id不能为空");
+			}
+			obj.setIsDelete(Contant.isDelete);
+			leaveMsgServiceImpl.updateLeaveMsgById(obj);
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result.setMsg("success");
+		} catch(Exception e) {
+			log.error("updateLeaveMsgById  {}",obj,e);
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result.setMsg("service error");
+		}
+		return result;
+	}
+
 
 	/**
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）

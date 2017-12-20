@@ -23,6 +23,7 @@
                 <th style="width: 8%">留言</th>
                 <th style="width: 8%">回复内容</th>
                 <th style="width: 8%">留言时间</th>
+                <th style="width: 8%">经纪人</th>
                 <th style="width: 8%">状态</th>
                 <th style="width: 10%">操作</th>
             </tr>
@@ -47,6 +48,7 @@
                         <td>${item.message}</td>
                         <td>${item.replyMsg}</td>
                         <td style="white-space: nowrap">${item.addTime}</td>
+                        <td style="white-space: nowrap">${item.agentName}</td>
                         <td><c:choose>
                             <c:when test="${not empty item.replyMsg}">已回复</c:when>
                             <c:otherwise>未回复</c:otherwise>

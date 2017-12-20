@@ -152,6 +152,19 @@ public class QuestionsRestController extends BaseFilter {
         return result;
     }
 
+
+
+    @RequestMapping("/myQuestions")
+    public Object findMyQuestions(@RequestBody Questions obj, HttpServletRequest request) {
+        if (obj.getUserId()==null){
+            Result result = new Result();
+            result.setCode(ResultStatusUtils.STATUS_CODE_202);
+            result.setMsg("userId 不能为空");
+            return result;
+        }
+        return findQuestionsList(obj,request);
+    }
+
     /**
      * 热门问题  按点击率降序排
      *

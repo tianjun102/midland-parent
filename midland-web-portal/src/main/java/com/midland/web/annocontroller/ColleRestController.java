@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -126,18 +128,31 @@ public class ColleRestController extends BaseFilter {
      public Object cacheList(@RequestBody Map map,HttpServletRequest request){
          Result result = new Result();
          try {
+
              String userId = String.valueOf(map.get("userId"));
              String houseType =String.valueOf(map.get("houseType"));
              if (StringUtils.isEmpty(userId)){
                  throw new IllegalArgumentException("参数不能为空");
              }
-             Map mapj = new HashMap();
-             mapj.put("hourseType",houseType);
-             StringBuffer sb = new StringBuffer();
-             sb.append(Contant.COLLE_CACHE_KEY).append(":"+houseType+":").append(userId);
-             result.setCode(ResultStatusUtils.STATUS_CODE_200);
-             result.setList(publicServiceImpl.getList(sb.toString()));
-             result.setMsg("success");
+             if (StringUtils.isEmpty(houseType)||houseType.equals("null")){
+                 List list = new ArrayList();
+                 for (int i=1;i<7;i++){
+                     StringBuffer sb = new StringBuffer();
+                     houseType=String.valueOf(i);
+                     sb.append(Contant.COLLE_CACHE_KEY).append(":"+houseType+":").append(userId);
+                     List listTemp =publicServiceImpl.getList(sb.toString());
+                     list.addAll(listTemp);
+                 }
+                 result.setCode(ResultStatusUtils.STATUS_CODE_200);
+                 result.setList(list);
+                 result.setMsg("success");
+             }else {
+                 StringBuffer sb = new StringBuffer();
+                 sb.append(Contant.COLLE_CACHE_KEY).append(":" + houseType + ":").append(userId);
+                 result.setCode(ResultStatusUtils.STATUS_CODE_200);
+                 result.setList(publicServiceImpl.getList(sb.toString()));
+                 result.setMsg("success");
+             }
          } catch (Exception e) {
              log.error("cache",e);
              result.setCode(ResultStatusUtils.STATUS_CODE_203);
