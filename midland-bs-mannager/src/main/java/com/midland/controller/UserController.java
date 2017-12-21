@@ -208,9 +208,16 @@ public class UserController extends BaseFilter {
         // 登出操作
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
-        return "redirect:"+midlandConfig.getLoginUrl();
+        return "redirect: /loginIndex";
     }
-    
+
+	@RequestMapping(value = "/loginIndex", method = RequestMethod.GET)
+	public String logout() {
+
+		return "/page/login";
+	}
+
+
     /**
      * 头部
      * @param model

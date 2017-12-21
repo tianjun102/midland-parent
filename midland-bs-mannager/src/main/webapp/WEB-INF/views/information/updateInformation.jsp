@@ -1,51 +1,77 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
-<%
-    String path = request.getContextPath();
-    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-%>
-<%@include file="../layout/tablib.jsp"%>
-<%@include file="../layout/source.jsp"%>
-<!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
-<!--[if !IE]><!-->
-<html lang="en" class="no-js">
-<!--<![endif]-->
-<!-- BEGIN HEAD -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@include file="../layout/tablib.jsp" %>
+<%@include file="../layout/source.jsp" %>
+<%@include file="../layout/zTree.jsp" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-    <base href="<%=basePath%>">
-    <meta charset="utf-8" />
-    <title>修改资讯</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta content="" name="description" />
-    <meta content="" name="author" />
-    <meta name="MobileOptimized" content="320">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>添加热门关注</title>
+    <link rel="stylesheet" href="${ctx}/assets/css/ztree/css/demo.css">
+    <link rel="stylesheet" href="${ctx }/assets/css/common.css">
+    <link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css">
+    <style type="text/css">
+        /*.content ul.userinfo>li {
+            float: none !important;
+            margin-left: 20px;
+            padding-top: 20px;
+        }*/
+
+        .dropdown {
+            width: 274px !important;
+        }
+    </style>
+    <script type="text/javascript">
+
+        var setting = {
+            check: {
+                enable: true,
+                chkboxType: {"Y": "sp", "N": "sp"}
+
+
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            callback: {
+                beforeClick: beforeClick
+            }
+        };
+        var catProNodes = [{
+            id: 0,
+            pId: 0,
+            name: '分类',
+            open: true,
+            nocheck: true,
+            iconSkin: "pIcon01"
+        }, ${categoryData}];
+
+
+        $(document).ready(function () {
+            $.fn.zTree.init($("#categoryTree"), setting, catProNodes);
+        });
+
+        function beforeClick(treeId, treeNode, clickFlag) {
+            $("input[name='cateId']").val(treeNode.id);
+            $("input[name='cateName']").val(treeNode.name);
+            $("#showDiv").hide();
+        }
+
+        function showTree(event) {
+            $("#showDiv").show();
+        }
+
+        function hideTree(event) {
+            $("#showDiv").hide();
+        }
+
+    </script>
 </head>
-<body >
-<style>
+<body>
 
-    .content ul.adminfo li > span {
-        float: left;
-        display: inline-block;
-        width: 100px;
-        height: 28px;
-        line-height: 28px;
-        text-align: right;
-        font-size: 14px;
-        color: rgb(102, 102, 102);
-    }
-    .layui-layer-msg{
-        top:260px!important;
-    }
-
-    .content ul.adminfo li:last-child>a:not(:nth-child(2)) {
-        margin-left: 0px!important;
-    }
-
-</style>
 <div class="box">
     <section class = "content">
         <p class = "detail-title">
@@ -64,25 +90,18 @@
                         </c:forEach>
                     </select>
                 </li>
-                <li><span>一级分类：</span>
-                    <input type="hidden" name="cateParentName" id="cateParentName" value="">
-                    <select name="cateParentid" id="cateParentid" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <%--class="dropdown"--%> onchange="setChildCateName();">
-                        <option value="" class="label">请选择</option>
-                        <c:forEach items="${cateList}" var="cate">
-                            <option <c:if test="${cate.id==item.cateParentid}">selected="selected"</c:if> value="${cate.id}">${cate.cateName}</option>
-                        </c:forEach>
-                    </select>
-                    <span class = "_star ">*</span>
+                <li><span>父节点：</span><input style="width: 250px!important;" value="${item.cateName}" name="cateName" onclick="showTree()"
+                                            readonly="readonly"/>
+                    <input name="cateId" type="hidden"/>
+                    <div style="font-size:12px; color:#afadad;text-indent: 70px;">(不选父分类则默认一级分类)</div>
                 </li>
-                <li><span>二级分类：</span>
-                    <input type="hidden" name="cateName" id="cateName" value="${item.cateName}">
-                    <select name="cateId" id="cateId" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <%--class="dropdown"--%> onchange="setCateName();">
-                        <option value="" class="label">请选择</option>
-                        <c:forEach items="${cateChildList}" var="cate">
-                            <option <c:if test="${cate.id==item.cateId}">selected="selected"</c:if> value="${cate.id}">${cate.cateName}</option>
-                        </c:forEach>
-                    </select>
-                    <span class = "_star ">*</span>
+                <li id="showDiv" style="display: none;padding-top: 0px;position:relative;">
+                    <div class="zTreeDemoBackground left" style="position:absolute; left: 72px; top: -30px;"
+                         onblur="test(event)">
+                        <ul id="categoryTree" class="ztree" style="width:235px; height: 140px!important;"></ul>
+                    </div>
+                    <img src="${ctx}/assets/img/Closed_16px.png" alt="关闭"
+                         style="vertical-align: top;position:absolute; left: 300px; top: -30px;" onclick="hideTree()">
                 </li>
                 <li><span>平台：</span>
                     <select name="platform" id="platform" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
@@ -172,7 +191,7 @@
     }
 
     function subumintInformation(){
-        if(checkSelect('cateParentid|cateId','请填写一级分类！|请填写二级分类！')&&notEmpty('title','title','标题不能为空！')){
+        if(notEmpty('title','title','标题不能为空！')){
         var data = $("#formId").serialize();
         $.ajax({
             type: "post",

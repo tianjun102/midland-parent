@@ -89,6 +89,12 @@ public class InformationController extends BaseFilter {
 			model.addAttribute("cityId",user.getCityId());
 			model.addAttribute("cityName",user.getCityName());
 		}
+		Category category1 = new Category();
+		category1.setType(1);
+		String result = getCategoryTree("",category1);
+		if(StringUtils.isNotEmpty(result)){
+			model.addAttribute("categoryData",result );
+		}
 		model.addAttribute("isSuper",user.getIsSuper());
 		model.addAttribute("cityList",cityList);
 		model.addAttribute("cateList",cateList);
@@ -172,6 +178,12 @@ public class InformationController extends BaseFilter {
 		if(user.getIsSuper()==null){
 			model.addAttribute("cityId",user.getCityId());
 			model.addAttribute("cityName",user.getCityName());
+		}
+		Category category1 = new Category();
+		category1.setType(1);
+		String result1 = getCategoryTree("",category1);
+		if(StringUtils.isNotEmpty(result1)){
+			model.addAttribute("categoryData",result1 );
 		}
 		model.addAttribute("isSuper",user.getIsSuper());
 		return "information/updateInformation";
