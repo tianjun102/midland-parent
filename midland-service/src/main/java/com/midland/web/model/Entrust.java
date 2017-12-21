@@ -148,6 +148,31 @@ public class Entrust{
 
 	private String endTime;
 
+	/**
+	 * 经纪人评分
+	 */
+	private Double agentScore;
+	/**
+	 * 经纪人的评价次数
+	 */
+	private Integer commentNum;
+
+	public Double getAgentScore() {
+		return agentScore;
+	}
+
+	public void setAgentScore(Double agentScore) {
+		this.agentScore = agentScore;
+	}
+
+	public Integer getCommentNum() {
+		return commentNum;
+	}
+
+	public void setCommentNum(Integer commentNum) {
+		this.commentNum = commentNum;
+	}
+
 	public String getUserId() {
 		return userId;
 	}

@@ -2,9 +2,13 @@ package com.midland.web.service;
 
 import com.midland.web.model.Comment;
 import java.util.List;
+import java.util.Map;
+
 public interface CommentService {
 
-	/**
+    Map getAvgScore(Comment comment) throws Exception;
+
+    /**
 	 * 主键查询
 	 **/
 	Comment selectCommentById(Integer id);

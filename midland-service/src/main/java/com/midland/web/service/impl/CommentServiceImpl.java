@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Map;
+
 @Service
 public class CommentServiceImpl implements CommentService {
 
@@ -23,6 +25,21 @@ public class CommentServiceImpl implements CommentService {
 		try {
 			log.debug("insert {}",comment);
 			commentMapper.insertComment(comment);
+		} catch(Exception e) {
+			log.error("insertComment异常 {}",comment,e);
+			throw e;
+		}
+	}
+	/**
+	 * 获取当前经纪人评分（当前类型的all_score/评分次数=经纪人评分）
+	 **/
+	@Override
+	public Map getAvgScore(Comment comment) throws Exception {
+		try {
+			Map result = commentMapper.getAvgScore(comment);
+			result.put("score",result.get("score")==null?0.0:result.get("score"));
+			result.put("count",(result.get("count")));
+			return result;
 		} catch(Exception e) {
 			log.error("insertComment异常 {}",comment,e);
 			throw e;

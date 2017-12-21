@@ -2,14 +2,18 @@ package com.midland.web.annocontroller;
 
 import com.midland.web.Contants.Contant;
 import com.midland.web.api.ApiHelper;
+import com.midland.web.model.Comment;
 import com.midland.web.model.Entrust;
+import com.midland.web.service.CommentService;
 import com.midland.web.service.EntrustService;
 import com.midland.base.BaseFilter;
 import com.midland.web.service.impl.PublicService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import org.slf4j.LoggerFactory;
@@ -36,6 +40,8 @@ public class EntrustRestController extends BaseFilter  {
 	private ApiHelper apiHelper;
 	@Autowired
 	private PublicService publicServiceImpl;
+	@Autowired
+	private CommentService commentServiceImpl;
 
 	/**
 	 * 新增买房委托
@@ -108,6 +114,19 @@ public class EntrustRestController extends BaseFilter  {
 			log.info("addEntrust {}",obj);
 			obj.setEntrustTime(MidlandHelper.getCurrentTime());
 			obj.setEntrustSn(publicServiceImpl.getCode(Contant.ENTRUST_SN_KEY,"E"));
+			if (StringUtils.isNotEmpty(obj.getAgentId())) {
+				Comment comment = new Comment();
+				comment.setAgentId(obj.getAgentId());
+				comment.setType(1);//0=资讯；1=委托；2=预约
+				comment.setIsDelete(Contant.isNotDelete);
+				Map map = commentServiceImpl.getAvgScore(comment);
+				if (map != null){
+					Double score = (Double) map.get("score");
+					Long count = (Long) map.get("count");
+					obj.setAgentScore(score);
+					obj.setCommentNum(count.intValue());
+				}
+			}
 			entrustServiceImpl.insertEntrust(obj);
 			//发送给经纪人的短信：模板56849，内容：您好{1},官网收到委托放盘，{1}{2}{3}，现已分配由您跟进，请尽快与客户进行联系，助您成交！
 			List<String> param = new ArrayList<>();

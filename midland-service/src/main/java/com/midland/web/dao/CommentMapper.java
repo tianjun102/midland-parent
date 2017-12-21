@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
+
 @Repository
 public interface CommentMapper {
 
@@ -15,6 +17,8 @@ public interface CommentMapper {
 	int updateCommentById(Comment comment);
 
 	int insertComment(Comment comment);
+
+	Map getAvgScore(Comment comment);
 
 	List<Comment> findCommentList(Comment comment);
 

@@ -2,336 +2,358 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.midland.web.dao.CommentMapper">
 
- 	<resultMap id="BaseResultMap" type="com.midland.web.model.Comment" >
-		<id column="id" property="id" jdbcType="INTEGER" />
-		<result column="comment" property="comment" jdbcType="LONGVARCHAR" />
-		<result column="user" property="user" jdbcType="VARCHAR" />
-		<result column="status" property="status" jdbcType="INTEGER" />
-		<result column="source" property="source" jdbcType="INTEGER" />
-		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
-		<result column="information_id" property="informationId" jdbcType="INTEGER" />
-		<result column="type" property="type" jdbcType="INTEGER" />
-		<result column="comment_time" property="commentTime" jdbcType="TIMESTAMP" />
-		<result column="like" property="like" jdbcType="INTEGER" />
-		<result column="user_id" property="userId" jdbcType="INTEGER" />
-		<result column="head_img" property="headImg" jdbcType="VARCHAR" />
-		<result column="reply_num" property="replyNum" jdbcType="VARCHAR" />
+    <resultMap id="BaseResultMap" type="com.midland.web.model.Comment">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="comment" property="comment" jdbcType="LONGVARCHAR"/>
+        <result column="user" property="user" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="source" property="source" jdbcType="INTEGER"/>
+        <result column="is_delete" property="isDelete" jdbcType="INTEGER"/>
+        <result column="information_id" property="informationId" jdbcType="INTEGER"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="comment_time" property="commentTime" jdbcType="TIMESTAMP"/>
+        <result column="like" property="like" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="head_img" property="headImg" jdbcType="VARCHAR"/>
+        <result column="reply_num" property="replyNum" jdbcType="VARCHAR"/>
+        <result column="all_score" property="allScore" jdbcType="VARCHAR"/>
+        <result column="service_score" property="serviceScore" jdbcType="VARCHAR"/>
+        <result column="professional_skills" property="professionalSkills" jdbcType="VARCHAR"/>
+        <result column="market_specialty" property="marketSpecialty" jdbcType="VARCHAR"/>
+        <result column="agent_name" property="agentName" jdbcType="VARCHAR"/>
+        <result column="agent_url" property="agentUrl" jdbcType="VARCHAR"/>
+        <result column="agent_id" property="agentId" jdbcType="VARCHAR"/>
 
-		<result column="all_score" property="allScore" jdbcType="INTEGER" />
-		<result column="service_score" property="serviceScore" jdbcType="INTEGER" />
-		<result column="professional_skills" property="professionalSkills" jdbcType="INTEGER" />
-		<result column="market_specialty" property="marketSpecialty" jdbcType="INTEGER" />
-		<result column="agent_name" property="agentName" jdbcType="VARCHAR" />
-		<result column="agent_url" property="agentUrl" jdbcType="VARCHAR" />
+    </resultMap>
 
-	</resultMap>
-
-	<sql id="Base_Column_List">
-		id,comment,user,status,source,is_delete,information_id,type,comment_time,`like`,user_id,head_img,reply_num,all_score,service_score,professional_skills,market_specialty,agent_name,agent_url
+    <sql id="Base_Column_List">
+		id,comment,user,status,source,is_delete,information_id,type,comment_time,`like`,user_id,head_img,reply_num,all_score,service_score,professional_skills,market_specialty,agent_name,agent_url,agent_id
 </sql>
 
-	<select id="selectCommentById" resultMap="BaseResultMap">
-		select <include refid="Base_Column_List" /> from comment
-		 where id= #{id}
-	</select>
+    <select id="selectCommentById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from comment
+        where id= #{id}
+    </select>
 
-	<delete id="deleteCommentById" >
+    <delete id="deleteCommentById">
 		delete from comment
 		 where id= #{id}
 	</delete>
 
-	<update id="updateCommentById" >
-		update comment 
-		<set>
-		<include refid="update_option"/>
-		</set>
+    <update id="updateCommentById">
+        update comment
+        <set>
+            <include refid="update_option"/>
+        </set>
 
-		 where id= #{id}
-	</update>
+        where id= #{id}
+    </update>
 
-	<update id="batchUpdate" parameterType="java.util.List">
-		<foreach collection="commentList" item="item" index="index" open="" close="" separator=";">
-		update comment
-		<set>
-			<if test="item.comment != null">
-				comment= #{item.comment,jdbcType=LONGVARCHAR},
-			</if>
-			<if test="item.user != null">
-				user= #{item.user,jdbcType=VARCHAR},
-			</if>
-			<if test="item.status != null">
-				status= #{item.status,jdbcType=INTEGER},
-			</if>
-			<if test="item.source != null">
-				source= #{item.source,jdbcType=INTEGER},
-			</if>
-			<if test="item.isDelete != null">
-				is_delete= #{item.isDelete,jdbcType=INTEGER},
-			</if>
-			<if test="item.informationId != null">
-				information_id= #{item.informationId,jdbcType=INTEGER},
-			</if>
-			<if test="item.type != null">
-				type= #{item.type,jdbcType=INTEGER},
-			</if>
-			<if test="item.commentTime != null">
-				comment_time= #{item.commentTime},
-			</if>
-			<if test="headImg != null">
-				head_img= #{headImg},
-			</if>
-			<if test="replyNum != null">
-				reply_num= #{replyNum},
-			</if>
-		</set>
+    <update id="batchUpdate" parameterType="java.util.List">
+        <foreach collection="commentList" item="item" index="index" open="" close="" separator=";">
+            update comment
+            <set>
+                <if test="item.comment != null">
+                    comment= #{item.comment,jdbcType=LONGVARCHAR},
+                </if>
+                <if test="item.user != null">
+                    user= #{item.user,jdbcType=VARCHAR},
+                </if>
+                <if test="item.status != null">
+                    status= #{item.status,jdbcType=INTEGER},
+                </if>
+                <if test="item.source != null">
+                    source= #{item.source,jdbcType=INTEGER},
+                </if>
+                <if test="item.isDelete != null">
+                    is_delete= #{item.isDelete,jdbcType=INTEGER},
+                </if>
+                <if test="item.informationId != null">
+                    information_id= #{item.informationId,jdbcType=INTEGER},
+                </if>
+                <if test="item.type != null">
+                    type= #{item.type,jdbcType=INTEGER},
+                </if>
+                <if test="item.commentTime != null">
+                    comment_time= #{item.commentTime},
+                </if>
+                <if test="headImg != null">
+                    head_img= #{headImg},
+                </if>
+                <if test="replyNum != null">
+                    reply_num= #{replyNum},
+                </if>
+            </set>
 
-		where id= #{item.id}
-		</foreach>
-	</update>
+            where id= #{item.id}
+        </foreach>
+    </update>
 
-	<select id="findCommentList" parameterType="com.midland.web.model.Comment" resultMap="BaseResultMap">
-		select <include refid="Base_Column_List" /> from comment
-		where  1=1
-		<if test="isDelete == null">
-			and is_delete=0
-		</if>
-		<include refid="select_option" />
-		<if test="orderByPopularity != null and orderByTime==null ">
-			ORDER BY `like` DESC
-		</if>
-		<if test="orderByTime != null and orderByPopularity==null ">
-			ORDER BY comment_time DESC
-		</if>
-	</select>
+    <select id="findCommentList" parameterType="com.midland.web.model.Comment" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from comment
+        where 1=1
+        <if test="isDelete == null">
+            and is_delete=0
+        </if>
+        <include refid="select_option"/>
+        <if test="orderByPopularity != null and orderByTime==null ">
+            ORDER BY `like` DESC
+        </if>
+        <if test="orderByTime != null and orderByPopularity==null ">
+            ORDER BY comment_time DESC
+        </if>
+    </select>
 
-	<select id="commentTotle" parameterType="com.midland.web.model.Comment" resultType="java.lang.Integer">
-		select count(0) from comment
-		where  1=1
-		<if test="informationId == null">
-			and information_id = #{informationId}
-		</if>
-	</select>
+    <select id="commentTotle" parameterType="com.midland.web.model.Comment" resultType="java.lang.Integer">
+        select count(0) from comment
+        where 1=1
+        <if test="informationId == null">
+            and information_id = #{informationId}
+        </if>
+    </select>
+    <select id="getAvgScore" parameterType="com.midland.web.model.Comment" resultType="java.util.Map">
+        select AVG(all_score) as score,COUNT(1) as count from comment
+        where 1=1
+        <include refid="select_option"/>
+    </select>
 
-	<insert id="insertComment" parameterType="com.midland.web.model.Comment">
-		insert into comment
-		<trim prefix="(" suffix=")" suffixOverrides="," >
-			<if test="comment != null">
-				comment,
-			</if>
-			<if test="user != null">
-				user,
-			</if>
-			<if test="status != null">
-				status,
-			</if>
-			<if test="source != null">
-				source,
-			</if>
-			<if test="isDelete != null">
-				is_delete,
-			</if>
-			<if test="informationId != null">
-				information_id,
-			</if>
-			<if test="type != null">
-				type,
-			</if>
-			<if test="commentTime != null">
-				comment_time,
-			</if>
-			<if test="like != null">
-				`like`,
-			</if>
-			<if test="userId != null">
-				user_id,
-			</if>
-			<if test="headImg != null">
-				head_img,
-			</if>
-			<if test="replyNum != null">
-				reply_num,
-			</if>
-			<if test="allScore != null">
-				`all_score`,
-			</if>
-			<if test="serviceScore != null">
-				service_score,
-			</if>
-			<if test="professionalSkills != null">
-				professional_skills,
-			</if>
-			<if test="marketSpecialty != null">
-				market_specialty,
-			</if>
-			<if test="agentName != null">
-				agent_name,
-			</if>
-			<if test="agentUrl != null">
-				agent_url,
-			</if>
-		</trim>
-		values
-		 <trim prefix="(" suffix=")" suffixOverrides="," >
-			<if test="comment != null">
-				#{comment,jdbcType=LONGVARCHAR},
-			</if>
-			<if test="user != null">
-				#{user,jdbcType=VARCHAR},
-			</if>
-			<if test="status != null">
-				#{status,jdbcType=INTEGER},
-			</if>
-			<if test="source != null">
-				#{source,jdbcType=INTEGER},
-			</if>
-			<if test="isDelete != null">
-				#{isDelete,jdbcType=INTEGER},
-			</if>
-			<if test="informationId != null">
-				#{informationId,jdbcType=INTEGER},
-			</if>
-			<if test="type != null">
-				 #{type,jdbcType=INTEGER},
-			</if>
-			 <if test="commentTime != null">
-				 #{commentTime},
-			 </if>
-			 <if test="like != null">
-				 #{like},
-			 </if>
-			 <if test="userId != null">
-				 #{userId},
-			 </if>
-			 <if test="headImg != null">
-				 #{headImg},
-			 </if>
-			 <if test="replyNum != null">
-				 #{replyNum},
-			 </if>
-			 <if test="allScore != null">
-				 #{allScore},
-			 </if>
-			 <if test="serviceScore != null">
-				 #{serviceScore},
-			 </if>
-			 <if test="professionalSkills != null">
-				 #{professionalSkills},
-			 </if>
-			 <if test="marketSpecialty != null">
-				 #{marketSpecialty},
-			 </if>
-			 <if test="agentName != null">
-				 #{agentName},
-			 </if>
-			 <if test="agentUrl != null">
-				 #{agentUrl},
-			 </if>
-		</trim>
-	</insert>
+    <insert id="insertComment" parameterType="com.midland.web.model.Comment">
+        insert into comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="comment != null">
+                comment,
+            </if>
+            <if test="user != null">
+                user,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="source != null">
+                source,
+            </if>
+            <if test="isDelete != null">
+                is_delete,
+            </if>
+            <if test="informationId != null">
+                information_id,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="commentTime != null">
+                comment_time,
+            </if>
+            <if test="like != null">
+                `like`,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="headImg != null">
+                head_img,
+            </if>
+            <if test="replyNum != null">
+                reply_num,
+            </if>
+            <if test="allScore != null">
+                `all_score`,
+            </if>
+            <if test="serviceScore != null">
+                service_score,
+            </if>
+            <if test="professionalSkills != null">
+                professional_skills,
+            </if>
+            <if test="marketSpecialty != null">
+                market_specialty,
+            </if>
+            <if test="agentName != null">
+                agent_name,
+            </if>
+            <if test="agentUrl != null">
+                agent_url,
+            </if>
+            <if test="agentId != null">
+                agent_id,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="comment != null">
+                #{comment,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="user != null">
+                #{user,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="source != null">
+                #{source,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,jdbcType=INTEGER},
+            </if>
+            <if test="informationId != null">
+                #{informationId,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="commentTime != null">
+                #{commentTime},
+            </if>
+            <if test="like != null">
+                #{like},
+            </if>
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="headImg != null">
+                #{headImg},
+            </if>
+            <if test="replyNum != null">
+                #{replyNum},
+            </if>
+            <if test="allScore != null">
+                #{allScore},
+            </if>
+            <if test="serviceScore != null">
+                #{serviceScore},
+            </if>
+            <if test="professionalSkills != null">
+                #{professionalSkills},
+            </if>
+            <if test="marketSpecialty != null">
+                #{marketSpecialty},
+            </if>
+            <if test="agentName != null">
+                #{agentName},
+            </if>
+            <if test="agentUrl != null">
+                #{agentUrl},
+            </if>
+            <if test="agentId != null">
+                #{agentId},
+            </if>
+        </trim>
+    </insert>
 
-	<sql id="update_option">
-		<if test="comment != null">
-			comment= #{comment,jdbcType=LONGVARCHAR},
-		</if>
-		<if test="user != null">
-			user= #{user,jdbcType=VARCHAR},
-		</if>
-		<if test="status != null">
-			status= #{status,jdbcType=INTEGER},
-		</if>
-		<if test="source != null">
-			source= #{source,jdbcType=INTEGER},
-		</if>
-		<if test="isDelete != null">
-			is_delete= #{isDelete,jdbcType=INTEGER},
-		</if>
-		<if test="informationId != null">
-			information_id= #{informationId,jdbcType=INTEGER},
-		</if>
-		<if test="type != null">
-			type= #{type,jdbcType=INTEGER},
-		</if>
-		<if test="commentTime != null">
-			comment_time= #{commentTime},
-		</if>
-		<if test="like != null">
-			`like`= #{like},
-		</if>
-		<if test="userId != null">
-			user_id= #{userId},
-		</if>
-		<if test="headImg != null">
-			head_img= #{headImg},
-		</if>
-		<if test="replyNum != null">
-			reply_num= #{replyNum},
-		</if>
-		<if test="allScore != null">
-			all_score= #{allScore},
-		</if>
-		<if test="serviceScore != null">
-			service_score= #{serviceScore},
-		</if>
-		<if test="professionalSkills != null">
-			professional_skills= #{professionalSkills},
-		</if>
-		<if test="marketSpecialty != null">
-			market_specialty= #{marketSpecialty},
-		</if>
-		<if test="agentName != null">
-			agent_name= #{agentName},
-		</if>
-		<if test="agentUrl != null">
-			agent_url= #{agentUrl},
-		</if>
-	</sql>
+    <sql id="update_option">
+        <if test="comment != null">
+            comment= #{comment,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="user != null">
+            user= #{user,jdbcType=VARCHAR},
+        </if>
+        <if test="status != null">
+            status= #{status,jdbcType=INTEGER},
+        </if>
+        <if test="source != null">
+            source= #{source,jdbcType=INTEGER},
+        </if>
+        <if test="isDelete != null">
+            is_delete= #{isDelete,jdbcType=INTEGER},
+        </if>
+        <if test="informationId != null">
+            information_id= #{informationId,jdbcType=INTEGER},
+        </if>
+        <if test="type != null">
+            type= #{type,jdbcType=INTEGER},
+        </if>
+        <if test="commentTime != null">
+            comment_time= #{commentTime},
+        </if>
+        <if test="like != null">
+            `like`= #{like},
+        </if>
+        <if test="userId != null">
+            user_id= #{userId},
+        </if>
+        <if test="headImg != null">
+            head_img= #{headImg},
+        </if>
+        <if test="replyNum != null">
+            reply_num= #{replyNum},
+        </if>
+        <if test="allScore != null">
+            all_score= #{allScore},
+        </if>
+        <if test="serviceScore != null">
+            service_score= #{serviceScore},
+        </if>
+        <if test="professionalSkills != null">
+            professional_skills= #{professionalSkills},
+        </if>
+        <if test="marketSpecialty != null">
+            market_specialty= #{marketSpecialty},
+        </if>
+        <if test="agentName != null">
+            agent_name= #{agentName},
+        </if>
+        <if test="agentUrl != null">
+            agent_url= #{agentUrl},
+        </if>
+        <if test="agentId != null">
+            agent_id= #{agentId},
+        </if>
+    </sql>
 
-	<sql id="select_option">
-		<if test="id != null">
-			 and id= #{id,jdbcType=INTEGER}
-		</if>
-		<if test="comment != null">
-			 and comment= #{comment,jdbcType=LONGVARCHAR}
-		</if>
-		<if test="user != null">
-			 and user= #{user,jdbcType=VARCHAR}
-		</if>
-		<if test="status != null">
-			 and status= #{status,jdbcType=INTEGER}
-		</if>
-		<if test="source != null">
-			 and source= #{source,jdbcType=INTEGER}
-		</if>
-		<if test="isDelete != null">
-			 and is_delete= #{isDelete,jdbcType=INTEGER}
-		</if>
-		<if test="informationId != null">
-			 and information_id= #{informationId,jdbcType=INTEGER}
-		</if>
-		<if test="type != null">
-			 and type= #{type,jdbcType=INTEGER}
-		</if>
-		<if test="commentTime != null">
-			and comment_time= #{commentTime}
-		</if>
-		<if test="startTime != null">
-			and comment_time>= #{startTime}
-		</if>
-		<if test="endTime != null">
-			and #{endTime}>= comment_time
-		</if>
-		<if test="like != null">
-			and #{like}= `like`
-		</if>
-		<if test="userId != null">
-			and user_id= #{userId}
-		</if>
-		<if test="headImg != null">
-			and head_img= #{headImg}
-		</if>
-		<if test="replyNum != null">
-			and reply_num= #{replyNum}
-		</if>
-	</sql>
+    <sql id="select_option">
+        <if test="id != null">
+            and id= #{id,jdbcType=INTEGER}
+        </if>
+        <if test="agentId != null">
+            AND agent_id= #{agentId}
+        </if>
+        <if test="type != null">
+            and type= #{type,jdbcType=INTEGER}
+        </if>
+        <if test="status != null">
+            and status= #{status,jdbcType=INTEGER}
+        </if>
+        <if test="source != null">
+            and source= #{source,jdbcType=INTEGER}
+        </if>
+        <if test="isDelete != null">
+            and is_delete= #{isDelete,jdbcType=INTEGER}
+        </if>
+        <if test="informationId != null">
+            and information_id= #{informationId,jdbcType=INTEGER}
+        </if>
+
+        <if test="commentTime != null">
+            and comment_time= #{commentTime}
+        </if>
+        <if test="startTime != null">
+            and comment_time>= #{startTime}
+        </if>
+        <if test="endTime != null">
+            and #{endTime}>= comment_time
+        </if>
+        <if test="like != null">
+            and #{like}= `like`
+        </if>
+        <if test="userId != null">
+            and user_id= #{userId}
+        </if>
+        <if test="headImg != null">
+            and head_img= #{headImg}
+        </if>
+        <if test="replyNum != null">
+            and reply_num= #{replyNum}
+        </if>
+        <if test="comment != null">
+            and comment= #{comment,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="user != null">
+            and user= #{user,jdbcType=VARCHAR}
+        </if>
+    </sql>
 
 </mapper>

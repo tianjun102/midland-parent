@@ -62,7 +62,16 @@ public class Comment{
 	private Integer marketSpecialty;
 	private String agentName;
 	private String agentUrl;
+	private String agentId;
 
+
+	public String getAgentId() {
+		return agentId;
+	}
+
+	public void setAgentId(String agentId) {
+		this.agentId = agentId;
+	}
 
 	public Integer getAllScore() {
 		return allScore;

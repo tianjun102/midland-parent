@@ -186,7 +186,9 @@ public class CategoryController extends BaseFilter {
 		try {
 			log.debug("findCategoryList  {}",category);
 			MidlandHelper.doPage(request);
+
 			Page<Category> result = (Page<Category>)categoryServiceImpl.findCategoryList(category);
+
 			Paginator paginator=result.getPaginator();
 			model.addAttribute("paginator",paginator);
 			model.addAttribute("items",result);
