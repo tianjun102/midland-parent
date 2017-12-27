@@ -27,7 +27,7 @@ public class JdbcService {
     }
 
     public void doSql(String sql) {
-        //System.out.println(sql);
+        //System.out.println(file);
         sqlMapperDao.doSql(sql);
     }
 

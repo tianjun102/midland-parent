@@ -1,7 +1,10 @@
 package com.midland.web.annocontroller;
 
+import com.midland.config.MidlandConfig;
+import com.midland.core.util.HttpUtils;
 import com.midland.web.Contants.Contant;
 import com.midland.web.api.ApiHelper;
+import com.midland.web.model.Area;
 import com.midland.web.model.Comment;
 import com.midland.web.model.Entrust;
 import com.midland.web.service.CommentService;
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.midland.web.util.MidlandHelper;
@@ -42,6 +46,8 @@ public class EntrustRestController extends BaseFilter  {
 	private PublicService publicServiceImpl;
 	@Autowired
 	private CommentService commentServiceImpl;
+@Autowired
+	private MidlandConfig midlandConfig;
 
 	/**
 	 * 新增买房委托
@@ -112,6 +118,7 @@ public class EntrustRestController extends BaseFilter  {
 		Result result=new Result();
 		try {
 			log.info("addEntrust {}",obj);
+			getHouseSourceFromDingJian(obj.getHouseType(),obj.getHouseId());
 			obj.setEntrustTime(MidlandHelper.getCurrentTime());
 			obj.setEntrustSn(publicServiceImpl.getCode(Contant.ENTRUST_SN_KEY,"E"));
 			if (StringUtils.isNotEmpty(obj.getAgentId())) {
@@ -150,6 +157,27 @@ public class EntrustRestController extends BaseFilter  {
 		}
 		return result;
 	}
+
+	public void getHouseSourceFromDingJian(Integer houseType,String houseId){
+//		//   0新房，1二手房，2租房，3写字楼，4商铺，5其它
+//		Map map = new HashMap();
+//		map.put("id",houseId);
+//		if (houseType==0){
+//			String data = HttpUtils.get(midlandConfig.getNewhouse(), map);
+//			List<Area> areaList = MidlandHelper.getPojoList(data, Area.class);
+//		}else if (houseType == 1){
+//
+//		}else if (houseType == 2){
+//
+//		}else if (houseType == 3){
+//
+//		}else if (houseType == 4){
+//
+//		}else if (houseType == 5){
+//
+//		}
+	}
+
 
 	/**
 	 * 查询

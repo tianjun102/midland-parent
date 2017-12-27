@@ -20,7 +20,7 @@ import java.util.*;
  */
 public class MidlandHelper {
 
-    private static final String COMMON_DATE = "yyyy-MM-dd hh:mm:ss";
+    private static final String COMMON_DATE = "yyyy-MM-dd HH:mm:ss";
     private static final String MONTH = "yyyy-MM";
     private static final String CODE_FORMAT = "#00000000";
     private static final String LONG_CODE_FORMAT = "#000000000000";

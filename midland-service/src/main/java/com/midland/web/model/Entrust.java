@@ -18,6 +18,26 @@ public class Entrust{
 	 * 委托房屋类型：0新房，1二手房，2租房，3写字楼，4商铺，5其它
 	 **/
 	private Integer houseType;
+
+	/**
+	 * 房源id
+	 */
+	private String houseId;
+
+	/**
+	 * 均价
+	 */
+	private String avgPrice;
+
+	/**
+	 * 距离地铁多久
+	 */
+	private String rangeToSubway;
+
+	/**
+	 * 房源图片地址
+	 */
+	private String houseImg;
 	/**
 	 * 0=合租；1=整租，2床位
 	 **/
@@ -156,6 +176,51 @@ public class Entrust{
 	 * 经纪人的评价次数
 	 */
 	private Integer commentNum;
+
+	/**
+	 * 楼层
+	 */
+	private String houseFloor;
+
+	public String getHouseFloor() {
+		return houseFloor;
+	}
+
+	public void setHouseFloor(String houseFloor) {
+		this.houseFloor = houseFloor;
+	}
+
+	public String getHouseImg() {
+		return houseImg;
+	}
+
+	public void setHouseImg(String houseImg) {
+		this.houseImg = houseImg;
+	}
+
+	public String getAvgPrice() {
+		return avgPrice;
+	}
+
+	public void setAvgPrice(String avgPrice) {
+		this.avgPrice = avgPrice;
+	}
+
+	public String getRangeToSubway() {
+		return rangeToSubway;
+	}
+
+	public void setRangeToSubway(String rangeToSubway) {
+		this.rangeToSubway = rangeToSubway;
+	}
+
+	public String getHouseId() {
+		return houseId;
+	}
+
+	public void setHouseId(String houseId) {
+		this.houseId = houseId;
+	}
 
 	public Double getAgentScore() {
 		return agentScore;

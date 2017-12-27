@@ -48,7 +48,7 @@ public class PaginationStatementHandlerInterceptor implements Interceptor {
 
         Configuration configuration = (Configuration) metaStatementHandler.getValue("delegate.configuration");
         Dialect dialect = DialectFactory.buildDialect(configuration);
-        String originalSql = (String) metaStatementHandler.getValue("delegate.boundSql.sql");
+        String originalSql = (String) metaStatementHandler.getValue("delegate.boundSql.file");
         // 获取总记录数
         Page<?> page = (Page<?>) rowBounds;
         String countSql = dialect.getCountString(originalSql);
@@ -57,7 +57,7 @@ public class PaginationStatementHandlerInterceptor implements Interceptor {
         page.setTotalCount(total);
 
         // 设置物理分页语句
-        metaStatementHandler.setValue("delegate.boundSql.sql", dialect.getLimitString(originalSql, page.getOffset(), page.getLimit()));
+        metaStatementHandler.setValue("delegate.boundSql.file", dialect.getLimitString(originalSql, page.getOffset(), page.getLimit()));
         // 屏蔽mybatis原有分页
         metaStatementHandler.setValue("delegate.rowBounds.offset", RowBounds.NO_ROW_OFFSET);
         metaStatementHandler.setValue("delegate.rowBounds.limit", RowBounds.NO_ROW_LIMIT);

@@ -19,7 +19,7 @@ public abstract class Dialect {
     public abstract String getLimitString(String sql, int offset, int limit);
 
     /**
-     * 得到总数量 sql
+     * 得到总数量 file
      * 
      * @param sql
      * @return

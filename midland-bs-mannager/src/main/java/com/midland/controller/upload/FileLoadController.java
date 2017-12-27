@@ -112,7 +112,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 	
 	/**
 	 * 根据is生成workbook
-	 *
+	 * 读取excel表格
 	 * @param fileItem
 	 * @param is
 	 * @return
@@ -132,8 +132,13 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 		}
 		return wb;
 	}
-	
-	
+
+	/**
+	 * 读取新房,二手房excel表格中的数据
+	 * @param request
+	 * @param wb
+	 * @throws Exception
+	 */
 	private void quotationExcelReader(HttpServletRequest request, Workbook wb) throws Exception {
 		List result = new ArrayList<>();//对应excel文件
 		Sheet sheet = wb.getSheetAt(0);
@@ -153,6 +158,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 	
 	/**
 	 * 二手房详情导入数据专用
+	 * 针对表格结构读取数据,代码不好说明,可以上传excel,debug来看,模板在项目目录的resource里
 	 */
 	private void secondHandHouseResource(List result, Sheet sheet, HttpServletRequest request) throws Exception {
 		
@@ -596,7 +602,14 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 		logger.error("not found file");
 		return null;
 	}
-	
+
+	/**
+	 * 图片,文件上传
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 * @throws FileUploadException
+	 */
 	@RequestMapping("/img")
 	public void upload(HttpServletRequest request, HttpServletResponse response) throws IOException, FileUploadException {
 		DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -633,8 +646,13 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 	private String processUploadedFile(FileItem item) throws FileUploadException {
 		// Process a file upload
 		if (!item.isFormField()) {
+			UUID uuid = UUID.randomUUID();
 			String fileName = item.getName();
-			
+			int index = fileName.lastIndexOf(".");
+			String name = fileName.substring(0,index);
+			String prefix = fileName.substring(index);
+			fileName = uuid+"_"+name+"."+prefix;
+
 			String storePath;
 			String opposite;
 			if (isWindows()) {

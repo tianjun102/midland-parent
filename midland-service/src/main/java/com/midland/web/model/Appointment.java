@@ -135,12 +135,65 @@ public class Appointment{
 	private String webUserId;
 
 
+
 	/**
 	 * 评论管理时为了区分是预约未评论还是委托未评论加上去的
 	 * @return
 	 */
 	private int type;
 
+	/**
+	 * 楼层数
+	 */
+    private String houseFloor;
+
+	/**
+	 * 均价
+	 */
+	private String avgPrice;
+
+	/**
+	 * 距离地铁多久
+	 */
+	private String rangeToSubway;
+
+	/**
+	 * 房源图片地址
+	 */
+	private String houseImg;
+
+
+	public String getHouseFloor() {
+		return houseFloor;
+	}
+
+	public void setHouseFloor(String houseFloor) {
+		this.houseFloor = houseFloor;
+	}
+
+	public String getAvgPrice() {
+		return avgPrice;
+	}
+
+	public void setAvgPrice(String avgPrice) {
+		this.avgPrice = avgPrice;
+	}
+
+	public String getRangeToSubway() {
+		return rangeToSubway;
+	}
+
+	public void setRangeToSubway(String rangeToSubway) {
+		this.rangeToSubway = rangeToSubway;
+	}
+
+	public String getHouseImg() {
+		return houseImg;
+	}
+
+	public void setHouseImg(String houseImg) {
+		this.houseImg = houseImg;
+	}
 
 	public int getType() {
 		return type;

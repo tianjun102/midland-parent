@@ -34,10 +34,17 @@
         <result column="reset_flag" property="resetFlag" jdbcType="INTEGER"/>
         <result column="assigned_time" property="assignedTime" jdbcType="TIMESTAMP"/>
         <result column="sex" property="sex" jdbcType="INTEGER"/>
+        <result column="house_id" property="houseId" jdbcType="VARCHAR" />
+        <result column="avg_price" property="avgPrice" jdbcType="VARCHAR" />
+        <result column="range_to_subway" property="rangeToSubway" jdbcType="VARCHAR" />
+        <result column="house_img" property="houseImg" jdbcType="VARCHAR" />
+        <result column="house_floor" property="houseFloor" jdbcType="VARCHAR" />
     </resultMap>
 
     <sql id="Base_Column_List">
-		id,appoint_sn,source,nick_name,web_user_id,phone,house_type,sell_rent,DATE_FORMAT(appointment_time,'%Y-%m-%d %H:%i:%s')appointment_time,area_name,community_name,address,layout,measure,price,DATE_FORMAT(entrust_time,'%Y-%m-%d %H:%i:%s'),agent_id,agent_name,status,DATE_FORMAT(handle_time,'%Y-%m-%d %H:%i:%s')handle_time,decoration,is_delete,city_id,city_name,area_id,flag,agent_phone,view_url,reset_flag,DATE_FORMAT(assigned_time,'%Y-%m-%d %H:%i:%s')assigned_time,sex
+		id,appoint_sn,source,nick_name,web_user_id,phone,house_type,sell_rent,DATE_FORMAT(appointment_time,'%Y-%m-%d %H:%i:%s')appointment_time,area_name,community_name,
+		address,layout,measure,price,DATE_FORMAT(entrust_time,'%Y-%m-%d %H:%i:%s'),agent_id,agent_name,status,DATE_FORMAT(handle_time,'%Y-%m-%d %H:%i:%s')handle_time,
+		decoration,is_delete,city_id,city_name,area_id,flag,agent_phone,view_url,reset_flag,DATE_FORMAT(assigned_time,'%Y-%m-%d %H:%i:%s')assigned_time,sex,range_to_subway,avg_price,house_id,house_img,house_floor
 	</sql>
 
     <select id="getUnCommentList" parameterType="com.midland.web.model.Appointment" resultMap="BaseResultMap">
@@ -53,6 +60,7 @@
         community_name,
         appointment_time as handle_time,
         decoration,
+        range_to_subway,avg_price,house_id,house_img,house_floor,
         '2' as type
         FROM
         appointment
@@ -86,6 +94,7 @@
         community_name,
         entrust_time as handle_time,
         renovation as decoration,
+        range_to_subway,avg_price,house_id,house_img,house_floor,
         '1' as type
         FROM
         entrust
@@ -246,6 +255,22 @@
             <if test="sex != null">
                 sex,
             </if>
+            <if test="houseId != null">
+                house_id,
+            </if>
+            <if test="avgPrice != null">
+                avg_price,
+            </if>
+            <if test="rangeToSubway != null">
+                range_to_subway,
+            </if>
+            <if test="houseImg != null">
+                house_img,
+            </if>
+            <if test="houseFloor != null">
+                house_floor,
+            </if>
+
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -341,6 +366,21 @@
             </if>
 
         </trim>
+        <if test="houseId != null">
+            #{houseId},
+        </if>
+        <if test="avgPrice != null">
+            #{avgPrice},
+        </if>
+        <if test="rangeToSubway != null">
+            #{rangeToSubway},
+        </if>
+        <if test="houseImg != null">
+            #{houseImg},
+        </if>
+        <if test="houseFloor != null">
+            #{houseFloor},
+        </if>
     </insert>
 
     <sql id="update_option">

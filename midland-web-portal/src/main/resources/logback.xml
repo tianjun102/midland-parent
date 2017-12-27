@@ -30,9 +30,9 @@
             <MaxFileSize>10MB</MaxFileSize>
         </triggeringPolicy>
     </appender>
-    <!-- show parameters for hibernate sql 专为 Hibernate 定制 -->
-    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" />
-    <logger name="org.hibernate.type.descriptor.sql.BasicExtractor" level="DEBUG" />
+    <!-- show parameters for hibernate file 专为 Hibernate 定制 -->
+    <logger name="org.hibernate.type.descriptor.file.BasicBinder" level="TRACE" />
+    <logger name="org.hibernate.type.descriptor.file.BasicExtractor" level="DEBUG" />
     <logger name="org.hibernate.SQL" level="DEBUG" />
     <logger name="org.hibernate.engine.QueryParameters" level="DEBUG" />
     <logger name="org.hibernate.engine.query.HQLQueryPlan" level="DEBUG" />

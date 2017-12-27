@@ -7,6 +7,7 @@
 		<result column="entrust_sn" property="entrustSn" jdbcType="VARCHAR" />
 		<result column="source" property="source" jdbcType="INTEGER" />
 		<result column="house_type" property="houseType" jdbcType="INTEGER" />
+		<result column="house_id" property="houseId" jdbcType="VARCHAR" />
 		<result column="sell_rent" property="sellRent" jdbcType="INTEGER" />
 		<result column="entrust_time" property="entrustTime" jdbcType="TIMESTAMP" />
 		<result column="area_name" property="areaName" jdbcType="VARCHAR" />
@@ -15,6 +16,10 @@
 		<result column="layout" property="layout" jdbcType="VARCHAR" />
 		<result column="measure" property="measure" jdbcType="VARCHAR" />
 		<result column="price" property="price" jdbcType="VARCHAR" />
+		<result column="avg_price" property="avgPrice" jdbcType="VARCHAR" />
+		<result column="range_to_subway" property="rangeToSubway" jdbcType="VARCHAR" />
+		<result column="house_img" property="houseImg" jdbcType="VARCHAR" />
+		<result column="house_floor" property="houseFloor" jdbcType="VARCHAR" />
 		<result column="agent_id" property="agentId" jdbcType="VARCHAR" />
 		<result column="agent_name" property="agentName" jdbcType="VARCHAR" />
 		<result column="status" property="status" jdbcType="INTEGER" />
@@ -44,7 +49,7 @@
 
 	<sql id="Base_Column_List">
 		id,entrust_sn,source,house_type,sell_rent,DATE_FORMAT(entrust_time,'%Y-%m-%d %H:%i:%s')entrust_time,area_name,community_name,address,layout,measure,price,agent_id,agent_name,status,DATE_FORMAT(handle_time,'%Y-%m-%d %H:%i:%s')handle_time,nick_name,user_id,renovation,phone,is_delete,other_facilities,entrust_type,city_id,city_name,area_id,agent_phone,reset_flag,DATE_FORMAT(assigned_time,'%Y-%m-%d %H:%i:%s')assigned_time,
-		turned,build_year,the_layer,total_layer,other_item,remark,agent_score,comment_num
+		turned,build_year,the_layer,total_layer,other_item,remark,agent_score,comment_num,range_to_subway,avg_price,house_id,house_img,house_floor
 	</sql>
 
 	<select id="selectEntrustById" resultMap="BaseResultMap">
@@ -183,6 +188,22 @@
 			<if test="commentNum != null">
 				comment_num,
 			</if>
+			<if test="houseId != null">
+				house_id,
+			</if>
+			<if test="avgPrice != null">
+				avg_price,
+			</if>
+			<if test="rangeToSubway != null">
+				range_to_subway,
+			</if>
+			<if test="houseImg != null">
+				house_img,
+			</if>
+			<if test="houseFloor != null">
+				house_floor,
+			</if>
+
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -293,6 +314,21 @@
 			 </if>
 			 <if test="commentNum != null">
 				 #{commentNum},
+			 </if>
+			 <if test="houseId != null">
+				 #{houseId},
+			 </if>
+			 <if test="avgPrice != null">
+				 #{avgPrice},
+			 </if>
+			 <if test="rangeToSubway != null">
+				  #{rangeToSubway},
+			 </if>
+			 <if test="houseImg != null">
+				 #{houseImg},
+			 </if>
+			 <if test="houseFloor != null">
+				 #{houseFloor},
 			 </if>
 		</trim>
 	</insert>
