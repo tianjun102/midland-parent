@@ -23,6 +23,7 @@
 	<table class="table table-bordered table-add">
 		<thead>
 		<tr>
+			<th style="width: 8%">房源名</th>
 			<th style="width: 8%">建筑类型</th>
 			<th style="width: 8%">物业座数</th>
 			<th style="width: 8%">均价</th>
@@ -33,8 +34,6 @@
 			<th style="width: 8%">装修标准</th>
 			<th style="width: 8%">物业地址</th>
 			<th style="width: 8%">开发商</th>
-			<th style="width: 8%">物业管理</th>
-			<th style="width: 8%">地理位置</th>
 			<th style="width: 10%">操作</th>
 		</tr>
 		</thead>
@@ -44,6 +43,7 @@
 				<c:forEach items="${requestScope.items }" var="item" varStatus="xh">
 					<tr>
 						<input type="hidden" id="id" value="${item.id}"/>
+						<td>${item.houseName}</td>
 						<td>${item.buildingType}</td>
 						<td>${item.unitTotal}</td>
 						<td>${item.price}</td>
@@ -54,8 +54,6 @@
 						<td>${item.propertyNum}</td>
 						<td>${item.propertyAddress}</td>
 						<td>${item.developer}</td>
-						<td>${item.propertyManagement}</td>
-						<td>${item.position}</td>
 						<td>
 							<a target="contentF" href="${ctx}/rest/communityAlbum/index?hotHandId=${item.id}">小区图片</a>
 							<a target="contentF" href="${ctx}/rest/layoutMap/index?hotHandId=${item.id}">主推户型</a>
