@@ -161,6 +161,8 @@ public class HotHandController extends BaseFilter  {
 			}
 			Page<HotHand> result = (Page<HotHand>)hotHandServiceImpl.findHotHandList(hotHand);
 			Paginator paginator=result.getPaginator();
+			List<ParamObject> bo = JsonMapReader.getMap("decoration");
+			model.addAttribute("decorations",bo);
 			model.addAttribute("paginator",paginator);
 			model.addAttribute("items",result);
 		} catch(Exception e) {

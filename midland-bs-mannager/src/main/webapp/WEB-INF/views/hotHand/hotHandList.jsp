@@ -51,7 +51,11 @@
 						<td>${item.managerCosts}</td>
 						<td>${item.landArea}</td>
 						<td>${item.parkingNum}</td>
-						<td>${item.propertyNum}</td>
+						<td>
+							<c:forEach items="${decorations}" var="s">
+								<c:if test="${s.id==item.decoration}">${s.name}</c:if>
+							</c:forEach>
+						</td>
 						<td>${item.propertyAddress}</td>
 						<td>${item.developer}</td>
 						<td>
