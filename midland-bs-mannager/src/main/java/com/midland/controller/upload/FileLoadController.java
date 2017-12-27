@@ -651,7 +651,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 			int index = fileName.lastIndexOf(".");
 			String name = fileName.substring(0,index);
 			String prefix = fileName.substring(index);
-			fileName = uuid+"_"+name+"."+prefix;
+			fileName = uuid+"_"+name+prefix;
 
 			String storePath;
 			String opposite;
