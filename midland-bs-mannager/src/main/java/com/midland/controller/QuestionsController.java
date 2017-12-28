@@ -227,6 +227,7 @@ public class QuestionsController extends BaseFilter {
 		}
 		try {
 			answerServiceImpl.insertAnswer(answer);
+			questionsServiceImpl.answerNumCount(answer.getQuestionsId());
 			map.put("state",0);
 		} catch (Exception e) {
 			logger.error("repeat : {}",answer,e);
