@@ -78,6 +78,7 @@ public class SettingServiceImpl implements SettingService {
         param.put("flag","province");
         Map<String, List<Area>> result = queryCityByRedis(param);
         List<Area> provinceList = result.get("province");
+
         model.addAttribute("provinceList",provinceList);
     }
     /**

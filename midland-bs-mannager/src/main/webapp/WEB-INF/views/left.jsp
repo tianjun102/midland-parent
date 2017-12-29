@@ -410,14 +410,12 @@
 					<shiro:hasPermission name="discountList">
 						<a id = "left65" href="${ctx}/rest/discount/index" target="contentF"><span>折扣列表</span></a>
 					</shiro:hasPermission>
-
+					<shiro:hasPermission name="discountList">
+						<a id = "left65" href="${ctx}/rest/user/head/push" target="contentF"><span>首页公告</span></a>
+					</shiro:hasPermission>
 					<shiro:hasPermission name="descIndexList">
 						<a id = "left66" href="${ctx}/rest/loanType/descIndex" target="contentF"><span>计算器说明</span></a>
 					</shiro:hasPermission>
-
-
-
-
 						<a id = "left67" href="${ctx}/rest/user/toModifyPwdPage" target="contentF"><span>修改密码</span></a>
 						<a id = "left68" href="${ctx}/rest/user/about" target="contentF"><span>关于平台</span></a>
 				</dd>

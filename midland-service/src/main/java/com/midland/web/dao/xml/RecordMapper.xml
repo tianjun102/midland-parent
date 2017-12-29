@@ -135,13 +135,19 @@
 			 and city_name= #{cityName,jdbcType=VARCHAR}
 		</if>
 		<if test="record != null">
-			 and record= #{record,jdbcType=VARCHAR}
+			 and record like '%${record}%'
 		</if>
 		<if test="isDelete != null">
 			 and is_delete= #{isDelete,jdbcType=VARCHAR}
 		</if>
 		<if test="isShow != null">
 			 and is_show= #{isShow,jdbcType=INTEGER}
+		</if>
+		<if test="startTime != null">
+			and add_time &gt; #{startTime}
+		</if>
+		<if test="endTime != null">
+			and add_time &lt; #{endTime}
 		</if>
 	</sql>
 

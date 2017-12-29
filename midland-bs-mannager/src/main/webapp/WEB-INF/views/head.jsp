@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<script type="text/javascript" src="${ctx}/assets/scripts/jquery.min.js"></script>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -15,6 +16,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 	<title>美联物业管理平台</title>
 	<link rel="stylesheet" href="${ctx}/assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${ctx}/assets/css/common.css">
+
 </head>
 	<body>
 	<!--头部结构-->
@@ -27,22 +29,24 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		</c:if>
 		<div class="txtScroll-top">
 		<c:if test="${user.userType==0}">
-			<%--<div class="bd">
+			<div class="bd">
 				<ul class="infoList">
 				<c:choose>
 				<c:when test="${!empty requestScope.list }">
 						<c:forEach items="${requestScope.list }" var="notice" varStatus="xh">
-							<li><a href="${ctx}/rest/notice/viewNotice?id=${notice.id }" target="contentF">系统公告：${notice.title }</a><span class="date">${fn:substring(notice.sendTime,0,10)}</span></li>
+							<li><a href="${ctx}/rest/notice/viewNotice?id=${notice.id }" target="contentF">系统公告：${notice.title }</a><span class="date"><div class='time'></div></span></li>
 						</c:forEach>
 				</c:when>
 				<c:otherwise>
-						<li><span class="date">2017-03-09</span><a href="javascript:;" target="_blank">系统公告：欢迎来到美联物业管理平台！</a></li>
+
+					<li><a href="javascript:;" target="_blank">系统公告：欢迎来到美联物业管理平台!</a> </li>
 				</c:otherwise>
 				</c:choose>
+
 				</ul>
-			</div>--%>
+			</div>
 		</c:if>
-		
+
 		<c:if test="${user.userType==1}">
 			<%--<div class="bd">
 				<ul class="infoList">
@@ -59,9 +63,10 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				</ul>
 			</div>--%>
 		</c:if>
-		
+
 		</div>
 		<ul class = "user">
+			<li><span class="date" id="time1"></span></li>
 			<li><a href="javascript:;" class = "admin"><img src="${ctx}/assets/img/admin.png"/></a></li>
 			<li><span class = "user-name">${user.userCnName }</span></li>
 			<li>
@@ -104,4 +109,52 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		})
 	</script>
 	</body>
+<script type="text/javascript">
+    $(function(){
+        mytime()
+    })
+    function mytime(){
+        // var a = new Date().Format("yyyy-MM-dd HH:mm:ss");
+        var a = format(new Date(),"yyyy-mm-dd HH:mm:ss")
+
+        document.getElementById("time1").innerHTML = a;
+    }
+
+    setInterval(function() {mytime()},1000);
+    function format(date,str){
+        var mat={};
+        mat.M=date.getMonth()+1;//月份记得加1
+        mat.H=date.getHours();
+        mat.s=date.getSeconds();
+        mat.m=date.getMinutes();
+        mat.Y=date.getFullYear();
+        mat.D=date.getDate();
+        mat.d=date.getDay();//星期几
+        mat.d=check(mat.d);
+        mat.H=check(mat.H);
+        mat.M=check(mat.M);
+        mat.D=check(mat.D);
+        mat.s=check(mat.s);
+        mat.m=check(mat.m);
+        console.log(typeof mat.D)
+        if(str.indexOf(":")>-1){
+            mat.Y=mat.Y.toString().substr(2,2);
+            return mat.Y+"/"+mat.M+"/"+mat.D+" "+mat.H+":"+mat.m+":"+mat.s;
+        }
+        if(str.indexOf("/")>-1){
+            return mat.Y+"/"+mat.M+"/"+mat.D+" "+mat.H+"/"+mat.m+"/"+mat.s;
+        }
+        if(str.indexOf("-")>-1){
+            return mat.Y+"-"+mat.M+"-"+mat.D+" "+mat.H+"-"+mat.m+"-"+mat.s;
+        }
+    }
+    //检查是不是两位数字，不足补全
+    function check(str){
+        str=str.toString();
+        if(str.length<2){
+            str='0'+ str;
+        }
+        return str;
+    }
+</script>
 </html>

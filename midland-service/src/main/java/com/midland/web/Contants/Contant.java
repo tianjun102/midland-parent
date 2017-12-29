@@ -87,6 +87,11 @@ public class Contant {
     public static final String SENSITIVE_CACHE_KEY = "midland:sensitive:cache:key";
 
     /**
+     * 美联首页轮播字符KEY
+     */
+    public static final String HEAD_CACHE_KEY = "midland:head:cache:key";
+
+    /**
      * 外销网类型的houseType
      */
 

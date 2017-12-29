@@ -22,6 +22,15 @@
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
 				<%@include file="../menu/area.jsp" %>
+				<li><span>备案时间：</span><input class="Wdate half" id="time1"
+											 onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time2\')}'})"
+											 name="startTime"/> <em class="gang">-</em><input
+						class="Wdate half"
+						onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'time1\')}'})"
+						id="time2" name="endTime"/></li>
+				<%--<li><span>备案：</span>--%>
+					<%--<input type="text" name="record" id="record" placeholder="请输入备案号"/></li>--%>
+				<%--</li>--%>
 				<li>
 					<input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/>
 				</li>

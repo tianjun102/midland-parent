@@ -64,8 +64,8 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 用户控制器
- * 
- * @author 
+ *
+ * @author
  * @since 2016年5月28日 下午3:54:00
  **/
 @Controller
@@ -76,14 +76,14 @@ public class UserController extends BaseFilter {
 	private final Logger logger = LoggerFactory.getLogger(UserController.class);
     @Resource
     private UserService userService;
-    
+
     @Resource
 	private RoleService roleService;
 	@Autowired
 	private MenuService menuServiceImpl;
     @Autowired
 	private SettingService settingService;
-    
+
     @Resource
 	private RedisTemplate<String, Object> redisTemplate;
 
@@ -96,14 +96,14 @@ public class UserController extends BaseFilter {
 	@Autowired
 	private SmsSingleSender sender;
 
-    
+
     /**
      * 用户登录
-     * 
+     *
      * @param user
      * @param result
      * @return
-     * @throws UnsupportedEncodingException 
+     * @throws UnsupportedEncodingException
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@Valid User user, BindingResult result, Model model, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
@@ -114,13 +114,13 @@ public class UserController extends BaseFilter {
     	 String flag=request.getParameter("remember");//记住密码
     	 String userType = request.getParameter("userType");
         try {
-        	
+
             Subject subject = SecurityUtils.getSubject();
-           
+
             if(flag!=null && flag.length()>0){
-            	//创建Cookie  
-                           
-                Cookie nameCookie=new Cookie("username",username); 
+            	//创建Cookie
+
+                Cookie nameCookie=new Cookie("username",username);
                 nameCookie.setPath(request.getContextPath());
                 nameCookie.setMaxAge(60 * 60 * 24 * 3);
                 response.addCookie(nameCookie);
@@ -128,7 +128,7 @@ public class UserController extends BaseFilter {
                 passwordCookie.setPath(request.getContextPath());
                 passwordCookie.setMaxAge(60 * 60 * 24 * 3);
                 response.addCookie(passwordCookie);
-                    
+
             }
             user.setPassword(ApplicationUtils.sha256Hex(password));
             user.setUsername(username);
@@ -172,7 +172,7 @@ public class UserController extends BaseFilter {
 				}
 			}
             final User authUserInfo = userService.selectByUsername(user.getUsername());
-            
+
             List<Role> roles=roleService.selectRolesByUserId(authUserInfo.getId());
 			for (Role role:roles){
 				if (role.getRoleType()!=null&&role.getRoleType()==0){
@@ -185,7 +185,7 @@ public class UserController extends BaseFilter {
         } catch (AuthenticationException e) {
             // 身份验证失败
             model.addAttribute("error", "用户名或密码错误!");
-        	
+
         	e.printStackTrace();
 			return "login";
             //return "redirect:"+midlandConfig.getLoginUrl()+"?errorCode=1";
@@ -198,7 +198,7 @@ public class UserController extends BaseFilter {
 
     /**
      * 用户登出
-     * 
+     *
      * @param session
      * @return
      */
@@ -237,12 +237,12 @@ public class UserController extends BaseFilter {
     	notice.setIsSend(1);
     	notice.setIsDelete(1);
     	List<NoticeWithBLOBs> list=noticeService.selectNoticeList(notice);*/
-    	
+
     	model.addAttribute("user",user);
     	model.addAttribute("list",null);
         return "head";
     }
-    
+
     /**
      * 左边菜单栏
      * @param model
@@ -292,7 +292,7 @@ public class UserController extends BaseFilter {
     	return "user/userIndex";
     }
     /**
-     * 用户列表查询 
+     * 用户列表查询
      * @param user
      * @return
      */
@@ -312,10 +312,10 @@ public class UserController extends BaseFilter {
 		model.addAttribute("auditSatusList",map);
     	return "user/userlist";
     }
-	
-	
-	
-	
+
+
+
+
 	public void getUserList(User user, Model model, HttpServletRequest request) {
 		MidlandHelper.doPage(request);
 		Page<User> userList=(Page<User>)userService.selectByExampleAndPage(user);
@@ -323,10 +323,10 @@ public class UserController extends BaseFilter {
 		model.addAttribute("paginator", paginator);
 		model.addAttribute("users", userList);
 	}
-	
-	
-	
-	
+
+
+
+
 	/**
      * 跳转到新增页面
      * @return
@@ -344,9 +344,9 @@ public class UserController extends BaseFilter {
     	model.addAttribute("roles", roles);
     	return "user/addUser";
     }
-	
-	
-    
+
+
+
     /**
      * 新增用户
      * @param user
@@ -363,7 +363,7 @@ public class UserController extends BaseFilter {
 	    } catch (Exception e) {
 		    logger.error("addUser :{}",user,e);
 	    }
-	    
+
     	return map;
     }
 
@@ -387,8 +387,8 @@ public class UserController extends BaseFilter {
     	model.addAttribute("userRoles",userRoles);
     	return "user/userInfo";
     }
-    
-    
+
+
     /**
      * 用户的角色列表展示
      * @param userId
@@ -407,7 +407,7 @@ public class UserController extends BaseFilter {
     	model.addAttribute("userRoles",userRoles);
     	return "user/userRoleList";
     }
-    
+
     /**
      * 保存用户角色关系
      * @param userId
@@ -424,7 +424,7 @@ public class UserController extends BaseFilter {
     	}
     	return map;
     }
-	
+
 	/**
 	 * 跳转到修改页面
 	 * @return
@@ -437,8 +437,8 @@ public class UserController extends BaseFilter {
 		model.addAttribute("sources",sources);
 		return "user/updateUser";
 	}
-    
-    
+
+
     /**
      * 修改用户
      * @param user
@@ -451,7 +451,7 @@ public class UserController extends BaseFilter {
     	if (isFlag ==1){
 		    user.setUsername(null);
 		    user.setPhone(null);
-		
+
 	    }
 	    if (StringUtils.isEmpty(user.getEmail())){
     		user.setEmail("");
@@ -486,8 +486,8 @@ public class UserController extends BaseFilter {
 	    map.put("message","fail");
 	    return map;
     }
-    
-    
+
+
     @RequestMapping(value = "/update")
     @ResponseBody
     public Object updateUserInfo(User user){
@@ -501,10 +501,10 @@ public class UserController extends BaseFilter {
 	    map.put("message","fail");
     	return map;
     }
-    
-    
-    
-    
+
+
+
+
     /**
      * 开启/关闭
      * @param user
@@ -520,7 +520,7 @@ public class UserController extends BaseFilter {
     	}
     	return JSONObject.toJSONString(map);
     }
-    
+
     /**
      * 删除
      * @param userId
@@ -540,7 +540,7 @@ public class UserController extends BaseFilter {
     	}
     	return JSONObject.toJSONString(map);
     }
-    
+
     /**
      * 检查用户名唯一性
      * @return
@@ -555,7 +555,7 @@ public class UserController extends BaseFilter {
     	}
     	return JSONObject.toJSONString(map);
     }
-    
+
     /**
      * 检查手机号唯一性
      * @param phone
@@ -574,29 +574,29 @@ public class UserController extends BaseFilter {
     	}
     	return JSONObject.toJSONString(map);
     }
-    
+
     /**
      * 跳转到修改密码页
      * @return
      */
     @RequestMapping(value = "/forcedModifyPassword", method = {RequestMethod.GET,RequestMethod.POST})
     public String toForcedModifyPassword(){
-    	
+
     	return "user/forcedModifyPassword";
     }
-    
+
     /**
      * 跳转到修改密码页
      * @return
      */
     @RequestMapping(value = "/toModifyPwdPage", method = {RequestMethod.GET,RequestMethod.POST})
     public String toModifyPwdPage(){
-    	
+
     	return "user/modifyPassword";
     }
-    
+
     /**
-     * 检查原密码是否正确 
+     * 检查原密码是否正确
      * @param oldPwd
      * @param request
      * @return 1 正确  0 错误
@@ -615,7 +615,7 @@ public class UserController extends BaseFilter {
     	}
     	return map;
     }
-    
+
     /**
      * 修改密码提交保存
      * @param request
@@ -641,7 +641,7 @@ public class UserController extends BaseFilter {
         }
     	return map;
     }
-    
+
     /**
      * 重置密码
      * @param userId
@@ -662,7 +662,7 @@ public class UserController extends BaseFilter {
     	}
     	return JSONObject.toJSONString(map);
     }
-    
+
     /**
      * 找回密码发送邮件
      * @return
@@ -672,17 +672,17 @@ public class UserController extends BaseFilter {
     	String secretKey = UUID.randomUUID().toString(); // 密钥
     	Timestamp outDate = new Timestamp(System.currentTimeMillis() + 30 * 60 * 1000);//过期时间： 30分钟后过期
     	long date = outDate.getTime() / 1000 * 1000;// 忽略毫秒数  mySql 取出时间是忽略毫秒数的
-    	
+
     	User user=userService.selectByUsername(un);
     	if(user!=null){
 //    		user.set
     		//更新数据库
         	//userService.update(user);
-    		
+
     	}
-    	
-    	
-    	
+
+
+
     	String key =un + "$" + date + "$" + secretKey;
     	String digitalSignature = MD5Util.MD5Encode(key, null);// 数字签名
     	String basePath=request.getRequestURL().toString();
@@ -697,12 +697,12 @@ public class UserController extends BaseFilter {
 				.append("<br/>tips:本邮件超过30分钟,链接将会失效，需要重新申请'找回密码'")
 				.append("\t").append(digitalSignature);
 
-	    
+
         SmsUtil.send("13602825350", "xcv12345678");
-    	
+
     	return "login";
     }
-    
+
     /**
      * 验证密码找回链接
      * @return
@@ -711,24 +711,24 @@ public class UserController extends BaseFilter {
     public String checkResetLink(Model model,HttpServletRequest request){
     	String sid=request.getParameter("sid");
     	String userName=request.getParameter("userName");
-    	
+
     	if (sid.equals("")  || userName.equals("")) {
     		model.addAttribute("mesg", "链接不完整,请重新生成");
             return "error";
         }
-    	
+
     	User user=userService.selectByUsername(userName);
     	if(user!=null){
     		Timestamp outDate= new Timestamp(1111);//数据库用户过期时间
-        	
+
         	if(outDate.getTime() <= System.currentTimeMillis()){ //表示已经过期
         		model.addAttribute("mesg", "链接已经过期,请重新申请找回密码.");
                 return "error";
             }
-        	
+
         	String key = user.getUsername()+"$"+outDate.getTime()/1000*1000+"$"+"user.getValidataCode()";//数字签名
         	String digitalSignature = MD5Util.MD5Encode(key, null);// 数字签名
-        	
+
         	if(!digitalSignature.equals(sid)) {
         		model.addAttribute("mesg", "链接不正确,是否已经过期了?重新申请吧.");
                 return "error";
@@ -752,7 +752,7 @@ public class UserController extends BaseFilter {
     public String sendSms(String username){
     	Map<String, Object> map = new HashMap<String, Object>();
     	map.put("flag", 0);
-    	
+
     	String vcode = SmsUtil.createRandomVCode();//验证码
     	String mobile="";
     	String key="wks:vcode:"+username;
@@ -779,7 +779,7 @@ public class UserController extends BaseFilter {
     	}
     	return JSONObject.toJSONString(map);
     }
-    
+
     /**
      * 验证码校验
      * @param vcode
@@ -798,24 +798,24 @@ public class UserController extends BaseFilter {
     	}
     	return JSONObject.toJSONString(map);
     }
-    
+
     /**
      * 中间首页图
      * @return
      */
     @RequestMapping(value = "/contentIndex", method = {RequestMethod.GET,RequestMethod.POST})
     public String contentIndex(){
-    	
+
     	return "contentIndex";
     }
-    
+
     /**
      * 跳转到关于页面
      * @return
      */
     @RequestMapping(value = "/about", method = {RequestMethod.GET,RequestMethod.POST})
     public String about(){
-    	
+
     	return "about";
     }
     /**
@@ -837,8 +837,8 @@ public class UserController extends BaseFilter {
     public String create() {
         return "拥有user:create权限,能访问";
     }
-    
-    
+
+
     @RequestMapping("/export")
     public void userInfoExportExcel(User user, HttpServletResponse response,HttpServletRequest request){
 		User currUser = MidlandHelper.getCurrentUser(request);
@@ -1050,6 +1050,6 @@ public class UserController extends BaseFilter {
 		}
 		return map;
 	}
-    
-    
+
+
 }
