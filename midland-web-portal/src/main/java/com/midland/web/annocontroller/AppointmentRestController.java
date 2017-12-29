@@ -59,7 +59,7 @@ public class AppointmentRestController extends BaseFilter {
             mapj.put("hourseType",houseType);
             mapj.put("houseId",houseId);
             StringBuffer sb = new StringBuffer();
-            sb.append(Contant.APPOINT_CACHE_KEY).append(":").append(obj.getWebUserId());
+            sb.append(Contant.APPOINT_CACHE_KEY).append(":").append(obj.getUserId());
             publicServiceImpl.listRemove(sb.toString(),mapj);
             //发送给预约人的短信：模板id56848，内容：您好！您提交的看房日程由{1}电话{2}帮您带看，该经纪人会尽快联系您安排看房，请保持电话畅通，感谢！
             List<String> param = new ArrayList<>();
@@ -145,15 +145,15 @@ public class AppointmentRestController extends BaseFilter {
 
     /**
      * 清空预约记录
-     * @param webUserId
+     * @param userId
      */
     @RequestMapping("clean")
     public Object cleanAppointment(@RequestBody Map map) {
         Result result = new Result();
         try {
-            String webUserId = String.valueOf( map.get("userId"));
+            String userId = String.valueOf( map.get("userId"));
             Appointment obj = new Appointment();
-            obj.setWebUserId(webUserId);
+            obj.setUserId(userId);
             obj.setIsDelete(Contant.isDelete);
             log.info("cleanAppointment  {}", obj);
             appointmentServiceImpl.updateAppointmentByWebUserId(obj);
@@ -168,7 +168,7 @@ public class AppointmentRestController extends BaseFilter {
     }
     /*
      * 清空预约记录
-     * @param webUserId
+     * @param userId
      */
     @RequestMapping("delete")
     public Object deleteAppointment(@RequestBody Map map) {
@@ -192,7 +192,7 @@ public class AppointmentRestController extends BaseFilter {
 
     /**
      * 取消预约
-     * @param  webUserId
+     * @param  userId
      */
     @RequestMapping("cancel")
     public Object cancelAppointment(@RequestBody Map map) {
@@ -202,7 +202,7 @@ public class AppointmentRestController extends BaseFilter {
             Integer id = (Integer) map.get("id");
             Appointment obj = new Appointment();
             obj.setId(id);
-            obj.setWebUserId(userId);
+            obj.setUserId(userId);
             obj.setStatus(4);//已取消，详见Midland.json的 appointment_status
             log.info("cancelAppointment  {}", obj);
             appointmentServiceImpl.cancelAppointmentByIdAndWebUserId(obj);

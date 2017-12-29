@@ -4,14 +4,14 @@
 
     <resultMap id="BaseResultMap" type="com.midland.web.model.Attention">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="web_user_id" property="webUserId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="type" property="type" jdbcType="INTEGER"/>
         <result column="other_id" property="otherId" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-		id,web_user_id,type,other_id,create_time
+		id,user_id,type,other_id,create_time
 	</sql>
 
     <select id="selectAttentionById" resultMap="BaseResultMap">
@@ -55,7 +55,7 @@
             <foreach collection="mapList" item="item" index="index" open="(" close=")" separator=")or(">
                 <trim suffixOverrides="AND">
                     <if test="item.userId !=null">
-                        web_user_id = #{item.userId} AND
+                        user_id = #{item.userId} AND
                     </if>
                     <if test="item.type !=null">
                         type = #{item.type} AND
@@ -73,8 +73,8 @@
     <insert id="insertAttention" parameterType="com.midland.web.model.Attention">
         insert into attention
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="webUserId != null">
-                web_user_id,
+            <if test="userId != null">
+                user_id,
             </if>
             <if test="type != null">
                 type,
@@ -88,8 +88,8 @@
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="webUserId != null">
-                #{webUserId,jdbcType=INTEGER},
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
             </if>
             <if test="type != null">
                 #{type,jdbcType=INTEGER},
@@ -104,8 +104,8 @@
     </insert>
 
     <sql id="update_option">
-        <if test="webUserId != null">
-            web_user_id= #{webUserId,jdbcType=INTEGER},
+        <if test="userId != null">
+            user_id= #{userId,jdbcType=INTEGER},
         </if>
         <if test="type != null">
             type= #{type,jdbcType=INTEGER},
@@ -122,8 +122,8 @@
         <if test="id != null">
             and id= #{id,jdbcType=INTEGER}
         </if>
-        <if test="webUserId != null">
-            and web_user_id= #{webUserId,jdbcType=INTEGER}
+        <if test="userId != null">
+            and user_id= #{userId,jdbcType=INTEGER}
         </if>
         <if test="type != null">
             and type= #{type,jdbcType=INTEGER}

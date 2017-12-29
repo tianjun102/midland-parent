@@ -78,7 +78,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 	public void updateAppointmentByWebUserId(Appointment appointment) throws Exception {
 		try {
 			log.debug("updateAppointmentByWebUserId  {}",appointment);
-			int result = appointmentMapper.updateAppointmentByWebUserId(appointment);
+			int result = appointmentMapper.updateAppointmentByUserId(appointment);
 			if (result < 1) {
 				throw new Exception("updateAppointmentByWebUserId失败");
 			}

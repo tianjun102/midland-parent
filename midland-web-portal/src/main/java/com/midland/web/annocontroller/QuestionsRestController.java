@@ -330,7 +330,7 @@ public class QuestionsRestController extends BaseFilter {
     /**
      * 问题关注
      *
-     * @param obj webUserId,otherId
+     * @param obj userId,otherId
      * @return
      */
     @RequestMapping("attention")
@@ -359,7 +359,7 @@ public class QuestionsRestController extends BaseFilter {
     /**
      * 问题关注
      *
-     * @param obj webUserId,otherId
+     * @param obj userId,otherId
      * @return
      */
     @RequestMapping("attention/cancel")

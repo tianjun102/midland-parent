@@ -9,7 +9,7 @@ public class Attention{
 	/**
 	 * 关注的用户id
 	 **/
-	private Integer webUserId;
+	private Integer userId;
 	/**
 	 * 关注的类型
 	 **/
@@ -33,11 +33,11 @@ public class Attention{
 	}
 
 	public Integer getWebUserId() {
-		return webUserId;
+		return userId;
 	}
 
-	public void setWebUserId(Integer webUserId) {
-		this.webUserId = webUserId;
+	public void setWebUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	public Integer getType() {
@@ -70,8 +70,8 @@ public class Attention{
 		if (id != null) {
 			sb.append(", \"id\":\"").append(id).append("\"");
 		}
-		if (webUserId != null) {
-			sb.append(", \"webUserId\":\"").append(webUserId).append("\"");
+		if (userId != null) {
+			sb.append(", \"userId\":\"").append(userId).append("\"");
 		}
 		if (type != null) {
 			sb.append(", \"type\":\"").append(type).append("\"");

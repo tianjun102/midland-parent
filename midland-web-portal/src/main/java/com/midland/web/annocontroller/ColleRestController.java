@@ -37,7 +37,7 @@ public class ColleRestController extends BaseFilter {
 
     /**
      * 清空收藏记录
-     * @param webUserId
+     * @param userId
      */
     @RequestMapping("clean")
     public Object cleanAppointment(@RequestBody Map map) {
@@ -62,7 +62,7 @@ public class ColleRestController extends BaseFilter {
 
     /**
      * 取消收藏
-     * @param  webUserId
+     * @param  userId
      */
     @RequestMapping("cancel")
     public Object cancelAppointment(@RequestBody Map map) {

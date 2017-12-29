@@ -132,7 +132,7 @@ public class Appointment{
 	/**
 	 * 前端用户id
 	 */
-	private String webUserId;
+	private String userId;
 
 
 
@@ -162,6 +162,13 @@ public class Appointment{
 	 */
 	private String houseImg;
 
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 
 	public String getHouseFloor() {
 		return houseFloor;
@@ -211,13 +218,6 @@ public class Appointment{
 		this.houseId = houseId;
 	}
 
-	public String getWebUserId() {
-		return webUserId;
-	}
-
-	public void setWebUserId(String webUserId) {
-		this.webUserId = webUserId;
-	}
 
 	public Integer getSex() {
 		return sex;
@@ -487,8 +487,8 @@ public class Appointment{
 		if (source != null) {
 			sb.append(", \"source\":\"").append(source).append("\"");
 		}
-		if (webUserId != null) {
-			sb.append(", \"webUserId\":\"").append(webUserId).append("\"");
+		if (userId != null) {
+			sb.append(", \"userId\":\"").append(userId).append("\"");
 		}
 		if (nickName != null) {
 			sb.append(", \"nickName\":\"").append(nickName).append("\"");
