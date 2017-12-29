@@ -1,5 +1,6 @@
 package com.midland.task;
 
+import com.alibaba.fastjson.JSONArray;
 import com.midland.config.MidlandConfig;
 import com.midland.core.util.HttpUtils;
 import com.midland.web.Contants.Contant;
@@ -14,6 +15,8 @@ import com.midland.web.service.AppointmentService;
 import com.midland.web.service.EntrustService;
 import com.midland.web.util.MidlandHelper;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -41,6 +44,8 @@ public class MidlandTask {
 	private ApiHelper apiHelper;
 	@Autowired
 	private MailProperties mailProperties;
+
+	private Logger logger = LoggerFactory.getLogger(MidlandTask.class);
 
 @Autowired
 	private MidlandConfig midlandConfig;
@@ -90,7 +95,7 @@ public class MidlandTask {
 						message.setSubject("主题：预约关闭");
 						message.setText("您的预约超时未处理，现已关闭，预约编号："+appointment1.getAppointSn());
 						apiHelper.emailSender("scanAppointment",message);
-						System.out.println("发送给有指定邮箱，关闭");
+						logger.debug("发送给有指定邮箱，关闭,{}",message.toString());
 					} else if (te<0) {
 						//超过24小时,24小时内状态没有修改，发送短信给经纪人及其领导，
 						if (appointment1.getFlag() == 0) {
@@ -111,6 +116,7 @@ public class MidlandTask {
 								list.add(appointment1.getAgentName());
 								if (StringUtils.isEmpty(appointment1.getAgentName()))
 								apiHelper.smsSender(a.getPhone(), Contant.SMS_TEMPLATE_63647,list);
+								logger.debug("超过24小时,24小时内状态没有修改，发送短信给经纪人及其领导,{}", JSONArray.toJSONString(list));
 							});
 
 
@@ -150,6 +156,7 @@ public class MidlandTask {
 						entrust.setId(entrust1.getId());
 						entrust.setEntrustTime(null);
 						entrustServiceImpl.updateEntrustById(entrust);
+						logger.debug("若指定时间内已分配的业务员未跟进（还未从已分配状态变为看房中），后台可重新分配,{}", JSONArray.toJSONString(entrust1));
 
 					}
 				}
