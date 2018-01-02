@@ -16,7 +16,54 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 	<title>美联物业管理平台</title>
 	<link rel="stylesheet" href="${ctx}/assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${ctx}/assets/css/common.css">
+	<script type="text/javascript">
+		$(function(){
+			mytime()
+		})
+        function mytime(){
+           // var a = new Date().Format("yyyy-MM-dd HH:mm:ss");
+            var a = format(new Date(),"yyyy-MM-dd HH:mm:ss")
 
+            document.getElementById("time1").innerHTML = a;
+        }
+
+        setInterval(function() {mytime()},1000);
+        function format(date,str){
+            var mat={};
+            mat.M=date.getMonth()+1;//月份记得加1
+            mat.H=date.getHours();
+            mat.s=date.getSeconds();
+            mat.m=date.getMinutes();
+            mat.Y=date.getFullYear();
+            mat.D=date.getDate();
+            mat.d=date.getDay();//星期几
+            mat.d=check(mat.d);
+            mat.H=check(mat.H);
+            mat.M=check(mat.M);
+            mat.D=check(mat.D);
+            mat.s=check(mat.s);
+            mat.m=check(mat.m);
+            console.log(typeof mat.D)
+            if(str.indexOf(":")>-1){
+                mat.Y=mat.Y.toString().substr(0,4);
+                return mat.Y+"/"+mat.M+"/"+mat.D+" "+mat.H+":"+mat.m+":"+mat.s;
+            }
+            if(str.indexOf("/")>-1){
+                return mat.Y+"/"+mat.M+"/"+mat.D+" "+mat.H+"/"+mat.m+"/"+mat.s;
+            }
+            if(str.indexOf("-")>-1){
+                return mat.Y+"-"+mat.M+"-"+mat.D+" "+mat.H+"-"+mat.m+"-"+mat.s;
+            }
+        }
+        //检查是不是两位数字，不足补全
+        function check(str){
+            str=str.toString();
+            if(str.length<2){
+                str='0'+ str;
+            }
+            return str;
+        }
+	</script>
 </head>
 	<body>
 	<!--头部结构-->
@@ -32,8 +79,8 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			<div class="bd">
 				<ul class="infoList">
 				<c:choose>
-				<c:when test="${!empty requestScope.list }">
-						<c:forEach items="${requestScope.list }" var="notice" varStatus="xh">
+				<c:when test="${!empty list }">
+						<c:forEach items="${list }" var="notice" varStatus="xh">
 							<li><a href="${ctx}/rest/notice/viewNotice?id=${notice.id }" target="contentF">系统公告：${notice.title }</a><span class="date"><div class='time'></div></span></li>
 						</c:forEach>
 				</c:when>
@@ -109,52 +156,4 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		})
 	</script>
 	</body>
-<script type="text/javascript">
-    $(function(){
-        mytime()
-    })
-    function mytime(){
-        // var a = new Date().Format("yyyy-MM-dd HH:mm:ss");
-        var a = format(new Date(),"yyyy-mm-dd HH:mm:ss")
-
-        document.getElementById("time1").innerHTML = a;
-    }
-
-    setInterval(function() {mytime()},1000);
-    function format(date,str){
-        var mat={};
-        mat.M=date.getMonth()+1;//月份记得加1
-        mat.H=date.getHours();
-        mat.s=date.getSeconds();
-        mat.m=date.getMinutes();
-        mat.Y=date.getFullYear();
-        mat.D=date.getDate();
-        mat.d=date.getDay();//星期几
-        mat.d=check(mat.d);
-        mat.H=check(mat.H);
-        mat.M=check(mat.M);
-        mat.D=check(mat.D);
-        mat.s=check(mat.s);
-        mat.m=check(mat.m);
-        console.log(typeof mat.D)
-        if(str.indexOf(":")>-1){
-            mat.Y=mat.Y.toString().substr(2,2);
-            return mat.Y+"/"+mat.M+"/"+mat.D+" "+mat.H+":"+mat.m+":"+mat.s;
-        }
-        if(str.indexOf("/")>-1){
-            return mat.Y+"/"+mat.M+"/"+mat.D+" "+mat.H+"/"+mat.m+"/"+mat.s;
-        }
-        if(str.indexOf("-")>-1){
-            return mat.Y+"-"+mat.M+"-"+mat.D+" "+mat.H+"-"+mat.m+"-"+mat.s;
-        }
-    }
-    //检查是不是两位数字，不足补全
-    function check(str){
-        str=str.toString();
-        if(str.length<2){
-            str='0'+ str;
-        }
-        return str;
-    }
-</script>
 </html>

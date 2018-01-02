@@ -30,6 +30,11 @@ public class Comment{
 	 * 关联资讯表id
 	 **/
 	private Integer informationId;
+
+	/**
+	 * type=0时informationType才启用,0市场研究,1咨询
+	 */
+	private Integer informationType;
 	/**
 	 * 0=资讯(点评文章)；1=委托（点评经纪人）；2=预约（点评经纪人）
 	 **/
@@ -64,6 +69,14 @@ public class Comment{
 	private String agentUrl;
 	private String agentId;
 
+
+	public Integer getInformationType() {
+		return informationType;
+	}
+
+	public void setInformationType(Integer informationType) {
+		this.informationType = informationType;
+	}
 
 	public String getAgentId() {
 		return agentId;

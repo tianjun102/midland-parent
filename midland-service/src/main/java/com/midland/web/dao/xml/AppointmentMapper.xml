@@ -364,23 +364,23 @@
             <if test="sex != null">
                 #{sex,jdbcType=INTEGER},
             </if>
-
+            <if test="houseId != null">
+                #{houseId},
+            </if>
+            <if test="avgPrice != null">
+                #{avgPrice},
+            </if>
+            <if test="rangeToSubway != null">
+                #{rangeToSubway},
+            </if>
+            <if test="houseImg != null">
+                #{houseImg},
+            </if>
+            <if test="houseFloor != null">
+                #{houseFloor},
+            </if>
         </trim>
-        <if test="houseId != null">
-            #{houseId},
-        </if>
-        <if test="avgPrice != null">
-            #{avgPrice},
-        </if>
-        <if test="rangeToSubway != null">
-            #{rangeToSubway},
-        </if>
-        <if test="houseImg != null">
-            #{houseImg},
-        </if>
-        <if test="houseFloor != null">
-            #{houseFloor},
-        </if>
+
     </insert>
 
     <sql id="update_option">
