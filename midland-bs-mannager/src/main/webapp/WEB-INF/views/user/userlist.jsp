@@ -114,13 +114,14 @@
     }
 
     function alterUser(userId) {
-        layer.open({
-            type: 2,
-            title: ['编辑用户'],
-            shade: 0.3,
-            area: ['500px', '450px'],
-            content: ['${ctx}/rest/user/toUpdatePage?userId=' + userId, 'no']
-        });
+        <%--layer.open({--%>
+            <%--type: 2,--%>
+            <%--title: ['编辑用户'],--%>
+            <%--shade: 0.3,--%>
+            <%--area: ['500px', '450px'],--%>
+            <%--content: ['${ctx}/rest/user/toUpdatePage?userId=' + userId, 'no']--%>
+        <%--});--%>
+        window.open("${ctx}/rest/user/toUpdatePage?userId=" + userId, "contentF");
     }
 
     function takeOutblacklist(userId) {

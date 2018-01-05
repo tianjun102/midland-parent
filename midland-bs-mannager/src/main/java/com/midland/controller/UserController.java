@@ -472,7 +472,7 @@ public class UserController extends BaseFilter {
         if (StringUtils.isEmpty(user.getEmail())) {
             user.setEmail("");
         }
-        if (userService.modifyUser(user) > 0) {
+        if (userService.update(user) > 0) {
             map.put("state", 0);
             map.put("message", "success");
             return map;

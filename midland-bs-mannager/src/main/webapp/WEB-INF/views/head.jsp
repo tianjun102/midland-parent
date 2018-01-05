@@ -95,29 +95,21 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		</c:if>
 
 		<c:if test="${user.userType==1}">
-			<%--<div class="bd">
-				<ul class="infoList">
-				<c:choose>
-				<c:when test="${!empty requestScope.list }">
-						<c:forEach items="${requestScope.list }" var="notice" varStatus="xh">
-							<li><a href="${ctx}/rest/notice/viewNotice?id=${notice.id }" target="contentF">应用通知：${notice.title }</a><span class="date">${fn:substring(notice.sendTime,0,10)}</span></li>
-						</c:forEach>
-				</c:when>
-				<c:otherwise>
-						<li><span class="date">2017-03-09</span><a href="javascript:;" target="_blank">应用通知：欢迎来到智者汇经营管理平台！</a></li>
-				</c:otherwise>
-				</c:choose>
-				</ul>
-			</div>--%>
+
 		</c:if>
 
 		</div>
 		<ul class = "user">
-			<li><span class="date" id="time1"></span></li>
-			<li><a href="javascript:;" class = "admin"><img src="${ctx}/assets/img/admin.png"/></a></li>
-			<li><span class = "user-name">${user.userCnName }</span></li>
+			<%--<li><span class="date" id="time1"></span></li>--%>
+			<c:if test="${user.headImg == null}">
+				<li><a href="" onclick="toUpdate('${user.id}')" class = "admin"><img src="${ctx}/assets/img/admin.png"/></a></li>
+			</c:if>
+			<c:if test="${user.headImg != null}">
+				<li><a href="" onclick="toUpdate('${user.id}')" class = "admin"><img style="width:40px;height: 40px" src="${user.headImg}"/></a></li>
+			</c:if>
+			<li ><span class = "user-name">${user.userCnName }</span></li>
 			<li>
-				<span class = "glyphicon glyphicon glyphicon-triangle-bottom sign"></span>
+				<span class = "user-name glyphicon glyphicon glyphicon-triangle-bottom sign"></span>
 				<div class ="out"><em>退出</em></div>
 			</li>	
 		</ul>
@@ -129,7 +121,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 	<script type="text/javascript">
 		jQuery(".txtScroll-top").slide({titCell:".hd ul",mainCell:".bd ul",autoPage:true,effect:"topLoop",autoPlay:true});
 
-		$(".user").click(function(e){
+		$(".user-name").click(function(e){
 			$(".out").slideToggle();
 		})
 		$(".out").click(function(event){
@@ -154,6 +146,16 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
 			})
 		})
+        function toUpdate(userId) {
+            window.open("${ctx}/rest/user/toUpdatePage?userId=" +userId, "contentF");
+            <%--layer.open({--%>
+            <%--type: 2,--%>
+            <%--title: ['预约详情'],--%>
+            <%--shade: 0.3,--%>
+            <%--area: ['1000px', '500px'],--%>
+            <%--content: ['${ctx}/rest/appoint/to_update?appointId=' + appointId]--%>
+            <%--});--%>
+        }
 	</script>
 	</body>
 </html>

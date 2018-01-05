@@ -22,6 +22,14 @@ public abstract class BaseFilter {
 	@Autowired
 	private CategoryService categoryServiceImpl;
 
+	@InitBinder
+	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {
+		InitStringToNull stringEditor = new InitStringToNull();
+		//InitSensitive sensitive = new InitSensitive();
+		binder.registerCustomEditor(String.class, stringEditor);
+		//binder.registerCustomEditor(String.class,sensitive);
+	}
+
 	@ExceptionHandler({Exception.class})
 	public void handlerException(Exception e, HttpServletResponse response) throws IOException {
 		e.printStackTrace();

@@ -40,8 +40,11 @@ public class User {
     private String createTime;
     
     private String createBy;
-    
-    private String headImg;
+
+	/**
+	 * 头像图片
+	 */
+	private String headImg;
     
     
 	
@@ -107,7 +110,19 @@ public class User {
     private String actualName;
 
     private String isSuper;
-	
+	/**
+	 * 备用
+	 */
+	private String imgUrl;
+
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
+
 	public String getCityId() {
 		return cityId;
 	}

@@ -410,9 +410,9 @@
 					<shiro:hasPermission name="discountList">
 						<a id = "left65" href="${ctx}/rest/discount/index" target="contentF"><span>折扣列表</span></a>
 					</shiro:hasPermission>
-					<shiro:hasPermission name="siteMapCate">
-						<a id = "left65" href="${ctx}/rest/headMsg/index" target="contentF"><span>首页公告</span></a>
-					</shiro:hasPermission>
+					<%--<shiro:hasPermission name="siteMapCate">--%>
+						<%--<a id = "left65" href="${ctx}/rest/headMsg/index" target="contentF"><span>首页公告</span></a>--%>
+					<%--</shiro:hasPermission>--%>
 					<shiro:hasPermission name="descIndexList">
 						<a id = "left66" href="${ctx}/rest/loanType/descIndex" target="contentF"><span>计算器说明</span></a>
 					</shiro:hasPermission>
