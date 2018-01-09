@@ -226,9 +226,9 @@ public class UserController extends BaseFilter {
      * @return
      */
     @RequestMapping(value = "/head", method = {RequestMethod.GET, RequestMethod.POST})
-    public String head(Model model, HttpSession session) {
+    public String head(Model model, HttpServletRequest request) {
 //    	HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("userInfo");
+        User user = MidlandHelper.getCurrentUser(request);
     	
     	/*Notice notice=new Notice();
     	notice.setMsgType(1);//智者汇 看 系统公告
@@ -473,6 +473,11 @@ public class UserController extends BaseFilter {
             user.setEmail("");
         }
         if (userService.update(user) > 0) {
+            if (StringUtils.isNotEmpty(user.getHeadImg())) {
+                User user1 = MidlandHelper.getCurrentUser(request);
+                user1.setHeadImg(user.getHeadImg()   );
+                request.getSession().setAttribute("userInfo",user1);
+            }
             map.put("state", 0);
             map.put("message", "success");
             return map;

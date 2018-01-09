@@ -211,10 +211,22 @@ public class HotHandRestController extends BaseFilter {
             log.info("findHotHandList  {}", obj);
             MidlandHelper.doPage(request);
             Page<HotHand> list = (Page<HotHand>) hotHandServiceImpl.findHotHandList(obj);
+            List<HotHand> listRes= new ArrayList<>();
+            list.forEach(e->{
+                if (StringUtils.isNotEmpty(e.getImgUrl())){
+                    String[] array = e.getImgUrl().split("\\|\\|");
+                    List<String> imgList = Arrays.asList(array);
+                    e.setImgUrlList(imgList);
+                }else{
+                    e.setImgUrlList(Collections.EMPTY_LIST);
+                }
+                listRes.add(e);
+            });
+
             Paginator paginator = list.getPaginator();
             result.setCode(ResultStatusUtils.STATUS_CODE_200);
             result.setMsg("success");
-            result.setList(list);
+            result.setList(listRes);
             result.setPaginator(paginator);
         } catch (Exception e) {
             log.error("findHotHandList  {}", obj, e);
