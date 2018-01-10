@@ -48,7 +48,7 @@ public class JdbcService {
             sb.append("city_id=").append(obj.getCityId()).append(" and ");
         }
         if (StringUtils.isNotEmpty(obj.getType())) {
-            sb.append(obj.getType()).append(" and ");
+            sb.append("type=").append(obj.getType()).append(" and ");
         }
         if (obj.getSource()!=null) {
             sb.append("source=").append(obj.getSource()).append(" and ");

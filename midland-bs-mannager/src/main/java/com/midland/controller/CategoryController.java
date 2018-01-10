@@ -186,7 +186,9 @@ public class CategoryController extends BaseFilter {
 		try {
 			log.debug("findCategoryList  {}",category);
 			MidlandHelper.doPage(request);
-
+			if (StringUtils.isEmpty(category.getCityId())){
+				category.setCityId(MidlandHelper.getCurrentUser(request).getCityId());
+			}
 			Page<Category> result = (Page<Category>)categoryServiceImpl.findCategoryList(category);
 
 			Paginator paginator=result.getPaginator();
@@ -209,9 +211,9 @@ public class CategoryController extends BaseFilter {
 		String tableName="category";
 		String orderByColumn="order_by";
 		ListDescOtherParam obj = new ListDescOtherParam();
-		obj.setCityId(category.getCityId());
-		obj.setType(null);
-		obj.setSource(null);
+		obj.setCityId(category.getCityId()==null?MidlandHelper.getCurrentUser(request).getCityId():category.getCityId());
+		obj.setType(String.valueOf(category.getType()));
+		obj.setSource(category.getSource());
 		String orderByParam=String.valueOf(category.getOrderBy());
 		jdbcService.listDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,obj,sort);
 		Map map = new HashMap();

@@ -105,7 +105,7 @@
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/menu/add" method="post" id="dataForm">
-        <ul class="userinfo row">
+        <ul class="userinfo  row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <%@include file="area_required.jsp" %>
 
@@ -135,7 +135,7 @@
                 <label style="color: red" class = "_star " >*</label>
             </li>
             <li><span>链接：</span>
-                <input type="text" name="url" id="url" value="${item.url}" onblur="checkUrl('url','url','')"/>
+                <input type="text" name="url" id="url" value="${item.url}" placeholder="相对路径"/>
             </li>
             <li><span>图标：</span>
                 <div style="float: left;">
@@ -172,7 +172,7 @@
 
     //保存数据
     function updateData() {
-        if (!checkSelect('citys','请选择市级')||!notEmpty('menuName','menuName','')||!checkUrl('url','url','')){
+        if (!checkSelect('citys','请选择市级')||!notEmpty('menuName','menuName','')){
             return;
         }
         var data = $("#dataForm").serialize();

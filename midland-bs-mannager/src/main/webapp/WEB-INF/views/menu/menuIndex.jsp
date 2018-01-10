@@ -75,7 +75,7 @@
             title: ['新增菜单'],
             resize: false,
             scrollbar: false,
-            content: ['${ctx}/rest/menu/to_add', 'no']
+            content: ['${ctx}/rest/menu/to_add', 'yes']
         });
     }
 
