@@ -84,6 +84,16 @@ public class SiteMapServiceImpl implements SiteMapService {
 			throw e;
 		}
 	}
+	@Override
+	public List<SiteMap> findSiteMapTree(List<Integer> siteMap) throws Exception {
+		try {
+			log.debug("findSiteMapTree  {}",siteMap);
+			return siteMapMapper.findSiteMapTree(siteMap);
+		} catch(Exception e) {
+			log.error("findSiteMapTree  {}",siteMap,e);
+			throw e;
+		}
+	}
 
 	@Override
 	public void batchUpdate(List<SiteMap> siteMapList) throws Exception {

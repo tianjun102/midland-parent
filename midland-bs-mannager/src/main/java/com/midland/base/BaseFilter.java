@@ -1,7 +1,9 @@
 package com.midland.base;
 
 import com.midland.web.model.Category;
+import com.midland.web.model.SiteMap;
 import com.midland.web.service.CategoryService;
+import com.midland.web.service.SiteMapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
@@ -21,7 +23,9 @@ import java.util.List;
 public abstract class BaseFilter {
 	@Autowired
 	private CategoryService categoryServiceImpl;
-	
+	@Autowired
+	private SiteMapService siteMapServiceImpl;
+
 	@InitBinder
 	protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {
 		InitStringToNull stringEditor = new InitStringToNull();
@@ -83,6 +87,77 @@ public abstract class BaseFilter {
 
 		return "";
 	}
+	public String getSiteMap(String type,Category category) {
+		// 避免数据库中存在换行符,进行菜单文字的过滤
+		// String replaceStr = "(\r\n|\r|\n|\n\r)";
+		List<Category> list = new ArrayList<>();
+		List<Category> listTemp = new ArrayList<>();
+		List<Integer> arr=new ArrayList<>();
+		if("1".equals(type)){
+			try {
+				list = categoryServiceImpl.findCategoryList(category);
+				list.forEach(e->{
+					arr.add(e.getId());
+				});
+				List<SiteMap> siteMaps = siteMapServiceImpl.findSiteMapTree(arr);
+				siteMaps.forEach(e->{
+					Category category1 = new Category();
+					category1.setType(1);
+					category1.setParentId(e.getCateId());
+					category1.setParentName(e.getCateName());
+					category1.setId(e.getId());
+					listTemp.add(category1);
+				});
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else{
+			try {
+				list = categoryServiceImpl.findCategoryList(category);
+				list.forEach(e->{
+					arr.add(e.getId());
+				});
+				List<SiteMap> siteMaps = siteMapServiceImpl.findSiteMapTree(arr);
+				siteMaps.forEach(e->{
+					Category category1 = new Category();
+					category1.setType(1);
+					category1.setParentId(e.getCateId());
+					category1.setParentName(e.getCateName());
+					category1.setCateName(e.getName());
+					category1.setId(e.getId());
+					listTemp.add(category1);
+				});
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		list.addAll(listTemp);
+		StringBuffer ret = new StringBuffer("");
+		if (list != null   &&  list.size()>0) {
+			for (int i = 0; i < list.size(); i++) {
+				Category cat =  list.get(i);
+				ret.append("{id:").append(cat.getId()).append(", pId:").append(cat.getParentId())
+						.append(", name:'").append(cat.getCateName()).append("'");
+				if (cat.getType() != 1) {
+					ret.append(", type:").append("0");
+				}else{
+					ret.append(", type:").append("1");
+				}
 
+				ret.append(",open:true,nocheck:true");
+				if("".equals(type)){
+					ret.append(", chirdCount:").append(cat.getChirdCount());
+				}
+				if(!("0".equals(cat.getParentId().toString()))){
+					ret.append(",iconSkin:'pIcon03'");
+				}
+
+				ret.append("},");
+			}
+			return ret.substring(0, ret.length() - 1);
+		}
+
+		return "";
+	}
 
 }

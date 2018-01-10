@@ -50,6 +50,18 @@
 		<include refid="select_option" />
 		ORDER BY order_by ASC
 	</select>
+	<select id="findSiteMapTree" parameterType="com.midland.web.model.SiteMap" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from site_map
+		where  1=1 and is_delete=0
+		<if test="list.size >0">
+			AND cate_id in
+			<foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+
+		ORDER BY order_by ASC
+	</select>
 
 	<insert id="insertSiteMap" parameterType="com.midland.web.model.SiteMap">
 		<selectKey resultType="INTEGER" order="BEFORE" keyProperty="orderBy">

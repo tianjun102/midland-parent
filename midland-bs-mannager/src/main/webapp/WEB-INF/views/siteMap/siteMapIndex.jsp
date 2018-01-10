@@ -55,6 +55,7 @@
 				</c:if>
 				<li><span>类别：</span><input style="width: 243px;" class="vipcate" id="vipcate"  name="vipcate" onclick="showTree()" readonly="readonly"/>
 					<input name="cateId" type="hidden"/>
+					<input name="noteType" type="hidden"/>
 
 				</li>
 				<li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >
@@ -121,6 +122,7 @@
         function beforeClick(treeId, treeNode, clickFlag) {
             $("input[name='cateId']").val(treeNode.id);
             $("input[name='cateName']").val(treeNode.name);
+            $("input[name='noteType']").val(treeNode.type);
             $("input[name='vipcate']").val(treeNode.name);
             $("#showDiv").hide();
         }

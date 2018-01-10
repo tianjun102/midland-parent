@@ -47,7 +47,7 @@ public class SiteMapController extends BaseFilter {
 		Category cate1 = new Category();
 		//查询资讯分类
 		cate1.setType(4);
-		String result = getCategoryTree("",cate1);
+		String result = getSiteMap("",cate1);
 		if(StringUtils.isNotEmpty(result)){
 			model.addAttribute("categoryData",result );
 		}
@@ -73,7 +73,7 @@ public class SiteMapController extends BaseFilter {
 		List<Area> cityList = cityMap.get("city");
 		Category category = new Category();
 		category.setType(4);
-		String resultCate = getCategoryTree("",category);
+		String resultCate = getSiteMap("",category);
 		if(StringUtils.isNotEmpty(resultCate)){
 			model.addAttribute("categoryData",resultCate );
 		}
@@ -92,9 +92,10 @@ public class SiteMapController extends BaseFilter {
 	 **/
 	@RequestMapping("add")
 	@ResponseBody
-	public Object addSiteMap(SiteMap siteMap) throws Exception {
+	public Object addSiteMap(SiteMap siteMap,HttpServletRequest request) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
+			String noteType= request.getParameter("noteType");
 			log.debug("addSiteMap {}",siteMap);
 			siteMapServiceImpl.insertSiteMap(siteMap);
 			map.put("state",0);
