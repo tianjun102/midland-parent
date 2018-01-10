@@ -103,7 +103,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 						<input type="file" name="file_upload" id="file_upload"/>
 					</div>
 				</li>
-				<li><span>图片说明：</span><input type="text" name="imgDesc"></li>
+				<li><span>图片说明：</span><input type="text" name="imgDesc" placeholder="图片的alt"></li>
 				<!-- <li><span>小图：</span><img  src="" width="120px" height="100px" alt=""><input type="file" name="file2" id="file2" onchange="previewImg(this)"></li> -->
 				<li id="picLike"><span>图片链接：</span>
 				<input id="bannerLinkurl" name="bannerLinkurl" maxlength="255" type="text" onblur="checkUrl('bannerLinkurl','bannerLinkurl','网址格式不正确！')" value="">

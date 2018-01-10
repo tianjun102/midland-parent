@@ -71,7 +71,7 @@
                 title:['新增'],
                 resize: false,
                 scrollbar:false,
-                content:['${ctx}/rest/qrCode/to_add', 'no']
+                content:['${ctx}/rest/qrCode/to_add', 'yes']
             });
         }
 		 window.onload = function(){

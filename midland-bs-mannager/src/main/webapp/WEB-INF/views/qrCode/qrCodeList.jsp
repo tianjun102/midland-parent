@@ -123,7 +123,7 @@
             title: ['修改'],
             shade: 0.3,
             area: ['500px','370px'],
-            content: ['${ctx}/rest/qrCode/to_update?id='+id,'no']
+            content: ['${ctx}/rest/qrCode/to_update?id='+id,'yes']
         });
     }
 

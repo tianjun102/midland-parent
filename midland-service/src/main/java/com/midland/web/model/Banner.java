@@ -16,7 +16,7 @@ public class Banner{
 	 **/
 	private String bannerLinkurl;
 	/**
-	 * 图片说明
+	 * 图片说明   alt
 	 **/
 	private String imgDesc;
 	/**

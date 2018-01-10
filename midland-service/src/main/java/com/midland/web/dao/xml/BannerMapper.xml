@@ -54,7 +54,7 @@
 			and is_delete=0
 		</if>
 		<include refid="select_option" />
-		ORDER BY order_by ASC
+		ORDER BY order_by,position ASC
 	</select>
 
 	<insert id="insertBanner" parameterType="com.midland.web.model.Banner">

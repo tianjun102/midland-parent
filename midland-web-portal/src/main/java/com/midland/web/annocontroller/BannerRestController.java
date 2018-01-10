@@ -117,7 +117,7 @@ public class BannerRestController extends BaseFilter  {
 	}
 
 	/**
-	 * 更新
+	 * 点击量
 	 **/
 	@RequestMapping("clickNum")
 	public Object clickNum(@RequestBody Banner banner) throws Exception {
