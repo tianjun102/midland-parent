@@ -4,6 +4,8 @@ import com.midland.web.model.Popular;
 import java.util.List;
 public interface PopularService {
 
+	int getMaxOrderBy(Popular popular) throws Exception;
+
 	/**
 	 * 主键查询
 	 **/

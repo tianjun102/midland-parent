@@ -100,7 +100,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
 		</div>
 		<ul class = "user">
-			<%--<li><span class="date" id="time1"></span></li>--%>
+			<li><span class="date" id="time1"></span></li>
 			<c:if test="${user.headImg == null}">
 				<li><a href="" onclick="toUpdate('${user.id}')" class = "admin"><img src="${ctx}/assets/img/admin.png"/></a></li>
 			</c:if>

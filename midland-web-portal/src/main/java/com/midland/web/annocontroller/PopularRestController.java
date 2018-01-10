@@ -37,6 +37,8 @@ public class PopularRestController extends BaseFilter  {
 			log.info("addPopular {}",obj);
 			obj.setIsDelete(Contant.isNotDelete);
 			obj.setIsShow(Contant.isShow);
+			int maxOrderBy = popularServiceImpl.getMaxOrderBy(obj);
+			obj.setOrderBy(maxOrderBy);
 			popularServiceImpl.insertPopular(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");

@@ -18,6 +18,18 @@ public class ListDescOtherParam {
      * 热卖一手主表的id，
      */
     private Integer hotHandId;
+    /**
+     * 热门关注-分类id
+     */
+    private Integer cateId;
+
+    public Integer getCateId() {
+        return cateId;
+    }
+
+    public void setCateId(Integer cateId) {
+        this.cateId = cateId;
+    }
 
     public Integer getHotHandId() {
         return hotHandId;

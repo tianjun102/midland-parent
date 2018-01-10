@@ -28,6 +28,17 @@ public class PopularServiceImpl implements PopularService {
 			throw e;
 		}
 	}
+	@Override
+	public int getMaxOrderBy(Popular popular) throws Exception {
+		try {
+			log.debug("getMaxOrderBy {}",popular);
+			Integer result =  popularMapper.getMaxOrderBy(popular);
+			return result==null?0:result+1;
+		} catch(Exception e) {
+			log.error("getMaxOrderBy异常 {}",popular,e);
+			throw e;
+		}
+	}
 
 	/**
 	 * 查询

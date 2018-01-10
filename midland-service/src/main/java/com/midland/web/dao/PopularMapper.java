@@ -1,6 +1,5 @@
 package com.midland.web.dao;
 
-import com.midland.web.model.PageConf;
 import com.midland.web.model.Popular;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -14,6 +13,8 @@ public interface PopularMapper {
 	int deleteById(Integer popular);
 
 	int updateById(Popular popular);
+
+	Integer getMaxOrderBy(Popular popular);
 
 	int insertPopular(Popular popular);
 

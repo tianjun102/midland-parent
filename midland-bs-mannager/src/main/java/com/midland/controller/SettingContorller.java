@@ -13,6 +13,7 @@ import com.midland.web.model.remote.Agent;
 import com.midland.web.model.temp.ListDescOtherParam;
 import com.midland.web.model.user.User;
 import com.midland.web.service.JdbcService;
+import com.midland.web.service.PopularService;
 import com.midland.web.service.SettingService;
 import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
@@ -42,6 +43,8 @@ public class SettingContorller extends BaseFilter {
     private SettingService settingService;
     @Autowired
     private MidlandConfig midlandConfig;
+    @Autowired
+    private PopularService popularServiceImpl;
     @Autowired
     private JdbcService jdbcService;
     @Autowired
@@ -76,6 +79,9 @@ public class SettingContorller extends BaseFilter {
             pageSize = ContextEnums.PAGESIZE;
         }
         MidlandHelper.doPage(request);
+        if (StringUtils.isEmpty(popular.getCityId())){
+            popular.setCityId(MidlandHelper.getCurrentUser(request).getCityId());
+        }
         Page<Popular> PopularList = (Page<Popular>) settingService.findPopularList(popular);
         model.addAttribute("popularList", PopularList);
         model.addAttribute("paginator", PopularList.getPaginator());
@@ -126,15 +132,49 @@ public class SettingContorller extends BaseFilter {
     @RequestMapping(value = "addPopular", method = {RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     public Object addPopular(Model model, HttpServletRequest request, Popular popular) {
-        Map<String, String> parem = new HashMap<>();
-        Integer num = settingService.insertPopular(popular);
-        if (num >= 0) {
-            parem.put("flag", "1");
+        Map<String, String> parem = null;
+        try {
+            parem = new HashMap<>();
+            int maxOrderBy = popularServiceImpl.getMaxOrderBy(popular);
+            popular.setOrderBy(maxOrderBy);
+            Integer num = settingService.insertPopular(popular);
+            if (num >= 0) {
+                parem.put("flag", "1");
+            }
+        } catch (Exception e) {
+            parem.put("flag", "0");
         }
 
         return parem;
     }
 
+    @RequestMapping("popular/sort")
+    @ResponseBody
+    public Map listDesc(Popular popular, int sort, Model model, HttpServletRequest request) throws Exception {
+        String primaryKeyName="id";
+        String primaryParam=String.valueOf(popular.getId());
+        String tableName="popular";
+        String orderByColumn="order_by";
+        ListDescOtherParam obj = new ListDescOtherParam();
+        if (StringUtils.isNotEmpty(popular.getCityId())) {
+            obj.setCityId(popular.getCityId());
+        }else{
+            User currUser = MidlandHelper.getCurrentUser(request);
+            obj.setCityId(currUser.getCityId());
+        }
+        obj.setCateId(popular.getCateId());
+        obj.setSource(popular.getSource());
+        String orderByParam=String.valueOf(popular.getOrderBy());
+        Map map = new HashMap();
+        try {
+            jdbcService.listDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,obj,sort);
+            map.put("state",0);
+        } catch (Exception e) {
+            logger.error("",e);
+            map.put("state",-1);
+        }
+        return map;
+    }
 
     @RequestMapping(value = "toEditPage", method = {RequestMethod.GET, RequestMethod.POST})
     public String toEditPage(Model model, HttpServletRequest request, Popular popular) {

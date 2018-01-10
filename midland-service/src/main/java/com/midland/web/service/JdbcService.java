@@ -53,6 +53,9 @@ public class JdbcService {
         if (obj.getSource()!=null) {
             sb.append("source=").append(obj.getSource()).append(" and ");
         }
+        if (obj.getCateId()!=null) {
+            sb.append("cate_id=").append(obj.getCateId()).append(" and ");
+        }
         sb.append(orderByColumn)
                 .append("<").append(orderByParam).append(" order by ")
                 .append(orderByColumn).append(" desc limit 1");

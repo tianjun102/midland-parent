@@ -66,7 +66,18 @@ public class Popular{
 	private String cateName;
 
 	private Integer isShow;
+	/**
+	 * 排序
+	 */
+	private Integer orderBy;
 
+	public Integer getOrderBy() {
+		return orderBy;
+	}
+
+	public void setOrderBy(Integer orderBy) {
+		this.orderBy = orderBy;
+	}
 
 	public Integer getId() {
 		return id;
