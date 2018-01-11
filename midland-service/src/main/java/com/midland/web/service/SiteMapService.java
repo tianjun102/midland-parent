@@ -24,7 +24,9 @@ public interface SiteMapService {
 	 **/
 	void insertSiteMap(SiteMap siteMap) throws Exception;
 
-	/**
+    void updateSiteMapSelectiveById(SiteMap siteMap) throws Exception;
+
+    /**
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
 	 **/
 	List<SiteMap> findSiteMapList(SiteMap siteMap) throws Exception;

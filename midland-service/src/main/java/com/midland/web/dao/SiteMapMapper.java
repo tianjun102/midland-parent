@@ -14,6 +14,7 @@ public interface SiteMapMapper {
 	int deleteSiteMapById(Integer siteMap);
 
 	int updateSiteMapById(SiteMap siteMap);
+	int updateSiteMapSelectiveById(SiteMap siteMap);
 
 	int insertSiteMap(SiteMap siteMap);
 	List<SiteMap> findSiteMapByList(@Param("list") List<Integer> list);

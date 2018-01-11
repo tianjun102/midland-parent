@@ -70,6 +70,19 @@ public class SiteMapServiceImpl implements SiteMapService {
 			throw e;
 		}
 	}
+@Override
+	public void updateSiteMapSelectiveById(SiteMap siteMap) throws Exception {
+		try {
+			log.debug("updateSiteMapSelectiveById  {}",siteMap);
+			int result = siteMapMapper.updateSiteMapSelectiveById(siteMap);
+			if (result < 1) {
+				throw new Exception("updateSiteMapSelectiveById");
+			}
+		} catch(Exception e) {
+			log.error("updateSiteMapSelectiveById  {}",siteMap,e);
+			throw e;
+		}
+	}
 
 	/**
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）

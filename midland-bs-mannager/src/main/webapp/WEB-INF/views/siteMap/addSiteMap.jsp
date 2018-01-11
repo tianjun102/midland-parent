@@ -41,6 +41,8 @@
                 $("input[name='cateId']").val("");
                 $("input[name='cateName']").val("");
                 $("input[name='noteType']").val("");
+                $("input[name='modeId']").val("");
+                $("input[name='modeName']").val("");
             }else{
                 if (treeNode.type==1){
                     $("input[name='cateId']").val(treeNode.pId);
@@ -53,6 +55,8 @@
                     $("input[name='cateId']").val(treeNode.id);
                     $("input[name='cateName']").val(treeNode.name);
                     $("input[name='showCateName']").val(treeNode.name);
+                    $("input[name='modeId']").val("");
+                    $("input[name='modeName']").val("");
                     $("input[name='noteType']").val(treeNode.type);
                 }
 
@@ -111,11 +115,12 @@
                 </select>
                 <span class = "_star ">*</span>
             </li>--%>
-            <li><span>模块：</span><input style="width: 250px!important;" class="vipcate" id="showCateName" name="showCateName" onclick="showTree()" readonly="readonly"/>
+            <li><span>分类：</span><input style="width: 250px!important;" class="vipcate" id="showCateName" name="showCateName" onclick="showTree()" readonly="readonly"/>
                 <input name="cateName" id="cateName" type="hidden"/>
                 <input name="cateId" type="hidden"/><label style="color: red" class = "_star " >*</label>
 
             </li>
+
             <li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >
                 <div class="zTreeDemoBackground left" style  = "position:absolute;top: -10px;"   onblur="test(event)">
                     <ul id="categoryTree" class="ztree" style  = "width:250px; height: 140px!important;"></ul>

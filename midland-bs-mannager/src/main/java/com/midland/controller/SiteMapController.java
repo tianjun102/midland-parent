@@ -146,7 +146,7 @@ public class SiteMapController extends BaseFilter {
 		List<Area> cityList = cityMap.get("city");
 		Category category = new Category();
 		category.setType(4);
-		String resultCate = getCategoryTree("",category);
+		String resultCate = getSiteMap("",category);
 		if(StringUtils.isNotEmpty(resultCate)){
 			model.addAttribute("categoryData",resultCate );
 		}
@@ -170,7 +170,7 @@ public class SiteMapController extends BaseFilter {
 		Map<String,Object> map = new HashMap<>();
 		try {
 			log.debug("updateSiteMapById  {}",siteMap);
-			siteMapServiceImpl.updateSiteMapById(siteMap);
+			siteMapServiceImpl.updateSiteMapSelectiveById(siteMap);
 			map.put("state",0);
 		} catch(Exception e) {
 			log.error("updateSiteMapById  {}",siteMap,e);

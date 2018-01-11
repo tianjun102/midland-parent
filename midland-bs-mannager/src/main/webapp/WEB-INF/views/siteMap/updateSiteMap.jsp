@@ -41,6 +41,8 @@
                 $("input[name='cateId']").val("");
                 $("input[name='cateName']").val("");
                 $("input[name='noteType']").val("");
+                $("input[name='modeId']").val("");
+                $("input[name='modeName']").val("");
             }else{
                 if (treeNode.type==1){
                     $("input[name='cateId']").val(treeNode.pId);
@@ -53,6 +55,8 @@
                     $("input[name='cateId']").val(treeNode.id);
                     $("input[name='cateName']").val(treeNode.name);
                     $("input[name='showCateName']").val(treeNode.name);
+                    $("input[name='modeId']").val("");
+                    $("input[name='modeName']").val("");
                     $("input[name='noteType']").val(treeNode.type);
                 }
 
@@ -108,7 +112,7 @@
                 </select>
                 <span class = "_star ">*</span>
             </li>--%>
-            <li><span>模块：</span><input style="width: 250px!important;" class="vipcate" id="showCateName" name="showCateName"
+            <li><span>分类：</span><input style="width: 250px!important;" class="vipcate" id="showCateName" name="showCateName"
                                        <c:if test="${item.modeId != null}">value="${item.cateName}(${item.modeName})"</c:if>
                                        <c:if test="${item.modeId == null}">value="${item.cateName}"</c:if>
                                        onclick="showTree()" readonly="readonly"/>

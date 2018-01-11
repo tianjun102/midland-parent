@@ -18,6 +18,7 @@
                 <th style="width: 10%">编号</th>
 				<%--<th style="width: 10%">模块名称</th>--%>
 				<th style="width: 10%">城市</th>
+				<th style="width: 10%">分类名称</th>
 				<th style="width: 10%">模块名称</th>
                 <th style="width: 10%">关键字</th>
                 <th style="width: 20%">操作</th>
@@ -31,9 +32,9 @@
 						<input type="hidden" id="id" value="${item.id}"/>
                         <td><input type="checkbox" name="pid" value="${item.id}"></td>
                         <td>${xh.count}</td>
-						<%--<td>${item.modeName}</td>--%>
 						<td>${item.cityName}</td>
 						<td>${item.cateName}</td>
+                        <td>${item.modeName}</td>
                         <td>${item.name}</td>
 						<td>
                             <c:if test="${item.isDelete==0}">

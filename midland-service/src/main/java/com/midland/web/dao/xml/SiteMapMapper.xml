@@ -32,8 +32,16 @@
 		 where id= #{id}
 	</delete>
 
-	<update id="updateSiteMapById" >
+	<update id="updateSiteMapSelectiveById" >
 		update site_map 
+		<set>
+		<include refid="update_option_setive"/>
+		</set>
+
+		 where id= #{id}
+	</update>
+	<update id="updateSiteMapById" >
+		update site_map
 		<set>
 		<include refid="update_option"/>
 		</set>
@@ -160,15 +168,27 @@
 	</insert>
 
 	<sql id="update_option">
+			name= #{name,jdbcType=VARCHAR},
+			mode_id= #{modeId,jdbcType=INTEGER},
+			mode_name= #{modeName,jdbcType=VARCHAR},
+			city_id= #{cityId,jdbcType=VARCHAR},
+			city_name= #{cityName,jdbcType=VARCHAR},
+			cate_id= #{cateId,jdbcType=INTEGER},
+			cate_name= #{cateName,jdbcType=VARCHAR},
+			link_url= #{linkUrl,jdbcType=VARCHAR},
+			is_delete= #{isDelete,jdbcType=INTEGER},
+			order_by= #{orderBy,jdbcType=INTEGER},
+			is_show= #{isShow,jdbcType=INTEGER},
+			source= #{source,jdbcType=INTEGER},
+	</sql>
+	
+	
+	<sql id="update_option_setive">
 		<if test="name != null">
 			name= #{name,jdbcType=VARCHAR},
 		</if>
-		<if test="modeId != null">
 			mode_id= #{modeId,jdbcType=INTEGER},
-		</if>
-		<if test="modeName != null">
 			mode_name= #{modeName,jdbcType=VARCHAR},
-		</if>
 		<if test="cityId != null">
 			city_id= #{cityId,jdbcType=VARCHAR},
 		</if>

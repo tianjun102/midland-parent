@@ -63,7 +63,6 @@ public class SensitiveFilter implements HandlerInterceptor {
 
         try {
             response.setContentType("application/json");
-            response.setCharacterEncoding("utf-8");
             PrintWriter out = null;
             try {
                 out = response.getWriter();
