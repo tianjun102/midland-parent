@@ -85,12 +85,22 @@ public class SiteMapServiceImpl implements SiteMapService {
 		}
 	}
 	@Override
-	public List<SiteMap> findSiteMapTree(List<Integer> siteMap) throws Exception {
+	public List<SiteMap> findSiteMapByList(List<Integer> cateId) throws Exception {
 		try {
-			log.debug("findSiteMapTree  {}",siteMap);
-			return siteMapMapper.findSiteMapTree(siteMap);
+			log.debug("findSiteMapByList  {}",cateId);
+			return siteMapMapper.findSiteMapByList(cateId);
 		} catch(Exception e) {
-			log.error("findSiteMapTree  {}",siteMap,e);
+			log.error("findSiteMapByList  {}",cateId,e);
+			throw e;
+		}
+	}
+@Override
+	public List<SiteMap> findSiteMapByModeId(List<Integer> modeIds) throws Exception {
+		try {
+			log.debug("findSiteMapByModeId  {}",modeIds);
+			return siteMapMapper.findSiteMapByModeId(modeIds);
+		} catch(Exception e) {
+			log.error("findSiteMapByModeId  {}",modeIds,e);
 			throw e;
 		}
 	}

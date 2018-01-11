@@ -96,7 +96,7 @@ public abstract class BaseFilter {
 				list.forEach(e->{
 					arr.add(e.getId());
 				});
-				List<SiteMap> siteMaps = siteMapServiceImpl.findSiteMapTree(arr);
+				List<SiteMap> siteMaps = siteMapServiceImpl.findSiteMapByList(arr);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

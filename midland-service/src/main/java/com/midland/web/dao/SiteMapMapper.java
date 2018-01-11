@@ -16,7 +16,8 @@ public interface SiteMapMapper {
 	int updateSiteMapById(SiteMap siteMap);
 
 	int insertSiteMap(SiteMap siteMap);
-	List<SiteMap>  findSiteMapTree(@Param("list") List<Integer> list);
+	List<SiteMap> findSiteMapByList(@Param("list") List<Integer> list);
+	List<SiteMap> findSiteMapByModeId(@Param("list") List<Integer> list);
 
 	List<SiteMap> findSiteMapList(SiteMap siteMap);
 

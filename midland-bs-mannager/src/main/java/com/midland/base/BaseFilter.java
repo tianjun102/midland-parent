@@ -99,7 +99,7 @@ public abstract class BaseFilter {
 				list.forEach(e->{
 					arr.add(e.getId());
 				});
-				List<SiteMap> siteMaps = siteMapServiceImpl.findSiteMapTree(arr);
+				List<SiteMap> siteMaps = siteMapServiceImpl.findSiteMapByList(arr);
 				siteMaps.forEach(e->{
 					Category category1 = new Category();
 					category1.setType(1);
@@ -117,7 +117,7 @@ public abstract class BaseFilter {
 				list.forEach(e->{
 					arr.add(e.getId());
 				});
-				List<SiteMap> siteMaps = siteMapServiceImpl.findSiteMapTree(arr);
+				List<SiteMap> siteMaps = siteMapServiceImpl.findSiteMapByList(arr);
 				siteMaps.forEach(e->{
 					Category category1 = new Category();
 					category1.setType(1);
@@ -137,14 +137,15 @@ public abstract class BaseFilter {
 			for (int i = 0; i < list.size(); i++) {
 				Category cat =  list.get(i);
 				ret.append("{id:").append(cat.getId()).append(", pId:").append(cat.getParentId())
-						.append(", name:'").append(cat.getCateName()).append("'");
+						.append(", name:'").append(cat.getCateName()).append("'")
+						.append(", pName:'").append(cat.getParentName()).append("'");
 				if (cat.getType() != 1) {
 					ret.append(", type:").append("0");
 				}else{
 					ret.append(", type:").append("1");
 				}
 
-				ret.append(",open:true,nocheck:true");
+				ret.append(",open:false,nocheck:true");
 				if("".equals(type)){
 					ret.append(", chirdCount:").append(cat.getChirdCount());
 				}

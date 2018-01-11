@@ -30,8 +30,10 @@ public interface SiteMapService {
 	List<SiteMap> findSiteMapList(SiteMap siteMap) throws Exception;
 
 
-	List<SiteMap> findSiteMapTree(List<Integer> siteMap) throws Exception;
+	List<SiteMap> findSiteMapByList(List<Integer> cateId) throws Exception;
 
-	void batchUpdate(List<SiteMap> siteMapList) throws Exception;
+    List<SiteMap> findSiteMapByModeId(List<Integer> cateId) throws Exception;
+
+    void batchUpdate(List<SiteMap> siteMapList) throws Exception;
 
 }

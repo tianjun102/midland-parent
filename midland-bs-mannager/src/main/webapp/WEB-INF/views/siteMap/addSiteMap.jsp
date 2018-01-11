@@ -40,9 +40,22 @@
             if(treeNode.id==0){
                 $("input[name='cateId']").val("");
                 $("input[name='cateName']").val("");
+                $("input[name='noteType']").val("");
             }else{
-                $("input[name='cateId']").val(treeNode.id);
-                $("input[name='cateName']").val(treeNode.name);
+                if (treeNode.type==1){
+                    $("input[name='cateId']").val(treeNode.pId);
+                    $("input[name='cateName']").val(treeNode.pName);
+                    $("input[name='showCateName']").val(treeNode.pName+'('+treeNode.name+')');
+                    $("input[name='modeId']").val(treeNode.id);
+                    $("input[name='modeName']").val(treeNode.name);
+                    $("input[name='noteType']").val(treeNode.type);
+                }else{
+                    $("input[name='cateId']").val(treeNode.id);
+                    $("input[name='cateName']").val(treeNode.name);
+                    $("input[name='showCateName']").val(treeNode.name);
+                    $("input[name='noteType']").val(treeNode.type);
+                }
+
             }
             $("#showDiv").hide();
         }
@@ -61,7 +74,12 @@
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/siteMap/add" method="post" id="dataForm">
         <input type="hidden" name="cityName" id="cityName" value="${cityName}" >
-        <c:if test="${empty isSuper}"><input type="hidden" name="cityId"  value="${cityId}"></c:if>
+        <input name="noteType" type="hidden"/>
+        <input name="modeId" type="hidden"/>
+        <input name="modeName" type="hidden"/>
+        <c:if test="${empty isSuper}">
+            <input type="hidden" name="cityId"  value="${cityId}">
+        </c:if>
         <ul class="userinfo row">
             <li><span>平台：</span>
                 <select name="source" id="source" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
@@ -93,7 +111,8 @@
                 </select>
                 <span class = "_star ">*</span>
             </li>--%>
-            <li><span>模块：</span><input style="width: 250px!important;" class="vipcate" id="cateName" name="cateName" onclick="showTree()" readonly="readonly"/>
+            <li><span>模块：</span><input style="width: 250px!important;" class="vipcate" id="showCateName" name="showCateName" onclick="showTree()" readonly="readonly"/>
+                <input name="cateName" id="cateName" type="hidden"/>
                 <input name="cateId" type="hidden"/><label style="color: red" class = "_star " >*</label>
 
             </li>
@@ -152,7 +171,13 @@
                     layer.msg("保存失败！", {icon: 2});
                 }
             },
-             error: function (data) {                        if (data.responseText!= null){                            layer.msg(data.responseText, {icon: 2});                        }else {                            layer.msg("保存失败！", {icon: 2});                        }                    }
+            error: function (data) {
+                if (data.responseText != null) {
+                    layer.msg(data.responseText, {icon: 2});
+                } else {
+                    layer.msg("保存失败！", {icon: 2});
+                }
+            }
         });
     }
 

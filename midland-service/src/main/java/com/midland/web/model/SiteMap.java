@@ -1,6 +1,9 @@
 package com.midland.web.model;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class SiteMap{
 	/**
 	 * 网站地图主键id
@@ -204,5 +207,14 @@ public class SiteMap{
 			sb.append(", \"source\":\"").append(source).append("\"");
 		}
 		return sb.toString();
+	}
+	public Map toMap() {
+		Map map = new HashMap<>();
+		map.put("id",id);
+		map.put("name",name);
+		map.put("cateId",cateId);
+		map.put("cateName",cateName);
+		map.put("linkUrl",linkUrl);
+		return map;
 	}
 }
