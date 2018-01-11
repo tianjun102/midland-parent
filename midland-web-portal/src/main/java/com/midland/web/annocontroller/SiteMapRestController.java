@@ -1,5 +1,7 @@
 package com.midland.web.annocontroller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.web.Contants.Contant;
 import com.midland.web.commons.Result;
@@ -8,6 +10,7 @@ import com.midland.web.model.Category;
 import com.midland.web.model.SiteMap;
 import com.midland.web.service.CategoryService;
 import com.midland.web.service.SiteMapService;
+import com.midland.web.util.MidlandHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -95,11 +98,31 @@ public class SiteMapRestController extends BaseFilter  {
 		return result;
 	}
 
+	@RequestMapping("list")
+	public Object findSitemapList(@RequestBody SiteMap  obj, HttpServletRequest request) {
+		Result result=new Result();
+		try {
+			log.info("findSitemapList  {}",obj);
+			MidlandHelper.doPage(request);
+			Page<SiteMap> list = (Page<SiteMap>) siteMapServiceImpl.findSiteMapList(obj);
+			Paginator paginator=list.getPaginator();
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result.setMsg("success");
+			result.setList(list);
+			result.setPaginator(paginator);
+		} catch(Exception e) {
+			log.error("findSitemapList  {}",obj,e);
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result.setMsg("service error");
+		}
+		return result;
+	}
+
 	/**
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
 	 **/
-	@RequestMapping("list")
-	public Object findSitemapList(@RequestBody SiteMap  obj, HttpServletRequest request) {
+	@RequestMapping("tree")
+	public Object getSitemap(@RequestBody SiteMap  obj, HttpServletRequest request) {
 		 Result result=new Result();
 		try {
 			if (StringUtils.isEmpty(obj.getCityId())){
@@ -128,7 +151,11 @@ public class SiteMapRestController extends BaseFilter  {
 			 * 用modeId获取
 			 */
 			List<SiteMap> list =siteMapServiceImpl.findSiteMapByModeId(siteMapIds);
-			return dsfdsf(categories,siteMaps,list);
+			List<Map> map =  siteMapForm(categories,siteMaps,list);
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result.setMsg("success");
+			result.setList(map);
+			return result;
 		} catch(Exception e) {
 			log.error("findSitemapList  {}",obj,e);
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);
@@ -137,7 +164,7 @@ public class SiteMapRestController extends BaseFilter  {
 		return result;
 	}
 
-	public List<Map> dsfdsf(List<Category> a, List<SiteMap> b, List<SiteMap> c){
+	public List<Map> siteMapForm(List<Category> a, List<SiteMap> b, List<SiteMap> c){
 		List<Map> maplist = new ArrayList<>();
 		a.forEach(e->{
 			Map map = new HashMap();
