@@ -65,6 +65,7 @@ public class InformationController extends BaseFilter {
 			model.addAttribute("cityId",user.getCityId());
 			model.addAttribute("cityName",user.getCityName());
 		}
+		model.addAttribute("type",cate1.getType());
 		model.addAttribute("isSuper",user.getIsSuper());
 		return "information/informationIndex";
 	}

@@ -40,10 +40,15 @@
                 beforeClick: beforeClick
             }
         };
-        var catProNodes =[{id:0, pId:0,name:'分类',open:true,nocheck:true,iconSkin:"pIcon01"},${categoryData}];
-
 
         $(document).ready(function(){
+            var catProNodes=null;
+            if('${type}'==3){
+                catProNodes =[{id:0, pId:0,name:'分类',open:true,nocheck:true,iconSkin:"pIcon01"}
+                ,{id:-1, pId:0,name:'分类1',open:true,nocheck:true,iconSkin:"pIcon01"},${categoryData}];
+            }else{
+                catProNodes =[{id:0, pId:0,name:'分类',open:true,nocheck:true,iconSkin:"pIcon01"},${categoryData}];
+            }
             $.fn.zTree.init($("#categoryTree"), setting, catProNodes);
         });
 
@@ -73,12 +78,11 @@
                 <input type="hidden" name="cityName" id="cityName" value="${cityName}">
                 <c:if test="${empty isSuper}"><input type="hidden" name="cityId"  value="${cityId}"></c:if>
                 <select onchange="setCityName()" name="cityId" id="cityId" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
-                    <option value="">全部</option>
                     <c:forEach items="${cityList}" var="city">
                         <c:if test="${empty isSuper}"><option selected="selected" value="${cityId}">${cityName}</option></c:if>
                         <option value="${city.id}">${city.name}</option>
                     </c:forEach>
-                </select><div style = "font-size:12px; color:#afadad;text-indent: 70px;">(不选择城市则默认全部)</div>
+                </select><%--<div style = "font-size:12px; color:#afadad;text-indent: 70px;">(不选择城市则默认全部)</div>--%>
             </li>
             <c:if test="${type!=2}">
             <li>

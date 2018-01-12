@@ -80,12 +80,12 @@ public abstract class BaseFilter {
 				ret.append("{id:").append(cat.getId()).append(", pId:").append(cat.getParentId());
 				if (cat.getParentId()==0) {
 					if (cat.getSource()==0){
-						ret.append(", name:'").append(cat.getCateName()+"(网站)").append("',open:true,nocheck:true");
+						ret.append(", name:'").append(cat.getCateName()+"(网站)").append("',open:false,nocheck:true");
 					}else{
-						ret.append(", name:'").append(cat.getCateName()+"(微站)").append("',open:true,nocheck:true");
+						ret.append(", name:'").append(cat.getCateName()+"(微站)").append("',open:false,nocheck:true");
 					}
 				}else{
-					ret.append(", name:'").append(cat.getCateName()).append("',open:true,nocheck:true");
+					ret.append(", name:'").append(cat.getCateName()).append("',open:false,nocheck:true");
 
 				}
 				if("".equals(type)){

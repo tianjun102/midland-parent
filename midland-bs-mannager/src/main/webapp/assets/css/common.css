@@ -720,7 +720,7 @@ input.date {
 	overflow:inherit;
 	/* display: flex; */
 }
-.content ul.adminfo>li:last-child {
+.content > ul.adminfo>li:last-child {
 	/* padding-top: 40px; */
 }
 .content ul.adminfo li>span {
@@ -767,7 +767,7 @@ input.date {
 	height:28px!important;
 	line-height:28px;
 }
-.content ul.adminfo li:last-child>a:not(:nth-child(2)) {
+.content > ul.adminfo li:last-child>a:not(:nth-child(2)) {
 	margin-left: 20px;
 }
 .content ul.adminfo li input.half {
