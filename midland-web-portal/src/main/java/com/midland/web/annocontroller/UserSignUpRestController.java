@@ -78,29 +78,29 @@ public class UserSignUpRestController {
                 if (password != null && password.equals(confirmPassword)) {
                     webUserService.addUser(param);
                     result.setCode(ResultStatusUtils.STATUS_CODE_200);
-                    result.setMsg("sign up success");
+                    result.setMsg("注册成功");
                     return result;
                 } else {
                     result.setCode(ResultStatusUtils.STATUS_CODE_203);
-                    result.setMsg("Password and Confirm Password inconsistent!");
+                    result.setMsg("重复密码错误");
                     return result;
                 }
             } catch (Exception e) {
                 if (e instanceof DuplicateKeyException){
                     logger.error("codeCheck", e);
                     result.setCode(ResultStatusUtils.STATUS_CODE_203);
-                    result.setMsg("phone is exists");
+                    result.setMsg("用户已存在");
                     return result;
                 }else {
                     logger.error("sign_up:", e);
                     result.setCode(ResultStatusUtils.STATUS_CODE_203);
-                    result.setMsg("sign up error");
+                    result.setMsg("注册失败");
                     return result;
                 }
             }
         }
         result.setCode(ResultStatusUtils.STATUS_CODE_203);
-        result.setMsg("vCode is incorrect");
+        result.setMsg("验证码错误");
         return result;
     }
 

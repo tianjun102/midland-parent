@@ -115,8 +115,9 @@
 	</insert>
 
 	<sql id="update_option">
-
-		img_url= #{imgUrl,jdbcType=VARCHAR},
+		<if test="imgUrl != null">
+			img_url= #{imgUrl,jdbcType=VARCHAR},
+		</if>
 		<if test="title != null">
 			title= #{title,jdbcType=VARCHAR},
 		</if>

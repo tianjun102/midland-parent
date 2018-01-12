@@ -5,6 +5,7 @@ import com.midland.web.model.SiteMap;
 import com.midland.web.service.CategoryService;
 import com.midland.web.service.SiteMapService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -38,7 +39,12 @@ public abstract class BaseFilter {
 	@ExceptionHandler({Exception.class})
 	public void handlerException(Exception e, HttpServletResponse response) throws IOException {
 		e.printStackTrace();
-		responseInfo(response, "系统繁忙，请重试！...");
+		if (e instanceof DuplicateKeyException){
+			responseInfo(response, "数据已存在，请检查！...");
+		}else{
+			responseInfo(response, "系统繁忙，请重试！...");
+		}
+
 	}
 	
 	private void responseInfo(HttpServletResponse response, String info) throws IOException {
@@ -71,8 +77,17 @@ public abstract class BaseFilter {
 		if (list != null   &&  list.size()>0) {
 			for (int i = 0; i < list.size(); i++) {
 				Category cat = (Category) list.get(i);
-				ret.append("{id:").append(cat.getId()).append(", pId:").append(cat.getParentId())
-						.append(", name:'").append(cat.getCateName()).append("',open:true,nocheck:true");
+				ret.append("{id:").append(cat.getId()).append(", pId:").append(cat.getParentId());
+				if (cat.getParentId()==0) {
+					if (cat.getSource()==0){
+						ret.append(", name:'").append(cat.getCateName()+"(网站)").append("',open:true,nocheck:true");
+					}else{
+						ret.append(", name:'").append(cat.getCateName()+"(微站)").append("',open:true,nocheck:true");
+					}
+				}else{
+					ret.append(", name:'").append(cat.getCateName()).append("',open:true,nocheck:true");
+
+				}
 				if("".equals(type)){
 					ret.append(", chirdCount:").append(cat.getChirdCount());
 				}

@@ -182,7 +182,9 @@ public class SettingServiceImpl implements SettingService {
                         parentId = area.getParentId();
                         baseRedisTemplate.saveValue("province:" + area.getParentId(), area);
                     }
-                    if(area.getParentName().equals("上海")||area.getParentName().equals("北京")||area.getParentName().equals("天津")||area.getParentName().equals("重庆")){
+                    if(area.getParentName().equals("上海")||area.getParentName().equals("北京")||
+                            area.getParentName().equals("天津")||area.getParentName().equals("重庆")||
+                            area.getParentName().equals("香港")||area.getParentName().equals("澳门")){
                         Area city = new Area();
                         city.setParentName(area.getParentName());
                         city.setParentId(area.getParentId());
