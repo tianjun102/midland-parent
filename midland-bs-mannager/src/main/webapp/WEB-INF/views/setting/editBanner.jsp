@@ -81,6 +81,7 @@
 						<option <c:if test="${banner.model=='8'}"> selected='selected' </c:if> value="8">人物专访</option>
 						<option <c:if test="${banner.model=='9'}"> selected='selected' </c:if> value="9">购房资格</option>
 						<option <c:if test="${banner.model=='10'}"> selected='selected' </c:if> value="10">关于我们</option>
+						<option <c:if test="${banner.model=='11'}"> selected='selected' </c:if> value="11">外销网</option>
 					</select>
 					<span class = "_star ">*</span>
 				</li>

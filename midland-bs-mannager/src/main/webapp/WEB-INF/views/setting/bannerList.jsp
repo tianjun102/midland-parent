@@ -81,6 +81,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
                                 <c:if test="${banner.model=='8'}">人物专访</c:if>
                                 <c:if test="${banner.model=='9'}">购房资格</c:if>
                                 <c:if test="${banner.model=='10'}">关于我们</c:if>
+                                <c:if test="${banner.model=='11'}">外销网</c:if>
 							</td>
 							<td>
 								<c:if test="${banner.position==0}">位置一</c:if>

@@ -82,6 +82,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 						<option value="8">人物专访</option>
 						<option value="9">购房资格</option>
 						<option value="10">关于我们</option>
+						<option value="11">外销网</option>
 					</select>
 					<span class = "_star ">*</span>
 				</li>
