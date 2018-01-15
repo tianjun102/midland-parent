@@ -57,6 +57,32 @@ public class Category{
 
 	private List<Category> parents;
 
+	/**
+	 * 模块id
+	 */
+	private int modeId;
+	/**
+	 * 模块名称
+	 */
+	private String modeName;
+
+
+	public int getModeId() {
+		return modeId;
+	}
+
+	public void setModeId(int modeId) {
+		this.modeId = modeId;
+	}
+
+	public String getModeName() {
+		return modeName;
+	}
+
+	public void setModeName(String modeName) {
+		this.modeName = modeName;
+	}
+
 	public Integer getId() {
 		return id;
 	}

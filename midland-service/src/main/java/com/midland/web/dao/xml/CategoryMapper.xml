@@ -16,10 +16,13 @@
 		<result column="is_show" property="isShow" jdbcType="VARCHAR" />
 		<result column="source" property="source" jdbcType="INTEGER" />
 		<result column="link_url" property="link_url" jdbcType="VARCHAR" />
+		<result column="mode_id" property="modeId" jdbcType="INTEGER" />
+		<result column="mode_name" property="modeName" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,cate_name,status,order_by,parent_id,type,is_delete,city_id,city_name,cate_desc,is_show,source,link_url
+		id,cate_name,status,order_by,parent_id,type,is_delete,city_id,city_name,cate_desc,is_show,source,link_url,mode_id
+		mode_name
 	</sql>
 
 	<select id="selectCategoryById" resultMap="BaseResultMap">
@@ -96,6 +99,12 @@
 			<if test="linkUrl != null">
 				link_url,
 			</if>
+			<if test="modeId != null">
+				mode_id,
+			</if>
+			<if test="modeName != null">
+				mode_name,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -134,6 +143,12 @@
 			 </if>
 			 <if test="linkUrl != null">
 				 #{linkUrl},
+			 </if>
+			 <if test="modeId != null">
+				#{modeId},
+			 </if>
+			 <if test="modeName != null">
+				 #{modeName},
 			 </if>
 		</trim>
 	</insert>
@@ -174,6 +189,12 @@
 		</if>
 		<if test="linkUrl != null">
 			link_url= #{linkUrl},
+		</if>
+		<if test="modeId != null">
+			mode_id= #{modeId},
+		</if>
+		<if test="modeName != null">
+			mode_name= #{modeName},
 		</if>
 	</sql>
 
@@ -216,6 +237,12 @@
 		</if>
 		<if test="linkUrl != null">
 			and link_url= #{linkUrl}
+		</if>
+		<if test="modeId != null">
+			mode_id= #{modeId}
+		</if>
+		<if test="modeName != null">
+			mode_name= #{modeName}
 		</if>
 	</sql>
 
