@@ -131,7 +131,10 @@ public class QuestionsRestController extends BaseFilter {
             log.info("findQuestionsList  {}", obj);
             MidlandHelper.doPage(request);
             obj.setIsDelete(Contant.isNotDelete);
-            obj.setStatus(Contant.answerAuditPass);
+            if (obj.getUserId()==null){
+                obj.setStatus(Contant.answerAuditPass);
+            }
+
             if (obj.getSort() !=null&&obj.getSort()==1){
                 obj.setDescName("click_num");
             }else if (obj.getSort() !=null&&obj.getSort()==0){
