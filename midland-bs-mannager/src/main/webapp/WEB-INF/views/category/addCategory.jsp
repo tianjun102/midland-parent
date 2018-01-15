@@ -45,7 +45,7 @@
             var catProNodes=null;
             if('${type}'==3){
                 catProNodes =[{id:0, pId:0,name:'分类',open:true,nocheck:true,iconSkin:"pIcon01"}
-                ,{id:-1, pId:0,name:'分类1',open:true,nocheck:true,iconSkin:"pIcon01"},${categoryData}];
+                ,${categoryData}];
             }else{
                 catProNodes =[{id:0, pId:0,name:'分类',open:true,nocheck:true,iconSkin:"pIcon01"},${categoryData}];
             }
@@ -93,6 +93,28 @@
                 </select>
                 <div style = "font-size:12px; color:#afadad;text-indent: 70px;height: 18px;"></div>
             </li>
+            </c:if>
+
+            <c:if test="${type == 3}">
+                <li><span>模块：</span>
+                    <input type="hidden" id="modeName" name="modeName" value="" >
+                    <select onchange="setMenuName()" name="modeId" id="modeId" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                        <option value="">全部</option>
+                        <option value="0">首页</option>
+                        <option value="1">新房</option>
+                        <option value="2">二手房</option>
+                        <option value="3">租房</option>
+                        <option value="4">写字楼</option>
+                        <option value="5">商铺</option>
+                        <option value="6">小区</option>
+                        <option value="7">经纪人</option>
+                        <option value="8">外销网</option>
+                        <option value="9">市场调究</option>
+                        <option value="10">资讯</option>
+                        <option value="11">问答</option>
+                    </select>
+                    <label style="color: red" class = "_star " >*</label>
+                </li>
             </c:if>
             <li><span>父节点：</span><input style="width: 250px!important;" name="parentName" onclick="showTree()" readonly="readonly"/>
                 <input name="parentId" type="hidden"/>
@@ -159,7 +181,9 @@
         $("#cityName").val($("#cityId option:selected").text())
     }
 
-
+    function setMenuName(){
+        $("#modeName").val($("#modeId option:selected").text())
+    }
     //取消
     function closeWin() {
         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引

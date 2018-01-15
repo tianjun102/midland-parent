@@ -30,6 +30,8 @@
             }
         };
         var catProNodes =[{id:0, pId:0,name:'分类',open:true,nocheck:true,iconSkin:"pIcon01"},${categoryData}];
+        console.log(2,typeof ${categoryData});
+//        var catProNodes =[{id:0, pId:0,name:'分类',open:true,nocheck:true,iconSkin:"pIcon01"},null];
 
 
         $(document).ready(function(){
@@ -65,7 +67,31 @@
         }
 
         function showTree(event){
-            $("#showDiv").show();
+            var data = $("#dataForm").serialize();
+            $.ajax({
+                type: "post",
+                url: "${ctx}/rest/siteMap/choose",
+                async: false, // 此处必须同步
+                dataType: "json",
+                data: data,
+                success: function (data) {
+                    var dfd={id:0, pId:0,name:'分类',open:true,nocheck:true,iconSkin:"pIcon01"};
+                        catProNodes =[dfd];
+                    $.each(data.list,function (i,listItem) {
+                        catProNodes.push(listItem);
+                    });
+                    $.fn.zTree.init($("#categoryTree"), setting, catProNodes);
+                    $("#showDiv").show();
+                },
+                error: function (data) {
+                    if (data.responseText != null) {
+                        layer.msg(data.responseText, {icon: 2});
+                    } else {
+                        layer.msg("保存失败！", {icon: 2});
+                    }
+                }
+            });
+
         }
 
         function hideTree(event){
@@ -185,6 +211,9 @@
             }
         });
     }
+   $("#source").change(function () {
+           $("#showDiv").hide();
+   })
 
     //取消
     function closeWin() {
@@ -193,10 +222,25 @@
     }
 
     function setCityName(){
+        $("input[name='cateId']").val("");
+        $("input[name='cateName']").val("");
+        $("input[name='showCateName']").val("");
+        $("input[name='noteType']").val("");
+        $("input[name='modeId']").val("");
+        $("input[name='modeName']").val("");
+        $("#showDiv").hide();
+
         $("#cityName").val($("#cityId option:selected").text())
     }
 
     function setCateName(){
+        $("input[name='cateId']").val("");
+        $("input[name='cateName']").val("");
+        $("input[name='showCateName']").val("");
+        $("input[name='noteType']").val("");
+        $("input[name='modeId']").val("");
+        $("input[name='modeName']").val("");
+        $("#showDiv").hide();
         $("#cateName").val($("#cateId option:selected").text())
     }
 </script>

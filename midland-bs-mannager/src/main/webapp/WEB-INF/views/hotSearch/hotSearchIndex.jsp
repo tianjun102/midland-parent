@@ -81,7 +81,7 @@
                 title:['新增热搜词'],
                 resize: false,
                 scrollbar:false,
-                content:['${ctx}/rest/hotSearch/to_add', 'no']
+                content:['${ctx}/rest/hotSearch/to_add', 'yes']
             });
         }
 		 window.onload = function(){

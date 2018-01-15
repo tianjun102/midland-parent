@@ -129,7 +129,7 @@
             title: ['修改'],
             shade: 0.3,
             area: ['400px','380px'],
-            content: ['${ctx}/rest/category/to_update?id='+id,'no']
+            content: ['${ctx}/rest/category/to_update?id='+id,'yes']
         });
     }
 

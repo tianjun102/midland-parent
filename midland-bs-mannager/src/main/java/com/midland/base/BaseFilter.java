@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.InitBinder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -114,15 +116,17 @@ public abstract class BaseFilter {
 				list.forEach(e->{
 					arr.add(e.getId());
 				});
-				List<SiteMap> siteMaps = siteMapServiceImpl.findSiteMapByList(arr);
-				siteMaps.forEach(e->{
-					Category category1 = new Category();
-					category1.setType(1);
-					category1.setParentId(e.getCateId());
-					category1.setParentName(e.getCateName());
-					category1.setId(e.getId());
-					listTemp.add(category1);
-				});
+				if (arr.size()>0) {
+					List<SiteMap> siteMaps = siteMapServiceImpl.findSiteMapByList(arr);
+					siteMaps.forEach(e -> {
+						Category category1 = new Category();
+						category1.setType(1);
+						category1.setParentId(e.getCateId());
+						category1.setParentName(e.getCateName());
+						category1.setId(e.getId());
+						listTemp.add(category1);
+					});
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -132,16 +136,18 @@ public abstract class BaseFilter {
 				list.forEach(e->{
 					arr.add(e.getId());
 				});
-				List<SiteMap> siteMaps = siteMapServiceImpl.findSiteMapByList(arr);
-				siteMaps.forEach(e->{
-					Category category1 = new Category();
-					category1.setType(1);
-					category1.setParentId(e.getCateId());
-					category1.setParentName(e.getCateName());
-					category1.setCateName(e.getName());
-					category1.setId(e.getId());
-					listTemp.add(category1);
-				});
+				if (arr.size()>0) {
+					List<SiteMap> siteMaps = siteMapServiceImpl.findSiteMapByList(arr);
+					siteMaps.forEach(e -> {
+						Category category1 = new Category();
+						category1.setType(1);
+						category1.setParentId(e.getCateId());
+						category1.setParentName(e.getCateName());
+						category1.setCateName(e.getName());
+						category1.setId(e.getId());
+						listTemp.add(category1);
+					});
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -176,4 +182,167 @@ public abstract class BaseFilter {
 		return "";
 	}
 
+
+	public List<Tree> getSiteObject(String type, Category category) {
+		// 避免数据库中存在换行符,进行菜单文字的过滤
+		// String replaceStr = "(\r\n|\r|\n|\n\r)";
+		List<Category> list = new ArrayList<>();
+		List<Category> listTemp = new ArrayList<>();
+		List<Integer> arr=new ArrayList<>();
+		if("1".equals(type)){
+			try {
+				list = categoryServiceImpl.findCategoryList(category);
+				list.forEach(e->{
+					arr.add(e.getId());
+				});
+				if (arr.size()>0) {
+					List<SiteMap> siteMaps = siteMapServiceImpl.findSiteMapByList(arr);
+					siteMaps.forEach(e -> {
+						Category category1 = new Category();
+						category1.setType(1);
+						category1.setParentId(e.getCateId());
+						category1.setParentName(e.getCateName());
+						category1.setId(e.getId());
+						listTemp.add(category1);
+					});
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else{
+			try {
+				list = categoryServiceImpl.findCategoryList(category);
+				list.forEach(e->{
+					arr.add(e.getId());
+				});
+				if (arr.size()>0) {
+					List<SiteMap> siteMaps = siteMapServiceImpl.findSiteMapByList(arr);
+					siteMaps.forEach(e -> {
+						Category category1 = new Category();
+						category1.setType(1);
+						category1.setParentId(e.getCateId());
+						category1.setParentName(e.getCateName());
+						category1.setCateName(e.getName());
+						category1.setId(e.getId());
+						listTemp.add(category1);
+					});
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		list.addAll(listTemp);
+		List<Tree>treeList = new ArrayList<>();
+		if (list != null   &&  list.size()>0) {
+			for (int i = 0; i < list.size(); i++) {
+				Tree tree = new Tree();
+				Category cat =  list.get(i);
+				tree.setId(cat.getId());
+				tree.setpId(cat.getParentId());
+				tree.setName(cat.getCateName());
+				tree.setpName(cat.getParentName());
+				if (cat.getType() != 1) {
+					tree.setType(0);
+				}else{
+					tree.setType(1);
+				}
+				tree.setOpen(false);
+				tree.setNocheck(true);
+				if("".equals(type)){
+					tree.setChirdCount(cat.getChirdCount());
+				}
+				if(!("0".equals(cat.getParentId().toString()))){
+					tree.setIconSkin("pIcon03");
+				}
+				treeList.add(tree);
+			}
+			return treeList;
+		}
+
+		return Collections.EMPTY_LIST;
+	}
+
+}
+class Tree{
+	private Integer id;
+	private Integer pId;
+	private String name;
+	private String pName;
+	private Integer type;
+	private boolean open;
+	private boolean nocheck;
+	private Integer chirdCount;
+	private String iconSkin;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getpId() {
+		return pId;
+	}
+
+	public void setpId(int pId) {
+		this.pId = pId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getpName() {
+		return pName;
+	}
+
+	public void setpName(String pName) {
+		this.pName = pName;
+	}
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	public boolean isOpen() {
+		return open;
+	}
+
+	public void setOpen(boolean open) {
+		this.open = open;
+	}
+
+	public boolean isNocheck() {
+		return nocheck;
+	}
+
+	public void setNocheck(boolean nocheck) {
+		this.nocheck = nocheck;
+	}
+
+	public Integer getChirdCount() {
+		return chirdCount;
+	}
+
+	public void setChirdCount(Integer chirdCount) {
+		this.chirdCount = chirdCount;
+	}
+
+	public String getIconSkin() {
+		return iconSkin;
+	}
+
+	public void setIconSkin(String iconSkin) {
+		this.iconSkin = iconSkin;
+	}
 }

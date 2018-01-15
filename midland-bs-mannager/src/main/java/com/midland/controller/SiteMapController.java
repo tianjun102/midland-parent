@@ -3,6 +3,8 @@ package com.midland.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
+import com.midland.web.commons.Result;
+import com.midland.web.commons.core.util.ResultStatusUtils;
 import com.midland.web.model.Area;
 import com.midland.web.model.Category;
 import com.midland.web.model.SiteMap;
@@ -59,6 +61,29 @@ public class SiteMapController extends BaseFilter {
 		}
 		model.addAttribute("isSuper",user.getIsSuper());
 		return "siteMap/siteMapIndex";
+	}
+	@RequestMapping("choose")
+	@ResponseBody
+	public Object siteMapChoose(SiteMap siteMap, Model model, HttpServletRequest request) throws Exception {
+		Result<Object> result= new Result();
+		List result1=null;
+		try {
+			Category cate1 = new Category();
+			//查询资讯分类
+			cate1.setType(4);
+			cate1.setCityId(siteMap.getCityId());
+			cate1.setSource(siteMap.getSource());
+			result1 = getSiteObject("",cate1);
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result.setMsg("success");
+			result.setList(result1);
+		} catch (Exception e) {
+			log.error("siteMapChoose",e);
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result.setMsg("service error");
+		}
+
+		return result;
 	}
 
 	/**
