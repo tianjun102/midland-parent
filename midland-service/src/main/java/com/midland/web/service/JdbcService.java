@@ -81,7 +81,7 @@ public class JdbcService {
         }
         if (StringUtils.isNotEmpty(obj.getType())) {
             //artice_type=0
-            sb.append(obj.getType()).append(" and ");
+            sb.append("type=").append(obj.getType()).append(" and ");
         }
         if (obj.getSource()!=null) {
             sb.append("source=").append(obj.getSource()).append(" and ");
@@ -153,6 +153,8 @@ public class JdbcService {
         updateSql(primaryKeyName, primaryKeyId, orderByColumn, tableName, "-99999999");
         updateSql(primaryKeyName, id, orderByColumn, tableName, descNumResult);
         updateSql(primaryKeyName, primaryKeyId, orderByColumn, tableName, orderByParam);
+
+
 
 
     }

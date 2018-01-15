@@ -15,7 +15,7 @@ public interface AppointmentMapper {
 
 	int updateAppointmentById(Appointment appointment);
 	int updateAppointmentByUserId(Appointment appointment);
-	int cancelAppointmentByIdAndWebUserId(Appointment appointment);
+	int cancelAppointmentByIdAndUserId(Appointment appointment);
 
 	int insertAppointment(Appointment appointment);
 

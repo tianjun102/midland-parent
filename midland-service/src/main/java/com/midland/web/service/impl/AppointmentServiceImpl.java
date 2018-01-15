@@ -93,13 +93,13 @@ public class AppointmentServiceImpl implements AppointmentService {
 	@Override
 	public void cancelAppointmentByIdAndWebUserId(Appointment appointment) throws Exception {
 		try {
-			log.debug("cancelAppointmentByIdAndWebUserId  {}",appointment);
-			int result = appointmentMapper.cancelAppointmentByIdAndWebUserId(appointment);
+			log.debug("cancelAppointmentByIdAndUserId  {}",appointment);
+			int result = appointmentMapper.cancelAppointmentByIdAndUserId(appointment);
 			if (result < 1) {
-				throw new UpdateException("cancelAppointmentByIdAndWebUserId失败");
+				throw new UpdateException("cancelAppointmentByIdAndUserId失败");
 			}
 		} catch(Exception e) {
-			log.error("cancelAppointmentByIdAndWebUserId  {}",appointment,e);
+			log.error("cancelAppointmentByIdAndUserId  {}",appointment,e);
 			throw e;
 		}
 	}
