@@ -1,8 +1,6 @@
 package com.midland.controller;
 
 import com.midland.web.Contants.Contant;
-import com.midland.web.model.Area;
-import com.midland.web.model.LiaisonRecordEmail;
 import com.midland.web.model.Menu;
 import com.midland.web.model.MenuType;
 import com.midland.web.model.temp.ListDescOtherParam;
@@ -34,7 +32,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @SuppressWarnings("all")
 @RequestMapping("/menu/")
-public class MenuController extends BaseFilter  {
+public class MenuController extends BaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(MenuController.class);
 	@Autowired

@@ -2,7 +2,7 @@ package com.midland.web.annocontroller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
-import com.midland.base.BaseFilter;
+import com.midland.base.ServiceBaseFilter;
 import com.midland.web.Contants.Contant;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
@@ -29,7 +29,7 @@ import java.util.Map;
 /**
  * 回复管理接口
  **/
-public class ReplyRestController extends BaseFilter  {
+public class ReplyRestController extends ServiceBaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(ReplyRestController.class);
 	@Autowired

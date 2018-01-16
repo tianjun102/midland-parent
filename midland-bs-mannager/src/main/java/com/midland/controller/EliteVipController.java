@@ -2,7 +2,6 @@ package com.midland.controller;
 
 import com.midland.base.BaseFilter;
 import com.midland.web.model.Category;
-import com.midland.web.model.EliteClub;
 import com.midland.web.model.EliteVip;
 import com.midland.web.model.user.User;
 import com.midland.web.service.EliteVipService;

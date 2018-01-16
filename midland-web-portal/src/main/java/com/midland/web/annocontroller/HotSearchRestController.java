@@ -3,11 +3,10 @@ package com.midland.web.annocontroller;
 import com.midland.web.Contants.Contant;
 import com.midland.web.model.HotSearch;
 import com.midland.web.service.HotSearchService;
-import com.midland.base.BaseFilter;
+import com.midland.base.ServiceBaseFilter;
 import org.slf4j.Logger;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
-import java.util.HashMap;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @SuppressWarnings("all")
 @RequestMapping("/hotSearch/")
-public class HotSearchRestController extends BaseFilter  {
+public class HotSearchRestController extends ServiceBaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(HotSearchRestController.class);
 	@Autowired

@@ -86,7 +86,7 @@
                 title:['新增'],
                 resize: false,
                 scrollbar:false,
-                content:['${ctx}/rest/siteMap/to_add', 'no']
+                content:['${ctx}/rest/siteMap/to_add?type=4', 'no']
             });
         }
 		 window.onload = function(){

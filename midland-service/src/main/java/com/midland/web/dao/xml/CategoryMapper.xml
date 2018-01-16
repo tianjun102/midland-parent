@@ -239,10 +239,10 @@
 			and link_url= #{linkUrl}
 		</if>
 		<if test="modeId != null">
-			mode_id= #{modeId}
+			and mode_id= #{modeId}
 		</if>
 		<if test="modeName != null">
-			mode_name= #{modeName}
+			and mode_name= #{modeName}
 		</if>
 	</sql>
 
@@ -310,6 +310,9 @@
 		</if>
 		<if test="linkUrl != null">
 			and b.link_url= #{linkUrl}
+		</if>
+		<if test="modeId != null">
+			and b.mode_id= #{modeId}
 		</if>
 		ORDER BY b.order_by ASC
 	</select>

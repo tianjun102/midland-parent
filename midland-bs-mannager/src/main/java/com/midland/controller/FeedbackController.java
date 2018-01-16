@@ -5,7 +5,6 @@ import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.web.model.ExportModel;
 import com.midland.web.model.Feedback;
-import com.midland.web.model.HotSearch;
 import com.midland.web.model.user.User;
 import com.midland.web.service.FeedbackService;
 import com.midland.web.util.MidlandHelper;

@@ -3,8 +3,7 @@ package com.midland.web.annocontroller;
 import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
-import com.midland.base.BaseFilter;
-import com.midland.web.Contants.Contant;
+import com.midland.base.ServiceBaseFilter;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
 import com.midland.web.model.CommunityAlbum;
@@ -29,7 +28,7 @@ import java.util.*;
 @RestController
 @SuppressWarnings("all")
 @RequestMapping("/hotHand/")
-public class HotHandRestController extends BaseFilter {
+public class HotHandRestController extends ServiceBaseFilter {
 
     private Logger log = LoggerFactory.getLogger(HotHandRestController.class);
     @Autowired

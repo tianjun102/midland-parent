@@ -23,7 +23,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/public")
-public class PublicController extends BaseFilter{
+public class PublicController extends BaseFilter {
 	
 	@Autowired
 	private MidlandConfig midlandConfig;

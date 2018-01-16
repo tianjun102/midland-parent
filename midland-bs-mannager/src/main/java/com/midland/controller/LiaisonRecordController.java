@@ -5,7 +5,6 @@ import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.web.model.ExportModel;
 import com.midland.web.model.LiaisonRecord;
-import com.midland.web.model.user.User;
 import com.midland.web.service.LiaisonRecordService;
 import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;

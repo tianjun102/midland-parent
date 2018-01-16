@@ -1,13 +1,13 @@
 package com.midland.ueditor.upload;
 
 
-import com.midland.base.BaseFilter;
+import com.midland.base.ServiceBaseFilter;
 import com.midland.ueditor.define.State;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-public class Uploader  extends BaseFilter {
+public class Uploader  extends ServiceBaseFilter {
 	private HttpServletRequest request = null;
 	private Map<String, Object> conf = null;
 

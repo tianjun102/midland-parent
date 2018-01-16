@@ -326,7 +326,7 @@
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="popularList">
-						<a id = "left44" href="${ctx}/rest/setting/showPopularIndex" target="contentF"><span>热门关注管理</span></a>
+						<a id = "left44" href="${ctx}/rest/setting/showPopularIndex?type=3" target="contentF"><span>热门关注管理</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="popularCateList">

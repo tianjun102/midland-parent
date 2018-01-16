@@ -5,9 +5,8 @@ import com.midland.web.model.Attention;
 import com.midland.web.model.Questions;
 import com.midland.web.service.AttentionService;
 import com.midland.web.service.QuestionsService;
-import com.midland.base.BaseFilter;
+import com.midland.base.ServiceBaseFilter;
 import com.midland.web.service.impl.PublicService;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
@@ -35,7 +34,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @SuppressWarnings("all")
 @RequestMapping("/questions/")
-public class QuestionsRestController extends BaseFilter {
+public class QuestionsRestController extends ServiceBaseFilter {
 
     private Logger log = LoggerFactory.getLogger(QuestionsRestController.class);
     @Autowired

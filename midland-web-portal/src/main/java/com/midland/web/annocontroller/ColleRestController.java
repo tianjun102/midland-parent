@@ -1,6 +1,6 @@
 package com.midland.web.annocontroller;
 
-import com.midland.base.BaseFilter;
+import com.midland.base.ServiceBaseFilter;
 import com.midland.web.Contants.Contant;
 import com.midland.web.api.ApiHelper;
 import com.midland.web.commons.Result;
@@ -24,7 +24,7 @@ import java.util.Map;
 @RestController
 @SuppressWarnings("all")
 @RequestMapping("/colle/")
-public class ColleRestController extends BaseFilter {
+public class ColleRestController extends ServiceBaseFilter {
 
     private Logger log = LoggerFactory.getLogger(ColleRestController.class);
     @Autowired

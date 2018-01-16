@@ -1,12 +1,7 @@
 package com.midland.controller;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
-import com.midland.web.model.Attention;
-import com.midland.web.service.AttentionService;
 import com.midland.web.service.impl.PublicService;
-import com.midland.web.util.MidlandHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +18,7 @@ import java.util.Map;
 @Controller
 @SuppressWarnings("all")
 @RequestMapping("/sensitive/")
-public class SensitiveController extends BaseFilter  {
+public class SensitiveController extends BaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(SensitiveController.class);
 	@Autowired

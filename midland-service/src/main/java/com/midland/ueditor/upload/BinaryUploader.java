@@ -1,7 +1,7 @@
 package com.midland.ueditor.upload;
 
 
-import com.midland.base.BaseFilter;
+import com.midland.base.ServiceBaseFilter;
 import com.midland.core.util.AppSetting;
 import com.midland.ueditor.PathFormat;
 import com.midland.ueditor.define.AppInfo;
@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-public class BinaryUploader  extends BaseFilter {
+public class BinaryUploader  extends ServiceBaseFilter {
 
 	private static final Logger logger = LoggerFactory.getLogger(BinaryUploader.class);
 	

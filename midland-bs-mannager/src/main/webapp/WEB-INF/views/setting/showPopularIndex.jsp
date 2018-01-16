@@ -36,6 +36,7 @@
 						</c:forEach>
 					</select>
 				</li>--%>
+				<input type="hidden" name="type" value="${type}">
 				<%@include file="../layout/sherchArea.jsp" %>
 				<li>
 					<span style = "float:left;">平台：</span>

@@ -3,16 +3,15 @@ package com.midland.web.annocontroller;
 import com.midland.web.Contants.Contant;
 import com.midland.web.model.LeaveMsg;
 import com.midland.web.service.LeaveMsgService;
-import com.midland.base.BaseFilter;
+import com.midland.base.ServiceBaseFilter;
 import org.slf4j.Logger;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @SuppressWarnings("all")
 @RequestMapping("/leaveMsg/")
-public class LeaveMsgRestController extends BaseFilter  {
+public class LeaveMsgRestController extends ServiceBaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(LeaveMsgRestController.class);
 	@Autowired

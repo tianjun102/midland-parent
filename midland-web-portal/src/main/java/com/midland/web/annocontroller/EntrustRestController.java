@@ -1,22 +1,19 @@
 package com.midland.web.annocontroller;
 
 import com.midland.config.MidlandConfig;
-import com.midland.core.util.HttpUtils;
 import com.midland.web.Contants.Contant;
 import com.midland.web.api.ApiHelper;
-import com.midland.web.model.Area;
 import com.midland.web.model.Comment;
 import com.midland.web.model.Entrust;
 import com.midland.web.service.CommentService;
 import com.midland.web.service.EntrustService;
-import com.midland.base.BaseFilter;
+import com.midland.base.ServiceBaseFilter;
 import com.midland.web.service.impl.PublicService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import org.slf4j.LoggerFactory;
@@ -27,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.midland.web.util.MidlandHelper;
@@ -35,7 +31,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @SuppressWarnings("all")
 @RequestMapping("/entrust/")
-public class EntrustRestController extends BaseFilter  {
+public class EntrustRestController extends ServiceBaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(EntrustRestController.class);
 	@Autowired

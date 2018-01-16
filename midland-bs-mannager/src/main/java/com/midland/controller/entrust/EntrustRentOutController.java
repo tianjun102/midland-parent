@@ -3,11 +3,10 @@ package com.midland.controller.entrust;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.Paginator;
-import com.midland.base.BaseFilter;
+import com.midland.base.ServiceBaseFilter;
 import com.midland.config.MidlandConfig;
 import com.midland.web.Contants.Contant;
 import com.midland.web.api.ApiHelper;
-import com.midland.web.api.SmsSender.SmsModel;
 import com.midland.web.enums.ContextEnums;
 import com.midland.web.model.CenterMsg;
 import com.midland.web.model.Entrust;
@@ -40,7 +39,7 @@ import java.util.*;
  */
 @Controller
 @RequestMapping("/entrust/rentOut")
-public class EntrustRentOutController extends BaseFilter{
+public class EntrustRentOutController extends ServiceBaseFilter {
 	@Autowired
 	private EntrustService entrustServiceImpl;
 	@Autowired

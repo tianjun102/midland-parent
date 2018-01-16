@@ -1,7 +1,7 @@
 package com.midland.ueditor.upload;
 
 
-import com.midland.base.BaseFilter;
+import com.midland.base.ServiceBaseFilter;
 import com.midland.ueditor.define.AppInfo;
 import com.midland.ueditor.define.BaseState;
 import com.midland.ueditor.define.State;
@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 
 
-public class StorageManager  extends BaseFilter {
+public class StorageManager  extends ServiceBaseFilter {
 	public static final int BUFFER_SIZE = 8192;
 	private static final Logger logger = LoggerFactory.getLogger(BinaryUploader.class);
 

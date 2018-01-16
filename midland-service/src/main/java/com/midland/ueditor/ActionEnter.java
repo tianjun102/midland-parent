@@ -1,6 +1,6 @@
 package com.midland.ueditor;
 
-import com.midland.base.BaseFilter;
+import com.midland.base.ServiceBaseFilter;
 import com.midland.ueditor.define.ActionMap;
 import com.midland.ueditor.define.AppInfo;
 import com.midland.ueditor.define.BaseState;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 
-public class ActionEnter extends BaseFilter{
+public class ActionEnter extends ServiceBaseFilter {
 	private final Logger logger = LoggerFactory.getLogger(ActionEnter.class);
 	private HttpServletRequest request = null;
 	

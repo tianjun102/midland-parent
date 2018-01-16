@@ -3,11 +3,10 @@ package com.midland.web.annocontroller;
 import com.midland.web.Contants.Contant;
 import com.midland.web.model.LoanType;
 import com.midland.web.service.LoanTypeService;
-import com.midland.base.BaseFilter;
+import com.midland.base.ServiceBaseFilter;
 import org.slf4j.Logger;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
-import java.util.HashMap;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @SuppressWarnings("all")
 @RequestMapping("/loanType/")
-public class LoanTypeRestController extends BaseFilter  {
+public class LoanTypeRestController extends ServiceBaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(LoanTypeRestController.class);
 	@Autowired

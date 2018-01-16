@@ -1,6 +1,6 @@
 package com.midland.ueditor.upload;
 
-import com.midland.base.BaseFilter;
+import com.midland.base.ServiceBaseFilter;
 import com.midland.core.util.AppSetting;
 import com.midland.ueditor.PathFormat;
 import com.midland.ueditor.define.AppInfo;
@@ -11,7 +11,7 @@ import org.apache.commons.codec.binary.Base64;
 
 import java.util.Map;
 
-public final class Base64Uploader extends BaseFilter{
+public final class Base64Uploader extends ServiceBaseFilter {
 
 	public static State save(String content, Map<String, Object> conf) {
 		

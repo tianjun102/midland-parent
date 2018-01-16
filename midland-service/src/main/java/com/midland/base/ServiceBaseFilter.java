@@ -20,7 +20,7 @@ import java.util.List;
  * Created by 'ms.x' on 2017/7/27.
  */
 @Controller
-public abstract class BaseFilter {
+public abstract class ServiceBaseFilter {
 	@Autowired
 	private CategoryService categoryServiceImpl;
 	@Autowired

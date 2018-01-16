@@ -2,7 +2,7 @@ package com.midland.web.annocontroller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
-import com.midland.base.BaseFilter;
+import com.midland.base.ServiceBaseFilter;
 import com.midland.core.util.SmsUtil;
 import com.midland.web.Contants.Contant;
 import com.midland.web.api.ApiHelper;
@@ -31,7 +31,7 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @SuppressWarnings("all")
 @RequestMapping("/appointment/")
-public class AppointmentRestController extends BaseFilter {
+public class AppointmentRestController extends ServiceBaseFilter {
 
     private Logger log = LoggerFactory.getLogger(AppointmentRestController.class);
     @Autowired

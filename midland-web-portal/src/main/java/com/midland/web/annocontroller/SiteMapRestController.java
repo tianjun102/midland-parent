@@ -2,7 +2,7 @@ package com.midland.web.annocontroller;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
-import com.midland.base.BaseFilter;
+import com.midland.base.ServiceBaseFilter;
 import com.midland.web.Contants.Contant;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 @RestController
 @SuppressWarnings("all")
 @RequestMapping("/SiteMap/")
-public class SiteMapRestController extends BaseFilter  {
+public class SiteMapRestController extends ServiceBaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(SiteMapRestController.class);
 	@Autowired

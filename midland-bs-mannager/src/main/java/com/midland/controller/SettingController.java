@@ -1,15 +1,12 @@
 package com.midland.controller;
 
 import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.config.MidlandConfig;
-import com.midland.core.util.HttpUtils;
 import com.midland.task.TaskConfig;
 import com.midland.web.enums.ContextEnums;
 import com.midland.web.model.*;
-import com.midland.web.model.remote.Agent;
 import com.midland.web.model.temp.ListDescOtherParam;
 import com.midland.web.model.user.User;
 import com.midland.web.service.JdbcService;
@@ -36,9 +33,9 @@ import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/setting")
-public class SettingContorller extends BaseFilter {
+public class SettingController extends BaseFilter {
 
-    private final Logger logger = LoggerFactory.getLogger(SettingContorller.class);
+    private final Logger logger = LoggerFactory.getLogger(SettingController.class);
     @Autowired
     private SettingService settingService;
     @Autowired
@@ -64,6 +61,7 @@ public class SettingContorller extends BaseFilter {
             model.addAttribute("cityId",user.getCityId());
         }
         model.addAttribute("isSuper",user.getIsSuper());
+        model.addAttribute("type",request.getParameter("type"));
         return "setting/showPopularIndex";
     }
 

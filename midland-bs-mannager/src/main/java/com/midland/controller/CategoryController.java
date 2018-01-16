@@ -158,6 +158,7 @@ public class CategoryController extends BaseFilter {
 		}
 		model.addAttribute("isSuper",user.getIsSuper());
 		model.addAttribute("cityList",cityList);
+		model.addAttribute("type",result.getType());
 		model.addAttribute("item",result);
 		return "category/updateCategory";
 	}
@@ -185,6 +186,7 @@ public class CategoryController extends BaseFilter {
 	 **/
 	@RequestMapping(value = "list",produces ="application/json; charset=UTF-8")
 	public String findCategoryList(Category category, Model model, HttpServletRequest request) {
+		model.addAttribute("type",category.getType());
 		try {
 			log.debug("findCategoryList  {}",category);
 			MidlandHelper.doPage(request);

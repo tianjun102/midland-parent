@@ -1,6 +1,5 @@
 package com.midland.controller;
 
-import com.midland.web.Contants.Contant;
 import com.midland.web.model.HeadMsg;
 import com.midland.web.model.user.User;
 import com.midland.web.service.HeadMsgService;
@@ -24,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @SuppressWarnings("all")
 @RequestMapping("/headMsg/")
-public class HeadMsgController extends BaseFilter  {
+public class HeadMsgController extends BaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(HeadMsgController.class);
 	@Autowired

@@ -70,9 +70,12 @@ public class SiteMapController extends BaseFilter {
 		try {
 			Category cate1 = new Category();
 			//查询资讯分类
-			cate1.setType(4);
+			cate1.setType(Integer.valueOf(request.getParameter("type")));
 			cate1.setCityId(siteMap.getCityId());
 			cate1.setSource(siteMap.getSource());
+			if (StringUtils.isNotEmpty(request.getParameter("modeId"))&& !"".equals(request.getParameter("modeId"))) {
+				cate1.setModeId(Integer.valueOf(request.getParameter("modeId")));
+			}
 			result1 = getSiteObject("",cate1);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
@@ -102,6 +105,7 @@ public class SiteMapController extends BaseFilter {
 		if(StringUtils.isNotEmpty(resultCate)){
 			model.addAttribute("categoryData",resultCate );
 		}
+		model.addAttribute("type",4);
 		model.addAttribute("cityList",cityList);
 		User user = MidlandHelper.getCurrentUser(request);
 		if(user.getIsSuper()==null){
@@ -182,6 +186,7 @@ public class SiteMapController extends BaseFilter {
 			model.addAttribute("cityId",user.getCityId());
 			model.addAttribute("cityName",user.getCityName());
 		}
+		model.addAttribute("type",4);
 		model.addAttribute("isSuper",user.getIsSuper());
 		return "siteMap/updateSiteMap";
 	}

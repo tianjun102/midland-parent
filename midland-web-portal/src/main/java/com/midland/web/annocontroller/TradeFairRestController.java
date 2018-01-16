@@ -3,7 +3,7 @@ package com.midland.web.annocontroller;
 import com.midland.web.Contants.Contant;
 import com.midland.web.model.TradeFair;
 import com.midland.web.service.TradeFairService;
-import com.midland.base.BaseFilter;
+import com.midland.base.ServiceBaseFilter;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import com.midland.web.commons.Result;
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @SuppressWarnings("all")
 @RequestMapping("/tradeFair/")
-public class TradeFairRestController extends BaseFilter  {
+public class TradeFairRestController extends ServiceBaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(TradeFairRestController.class);
 	@Autowired

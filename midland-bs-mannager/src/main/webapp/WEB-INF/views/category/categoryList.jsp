@@ -18,6 +18,9 @@
             <th style="width: 8%">编号</th>
             <th style="width: 10%">父分类名称</th>
             <th style="width: 15%">分类名称</th>
+            <c:if test="${type == 3}">
+                <th style="width: 15%">模块名称</th>
+            </c:if>
             <th style="width: 10%">城市</th>
             <th style="width: 10%">平台</th>
             <th style="width: 32%">操作</th>
@@ -34,6 +37,9 @@
                         <td>${xh.count }</td>
                         <td><c:if test="${empty item.parentName}">一级分类</c:if>${item.parentName}</td>
                         <td>${item.cateName }</td>
+                        <c:if test="${type == 3}">
+                            <td>${item.modeName }</td>
+                        </c:if>
                         <td>${item.cityName }</td>
                         <td><c:forEach items="${sources}" var="s">
                             <c:if test="${item.source == s.id}">${s.name}</c:if>
@@ -121,7 +127,7 @@
             type: 2,
             title: ['修改'],
             shade: 0.3,
-            area: ['400px','380px'],
+            area: ['420px','450px'],
             content: ['${ctx}/rest/category/to_update?id='+id,'yes']
         });
     }

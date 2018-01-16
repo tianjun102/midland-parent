@@ -104,6 +104,7 @@
         <input type="hidden" name="id" id="id" value="${item.id}" >
         <input type="hidden" name="cityName" id="cityName" value="${item.cityName}" >
         <input name="noteType" type="hidden"/>
+        <input name="type" type="hidden" value="${type}" alt="网站管理的type=4"/>
         <input name="modeId" type="hidden" value="${item.modeId}"/>
         <input name="modeName" type="hidden"  value="${item.modeName}"/>
         <ul class="userinfo row">

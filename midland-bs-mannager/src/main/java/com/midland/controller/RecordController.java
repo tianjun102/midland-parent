@@ -16,14 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
-import java.util.List;
 import com.midland.web.util.MidlandHelper;
 import org.springframework.ui.Model;
 import javax.servlet.http.HttpServletRequest;
 @Controller
 @SuppressWarnings("all")
 @RequestMapping("/record/")
-public class RecordController extends BaseFilter  {
+public class RecordController extends BaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(RecordController.class);
 	@Autowired

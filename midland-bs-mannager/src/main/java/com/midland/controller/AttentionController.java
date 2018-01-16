@@ -1,26 +1,26 @@
 package com.midland.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.Paginator;
+import com.midland.base.BaseFilter;
 import com.midland.web.model.Attention;
 import com.midland.web.service.AttentionService;
-import com.midland.base.BaseFilter;
+import com.midland.web.util.MidlandHelper;
 import org.slf4j.Logger;
-import java.util.Map;
-import java.util.HashMap;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.Paginator;
-import java.util.List;
-import com.midland.web.util.MidlandHelper;
-import org.springframework.ui.Model;
+
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 @Controller
 @SuppressWarnings("all")
 @RequestMapping("/attention/")
-public class AttentionController extends BaseFilter  {
+public class AttentionController extends BaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(AttentionController.class);
 	@Autowired

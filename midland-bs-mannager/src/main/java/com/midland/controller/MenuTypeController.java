@@ -1,7 +1,6 @@
 package com.midland.controller;
 
 import com.midland.web.Contants.Contant;
-import com.midland.web.model.Menu;
 import com.midland.web.model.MenuType;
 import com.midland.web.model.user.User;
 import com.midland.web.service.MenuTypeService;
@@ -28,7 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @SuppressWarnings("all")
 @RequestMapping("/menuType/")
-public class MenuTypeController extends BaseFilter  {
+public class MenuTypeController extends BaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(MenuTypeController.class);
 	@Autowired

@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @SuppressWarnings("all")
 @RequestMapping("/layoutMap/")
-public class LayoutMapController extends BaseFilter  {
+public class LayoutMapController extends BaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(LayoutMapController.class);
 	@Autowired

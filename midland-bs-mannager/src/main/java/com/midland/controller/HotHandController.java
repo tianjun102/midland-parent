@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @SuppressWarnings("all")
 @RequestMapping("/hotHand/")
-public class HotHandController extends BaseFilter  {
+public class HotHandController extends BaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(HotHandController.class);
 	@Autowired

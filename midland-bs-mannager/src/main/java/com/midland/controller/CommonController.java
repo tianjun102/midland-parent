@@ -1,6 +1,7 @@
 package com.midland.controller;
 
 import com.midland.base.BaseFilter;
+import com.midland.base.ServiceBaseFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  * @since 2016年4月15日 下午4:16:34
  **/
 @Controller
-public class CommonController extends BaseFilter{
+public class CommonController extends BaseFilter {
     /**
      * 首页
      * 

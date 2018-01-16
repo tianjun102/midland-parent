@@ -91,7 +91,7 @@
                     }
                 }
             });
-
+            $("#showDiv").show();
         }
 
         function hideTree(event){
@@ -105,6 +105,7 @@
     <form action="${ctx}/rest/siteMap/add" method="post" id="dataForm">
         <input type="hidden" name="cityName" id="cityName" value="${cityName}" >
         <input name="noteType" type="hidden"/>
+        <input name="type" type="hidden" value="${type}" alt="网站管理的type=4"/>
         <input name="modeId" type="hidden"/>
         <input name="modeName" type="hidden"/>
         <c:if test="${empty isSuper}">
@@ -212,7 +213,7 @@
         });
     }
    $("#source").change(function () {
-           $("#showDiv").hide();
+       setEmpty();
    })
 
     //取消
@@ -222,18 +223,15 @@
     }
 
     function setCityName(){
-        $("input[name='cateId']").val("");
-        $("input[name='cateName']").val("");
-        $("input[name='showCateName']").val("");
-        $("input[name='noteType']").val("");
-        $("input[name='modeId']").val("");
-        $("input[name='modeName']").val("");
-        $("#showDiv").hide();
-
+        setEmpty();
         $("#cityName").val($("#cityId option:selected").text())
     }
 
     function setCateName(){
+        setEmpty();
+        $("#cateName").val($("#cateId option:selected").text())
+    }
+    function setEmpty() {
         $("input[name='cateId']").val("");
         $("input[name='cateName']").val("");
         $("input[name='showCateName']").val("");
@@ -241,7 +239,6 @@
         $("input[name='modeId']").val("");
         $("input[name='modeName']").val("");
         $("#showDiv").hide();
-        $("#cateName").val($("#cateId option:selected").text())
     }
 </script>
 </body>

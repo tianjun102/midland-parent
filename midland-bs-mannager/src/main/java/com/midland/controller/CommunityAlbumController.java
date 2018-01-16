@@ -1,10 +1,11 @@
 package com.midland.controller;
 
+import com.midland.base.BaseFilter;
 import com.midland.web.Contants.Contant;
 import com.midland.web.model.CommunityAlbum;
 import com.midland.web.model.temp.ListDescOtherParam;
 import com.midland.web.service.CommunityAlbumService;
-import com.midland.base.BaseFilter;
+import com.midland.base.ServiceBaseFilter;
 import com.midland.web.service.JdbcService;
 import org.slf4j.Logger;
 import java.util.Map;
@@ -22,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @SuppressWarnings("all")
 @RequestMapping("/communityAlbum/")
-public class CommunityAlbumController extends BaseFilter  {
+public class CommunityAlbumController extends BaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(CommunityAlbumController.class);
 	@Autowired

@@ -1,26 +1,17 @@
 package com.midland.controller;
 
 import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
-import com.midland.config.MidlandConfig;
-import com.midland.core.util.HttpUtils;
 import com.midland.web.Contants.Contant;
 import com.midland.web.api.ApiHelper;
-import com.midland.web.api.SmsSender.SmsClient;
-import com.midland.web.api.SmsSender.SmsModel;
-import com.midland.web.api.SmsSender.SmsResult;
 import com.midland.web.api.mailSender.MailProperties;
-import com.midland.web.enums.ContextEnums;
 import com.midland.web.model.AppointLog;
 import com.midland.web.model.Appointment;
 import com.midland.web.model.CenterMsg;
 import com.midland.web.model.ExportModel;
-import com.midland.web.model.remote.Agent;
 import com.midland.web.model.user.User;
 import com.midland.web.service.*;
-import com.midland.web.service.impl.TradeFairServiceImpl;
 import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
 import com.midland.web.util.ParamObject;
@@ -33,7 +24,6 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;

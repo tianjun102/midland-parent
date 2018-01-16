@@ -3,7 +3,7 @@ package com.midland.web.annocontroller;
 import com.midland.web.PublicUtils.QuotationUtil;
 import com.midland.web.model.QuotationSecondHand;
 import com.midland.web.service.QuotationSecondHandService;
-import com.midland.base.BaseFilter;
+import com.midland.base.ServiceBaseFilter;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import com.midland.web.commons.Result;
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @SuppressWarnings("all")
 @RequestMapping("/quotationSecondHand/")
-public class QuotationSecondHandRestController extends BaseFilter {
+public class QuotationSecondHandRestController extends ServiceBaseFilter {
 
     private Logger log = LoggerFactory.getLogger(QuotationSecondHandRestController.class);
     @Autowired

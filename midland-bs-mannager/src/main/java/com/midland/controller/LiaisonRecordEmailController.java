@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @SuppressWarnings("all")
 @RequestMapping("/liaisonRecordEmail/")
-public class LiaisonRecordEmailController extends BaseFilter  {
+public class LiaisonRecordEmailController extends BaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(LiaisonRecordEmailController.class);
 	@Autowired
