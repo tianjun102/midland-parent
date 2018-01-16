@@ -91,7 +91,9 @@ public class SettingController extends BaseFilter {
     public String toAddPage(Model model, HttpServletRequest request) {
         settingService.getAllProvinceList(model);
         Category category = new Category();
-        category.setType(3);
+        int type = 3;
+        category.setType(type);
+        model.addAttribute("type",type);
         String result = getCategoryTree("", category);
         if (StringUtils.isNotEmpty(result)) {
             model.addAttribute("categoryData", result);
@@ -204,7 +206,9 @@ public class SettingController extends BaseFilter {
             sheetLst = settingService.queryAreaByRedis(parem);
         }
         Category category = new Category();
-        category.setType(3);
+        int type = 3;
+        category.setType(type);
+        model.addAttribute("type",type);
         String resultCate = getCategoryTree("", category);
         if (StringUtils.isNotEmpty(resultCate)) {
             model.addAttribute("categoryData", resultCate);

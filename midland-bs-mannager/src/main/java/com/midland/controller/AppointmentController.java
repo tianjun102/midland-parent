@@ -64,8 +64,16 @@ public class AppointmentController extends BaseFilter {
 		settingServiceImpl.getAllProvinceList(model);
 		String pageNo = request.getParameter("pageNo");
 		String pageSize = request.getParameter("pageSize");
-		model.addAttribute("pageNo",pageNo);
-		model.addAttribute("pageSize",pageSize);
+		Paginator paginator = new Paginator();
+		if (pageNo != null&&StringUtils.isNotEmpty(pageNo)){
+			paginator.setPage(Integer.valueOf(pageNo));
+
+		}if (pageSize != null&&StringUtils.isNotEmpty(pageSize)){
+			paginator.setLimit(Integer.valueOf(pageSize));
+
+		}
+
+		model.addAttribute("paginator",paginator);
 		return "/appointment/appointIndex";
 	}
 	
@@ -208,7 +216,7 @@ public class AppointmentController extends BaseFilter {
 				CenterMsg centermsg = new CenterMsg();
 				centermsg.setType(3);
 				centermsg.setJumpId(record.getId().toString());
-				centermsg.setTitle(Contant.APPOINT_TITLE.replace("||",record.getAgentName()));
+				centermsg.setTitle(Contant.APPOINT_TITLE.replace("||",record.getAgentName()==null?"":record.getAgentName()));
 				centermsg.setMsg(msg.toString());
 				centerMsgServiceImpl.insertCenterMsg(centermsg);
 			}

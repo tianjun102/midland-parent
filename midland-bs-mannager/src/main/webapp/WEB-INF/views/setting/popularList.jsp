@@ -34,22 +34,22 @@
 								<td>${xh.count }</td>
 								<td>${popular.cityName}</td>
 								<td>
-									<c:if test="${popular.source==1}">网站</c:if>
-									<c:if test="${popular.source==2}">微站</c:if>
+									<c:if test="${popular.source==0}">网站</c:if>
+									<c:if test="${popular.source==1}">微站</c:if>
 								</td>
 								<td>
-									<c:if test="${popular.menuId==1}">首页</c:if>
-									<c:if test="${popular.menuId==2}">新房</c:if>
-									<c:if test="${popular.menuId==3}">二手房</c:if>
-									<c:if test="${popular.menuId==4}">租房</c:if>
-									<c:if test="${popular.menuId==5}">写字楼</c:if>
-									<c:if test="${popular.menuId==6}">商铺</c:if>
-									<c:if test="${popular.menuId==7}">小区</c:if>
-									<c:if test="${popular.menuId==8}">经纪人</c:if>
-									<c:if test="${popular.menuId==9}">外销网</c:if>
-									<c:if test="${popular.menuId==10}">市场调究</c:if>
-									<c:if test="${popular.menuId==11}">资讯</c:if>
-									<c:if test="${popular.menuId==12}">问答</c:if>
+									<c:if test="${popular.menuId==0}">首页</c:if>
+									<c:if test="${popular.menuId==1}">新房</c:if>
+									<c:if test="${popular.menuId==2}">二手房</c:if>
+									<c:if test="${popular.menuId==3}">租房</c:if>
+									<c:if test="${popular.menuId==4}">写字楼</c:if>
+									<c:if test="${popular.menuId==5}">商铺</c:if>
+									<c:if test="${popular.menuId==6}">小区</c:if>
+									<c:if test="${popular.menuId==7}">经纪人</c:if>
+									<c:if test="${popular.menuId==8}">外销网</c:if>
+									<c:if test="${popular.menuId==9}">市场调究</c:if>
+									<c:if test="${popular.menuId==10}">资讯</c:if>
+									<c:if test="${popular.menuId==11}">问答</c:if>
 								</td>
 								<td>${popular.cateName}</td>
 								<td>${popular.name}</td>

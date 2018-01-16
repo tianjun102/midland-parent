@@ -116,6 +116,7 @@ public class EntrustRestController extends ServiceBaseFilter {
 			log.info("addEntrust {}",obj);
 			getHouseSourceFromDingJian(obj.getHouseType(),obj.getHouseId());
 			obj.setEntrustTime(MidlandHelper.getCurrentTime());
+			obj.setResetFlag(1);
 			obj.setEntrustSn(publicServiceImpl.getCode(Contant.ENTRUST_SN_KEY,"E"));
 			if (StringUtils.isNotEmpty(obj.getAgentId())) {
 				Comment comment = new Comment();

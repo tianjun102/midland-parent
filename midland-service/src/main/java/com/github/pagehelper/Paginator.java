@@ -14,11 +14,26 @@ public class Paginator implements Serializable {
     private int limit;
     private int page;
     private int totalCount;
+    public Paginator() {
 
+    }
     public Paginator(int page, int limit, int totalCount) {
         this.limit = limit;
         this.totalCount = totalCount;
         this.page = this.computePageNo(page);
+    }
+
+
+    public void setLimit(int limit) {
+        this.limit = limit;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public void setTotalCount(int totalCount) {
+        this.totalCount = totalCount;
     }
 
     public int getPage() {
