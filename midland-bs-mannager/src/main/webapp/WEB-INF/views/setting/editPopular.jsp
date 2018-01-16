@@ -108,7 +108,7 @@
                 <select name="menuId" id="menuId" style="height: 28px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option <c:if test="${popular.source =='1'}">selected = 'selected'</c:if> value="1">首页</option>
                     <option <c:if test="${popular.source =='2'}">selected = 'selected'</c:if> value="2">新房</option>
-                    <option <c:if test="${popular.source =='3'}">selected = 'selected'</c:if> value="3">新二手房</option>
+                    <option <c:if test="${popular.source =='3'}">selected = 'selected'</c:if> value="3">二手房</option>
                     <option <c:if test="${popular.source =='4'}">selected = 'selected'</c:if> value="4">租房</option>
                     <option <c:if test="${popular.source =='5'}">selected = 'selected'</c:if> value="5">写字楼</option>
                     <option <c:if test="${popular.source =='6'}">selected = 'selected'</c:if> value="6">商铺</option>

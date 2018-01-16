@@ -109,7 +109,7 @@
                 <select name="menuId" id="menuId" style="height: 28px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option value="1">首页</option>
                     <option value="2">新房</option>
-                    <option value="3">新二手房</option>
+                    <option value="3">二手房</option>
                     <option value="4">租房</option>
                     <option value="5">写字楼</option>
                     <option value="6">商铺</option>
