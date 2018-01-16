@@ -66,7 +66,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							<td><input type="checkbox" name="pid" value="${banner.id}"></td>
 							<td>${xh.count}</td>
 							<td><img style="height: 36px;" src="${fileUrl}${banner.bannerImg}" class="suo"/></td>
-							<td><c:if test="${banner.enabled =='0'}">开放</c:if><c:if test="${banner.enabled =='1'}">关闭</c:if></td>
+							<td><c:if test="${banner.enabled =='1'}">开放</c:if><c:if test="${banner.enabled =='0'}">关闭</c:if></td>
 							<td>${banner.cityName}</td>
 							<td><c:if test="${banner.source =='0'}">网站</c:if><c:if test="${banner.source =='1'}">微站</c:if></td>
 							<td>
@@ -102,9 +102,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 								<c:if test="${banner.isDelete==1}">
 									<a target="contentF" class="recove_img" title="恢复" onclick="deleteBanner(${banner.id },0)"></a>
 								</c:if>
-								<%--<a class="up_img" title="上移" target="contentF" onclick="sort(${banner.id },${banner.orderBy},1)"></a>--%>
-								<%--<a class="down_img" title="下移" target="contentF" onclick="sort(${banner.id },${banner.orderBy},2)"></a>--%>
-								<%--<a <c:if test="${banner.enabled==0}">class="onoff_img"</c:if> <c:if test="${banner.enabled==1}">class="offon_img"</c:if> target="contentF" onclick="updateEnabled(${banner.enabled},${banner.id })"></a>--%>
+								<a class="up_img" title="上移" target="contentF" onclick="sort(${banner.id },${banner.orderBy},1)"></a>
+								<a class="down_img" title="下移" target="contentF" onclick="sort(${banner.id },${banner.orderBy},2)"></a>
+								<a <c:if test="${banner.enabled==1}">class="onoff_img"</c:if> <c:if test="${banner.enabled==0}">class="offon_img"</c:if> target="contentF" onclick="updateEnabled(${banner.enabled},${banner.id })"></a>
 								<!-- <a href="javascript:;" target="contentFrame" class = "admin_img" title = "管理图片"></a> -->
 							</td>
 						</tr>

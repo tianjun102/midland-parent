@@ -30,7 +30,6 @@
             <th style="width:auto">所属区域</th>
             <th style="width:auto">小区名</th>
             <th style="width:auto">门牌地址</th>
-
             <th style="width:auto">经纪人</th>
             <th style="width:auto">状态</th>
             <th style="width:auto">处理时间</th>

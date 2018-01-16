@@ -99,7 +99,8 @@ public class BannerRestController extends BaseFilter  {
 	public Object findBannerList(@RequestBody Banner  obj, HttpServletRequest request) {
 		 Result result=new Result();
 		try {
-			obj.setEnabled(0);
+			obj.setEnabled(1);
+			obj.setIsDelete(Contant.isNotDelete);
 			log.info("findBannerList  {}",obj);
 			MidlandHelper.doPage(request);
 			Page<Banner> list = (Page<Banner>)bannerServiceImpl.findBannerList(obj);

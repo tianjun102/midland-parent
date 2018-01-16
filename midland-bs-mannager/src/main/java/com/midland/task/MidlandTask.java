@@ -87,6 +87,7 @@ public class MidlandTask {
 						appoint.setStatus(3);//关闭预约
 						appoint.setResetFlag(0);
 						appoint.setId(appointment1.getId());
+						appoint.setHandleTime(MidlandHelper.getCurrentTime());
 						appointmentServiceImpl.updateAppointmentById(appoint);
 
 						SimpleMailMessage message = new SimpleMailMessage();
