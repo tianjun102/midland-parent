@@ -64,12 +64,25 @@ public class Popular{
 	private String sheetName;
 
 	private String cateName;
+	/**
+	 * 0=租；1=售
+	 */
+	private String sellRent;
 
 	private Integer isShow;
 	/**
 	 * 排序
 	 */
 	private Integer orderBy;
+
+
+	public String getSellRent() {
+		return sellRent;
+	}
+
+	public void setSellRent(String sellRent) {
+		this.sellRent = sellRent;
+	}
 
 	public Integer getOrderBy() {
 		return orderBy;

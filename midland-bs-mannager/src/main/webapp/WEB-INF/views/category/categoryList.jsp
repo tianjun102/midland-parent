@@ -19,8 +19,7 @@
             <th style="width: 10%">父分类名称</th>
             <th style="width: 15%">分类名称</th>
             <th style="width: 10%">城市</th>
-            <%--<th style="width: 10%">类型</th>--%>
-            <th style="width: 10%">状态</th>
+            <th style="width: 10%">平台</th>
             <th style="width: 32%">操作</th>
         </tr>
         </thead>
@@ -36,15 +35,9 @@
                         <td><c:if test="${empty item.parentName}">一级分类</c:if>${item.parentName}</td>
                         <td>${item.cateName }</td>
                         <td>${item.cityName }</td>
-                        <%--<td>
-                            <c:if test="${item.type ==0}">市场调究</c:if>
-                            <c:if test="${item.type ==1}">资讯</c:if>
-                            <c:if test="${item.type ==2}">会员分类</c:if>
-                        </td>--%>
-                        <td>
-                            <c:if test="${item.isShow ==0}">开启</c:if>
-                            <c:if test="${item.isShow ==1}">关闭</c:if>
-                        </td>
+                        <td><c:forEach items="${sources}" var="s">
+                            <c:if test="${item.source == s.id}">${s.name}</c:if>
+                        </c:forEach></td>
                         <td>
                             <c:if test="${item.isDelete==0}">
                             <a target="contentF" class="edit_img" title="编辑" onclick="to_edit(${item.id })"></a>

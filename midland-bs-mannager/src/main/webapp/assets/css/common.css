@@ -8,7 +8,8 @@ li{list-style: none;}
 a{text-decoration: none;}
 a:hover{text-decoration: none; cursor:pointer;}
 a:focus{outline: none;text-decoration: none;}
-input:focus{box-shadow: 0 0 0 1px #0099e0;}
+input{outline: none;}
+/*input:focus{box-shadow: 0 0 0 1px #0099e0;}*/
 .suo {height: 60%;}
 input:-webkit-autofill { box-shadow: 0 0 0px 1000px white inset !important;}
 
@@ -318,13 +319,20 @@ section.content p.detail-title .left:hover {
 	font-size: 14px;
 	color: rgb( 102, 102, 102 );
 }
+.content ul.userinfo li .checkitem{
+	display: inline-block;
+	height: 28px;
+	line-height: 28px;
+	margin-right: 10px;
+	outline: none;
+}
 .content ul.userinfo li>em.gang {
 	display:inline-block;
 	height:28px;
 	line-height:28px;
 	float:left;
 }
-.content ul.userinfo li:not(:last-child) input {
+.content ul.userinfo li:not(:last-child) input[type=text] {
 	float:left;
 	width: 150px;
 	height: 28px;
@@ -334,10 +342,10 @@ section.content p.detail-title .left:hover {
 	text-indent: 10px;
 	outline-color: #0099e0;
 }
-.content ul.userinfo li:last-child input:not(:first-child) {
+.content ul.userinfo li:last-child input[type=text]:not(:first-child) {
 	margin-left: 20px;
 }
-.content ul.userinfo li input.half {
+.content ul.userinfo li input[type=text].half {
 	width: 123px;
 }
 input.date {

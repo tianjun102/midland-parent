@@ -122,6 +122,11 @@
                 </select>
                 <span class="_star">*</span>
             </li>
+            <li id="sellrentLi" style="display: none"><span>租售：</span>
+                <label class="checkitem"><input type="radio" name="sellRent" value="0"><span>租房</span></label>
+                <label class="checkitem"><input type="radio" name="sellRent" value="1"><span>售房</span></label>
+            </li>
+
 
             <li><span>省：</span> <!-- 省 -->
                 <p id="province" style="display: inline-block;height: 28px;">
@@ -182,32 +187,14 @@
 <script type="text/javascript">
     function saveData() {
     if(notEmpty('name','name','链接名不能为空！')&&notEmpty('cateName','cateName','类型不能为空！')&&checkSelect("source|menuId","平台不能为空！|模块不能为空！")&&checkUrl("url","url","网址格式不正确！")){
-            var name = $("#name").val();
-            var source = $("#source option:selected").val();
-            var provinceId = $("input[name='provinceId']").val();
-            var cityId = $("input[name='cityId']").val();
-            var distId = $("input[name='distId']").val();
-            var sheetId = $("input[name='sheetId']").val();
-            var url = $("input[name='url']").val();
-            var cateId = $("input[name='cateId']").val();
-            var menuId = $("input[name='menuId']").val();
-            var provinceName = $("input[name='provinceName']").val();
-            var cityName = $("input[name='cityName']").val();
-            var areaName = $("input[name='distName']").val();
-            var sheetName = $("input[name='sheetName']").val();
-            var cateId = $("#cateId option:selected").val();
-            var menuId = $("#menuId option:selected").val();
-            var cateName = $("input[name='cateName']").val();
-
+        var data = $("#addFrom").serialize();
+            debugger;
             $.ajax({
                 type: "post",
                 url: "${ctx}/rest/setting/addPopular",
                 async: false, // 此处必须同步
                 dataType: "json",
-                data: {
-                    "name": name, "source": source, "provinceId": provinceId, "cityId": cityId,
-                    "areaId": distId, "sheetId": sheetId, "url": url,"cateId":cateId,"menuId":menuId,"provinceName":provinceName,"cityName":cityName,"areaName":areaName,"sheetName":sheetName,"cateName":cateName
-                },
+                data: data,
                 success: function (data) {
                     if (data.flag == 1) {
                         layer.msg("新增成功！！！", {icon: 1});
@@ -455,6 +442,17 @@
 
     }
 
+    $("#menuId").change(function () {
+        var menuId = $("#menuId option:selected").val();
+        var menuName = $("#menuId option:selected").text();
+        if (menuId == 5||menuId == 6) {
+            if ($("#sellrentLi").is(":hidden")) {
+                $("#sellrentLi").show();
+            } else {
+                $("#sellrentLi").hide();
+            }
+         }
+    })
 
 
 </script>

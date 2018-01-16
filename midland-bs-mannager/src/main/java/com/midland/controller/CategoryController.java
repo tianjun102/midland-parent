@@ -10,7 +10,9 @@ import com.midland.web.model.user.User;
 import com.midland.web.service.CategoryService;
 import com.midland.web.service.JdbcService;
 import com.midland.web.service.SettingService;
+import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
+import com.midland.web.util.ParamObject;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -190,7 +192,8 @@ public class CategoryController extends BaseFilter {
 				category.setCityId(MidlandHelper.getCurrentUser(request).getCityId());
 			}
 			Page<Category> result = (Page<Category>)categoryServiceImpl.findCategoryList(category);
-
+			List<ParamObject> paramObjects2 = JsonMapReader.getMap("source");
+			model.addAttribute("sources", paramObjects2);
 			Paginator paginator=result.getPaginator();
 			model.addAttribute("paginator",paginator);
 			model.addAttribute("items",result);

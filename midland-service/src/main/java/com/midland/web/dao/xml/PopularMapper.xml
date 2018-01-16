@@ -21,10 +21,11 @@
         <result column="cate_name" property="cateName" jdbcType="VARCHAR"/>
         <result column="is_show" property="isShow" jdbcType="INTEGER"/>
         <result column="order_by" property="orderBy" jdbcType="INTEGER"/>
+        <result column="sell_rent" property="sellRent" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-		id,cate_id,menu_id,name,source,url,province_id,city_id,area_id,sheet_id,is_delete,province_name,city_name,area_name,sheet_name,cate_name,is_show,order_by
+		id,cate_id,menu_id,name,source,url,province_id,city_id,area_id,sheet_id,is_delete,province_name,city_name,area_name,sheet_name,cate_name,is_show,order_by,sell_rent
 	</sql>
 
     <select id="selectById" resultMap="BaseResultMap">
@@ -114,6 +115,10 @@
             <if test="orderBy != null">
                 order_by,
             </if>
+            <if test="sellRent != null">
+                sell_rent,
+            </if>
+
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -167,6 +172,9 @@
             </if>
             <if test="orderBy != null">
                 #{orderBy},
+            </if>
+            <if test="sellRent != null">
+                #{sellRent},
             </if>
         </trim>
     </insert>
@@ -222,6 +230,9 @@
         </if>
         <if test="orderBy != null">
             order_by=#{orderBy},
+        </if>
+        <if test="sellRent != null">
+            sell_rent=#{sellRent},
         </if>
     </sql>
 
@@ -280,12 +291,15 @@
         <if test="orderBy != null">
             order_by=#{orderBy}
         </if>
+        <if test="sellRent != null">
+            sell_rent=#{sellRent}
+        </if>
     </sql>
 
     <select id="getMaxOrderBy" resultType="java.lang.Integer">
         select order_by from popular where 1=1
         <if test="cateId != null">
-            cate_id=#{cateId}
+            AND cate_id=#{cateId}
         </if>
         <if test="cityId != null">
             and city_id=#{cityId}
