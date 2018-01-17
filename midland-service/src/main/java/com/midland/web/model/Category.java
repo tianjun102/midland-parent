@@ -60,18 +60,18 @@ public class Category{
 	/**
 	 * 模块id
 	 */
-	private int modeId;
+	private Integer modeId;
 	/**
 	 * 模块名称
 	 */
 	private String modeName;
 
 
-	public int getModeId() {
+	public Integer getModeId() {
 		return modeId;
 	}
 
-	public void setModeId(int modeId) {
+	public void setModeId(Integer modeId) {
 		this.modeId = modeId;
 	}
 

@@ -332,7 +332,8 @@ section.content p.detail-title .left:hover {
 	line-height:28px;
 	float:left;
 }
-.content ul.userinfo li:not(:last-child) input[type=text] {
+.content ul.userinfo li:not(:last-child) input[type=text],
+.content ul.userinfo li:not(:last-child) .Wdate {
 	float:left;
 	width: 150px;
 	height: 28px;
@@ -342,10 +343,12 @@ section.content p.detail-title .left:hover {
 	text-indent: 10px;
 	outline-color: #0099e0;
 }
-.content ul.userinfo li:last-child input[type=text]:not(:first-child) {
+.content ul.userinfo li:last-child input[type=text]:not(:first-child),
+.content ul.userinfo li:last-child .Wdate:not(:first-child){
 	margin-left: 20px;
 }
-.content ul.userinfo li input[type=text].half {
+.content ul.userinfo li input[type=text].half,
+.content ul.userinfo li .Wdate.half{
 	width: 123px;
 }
 input.date {

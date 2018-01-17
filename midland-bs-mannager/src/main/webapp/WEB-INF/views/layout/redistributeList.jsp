@@ -97,7 +97,9 @@
                     layer.msg("分配成功！！！", {icon: 1});
                     $('#save').removeAttr("onclick");
                     setTimeout(function () {
-                        window.open(indexUrl,"contentF");
+                        parent.layer.closeAll();
+                        //$("#inquery").click();
+                        parent.$("#inquery").click();
                     }, 1000);
 
                 } else {
@@ -116,10 +118,9 @@
     }
 
     function closeWin(){
-        var indexUrl = $("#indexUrl").val();
-        window.open(indexUrl,"contentF");
-//        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-//        parent.layer.close(index);
+//        var indexUrl = $("#indexUrl").val();
+//        window.open(indexUrl,"contentF");
+        parent.layer.closeAll();
     }
 </script>
 </body>

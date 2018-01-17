@@ -113,34 +113,34 @@
     //修改
     function toRedistribute(id) {
         //重新分配经纪人时，保存的地址
-        var pageNo = ${paginator.page};
-        var pageSize = ${paginator.limit};
-        var parame1 = "&pageNo="+pageNo+"&pageSize="+pageSize;
+        <%--var pageNo = ${paginator.page};--%>
+        <%--var pageSize = ${paginator.limit};--%>
+        <%--var parame1 = "&pageNo="+pageNo+"&pageSize="+pageSize;--%>
         var url = "${ctx}/rest/appoint/reset_agent";
-        var indexUrl="${ctx}/rest/appoint/index";
-        window.open("${ctx}/rest/public/toRedistribute?id=" + id + "&url=" + url+"&indexUrl="+indexUrl+parame1, "contentF");
-        <%--layer.open({--%>
-            <%--type: 2,--%>
-            <%--title: ['重新分配经纪人'],--%>
-            <%--shade: 0.3,--%>
-            <%--area: ['1000px',  '500px'],--%>
-            <%--content: ['${ctx}/rest/public/toRedistribute?id=' + id + "&url=" + url, 'no']--%>
-        <%--});--%>
+        <%--var indexUrl="${ctx}/rest/appoint/index";--%>
+        <%--window.open("${ctx}/rest/public/toRedistribute?id=" + id + "&url=" + url+"&indexUrl="+indexUrl+parame1, "contentF");--%>
+        layer.open({
+            type: 2,
+            title: ['重新分配经纪人'],
+            shade: 0.3,
+            area: ['100%',  '800px'],
+            content: ['${ctx}/rest/public/toRedistribute?id=' + id + "&url=" + url, 'no']
+        });
     }
 
 
     function toUpdateAppointment(appointId) {
-        var pageNo = ${paginator.page};
-        var pageSize = ${paginator.limit};
-        var param = "&pageNo="+pageNo+"&pageSize="+pageSize;
-        window.open("${ctx}/rest/appoint/to_update?appointId=" + appointId +param, "contentF");
-        <%--layer.open({--%>
-            <%--type: 2,--%>
-            <%--title: ['预约详情'],--%>
-            <%--shade: 0.3,--%>
-            <%--area: ['1000px', '500px'],--%>
-            <%--content: ['${ctx}/rest/appoint/to_update?appointId=' + appointId]--%>
-        <%--});--%>
+        <%--var pageNo = ${paginator.page};--%>
+        <%--var pageSize = ${paginator.limit};--%>
+        <%--var param = "&pageNo="+pageNo+"&pageSize="+pageSize;--%>
+        <%--window.open("${ctx}/rest/appoint/to_update?appointId=" + appointId +param, "contentF");--%>
+        layer.open({
+            type: 2,
+            title: ['预约详情'],
+            shade: 0.3,
+            area: ['1000px', '900px'],
+            content: ['${ctx}/rest/appoint/to_update?appointId=' + appointId]
+        });
     }
 </script>
 </body>
