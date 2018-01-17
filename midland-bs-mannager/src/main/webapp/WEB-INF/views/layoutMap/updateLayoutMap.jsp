@@ -8,28 +8,20 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
     <style type="text/css">
-
-
-        .content ul.userinfo li input {
-            width: 150px;
+        .updInfo .dropdown {
+            width: 250px;
+        }
+    </style>
+    <style type="text/css">
+        .content ul.userinfo li:not(:last-child) input[type=text]{
+            float: none;
+            width: 250px;
             height: 28px;
             line-height: 28px;
             border: 1px solid #dbe2e6;
             border-radius: 4px;
             text-indent: 10px;
             outline-color: #0099e0;
-        }
-
-        .dropdown .selected, .dropdown li {
-            display: block;
-            height: 26px;
-            width: 150px;
-            line-height: 26px;
-            font-size: 14px;
-            color: #000;
-            padding: 0 10px;
-            /* overflow: hidden; */
-            white-space: nowrap;
         }
     </style>
     <script type="text/javascript">

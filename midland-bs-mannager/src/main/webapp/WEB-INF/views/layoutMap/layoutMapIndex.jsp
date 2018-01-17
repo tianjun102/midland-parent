@@ -17,7 +17,7 @@
 		<section class = "content">
 			<p class = "detail-title">
 				<span>外销网>>热卖一手>>主推户型</span>
-				<a class = "setup"  target="contentF" href="${ctx}/rest/layoutMap/to_add?hotHandId=${item.hotHandId}">新增</a>
+				<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>
 			</p>
 		<form action="${ctx }/rest/layoutMap/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
@@ -51,12 +51,12 @@
             layer.open({
                 type: 2,
                 skin: 'layer-style',
-                area: ['600px','400px'],
+                area: ['550px','450px'],
                 shadeClose: false, //点击遮罩关闭
                 title:['新增'],
                 resize: false,
                 scrollbar:false,
-                content:['${ctx}/rest/layoutMap/to_add?hotHandId=${item.hotHandId}', 'no']
+                content:['${ctx}/rest/layoutMap/to_add?hotHandId=${item.hotHandId}', 'yes']
             });
         }
 		 window.onload = function(){

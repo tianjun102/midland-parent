@@ -54,7 +54,7 @@
 						<td>${item.price}</td>
 						<td>${item.createTime}</td>
 						<td>
-                            <a target="contentF" title="编辑" class="edit_img" href="${ctx}/rest/layoutMap/to_update?id=${item.id}"></a>
+                            <a target="contentF" title="编辑" class="edit_img" onclick="toUpdatePage(${item.id })"></a>
                             <a target="contentF" title="删除" class="delete_img" onclick="delete1(${item.id })"></a>
                             <a target="contentF" title="上移" class="up_img"
                                onclick="sort(${item.id },${item.orderBy},2)"></a>
@@ -81,6 +81,15 @@
 </c:if>
 
 <script type="text/javascript">
+    function toUpdatePage(id) {
+        layer.open({
+            type: 2,
+            title: ['修改'],
+            shade: 0.3,
+            area: ['550px','450px'],
+            content: ['${ctx}/rest/layoutMap/to_update?id='+id,'yes']
+        });
+    }
     //排序
     function sort(id, orderById, sort) {
         var data = $("#searchForm").serialize();
