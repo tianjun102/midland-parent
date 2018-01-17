@@ -16,6 +16,7 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
+				<span>外销网>>热卖一手>>主推户型</span>
 				<a class = "setup"  target="contentF" href="${ctx}/rest/layoutMap/to_add?hotHandId=${item.hotHandId}">新增</a>
 			</p>
 		<form action="${ctx }/rest/layoutMap/list" method="POST" id="searchForm"
@@ -32,7 +33,7 @@
 				</li>
 				<li>
 					<input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/>
-					<a   style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;" class = "public_btn bg1"  href="${ctx}/rest/hotHand/index" target="contentF">返回</a></li>
+					<a   style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;" class = "public_btn bg1"  onclick="closeDiv()" target="contentF">返回</a></li>
 				</li>
 			</ul>
 			</form>
@@ -42,6 +43,10 @@
 	
 	
 	<script type="text/javascript">
+		function closeDiv() {
+            parent.layer.closeAll();
+        }
+
         function toAddPage(){
             layer.open({
                 type: 2,

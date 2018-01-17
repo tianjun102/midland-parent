@@ -63,7 +63,7 @@
 							<a target="contentF" onclick="layoutMap('${item.id}')">主推户型</a>
 							<a target="contentF" class="arrange_img" title="重新分配经纪人"
 							   onclick="toRedistribute(${item.id })"></a>
-							<a target="contentF"  class="edit_img" href="${ctx}/rest/hotHand/to_update?id=${item.id}"></a>
+							<a target="contentF"  class="edit_img" onclick="toUpdatePage(${item.id })"></a>
 							<a target="contentF" class="delete_img" onclick="delete1(${item.id })"></a>
 							<a target="contentF" title="上移" class="up_img"
 							   onclick="sort(${item.id },${item.orderBy},2)"></a>
@@ -90,13 +90,26 @@
 </c:if>
 
 <script type="text/javascript">
+	function toUpdatePage(id) {
+        layer.open({
+            type: 2,
+            skin: 'layer-style',
+            area: ['100%','100%'],
+            shadeClose: false, //点击遮罩关闭
+            title:[''],
+            resize: false,
+            scrollbar:false,
+            content:['${ctx}/rest/hotHand/to_update?id='+ id, 'no']
+        });
+
+    }
     function commu(id) {
         layer.open({
             type: 2,
             skin: 'layer-style',
             area: ['100%','100%'],
             shadeClose: false, //点击遮罩关闭
-            title:['新增'],
+            title:[''],
             resize: false,
             scrollbar:false,
             content:['${ctx}/rest/communityAlbum/index?hotHandId=' + id, 'no']
@@ -108,7 +121,7 @@
             skin: 'layer-style',
             area: ['100%','100%'],
             shadeClose: false, //点击遮罩关闭
-            title:['新增'],
+            title:[''],
             resize: false,
             scrollbar:false,
             content:['${ctx}/rest/layoutMap/index?hotHandId=' + id , 'no']
