@@ -19,10 +19,12 @@
 		<result column="release_time" property="releaseTime" jdbcType="VARCHAR" />
 		<result column="email" property="email" jdbcType="VARCHAR" />
 		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+		<result column="g_roup" property="group" jdbcType="INTEGER" />
+		<result column="category" property="category" jdbcType="INTEGER" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,type,post,recruiters_num,education,work_lift,start_time,end_time,release_status,post_desc,job_claim,city_id,city_name,release_time,email,is_delete
+		id,type,post,recruiters_num,education,work_lift,start_time,end_time,release_status,post_desc,job_claim,city_id,city_name,release_time,email,is_delete ,g_roup ,category
 	</sql>
 
 	<select id="selectRecruitManagerById" resultMap="BaseResultMap">
@@ -101,6 +103,12 @@
 			<if test="isDelete != null">
 				is_delete,
 			</if>
+			<if test="group != null">
+				g_roup,
+			</if>
+			<if test="category != null">
+				category,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -147,8 +155,14 @@
 				#{email,jdbcType=VARCHAR},
 			</if>
 			<if test="isDelete != null">
-				 #{isDelete,jdbcType=INTEGER}
+				 #{isDelete,jdbcType=INTEGER},
 			</if>
+			 <if test="group != null">
+				 #{group,jdbcType=INTEGER},
+			 </if>
+			 <if test="category != null">
+				 #{category,jdbcType=INTEGER},
+			 </if>
 		</trim>
 	</insert>
 
@@ -197,6 +211,12 @@
 		</if>
 		<if test="isDelete != null">
 			is_delete= #{isDelete},
+		</if>
+		<if test="group != null">
+			g_roup=#{group,jdbcType=INTEGER},
+		</if>
+		<if test="category != null">
+			category=#{category,jdbcType=INTEGER},
 		</if>
 	</sql>
 
@@ -251,6 +271,12 @@
 		</if>
 		<if test="onlineTime != null">
 			and end_time >= #{onlineTime,jdbcType=VARCHAR} and #{onlineTime,jdbcType=VARCHAR} >= start_time
+		</if>
+		<if test="group != null">
+			and g_roup=#{group,jdbcType=INTEGER}
+		</if>
+		<if test="category != null">
+			and category=#{category,jdbcType=INTEGER}
 		</if>
 
 	</sql>

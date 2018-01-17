@@ -49,6 +49,28 @@
                     <em class = "gang">-</em>
                     <input type="text" name="endTime" class="Wdate half" id="time4" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'time3\')}'})"/>
                 </li>
+                <li><span>职业类别：</span>
+                    <select name="category" id="category" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" >
+                        <option value="" >请选择</option>
+                        <option value="0">开发类</option>
+                        <option value="1">设计类</option>
+                        <option value="2">销售类</option>
+                        <option value="3">运维类</option>
+                        <option value="4">产品类</option>
+                        <option value="5">金融类</option>
+                        <option value="6">职能类</option>
+                    </select>
+                    <span class = "_star ">*</span>
+                </li>
+                <li><span>工作分组：</span>
+                    <select name="group" id="group" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" >
+                        <option value="" >请选择</option>
+                        <option value="0">前线组</option>
+                        <option value="1">后勤组</option>
+
+                    </select>
+                    <span class = "_star ">*</span>
+                </li>
                 <li><span>招聘岗位：</span>
                     <input id="post" name="post" maxlength="255" type="text" value="">
                 </li>

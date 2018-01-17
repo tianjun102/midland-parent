@@ -128,7 +128,6 @@
                         $('#save').removeAttr("onclick");
                         setTimeout(function () {
                             parent.layer.closeAll();
-                           //$("#inquery").click();
                             parent.$("#inquery").click();
                         }, 1000);
 

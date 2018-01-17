@@ -34,7 +34,8 @@
         <c:if test="${empty isSuper}"><input type="hidden" name="cityName"  value="${cityName}"></c:if>
         <select id="citys" onchange="initCity()"
                 <c:if test="${not empty isSuper}"> style="height: 28px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;"</c:if>   <c:if test="${empty isSuper}">style="height: 28px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;background-color: #dddfe2;" disabled="disabled"</c:if>>
-            <c:if test="${empty isSuper}"><option selected="selected" value="${cityId}">${cityName}</option></c:if>
+            <c:if test="${not empty isSuper}"><option selected="selected" value="${cityId}">${cityName}</option></c:if>
+
             <option value="">请选择</option>
         </select>
     </p>

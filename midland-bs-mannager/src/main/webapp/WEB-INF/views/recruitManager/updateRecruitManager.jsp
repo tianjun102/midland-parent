@@ -49,6 +49,27 @@
                     <em class = "gang">-</em>
                     <input type="text" value="${fn:substring(item.endTime,0 , 10)}" name="endTime" class="Wdate half" id="time4" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'time3\')}'})"/>
                 </li>
+                <li><span>职业类别：</span>
+                    <select name="category" id="category" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" >
+
+                        <option value="0" <c:if test="${item.category==0}">selected="selected"</c:if>>开发类</option>
+                        <option value="1" <c:if test="${item.category==1}">selected="selected"</c:if>>设计类</option>
+                        <option value="2" <c:if test="${item.category==2}">selected="selected"</c:if>>销售类</option>
+                        <option value="3" <c:if test="${item.category==3}">selected="selected"</c:if>>运维类</option>
+                        <option value="4" <c:if test="${item.category==4}">selected="selected"</c:if>>产品类</option>
+                        <option value="5" <c:if test="${item.category==5}">selected="selected"</c:if>>金融类</option>
+                        <option value="6" <c:if test="${item.category==6}">selected="selected"</c:if>>职能类</option>
+                    </select>
+                    <span class = "_star ">*</span>
+                </li>
+                <li><span>工作分组：</span>
+                    <select name="group" id="group" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" >
+                        <option value="0" <c:if test="${item.group==0}">selected="selected"</c:if>>前线组</option>
+                        <option value="1" <c:if test="${item.group==1}">selected="selected"</c:if>>后勤组</option>
+
+                    </select>
+                    <span class = "_star ">*</span>
+                </li>
                 <li><span>招聘岗位：</span>
                     <input id="post" name="post" maxlength="255" type="text" value="${item.post}">
                 </li>

@@ -43,7 +43,7 @@
                         <td>
                             <a target="contentF" title="评论" class="comment_img" onclick="to_comment(${item.id});" ></a>
                             <c:if test="${item.isDelete==0}">
-                            <a target="contentF" title="编辑" class="edit_img" href="${ctx}/rest/information/to_update?id=${item.id}"></a>
+                            <a target="contentF" title="编辑" class="edit_img" onclick="toUpdatePage('${item.id}')" ></a>
                             </c:if>
                             <c:if test="${item.isDelete==0}">
                                 <a target="contentF" onclick="deleteInfrmateion(${item.id },1)" class="delete_img"></a>
@@ -76,6 +76,19 @@
 </c:if>
 
 <script type="text/javascript">
+
+    function toUpdatePage(id) {
+        layer.open({
+            type: 2,
+            skin: 'layer-style',
+            area: ['100%', '100%'],
+            shadeClose: false, //点击遮罩关闭
+            title: ['资讯'],
+            resize: false,
+            scrollbar: false,
+            content: ['${ctx}/rest/information/to_update?id='+id, 'yes']
+        });
+    }
 
 
     function deleteInfrmateion(id,isDelete){

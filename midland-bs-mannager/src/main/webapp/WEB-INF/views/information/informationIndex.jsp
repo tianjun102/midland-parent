@@ -21,7 +21,7 @@
 		<section class = "content">
 			<p class = "detail-title">
 				<span>资讯管理>>资讯列表</span>
-				<a class = "setup"  target="contentF" href="${ctx}/rest/information/to_add">新增</a>
+				<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>
 				<a style="margin-right: 10px;" class = "setup"  target="contentF" href="${ctx}/rest/category/index?type=1">分类管理</a>
 			</p>
 		<form action="${ctx }/rest/information/list" method="POST" id="searchForm"
@@ -74,17 +74,27 @@
 			<div id="listDiv"></div>
 		</section>
 	</div>
-	
-	
-	<script type="text/javascript">
 
-		 window.onload = function(){
-             $('#searchForm').submit();
-		}
-	</script>
 	<!-- 本页私有js -->
 
 	<script type="text/javascript">
+        window.onload = function(){
+            $('#searchForm').submit();
+        }
+
+        function toAddPage() {
+            layer.open({
+                type: 2,
+                skin: 'layer-style',
+                area: ['100%', '100%'],
+                shadeClose: false, //点击遮罩关闭
+                title: ['资讯'],
+                resize: false,
+                scrollbar: false,
+                content: ['${ctx}/rest/information/to_add', 'yes']
+            });
+        }
+
 
         var setting = {
             check: {

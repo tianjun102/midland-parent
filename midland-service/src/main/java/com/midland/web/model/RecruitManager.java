@@ -67,7 +67,31 @@ public class RecruitManager{
 	private int isDelete;
 
 	private String onlineTime;
+	/**
+	 * 职位类别,0开发类,1设计类,2销售类,3运维类,4产品类,5金融类,6职能类
+	 */
+	private String category;
+	/**
+	 * 工作分组,0前线,1后勤
+	 */
+	private String group;
 
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getGroup() {
+		return group;
+	}
+
+	public void setGroup(String group) {
+		this.group = group;
+	}
 
 	public Integer getId() {
 		return id;

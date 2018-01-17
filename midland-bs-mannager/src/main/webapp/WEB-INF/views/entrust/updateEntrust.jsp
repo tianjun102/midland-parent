@@ -199,7 +199,7 @@
     //保存数据
     function updateData() {
         if(!notEmpty('nickName','nickName','')||!notEmpty('areaName','areaName','')
-            ||!notEmpty('communityName','communityName','')||!notEmpty('address','address','')||!notEmpty('layout','layout','')||!notEmpty('measure','measure','')
+            ||!notEmpty('communityName','communityName','')||!notEmpty('layout','layout','')||!notEmpty('measure','measure','')
             ||!checkPhone('','phone','')){
             return;
         }

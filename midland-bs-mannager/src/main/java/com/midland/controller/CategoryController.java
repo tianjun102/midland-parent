@@ -52,9 +52,8 @@ public class CategoryController extends BaseFilter {
 		/*model.addAttribute("cityList",cityList);*/
 		settingService.getAllProvinceList(model);
 		User user = MidlandHelper.getCurrentUser(request);
-		if(user.getIsSuper()==null){
-			model.addAttribute("cityId",user.getCityId());
-		}
+		model.addAttribute("cityId",user.getCityId());
+		model.addAttribute("cityName",user.getCityName());
 		model.addAttribute("type",category.getType());
 		model.addAttribute("isSuper",user.getIsSuper());
 		return "category/categoryIndex";

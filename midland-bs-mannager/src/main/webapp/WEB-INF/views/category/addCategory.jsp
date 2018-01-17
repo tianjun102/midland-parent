@@ -166,6 +166,12 @@
 
 </section>
 <script type="text/javascript">
+
+    $(function () {
+        if($("#cityName").val()==""){
+            $("#cityName").val("${cityList[0].name}");
+        }
+    })
     function saveData() {
         if(notEmpty('cateName','cateName','分类名称不能为空！')&&checkUrl('linkUrl','linkUrl','网站链接格式不正确！')){
         var data = $("#addFrom").serialize();
@@ -181,7 +187,8 @@
                     layer.msg("新增成功！！！", {icon: 1});
                     $('#save').removeAttr("onclick");
                     setTimeout(function () {
-                        parent.location.reload();
+                        parent.layer.closeAll();
+                        parent.$("#inquery").click();
                     }, 1000);
 
                 } else {

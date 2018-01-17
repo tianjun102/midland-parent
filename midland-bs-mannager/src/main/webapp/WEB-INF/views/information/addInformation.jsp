@@ -168,7 +168,7 @@
                 <li>
                     <span></span>
                     <a onclick="subumintInformation();" target="contentF" class="public_btn bg2">保存</a>
-                    <a style="margin-left: 20px" href="${ctx}/rest/information/index" target="contentF"
+                    <a style="margin-left: 20px" onclick="closeWin()" target="contentF"
                        class="public_btn bg3" id="cancel">取消</a>
                 </li>
             </ul>
@@ -215,7 +215,8 @@
                     if (data.state == 0) {
                         layer.msg("保存成功！", {icon: 1});
                         setTimeout(function () {
-                            window.open("${ctx}/rest/information/index", "contentF");
+                            parent.layer.closeAll();
+                            parent.$("#inquery").click();
                         }, 2000);
                     } else {
                         layer.msg("新增失败！", {icon: 2});
@@ -233,7 +234,9 @@
         }
 
     }
-
+    function closeWin() {
+    parent.layer.closeAll();
+    }
 
     function setCityName() {
         $("#cityName").val($("#cityId option:selected").text())
