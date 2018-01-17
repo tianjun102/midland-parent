@@ -103,8 +103,8 @@
             type: 2,
             title: ['修改'],
             shade: 0.3,
-            area: ['400px', '350px'],
-            content: ['${ctx}/rest/liaisonRecordEmail/to_update?id='+id,'no']
+            area: ['100%', '100%'],
+            content: ['${ctx}/rest/liaisonRecordEmail/to_update?id='+id,'yes']
         });
     }
 

@@ -9,18 +9,7 @@
     <title>Insert title here</title>
     <script type="text/javascript">
     </script>
-    <style type="text/css">
-        .content ul.userinfo li:not(:last-child) input[type=text]{
-            float: none;
-            width: 150px;
-            height: 28px;
-            line-height: 28px;
-            border: 1px solid #dbe2e6;
-            border-radius: 4px;
-            text-indent: 10px;
-            outline-color: #0099e0;
-        }
-    </style>
+
 </head>
 <body>
 <section class="content" style="border:none;">

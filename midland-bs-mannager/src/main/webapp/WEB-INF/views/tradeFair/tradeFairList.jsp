@@ -203,7 +203,7 @@
             type: 2,
             title: ['修改'],
             shade: 0.3,
-            area: ['450px', '420px'],
+            area: ['100%', '100%'],
             content: ['${ctx}/rest/tradeFair/to_update?id='+id,'yes']
         });
     }

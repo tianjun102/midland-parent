@@ -677,7 +677,7 @@ input.date {
 	width: auto;
 	min-width: 80px;
 }
-.content ul.updInfo li:not(:last-child) input{
+.content ul.updInfo li:not(:last-child) input[type=text]{
 	float: none;
 	width: 250px;
 }

@@ -37,18 +37,7 @@
             cursor: pointer;
         }
     </style>
-    <style type="text/css">
-        .content ul.userinfo li:not(:last-child) input[type=text]{
-            float: none;
-            width: 150px;
-            height: 28px;
-            line-height: 28px;
-            border: 1px solid #dbe2e6;
-            border-radius: 4px;
-            text-indent: 10px;
-            outline-color: #0099e0;
-        }
-    </style>
+
     <script type="text/javascript">
         $(function () {
             $('#file_upload').uploadify({

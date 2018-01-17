@@ -59,12 +59,12 @@
             layer.open({
                 type: 2,
                 skin: 'layer-style',
-                area: ['400px', '350px'],
+                area: ['100%', '100%'],
                 shadeClose: false, //点击遮罩关闭
                 title:['新增'],
                 resize: false,
                 scrollbar:false,
-                content:['${ctx}/rest/liaisonRecordEmail/to_add', 'no']
+                content:['${ctx}/rest/liaisonRecordEmail/to_add', 'yes']
             });
         }
 		 window.onload = function(){

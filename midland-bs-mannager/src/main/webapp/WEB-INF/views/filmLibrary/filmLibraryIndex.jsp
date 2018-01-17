@@ -17,7 +17,7 @@
         <div id="headIndex">
             <p class="detail-title">
                 <span>外销网管理>>片库管理</span>
-                <a class="setup" target="contentF" href="${ctx}/rest/filmLibrary/to_add">新增</a>
+                <a class="setup" target="contentF" onclick="toAddPage1()">新增</a>
             </p>
             <form action="${ctx }/rest/filmLibrary/list" method="POST" id="searchForm"
                   onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
@@ -81,12 +81,13 @@
         layer.open({
             type: 2,
             skin: 'layer-style',
-            area: ['500px', '700px'],
+            area: ['100%', '100%'],
             shadeClose: false, //点击遮罩关闭
             title: ['片库信息'],
             resize: false,
             scrollbar: false,
-            content: ['${ctx}/rest/filmLibrary/to_add', 'no']
+            content: ['${ctx}/rest/filmLibrary/to_add', 'yes']
+
         });
     }
 
