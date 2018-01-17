@@ -143,7 +143,8 @@
                         layer.msg("保存成功！！！", {icon: 1});
                         $('#save').removeAttr("onclick");
                         setTimeout(function () {
-                            window.open("${ctx}/rest/filmLibrary/index", "contentF");
+                            parent.layer.closeAll();
+                            parent.$("#inquery").click();
                         }, 1000);
 
                     } else {
@@ -185,8 +186,7 @@
 
     //取消
     function closeWin() {
-        window.open("${ctx}/rest/filmLibrary/index", "contentF")
-
+        parent.layer.closeAll();
     }
 
 

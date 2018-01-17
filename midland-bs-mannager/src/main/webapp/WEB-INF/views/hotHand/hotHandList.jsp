@@ -59,8 +59,8 @@
 						<td>${item.propertyAddress}</td>
 						<td>${item.developer}</td>
 						<td>
-							<a target="contentF" href="${ctx}/rest/communityAlbum/index?hotHandId=${item.id}">小区图片</a>
-							<a target="contentF" href="${ctx}/rest/layoutMap/index?hotHandId=${item.id}">主推户型</a>
+							<a target="contentF" onclick="commu('${item.id}')" >小区图片</a>
+							<a target="contentF" onclick="layoutMap('${item.id}')">主推户型</a>
 							<a target="contentF" class="arrange_img" title="重新分配经纪人"
 							   onclick="toRedistribute(${item.id })"></a>
 							<a target="contentF"  class="edit_img" href="${ctx}/rest/hotHand/to_update?id=${item.id}"></a>
@@ -90,21 +90,43 @@
 </c:if>
 
 <script type="text/javascript">
+    function commu(id) {
+        layer.open({
+            type: 2,
+            skin: 'layer-style',
+            area: ['100%','100%'],
+            shadeClose: false, //点击遮罩关闭
+            title:['新增'],
+            resize: false,
+            scrollbar:false,
+            content:['${ctx}/rest/communityAlbum/index?hotHandId=' + id, 'no']
+        });
+    }
+    function layoutMap(id) {
+        layer.open({
+            type: 2,
+            skin: 'layer-style',
+            area: ['100%','100%'],
+            shadeClose: false, //点击遮罩关闭
+            title:['新增'],
+            resize: false,
+            scrollbar:false,
+            content:['${ctx}/rest/layoutMap/index?hotHandId=' + id , 'no']
+        });
+    }
     function toRedistribute(id) {
         //重新分配经纪人时，保存的地址
-        var pageNo = ${paginator.page};
-        var pageSize = ${paginator.limit};
-        var parame1 = "&pageNo="+pageNo+"&pageSize="+pageSize;
         var url = "${ctx}/rest/hotHand/reset_agent";
-        var indexUrl="${ctx}/rest/hotHand/index";
-        window.open("${ctx}/rest/public/toRedistribute?id=" + id + "&url=" + url+"&indexUrl="+indexUrl+parame1, "contentF");
-        <%--layer.open({--%>
-        <%--type: 2,--%>
-        <%--title: ['重新分配经纪人'],--%>
-        <%--shade: 0.3,--%>
-        <%--area: ['1000px',  '500px'],--%>
-        <%--content: ['${ctx}/rest/public/toRedistribute?id=' + id + "&url=" + url, 'no']--%>
-        <%--});--%>
+        layer.open({
+            type: 2,
+            skin: 'layer-style',
+            area: ['100%','100%'],
+            shadeClose: false, //点击遮罩关闭
+            title:['新增'],
+            resize: false,
+            scrollbar:false,
+            content:['${ctx}/rest/public/toRedistribute?id=' + id + "&url=" + url, 'no']
+        });
     }
     //排序
     function sort(id, orderById, sort) {

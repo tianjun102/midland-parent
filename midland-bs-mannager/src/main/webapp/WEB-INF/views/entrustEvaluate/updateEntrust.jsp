@@ -12,16 +12,7 @@
         section.content{
             padding: 0 13px 0 30px;
         }
-        .content ul.userinfo{
-            height: 606px;
-            overflow: hidden;
-            overflow-y: scroll;
-            padding: 15px 0 25px;
-        }
-        .content ul.userinfo > li {
-            margin-left: 0;
-            padding-top: 8px;
-        }
+
 
         .content ul.userinfo li > span,
         .content ul.userinfo li:not(:last-child) input,
@@ -188,9 +179,6 @@
     function updateData() {
 
         var data = $("#appointInfoForm").serialize();
-        var pageNo = ${pageNo};
-        var pageSize = ${pageSize};
-        var param = "?pageNo="+pageNo+"&pageSize="+pageSize;
         $.ajax({
             type: "post",
             url: "${ctx}/rest/entrust/evaluate/update",
@@ -202,7 +190,8 @@
                     layer.msg("保存成功！！！", {icon: 1});
                     $('#save').removeAttr("onclick");
                     setTimeout(function () {
-                        window.open('${ctx}/rest/entrust/evaluate/index'+param,'contentF');
+                        parent.layer.closeAll();
+                        parent.$("#inquery").click();
                     }, 1000);
 
                 } else {
@@ -221,12 +210,7 @@
 
     //取消
     function closeWin() {
-        var pageNo = ${pageNo};
-        var pageSize = ${pageSize};
-        var param = "?pageNo="+pageNo+"&pageSize="+pageSize;
-        window.open('${ctx}/rest/entrust/evaluate/index'+param,'contentF');
-//        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-//        parent.layer.close(index);
+        parent.layer.closeAll();
     }
 </script>
 </body>
