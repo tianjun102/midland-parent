@@ -46,6 +46,7 @@
 					</c:forEach>
 				</select>
 			</li>
+
 			<li style="display: block" id="acreageShow">
 				<span style="width:90px">面积范围：</span>
 				<select name="houseAcreage" id="houseAcreage"  class="dropdown">
@@ -95,6 +96,11 @@
             $("#field").append("<option value='1'>成交面积</option>");
             $("#field").append("<option value='2'>成交均价</option>");
             $("#field").append("<option value='3'>成交金额</option>");
+            if (${acreageRange != null }){
+             $("#houseAcreage").val("${acreageRange[0].id}");
+			}else{
+                $("#houseAcreage").val("");
+            }
             $("#acreageShow").css('display','block');
 		}else if (j==2){
             $("#field").html("<option value='0' selected='selected'>成交套数</option>");

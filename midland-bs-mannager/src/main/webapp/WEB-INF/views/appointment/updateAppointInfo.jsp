@@ -103,7 +103,7 @@
                 <c:if test="${appointment.status != 3}">
                     <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">更新</a>
                 </c:if>
-                <a style="margin-left: 20px" class="public_btn bg3" id="cancel" onclick="updateData()">取消</a>
+                <a style="margin-left: 20px" class="public_btn bg3" id="cancel" onclick="closeWin1()">取消</a>
             </li>
         </ul>
 
