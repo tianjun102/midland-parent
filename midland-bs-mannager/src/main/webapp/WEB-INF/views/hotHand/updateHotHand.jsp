@@ -11,7 +11,7 @@
 
         .dropdown {
             position: relative;
-            width: 200px;
+            width: 150px;
             border: 1px solid #ccc;
             cursor: pointer;
             background: #fff;
@@ -257,9 +257,7 @@
         if (!checkSelect('citys', '请选择市级')) {
             return;
         }
-
         var data = $("#dataForm").serialize();
-        debugger;
         $.ajax({
             type: "post",
             url: "${ctx}/rest/hotHand/update",

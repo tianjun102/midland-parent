@@ -99,7 +99,7 @@
             title:[''],
             resize: false,
             scrollbar:false,
-            content:['${ctx}/rest/hotHand/to_update?id='+ id, 'no']
+            content:['${ctx}/rest/hotHand/to_update?id='+ id, 'yes']
         });
 
     }
@@ -112,7 +112,7 @@
             title:[''],
             resize: false,
             scrollbar:false,
-            content:['${ctx}/rest/communityAlbum/index?hotHandId=' + id, 'no']
+            content:['${ctx}/rest/communityAlbum/index?hotHandId=' + id, 'yes']
         });
     }
     function layoutMap(id) {
@@ -124,7 +124,7 @@
             title:[''],
             resize: false,
             scrollbar:false,
-            content:['${ctx}/rest/layoutMap/index?hotHandId=' + id , 'no']
+            content:['${ctx}/rest/layoutMap/index?hotHandId=' + id , 'yes']
         });
     }
     function toRedistribute(id) {
@@ -138,7 +138,7 @@
             title:['新增'],
             resize: false,
             scrollbar:false,
-            content:['${ctx}/rest/public/toRedistribute?id=' + id + "&url=" + url, 'no']
+            content:['${ctx}/rest/public/toRedistribute?id=' + id + "&url=" + url, 'yes']
         });
     }
     //排序
