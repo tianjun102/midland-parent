@@ -11,37 +11,6 @@
     <link rel="stylesheet" href="${ctx}/assets/css/ztree/css/demo.css">
     <link rel="stylesheet" href="${ctx }/assets/css/common.css">
     <link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css"/>
-    <style type="text/css">
-        .content ul.userinfo li:not(:last-child) input {
-            float: left;
-            width: 250px;
-            height: 28px;
-            line-height: 28px;
-            border: 1px solid #dbe2e6;
-            border-radius: 4px;
-            text-indent: 10px;
-            outline-color: #0099e0;
-        }
-        .content ul.userinfo>li {
-            display: flex;
-            float: none !important;
-            margin-left: 20px;
-            padding-top: 20px;
-        }
-
-        .dropdown {
-            width: 250px!important;
-        }
-        .vipcate{
-            width: 250px!important;;
-            height: 28px;
-            line-height: 28px;
-            border: 1px solid #dbe2e6;
-            border-radius: 4px;
-            text-indent: 10px;
-            outline-color: #0099e0;
-        }
-    </style>
     <script type="text/javascript">
         $(function () {
             $('#file_upload').uploadify({
@@ -110,7 +79,7 @@
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/menu/add" method="post" id="dataForm">
-        <ul class="userinfo row">
+        <ul class="userinfo width-md row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <%@include file="area_required.jsp" %>
 
@@ -126,7 +95,7 @@
             </li>
 
             <li style="display: none" id="menuTypeZtreeId"><span>类型：</span>
-                <input class="vipcate" id="menuTypeName" name="menuTypeName" onclick="showTree()" value="${item.menuTypeName}" readonly="readonly"/>
+                <input class="vipcate" id="menuTypeName" type="text" name="menuTypeName" onclick="showTree()" value="${item.menuTypeName}" readonly="readonly"/>
                 <input name="menuTypeId" type="hidden" value="${item.menuTypeId}"/><label style="color: red" class = "_star " >*</label>
             </li>
             <li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >

@@ -31,7 +31,7 @@
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/feedback/update" method="post" id="dataForm">
-        <ul class="userinfo row">
+        <ul class="userinfo width-md row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <li><span>昵称：</span>
                 <input type="text" name="nickName" disabled="disabled" id="nickName" value="${item.nickName}"/>
@@ -58,7 +58,7 @@
                 </select>
             <li>
             <li><span>备注：</span>
-                <textarea rows="" cols="" style="width: 250px;height: 100px;border: 1px solid #dbe2e6;" name="remark"
+                <textarea rows="" cols="" style="height: 100px;border: 1px solid #dbe2e6;" name="remark"
                           id="remark">${item.remark}</textarea>
             </li>
 

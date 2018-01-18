@@ -24,17 +24,6 @@
     <meta content="" name="author"/>
     <meta name="MobileOptimized" content="320">
     <style>
-        .content ul.adminfo li > span {
-            float: left;
-            display: inline-block;
-            width: 130px;
-            height: 28px;
-            line-height: 28px;
-            text-align: right;
-            font-size: 14px;
-            color: rgb(102, 102, 102);
-        }
-
         .layui-layer {
             top: 260px !important;
         }
@@ -49,10 +38,9 @@
         <form id="formId" action="${ctx}/rest/pageConf/add" method="post" enctype="multipart/form-data" method="post">
             <input type="hidden" name="cityName" id="cityName" value="${cityName}">
             <c:if test="${empty isSuper}"><input type="hidden" name="cityId" value="${cityId}"></c:if>
-            <ul class="adminfo row">
+            <ul class="adminfo width-lg row">
                 <li><span>城市：</span>
                     <select onchange="setCityName();" name="cityId" id="cityId"
-                            style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;"
                             <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
                         <c:if test="${empty isSuper}">
                             <option selected="selected" value="${cityId}">${cityName}</option>
@@ -66,7 +54,6 @@
                 </li>
                 <li><span>平台：</span>
                     <select name="source" id="source"
-                            style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;"
                             onchange="selectSource()">
                         <option value="0">网站</option>
                         <option value="1">微站</option>
@@ -75,8 +62,7 @@
                 </li>
                 <li><span>页面：</span>
                     <%--<input type="text" name="model" id="model" value=""/>--%>
-                    <select name="model" id="model"
-                            style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <select name="model" id="model">
                         <option value="0">首页</option>
                         <option value="1">新房</option>
                         <option value="2">二手房</option>
@@ -101,22 +87,22 @@
                 </li>
                 <li><span>CNZZ状态：</span>
                     <%--<input type="hidden" name="metaShow" id="metaShow" value=""/>--%>
-                    <span style="width: 50px;"> 开启&nbsp; </span><input type="radio" name="metaShow" value="1">
-                    <span style="width: 50px;"> 关闭&nbsp; </span><input type="radio" name="metaShow" value="0">
+                    <span style="width: 50px !important;"> 开启&nbsp; </span><input type="radio" name="metaShow" value="1">
+                    <span style="width: 50px !important;;"> 关闭&nbsp; </span><input type="radio" name="metaShow" value="0">
                 </li>
                 <li id="cnzzPc"><span>CNZZ配置：</span><textarea
-                        style="width: 87%;min-height: 250px;resize:none; outline-color: #0099e0;float: right"
+                        style="width: 87%;min-height: 250px;resize:none; outline-color: #0099e0;float: left"
                         name="cnzzCode" id="myEditor" rows="" cols=""></textarea></li>
                 <li id="cnzzWechat" style="display: none"><span>CNZZ微站配置：</span><textarea
                         style="width: 87%;min-height: 250px;resize:none; outline-color: #0099e0;float: right"
                         name="cnzzCodeWechat" id="myEditor2" rows="" cols=""></textarea></li>
                 <li><span>百度计量状态：</span>
                     <%--<input type="hidden" name="baiduShow" id="baiduShow" value=""/>--%>
-                    <span style="width: 50px;"> 开启&nbsp; </span><input type="radio" name="baiduShow" value="1">
-                    <span style="width: 50px;"> 关闭&nbsp; </span><input type="radio" name="baiduShow" value="0">
+                    <span style="width: 50px !important;"> 开启&nbsp; </span><input type="radio" name="baiduShow" value="1">
+                    <span style="width: 50px !important;"> 关闭&nbsp; </span><input type="radio" name="baiduShow" value="0">
                 </li>
                 <li id="baiduPc"><span>百度计量代码：</span><textarea
-                        style="width: 87%;min-height: 250px;resize:none; outline-color: #0099e0;float: right"
+                        style="width: 87%;min-height: 250px;resize:none; outline-color: #0099e0;float: left"
                         name="baiduCode" id="myEditor1" rows="" cols=""></textarea></li>
                 <li id="baiduWechat" style="display: none"><span>百度计量微站代码：</span><textarea
                         style="width: 87%;min-height: 250px;resize:none; outline-color: #0099e0;float: right;"

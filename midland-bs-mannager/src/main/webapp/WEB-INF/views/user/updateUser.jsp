@@ -59,13 +59,13 @@
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/filmLibrary/add" method="post" id="dataForm">
-        <ul class="adminfo row">
-            <input style="width:264px;" type="hidden" name="id" id="id" value="${item.id}"/>
-            <input style="width:264px;" type="hidden" name="userRoles" id="userRoles" value="${item.userRoles}"/>
-            <li class="col-md-6"><span>用户名：</span><input style="width:264px;" type="text" name="username"
+        <ul class="adminfo width-lg row">
+            <input  type="hidden" name="id" id="id" value="${item.id}"/>
+            <input  type="hidden" name="userRoles" id="userRoles" value="${item.userRoles}"/>
+            <li class="col-md-6"><span>用户名：</span><input  type="text" name="username"
                                                          disabled="true" id="username" value="${item.username}"
                                                          onblur="checkUserName();" maxlength="50"/></li>
-            <li class="col-md-6"><span>用户名称：</span><input style="width:264px;" type="text" name="userCnName"
+            <li class="col-md-6"><span>用户名称：</span><input  type="text" name="userCnName"
                                                           id="userCnName"
                                                           onblur="notEmpty('userCnName','userCnName','用户昵称不能为空')"
                                                           value="${item.userCnName}" maxlength="50"/><span
@@ -82,10 +82,9 @@
                 <span class="_star">*</span>
             </li>
             <%@include file="../menu/area_up_required1.jsp" %>
-            <span class="_star">*</span>
-            <li class="col-md-6"><span>手机号码：</span><input style="width:264px;" type="text" name="phone" disabled="true"
+            <li class="col-md-6"><span>手机号码：</span><input  type="text" name="phone" disabled="true"
                                                           id="phone" value="${item.phone}" onblur="checkPhone();"/></li>
-            <li class="col-md-6"><span>邮箱：</span><input style="width:264px;" type="text" name="email" id="email"
+            <li class="col-md-6"><span>邮箱：</span><input  type="text" name="email" id="email"
                                                         value="${item.email}" onblur="checkEmail();"/></li>
 
             <li><span>图片上传：</span>

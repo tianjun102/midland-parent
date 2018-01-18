@@ -8,77 +8,20 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
-    <style type="text/css">
-        .content ul.userinfo li>span {
-            float: left;
-            display: inline-block;
-            width: 90px;
-            height: 28px;
-            line-height: 28px;
-            text-align: right;
-            font-size: 14px;
-            color: rgb( 102, 102, 102 );
-        }
-        .dropdown {
-            position: relative;
-            width: 264px;
-            border: 1px solid #ccc;
-            cursor: pointer;
-            background: #fff;
-            border-radius: 3px;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-    </style>
-    <style type="text/css">
-
-        .content ul.userinfo>li {
-            float: none !important;
-            margin-left: 20px;
-            padding-top: 20px;
-        }
-
-
-        .dropdown {
-            width: 268px !important;
-        }
-    </style>
-
-    <style type="text/css">
-        .content ul.userinfo>li {
-            float: none !important;
-            margin-left: 20px;
-            padding-top: 20px;
-        }
-    </style>
-
-    <style type="text/css">
-        .content ul.userinfo>li {
-            float: none !important;
-            margin-left: 20px;
-            padding-top: 20px;
-        }
-
-
-        .dropdown {
-            width: 268px !important;
-        }
-    </style>
 
 </head>
 <body>
 <section class="content" style="border:none;">
     <form action="" method="post" id="addFrom">
-        <ul class="userinfo row">
-            <li><span>用户名：</span><input style="width:264px;" type="text" name="username" id="username"
+        <ul class="userinfo width-md row">
+            <li><span>用户名：</span><input type="text" name="username" id="username"
                                         value="${user.username}" onblur="checkUserName();"
                                         maxlength="50"/><span class="_star">*</span></li>
-            <li><span>用户昵称：</span><input style="width:264px;" type="text" name="userCnName" id="userCnName"
+            <li><span>用户昵称：</span><input type="text" name="userCnName" id="userCnName"
                                          value="${user.userCnName}" maxlength="50" onblur="notEmpty('userCnName','userCnName','用户昵称不能为空')"/><span class="_star">*</span></li>
             <li style="display:flex;align-items:center">
                 <span>平台：</span>
-                <select name="source" id="source" class="dropdown" style="width: 264px">
+                <select name="source" id="source" class="dropdown" >
                     <c:forEach items="${sources}" var="s">
                         <option value="${s.id}" >
                                 ${s.name}
@@ -88,9 +31,9 @@
                 <span class="_star">*</span>
             </li>
             <%@include file="../menu/area_required.jsp" %>
-            <li><span>手机号码：</span><input style="width:264px;" type="text" name="phone" id="phone" value="${user.phone}"
+            <li><span>手机号码：</span><input type="text" name="phone" id="phone" value="${user.phone}"
                                          onblur="checkPhone();"/><span class="_star">*</span></li>
-            <li><span>邮箱：</span><input style="width:264px;" type="text" name="email" id="email" value="${user.email}"
+            <li><span>邮箱：</span><input type="text" name="email" id="email" value="${user.email}"
                                        onblur="checkEmail();"/></li>
             <%-- <li>
                 <span>角色类型：</span>

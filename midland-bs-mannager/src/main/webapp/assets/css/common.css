@@ -439,6 +439,14 @@ input.date {
 }
 
 
+
+
+.width-lg .selected{
+	width: 278px !important;
+}
+.width-lg li>span:not(._star){
+	width: 100px !important;
+}
 .width-md input[type=text],
 .width-md textarea{
 	width: 250px !important;
