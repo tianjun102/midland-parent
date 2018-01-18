@@ -42,7 +42,7 @@
 						<td>${item.post}</td>
 						<td>
                             <c:if test="${item.isDelete==0}">
-                            <a class="edit_img" target="contentF" href="${ctx}/rest/eliteVip/to_update?id=${item.id}"></a>
+                            <a class="edit_img" target="contentF" onclick="to_edit(${item.id})" ></a>
                             </c:if>
                             <c:if test="${item.isDelete==0}">
                                 <a target="contentF" onclick="delete1(${item.id },1)" class="delete_img"></a>
@@ -101,7 +101,7 @@
             type: 2,
             title: ['修改'],
             shade: 0.3,
-            area: ['500px', '700px'],
+            area: ['100%', '100%'],
             content: ['${ctx}/rest/eliteVip/to_update?id='+id,'no']
         });
     }

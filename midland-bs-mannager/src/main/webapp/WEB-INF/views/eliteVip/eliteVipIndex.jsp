@@ -60,7 +60,7 @@
 		<section class = "content">
 			<p class = "detail-title">
 				<span>精英会>>精英会会员管理</span>
-				<a class = "setup"  target="contentF" href="${ctx}/rest/eliteVip/to_add">新增</a>
+				<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>
 			</p>
 		<form action="${ctx }/rest/eliteVip/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
@@ -73,7 +73,7 @@
 						</c:forEach>
 					</select>
 				</li>--%>
-				<li><span>会员分类：</span><input class="vipcate" style="width: 200px;" name="cateName" onclick="showTree()" readonly="readonly"/>
+				<li><span>会员分类：</span><input type="text" class="vipcate" style="width: 200px;" name="cateName" onclick="showTree()" readonly="readonly"/>
 					<input name="cateId" type="hidden"/>
 				</li>
 				<li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >
@@ -120,7 +120,7 @@
             layer.open({
                 type: 2,
                 skin: 'layer-style',
-                area: ['400px;','500px;'],
+                area: ['100%;','100%;'],
                 shadeClose: false, //点击遮罩关闭
                 title:['新增'],
                 resize: false,

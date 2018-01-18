@@ -55,7 +55,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		<section class = "content">
 			<p class = "detail-title">
 				<span>系统管理>>Banner管理</span>
-				<a class = "setup" href="${ctx}/rest/setting/enterBanner" target="contentF">添加Banner</a>
+				<a class = "setup" onclick="toAddPage()" target="contentF">添加Banner</a>
 			</p>
 			<ul class = "userinfo row">
 				<%--<li>
@@ -176,6 +176,19 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				  }
 			  }); 
 	}
+
+	function toAddPage() {
+        layer.open({
+            type: 2,
+            skin: 'layer-style',
+            area: ['100%','100%'],
+            shadeClose: false, //点击遮罩关闭
+            title:['新增'],
+            resize: false,
+            scrollbar:false,
+            content:['${ctx}/rest/setting/enterBanner', 'yes']
+        });
+    }
     </script>
     
 </html>

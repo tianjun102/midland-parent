@@ -14,7 +14,7 @@
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/hotSearch/add" method="post" id="dataForm">
-        <ul class="userinfo row">
+        <ul class="userinfo updInfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <li><span>搜索词：</span>
                <input type="text" name="keywords" id="keywords"  onblur="notEmpty('keywords','keywords','搜索词不能为空！');" /><label style="color: red" class = "_star " >*</label>
@@ -76,22 +76,28 @@
                     layer.msg("保存成功！！！", {icon: 1});
                     $('#save').removeAttr("onclick");
                     setTimeout(function () {
-                        parent.location.reload();
+                        parent.layer.closeAll();
+                        parent.$("#inquery").click();
                     }, 1000);
 
                 } else {
                     layer.msg("保存失败！", {icon: 2});
                 }
             },
-             error: function (data) {                        if (data.responseText!= null){                            layer.msg(data.responseText, {icon: 2});                        }else {                            layer.msg("保存失败！", {icon: 2});                        }                    }
+            error: function (data) {
+                if (data.responseText != null) {
+                    layer.msg(data.responseText, {icon: 2});
+                } else {
+                    layer.msg("保存失败！", {icon: 2});
+                }
+            }
         });
         }
     }
 
     //取消
     function closeWin() {
-        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-        parent.layer.close(index);
+        parent.layer.closeAll();
     }
 
     function setCityName(){

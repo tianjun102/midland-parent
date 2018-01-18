@@ -51,13 +51,13 @@
 			<span></span>
 			<a target="contentF" class = "public_btn bg2" id="save" onclick="auditsuccess(${user.id })">审核通过</a>
 			<a style="margin-left: 20px" class = "public_btn bg3" id="cancel" onclick="auditRejectView(${user.id });">审核拒绝</a>
-			<a target="contentF" class = "public_btn bg3" href="${ctx}/rest/user/userIndex">返回</a>
+			<a target="contentF" class = "public_btn bg3" onclick="closeWin()" >返回</a>
 		</li>
 		</c:if>
 		<c:if test="${user.auditStatus != 0}">
 			<li>
 				<span></span>
-				<a target="contentF" class = "public_btn bg3" href="${ctx}/rest/user/userIndex">返回</a>
+				<a target="contentF" class = "public_btn bg3" onclick="closeWin()">返回</a>
 			</li>
 		</c:if>
 	</ul>
@@ -91,7 +91,8 @@
                     success: function(obj){
                         if(obj.state==0){
                             layer.msg("审核成功！",{icon:1});
-                            window.open("${ctx}/rest/user/userIndex","contentF");
+                            parent.layer.closeAll();
+                            parent.$("#inquery").click();
                         }
                         if(obj.state==-1){
                             layer.msg("审核失败！！",{icon:7});
@@ -131,8 +132,8 @@
 
 
     //取消
-    function closeWin(id){
-        window.open("${ctx}/rest/user/findUser?userId="+id+"&flag=1","contentF");
+    function closeWin(){
+        parent.layer.closeAll();
     }
 
 
@@ -147,8 +148,8 @@
             success: function(obj){
                 if(obj.state==0){
                     layer.msg("成功！",{icon:5});
-                    parent.window.location.reload();
                     parent.layer.closeAll();
+                    parent.$("#inquery").click();
                 }
                 if(obj.state==-1){
                     layer.msg("失败！！",{icon:7});

@@ -89,7 +89,8 @@
             <li class="col-md-11"><span>处理记录：</span>
                 <textarea name="record" id="record" disabled="disabled"
                           style="width:calc(100% - 120px);height:150px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;">
-<c:forEach items="${appointLogs}" var="s">状态    ：<c:forEach items="${statusList}" var="m"><c:if test="${m.id==s.state}">${m.name}</c:if> </c:forEach>
+<c:forEach items="${appointLogs}" var="s">
+状态    ：<c:forEach items="${statusList}" var="m"><c:if test="${m.id==s.state}">${m.name}</c:if> </c:forEach>
 时间    ：${s.logTime}
 操作人：${s.operatorName}
 备注    ：${s.remark}
@@ -100,9 +101,10 @@
             </li>
             <li class="col-md-6">
                 <span></span>
-                <c:if test="${appointment.status != 3}">
+                <c:if test="${appointment.status !=2 and appointment.status !=3 and appointment.status !=4 }">
                     <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">更新</a>
                 </c:if>
+
                 <a style="margin-left: 20px" class="public_btn bg3" id="cancel" onclick="closeWin1()">取消</a>
             </li>
         </ul>

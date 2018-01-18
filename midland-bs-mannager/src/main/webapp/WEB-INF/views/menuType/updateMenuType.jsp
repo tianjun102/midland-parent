@@ -27,13 +27,14 @@
         <ul class="userinfo updinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <%@include file="../menu/area_required.jsp" %>
-            <li ><span>上级分类：</span>
+            <li><span>上级分类：</span>
                 <select name="" id="parentIdTemp" class="dropdown" onchange="chooseParent()">
                     <c:forEach items="${rootMentTypes}" var="s">
                         <c:choose>
                             <c:when test="${s.id ==item.id}"></c:when>
                             <c:otherwise>
-                                <option value="${s.id}" <c:if test="${item.parentId==s.id}">selected</c:if>>${s.name}</option>
+                                <option value="${s.id}"
+                                        <c:if test="${item.parentId==s.id}">selected</c:if>>${s.name}</option>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
@@ -42,7 +43,7 @@
                 <input type="hidden" id="parentName" name="parentName" value="${item.parentName}">
             </li>
             <li><span>名称：</span>
-               <input type="text" name="name" id="name" value="${item.name}" onblur="notEmpty('name','name','')"/>
+                <input type="text" name="name" id="name" value="${item.name}" onblur="notEmpty('name','name','')"/>
             </li>
 
             <li>
@@ -59,16 +60,17 @@
 
     function chooseParent() {
         $("#parentId").val($("#parentIdTemp option:selected").val())
-        if ($("#parentIdTemp option:selected").text()=="分类"){
+        if ($("#parentIdTemp option:selected").text() == "分类") {
             $("#parentName").val(" ")
-        }else{
+        } else {
             $("#parentName").val($("#parentIdTemp option:selected").text())
         }
     }
+
     //保存数据
     function updateData() {
 
-        if (!checkSelect('citys','请选择市级')||!notEmpty('name','name','')){
+        if (!checkSelect('citys', '请选择市级') || !notEmpty('name', 'name', '')) {
             return;
         }
         var data = $("#dataForm").serialize();
@@ -83,21 +85,27 @@
                     layer.msg("保存成功！！！", {icon: 1});
                     $('#save').removeAttr("onclick");
                     setTimeout(function () {
-                        parent.location.reload();
+                        parent.layer.closeAll();
+                        parent.$("#inquery").click();
                     }, 1000);
 
                 } else {
                     layer.msg("保存失败！", {icon: 2});
                 }
             },
-             error: function (data) {                        if (data.responseText!= null){                            layer.msg(data.responseText, {icon: 2});                        }else {                            layer.msg("保存失败！", {icon: 2});                        }                    }
+            error: function (data) {
+                if (data.responseText != null) {
+                    layer.msg(data.responseText, {icon: 2});
+                } else {
+                    layer.msg("保存失败！", {icon: 2});
+                }
+            }
         });
     }
 
     //取消
     function closeWin() {
-        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-        parent.layer.close(index);
+        parent.layer.closeAll();
     }
 </script>
 </body>

@@ -45,7 +45,7 @@
                             <a class="up_img" title="上移" target="contentF" onclick="sort(${item.id },${item.orderBy},1)"></a>
                             <a class="down_img" title="下移" target="contentF" onclick="sort(${item.id },${item.orderBy},2)"></a>
                             <c:if test="${item.isDelete==0}">
-                            <a class="edit_img" title="编辑" target="contentF" href="${ctx}/rest/specialPage/to_update?id=${item.id}"></a>
+                            <a class="edit_img" title="编辑" target="contentF" onclick="to_edit(${item.id})"></a>
                             </c:if>
                             <c:if test="${item.isDelete==0}">
                                 <a target="contentF" title="删除" onclick="delete1(${item.id },1)" class="delete_img"></a>
@@ -124,7 +124,7 @@
             type: 2,
             title: ['修改'],
             shade: 0.3,
-            area: ['500px', '700px'],
+            area: ['100%', '100%'],
             content: ['${ctx}/rest/specialPage/to_update?id='+id,'no']
         });
     }

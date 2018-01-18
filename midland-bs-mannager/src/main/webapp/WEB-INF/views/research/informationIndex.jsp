@@ -22,7 +22,7 @@
 		<section class = "content">
 			<p class = "detail-title">
 				<span>市场调究管理>>市场调究列表</span>
-				<a class = "setup"  target="contentF" href="${ctx}/rest/research/to_add">新增</a>
+				<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>
 				<a style="margin-right: 10px;" class = "setup"  target="contentF" href="${ctx}/rest/category/index?type=0">分类管理</a>
 			</p>
 		<form action="${ctx }/rest/research/list" method="POST" id="searchForm"
@@ -86,6 +86,17 @@
 	<!-- 本页私有js -->
 	
 	<script type="text/javascript">
+
+		function toAddPage() {
+            layer.open({
+                type: 2,
+                title: ['新增市场调究'],
+                shade: 0.3,
+                area: ['100%', '100%'],
+                content: ['${ctx}/rest/research/to_add' , 'yes']
+            });
+        }
+
 
         var setting = {
             check: {

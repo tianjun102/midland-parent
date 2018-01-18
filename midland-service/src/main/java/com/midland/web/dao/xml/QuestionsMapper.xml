@@ -44,9 +44,15 @@
       and is_delete=0
     </if>
     <include refid="select_option"/>
-    <if test="descName !=null">
-      order by ${descName} DESC
-    </if>
+    <choose>
+      <when test="descName !=null">
+        order by ${descName} DESC
+      </when>
+      <otherwise>
+        order by id DESC
+      </otherwise>
+    </choose>
+
   </select>
 
   <select id="attentionQuestionPage" resultMap="BaseResultMap" >

@@ -39,7 +39,7 @@
                         <td>${item.releaseTime}</td>
 						<td>
                             <c:if test="${item.isDelete==0}">
-                            <a target="contentF" class="edit_img" href="${ctx}/rest/recruitManager/to_update?id=${item.id}"></a>
+                            <a target="contentF" class="edit_img" onclick="to_edit(${item.id})"></a>
                             </c:if>
                             <c:if test="${item.isDelete==0}">
                                 <a target="contentF" onclick="delete1(${item.id },1)" class="delete_img"></a>
@@ -119,8 +119,8 @@
             type: 2,
             title: ['修改'],
             shade: 0.3,
-            area: ['500px', '700px'],
-            content: ['${ctx}/rest/recruitManager/to_update?id='+id,'no']
+            area: ['100%', '100%'],
+            content: ['${ctx}/rest/recruitManager/to_update?id='+id,'yes']
         });
     }
 

@@ -73,13 +73,20 @@
                 if (data.state == 0) {
                     layer.msg("保存成功！", {icon: 1});
                     setTimeout(function () {
-                        setTimeout(function(){window.open("${ctx}/rest/leaveMsg/index","contentF");},1000);
+                        parent.layer.closeAll();
+                        parent.$("#inquery").click();
                     }, 1000);
                 } else {
                     layer.msg("保存失败！", {icon: 2});
                 }
             },
-             error: function (data) {                        if (data.responseText!= null){                            layer.msg(data.responseText, {icon: 2});                        }else {                            layer.msg("保存失败！", {icon: 2});                        }                    }
+            error: function (data) {
+                if (data.responseText != null) {
+                    layer.msg(data.responseText, {icon: 2});
+                } else {
+                    layer.msg("保存失败！", {icon: 2});
+                }
+            }
 
         });
 

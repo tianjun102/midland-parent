@@ -117,8 +117,8 @@
             type: 2,
             title: ['修改'],
             shade: 0.3,
-            area: ['400px','350px'],
-            content: ['${ctx}/rest/feedbackEmail/to_update?id='+id,'no']
+            area: ['500px','400px'],
+            content: ['${ctx}/rest/feedbackEmail/to_update?id='+id,'yes']
         });
     }
 

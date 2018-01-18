@@ -55,10 +55,10 @@
                                     <a  class="check_img" title="审核" target="contentF" onclick="toAudit(${item.id })"></a>
                                 </c:when>
                                 <c:otherwise>
-                                    <a  class="see_img" title="查看问题" target="contentF" href="${ctx}/rest/questions/to_view?id=${item.id}"></a>
+                                    <a  class="see_img" title="查看问题" target="contentF" onclick="toUpdatePage(${item.id })"></a>
                                 </c:otherwise>
                             </c:choose>
-                            <a  target="contentF" class="reply_img" title="回答" href="${ctx}/rest/questions/to_repeat?id=${item.id}"></a>
+                            <a  target="contentF" class="reply_img" title="回答" onclick="toRepeat(${item.id})" ></a>
                             <c:if test="${item.isDelete==0}">
                                 <a target="contentF" onclick="deleteQuestions(${item.id },1)" class="delete_img"></a>
                             </c:if>
@@ -86,6 +86,26 @@
 </c:if>
 
 <script type="text/javascript">
+
+    function toRepeat(id) {
+        layer.open({
+            type: 2,
+            title: ['回答'],
+            shade: 0.3,
+            area: ['100%', '100%'],
+            content: ['${ctx}/rest/questions/to_repeat?id=' + id , 'yes']
+        });
+    }
+
+    function toUpdatePage(id) {
+        layer.open({
+            type: 2,
+            title: ['回答'],
+            shade: 0.3,
+            area: ['100%', '100%'],
+            content: ['${ctx}/rest/questions/to_view?id=' + id , 'yes']
+        });
+    }
 
     $(function () {
         var headIndex = $("#headIndex").height();
@@ -149,8 +169,8 @@ function toAudit(id) {
             type: 2,
             title: ['审核'],
             shade: 0.3,
-            area: ['1000px', '700px'],
-            content: ['${ctx}/rest/questions/toAudit?id=' + id , 'no']
+            area: ['100%', '100%'],
+            content: ['${ctx}/rest/questions/toAudit?id=' + id , 'yes']
         });
     }
 

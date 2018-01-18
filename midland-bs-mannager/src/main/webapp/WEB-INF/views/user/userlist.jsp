@@ -61,7 +61,7 @@
                                         </c:otherwise>
                                     </c:choose>
 
-                                    href="${ctx}/rest/user/findUser?userId=${cust.id}&flag=1"
+                                    onclick="auditOrView(${cust.id })"
                             </a>
                         </td>
                     </tr>
@@ -86,7 +86,16 @@
 <script type="text/javascript">
     //删除
     //修改
+function auditOrView(userId) {
 
+    layer.open({
+        type: 2,
+        title: ['用户信息'],
+        shade: 0.3,
+        area: ['100%', '100%'],
+        content: ['${ctx}/rest/user/findUser?userId=' + userId + '&flag=1', 'no']
+    });
+}
 
     function viewRealRegistration(userId) {
         layer.open({
@@ -114,14 +123,13 @@
     }
 
     function alterUser(userId) {
-        <%--layer.open({--%>
-            <%--type: 2,--%>
-            <%--title: ['编辑用户'],--%>
-            <%--shade: 0.3,--%>
-            <%--area: ['500px', '450px'],--%>
-            <%--content: ['${ctx}/rest/user/toUpdatePage?userId=' + userId, 'no']--%>
-        <%--});--%>
-        window.open("${ctx}/rest/user/toUpdatePage?userId=" + userId, "contentF");
+        layer.open({
+            type: 2,
+            title: ['编辑用户'],
+            shade: 0.3,
+            area: ['500px', '450px'],
+            content: ['${ctx}/rest/user/toUpdatePage?userId=' + userId, 'yes']
+        });
     }
 
     function takeOutblacklist(userId) {

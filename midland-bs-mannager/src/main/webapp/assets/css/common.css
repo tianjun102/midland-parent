@@ -439,6 +439,16 @@ input.date {
 }
 
 
+.width-md input[type=text],
+.width-md textarea{
+	width: 250px !important;
+}
+.width-md .selected{
+	width: 248px !important;
+}
+
+
+
 /******* 列表td图标样式 *******/
 
 
@@ -782,7 +792,7 @@ input.date {
 	margin-left: 20px;
 }
 .content ul.adminfo li input.half {
-	width: 117px;
+	width: 132px;
 }
 .content ul.adminfo li input.date {
 	background: url(../img/date.png) no-repeat 95% center;
@@ -800,6 +810,13 @@ input.date {
 	font-size: 14px;
 	color:#999;
 	margin-left: 10px;
+}
+.content ul.adminfo li select{
+	height: 28px;
+	width: 280px;
+	display: inline-table;
+	border-radius: 4px;
+	border: 1px solid #dbe2e6;
 }
 
 /******* table2 *******/

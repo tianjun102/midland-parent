@@ -46,16 +46,6 @@
         top:260px!important;
     }
 
-    .vipcate{
-        width: 250px;
-        height: 28px;
-        line-height: 28px;
-        border: 1px solid #dbe2e6;
-        border-radius: 4px;
-        text-indent: 10px;
-        outline-color: #0099e0;
-    }
-
     .content ul.adminfo li:last-child>a:not(:nth-child(2)) {
         margin-left: 0px!important;
     }
@@ -110,8 +100,11 @@
         <form id="formId" action="" method="post" enctype="multipart/form-data" method="post">
             <ul class = "adminfo row">
                 <input type="hidden" name="cateName" id="cateName">
-                <li><span>市场调究分类：</span><input class="vipcate" id="vipcate"  name="vipcate" onclick="showTree()" readonly="readonly"/>
-                    <input name="cateId" type="hidden"/><label style="color: red" class = "_star " >*</label>
+                <li>
+                    <span>市场调究分类：</span>
+                    <input class="vipcate" id="vipcate" type="text" name="vipcate" onclick="showTree()" readonly="readonly"/>
+                    <input name="cateId" type="hidden"/>
+                    <label style="color: red" class = "_star " >*</label>
 
                 </li>
                 <li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >
@@ -124,7 +117,7 @@
                     <span style = "float:left;">城市：</span>
                     <input type="hidden" name="cityName" id="cityName" value="${cityName}">
                     <c:if test="${empty isSuper}"><input type="hidden" name="cityId"  value="${cityId}"></c:if>
-                    <select onchange="setCityName()" name="cityId" id="cityId" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
+                    <select onchange="setCityName()" name="cityId" id="cityId" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
                         <option value="">全部</option>
                         <c:forEach items="${cityList}" var="city">
                             <c:if test="${empty isSuper}"><option selected="selected" value="${cityId}">${cityName}</option></c:if>
@@ -133,7 +126,7 @@
                     </select>
                 </li>
                 <li><span>平台：</span>
-                    <select name="platform" id="platform" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <select name="platform" id="platform">
                         <option value="0" >网站</option>
                         <option value="1" >微站</option>
                     </select>
@@ -200,7 +193,7 @@
                 <li>
                     <span></span>
                     <a onclick="subumintInformation();" target="contentF" class = "public_btn bg2">保存</a>
-                    <a style="margin-left: 20px" href="${ctx}/rest/research/index" target="contentF" class="public_btn bg3" id="cancel">取消</a>
+                    <a style="margin-left: 20px" onclick="closeWin()" target="contentF" class="public_btn bg3" id="cancel">取消</a>
                 </li>
             </ul>
         </form>
@@ -208,6 +201,10 @@
 </div>
 </body>
 <script type="text/javascript">
+    function closeWin() {
+        parent.layer.closeAll();
+    }
+
     UE.getEditor('myEditor');
     function subumintInformation(){
         var data = $("#formId").serialize();
@@ -221,7 +218,10 @@
             success: function (data) {
                 if(data.state==0){
                     layer.msg("保存成功！",{icon:1});
-                    setTimeout(function(){window.open("${ctx}/rest/research/index","contentF");},2000);
+                    setTimeout(function(){
+                        parent.layer.closeAll();
+                        parent.$("#inquery").click();
+                    },2000);
                 } else {
                     layer.msg("新增失败！", {icon: 2});
                 }

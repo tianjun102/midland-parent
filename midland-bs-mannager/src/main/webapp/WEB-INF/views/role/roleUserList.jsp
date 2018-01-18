@@ -93,7 +93,10 @@
 				if(data.flag==1){
 					layer.msg("保存成功！！！",{icon:1});
 					$('#save').removeAttr("onclick");
-					setTimeout(function(){parent.location.reload();},1000);
+                    setTimeout(function () {
+                        parent.layer.closeAll();
+                        parent.$("#inquery").click();
+                    }, 1000);
 					
 				}else{
 					layer.msg("保存失败！",{icon:2});

@@ -55,7 +55,7 @@
                             <c:if test="${item.isShow==0}">显示</c:if>
                         </td>
 						<td>
-                            <a target="contentF" class="edit_img" href="${ctx}/rest/record/to_update?id=${item.id}" ></a>
+                            <a target="contentF" class="edit_img" onclick="to_edit(${item.id })" ></a>
                             <c:choose>
                                 <c:when test="${item.isShow==0}">
                                     <a target="contentF" class="onoff_img" title="状态：显示" onclick="hiddenOrShow(${item.id },1)"></a>
@@ -144,8 +144,8 @@
             type: 2,
             title: ['修改'],
             shade: 0.3,
-            area: ['500px', '700px'],
-            content: ['${ctx}/rest/record/to_update?id='+id,'no']
+            area: ['100%', '100%'],
+            content: ['${ctx}/rest/record/to_update?id='+id,'yes']
         });
     }
 

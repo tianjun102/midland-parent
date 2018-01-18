@@ -22,7 +22,7 @@
 		<section class = "content">
 			<p class = "detail-title">
 				<span>招聘管理>>招聘列表</span>
-				<a class = "setup"  target="contentF" href="${ctx}/rest/recruitManager/to_add">新增</a>
+				<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>
 			</p>
 		<form action="${ctx }/rest/recruitManager/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
@@ -74,12 +74,13 @@
             layer.open({
                 type: 2,
                 skin: 'layer-style',
-                area: ['500px','700px'],
+                area: ['100%','100%'],
                 shadeClose: false, //点击遮罩关闭
                 title:['新增'],
                 resize: false,
                 scrollbar:false,
-                content:['${ctx}/rest/recruitManager/to_add', 'no']
+                content:['${ctx}/rest/recruitManager/to_add', 'yes']
+
             });
         }
 		 window.onload = function(){

@@ -38,8 +38,7 @@
                     <span></span>
                     <a onclick="audit('${answer.id}','2');" target="contentF" class="public_btn bg2">通过</a>
                     <a onclick="audit('${answer.id}','3');" target="contentF" class="public_btn bg2">拒绝</a>
-                    <a style="margin-left: 20px" href="${ctx}/rest/questions/index" target="contentF"
-                       class="public_btn bg3" id="cancel">取消</a>
+                    <a style="margin-left: 20px" target="contentF" class="public_btn bg3" id="cancel">取消</a>
                 </li>
             </ul>
         </form>
@@ -74,9 +73,8 @@
                     success: function (obj) {
                         if (obj.state == 0) {
                             layer.msg("成功！", {icon: 5});
-                            parent.window.location.reload();
-                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                            parent.layer.close(index);
+                            parent.layer.closeAll();
+                            parent.$("#inquery").click();
                         }
                         if (obj.state == -1) {
                             layer.msg("失败！！", {icon: 7});
@@ -94,6 +92,10 @@
 
     }
 
+
+    $("#cancel").click(function () {
+        parent.layer.closeAll();
+    })
 </script>
 
 </body>

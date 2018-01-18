@@ -20,13 +20,13 @@
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/feedbackEmail/add" method="post" id="dataForm">
         <input type="hidden" name="emailType" value="${emailType}">
-        <ul class="userinfo row">
+        <ul class="userinfo width-md row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <li>
                 <span style = "float:left;">城市：</span>
                 <input type="hidden" name="cityName" id="cityName" value="${cityName}">
                 <c:if test="${empty isSuper}"><input type="hidden" name="cityId"  value="${cityId}"></c:if>
-                <select onchange="setCityName()" name="cityId" id="cityId" style="height: 28px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
+                <select onchange="setCityName()" name="cityId" id="cityId"  class="dropdown" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
                     <option value="">全部</option>
                     <c:if test="${empty isSuper}"><option selected="selected" value="${cityId}">${cityName}</option></c:if>
                     <c:forEach items="${cityList}" var="city">
@@ -81,7 +81,8 @@
                     layer.msg("保存成功！！！", {icon: 1});
                     $('#save').removeAttr("onclick");
                     setTimeout(function () {
-                        parent.location.reload();
+                        parent.layer.closeAll();
+                        parent.$("#inquery").click();
                     }, 1000);
 
                 } else {
@@ -100,8 +101,7 @@
 
     //取消
     function closeWin() {
-        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-        parent.layer.close(index);
+        parent.layer.closeAll();
     }
 
     function setCityName(){

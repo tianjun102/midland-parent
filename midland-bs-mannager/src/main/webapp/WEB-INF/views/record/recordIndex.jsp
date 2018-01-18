@@ -16,7 +16,7 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
-				<a class = "setup" href="${ctx}/rest/record/to_add" target="contentF" >新增</a>
+				<a class = "setup" onclick="toAddPage()" target="contentF" >新增</a>
 			</p>
 		<form action="${ctx }/rest/record/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
@@ -46,7 +46,7 @@
             layer.open({
                 type: 2,
                 skin: 'layer-style',
-                area: ['500px','700px'],
+                area: ['100%','100%'],
                 shadeClose: false, //点击遮罩关闭
                 title:['新增'],
                 resize: false,

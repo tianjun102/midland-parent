@@ -85,7 +85,10 @@
 				}
 			});
 			if(flag){
-				setTimeout(function(){parent.window.location.reload();},1000);
+                setTimeout(function () {
+                    parent.layer.closeAll();
+                    parent.$("#inquery").click();
+                }, 1000);
 			}
 			
 		});
@@ -93,8 +96,7 @@
 	
 	//取消
 	function closeWin() {
-		var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-		parent.layer.close(index);
+        parent.layer.closeAll();
 	}
 	
 </script>

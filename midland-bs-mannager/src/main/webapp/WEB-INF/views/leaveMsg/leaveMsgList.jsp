@@ -54,7 +54,7 @@
                             <c:otherwise>未回复</c:otherwise>
                         </c:choose> </td>
 						<td>
-                            <a target="contentF" title="回复" class="reply_img" href="${ctx}/rest/leaveMsg/to_update?id=${item.id}"></a>
+                            <a target="contentF" title="回复" class="reply_img" onclick="toUpdatePage(${item.id})" ></a>
                             <c:if test="${item.isDelete==0}">
                                 <a target="contentF" onclick="delete1(${item.id },1)" class="delete_img"></a>
                             </c:if>
@@ -82,6 +82,16 @@
 </c:if>
 
 <script type="text/javascript">
+
+    function toUpdatePage(id) {
+        layer.open({
+            type: 2,
+            title: ['留言回复'],
+            shade: 0.3,
+            area: ['100%',  '100%'],
+            content: ['${ctx}/rest/leaveMsg/to_update?id=' + id, 'yes']
+        });
+    }
 
     $(function () {
         var headIndex = $("#headIndex").height();

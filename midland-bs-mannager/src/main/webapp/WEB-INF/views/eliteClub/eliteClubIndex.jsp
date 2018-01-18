@@ -17,7 +17,7 @@
 		<section class = "content">
 			<p class = "detail-title">
 				<span>精英会>>精英会活动</span>
-				<a class = "setup"  target="contentF" href="${ctx}/rest/eliteClub/to_add">新增</a>
+				<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>
 			</p>
 		<form action="${ctx }/rest/eliteClub/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
@@ -65,7 +65,7 @@
             layer.open({
                 type: 2,
                 skin: 'layer-style',
-                area: ['500px','700px'],
+                area: ['100%','100%'],
                 shadeClose: false, //点击遮罩关闭
                 title:['新增'],
                 resize: false,

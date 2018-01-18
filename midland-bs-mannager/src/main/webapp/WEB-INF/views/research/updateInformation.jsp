@@ -44,15 +44,7 @@
     .layui-layer-msg{
         top:260px!important;
     }
-    .vipcate{
-        width: 250px;
-        height: 28px;
-        line-height: 28px;
-        border: 1px solid #dbe2e6;
-        border-radius: 4px;
-        text-indent: 10px;
-        outline-color: #0099e0;
-    }
+
 
     .content ul.adminfo li:last-child>a:not(:nth-child(2)) {
         margin-left: 0px!important;
@@ -107,7 +99,9 @@
         <form id="formId" action="${ctx}/rest/banner/addBanner" method="post" enctype="multipart/form-data" method="post">
             <ul class = "adminfo row">
                 <input type="hidden" value="${item.id}" name="id" id="id">
-                <li><span>市场调究分类：</span><input class="vipcate" id="cateName" value="${item.cateName}" name="cateName" onclick="showTree()" readonly="readonly"/>
+                <li>
+                    <span>市场调究分类：</span>
+                    <input class="vipcate" id="cateName" type="text" value="${item.cateName}" name="cateName" onclick="showTree()" readonly="readonly"/>
                     <input value="${item.cateId}" name="cateId" id="cateId" type="hidden"/><label style="color: red" class = "_star " >*</label>
 
                 </li>
@@ -120,7 +114,7 @@
                 <li>
                     <span style = "float:left;">城市：</span>
                     <input type="hidden" name="cityName" id="cityName" value="">
-                    <select onchange="setCityName()" name="cityId" id="cityId" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
+                    <select onchange="setCityName()" name="cityId" id="cityId" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
                         <option value="">全部</option>
                         <c:forEach items="${cityList}" var="city">
                             <option <c:if test="${item.cityId == city.id}"> selected ='selected' </c:if>  value="${city.id}">${city.name}</option>
@@ -128,7 +122,7 @@
                     </select>
                 </li>
                 <li><span>平台：</span>
-                    <select name="platform" id="platform" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <select name="platform" id="platform">
                         <option <c:if test="${item.platform==0}">selected="selected"</c:if> value="0" >网站</option>
                         <option <c:if test="${item.platform==1}">selected="selected"</c:if> value="1" >微站</option>
                     </select>
@@ -182,7 +176,7 @@
                 <li>
                     <span></span>
                     <a onclick="subumintInformation();" target="contentF" class = "public_btn bg2">保存</a>
-                    <a style="margin-left: 20px" href="${ctx}/rest/research/index" target="contentF" class="public_btn bg3" id="cancel">取消</a>
+                    <a style="margin-left: 20px" onclick="closeWin()" target="contentF" class="public_btn bg3" id="cancel">取消</a>
                 </li>
             </ul>
         </form>
@@ -190,6 +184,12 @@
 </div>
 </body>
 <script type="text/javascript">
+
+    function closeWin() {
+        parent.layer.closeAll();
+
+    }
+
     UE.getEditor('myEditor');
 
     function selectTypes(){
@@ -226,7 +226,10 @@
             success: function (data) {
                 if(data.state==0){
                     layer.msg("更新成功！",{icon:1});
-                    setTimeout(function(){window.open("${ctx}/rest/research/index","contentF");},2000);
+                    setTimeout(function(){
+                        parent.layer.closeAll();
+                        parent.$("#inquery").click();
+                    },2000);
                 } else {
                     layer.msg("更新失败！", {icon: 2});
                 }

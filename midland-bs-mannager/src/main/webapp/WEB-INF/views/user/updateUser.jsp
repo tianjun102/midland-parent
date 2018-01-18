@@ -152,7 +152,8 @@
                         layer.msg("修改成功！！！", {icon: 1});
                         $('#save').removeAttr("onclick");
                         setTimeout(function () {
-                            parent.location.reload();
+                            parent.layer.closeAll();
+                            parent.$("#inquery").click();
                         }, 1000);
 
                     } else {
@@ -255,7 +256,7 @@
 
     //取消
     function closeWin() {
-        parent.location.reload();
+        parent.layer.closeAll();
     }
 </script>
 

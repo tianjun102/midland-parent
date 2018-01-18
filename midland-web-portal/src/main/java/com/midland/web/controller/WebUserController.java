@@ -163,7 +163,7 @@ public class WebUserController extends WebCommonsController {
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	@RequestMapping(value = "/logout")
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
 		Result<WebUser> result = new Result<>();
 		HttpSession session = request.getSession();

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@include file="../layout/tablib.jsp" %>
-<%@include file="../layout/source.jsp"%>
+<%@include file="../layout/source.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,14 +14,15 @@
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/resumeManager/update" method="post" id="dataForm">
-        <ul class="userinfo row">
+        <ul class="userinfo width-md row">
             <input type="hidden" name="id" id="id" value="${item.id}">
-            <li><span style = "float:left;">邮件标题：</span>
-            <input name="title" value="" id="title">
+            <li><span style="float:left;">邮件标题：</span>
+                <input name="title" value="" id="title" type="text">
             </li>
-            <li><span style = "float:left;">回复内容：</span> <!-- <textarea name="custNote" id="custNote" rows="" cols="" placeholder="备注说明"></textarea> -->
+            <li><span style="float:left;">回复内容：</span>
+                <!-- <textarea name="custNote" id="custNote" rows="" cols="" placeholder="备注说明"></textarea> -->
                 <textarea id="reply" name="reply"
-                          style="width: 265px; height: 110px; resize: none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;"
+                          style="height: 110px; resize: none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;"
                           rows="" cols="">${item.reply}</textarea></li>
             <li>
                 <span></span>
@@ -48,21 +49,27 @@
                     layer.msg("保存成功！！！", {icon: 1});
                     $('#save').removeAttr("onclick");
                     setTimeout(function () {
-                        parent.location.reload();
+                        parent.layer.closeAll();
+                        parent.$("#inquery").click();
                     }, 1000);
 
                 } else {
                     layer.msg("保存失败！", {icon: 2});
                 }
             },
-             error: function (data) {                        if (data.responseText!= null){                            layer.msg(data.responseText, {icon: 2});                        }else {                            layer.msg("保存失败！", {icon: 2});                        }                    }
+            error: function (data) {
+                if (data.responseText != null) {
+                    layer.msg(data.responseText, {icon: 2});
+                } else {
+                    layer.msg("保存失败！", {icon: 2});
+                }
+            }
         });
     }
 
     //取消
     function closeWin() {
-        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-        parent.layer.close(index);
+        parent.layer.closeAll();
     }
 </script>
 </body>

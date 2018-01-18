@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@include file="../layout/tablib.jsp" %>
-<%@include file="../layout/source.jsp"%>
+<%@include file="../layout/source.jsp" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -47,7 +47,7 @@
                     <li>
                         <span></span>
                         <a onclick="subumintBanner();" target="contentF" class="public_btn bg2">保存</a>
-                        <a style="margin-left: 20px" href="${ctx}/rest/questions/index" target="contentF"
+                        <a style="margin-left: 20px" onclick="closeWin()" target="contentF"
                            class="public_btn bg3" id="cancel">取消</a>
                     </li>
                 </ul>
@@ -59,6 +59,10 @@
 
 
 <script type="text/javascript">
+
+    function closeWin() {
+        parent.layer.closeAll();
+    }
 
     HasCheked = true;
     UE.getEditor('myEditor');
@@ -76,7 +80,10 @@
                 if (data.state == 0) {
                     layer.msg("保存成功！", {icon: 1});
                     setTimeout(function () {
-                        setTimeout(function(){window.open("${ctx}/rest/questions/index","contentF");},1000);
+                        setTimeout(function () {
+                            parent.layer.closeAll();
+                            parent.$("#inquery").click();
+                        }, 1000);
                     }, 1000);
                 } else {
                     layer.msg("保存失败！", {icon: 2});
@@ -105,6 +112,7 @@
         update(data);
 
     }
+
     function update(data) {
         $.ajax({
             type: "post",
@@ -117,7 +125,8 @@
                     layer.msg("删除成功！！！", {icon: 1});
                     $('#save').removeAttr("onclick");
                     setTimeout(function () {
-                        parent.location.reload();
+                        parent.layer.closeAll();
+                        parent.$("#inquery").click();
                     }, 1000);
 
                 } else {

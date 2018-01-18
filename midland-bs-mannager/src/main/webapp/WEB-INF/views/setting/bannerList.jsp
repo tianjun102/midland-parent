@@ -94,7 +94,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 							<td>${banner.clikNum}</td>
 							<td>
 								<c:if test="${banner.isDelete==0}">
-								<a target="contentF" class = "edit_img" title = "编辑" href="${ctx}/rest/setting/enterEditBanner?id=${banner.id}"></a>
+								<a target="contentF" class = "edit_img" title = "编辑" onclick="to_edit(${banner.id })"></a>
 								</c:if>
 								<c:if test="${banner.isDelete==0}">
 									<a target="contentF" title="删除" onclick="deleteBanner(${banner.id },1)" class="delete_img"></a>
@@ -136,6 +136,20 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			}
 		})
 	})
+
+	function to_edit(id) {
+        layer.open({
+            type: 2,
+            skin: 'layer-style',
+            area: ['100%','100%'],
+            shadeClose: false, //点击遮罩关闭
+            title:['新增'],
+            resize: false,
+            scrollbar:false,
+            content:['${ctx}/rest/setting/enterEditBanner?id='+id, 'yes']
+        });
+    }
+
 
     //排序
     function sort(id,orderById,sort) {

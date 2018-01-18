@@ -1,13 +1,13 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
-<%@include file="../layout/tablib.jsp"%>
-<%@include file="../layout/source.jsp"%>
-<%@include file="../layout/zTree.jsp"%>
+<%@include file="../layout/tablib.jsp" %>
+<%@include file="../layout/source.jsp" %>
+<%@include file="../layout/zTree.jsp" %>
 
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
@@ -18,31 +18,24 @@
 <!-- BEGIN HEAD -->
 <head>
     <base href="<%=basePath%>">
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>添加会员</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta content="" name="description" />
-    <meta content="" name="author" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="" name="description"/>
+    <meta content="" name="author"/>
     <meta name="MobileOptimized" content="320">
     <link rel="stylesheet" href="${ctx}/assets/css/ztree/css/demo.css">
     <link rel="stylesheet" href="${ctx }/assets/css/common.css">
     <link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css"/>
     <style>
-        .layui-layer{
-            top:260px!important;
+        .layui-layer {
+            top: 260px !important;
         }
-        .vipcate{
-            width: 250px;
-            height: 28px;
-            line-height: 28px;
-            border: 1px solid #dbe2e6;
-            border-radius: 4px;
-            text-indent: 10px;
-            outline-color: #0099e0;
-        }
-        .content ul.adminfo li:last-child>a:not(:nth-child(2)) {
-            margin-left: 0px!important;
+
+
+        .content ul.adminfo li:last-child > a:not(:nth-child(2)) {
+            margin-left: 0px !important;
         }
 
     </style>
@@ -51,7 +44,7 @@
         var setting = {
             check: {
                 enable: true,
-                chkboxType: { "Y": "sp", "N": "sp" }
+                chkboxType: {"Y": "sp", "N": "sp"}
 
 
             },
@@ -64,10 +57,17 @@
                 beforeClick: beforeClick
             }
         };
-        var catProNodes =[{id:0, pId:0,name:'分类',open:true,nocheck:true,iconSkin:"pIcon01"},${categoryData}];
+        var catProNodes = [{
+            id: 0,
+            pId: 0,
+            name: '分类',
+            open: true,
+            nocheck: true,
+            iconSkin: "pIcon01"
+        }, ${categoryData}];
 
 
-        $(document).ready(function(){
+        $(document).ready(function () {
             $.fn.zTree.init($("#categoryTree"), setting, catProNodes);
         });
 
@@ -77,25 +77,26 @@
             $("#showDiv").hide();
         }
 
-        function showTree(event){
+        function showTree(event) {
             $("#showDiv").show();
         }
 
-        function hideTree(event){
+        function hideTree(event) {
             $("#showDiv").hide();
         }
 
     </script>
 </head>
-<body >
+<body>
 <div class="box">
-    <section class = "content">
-        <p class = "detail-title">
+    <section class="content">
+        <p class="detail-title">
             <span>添加会员</span>
         </p>
-        <form id="formId" action="${ctx}/rest/banner/addBanner" method="post" enctype="multipart/form-data" method="post">
-            <input type="hidden" name="cityName" id="cityName" value="" >
-            <ul class = "adminfo row">
+        <form id="formId" action="${ctx}/rest/banner/addBanner" method="post" enctype="multipart/form-data"
+              method="post">
+            <input type="hidden" name="cityName" id="cityName" value="">
+            <ul class="adminfo row">
 
                 <%--<li><span>会员分类：</span>
                     <select id="cateId" name="cateId" class="dropdown" onchange="setCateName();">
@@ -105,15 +106,16 @@
                         <option value="4">会员分类4</option>
                     </select>
                 </li>--%>
-                <li><span>会员分类：</span><input class="vipcate" name="cateName" onclick="showTree()" readonly="readonly"/>
-                    <input name="cateId" type="hidden"/><label style="color: red" class = "_star " >*</label>
+                <li><span>会员分类：</span><input class="vipcate" type="text" name="cateName" onclick="showTree()" readonly="readonly"/>
+                    <input name="cateId" type="hidden"/><label style="color: red" class="_star ">*</label>
 
                 </li>
-                <li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >
-                    <div class="zTreeDemoBackground left" style  = "position:absolute;top: -10px;"   onblur="test(event)">
-                        <ul id="categoryTree" class="ztree" style  = "width:235px; height: 140px!important;"></ul>
+                <li id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;">
+                    <div class="zTreeDemoBackground left" style="position:absolute;top: -10px;" onblur="test(event)">
+                        <ul id="categoryTree" class="ztree" style="width:235px; height: 140px!important;"></ul>
                     </div>
-                    <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: 290px;" onclick="hideTree()">
+                    <img src="${ctx}/assets/img/Closed_16px.png" alt="关闭"
+                         style="vertical-align: top;position:absolute; left: 290px;" onclick="hideTree()">
                 </li>
                 <li><span>会员等级：</span>
                     <input type="text" name="level" id="level"/>
@@ -145,11 +147,12 @@
 
             </ul>
 
-            <ul class = "adminfo row">
+            <ul class="adminfo row">
                 <li>
                     <span></span>
-                    <a onclick="updateData();" target="contentF" class = "public_btn bg2">保存</a>
-                    <a style="margin-left: 20px" href="${ctx}/rest/eliteVip/index" target="contentF" class="public_btn bg3" id="cancel">取消</a>
+                    <a onclick="updateData();" target="contentF" class="public_btn bg2">保存</a>
+                    <a style="margin-left: 20px" onclick="closeWin()" target="contentF"
+                       class="public_btn bg3" id="cancel">取消</a>
                 </li>
             </ul>
         </form>
@@ -171,21 +174,27 @@
                     layer.msg("保存成功！！！", {icon: 1});
                     $('#save').removeAttr("onclick");
                     setTimeout(function () {
-                        parent.location.reload();
+                        parent.layer.closeAll();
+                        parent.$("#inquery").click();
                     }, 1000);
 
                 } else {
                     layer.msg("保存失败！", {icon: 2});
                 }
             },
-             error: function (data) {                        if (data.responseText!= null){                            layer.msg(data.responseText, {icon: 2});                        }else {                            layer.msg("保存失败！", {icon: 2});                        }                    }
+            error: function (data) {
+                if (data.responseText != null) {
+                    layer.msg(data.responseText, {icon: 2});
+                } else {
+                    layer.msg("保存失败！", {icon: 2});
+                }
+            }
         });
     }
 
     //取消
     function closeWin() {
-        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-        parent.layer.close(index);
+        parent.layer.closeAll();
     }
 
     $(function () {
@@ -197,7 +206,7 @@
             'onUploadSuccess': function (file, data, response) {
                 console.log(data);
                 $("#imgUrl").attr("value", data);
-                $("#iconImg1").attr("src", "${fileUrl}"+data);
+                $("#iconImg1").attr("src", "${fileUrl}" + data);
             },
             'onQueueComplete': function (queueData) {
                 if (queueData.uploadsSuccessful < 1) {
@@ -209,7 +218,7 @@
         });
     })
 
-    function setCateName(){
+    function setCateName() {
         $("#cateName").val($("#cateId option:selected").text())
     }
 </script>

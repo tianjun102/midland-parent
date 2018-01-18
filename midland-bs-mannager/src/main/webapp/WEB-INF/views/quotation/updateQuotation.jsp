@@ -13,7 +13,7 @@
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/quotation/update" method="post" id="dataForm">
-        <ul class="userinfo updinfo row">
+        <ul class="userinfo  row width-md">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <li class=""><span>数据时间：</span>
                 <input class="Wdate half" id="time1" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd'})"
@@ -71,7 +71,8 @@
                     layer.msg("保存成功！！！", {icon: 1});
                     $('#save').removeAttr("onclick");
                     setTimeout(function () {
-                        parent.location.reload();
+                        parent.layer.closeAll();
+                        parent.$("#inquery").click();
                     }, 1000);
 
                 } else {
@@ -91,8 +92,7 @@
 
     //取消
     function closeWin() {
-        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-        parent.layer.close(index);
+        parent.layer.closeAll();
     }
 </script>
 </body>

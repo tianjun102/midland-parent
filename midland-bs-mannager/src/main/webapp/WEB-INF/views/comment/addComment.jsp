@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@include file="../layout/tablib.jsp" %>
-<%@include file="../layout/source.jsp"%>
+<%@include file="../layout/source.jsp" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -18,22 +18,22 @@
         <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <li><span>comment：</span>
-               <input type="text" name="comment" id="comment" value="${item.menuName}"/>
+                <input type="text" name="comment" id="comment" value="${item.menuName}"/>
             </li>
             <li><span>user：</span>
-               <input type="text" name="user" id="user" value="${item.menuName}"/>
+                <input type="text" name="user" id="user" value="${item.menuName}"/>
             </li>
             <li><span>status：</span>
-               <input type="text" name="status" id="status" value="${item.menuName}"/>
+                <input type="text" name="status" id="status" value="${item.menuName}"/>
             </li>
             <li><span>source：</span>
-               <input type="text" name="source" id="source" value="${item.menuName}"/>
+                <input type="text" name="source" id="source" value="${item.menuName}"/>
             </li>
             <li><span>isDelete：</span>
-               <input type="text" name="isDelete" id="isDelete" value="${item.menuName}"/>
+                <input type="text" name="isDelete" id="isDelete" value="${item.menuName}"/>
             </li>
             <li><span>informationId：</span>
-               <input type="text" name="informationId" id="informationId" value="${item.menuName}"/>
+                <input type="text" name="informationId" id="informationId" value="${item.menuName}"/>
             </li>
             <li>
                 <span></span>
@@ -61,21 +61,27 @@
                     layer.msg("保存成功！！！", {icon: 1});
                     $('#save').removeAttr("onclick");
                     setTimeout(function () {
-                        parent.location.reload();
+                        parent.layer.closeAll();
+                        parent.$("#inquery").click();
                     }, 1000);
 
                 } else {
                     layer.msg("保存失败！", {icon: 2});
                 }
             },
-             error: function (data) {                        if (data.responseText!= null){                            layer.msg(data.responseText, {icon: 2});                        }else {                            layer.msg("保存失败！", {icon: 2});                        }                    }
+            error: function (data) {
+                if (data.responseText != null) {
+                    layer.msg(data.responseText, {icon: 2});
+                } else {
+                    layer.msg("保存失败！", {icon: 2});
+                }
+            }
         });
     }
 
     //取消
     function closeWin() {
-        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-        parent.layer.close(index);
+        parent.layer.closeAll();
     }
 </script>
 </body>
