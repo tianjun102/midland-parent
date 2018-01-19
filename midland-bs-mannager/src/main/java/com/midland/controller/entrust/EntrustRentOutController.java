@@ -203,7 +203,7 @@ public class EntrustRentOutController extends ServiceBaseFilter {
 				centermsg.setType(4);
 				centermsg.setJumpId(entrust.getId().toString());
 				if (StringUtils.isNotEmpty(entrust.getAgentName())) {
-					centermsg.setTitle(Contant.APPOINT_TITLE.replace("||", entrust.getAgentName()));
+					centermsg.setTitle(Contant.APPOINT_TITLE.replace("||", entrust.getAgentName()==null?"":entrust.getAgentName()));
 				}
 				centermsg.setMsg(msg.toString());
 				centerMsgServiceImpl.insertCenterMsg(centermsg);

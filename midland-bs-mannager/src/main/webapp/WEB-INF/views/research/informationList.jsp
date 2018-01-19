@@ -88,7 +88,7 @@ function toUpdatePage(id) {
         title:['评论'],
         resize: true,
         scrollbar: true,
-        content:['${ctx}/rest/research/to_update?informationId='+id, ]
+        content:['${ctx}/rest/research/to_update?id='+id, ]
     });
 }
     function deleteInfrmateion(id,isDelete){

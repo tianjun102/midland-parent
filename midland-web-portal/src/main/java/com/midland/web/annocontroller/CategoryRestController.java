@@ -95,7 +95,7 @@ public class CategoryRestController extends ServiceBaseFilter {
 		 Result result=new Result();
 		try {
 			log.info("findCategoryList  {}",obj);
-			MidlandHelper.doPage(request);
+			//MidlandHelper.doPage(request);
 			/*Page<Category> list = (Page<Category>)categoryServiceImpl.findCategoryList(obj);*/
             obj.setIsDelete(Contant.isNotDelete);
             obj.setIsShow(Contant.isShow);

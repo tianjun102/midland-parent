@@ -200,7 +200,7 @@ public class EntrustBuyController extends ServiceBaseFilter {
 				CenterMsg centermsg = new CenterMsg();
 				centermsg.setType(4);
 				centermsg.setJumpId(entrust.getId().toString());
-				centermsg.setTitle(Contant.APPOINT_TITLE.replace("||",entrust.getAgentName()));
+				centermsg.setTitle(Contant.APPOINT_TITLE.replace("||",entrust.getAgentName()==null?"":entrust.getAgentName()));
 				centermsg.setMsg(msg.toString());
 				centerMsgServiceImpl.insertCenterMsg(centermsg);
 			}

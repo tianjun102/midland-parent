@@ -119,6 +119,7 @@
     }
 
     function to_edit(id){
+        debugger;
         layer.open({
             type: 2,
             title: ['修改热搜词'],

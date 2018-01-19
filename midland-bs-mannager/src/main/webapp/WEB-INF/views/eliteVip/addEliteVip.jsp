@@ -33,6 +33,15 @@
             top: 260px !important;
         }
 
+        .vipcate {
+            width: 250px;
+            height: 28px;
+            line-height: 28px;
+            border: 1px solid #dbe2e6;
+            border-radius: 4px;
+            text-indent: 10px;
+            outline-color: #0099e0;
+        }
 
         .content ul.adminfo li:last-child > a:not(:nth-child(2)) {
             margin-left: 0px !important;
@@ -106,7 +115,7 @@
                         <option value="4">会员分类4</option>
                     </select>
                 </li>--%>
-                <li><span>会员分类：</span><input class="vipcate" type="text" name="cateName" onclick="showTree()" readonly="readonly"/>
+                <li><span>会员分类：</span><input class="vipcate" name="cateName" onclick="showTree()" readonly="readonly"/>
                     <input name="cateId" type="hidden"/><label style="color: red" class="_star ">*</label>
 
                 </li>
