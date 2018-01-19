@@ -84,6 +84,30 @@
     }
 
     function showTree(event){
+        var data = $("#formId").serialize();
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/siteMap/choose",
+            async: false, // 此处必须同步
+            dataType: "json",
+            data: data,
+            success: function (data) {
+                var dfd={id:0, pId:0,name:'分类',open:true,nocheck:true,iconSkin:"pIcon01"};
+                catProNodes =[dfd];
+                $.each(data.list,function (i,listItem) {
+                    catProNodes.push(listItem);
+                });
+                $.fn.zTree.init($("#categoryTree"), setting, catProNodes);
+                $("#showDiv").show();
+            },
+            error: function (data) {
+                if (data.responseText != null) {
+                    layer.msg(data.responseText, {icon: 2});
+                } else {
+                    layer.msg("保存失败！", {icon: 2});
+                }
+            }
+        });
         $("#showDiv").show();
     }
 
@@ -100,6 +124,25 @@
         <form id="formId" action="" method="post" enctype="multipart/form-data" method="post">
             <ul class = "adminfo row">
                 <input type="hidden" name="cateName" id="cateName">
+                <input type="hidden" name="type" value="0" alt="市场研究:type=0">
+                <li>
+                    <span style = "float:left;">城市：</span>
+                    <input type="hidden" name="cityName" id="cityName" value="${cityName}">
+                    <c:if test="${empty isSuper}"><input type="hidden" name="cityId"  value="${cityId}"></c:if>
+                    <select onchange="setCityName()" name="cityId" id="cityId" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
+                        <c:forEach items="${cityList}" var="city">
+                            <c:if test="${empty isSuper}"><option selected="selected" value="${cityId}">${cityName}</option></c:if>
+                            <option value="${city.id}">${city.name}</option>
+                        </c:forEach>
+                    </select>
+                </li>
+                <li><span>平台：</span>
+                    <select name="source" id="source">
+                        <option value="0" >网站</option>
+                        <option value="1" >微站</option>
+                    </select>
+                    <span class = "_star ">*</span>
+                </li>
                 <li>
                     <span>市场调究分类：</span>
                     <input class="vipcate" id="vipcate" type="text" name="vipcate" onclick="showTree()" readonly="readonly"/>
@@ -114,29 +157,10 @@
                     <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: 320px;" onclick="hideTree()">
                 </li>
                 <li>
-                    <span style = "float:left;">城市：</span>
-                    <input type="hidden" name="cityName" id="cityName" value="${cityName}">
-                    <c:if test="${empty isSuper}"><input type="hidden" name="cityId"  value="${cityId}"></c:if>
-                    <select onchange="setCityName()" name="cityId" id="cityId" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
-                        <option value="">全部</option>
-                        <c:forEach items="${cityList}" var="city">
-                            <c:if test="${empty isSuper}"><option selected="selected" value="${cityId}">${cityName}</option></c:if>
-                            <option value="${city.id}">${city.name}</option>
-                        </c:forEach>
-                    </select>
-                </li>
-                <li><span>平台：</span>
-                    <select name="platform" id="platform">
-                        <option value="0" >网站</option>
-                        <option value="1" >微站</option>
-                    </select>
-                    <span class = "_star ">*</span>
-                </li>
-                <li>
                     <span>标题：</span>
                     <input type="text" name="title" id="title"  onblur="notEmpty('title','title','标题不能为空！');"  onfocus="notEmpty('vipcate','vipcate','请填写市场分类！')"  />
                 </li>
-                <li><span>平台：</span><input name="source" id="source" type="text">
+                <li><span>平台：</span><input name="platform" id="platform" type="text">
                 </li>
                 <li><span>附件：</span>
                     <div style="float: left;">
@@ -233,12 +257,24 @@
         });
         }
     }
-
+    $("#source").change(function () {
+        setEmpty();
+    })
 
     function setCityName(){
+        setEmpty();
         $("#cityName").val($("#cityId option:selected").text())
     }
 
+    function setEmpty() {
+        $("input[name='cateId']").val("");
+        $("input[name='cateName']").val("");
+        $("input[name='showCateName']").val("");
+        $("input[name='noteType']").val("");
+        $("input[name='modeId']").val("");
+        $("input[name='modeName']").val("");
+        $("#showDiv").hide();
+    }
 
     function getObjectURL(file) {
         var url = null;

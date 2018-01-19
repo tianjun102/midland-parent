@@ -29,7 +29,13 @@
 			<ul class = "userinfo row">
 
 				<%@include file="../layout/sherchArea.jsp" %>
-				<li><span>类别：</span><input style="width: 243px;" class="vipcate" id="vipcate"  name="vipcate" onclick="showTree()" readonly="readonly"/>
+				<li><span>平台：</span>
+					<select name="source" id="source" class="dropdown">
+						<option value="0">网站</option>
+						<option value="1">微站</option>
+					</select>
+				</li>
+				<li><span>类别：</span><input style="width: 243px;" type="text" class="vipcate" id="vipcate"  name="vipcate" onclick="showTree()" readonly="readonly"/>
 					<input name="cateId" type="hidden"/>
 
 				</li>
@@ -127,13 +133,56 @@
         }
 
         function showTree(event){
+            var data = $("#searchForm").serialize();
+            data+="&type=1";
+            debugger;
+            $.ajax({
+                type: "post",
+                url: "${ctx}/rest/siteMap/choose",
+                async: false, // 此处必须同步
+                dataType: "json",
+                data: data,
+                success: function (data) {
+                    var dfd={id:0, pId:0,name:'分类',open:true,nocheck:true,iconSkin:"pIcon01"};
+                    catProNodes =[dfd];
+                    $.each(data.list,function (i,listItem) {
+                        catProNodes.push(listItem);
+                    });
+                    $.fn.zTree.init($("#categoryTree"), setting, catProNodes);
+                    $("#showDiv").show();
+                },
+                error: function (data) {
+                    if (data.responseText != null) {
+                        layer.msg(data.responseText, {icon: 2});
+                    } else {
+                        layer.msg("保存失败！", {icon: 2});
+                    }
+                }
+            });
             $("#showDiv").show();
         }
 
         function hideTree(event){
             $("#showDiv").hide();
         }
+        $("#source").change(function () {
+            setEmpty();
+            $("#cityName").val($("#cityId option:selected").text());
+        })
 
+        $("#citys").change(function () {
+            setEmpty();
+            $("#cityName").val($("#cityId option:selected").text());
+        })
+        function setEmpty() {
+            $("input[name='cateId']").val("");
+            $("input[name='cateName']").val("");
+            $("input[name='showCateName']").val("");
+            $("input[name='noteType']").val("");
+            $("input[name='modeId']").val("");
+            $("input[name='modeName']").val("");
+            $("#showDiv").hide();
+        }
 	</script>
 	
 </body>

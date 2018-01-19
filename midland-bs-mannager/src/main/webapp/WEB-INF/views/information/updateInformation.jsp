@@ -61,6 +61,32 @@
         }
 
         function showTree(event) {
+            var data = $("#formId").serialize();
+            data+="&type=1";
+            debugger;
+            $.ajax({
+                type: "post",
+                url: "${ctx}/rest/siteMap/choose",
+                async: false, // 此处必须同步
+                dataType: "json",
+                data: data,
+                success: function (data) {
+                    var dfd={id:0, pId:0,name:'分类',open:true,nocheck:true,iconSkin:"pIcon01"};
+                    catProNodes =[dfd];
+                    $.each(data.list,function (i,listItem) {
+                        catProNodes.push(listItem);
+                    });
+                    $.fn.zTree.init($("#categoryTree"), setting, catProNodes);
+                    $("#showDiv").show();
+                },
+                error: function (data) {
+                    if (data.responseText != null) {
+                        layer.msg(data.responseText, {icon: 2});
+                    } else {
+                        layer.msg("保存失败！", {icon: 2});
+                    }
+                }
+            });
             $("#showDiv").show();
         }
 
@@ -90,6 +116,13 @@
                         </c:forEach>
                     </select>
                 </li>
+                <li><span>平台：</span>
+                    <select name="source" id="source" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                        <option <c:if test="${item.source==0}">selected="selected"</c:if> value="0" >网站</option>
+                        <option <c:if test="${item.source==1}">selected="selected"</c:if> value="1" >微站</option>
+                    </select>
+                    <span class = "_star ">*</span>
+                </li>
                 <li><span>父节点：</span><input style="width: 250px!important;" value="${item.cateName}" name="cateName" onclick="showTree()"
                                             readonly="readonly"/>
                     <input name="cateId" type="hidden"/>
@@ -103,18 +136,12 @@
                     <img src="${ctx}/assets/img/Closed_16px.png" alt="关闭"
                          style="vertical-align: top;position:absolute; left: 300px; top: -30px;" onclick="hideTree()">
                 </li>
-                <li><span>平台：</span>
-                    <select name="platform" id="platform" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
-                        <option <c:if test="${item.platform==0}">selected="selected"</c:if> value="0" >网站</option>
-                        <option <c:if test="${item.platform==1}">selected="selected"</c:if> value="1" >微站</option>
-                    </select>
-                    <span class = "_star ">*</span>
-                </li>
+
                 <li>
                     <span>标题：</span>
                     <input type="text" id="title" name="title" value="${item.title}" onfocus="checkSelect('cateParentid|cateId','请填写一级分类！|请填写二级分类！')" onblur="notEmpty('title','title','标题不能为空！');" />
                 </li>
-                <li><span>平台：</span><input name="source" id="source" type="text" value="${item.source}" />
+                <li><span>平台：</span><input name="platform" id="platform" type="text" value="${item.platform}" />
                 </li>
                 <li><span>附件：</span>
                     <div style="float: left;">
@@ -188,6 +215,23 @@
             $("#picLike").show();
         }
 
+    }
+    $("#source").change(function () {
+        setEmpty();
+    })
+    $("#cityId").change(function () {
+        setEmpty();
+        $("#cityName").val($("#cityId option:selected").text());
+    })
+
+    function setEmpty() {
+        $("input[name='cateId']").val("");
+        $("input[name='cateName']").val("");
+        $("input[name='showCateName']").val("");
+        $("input[name='noteType']").val("");
+        $("input[name='modeId']").val("");
+        $("input[name='modeName']").val("");
+        $("#showDiv").hide();
     }
 
     function subumintInformation(){

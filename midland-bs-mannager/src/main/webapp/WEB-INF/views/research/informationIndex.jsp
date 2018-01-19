@@ -28,8 +28,16 @@
 		<form action="${ctx }/rest/research/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
+
 				<%@include file="../layout/sherchArea.jsp" %>
-				<li><span>类别：</span><input style="width: 243px;" class="vipcate" id="vipcate"  name="vipcate" onclick="showTree()" readonly="readonly"/>
+				<li><span>平台：</span>
+					<select name="source" id="source" class="dropdown">
+						<option value="0">网站</option>
+						<option value="1">微站</option>
+					</select>
+				</li>
+
+				<li><span>类别：</span><input style="width: 243px;" type="text" class="vipcate" id="vipcate"  name="vipcate" onclick="showTree()" readonly="readonly"/>
 					<input name="cateId" type="hidden"/>
 
 				</li>
@@ -41,14 +49,13 @@
 				</li>
 				<li>
 					<span style = "float:left;">状态：</span>
-					<select name="status" id="status" style="height: 28px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+					<select name="status" id="status"  class="dropdown">
 						<option value="">全部</option>
 						<option value="0">上架</option>
 						<option value="1">下架</option>
 					</select>
 				</li>
 				<li><span>标题：</span><input type="text" name="title" id="title" placeholder="请输入标题" /></li>
-				<li><span>平台：</span><input name="source" id="source" type="text" placeholder="请输入平台">
 				<li>
 					<span>发布时间：</span><input class="Wdate half" id="time1"
 											 onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time2\')}'})"
@@ -129,12 +136,63 @@
         }
 
         function showTree(event){
+            var data = $("#searchForm").serialize();
+            data+="&type=0";
+            debugger;
+            $.ajax({
+                type: "post",
+                url: "${ctx}/rest/siteMap/choose",
+                async: false, // 此处必须同步
+                dataType: "json",
+                data: data,
+                success: function (data) {
+                    var dfd={id:0, pId:0,name:'分类',open:true,nocheck:true,iconSkin:"pIcon01"};
+                    catProNodes =[dfd];
+                    $.each(data.list,function (i,listItem) {
+                        catProNodes.push(listItem);
+                    });
+                    $.fn.zTree.init($("#categoryTree"), setting, catProNodes);
+                    $("#showDiv").show();
+                },
+                error: function (data) {
+                    if (data.responseText != null) {
+                        layer.msg(data.responseText, {icon: 2});
+                    } else {
+                        layer.msg("保存失败！", {icon: 2});
+                    }
+                }
+            });
             $("#showDiv").show();
         }
 
         function hideTree(event){
             $("#showDiv").hide();
         }
+
+
+        $("#source").change(function () {
+            setEmpty();
+        })
+
+        $("#citys").change(function () {
+            setEmpty();
+            $("#cityName").val($("#cityId option:selected").text());
+        })
+
+        function setMenuName(){
+            setEmpty();
+            $("#modeName").val($("#modeId option:selected").text())
+        }
+        function setEmpty() {
+            $("input[name='cateId']").val("");
+            $("input[name='cateName']").val("");
+            $("input[name='showCateName']").val("");
+            $("input[name='noteType']").val("");
+            $("input[name='modeId']").val("");
+            $("input[name='modeName']").val("");
+            $("#showDiv").hide();
+        }
+
 
 	</script>
 </body>

@@ -210,12 +210,13 @@
 						class="glyphicon glyphicon-menu-right"></span></a>
 				</dt>
 				<dd>
-					<shiro:hasPermission name="researchList">
-						<a id = "left24" href="${ctx}/rest/research/index" target="contentF"><span>市场调究列表</span></a>
-					</shiro:hasPermission>
 					<shiro:hasPermission name="categoryList">
 						<a id = "left25" href="${ctx}/rest/category/index?type=0" target="contentF"><span>分类</span></a>
 					</shiro:hasPermission>
+					<shiro:hasPermission name="researchList">
+						<a id = "left24" href="${ctx}/rest/research/index" target="contentF"><span>市场调究列表</span></a>
+					</shiro:hasPermission>
+
 				</dd>
 			</dl>
 		</shiro:hasPermission>

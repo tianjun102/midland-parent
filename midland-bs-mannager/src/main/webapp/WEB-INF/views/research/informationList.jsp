@@ -39,7 +39,7 @@
                         <td>${item.cityName }</td>
                         <td>${item.clickNum }</td>
                         <td>${item.releaseTime }</td>
-                        <td><c:if test="${item.platform==0}">网站</c:if><c:if test="${item.platform==1}">微站</c:if> </td>
+                        <td><c:if test="${item.source==0}">网站</c:if><c:if test="${item.source==1}">微站</c:if> </td>
                         <td>
                             <a target="contentF" title="评论" class="comment_img" onclick="to_comment(${item.id});" ></a>
                             <c:if test="${item.isDelete==0}">

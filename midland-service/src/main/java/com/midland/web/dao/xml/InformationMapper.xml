@@ -8,7 +8,7 @@
 		<result column="cate_parentId" property="cateParentid" jdbcType="INTEGER" />
 		<result column="type" property="type" jdbcType="VARCHAR" />
 		<result column="title" property="title" jdbcType="VARCHAR" />
-		<result column="source" property="source" jdbcType="VARCHAR" />
+		<result column="source" property="source" jdbcType="INTEGER" />
 		<result column="enclosure" property="enclosure" jdbcType="VARCHAR" />
 		<result column="meta_keywords" property="metaKeywords" jdbcType="VARCHAR" />
 		<result column="meta_desc" property="metaDesc" jdbcType="VARCHAR" />
@@ -25,7 +25,7 @@
 		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
 		<result column="cate_name" property="cateName" jdbcType="VARCHAR" />
 		<result column="status" property="status" jdbcType="VARCHAR" />
-		<result column="platform" property="platform" jdbcType="INTEGER" />
+		<result column="platform" property="platform" jdbcType="VARCHAR" />
 		<result column="author" property="author" jdbcType="VARCHAR" />
 
 	</resultMap>

@@ -26,7 +26,7 @@ public class Information{
 	/**
 	 * 平台
 	 **/
-	private String source;
+	private Integer source;
 	/**
 	 * 附件地址
 	 **/
@@ -96,7 +96,7 @@ public class Information{
 	/**
 	 * 上架状态；0=网站；1=微站
 	 */
-	private Integer platform;
+	private String platform;
 
 	private String startTime;
 
@@ -146,11 +146,11 @@ public class Information{
 		this.title = title;
 	}
 
-	public String getSource() {
+	public Integer getSource() {
 		return source;
 	}
 
-	public void setSource(String source) {
+	public void setSource(Integer source) {
 		this.source = source;
 	}
 
@@ -291,11 +291,11 @@ public class Information{
 		this.cateParentName = cateParentName;
 	}
 
-	public Integer getPlatform() {
+	public String getPlatform() {
 		return platform;
 	}
 
-	public void setPlatform(Integer platform) {
+	public void setPlatform(String platform) {
 		this.platform = platform;
 	}
 
