@@ -2,6 +2,7 @@ package com.midland.web.filter;
 
 import java.io.PrintWriter;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -11,6 +12,7 @@ import com.midland.web.commons.core.util.ResultStatusUtils;
 import com.midland.web.model.WebUser;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import com.midland.web.commons.FastJsonUtils;
@@ -22,18 +24,22 @@ public class AdminAspect {
 
 	HttpServletRequest request;
 	HttpServletResponse response;
+	@Resource
+	private RedisTemplate<String, WebUser> userSessionRedisTemplate;
 
 	@Before("execution(* com.midland.web.controller.*.*(..))")
 	public void adminPrivilegeCheck() throws Exception {
-		HttpSession session = SysContext.getSession();
 		request = SysContext.getRequest();
 		response = SysContext.getResponse();
-
+		String sessionId = request.getParameter("sessionId");
+		WebUser user =null;
+		if (sessionId != null){
+			user = (WebUser)userSessionRedisTemplate.opsForHash().get(ConstantUtils.USER_SESSION,sessionId);
+		}
 		Result<?> result = new Result<>();
-		WebUser user = null;
 		String url = request.getRequestURI();
-		if (url.indexOf("/login") < 0) {
-			user = (WebUser) session.getAttribute(ConstantUtils.USER_SESSION);
+		if (url.indexOf("/login") < 0 && url.indexOf("/logout") < 0) {
+
 			if (null == user) {
 				PrintWriter out = null;
 				result.setCode(ResultStatusUtils.STATUS_CODE_303);

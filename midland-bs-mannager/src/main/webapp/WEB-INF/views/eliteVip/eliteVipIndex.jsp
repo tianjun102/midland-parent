@@ -73,24 +73,17 @@
 						</c:forEach>
 					</select>
 				</li>--%>
-				<li><span>会员分类：</span><input type="text" class="vipcate" style="width: 200px;" name="cateName" onclick="showTree()" readonly="readonly"/>
-					<input name="cateId" type="hidden"/>
+				<li><span>会员分类：</span><input type="text" class="vipcate" name="level"/>
+
 				</li>
-				<li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >
-					<div class="zTreeDemoBackground left" style  = "position:absolute;top: -10px;"   onblur="test(event)">
-						<ul id="categoryTree" class="ztree" style  = "width:200px; height: 140px!important;margin-left: -290px!important;margin-top: 50px!important;"></ul>
-					</div>
-					<img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute;left:-38px;top: 40px;" onclick="hideTree()">
-				</li>
+
 				<li><span>中文名：</span>
 					<input type="text" name="cname" style="width: 200px;" id="cname" placeholder="请输入会员中文名称"/></li>
 				</li>
 				<li><span>英文名：</span>
 					<input type="text" name="ename"　style="width: 200px;" id="ename" placeholder="请输入会员英文名称" /></li>
 				</li>
-				<li><span>会员级别：</span>
-					<input type="text" name="level"　style="width: 200px;" id="level" placeholder="请输入会员级别" /></li>
-				</li>
+
 				<li><span>所属地区：</span>
 					<input type="text" name="address"　style="width: 200px;" id="address" placeholder="请输入会员所属地区" /></li>
 				</li>

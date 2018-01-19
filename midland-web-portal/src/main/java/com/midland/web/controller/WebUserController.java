@@ -50,6 +50,8 @@ public class WebUserController extends WebCommonsController {
 
     @Resource
 	private RedisTemplate<String, Object> redisTemplate;
+	@Resource
+	private RedisTemplate<String, WebUser> userSessionRedisTemplate;
 
 	@Autowired
 	private SmsSingleSender sender;
@@ -89,24 +91,12 @@ public class WebUserController extends WebCommonsController {
 					if (userInfo.getPassword().equals(encryptedPwd)) {
 
 						// 用户登录验证成功后保存用户信息到SESSION
-						
-						/*if(userInfo.getId()!=null){
-							userInfo.setMsgNum(noticeService.countNoticeNum(userInfo.getId()));
-						}*/
-						
 						request.getSession().setAttribute(ConstantUtils.USER_SESSION, userInfo);
-						/*if (userInfo.getUserType() == 2) {
-							WebUser catUser = userService.findParentUserByChild(userInfo.getUsername());
-							if(catUser!=null){
-							userInfo.setParentId(catUser.getId());
-							userInfo.setCustName(catUser.getCustName());
-							}
-						}*/
 						String sessionId = request.getSession().getId();
+						userSessionRedisTemplate.opsForHash().put(ConstantUtils.USER_SESSION,sessionId,userInfo);
 
 						// "1"表示用户勾选记住密码
 						if (remember) {
-
 							// 创建Cookie
 							Cookie usernameCookie = new Cookie(ConstantUtils.USER_INFO_COOKIE_USERNAME,
 									user.getUsername());
@@ -164,13 +154,14 @@ public class WebUserController extends WebCommonsController {
 	 * @return
 	 */
 	@RequestMapping(value = "/logout")
-	public String logout(HttpServletRequest request, HttpServletResponse response) {
+	public String logout(HttpServletRequest request,HttpSession session, HttpServletResponse response) {
 		Result<WebUser> result = new Result<>();
-		HttpSession session = request.getSession();
+//		HttpSession session = request.getSession();
 		/** 删除session用户信息 */
 		session.removeAttribute(ConstantUtils.USER_SESSION);
 		session.invalidate();
-
+		WebUser user = (WebUser)userSessionRedisTemplate.opsForHash().get(ConstantUtils.USER_SESSION,request.getParameter("sessionId"));
+		userSessionRedisTemplate.opsForHash().delete(ConstantUtils.USER_SESSION,request.getParameter("sessionId"));
 		/** 删除cookie用户信息 */
 		Cookie[] cookies = request.getCookies();
 		if (null != cookies) {

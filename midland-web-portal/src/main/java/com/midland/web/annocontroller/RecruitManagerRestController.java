@@ -98,8 +98,8 @@ public class RecruitManagerRestController extends ServiceBaseFilter {
 		try {
 			log.info("findRecruitManagerList  {}",obj);
 			obj.setOnlineTime(MidlandHelper.getCurrentTime());
-			MidlandHelper.doPage(request);
 			obj.setIsDelete(Contant.isNotDelete);
+			MidlandHelper.doPage(request);
 			Page<RecruitManager> list = (Page<RecruitManager>)recruitManagerServiceImpl.findRecruitManagerList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

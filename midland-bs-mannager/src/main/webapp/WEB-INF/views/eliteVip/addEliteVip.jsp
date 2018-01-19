@@ -107,26 +107,12 @@
             <input type="hidden" name="cityName" id="cityName" value="">
             <ul class="adminfo width-lg row">
 
-                <%--<li><span>会员分类：</span>
-                    <select id="cateId" name="cateId" class="dropdown" onchange="setCateName();">
-                        <option value="1">会员分类1</option>
-                        <option value="2">会员分类2</option>
-                        <option value="3">会员分类3</option>
-                        <option value="4">会员分类4</option>
-                    </select>
-                </li>--%>
-                <li><span>会员分类：</span><input class="vipcate" name="cateName" onclick="showTree()" readonly="readonly"/>
-                    <input name="cateId" type="hidden"/><label style="color: red" class="_star ">*</label>
 
+                <li><span>会员级别：</span>
+                    <input class="vipcate" type="text" name="cateName"  />
                 </li>
-                <li id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;">
-                    <div class="zTreeDemoBackground left" style="position:absolute;top: -10px;" onblur="test(event)">
-                        <ul id="categoryTree" class="ztree" style="width:235px; height: 140px!important;"></ul>
-                    </div>
-                    <img src="${ctx}/assets/img/Closed_16px.png" alt="关闭"
-                         style="vertical-align: top;position:absolute; left: 290px;" onclick="hideTree()">
-                </li>
-                <li><span>会员等级：</span>
+
+                <li><span>会员分类：</span>
                     <select name="level" id="level" class="dropdown" >
                         <option value="0">精英会委员会成员</option>
                         <option value="1">精英会总经理级别成员</option>
