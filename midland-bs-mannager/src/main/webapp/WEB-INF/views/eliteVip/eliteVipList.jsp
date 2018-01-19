@@ -14,35 +14,42 @@
 <div class="table-responsive m40">
     <table class="table table-bordered table-add">
         <thead>
-            <tr>
-                <th style="width: 8%"><a href="#" onclick="checkall()" >全选</a> / <a href="#" onclick="delcheckall()" >取消</a></th>
-                <th style="width: 8%">编号</th>
-				<th style="width: 8%">会员级别</th>
-				<th style="width: 8%">会员中文名</th>
-				<th style="width: 8%">会员分类</th>
-				<th style="width: 8%">会员英文名</th>
-				<th style="width: 8%">所属地区</th>
-				<th style="width: 8%">会员职位</th>
-                <th style="width: 10%">操作</th>
-            </tr>
+        <tr>
+            <th style="width: 8%"><a href="#" onclick="checkall()">全选</a> / <a href="#" onclick="delcheckall()">取消</a>
+            </th>
+            <th style="width: 8%">编号</th>
+            <th style="width: 8%">会员级别</th>
+            <th style="width: 8%">会员中文名</th>
+            <th style="width: 8%">会员分类</th>
+            <th style="width: 8%">会员英文名</th>
+            <th style="width: 8%">所属地区</th>
+            <th style="width: 8%">会员职位</th>
+            <th style="width: 10%">操作</th>
+        </tr>
         </thead>
         <tbody>
         <c:choose>
             <c:when test="${!empty requestScope.items }">
                 <c:forEach items="${requestScope.items }" var="item" varStatus="xh">
                     <tr>
-						<input type="hidden" id="id" value="${item.id}"/>
+                        <input type="hidden" id="id" value="${item.id}"/>
                         <td><input type="checkbox" name="pid" value="${item.id}"></td>
                         <td>${xh.count}</td>
-						<td>${item.level}</td>
-						<td>${item.cname}</td>
-						<td>${item.cateName}</td>
-						<td>${item.ename}</td>
-						<td>${item.address}</td>
-						<td>${item.post}</td>
-						<td>
+                        <td>
+                            <c:if test="${item.level==0}">精英会委员会成员</c:if>
+                            <c:if test="${item.level==1}">精英会总经理级别成员</c:if>
+                            <c:if test="${item.level==2}">精英会总监级别成员</c:if>
+                            <c:if test="${item.level==3}">精英会经理级别成员</c:if>
+                            <c:if test="${item.level==4}">精英会客户主任级别成员</c:if>
+                        </td>
+                        <td>${item.cname}</td>
+                        <td>${item.cateName}</td>
+                        <td>${item.ename}</td>
+                        <td>${item.address}</td>
+                        <td>${item.post}</td>
+                        <td>
                             <c:if test="${item.isDelete==0}">
-                            <a class="edit_img" target="contentF" onclick="to_edit(${item.id})" ></a>
+                                <a class="edit_img" target="contentF" onclick="to_edit(${item.id})"></a>
                             </c:if>
                             <c:if test="${item.isDelete==0}">
                                 <a target="contentF" onclick="delete1(${item.id },1)" class="delete_img"></a>
@@ -72,17 +79,17 @@
 
 <script type="text/javascript">
 
-    function delete1(id,isDelete){
+    function delete1(id, isDelete) {
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/eliteVip/update?id="+id+"&isDelete="+isDelete,
+            url: "${ctx}/rest/eliteVip/update?id=" + id + "&isDelete=" + isDelete,
             async: false, // 此处必须同步
             dataType: "json",
 
             success: function (data) {
-                if (data.state==0){
+                if (data.state == 0) {
                     $('#searchForm').submit();
-                }else {
+                } else {
                     layer.msg("操作失败！", {icon: 2});
                 }
             },
@@ -96,49 +103,48 @@
         })
     }
 
-    function to_edit(id){
+    function to_edit(id) {
         layer.open({
             type: 2,
             title: ['修改'],
             shade: 0.3,
             area: ['100%', '100%'],
-            content: ['${ctx}/rest/eliteVip/to_update?id='+id,'no']
+            content: ['${ctx}/rest/eliteVip/to_update?id=' + id, 'no']
         });
     }
 
-    function checkall(){
-        $("input[name='pid']").each(function(){
-            this.checked=true;
+    function checkall() {
+        $("input[name='pid']").each(function () {
+            this.checked = true;
         });
     }
 
 
-
-    function delcheckall(){
-        $("input[name='pid']").each(function(){
-            this.checked=false;
+    function delcheckall() {
+        $("input[name='pid']").each(function () {
+            this.checked = false;
         });
     }
 
     function batchDelete(status) {
         var ids = [];
-        $("input[name='pid']").each(function(){
-            if(this.checked){
+        $("input[name='pid']").each(function () {
+            if (this.checked) {
                 ids.push($(this).val());
             }
         });
-        if(ids.length==0){
+        if (ids.length == 0) {
             layer.msg("请选择所操作的数据！", {icon: 2})
             return;
         }
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/eliteVip/batchUpdate?ids="+ids+"&isDelete="+status,
+            url: "${ctx}/rest/eliteVip/batchUpdate?ids=" + ids + "&isDelete=" + status,
             async: false, // 此处必须同步
             dataType: "json",
 
             success: function (data) {
-                if (data.state==0){
+                if (data.state == 0) {
                     layer.msg("操作成功！", {icon: 1});
                     $('#searchForm').submit();
                 }
@@ -148,7 +154,6 @@
             }
         })
     }
-
 
 
 </script>

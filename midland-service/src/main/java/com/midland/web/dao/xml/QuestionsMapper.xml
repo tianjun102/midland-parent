@@ -314,7 +314,7 @@
       and fabulous = #{fabulous,jdbcType=INTEGER}
     </if>
     <if test="questionsArea != null" >
-      and questions_area = #{questionsArea,jdbcType=LONGVARCHAR}
+      and questions_area like '%${questionsArea}%'
     </if>
     <if test="startTime != null" >
       and question_time &gt; #{startTime,jdbcType=TIMESTAMP}

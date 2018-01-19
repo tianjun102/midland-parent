@@ -91,7 +91,7 @@
         </p>
         <form id="formId" action="${ctx}/rest/banner/addBanner" method="post" enctype="multipart/form-data" method="post">
             <input type="hidden" name="cityName" id="cityName" value="" >
-            <ul class = "adminfo row">
+            <ul class = "adminfo  width-lg row">
 
                 <input type="hidden" name="id" id="id" value="${item.id}">
                 <input type="hidden" name="cateName" id="cateName" value="${item.cateName}">
@@ -106,7 +106,13 @@
                     <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: 310px;" onclick="hideTree()">
                 </li>
                 <li><span>会员等级：</span>
-                    <input type="text" name="level" id="level" value="${item.level}"/>
+                    <select name="level" id="level" class="dropdown" >
+                        <option value="0" <c:if test="${item.level==0}">selected="selected"</c:if> >精英会委员会成员</option>
+                        <option value="1" <c:if test="${item.level==1}">selected="selected"</c:if> >精英会总经理级别成员</option>
+                        <option value="2" <c:if test="${item.level==2}">selected="selected"</c:if> >精英会总监级别成员</option>
+                        <option value="3" <c:if test="${item.level==3}">selected="selected"</c:if> >精英会经理级别成员</option>
+                        <option value="4" <c:if test="${item.level==4}">selected="selected"</c:if> >精英会客户主任级别成员</option>
+                    </select>
                 </li>
                 <li><span>中文名称：</span>
                     <input type="text" name="cname" id="cname" value="${item.cname}"/>

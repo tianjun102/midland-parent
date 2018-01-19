@@ -105,7 +105,7 @@
         <form id="formId" action="${ctx}/rest/banner/addBanner" method="post" enctype="multipart/form-data"
               method="post">
             <input type="hidden" name="cityName" id="cityName" value="">
-            <ul class="adminfo row">
+            <ul class="adminfo width-lg row">
 
                 <%--<li><span>会员分类：</span>
                     <select id="cateId" name="cateId" class="dropdown" onchange="setCateName();">
@@ -127,7 +127,13 @@
                          style="vertical-align: top;position:absolute; left: 290px;" onclick="hideTree()">
                 </li>
                 <li><span>会员等级：</span>
-                    <input type="text" name="level" id="level"/>
+                    <select name="level" id="level" class="dropdown" >
+                        <option value="0">精英会委员会成员</option>
+                        <option value="1">精英会总经理级别成员</option>
+                        <option value="2">精英会总监级别成员</option>
+                        <option value="3">精英会经理级别成员</option>
+                        <option value="4">精英会客户主任级别成员</option>
+                    </select>
                 </li>
                 <li><span>中文名称：</span>
                     <input type="text" name="cname" id="cname"/>

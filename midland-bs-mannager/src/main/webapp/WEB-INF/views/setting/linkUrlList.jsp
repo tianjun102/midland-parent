@@ -14,7 +14,7 @@
 				<table class="table table-bordered table-add">
 	 				<thead>
 						<tr>
-							<th style="width: 8%"><a href="#" onclick="checkall()" >全选</a> / <a href="#" onclick="delcheckall()" >取消</a></th>
+							<th style="width: 5%"><a href="#" onclick="checkall()" >全选</a> / <a href="#" onclick="delcheckall()" >取消</a></th>
 							<th style="width: 5%">编号</th>
 							<th style="width: 5%">城市</th>
 							<th style="width: 5%">平台</th>
