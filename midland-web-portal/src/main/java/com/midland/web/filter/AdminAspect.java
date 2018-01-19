@@ -32,7 +32,7 @@ public class AdminAspect {
 		Result<?> result = new Result<>();
 		WebUser user = null;
 		String url = request.getRequestURI();
-		if (url.indexOf("/log") < 0) {
+		if (url.indexOf("/login") < 0) {
 			user = (WebUser) session.getAttribute(ConstantUtils.USER_SESSION);
 			if (null == user) {
 				PrintWriter out = null;
