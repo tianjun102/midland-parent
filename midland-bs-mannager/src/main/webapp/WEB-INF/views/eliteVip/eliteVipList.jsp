@@ -36,11 +36,9 @@
                         <td><input type="checkbox" name="pid" value="${item.id}"></td>
                         <td>${xh.count}</td>
                         <td>
-                            <c:if test="${item.level==0}">精英会委员会成员</c:if>
-                            <c:if test="${item.level==1}">精英会总经理级别成员</c:if>
-                            <c:if test="${item.level==2}">精英会总监级别成员</c:if>
-                            <c:if test="${item.level==3}">精英会经理级别成员</c:if>
-                            <c:if test="${item.level==4}">精英会客户主任级别成员</c:if>
+                           <c:forEach items="${vipCateGory}" var="s">
+                                <c:if test="${s.id==item.cateId}">${s.cateName}</c:if>
+                           </c:forEach>
                         </td>
                         <td>${item.cname}</td>
                         <td>${item.cateName}</td>

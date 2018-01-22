@@ -15,7 +15,7 @@
 		<result column="cate_desc" property="cateDesc" jdbcType="VARCHAR" />
 		<result column="is_show" property="isShow" jdbcType="VARCHAR" />
 		<result column="source" property="source" jdbcType="INTEGER" />
-		<result column="link_url" property="link_url" jdbcType="VARCHAR" />
+		<result column="link_url" property="linkUrl" jdbcType="VARCHAR" />
 		<result column="mode_id" property="modeId" jdbcType="INTEGER" />
 		<result column="mode_name" property="modeName" jdbcType="VARCHAR" />
 	</resultMap>
@@ -53,6 +53,23 @@
 		<include refid="select_option" />
 		ORDER BY order_by ASC
 	</select>
+	<select id="findCategoryListByIdList"  resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from category
+		where  id IN
+		<foreach collection="ids" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+		ORDER BY order_by ASC
+	</select>
+
+	<select id="findCategoryListFromCityIdById" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List"/>
+		from category b,(SELECT city_id as city from category where id=#{id})a where b.city_id=a.city
+		<include refid="select_option1" />
+	</select>
+
+
 
 	<insert id="insertCategory" parameterType="com.midland.web.model.Category">
 		<selectKey resultType="INTEGER" order="BEFORE" keyProperty="orderBy">
@@ -202,6 +219,52 @@
 		<if test="id != null">
 			 and id= #{id,jdbcType=INTEGER}
 		</if>
+		<if test="cateName != null">
+			 and cate_name like CONCAT(CONCAT('%', #{cateName}), '%')
+		</if>
+		<if test="status != null">
+			 and status= #{status,jdbcType=INTEGER}
+		</if>
+		<if test="orderBy != null">
+			 and order_by= #{orderBy,jdbcType=INTEGER}
+		</if>
+		<if test="parentId != null">
+			 and parent_id= #{parentId,jdbcType=INTEGER}
+		</if>
+		<if test="type != null">
+			 and type= #{type,jdbcType=INTEGER}
+		</if>
+		<if test="isDelete != null">
+			 and is_delete= #{isDelete,jdbcType=INTEGER}
+		</if>
+		<if test="cityId != null">
+			and city_id= #{cityId}
+		</if>
+		<if test="cityName != null">
+			and city_name= #{cityName}
+		</if>
+		<if test="cateDesc != null">
+			and cate_desc= #{cateDesc}
+		</if>
+		<if test="isShow != null">
+			and is_show= #{isShow}
+		</if>
+		<if test="source != null">
+			and source= #{source}
+		</if>
+		<if test="linkUrl != null">
+			and link_url= #{linkUrl}
+		</if>
+		<if test="modeId != null">
+			and mode_id= #{modeId}
+		</if>
+		<if test="modeName != null">
+			and mode_name= #{modeName}
+		</if>
+	</sql>
+
+<sql id="select_option1">
+
 		<if test="cateName != null">
 			 and cate_name like CONCAT(CONCAT('%', #{cateName}), '%')
 		</if>

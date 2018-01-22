@@ -28,60 +28,6 @@
     <link rel="stylesheet" href="${ctx}/assets/css/ztree/css/demo.css">
     <link rel="stylesheet" href="${ctx }/assets/css/common.css">
     <link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css"/>
-    <style>
-        .layui-layer{
-            top:260px!important;
-        }
-        .vipcate{
-            width: 250px;
-            height: 28px;
-            line-height: 28px;
-            border: 1px solid #dbe2e6;
-            border-radius: 4px;
-            text-indent: 10px;
-            outline-color: #0099e0;
-        }
-    </style>
-    <script type="text/javascript">
-
-        var setting = {
-            check: {
-                enable: true,
-                chkboxType: { "Y": "sp", "N": "sp" }
-
-
-            },
-            data: {
-                simpleData: {
-                    enable: true
-                }
-            },
-            callback: {
-                beforeClick: beforeClick
-            }
-        };
-        var catProNodes =[{id:0, pId:0,name:'分类',open:true,nocheck:true,iconSkin:"pIcon01"},${categoryData}];
-
-
-        $(document).ready(function(){
-            $.fn.zTree.init($("#categoryTree"), setting, catProNodes);
-        });
-
-        function beforeClick(treeId, treeNode, clickFlag) {
-            $("input[name='cateId']").val(treeNode.id);
-            $("input[name='cateName']").val(treeNode.name);
-            $("#showDiv").hide();
-        }
-
-        function showTree(event){
-            $("#showDiv").show();
-        }
-
-        function hideTree(event){
-            $("#showDiv").hide();
-        }
-
-    </script>
 </head>
 <body >
 <div class="box">
@@ -90,29 +36,20 @@
             <span>修改会员</span>
         </p>
         <form id="formId" action="${ctx}/rest/banner/addBanner" method="post" enctype="multipart/form-data" method="post">
-            <input type="hidden" name="cityName" id="cityName" value="" >
             <ul class = "adminfo  width-lg row">
-
                 <input type="hidden" name="id" id="id" value="${item.id}">
-                <input type="hidden" name="cateName" id="cateName" value="${item.cateName}">
-                <li><span>会员分类：</span><input value="${item.cateName}" class="vipcate" name="cateName" onclick="showTree()" readonly="readonly"/>
-                    <input value="${item.cateId}" name="cateId" type="hidden"/><label style="color: red" class = "_star " >*</label>
-
-                </li>
-                <li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >
-                    <div class="zTreeDemoBackground left" style  = "position:absolute;"   onblur="test(event)">
-                        <ul id="categoryTree" class="ztree" style  = "width:235px; height: 140px!important;"></ul>
-                    </div>
-                    <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: 310px;" onclick="hideTree()">
-                </li>
-                <li><span>会员等级：</span>
-                    <select name="level" id="level" class="dropdown" >
-                        <option value="0" <c:if test="${item.level==0}">selected="selected"</c:if> >精英会委员会成员</option>
-                        <option value="1" <c:if test="${item.level==1}">selected="selected"</c:if> >精英会总经理级别成员</option>
-                        <option value="2" <c:if test="${item.level==2}">selected="selected"</c:if> >精英会总监级别成员</option>
-                        <option value="3" <c:if test="${item.level==3}">selected="selected"</c:if> >精英会经理级别成员</option>
-                        <option value="4" <c:if test="${item.level==4}">selected="selected"</c:if> >精英会客户主任级别成员</option>
+                <%@include file="../menu/area_required.jsp" %>
+                <li><span>会员级别：</span>
+                    <input type="hidden" name="cateId" id="cateId" value="${item.cateId}"/>
+                    <input type="hidden" name="cateName" id="cateName" value="${item.cateName}">
+                    <select id="cates" name="cates" >
+                        <c:forEach items="${vipCateGory}" var="s">
+                        <option value="${s.id}" <c:if test="${s.id==item.cateId}">selected="selected"</c:if>>${s.cateName}</option>
+                        </c:forEach>
                     </select>
+                </li>
+                <li><span>会员分类：</span>
+                    <input type="text" name="level" id="level" value="${item.level}"/>
                 </li>
                 <li><span>中文名称：</span>
                     <input type="text" name="cname" id="cname" value="${item.cname}"/>
@@ -153,6 +90,51 @@
 </div>
 </body>
 <script type="text/javascript">
+
+
+    $("#cates").change(function () {
+        $("#cateId").val($("#cates option:selected").val());
+        if ($("#cates option:selected").text()=="请选择"){
+            $("#cateName").val("");
+        }else{
+            $("#cateName").val($("#cates option:selected").text());
+        }
+
+    })
+
+    $("#citys").change(function () {
+        $("#cateId").val("");
+        $("#cateName").val("");
+        var data = $("#cityId").val();
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/eliteVip/getVipCate",
+            async: false, // 此处必须同步
+            dataType: "json",
+            data: {cityId:data},
+            success: function (data) {
+                if (data.state == 0) {
+                    debugger;
+                    $("#cates").html("<option  value=''>请选择</option>");
+                    data.result.forEach(function (list) {
+
+                        $("#cates").append(
+                            "<option value=" + list.id + " >" + list.cateName + "</option>");
+                    })
+
+                } else {
+                    layer.msg("获取失败！", {icon: 2});
+                }
+            },
+            error: function (data) {
+                if (data.responseText != null) {
+                    layer.msg(data.responseText, {icon: 2});
+                } else {
+                    layer.msg("保存失败！", {icon: 2});
+                }
+            }
+        });
+    })
     //保存数据
     function updateData() {
         var data = $("#formId").serialize();
@@ -211,8 +193,6 @@
         });
     })
 
-    function setCateName(){
-        $("#cateName").val($("#cateId option:selected").text())
-    }
+
 </script>
 </html>

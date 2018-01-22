@@ -48,53 +48,7 @@
         }
 
     </style>
-    <script type="text/javascript">
 
-        var setting = {
-            check: {
-                enable: true,
-                chkboxType: {"Y": "sp", "N": "sp"}
-
-
-            },
-            data: {
-                simpleData: {
-                    enable: true
-                }
-            },
-            callback: {
-                beforeClick: beforeClick
-            }
-        };
-        var catProNodes = [{
-            id: 0,
-            pId: 0,
-            name: '分类',
-            open: true,
-            nocheck: true,
-            iconSkin: "pIcon01"
-        }, ${categoryData}];
-
-
-        $(document).ready(function () {
-            $.fn.zTree.init($("#categoryTree"), setting, catProNodes);
-        });
-
-        function beforeClick(treeId, treeNode, clickFlag) {
-            $("input[name='cateId']").val(treeNode.id);
-            $("input[name='cateName']").val(treeNode.name);
-            $("#showDiv").hide();
-        }
-
-        function showTree(event) {
-            $("#showDiv").show();
-        }
-
-        function hideTree(event) {
-            $("#showDiv").hide();
-        }
-
-    </script>
 </head>
 <body>
 <div class="box">
@@ -104,22 +58,21 @@
         </p>
         <form id="formId" action="${ctx}/rest/banner/addBanner" method="post" enctype="multipart/form-data"
               method="post">
-            <input type="hidden" name="cityName" id="cityName" value="">
             <ul class="adminfo width-lg row">
-
+                <%@include file="../menu/area_required.jsp" %>
 
                 <li><span>会员级别：</span>
-                    <input class="vipcate" type="text" name="cateName"  />
+                    <input type="hidden" name="cateId" id="cateId"/>
+                    <input type="hidden" name="cateName" id="cateName"/>
+                    <select id="cates" name="cates" >
+                        <c:forEach items="${vipCateGory}" var="s">
+                            <option value="${s.id}">${s.cateName}</option>
+                        </c:forEach>
+                    </select>
                 </li>
 
                 <li><span>会员分类：</span>
-                    <select name="level" id="level" class="dropdown" >
-                        <option value="0">精英会委员会成员</option>
-                        <option value="1">精英会总经理级别成员</option>
-                        <option value="2">精英会总监级别成员</option>
-                        <option value="3">精英会经理级别成员</option>
-                        <option value="4">精英会客户主任级别成员</option>
-                    </select>
+                    <input  type="text" name="level"  />
                 </li>
                 <li><span>中文名称：</span>
                     <input type="text" name="cname" id="cname"/>
@@ -161,6 +114,51 @@
 </div>
 </body>
 <script type="text/javascript">
+
+    $("#cates").change(function () {
+        $("#cateId").val($("#cates option:selected").val());
+        if ($("#cates option:selected").text()=="请选择"){
+            $("#cateName").val("");
+        }else{
+            $("#cateName").val($("#cates option:selected").text());
+        }
+
+    })
+
+    $("#citys").change(function () {
+        $("#cateId").val("");
+
+        $("#cateName").val("");
+        var data = $("#formId").serialize();
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/eliteVip/getVipCate",
+            async: false, // 此处必须同步
+            dataType: "json",
+            data: data,
+            success: function (data) {
+                if (data.state == 0) {
+                    debugger;
+                    $("#cates").html("<option  value=''>请选择</option>");
+                    data.result.forEach(function (list) {
+
+                        $("#cates").append(
+                            "<option value=" + list.id + " >" + list.cateName + "</option>");
+                    })
+
+                } else {
+                    layer.msg("获取失败！", {icon: 2});
+                }
+            },
+            error: function (data) {
+                if (data.responseText != null) {
+                    layer.msg(data.responseText, {icon: 2});
+                } else {
+                    layer.msg("保存失败！", {icon: 2});
+                }
+            }
+        });
+    })
     //保存数据
     function updateData() {
         var data = $("#formId").serialize();
@@ -219,8 +217,5 @@
         });
     })
 
-    function setCateName() {
-        $("#cateName").val($("#cateId option:selected").text())
-    }
 </script>
 </html>

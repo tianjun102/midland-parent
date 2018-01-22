@@ -23,6 +23,7 @@ import org.springframework.ui.Model;
 
 import java.io.UnsupportedEncodingException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class SettingServiceImpl implements SettingService {
@@ -190,10 +191,10 @@ public class SettingServiceImpl implements SettingService {
                         city.setParentId(area.getParentId());
                         city.setId(area.getParentId());
                         city.setName(area.getParentName());
-                        baseRedisTemplate.saveValue("city:" + area.getParentId() + ":" + area.getParentId(), city);
-                        baseRedisTemplate.saveValue("area:" + area.getId() + ":" + area.getParentId(), area);
+                        baseRedisTemplate.saveValue("city:" + area.getParentId() + ":" + area.getParentId(), city,12, TimeUnit.HOURS);
+                        baseRedisTemplate.saveValue("area:" + area.getId() + ":" + area.getParentId(), area,12, TimeUnit.HOURS);
                     }else {
-                        baseRedisTemplate.saveValue("city:" + area.getId() + ":" + area.getParentId(), area);
+                        baseRedisTemplate.saveValue("city:" + area.getId() + ":" + area.getParentId(), area,12, TimeUnit.HOURS);
                     }
                 }
             }
@@ -232,9 +233,9 @@ public class SettingServiceImpl implements SettingService {
             if (areaList!=null) {
                 for (Area area : areaList) {
                     if (StringUtils.isNotEmpty(parem.get("id")) && StringUtils.isEmpty(parem.get("parentId"))) {
-                        baseRedisTemplate.saveValue("area:" + area.getId() + ":" + parem.get("id"), area);
+                        baseRedisTemplate.saveValue("area:" + area.getId() + ":" + parem.get("id"), area,12, TimeUnit.HOURS);
                     } else if (StringUtils.isNotEmpty(parem.get("id")) && StringUtils.isNotEmpty(parem.get("parentId"))) {
-                        baseRedisTemplate.saveValue("sheet:" + area.getId() + ":" + area.getParentId(), area);
+                        baseRedisTemplate.saveValue("sheet:" + area.getId() + ":" + area.getParentId(), area,12, TimeUnit.HOURS);
                     }
                 }
             }

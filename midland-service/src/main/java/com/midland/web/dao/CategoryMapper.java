@@ -22,6 +22,8 @@ public interface CategoryMapper {
 	List<Category> findCategoryTreeList(Category category);
 
 	List<Category> findCategoryParentNameList(Category category);
+	List<Category> findCategoryListFromCityIdById(Category category);
+	List<Category> findCategoryListByIdList(@Param("ids") List list);
 
 	Category selectCategoryParentById(Integer category);
 

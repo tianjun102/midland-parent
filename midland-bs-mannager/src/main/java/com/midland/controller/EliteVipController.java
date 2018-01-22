@@ -1,18 +1,25 @@
 package com.midland.controller;
 
 import com.midland.base.BaseFilter;
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.Category;
 import com.midland.web.model.EliteVip;
 import com.midland.web.model.user.User;
 import com.midland.web.service.CategoryService;
 import com.midland.web.service.EliteVipService;
+import com.midland.web.service.SettingService;
+import com.midland.web.service.impl.PublicService;
+import com.sun.scenario.Settings;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.tools.ant.taskdefs.condition.Http;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.stream.Collectors;
+
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +40,10 @@ public class EliteVipController extends BaseFilter {
 	private EliteVipService eliteVipServiceImpl;
 	@Autowired
 	CategoryService categoryServiceImpl;
+	@Autowired
+	PublicService publicServiceImpl;
+	@Autowired
+	SettingService settingServiceImpl;
 
 	/**
 	 * 
@@ -53,16 +64,41 @@ public class EliteVipController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("to_add")
-	public String toAddEliteVip(EliteVip eliteVip,Model model) throws Exception {
+	public String toAddEliteVip(EliteVip eliteVip, Model model, HttpServletRequest request) throws Exception {
 		Category category = new Category();
 		category.setType(2);
-		String result = getCategoryTree("",category);
-		if(StringUtils.isNotEmpty(result)){
-			model.addAttribute("categoryData",result );
-		}
+		category.setCityId(MidlandHelper.getCurrentUser(request).getCityId());//避免category查询出多个城市的类型,所以这里默认为登录用户的城市
+		category.setIsDelete(Contant.isNotDelete);
+		List<Category> result = categoryServiceImpl.findCategoryList(category);
+		settingServiceImpl.getAllProvinceList(model);
+		model.addAttribute("cityId",MidlandHelper.getCurrentUser(request).getCityId());
+		model.addAttribute("cityName",MidlandHelper.getCurrentUser(request).getCityName());
+		model.addAttribute("vipCateGory",result );
 		model.addAttribute("type",category.getType());
 		return "eliteVip/addEliteVip";
 	}
+
+	@RequestMapping("getVipCate")
+	@ResponseBody
+	public Object getVipCateGory(Category category,  HttpServletRequest request) throws Exception {
+		Map<String,Object> map = new HashMap<>();
+		try {
+			log.debug("addEliteVip {}",category);
+			category.setType(2);
+			category.setIsDelete(Contant.isNotDelete);
+			category.setIsShow(Contant.isShow);
+			List<Category> result = categoryServiceImpl.findCategoryList(category);
+			map.put("result",result);
+			map.put("state",0);
+		} catch(Exception e) {
+			log.error("addEliteVip异常 {}",category,e);
+			map.put("state",-1);
+		}
+		return map;
+
+	}
+
+
 
 	/**
 	 * 新增
@@ -113,15 +149,29 @@ public class EliteVipController extends BaseFilter {
 	 * 
 	 **/
 	@RequestMapping("to_update")
-	public String toUpdateEliteVip(Integer id,Model model) throws Exception {
-		EliteVip result = eliteVipServiceImpl.selectEliteVipById(id);
+	public String toUpdateEliteVip(Integer id,Model model,HttpServletRequest request) throws Exception {
+		EliteVip eliteVip = eliteVipServiceImpl.selectEliteVipById(id);
 		Category category = new Category();
 		category.setType(2);
-		String cateResult = getCategoryTree("",category);
-		if(StringUtils.isNotEmpty(cateResult)){
-			model.addAttribute("categoryData",cateResult );
+		category.setIsDelete(Contant.isNotDelete);
+		category.setId(eliteVip.getCateId());
+		category.setIsShow(Contant.isShow);
+		List<Category> result = categoryServiceImpl.findCategoryListFromCityIdById(category);
+		settingServiceImpl.getAllProvinceList(model);
+		String cityId=null;
+		String cityName=null;
+		if (result.size()>0){
+			 cityId = result.get(0).getCityId();
+			 cityName = result.get(0).getCityName();
+		}else {
+			User user = MidlandHelper.getCurrentUser(request);
+			cityId = user.getCityId();
+			cityName = user.getCityName();
 		}
-		model.addAttribute("item",result);
+		model.addAttribute("cityId",cityId);
+		model.addAttribute("cityName",cityName);
+		model.addAttribute("vipCateGory",result );
+		model.addAttribute("item",eliteVip);
 		return "eliteVip/updateEliteVip";
 	}
 
@@ -156,8 +206,11 @@ public class EliteVipController extends BaseFilter {
 			log.debug("findEliteVipList  {}",eliteVip);
 			MidlandHelper.doPage(request);
 			Page<EliteVip> result = (Page<EliteVip>)eliteVipServiceImpl.findEliteVipList(eliteVip);
+			List<Integer> list = result.stream().map(e->e.getCateId()).collect(Collectors.toList());
+			List<Category> vipCateGory = categoryServiceImpl.findCategoryListByIdList(list);
 			Paginator paginator=result.getPaginator();
 			model.addAttribute("paginator",paginator);
+			model.addAttribute("vipCateGory",vipCateGory);
 			model.addAttribute("items",result);
 		} catch(Exception e) {
 			log.error("findEliteVipList  {}",eliteVip,e);

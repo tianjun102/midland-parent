@@ -35,10 +35,13 @@
         <input type="hidden" name="cityName" id="cityName">
         <select id="citys" name="citys" onchange="initCity()" style="height: 28px;width: 105px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;"  onblur="checkSelect('citys','请选择市级')">
             <c:choose>
-                <c:when test="${not empty item.cityId}">
-                    <option value="${item.cityId}">${item.cityName}</option>
+                <c:when test="${not empty cityName}">
+                    <option value="${cityId}">${cityName}</option>
                 </c:when>
                 <c:otherwise>
+                    <c:if test="${not empty item.cityId}">
+                        <option value="${item.cityId}">${item.cityName}</option>
+                    </c:if>
                     <option value="">请选择</option>
                 </c:otherwise>
             </c:choose>
