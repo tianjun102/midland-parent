@@ -183,6 +183,7 @@
                     </div>
                 </li>
                 <li><span>图片说明：</span><input type="text" name="imgDesc"></li>
+                <li><span>摘要：</span><input type="text" name="summary"></li>
                 <li style="overflow: hidden" id="textArea"><span style="float:left;">页面内容：</span><textarea
                         style="width: 90%;min-height: 350px;resize:none; outline-color: #0099e0;float: right"
                         name="details" id="myEditor" rows="" cols=""></textarea></li>

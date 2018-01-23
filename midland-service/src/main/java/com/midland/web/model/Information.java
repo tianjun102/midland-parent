@@ -1,7 +1,5 @@
 package com.midland.web.model;
 
-import java.util.Date;
-
 public class Information{
 	/**
 	 * 资讯表，主键
@@ -24,7 +22,7 @@ public class Information{
 	 **/
 	private String title;
 	/**
-	 * 平台
+	 * 平台0网站,1微站
 	 **/
 	private Integer source;
 	/**
@@ -94,17 +92,33 @@ public class Information{
 
 	private String cateParentName;
 	/**
-	 * 上架状态；0=网站；1=微站
+	 * 上架状态；来源
 	 */
 	private String platform;
 
 	private String startTime;
 
 	private String endTime;
-
+	/**
+	 * 作者
+	 */
 	private String author;
-
+	/**
+	 * 评论次数
+	 */
 	private Integer commentNum;
+	/**
+	 * 摘要
+	 */
+	private String summary;
+
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
 
 	public Integer getId() {
 		return id;

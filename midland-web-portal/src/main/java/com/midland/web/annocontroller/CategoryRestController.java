@@ -109,4 +109,26 @@ public class CategoryRestController extends ServiceBaseFilter {
 		}
 		return result;
 	}
+
+
+	@RequestMapping("list1")
+	public Object findCategoryList1(@RequestBody Category  obj, HttpServletRequest request) {
+		Result result=new Result();
+		try {
+			log.info("findCategoryList  {}",obj);
+
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setIsShow(Contant.isShow);
+			List<Category> list= categoryServiceImpl.findCategoryList1(obj);
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result.setMsg("success");
+			result.setList(list);
+		} catch(Exception e) {
+			log.error("findCategoryList  {}",obj,e);
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result.setMsg("service error");
+		}
+		return result;
+	}
+
 }

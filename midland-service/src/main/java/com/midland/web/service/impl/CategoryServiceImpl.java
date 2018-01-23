@@ -86,6 +86,18 @@ public class CategoryServiceImpl implements CategoryService {
 			throw e;
 		}
 	}
+
+	@Override
+	public List<Category> findCategoryList1(Category category) throws Exception {
+		try {
+			log.debug("findCategoryList  {}",category);
+			return categoryMapper.findCategoryList(category);
+		} catch(Exception e) {
+			log.error("findCategoryList  {}",category,e);
+			throw e;
+		}
+	}
+
 	@Override
 	public List<Category> findCategoryListFromCityIdById(Category category) throws Exception {
 		try {

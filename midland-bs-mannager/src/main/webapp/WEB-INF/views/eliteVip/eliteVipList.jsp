@@ -41,7 +41,7 @@
                            </c:forEach>
                         </td>
                         <td>${item.cname}</td>
-                        <td>${item.cateName}</td>
+                        <td>${item.level}</td>
                         <td>${item.ename}</td>
                         <td>${item.address}</td>
                         <td>${item.post}</td>
