@@ -123,18 +123,20 @@
                     </select>
                     <span class = "_star ">*</span>
                 </li>
-                <li><span>父节点：</span><input style="width: 250px!important;" value="${item.cateName}" name="cateName" onclick="showTree()"
-                                            readonly="readonly"/>
-                    <input name="cateId" type="hidden"/>
-                    <div style="font-size:12px; color:#afadad;text-indent: 70px;">(不选父分类则默认一级分类)</div>
-                </li>
-                <li id="showDiv" style="display: none;padding-top: 0px;position:relative;">
-                    <div class="zTreeDemoBackground left" style="position:absolute; left: 72px; top: -30px;"
-                         onblur="test(event)">
-                        <ul id="categoryTree" class="ztree" style="width:235px; height: 140px!important;"></ul>
+
+                <li>
+                    <span>父节点：</span>
+                    <div class="tree-select">
+                        <input name="cateName" type="text" value="${item.cateName}" onclick="showTree()" readonly="readonly"/>
+                        <input name="cateId" type="hidden"/>
+                        <div id="showDiv" style="display: none;">
+                            <div class="zTreeDemoBackground left" onblur="test(event)">
+                                <ul id="categoryTree" class="ztree"></ul>
+                            </div>
+                            <img class="ztree-close" src="${ctx}/assets/img/Closed_16px.png" alt="关闭" onclick="hideTree()">
+                        </div>
+                        <div class="warn">(不选父分类则默认一级分类)</div>
                     </div>
-                    <img src="${ctx}/assets/img/Closed_16px.png" alt="关闭"
-                         style="vertical-align: top;position:absolute; left: 300px; top: -30px;" onclick="hideTree()">
                 </li>
 
                 <li>
@@ -175,8 +177,13 @@
                     </div>
                 </li>
                 <li><span>图片说明：</span><input value="${item.imgDesc}" type="text" name="imgDesc"></li>
-                <li><span>摘要：</span><input type="text" name="summary" value="${item.summary}"></li>
-                <li style="overflow: hidden" id="textArea"><span style = "float:left;">页面内容：</span><textarea style="width: 90%;min-height: 350px;resize:none; outline-color: #0099e0;float: right" name="details" id="myEditor" rows="" cols="">${item.details}</textarea></li>
+                <li style="overflow: hidden" id="textArea1">
+                    <span style="float:left;">摘要：</span>
+                    <textarea class="textarea-md" name="summary">${item.summary}</textarea>
+                </li>
+                <li style="overflow: hidden" id="textArea"><span style="float:left;">页面内容：</span><textarea
+                        class="textarea-lg"
+                        name="details" id="myEditor" rows="" cols="">${item.details}</textarea></li>
             </ul>
 
 

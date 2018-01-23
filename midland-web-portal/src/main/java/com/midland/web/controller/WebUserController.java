@@ -93,8 +93,8 @@ public class WebUserController extends WebCommonsController {
 						// 用户登录验证成功后保存用户信息到SESSION
 						request.getSession().setAttribute(ConstantUtils.USER_SESSION, userInfo);
 						String sessionId = request.getSession().getId();
-						userSessionRedisTemplate.opsForHash().put(ConstantUtils.USER_SESSION,sessionId,userInfo);
-
+						userSessionRedisTemplate.opsForValue().set(ConstantUtils.USER_SESSION+sessionId,userInfo);
+						userSessionRedisTemplate.expire(ConstantUtils.USER_SESSION+sessionId,30,TimeUnit.MINUTES);
 						// "1"表示用户勾选记住密码
 						if (remember) {
 							// 创建Cookie
@@ -160,7 +160,6 @@ public class WebUserController extends WebCommonsController {
 		/** 删除session用户信息 */
 		session.removeAttribute(ConstantUtils.USER_SESSION);
 		session.invalidate();
-		WebUser user = (WebUser)userSessionRedisTemplate.opsForHash().get(ConstantUtils.USER_SESSION,request.getParameter("sessionId"));
 		userSessionRedisTemplate.opsForHash().delete(ConstantUtils.USER_SESSION,request.getParameter("sessionId"));
 		/** 删除cookie用户信息 */
 		Cookie[] cookies = request.getCookies();

@@ -1,6 +1,7 @@
 package com.midland.web.filter;
 
 import java.io.PrintWriter;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -34,18 +35,18 @@ public class AdminAspect {
 		String sessionId = request.getParameter("sessionId");
 		WebUser user =null;
 		if (sessionId != null){
-			user = (WebUser)userSessionRedisTemplate.opsForHash().get(ConstantUtils.USER_SESSION,sessionId);
+			user = userSessionRedisTemplate.opsForValue().get(ConstantUtils.USER_SESSION+sessionId);
+			userSessionRedisTemplate.expire(ConstantUtils.USER_SESSION+sessionId,30, TimeUnit.MINUTES);
+
 		}
 		Result<?> result = new Result<>();
 		String url = request.getRequestURI();
 		if (url.indexOf("/login") < 0 && url.indexOf("/logout") < 0) {
-
 			if (null == user) {
-				PrintWriter out = null;
 				result.setCode(ResultStatusUtils.STATUS_CODE_303);
 				result.setMsg("未登录或登录已过期，请重新登录。");
 				response.setContentType("text/html;charset=utf-8");
-				out = response.getWriter();
+				PrintWriter out  = response.getWriter();
 				out.print(FastJsonUtils.toJSONStr(result));
 				out.flush();
 				out.close();

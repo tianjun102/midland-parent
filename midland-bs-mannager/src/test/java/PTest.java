@@ -6,6 +6,8 @@ import com.midland.core.util.HttpUtils;
 import com.midland.web.api.ApiHelper;
 import com.midland.web.api.SmsSender.SmsClient;
 import com.midland.web.api.SmsSender.SmsModel;
+import com.midland.web.commons.core.util.ConstantUtils;
+import com.midland.web.model.WebUser;
 import com.midland.web.model.remote.Agent;
 import com.midland.web.model.user.Agenter;
 import com.midland.web.service.AppointmentService;
@@ -13,11 +15,13 @@ import com.midland.web.util.MidlandHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.annotation.Resource;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -29,6 +33,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by 'ms.x' on 2017/9/14.
@@ -37,7 +42,10 @@ import java.util.Map;
 @SuppressWarnings("all")
 @ContextConfiguration(locations = {"classpath*:spring/applicationContext.xml"})
 public class PTest {
-	
+
+	@Resource
+	private RedisTemplate<String, WebUser> userSessionRedisTemplate;
+
 	@Autowired
 	private AppointmentService appointmentServiceImpl;
 	@Autowired
@@ -130,6 +138,17 @@ public class PTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Test
+	public void sefdxsde(){
+		try {
+			userSessionRedisTemplate.opsForValue().set(ConstantUtils.USER_SESSION+"123",new WebUser());
+			userSessionRedisTemplate.expire(ConstantUtils.USER_SESSION+"123",5,TimeUnit.SECONDS);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 	
 }

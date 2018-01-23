@@ -63,7 +63,6 @@
         function showTree(event) {
             var data = $("#formId").serialize();
             data+="&type=1";
-            debugger;
             $.ajax({
                 type: "post",
                 url: "${ctx}/rest/siteMap/choose",
@@ -104,13 +103,12 @@
             <span>添加资讯</span>
         </p>
         <form id="formId" action="" method="post" enctype="multipart/form-data" method="post">
-            <ul class="adminfo  row">
+            <ul class="adminfo width-lg  row">
                 <li>
                     <span style="float:left;">城市：</span>
                     <c:if test="${empty isSuper}"><input type="hidden" name="cityId" value="${cityId}"></c:if>
                     <input type="hidden" name="cityName" id="cityName" value="${cityName}">
                     <select onchange="setCityName()" name="cityId" id="cityId"
-                            style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;"
                             <c:if test="${empty isSuper}"> disabled="disabled"</c:if> >
                         <c:forEach items="${cityList}" var="city">
                             <c:if test="${empty isSuper}">
@@ -121,25 +119,25 @@
                     </select>
                 </li>
                 <li><span>平台：</span>
-                    <select name="source" id="source"
-                            style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <select name="source" id="source">
                         <option value="0">网站</option>
                         <option value="1">微站</option>
                     </select>
                     <span class="_star ">*</span>
                 </li>
-                <li><span>父节点：</span><input style="width: 250px!important;" name="cateName" onclick="showTree()"
-                                            readonly="readonly"/>
-                    <input name="cateId" type="hidden"/>
-                    <div style="font-size:12px; color:#afadad;text-indent: 70px;">(不选父分类则默认一级分类)</div>
-                </li>
-                <li id="showDiv" style="display: none;padding-top: 0px;position:relative;">
-                    <div class="zTreeDemoBackground left" style="position:absolute; left: 72px; top: -30px;"
-                         onblur="test(event)">
-                        <ul id="categoryTree" class="ztree" style="width:235px; height: 140px!important;"></ul>
+                <li>
+                    <span>父节点：</span>
+                    <div class="tree-select">
+                        <input name="cateName" type="text" onclick="showTree()" readonly="readonly"/>
+                        <input name="cateId" type="hidden"/>
+                        <div id="showDiv" style="display: none;">
+                            <div class="zTreeDemoBackground left" onblur="test(event)">
+                                <ul id="categoryTree" class="ztree"></ul>
+                            </div>
+                            <img class="ztree-close" src="${ctx}/assets/img/Closed_16px.png" alt="关闭" onclick="hideTree()">
+                        </div>
+                        <div class="warn">(不选父分类则默认一级分类)</div>
                     </div>
-                    <img src="${ctx}/assets/img/Closed_16px.png" alt="关闭"
-                         style="vertical-align: top;position:absolute; left: 300px; top: -30px;" onclick="hideTree()">
                 </li>
 
                 <li>
@@ -183,10 +181,14 @@
                     </div>
                 </li>
                 <li><span>图片说明：</span><input type="text" name="imgDesc"></li>
-                <li><span>摘要：</span><input type="text" name="summary"></li>
-                <li style="overflow: hidden" id="textArea"><span style="float:left;">页面内容：</span><textarea
-                        style="width: 90%;min-height: 350px;resize:none; outline-color: #0099e0;float: right"
-                        name="details" id="myEditor" rows="" cols=""></textarea></li>
+                <li style="overflow: hidden" id="textArea1">
+                    <span style="float:left;">摘要：</span>
+                    <textarea class="textarea-md" name="summary"></textarea>
+                </li>
+                <li style="overflow: hidden" id="textArea">
+                    <span style="float:left;">页面内容：</span>
+                    <textarea class="textarea-lg" name="details" id="myEditor" rows="" cols=""></textarea>
+                </li>
             </ul>
 
 
@@ -205,6 +207,7 @@
 </body>
 <script type="text/javascript">
     UE.getEditor('myEditor');
+    UE.getEditor('myEditor1');
 
     function selectTypes() {
         if ($("#selectType option:selected").val() == 1) {
