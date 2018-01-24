@@ -112,6 +112,20 @@ public class Information{
 	 */
 	private String summary;
 
+	/**
+	 *  0隐藏1显示
+	 */
+	private String isShow;
+
+
+	public String getIsShow() {
+		return isShow;
+	}
+
+	public void setIsShow(String isShow) {
+		this.isShow = isShow;
+	}
+
 	public String getSummary() {
 		return summary;
 	}

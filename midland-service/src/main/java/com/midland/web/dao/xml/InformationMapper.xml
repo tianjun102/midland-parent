@@ -28,11 +28,12 @@
 		<result column="platform" property="platform" jdbcType="VARCHAR" />
 		<result column="author" property="author" jdbcType="VARCHAR" />
 		<result column="summary" property="summary" jdbcType="VARCHAR" />
+		<result column="is_show" property="isShow" jdbcType="INTEGER" />
 
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,cate_id,cate_parentId,type,title,source,enclosure,meta_keywords,meta_desc,img_url,img_desc,details,order_by,click_num,is_delete,artice_type,DATE_FORMAT(release_time,'%Y-%m-%d %H:%i:%s') release_time,comment,city_id,city_name,cate_name,status,platform,author,summary
+		id,cate_id,cate_parentId,type,title,source,enclosure,meta_keywords,meta_desc,img_url,img_desc,details,order_by,click_num,is_delete,artice_type,DATE_FORMAT(release_time,'%Y-%m-%d %H:%i:%s') release_time,comment,city_id,city_name,cate_name,status,platform,author,summary,is_show
 	</sql>
 
 	<select id="selectInformationById" resultMap="BaseResultMap">
@@ -149,6 +150,9 @@
 			<if test="summary != null">
 				summary,
 			</if>
+			<if test="isShow != null">
+				is_show,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -223,6 +227,9 @@
 			 </if>
 			 <if test="summary != null">
 				 #{summary},
+			 </if>
+			 <if test="isShow != null">
+				 #{isShow},
 			 </if>
 		</trim>
 	</insert>
@@ -299,6 +306,9 @@
 		</if>
 		<if test="summary != null">
 			summary = #{summary},
+		</if>
+		<if test="isShow != null">
+			is_show=#{isShow},
 		</if>
 	</sql>
 
@@ -383,6 +393,9 @@
 		</if>
 		<if test="summary != null">
 			and summary = #{summary}
+		</if>
+		<if test="isShow != null">
+			and is_show=#{isShow}
 		</if>
 	</sql>
 

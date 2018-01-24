@@ -13,7 +13,7 @@
 </head>
 <body>
 <section class="content" style="border:none;">
-    <form action="${ctx}/rest/privacy/update" method="post" id="dataForm">
+    <form action="${ctx}/rest/cornerFile/update" method="post" id="dataForm">
         <ul class="adminfo width-lg row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <%@include file="../menu/area_required.jsp" %>
@@ -28,7 +28,7 @@
                 </select>
             </li>
 
-            <li id="textArea" style="display: block;"><span>私隐政策：</span>
+            <li id="textArea" style="display: block;"><span>角文件：</span>
                 <textarea class="textarea-lg"
                           name="registrationProtocol"
                           id="myEditor" rows="" cols="">${item.registrationProtocol}</textarea>
@@ -52,7 +52,7 @@
         debugger;
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/privacy/update",
+            url: "${ctx}/rest/cornerFile/update",
             async: false, // 此处必须同步
             dataType: "json",
             data: data,

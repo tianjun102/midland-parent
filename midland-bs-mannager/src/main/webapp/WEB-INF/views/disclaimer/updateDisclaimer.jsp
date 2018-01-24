@@ -28,7 +28,7 @@
                 </select>
             </li>
 
-            <li id="textArea" style="display: block;"><span>注册协议：</span>
+            <li id="textArea" style="display: block;"><span>免责申明：</span>
                 <textarea class="textarea-lg"
                           name="registrationProtocol"
                           id="myEditor" rows="" cols="">${item.registrationProtocol}</textarea>

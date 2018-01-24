@@ -55,6 +55,16 @@
                             </c:if>                            <a target="contentF" title="上移" class="up_img" onclick="sort(${item.id },${item.orderBy},1)"></a>
                             <a target="contentF" title="下移" class="down_img" onclick="sort(${item.id },${item.orderBy},2)"></a>
                             <a target="contentF" title="置顶" class="stick_img" onclick="sort(${item.id },${item.orderBy},0)"></a>
+                            <c:choose>
+                                <c:when test="${item.isShow==0}">
+                                    <a target="contentF" class="onoff_img" title="状态：显示"
+                                       onclick="hiddenOrShow(${item.id },1)"></a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a target="contentF" class="offon_img" title="状态：隐藏"
+                                       onclick="hiddenOrShow(${item.id },0)"></a>
+                                </c:otherwise>
+                            </c:choose>
                             <c:if test="${empty item.status or item.status==1}"><a target="contentF" title="发布" class="lineup_img" onclick="updateStatus(${item.id},${item.status});"></a></c:if>
                             <c:if test="${item.status==0}"><a target="contentF" title="下线" class="linedown_img" onclick="updateStatus(${item.id},${item.status});"></a></c:if>
                         </td>
@@ -78,6 +88,29 @@
 </c:if>
 
 <script type="text/javascript">
+
+    function hiddenOrShow(id, flag) {
+        //0隐藏，1显示
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/information/update?id=" + id + "&isShow=" + flag,
+            async: false, // 此处必须同步
+            dataType: "json",
+
+            success: function (data) {
+                if (data.state == 0) {
+                    $('#searchForm').submit();
+                }
+            },
+            error: function (data) {
+                if (data.responseText != null) {
+                    layer.msg(data.responseText, {icon: 2});
+                } else {
+                    layer.msg("操作失败！", {icon: 2});
+                }
+            }
+        })
+    }
 
     function toUpdatePage(id) {
         layer.open({
