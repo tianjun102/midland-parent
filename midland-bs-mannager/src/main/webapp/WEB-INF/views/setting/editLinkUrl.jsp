@@ -60,7 +60,7 @@
                     <option value="9"  <c:if test="${linkUrlManager.modeId eq 9  }"> selected="selected"</c:if>>市场调究</option>
                     <option value="10" <c:if test="${linkUrlManager.modeId eq 10 }"> selected="selected"</c:if>>资讯</option>
                     <option value="11" <c:if test="${linkUrlManager.modeId eq 11 }"> selected="selected"</c:if>>问答</option>
-                </select
+                </select>
                 <span class="_star">*</span>
             </li>
             <li>
