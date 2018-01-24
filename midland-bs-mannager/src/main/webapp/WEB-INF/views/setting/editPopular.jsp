@@ -113,7 +113,7 @@
             </li>
             <li>
                 <span style = "float:left;">模块：</span>
-                <select name="modeId" id="menuId" style="height: 28px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                <select name="menuId" id="menuId" style="height: 28px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option <c:if test="${popular.menuId =='0'}">selected = 'selected'</c:if> value="0">首页</option>
                     <option <c:if test="${popular.menuId =='1'}">selected = 'selected'</c:if> value="1">新房</option>
                     <option <c:if test="${popular.menuId =='2'}">selected = 'selected'</c:if> value="2">二手房</option>
@@ -129,8 +129,8 @@
                 </select>
             </li>
             <li id="sellrentLi" style="display: none"><span>租售：</span>
-                <label class="checkitem"><input type="radio" name="sellRent" value="0"><span>租房</span></label>
-                <label class="checkitem"><input type="radio" name="sellRent" value="1"><span>售房</span></label>
+                <label class="checkitem"><input id="radio1" type="radio" name="sellRent" value="0"><span>租房</span></label>
+                <label class="checkitem"><input id="radio2" type="radio" name="sellRent" value="1"><span>售房</span></label>
             </li>
             <li><span>类型：</span><input class="vipcate" id="cateName" name="cateName" value="${popular.cateName}" onclick="showTree()" readonly="readonly"/>
                 <input name="cateId" value="${popular.cateId}" type="hidden"/><label style="color: red" class = "_star " >*</label>
@@ -157,6 +157,21 @@
 
 </section>
 <script type="text/javascript">
+    $(function () {
+
+        if (${popular.menuId==4}|| ${popular.menuId==5}) {
+            if (${popular.menuId==0}){
+                $("input[name='sellRent']:eq(0)").attr('checked','true');
+            }else if(${popular.menuId==0}){
+                $("input[name='sellRent']:eq(1)").attr('checked','true');
+            }
+            $("#sellrentLi").show();
+        }else {
+            $("#sellrentLi").hide();
+        }
+
+    })
+
     function saveData() {
         if(notEmpty('name','name','链接名不能为空！')&&notEmpty('cateName','cateName','链接名不能为空！')&&checkSelect("source|menuId","平台不能为空！|类型不能为空！|模块不能为空！")&&checkUrl("url","url","网址格式不正确！")){
             var data = $("#addFrom").serialize();
@@ -337,6 +352,11 @@
         setEmpty();
     })
     $("#menuId").change(function () {
+        if ($("#menuId option:selected").val() == 4 || $("#menuId option:selected").val() == 5) {
+            $("#sellrentLi").show();
+        }else {
+            $("#sellrentLi").hide();
+        }
         setEmpty();
     })
     function setEmpty() {

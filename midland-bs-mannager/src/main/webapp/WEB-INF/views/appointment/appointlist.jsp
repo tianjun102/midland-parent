@@ -112,12 +112,13 @@
     })
     //修改
     function toRedistribute(id) {
+        var updateUrl = "${ctx}/rest/appoint/reset_agent";
         layer.open({
             type: 2,
             title: ['重新分配经纪人'],
             shade: 0.3,
-            area: ['100%',  '800px'],
-            content: ['${ctx}/rest/public/toRedistribute?id=' + id + "&url=" + url, 'yes']
+            area: ['100%',  '100%'],
+            content: ['${ctx}/rest/public/toRedistribute?id=' + id+"&url="+updateUrl , 'yes']
         });
     }
 

@@ -80,9 +80,10 @@
                             <td>${item.answerArea }</td>
                             <td>${item.answerTime }</td>
                             <td>${item.answerName }</td>
-                            <td><c:forEach items="${auditStatusList}" var="s">
-                                <c:if test="${item.auditStatus == s.id}">${s.name}</c:if>
-                            </c:forEach></td>
+                            <td>
+                                <c:if test="${item.auditStatus == 0}">未审核</c:if>
+                                <c:if test="${item.auditStatus == 1}">已审核</c:if>
+                                <c:if test="${item.auditStatus == 2}">已拒绝</c:if>
                             <td>
                             <a target="contentF" onclick="deleteAnswer(${item.id })">删除</a>
                                 <c:if test="${item.auditStatus==0}">

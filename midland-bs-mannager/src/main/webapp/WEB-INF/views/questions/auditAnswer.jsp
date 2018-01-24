@@ -36,8 +36,8 @@
             <ul class="adminfo row">
                 <li>
                     <span></span>
-                    <a onclick="audit('${answer.id}','2');" target="contentF" class="public_btn bg2">通过</a>
-                    <a onclick="audit('${answer.id}','3');" target="contentF" class="public_btn bg2">拒绝</a>
+                    <a onclick="audit('${answer.id}','1');" target="contentF" class="public_btn bg2">通过</a>
+                    <a onclick="audit('${answer.id}','2');" target="contentF" class="public_btn bg2">拒绝</a>
                     <a style="margin-left: 20px" target="contentF" class="public_btn bg3" id="cancel">取消</a>
                 </li>
             </ul>

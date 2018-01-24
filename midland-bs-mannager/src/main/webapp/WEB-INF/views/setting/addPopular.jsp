@@ -122,7 +122,7 @@
             </li>
             <li>
                 <span style="float:left;">模块：</span>
-                <select name="modeId" id="menuId"
+                <select name="menuId" id="menuId"
                         style="height: 28px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option value="">全部</option>
                     <option value="0">首页</option>
@@ -172,6 +172,7 @@
 
 </section>
 <script type="text/javascript">
+
     function saveData() {
         if (notEmpty('name', 'name', '链接名不能为空！') && notEmpty('cateName', 'cateName', '类型不能为空！') && checkSelect("source|menuId", "平台不能为空！|模块不能为空！") && checkUrl("url", "url", "网址格式不正确！")) {
             var data = $("#addFrom").serialize();
@@ -305,6 +306,11 @@
         setEmpty();
     })
     $("#menuId").change(function () {
+        if ($("#menuId option:selected").val() == 4 || $("#menuId option:selected").val() == 5) {
+            $("#sellrentLi").show();
+        }else {
+            $("#sellrentLi").hide();
+        }
         setEmpty();
     })
     function setEmpty() {
@@ -316,6 +322,7 @@
         $("input[name='modeName']").val("");
         $("#showDiv").hide();
     }
+
 
 </script>
 </body>

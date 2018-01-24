@@ -27,6 +27,9 @@ public class MidlandHelper {
 
 
     public static String scientificNotation(String s) {
+        if (StringUtils.isEmpty(s)){
+            return "0";
+        }
         BigDecimal bigDecimal = new BigDecimal(s);
         return bigDecimal.toPlainString();
     }

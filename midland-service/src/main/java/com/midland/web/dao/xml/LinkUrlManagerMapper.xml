@@ -15,10 +15,12 @@
 		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
 		<result column="source" property="source" jdbcType="INTEGER" />
 		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+		<result column="mode_id" property="modeId" jdbcType="INTEGER" />
+		<result column="mode_name" property="modeName" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,city_id,link_name,link_url,contacts,phone,remarks,is_show,order_by,is_delete,source,city_name
+		id,city_id,link_name,link_url,contacts,phone,remarks,is_show,order_by,is_delete,source,city_name,mode_id,mode_name
 	</sql>
 
 	<select id="selectById" resultMap="BaseResultMap">
@@ -89,6 +91,12 @@
 			<if test="cityName != null">
 				city_name,
 			</if>
+			<if test="modeId != null">
+				mode_id,
+			</if>
+			<if test="modeName != null">
+				mode_name,
+			</if>
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -125,6 +133,12 @@
 			<if test="cityName != null">
 				#{cityName,jdbcType=VARCHAR},
 			</if>
+			 <if test="modeId != null">
+				 #{modeId,jdbcType=INTEGER},
+			 </if>
+			 <if test="modeName != null">
+				 #{modeName,jdbcType=VARCHAR},
+			 </if>
 		</trim>
 	</insert>
 
@@ -161,6 +175,12 @@
 		</if>
 		<if test="cityName != null">
 			city_name= #{cityName,jdbcType=VARCHAR},
+		</if>
+		<if test="modeId != null">
+			mode_id=#{modeId,jdbcType=INTEGER},
+		</if>
+		<if test="modeName != null">
+			mode_name=#{modeName,jdbcType=VARCHAR},
 		</if>
 	</sql>
 
@@ -200,6 +220,12 @@
 		</if>
 		<if test="cityName != null">
 			 and city_name= #{cityName,jdbcType=VARCHAR}
+		</if>
+		<if test="modeId != null">
+			and mode_id=#{modeId,jdbcType=INTEGER}
+		</if>
+		<if test="modeName != null">
+			and mode_name=#{modeName,jdbcType=VARCHAR}
 		</if>
 	</sql>
 

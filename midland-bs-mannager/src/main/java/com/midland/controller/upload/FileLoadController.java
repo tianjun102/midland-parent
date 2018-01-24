@@ -323,7 +323,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 			if (j > 0 ) {
 				//每个市27行
 				
-				if (j!=27 && row_27<13){//每个市的前12行，为住宅信息
+				if (row_27 != 0 && row_27<13){//每个市的前12行，为住宅信息
 					int row_4=row_27%4;
 					if (row_4==1){
 						dealNum=new ArrayList<>();

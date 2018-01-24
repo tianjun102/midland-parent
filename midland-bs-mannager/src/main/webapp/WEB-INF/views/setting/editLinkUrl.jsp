@@ -29,7 +29,6 @@
                 <p style="display: inline-block;height: 28px;">
                     <input type="hidden" name="cityName" id="cityName" value="${linkUrlManager.cityName}">
                     <select onchange="SetcityNam();" name="cityId" id="cityId" style="height: 28px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
-                        <option value="">全部</option>
                         <c:forEach items="${cityList}" var="city">
                         <option <c:if test="${linkUrlManager.cityId == city.id}"> selected = 'selected' </c:if>   value="${city.id}">${city.name}</option>
                         </c:forEach>
@@ -43,6 +42,26 @@
                     <option <c:if test="${linkUrlManager.source eq 1}">selected='selected' </c:if> value="1">网站</option>
                     <option <c:if test="${linkUrlManager.source eq 2}">selected='selected' </c:if> value="2">微站</option>
                 </select>
+            </li>
+            <li>
+                <span style="float:left;">模块：</span>
+                <input type="hidden" name="modeName" id="modeName" value="${linkUrlManager.modeName}">
+                <select name="modeId" id="modeId"
+                        style="height: 28px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <option value="0"  <c:if test="${linkUrlManager.modeId eq 0  }"> </c:if>>首页</option>
+                    <option value="1"  <c:if test="${linkUrlManager.modeId eq 1  }"> </c:if>>新房</option>
+                    <option value="2"  <c:if test="${linkUrlManager.modeId eq 2  }"> </c:if>>二手房</option>
+                    <option value="3"  <c:if test="${linkUrlManager.modeId eq 3  }"> </c:if>>租房</option>
+                    <option value="4"  <c:if test="${linkUrlManager.modeId eq 4  }"> </c:if>>写字楼</option>
+                    <option value="5"  <c:if test="${linkUrlManager.modeId eq 5  }"> </c:if>>商铺</option>
+                    <option value="6"  <c:if test="${linkUrlManager.modeId eq 6  }"> </c:if>>小区</option>
+                    <option value="7"  <c:if test="${linkUrlManager.modeId eq 7  }"> </c:if>>经纪人</option>
+                    <option value="8"  <c:if test="${linkUrlManager.modeId eq 8  }"> </c:if>>外销网</option>
+                    <option value="9"  <c:if test="${linkUrlManager.modeId eq 9  }"> </c:if>>市场调究</option>
+                    <option value="10" <c:if test="${linkUrlManager.modeId eq 10 }"> </c:if>>资讯</option>
+                    <option value="11" <c:if test="${linkUrlManager.modeId eq 11 }"> </c:if>>问答</option>
+                </select>
+                <span class="_star">*</span>
             </li>
             <li>
                 <span>链接URL：</span><input style="width:274px;" type="text" name="linkUrl" id="linkUrl" onblur="checkUrl('linkUrl','linkUrl','网址格式不正确！')" value="${linkUrlManager.linkUrl}" /><span class="_star">*</span>
@@ -85,94 +104,21 @@
                         layer.msg("修改失败！", {icon: 2});
                     }
                 },
-                error: function () {
-                    layer.msg("修改失败！", {icon: 2});
+                error: function (data) {
+                    if (data.responseText != null) {
+                        layer.msg(data.responseText, {icon: 2});
+                    } else {
+                        layer.msg("保存失败！", {icon: 2});
+                    }
                 }
 
             });
         }
     }
 
-
-    function checkUserName() {
-        var regUserName = /^[a-zA-Z0-9_]{6,20}$/;
-        var userName = $("#username").val();
-        if (userName == null || userName.trim() == "") {
-            //$("#userNameCheck").text("用户名不能为空！");
-            layer.tips("用户名不能为空！", "input[name='username']", {tips: 1});
-            return false;
-        }
-        if (!regUserName.test(userName.trim())) {
-            layer.tips("仅支持英文、数字和下划线,长度为6-20个字符！", "input[name='username']", {tips: 1});
-            return false;
-        }
-        var a = true;
-        $.ajax({
-            type: "post",
-            url: "${ctx }/rest/user/checkUnique",
-            async: false, // 此处必须同步
-            dataType: "json",
-            data: {"userName": userName},
-            success: function (xmlobj) {
-                if (xmlobj.flag == 1) {
-                    layer.tips("该用户已存在！", "input[name='username']", {tips: 1});
-                    a = false;
-                } else {
-
-                    a = true;
-                }
-            }
-        });
-        return a;
-    }
-
-    //检查手机号格式
-    function checkPhone() {
-        var reg = /^1[3,4,5,7,8]\d{9}$/;
-        var phone = $("input[name='phone']").val();
-        if (phone.trim() == '') {
-            layer.tips("手机号不能为空！", "input[name='phone']", {tips: 3});
-            return false;
-        }
-        if (!reg.test(phone)) {
-            layer.tips("手机号格式有误,请核对!", "input[name='phone']", {tips: 3});
-            $("input[name='phone']").focus();
-            return false;
-        }
-        var a = true;
-        $.ajax({
-            type: "post",
-            url: "${ctx }/rest/user/checkPhoneUnique",
-            async: false, // 此处必须同步
-            dataType: "json",
-            data: {"phone": phone},
-            success: function (xmlobj) {
-                if (xmlobj.flag == 1) {
-                    layer.tips("当前手机号码已被使用，请更换手机号码！", "input[name='phone']", {tips: 1});
-                    a = false;
-                } else {
-                    a = true;
-                }
-            }
-        });
-        return a;
-    }
-
-    //检查邮箱格式
-    function checkEmail() {
-        var reg = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        var email = $("input[name='email']").val();
-        if (email.trim() == '') {
-            //layer.tips("邮箱不能为空！", "input[name='email']",{tips:3});
-            return true;
-        }
-        if (!reg.test(email)) {
-            layer.tips("邮箱格式有误,请核对!", "input[name='email']", {tips: 3});
-            $("input[name='email']").focus();
-            return false;
-        }
-        return true;
-    }
+    $("#modeId").change(function () {
+        $("#modeName").val($("#modeId").find("option:selected").text());
+    })
 
     //取消
     function closeWin() {

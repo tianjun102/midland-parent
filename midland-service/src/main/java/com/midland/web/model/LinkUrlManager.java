@@ -50,7 +50,28 @@ public class LinkUrlManager{
 	 * 
 	 **/
 	private String cityName;
+	/**
+	 * 0  首页,1  新房,2  二手房,3  租房,4  写字楼,5  商铺,6  小区,7  经纪人,8  外销网,9  市场调究,10 资讯,11 问答,
+	 */
+	private Integer modeId;
 
+	private String modeName;
+
+	public Integer getModeId() {
+		return modeId;
+	}
+
+	public void setModeId(Integer modeId) {
+		this.modeId = modeId;
+	}
+
+	public String getModeName() {
+		return modeName;
+	}
+
+	public void setModeName(String modeName) {
+		this.modeName = modeName;
+	}
 
 	public Integer getId() {
 		return id;

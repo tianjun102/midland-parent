@@ -40,9 +40,8 @@
 					<select name="auditStatus" id="auditStatus" class="dropdown">
 						<option value="" >请选择</option>
 						<option value="0" >未审核</option>
-						<option value="1" >审核中</option>
-						<option value="2" >已审核</option>
-						<option value="3" >拒绝</option>
+						<option value="1" >已审核</option>
+						<option value="2" >拒绝</option>
 					</select>
 				</li>
 				<li><span>平台：</span>

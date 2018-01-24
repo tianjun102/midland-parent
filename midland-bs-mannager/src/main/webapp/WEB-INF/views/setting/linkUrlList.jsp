@@ -18,6 +18,7 @@
 							<th style="width: 5%">编号</th>
 							<th style="width: 5%">城市</th>
 							<th style="width: 5%">平台</th>
+							<th style="width: 5%">模块</th>
 							<th style="width: 5%">名称</th>
 							<th style="width: 10%">操作</th>
 						</tr>
@@ -35,7 +36,9 @@
 									<c:if test="${linkUrl.source==1}">网站</c:if>
 									<c:if test="${linkUrl.source==2}">微站</c:if>
 								</td>
+								<td>${linkUrl.modeName}</td>
 								<td>${linkUrl.linkName}</td>
+
 								<td>
 									<a target="contentF" title="上移" class="up_img" onclick="sort(${linkUrl.id },${linkUrl.orderBy},1)"></a>
 									<a target="contentF" title="下移" class="down_img" onclick="sort(${linkUrl.id },${linkUrl.orderBy},2)"></a>
@@ -182,10 +185,10 @@ function takeblacklist(userId){
 				'</section>',
 			  btn:['确定','取消'],
 			  yes: function(index){
-				  $.ajax({ 
-						type: "post", 
+				  $.ajax({
+						type: "post",
 						url: "${ctx}/rest/user/resetPwd?userId="+userId,
-						cache:false, 
+						cache:false,
 						async:false, // 此处必须同步
 						dataType: "json",
 						success: function(xmlobj){
@@ -196,7 +199,7 @@ function takeblacklist(userId){
 								layer.msg("重置失败！！",{icon:7});
 							}
 							layer.close(index);
-						} 
+						}
 					});
 				 }
 				,success: function (layero) {
@@ -238,7 +241,7 @@ function takeblacklist(userId){
 	//启用关闭
 	function isOffOn(userId,state){
 		if(state=="0"){
-			
+
 			layer.open({
 				  type: 1,
 				  skin: 'layer-style',
@@ -253,10 +256,10 @@ function takeblacklist(userId){
 					'</section>',
 				  btn:['确定','取消'],
 				  yes: function(index){
-					  $.ajax({ 
-							type: "post", 
+					  $.ajax({
+							type: "post",
 							url: "${ctx}/rest/user/offOn?id="+userId+"&state=1",
-							cache:false, 
+							cache:false,
 							async:false, // 此处必须同步
 							dataType: "json",
 							success: function(xmlobj){
@@ -291,10 +294,10 @@ function takeblacklist(userId){
 					'</section>',
 				  btn:['确定','取消'],
 				  yes: function(index){
-					  $.ajax({ 
-							type: "post", 
+					  $.ajax({
+							type: "post",
 							url: "${ctx}/rest/user/offOn?id="+userId+"&state=0",
-							cache:false, 
+							cache:false,
 							async:false, // 此处必须同步
 							dataType: "json",
 							success: function(xmlobj){

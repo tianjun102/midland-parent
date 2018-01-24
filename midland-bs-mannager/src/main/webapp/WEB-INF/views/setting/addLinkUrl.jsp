@@ -29,7 +29,6 @@
                     <input type="hidden" name="cityName" id="cityName" value="${cityName}">
                     <c:if test="${empty isSuper}"><input type="hidden" name="cityId"  value="${cityId}"></c:if>
                     <select onchange="SetcityNam();" name="cityId" id="cityId" style="height: 28px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
-                        <option value="">全部</option>
                         <c:forEach items="${cityList}" var="city">
                             <c:if test="${empty isSuper}"><option selected="selected" value="${cityId}">${cityName}</option></c:if>
                             <option value="${city.id}">${city.name}</option>
@@ -37,7 +36,6 @@
                     </select>
                 </p>
             </li>
-            <li><span>链接名：</span><input style="width:274px;" type="text" name="linkName" id="linkName" onblur="notEmpty('linkName','linkName','链接名不能为空！');" maxlength="50"/><span class="_star">*</span></li>
             <li>
                 <span style = "float:left;">平台：</span>
                 <select name="source" id="source" class="dropdown">
@@ -45,6 +43,28 @@
                     <option value="2">微站</option>
                 </select>
             </li>
+            <li>
+                <span style="float:left;">模块：</span>
+                <input type="hidden" name="modeName" id="modeName">
+                <select name="modeId" id="modeId"
+                        style="height: 28px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <option value="0">首页</option>
+                    <option value="1">新房</option>
+                    <option value="2">二手房</option>
+                    <option value="3">租房</option>
+                    <option value="4">写字楼</option>
+                    <option value="5">商铺</option>
+                    <option value="6">小区</option>
+                    <option value="7">经纪人</option>
+                    <option value="8">外销网</option>
+                    <option value="9">市场调究</option>
+                    <option value="10">资讯</option>
+                    <option value="11">问答</option>
+                </select>
+                <span class="_star">*</span>
+            </li>
+            <li><span>链接名：</span><input style="width:274px;" type="text" name="linkName" id="linkName" onblur="notEmpty('linkName','linkName','链接名不能为空！');" maxlength="50"/><span class="_star">*</span></li>
+
             <li>
                 <span>链接URL：</span><input style="width:274px;" type="text" name="linkUrl" id="linkUrl" value="" onblur="checkUrl('linkUrl','linkUrl','网址格式不正确！')" /><span class="_star">*</span>
             </li>
@@ -87,14 +107,21 @@
                         layer.msg("新增失败！", {icon: 2});
                     }
                 },
-                error: function () {
-                    layer.msg("新增失败！", {icon: 2});
+                error: function (data) {
+                    if (data.responseText != null) {
+                        layer.msg(data.responseText, {icon: 2});
+                    } else {
+                        layer.msg("保存失败！", {icon: 2});
+                    }
                 }
 
             });
         }
     }
 
+$("#modeId").change(function () {
+    $("#modeName").val($("#modeId").find("option:selected").text());
+})
 
     function checkUserName() {
         var regUserName = /^[a-zA-Z0-9_]{6,20}$/;

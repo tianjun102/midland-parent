@@ -200,11 +200,11 @@ public class QuotationController extends BaseFilter {
 	
 	@RequestMapping("toolsTip")
 	public String showTooltip(Integer id, Quotation obj,String distName,String distId,String url,String showType, Model model) throws Exception {
-		if (StringUtils.isEmpty(distId)&&StringUtils.isEmpty(distName)){
+		if (StringUtils.isEmpty(obj.getAreaId())&&StringUtils.isEmpty(obj.getAreaName())){
 			obj.setAreaId("0");
 		}else{
-			obj.setAreaId(distId);
-			obj.setAreaName(distName);
+			obj.setAreaId(obj.getAreaId());
+			obj.setAreaName(obj.getAreaName());
 		}
 		if (StringUtils.isEmpty(obj.getCityId())){
 			obj.setCityId("085");
