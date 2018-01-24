@@ -357,6 +357,15 @@
 					<shiro:hasPermission name="bsUserList">
 						<a id = "left51" href="${ctx}/rest/user/bsUserIndex" target="contentF"><span>前台用户管理</span></a>
 					</shiro:hasPermission>
+					<shiro:hasPermission name="userList">
+						<a id = "left50" href="${ctx}/rest/registrationProtocol/index1" target="contentF"><span>前台用户注册协议</span></a>
+					</shiro:hasPermission>
+					<shiro:hasPermission name="userList">
+						<a id = "left50" href="${ctx}/rest/disclaimer/index1" target="contentF"><span>免责申明</span></a>
+					</shiro:hasPermission>
+					<shiro:hasPermission name="userList">
+						<a id = "left50" href="${ctx}/rest/privacy/index1" target="contentF"><span>私隐政策</span></a>
+					</shiro:hasPermission>
 
 					<shiro:hasPermission name="rolelist">
 						<a id = "left52" href="${ctx}/rest/role/roleIndex" target="contentF"><span>角色列表</span></a>
