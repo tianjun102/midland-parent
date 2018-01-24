@@ -214,7 +214,7 @@ public class SettingController extends BaseFilter {
             model.addAttribute("categoryData", resultCate);
         }
         model.addAttribute("sheetList", sheetLst == null ? null : sheetLst.get("sheet"));
-        model.addAttribute("popular", popular);
+        model.addAttribute("item", popular);
         User user = MidlandHelper.getCurrentUser(request);
         if(user.getIsSuper()==null){
             model.addAttribute("cityId",user.getCityId());

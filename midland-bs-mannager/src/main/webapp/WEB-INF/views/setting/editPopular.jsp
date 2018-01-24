@@ -100,40 +100,40 @@
 <body>
 <section class="content" style="border:none;">
     <form action="" method="post" id="addFrom">
-        <input type="hidden" name="id" id="id" value="${popular.id}">
+        <input type="hidden" name="id" id="id" value="${item.id}">
         <input name="type" type="hidden" value="${type}" alt="热门关注的type=3"/>
         <ul class="userinfo row">
-            <%@include file="../menu/sheet_required.jsp" %>
+            <%@include file="../menu/sheet_required1.jsp" %>
             <li>
                 <span style = "float:left;">平台：</span>
                 <select name="source" id="source" style="height: 28px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
-                    <option <c:if test="${popular.source =='0'}">selected = 'selected'</c:if> value="0">网站</option>
-                    <option <c:if test="${popular.source =='1'}">selected = 'selected'</c:if> value="1">微站</option>
+                    <option <c:if test="${item.source =='0'}">selected = 'selected'</c:if> value="0">网站</option>
+                    <option <c:if test="${item.source =='1'}">selected = 'selected'</c:if> value="1">微站</option>
                 </select>
             </li>
             <li>
                 <span style = "float:left;">模块：</span>
                 <select name="menuId" id="menuId" style="height: 28px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
-                    <option <c:if test="${popular.menuId =='0'}">selected = 'selected'</c:if> value="0">首页</option>
-                    <option <c:if test="${popular.menuId =='1'}">selected = 'selected'</c:if> value="1">新房</option>
-                    <option <c:if test="${popular.menuId =='2'}">selected = 'selected'</c:if> value="2">二手房</option>
-                    <option <c:if test="${popular.menuId =='3'}">selected = 'selected'</c:if> value="3">租房</option>
-                    <option <c:if test="${popular.menuId =='4'}">selected = 'selected'</c:if> value="4">写字楼</option>
-                    <option <c:if test="${popular.menuId =='5'}">selected = 'selected'</c:if> value="5">商铺</option>
-                    <option <c:if test="${popular.menuId =='6'}">selected = 'selected'</c:if> value="6">小区</option>
-                    <option <c:if test="${popular.menuId =='7'}">selected = 'selected'</c:if> value="7">经纪人</option>
-                    <option <c:if test="${popular.menuId =='8'}">selected = 'selected'</c:if> value="8">外销网</option>
-                    <option <c:if test="${popular.menuId =='9'}">selected = 'selected'</c:if> value="9">市场调究</option>
-                    <option <c:if test="${popular.menuId =='10'}">selected = 'selected'</c:if> value="10">资讯</option>
-                    <option <c:if test="${popular.menuId =='11'}">selected = 'selected'</c:if> value="11">问答</option>
+                    <option <c:if test="${item.menuId =='0'}">selected = 'selected'</c:if> value="0">首页</option>
+                    <option <c:if test="${item.menuId =='1'}">selected = 'selected'</c:if> value="1">新房</option>
+                    <option <c:if test="${item.menuId =='2'}">selected = 'selected'</c:if> value="2">二手房</option>
+                    <option <c:if test="${item.menuId =='3'}">selected = 'selected'</c:if> value="3">租房</option>
+                    <option <c:if test="${item.menuId =='4'}">selected = 'selected'</c:if> value="4">写字楼</option>
+                    <option <c:if test="${item.menuId =='5'}">selected = 'selected'</c:if> value="5">商铺</option>
+                    <option <c:if test="${item.menuId =='6'}">selected = 'selected'</c:if> value="6">小区</option>
+                    <option <c:if test="${item.menuId =='7'}">selected = 'selected'</c:if> value="7">经纪人</option>
+                    <option <c:if test="${item.menuId =='8'}">selected = 'selected'</c:if> value="8">外销网</option>
+                    <option <c:if test="${item.menuId =='9'}">selected = 'selected'</c:if> value="9">市场调究</option>
+                    <option <c:if test="${item.menuId =='10'}">selected = 'selected'</c:if> value="10">资讯</option>
+                    <option <c:if test="${item.menuId =='11'}">selected = 'selected'</c:if> value="11">问答</option>
                 </select>
             </li>
             <li id="sellrentLi" style="display: none"><span>租售：</span>
                 <label class="checkitem"><input id="radio1" type="radio" name="sellRent" value="0"><span>租房</span></label>
                 <label class="checkitem"><input id="radio2" type="radio" name="sellRent" value="1"><span>售房</span></label>
             </li>
-            <li><span>类型：</span><input class="vipcate" id="cateName" name="cateName" value="${popular.cateName}" onclick="showTree()" readonly="readonly"/>
-                <input name="cateId" value="${popular.cateId}" type="hidden"/><label style="color: red" class = "_star " >*</label>
+            <li><span>类型：</span><input class="vipcate" id="cateName" name="cateName" value="${item.cateName}" onclick="showTree()" readonly="readonly"/>
+                <input name="cateId" value="${item.cateId}" type="hidden"/><label style="color: red" class = "_star " >*</label>
 
             </li>
             <li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >
@@ -143,8 +143,8 @@
                 <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: 323px;" onclick="hideTree()">
             </li>
 
-            <li><span>链接名：</span><input style="width:274px;" type="text" value="${popular.name}" onblur="notEmpty('name','name','链接名不能为空！');" name="name" id="name" maxlength="50"/><span class="_star">*</span></li>
-            <li><span>链接URL：</span><input style="width:274px;" type="text" name="url" id="url" value="${popular.url}"
+            <li><span>链接名：</span><input style="width:274px;" type="text" value="${item.name}" onblur="notEmpty('name','name','链接名不能为空！');" name="name" id="name" maxlength="50"/><span class="_star">*</span></li>
+            <li><span>链接URL：</span><input style="width:274px;" type="text" name="url" id="url" value="${item.url}"
                                           onblur="checkUrl('url','url','网址格式不正确！')"/><span class="_star">*</span>
             </li>
             <li style="padding-top:30px;">
@@ -158,12 +158,11 @@
 </section>
 <script type="text/javascript">
     $(function () {
-
-        if (${popular.menuId==4}|| ${popular.menuId==5}) {
-            if (${popular.menuId==0}){
-                $("input[name='sellRent']:eq(0)").attr('checked','true');
-            }else if(${popular.menuId==0}){
-                $("input[name='sellRent']:eq(1)").attr('checked','true');
+        if (${item.menuId==4}|| ${item.menuId==5}) {
+            if (${item.sellRent==0}){
+                $("#radio1").attr('checked','true');
+            }else if(${item.sellRent==1}){
+                $("#radio2").attr('checked','true');
             }
             $("#sellrentLi").show();
         }else {
