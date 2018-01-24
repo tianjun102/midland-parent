@@ -48,19 +48,19 @@
                 <input type="hidden" name="modeName" id="modeName" value="${linkUrlManager.modeName}">
                 <select name="modeId" id="modeId"
                         style="height: 28px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
-                    <option value="0"  <c:if test="${linkUrlManager.modeId eq 0  }"> </c:if>>首页</option>
-                    <option value="1"  <c:if test="${linkUrlManager.modeId eq 1  }"> </c:if>>新房</option>
-                    <option value="2"  <c:if test="${linkUrlManager.modeId eq 2  }"> </c:if>>二手房</option>
-                    <option value="3"  <c:if test="${linkUrlManager.modeId eq 3  }"> </c:if>>租房</option>
-                    <option value="4"  <c:if test="${linkUrlManager.modeId eq 4  }"> </c:if>>写字楼</option>
-                    <option value="5"  <c:if test="${linkUrlManager.modeId eq 5  }"> </c:if>>商铺</option>
-                    <option value="6"  <c:if test="${linkUrlManager.modeId eq 6  }"> </c:if>>小区</option>
-                    <option value="7"  <c:if test="${linkUrlManager.modeId eq 7  }"> </c:if>>经纪人</option>
-                    <option value="8"  <c:if test="${linkUrlManager.modeId eq 8  }"> </c:if>>外销网</option>
-                    <option value="9"  <c:if test="${linkUrlManager.modeId eq 9  }"> </c:if>>市场调究</option>
-                    <option value="10" <c:if test="${linkUrlManager.modeId eq 10 }"> </c:if>>资讯</option>
-                    <option value="11" <c:if test="${linkUrlManager.modeId eq 11 }"> </c:if>>问答</option>
-                </select>
+                    <option value="0"  <c:if test="${linkUrlManager.modeId == 0  }"> selected="selected"</c:if>>首页</option>
+                    <option value="1"  <c:if test="${linkUrlManager.modeId == 1  }"> selected="selected"</c:if>>新房</option>
+                    <option value="2"  <c:if test="${linkUrlManager.modeId eq 2  }"> selected="selected"</c:if>>二手房</option>
+                    <option value="3"  <c:if test="${linkUrlManager.modeId eq 3  }"> selected="selected"</c:if>>租房</option>
+                    <option value="4"  <c:if test="${linkUrlManager.modeId eq 4  }"> selected="selected"</c:if>>写字楼</option>
+                    <option value="5"  <c:if test="${linkUrlManager.modeId eq 5  }"> selected="selected"</c:if>>商铺</option>
+                    <option value="6"  <c:if test="${linkUrlManager.modeId eq 6  }"> selected="selected"</c:if>>小区</option>
+                    <option value="7"  <c:if test="${linkUrlManager.modeId eq 7  }"> selected="selected"</c:if>>经纪人</option>
+                    <option value="8"  <c:if test="${linkUrlManager.modeId eq 8  }"> selected="selected"</c:if>>外销网</option>
+                    <option value="9"  <c:if test="${linkUrlManager.modeId eq 9  }"> selected="selected"</c:if>>市场调究</option>
+                    <option value="10" <c:if test="${linkUrlManager.modeId eq 10 }"> selected="selected"</c:if>>资讯</option>
+                    <option value="11" <c:if test="${linkUrlManager.modeId eq 11 }"> selected="selected"</c:if>>问答</option>
+                </select
                 <span class="_star">*</span>
             </li>
             <li>
