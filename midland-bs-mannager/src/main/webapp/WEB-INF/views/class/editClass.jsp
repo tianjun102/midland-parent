@@ -320,37 +320,43 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
         }
         return url
     };
-    
-    function subumintEditClass(){
-    	var required = true;
-    	if($("input[name='className']").val()==""){
-			layer.msg("请完成必填项");
-			required = false;
-    	}
-    	if(required){
-    	var form = document.getElementById('formId');
-		var data = new FormData(form);
-		$.ajax({
-			url : "${ctx}/rest/class/submiteditmenus",
-			type : "post",
-			cache : false,
-			contentType : false,
-			processData : false,
-			dataType: "json",
-			data : data,
-			async : false,
-			success : function(result) {
-			if(result.result=="ok"){
-				layer.msg("保存成功！",{icon:1});
-				setTimeout(function(){window.open("${ctx}/rest/class/index","contentF");},2000); 
-			}
-			},
-			error:function(){
-				layer.msg("保存失败！",{icon:2});
-			}
-			});
-    	}
-    	
+
+    function subumintEditClass() {
+        var required = true;
+        if ($("input[name='className']").val() == "") {
+            layer.msg("请完成必填项");
+            required = false;
+        }
+        if (required) {
+            var form = document.getElementById('formId');
+            var data = new FormData(form);
+            $.ajax({
+                url: "${ctx}/rest/class/submiteditmenus",
+                type: "post",
+                cache: false,
+                contentType: false,
+                processData: false,
+                dataType: "json",
+                data: data,
+                async: false,
+                success: function (result) {
+                    if (result.result == "ok") {
+                        layer.msg("保存成功！", {icon: 1});
+                        setTimeout(function () {
+                            window.open("${ctx}/rest/class/index", "contentF");
+                        }, 2000);
+                    }
+                },
+                error: function (data) {
+                    if (data.responseText != null) {
+                        layer.msg(data.responseText, {icon: 2});
+                    } else {
+                        layer.msg("操作失败！", {icon: 2});
+                    }
+                }
+            });
+        }
+
     }
     
     </script>

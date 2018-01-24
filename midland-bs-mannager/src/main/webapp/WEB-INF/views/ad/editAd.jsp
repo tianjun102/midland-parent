@@ -321,41 +321,47 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
    	} 
    	
    }
-    
-    function subumintAd(){
-    	var form = document.getElementById('formId');
-		var data = new FormData(form);
-		//var files=$("input[type='file']");
-		/* $.each(files, function(i, file) {
-	
-			data.append(file.name, file.files[0]);
-		}) */
-		var required = true;
-    	if($("input[name='adName']").val()==""||$("select[name='type']").val()==""||$("input[name='sortOrder']").val()==""||$("#enabled").val()==""||$("input[name='addTime']").val()==""){
-			layer.msg("请完成必填项");
-			required = false;
-    	}
-		if(required){
-		$.ajax({
-			url : "${ctx}/rest/ad/saveEditAd",
-			type : "post",
-			cache : false,
-			contentType : false,
-			processData : false,
-			dataType: "json",
-			data : data,
-			async : false,
-			success : function(result) {
-			if(result.result=="ok"){
-				layer.msg("保存成功！",{icon:1});
-				setTimeout(function(){window.open("${ctx}/rest/ad/listindex","contentF");},2000); 
-			}
-			},
-			error:function(){
-				layer.msg("保存失败！",{icon:2});
-			}
-			});
-		}
+
+    function subumintAd() {
+        var form = document.getElementById('formId');
+        var data = new FormData(form);
+        //var files=$("input[type='file']");
+        /* $.each(files, function(i, file) {
+
+            data.append(file.name, file.files[0]);
+        }) */
+        var required = true;
+        if ($("input[name='adName']").val() == "" || $("select[name='type']").val() == "" || $("input[name='sortOrder']").val() == "" || $("#enabled").val() == "" || $("input[name='addTime']").val() == "") {
+            layer.msg("请完成必填项");
+            required = false;
+        }
+        if (required) {
+            $.ajax({
+                url: "${ctx}/rest/ad/saveEditAd",
+                type: "post",
+                cache: false,
+                contentType: false,
+                processData: false,
+                dataType: "json",
+                data: data,
+                async: false,
+                success: function (result) {
+                    if (result.result == "ok") {
+                        layer.msg("保存成功！", {icon: 1});
+                        setTimeout(function () {
+                            window.open("${ctx}/rest/ad/listindex", "contentF");
+                        }, 2000);
+                    }
+                },
+                error: function (data) {
+                    if (data.responseText != null) {
+                        layer.msg(data.responseText, {icon: 2});
+                    } else {
+                        layer.msg("操作失败！", {icon: 2});
+                    }
+                }
+            });
+        }
     }
     
     $(function() {
