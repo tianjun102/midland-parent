@@ -241,7 +241,7 @@
 			 and cate_id= #{cateId,jdbcType=INTEGER}
 		</if>
 		<if test="cateName != null">
-			 and cate_name= #{cateName,jdbcType=VARCHAR}
+			 and cate_name LIKE '%${cateName}%'
 		</if>
 		<if test="linkUrl != null">
 			 and link_url= #{linkUrl,jdbcType=VARCHAR}

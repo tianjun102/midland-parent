@@ -23,16 +23,21 @@
                 <span style = "float:left;">城市：</span>
                 <input type="hidden" name="cityName" id="cityName" value="${item.cityName}">
                 <select onchange="setCityName()" name="cityId" id="cityId" class="dropdown" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
-                    <option value="">全部</option>
                     <c:forEach items="${cityList}" var="city">
                     <option <c:if test="${item.cityId == city.id}">selected="selected"</c:if> value="${city.id}">${city.name}</option>
                     </c:forEach>
                 </select>
             </li>
+            <li><span>平台：</span>
+                <select name="source" id="source" class="dropdown">
+                    <option value="0" <c:if test="${item.source == 0}">selected="selected"</c:if>>网站</option>
+                    <option value="1" <c:if test="${item.source == 1}">selected="selected"</c:if>>微站</option>
+                </select>
+            </li>
+
             <li><span>模块：</span>
                 <input type="hidden" id="menuName" name="menuName" value="${item.menuName}" >
                 <select onchange="setMenuName()" name="menuId" id="menuId" class="dropdown">
-                    <option value="">全部</option>
                     <option <c:if test="${item.menuId =='0'}">selected="selected"</c:if> value="0">首页</option>
                     <option <c:if test="${item.menuId =='1'}">selected="selected"</c:if> value="1">新房</option>
                     <option <c:if test="${item.menuId =='2'}">selected="selected"</c:if> value="2">二手房</option>
@@ -48,6 +53,9 @@
                 </select>
                 <label style="color: red" class = "_star " >*</label>
             </li>
+            <li><span>地址：</span>
+                <input type="text" name="url" id="url" value="${item.url}"  onblur="checkUrl('url','url','链接格式不正确！')">
+            </li>
             <li>
                 <span></span>
                 <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">更新</a>
@@ -61,7 +69,7 @@
 <script type="text/javascript">
     //保存数据
     function updateData() {
-        if(notEmpty('keywords','keywords','搜索词不能为空！')&&checkSelect('menuId','请选择模块！')){
+        if(notEmpty('keywords','keywords','搜索词不能为空！')&&checkSelect('menuId','请选择模块！')&&checkUrl('url','url','链接格式不正确！')){
         var data = $("#dataForm").serialize();
         $.ajax({
             type: "post",

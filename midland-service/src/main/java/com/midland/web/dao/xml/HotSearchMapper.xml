@@ -14,10 +14,12 @@
 		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
 		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
 		<result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+		<result column="source" property="source" jdbcType="INTEGER" />
+		<result column="url" property="url" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,keywords,count,sort_order,city_id,menu_id,is_show,order_by,is_delete,city_name,menu_name
+		id,keywords,count,sort_order,city_id,menu_id,is_show,order_by,is_delete,city_name,menu_name,source,url
 	</sql>
 
 	<select id="selectHotSearchById" resultMap="BaseResultMap">
@@ -85,6 +87,13 @@
 			<if test="menuName != null">
 				menu_name,
 			</if>
+			<if test="source != null">
+				source,
+			</if>
+			<if test="url != null">
+				url,
+			</if>
+
 		</trim>
 		values
 		 <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -118,6 +127,13 @@
 			<if test="menuName != null">
 				#{menuName,jdbcType=VARCHAR},
 			</if>
+			 <if test="source != null">
+				 #{source,jdbcType=INTEGER},
+			 </if>
+			  <if test="url != null">
+				 #{url},
+			 </if>
+
 		</trim>
 	</insert>
 
@@ -152,6 +168,14 @@
 		<if test="menuName != null">
 			menu_name= #{menuName,jdbcType=VARCHAR},
 		</if>
+		<if test="source != null">
+			source=#{source,jdbcType=INTEGER},
+		</if>
+		<if test="url != null">
+			url=#{url},
+		</if>
+
+
 	</sql>
 
 	<sql id="select_option">
@@ -188,6 +212,14 @@
 		<if test="menuName != null">
 			 and menu_name= #{menuName,jdbcType=VARCHAR}
 		</if>
+		<if test="source != null">
+			and source =#{source,jdbcType=INTEGER}
+		</if>
+		<if test="url != null">
+			and url =#{url}
+		</if>
+
+
 	</sql>
 
 	<update id="batchUpdate" parameterType="java.util.List">

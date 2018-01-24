@@ -17,7 +17,8 @@
             <th style="width: 8%"><a href="#" onclick="checkall()" >全选</a> / <a href="#" onclick="delcheckall()" >取消</a></th>
             <th style="width: 5%">编号</th>
             <th style="width: 8%">缩列图</th>
-            <th style="width: 20%">标题</th>
+            <th style="width: 10%">标题</th>
+            <th style="width: 5%">分类名称</th>
             <th style="width: 7%">城市</th>
             <th style="width: 5%">点击量</th>
             <th style="width: 12%">发布日期</th>
@@ -36,6 +37,7 @@
                         <td>${xh.count }</td>
                         <td><img src="${item.imgUrl }" style="width:40px;height:40px" alt=""></td>
                         <td>${item.title }</td>
+                        <td>${item.cateName }</td>
                         <td>${item.cityName }</td>
                         <td>${item.clickNum }</td>
                         <td>${item.releaseTime }</td>

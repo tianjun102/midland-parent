@@ -47,6 +47,31 @@ public class HotSearch{
 	 **/
 	private String menuName;
 
+	/**
+	 * 0网站,1微站
+	 */
+	private Integer source;
+
+	/**
+	 * 链接
+	 */
+	private String url;
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public Integer getSource() {
+		return source;
+	}
+
+	public void setSource(Integer source) {
+		this.source = source;
+	}
 
 	public Integer getId() {
 		return id;

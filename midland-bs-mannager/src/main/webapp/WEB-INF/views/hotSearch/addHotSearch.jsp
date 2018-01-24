@@ -24,17 +24,22 @@
                 <input type="hidden" name="cityName" id="cityName" value="${cityName}">
                 <c:if test="${empty isSuper}"><input type="hidden" name="cityId"  value="${cityId}"></c:if>
                 <select onchange="setCityName()" name="cityId" id="cityId" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
-                    <option value="">全部</option>
                     <c:forEach items="${cityList}" var="city">
                         <c:if test="${empty isSuper}"><option selected="selected" value="${cityId}">${cityName}</option></c:if>
                         <option value="${city.id}">${city.name}</option>
                     </c:forEach>
                 </select>
             </li>
+            <li><span>平台：</span>
+                <select name="source" id="source" class="dropdown">
+                    <option value="0">网站</option>
+                    <option value="1">微站</option>
+                </select>
+            </li>
+
             <li><span>模块：</span>
                 <input type="hidden" id="menuName" name="menuName" value="" >
                 <select onchange="setMenuName()" name="menuId" id="menuId" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
-                    <option value="">全部</option>
                     <option value="0">首页</option>
                     <option value="1">新房</option>
                     <option value="2">二手房</option>
@@ -50,6 +55,9 @@
                 </select>
                 <label style="color: red" class = "_star " >*</label>
             </li>
+            <li><span>地址：</span>
+                <input type="text" name="url" id="url" value="${item.url}" onblur="checkUrl('url','url','链接格式不正确！')">
+            </li>
             <li>
                 <span></span>
                 <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">更新</a>
@@ -63,7 +71,7 @@
 <script type="text/javascript">
     //保存数据
     function updateData() {
-        if(notEmpty('keywords','keywords','搜索词不能为空！')&&checkSelect('menuId','请选择模块！')){
+        if(notEmpty('keywords','keywords','搜索词不能为空！')&&checkSelect('menuId','请选择模块！')&&checkUrl('url','url','链接格式不正确！')){
         var data = $("#dataForm").serialize();
         $.ajax({
             type: "post",

@@ -19,6 +19,7 @@
                 <th style="width: 10%">城市</th>
                 <th style="width: 20%">热搜词</th>
 				<th style="width: 10%">模块</th>
+				<th style="width: 10%">平台</th>
                 <th style="width: 30%">操作</th>
             </tr>
         </thead>
@@ -32,6 +33,8 @@
 						<td>${item.cityName}</td>
                         <td>${item.keywords}</td>
                         <td>${item.menuName}</td>
+                        <td><c:if test="${item.source==0}">网站</c:if>
+                            <c:if test="${item.source==1}">微站</c:if></td>
 						<td>
                             <c:if test="${item.isDelete==0}">
                             <a class="edit_img" title="编辑" target="contentF" onclick="to_edit(${item.id })"></a>

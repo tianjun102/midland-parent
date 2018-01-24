@@ -110,7 +110,6 @@
                     <span style = "float:left;">城市：</span>
                     <input type="hidden" name="cityName" id="cityName" value="">
                     <select onchange="setCityName()" name="cityId" id="cityId" style="height: 28px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if> >
-                        <option value="">全部</option>
                         <c:forEach items="${cityList}" var="city">
                             <option <c:if test="${item.cityId == city.id}"> selected ='selected' </c:if>  value="${city.id}">${city.name}</option>
                         </c:forEach>
