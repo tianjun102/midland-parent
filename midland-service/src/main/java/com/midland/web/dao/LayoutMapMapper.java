@@ -14,10 +14,12 @@ public interface LayoutMapMapper {
 
     int updateLayoutMapById(LayoutMap layoutMap);
 
-    Integer getMaxOrderBy(LayoutMap layoutMap);
-
     int insertLayoutMap(LayoutMap layoutMap);
 
     List<LayoutMap> findLayoutMapList(LayoutMap layoutMap);
+
+    LayoutMap shiftUp(LayoutMap layoutMap);
+
+    LayoutMap shiftDown(LayoutMap layoutMap);
 
 }

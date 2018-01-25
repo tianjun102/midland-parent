@@ -23,11 +23,21 @@
         id,img_url,type,title,turned,acreage,avg_price,saleing_num,is_delete,is_show,order_by,price,hot_hand_id,create_time
     </sql>
 
-    <select id="getMaxOrderBy" resultType="java.lang.Integer">
-        select order_by from layout_map where hot_hand_id=#{hotHandId}
-        order by order_by desc limit 1;
-    </select>
 
+    <select id="shiftDown" parameterType="com.midland.web.model.LayoutMap" resultMap="BaseResultMap">
+        select id,order_by from layout_map where 1=1
+        <include refid="select_option1"/>
+        AND
+        order_by &lt; #{orderBy} order by order_by desc LIMIT 1
+
+    </select>
+    <select id="shiftUp" parameterType="com.midland.web.model.LayoutMap" resultMap="BaseResultMap">
+        select id,order_by from layout_map where 1=1
+        <include refid="select_option1"/>
+        AND
+        order_by &gt; #{orderBy} order by order_by asc LIMIT 1
+
+    </select>
     <select id="selectLayoutMapById" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -60,6 +70,10 @@
     </select>
 
     <insert id="insertLayoutMap" parameterType="com.midland.web.model.LayoutMap">
+        <selectKey resultType="INTEGER" order="BEFORE" keyProperty="orderBy">
+            SELECT MAX(order_by) +1 as orderBy from hot_hand
+        </selectKey>
+
         insert into layout_map
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="imgUrl != null">
@@ -222,6 +236,45 @@
         <if test="orderBy != null">
             and order_by= #{orderBy,jdbcType=INTEGER}
         </if>
+        <if test="price != null">
+            and price= #{price,jdbcType=VARCHAR}
+        </if>
+        <if test="hotHandId != null">
+            and hot_hand_id= #{hotHandId,jdbcType=INTEGER}
+        </if>
+        <if test="createTime != null">
+            and create_time= #{createTime,jdbcType=TIMESTAMP}
+        </if>
+    </sql>
+ <sql id="select_option1">
+        <if test="imgUrl != null">
+            and img_url= #{imgUrl,jdbcType=VARCHAR}
+        </if>
+        <if test="type != null">
+            and type= #{type,jdbcType=VARCHAR}
+        </if>
+        <if test="title != null">
+            and title= #{title,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="turned != null">
+            and turned= #{turned,jdbcType=INTEGER}
+        </if>
+        <if test="acreage != null">
+            and acreage= #{acreage,jdbcType=VARCHAR}
+        </if>
+        <if test="avgPrice != null">
+            and avg_price= #{avgPrice,jdbcType=DOUBLE}
+        </if>
+        <if test="saleingNum != null">
+            and saleing_num= #{saleingNum,jdbcType=INTEGER}
+        </if>
+        <if test="isDelete != null">
+            and is_delete= #{isDelete,jdbcType=INTEGER}
+        </if>
+        <if test="isShow != null">
+            and is_show= #{isShow,jdbcType=INTEGER}
+        </if>
+
         <if test="price != null">
             and price= #{price,jdbcType=VARCHAR}
         </if>

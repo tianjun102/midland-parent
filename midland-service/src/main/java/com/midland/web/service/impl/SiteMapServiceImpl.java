@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -88,6 +89,59 @@ public class SiteMapServiceImpl implements SiteMapService {
         }
     }
 
+    /**
+     * 上移
+     **/
+    @Override
+    @Transactional
+    public void shiftUp(SiteMap siteMap) throws Exception {
+        try {
+            log.debug("shiftUp {}", siteMap);
+            SiteMap obj = siteMapMapper.shiftUp(siteMap);
+            if (obj == null){
+                return;
+            }
+            int nextOrderBy = obj.getOrderBy();
+            int currOrderBy = siteMap.getOrderBy();
+            obj.setOrderBy(-999999999);
+            siteMapMapper.updateSiteMapById(obj);
+            siteMap.setOrderBy(nextOrderBy);
+            siteMapMapper.updateSiteMapById(siteMap);
+            obj.setOrderBy(currOrderBy);
+            siteMapMapper.updateSiteMapById(obj);
+        } catch (Exception e) {
+            log.error("shiftUp {}", siteMap, e);
+            throw e;
+        }
+    }
+
+    /**
+     * 下移
+     **/
+    @Override
+    @Transactional
+    public void shiftDown(SiteMap siteMap) throws Exception {
+        try {
+            log.debug("shiftDown {}", siteMap);
+            SiteMap obj = siteMapMapper.shiftDown(siteMap);
+            if (obj == null){
+                return;
+            }
+            int nextOrderBy = obj.getOrderBy();
+            int currOrderBy = siteMap.getOrderBy();
+            obj.setOrderBy(-999999999);
+            siteMapMapper.updateSiteMapById(obj);
+            siteMap.setOrderBy(nextOrderBy);
+            siteMapMapper.updateSiteMapById(siteMap);
+            obj.setOrderBy(currOrderBy);
+            siteMapMapper.updateSiteMapById(obj);
+        } catch (Exception e) {
+            log.error("shiftDown异常 {}", siteMap, e);
+            throw e;
+        }
+    }
+    
+    
     /**
      * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
      **/

@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface HotHandService {
 
-    int getMaxOrderBy();
 
     /**
      * 主键查询

@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -53,6 +54,58 @@ public class HotSearchServiceImpl implements HotSearchService {
             }
         } catch (Exception e) {
             log.error("deleteHotSearchById  {}", id, e);
+            throw e;
+        }
+    }
+
+    /**
+     * 上移
+     **/
+    @Override
+    @Transactional
+    public void shiftUp(HotSearch hotSearch) throws Exception {
+        try {
+            log.debug("shiftUp {}", hotSearch);
+            HotSearch obj = hotSearchMapper.shiftUp(hotSearch);
+            if (obj == null){
+                return;
+            }
+            int nextOrderBy = obj.getOrderBy();
+            int currOrderBy = hotSearch.getOrderBy();
+            obj.setOrderBy(-999999999);
+            hotSearchMapper.updateHotSearchById(obj);
+            hotSearch.setOrderBy(nextOrderBy);
+            hotSearchMapper.updateHotSearchById(hotSearch);
+            obj.setOrderBy(currOrderBy);
+            hotSearchMapper.updateHotSearchById(obj);
+        } catch (Exception e) {
+            log.error("shiftUp {}", hotSearch, e);
+            throw e;
+        }
+    }
+
+    /**
+     * 下移
+     **/
+    @Override
+    @Transactional
+    public void shiftDown(HotSearch hotSearch) throws Exception {
+        try {
+            log.debug("shiftDown {}", hotSearch);
+            HotSearch obj = hotSearchMapper.shiftDown(hotSearch);
+            if (obj == null){
+                return;
+            }
+            int nextOrderBy = obj.getOrderBy();
+            int currOrderBy = hotSearch.getOrderBy();
+            obj.setOrderBy(-999999999);
+            hotSearchMapper.updateHotSearchById(obj);
+            hotSearch.setOrderBy(nextOrderBy);
+            hotSearchMapper.updateHotSearchById(hotSearch);
+            obj.setOrderBy(currOrderBy);
+            hotSearchMapper.updateHotSearchById(obj);
+        } catch (Exception e) {
+            log.error("shiftDown异常 {}", hotSearch, e);
             throw e;
         }
     }

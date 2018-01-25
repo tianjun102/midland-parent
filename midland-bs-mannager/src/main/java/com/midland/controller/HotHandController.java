@@ -75,8 +75,7 @@ public class HotHandController extends BaseFilter {
         Map<String, Object> map = new HashMap<>();
         try {
             log.info("addHotHand {}", hotHand);
-            int maxOrderBy = hotHandServiceImpl.getMaxOrderBy();
-            hotHand.setOrderBy(maxOrderBy);
+
             hotHand.setCreateTime(MidlandHelper.getCurrentTime());
             hotHandServiceImpl.insertHotHand(hotHand);
             map.put("state", 0);

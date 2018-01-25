@@ -135,8 +135,6 @@ public class SettingController extends BaseFilter {
         Map<String, String> parem = null;
         try {
             parem = new HashMap<>();
-            int maxOrderBy = popularServiceImpl.getMaxOrderBy(popular);
-            popular.setOrderBy(maxOrderBy);
             Integer num = settingService.insertPopular(popular);
             if (num >= 0) {
                 parem.put("flag", "1");
@@ -151,28 +149,13 @@ public class SettingController extends BaseFilter {
     @RequestMapping("popular/sort")
     @ResponseBody
     public Map listDesc(Popular popular, int sort, Model model, HttpServletRequest request) throws Exception {
-        String primaryKeyName="id";
-        String primaryParam=String.valueOf(popular.getId());
-        String tableName="popular";
-        String orderByColumn="order_by";
-        ListDescOtherParam obj = new ListDescOtherParam();
-        if (StringUtils.isNotEmpty(popular.getCityId())) {
-            obj.setCityId(popular.getCityId());
+        if (sort==1){
+            popularServiceImpl.shiftUp(popular);
         }else{
-            User currUser = MidlandHelper.getCurrentUser(request);
-            obj.setCityId(currUser.getCityId());
+            popularServiceImpl.shiftDown(popular);
         }
-        obj.setCateId(popular.getCateId());
-        obj.setSource(popular.getSource());
-        String orderByParam=String.valueOf(popular.getOrderBy());
         Map map = new HashMap();
-        try {
-            jdbcService.listDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,obj,sort);
-            map.put("state",0);
-        } catch (Exception e) {
-            logger.error("",e);
-            map.put("state",-1);
-        }
+        map.put("state",0);
         return map;
     }
 

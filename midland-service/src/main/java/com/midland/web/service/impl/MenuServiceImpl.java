@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -88,11 +89,7 @@ public class MenuServiceImpl implements MenuService {
         }
     }
 
-    @Override
-    public int getMaxOrderBy() {
-        Integer result = menuMapper.getMaxOrderBy();
-        return result == null ? 0 : result + 1;
-    }
+
 
     @Override
     public void batchUpdate(List<Menu> menuList) throws Exception {
@@ -107,4 +104,57 @@ public class MenuServiceImpl implements MenuService {
             throw e;
         }
     }
+
+    /**
+     * 上移
+     **/
+    @Override
+    @Transactional
+    public void shiftUp(Menu menu) throws Exception {
+        try {
+            log.debug("shiftUp {}", menu);
+            Menu obj = menuMapper.shiftUp(menu);
+            if (obj == null){
+                return;
+            }
+            int nextOrderBy = obj.getOrderBy();
+            int currOrderBy = menu.getOrderBy();
+            obj.setOrderBy(-999999999);
+            menuMapper.updateMenuById(obj);
+            menu.setOrderBy(nextOrderBy);
+            menuMapper.updateMenuById(menu);
+            obj.setOrderBy(currOrderBy);
+            menuMapper.updateMenuById(obj);
+        } catch (Exception e) {
+            log.error("shiftUp {}", menu, e);
+            throw e;
+        }
+    }
+
+    /**
+     * 下移
+     **/
+    @Override
+    @Transactional
+    public void shiftDown(Menu menu) throws Exception {
+        try {
+            log.debug("shiftDown {}", menu);
+            Menu obj = menuMapper.shiftDown(menu);
+            if (obj == null){
+                return;
+            }
+            int nextOrderBy = obj.getOrderBy();
+            int currOrderBy = menu.getOrderBy();
+            obj.setOrderBy(-999999999);
+            menuMapper.updateMenuById(obj);
+            menu.setOrderBy(nextOrderBy);
+            menuMapper.updateMenuById(menu);
+            obj.setOrderBy(currOrderBy);
+            menuMapper.updateMenuById(obj);
+        } catch (Exception e) {
+            log.error("shiftDown异常 {}", menu, e);
+            throw e;
+        }
+    }
+    
 }

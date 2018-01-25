@@ -20,7 +20,6 @@ public interface HotHandMapper {
 
     int insertHotHand(HotHand hotHand);
 
-    Integer getMaxOrderBy();
 
     List<HotHand> findHotHandList(HotHand hotHand);
 

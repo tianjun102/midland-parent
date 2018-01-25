@@ -32,6 +32,22 @@
         where id= #{id}
     </select>
 
+
+    <select id="shiftDown" parameterType="com.midland.web.model.Menu" resultMap="BaseResultMap">
+        select id,order_by from menu where 1=1
+        <include refid="select_option1"/>
+        AND
+        order_by &lt; #{orderBy} order by order_by desc LIMIT 1
+
+    </select>
+    <select id="shiftUp" parameterType="com.midland.web.model.Menu" resultMap="BaseResultMap">
+        select id,order_by from menu where 1=1
+        <include refid="select_option1"/>
+        AND
+        order_by &gt; #{orderBy} order by order_by asc LIMIT 1
+
+    </select>
+
     <delete id="deleteMenuById">
         delete from menu
         where id= #{id}
@@ -53,13 +69,10 @@
         <include refid="select_option"/>
         ORDER BY source, order_by ASC
     </select>
-
-    <select id="getMaxOrderBy" resultType="java.lang.Integer">
-        select order_by from menu
-        order by order_by desc limit 1;
-    </select>
-
     <insert id="insertMenu" parameterType="com.midland.web.model.Menu">
+        <selectKey resultType="INTEGER" order="BEFORE" keyProperty="orderBy">
+            SELECT MAX(order_by) +1 as orderBy from hot_hand
+        </selectKey>
         insert into menu
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="iconImg != null">
@@ -198,6 +211,53 @@
     </sql>
 
     <sql id="select_option">
+        <if test="id != null">
+            and id= #{id,jdbcType=INTEGER}
+        </if>
+        <if test="iconImg != null">
+            and icon_img= #{iconImg,jdbcType=VARCHAR}
+        </if>
+        <if test="cityId != null">
+            and city_id= #{cityId,jdbcType=VARCHAR}
+        </if>
+        <if test="menuName != null">
+            and menu_name like CONCAT(CONCAT('%', #{menuName}), '%')
+        </if>
+        <if test="clickNum != null">
+            and click_num= #{clickNum,jdbcType=INTEGER}
+        </if>
+        <if test="orderBy != null">
+            and order_by= #{orderBy,jdbcType=INTEGER}
+        </if>
+        <if test="url != null">
+            and url= #{url,jdbcType=VARCHAR}
+        </if>
+        <if test="isShow != null">
+            and is_show= #{isShow,jdbcType=INTEGER}
+        </if>
+        <if test="position != null">
+            and position= #{position,jdbcType=INTEGER}
+        </if>
+        <if test="parentId != null">
+            and parent_id= #{parentId,jdbcType=INTEGER}
+        </if>
+        <if test="source != null">
+            and source= #{source,jdbcType=INTEGER}
+        </if>
+        <if test="isDelete != null">
+            and is_delete= #{isDelete,jdbcType=INTEGER}
+        </if>
+        <if test="cityName != null">
+            and city_name= #{cityName,jdbcType=VARCHAR}
+        </if>
+        <if test="menuTypeId != null">
+            and menu_type_id= #{menuTypeId}
+        </if>
+        <if test="menuTypeName != null">
+            and menu_type_name like CONCAT(CONCAT('%', #{menuTypeName}), '%')
+        </if>
+    </sql>
+    <sql id="select_option1">
         <if test="id != null">
             and id= #{id,jdbcType=INTEGER}
         </if>

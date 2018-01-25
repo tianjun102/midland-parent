@@ -212,18 +212,13 @@ public class SpecialPageController extends BaseFilter {
 	@RequestMapping("sort")
 	@ResponseBody
 	public Map listDesc(SpecialPage specialPage, int sort, Model model, HttpServletRequest request) throws Exception {
-		String primaryKeyName = "id";
-		String primaryParam = String.valueOf(specialPage.getId());
-		String tableName = "special_page";
-		String orderByColumn = "order_by";
-		ListDescOtherParam obj = new ListDescOtherParam();
-		obj.setCityId(null);
-		obj.setType(null);
-		obj.setSource(null);
-		String orderByParam = String.valueOf(specialPage.getOrderBy());
-		jdbcService.listDesc(primaryKeyName, primaryParam, orderByColumn, tableName, orderByParam, obj, sort);
+		if (sort==1){
+			specialPageServiceImpl.shiftUp(specialPage);
+		}else{
+			specialPageServiceImpl.shiftDown(specialPage);
+		}
 		Map map = new HashMap();
-		map.put("state", 0);
+		map.put("state",0);
 		return map;
 	}
 }

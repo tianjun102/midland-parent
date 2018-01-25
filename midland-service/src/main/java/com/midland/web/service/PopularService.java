@@ -1,12 +1,18 @@
 package com.midland.web.service;
 
 import com.midland.web.model.Popular;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 public interface PopularService {
 
-    int getMaxOrderBy(Popular popular) throws Exception;
+
+    @Transactional
+    void shiftUp(Popular popular) throws Exception;
+
+    @Transactional
+    void shiftDown(Popular popular) throws Exception;
 
     /**
      * 主键查询

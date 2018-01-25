@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -101,4 +102,57 @@ public class SpecialPageServiceImpl implements SpecialPageService {
             throw e;
         }
     }
+
+    /**
+     * 上移
+     **/
+    @Override
+    @Transactional
+    public void shiftUp(SpecialPage specialPage) throws Exception {
+        try {
+            log.debug("shiftUp {}", specialPage);
+            SpecialPage obj = specialPageMapper.shiftUp(specialPage);
+            if (obj == null){
+                return;
+            }
+            int nextOrderBy = obj.getOrderBy();
+            int currOrderBy = specialPage.getOrderBy();
+            obj.setOrderBy(-999999999);
+            specialPageMapper.updateSpecialPageById(obj);
+            specialPage.setOrderBy(nextOrderBy);
+            specialPageMapper.updateSpecialPageById(specialPage);
+            obj.setOrderBy(currOrderBy);
+            specialPageMapper.updateSpecialPageById(obj);
+        } catch (Exception e) {
+            log.error("shiftUp {}", specialPage, e);
+            throw e;
+        }
+    }
+
+    /**
+     * 下移
+     **/
+    @Override
+    @Transactional
+    public void shiftDown(SpecialPage specialPage) throws Exception {
+        try {
+            log.debug("shiftDown {}", specialPage);
+            SpecialPage obj = specialPageMapper.shiftDown(specialPage);
+            if (obj == null){
+                return;
+            }
+            int nextOrderBy = obj.getOrderBy();
+            int currOrderBy = specialPage.getOrderBy();
+            obj.setOrderBy(-999999999);
+            specialPageMapper.updateSpecialPageById(obj);
+            specialPage.setOrderBy(nextOrderBy);
+            specialPageMapper.updateSpecialPageById(specialPage);
+            obj.setOrderBy(currOrderBy);
+            specialPageMapper.updateSpecialPageById(obj);
+        } catch (Exception e) {
+            log.error("shiftDown异常 {}", specialPage, e);
+            throw e;
+        }
+    }
+    
 }

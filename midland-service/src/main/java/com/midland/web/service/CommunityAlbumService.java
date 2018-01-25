@@ -1,12 +1,18 @@
 package com.midland.web.service;
 
 import com.midland.web.model.CommunityAlbum;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 public interface CommunityAlbumService {
 
-    int getMaxOrderBy(Integer hotHandId);
+
+    @Transactional
+    void shiftUp(CommunityAlbum communityAlbum) throws Exception;
+
+    @Transactional
+    void shiftDown(CommunityAlbum communityAlbum) throws Exception;
 
     /**
      * 主键查询

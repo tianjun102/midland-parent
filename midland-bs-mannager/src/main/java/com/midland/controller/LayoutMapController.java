@@ -66,8 +66,7 @@ public class LayoutMapController extends BaseFilter {
 			layoutMap.setCreateTime(MidlandHelper.getCurrentTime());
 			layoutMap.setIsDelete(Contant.isNotDelete);
 			layoutMap.setIsShow(Contant.isShow);
-			int maxOrderBy = layoutMapServiceImpl.getMaxOrderBy(layoutMap.getHotHandId());
-			layoutMap.setOrderBy(maxOrderBy);
+
 			layoutMapServiceImpl.insertLayoutMap(layoutMap);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -159,21 +158,13 @@ public class LayoutMapController extends BaseFilter {
 	@RequestMapping("sort")
 	@ResponseBody
 	public Map listDesc(LayoutMap layoutMap, int sort, Model model, HttpServletRequest request) throws Exception {
-		String primaryKeyName="id";
-		String primaryParam=String.valueOf(layoutMap.getId());
-		String tableName="layout_map";
-		String orderByColumn="order_by";
-		ListDescOtherParam obj = new ListDescOtherParam();
-		obj.setHotHandId(layoutMap.getHotHandId());
-		String orderByParam=String.valueOf(layoutMap.getOrderBy());
-		Map map = new HashMap();
-		try {
-			jdbcService.hotHandListDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,obj,sort);
-			map.put("state",0);
-		} catch (Exception e) {
-			log.error("",e);
-			map.put("state",-1);
+		if (sort==1){
+			layoutMapServiceImpl.shiftUp(layoutMap);
+		}else{
+			layoutMapServiceImpl.shiftDown(layoutMap);
 		}
+		Map map = new HashMap();
+		map.put("state",0);
 		return map;
 	}
 }

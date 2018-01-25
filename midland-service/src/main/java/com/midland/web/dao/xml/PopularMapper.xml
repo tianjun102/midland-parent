@@ -49,6 +49,21 @@
         where id= #{id}
     </update>
 
+    <select id="shiftDown" parameterType="com.midland.web.model.Popular" resultMap="BaseResultMap">
+        select id,order_by from popular where 1=1
+        <include refid="select_option1"/>
+        AND
+        order_by &lt; #{orderBy} order by order_by desc LIMIT 1
+
+    </select>
+    <select id="shiftUp" parameterType="com.midland.web.model.Popular" resultMap="BaseResultMap">
+        select id,order_by from popular where 1=1
+        <include refid="select_option1"/>
+        AND
+        order_by &gt; #{orderBy} order by order_by asc LIMIT 1
+
+    </select>
+
     <select id="findPopularList" parameterType="com.midland.web.model.Popular" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -62,6 +77,9 @@
     </select>
 
     <insert id="insertPopular" parameterType="com.midland.web.model.Popular">
+        <selectKey resultType="INTEGER" order="BEFORE" keyProperty="orderBy">
+            SELECT MAX(order_by) +1 as orderBy from hot_hand
+        </selectKey>
         insert into popular
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="cateId != null">
@@ -295,17 +313,62 @@
             sell_rent=#{sellRent}
         </if>
     </sql>
+    <sql id="select_option1">
 
-    <select id="getMaxOrderBy" resultType="java.lang.Integer">
-        select order_by from popular where 1=1
         <if test="cateId != null">
-            AND cate_id=#{cateId}
+            and cate_id= #{cateId,jdbcType=INTEGER}
+        </if>
+        <if test="menuId != null">
+            and menu_id= #{menuId,jdbcType=INTEGER}
+        </if>
+        <if test="name != null">
+            and name= #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="source != null">
+            and source= #{source,jdbcType=INTEGER}
+        </if>
+        <if test="url != null">
+            and url= #{url,jdbcType=VARCHAR}
+        </if>
+        <if test="provinceId != null">
+            and province_id= #{provinceId,jdbcType=VARCHAR}
         </if>
         <if test="cityId != null">
-            and city_id=#{cityId}
+            and city_id= #{cityId,jdbcType=VARCHAR}
         </if>
-        order by order_by desc limit 1;
-    </select>
+        <if test="areaId != null">
+            and area_id= #{areaId,jdbcType=VARCHAR}
+        </if>
+        <if test="sheetId != null">
+            and sheet_id= #{sheetId,jdbcType=VARCHAR}
+        </if>
+        <if test="isDelete != null">
+            and is_delete= #{isDelete,jdbcType=INTEGER}
+        </if>
+        <if test="provinceName != null">
+            and province_name= #{provinceName,jdbcType=VARCHAR}
+        </if>
+        <if test="cityName != null">
+            and city_name= #{cityName,jdbcType=VARCHAR}
+        </if>
+        <if test="areaName != null">
+            and area_name= #{areaName,jdbcType=VARCHAR}
+        </if>
+        <if test="sheetName != null">
+            and sheet_name= #{sheetName,jdbcType=VARCHAR}
+        </if>
+        <if test="cateName != null">
+            and cate_name= #{cateName,jdbcType=VARCHAR}
+        </if>
+        <if test="isShow != null">
+            and is_show= #{isShow}
+        </if>
+
+        <if test="sellRent != null">
+            sell_rent=#{sellRent}
+        </if>
+    </sql>
+
 
     <update id="batchUpdate" parameterType="java.util.List">
         <foreach collection="popularList" item="item" index="index" open="" close="" separator=";">

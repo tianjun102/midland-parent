@@ -87,8 +87,7 @@ public class MenuController extends BaseFilter {
 		Map<String,Object> map = new HashMap<>();
 		try {
 			log.debug("addMenu {}",menu);
-			int maxOrderBy = menuServiceImpl.getMaxOrderBy();
-			menu.setOrderBy(maxOrderBy);
+
 			menuServiceImpl.insertMenu(menu);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -191,28 +190,13 @@ public class MenuController extends BaseFilter {
 	@RequestMapping("sort")
 	@ResponseBody
 	public Map listDesc(Menu menu, int sort, Model model, HttpServletRequest request) throws Exception {
-		String primaryKeyName="id";
-		String primaryParam=String.valueOf(menu.getId());
-		String tableName="menu";
-		String orderByColumn="order_by";
-		ListDescOtherParam obj = new ListDescOtherParam();
-		if (StringUtils.isNotEmpty(menu.getCityId())) {
-			obj.setCityId(menu.getCityId());
+		if (sort==1){
+			menuServiceImpl.shiftUp(menu);
 		}else{
-			User currUser = MidlandHelper.getCurrentUser(request);
-			obj.setCityId(currUser.getCityId());
+			menuServiceImpl.shiftDown(menu);
 		}
-		obj.setType(null);
-		obj.setSource(menu.getSource());
-		String orderByParam=String.valueOf(menu.getOrderBy());
 		Map map = new HashMap();
-		try {
-			jdbcService.menuListDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,obj,sort);
-			map.put("state",0);
-		} catch (Exception e) {
-			log.error("",e);
-			map.put("state",-1);
-		}
+		map.put("state",0);
 		return map;
 	}
 

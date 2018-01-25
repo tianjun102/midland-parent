@@ -15,9 +15,13 @@ public interface PopularMapper {
 
     int updateById(Popular popular);
 
-    Integer getMaxOrderBy(Popular popular);
+
 
     int insertPopular(Popular popular);
+
+    Popular shiftUp(Popular popular);
+
+    Popular shiftDown(Popular popular);
 
     List<Popular> findPopularList(Popular popular);
 

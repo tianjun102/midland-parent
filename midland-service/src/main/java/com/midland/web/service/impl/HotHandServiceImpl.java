@@ -32,11 +32,7 @@ public class HotHandServiceImpl implements HotHandService {
         }
     }
 
-    @Override
-    public int getMaxOrderBy() {
-        Integer result = hotHandMapper.getMaxOrderBy();
-        return result == null ? 0 : result + 1;
-    }
+
 
     /**
      * 查询

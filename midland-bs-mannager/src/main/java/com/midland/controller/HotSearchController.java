@@ -186,17 +186,12 @@ public class HotSearchController extends BaseFilter {
 
 	@RequestMapping("sort")
 	@ResponseBody
-	public Map listDesc(Information information, int sort, Model model, HttpServletRequest request) throws Exception {
-		String primaryKeyName="id";
-		String primaryParam=String.valueOf(information.getId());
-		String tableName="hot_search";
-		String orderByColumn="order_by";
-		ListDescOtherParam obj = new ListDescOtherParam();
-		obj.setCityId(null);
-		obj.setType(null);
-		obj.setSource(null);
-		String orderByParam=String.valueOf(information.getOrderBy());
-		jdbcService.listDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,obj,sort);
+	public Map listDesc(HotSearch hotSearch, int sort, Model model, HttpServletRequest request) throws Exception {
+		if (sort==1){
+			hotSearchServiceImpl.shiftUp(hotSearch);
+		}else{
+			hotSearchServiceImpl.shiftDown(hotSearch);
+		}
 		Map map = new HashMap();
 		map.put("state",0);
 		return map;

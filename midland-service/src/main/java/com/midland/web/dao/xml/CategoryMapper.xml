@@ -94,9 +94,7 @@
     <insert id="insertCategory" parameterType="com.midland.web.model.Category">
         <selectKey resultType="INTEGER" order="BEFORE" keyProperty="orderBy">
             SELECT max(order_by)+1 as orderBy from category
-            <if test="type != null">
-                where type = #{type}
-            </if>
+
         </selectKey>
         insert into category
         <trim prefix="(" suffix=")" suffixOverrides=",">

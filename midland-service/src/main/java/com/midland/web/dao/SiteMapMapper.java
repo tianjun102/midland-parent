@@ -19,6 +19,10 @@ public interface SiteMapMapper {
 
     int insertSiteMap(SiteMap siteMap);
 
+    SiteMap shiftUp(SiteMap siteMap);
+
+    SiteMap shiftDown(SiteMap siteMap);
+
     List<SiteMap> findSiteMapByList(@Param("list") List<Integer> list);
 
     List<SiteMap> findSiteMapByModeId(@Param("list") List<Integer> list);

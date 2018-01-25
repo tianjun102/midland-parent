@@ -21,4 +21,7 @@ public interface SpecialPageMapper {
 
     int batchUpdate(@Param("specialPageList") List<SpecialPage> specialPageList);
 
+    SpecialPage shiftUp(SpecialPage specialPage);
+
+    SpecialPage shiftDown(SpecialPage specialPage);
 }

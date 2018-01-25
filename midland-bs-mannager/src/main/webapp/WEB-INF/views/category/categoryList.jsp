@@ -60,9 +60,9 @@
                                 <a target="contentF" class="recove_img" title="恢复" onclick="delete1(${item.id },0)"></a>
                             </c:if>
                             <a target="contentF" class="up_img" title="上移"
-                               onclick="sort(${item.id },${item.orderBy},1)"></a>
-                            <a target="contentF" class="down_img" title="下移"
                                onclick="sort(${item.id },${item.orderBy},2)"></a>
+                            <a target="contentF" class="down_img" title="下移"
+                               onclick="sort(${item.id },${item.orderBy},1)"></a>
                                 <%--<c:if test="${item.type==3}">--%><a
                                 <c:if test="${item.isShow==0}">class="onoff_img"</c:if>
                                 <c:if test="${item.isShow==1}">class="offon_img"</c:if> target="contentF"

@@ -49,6 +49,21 @@
         where id= #{id}
     </update>
 
+    <select id="shiftDown" parameterType="com.midland.web.model.SpecialPage" resultMap="BaseResultMap">
+        select id,order_by from special_page where 1=1
+        <include refid="select_option1"/>
+        AND
+        order_by &lt; #{orderBy} order by order_by desc LIMIT 1
+
+    </select>
+    <select id="shiftUp" parameterType="com.midland.web.model.SpecialPage" resultMap="BaseResultMap">
+        select id,order_by from special_page where 1=1
+        <include refid="select_option1"/>
+        AND
+        order_by &gt; #{orderBy} order by order_by asc LIMIT 1
+
+    </select>
+
     <select id="findSpecialPageList" parameterType="com.midland.web.model.SpecialPage" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -295,6 +310,60 @@
         </if>
         <if test="orderBy != null">
             and order_by= #{orderBy}
+        </if>
+    </sql>
+<sql id="select_option1">
+
+        <if test="cityId != null">
+            and city_id= #{cityId,jdbcType=VARCHAR}
+        </if>
+        <if test="source != null">
+            and source= #{source,jdbcType=INTEGER}
+        </if>
+        <if test="modeName != null">
+            and mode_name= #{modeName,jdbcType=VARCHAR}
+        </if>
+        <if test="position != null">
+            and position= #{position,jdbcType=INTEGER}
+        </if>
+        <if test="title != null">
+            and title= #{title,jdbcType=VARCHAR}
+        </if>
+        <if test="description != null">
+            and description= #{description,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="price != null">
+            and price= #{price,jdbcType=FLOAT}
+        </if>
+        <if test="address != null">
+            and address= #{address,jdbcType=VARCHAR}
+        </if>
+        <if test="imgUrl != null">
+            and img_url= #{imgUrl,jdbcType=VARCHAR}
+        </if>
+        <if test="subwayDistance != null">
+            and subway_distance= #{subwayDistance,jdbcType=VARCHAR}
+        </if>
+        <if test="linkUrl != null">
+            and link_url= #{linkUrl,jdbcType=VARCHAR}
+        </if>
+        <if test="detail != null">
+            and detail= #{detail,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="isDelete != null">
+            and is_delete= #{isDelete,jdbcType=INTEGER}
+        </if>
+        <if test="cityName != null">
+            and city_name= #{cityName,jdbcType=VARCHAR}
+        </if>
+        <if test="imgDesc != null">
+            and img_desc= #{imgDesc,jdbcType=VARCHAR}
+        </if>
+        <if test="isShow != null">
+            and is_show= #{isShow,jdbcType=INTEGER}
+        </if>
+        <if test="detailsUrl != null">
+            and details_url= #{detailsUrl}
         </if>
     </sql>
 

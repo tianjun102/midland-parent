@@ -21,4 +21,8 @@ public interface HotSearchMapper {
 
     int batchUpdate(@Param("hotSearchList") List<HotSearch> hotSearchList);
 
+    HotSearch shiftUp(HotSearch hotSearch);
+
+    HotSearch shiftDown(HotSearch hotSearch);
+
 }

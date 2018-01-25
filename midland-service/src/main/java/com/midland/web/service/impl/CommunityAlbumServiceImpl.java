@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,14 +33,59 @@ public class CommunityAlbumServiceImpl implements CommunityAlbumService {
     }
 
 
+
+
+    /**
+     * 上移
+     **/
     @Override
-    public int getMaxOrderBy(Integer hotHandId) {
-        CommunityAlbum communityAlbum = new CommunityAlbum();
-        communityAlbum.setHotHandId(hotHandId);
-        Integer result = communityAlbumMapper.getMaxOrderBy(communityAlbum);
-        return result == null ? 0 : result + 1;
+    @Transactional
+    public void shiftUp(CommunityAlbum communityAlbum) throws Exception {
+        try {
+            log.debug("shiftUp {}", communityAlbum);
+            CommunityAlbum obj = communityAlbumMapper.shiftUp(communityAlbum);
+            if (obj == null){
+                return;
+            }
+            int nextOrderBy = obj.getOrderBy();
+            int currOrderBy = communityAlbum.getOrderBy();
+            obj.setOrderBy(-999999999);
+            communityAlbumMapper.updateCommunityAlbumById(obj);
+            communityAlbum.setOrderBy(nextOrderBy);
+            communityAlbumMapper.updateCommunityAlbumById(communityAlbum);
+            obj.setOrderBy(currOrderBy);
+            communityAlbumMapper.updateCommunityAlbumById(obj);
+        } catch (Exception e) {
+            log.error("shiftUp {}", communityAlbum, e);
+            throw e;
+        }
     }
 
+    /**
+     * 下移
+     **/
+    @Override
+    @Transactional
+    public void shiftDown(CommunityAlbum communityAlbum) throws Exception {
+        try {
+            log.debug("shiftDown {}", communityAlbum);
+            CommunityAlbum obj = communityAlbumMapper.shiftDown(communityAlbum);
+            if (obj == null){
+                return;
+            }
+            int nextOrderBy = obj.getOrderBy();
+            int currOrderBy = communityAlbum.getOrderBy();
+            obj.setOrderBy(-999999999);
+            communityAlbumMapper.updateCommunityAlbumById(obj);
+            communityAlbum.setOrderBy(nextOrderBy);
+            communityAlbumMapper.updateCommunityAlbumById(communityAlbum);
+            obj.setOrderBy(currOrderBy);
+            communityAlbumMapper.updateCommunityAlbumById(obj);
+        } catch (Exception e) {
+            log.error("shiftDown异常 {}", communityAlbum, e);
+            throw e;
+        }
+    }
 
     /**
      * 查询

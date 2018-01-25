@@ -51,8 +51,8 @@
                             <c:if test="${item.isDelete==1}">
                                 <a target="contentF" class="recove_img" title="恢复" onclick="deleteInfrmateion(${item.id },0)"></a>
                             </c:if>
-                            <a target="contentF" title="上移" class="up_img" onclick="sort(${item.id },${item.orderBy},1)"></a>
-                            <a target="contentF" title="下移" class="down_img" onclick="sort(${item.id },${item.orderBy},2)"></a>
+                            <a target="contentF" title="上移" class="up_img" onclick="sort(${item.id },${item.orderBy},2)"></a>
+                            <a target="contentF" title="下移" class="down_img" onclick="sort(${item.id },${item.orderBy},1)"></a>
                             <a target="contentF" title="置顶" class="stick_img" onclick="sort(${item.id },${item.orderBy},0)"></a>
                             <c:if test="${empty item.status or item.status==1}"><a target="contentF" title="发布" class="lineup_img" onclick="updateStatus(${item.id});"></a></c:if>
                             <c:if test="${item.status==0}"><a target="contentF" title="下线" class="linedown_img" onclick="updateStatus(${item.id},${item.status});"></a></c:if>

@@ -1,6 +1,7 @@
 package com.midland.web.service;
 
 import com.midland.web.model.Menu;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -31,9 +32,13 @@ public interface MenuService {
      **/
     List<Menu> findMenuList(Menu menu) throws Exception;
 
-    int getMaxOrderBy();
 
     void batchUpdate(List<Menu> menuList) throws Exception;
 
 
+    @Transactional
+    void shiftUp(Menu menu) throws Exception;
+
+    @Transactional
+    void shiftDown(Menu menu) throws Exception;
 }

@@ -235,19 +235,14 @@ public class SiteMapController extends BaseFilter {
     @RequestMapping("sort")
     @ResponseBody
     public Map listDesc(SiteMap siteMap, int sort, Model model, HttpServletRequest request) throws Exception {
-        String primaryKeyName="id";
-        String primaryParam=String.valueOf(siteMap.getId());
-        String tableName="site_map";
-        String orderByColumn="order_by";
-		ListDescOtherParam obj = new ListDescOtherParam();
-		obj.setCityId(null);
-		obj.setType(null);
-		obj.setSource(null);
-        String orderByParam=String.valueOf(siteMap.getOrderBy());
-        jdbcService.listDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,obj,sort);
-        Map map = new HashMap();
-        map.put("state",0);
-        return map;
+		if (sort==1){
+			siteMapServiceImpl.shiftUp(siteMap);
+		}else{
+			siteMapServiceImpl.shiftDown(siteMap);
+		}
+		Map map = new HashMap();
+		map.put("state",0);
+		return map;
     }
 
 	/**

@@ -18,10 +18,6 @@
 		id,type,img_url,is_delete,is_show,order_by,description,hot_hand_id,create_time
 	</sql>
 
-    <select id="getMaxOrderBy" resultType="java.lang.Integer">
-        select order_by from community_album where hot_hand_id=#{hotHandId}
-        order by order_by desc limit 1;
-    </select>
 
     <select id="selectCommunityAlbumById" resultMap="BaseResultMap">
         select
@@ -34,6 +30,22 @@
         delete from community_album
         where id= #{id}
     </delete>
+
+
+    <select id="shiftDown" parameterType="com.midland.web.model.CommunityAlbum" resultMap="BaseResultMap">
+        select id,order_by from community_album where 1=1
+        <include refid="select_option1"/>
+        AND
+        order_by &lt; #{orderBy} order by order_by desc LIMIT 1
+
+    </select>
+    <select id="shiftUp" parameterType="com.midland.web.model.CommunityAlbum" resultMap="BaseResultMap">
+        select id,order_by from community_album where 1=1
+        <include refid="select_option1"/>
+        AND
+        order_by &gt; #{orderBy} order by order_by asc LIMIT 1
+
+    </select>
 
     <update id="updateCommunityAlbumById">
         update community_album
@@ -55,6 +67,9 @@
     </select>
 
     <insert id="insertCommunityAlbum" parameterType="com.midland.web.model.CommunityAlbum">
+        <selectKey resultType="INTEGER" order="BEFORE" keyProperty="orderBy">
+            SELECT MAX(order_by) +1 as orderBy from hot_hand
+        </selectKey>
         insert into community_album
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="type != null">
@@ -157,6 +172,31 @@
         <if test="orderBy != null">
             and order_by= #{orderBy,jdbcType=INTEGER}
         </if>
+        <if test="description != null">
+            and description= #{description,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="hotHandId != null">
+            and hot_hand_id= #{hotHandId,jdbcType=INTEGER}
+        </if>
+        <if test="createTime != null">
+            and create_time= #{createTime,jdbcType=TIMESTAMP}
+        </if>
+    </sql>
+<sql id="select_option1">
+
+        <if test="type != null">
+            and type= #{type,jdbcType=INTEGER}
+        </if>
+        <if test="imgUrl != null">
+            and img_url= #{imgUrl,jdbcType=VARCHAR}
+        </if>
+        <if test="isDelete != null">
+            and is_delete= #{isDelete,jdbcType=INTEGER}
+        </if>
+        <if test="isShow != null">
+            and is_show= #{isShow,jdbcType=INTEGER}
+        </if>
+
         <if test="description != null">
             and description= #{description,jdbcType=LONGVARCHAR}
         </if>

@@ -1,6 +1,7 @@
 package com.midland.web.service;
 
 import com.midland.web.model.SiteMap;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -27,6 +28,12 @@ public interface SiteMapService {
     void insertSiteMap(SiteMap siteMap) throws Exception;
 
     void updateSiteMapSelectiveById(SiteMap siteMap) throws Exception;
+
+    @Transactional
+    void shiftUp(SiteMap siteMap) throws Exception;
+
+    @Transactional
+    void shiftDown(SiteMap siteMap) throws Exception;
 
     /**
      * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）

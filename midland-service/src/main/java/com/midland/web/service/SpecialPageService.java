@@ -1,6 +1,7 @@
 package com.midland.web.service;
 
 import com.midland.web.model.SpecialPage;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -33,4 +34,9 @@ public interface SpecialPageService {
 
     void batchUpdate(List<SpecialPage> specialPageList) throws Exception;
 
+    @Transactional
+    void shiftUp(SpecialPage specialPage) throws Exception;
+
+    @Transactional
+    void shiftDown(SpecialPage specialPage) throws Exception;
 }

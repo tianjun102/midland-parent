@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -31,13 +32,7 @@ public class LayoutMapServiceImpl implements LayoutMapService {
         }
     }
 
-    @Override
-    public int getMaxOrderBy(Integer hotHandId) {
-        LayoutMap layoutMap = new LayoutMap();
-        layoutMap.setHotHandId(hotHandId);
-        Integer result = layoutMapMapper.getMaxOrderBy(layoutMap);
-        return result == null ? 0 : result + 1;
-    }
+
 
     /**
      * 查询
@@ -95,4 +90,57 @@ public class LayoutMapServiceImpl implements LayoutMapService {
             throw e;
         }
     }
+
+    /**
+     * 上移
+     **/
+    @Override
+    @Transactional
+    public void shiftUp(LayoutMap layoutMap) throws Exception {
+        try {
+            log.debug("shiftUp {}", layoutMap);
+            LayoutMap obj = layoutMapMapper.shiftUp(layoutMap);
+            if (obj == null){
+                return;
+            }
+            int nextOrderBy = obj.getOrderBy();
+            int currOrderBy = layoutMap.getOrderBy();
+            obj.setOrderBy(-999999999);
+            layoutMapMapper.updateLayoutMapById(obj);
+            layoutMap.setOrderBy(nextOrderBy);
+            layoutMapMapper.updateLayoutMapById(layoutMap);
+            obj.setOrderBy(currOrderBy);
+            layoutMapMapper.updateLayoutMapById(obj);
+        } catch (Exception e) {
+            log.error("shiftUp {}", layoutMap, e);
+            throw e;
+        }
+    }
+
+    /**
+     * 下移
+     **/
+    @Override
+    @Transactional
+    public void shiftDown(LayoutMap category) throws Exception {
+        try {
+            log.debug("shiftDown {}", category);
+            LayoutMap obj = layoutMapMapper.shiftDown(category);
+            if (obj == null){
+                return;
+            }
+            int nextOrderBy = obj.getOrderBy();
+            int currOrderBy = category.getOrderBy();
+            obj.setOrderBy(-999999999);
+            layoutMapMapper.updateLayoutMapById(obj);
+            category.setOrderBy(nextOrderBy);
+            layoutMapMapper.updateLayoutMapById(category);
+            obj.setOrderBy(currOrderBy);
+            layoutMapMapper.updateLayoutMapById(obj);
+        } catch (Exception e) {
+            log.error("shiftDown异常 {}", category, e);
+            throw e;
+        }
+    }
+    
 }

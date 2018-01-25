@@ -15,13 +15,18 @@ public interface MenuMapper {
 
     int updateMenuById(Menu menu);
 
+
     int insertMenu(Menu menu);
 
-    Integer getMaxOrderBy();
 
     List<Menu> findMenuList(Menu menu);
 
     int batchUpdate(@Param("menuList") List<Menu> menuList);
 
+
+
+    Menu shiftUp(Menu menu);
+
+    Menu shiftDown(Menu menu);
 
 }

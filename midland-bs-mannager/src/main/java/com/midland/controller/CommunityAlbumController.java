@@ -60,8 +60,7 @@ public class CommunityAlbumController extends BaseFilter {
 			communityAlbum.setCreateTime(MidlandHelper.getCurrentTime());
 			communityAlbum.setIsDelete(Contant.isNotDelete);
 			communityAlbum.setIsShow(Contant.isShow);
-			int maxOrderBy = communityAlbumServiceImpl.getMaxOrderBy(communityAlbum.getHotHandId());
-			communityAlbum.setOrderBy(maxOrderBy);
+
 			communityAlbumServiceImpl.insertCommunityAlbum(communityAlbum);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -149,21 +148,13 @@ public class CommunityAlbumController extends BaseFilter {
 	@RequestMapping("sort")
 	@ResponseBody
 	public Map listDesc(CommunityAlbum communityAlbum, int sort, Model model, HttpServletRequest request) throws Exception {
-		String primaryKeyName="id";
-		String primaryParam=String.valueOf(communityAlbum.getId());
-		String tableName="community_album";
-		String orderByColumn="order_by";
-		ListDescOtherParam obj = new ListDescOtherParam();
-		obj.setHotHandId(communityAlbum.getHotHandId());
-		String orderByParam=String.valueOf(communityAlbum.getOrderBy());
-		Map map = new HashMap();
-		try {
-			jdbcService.hotHandListDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,obj,sort);
-			map.put("state",0);
-		} catch (Exception e) {
-			log.error("",e);
-			map.put("state",-1);
+		if (sort==1){
+			communityAlbumServiceImpl.shiftUp(communityAlbum);
+		}else{
+			communityAlbumServiceImpl.shiftDown(communityAlbum);
 		}
+		Map map = new HashMap();
+		map.put("state",0);
 		return map;
 	}
 }

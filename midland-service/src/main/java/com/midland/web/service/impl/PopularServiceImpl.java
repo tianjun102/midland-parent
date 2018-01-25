@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -31,17 +32,61 @@ public class PopularServiceImpl implements PopularService {
         }
     }
 
+
+
+    /**
+     * 上移
+     **/
     @Override
-    public int getMaxOrderBy(Popular popular) throws Exception {
+    @Transactional
+    public void shiftUp(Popular popular) throws Exception {
         try {
-            log.debug("getMaxOrderBy {}", popular);
-            Integer result = popularMapper.getMaxOrderBy(popular);
-            return result == null ? 0 : result + 1;
+            log.debug("shiftUp {}", popular);
+            Popular obj = popularMapper.shiftUp(popular);
+            if (obj == null){
+                return;
+            }
+            int nextOrderBy = obj.getOrderBy();
+            int currOrderBy = popular.getOrderBy();
+            obj.setOrderBy(-999999999);
+            popularMapper.updateById(obj);
+            popular.setOrderBy(nextOrderBy);
+            popularMapper.updateById(popular);
+            obj.setOrderBy(currOrderBy);
+            popularMapper.updateById(obj);
         } catch (Exception e) {
-            log.error("getMaxOrderBy异常 {}", popular, e);
+            log.error("shiftUp {}", popular, e);
             throw e;
         }
     }
+
+    /**
+     * 下移
+     **/
+    @Override
+    @Transactional
+    public void shiftDown(Popular popular) throws Exception {
+        try {
+            log.debug("shiftDown {}", popular);
+            Popular obj = popularMapper.shiftDown(popular);
+            if (obj == null){
+                return;
+            }
+            int nextOrderBy = obj.getOrderBy();
+            int currOrderBy = popular.getOrderBy();
+            obj.setOrderBy(-999999999);
+            popularMapper.updateById(obj);
+            popular.setOrderBy(nextOrderBy);
+            popularMapper.updateById(popular);
+            obj.setOrderBy(currOrderBy);
+            popularMapper.updateById(obj);
+        } catch (Exception e) {
+            log.error("shiftDown异常 {}", popular, e);
+            throw e;
+        }
+    }
+    
+    
 
     /**
      * 查询
