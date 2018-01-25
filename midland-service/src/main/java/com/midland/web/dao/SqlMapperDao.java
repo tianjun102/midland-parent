@@ -12,21 +12,21 @@ import java.util.Map;
  */
 @Repository
 public class SqlMapperDao {
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
-	
-	public Map querySql(String sql){
-		List<Map<String,Object>> mapList = jdbcTemplate.queryForList(sql);
-		Map map=null;
-		if(null!=mapList&&mapList.size()>0){
-			map = mapList.get(0);
-		}
-		return map;
-	}
-	
-	public void doSql(String sql){
-		jdbcTemplate.execute(sql);
-	}
-	
-	
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    public Map querySql(String sql) {
+        List<Map<String, Object>> mapList = jdbcTemplate.queryForList(sql);
+        Map map = null;
+        if (null != mapList && mapList.size() > 0) {
+            map = mapList.get(0);
+        }
+        return map;
+    }
+
+    public void doSql(String sql) {
+        jdbcTemplate.execute(sql);
+    }
+
+
 }

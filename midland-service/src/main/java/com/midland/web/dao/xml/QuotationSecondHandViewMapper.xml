@@ -20,15 +20,16 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-		id,DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s')update_time,is_delete,city_name,area_name,slice_name,data_time,type,city_id,area_id,deal_num,deal_acreage,pre_num,pre_acreage
-	</sql>
+        id,DATE_FORMAT(update_time,'%Y-%m-%d
+        %H:%i:%s')update_time,is_delete,city_name,area_name,slice_name,data_time,type,city_id,area_id,deal_num,deal_acreage,pre_num,pre_acreage
+    </sql>
 
     <select id="toolTip" parameterType="com.midland.web.model.QuotationSecondHandView" resultMap="BaseResultMap">
         SELECT
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from quotation_second_hand_view
         where 1=1
-        <include refid="select_option" />
+        <include refid="select_option"/>
     </select>
 
     <sql id="select_option">
@@ -52,7 +53,7 @@
             and area_id= #{areaId,jdbcType=VARCHAR}
         </if>
         <if test="areaName != null">
-            and area_name like  '%${areaName}%'
+            and area_name like '%${areaName}%'
         </if>
 
     </sql>

@@ -16,24 +16,24 @@ import javax.servlet.http.HttpServletRequest;
  * Created by 'ms.x' on 2017/8/7.
  */
 @Service
-public class DingJiangServiceImpl implements DingJiangService{
-	
-	@Autowired
-	private UserService userServiceImpl;
-	
-	@Override
-	public Page<User> getUserList(User user, String pageSize, Model model, HttpServletRequest request) {
-		String pageNo = request.getParameter("pageNo");
-		
-		if(pageNo==null||pageNo.equals("")){
-			pageNo = ContextEnums.PAGENO;
-		}
-		if(pageSize==null||pageSize.equals("")){
-			
-			pageSize = ContextEnums.PAGESIZE;
-		}
-		PageHelper.startPage(Integer.valueOf(pageNo), Integer.valueOf(pageSize));
-		return (Page<User>)userServiceImpl.selectByExampleAndPage(user);
-		
-	}
+public class DingJiangServiceImpl implements DingJiangService {
+
+    @Autowired
+    private UserService userServiceImpl;
+
+    @Override
+    public Page<User> getUserList(User user, String pageSize, Model model, HttpServletRequest request) {
+        String pageNo = request.getParameter("pageNo");
+
+        if (pageNo == null || pageNo.equals("")) {
+            pageNo = ContextEnums.PAGENO;
+        }
+        if (pageSize == null || pageSize.equals("")) {
+
+            pageSize = ContextEnums.PAGESIZE;
+        }
+        PageHelper.startPage(Integer.valueOf(pageNo), Integer.valueOf(pageSize));
+        return (Page<User>) userServiceImpl.selectByExampleAndPage(user);
+
+    }
 }

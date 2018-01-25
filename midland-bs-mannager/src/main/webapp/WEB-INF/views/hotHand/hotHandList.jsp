@@ -66,9 +66,9 @@
 							<a target="contentF"  class="edit_img" onclick="toUpdatePage(${item.id })"></a>
 							<a target="contentF" class="delete_img" onclick="delete1(${item.id })"></a>
 							<a target="contentF" title="上移" class="up_img"
-							   onclick="sort(${item.id },${item.orderBy},2)"></a>
-							<a target="contentF" title="下移" class="down_img"
 							   onclick="sort(${item.id },${item.orderBy},1)"></a>
+							<a target="contentF" title="下移" class="down_img"
+							   onclick="sort(${item.id },${item.orderBy},2)"></a>
 						</td>
 					</tr>
 				</c:forEach>

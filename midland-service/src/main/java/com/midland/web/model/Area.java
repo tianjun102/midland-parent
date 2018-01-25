@@ -5,11 +5,11 @@ package com.midland.web.model;
  * @author tianj
  * 区域实体类
  */
-public class Area implements java.io.Serializable{
+public class Area implements java.io.Serializable {
 
     private static final long serialVersionUID = 8456182291437212997L;
 
-    private String id ;
+    private String id;
 
     private String parentId;
 

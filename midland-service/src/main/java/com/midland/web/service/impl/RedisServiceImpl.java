@@ -11,35 +11,36 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class RedisServiceImpl implements RedisService {
-	
-	@Autowired
-	private IBaseRedisTemplate baseRedisTemplate;
-	
-	@Override
-	public void setAnswerAuditFlag(int value){
 
-		baseRedisTemplate.saveValue(Contant.answerAuditKey,value);
-	}
-	@Override
-	public Integer getAnswerAuditFlag(){
+    @Autowired
+    private IBaseRedisTemplate baseRedisTemplate;
 
-		Integer result = (Integer)baseRedisTemplate.getValueByKey(Contant.answerAuditKey);
-		if (result == null){
-			//如果没有获取到值，说明还未设置，直接设置为“未开启”
-			setAnswerAuditFlag(Contant.answerAuditClose);
-			return Contant.answerAuditClose;
-		}
-		return result;
-	}
+    @Override
+    public void setAnswerAuditFlag(int value) {
 
-	@Override
-	public Object getValue(String key){
-		return  baseRedisTemplate.getValueByKey(key);
-	}
+        baseRedisTemplate.saveValue(Contant.answerAuditKey, value);
+    }
 
-	@Override
-	public void setValue(String key,Object value){
-		baseRedisTemplate.saveValue(key,value);
-	}
+    @Override
+    public Integer getAnswerAuditFlag() {
+
+        Integer result = (Integer) baseRedisTemplate.getValueByKey(Contant.answerAuditKey);
+        if (result == null) {
+            //如果没有获取到值，说明还未设置，直接设置为“未开启”
+            setAnswerAuditFlag(Contant.answerAuditClose);
+            return Contant.answerAuditClose;
+        }
+        return result;
+    }
+
+    @Override
+    public Object getValue(String key) {
+        return baseRedisTemplate.getValueByKey(key);
+    }
+
+    @Override
+    public void setValue(String key, Object value) {
+        baseRedisTemplate.saveValue(key, value);
+    }
 
 }

@@ -2,51 +2,51 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.midland.web.dao.RoleMapper">
     <resultMap id="BaseResultMap" type="com.midland.web.model.role.Role">
-        <id column="id" property="id" jdbcType="BIGINT" />
-        <result column="role_name" property="roleName" jdbcType="VARCHAR" />
-        <result column="role_sign" property="roleSign" jdbcType="VARCHAR" />
-        <result column="description" property="description" jdbcType="VARCHAR" />
-        <result column="role_type" property="roleType" jdbcType="BIGINT" />
-        <result column="state" property="state" jdbcType="BIGINT" />
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+        <result column="role_sign" property="roleSign" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="role_type" property="roleType" jdbcType="BIGINT"/>
+        <result column="state" property="state" jdbcType="BIGINT"/>
     </resultMap>
     <resultMap id="RoleAuthResultMap" type="com.midland.web.model.role.RoleAuth">
-		<id column="id" property="id" jdbcType="INTEGER" />
-		<result column="role_id" property="roleId" jdbcType="INTEGER" />
-		<result column="auth_id" property="authId" jdbcType="INTEGER" />
-		<result column="role_name" property="roleName" jdbcType="VARCHAR" />
-	</resultMap>
-	<resultMap id="authRelation" type="com.midland.web.model.AuthRelation">
-		<result property="authId" column="auth_id" javaType="java.lang.Long" />
-		<result property="tagName" column="auth_name" javaType="java.lang.String" />
-		<result property="url" column="auth_url" javaType="java.lang.String" />
-		<result property="tagLevel" column="auth_level" javaType="java.lang.String" />
-		<result property="code" column="auth_code" javaType="java.lang.String" />
-		<result property="fatherCode" column="auth_parent_code" javaType="java.lang.String" />
-	</resultMap>
-	
-	<resultMap id="RolePermissionMap" type="com.midland.web.model.role.RolePermission">
-		<id column="id" property="id" jdbcType="INTEGER" />
-		<result column="role_id" property="roleId" jdbcType="INTEGER" />
-		<result column="permission_id" property="permissionId" jdbcType="INTEGER" />
-	</resultMap>
-	<resultMap id="permissionMap" type="com.midland.web.model.Permission">
-		<id column="id" property="id" jdbcType="BIGINT" />
-        <result column="permission_name" property="permissionName" jdbcType="VARCHAR" />
-        <result column="permission_sign" property="permissionSign" jdbcType="VARCHAR" />
-        <result column="description" property="description" jdbcType="VARCHAR" />
-        <result column="parent_id" property="parentId" jdbcType="BIGINT" />
-        <result column="parent_sign" property="parentSign" jdbcType="VARCHAR" />
-        <result column="permission_path" property="permissionPath" jdbcType="VARCHAR" />
-        <result column="permissionType" property="permissionType" jdbcType="INTEGER" />
-        <result column="orderNo" property="orderNo" jdbcType="INTEGER" />
-        <result column="status" property="status" jdbcType="INTEGER" />
-	</resultMap>
-	<resultMap id="UserRoleResultMap" type="com.midland.web.model.user.UserRole">
-        <id column="id" property="id" jdbcType="BIGINT" />
-        <result column="user_id" property="userId" jdbcType="BIGINT" />
-        <result column="role_id" property="roleId" jdbcType="BIGINT" />
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="role_id" property="roleId" jdbcType="INTEGER"/>
+        <result column="auth_id" property="authId" jdbcType="INTEGER"/>
+        <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
     </resultMap>
-	
+    <resultMap id="authRelation" type="com.midland.web.model.AuthRelation">
+        <result property="authId" column="auth_id" javaType="java.lang.Long"/>
+        <result property="tagName" column="auth_name" javaType="java.lang.String"/>
+        <result property="url" column="auth_url" javaType="java.lang.String"/>
+        <result property="tagLevel" column="auth_level" javaType="java.lang.String"/>
+        <result property="code" column="auth_code" javaType="java.lang.String"/>
+        <result property="fatherCode" column="auth_parent_code" javaType="java.lang.String"/>
+    </resultMap>
+
+    <resultMap id="RolePermissionMap" type="com.midland.web.model.role.RolePermission">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="role_id" property="roleId" jdbcType="INTEGER"/>
+        <result column="permission_id" property="permissionId" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="permissionMap" type="com.midland.web.model.Permission">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="permission_name" property="permissionName" jdbcType="VARCHAR"/>
+        <result column="permission_sign" property="permissionSign" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="BIGINT"/>
+        <result column="parent_sign" property="parentSign" jdbcType="VARCHAR"/>
+        <result column="permission_path" property="permissionPath" jdbcType="VARCHAR"/>
+        <result column="permissionType" property="permissionType" jdbcType="INTEGER"/>
+        <result column="orderNo" property="orderNo" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="UserRoleResultMap" type="com.midland.web.model.user.UserRole">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="role_id" property="roleId" jdbcType="BIGINT"/>
+    </resultMap>
+
     <sql id="Example_Where_Clause">
         <where>
             <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -65,7 +65,8 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -94,7 +95,8 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -106,17 +108,17 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        id, role_name, role_sign, description,role_type,state 
+        id, role_name, role_sign, description,role_type,state
     </sql>
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.midland.web.model.role.RoleExample">
         select
         <if test="distinct">
             distinct
         </if>
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from role
         <if test="_parameter != null">
-            <include refid="Example_Where_Clause" />
+            <include refid="Example_Where_Clause"/>
         </if>
         <if test="orderByClause != null">
             order by ${orderByClause}
@@ -124,7 +126,7 @@
     </select>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from role
         where id = #{id,jdbcType=BIGINT}
     </select>
@@ -135,7 +137,7 @@
     <delete id="deleteByExample" parameterType="com.midland.web.model.role.RoleExample">
         delete from role
         <if test="_parameter != null">
-            <include refid="Example_Where_Clause" />
+            <include refid="Example_Where_Clause"/>
         </if>
     </delete>
     <insert id="insert" parameterType="com.midland.web.model.role.Role">
@@ -190,7 +192,7 @@
     <select id="countByExample" parameterType="com.midland.web.model.role.RoleExample" resultType="java.lang.Integer">
         select count(*) from role
         <if test="_parameter != null">
-            <include refid="Example_Where_Clause" />
+            <include refid="Example_Where_Clause"/>
         </if>
     </select>
     <update id="updateByExampleSelective" parameterType="map">
@@ -210,7 +212,7 @@
             </if>
         </set>
         <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause" />
+            <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
     <update id="updateByExample" parameterType="map">
@@ -221,7 +223,7 @@
         description =
         #{record.description,jdbcType=VARCHAR}
         <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause" />
+            <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
     <update id="updateByPrimaryKeySelective" parameterType="com.midland.web.model.role.Role">
@@ -256,119 +258,121 @@
     <!-- 通过用户id 查询用户 拥有的角色 -->
     <select id="selectRolesByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long">
         SELECT r.id,
-	       r.role_name,
-	       r.role_sign,
-	       r.description,
-	       r.role_type,
-	       r.state
-       FROM role r LEFT JOIN user_role ur ON r.id = ur.role_id
+        r.role_name,
+        r.role_sign,
+        r.description,
+        r.role_type,
+        r.state
+        FROM role r LEFT JOIN user_role ur ON r.id = ur.role_id
         WHERE r.state=1 and ur.user_id = #{id,jdbcType=BIGINT}
     </select>
-    
+
     <!-- 分页条件查询 -->
-    <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.midland.web.model.role.RoleExample">
+    <select id="selectByExampleAndPage" resultMap="BaseResultMap"
+            parameterType="com.midland.web.model.role.RoleExample">
         select
         <if test="distinct">
             distinct
         </if>
-        <include refid="Base_Column_List" />
-        from role 
+        <include refid="Base_Column_List"/>
+        from role
         <if test="_parameter != null">
-            <include refid="Example_Where_Clause" />
+            <include refid="Example_Where_Clause"/>
         </if>
         <if test="orderByClause != null">
             order by ${orderByClause}
         </if>
     </select>
-    
+
     <select id="getListAuthid" parameterType="com.midland.web.model.role.RoleAuth" resultMap="RoleAuthResultMap">
-		select 	    
-	          auth_id
-	     from  role_auth 
-		where 1=1
-		 <if test="roleId != null">
-           and role_id = #{roleId,jdbcType=Integer}
+        select
+        auth_id
+        from role_auth
+        where 1=1
+        <if test="roleId != null">
+            and role_id = #{roleId,jdbcType=Integer}
         </if>
-	</select>
-	
-	<select id="getFatherAuths" resultMap="authRelation">
-		select
-		b.auth_id,
-		b.auth_name,
-		b.auth_url,
-		b.auth_level,
-		b.auth_parent_code,
-		b.auth_code,
-		b.autu_type
-		from authority b where 
-		b.auth_status=1 and b.auth_level=2
-	</select>
-	
-	<select id="getChildAuths" parameterType="java.util.Map" resultMap="authRelation" >
-	select
-		b.auth_id,
-		b.auth_name,
-		b.auth_url,
-		b.auth_level,
-		b.auth_parent_code,
-		b.auth_code,
-		b.autu_type
-	from authority b 
-	 where b.auth_status=1 
-		and b.autu_type=2 
-		and b.auth_level=1 
-		and b.auth_parent_code=#{code}
-	</select>
-    
-    <!-- 获取所有该角色已有的权限-->
-    <select id="getListPermission" parameterType="com.midland.web.model.role.RolePermission" resultMap="RolePermissionMap">
-		select 	    
-	          permission_id 
-	     from  role_permission 
-		where 1=1 
-		 <if test="roleId != null">
-           and role_id = #{roleId,jdbcType=BIGINT}
-        </if>
-	</select>
-	
-	<select id="getFatherPermissions" resultMap="permissionMap">
-	select
-		p.id,
-		p.permission_name,
-	    p.permission_sign,
-		p.description,
-	    p.parent_id,
-	    p.parent_sign,
-	    p.permission_path,
-	    p.permission_type
-	from permission p 
-	 where p.status=1 
-		and p.permission_type=0
-	    order by p.order_no 
-	</select>
-	
-	<select id="getChildPermissions" parameterType="java.util.Map" resultMap="permissionMap" >
-	select
-		p.id,
-		p.permission_name,
-	    p.permission_sign,
-		p.description,
-	    p.parent_id,
-	    p.parent_sign,
-	    p.permission_path,
-	    p.permission_type
-	from permission p 
-	 where p.status=1 
-		and p.permission_type=1
-		and p.parent_id=#{parentId}
-	    order by p.order_no 
-	</select>
-    
-    <!-- 根据用户id查找用户角色关系-->
-   <select id="findUserRoleByRoleId"  resultMap="UserRoleResultMap">
-   	SELECT id, user_id, role_id
-	  FROM user_role
-	 WHERE role_id=#{roleId}
     </select>
-    
+
+    <select id="getFatherAuths" resultMap="authRelation">
+        select
+        b.auth_id,
+        b.auth_name,
+        b.auth_url,
+        b.auth_level,
+        b.auth_parent_code,
+        b.auth_code,
+        b.autu_type
+        from authority b where
+        b.auth_status=1 and b.auth_level=2
+    </select>
+
+    <select id="getChildAuths" parameterType="java.util.Map" resultMap="authRelation">
+        select
+        b.auth_id,
+        b.auth_name,
+        b.auth_url,
+        b.auth_level,
+        b.auth_parent_code,
+        b.auth_code,
+        b.autu_type
+        from authority b
+        where b.auth_status=1
+        and b.autu_type=2
+        and b.auth_level=1
+        and b.auth_parent_code=#{code}
+    </select>
+
+    <!-- 获取所有该角色已有的权限-->
+    <select id="getListPermission" parameterType="com.midland.web.model.role.RolePermission"
+            resultMap="RolePermissionMap">
+        select
+        permission_id
+        from role_permission
+        where 1=1
+        <if test="roleId != null">
+            and role_id = #{roleId,jdbcType=BIGINT}
+        </if>
+    </select>
+
+    <select id="getFatherPermissions" resultMap="permissionMap">
+        select
+        p.id,
+        p.permission_name,
+        p.permission_sign,
+        p.description,
+        p.parent_id,
+        p.parent_sign,
+        p.permission_path,
+        p.permission_type
+        from permission p
+        where p.status=1
+        and p.permission_type=0
+        order by p.order_no
+    </select>
+
+    <select id="getChildPermissions" parameterType="java.util.Map" resultMap="permissionMap">
+        select
+        p.id,
+        p.permission_name,
+        p.permission_sign,
+        p.description,
+        p.parent_id,
+        p.parent_sign,
+        p.permission_path,
+        p.permission_type
+        from permission p
+        where p.status=1
+        and p.permission_type=1
+        and p.parent_id=#{parentId}
+        order by p.order_no
+    </select>
+
+    <!-- 根据用户id查找用户角色关系-->
+    <select id="findUserRoleByRoleId" resultMap="UserRoleResultMap">
+        SELECT id, user_id, role_id
+        FROM user_role
+        WHERE role_id=#{roleId}
+    </select>
+
 </mapper>

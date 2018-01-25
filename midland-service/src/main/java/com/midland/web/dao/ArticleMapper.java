@@ -1,6 +1,5 @@
 package com.midland.web.dao;
 
-import com.midland.web.model.Appointment;
 import com.midland.web.model.Article;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;

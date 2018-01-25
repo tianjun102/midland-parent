@@ -2,124 +2,127 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.midland.web.dao.QuotationViewMapper">
 
- 	<resultMap id="BaseResultMap" type="com.midland.web.model.QuotationView" >
-		<id column="id" property="id" jdbcType="INTEGER" />
-		<result column="city_id" property="cityId" jdbcType="VARCHAR" />
-		<result column="area_id" property="areaId" jdbcType="VARCHAR" />
-		<result column="type" property="type" jdbcType="INTEGER" />
-		<result column="slice_id" property="sliceId" jdbcType="VARCHAR" />
-		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
-		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
-		<result column="area_name" property="areaName" jdbcType="VARCHAR" />
-		<result column="slice_name" property="sliceName" jdbcType="VARCHAR" />
-		<result column="house_acreage" property="houseAcreage" jdbcType="VARCHAR" />
-		<result column="data_time" property="dataTime" jdbcType="VARCHAR" />
-		<result column="deal_num" property="dealNum" jdbcType="INTEGER" />
-		<result column="pre_deal_num" property="preDealNum" jdbcType="DECIMAL" />
-		<result column="deal_acreage" property="dealAcreage" jdbcType="VARCHAR" />
-		<result column="pre_deal_acreage" property="preDealAcreage" jdbcType="DOUBLE" />
-		<result column="price" property="price" jdbcType="VARCHAR" />
-		<result column="pre_price" property="prePrice" jdbcType="DOUBLE" />
-		<result column="sold_num" property="soldNum" jdbcType="INTEGER" />
-		<result column="pre_sold_num" property="preSoldNum" jdbcType="DECIMAL" />
-		<result column="sold_area" property="soldArea" jdbcType="VARCHAR" />
-		<result column="pre_sold_area" property="preSoldArea" jdbcType="DOUBLE" />
-		<result column="deal_price" property="dealPrice" jdbcType="VARCHAR" />
-		<result column="pre_deal_price" property="preDealPrice" jdbcType="DOUBLE" />
-	</resultMap>
+    <resultMap id="BaseResultMap" type="com.midland.web.model.QuotationView">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="city_id" property="cityId" jdbcType="VARCHAR"/>
+        <result column="area_id" property="areaId" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="slice_id" property="sliceId" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="is_delete" property="isDelete" jdbcType="INTEGER"/>
+        <result column="city_name" property="cityName" jdbcType="VARCHAR"/>
+        <result column="area_name" property="areaName" jdbcType="VARCHAR"/>
+        <result column="slice_name" property="sliceName" jdbcType="VARCHAR"/>
+        <result column="house_acreage" property="houseAcreage" jdbcType="VARCHAR"/>
+        <result column="data_time" property="dataTime" jdbcType="VARCHAR"/>
+        <result column="deal_num" property="dealNum" jdbcType="INTEGER"/>
+        <result column="pre_deal_num" property="preDealNum" jdbcType="DECIMAL"/>
+        <result column="deal_acreage" property="dealAcreage" jdbcType="VARCHAR"/>
+        <result column="pre_deal_acreage" property="preDealAcreage" jdbcType="DOUBLE"/>
+        <result column="price" property="price" jdbcType="VARCHAR"/>
+        <result column="pre_price" property="prePrice" jdbcType="DOUBLE"/>
+        <result column="sold_num" property="soldNum" jdbcType="INTEGER"/>
+        <result column="pre_sold_num" property="preSoldNum" jdbcType="DECIMAL"/>
+        <result column="sold_area" property="soldArea" jdbcType="VARCHAR"/>
+        <result column="pre_sold_area" property="preSoldArea" jdbcType="DOUBLE"/>
+        <result column="deal_price" property="dealPrice" jdbcType="VARCHAR"/>
+        <result column="pre_deal_price" property="preDealPrice" jdbcType="DOUBLE"/>
+    </resultMap>
 
-	<sql id="Base_Column_List">
-		id,city_id,area_id,type,slice_id,DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s')update_time,is_delete,city_name,area_name,slice_name,house_acreage,data_time,deal_num,pre_deal_num,deal_acreage,pre_deal_acreage,price,pre_price,sold_num,pre_sold_num,sold_area,pre_sold_area,deal_price,pre_deal_price
-	</sql>
+    <sql id="Base_Column_List">
+        id,city_id,area_id,type,slice_id,DATE_FORMAT(update_time,'%Y-%m-%d
+        %H:%i:%s')update_time,is_delete,city_name,area_name,slice_name,house_acreage,data_time,deal_num,pre_deal_num,deal_acreage,pre_deal_acreage,price,pre_price,sold_num,pre_sold_num,sold_area,pre_sold_area,deal_price,pre_deal_price
+    </sql>
 
- 	<select id="findQuotationViewList" parameterType="com.midland.web.model.QuotationView" resultMap="BaseResultMap">
-		select <include refid="Base_Column_List" /> from quotation_view
-		where 
-		is_delete=0
-		<include refid="select_option" />
-	</select>
+    <select id="findQuotationViewList" parameterType="com.midland.web.model.QuotationView" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from quotation_view
+        where
+        is_delete=0
+        <include refid="select_option"/>
+    </select>
 
 
-	<sql id="select_option">
-		<if test="id != null">
-			 and id= #{id,jdbcType=INTEGER}
-		</if>
-		<if test="cityId != null">
-			 and city_id= #{cityId,jdbcType=VARCHAR}
-		</if>
-		<if test="areaId != null">
-			 and area_id= #{areaId,jdbcType=VARCHAR}
-		</if>
-		<if test="type != null">
-			 and type= #{type,jdbcType=INTEGER}
-		</if>
-		<if test="sliceId != null">
-			 and slice_id= #{sliceId,jdbcType=VARCHAR}
-		</if>
-		<if test="updateTime != null">
-			 and update_time= #{updateTime,jdbcType=TIMESTAMP}
-		</if>
-		<if test="isDelete != null">
-			 and is_delete= #{isDelete,jdbcType=INTEGER}
-		</if>
-		<if test="cityName != null">
-			 and city_name= #{cityName,jdbcType=VARCHAR}
-		</if>
-		<if test="areaName != null">
-			and area_name like  '%${areaName}%'
-		</if>
-		<if test="sliceName != null">
-			 and slice_name= #{sliceName,jdbcType=VARCHAR}
-		</if>
-		<if test="houseAcreage != null">
-			 and house_acreage= #{houseAcreage,jdbcType=VARCHAR}
-		</if>
-		<if test="dataTime != null">
-			 and data_time= #{dataTime,jdbcType=VARCHAR}
-		</if>
-		<if test="dealNum != null">
-			 and deal_num= #{dealNum,jdbcType=INTEGER}
-		</if>
-		<if test="preDealNum != null">
-			 and pre_deal_num= #{preDealNum,jdbcType=DECIMAL}
-		</if>
-		<if test="dealAcreage != null">
-			 and deal_acreage= #{dealAcreage,jdbcType=VARCHAR}
-		</if>
-		<if test="preDealAcreage != null">
-			 and pre_deal_acreage= #{preDealAcreage,jdbcType=DOUBLE}
-		</if>
-		<if test="price != null">
-			 and price= #{price,jdbcType=VARCHAR}
-		</if>
-		<if test="prePrice != null">
-			 and pre_price= #{prePrice,jdbcType=DOUBLE}
-		</if>
-		<if test="soldNum != null">
-			 and sold_num= #{soldNum,jdbcType=INTEGER}
-		</if>
-		<if test="preSoldNum != null">
-			 and pre_sold_num= #{preSoldNum,jdbcType=DECIMAL}
-		</if>
-		<if test="soldArea != null">
-			 and sold_area= #{soldArea,jdbcType=VARCHAR}
-		</if>
-		<if test="preSoldArea != null">
-			 and pre_sold_area= #{preSoldArea,jdbcType=DOUBLE}
-		</if>
-		<if test="dealPrice != null">
-			 and deal_price= #{dealPrice,jdbcType=VARCHAR}
-		</if>
-		<if test="preDealPrice != null">
-			 and pre_deal_price= #{preDealPrice,jdbcType=DOUBLE}
-		</if>
-		<if test="startTime != null">
-			and data_time &gt; #{startTime,jdbcType=VARCHAR}
-		</if>
-		<if test="endTime != null">
-			and data_time &lt; #{endTime,jdbcType=VARCHAR}
-		</if>
-	</sql>
+    <sql id="select_option">
+        <if test="id != null">
+            and id= #{id,jdbcType=INTEGER}
+        </if>
+        <if test="cityId != null">
+            and city_id= #{cityId,jdbcType=VARCHAR}
+        </if>
+        <if test="areaId != null">
+            and area_id= #{areaId,jdbcType=VARCHAR}
+        </if>
+        <if test="type != null">
+            and type= #{type,jdbcType=INTEGER}
+        </if>
+        <if test="sliceId != null">
+            and slice_id= #{sliceId,jdbcType=VARCHAR}
+        </if>
+        <if test="updateTime != null">
+            and update_time= #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="isDelete != null">
+            and is_delete= #{isDelete,jdbcType=INTEGER}
+        </if>
+        <if test="cityName != null">
+            and city_name= #{cityName,jdbcType=VARCHAR}
+        </if>
+        <if test="areaName != null">
+            and area_name like '%${areaName}%'
+        </if>
+        <if test="sliceName != null">
+            and slice_name= #{sliceName,jdbcType=VARCHAR}
+        </if>
+        <if test="houseAcreage != null">
+            and house_acreage= #{houseAcreage,jdbcType=VARCHAR}
+        </if>
+        <if test="dataTime != null">
+            and data_time= #{dataTime,jdbcType=VARCHAR}
+        </if>
+        <if test="dealNum != null">
+            and deal_num= #{dealNum,jdbcType=INTEGER}
+        </if>
+        <if test="preDealNum != null">
+            and pre_deal_num= #{preDealNum,jdbcType=DECIMAL}
+        </if>
+        <if test="dealAcreage != null">
+            and deal_acreage= #{dealAcreage,jdbcType=VARCHAR}
+        </if>
+        <if test="preDealAcreage != null">
+            and pre_deal_acreage= #{preDealAcreage,jdbcType=DOUBLE}
+        </if>
+        <if test="price != null">
+            and price= #{price,jdbcType=VARCHAR}
+        </if>
+        <if test="prePrice != null">
+            and pre_price= #{prePrice,jdbcType=DOUBLE}
+        </if>
+        <if test="soldNum != null">
+            and sold_num= #{soldNum,jdbcType=INTEGER}
+        </if>
+        <if test="preSoldNum != null">
+            and pre_sold_num= #{preSoldNum,jdbcType=DECIMAL}
+        </if>
+        <if test="soldArea != null">
+            and sold_area= #{soldArea,jdbcType=VARCHAR}
+        </if>
+        <if test="preSoldArea != null">
+            and pre_sold_area= #{preSoldArea,jdbcType=DOUBLE}
+        </if>
+        <if test="dealPrice != null">
+            and deal_price= #{dealPrice,jdbcType=VARCHAR}
+        </if>
+        <if test="preDealPrice != null">
+            and pre_deal_price= #{preDealPrice,jdbcType=DOUBLE}
+        </if>
+        <if test="startTime != null">
+            and data_time &gt; #{startTime,jdbcType=VARCHAR}
+        </if>
+        <if test="endTime != null">
+            and data_time &lt; #{endTime,jdbcType=VARCHAR}
+        </if>
+    </sql>
 
 </mapper>

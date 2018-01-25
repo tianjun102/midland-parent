@@ -2,7 +2,7 @@ package com.midland.web.model.temp;
 
 public class ListDescOtherParam {
     /**
-     *  城市id
+     * 城市id
      */
     private String cityId;
     /**

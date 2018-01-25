@@ -239,16 +239,14 @@ public class InformationController extends BaseFilter {
 	@RequestMapping("sort")
 	@ResponseBody
 	public Map listDesc(Information information, int sort, Model model, HttpServletRequest request) throws Exception {
-		String primaryKeyName="id";
-		String primaryParam=String.valueOf(information.getId());
-		String tableName="information";
-		String orderByColumn="order_by";
-		ListDescOtherParam obj = new ListDescOtherParam();
-		obj.setCityId(null);
-		obj.setType("artice_type=1");
-		obj.setSource(null);
-		String orderByParam=String.valueOf(information.getOrderBy());
-		jdbcService.listDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,obj,sort);
+		if(sort==0){
+			informationServiceImpl.shiftUp(information);
+		}
+		else if (sort==1){
+			informationServiceImpl.shiftUp(information);
+		}else {
+			informationServiceImpl.shiftDown(information);
+		}
 		Map map = new HashMap();
 		map.put("state",0);
 		return map;

@@ -38,9 +38,9 @@
     </select>
 
     <delete id="deleteCommentById">
-		delete from comment
-		 where id= #{id}
-	</delete>
+        delete from comment
+        where id= #{id}
+    </delete>
 
     <update id="updateCommentById">
         update comment

@@ -5,9 +5,9 @@ import java.util.Date;
 
 public class WebUser implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private String id;
+    private String id;
 
     private String username;
 
@@ -24,19 +24,19 @@ public class WebUser implements Serializable {
     private String phone;
 
     private String createBy;
-    
+
     private Date createTime;
 
     private Date modifyTime;
-    
+
     private Integer parentId;
-    
+
     private String type;
-    
+
     private Integer msgNum;
-    
+
     private String custName;
-    
+
     private String headImg;
 
     private String qqOpenId;
@@ -60,16 +60,16 @@ public class WebUser implements Serializable {
     private String idcartImg1;
 
     private String actualName;
-    
+
     public String getHeadImg() {
-		return headImg;
-	}
+        return headImg;
+    }
 
-	public void setHeadImg(String headImg) {
-		this.headImg = headImg;
-	}
+    public void setHeadImg(String headImg) {
+        this.headImg = headImg;
+    }
 
-	public String getId() {
+    public String getId() {
         return id;
     }
 
@@ -134,14 +134,14 @@ public class WebUser implements Serializable {
     }
 
     public String getCreateBy() {
-		return createBy;
-	}
+        return createBy;
+    }
 
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
-	}
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
 
-	public Date getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
@@ -157,37 +157,37 @@ public class WebUser implements Serializable {
         this.modifyTime = modifyTime;
     }
 
-	public Integer getParentId() {
-		return parentId;
-	}
+    public Integer getParentId() {
+        return parentId;
+    }
 
-	public void setParentId(Integer parentId) {
-		this.parentId = parentId;
-	}
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	public Integer getMsgNum() {
-		return msgNum;
-	}
+    public Integer getMsgNum() {
+        return msgNum;
+    }
 
-	public void setMsgNum(Integer msgNum) {
-		this.msgNum = msgNum;
-	}
+    public void setMsgNum(Integer msgNum) {
+        this.msgNum = msgNum;
+    }
 
-	public String getCustName() {
-		return custName;
-	}
+    public String getCustName() {
+        return custName;
+    }
 
-	public void setCustName(String custName) {
-		this.custName = custName;
-	}
+    public void setCustName(String custName) {
+        this.custName = custName;
+    }
 
 
     public String getQqOpenId() {

@@ -2,152 +2,156 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.midland.web.dao.ReplyMapper">
 
- 	<resultMap id="BaseResultMap" type="com.midland.web.model.Reply" >
-		<id column="id" property="id" jdbcType="INTEGER" />
-		<result column="detail" property="detail" jdbcType="VARCHAR" />
-		<result column="addTime" property="addtime" jdbcType="TIMESTAMP" />
-		<result column="user" property="user" jdbcType="VARCHAR" />
-		<result column="user_id" property="userId" jdbcType="INTEGER" />
-		<result column="comm_id" property="commId" jdbcType="INTEGER" />
-		<result column="likes" property="likes" jdbcType="INTEGER" />
-		<result column="head_img" property="headImg" jdbcType="VARCHAR" />
-	</resultMap>
+    <resultMap id="BaseResultMap" type="com.midland.web.model.Reply">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="detail" property="detail" jdbcType="VARCHAR"/>
+        <result column="addTime" property="addtime" jdbcType="TIMESTAMP"/>
+        <result column="user" property="user" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="comm_id" property="commId" jdbcType="INTEGER"/>
+        <result column="likes" property="likes" jdbcType="INTEGER"/>
+        <result column="head_img" property="headImg" jdbcType="VARCHAR"/>
+    </resultMap>
 
-	<sql id="Base_Column_List">
-		id,detail,addTime,user,user_id,comm_id,head_img,likes
-	</sql>
+    <sql id="Base_Column_List">
+        id,detail,addTime,user,user_id,comm_id,head_img,likes
+    </sql>
 
-	<select id="selectReplyById" resultMap="BaseResultMap">
-		select <include refid="Base_Column_List" /> from reply
-		 where id= #{id}
-	</select>
+    <select id="selectReplyById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from reply
+        where id= #{id}
+    </select>
 
-	<delete id="deleteReplyById" >
-		delete from reply
-		 where id= #{id}
-	</delete>
+    <delete id="deleteReplyById">
+        delete from reply
+        where id= #{id}
+    </delete>
 
-	<update id="updateReplyById" >
-		update reply 
-		<set>
-		<include refid="update_option"/>
-		</set>
+    <update id="updateReplyById">
+        update reply
+        <set>
+            <include refid="update_option"/>
+        </set>
 
-		 where id= #{id}
-	</update>
+        where id= #{id}
+    </update>
 
-	<select id="findReplyList" parameterType="com.midland.web.model.Reply" resultMap="BaseResultMap">
-		select <include refid="Base_Column_List" /> from reply
-		where 1=1
-		<include refid="select_option" />
-		<if test="orderByPopularity != null and orderByTime==null ">
-			ORDER BY `likes` DESC
-		</if>
-		<if test="orderByTime != null and orderByPopularity==null ">
-			ORDER BY addTime DESC
-		</if>
-	</select>
+    <select id="findReplyList" parameterType="com.midland.web.model.Reply" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from reply
+        where 1=1
+        <include refid="select_option"/>
+        <if test="orderByPopularity != null and orderByTime==null ">
+            ORDER BY `likes` DESC
+        </if>
+        <if test="orderByTime != null and orderByPopularity==null ">
+            ORDER BY addTime DESC
+        </if>
+    </select>
 
-	<insert id="insertReply" parameterType="com.midland.web.model.Reply">
-		insert into reply
-		<trim prefix="(" suffix=")" suffixOverrides="," >
-			<if test="detail != null">
-				detail,
-			</if>
-			<if test="addtime != null">
-				addTime,
-			</if>
-			<if test="user != null">
-				user,
-			</if>
-			<if test="userId != null">
-				user_id,
-			</if>
-			<if test="commId != null">
-				comm_id,
-			</if>
-			<if test="likes != null">
-				likes,
-			</if>
-			<if test="headImg != null">
-				head_img,
-			</if>
-		</trim>
-		values
-		 <trim prefix="(" suffix=")" suffixOverrides="," >
-			<if test="detail != null">
-				#{detail,jdbcType=VARCHAR},
-			</if>
-			<if test="addtime != null">
-				#{addtime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="user != null">
-				#{user,jdbcType=VARCHAR},
-			</if>
-			<if test="userId != null">
-				#{userId,jdbcType=INTEGER},
-			</if>
-			<if test="commId != null">
-				#{commId,jdbcType=INTEGER},
-			</if>
-			 <if test="likes != null">
-				 #{likes},
-			 </if>
-			 <if test="headImg != null">
-				 #{headImg},
-			 </if>
-		</trim>
-	</insert>
+    <insert id="insertReply" parameterType="com.midland.web.model.Reply">
+        insert into reply
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="detail != null">
+                detail,
+            </if>
+            <if test="addtime != null">
+                addTime,
+            </if>
+            <if test="user != null">
+                user,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="commId != null">
+                comm_id,
+            </if>
+            <if test="likes != null">
+                likes,
+            </if>
+            <if test="headImg != null">
+                head_img,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="detail != null">
+                #{detail,jdbcType=VARCHAR},
+            </if>
+            <if test="addtime != null">
+                #{addtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="user != null">
+                #{user,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="commId != null">
+                #{commId,jdbcType=INTEGER},
+            </if>
+            <if test="likes != null">
+                #{likes},
+            </if>
+            <if test="headImg != null">
+                #{headImg},
+            </if>
+        </trim>
+    </insert>
 
-	<sql id="update_option">
-		<if test="detail != null">
-			detail= #{detail,jdbcType=VARCHAR},
-		</if>
-		<if test="addtime != null">
-			addTime= #{addtime,jdbcType=TIMESTAMP},
-		</if>
-		<if test="user != null">
-			user= #{user,jdbcType=VARCHAR},
-		</if>
-		<if test="userId != null">
-			user_id= #{userId,jdbcType=INTEGER},
-		</if>
-		<if test="commId != null">
-			comm_id= #{commId,jdbcType=INTEGER},
-		</if>
-		<if test="likes != null">
-			likes= #{likes},
-		</if>
-		<if test="headImg != null">
-			head_img= #{headImg},
-		</if>
-	</sql>
+    <sql id="update_option">
+        <if test="detail != null">
+            detail= #{detail,jdbcType=VARCHAR},
+        </if>
+        <if test="addtime != null">
+            addTime= #{addtime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="user != null">
+            user= #{user,jdbcType=VARCHAR},
+        </if>
+        <if test="userId != null">
+            user_id= #{userId,jdbcType=INTEGER},
+        </if>
+        <if test="commId != null">
+            comm_id= #{commId,jdbcType=INTEGER},
+        </if>
+        <if test="likes != null">
+            likes= #{likes},
+        </if>
+        <if test="headImg != null">
+            head_img= #{headImg},
+        </if>
+    </sql>
 
-	<sql id="select_option">
-		<if test="id != null">
-			 and id= #{id,jdbcType=INTEGER}
-		</if>
-		<if test="detail != null">
-			 and detail= #{detail,jdbcType=VARCHAR}
-		</if>
-		<if test="addtime != null">
-			 and addTime= #{addtime,jdbcType=TIMESTAMP}
-		</if>
-		<if test="user != null">
-			 and user= #{user,jdbcType=VARCHAR}
-		</if>
-		<if test="userId != null">
-			 and user_id= #{userId,jdbcType=INTEGER}
-		</if>
-		<if test="commId != null">
-			 and comm_id= #{commId,jdbcType=INTEGER}
-		</if>
-		<if test="likes != null">
-			 and likes= #{likes}
-		</if>
-		<if test="headImg != null">
-			 and head_img= #{headImg}
-		</if>
-	</sql>
+    <sql id="select_option">
+        <if test="id != null">
+            and id= #{id,jdbcType=INTEGER}
+        </if>
+        <if test="detail != null">
+            and detail= #{detail,jdbcType=VARCHAR}
+        </if>
+        <if test="addtime != null">
+            and addTime= #{addtime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="user != null">
+            and user= #{user,jdbcType=VARCHAR}
+        </if>
+        <if test="userId != null">
+            and user_id= #{userId,jdbcType=INTEGER}
+        </if>
+        <if test="commId != null">
+            and comm_id= #{commId,jdbcType=INTEGER}
+        </if>
+        <if test="likes != null">
+            and likes= #{likes}
+        </if>
+        <if test="headImg != null">
+            and head_img= #{headImg}
+        </if>
+    </sql>
 
 </mapper>

@@ -5,23 +5,23 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 @Repository
 public interface AppointLogMapper {
 
-	AppointLog selectAppointLogByAppointLogId(Integer appointLogId);
-	List<AppointLog> selectAppointLogByAppointId(Integer appointId);
-	
-	
-	
+    AppointLog selectAppointLogByAppointLogId(Integer appointLogId);
 
-	int deleteAppointLogByAppointLogId(Integer appointLogId);
+    List<AppointLog> selectAppointLogByAppointId(Integer appointId);
 
-	int updateAppointLogByAppointLogId(AppointLog appointLog);
 
-	int insertAppointLog(AppointLog appointLog);
+    int deleteAppointLogByAppointLogId(Integer appointLogId);
 
-	List<AppointLog> findAppointLogList(AppointLog appointLog);
+    int updateAppointLogByAppointLogId(AppointLog appointLog);
 
-	int batchUpdate(@Param("appointLogList") List<AppointLog> appointLogList);
+    int insertAppointLog(AppointLog appointLog);
+
+    List<AppointLog> findAppointLogList(AppointLog appointLog);
+
+    int batchUpdate(@Param("appointLogList") List<AppointLog> appointLogList);
 
 }

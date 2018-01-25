@@ -25,8 +25,8 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-		id,cate_id,menu_id,name,source,url,province_id,city_id,area_id,sheet_id,is_delete,province_name,city_name,area_name,sheet_name,cate_name,is_show,order_by,sell_rent
-	</sql>
+        id,cate_id,menu_id,name,source,url,province_id,city_id,area_id,sheet_id,is_delete,province_name,city_name,area_name,sheet_name,cate_name,is_show,order_by,sell_rent
+    </sql>
 
     <select id="selectById" resultMap="BaseResultMap">
         select
@@ -36,9 +36,9 @@
     </select>
 
     <delete id="deleteById">
-		delete from popular
-		 where id= #{id}
-	</delete>
+        delete from popular
+        where id= #{id}
+    </delete>
 
     <update id="updateById">
         update popular

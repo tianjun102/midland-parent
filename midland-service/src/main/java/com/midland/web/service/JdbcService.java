@@ -50,10 +50,10 @@ public class JdbcService {
         if (StringUtils.isNotEmpty(obj.getType())) {
             sb.append("type=").append(obj.getType()).append(" and ");
         }
-        if (obj.getSource()!=null) {
+        if (obj.getSource() != null) {
             sb.append("source=").append(obj.getSource()).append(" and ");
         }
-        if (obj.getCateId()!=null) {
+        if (obj.getCateId() != null) {
             sb.append("cate_id=").append(obj.getCateId()).append(" and ");
         }
         sb.append(orderByColumn)
@@ -73,7 +73,7 @@ public class JdbcService {
      * @param orderByParam
      * @return
      */
-    public Map shiftDown(String primaryKeyName, String id, String orderByColumn, String tableName, String orderByParam,ListDescOtherParam obj) {
+    public Map shiftDown(String primaryKeyName, String id, String orderByColumn, String tableName, String orderByParam, ListDescOtherParam obj) {
         StringBuffer sb = new StringBuffer("SELECT ").append(primaryKeyName + ",").append(orderByColumn)
                 .append(" from ").append(tableName).append(" where ").append("is_delete = 0 and ");
         if (StringUtils.isNotEmpty(obj.getCityId())) {
@@ -83,10 +83,10 @@ public class JdbcService {
             //artice_type=0
             sb.append("type=").append(obj.getType()).append(" and ");
         }
-        if (obj.getSource()!=null) {
+        if (obj.getSource() != null) {
             sb.append("source=").append(obj.getSource()).append(" and ");
         }
-                sb.append(orderByColumn)
+        sb.append(orderByColumn)
                 .append(">").append(orderByParam).append(" order by ")
                 .append(orderByColumn).append(" asc limit 1");
         return querySql(sb.toString());
@@ -125,16 +125,16 @@ public class JdbcService {
      * @param sort           0置顶，1上移，2下移，这个是页面控制后台逻辑用的，不保存到数据库
      */
     @Transactional(rollbackFor = Exception.class)
-    public void listDesc(String primaryKeyName, String id, String orderByColumn, String tableName, String orderByParam, ListDescOtherParam obj,int sort) {
+    public void listDesc(String primaryKeyName, String id, String orderByColumn, String tableName, String orderByParam, ListDescOtherParam obj, int sort) {
         if (sort == 0) {
             Map map = stickly(primaryKeyName, id, orderByColumn, tableName);
             String descNumResult = String.valueOf(map.get(orderByColumn));
             updateSql(primaryKeyName, id, orderByColumn, tableName, descNumResult);
         } else if (sort == 1) {
-            Map map = shiftUp(primaryKeyName, id, orderByColumn, tableName, orderByParam,obj);
+            Map map = shiftUp(primaryKeyName, id, orderByColumn, tableName, orderByParam, obj);
             doExchangeDescNum(primaryKeyName, id, orderByColumn, orderByParam, tableName, map);
         } else if (sort == 2) {
-            Map map = shiftDown(primaryKeyName, id, orderByColumn, tableName, orderByParam,obj);
+            Map map = shiftDown(primaryKeyName, id, orderByColumn, tableName, orderByParam, obj);
             doExchangeDescNum(primaryKeyName, id, orderByColumn, orderByParam, tableName, map);
         } else {
             throw new IllegalArgumentException("没有这个sort排序方法");
@@ -155,10 +155,9 @@ public class JdbcService {
         updateSql(primaryKeyName, primaryKeyId, orderByColumn, tableName, orderByParam);
 
 
-
-
     }
- private void doStickly(String primaryKeyName, String id, String orderByColumn, String orderByParam, String tableName, Map map) {
+
+    private void doStickly(String primaryKeyName, String id, String orderByColumn, String orderByParam, String tableName, Map map) {
         if (map == null) {
             log.warn("上移下移排序，第一条不能上移，最后一条不能下移");
             return;
@@ -173,6 +172,7 @@ public class JdbcService {
     }
 
     //***********************************************************排序**************************************************************************
+
     /**
      * @param primaryKeyName 要排序表的主键名
      * @param id             要排序表的主键值
@@ -187,10 +187,10 @@ public class JdbcService {
             Map map = stickly(primaryKeyName, id, orderByColumn, tableName);
             doExchangeDescNum(primaryKeyName, id, orderByColumn, orderByParam, tableName, map);
         } else if (sort == 1) {
-            Map map = hotHandShiftUp(primaryKeyName, id, orderByColumn, tableName, orderByParam,obj);
+            Map map = hotHandShiftUp(primaryKeyName, id, orderByColumn, tableName, orderByParam, obj);
             doExchangeDescNum(primaryKeyName, id, orderByColumn, orderByParam, tableName, map);
         } else if (sort == 2) {
-            Map map = hotHandShiftDown(primaryKeyName, id, orderByColumn, tableName, orderByParam,obj);
+            Map map = hotHandShiftDown(primaryKeyName, id, orderByColumn, tableName, orderByParam, obj);
             doExchangeDescNum(primaryKeyName, id, orderByColumn, orderByParam, tableName, map);
         } else {
             throw new IllegalArgumentException("没有这个sort排序方法");
@@ -217,10 +217,10 @@ public class JdbcService {
             //artice_type=0
             sb.append(obj.getType()).append(" and ");
         }
-        if (obj.getSource()!=null) {
+        if (obj.getSource() != null) {
             sb.append("source=").append(obj.getSource()).append(" and ");
         }
-        if (obj.getHotHandId() != null){
+        if (obj.getHotHandId() != null) {
             sb.append("hot_hand_id=").append(obj.getHotHandId()).append(" and ");
         }
         sb.append(orderByColumn)
@@ -250,10 +250,10 @@ public class JdbcService {
             //artice_type=0
             sb.append(obj.getType()).append(" and ");
         }
-        if (obj.getSource()!=null) {
+        if (obj.getSource() != null) {
             sb.append("source=").append(obj.getSource()).append(" and ");
         }
-        if (obj.getHotHandId() != null){
+        if (obj.getHotHandId() != null) {
             sb.append("hot_hand_id=").append(obj.getHotHandId()).append(" and ");
         }
         sb.append(orderByColumn)
@@ -264,8 +264,8 @@ public class JdbcService {
     }
 
 
-
     //***********************************************************菜单排序**************************************************************************
+
     /**
      * @param primaryKeyName 要排序表的主键名
      * @param id             要排序表的主键值
@@ -275,15 +275,15 @@ public class JdbcService {
      * @param sort           0置顶，1上移，2下移，这个是页面控制后台逻辑用的，不保存到数据库
      */
     @Transactional(rollbackFor = Exception.class)
-    public void menuListDesc(String primaryKeyName, String id, String orderByColumn, String tableName, String orderByParam, ListDescOtherParam obj,int sort) {
+    public void menuListDesc(String primaryKeyName, String id, String orderByColumn, String tableName, String orderByParam, ListDescOtherParam obj, int sort) {
         if (sort == 0) {
             Map map = stickly(primaryKeyName, id, orderByColumn, tableName);
             doExchangeDescNum(primaryKeyName, id, orderByColumn, orderByParam, tableName, map);
         } else if (sort == 1) {
-            Map map = menuShiftUp(primaryKeyName, id, orderByColumn, tableName, orderByParam,obj);
+            Map map = menuShiftUp(primaryKeyName, id, orderByColumn, tableName, orderByParam, obj);
             doExchangeDescNum(primaryKeyName, id, orderByColumn, orderByParam, tableName, map);
         } else if (sort == 2) {
-            Map map = menuShiftDown(primaryKeyName, id, orderByColumn, tableName, orderByParam,obj);
+            Map map = menuShiftDown(primaryKeyName, id, orderByColumn, tableName, orderByParam, obj);
             doExchangeDescNum(primaryKeyName, id, orderByColumn, orderByParam, tableName, map);
         } else {
             throw new IllegalArgumentException("没有这个sort排序方法");
@@ -310,7 +310,7 @@ public class JdbcService {
             //artice_type=0
             sb.append(obj.getType()).append(" and ");
         }
-        if (obj.getSource()!=null) {
+        if (obj.getSource() != null) {
             sb.append("source=").append(obj.getSource()).append(" and ");
         }
         sb.append(orderByColumn)
@@ -330,7 +330,7 @@ public class JdbcService {
      * @param orderByParam
      * @return
      */
-    public Map menuShiftDown(String primaryKeyName, String id, String orderByColumn, String tableName, String orderByParam,ListDescOtherParam obj) {
+    public Map menuShiftDown(String primaryKeyName, String id, String orderByColumn, String tableName, String orderByParam, ListDescOtherParam obj) {
         StringBuffer sb = new StringBuffer("SELECT ").append(primaryKeyName + ",").append(orderByColumn)
                 .append(" from ").append(tableName).append(" where ").append("is_delete = 0 and ");
         if (StringUtils.isNotEmpty(obj.getCityId())) {
@@ -340,7 +340,7 @@ public class JdbcService {
             //artice_type=0
             sb.append(obj.getType()).append(" and ");
         }
-        if (obj.getSource()!=null) {
+        if (obj.getSource() != null) {
             sb.append("source=").append(obj.getSource()).append(" and ");
         }
         sb.append(orderByColumn)

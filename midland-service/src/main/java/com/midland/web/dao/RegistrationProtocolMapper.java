@@ -1,18 +1,20 @@
 package com.midland.web.dao;
 
 import com.midland.web.model.RegistrationProtocol;
-import java.util.List;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+@Repository
 public interface RegistrationProtocolMapper {
 
-	RegistrationProtocol selectRegistrationProtocolById(Integer registrationProtocol);
+    RegistrationProtocol selectRegistrationProtocolById(Integer registrationProtocol);
 
-	int deleteRegistrationProtocolById(Integer registrationProtocol);
+    int deleteRegistrationProtocolById(Integer registrationProtocol);
 
-	int updateRegistrationProtocolById(RegistrationProtocol registrationProtocol);
+    int updateRegistrationProtocolById(RegistrationProtocol registrationProtocol);
 
-	int insertRegistrationProtocol(RegistrationProtocol registrationProtocol);
+    int insertRegistrationProtocol(RegistrationProtocol registrationProtocol);
 
-	List<RegistrationProtocol> findRegistrationProtocolList(RegistrationProtocol registrationProtocol);
+    List<RegistrationProtocol> findRegistrationProtocolList(RegistrationProtocol registrationProtocol);
 
 }

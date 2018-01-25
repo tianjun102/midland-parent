@@ -178,7 +178,7 @@ public class RoleExample {
             addCriterion("role_name =", value, "roleName");
             return (Criteria) this;
         }
-        
+
 
         public Criteria andRoleNameNotEqualTo(String value) {
             addCriterion("role_name <>", value, "roleName");
@@ -249,7 +249,7 @@ public class RoleExample {
             addCriterion("role_sign =", value, "roleSign");
             return (Criteria) this;
         }
-        
+
         public Criteria andRoleTypeEqualTo(Integer value) {
             addCriterion("role_type =", value, "roleType");
             return (Criteria) this;
@@ -379,7 +379,7 @@ public class RoleExample {
             addCriterion("description not between", value1, value2, "description");
             return (Criteria) this;
         }
-        
+
         public Criteria andStateEqualTo(Integer value) {
             addCriterion("state=", value, "state");
             return (Criteria) this;

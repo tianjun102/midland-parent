@@ -1,25 +1,26 @@
 package com.midland.web.dao;
 
-import com.midland.web.model.EliteVip;
 import com.midland.web.model.EntrustLog;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 @Repository
 public interface EntrustLogMapper {
 
-	EntrustLog selectEntrustLogByEntrustLogId(Integer entrustLogId);
-	List<EntrustLog> selectEntrustLogByEntrustId(Integer entrustId);
+    EntrustLog selectEntrustLogByEntrustLogId(Integer entrustLogId);
 
-	int deleteEntrustLogByEntrustLogId(Integer entrustLog);
+    List<EntrustLog> selectEntrustLogByEntrustId(Integer entrustId);
 
-	int updateEntrustLogByEntrustLogId(EntrustLog entrustLog);
+    int deleteEntrustLogByEntrustLogId(Integer entrustLog);
 
-	int insertEntrustLog(EntrustLog entrustLog);
+    int updateEntrustLogByEntrustLogId(EntrustLog entrustLog);
 
-	List<EntrustLog> findEntrustLogList(EntrustLog entrustLog);
+    int insertEntrustLog(EntrustLog entrustLog);
 
-	int batchUpdate(@Param("entrustLogList") List<EntrustLog> entrustLogList);
+    List<EntrustLog> findEntrustLogList(EntrustLog entrustLog);
+
+    int batchUpdate(@Param("entrustLogList") List<EntrustLog> entrustLogList);
 
 }

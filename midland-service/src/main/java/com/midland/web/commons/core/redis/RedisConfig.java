@@ -20,7 +20,7 @@ public class RedisConfig {
     @Bean
     public StringRedisSerializer stringRedisSerializer() {
         StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
-        
+
         return stringRedisSerializer;
     }
 
@@ -30,8 +30,8 @@ public class RedisConfig {
                 new Jackson2JsonRedisSerializer<ShoppingCart>(ShoppingCart.class);
         return jacksonJsonRedisJsonSerializer;
     }*/
-    
-    
+
+
     @Bean
     public Jackson2JsonRedisSerializer<Region> jacksonJsonRedisJsonSerializer2() {
         Jackson2JsonRedisSerializer<Region> jacksonJsonRedisJsonSerializer =
@@ -48,8 +48,8 @@ public class RedisConfig {
         return redisTemplate;
     }
     */
-    
-    @Bean(name="regionRedisTemplate")
+
+    @Bean(name = "regionRedisTemplate")
     public RedisTemplate<String, Region> regionRedis() {
         RedisTemplate<String, Region> redisTemplate = new RedisTemplate<String, Region>();
         redisTemplate.setConnectionFactory(jedisConnectionFactory);
@@ -57,6 +57,6 @@ public class RedisConfig {
         redisTemplate.setValueSerializer(jacksonJsonRedisJsonSerializer2());
         return redisTemplate;
     }
-    
+
 
 }

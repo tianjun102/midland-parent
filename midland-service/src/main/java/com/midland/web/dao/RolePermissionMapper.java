@@ -2,9 +2,10 @@ package com.midland.web.dao;
 
 import com.midland.web.model.role.RolePermission;
 import com.midland.web.model.role.RolePermissionExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface RolePermissionMapper {
@@ -29,8 +30,8 @@ public interface RolePermissionMapper {
     int updateByPrimaryKeySelective(RolePermission record);
 
     int updateByPrimaryKey(RolePermission record);
-    
+
     int insertBatch(List<RolePermission> record);
 
-	int deleteBatch(@Param("roleId") Integer roleId, @Param("list") List<RolePermission> list);
+    int deleteBatch(@Param("roleId") Integer roleId, @Param("list") List<RolePermission> list);
 }

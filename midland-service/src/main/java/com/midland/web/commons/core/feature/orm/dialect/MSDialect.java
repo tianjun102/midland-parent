@@ -2,8 +2,8 @@ package com.midland.web.commons.core.feature.orm.dialect;
 
 /**
  * MSSQL 数据库方言
- * 
- * @author 
+ *
+ * @author
  * @since 2016年5月18日 下午1:32:33
  **/
 public class MSDialect extends Dialect {

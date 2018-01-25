@@ -11,47 +11,49 @@ import java.util.List;
 
 /**
  * 角色 业务接口
- * 
- * @author 
+ *
+ * @author
  * @since 2016年6月10日 下午4:15:01
  **/
 public interface RoleService extends GenericService<Role, Integer> {
     /**
      * 通过用户id 查询用户 拥有的角色
-     * 
+     *
      * @param userId
      * @return
      */
     List<Role> selectRolesByUserId(String userId);
 
-	List<Role> selectRoleList(Role role);
+    List<Role> selectRoleList(Role role);
 
-	/**
-	 * 分页搜索查询
-	 * @param role
-	 * @return
-	 */
-	List<Role> selectByExampleAndPage(Role role);
+    /**
+     * 分页搜索查询
+     *
+     * @param role
+     * @return
+     */
+    List<Role> selectByExampleAndPage(Role role);
 
-	/**
-	 * 条件查询获取对象
-	 * @param role
-	 * @return
-	 */
-	Role selectByExampleOne(Role role);
+    /**
+     * 条件查询获取对象
+     *
+     * @param role
+     * @return
+     */
+    Role selectByExampleOne(Role role);
 
-	List<RoleAuth> getListAuthid(RoleAuth roleAuth);
+    List<RoleAuth> getListAuthid(RoleAuth roleAuth);
 
-	List<AuthRelation> getAuths();
+    List<AuthRelation> getAuths();
 
-	List<RolePermission> getListPermission(RolePermission rp);
+    List<RolePermission> getListPermission(RolePermission rp);
 
-	List<Permission> getPermissions();
+    List<Permission> getPermissions();
 
-	int saveRolePermissions(String roleId, String permissionIds);
+    int saveRolePermissions(String roleId, String permissionIds);
 
-	int updateRoleUser(Integer roleId, String userIds);
-	
-	int modifyRole(Role role);
+    int updateRoleUser(Integer roleId, String userIds);
+
+    int modifyRole(Role role);
 
 }

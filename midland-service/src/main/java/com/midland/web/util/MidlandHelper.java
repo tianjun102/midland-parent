@@ -27,7 +27,7 @@ public class MidlandHelper {
 
 
     public static String scientificNotation(String s) {
-        if (StringUtils.isEmpty(s)){
+        if (StringUtils.isEmpty(s)) {
             return "0";
         }
         BigDecimal bigDecimal = new BigDecimal(s);
@@ -195,7 +195,7 @@ public class MidlandHelper {
     public static <T> T getPojo(String str, Class<T> clazz) {
         JSONObject rootJsonObject = JSON.parseObject(str);
         String messageStr = rootJsonObject.getString("data");
-        if (StringUtils.isEmpty(messageStr)){
+        if (StringUtils.isEmpty(messageStr)) {
             messageStr = rootJsonObject.getString("DATA");
         }
         T t = JSON.parseObject(messageStr, clazz);

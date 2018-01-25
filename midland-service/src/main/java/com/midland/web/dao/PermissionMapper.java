@@ -1,16 +1,17 @@
 package com.midland.web.dao;
 
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 import com.midland.core.generic.GenericDao;
 import com.midland.web.model.Permission;
 import com.midland.web.model.PermissionExample;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * 权限 Dao 接口
- * 
- * @author 
+ *
+ * @author
  * @since 2016年7月5日 上午11:59:03
  **/
 @Repository
@@ -39,7 +40,7 @@ public interface PermissionMapper extends GenericDao<Permission, Integer> {
 
     /**
      * 通过角色id 查询角色 拥有的权限
-     * 
+     *
      * @param roleId
      * @return
      */

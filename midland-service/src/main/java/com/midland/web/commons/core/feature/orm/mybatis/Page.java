@@ -7,10 +7,9 @@ import java.util.List;
 
 /**
  * Mybatis分页参数及查询结果封装. 注意所有序号从1开始.
- * 
- * @param <T>
- *            Page中记录的类型.
- * @author 
+ *
+ * @param <T> Page中记录的类型.
+ * @author
  * @since 2016年5月18日 下午1:34:32
  **/
 public class Page<T> extends RowBounds {
@@ -51,6 +50,7 @@ public class Page<T> extends RowBounds {
     protected int totalPages;
 
     // --计算 数据库 查询的参数 : LIMIT 3, 3; LIMIT offset, limit; --//
+
     /**
      * 计算偏移量
      */
@@ -79,6 +79,7 @@ public class Page<T> extends RowBounds {
     }
 
     // -- 访问查询参数函数 --//
+
     /**
      * 获得当前页的页号,序号从1开始,默认为1.
      */
@@ -112,6 +113,7 @@ public class Page<T> extends RowBounds {
     }
 
     // -- 访问查询结果函数 --//
+
     /**
      * 取得页内的记录列表.
      */

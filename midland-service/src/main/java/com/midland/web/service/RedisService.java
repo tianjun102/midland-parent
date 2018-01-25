@@ -4,11 +4,11 @@ package com.midland.web.service;
  * Created by 'ms.x' on 2017/9/20.
  */
 public interface RedisService {
-	void setAnswerAuditFlag(int value);
-	
-	Integer getAnswerAuditFlag();
+    void setAnswerAuditFlag(int value);
 
-	Object getValue(String key);
+    Integer getAnswerAuditFlag();
 
-	void setValue(String key, Object value);
+    Object getValue(String key);
+
+    void setValue(String key, Object value);
 }

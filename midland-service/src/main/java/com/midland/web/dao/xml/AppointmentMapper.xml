@@ -34,11 +34,11 @@
         <result column="reset_flag" property="resetFlag" jdbcType="INTEGER"/>
         <result column="assigned_time" property="assignedTime" jdbcType="TIMESTAMP"/>
         <result column="sex" property="sex" jdbcType="INTEGER"/>
-        <result column="house_id" property="houseId" jdbcType="VARCHAR" />
-        <result column="avg_price" property="avgPrice" jdbcType="VARCHAR" />
-        <result column="range_to_subway" property="rangeToSubway" jdbcType="VARCHAR" />
-        <result column="house_img" property="houseImg" jdbcType="VARCHAR" />
-        <result column="house_floor" property="houseFloor" jdbcType="VARCHAR" />
+        <result column="house_id" property="houseId" jdbcType="VARCHAR"/>
+        <result column="avg_price" property="avgPrice" jdbcType="VARCHAR"/>
+        <result column="range_to_subway" property="rangeToSubway" jdbcType="VARCHAR"/>
+        <result column="house_img" property="houseImg" jdbcType="VARCHAR"/>
+        <result column="house_floor" property="houseFloor" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -121,9 +121,9 @@
     </select>
 
     <delete id="deleteAppointmentById">
-		delete from appointment
-		 where id= #{id}
-	</delete>
+        delete from appointment
+        where id= #{id}
+    </delete>
 
     <update id="updateAppointmentById">
         update appointment
@@ -151,8 +151,6 @@
     </update>
 
 
-
-
     <select id="findAppointmentList" parameterType="com.midland.web.model.Appointment" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -160,6 +158,7 @@
         where
         is_delete=0
         <include refid="select_option"/>
+        ORDER BY id DESC
     </select>
 
     <insert id="insertAppointment" parameterType="com.midland.web.model.Appointment">

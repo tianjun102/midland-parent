@@ -1,10 +1,5 @@
 package com.midland.web.dao;
 
-import java.util.List;
-import java.util.Map;
-
-import org.apache.ibatis.annotations.Param;
-
 import com.midland.core.generic.GenericDao;
 import com.midland.web.model.AuthRelation;
 import com.midland.web.model.Permission;
@@ -13,12 +8,16 @@ import com.midland.web.model.role.RoleAuth;
 import com.midland.web.model.role.RoleExample;
 import com.midland.web.model.role.RolePermission;
 import com.midland.web.model.user.UserRole;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 角色Dao 接口
- * 
- * @author 
+ *
+ * @author
  * @since 2016年7月5日 上午11:55:59
  **/
 @Repository
@@ -47,30 +46,30 @@ public interface RoleMapper extends GenericDao<Role, Integer> {
 
     /**
      * 通过用户id 查询用户 拥有的角色
-     * 
+     *
      * @return
      */
     List<Role> selectRolesByUserId(String userId);
-    
+
     /**
      * 分页条件查询
-     * 
+     *
      * @param example
      * @return
      */
     List<Role> selectByExampleAndPage(RoleExample example);
 
-	List<RoleAuth> getListAuthid(RoleAuth roleAuth);
+    List<RoleAuth> getListAuthid(RoleAuth roleAuth);
 
-	List<AuthRelation> getFatherAuths();
+    List<AuthRelation> getFatherAuths();
 
-	List<AuthRelation> getChildAuths(Map<String, String> queryMap);
+    List<AuthRelation> getChildAuths(Map<String, String> queryMap);
 
-	List<RolePermission> getListPermission(RolePermission rp);
+    List<RolePermission> getListPermission(RolePermission rp);
 
-	List<Permission> getFatherPermissions();
+    List<Permission> getFatherPermissions();
 
-	List<Permission> getChildPermissions(Map<String, Integer> queryMap);
+    List<Permission> getChildPermissions(Map<String, Integer> queryMap);
 
-	List<UserRole> findUserRoleByRoleId(@Param("roleId") Integer roleId);
+    List<UserRole> findUserRoleByRoleId(@Param("roleId") Integer roleId);
 }

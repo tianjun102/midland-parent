@@ -86,30 +86,31 @@ public class PublicServiceImpl implements PublicService {
     }
 
     @Override
-    public void moveSet( Object V) throws Exception {
+    public void moveSet(Object V) throws Exception {
         SetOperations<String, Object> vo = redisTemplate.opsForSet();
-        Long i =vo.remove(Contant.SENSITIVE_CACHE_KEY, V);
-        if (i<1){
+        Long i = vo.remove(Contant.SENSITIVE_CACHE_KEY, V);
+        if (i < 1) {
             throw new Exception("删除敏感词汇失败");
         }
     }
- @Override
+
+    @Override
     public void addSet(Object V) throws Exception {
         SetOperations<String, Object> vo = redisTemplate.opsForSet();
-        Long i =vo.add(Contant.SENSITIVE_CACHE_KEY, V);
-        if (i<1){
+        Long i = vo.add(Contant.SENSITIVE_CACHE_KEY, V);
+        if (i < 1) {
             throw new Exception("新增敏感词汇失败");
         }
     }
 
     @Override
     public Set<String> getSensitiveSet() {
-        SetOperations<String, String> vo =  redisStringTemplate.opsForSet();
+        SetOperations<String, String> vo = redisStringTemplate.opsForSet();
         if (vo == null) {
-           return Collections.EMPTY_SET;
+            return Collections.EMPTY_SET;
         }
-         Set<String> obj =  vo.distinctRandomMembers(Contant.SENSITIVE_CACHE_KEY, 100000);
-        if (obj.size()<1){
+        Set<String> obj = vo.distinctRandomMembers(Contant.SENSITIVE_CACHE_KEY, 100000);
+        if (obj.size() < 1) {
             Set<String> temp = new HashSet<>();
             Arrays.asList(JsonMapReader.getSensitive("sensitive").split(",")).forEach(e1 ->
                     temp.add(e1)
@@ -125,11 +126,12 @@ public class PublicServiceImpl implements PublicService {
         SetOperations<String, Object> vo = redisTemplate.opsForSet();
         vo.add(Contant.SENSITIVE_CACHE_KEY, V);
     }
+
     @Override
     public void putSensitiveSet(Set<String> V) {
         SetOperations<String, Object> vo = redisTemplate.opsForSet();
-        Iterator<String> iterable=V.iterator();
-        while (iterable.hasNext()){
+        Iterator<String> iterable = V.iterator();
+        while (iterable.hasNext()) {
             vo.add(Contant.SENSITIVE_CACHE_KEY, iterable.next());
         }
 

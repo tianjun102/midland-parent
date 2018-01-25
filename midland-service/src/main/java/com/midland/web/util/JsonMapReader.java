@@ -1,6 +1,5 @@
 package com.midland.web.util;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -11,8 +10,7 @@ import java.util.List;
 /**
  * Created by jim on 2017/6/14.
  */
-public class JsonMapReader
-{
+public class JsonMapReader {
     private Logger logger = LoggerFactory.getLogger(JsonMapReader.class);
     private static String PAY_CHANNEL = "jsonMap/midland.json";
     private static List<ParamObject> objects = null;
@@ -22,9 +20,9 @@ public class JsonMapReader
     private static ClassPathResource cpr1 = null;
     private static String objects1 = null;
 
-    public  void getInfo(String pro) {
-        if (cpr == null){
-             cpr = new ClassPathResource(PAY_CHANNEL);
+    public void getInfo(String pro) {
+        if (cpr == null) {
+            cpr = new ClassPathResource(PAY_CHANNEL);
         }
         if (cpr != null && cpr.exists()) {
             try {
@@ -35,14 +33,15 @@ public class JsonMapReader
             }
         }
     }
-public  void getSensitiveInfo(String pro) {
-        if (cpr1 == null){
+
+    public void getSensitiveInfo(String pro) {
+        if (cpr1 == null) {
             cpr1 = new ClassPathResource(SENSITIVE);
         }
         if (cpr1 != null && cpr1.exists()) {
             try {
                 String object = JsonUtil.getNodeValue(cpr1.getInputStream(), pro);
-                objects1 = object.substring(1,object.length()-1);
+                objects1 = object.substring(1, object.length() - 1);
             } catch (IOException e) {
                 logger.error("", e);
             }
@@ -50,22 +49,22 @@ public  void getSensitiveInfo(String pro) {
     }
 
     public static String getSensitive(String note) {
-            JsonMapReader jsonMapReader = new JsonMapReader();
-            jsonMapReader.getSensitiveInfo(note);
+        JsonMapReader jsonMapReader = new JsonMapReader();
+        jsonMapReader.getSensitiveInfo(note);
         return objects1;
     }
 
-     public static List<ParamObject> getMap(String note) {
+    public static List<ParamObject> getMap(String note) {
         JsonMapReader jsonMapReader = new JsonMapReader();
         jsonMapReader.getInfo(note);
         return objects;
     }
 
 
-    public static ParamObject getObject(String note, Object id){
+    public static ParamObject getObject(String note, Object id) {
         List<ParamObject> re = getMap(note);
-        for (ParamObject o:re){
-            if (o.getId().equals(id)){
+        for (ParamObject o : re) {
+            if (o.getId().equals(id)) {
                 return o;
             }
         }

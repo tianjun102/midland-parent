@@ -207,24 +207,35 @@ public class CategoryController extends BaseFilter {
 	}
 
 
-	@RequestMapping("sort")
-	@ResponseBody
-	public Map listDesc(Category category, int sort, Model model, HttpServletRequest request) throws Exception {
-		String primaryKeyName="id";
-		String primaryParam=String.valueOf(category.getId());
-		String tableName="category";
-		String orderByColumn="order_by";
-		ListDescOtherParam obj = new ListDescOtherParam();
-		obj.setCityId(category.getCityId()==null?MidlandHelper.getCurrentUser(request).getCityId():category.getCityId());
-		obj.setType(String.valueOf(category.getType()));
-		obj.setSource(category.getSource());
-		String orderByParam=String.valueOf(category.getOrderBy());
-		jdbcService.listDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,obj,sort);
-		Map map = new HashMap();
-		map.put("state",0);
-		return map;
+//	@RequestMapping("sort")
+//	@ResponseBody
+//	public Map listDesc(Category category, int sort, Model model, HttpServletRequest request) throws Exception {
+//		String primaryKeyName="id";
+//		String primaryParam=String.valueOf(category.getId());
+//		String tableName="category";
+//		String orderByColumn="order_by";
+//		ListDescOtherParam obj = new ListDescOtherParam();
+//		obj.setCityId(category.getCityId()==null?MidlandHelper.getCurrentUser(request).getCityId():category.getCityId());
+//		obj.setType(String.valueOf(category.getType()));
+//		obj.setSource(category.getSource());
+//		String orderByParam=String.valueOf(category.getOrderBy());
+//		jdbcService.listDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,obj,sort);
+//		Map map = new HashMap();
+//		map.put("state",0);
+//		return map;
+//	}
+@RequestMapping("sort")
+@ResponseBody
+public Map listDesc(Category category, int sort, Model model, HttpServletRequest request) throws Exception {
+	if (sort==0){
+		categoryServiceImpl.shiftUp(category);
+	}else{
+		categoryServiceImpl.shiftDown(category);
 	}
-
+	Map map = new HashMap();
+	map.put("state",0);
+	return map;
+}
 
 	/**
 	 * 查询子分类

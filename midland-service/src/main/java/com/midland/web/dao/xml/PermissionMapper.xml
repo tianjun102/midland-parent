@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.midland.web.dao.PermissionMapper">
     <resultMap id="BaseResultMap" type="com.midland.web.model.Permission">
-        <id column="id" property="id" jdbcType="BIGINT" />
-        <result column="permission_name" property="permissionName" jdbcType="VARCHAR" />
-        <result column="permission_sign" property="permissionSign" jdbcType="VARCHAR" />
-        <result column="description" property="description" jdbcType="VARCHAR" />
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="permission_name" property="permissionName" jdbcType="VARCHAR"/>
+        <result column="permission_sign" property="permissionSign" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -25,7 +25,8 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -54,7 +55,8 @@
                                 </when>
                                 <when test="criterion.listValue">
                                     and ${criterion.condition}
-                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator=",">
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
                                         #{listItem}
                                     </foreach>
                                 </when>
@@ -73,10 +75,10 @@
         <if test="distinct">
             distinct
         </if>
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from permission
         <if test="_parameter != null">
-            <include refid="Example_Where_Clause" />
+            <include refid="Example_Where_Clause"/>
         </if>
         <if test="orderByClause != null">
             order by ${orderByClause}
@@ -84,7 +86,7 @@
     </select>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from permission
         where id = #{id,jdbcType=BIGINT}
     </select>
@@ -95,7 +97,7 @@
     <delete id="deleteByExample" parameterType="com.midland.web.model.PermissionExample">
         delete from permission
         <if test="_parameter != null">
-            <include refid="Example_Where_Clause" />
+            <include refid="Example_Where_Clause"/>
         </if>
     </delete>
     <insert id="insert" parameterType="com.midland.web.model.Permission">
@@ -139,7 +141,7 @@
     <select id="countByExample" parameterType="com.midland.web.model.PermissionExample" resultType="java.lang.Integer">
         select count(*) from permission
         <if test="_parameter != null">
-            <include refid="Example_Where_Clause" />
+            <include refid="Example_Where_Clause"/>
         </if>
     </select>
     <update id="updateByExampleSelective" parameterType="map">
@@ -159,7 +161,7 @@
             </if>
         </set>
         <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause" />
+            <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
     <update id="updateByExample" parameterType="map">
@@ -170,7 +172,7 @@
         description =
         #{record.description,jdbcType=VARCHAR}
         <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause" />
+            <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
     <update id="updateByPrimaryKeySelective" parameterType="com.midland.web.model.Permission">
@@ -200,16 +202,16 @@
     <!-- 通过角色id 查询角色 拥有的权限 -->
     <select id="selectPermissionsByRoleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
         SELECT p.id,
-	       p.permission_name,
-	       p.permission_sign,
-	       p.description,
-	       p.parent_id,
-	       p.parent_sign,
-	       p.permission_path,
-	       p.permission_type,
-	       p.order_no,
-	       p.status
-      FROM permission p LEFT JOIN role_permission rp ON rp.permission_id = p.id
+        p.permission_name,
+        p.permission_sign,
+        p.description,
+        p.parent_id,
+        p.parent_sign,
+        p.permission_path,
+        p.permission_type,
+        p.order_no,
+        p.status
+        FROM permission p LEFT JOIN role_permission rp ON rp.permission_id = p.id
         WHERE rp.role_id =#{id,jdbcType=BIGINT}
     </select>
 </mapper>

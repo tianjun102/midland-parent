@@ -2,126 +2,130 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.midland.web.dao.HeadMsgMapper">
 
- 	<resultMap id="BaseResultMap" type="com.midland.web.model.HeadMsg" >
-		<id column="id" property="id" jdbcType="INTEGER" />
-		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-		<result column="title" property="title" jdbcType="VARCHAR" />
-		<result column="content" property="content" jdbcType="VARCHAR" />
-		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
-		<result column="is_show" property="isShow" jdbcType="INTEGER" />
-	</resultMap>
+    <resultMap id="BaseResultMap" type="com.midland.web.model.HeadMsg">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="is_delete" property="isDelete" jdbcType="INTEGER"/>
+        <result column="is_show" property="isShow" jdbcType="INTEGER"/>
+    </resultMap>
 
-	<sql id="Base_Column_List">
-		id,DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s')create_time,title,content,is_delete,is_show
-	</sql>
+    <sql id="Base_Column_List">
+        id,DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s')create_time,title,content,is_delete,is_show
+    </sql>
 
-	<select id="selectHeadMsgById" resultMap="BaseResultMap">
-		select <include refid="Base_Column_List" /> from head_msg
-		 where id= #{id}
-	</select>
+    <select id="selectHeadMsgById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from head_msg
+        where id= #{id}
+    </select>
 
-	<delete id="deleteHeadMsgById" >
-		delete from head_msg
-		 where id= #{id}
-	</delete>
+    <delete id="deleteHeadMsgById">
+        delete from head_msg
+        where id= #{id}
+    </delete>
 
-	<update id="updateHeadMsgById" >
-		update head_msg 
-		<set>
-		<include refid="update_option"/>
-		</set>
+    <update id="updateHeadMsgById">
+        update head_msg
+        <set>
+            <include refid="update_option"/>
+        </set>
 
-		 where id= #{id}
-	</update>
+        where id= #{id}
+    </update>
 
-	<select id="findHeadMsgList" parameterType="com.midland.web.model.HeadMsg" resultMap="BaseResultMap">
-		select <include refid="Base_Column_List" /> from head_msg
-		where 1=1
-		<include refid="select_option" />
-	</select>
+    <select id="findHeadMsgList" parameterType="com.midland.web.model.HeadMsg" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from head_msg
+        where 1=1
+        <include refid="select_option"/>
+    </select>
 
-	<insert id="insertHeadMsg" parameterType="com.midland.web.model.HeadMsg">
-		insert into head_msg
-		<trim prefix="(" suffix=")" suffixOverrides="," >
-			<if test="createTime != null">
-				create_time,
-			</if>
-			<if test="title != null">
-				title,
-			</if>
-			<if test="content != null">
-				content,
-			</if>
-			<if test="isDelete != null">
-				is_delete,
-			</if>
-			<if test="isShow != null">
-				is_show,
-			</if>
-		</trim>
-		values
-		 <trim prefix="(" suffix=")" suffixOverrides="," >
-			<if test="createTime != null">
-				#{createTime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="title != null">
-				#{title,jdbcType=VARCHAR},
-			</if>
-			<if test="content != null">
-				#{content,jdbcType=VARCHAR},
-			</if>
-			<if test="isDelete != null">
-				#{isDelete,jdbcType=INTEGER},
-			</if>
-			<if test="isShow != null">
-				#{isShow,jdbcType=INTEGER},
-			</if>
-		</trim>
-	</insert>
+    <insert id="insertHeadMsg" parameterType="com.midland.web.model.HeadMsg">
+        insert into head_msg
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="isDelete != null">
+                is_delete,
+            </if>
+            <if test="isShow != null">
+                is_show,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,jdbcType=INTEGER},
+            </if>
+            <if test="isShow != null">
+                #{isShow,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
 
-	<sql id="update_option">
-		<if test="createTime != null">
-			create_time= #{createTime,jdbcType=TIMESTAMP},
-		</if>
-		<if test="title != null">
-			title= #{title,jdbcType=VARCHAR},
-		</if>
-		<if test="content != null">
-			content= #{content,jdbcType=VARCHAR},
-		</if>
-		<if test="isDelete != null">
-			is_delete= #{isDelete,jdbcType=INTEGER},
-		</if>
-		<if test="isShow != null">
-			is_show= #{isShow,jdbcType=INTEGER},
-		</if>
-	</sql>
+    <sql id="update_option">
+        <if test="createTime != null">
+            create_time= #{createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="title != null">
+            title= #{title,jdbcType=VARCHAR},
+        </if>
+        <if test="content != null">
+            content= #{content,jdbcType=VARCHAR},
+        </if>
+        <if test="isDelete != null">
+            is_delete= #{isDelete,jdbcType=INTEGER},
+        </if>
+        <if test="isShow != null">
+            is_show= #{isShow,jdbcType=INTEGER},
+        </if>
+    </sql>
 
-	<sql id="select_option">
-		<if test="id != null">
-			 and id= #{id,jdbcType=INTEGER}
-		</if>
-		<if test="createTime != null">
-			 and create_time= #{createTime,jdbcType=TIMESTAMP}
-		</if>
-		<if test="startTime != null">
-			and create_time &gt; {startTime,jdbcType=TIMESTAMP}
-		</if>
-		<if test="endTime != null">
-			and create_time &lt; {endTime,jdbcType=TIMESTAMP}
-		</if>
-		<if test="title != null">
-			 and title= #{title,jdbcType=VARCHAR}
-		</if>
-		<if test="content != null">
-			 and content= #{content,jdbcType=VARCHAR}
-		</if>
-		<if test="isDelete != null">
-			 and is_delete= #{isDelete,jdbcType=INTEGER}
-		</if>
-		<if test="isShow != null">
-			 and is_show= #{isShow,jdbcType=INTEGER}
-		</if>
-	</sql>
+    <sql id="select_option">
+        <if test="id != null">
+            and id= #{id,jdbcType=INTEGER}
+        </if>
+        <if test="createTime != null">
+            and create_time= #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="startTime != null">
+            and create_time &gt; {startTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="endTime != null">
+            and create_time &lt; {endTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="title != null">
+            and title= #{title,jdbcType=VARCHAR}
+        </if>
+        <if test="content != null">
+            and content= #{content,jdbcType=VARCHAR}
+        </if>
+        <if test="isDelete != null">
+            and is_delete= #{isDelete,jdbcType=INTEGER}
+        </if>
+        <if test="isShow != null">
+            and is_show= #{isShow,jdbcType=INTEGER}
+        </if>
+    </sql>
 
 </mapper>

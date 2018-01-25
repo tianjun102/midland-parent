@@ -1,20 +1,19 @@
 package com.midland.web.service.impl;
 
-import java.util.List;
-import javax.annotation.Resource;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.midland.core.generic.GenericDao;
 import com.midland.core.generic.GenericServiceImpl;
 import com.midland.web.dao.PermissionMapper;
 import com.midland.web.model.Permission;
 import com.midland.web.service.PermissionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 权限Service实现类
  *
- * @author 
+ * @author
  * @since 2016年6月10日 下午12:05:03
  */
 @Service

@@ -22,9 +22,9 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-		id,message,date_format(str_to_date(add_time, '%Y-%m'),'%Y-%m')add_time,user_id,user_name,phone,reply_msg,type,
-		is_delete,email,reply_time,city_id,city_name,agent_name,agent_id,agent_url
-	</sql>
+        id,message,date_format(str_to_date(add_time, '%Y-%m'),'%Y-%m')add_time,user_id,user_name,phone,reply_msg,type,
+        is_delete,email,reply_time,city_id,city_name,agent_name,agent_id,agent_url
+    </sql>
 
     <select id="selectLeaveMsgById" resultMap="BaseResultMap">
         select
@@ -34,9 +34,9 @@
     </select>
 
     <delete id="deleteLeaveMsgById">
-		delete from leave_msg
-		 where id= #{id}
-	</delete>
+        delete from leave_msg
+        where id= #{id}
+    </delete>
 
     <update id="updateLeaveMsgById">
         update leave_msg
@@ -199,7 +199,7 @@
             agent_name= #{agentName,jdbcType=VARCHAR},
         </if>
         <if test="agentUrl != null">
-            agent_url =  #{agentUrl,jdbcType=VARCHAR},
+            agent_url = #{agentUrl,jdbcType=VARCHAR},
         </if>
     </sql>
 
@@ -256,7 +256,7 @@
             agent_name= #{agentName,jdbcType=VARCHAR}
         </if>
         <if test="agentUrl != null">
-            agent_url =  #{agentUrl,jdbcType=VARCHAR}
+            agent_url = #{agentUrl,jdbcType=VARCHAR}
         </if>
     </sql>
 

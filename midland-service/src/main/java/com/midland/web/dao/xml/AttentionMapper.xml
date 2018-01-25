@@ -22,9 +22,9 @@
     </select>
 
     <delete id="deleteAttentionById">
-		delete from attention
-		 where id= #{id}
-	</delete>
+        delete from attention
+        where id= #{id}
+    </delete>
 
     <update id="updateAttentionById">
         update attention

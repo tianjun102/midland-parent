@@ -181,21 +181,22 @@ public class UserExample {
             addCriterion("username =", value, "username");
             return (Criteria) this;
         }
+
         public Criteria andPhoneEqualTo(String value) {
-        	addCriterion("phone =", value, "phone");
-        	return (Criteria) this;
+            addCriterion("phone =", value, "phone");
+            return (Criteria) this;
         }
-        
+
         public Criteria andUserCnNameEqualTo(String value) {
             addCriterion("user_cn_name =", value, "userCnName");
             return (Criteria) this;
         }
-        
+
         public Criteria andUserCnNameLike(String value) {
             addCriterion("user_cn_name like", value, "userCnName");
             return (Criteria) this;
         }
-        
+
         public Criteria andUserTypeEqualTo(Integer value) {
             addCriterion("user_type =", value, "userType");
             return (Criteria) this;
@@ -450,13 +451,14 @@ public class UserExample {
             addCriterion("create_time between", value1, value2, "createTime");
             return (Criteria) this;
         }
+
         public Criteria andCreateTimeIn(String value1, String value2) {
-            if (StringUtils.isNotEmpty(value1)){
+            if (StringUtils.isNotEmpty(value1)) {
                 addCriterion("create_time >", value1, "createTime");
-    
+
             }
             if (StringUtils.isNotEmpty(value2))
-            addCriterion("create_time <", value2, "createTime");
+                addCriterion("create_time <", value2, "createTime");
             return (Criteria) this;
         }
 
@@ -464,12 +466,12 @@ public class UserExample {
             addCriterion("create_time not between", value1, value2, "createTime");
             return (Criteria) this;
         }
-    
+
         public Criteria andAuditStatusEqualTo(Integer value) {
             addCriterion("audit_status =", value, "auditStatus");
             return (Criteria) this;
         }
-        
+
         public Criteria andSourceEqualTo(Date value) {
             addCriterion("source =", value, "source");
             return (Criteria) this;

@@ -233,8 +233,8 @@
         $("#modeName").val($("#modeId option:selected").text())
     }
     function setEmpty() {
-        $("input[name='cateId']").val("");
-        $("input[name='cateName']").val("");
+        $("input[name='parentId']").val("");
+        $("input[name='parentName']").val("");
         $("input[name='showCateName']").val("");
         $("input[name='noteType']").val("");
         $("input[name='modeId']").val("");

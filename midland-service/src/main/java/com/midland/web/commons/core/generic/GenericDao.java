@@ -8,7 +8,7 @@ package com.midland.web.commons.core.generic;
  * Model : 代表数据库中的表 映射的Java对象类型
  * PK :代表对象的主键类型
  *
- * @author 
+ * @author
  * @since 2016年6月9日 下午6:14:06
  */
 public interface GenericDao<Model, PK> {

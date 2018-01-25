@@ -11,15 +11,15 @@ import java.util.Map;
  * 服务器响应的状态码
  *
  * @author zhangrq
- *
  * @since 2016年07月10日下午2:06:09
  */
 @SuppressWarnings("serial")
 public class RestResponse implements java.io.Serializable {
 
-    public RestResponse(){
+    public RestResponse() {
 
     }
+
     /**
      * 　响应成功的code码
      */

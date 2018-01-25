@@ -2,8 +2,8 @@ package com.midland.web.commons.core.feature.orm.dialect;
 
 /**
  * MySQL数据库方言
- * 
- * @author 
+ *
+ * @author
  * @since 2016年5月18日 下午1:32:52
  **/
 public class MySql5Dialect extends Dialect {

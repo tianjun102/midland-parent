@@ -11,8 +11,8 @@ import java.util.Map;
 
 /**
  * 用户Dao接口
- * 
- * @author 
+ *
+ * @author
  * @since 2016年7月5日 上午11:49:57
  **/
 @Repository
@@ -27,7 +27,7 @@ public interface UserMapper extends GenericDao<User, String> {
     List<User> selectByExample(User user);
 
     User selectByPrimaryKey(String id);
-	
+
 
     int updateByPrimaryKeySelective(User record);
 
@@ -35,7 +35,7 @@ public interface UserMapper extends GenericDao<User, String> {
 
     /**
      * 用户登录验证查询
-     * 
+     *
      * @param record
      * @return
      */
@@ -43,7 +43,7 @@ public interface UserMapper extends GenericDao<User, String> {
 
     /**
      * 分页条件查询
-     * 
+     *
      * @param user
      * @return
      */
@@ -51,28 +51,31 @@ public interface UserMapper extends GenericDao<User, String> {
 
     /**
      * 批量新增用户角色关系
+     *
      * @param list
      * @return
      */
-	int insertUserRoleBatch(List<UserRole> list);
+    int insertUserRoleBatch(List<UserRole> list);
 
-	/**
-	 * 查找用户的角色关系
-	 * @param userId
-	 * @return
-	 */
-	List<UserRole> findUserRoleByUserId(@Param("userId") String userId);
+    /**
+     * 查找用户的角色关系
+     *
+     * @param userId
+     * @return
+     */
+    List<UserRole> findUserRoleByUserId(@Param("userId") String userId);
 
-	/**
-	 * 批量删除用户角色关系
-	 * @return
-	 */
-	int deleteUserRoleBatch(Map map);
+    /**
+     * 批量删除用户角色关系
+     *
+     * @return
+     */
+    int deleteUserRoleBatch(Map map);
 
-	List<User> selectUsersByRoleId(Integer roleId);
+    List<User> selectUsersByRoleId(Integer roleId);
 
-	int deleteUserRoleBatchById(List<UserRole> list);
+    int deleteUserRoleBatchById(List<UserRole> list);
 
-	User queryUserForPhone(String phone);
-	
+    User queryUserForPhone(String phone);
+
 }

@@ -26,10 +26,10 @@
         <result column="audit_remark" property="auditRemark" jdbcType="VARCHAR"/>
         <result column="audit_name" property="auditName" jdbcType="VARCHAR"/>
         <result column="audit_remark" property="auditRemark" jdbcType="VARCHAR"/>
-        <result column="city_id" property="cityId" jdbcType="VARCHAR" />
-        <result column="city_name" property="cityName" jdbcType="VARCHAR" />
-        <result column="actual_name" property="actualName" jdbcType="VARCHAR" />
-        <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+        <result column="city_id" property="cityId" jdbcType="VARCHAR"/>
+        <result column="city_name" property="cityName" jdbcType="VARCHAR"/>
+        <result column="actual_name" property="actualName" jdbcType="VARCHAR"/>
+        <result column="img_url" property="imgUrl" jdbcType="VARCHAR"/>
     </resultMap>
     <resultMap id="UserRoleResultMap" type="com.midland.web.model.user.UserRole">
         <id column="id" property="id" jdbcType="BIGINT"/>
@@ -39,16 +39,19 @@
 
 
     <sql id="Base_Column_List">
-    id, username, user_cn_name, password, user_type, state, email, phone, DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s')create_time,
-    create_by, DATE_FORMAT(modify_time,'%Y-%m-%d %H:%i:%s')modify_time, head_img, source, audit_status, DATE_FORMAT(audit_time,'%Y-%m-%d %H:%i:%s')audit_time, is_black, black_remark,
-    identification, idcart_img, idcart_img1, audit_name, audit_remark,city_id,city_name,actual_name,img_url
-  </sql>
+        id, username, user_cn_name, password, user_type, state, email, phone, DATE_FORMAT(create_time,'%Y-%m-%d
+        %H:%i:%s')create_time,
+        create_by, DATE_FORMAT(modify_time,'%Y-%m-%d %H:%i:%s')modify_time, head_img, source, audit_status,
+        DATE_FORMAT(audit_time,'%Y-%m-%d %H:%i:%s')audit_time, is_black, black_remark,
+        identification, idcart_img, idcart_img1, audit_name, audit_remark,city_id,city_name,actual_name,img_url
+    </sql>
 
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.midland.web.model.user.User">
         select
         <include refid="Base_Column_List"/>
         from user
-         where 1=1 <include refid="select_option" />
+        where 1=1
+        <include refid="select_option"/>
     </select>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
@@ -63,182 +66,185 @@
     <delete id="deleteByExample" parameterType="com.midland.web.model.user.User">
         delete from user
         where 1=1
-            <include refid="select_option"/>
+        <include refid="select_option"/>
     </delete>
 
-    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.midland.web.model.user.User">
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.midland.web.model.user.User">
         insert into user
-        <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
                 id,
             </if>
-            <if test="username != null" >
+            <if test="username != null">
                 username,
             </if>
-            <if test="userCnName != null" >
+            <if test="userCnName != null">
                 user_cn_name,
             </if>
-            <if test="password != null" >
+            <if test="password != null">
                 password,
             </if>
-            <if test="userType != null" >
+            <if test="userType != null">
                 user_type,
             </if>
-            <if test="state != null" >
+            <if test="state != null">
                 state,
             </if>
-            <if test="email != null" >
+            <if test="email != null">
                 email,
             </if>
-            <if test="phone != null" >
+            <if test="phone != null">
                 phone,
             </if>
-            <if test="createTime != null" >
+            <if test="createTime != null">
                 create_time,
             </if>
-            <if test="createBy != null" >
+            <if test="createBy != null">
                 create_by,
             </if>
-            <if test="modifyTime != null" >
+            <if test="modifyTime != null">
                 modify_time,
             </if>
-            <if test="headImg != null" >
+            <if test="headImg != null">
                 head_img,
             </if>
-            <if test="source != null" >
+            <if test="source != null">
                 source,
             </if>
-            <if test="auditStatus != null" >
+            <if test="auditStatus != null">
                 audit_status,
             </if>
-            <if test="auditTime != null" >
+            <if test="auditTime != null">
                 audit_time,
             </if>
-            <if test="isBlack != null" >
+            <if test="isBlack != null">
                 is_black,
             </if>
-            <if test="blackRemark != null" >
+            <if test="blackRemark != null">
                 black_remark,
             </if>
-            <if test="identification != null" >
+            <if test="identification != null">
                 identification,
             </if>
-            <if test="idcartImg != null" >
+            <if test="idcartImg != null">
                 idcart_img,
             </if>
-            <if test="idcartImg1 != null" >
+            <if test="idcartImg1 != null">
                 idcart_img1,
             </if>
-            <if test="auditName != null" >
+            <if test="auditName != null">
                 audit_name,
             </if>
-            <if test="auditRemark != null" >
+            <if test="auditRemark != null">
                 audit_remark,
             </if>
-            <if test="cityId != null" >
+            <if test="cityId != null">
                 city_id,
             </if>
-            <if test="cityName != null" >
+            <if test="cityName != null">
                 city_name,
             </if>
-            <if test="actualName != null" >
+            <if test="actualName != null">
                 actual_name,
             </if>
-            <if test="imgUrl != null" >
+            <if test="imgUrl != null">
                 img_url,
             </if>
         </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="id != null" >
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
                 #{id,jdbcType=INTEGER},
             </if>
-            <if test="username != null" >
+            <if test="username != null">
                 #{username,jdbcType=VARCHAR},
             </if>
-            <if test="userCnName != null" >
+            <if test="userCnName != null">
                 #{userCnName,jdbcType=VARCHAR},
             </if>
-            <if test="password != null" >
+            <if test="password != null">
                 #{password,jdbcType=CHAR},
             </if>
-            <if test="userType != null" >
+            <if test="userType != null">
                 #{userType,jdbcType=INTEGER},
             </if>
-            <if test="state != null" >
+            <if test="state != null">
                 #{state,jdbcType=INTEGER},
             </if>
-            <if test="email != null" >
+            <if test="email != null">
                 #{email,jdbcType=VARCHAR},
             </if>
-            <if test="phone != null" >
+            <if test="phone != null">
                 #{phone,jdbcType=VARCHAR},
             </if>
-            <if test="createTime != null" >
+            <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="createBy != null" >
+            <if test="createBy != null">
                 #{createBy,jdbcType=VARCHAR},
             </if>
-            <if test="modifyTime != null" >
+            <if test="modifyTime != null">
                 #{modifyTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="headImg != null" >
+            <if test="headImg != null">
                 #{headImg,jdbcType=VARCHAR},
             </if>
-            <if test="source != null" >
+            <if test="source != null">
                 #{source,jdbcType=INTEGER},
             </if>
-            <if test="auditStatus != null" >
+            <if test="auditStatus != null">
                 #{auditStatus,jdbcType=INTEGER},
             </if>
-            <if test="auditTime != null" >
+            <if test="auditTime != null">
                 #{auditTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="isBlack != null" >
+            <if test="isBlack != null">
                 #{isBlack,jdbcType=VARCHAR},
             </if>
-            <if test="blackRemark != null" >
+            <if test="blackRemark != null">
                 #{blackRemark,jdbcType=VARCHAR},
             </if>
-            <if test="identification != null" >
+            <if test="identification != null">
                 #{identification,jdbcType=VARCHAR},
             </if>
-            <if test="idcartImg != null" >
+            <if test="idcartImg != null">
                 #{idcartImg,jdbcType=VARCHAR},
             </if>
-            <if test="idcartImg1 != null" >
+            <if test="idcartImg1 != null">
                 #{idcartImg1,jdbcType=VARCHAR},
             </if>
-            <if test="auditName != null" >
+            <if test="auditName != null">
                 #{auditName,jdbcType=VARCHAR},
             </if>
-            <if test="auditRemark != null" >
+            <if test="auditRemark != null">
                 #{auditRemark,jdbcType=VARCHAR},
             </if>
-            <if test="cityId != null" >
+            <if test="cityId != null">
                 #{cityId,jdbcType=VARCHAR},
             </if>
-            <if test="cityName != null" >
+            <if test="cityName != null">
                 #{cityName,jdbcType=VARCHAR},
             </if>
-            <if test="actualName != null" >
+            <if test="actualName != null">
                 #{actualName},
             </if>
-            <if test="imgUrl != null" >
+            <if test="imgUrl != null">
                 #{imgUrl},
             </if>
         </trim>
     </insert>
     <select id="countByExample" parameterType="com.midland.web.model.user.UserExample" resultType="java.lang.Integer">
         select count(*) from user
-        where 1=1 <include refid="select_option" />
+        where 1=1
+        <include refid="select_option"/>
     </select>
     <update id="updateByExampleSelective" parameterType="map">
         update user
         <set>
-            <include refid="update_option" />
+            <include refid="update_option"/>
         </set>
-        where 1=1 <include refid="select_option" />
+        where 1=1
+        <include refid="select_option"/>
     </update>
     <update id="updateByExample" parameterType="map">
         update user
@@ -248,18 +254,19 @@
         state = #{record.state,jdbcType=VARCHAR},
         create_time = #{record.createTime,jdbcType=TIMESTAMP}
         where 1=1
-        <include refid="select_option" />
+        <include refid="select_option"/>
     </update>
     <update id="updateByPrimaryKeySelective" parameterType="com.midland.web.model.user.User">
         update user
         <set>
-            <include refid="update_option" />
+            <include refid="update_option"/>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.midland.web.model.user.User">
         update user
-        set <include refid="update_option" />
+        set
+        <include refid="update_option"/>
         where id = #{id,jdbcType=BIGINT}
     </update>
 
@@ -269,9 +276,9 @@
         <include refid="Base_Column_List"/>
         from user
         where state=1
-            and user_type in (0,1)
-            and (username = #{username,jdbcType=VARCHAR} or phone=#{username,jdbcType=VARCHAR} )
-            and password = #{password,jdbcType=CHAR}
+        and user_type in (0,1)
+        and (username = #{username,jdbcType=VARCHAR} or phone=#{username,jdbcType=VARCHAR} )
+        and password = #{password,jdbcType=CHAR}
     </select>
 
     <!-- 分页条件查询 -->
@@ -294,9 +301,9 @@
 
     <!-- 根据用户id查找用户角色关系-->
     <select id="findUserRoleByUserId" resultMap="UserRoleResultMap">
-   	SELECT id, user_id, role_id
-	  FROM user_role
-	 WHERE user_id=#{userId}
+        SELECT id, user_id, role_id
+        FROM user_role
+        WHERE user_id=#{userId}
     </select>
 
     <!-- 批量删除用户角色关系 -->
@@ -320,17 +327,17 @@
 
     <!-- 通过角色id 查询角色关联的用户 -->
     <select id="selectUsersByRoleId" resultMap="BaseResultMap" parameterType="java.lang.Long">
-       SELECT DISTINCT u.id,
-                u.username,
-                u.user_cn_name,
-                u.password,
-                u.user_type,
-                u.state,
-                u.create_time,
-                u.modify_time
-	  FROM user u, user_role ur
-	 WHERE u.id = ur.user_id 
-	 AND ur.role_id = #{roleId,jdbcType=BIGINT}
+        SELECT DISTINCT u.id,
+        u.username,
+        u.user_cn_name,
+        u.password,
+        u.user_type,
+        u.state,
+        u.create_time,
+        u.modify_time
+        FROM user u, user_role ur
+        WHERE u.id = ur.user_id
+        AND ur.role_id = #{roleId,jdbcType=BIGINT}
     </select>
 
 
@@ -421,7 +428,7 @@
         <if test="cityName != null">
             AND city_name = #{cityName,jdbcType=VARCHAR}
         </if>
-        <if test="actualName != null" >
+        <if test="actualName != null">
             AND actual_name = #{actualName}
         </if>
     </sql>
@@ -498,10 +505,10 @@
         <if test="cityName != null">
             city_name = #{cityName,jdbcType=VARCHAR},
         </if>
-        <if test="actualName != null" >
+        <if test="actualName != null">
             actual_name = #{actualName},
         </if>
-        <if test="imgUrl != null" >
+        <if test="imgUrl != null">
             img_url = #{imgUrl},
         </if>
     </sql>

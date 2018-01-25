@@ -1,11 +1,11 @@
 package com.midland.web.dao;
 
-import com.midland.web.model.TradeFair;
 import com.midland.web.model.user.UserBlackLog;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 @Repository
 public interface UserBlackLogMapper {
     int deleteByPrimaryKey(Integer blackLogId);
@@ -15,6 +15,7 @@ public interface UserBlackLogMapper {
     int insertSelective(UserBlackLog record);
 
     UserBlackLog selectByPrimaryKey(Integer blackLogId);
+
     List<UserBlackLog> selectByUserId(Integer userId);
 
     int updateByPrimaryKeySelective(UserBlackLog record);

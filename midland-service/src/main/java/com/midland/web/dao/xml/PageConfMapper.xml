@@ -2,251 +2,255 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.midland.web.dao.PageConfMapper">
 
- 	<resultMap id="BaseResultMap" type="com.midland.web.model.PageConf" >
-		<id column="id" property="id" jdbcType="INTEGER" />
-		<result column="city_id" property="cityId" jdbcType="VARCHAR" />
-		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
-		<result column="model" property="model" jdbcType="INTEGER" />
-		<result column="meta_lable" property="metaLable" jdbcType="VARCHAR" />
-		<result column="meta_show" property="metaShow" jdbcType="INTEGER" />
-		<result column="baidu_code" property="baiduCode" jdbcType="LONGVARCHAR" />
-		<result column="baidu_show" property="baiduShow" jdbcType="INTEGER" />
-		<result column="cnzz_code" property="cnzzCode" jdbcType="LONGVARCHAR" />
-		<result column="cnzz_code_wechat" property="cnzzCodeWechat" jdbcType="LONGVARCHAR" />
-		<result column="baidu_code_wechat" property="baiduCodeWechat" jdbcType="LONGVARCHAR" />
-		<result column="meta_desc" property="metaDesc" jdbcType="LONGVARCHAR" />
-		<result column="title" property="title" jdbcType="VARCHAR" />
-		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
-		<result column="source" property="source" jdbcType="INTEGER" />
-	</resultMap>
+    <resultMap id="BaseResultMap" type="com.midland.web.model.PageConf">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="city_id" property="cityId" jdbcType="VARCHAR"/>
+        <result column="city_name" property="cityName" jdbcType="VARCHAR"/>
+        <result column="model" property="model" jdbcType="INTEGER"/>
+        <result column="meta_lable" property="metaLable" jdbcType="VARCHAR"/>
+        <result column="meta_show" property="metaShow" jdbcType="INTEGER"/>
+        <result column="baidu_code" property="baiduCode" jdbcType="LONGVARCHAR"/>
+        <result column="baidu_show" property="baiduShow" jdbcType="INTEGER"/>
+        <result column="cnzz_code" property="cnzzCode" jdbcType="LONGVARCHAR"/>
+        <result column="cnzz_code_wechat" property="cnzzCodeWechat" jdbcType="LONGVARCHAR"/>
+        <result column="baidu_code_wechat" property="baiduCodeWechat" jdbcType="LONGVARCHAR"/>
+        <result column="meta_desc" property="metaDesc" jdbcType="LONGVARCHAR"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="is_delete" property="isDelete" jdbcType="INTEGER"/>
+        <result column="source" property="source" jdbcType="INTEGER"/>
+    </resultMap>
 
-	<sql id="Base_Column_List">
-		id,city_id,city_name,model,meta_lable,meta_show,baidu_code,baidu_show,cnzz_code,cnzz_code_wechat,baidu_code_wechat,meta_desc,title,is_delete,source
-	</sql>
+    <sql id="Base_Column_List">
+        id,city_id,city_name,model,meta_lable,meta_show,baidu_code,baidu_show,cnzz_code,cnzz_code_wechat,baidu_code_wechat,meta_desc,title,is_delete,source
+    </sql>
 
-	<select id="selectPageConfById" resultMap="BaseResultMap">
-		select <include refid="Base_Column_List" /> from page_conf
-		 where id= #{id}
-	</select>
+    <select id="selectPageConfById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from page_conf
+        where id= #{id}
+    </select>
 
-	<delete id="deletePageConfById" >
-		delete from page_conf
-		 where id= #{id}
-	</delete>
+    <delete id="deletePageConfById">
+        delete from page_conf
+        where id= #{id}
+    </delete>
 
-	<update id="updatePageConfById" >
-		update page_conf 
-		<set>
-		<include refid="update_option"/>
-		</set>
+    <update id="updatePageConfById">
+        update page_conf
+        <set>
+            <include refid="update_option"/>
+        </set>
 
-		 where id= #{id}
-	</update>
+        where id= #{id}
+    </update>
 
-	<select id="findPageConfList" parameterType="com.midland.web.model.PageConf" resultMap="BaseResultMap">
-		select <include refid="Base_Column_List" /> from page_conf
-		where  1=1
-		<if test="isDelete == null">
-			and is_delete=0
-		</if>
-		<include refid="select_option" />
-	</select>
+    <select id="findPageConfList" parameterType="com.midland.web.model.PageConf" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from page_conf
+        where 1=1
+        <if test="isDelete == null">
+            and is_delete=0
+        </if>
+        <include refid="select_option"/>
+    </select>
 
-	<insert id="insertPageConf" parameterType="com.midland.web.model.PageConf">
-		insert into page_conf
-		<trim prefix="(" suffix=")" suffixOverrides="," >
-			<if test="cityId != null">
-				city_id,
-			</if>
-			<if test="cityName != null">
-				city_name,
-			</if>
-			<if test="model != null">
-				model,
-			</if>
-			<if test="metaLable != null">
-				meta_lable,
-			</if>
-			<if test="metaShow != null">
-				meta_show,
-			</if>
-			<if test="baiduCode != null">
-				baidu_code,
-			</if>
-			<if test="baiduShow != null">
-				baidu_show,
-			</if>
-			<if test="cnzzCode != null">
-				cnzz_code,
-			</if>
-			<if test="cnzzCodeWechat != null">
-				cnzz_code_wechat,
-			</if>
-			<if test="baiduCodeWechat != null">
-				baidu_code_wechat,
-			</if>
-			<if test="metaDesc != null">
-				meta_desc,
-			</if>
-			<if test="title != null">
-				title,
-			</if>
-			<if test="isDelete != null">
-				is_delete,
-			</if>
-			<if test="source != null">
-				source,
-			</if>
-		</trim>
-		values
-		 <trim prefix="(" suffix=")" suffixOverrides="," >
-			<if test="cityId != null">
-				#{cityId,jdbcType=VARCHAR},
-			</if>
-			<if test="cityName != null">
-				#{cityName,jdbcType=VARCHAR},
-			</if>
-			<if test="model != null">
-				#{model,jdbcType=INTEGER},
-			</if>
-			<if test="metaLable != null">
-				#{metaLable,jdbcType=VARCHAR},
-			</if>
-			<if test="metaShow != null">
-				#{metaShow,jdbcType=INTEGER},
-			</if>
-			<if test="baiduCode != null">
-				#{baiduCode,jdbcType=LONGVARCHAR},
-			</if>
-			<if test="baiduShow != null">
-				#{baiduShow,jdbcType=INTEGER},
-			</if>
-			<if test="cnzzCode != null">
-				#{cnzzCode,jdbcType=LONGVARCHAR},
-			</if>
-			<if test="cnzzCodeWechat != null">
-				#{cnzzCodeWechat,jdbcType=LONGVARCHAR},
-			</if>
-			<if test="baiduCodeWechat != null">
-				#{baiduCodeWechat,jdbcType=LONGVARCHAR},
-			</if>
-			<if test="metaDesc != null">
-				#{metaDesc,jdbcType=LONGVARCHAR},
-			</if>
-			<if test="title != null">
-				#{title,jdbcType=VARCHAR},
-			</if>
-			<if test="isDelete != null">
-				#{isDelete,jdbcType=INTEGER},
-			</if>
-			 <if test="source != null">
-				 #{source,jdbcType=INTEGER},
-			 </if>
-		</trim>
-	</insert>
+    <insert id="insertPageConf" parameterType="com.midland.web.model.PageConf">
+        insert into page_conf
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cityId != null">
+                city_id,
+            </if>
+            <if test="cityName != null">
+                city_name,
+            </if>
+            <if test="model != null">
+                model,
+            </if>
+            <if test="metaLable != null">
+                meta_lable,
+            </if>
+            <if test="metaShow != null">
+                meta_show,
+            </if>
+            <if test="baiduCode != null">
+                baidu_code,
+            </if>
+            <if test="baiduShow != null">
+                baidu_show,
+            </if>
+            <if test="cnzzCode != null">
+                cnzz_code,
+            </if>
+            <if test="cnzzCodeWechat != null">
+                cnzz_code_wechat,
+            </if>
+            <if test="baiduCodeWechat != null">
+                baidu_code_wechat,
+            </if>
+            <if test="metaDesc != null">
+                meta_desc,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="isDelete != null">
+                is_delete,
+            </if>
+            <if test="source != null">
+                source,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cityId != null">
+                #{cityId,jdbcType=VARCHAR},
+            </if>
+            <if test="cityName != null">
+                #{cityName,jdbcType=VARCHAR},
+            </if>
+            <if test="model != null">
+                #{model,jdbcType=INTEGER},
+            </if>
+            <if test="metaLable != null">
+                #{metaLable,jdbcType=VARCHAR},
+            </if>
+            <if test="metaShow != null">
+                #{metaShow,jdbcType=INTEGER},
+            </if>
+            <if test="baiduCode != null">
+                #{baiduCode,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="baiduShow != null">
+                #{baiduShow,jdbcType=INTEGER},
+            </if>
+            <if test="cnzzCode != null">
+                #{cnzzCode,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="cnzzCodeWechat != null">
+                #{cnzzCodeWechat,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="baiduCodeWechat != null">
+                #{baiduCodeWechat,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="metaDesc != null">
+                #{metaDesc,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,jdbcType=INTEGER},
+            </if>
+            <if test="source != null">
+                #{source,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
 
-	<sql id="update_option">
-		<if test="cityId != null">
-			city_id= #{cityId,jdbcType=VARCHAR},
-		</if>
-		<if test="cityName != null">
-			city_name= #{cityName,jdbcType=VARCHAR},
-		</if>
-		<if test="model != null">
-			model= #{model,jdbcType=INTEGER},
-		</if>
-		<if test="metaLable != null">
-			meta_lable= #{metaLable,jdbcType=VARCHAR},
-		</if>
-		<if test="metaShow != null">
-			meta_show= #{metaShow,jdbcType=INTEGER},
-		</if>
-		<if test="baiduCode != null">
-			baidu_code= #{baiduCode,jdbcType=LONGVARCHAR},
-		</if>
-		<if test="baiduShow != null">
-			baidu_show= #{baiduShow,jdbcType=INTEGER},
-		</if>
-		<if test="cnzzCode != null">
-			cnzz_code= #{cnzzCode,jdbcType=LONGVARCHAR},
-		</if>
-		<if test="cnzzCodeWechat != null">
-			cnzz_code_wechat= #{cnzzCodeWechat,jdbcType=LONGVARCHAR},
-		</if>
-		<if test="baiduCodeWechat != null">
-			baidu_code_wechat= #{baiduCodeWechat,jdbcType=LONGVARCHAR},
-		</if>
-		<if test="metaDesc != null">
-			meta_desc= #{metaDesc,jdbcType=LONGVARCHAR},
-		</if>
-		<if test="title != null">
-			title= #{title,jdbcType=VARCHAR},
-		</if>
-		<if test="isDelete != null">
-			is_delete= #{isDelete,jdbcType=INTEGER},
-		</if>
-		<if test="source != null">
-			source= #{source,jdbcType=INTEGER},
-		</if>
-	</sql>
+    <sql id="update_option">
+        <if test="cityId != null">
+            city_id= #{cityId,jdbcType=VARCHAR},
+        </if>
+        <if test="cityName != null">
+            city_name= #{cityName,jdbcType=VARCHAR},
+        </if>
+        <if test="model != null">
+            model= #{model,jdbcType=INTEGER},
+        </if>
+        <if test="metaLable != null">
+            meta_lable= #{metaLable,jdbcType=VARCHAR},
+        </if>
+        <if test="metaShow != null">
+            meta_show= #{metaShow,jdbcType=INTEGER},
+        </if>
+        <if test="baiduCode != null">
+            baidu_code= #{baiduCode,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="baiduShow != null">
+            baidu_show= #{baiduShow,jdbcType=INTEGER},
+        </if>
+        <if test="cnzzCode != null">
+            cnzz_code= #{cnzzCode,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="cnzzCodeWechat != null">
+            cnzz_code_wechat= #{cnzzCodeWechat,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="baiduCodeWechat != null">
+            baidu_code_wechat= #{baiduCodeWechat,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="metaDesc != null">
+            meta_desc= #{metaDesc,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="title != null">
+            title= #{title,jdbcType=VARCHAR},
+        </if>
+        <if test="isDelete != null">
+            is_delete= #{isDelete,jdbcType=INTEGER},
+        </if>
+        <if test="source != null">
+            source= #{source,jdbcType=INTEGER},
+        </if>
+    </sql>
 
-	<sql id="select_option">
-		<if test="id != null">
-			 and id= #{id,jdbcType=INTEGER}
-		</if>
-		<if test="cityId != null">
-			 and city_id= #{cityId,jdbcType=VARCHAR}
-		</if>
-		<if test="cityName != null">
-			 and city_name= #{cityName,jdbcType=VARCHAR}
-		</if>
-		<if test="model != null">
-			 and model= #{model,jdbcType=INTEGER}
-		</if>
-		<if test="metaLable != null">
-			 and meta_lable= #{metaLable,jdbcType=VARCHAR}
-		</if>
-		<if test="metaShow != null">
-			 and meta_show= #{metaShow,jdbcType=INTEGER}
-		</if>
-		<if test="baiduCode != null">
-			 and baidu_code= #{baiduCode,jdbcType=LONGVARCHAR}
-		</if>
-		<if test="baiduShow != null">
-			 and baidu_show= #{baiduShow,jdbcType=INTEGER}
-		</if>
-		<if test="cnzzCode != null">
-			 and cnzz_code= #{cnzzCode,jdbcType=LONGVARCHAR}
-		</if>
-		<if test="cnzzCodeWechat != null">
-			 and cnzz_code_wechat= #{cnzzCodeWechat,jdbcType=LONGVARCHAR}
-		</if>
-		<if test="baiduCodeWechat != null">
-			 and baidu_code_wechat= #{baiduCodeWechat,jdbcType=LONGVARCHAR}
-		</if>
-		<if test="metaDesc != null">
-			 and meta_desc= #{metaDesc,jdbcType=LONGVARCHAR}
-		</if>
-		<if test="title != null">
-			 and title= #{title,jdbcType=VARCHAR}
-		</if>
-		<if test="isDelete != null">
-			 and is_delete= #{isDelete,jdbcType=INTEGER}
-		</if>
-		<if test="source != null">
-			 and source= #{source,jdbcType=INTEGER}
-		</if>
-	</sql>
-	<update id="batchUpdate" parameterType="java.util.List">
-		<foreach collection="pageConfList" item="item" index="index" open="" close="" separator=";">
-			update page_conf
-			<set>
-				<if test="item.isDelete != null">
-					is_delete= #{item.isDelete,jdbcType=INTEGER}
-				</if>
-			</set>
-			where id= #{item.id}
-		</foreach>
-	</update>
+    <sql id="select_option">
+        <if test="id != null">
+            and id= #{id,jdbcType=INTEGER}
+        </if>
+        <if test="cityId != null">
+            and city_id= #{cityId,jdbcType=VARCHAR}
+        </if>
+        <if test="cityName != null">
+            and city_name= #{cityName,jdbcType=VARCHAR}
+        </if>
+        <if test="model != null">
+            and model= #{model,jdbcType=INTEGER}
+        </if>
+        <if test="metaLable != null">
+            and meta_lable= #{metaLable,jdbcType=VARCHAR}
+        </if>
+        <if test="metaShow != null">
+            and meta_show= #{metaShow,jdbcType=INTEGER}
+        </if>
+        <if test="baiduCode != null">
+            and baidu_code= #{baiduCode,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="baiduShow != null">
+            and baidu_show= #{baiduShow,jdbcType=INTEGER}
+        </if>
+        <if test="cnzzCode != null">
+            and cnzz_code= #{cnzzCode,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="cnzzCodeWechat != null">
+            and cnzz_code_wechat= #{cnzzCodeWechat,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="baiduCodeWechat != null">
+            and baidu_code_wechat= #{baiduCodeWechat,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="metaDesc != null">
+            and meta_desc= #{metaDesc,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="title != null">
+            and title= #{title,jdbcType=VARCHAR}
+        </if>
+        <if test="isDelete != null">
+            and is_delete= #{isDelete,jdbcType=INTEGER}
+        </if>
+        <if test="source != null">
+            and source= #{source,jdbcType=INTEGER}
+        </if>
+    </sql>
+    <update id="batchUpdate" parameterType="java.util.List">
+        <foreach collection="pageConfList" item="item" index="index" open="" close="" separator=";">
+            update page_conf
+            <set>
+                <if test="item.isDelete != null">
+                    is_delete= #{item.isDelete,jdbcType=INTEGER}
+                </if>
+            </set>
+            where id= #{item.id}
+        </foreach>
+    </update>
 
 </mapper>

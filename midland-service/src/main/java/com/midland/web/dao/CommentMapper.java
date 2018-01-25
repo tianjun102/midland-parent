@@ -10,20 +10,20 @@ import java.util.Map;
 @Repository
 public interface CommentMapper {
 
-	Comment selectCommentById(Integer comment);
+    Comment selectCommentById(Integer comment);
 
-	int deleteCommentById(Integer comment);
+    int deleteCommentById(Integer comment);
 
-	int updateCommentById(Comment comment);
+    int updateCommentById(Comment comment);
 
-	int insertComment(Comment comment);
+    int insertComment(Comment comment);
 
-	Map getAvgScore(Comment comment);
+    Map getAvgScore(Comment comment);
 
-	List<Comment> findCommentList(Comment comment);
+    List<Comment> findCommentList(Comment comment);
 
-	int batchUpdate(@Param("commentList") List<Comment> commentList);
+    int batchUpdate(@Param("commentList") List<Comment> commentList);
 
-	int commentTotle(Comment comment);
+    int commentTotle(Comment comment);
 
 }

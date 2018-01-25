@@ -36,8 +36,10 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-		id,price,DATE_FORMAT(into_time,'%Y-%m-%d %H:%i:%s')into_time,manager_costs,city_id,city_name,unit_total,land_area,parking_num,building_type,property_address,developer,decoration,property_management,property_desc,property_advantages,position,supporting,house_name,img_url,agent_name,agent_id,DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s')create_time,is_delete,order_by,is_show,feature,recommend,building_area,property_num
-	</sql>
+        id,price,DATE_FORMAT(into_time,'%Y-%m-%d
+        %H:%i:%s')into_time,manager_costs,city_id,city_name,unit_total,land_area,parking_num,building_type,property_address,developer,decoration,property_management,property_desc,property_advantages,position,supporting,house_name,img_url,agent_name,agent_id,DATE_FORMAT(create_time,'%Y-%m-%d
+        %H:%i:%s')create_time,is_delete,order_by,is_show,feature,recommend,building_area,property_num
+    </sql>
 
     <select id="selectHotHandById" resultMap="BaseResultMap">
         select
@@ -46,10 +48,25 @@
         where id= #{id}
     </select>
 
+    <select id="shiftDown" parameterType="com.midland.web.model.HotHand" resultMap="BaseResultMap">
+        select id,order_by from hot_hand where 1=1
+        <include refid="select_option1"/>
+        AND
+        order_by &lt; #{orderBy} order by order_by desc LIMIT 1
+
+    </select>
+    <select id="shiftUp" parameterType="com.midland.web.model.HotHand" resultMap="BaseResultMap">
+        select id,order_by from hot_hand where 1=1
+        <include refid="select_option1"/>
+        AND
+        order_by &gt; #{orderBy} order by order_by asc LIMIT 1
+
+    </select>
+
     <delete id="deleteHotHandById">
-		delete from hot_hand
-		 where id= #{id}
-	</delete>
+        delete from hot_hand
+        where id= #{id}
+    </delete>
 
     <update id="updateHotHandById">
         update hot_hand
@@ -74,9 +91,9 @@
     </select>
 
     <select id="getMaxOrderBy" resultType="java.lang.Integer">
-		select order_by from hot_hand
-		order by order_by desc limit 1;
-	</select>
+        select order_by from hot_hand
+        order by order_by desc limit 1;
+    </select>
 
 
     <insert id="insertHotHand" parameterType="com.midland.web.model.HotHand">
@@ -436,6 +453,102 @@
         <if test="orderBy != null">
             and order_by= #{orderBy,jdbcType=INTEGER}
         </if>
+        <if test="isShow != null">
+            and is_show= #{isShow,jdbcType=INTEGER}
+        </if>
+        <if test="feature != null">
+            and feature like CONCAT(CONCAT('%', #{feature}), '%')
+        </if>
+        <if test="recommend != null">
+            and recommend like CONCAT(CONCAT('%', #{recommend}), '%')
+        </if>
+        <if test="buildingArea != null">
+            building_area=#{buildingArea,jdbcType=VARCHAR}
+        </if>
+        <if test="propertyNum != null">
+            property_num=#{propertyNum,jdbcType=VARCHAR}
+        </if>
+
+    </sql>
+
+    <sql id="select_option1">
+
+        <if test="price != null">
+            and price= #{price,jdbcType=VARCHAR}
+        </if>
+        <if test="intoTime != null">
+            and into_time= #{intoTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="startTime != null">
+            and into_time &gt; #{startTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="endTime != null">
+            and into_time &lt; #{endTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="managerCosts != null">
+            and manager_costs= #{managerCosts,jdbcType=VARCHAR}
+        </if>
+        <if test="cityId != null">
+            and city_id= #{cityId,jdbcType=VARCHAR}
+        </if>
+        <if test="cityName != null">
+            and city_name= #{cityName,jdbcType=VARCHAR}
+        </if>
+        <if test="unitTotal != null">
+            and unit_total= #{unitTotal,jdbcType=VARCHAR}
+        </if>
+        <if test="landArea != null">
+            and land_area like CONCAT(CONCAT('%', #{landArea}), '%')
+        </if>
+        <if test="parkingNum != null">
+            and parking_num= #{parkingNum,jdbcType=VARCHAR}
+        </if>
+        <if test="buildingType != null">
+            and building_type= #{buildingType,jdbcType=VARCHAR}
+        </if>
+        <if test="propertyAddress != null">
+            and property_address like CONCAT(CONCAT('%', #{propertyAddress}), '%')
+        </if>
+        <if test="developer != null">
+            and developer like CONCAT(CONCAT('%', #{developer}), '%')
+        </if>
+        <if test="decoration != null">
+            and decoration like CONCAT(CONCAT('%', #{decoration}), '%')
+        </if>
+        <if test="propertyManagement != null">
+            and property_management like CONCAT(CONCAT('%', #{propertyManagement}), '%')
+        </if>
+        <if test="propertyDesc != null">
+            and property_desc= #{propertyDesc,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="propertyAdvantages != null">
+            and property_advantages= #{propertyAdvantages,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="position != null">
+            and position like CONCAT(CONCAT('%', #{position}), '%')
+        </if>
+        <if test="supporting != null">
+            and supporting like CONCAT(CONCAT('%', #{supporting}), '%')
+        </if>
+        <if test="houseName != null">
+            and house_name like CONCAT(CONCAT('%', #{houseName}), '%')
+        </if>
+        <if test="imgUrl != null">
+            and img_url= #{imgUrl,jdbcType=VARCHAR}
+        </if>
+        <if test="agentName != null">
+            and agent_name= #{agentName,jdbcType=VARCHAR}
+        </if>
+        <if test="agentId != null">
+            and agent_id= #{agentId,jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != null">
+            and create_time= #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="isDelete != null">
+            and is_delete= #{isDelete,jdbcType=INTEGER}
+        </if>
+
         <if test="isShow != null">
             and is_show= #{isShow,jdbcType=INTEGER}
         </if>

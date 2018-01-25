@@ -4,7 +4,6 @@ import com.midland.web.model.Area;
 import com.midland.web.model.Banner;
 import com.midland.web.model.LinkUrlManager;
 import com.midland.web.model.Popular;
-import com.midland.web.model.remote.Agent;
 import org.springframework.ui.Model;
 
 import java.util.List;
@@ -21,26 +20,28 @@ public interface SettingService {
     public int insertPopular(Popular popular);
 
     public Map<String, List<Area>> queryCityByRedis(Map<String, String> parem);
-	
-	void getAllProvinceList(Model model);
-	
-	List<Area> getAllProvince();
-	
-	List<Area> queryAllCityByRedis();
-	
-	Area getCityByCityId(String cityId);
-	
-	Area queryProvinceByCityId(String cityId);
-	
-	List<Area> getAreaByCityId(String cityId);
-	
-	Area getDistByCityIdAndDistName(String cityId, String distName);
-	public Map<String, List<Area>> queryAreaByRedis(Map<String, String> parem);
+
+    void getAllProvinceList(Model model);
+
+    List<Area> getAllProvince();
+
+    List<Area> queryAllCityByRedis();
+
+    Area getCityByCityId(String cityId);
+
+    Area queryProvinceByCityId(String cityId);
+
+    List<Area> getAreaByCityId(String cityId);
+
+    Area getDistByCityIdAndDistName(String cityId, String distName);
+
+    public Map<String, List<Area>> queryAreaByRedis(Map<String, String> parem);
 
     void batchUpdatePopular(List<Popular> popularList) throws Exception;
 
     /**
      * 友情链接
+     *
      * @param linkUrlManager
      * @return
      */

@@ -2,231 +2,235 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.midland.web.dao.LayoutMapMapper">
 
- 	<resultMap id="BaseResultMap" type="com.midland.web.model.LayoutMap" >
-		<id column="id" property="id" jdbcType="INTEGER" />
-		<result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
-		<result column="type" property="type" jdbcType="VARCHAR" />
-		<result column="title" property="title" jdbcType="LONGVARCHAR" />
-		<result column="turned" property="turned" jdbcType="INTEGER" />
-		<result column="acreage" property="acreage" jdbcType="VARCHAR" />
-		<result column="avg_price" property="avgPrice" jdbcType="DOUBLE" />
-		<result column="saleing_num" property="saleingNum" jdbcType="INTEGER" />
-		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
-		<result column="is_show" property="isShow" jdbcType="INTEGER" />
-		<result column="order_by" property="orderBy" jdbcType="INTEGER" />
-		<result column="price" property="price" jdbcType="VARCHAR" />
-		<result column="hot_hand_id" property="hotHandId" jdbcType="INTEGER" />
-		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-	</resultMap>
+    <resultMap id="BaseResultMap" type="com.midland.web.model.LayoutMap">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="img_url" property="imgUrl" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="title" property="title" jdbcType="LONGVARCHAR"/>
+        <result column="turned" property="turned" jdbcType="INTEGER"/>
+        <result column="acreage" property="acreage" jdbcType="VARCHAR"/>
+        <result column="avg_price" property="avgPrice" jdbcType="DOUBLE"/>
+        <result column="saleing_num" property="saleingNum" jdbcType="INTEGER"/>
+        <result column="is_delete" property="isDelete" jdbcType="INTEGER"/>
+        <result column="is_show" property="isShow" jdbcType="INTEGER"/>
+        <result column="order_by" property="orderBy" jdbcType="INTEGER"/>
+        <result column="price" property="price" jdbcType="VARCHAR"/>
+        <result column="hot_hand_id" property="hotHandId" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
 
-	<sql id="Base_Column_List">
-		id,img_url,type,title,turned,acreage,avg_price,saleing_num,is_delete,is_show,order_by,price,hot_hand_id,create_time
-	</sql>
+    <sql id="Base_Column_List">
+        id,img_url,type,title,turned,acreage,avg_price,saleing_num,is_delete,is_show,order_by,price,hot_hand_id,create_time
+    </sql>
 
-	<select id="getMaxOrderBy" resultType="java.lang.Integer">
-		select order_by from layout_map where hot_hand_id=#{hotHandId}
-		order by order_by desc limit 1;
-	</select>
+    <select id="getMaxOrderBy" resultType="java.lang.Integer">
+        select order_by from layout_map where hot_hand_id=#{hotHandId}
+        order by order_by desc limit 1;
+    </select>
 
-	<select id="selectLayoutMapById" resultMap="BaseResultMap">
-		select <include refid="Base_Column_List" /> from layout_map
-		 where id= #{id}
-	</select>
+    <select id="selectLayoutMapById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from layout_map
+        where id= #{id}
+    </select>
 
-	<delete id="deleteLayoutMapById" >
-		delete from layout_map
-		 where id= #{id}
-	</delete>
+    <delete id="deleteLayoutMapById">
+        delete from layout_map
+        where id= #{id}
+    </delete>
 
-	<update id="updateLayoutMapById" >
-		update layout_map 
-		<set>
-		<include refid="update_option"/>
-		</set>
+    <update id="updateLayoutMapById">
+        update layout_map
+        <set>
+            <include refid="update_option"/>
+        </set>
 
-		 where id= #{id}
-	</update>
+        where id= #{id}
+    </update>
 
-	<select id="findLayoutMapList" parameterType="com.midland.web.model.LayoutMap" resultMap="BaseResultMap">
-		select <include refid="Base_Column_List" /> from layout_map
-		where 
-		is_delete=0
-		<include refid="select_option" />
-		order by order_by desc
-	</select>
+    <select id="findLayoutMapList" parameterType="com.midland.web.model.LayoutMap" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from layout_map
+        where
+        is_delete=0
+        <include refid="select_option"/>
+        order by order_by desc
+    </select>
 
-	<insert id="insertLayoutMap" parameterType="com.midland.web.model.LayoutMap">
-		insert into layout_map
-		<trim prefix="(" suffix=")" suffixOverrides="," >
-			<if test="imgUrl != null">
-				img_url,
-			</if>
-			<if test="type != null">
-				type,
-			</if>
-			<if test="title != null">
-				title,
-			</if>
-			<if test="turned != null">
-				turned,
-			</if>
-			<if test="acreage != null">
-				acreage,
-			</if>
-			<if test="avgPrice != null">
-				avg_price,
-			</if>
-			<if test="saleingNum != null">
-				saleing_num,
-			</if>
-			<if test="isDelete != null">
-				is_delete,
-			</if>
-			<if test="isShow != null">
-				is_show,
-			</if>
-			<if test="orderBy != null">
-				order_by,
-			</if>
-			<if test="price != null">
-				price,
-			</if>
-			<if test="hotHandId != null">
-				hot_hand_id,
-			</if>
-			<if test="createTime != null">
-				create_time,
-			</if>
-		</trim>
-		values
-		 <trim prefix="(" suffix=")" suffixOverrides="," >
-			<if test="imgUrl != null">
-				#{imgUrl,jdbcType=VARCHAR},
-			</if>
-			<if test="type != null">
-				#{type,jdbcType=VARCHAR},
-			</if>
-			<if test="title != null">
-				#{title,jdbcType=LONGVARCHAR},
-			</if>
-			<if test="turned != null">
-				#{turned,jdbcType=INTEGER},
-			</if>
-			<if test="acreage != null">
-				#{acreage,jdbcType=VARCHAR},
-			</if>
-			<if test="avgPrice != null">
-				#{avgPrice,jdbcType=DOUBLE},
-			</if>
-			<if test="saleingNum != null">
-				#{saleingNum,jdbcType=INTEGER},
-			</if>
-			<if test="isDelete != null">
-				#{isDelete,jdbcType=INTEGER},
-			</if>
-			<if test="isShow != null">
-				#{isShow,jdbcType=INTEGER},
-			</if>
-			<if test="orderBy != null">
-				#{orderBy,jdbcType=INTEGER},
-			</if>
-			<if test="price != null">
-				#{price,jdbcType=VARCHAR},
-			</if>
-			<if test="hotHandId != null">
-				#{hotHandId,jdbcType=INTEGER},
-			</if>
-			<if test="createTime != null">
-				#{createTime,jdbcType=TIMESTAMP},
-			</if>
-		</trim>
-	</insert>
+    <insert id="insertLayoutMap" parameterType="com.midland.web.model.LayoutMap">
+        insert into layout_map
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="imgUrl != null">
+                img_url,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="turned != null">
+                turned,
+            </if>
+            <if test="acreage != null">
+                acreage,
+            </if>
+            <if test="avgPrice != null">
+                avg_price,
+            </if>
+            <if test="saleingNum != null">
+                saleing_num,
+            </if>
+            <if test="isDelete != null">
+                is_delete,
+            </if>
+            <if test="isShow != null">
+                is_show,
+            </if>
+            <if test="orderBy != null">
+                order_by,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="hotHandId != null">
+                hot_hand_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="imgUrl != null">
+                #{imgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="turned != null">
+                #{turned,jdbcType=INTEGER},
+            </if>
+            <if test="acreage != null">
+                #{acreage,jdbcType=VARCHAR},
+            </if>
+            <if test="avgPrice != null">
+                #{avgPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="saleingNum != null">
+                #{saleingNum,jdbcType=INTEGER},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,jdbcType=INTEGER},
+            </if>
+            <if test="isShow != null">
+                #{isShow,jdbcType=INTEGER},
+            </if>
+            <if test="orderBy != null">
+                #{orderBy,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=VARCHAR},
+            </if>
+            <if test="hotHandId != null">
+                #{hotHandId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
 
-	<sql id="update_option">
-		<if test="imgUrl != null">
-			img_url= #{imgUrl,jdbcType=VARCHAR},
-		</if>
-		<if test="type != null">
-			type= #{type,jdbcType=VARCHAR},
-		</if>
-		<if test="title != null">
-			title= #{title,jdbcType=LONGVARCHAR},
-		</if>
-		<if test="turned != null">
-			turned= #{turned,jdbcType=INTEGER},
-		</if>
-		<if test="acreage != null">
-			acreage= #{acreage,jdbcType=VARCHAR},
-		</if>
-		<if test="avgPrice != null">
-			avg_price= #{avgPrice,jdbcType=DOUBLE},
-		</if>
-		<if test="saleingNum != null">
-			saleing_num= #{saleingNum,jdbcType=INTEGER},
-		</if>
-		<if test="isDelete != null">
-			is_delete= #{isDelete,jdbcType=INTEGER},
-		</if>
-		<if test="isShow != null">
-			is_show= #{isShow,jdbcType=INTEGER},
-		</if>
-		<if test="orderBy != null">
-			order_by= #{orderBy,jdbcType=INTEGER},
-		</if>
-		<if test="price != null">
-			price= #{price,jdbcType=VARCHAR},
-		</if>
-		<if test="hotHandId != null">
-			hot_hand_id= #{hotHandId,jdbcType=INTEGER},
-		</if>
-		<if test="createTime != null">
-			create_time= #{createTime,jdbcType=TIMESTAMP},
-		</if>
-	</sql>
+    <sql id="update_option">
+        <if test="imgUrl != null">
+            img_url= #{imgUrl,jdbcType=VARCHAR},
+        </if>
+        <if test="type != null">
+            type= #{type,jdbcType=VARCHAR},
+        </if>
+        <if test="title != null">
+            title= #{title,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="turned != null">
+            turned= #{turned,jdbcType=INTEGER},
+        </if>
+        <if test="acreage != null">
+            acreage= #{acreage,jdbcType=VARCHAR},
+        </if>
+        <if test="avgPrice != null">
+            avg_price= #{avgPrice,jdbcType=DOUBLE},
+        </if>
+        <if test="saleingNum != null">
+            saleing_num= #{saleingNum,jdbcType=INTEGER},
+        </if>
+        <if test="isDelete != null">
+            is_delete= #{isDelete,jdbcType=INTEGER},
+        </if>
+        <if test="isShow != null">
+            is_show= #{isShow,jdbcType=INTEGER},
+        </if>
+        <if test="orderBy != null">
+            order_by= #{orderBy,jdbcType=INTEGER},
+        </if>
+        <if test="price != null">
+            price= #{price,jdbcType=VARCHAR},
+        </if>
+        <if test="hotHandId != null">
+            hot_hand_id= #{hotHandId,jdbcType=INTEGER},
+        </if>
+        <if test="createTime != null">
+            create_time= #{createTime,jdbcType=TIMESTAMP},
+        </if>
+    </sql>
 
-	<sql id="select_option">
-		<if test="id != null">
-			 and id= #{id,jdbcType=INTEGER}
-		</if>
-		<if test="imgUrl != null">
-			 and img_url= #{imgUrl,jdbcType=VARCHAR}
-		</if>
-		<if test="type != null">
-			 and type= #{type,jdbcType=VARCHAR}
-		</if>
-		<if test="title != null">
-			 and title= #{title,jdbcType=LONGVARCHAR}
-		</if>
-		<if test="turned != null">
-			 and turned= #{turned,jdbcType=INTEGER}
-		</if>
-		<if test="acreage != null">
-			 and acreage= #{acreage,jdbcType=VARCHAR}
-		</if>
-		<if test="avgPrice != null">
-			 and avg_price= #{avgPrice,jdbcType=DOUBLE}
-		</if>
-		<if test="saleingNum != null">
-			 and saleing_num= #{saleingNum,jdbcType=INTEGER}
-		</if>
-		<if test="isDelete != null">
-			 and is_delete= #{isDelete,jdbcType=INTEGER}
-		</if>
-		<if test="isShow != null">
-			 and is_show= #{isShow,jdbcType=INTEGER}
-		</if>
-		<if test="orderBy != null">
-			 and order_by= #{orderBy,jdbcType=INTEGER}
-		</if>
-		<if test="price != null">
-			 and price= #{price,jdbcType=VARCHAR}
-		</if>
-		<if test="hotHandId != null">
-			 and hot_hand_id= #{hotHandId,jdbcType=INTEGER}
-		</if>
-		<if test="createTime != null">
-			 and create_time= #{createTime,jdbcType=TIMESTAMP}
-		</if>
-	</sql>
+    <sql id="select_option">
+        <if test="id != null">
+            and id= #{id,jdbcType=INTEGER}
+        </if>
+        <if test="imgUrl != null">
+            and img_url= #{imgUrl,jdbcType=VARCHAR}
+        </if>
+        <if test="type != null">
+            and type= #{type,jdbcType=VARCHAR}
+        </if>
+        <if test="title != null">
+            and title= #{title,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="turned != null">
+            and turned= #{turned,jdbcType=INTEGER}
+        </if>
+        <if test="acreage != null">
+            and acreage= #{acreage,jdbcType=VARCHAR}
+        </if>
+        <if test="avgPrice != null">
+            and avg_price= #{avgPrice,jdbcType=DOUBLE}
+        </if>
+        <if test="saleingNum != null">
+            and saleing_num= #{saleingNum,jdbcType=INTEGER}
+        </if>
+        <if test="isDelete != null">
+            and is_delete= #{isDelete,jdbcType=INTEGER}
+        </if>
+        <if test="isShow != null">
+            and is_show= #{isShow,jdbcType=INTEGER}
+        </if>
+        <if test="orderBy != null">
+            and order_by= #{orderBy,jdbcType=INTEGER}
+        </if>
+        <if test="price != null">
+            and price= #{price,jdbcType=VARCHAR}
+        </if>
+        <if test="hotHandId != null">
+            and hot_hand_id= #{hotHandId,jdbcType=INTEGER}
+        </if>
+        <if test="createTime != null">
+            and create_time= #{createTime,jdbcType=TIMESTAMP}
+        </if>
+    </sql>
 
 </mapper>

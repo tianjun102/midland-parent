@@ -1,7 +1,5 @@
 package com.midland.web.Contants;
 
-import org.apache.xmlbeans.impl.xb.xsdschema.Public;
-
 /**
  * Created by 'ms.x' on 2017/9/7.
  */

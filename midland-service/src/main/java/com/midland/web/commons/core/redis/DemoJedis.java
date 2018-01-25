@@ -6,13 +6,16 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 
 public class DemoJedis {
-	@Autowired
-	private RedisTemplate<String, Object> redisTemplate;
-	public void save(){
-		
-		ValueOperations<String, Object> opsForValue = redisTemplate.opsForValue();
-		
-		opsForValue.set("testRedis", "保存成功了！！！！！");
-	};
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
+
+    public void save() {
+
+        ValueOperations<String, Object> opsForValue = redisTemplate.opsForValue();
+
+        opsForValue.set("testRedis", "保存成功了！！！！！");
+    }
+
+    ;
 
 }

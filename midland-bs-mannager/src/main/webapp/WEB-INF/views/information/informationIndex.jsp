@@ -27,10 +27,11 @@
 		<form action="${ctx }/rest/information/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
-
+				<input type="hidden" name="articeType" value="1"/>
 				<%@include file="../layout/sherchArea.jsp" %>
 				<li><span>平台：</span>
 					<select name="source" id="source" class="dropdown">
+						<option value>全部</option>
 						<option value="0">网站</option>
 						<option value="1">微站</option>
 					</select>

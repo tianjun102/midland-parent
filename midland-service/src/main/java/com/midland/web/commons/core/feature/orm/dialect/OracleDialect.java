@@ -1,7 +1,7 @@
 package com.midland.web.commons.core.feature.orm.dialect;
 
 /**
- * @author 
+ * @author
  * @since 2016年5月18日 下午1:33:17
  **/
 public class OracleDialect extends Dialect {

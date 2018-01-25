@@ -13,13 +13,13 @@ import java.util.List;
 @Service
 public class QuotationSecondHandServiceViewImpl implements QuotationSecondHandViewService {
 
-	private Logger log = LoggerFactory.getLogger(QuotationSecondHandServiceViewImpl.class);
-	@Autowired
-	private QuotationSecondHandViewMapper quotationSecondHandViewMapper;
-	
-	@Override
-	public List toolTip(QuotationSecondHandView quotationSecondHandView){
-		return quotationSecondHandViewMapper.toolTip(quotationSecondHandView);
-	}
-	
+    private Logger log = LoggerFactory.getLogger(QuotationSecondHandServiceViewImpl.class);
+    @Autowired
+    private QuotationSecondHandViewMapper quotationSecondHandViewMapper;
+
+    @Override
+    public List toolTip(QuotationSecondHandView quotationSecondHandView) {
+        return quotationSecondHandViewMapper.toolTip(quotationSecondHandView);
+    }
+
 }

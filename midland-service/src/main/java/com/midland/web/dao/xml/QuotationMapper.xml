@@ -26,8 +26,10 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-		id,date_format(str_to_date(data_time, '%Y-%m'),'%Y-%m')data_time,type,city_id,area_id,slice_id,deal_num,deal_acreage,price,sold_num,sold_area,ring_ratio,DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%s')update_time,is_new,is_delete,city_name,area_name,slice_name,house_acreage,deal_price
-	</sql>
+        id,date_format(str_to_date(data_time,
+        '%Y-%m'),'%Y-%m')data_time,type,city_id,area_id,slice_id,deal_num,deal_acreage,price,sold_num,sold_area,ring_ratio,DATE_FORMAT(update_time,'%Y-%m-%d
+        %H:%i:%s')update_time,is_new,is_delete,city_name,area_name,slice_name,house_acreage,deal_price
+    </sql>
 
     <select id="tooltip" resultType="Map">
         SELECT
@@ -51,9 +53,9 @@
     </select>
 
     <delete id="deleteQuotationById">
-		delete from quotation
-		 where id= #{id}
-	</delete>
+        delete from quotation
+        where id= #{id}
+    </delete>
 
     <update id="updateQuotationById">
         update quotation
@@ -445,7 +447,7 @@
             and city_name= #{cityName,jdbcType=VARCHAR}
         </if>
         <if test="areaName != null">
-            and area_name like  '%${areaName}%'
+            and area_name like '%${areaName}%'
         </if>
         <if test="sliceName != null">
             and slice_name= #{sliceName,jdbcType=VARCHAR}

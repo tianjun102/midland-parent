@@ -2,200 +2,205 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.midland.web.dao.ResumeManagerMapper">
 
- 	<resultMap id="BaseResultMap" type="com.midland.web.model.ResumeManager" >
-		<id column="id" property="id" jdbcType="INTEGER" />
-		<result column="deliverer" property="deliverer" jdbcType="VARCHAR" />
-		<result column="phone" property="phone" jdbcType="VARCHAR" />
-		<result column="post" property="post" jdbcType="VARCHAR" />
-		<result column="email" property="email" jdbcType="VARCHAR" />
-		<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
-		<result column="enclosure_url" property="enclosureUrl" jdbcType="VARCHAR" />
-		<result column="city_id" property="cityId" jdbcType="VARCHAR" />
-		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
-		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
-		<result column="reply" property="reply" jdbcType="LONGVARCHAR" />
-	</resultMap>
+    <resultMap id="BaseResultMap" type="com.midland.web.model.ResumeManager">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="deliverer" property="deliverer" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="post" property="post" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="add_time" property="addTime" jdbcType="TIMESTAMP"/>
+        <result column="enclosure_url" property="enclosureUrl" jdbcType="VARCHAR"/>
+        <result column="city_id" property="cityId" jdbcType="VARCHAR"/>
+        <result column="city_name" property="cityName" jdbcType="VARCHAR"/>
+        <result column="is_delete" property="isDelete" jdbcType="INTEGER"/>
+        <result column="reply" property="reply" jdbcType="LONGVARCHAR"/>
+    </resultMap>
 
-	<sql id="Base_Column_List">
-		id,deliverer,phone,post,email,DATE_FORMAT(add_time,'%Y-%m-%d %H:%i:%s') add_time,enclosure_url,city_id,city_name,is_delete,reply
-	</sql>
+    <sql id="Base_Column_List">
+        id,deliverer,phone,post,email,DATE_FORMAT(add_time,'%Y-%m-%d %H:%i:%s')
+        add_time,enclosure_url,city_id,city_name,is_delete,reply
+    </sql>
 
-	<select id="selectResumeManagerById" resultMap="BaseResultMap">
-		select <include refid="Base_Column_List" /> from resume_manager
-		 where id= #{id}
-	</select>
+    <select id="selectResumeManagerById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from resume_manager
+        where id= #{id}
+    </select>
 
-	<delete id="deleteResumeManagerById" >
-		delete from resume_manager
-		 where id= #{id}
-	</delete>
+    <delete id="deleteResumeManagerById">
+        delete from resume_manager
+        where id= #{id}
+    </delete>
 
-	<update id="updateResumeManagerById" >
-		update resume_manager 
-		<set>
-		<include refid="update_option"/>
-		</set>
+    <update id="updateResumeManagerById">
+        update resume_manager
+        <set>
+            <include refid="update_option"/>
+        </set>
 
-		 where id= #{id}
-	</update>
+        where id= #{id}
+    </update>
 
-	<select id="findResumeManagerList" parameterType="com.midland.web.model.ResumeManager" resultMap="BaseResultMap">
-		select <include refid="Base_Column_List" /> from resume_manager
-		where  1=1
-		<if test="isDelete == null">
-			and is_delete=0
-		</if>
-		<include refid="select_option" />
-	</select>
+    <select id="findResumeManagerList" parameterType="com.midland.web.model.ResumeManager" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from resume_manager
+        where 1=1
+        <if test="isDelete == null">
+            and is_delete=0
+        </if>
+        <include refid="select_option"/>
+    </select>
 
-	<insert id="insertResumeManager" parameterType="com.midland.web.model.ResumeManager">
-		insert into resume_manager
-		<trim prefix="(" suffix=")" suffixOverrides="," >
-			<if test="deliverer != null">
-				deliverer,
-			</if>
-			<if test="phone != null">
-				phone,
-			</if>
-			<if test="post != null">
-				post,
-			</if>
-			<if test="email != null">
-				email,
-			</if>
-			<if test="addTime != null">
-				add_time,
-			</if>
-			<if test="enclosureUrl != null">
-				enclosure_url,
-			</if>
-			<if test="cityId != null">
-				city_id,
-			</if>
-			<if test="cityName != null">
-				city_name,
-			</if>
-			<if test="isDelete != null">
-				is_delete,
-			</if>
-			<if test="reply != null">
-				reply,
-			</if>
-		</trim>
-		values
-		 <trim prefix="(" suffix=")" suffixOverrides="," >
-			<if test="deliverer != null">
-				#{deliverer,jdbcType=VARCHAR},
-			</if>
-			<if test="phone != null">
-				#{phone,jdbcType=VARCHAR},
-			</if>
-			<if test="post != null">
-				#{post,jdbcType=VARCHAR},
-			</if>
-			<if test="email != null">
-				#{email,jdbcType=VARCHAR},
-			</if>
-			<if test="addTime != null">
-				#{addTime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="enclosureUrl != null">
-				#{enclosureUrl,jdbcType=VARCHAR},
-			</if>
-			<if test="cityId != null">
-				#{cityId,jdbcType=VARCHAR},
-			</if>
-			<if test="cityName != null">
-				#{cityName,jdbcType=VARCHAR},
-			</if>
-			<if test="isDelete != null">
-				#{isDelete,jdbcType=INTEGER},
-			</if>
-			<if test="reply != null">
-				#{reply,jdbcType=LONGVARCHAR},
-			</if>
-		</trim>
-	</insert>
+    <insert id="insertResumeManager" parameterType="com.midland.web.model.ResumeManager">
+        insert into resume_manager
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="deliverer != null">
+                deliverer,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="post != null">
+                post,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="addTime != null">
+                add_time,
+            </if>
+            <if test="enclosureUrl != null">
+                enclosure_url,
+            </if>
+            <if test="cityId != null">
+                city_id,
+            </if>
+            <if test="cityName != null">
+                city_name,
+            </if>
+            <if test="isDelete != null">
+                is_delete,
+            </if>
+            <if test="reply != null">
+                reply,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="deliverer != null">
+                #{deliverer,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="post != null">
+                #{post,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="addTime != null">
+                #{addTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="enclosureUrl != null">
+                #{enclosureUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="cityId != null">
+                #{cityId,jdbcType=VARCHAR},
+            </if>
+            <if test="cityName != null">
+                #{cityName,jdbcType=VARCHAR},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,jdbcType=INTEGER},
+            </if>
+            <if test="reply != null">
+                #{reply,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
 
-	<sql id="update_option">
-		<if test="deliverer != null">
-			deliverer= #{deliverer,jdbcType=VARCHAR},
-		</if>
-		<if test="phone != null">
-			phone= #{phone,jdbcType=VARCHAR},
-		</if>
-		<if test="post != null">
-			post= #{post,jdbcType=VARCHAR},
-		</if>
-		<if test="email != null">
-			email= #{email,jdbcType=VARCHAR},
-		</if>
-		<if test="addTime != null">
-			add_time= #{addTime,jdbcType=TIMESTAMP},
-		</if>
-		<if test="enclosureUrl != null">
-			enclosure_url= #{enclosureUrl,jdbcType=VARCHAR},
-		</if>
-		<if test="cityId != null">
-			city_id= #{cityId,jdbcType=VARCHAR},
-		</if>
-		<if test="cityName != null">
-			city_name= #{cityName,jdbcType=VARCHAR},
-		</if>
-		<if test="isDelete != null">
-			is_delete= #{isDelete,jdbcType=INTEGER},
-		</if>
-		<if test="reply != null">
-			reply= #{reply,jdbcType=LONGVARCHAR},
-		</if>
-	</sql>
+    <sql id="update_option">
+        <if test="deliverer != null">
+            deliverer= #{deliverer,jdbcType=VARCHAR},
+        </if>
+        <if test="phone != null">
+            phone= #{phone,jdbcType=VARCHAR},
+        </if>
+        <if test="post != null">
+            post= #{post,jdbcType=VARCHAR},
+        </if>
+        <if test="email != null">
+            email= #{email,jdbcType=VARCHAR},
+        </if>
+        <if test="addTime != null">
+            add_time= #{addTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="enclosureUrl != null">
+            enclosure_url= #{enclosureUrl,jdbcType=VARCHAR},
+        </if>
+        <if test="cityId != null">
+            city_id= #{cityId,jdbcType=VARCHAR},
+        </if>
+        <if test="cityName != null">
+            city_name= #{cityName,jdbcType=VARCHAR},
+        </if>
+        <if test="isDelete != null">
+            is_delete= #{isDelete,jdbcType=INTEGER},
+        </if>
+        <if test="reply != null">
+            reply= #{reply,jdbcType=LONGVARCHAR},
+        </if>
+    </sql>
 
-	<sql id="select_option">
-		<if test="id != null">
-			 and id= #{id,jdbcType=INTEGER}
-		</if>
-		<if test="deliverer != null">
-			 and deliverer= #{deliverer,jdbcType=VARCHAR}
-		</if>
-		<if test="phone != null">
-			 and phone= #{phone,jdbcType=VARCHAR}
-		</if>
-		<if test="post != null">
-			 and post= #{post,jdbcType=VARCHAR}
-		</if>
-		<if test="email != null">
-			 and email= #{email,jdbcType=VARCHAR}
-		</if>
-		<if test="addTime != null">
-			 and add_time= #{addTime,jdbcType=TIMESTAMP}
-		</if>
-		<if test="enclosureUrl != null">
-			 and enclosure_url= #{enclosureUrl,jdbcType=VARCHAR}
-		</if>
-		<if test="cityId != null">
-			 and city_id= #{cityId,jdbcType=VARCHAR}
-		</if>
-		<if test="cityName != null">
-			 and city_name= #{cityName,jdbcType=VARCHAR}
-		</if>
-		<if test="isDelete != null">
-			 and is_delete= #{isDelete,jdbcType=INTEGER}
-		</if>
-		<if test="reply != null">
-			 and reply= #{reply,jdbcType=LONGVARCHAR}
-		</if>
-	</sql>
+    <sql id="select_option">
+        <if test="id != null">
+            and id= #{id,jdbcType=INTEGER}
+        </if>
+        <if test="deliverer != null">
+            and deliverer= #{deliverer,jdbcType=VARCHAR}
+        </if>
+        <if test="phone != null">
+            and phone= #{phone,jdbcType=VARCHAR}
+        </if>
+        <if test="post != null">
+            and post= #{post,jdbcType=VARCHAR}
+        </if>
+        <if test="email != null">
+            and email= #{email,jdbcType=VARCHAR}
+        </if>
+        <if test="addTime != null">
+            and add_time= #{addTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="enclosureUrl != null">
+            and enclosure_url= #{enclosureUrl,jdbcType=VARCHAR}
+        </if>
+        <if test="cityId != null">
+            and city_id= #{cityId,jdbcType=VARCHAR}
+        </if>
+        <if test="cityName != null">
+            and city_name= #{cityName,jdbcType=VARCHAR}
+        </if>
+        <if test="isDelete != null">
+            and is_delete= #{isDelete,jdbcType=INTEGER}
+        </if>
+        <if test="reply != null">
+            and reply= #{reply,jdbcType=LONGVARCHAR}
+        </if>
+    </sql>
 
-	<update id="batchUpdate" parameterType="java.util.List">
-		<foreach collection="resumeManagerList" item="item" index="index" open="" close="" separator=";">
-			update resume_manager
-			<set>
-				<if test="item.isDelete != null">
-					is_delete= #{item.isDelete,jdbcType=INTEGER}
-				</if>
-			</set>
-			where id= #{item.id}
-		</foreach>
-	</update>
+    <update id="batchUpdate" parameterType="java.util.List">
+        <foreach collection="resumeManagerList" item="item" index="index" open="" close="" separator=";">
+            update resume_manager
+            <set>
+                <if test="item.isDelete != null">
+                    is_delete= #{item.isDelete,jdbcType=INTEGER}
+                </if>
+            </set>
+            where id= #{item.id}
+        </foreach>
+    </update>
 
 </mapper>

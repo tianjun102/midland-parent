@@ -22,8 +22,8 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-		id,icon_img,city_id,menu_name,click_num,order_by,url,is_show,position,parent_id,source,is_delete,city_name,menu_type_id,menu_type_name
-	</sql>
+        id,icon_img,city_id,menu_name,click_num,order_by,url,is_show,position,parent_id,source,is_delete,city_name,menu_type_id,menu_type_name
+    </sql>
 
     <select id="selectMenuById" resultMap="BaseResultMap">
         select
@@ -33,9 +33,9 @@
     </select>
 
     <delete id="deleteMenuById">
-		delete from menu
-		 where id= #{id}
-	</delete>
+        delete from menu
+        where id= #{id}
+    </delete>
 
     <update id="updateMenuById">
         update menu
@@ -55,9 +55,9 @@
     </select>
 
     <select id="getMaxOrderBy" resultType="java.lang.Integer">
-		select order_by from menu
-		order by order_by desc limit 1;
-	</select>
+        select order_by from menu
+        order by order_by desc limit 1;
+    </select>
 
     <insert id="insertMenu" parameterType="com.midland.web.model.Menu">
         insert into menu

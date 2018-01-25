@@ -1,7 +1,6 @@
 package com.midland.web.commons.core.util;
 
 
-
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.SimpleDateFormat;
@@ -13,7 +12,6 @@ import java.util.Date;
  * 日期格式实用类
  *
  * @author zhangrq
- *
  * @since 2016年07月10日下午4:06:09
  */
 public class DateUtils {
