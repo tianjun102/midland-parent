@@ -393,32 +393,87 @@ public class QuotationController extends BaseFilter {
 	}
 
 	@RequestMapping("/export")
-	public void quotationExportExcel(QuotationView view1, HttpServletResponse response, HttpServletRequest request) throws Exception {
-		List<QuotationView> dataList = quotationViewServiceImpl.findQuotationViewList(view1);
+	public void quotationExportExcel(Quotation obj, HttpServletResponse response, HttpServletRequest request) throws Exception {
+		if (StringUtils.isEmpty(obj.getAreaId())&&StringUtils.isEmpty(obj.getAreaName())){
+			obj.setAreaId("0");
+		}else{
+			obj.setAreaId(obj.getAreaId());
+			obj.setAreaName(obj.getAreaName());
+		}
+		if (StringUtils.isEmpty(obj.getCityId())){
+			obj.setCityId("085");
+		}
+
+		if (obj.getStartTime()==null){
+			Date date= new Date();
+			obj.setStartTime(MidlandHelper.getMonth(date,-12));
+		}
+		if (obj.getEndTime() == null){
+			obj.setEndTime(MidlandHelper.getCurrentTime());
+		}
+		List<String> month = new ArrayList<>();
+
+		List<Object> numList = new ArrayList<>();
+		List<Object> numRatioList = new ArrayList<>();
+		List<Object> acreageList = new ArrayList<>();
+		List<Object> acreageRatioList = new ArrayList<>();
+		List<Object> dealAvgPriceList = new ArrayList<>();
+		List<Object> dealAvgPriceRatioList = new ArrayList<>();
+		List<Object> turnVolumeList = new ArrayList<>();
+		List<Object> turnVolumeRatioList = new ArrayList<>();
+		List<Object> soldNumList = new ArrayList<>();
+		List<Object> soldNumRatioList = new ArrayList<>();
+		List<Object> soldAcreageList = new ArrayList<>();
+		List<Object> soldAcreageRatioList = new ArrayList<>();
+		double listMax=0;
+		double listMin=0;
+		double ratioMax=0;
+		double ratioMin=0;
+		List<Quotation> result = quotationServiceImpl.findQuotationList(obj);
+		obj.setStartTime(MidlandHelper.getFormatPreMonth(obj.getStartTime(),-1));
+		obj.setEndTime(MidlandHelper.getFormatPreMonth(obj.getEndTime(),-1));
+		List<Quotation> listTemp = quotationServiceImpl.findQuotationList(obj);
+		List<Quotation> listRes=new ArrayList<>();
+		result.forEach(e->{
+			month.add(e.getDataTime());
+			listTemp.forEach(e1->{
+				if (e.getDataTime().equals(MidlandHelper.getFormatyyMMToMonth(e1.getDataTime(),+1))){
+					e.setPreNum(e1.getDealNum());
+				}
+			});
+			listRes.add(e);
+		});
+
+
+
+
 		PoiExcelExport pee = new PoiExcelExport(response,"新房信息","sheet1");
 		//调用
 		List<ExportModel> exportModels=new ArrayList<>();
-		for (QuotationView view:dataList){
+		listRes.forEach(e->{
 			ExportModel exportModel = new ExportModel();
-			exportModel.setModelName1(view.getCityName());
-			exportModel.setModelName2(view.getAreaName());
+			exportModel.setModelName1(e.getCityName());
+			exportModel.setModelName2(e.getAreaName());
 			List<ParamObject> quotationType = JsonMapReader.getMap("quotation_type");
 
-			exportModel.setModelName3(MidlandHelper.getNameById(view.getType(), quotationType));
-			exportModel.setModelName4(String.valueOf(view.getDealNum()));
-			exportModel.setModelName5(String.valueOf(view.getDealAcreage()));
+			exportModel.setModelName3(MidlandHelper.getNameById(e.getType(), quotationType));
+			exportModel.setModelName4(String.valueOf(e.getDealNum()==null?0:e.getDealNum()));
+			exportModel.setModelName5(String.valueOf(e.getPreNum()==null?0:e.getPreNum()));
+			Double ratio = QuotationUtil.getRatio(Double.valueOf(e.getDealNum()), Double.valueOf(e.getPreNum()==null?0:e.getPreNum()));
+			exportModel.setModelName6(String.valueOf(ratio));
+			exportModel.setModelName7(String.valueOf(e.getDealAcreage()==null?0:e.getDealAcreage()));
 
-			exportModel.setModelName6(String.valueOf(view.getPrice()));
-			exportModel.setModelName7(String.valueOf(view.getDealPrice()));
-			exportModel.setModelName8(String.valueOf(view.getSoldNum()));
-			exportModel.setModelName9(String.valueOf(view.getSoldArea()));
-			exportModel.setModelName10(view.getDataTime());
-			exportModel.setModelName11(view.getUpdateTime());
+			exportModel.setModelName8(String.valueOf(e.getPrice()==null?0:e.getPrice()));
+			exportModel.setModelName9(String.valueOf(e.getDealPrice()==null?0:e.getDealPrice()));
+			exportModel.setModelName10(String.valueOf(e.getSoldNum()==null?0:e.getSoldNum()));
+			exportModel.setModelName11(String.valueOf(e.getSoldArea()==null?0:e.getSoldArea()));
+			exportModel.setModelName12(e.getDataTime());
+			exportModel.setModelName13(e.getUpdateTime());
 			exportModels.add(exportModel);
-		}
-		String titleColumn[] = {"modelName1","modelName2","modelName3","modelName4","modelName5","modelName6","modelName7","modelName8","modelName9","modelName10","modelName11"};
-		String titleName[] = {"城市","区域","类型","成交套数","成交面积","成交均价","成交金额","可售套数","可售面积","数据时间","更新时间"};
-		int titleSize[] = {13,13,13,13,13,13,13,13,13,13,13};
+		});
+		String titleColumn[] = {"modelName1","modelName2","modelName3","modelName4","modelName5","modelName6","modelName7","modelName8","modelName9","modelName10","modelName11","modelName12","modelName13"};
+		String titleName[] = {"城市","区域","类型","成交套数","上月成交套数","成交套数环比","成交面积","成交均价","成交金额","可售套数","可售面积","数据时间","更新时间"};
+		int titleSize[] = {13,13,13,13,13,13,13,13,13,13,13,13,13};
 		//其他设置 set方法可全不调用
 		pee.wirteExcel(titleColumn, titleName, titleSize, exportModels,request);
 	}

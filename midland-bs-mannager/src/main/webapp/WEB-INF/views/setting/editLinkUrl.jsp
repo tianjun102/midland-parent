@@ -39,8 +39,8 @@
             <li>
                 <span style = "float:left;">平台：</span>
                 <select name="source" id="source" class="dropdown">
-                    <option <c:if test="${linkUrlManager.source eq 1}">selected='selected' </c:if> value="1">网站</option>
-                    <option <c:if test="${linkUrlManager.source eq 2}">selected='selected' </c:if> value="2">微站</option>
+                    <option <c:if test="${linkUrlManager.source eq 0}">selected='selected' </c:if> value="0">网站</option>
+                    <option <c:if test="${linkUrlManager.source eq 1}">selected='selected' </c:if> value="1">微站</option>
                 </select>
             </li>
             <li>

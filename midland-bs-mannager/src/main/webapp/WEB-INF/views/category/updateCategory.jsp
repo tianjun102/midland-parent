@@ -109,7 +109,7 @@
                     <c:forEach items="${cityList}" var="city">
                         <option <c:if test="${item.cityId == city.id}"> selected = 'selected'</c:if> value="${city.id}">${city.name}</option>
                     </c:forEach>
-                </select><%--<div style = "font-size:12px; color:#afadad;text-indent: 70px;">(不选择城市则默认全部)</div>--%>
+                </select>
             </li>
             <li>
                 <span style = "float:left;">平台：</span>
@@ -133,7 +133,6 @@
                 <li><span>模块：</span>
                     <input type="hidden" id="modeName" name="modeName" value="" >
                     <select onchange="setMenuName()" name="modeId" id="modeId" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
-                        <option value="">全部</option>
                         <option value="0">首页</option>
                         <option value="1">新房</option>
                         <option value="2">二手房</option>

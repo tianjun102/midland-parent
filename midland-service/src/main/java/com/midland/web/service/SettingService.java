@@ -4,6 +4,7 @@ import com.midland.web.model.Area;
 import com.midland.web.model.Banner;
 import com.midland.web.model.LinkUrlManager;
 import com.midland.web.model.Popular;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import java.util.List;
@@ -53,6 +54,12 @@ public interface SettingService {
     public int updateLinkUrlManager(LinkUrlManager linkUrlManager);
 
     public int insertLinkUrlManage(LinkUrlManager linkUrlManager);
+
+    @Transactional
+    void shiftUp(LinkUrlManager category) throws Exception;
+
+    @Transactional
+    void shiftDown(LinkUrlManager linkUrlManager) throws Exception;
 
     void batchUpdateLinkUrl(List<LinkUrlManager> linkUrlManagerList) throws Exception;
 

@@ -104,11 +104,11 @@ public class SiteMapServiceImpl implements SiteMapService {
             int nextOrderBy = obj.getOrderBy();
             int currOrderBy = siteMap.getOrderBy();
             obj.setOrderBy(-999999999);
-            siteMapMapper.updateSiteMapById(obj);
+            siteMapMapper.updateSiteMapSelectiveById(obj);
             siteMap.setOrderBy(nextOrderBy);
-            siteMapMapper.updateSiteMapById(siteMap);
+            siteMapMapper.updateSiteMapSelectiveById(siteMap);
             obj.setOrderBy(currOrderBy);
-            siteMapMapper.updateSiteMapById(obj);
+            siteMapMapper.updateSiteMapSelectiveById(obj);
         } catch (Exception e) {
             log.error("shiftUp {}", siteMap, e);
             throw e;
@@ -130,11 +130,11 @@ public class SiteMapServiceImpl implements SiteMapService {
             int nextOrderBy = obj.getOrderBy();
             int currOrderBy = siteMap.getOrderBy();
             obj.setOrderBy(-999999999);
-            siteMapMapper.updateSiteMapById(obj);
+            siteMapMapper.updateSiteMapSelectiveById(obj);
             siteMap.setOrderBy(nextOrderBy);
-            siteMapMapper.updateSiteMapById(siteMap);
+            siteMapMapper.updateSiteMapSelectiveById(siteMap);
             obj.setOrderBy(currOrderBy);
-            siteMapMapper.updateSiteMapById(obj);
+            siteMapMapper.updateSiteMapSelectiveById(obj);
         } catch (Exception e) {
             log.error("shiftDown异常 {}", siteMap, e);
             throw e;

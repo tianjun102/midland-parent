@@ -45,7 +45,6 @@
                         <c:if test="${empty isSuper}">
                             <option selected="selected" value="${cityId}">${cityName}</option>
                         </c:if>
-                        <option value="">全部</option>
                         <c:forEach items="${cityList}" var="city">
                             <option value="${city.id}">${city.name}</option>
                         </c:forEach>

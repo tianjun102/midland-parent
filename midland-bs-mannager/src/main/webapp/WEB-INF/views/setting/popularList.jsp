@@ -63,8 +63,8 @@
 									<c:if test="${popular.isDelete==1}">
 										<a target="contentF" class="recove_img" title="恢复" onclick="isDelete(${popular.id },0)"></a>
 									</c:if>
-									<a target="contentF" class="up_img" title="上移" onclick="sort(${popular.id },${popular.orderBy},1)"></a>
-									<a target="contentF" class="down_img" title="下移" onclick="sort(${popular.id },${popular.orderBy},2)"></a>
+									<a target="contentF" class="up_img" title="上移" onclick="sort(${popular.id },${popular.orderBy},2)"></a>
+									<a target="contentF" class="down_img" title="下移" onclick="sort(${popular.id },${popular.orderBy},1)"></a>
 
 									<a <c:if test="${popular.isShow==0}">class="onoff_img"</c:if> <c:if test="${popular.isShow==1}">class="offon_img"</c:if> target="contentF" onclick="updatePopular(${popular.isShow},${popular.id })"></a>
 								  </td>

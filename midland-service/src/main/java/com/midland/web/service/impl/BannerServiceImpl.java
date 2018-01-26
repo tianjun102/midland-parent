@@ -2,11 +2,13 @@ package com.midland.web.service.impl;
 
 import com.midland.web.dao.BannerMapper;
 import com.midland.web.model.Banner;
+import com.midland.web.model.Banner;
 import com.midland.web.service.BannerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -74,6 +76,59 @@ public class BannerServiceImpl implements BannerService {
         }
     }
 
+    /**
+     * 上移
+     **/
+    @Override
+    @Transactional
+    public void shiftUp(Banner banner) throws Exception {
+        try {
+            log.debug("shiftUp {}", banner);
+            Banner obj = bannerMapper.shiftUp(banner);
+            if (obj == null){
+                return;
+            }
+            int nextOrderBy = obj.getOrderBy();
+            int currOrderBy = banner.getOrderBy();
+            obj.setOrderBy(-999999999);
+            bannerMapper.updateById(obj);
+            banner.setOrderBy(nextOrderBy);
+            bannerMapper.updateById(banner);
+            obj.setOrderBy(currOrderBy);
+            bannerMapper.updateById(obj);
+        } catch (Exception e) {
+            log.error("shiftUp {}", banner, e);
+            throw e;
+        }
+    }
+
+    /**
+     * 下移
+     **/
+    @Override
+    @Transactional
+    public void shiftDown(Banner banner) throws Exception {
+        try {
+            log.debug("shiftDown {}", banner);
+            Banner obj = bannerMapper.shiftDown(banner);
+            if (obj == null){
+                return;
+            }
+            int nextOrderBy = obj.getOrderBy();
+            int currOrderBy = banner.getOrderBy();
+            obj.setOrderBy(-999999999);
+            bannerMapper.updateById(obj);
+            banner.setOrderBy(nextOrderBy);
+            bannerMapper.updateById(banner);
+            obj.setOrderBy(currOrderBy);
+            bannerMapper.updateById(obj);
+        } catch (Exception e) {
+            log.error("shiftDown异常 {}", banner, e);
+            throw e;
+        }
+    }
+    
+    
     /**
      * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
      **/

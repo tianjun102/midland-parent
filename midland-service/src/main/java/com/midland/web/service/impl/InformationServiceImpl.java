@@ -109,6 +109,18 @@ public class InformationServiceImpl implements InformationService {
             throw e;
         }
     }
+  @Override
+    @Transactional
+    public void shiftTop(Information information) throws Exception {
+        try {
+            log.debug("shiftTop {}", information);
+            Information obj = informationMapper.shiftTop(information);
+
+        } catch (Exception e) {
+            log.error("shiftUp {}", information, e);
+            throw e;
+        }
+    }
 
     /**
      * 下移

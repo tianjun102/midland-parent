@@ -79,14 +79,6 @@
 		}
 	</script>
 	<!-- 本页私有js -->
-	
-	
-	<script type="text/javascript" src="${ctx}/assets/scripts/jquery.min.js"></script>
-	<script type="text/javascript" src="${ctx}/assets/scripts/jquery.easydropdown.js" ></script>
-	<script type="text/javascript" src="${ctx}/assets/scripts/bootstrap.min.js"></script>
-	<script type="text/javascript" src="${ctx}/assets/scripts/layer/layer.js"></script>
-	<script type="text/javascript" src="${ctx}/assets/scripts/common.js"></script>
-	<script type="text/javascript" src="${ctx}/assets/scripts/base.js" ></script>
-	<script src="${ctx}/assets/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+
 </body>
 </html>

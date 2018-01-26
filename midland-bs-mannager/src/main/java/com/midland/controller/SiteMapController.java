@@ -235,6 +235,9 @@ public class SiteMapController extends BaseFilter {
     @RequestMapping("sort")
     @ResponseBody
     public Map listDesc(SiteMap siteMap, int sort, Model model, HttpServletRequest request) throws Exception {
+		if(siteMap.getCateId()!=null&&siteMap.getCateId()==0){
+			siteMap.setCateId(null);
+		}
 		if (sort==1){
 			siteMapServiceImpl.shiftUp(siteMap);
 		}else{

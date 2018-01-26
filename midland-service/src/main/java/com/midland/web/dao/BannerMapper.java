@@ -20,4 +20,9 @@ public interface BannerMapper {
     List<Banner> findBannerList(Banner banner);
 
     int batchUpdate(@Param("bannerList") List<Banner> bannerList);
+
+    Banner shiftUp(Banner banner);
+
+    Banner shiftDown(Banner banner);
+
 }

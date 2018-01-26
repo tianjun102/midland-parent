@@ -1,6 +1,7 @@
 package com.midland.web.service;
 
 import com.midland.web.model.Banner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,6 +26,12 @@ public interface BannerService {
      * 插入
      **/
     void insertBanner(Banner banner) throws Exception;
+
+    @Transactional
+    void shiftUp(Banner banner) throws Exception;
+
+    @Transactional
+    void shiftDown(Banner banner) throws Exception;
 
     /**
      * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）

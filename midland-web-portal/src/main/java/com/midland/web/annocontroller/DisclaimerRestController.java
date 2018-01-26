@@ -1,12 +1,11 @@
 package com.midland.web.annocontroller;
 
+import com.midland.base.ServiceBaseFilter;
 import com.midland.web.model.Disclaimer;
 import com.midland.web.service.DisclaimerService;
-import com.midland.base.BaseFilter;
 import org.slf4j.Logger;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
-import java.util.HashMap;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @SuppressWarnings("all")
 @RequestMapping("/disclaimer/")
-public class DisclaimerRestController extends BaseFilter  {
+public class DisclaimerRestController extends ServiceBaseFilter {
 
 	private Logger log = LoggerFactory.getLogger(DisclaimerRestController.class);
 	@Autowired

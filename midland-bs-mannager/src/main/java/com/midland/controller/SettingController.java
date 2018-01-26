@@ -9,6 +9,7 @@ import com.midland.web.enums.ContextEnums;
 import com.midland.web.model.*;
 import com.midland.web.model.temp.ListDescOtherParam;
 import com.midland.web.model.user.User;
+import com.midland.web.service.BannerService;
 import com.midland.web.service.JdbcService;
 import com.midland.web.service.PopularService;
 import com.midland.web.service.SettingService;
@@ -46,15 +47,12 @@ public class SettingController extends BaseFilter {
     private JdbcService jdbcService;
     @Autowired
     private TaskConfig taskConfig;
+    @Autowired
+    private BannerService bannerServiceImpl;
     // 进入热门关注首页面
     @RequestMapping(value = "showPopularIndex", method = {RequestMethod.GET, RequestMethod.POST})
     public String showPopularIndex(Model model, HttpServletRequest request) {
-        /*Map<String,String> parem = new HashMap<>();
-        parem.put("flag","city");
-        parem.put("id","*");
-        Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
-        List<Area> cityList = cityMap.get("city");
-        model.addAttribute("cityList",cityList);*/
+
         settingService.getAllProvinceList(model);
         User user = MidlandHelper.getCurrentUser(request);
         if(user.getIsSuper()==null){
@@ -77,9 +75,7 @@ public class SettingController extends BaseFilter {
             pageSize = ContextEnums.PAGESIZE;
         }
         MidlandHelper.doPage(request);
-        if (StringUtils.isEmpty(popular.getCityId())){
-            popular.setCityId(MidlandHelper.getCurrentUser(request).getCityId());
-        }
+
         Page<Popular> PopularList = (Page<Popular>) settingService.findPopularList(popular);
         model.addAttribute("popularList", PopularList);
         model.addAttribute("paginator", PopularList.getPaginator());
@@ -269,18 +265,13 @@ public class SettingController extends BaseFilter {
     @RequestMapping("linkUrlSort")
     @ResponseBody
     public Map listDesc(LinkUrlManager linkUrlManager, int sort, Model model, HttpServletRequest request) throws Exception {
-        String primaryKeyName = "id";
-        String primaryParam = String.valueOf(linkUrlManager.getId());
-        String tableName = "link_url_manager";
-        String orderByColumn = "order_by";
-        ListDescOtherParam obj = new ListDescOtherParam();
-        obj.setCityId(null);
-        obj.setType(null);
-        obj.setSource(null);
-        String orderByParam = String.valueOf(linkUrlManager.getOrderBy());
-        jdbcService.listDesc(primaryKeyName, primaryParam, orderByColumn, tableName, orderByParam, obj, sort);
+        if (sort==1){
+            settingService.shiftUp(linkUrlManager);
+        }else{
+            settingService.shiftDown(linkUrlManager);
+        }
         Map map = new HashMap();
-        map.put("state", 0);
+        map.put("state",0);
         return map;
     }
 
@@ -529,16 +520,12 @@ public class SettingController extends BaseFilter {
     @RequestMapping("bannerSort")
     @ResponseBody
     public Map bannerSort(Banner banner, int sort, Model model, HttpServletRequest request) throws Exception {
-        String primaryKeyName="id";
-        String primaryParam=String.valueOf(banner.getId());
-        String tableName="banner";
-        String orderByColumn="order_by";
-        ListDescOtherParam obj = new ListDescOtherParam();
-        obj.setCityId(null);
-        obj.setType(null);
-        obj.setSource(null);
-        String orderByParam=String.valueOf(banner.getOrderBy());
-        jdbcService.listDesc(primaryKeyName,primaryParam,orderByColumn,tableName,orderByParam,obj,sort);
+
+        if (sort==1){
+            bannerServiceImpl.shiftUp(banner);
+        }else {
+            bannerServiceImpl.shiftDown(banner);
+        }
         Map map = new HashMap();
         map.put("state",0);
         return map;

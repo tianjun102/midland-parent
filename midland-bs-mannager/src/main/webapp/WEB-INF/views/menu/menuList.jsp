@@ -74,9 +74,9 @@
                                 </c:otherwise>
                             </c:choose>
                             <a target="contentF" title="上移" class="up_img"
-                               onclick="sort(${item.id },${item.orderBy},1)"></a>
-                            <a target="contentF" title="下移" class="down_img"
                                onclick="sort(${item.id },${item.orderBy},2)"></a>
+                            <a target="contentF" title="下移" class="down_img"
+                               onclick="sort(${item.id },${item.orderBy},1)"></a>
                         </td>
                     </tr>
                 </c:forEach>

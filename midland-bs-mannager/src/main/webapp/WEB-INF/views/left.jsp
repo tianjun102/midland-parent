@@ -206,7 +206,7 @@
 				<dt>
 					<a href="javascript:;"
 						dota="url(${ctx}/assets/img/06.png) no-repeat 20px center"
-						data-img="url(${ctx}/assets/img/06_w.png) no-repeat 20px center">市场调究管理<span
+						data-img="url(${ctx}/assets/img/06_w.png) no-repeat 20px center">市场研究管理<span
 						class="glyphicon glyphicon-menu-right"></span></a>
 				</dt>
 				<dd>
@@ -214,7 +214,7 @@
 						<a id = "left25" href="${ctx}/rest/category/index?type=0" target="contentF"><span>分类</span></a>
 					</shiro:hasPermission>
 					<shiro:hasPermission name="researchList">
-						<a id = "left24" href="${ctx}/rest/research/index" target="contentF"><span>市场调究列表</span></a>
+						<a id = "left24" href="${ctx}/rest/research/index" target="contentF"><span>市场研究列表</span></a>
 					</shiro:hasPermission>
 
 				</dd>

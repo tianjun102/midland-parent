@@ -10,10 +10,11 @@
         <result column="is_delete" property="isDelete" jdbcType="INTEGER"/>
         <result column="city_id" property="cityId" jdbcType="VARCHAR"/>
         <result column="city_name" property="cityName" jdbcType="VARCHAR"/>
+        <result column="order_by" property="orderBy" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,name,parent_id,parent_name,is_delete,city_id,city_name
+        id,name,parent_id,parent_name,is_delete,city_id,city_name,order_by
     </sql>
 
     <select id="selectMenuTypeById" resultMap="BaseResultMap">
@@ -21,6 +22,21 @@
         <include refid="Base_Column_List"/>
         from menu_type
         where id= #{id}
+    </select>
+
+    <select id="shiftDown" parameterType="com.midland.web.model.MenuType" resultMap="BaseResultMap">
+        select id,order_by from menu_type where 1=1
+        <include refid="select_option1"/>
+        AND
+        order_by &lt; #{orderBy} order by order_by desc LIMIT 1
+
+    </select>
+    <select id="shiftUp" parameterType="com.midland.web.model.MenuType" resultMap="BaseResultMap">
+        select id,order_by from menu_type where 1=1
+        <include refid="select_option1"/>
+        AND
+        order_by &gt; #{orderBy} order by order_by asc LIMIT 1
+
     </select>
 
     <delete id="deleteMenuTypeById">
@@ -43,6 +59,7 @@
         from menu_type
         where 1=1
         <include refid="select_option"/>
+        ORDER BY order_by ASC
     </select>
 
     <select id="findRootMenuTypeList" parameterType="com.midland.web.model.MenuType" resultMap="BaseResultMap">
@@ -61,6 +78,9 @@
     </select>
 
     <insert id="insertMenuType" parameterType="com.midland.web.model.MenuType">
+        <selectKey resultType="INTEGER" order="BEFORE" keyProperty="orderBy">
+            SELECT MAX(order_by) +1 as orderBy from menu_type
+        </selectKey>
         insert into menu_type
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="name != null">
@@ -81,6 +101,10 @@
             <if test="cityName != null">
                 city_name,
             </if>
+            <if test="orderBy != null">
+                order_by,
+            </if>
+
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -102,6 +126,10 @@
             <if test="cityName != null">
                 #{cityName,jdbcType=VARCHAR},
             </if>
+            <if test="orderBy != null">
+                #{orderBy,jdbcType=INTEGER},
+            </if>
+
         </trim>
     </insert>
 
@@ -124,12 +152,36 @@
         <if test="cityName != null">
             city_name= #{cityName,jdbcType=VARCHAR},
         </if>
+        <if test="orderBy != null">
+            order_by=#{orderBy,jdbcType=INTEGER},
+        </if>
     </sql>
 
     <sql id="select_option">
         <if test="id != null">
             and id= #{id,jdbcType=INTEGER}
         </if>
+        <if test="name != null">
+            and name= #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="parentId != null">
+            and parent_id= #{parentId,jdbcType=INTEGER}
+        </if>
+        <if test="parentName != null">
+            and parent_name= #{parentName,jdbcType=VARCHAR}
+        </if>
+        <if test="isDelete != null">
+            and is_delete= #{isDelete,jdbcType=INTEGER}
+        </if>
+        <if test="cityId != null">
+            and city_id= #{cityId,jdbcType=VARCHAR}
+        </if>
+        <if test="cityName != null">
+            and city_name= #{cityName,jdbcType=VARCHAR}
+        </if>
+    </sql>
+    <sql id="select_option1">
+
         <if test="name != null">
             and name= #{name,jdbcType=VARCHAR}
         </if>

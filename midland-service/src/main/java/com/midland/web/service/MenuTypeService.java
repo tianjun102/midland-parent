@@ -1,6 +1,7 @@
 package com.midland.web.service;
 
 import com.midland.web.model.MenuType;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,6 +16,12 @@ public interface MenuTypeService {
      * 主键删除
      **/
     void deleteMenuTypeById(Integer id) throws Exception;
+
+    @Transactional
+    void shiftUp(MenuType menuType) throws Exception;
+
+    @Transactional
+    void shiftDown(MenuType menuType) throws Exception;
 
     /**
      * 主键更新

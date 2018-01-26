@@ -132,6 +132,7 @@
 
     //排序
     function sort(id,orderById,sort) {
+        var data = $("#searchForm").serialize();
         $.ajax({
             type: "post",
             url: "${ctx}/rest/siteMap/sort?sort="+sort+"&orderBy="+orderById+"&id="+id,

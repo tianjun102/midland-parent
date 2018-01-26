@@ -39,7 +39,6 @@
                 <li><span>城市：</span>
                     <select onchange="setCityName();" name="cityId" id="cityId"
                             >
-                        <option value="">全部</option>
                         <c:forEach items="${cityList}" var="city">
                             <option value="${city.id}">${city.name}</option>
                         </c:forEach>

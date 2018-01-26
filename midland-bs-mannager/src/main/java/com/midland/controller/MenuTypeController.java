@@ -104,6 +104,21 @@ public class MenuTypeController extends BaseFilter {
 		}
 		return map;
 	}
+
+	@RequestMapping("sort")
+	@ResponseBody
+	public Map listDesc(MenuType menuType, int sort, Model model, HttpServletRequest request) throws Exception {
+		if (sort==1){
+			menuTypeServiceImpl.shiftUp(menuType);
+		}else{
+			menuTypeServiceImpl.shiftDown(menuType);
+		}
+		Map map = new HashMap();
+		map.put("state",0);
+		return map;
+	}
+
+
 	/**
 	 * 
 	 **/

@@ -15,6 +15,8 @@ public interface MenuTypeMapper {
     int updateMenuTypeById(MenuType menuType);
 
     int insertMenuType(MenuType menuType);
+    MenuType shiftUp(MenuType menuType);
+    MenuType shiftDown(MenuType menuType);
 
     List<MenuType> findMenuTypeList(MenuType menuType);
 

@@ -42,7 +42,6 @@
             <ul class="adminfo width-lg row">
                 <li><span>展示方式：</span>
                     <select name="type" id="selectType" class="dropdown" onchange="selectTypes();">
-                        <option value="" class="label">请选择</option>
                         <option <c:if test="${banner.type=='0'}"> selected='selected' </c:if> value="0">单页面</option>
                         <option <c:if test="${banner.type=='2'}"> selected='selected' </c:if> value="2">外网链接</option>
                     </select>

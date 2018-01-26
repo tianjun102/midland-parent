@@ -35,6 +35,24 @@
         where id= #{id}
     </select>
 
+
+    <select id="shiftDown" parameterType="com.midland.web.model.Banner" resultMap="BaseResultMap">
+        select id,order_by from banner where 1=1
+        <include refid="select_option1"/>
+        AND
+        order_by &lt; #{orderBy} order by order_by desc LIMIT 1
+
+    </select>
+    <select id="shiftUp" parameterType="com.midland.web.model.Banner" resultMap="BaseResultMap">
+        select id,order_by from banner where 1=1
+        <include refid="select_option1"/>
+        AND
+        order_by &gt; #{orderBy} order by order_by asc LIMIT 1
+
+    </select>
+
+
+
     <delete id="deleteById">
         delete from banner
         where id= #{id}
@@ -295,6 +313,60 @@
         </if>
         <if test="orderBy != null">
             and order_by= #{orderBy}
+        </if>
+    </sql>
+    <sql id="select_option1">
+
+        <if test="bannerImg != null">
+            and banner_img= #{bannerImg,jdbcType=VARCHAR}
+        </if>
+        <if test="bannerLinkurl != null">
+            and banner_linkurl= #{bannerLinkurl,jdbcType=VARCHAR}
+        </if>
+        <if test="imgDesc != null">
+            and img_desc= #{imgDesc,jdbcType=VARCHAR}
+        </if>
+        <if test="sortOrder != null">
+            and sort_order= #{sortOrder,jdbcType=INTEGER}
+        </if>
+        <if test="enabled != null">
+            and enabled= #{enabled,jdbcType=INTEGER}
+        </if>
+        <if test="cityId != null">
+            and city_id= #{cityId,jdbcType=VARCHAR}
+        </if>
+        <if test="source != null">
+            and source= #{source,jdbcType=INTEGER}
+        </if>
+        <if test="model != null">
+            and model= #{model,jdbcType=VARCHAR}
+        </if>
+        <if test="startTime != null">
+            and start_time>= #{startTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="endTime != null">
+            and #{endTime,jdbcType=TIMESTAMP} >= end_time
+        </if>
+        <if test="position != null">
+            and position= #{position,jdbcType=VARCHAR}
+        </if>
+        <if test="videoUrl != null">
+            and video_url= #{videoUrl,jdbcType=VARCHAR}
+        </if>
+        <if test="detail != null">
+            and detail= #{detail,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="isDelete != null">
+            and is_delete= #{isDelete,jdbcType=INTEGER}
+        </if>
+        <if test="cityName != null">
+            and city_name= #{cityName,jdbcType=INTEGER}
+        </if>
+        <if test="clikNum != null">
+            and clik_num= #{clikNum,jdbcType=INTEGER}
+        </if>
+        <if test="type != null">
+            and type= #{type,jdbcType=INTEGER}
         </if>
     </sql>
 

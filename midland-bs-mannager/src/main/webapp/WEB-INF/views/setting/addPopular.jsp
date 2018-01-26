@@ -124,7 +124,6 @@
                 <span style="float:left;">模块：</span>
                 <select name="menuId" id="menuId"
                         style="height: 28px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
-                    <option value="">全部</option>
                     <option value="0">首页</option>
                     <option value="1">新房</option>
                     <option value="2">二手房</option>

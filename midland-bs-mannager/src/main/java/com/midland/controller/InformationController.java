@@ -240,7 +240,7 @@ public class InformationController extends BaseFilter {
 	@ResponseBody
 	public Map listDesc(Information information, int sort, Model model, HttpServletRequest request) throws Exception {
 		if(sort==0){
-			informationServiceImpl.shiftUp(information);
+			informationServiceImpl.shiftTop(information);
 		}
 		else if (sort==1){
 			informationServiceImpl.shiftUp(information);

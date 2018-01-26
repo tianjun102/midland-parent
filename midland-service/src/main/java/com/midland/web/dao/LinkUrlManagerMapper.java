@@ -21,4 +21,7 @@ public interface LinkUrlManagerMapper {
 
     int batchUpdate(@Param("linkUrlManagerList") List<LinkUrlManager> linkUrlManagerList);
 
+    LinkUrlManager shiftUp(LinkUrlManager linkUrlManager);
+
+    LinkUrlManager shiftDown(LinkUrlManager linkUrlManager);
 }

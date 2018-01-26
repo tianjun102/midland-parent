@@ -53,7 +53,6 @@
                 <li><span>城市：</span>
                     <select onchange="setCityName();" name="cityId" id="cityId"
                             <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
-                        <option value="">全部</option>
                         <c:forEach items="${cityList}" var="city">
                             <c:if test="${empty isSuper}">
                                 <option selected="selected" value="${cityId}">${cityName}</option>

@@ -53,8 +53,8 @@
                             <c:if test="${item.isDelete==1}">
                                 <a target="contentF" class="recove_img" title="恢复" onclick="deleteInfrmateion(${item.id },0)"></a>
                             </c:if>
-                            <a target="contentF" title="上移" class="up_img" onclick="sort(${item.id },${item.orderBy},2)"></a>
-                            <a target="contentF" title="下移" class="down_img" onclick="sort(${item.id },${item.orderBy},1)"></a>
+                            <a target="contentF" title="上移" class="up_img" onclick="sort(${item.id },${item.orderBy},1)"></a>
+                            <a target="contentF" title="下移" class="down_img" onclick="sort(${item.id },${item.orderBy},2)"></a>
                             <a target="contentF" title="置顶" class="stick_img" onclick="sort(${item.id },${item.orderBy},0)"></a>
                             <c:choose>
                                 <c:when test="${item.isShow==0}">

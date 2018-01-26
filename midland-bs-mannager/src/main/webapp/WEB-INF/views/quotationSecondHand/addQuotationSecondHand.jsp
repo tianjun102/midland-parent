@@ -22,7 +22,6 @@
             </li>
             <li class=""><span>类型：</span>
                 <select name="type" id="type" class="dropdown">
-                    <option value="" >全部</option>
                     <c:forEach items="${types}" var="type">
                         <option value="${type.id}" <c:if test="${type.id==item.type}">selected</c:if> >${type.name}</option>
                     </c:forEach>

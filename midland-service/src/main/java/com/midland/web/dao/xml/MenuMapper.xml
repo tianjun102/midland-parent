@@ -258,9 +258,7 @@
         </if>
     </sql>
     <sql id="select_option1">
-        <if test="id != null">
-            and id= #{id,jdbcType=INTEGER}
-        </if>
+
         <if test="iconImg != null">
             and icon_img= #{iconImg,jdbcType=VARCHAR}
         </if>
@@ -273,9 +271,7 @@
         <if test="clickNum != null">
             and click_num= #{clickNum,jdbcType=INTEGER}
         </if>
-        <if test="orderBy != null">
-            and order_by= #{orderBy,jdbcType=INTEGER}
-        </if>
+
         <if test="url != null">
             and url= #{url,jdbcType=VARCHAR}
         </if>

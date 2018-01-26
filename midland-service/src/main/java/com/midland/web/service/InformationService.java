@@ -33,6 +33,9 @@ public interface InformationService {
     void shiftUp(Information information) throws Exception;
 
     @Transactional
+    void shiftTop(Information information) throws Exception;
+
+    @Transactional
     void shiftDown(Information information) throws Exception;
 
     /**

@@ -33,8 +33,8 @@
 								<td>${xh.count }</td>
 								<td>${linkUrl.cityName}</td>
 								<td>
-									<c:if test="${linkUrl.source==1}">网站</c:if>
-									<c:if test="${linkUrl.source==2}">微站</c:if>
+									<c:if test="${linkUrl.source==0}">网站</c:if>
+									<c:if test="${linkUrl.source==1}">微站</c:if>
 								</td>
 								<td>${linkUrl.modeName}</td>
 								<td>${linkUrl.linkName}</td>
@@ -73,32 +73,6 @@
 	</c:if>		  
 
 <script type="text/javascript">
-	//删除
-    //修改
-    function viewRealRegistration(userId){
-        layer.open({
-            type: 2,
-            title: ['用户信息'],
-            shade: 0.3,
-            area: ['500px', '500px'],
-            content: ['${ctx}/rest/user/findUser?userId='+userId+'&flag=1','no']
-        });
-    }
-
-function takeblacklist(userId){
-        layer.open({
-            type: 1,
-            title: ['加入黑名单'],
-            shade: 0.3,
-            area: ['500px', '500px'],
-            content: '<form action="${ctx}/rest/user/update" method="post" id="blackForm">'
-            +'<ul class = "userinfo row"><input type="hidden" name="id" id="id" value="'+userId+'">'
-            +'<li><span>拉黑原因：</span><textarea style="width:80%;height:100px" name="blackRemark" id="blackRemark"></textarea></li>'
-            +'<li><a target="contentF" class = "public_btn bg2" id="save" onclick="consume('+userId+')">加入黑名单</a>'
-            +'</ul></form>'
-        });
-    }
-
 
     function consume(userId){
         $.ajax({
@@ -168,46 +142,7 @@ function takeblacklist(userId){
 		
 	}
 
-	//重置
-	function isReset(userId){
 
-		layer.open({
-			  type: 1,
-			  skin: 'layer-style',
-			  area: ['350px','200px'],
-			  shadeClose: false, //点击遮罩关闭
-			  title:['重置密码'],
-			  resize: false,
-			  scrollbar:false,
-			  content:
-			 	'<section class = "content" style = "border:none; height:100%;">'+
-							'<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">您是否确定重置该用户的密码?</p>'+
-				'</section>',
-			  btn:['确定','取消'],
-			  yes: function(index){
-				  $.ajax({
-						type: "post",
-						url: "${ctx}/rest/user/resetPwd?userId="+userId,
-						cache:false,
-						async:false, // 此处必须同步
-						dataType: "json",
-						success: function(xmlobj){
-							if(xmlobj.flag==1){
-								layer.msg("已重置！",{icon:1});
-							}
-							if(xmlobj.flag==0){
-								layer.msg("重置失败！！",{icon:7});
-							}
-							layer.close(index);
-						}
-					});
-				 }
-				,success: function (layero) {
-				      var btn = layero.find('.layui-layer-btn');
-				      btn.css('text-align', 'center');
-				  }
-			  });
-	}
 	//修改
 	function preUpdate(Id){
 		layer.open({
@@ -228,106 +163,16 @@ function takeblacklist(userId){
 			content: ['${ctx}/rest/user/userRole?userId='+userId,'yes']
 			});
 	}
-	//查看
-	function viewUser(userId){
-		layer.open({
-			type: 2,
-			title: ['用户信息'],
-			shade: 0.3,
-			area: ['600px', '550px'],
-			content: ['${ctx}/rest/user/findUser?userId='+userId,'no']
-			});
-	}
-	//启用关闭
-	function isOffOn(userId,state){
-		if(state=="0"){
-
-			layer.open({
-				  type: 1,
-				  skin: 'layer-style',
-				  area: ['350px','200px'],
-				  shadeClose: false, //点击遮罩关闭
-				  title:['启用'],
-				  resize: false,
-				  scrollbar:false,
-				  content:
-				 	'<section class = "content" style = "border:none; height:100%;">'+
-								'<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">您是否确定开启该用户?</p>'+
-					'</section>',
-				  btn:['确定','取消'],
-				  yes: function(index){
-					  $.ajax({
-							type: "post",
-							url: "${ctx}/rest/user/offOn?id="+userId+"&state=1",
-							cache:false,
-							async:false, // 此处必须同步
-							dataType: "json",
-							success: function(xmlobj){
-								if(xmlobj.flag==1){
-									layer.msg("已重新开启！",{icon:1});
-								}
-								if(xmlobj.flag==0){
-									layer.msg("操作失败！！",{icon:7});
-								}
-								setTimeout(function(){$("#searchForm").submit();},1000);
-								layer.close(index);
-							}
-						});
-					 }
-					,success: function (layero) {
-					      var btn = layero.find('.layui-layer-btn');
-					      btn.css('text-align', 'center');
-					  }
-				  });
-		}else{
-			layer.open({
-				  type: 1,
-				  skin: 'layer-style',
-				  area: ['350px','200px'],
-				  shadeClose: false, //点击遮罩关闭
-				  title:['关闭'],
-				  resize: false,
-				  scrollbar:false,
-				  content:
-				 	'<section class = "content" style = "border:none; height:100%;">'+
-								'<p style = "text-align: center; font-size:16px; color:#000; margin-top:30px;">您是否确定关闭该用户?</p>'+
-					'</section>',
-				  btn:['确定','取消'],
-				  yes: function(index){
-					  $.ajax({
-							type: "post",
-							url: "${ctx}/rest/user/offOn?id="+userId+"&state=0",
-							cache:false,
-							async:false, // 此处必须同步
-							dataType: "json",
-							success: function(xmlobj){
-								if(xmlobj.flag==1){
-									layer.msg("已关闭！",{icon:1});
-								}
-								if(xmlobj.flag==0){
-									layer.msg("操作失败！！",{icon:7});
-								}
-								setTimeout(function(){$("#searchForm").submit();},1000);
-								layer.close(index);
-							}
-						});
-					 }
-					,success: function (layero) {
-					      var btn = layero.find('.layui-layer-btn');
-					      btn.css('text-align', 'center');
-					  }
-				  });
-		}
-	}
 
     //排序
     function sort(id,orderById,sort) {
+	    var data = $("#searchForm").serialize();
         $.ajax({
             type: "post",
             url: "${ctx}/rest/setting/linkUrlSort?sort="+sort+"&orderBy="+orderById+"&id="+id,
             async: false, // 此处必须同步
             dataType: "json",
-
+			data:data,
             success: function (data) {
                 if (data.state==0){
                     $('#searchForm').submit();

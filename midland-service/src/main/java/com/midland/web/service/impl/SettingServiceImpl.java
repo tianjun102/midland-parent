@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import java.io.UnsupportedEncodingException;
@@ -290,6 +291,58 @@ public class SettingServiceImpl implements SettingService {
         return linkUrlMapper.insertLinkUrlManager(linkUrlManager);
     }
 
+    /**
+     * 上移
+     **/
+    @Override
+    @Transactional
+    public void shiftUp(LinkUrlManager category) throws Exception {
+        try {
+            log.debug("shiftUp {}", category);
+            LinkUrlManager obj = linkUrlMapper.shiftUp(category);
+            if (obj == null){
+                return;
+            }
+            int nextOrderBy = obj.getOrderBy();
+            int currOrderBy = category.getOrderBy();
+            obj.setOrderBy(-999999999);
+            linkUrlMapper.updateById(obj);
+            category.setOrderBy(nextOrderBy);
+            linkUrlMapper.updateById(category);
+            obj.setOrderBy(currOrderBy);
+            linkUrlMapper.updateById(obj);
+        } catch (Exception e) {
+            log.error("shiftUp {}", category, e);
+            throw e;
+        }
+    }
+
+    /**
+     * 下移
+     **/
+    @Override
+    @Transactional
+    public void shiftDown(LinkUrlManager linkUrlManager) throws Exception {
+        try {
+            log.debug("shiftDown {}", linkUrlManager);
+            LinkUrlManager obj = linkUrlMapper.shiftDown(linkUrlManager);
+            if (obj == null){
+                return;
+            }
+            int nextOrderBy = obj.getOrderBy();
+            int currOrderBy = linkUrlManager.getOrderBy();
+            obj.setOrderBy(-999999999);
+            linkUrlMapper.updateById(obj);
+            linkUrlManager.setOrderBy(nextOrderBy);
+            linkUrlMapper.updateById(linkUrlManager);
+            obj.setOrderBy(currOrderBy);
+            linkUrlMapper.updateById(obj);
+        } catch (Exception e) {
+            log.error("shiftDown异常 {}", linkUrlManager, e);
+            throw e;
+        }
+    }
+    
     @Override
     public void batchUpdateLinkUrl(List<LinkUrlManager> linkUrlManagerList) throws Exception {
         try {

@@ -118,7 +118,7 @@
                         </c:if>
                         <option value="${city.id}">${city.name}</option>
                     </c:forEach>
-                </select><%--<div style = "font-size:12px; color:#afadad;text-indent: 70px;">(不选择城市则默认全部)</div>--%>
+                </select>
             </li>
             <li>
                 <span style="float:left;">平台：</span>

@@ -41,7 +41,6 @@
                 </li>
                 <li><span>城市：</span>
                     <select onchange="setCityName();" name="cityId" id="cityId">
-                        <option value="">全部</option>
                         <c:forEach items="${cityList}" var="city">
                             <option
                                     <c:if test="${item.cityId==city.id}">selected="selected"</c:if>

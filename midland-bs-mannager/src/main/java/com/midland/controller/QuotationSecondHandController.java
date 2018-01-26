@@ -63,6 +63,8 @@ public class QuotationSecondHandController extends BaseFilter {
         List<ParamObject> paramObjects = JsonMapReader.getMap("quotation_type");
         model.addAttribute("types", paramObjects);
         model.addAttribute("isNew", "0");
+        User user = MidlandHelper.getCurrentUser(request);
+        model.addAttribute("isSuper",user.getIsSuper());
         settingService.getAllProvinceList(model);
         return "quotationSecondHand/toImport";
     }
@@ -118,7 +120,6 @@ public class QuotationSecondHandController extends BaseFilter {
         if ("0".equals(showType)) {
             for (QuotationSecondHand view : list) {
                 month.add(view.getDataTime());
-
                 QuotationSecondHand res = null;
                 for (QuotationSecondHand quoTemp:listTemp){
                     if (view.getDataTime().equals(MidlandHelper.getFormatyyMMToMonth(quoTemp.getDataTime(),+1))){
@@ -201,50 +202,6 @@ public class QuotationSecondHandController extends BaseFilter {
         model.addAttribute("items", list);
         return "quotationSecondHand/quotationSecondHandList";
     }
-
-//	public String list(QuotationSecondHandView obj, Model model,HttpServletRequest request) throws Exception {
-//		if (StringUtils.isEmpty(obj.getAreaId())&&StringUtils.isEmpty(obj.getAreaName())){
-//			obj.setAreaId("0");
-//		}
-//		if (StringUtils.isEmpty(obj.getCityId())){
-//			User user = MidlandHelper.getCurrentUser(request);
-//
-//			obj.setCityId(user.getCityId());
-//		}
-//		if (obj.getType()==null){
-//			obj.setType(0);
-//		}
-//		if (obj.getStartTime()==null){
-//			Date date= new Date();
-//			obj.setStartTime(MidlandHelper.getMonth(date,-12));
-//		}
-//		if (obj.getEndTime() == null){
-//			obj.setEndTime(MidlandHelper.getCurrentTime());
-//		}
-//		//只展示登录用户当前城市的信息
-//
-//		List<QuotationSecondHandView> resultList = new ArrayList<>();
-//		MidlandHelper.doPage(request);
-//		Page<QuotationSecondHandView> list = (Page<QuotationSecondHandView>)quotationSecondHandViewService.toolTip(obj);
-//
-//		//计算环比，（当月套数-上月套数）/上月套数
-//		for (QuotationSecondHandView view : list){
-//			//（当前月数据-上个月数据)/上个月数据=当月环比
-//			double minus = view.getPreNum()==null?view.getDealNum():view.getPreNum();
-//			double numRes=Calculate.minus(Double.valueOf(view.getDealNum()),minus);
-//			double numRatio=Calculate.divide(numRes,minus);
-//			view.setRingRatio(String.valueOf(Calculate.multiply(numRatio,100.00)));
-//			resultList.add(view);
-//		}
-//
-//		Paginator paginator=list.getPaginator();
-//		List<ParamObject> paramObjects = JsonMapReader.getMap("quotation_type");
-//		model.addAttribute("types", paramObjects);
-//		model.addAttribute("paginator",paginator);
-//		model.addAttribute("items",resultList);
-//		return "quotationSecondHand/quotationSecondHandList";
-//	}
-
 
     /**
      *
@@ -338,58 +295,74 @@ public class QuotationSecondHandController extends BaseFilter {
         return map;
     }
 
-    /**
-     * 弃用
-     **/
-    //@RequestMapping("list")
-    public String findQuotationSecondHandList(QuotationSecondHand quotationSecondHand, Model model, HttpServletRequest request) {
-        try {
-            log.debug("findQuotationSecondHandList  {}", quotationSecondHand);
-            User user = MidlandHelper.getCurrentUser(request);
-            //只展示登录用户当前城市的信息
-            quotationSecondHand.setCityId(user.getCityId());
-            MidlandHelper.doPage(request);
-            Page<QuotationSecondHand> result = (Page<QuotationSecondHand>) quotationSecondHandServiceImpl.findQuotationSecondHandList(quotationSecondHand);
-            Paginator paginator = result.getPaginator();
-            List<ParamObject> paramObjects = JsonMapReader.getMap("quotation_type");
-            model.addAttribute("types", paramObjects);
-            model.addAttribute("paginator", paginator);
-            model.addAttribute("items", result);
-        } catch (Exception e) {
-            log.error("findQuotationSecondHandList  {}", quotationSecondHand, e);
-            model.addAttribute("paginator", null);
-            model.addAttribute("items", null);
-        }
-        return "quotationSecondHand/quotationSecondHandList";
-    }
-
     @RequestMapping("/export")
-    public void quotationSecondHandExportExcel(QuotationSecondHandView view1, HttpServletResponse response, HttpServletRequest request) throws Exception {
-        List<QuotationSecondHandView> dataList = quotationSecondHandViewService.toolTip(view1);
+    public void quotationSecondHandExportExcel(QuotationSecondHand obj, HttpServletResponse response, HttpServletRequest request) throws Exception {
+        if (StringUtils.isEmpty(obj.getAreaId()) && StringUtils.isEmpty(obj.getAreaName())) {
+            obj.setAreaId("0");
+        } else {
+            obj.setAreaId(obj.getAreaId());
+            obj.setAreaName(obj.getAreaName());
+        }
+        if (StringUtils.isEmpty(obj.getCityId())) {
+            obj.setCityId("085");
+        }
+
+        if (obj.getStartTime() == null) {
+            Date date = new Date();
+            obj.setStartTime(MidlandHelper.getMonth(date, -12));
+        }
+        if (obj.getEndTime() == null) {
+            obj.setEndTime(MidlandHelper.getCurrentTime());
+        }
+        List<String> month = new ArrayList<>();
+        List<Object> numRatioList = new ArrayList<>();
+        List<Object> acreageRatioList = new ArrayList<>();
+        List<Object> numList = new ArrayList<>();
+        List<Object> acreageList = new ArrayList<>();
+        double listMax = 0;
+        double listMin = 0;
+        double ratioMax = 0;
+        double ratioMin = 0;
+        List<QuotationSecondHand> list = quotationSecondHandServiceImpl.findQuotationSecondHandList(obj);
+        obj.setStartTime(MidlandHelper.getFormatPreMonth(obj.getStartTime(),-1));
+        obj.setEndTime(MidlandHelper.getFormatPreMonth(obj.getEndTime(),-1));
+        List<QuotationSecondHand> listTemp = quotationSecondHandServiceImpl.findQuotationSecondHandList(obj);
+        List<QuotationSecondHand> listRes=new ArrayList<>();
+        list.forEach(e->{
+            month.add(e.getDataTime());
+            QuotationSecondHand res = null;
+            listTemp.forEach(e1->{
+                if (e.getDataTime().equals(MidlandHelper.getFormatyyMMToMonth(e1.getDataTime(),+1))){
+                    e.setPreNum(e1.getDealNum());
+                }
+            });
+            listRes.add(e);
+        });
+
         PoiExcelExport pee = new PoiExcelExport(response, "二手房信息", "sheet1");
         //调用
+
         List<ExportModel> exportModels = new ArrayList<>();
-        for (QuotationSecondHandView view : dataList) {
+       listRes.forEach(e->{
             ExportModel exportModel = new ExportModel();
-            exportModel.setModelName1(view.getCityName());
-            exportModel.setModelName2(view.getAreaName());
+            exportModel.setModelName1(e.getCityName());
+            exportModel.setModelName2(e.getAreaName());
             List<ParamObject> quotationType = JsonMapReader.getMap("quotation_type");
 
-            exportModel.setModelName3(MidlandHelper.getNameById(view.getType(), quotationType));
-            exportModel.setModelName4(String.valueOf(view.getDealNum()));
-            exportModel.setModelName5(String.valueOf(view.getDealAcreage()));
+            exportModel.setModelName3(MidlandHelper.getNameById(e.getType(), quotationType));
+            exportModel.setModelName4(String.valueOf(e.getDealNum()));
+            exportModel.setModelName5(String.valueOf(e.getPreNum()));
+            exportModel.setModelName6(String.valueOf(e.getDealAcreage()));
             //（当前月数据-上个月数据)/上个月数据=当月环比
-            double minus = view.getPreNum() == null ? view.getDealNum() : view.getPreNum();
-            double numRes = Calculate.minus(Double.valueOf(view.getDealNum()), minus);
-            double numRatio = Calculate.divide(numRes, minus);
-            exportModel.setModelName6(String.valueOf(Calculate.multiply(numRatio, 100.00)));
-            exportModel.setModelName7(view.getDataTime());
-            exportModel.setModelName8(view.getUpdateTime());
+            Double ratio = QuotationUtil.getRatio(Double.valueOf(e.getDealNum()), Double.valueOf(e.getPreNum()==null?0:e.getPreNum()));
+            exportModel.setModelName7(String.valueOf(ratio));
+            exportModel.setModelName8(e.getDataTime());
+            exportModel.setModelName9(e.getUpdateTime());
             exportModels.add(exportModel);
-        }
-        String titleColumn[] = {"modelName1", "modelName2", "modelName3", "modelName4", "modelName5", "modelName6", "modelName7", "modelName8"};
-        String titleName[] = {"城市", "区域", "类型", "成交套数", "成交面积", "环比", "数据时间", "更新时间"};
-        int titleSize[] = {13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13};
+        });
+        String titleColumn[] = {"modelName1", "modelName2", "modelName3", "modelName4", "modelName5", "modelName6", "modelName7", "modelName8", "modelName9"};
+        String titleName[] = {"城市", "区域", "类型", "成交套数","上月成交套数", "成交面积", "环比", "数据时间", "更新时间"};
+        int titleSize[] = {13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13};
         //其他设置 set方法可全不调用
         pee.wirteExcel(titleColumn, titleName, titleSize, exportModels, request);
     }

@@ -102,9 +102,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 								<c:if test="${banner.isDelete==1}">
 									<a target="contentF" class="recove_img" title="恢复" onclick="deleteBanner(${banner.id },0)"></a>
 								</c:if>
-								<a class="up_img" title="上移" target="contentF" onclick="sort(${banner.id },${banner.orderBy},1)"></a>
-								<a class="down_img" title="下移" target="contentF" onclick="sort(${banner.id },${banner.orderBy},2)"></a>
-								<a <c:if test="${banner.enabled==1}">class="onoff_img"</c:if> <c:if test="${banner.enabled==0}">class="offon_img"</c:if> target="contentF" onclick="updateEnabled(${banner.enabled},${banner.id })"></a>
+								<a class="up_img" title="上移" target="contentF" onclick="sort(${banner.id },${banner.orderBy},2)"></a>
+								<a class="down_img" title="下移" target="contentF" onclick="sort(${banner.id },${banner.orderBy},1)"></a>
+								<a <c:if test="${banner.enabled==0}">class="onoff_img"</c:if> <c:if test="${banner.enabled==1}">class="offon_img"</c:if> target="contentF" onclick="updateEnabled(${banner.enabled},${banner.id })"></a>
 								<!-- <a href="javascript:;" target="contentFrame" class = "admin_img" title = "管理图片"></a> -->
 							</td>
 						</tr>
@@ -153,12 +153,13 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
     //排序
     function sort(id,orderById,sort) {
+	    var data = $("#searchForm").serialize();
         $.ajax({
             type: "post",
             url: "${ctx}/rest/setting/bannerSort?sort="+sort+"&orderBy="+orderById+"&id="+id,
             async: false, // 此处必须同步
             dataType: "json",
-
+			data:data,
             success: function (data) {
                 if (data.state==0){
                     $('#searchForm').submit();

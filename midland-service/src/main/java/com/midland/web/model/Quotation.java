@@ -42,6 +42,12 @@ public class Quotation {
      * 成交数量
      **/
     private Integer dealNum;
+
+    /**
+     * 上月成交数量
+     */
+    private Integer preNum;
+
     /**
      * 成交面积
      **/
@@ -91,6 +97,14 @@ public class Quotation {
      * 截至时间
      **/
     private String endTime;
+
+    public Integer getPreNum() {
+        return preNum;
+    }
+
+    public void setPreNum(Integer preNum) {
+        this.preNum = preNum;
+    }
 
     public String getStartTime() {
         return startTime;

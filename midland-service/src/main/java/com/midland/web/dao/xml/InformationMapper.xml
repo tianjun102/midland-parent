@@ -44,6 +44,15 @@
     </select>
 
 
+    <select id="shiftTop" parameterType="com.midland.web.model.Information" resultMap="BaseResultMap">
+        update information a INNER JOIN (select max(order_by)+1 order_by from information where 1=1
+        <include refid="select_option1"/>
+        ) b set a.order_by = b.order_by where a.id=#{id}
+
+
+    </select>
+
+
     <select id="shiftDown" parameterType="com.midland.web.model.Information" resultMap="BaseResultMap">
         select id,order_by from information where 1=1
         <include refid="select_option1"/>
@@ -92,7 +101,7 @@
             and is_delete=0
         </if>
         <include refid="select_option"/>
-        ORDER BY order_by ASC
+        ORDER BY order_by DESC
     </select>
 
     <insert id="insertInformation" parameterType="com.midland.web.model.Information">

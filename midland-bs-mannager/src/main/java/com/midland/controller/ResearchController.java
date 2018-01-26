@@ -210,7 +210,6 @@ public class ResearchController extends BaseFilter {
 			}
 			log.debug("findInformationList  {}",information);
 			MidlandHelper.doPage(request);
-			information.setArticeType(0);
 			Page<Information> result = (Page<Information>)informationServiceImpl.findInformationList(information);
 			Paginator paginator=result.getPaginator();
 			model.addAttribute("paginator",paginator);
@@ -228,7 +227,7 @@ public class ResearchController extends BaseFilter {
 	@ResponseBody
 	public Map listDesc(Information information, int sort, Model model, HttpServletRequest request) throws Exception {
 		if(sort==0){
-			informationServiceImpl.shiftUp(information);
+			informationServiceImpl.shiftTop(information);
 		}
 		else if (sort==1){
 			informationServiceImpl.shiftUp(information);

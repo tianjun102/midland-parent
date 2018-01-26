@@ -15,6 +15,7 @@ public interface InformationMapper {
 
     int updateInformationById(Information information);
 
+    Information shiftTop(Information information);
     Information shiftUp(Information information);
 
     Information shiftDown(Information information);

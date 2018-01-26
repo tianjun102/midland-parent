@@ -1,12 +1,14 @@
 package com.midland.web.service.impl;
 
 import com.midland.web.dao.MenuTypeMapper;
+import com.midland.web.model.Menu;
 import com.midland.web.model.MenuType;
 import com.midland.web.service.MenuTypeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +59,60 @@ public class MenuTypeServiceImpl implements MenuTypeService {
             throw e;
         }
     }
+
+    /**
+     * 上移
+     **/
+    @Override
+    @Transactional
+    public void shiftUp(MenuType menuType) throws Exception {
+        try {
+            log.debug("shiftUp {}", menuType);
+            MenuType obj = menuTypeMapper.shiftUp(menuType);
+            if (obj == null){
+                return;
+            }
+            int nextOrderBy = obj.getOrderBy();
+            int currOrderBy = menuType.getOrderBy();
+            obj.setOrderBy(-999999999);
+            menuTypeMapper.updateMenuTypeById(obj);
+            menuType.setOrderBy(nextOrderBy);
+            menuTypeMapper.updateMenuTypeById(menuType);
+            obj.setOrderBy(currOrderBy);
+            menuTypeMapper.updateMenuTypeById(obj);
+        } catch (Exception e) {
+            log.error("shiftUp {}", menuType, e);
+            throw e;
+        }
+    }
+
+    /**
+     * 下移
+     **/
+    @Override
+    @Transactional
+    public void shiftDown(MenuType menuType) throws Exception {
+        try {
+            log.debug("shiftDown {}", menuType);
+            MenuType obj = menuTypeMapper.shiftDown(menuType);
+            if (obj == null){
+                return;
+            }
+            int nextOrderBy = obj.getOrderBy();
+            int currOrderBy = menuType.getOrderBy();
+            obj.setOrderBy(-999999999);
+            menuTypeMapper.updateMenuTypeById(obj);
+            menuType.setOrderBy(nextOrderBy);
+            menuTypeMapper.updateMenuTypeById(menuType);
+            obj.setOrderBy(currOrderBy);
+            menuTypeMapper.updateMenuTypeById(obj);
+        } catch (Exception e) {
+            log.error("shiftDown异常 {}", menuType, e);
+            throw e;
+        }
+    }
+
+
 
     /**
      * 更新
