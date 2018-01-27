@@ -21,7 +21,22 @@ import com.midland.web.util.MidlandHelper;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@SuppressWarnings("all")
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// @SuppressWarnings("all")
 @RequestMapping("/quotationSecondHand/")
 public class QuotationSecondHandRestController extends ServiceBaseFilter {
 
@@ -120,10 +135,10 @@ public class QuotationSecondHandRestController extends ServiceBaseFilter {
             List<Object> acreageRatioList = new ArrayList<>();
             List<Object> numList = new ArrayList<>();
             List<Object> acreageList = new ArrayList<>();
-            double listMax = 0;
-            double listMin = 0;
-            double ratioMax = 0;
-            double ratioMin = 0;
+            double dealNumMax = 0;
+            double dealNumMin = 0;
+            double acreageMax = 0;
+            double acreageMin = 0;
             List<QuotationSecondHand> list = quotationSecondHandServiceImpl.findQuotationSecondHandList(obj);
             obj.setStartTime(MidlandHelper.getFormatPreMonth(obj.getStartTime(), -1));
             obj.setEndTime(MidlandHelper.getFormatPreMonth(obj.getEndTime(), -1));
@@ -145,16 +160,26 @@ public class QuotationSecondHandRestController extends ServiceBaseFilter {
                 if (res != null&& res.getDealAcreage()!=null) {
                     preAcreage = Double.valueOf(res.getDealAcreage());
                 }
+                //
+                dealNumMax = QuotationUtil.getMax(dealNumMax, view.getDealNum());
+                dealNumMin = QuotationUtil.getMin(dealNumMin, view.getDealNum());
+                //
+
+                acreageMax = QuotationUtil.getMax(acreageMax, Double.valueOf(view.getDealAcreage()==null?"0":view.getDealAcreage()));
+                acreageMin = QuotationUtil.getMin(acreageMin,  Double.valueOf(view.getDealAcreage()==null?"0":view.getDealAcreage()));
+
                 numList.add(view.getDealNum());
                 acreageList.add(view.getDealAcreage());
                 Double numRatio = QuotationUtil.getRatio(Double.valueOf(view.getDealNum()), preNum);
-                Double accreageRatio = QuotationUtil.getRatio(Double.valueOf(view.getDealAcreage()), preAcreage);
+                Double acreageRatio = QuotationUtil.getRatio(Double.valueOf(view.getDealAcreage()), preAcreage);
                 numRatioList.add(numRatio);
-                acreageList.add(accreageRatio);
+                acreageRatioList.add(acreageRatio);
 
             }
             map.put("month",month);
             map.put("numList",numList);
+            map.put("dealNumMax", dealNumMax );
+            map.put("acreageMax", acreageMax);
             map.put("numRatioList",numRatioList);
             map.put("acreageList",acreageList);
             map.put("numRatioList",numRatioList);

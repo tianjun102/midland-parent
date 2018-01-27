@@ -71,7 +71,7 @@
         }
 
         function showTree(event) {
-            var data = $("#addFrom").serialize();
+            var data = $("#addFrom").serialize()+"&modeId="+$("#menuId option:selected").val();
             debugger;
             $.ajax({
                 type: "post",

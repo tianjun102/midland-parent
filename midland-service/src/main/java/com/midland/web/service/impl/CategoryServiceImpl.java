@@ -39,6 +39,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     @Transactional
     public void shiftUp(Category category) throws Exception {
+        long time = System.currentTimeMillis();
         try {
             log.debug("shiftUp {}", category);
             Category obj = categoryMapper.shiftUp(category);

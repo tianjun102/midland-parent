@@ -133,18 +133,18 @@
                 <li><span>模块：</span>
                     <input type="hidden" id="modeName" name="modeName" value="" >
                     <select onchange="setMenuName()" name="modeId" id="modeId" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
-                        <option value="0">首页</option>
-                        <option value="1">新房</option>
-                        <option value="2">二手房</option>
-                        <option value="3">租房</option>
-                        <option value="4">写字楼</option>
-                        <option value="5">商铺</option>
-                        <option value="6">小区</option>
-                        <option value="7">经纪人</option>
-                        <option value="8">外销网</option>
-                        <option value="9">市场调究</option>
-                        <option value="10">资讯</option>
-                        <option value="11">问答</option>
+                        <option value="0" <c:if test="${item.modeId ==0}"  >selected="selected"</c:if> >首页</option>
+                        <option value="1"  <c:if test="${item.modeId ==1}"  >selected="selected"</c:if>>新房</option>
+                        <option value="2"  <c:if test="${item.modeId ==2}"  >selected="selected"</c:if>>二手房</option>
+                        <option value="3"  <c:if test="${item.modeId ==3}"  >selected="selected"</c:if>>租房</option>
+                        <option value="4"  <c:if test="${item.modeId ==4}"  >selected="selected"</c:if>>写字楼</option>
+                        <option value="5"  <c:if test="${item.modeId ==5}"  >selected="selected"</c:if>>商铺</option>
+                        <option value="6"  <c:if test="${item.modeId ==6}"  >selected="selected"</c:if>>小区</option>
+                        <option value="7"  <c:if test="${item.modeId ==7}"  >selected="selected"</c:if>>经纪人</option>
+                        <option value="8"  <c:if test="${item.modeId ==8}"  >selected="selected"</c:if>>外销网</option>
+                        <option value="9"  <c:if test="${item.modeId ==9}"  >selected="selected"</c:if>>市场调究</option>
+                        <option value="10"  <c:if test="${item.modeId ==10}"  >selected="selected"</c:if>>资讯</option>
+                        <option value="11"  <c:if test="${item.modeId ==11}"  >selected="selected"</c:if>>问答</option>
                     </select>
                     <label style="color: red" class = "_star " >*</label>
                 </li>
