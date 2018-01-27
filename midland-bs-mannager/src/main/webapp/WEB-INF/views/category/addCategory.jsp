@@ -135,7 +135,6 @@
                     <input type="hidden" id="modeName" name="modeName" value="">
                     <select onchange="setMenuName()" name="modeId" id="modeId"
                             style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
-                        <option value="">全部</option>
                         <option value="0">首页</option>
                         <option value="1">新房</option>
                         <option value="2">二手房</option>
@@ -153,7 +152,7 @@
                 </li>
             </c:if>
             <c:if test="${type != 2}">
-                <li><span>父节点：</span><input style="width: 250px!important;" name="parentName" onclick="showTree()"
+                <li><span>父节点：</span><input style="width: 250px!important;" type="text" name="parentName" onclick="showTree()"
                                             readonly="readonly"/>
                     <input name="parentId" type="hidden"/>
                     <div style="font-size:12px; color:#afadad;text-indent: 70px;">(不选父分类则默认一级分类)</div>

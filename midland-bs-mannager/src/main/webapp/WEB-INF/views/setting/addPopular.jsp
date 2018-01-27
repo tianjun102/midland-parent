@@ -143,7 +143,7 @@
                 <label class="checkitem"><input type="radio" name="sellRent" value="0"><span>租房</span></label>
                 <label class="checkitem"><input type="radio" name="sellRent" value="1"><span>售房</span></label>
             </li>
-            <li><span>类型：</span><input class="vipcate" id="cateName" name="cateName" onclick="showTree()"
+            <li><span>类型：</span><input class="vipcate" type="text" id="cateName" name="cateName" onclick="showTree()"
                                        readonly="readonly"/>
                 <input name="cateId" type="hidden"/><label style="color: red" class="_star ">*</label>
 

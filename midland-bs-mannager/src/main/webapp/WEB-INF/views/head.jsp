@@ -147,13 +147,13 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			})
 		})
         function toUpdate(userId) {
-            window.open("${ctx}/rest/user/toUpdatePage?userId=" +userId, "contentF");
+            window.open("${ctx}/rest/user/hrefUpdateUser?userId=" +userId, "contentF");
             <%--layer.open({--%>
-            <%--type: 2,--%>
-            <%--title: ['预约详情'],--%>
-            <%--shade: 0.3,--%>
-            <%--area: ['1000px', '500px'],--%>
-            <%--content: ['${ctx}/rest/appoint/to_update?appointId=' + appointId]--%>
+                <%--type: 2,--%>
+                <%--title: ['用户修改'],--%>
+                <%--shade: 0.3,--%>
+                <%--area: ['100%', '100%'],--%>
+                <%--content: ['${ctx}/rest/user/toUpdatePage?userId=' +userId,"contentF"]--%>
             <%--});--%>
         }
 	</script>

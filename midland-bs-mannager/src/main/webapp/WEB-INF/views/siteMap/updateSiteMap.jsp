@@ -193,6 +193,7 @@
                     $('#save').removeAttr("onclick");
                     setTimeout(function () {
                         parent.layer.closeAll();
+                        parent.$("#inquery").click();
                     }, 1000);
 
                 } else {

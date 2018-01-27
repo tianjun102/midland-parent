@@ -451,6 +451,19 @@ public class UserController extends BaseFilter {
         model.addAttribute("sources", sources);
         return "user/updateUser";
     }
+/**
+     * 跳转到修改页面
+     *
+     * @return
+     */
+    @RequestMapping(value = "/hrefUpdateUser", method = {RequestMethod.GET, RequestMethod.POST})
+    public String hrefUpdateUserPage(Model model, String userId, HttpServletRequest request) {
+        User userInfo = userService.selectById(userId);
+        model.addAttribute("item", userInfo);
+        List<ParamObject> sources = JsonMapReader.getMap("source");
+        model.addAttribute("sources", sources);
+        return "user/hrefUpdateUser";
+    }
 
 
     /**
