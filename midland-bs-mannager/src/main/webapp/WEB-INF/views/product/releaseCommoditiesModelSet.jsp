@@ -209,7 +209,7 @@
 			var prodStr = $(obj).parent().parent().find("input:hidden").val();
 			if (prodStr=="") {
 				$(obj).parent().parent().remove();
-				layer.msg("删除成功！",{icon:1});
+				layer.msg("操作成功！",{icon:1});
 				return false;
 			}
 			layer.open({
@@ -233,7 +233,7 @@
 									dataType : "json",
 									success : function(xmlobj) {
 										if (xmlobj.flag == 1) {
-											layer.msg("删除成功！", {icon : 1});
+											layer.msg("操作成功！", {icon : 1});
 											$(obj).parent().parent().remove();
 										}
 										if (xmlobj.flag == 0) {

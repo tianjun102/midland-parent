@@ -207,7 +207,12 @@
                     </div>
                 </li>
                 <li><span>图片说明：</span><input type="text" name="imgDesc"></li>
-                <li style="overflow: hidden" id="textArea"><span style = "float:left;">页面内容：</span><textarea style="width: 90%;min-height: 350px;resize:none; outline-color: #0099e0;float: right" name="details" id="myEditor" rows="" cols=""></textarea></li>
+                <li style="overflow: hidden" id="textArea1">
+                    <span style="float:left;">摘要：</span>
+                    <textarea class="textarea-md" name="summary"></textarea>
+                </li>
+                <li style="overflow: hidden" id="textArea"><span style = "float:left;">页面内容：</span>
+                    <textarea class="textarea-lg" name="details" id="myEditor" rows="" cols=""></textarea></li>
             </ul>
 
 

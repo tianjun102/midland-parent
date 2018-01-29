@@ -71,7 +71,7 @@
 
     <insert id="insertLayoutMap" parameterType="com.midland.web.model.LayoutMap">
         <selectKey resultType="INTEGER" order="BEFORE" keyProperty="orderBy">
-            SELECT MAX(order_by) +1 as orderBy from hot_hand
+            SELECT Max(order_by)+1 as orderBy from layout_map
         </selectKey>
 
         insert into layout_map

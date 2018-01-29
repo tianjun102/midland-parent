@@ -152,7 +152,7 @@
             and email like CONCAT(CONCAT('%', #{email}), '%')
         </if>
         <if test="phone != null">
-            and phone= #{phone,jdbcType=VARCHAR}
+            and phone like CONCAT(CONCAT('%', #{phone}), '%')
         </if>
         <if test="contactId != null">
             and contact_id= #{contactId,jdbcType=VARCHAR}

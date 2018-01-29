@@ -72,10 +72,10 @@
     </select>
 
     <insert id="insertHotSearch" parameterType="com.midland.web.model.HotSearch">
-        insert into hot_search
         <selectKey resultType="INTEGER" order="BEFORE" keyProperty="orderBy">
-            SELECT count(0)+1 as orderBy from hot_search
+            SELECT Max(order_by)+1 as orderBy from hot_search
         </selectKey>
+        insert into hot_search
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="keywords != null">
                 keywords,

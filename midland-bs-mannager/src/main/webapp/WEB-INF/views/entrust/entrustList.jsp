@@ -145,7 +145,7 @@
                     dataType: "json",
                     success: function(xmlobj){
                         if(xmlobj.state==0){
-                            layer.msg("删除成功！",{icon:1});
+                            layer.msg("操作成功！",{icon:1});
                             $("#searchForm").submit();
                         }
                         if(xmlobj.state==1){

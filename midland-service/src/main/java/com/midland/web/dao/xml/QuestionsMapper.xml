@@ -302,7 +302,7 @@
             and question_name = #{questionName,jdbcType=VARCHAR}
         </if>
         <if test="questionPhone != null">
-            and question_phone = #{questionPhone,jdbcType=VARCHAR}
+            and question_phone like CONCAT(CONCAT('%', #{questionPhone}), '%')
         </if>
         <if test="auditor != null">
             and auditor = #{auditor,jdbcType=VARCHAR}

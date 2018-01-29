@@ -110,7 +110,7 @@
 
     <insert id="insertSiteMap" parameterType="com.midland.web.model.SiteMap">
         <selectKey resultType="INTEGER" order="BEFORE" keyProperty="orderBy">
-            SELECT count(0)+1 as orderBy from site_map
+            SELECT Max(order_by)+1 as orderBy from site_map
         </selectKey>
         insert into site_map
         <trim prefix="(" suffix=")" suffixOverrides=",">

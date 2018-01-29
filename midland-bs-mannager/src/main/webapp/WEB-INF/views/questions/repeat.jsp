@@ -122,7 +122,7 @@
             data: "id=" + data,
             success: function (data) {
                 if (data.state == 0) {
-                    layer.msg("删除成功！！！", {icon: 1});
+                    layer.msg("操作成功！！！", {icon: 1});
                     $('#save').removeAttr("onclick");
                     setTimeout(function () {
                         parent.layer.closeAll();

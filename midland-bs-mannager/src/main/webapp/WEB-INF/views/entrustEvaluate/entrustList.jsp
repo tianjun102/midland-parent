@@ -74,14 +74,27 @@
                             </c:forEach>
                         </td>
                         <td>
-                            <c:if test="${item.resetFlag==1}">
-                                <a target="contentF" class="arrange_img" title="分配"
-                                   onclick="toRedistribute(${item.id })"></a>
+                            <c:if test="${item.resetFlag==1 and item.isDelete ==0}">
+                                <a target="contentF" class="arrange_img" title="分配" onclick="toRedistribute(${item.id })"></a>
                             </c:if>
-                            <c:if test="${item.isDelete==0}">
-                            <a target="contentF" class="edit_img" title="编辑" onclick="toUpdateEntrust(${item.id })"></a>
+                            <c:choose>
+                                <c:when test="${item.status==3 or item.status==5}">
+                                    <a target="contentF" class="see_img" title="查看" onclick="toUpdateEntrust(${item.id })"></a>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:if test="${item.isDelete ==0}">
+                                        <a target="contentF" class="edit_img" title="编辑" onclick="toUpdateEntrust(${item.id })"></a>
+                                    </c:if>
+
+                                </c:otherwise>
+                            </c:choose>
+
+                            <c:if test="${item.isDelete ==0}">
+                                <a target="contentF"  class="delete_img" title="删除" onclick="deleteEntrust(${item.id })"></a>
                             </c:if>
-                            <a target="contentF" class="delete_img" title="删除" onclick="deleteEntrust(${item.id })"></a>
+                            <c:if test="${item.isDelete ==1}">
+                                <a target="contentF"  class="recove_img" title="恢复" onclick="deleteOrRecover(${item.id },0)"></a>
+                            </c:if>
                         </td>
                     </tr>
                 </c:forEach>
@@ -103,6 +116,29 @@
 </c:if>
 
 <script type="text/javascript">
+
+
+    function deleteOrRecover(id, flag) {
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/entrust/evaluate/update?id=" + id + "&isDelete=" + flag,
+            async: false, // 此处必须同步
+            dataType: "json",
+
+            success: function (data) {
+                if (data.state == 0) {
+                    $('#searchForm').submit();
+                }
+            },
+            error: function (data) {
+                if (data.responseText != null) {
+                    layer.msg(data.responseText, {icon: 2});
+                } else {
+                    layer.msg("操作失败！", {icon: 2});
+                }
+            }
+        })
+    }
 
     $(function () {
         var headIndex = $("#headIndex").height();
@@ -155,7 +191,7 @@
                     dataType: "json",
                     success: function (xmlobj) {
                         if (xmlobj.state == 0) {
-                            layer.msg("删除成功！", {icon: 1});
+                            layer.msg("操作成功！", {icon: 1});
                             $("#searchForm").submit();
                         }
                         if (xmlobj.state == 1) {

@@ -78,7 +78,7 @@
 
     <insert id="insertSpecialPage" parameterType="com.midland.web.model.SpecialPage">
         <selectKey resultType="INTEGER" order="BEFORE" keyProperty="orderBy">
-            SELECT count(0)+1 as orderBy from special_page
+            SELECT Max(order_by)+1 as orderBy from special_page
         </selectKey>
         insert into special_page
         <trim prefix="(" suffix=")" suffixOverrides=",">

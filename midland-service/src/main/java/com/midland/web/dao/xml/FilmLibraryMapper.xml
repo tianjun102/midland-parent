@@ -215,10 +215,10 @@
             and img_desc= #{imgDesc,jdbcType=VARCHAR}
         </if>
         <if test="housesName != null">
-            and houses_name= #{housesName,jdbcType=VARCHAR}
+            and houses_name like  CONCAT(CONCAT('%', #{housesName}), '%')
         </if>
         <if test="housesId != null">
-            and houses_id= #{housesId,jdbcType=VARCHAR}
+            and houses_id  like  CONCAT(CONCAT('%', #{housesId}), '%')
         </if>
         <if test="introduction != null">
             and introduction= #{introduction,jdbcType=LONGVARCHAR}

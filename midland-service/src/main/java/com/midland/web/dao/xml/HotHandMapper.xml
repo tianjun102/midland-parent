@@ -96,7 +96,7 @@
     <insert id="insertHotHand" parameterType="com.midland.web.model.HotHand">
 
         <selectKey resultType="INTEGER" order="BEFORE" keyProperty="orderBy">
-            SELECT MAX(order_by) +1 as orderBy from hot_hand
+            SELECT Max(order_by)+1 as orderBy from hot_hand
         </selectKey>
 
         insert into hot_hand

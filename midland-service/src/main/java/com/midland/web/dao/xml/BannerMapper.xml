@@ -81,7 +81,7 @@
 
     <insert id="insertBanner" parameterType="com.midland.web.model.Banner">
         <selectKey resultType="INTEGER" order="BEFORE" keyProperty="orderBy">
-            SELECT count(0)+1 as orderBy from banner
+            SELECT Max(order_by)+1 as orderBy from banner
         </selectKey>
         insert into banner
         <trim prefix="(" suffix=")" suffixOverrides=",">

@@ -79,7 +79,7 @@
 
     <insert id="insertMenuType" parameterType="com.midland.web.model.MenuType">
         <selectKey resultType="INTEGER" order="BEFORE" keyProperty="orderBy">
-            SELECT MAX(order_by) +1 as orderBy from menu_type
+            SELECT Max(order_by)+1 as orderBy from menu_type
         </selectKey>
         insert into menu_type
         <trim prefix="(" suffix=")" suffixOverrides=",">

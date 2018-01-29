@@ -326,7 +326,7 @@
 							dataType : "json",
 							success : function(xmlobj) {
 								if (xmlobj.flag == 1) {
-									layer.msg("删除成功！", {icon : 1});
+									layer.msg("操作成功！", {icon : 1});
 									$(span).hide(); //this指的是span
 									$(span).next().nextAll(".img2").hide();
 									$(span).next().nextAll(".img1").show();

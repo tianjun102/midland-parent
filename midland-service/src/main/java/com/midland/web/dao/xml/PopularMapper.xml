@@ -78,7 +78,7 @@
 
     <insert id="insertPopular" parameterType="com.midland.web.model.Popular">
         <selectKey resultType="INTEGER" order="BEFORE" keyProperty="orderBy">
-            SELECT MAX(order_by) +1 as orderBy from hot_hand
+            SELECT Max(order_by)+1 as orderBy from popular
         </selectKey>
         insert into popular
         <trim prefix="(" suffix=")" suffixOverrides=",">

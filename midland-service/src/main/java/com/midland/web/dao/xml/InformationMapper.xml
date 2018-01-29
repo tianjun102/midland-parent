@@ -45,8 +45,8 @@
 
 
     <select id="shiftTop" parameterType="com.midland.web.model.Information" resultMap="BaseResultMap">
-        update information a INNER JOIN (select max(order_by)+1 order_by from information where 1=1
-        <include refid="select_option1"/>
+        update information a INNER JOIN (select max(order_by)+1 order_by from information
+
         ) b set a.order_by = b.order_by where a.id=#{id}
 
 
@@ -106,7 +106,7 @@
 
     <insert id="insertInformation" parameterType="com.midland.web.model.Information">
         <selectKey resultType="INTEGER" order="BEFORE" keyProperty="orderBy">
-            SELECT count(0)+1 as orderBy from information WHERE artice_type = #{articeType}
+            SELECT Max(order_by)+1 as orderBy from information
         </selectKey>
         insert into information
         <trim prefix="(" suffix=")" suffixOverrides=",">

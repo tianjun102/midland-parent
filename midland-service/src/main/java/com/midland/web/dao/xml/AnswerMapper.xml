@@ -196,7 +196,7 @@
             and audit_status= #{auditStatus,jdbcType=INTEGER}
         </if>
         <if test="answerPhone != null">
-            and answer_phone= #{answerPhone,jdbcType=VARCHAR}
+            and answer_phone like CONCAT(CONCAT('%', #{answerPhone}), '%')
         </if>
         <if test="answerNo != null">
             and answer_no= #{answerNo,jdbcType=INTEGER}

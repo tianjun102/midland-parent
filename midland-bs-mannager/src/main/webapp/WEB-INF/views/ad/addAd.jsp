@@ -230,7 +230,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		        		$("#adId").val("");
 		        	}
 				    layer.close(index);
-					layer.msg("删除成功！",{icon:1});
+					layer.msg("操作成功！",{icon:1});
 				 }
 				,success: function (layero) {
 				      var btn = layero.find('.layui-layer-btn');
@@ -270,7 +270,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			    	$("#productList").find("tr").remove();
 			    	$("#adId").val("");
 			    	layer.close(index);
-			    	layer.msg("删除成功！",{icon:1});
+			    	layer.msg("操作成功！",{icon:1});
 				 }
 				,success: function (layero) {
 				      var btn = layero.find('.layui-layer-btn');

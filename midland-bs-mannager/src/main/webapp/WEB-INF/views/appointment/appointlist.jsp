@@ -67,12 +67,19 @@
                         </c:forEach></td>
                         <td>${item.handleTime }</td>
                         <td>
-                            <c:if test="${item.resetFlag==1 and item.status !=3}">
+                            <c:if test="${item.resetFlag==1 and item.status ==0}">
                                 <a target="contentF" class="arrange_img" title="重新分配经纪人"
                                    onclick="toRedistribute(${item.id })"></a>
                             </c:if>
 
-                            <a target="contentF" class="edit_img" title="编辑" onclick="toUpdateAppointment(${item.id})"></a>
+                            <c:choose>
+                            <c:when test="${item.status ==0 or item.status ==1}">
+                             <a target="contentF" class="edit_img" title="编辑" onclick="toUpdateAppointment(${item.id})"></a>
+                            </c:when>
+                                <c:otherwise>
+                                    <a target="contentF" class="see_img" title="查看" onclick="toUpdateAppointment(${item.id})"></a>
+                                </c:otherwise>
+                            </c:choose>
                         </td>
                     </tr>
                 </c:forEach>

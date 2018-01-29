@@ -46,7 +46,7 @@
                                 隐藏
                             </c:otherwise>
                         </c:choose></td>
-                        <td>${item.introduction }</td>
+                        <td>${item.housesName }</td>
                         <td>${item.housesId }</td>
                         <td>${item.operatorName }</td>
                         <td><c:forEach items="${filmTypes}" var="s">
@@ -161,7 +161,7 @@
                     dataType: "json",
                     success: function(data){
                         if(data.state==0){
-                            layer.msg("删除成功！",{icon:1});
+                            layer.msg("操作成功！",{icon:1});
                             setTimeout(function(){$("#searchForm").submit();},1000);
                         }else{
                             layer.msg("删除失败！！",{icon:7});

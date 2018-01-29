@@ -100,7 +100,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 	  				success: function(data){ 
 	  					console.log(data.result);
 	  					if(data.result=='ok'){
-	  			            layer.msg("删除成功",{icon:1});
+	  			            layer.msg("操作成功",{icon:1});
 	  			            setTimeout(function(){$('#searchForm').submit();},1000);
 	  					}
 	  				} 

@@ -99,14 +99,14 @@
                             if(isDelete==0){
                                 layer.msg("恢复成功！",{icon:1});
                             }else{
-                                layer.msg("删除成功！",{icon:1});
+                                layer.msg("操作成功！",{icon:1});
                             }
                             setTimeout(function(){$("#searchForm").submit();},1000);
                         }else{
                             if(isDelete==0){
                                 layer.msg("恢复成功！",{icon:7});
                             }else{
-                                layer.msg("删除成功！",{icon:7});
+                                layer.msg("操作成功！",{icon:7});
                             }
                         }
                         layer.close(index);

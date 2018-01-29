@@ -68,7 +68,7 @@
 
     <insert id="insertCommunityAlbum" parameterType="com.midland.web.model.CommunityAlbum">
         <selectKey resultType="INTEGER" order="BEFORE" keyProperty="orderBy">
-            SELECT MAX(order_by) +1 as orderBy from hot_hand
+            SELECT Max(order_by)+1 as orderBy from community_album
         </selectKey>
         insert into community_album
         <trim prefix="(" suffix=")" suffixOverrides=",">

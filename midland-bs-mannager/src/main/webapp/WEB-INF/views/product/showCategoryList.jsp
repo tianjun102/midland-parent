@@ -129,7 +129,7 @@
 						dataType: "json",
 						success: function(xmlobj){
 							if(xmlobj.flag==1){
-								layer.msg("删除成功！",{icon:1});
+								layer.msg("操作成功！",{icon:1});
 								setTimeout(function(){window.open("${ctx}/rest/product/showCategoryIndex","contentF");},2000);
 							}
 							if(xmlobj.flag==0){

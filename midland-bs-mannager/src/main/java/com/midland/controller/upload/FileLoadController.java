@@ -322,7 +322,9 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 			int row_27 = j % 27;
 			if (j > 0 ) {
 				//每个市27行
-				
+				if (j>188){
+					System.out.println(j);
+				}
 				if (row_27 != 0 && row_27<13){//每个市的前12行，为住宅信息
 					int row_4=row_27%4;
 					if (row_4==1){
@@ -374,7 +376,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 							throw new IllegalDocumentException("数据与选择的城市不匹配");
 						}
 					}
-					if (j > 0 && j % 4 == 0) {
+					if (j > 0 && row_27 % 4 == 0) {
 						int length = dealNum.size() < 12 ? dealNum.size() : 12;
 						for (int x = 0; x < length; x++) {
 							if (dealNum.get(x) != null && !dealNum.get(x).equals("")) {
@@ -429,7 +431,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 					
 				}else{
 					//每个市的后16行，为商业、办公楼、其他信息
-					int row_5=(j-12)%5;
+					int row_5=row_27==0?0:(row_27-12)%5;
 					if (row_5==1){
 						dealNum=new ArrayList<>();
 						list=dealNum;
@@ -481,7 +483,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 							throw new IllegalDocumentException("数据与选择的城市不匹配");
 						}
 					}
-					if (j > 13 && (j-12) % 5 == 0) {
+					if (row_27==0 || (row_27 > 13 && (row_27-12) % 5 == 0)) {
 						int length = dealNum.size() < 12 ? dealNum.size() : 12;
 						for (int x = 0; x < length; x++) {
 							if (dealNum.get(x) != null && !dealNum.get(x).equals("")) {

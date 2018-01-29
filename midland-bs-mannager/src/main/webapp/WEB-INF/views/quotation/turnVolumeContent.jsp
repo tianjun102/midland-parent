@@ -71,7 +71,7 @@
             },
             {
                 type: 'value',
-                name: '价格',
+                name: '环比',
                 min: ${ratioMin},
                 max: ${ratioMax},
                 interval: ${ratioStep},
