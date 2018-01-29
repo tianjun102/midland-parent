@@ -108,7 +108,7 @@ public class FooterController extends BaseFilter {
 		try {
 			log.debug("updateFooterById  {}",footer);
 			if (footer.getId()!=null){
-			footerServiceImpl.updateFooterById(footer);
+			footerServiceImpl.updateFooterSelectiveById(footer);
 			}else{
 			footerServiceImpl.insertFooter(footer);
 			}

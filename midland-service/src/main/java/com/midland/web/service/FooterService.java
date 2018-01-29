@@ -28,6 +28,8 @@ public interface FooterService {
      **/
     void insertFooter(Footer footer) throws Exception;
 
+    void updateFooterSelectiveById(Footer footer) throws Exception;
+
     /**
      * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
      **/

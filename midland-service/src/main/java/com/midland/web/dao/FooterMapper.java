@@ -16,6 +16,7 @@ public interface FooterMapper {
     int deleteFooterById(Integer footer);
 
     int updateFooterById(Footer footer);
+    int updateFooterSelectiveById(Footer footer);
 
     int insertFooter(Footer footer);
 

@@ -51,6 +51,14 @@
 
         where id= #{id}
     </update>
+    <update id="updateFooterSelectiveById">
+        update footer
+        <set>
+            <include refid="update_option_selective"/>
+        </set>
+
+        where id= #{id}
+    </update>
 
     <select id="findFooterList" parameterType="com.midland.web.model.Footer" resultMap="BaseResultMap">
         select
@@ -179,6 +187,56 @@
             is_delete= #{isDelete,jdbcType=INTEGER},
         </if>
     </sql>
+
+
+    <sql id="update_option_selective">
+        <if test="registrationProtocol != null">
+            registration_protocol= #{registrationProtocol,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="disclaimer != null">
+            disclaimer= #{disclaimer,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="recordNumber != null">
+            record_number= #{recordNumber,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="recruitment != null">
+            recruitment= #{recruitment,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="aboutUs != null">
+            about_us= #{aboutUs,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="privacy != null">
+            privacy= #{privacy,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="serviceArea != null">
+            service_area= #{serviceArea,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="tradingProcess != null">
+            trading_process= #{tradingProcess,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="isexport != null">
+            isexport= #{isexport,jdbcType=INTEGER},
+        </if>
+        <if test="purpose != null">
+            purpose= #{purpose,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="eliteDesc != null">
+            elite_desc= #{eliteDesc,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="memberShip != null">
+            member_ship= #{memberShip,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="development != null">
+            development= #{development,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="contactUs != null">
+            contact_us= #{contactUs,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="isDelete != null">
+            is_delete= #{isDelete,jdbcType=INTEGER},
+        </if>
+    </sql>
+
 
     <sql id="select_option">
         <if test="id != null">

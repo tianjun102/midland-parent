@@ -82,6 +82,19 @@ public class FooterServiceImpl implements FooterService {
             throw e;
         }
     }
+ @Override
+    public void updateFooterSelectiveById(Footer footer) throws Exception {
+        try {
+            log.debug("updateFooterById  {}", footer);
+            int result = footerMapper.updateFooterSelectiveById(footer);
+            if (result < 1) {
+                throw new Exception("updateFooterById失败");
+            }
+        } catch (Exception e) {
+            log.error("updateFooterById  {}", footer, e);
+            throw e;
+        }
+    }
 
     /**
      * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
