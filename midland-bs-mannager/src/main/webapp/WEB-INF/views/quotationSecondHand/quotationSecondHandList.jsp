@@ -21,6 +21,7 @@
             <th style="width: 8%">类型</th>
             <th style="width: 8%">成交套数</th>
             <th style="width: 8%">成交面积</th>
+            <th style="width: 8%">成交均价</th>
             <th style="width: 8%">数据时间</th>
             <th style="width: 8%">更新时间</th>
             <th style="width: 10%">操作</th>
@@ -41,6 +42,7 @@
                         </c:forEach></td>
                         <td>${item.dealNum}</td>
                         <td>${item.dealAcreage}</td>
+                        <td>${item.dealAvgPrice}</td>
                         <td>${item.dataTime}</td>
                         <td>${item.updateTime}</td>
                         <td>

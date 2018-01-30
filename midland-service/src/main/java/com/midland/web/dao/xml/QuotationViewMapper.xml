@@ -118,10 +118,10 @@
             and pre_deal_price= #{preDealPrice,jdbcType=DOUBLE}
         </if>
         <if test="startTime != null">
-            and data_time &gt; #{startTime,jdbcType=VARCHAR}
+            and data_time &gt;= #{startTime,jdbcType=VARCHAR}
         </if>
         <if test="endTime != null">
-            and data_time &lt; #{endTime,jdbcType=VARCHAR}
+            and data_time &lt;= #{endTime,jdbcType=VARCHAR}
         </if>
     </sql>
 

@@ -207,7 +207,10 @@ public class EliteVipController extends BaseFilter {
 			MidlandHelper.doPage(request);
 			Page<EliteVip> result = (Page<EliteVip>)eliteVipServiceImpl.findEliteVipList(eliteVip);
 			List<Integer> list = result.stream().map(e->e.getCateId()).collect(Collectors.toList());
-			List<Category> vipCateGory = categoryServiceImpl.findCategoryListByIdList(list);
+			List<Category> vipCateGory =new ArrayList<>();
+			if (list.size()>0){
+				vipCateGory = categoryServiceImpl.findCategoryListByIdList(list);
+			}
 			Paginator paginator=result.getPaginator();
 			model.addAttribute("paginator",paginator);
 			model.addAttribute("vipCateGory",vipCateGory);

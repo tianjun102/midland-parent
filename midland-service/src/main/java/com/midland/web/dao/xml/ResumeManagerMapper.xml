@@ -160,16 +160,16 @@
             and id= #{id,jdbcType=INTEGER}
         </if>
         <if test="deliverer != null">
-            and deliverer= #{deliverer,jdbcType=VARCHAR}
+            and deliverer   like CONCAT(CONCAT('%', #{deliverer}), '%')
         </if>
         <if test="phone != null">
-            and phone= #{phone,jdbcType=VARCHAR}
+            and phone  like CONCAT(CONCAT('%', #{phone}), '%')
         </if>
         <if test="post != null">
-            and post= #{post,jdbcType=VARCHAR}
+            and post like CONCAT(CONCAT('%', #{post}), '%')
         </if>
         <if test="email != null">
-            and email= #{email,jdbcType=VARCHAR}
+            and email  like CONCAT(CONCAT('%', #{email}), '%')
         </if>
         <if test="addTime != null">
             and add_time= #{addTime,jdbcType=TIMESTAMP}

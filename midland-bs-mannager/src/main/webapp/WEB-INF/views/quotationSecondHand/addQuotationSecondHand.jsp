@@ -34,6 +34,9 @@
             <li class=""><span>成交面积：</span>
                 <input type="text" name="dealAcreage" id="dealAcreage" value="${item.dealAcreage}"/>
             </li>
+            <li class=""><span>成交金额：</span>
+                <input type="text" name="dealAvgPrice" id="dealAvgPrice" value="${item.dealAvgPrice}"/>
+            </li>
             <li class="col-sm-12 col-md-12 col-lg-12">
                 <span></span>
                 <a target="contentF" class="public_btn bg2" id="save" onclick="addData()">更新</a>

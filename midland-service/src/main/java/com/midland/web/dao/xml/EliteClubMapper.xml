@@ -178,13 +178,13 @@
             and img_desc= #{imgDesc,jdbcType=VARCHAR}
         </if>
         <if test="adName != null">
-            and ad_name= #{adName,jdbcType=VARCHAR}
+            and ad_name like CONCAT(CONCAT('%', #{adName}), '%')
         </if>
         <if test="adTime != null">
             and ad_time= #{adTime,jdbcType=VARCHAR}
         </if>
         <if test="adTitle != null">
-            and ad_title= #{adTitle,jdbcType=VARCHAR}
+            and ad_title like CONCAT(CONCAT('%', #{adTitle}), '%')
         </if>
         <if test="adAddress != null">
             and ad_address= #{adAddress,jdbcType=VARCHAR}

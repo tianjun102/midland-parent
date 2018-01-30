@@ -61,7 +61,7 @@
         yAxis: [
             {
                 type: 'value',
-                name: '价格',
+                name: '成交金额',
                 min: 0,
                 max: ${listMax},
                 interval:${listStep},

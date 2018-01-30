@@ -45,6 +45,9 @@ public class QuotationUtil {
     }
 
     public static Double getRatio(Double dealNum, Double preDealNum) {
+        if (dealNum ==null|| dealNum-0.0==0 || preDealNum == null || preDealNum -0.0==0){
+            return 0.0;
+        }
         double minus = preDealNum == null ? dealNum : preDealNum;
         double numRes = Calculate.minus(Double.valueOf(dealNum), minus);
         double numRatio = Calculate.divide(numRes, minus);

@@ -34,7 +34,7 @@
 		  onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 		<input type="hidden" name="url" id="url" value="${url}"/>
 		<input type="hidden" name="showType" id="showType" value="${showType}"/>
-		<ul class="userinfo row">
+		<ul class="userinfo  row">
 			<li>
 				<%@include file="../menu/dist.jsp" %>
 			</li>
@@ -57,7 +57,7 @@
 			</li>
 			<li>
 				<span style="width:90px">环比类型：</span>
-				<select name="field" onchange="fieldChange()" id="field" style="height: 36px;">
+				<select name="field"  onchange="fieldChange()" id="field" style="height: 28px;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" >
 					<option value="0">成交套数</option>
 					<option value="1">成交面积</option>
 					<option value="2">成交均价</option>

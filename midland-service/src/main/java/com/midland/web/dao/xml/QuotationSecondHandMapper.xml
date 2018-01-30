@@ -17,12 +17,13 @@
         <result column="city_name" property="cityName" jdbcType="VARCHAR"/>
         <result column="area_name" property="areaName" jdbcType="VARCHAR"/>
         <result column="slice_name" property="sliceName" jdbcType="VARCHAR"/>
+        <result column="deal_avg_price" property="dealAvgPrice" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,date_format(str_to_date(data_time,
         '%Y-%m'),'%Y-%m')data_time,type,city_id,area_id,slice_id,deal_num,deal_acreage,ring_ratio,DATE_FORMAT(update_time,'%Y-%m-%d
-        %H:%i:%s')update_time,is_delete,city_name,area_name,slice_name
+        %H:%i:%s')update_time,is_delete,city_name,area_name,slice_name,deal_avg_price
     </sql>
     <select id="selectQuotationSecondHandById" resultMap="BaseResultMap">
         select
@@ -170,6 +171,11 @@
                 <if test="s.sliceName != null">
                     slice_name,
                 </if>
+                <if test="s.dealAvgPrice != null">
+                    deal_avg_price,
+                </if>
+
+
             </trim>
             values
             <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -212,6 +218,11 @@
                 <if test="s.sliceName != null">
                     #{s.sliceName,jdbcType=VARCHAR},
                 </if>
+                <if test="s.dealAvgPrice != null">
+                    #{s.dealAvgPrice,jdbcType=VARCHAR},
+                </if>
+
+
             </trim>
         </foreach>
     </insert>
@@ -257,6 +268,9 @@
             <if test="sliceName != null">
                 slice_name,
             </if>
+            <if test="s.dealAvgPrice != null">
+                deal_avg_price,
+            </if>
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -299,6 +313,11 @@
             <if test="sliceName != null">
                 #{sliceName,jdbcType=VARCHAR},
             </if>
+
+            <if test="s.dealAvgPrice != null">
+                #{s.dealAvgPrice,jdbcType=VARCHAR},
+            </if>
+
         </trim>
     </insert>
 
@@ -341,6 +360,9 @@
         </if>
         <if test="sliceName != null">
             slice_name= #{sliceName,jdbcType=VARCHAR},
+        </if>
+        <if test="dealAvgPrice != null">
+            deal_avg_price=#{dealAvgPrice,jdbcType=VARCHAR},
         </if>
     </sql>
 
@@ -392,6 +414,10 @@
         </if>
         <if test="sliceName != null">
             and slice_name= #{sliceName,jdbcType=VARCHAR}
+        </if>
+
+        <if test="dealAvgPrice != null">
+            and deal_avg_price=#{dealAvgPrice,jdbcType=VARCHAR}
         </if>
     </sql>
 

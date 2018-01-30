@@ -33,6 +33,7 @@
         <input type="hidden" name="cityName" id="cityName">
         <select id="citys" onchange="initCity()"
                 style="height: 28px;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+
             <c:choose>
                 <c:when test="${not empty item.cityId}">
                     <option value="${item.cityId}">${item.cityName}</option>
@@ -52,7 +53,14 @@
         <input type="hidden" value="" name="areaName">
         <select id="districts" onchange="initDistrict()"
                 style="height: 100%;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
-            <option value="">请选择</option>
+            <c:choose>
+                <c:when test="${not empty item.cityId}">
+                    <option value="${item.areaId}">${item.areaName}</option>
+                </c:when>
+                <c:otherwise>
+                    <option value="">请选择</option>
+                </c:otherwise>
+            </c:choose>
         </select>
     </p>
 

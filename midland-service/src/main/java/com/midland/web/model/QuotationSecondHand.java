@@ -71,6 +71,18 @@ public class QuotationSecondHand {
      * 截至时间
      **/
     private String endTime;
+    /**
+     * 成交均价
+     */
+    private String dealAvgPrice;
+
+    public String getDealAvgPrice() {
+        return dealAvgPrice;
+    }
+
+    public void setDealAvgPrice(String dealAvgPrice) {
+        this.dealAvgPrice = dealAvgPrice;
+    }
 
     public Integer getPreNum() {
         return preNum;
