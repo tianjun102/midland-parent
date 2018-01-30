@@ -77,8 +77,7 @@
         <c:if test="${not empty isSuper}"><input
                 style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;margin-top: 10px;"
                 onclick="batchDelete(0)" class="public_btn bg1" type="submit" value="批量恢复"/></c:if>
-        <input style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;margin-top: 10px;"
-               onclick="window.open('${ctx}/rest/hotSearch/export','contentF')" class="public_btn bg1" type="submit"
+        <input style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;margin-top: 10px;" onclick="export1()" class="public_btn bg1" type="submit"
                value="导出"/>
         <div id="listDiv"></div>
     </section>
@@ -86,6 +85,13 @@
 
 
 <script type="text/javascript">
+    function export1() {
+
+        var data = $("#searchForm").serialize();
+
+        window.location.href = "${ctx}/rest/hotSearch/export?" + data;
+    }
+
     function toAddPage() {
         layer.open({
             type: 2,

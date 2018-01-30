@@ -119,7 +119,6 @@
             '</section>',
             btn: ['确定', '取消'],
             yes: function (index) {
-                var data = $("#formId").serialize();
                 $.ajax({
                     type: "post",
                     url: "${ctx}/rest/quotation/update?id="+id+"&isDelete="+isDelete,

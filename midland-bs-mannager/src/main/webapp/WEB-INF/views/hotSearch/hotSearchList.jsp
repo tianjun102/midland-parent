@@ -122,7 +122,6 @@
     }
 
     function to_edit(id){
-        debugger;
         layer.open({
             type: 2,
             title: ['修改热搜词'],
@@ -134,11 +133,13 @@
 
     //排序
     function sort(id,orderById,sort) {
+        var data = $("#searchForm").serialize();
         $.ajax({
             type: "post",
             url: "${ctx}/rest/hotSearch/sort?sort="+sort+"&orderBy="+orderById+"&id="+id,
             async: false, // 此处必须同步
             dataType: "json",
+            data:data,
 
             success: function (data) {
                 if (data.state==0){
