@@ -31,7 +31,7 @@ public class InformationRestController extends ServiceBaseFilter {
 	private CommentService commentServiceImpl;
 
 	/**
-	 * 新增
+	 * 新增 资讯
 	 **/
 	@RequestMapping("add")
 	public Object addInformation(@RequestBody Information obj) throws Exception {
@@ -112,8 +112,32 @@ public class InformationRestController extends ServiceBaseFilter {
 			log.info("findInformationList  {}",obj);
 			MidlandHelper.doPage(request);
 			obj.setIsDelete(Contant.isNotDelete);
-			obj.setStatus(0);//上架
+			obj.setStatus(Contant.PUBLISH_UP);//上架
 			Page<Information> list = (Page<Information>)informationServiceImpl.findInformationList(obj);
+			Paginator paginator=list.getPaginator();
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result.setMsg("success");
+			result.setList(list);
+			result.setPaginator(paginator);
+		} catch(Exception e) {
+			log.error("findInformationList  {}",obj,e);
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result.setMsg("service error");
+		}
+		return result;
+	}
+	/**
+	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
+	 **/
+	@RequestMapping("newest")
+	public Object findNewestInformationList(@RequestBody Information  obj, HttpServletRequest request) {
+		 Result result=new Result();
+		try {
+			log.info("findInformationList  {}",obj);
+			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setStatus(Contant.PUBLISH_UP);//上架
+			Page<Information> list = (Page<Information>)informationServiceImpl.findNewestInformationList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");

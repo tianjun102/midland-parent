@@ -162,6 +162,16 @@ public class InformationServiceImpl implements InformationService {
             throw e;
         }
     }
+    @Override
+    public List<Information> findNewestInformationList(Information information) throws Exception {
+        try {
+            log.debug("findNewestInformationList  {}", information);
+            return informationMapper.findNewestInformationList(information);
+        } catch (Exception e) {
+            log.error("findNewestInformationList  {}", information, e);
+            throw e;
+        }
+    }
 
     @Override
     public void batchUpdate(List<Information> informationList) throws Exception {

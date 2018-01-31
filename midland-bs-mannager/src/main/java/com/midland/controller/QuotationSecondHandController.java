@@ -9,10 +9,8 @@ import com.midland.web.Contants.Contant;
 import com.midland.web.model.Area;
 import com.midland.web.model.ExportModel;
 import com.midland.web.model.QuotationSecondHand;
-import com.midland.web.model.QuotationSecondHandView;
 import com.midland.web.model.user.User;
 import com.midland.web.service.QuotationSecondHandService;
-import com.midland.web.service.QuotationSecondHandViewService;
 import com.midland.web.service.SettingService;
 import com.midland.web.util.*;
 import org.apache.commons.lang3.StringUtils;
@@ -36,8 +34,6 @@ public class QuotationSecondHandController extends BaseFilter {
     private Logger log = LoggerFactory.getLogger(QuotationSecondHandController.class);
     @Autowired
     private QuotationSecondHandService quotationSecondHandServiceImpl;
-    @Autowired
-    private QuotationSecondHandViewService quotationSecondHandViewService;
 
     @Autowired
     private SettingService settingService;

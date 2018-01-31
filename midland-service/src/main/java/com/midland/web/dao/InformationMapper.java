@@ -25,6 +25,7 @@ public interface InformationMapper {
     List<Information> getByIdList(@Param("list") List<Integer> ids);
 
     List<Information> findInformationList(Information information);
+    List<Information> findNewestInformationList(Information information);
 
     int batchUpdate(@Param("informationList") List<Information> informationList);
 

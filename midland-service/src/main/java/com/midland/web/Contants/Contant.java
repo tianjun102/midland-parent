@@ -4,6 +4,20 @@ package com.midland.web.Contants;
  * Created by 'ms.x' on 2017/9/7.
  */
 public class Contant {
+
+    /**
+     * 资讯
+     */
+    public static final int PUBLISH_UP = 0;//资讯上架
+    public static final int PUBLISH_DOWN = 1;//资讯下架
+
+    /**
+     * information
+     */
+    public static final int INFORMATION = 1;//资讯
+    public static final int MARKET_RESEARCH = 0;//市场研究
+
+
     public static final int isNewHouse = 1;
     public static final int isOldHouse = 0;
     /**

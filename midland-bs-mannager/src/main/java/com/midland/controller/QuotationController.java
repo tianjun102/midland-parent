@@ -9,7 +9,6 @@ import com.midland.web.Contants.Contant;
 import com.midland.web.model.*;
 import com.midland.web.model.user.User;
 import com.midland.web.service.QuotationService;
-import com.midland.web.service.QuotationViewService;
 import com.midland.web.service.SettingService;
 import com.midland.web.util.*;
 import org.apache.commons.lang3.StringUtils;
@@ -33,8 +32,6 @@ public class QuotationController extends BaseFilter {
     private Logger log = LoggerFactory.getLogger(QuotationController.class);
     @Autowired
     private QuotationService quotationServiceImpl;
-    @Autowired
-    private QuotationViewService quotationViewServiceImpl;
     @Autowired
     private SettingService settingService;
 

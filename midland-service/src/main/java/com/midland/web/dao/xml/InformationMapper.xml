@@ -104,6 +104,19 @@
         ORDER BY order_by DESC
     </select>
 
+
+    <select id="findNewestInformationList" parameterType="com.midland.web.model.Information" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from information
+        where 1=1
+        <if test="isDelete == null">
+            and is_delete=0
+        </if>
+        <include refid="select_option"/>
+        ORDER BY release_time DESC
+    </select>
+
     <insert id="insertInformation" parameterType="com.midland.web.model.Information">
         <selectKey resultType="INTEGER" order="BEFORE" keyProperty="orderBy">
             SELECT Max(order_by)+1 as orderBy from information
