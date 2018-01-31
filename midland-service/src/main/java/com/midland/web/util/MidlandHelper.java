@@ -56,8 +56,15 @@ public class MidlandHelper {
         return format.format(intTime);
     }
 
-    public static String getMonth(Date time, Integer amount) {
+    public static String getMonthyyyyMMddHHmmss(Date time, Integer amount) {
         DateFormat format = new SimpleDateFormat(COMMON_DATE);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(time);
+        calendar.add(Calendar.MONTH, amount);
+        return format.format(calendar.getTime());
+    }
+    public static String getMonth(Date time, Integer amount) {
+        DateFormat format = new SimpleDateFormat(MONTH);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(time);
         calendar.add(Calendar.MONTH, amount);

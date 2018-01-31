@@ -18,7 +18,7 @@
 			<p class = "detail-title">
 				<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>
 			</p>
-		<form action="${ctx }/rest/disclaimer/list" method="POST" id="searchForm"
+		<form action="${ctx }/rest/siteProtocol/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
 				<%@include file="../menu/area_required.jsp" %>
@@ -55,7 +55,7 @@
                 title:['新增'],
                 resize: false,
                 scrollbar:false,
-                content:['${ctx}/rest/disclaimer/to_add', 'yes']
+                content:['${ctx}/rest/siteProtocol/to_add', 'yes']
             });
         }
 		 window.onload = function(){

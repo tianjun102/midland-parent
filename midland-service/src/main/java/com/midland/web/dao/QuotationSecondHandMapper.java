@@ -23,6 +23,8 @@ public interface QuotationSecondHandMapper {
 
     List<QuotationSecondHand> findQuotationSecondHandList(QuotationSecondHand quotationSecondHand);
 
+    List<QuotationSecondHand> getQuotationSecondHandByDate(QuotationSecondHand quotationSecondHand);
+
     List<QuotationSecondHand> findQuotationSecondHandListTemp(QuotationSecondHand quotationSecondHand, List<String> list);
 
     int batchUpdate(@Param("quotationSecondHandList") List<QuotationSecondHand> quotationSecondHandList);

@@ -13,7 +13,7 @@
 </head>
 <body>
 <section class="content" style="border:none;">
-    <form action="${ctx}/rest/disclaimer/update" method="post" id="dataForm">
+    <form action="${ctx}/rest/siteProtocol/update" method="post" id="dataForm">
         <ul class="adminfo width-lg row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <%@include file="../menu/area_required.jsp" %>
@@ -84,7 +84,7 @@
         debugger;
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/disclaimer/update",
+            url: "${ctx}/rest/siteProtocol/update",
             async: false, // 此处必须同步
             dataType: "json",
             data: data,

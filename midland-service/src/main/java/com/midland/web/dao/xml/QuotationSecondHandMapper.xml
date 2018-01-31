@@ -57,6 +57,18 @@
         </if>
         <include refid="select_option"/>
     </select>
+    <select id="getQuotationSecondHandByDate" parameterType="com.midland.web.model.QuotationSecondHand"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from quotation_second_hand
+        where 1=1
+        <if test="isDelete == null">
+            and is_delete=0
+        </if>
+        <include refid="select_option"/>
+        limit 1
+    </select>
 
 
     <select id="findQuotationSecondHandListTemp" parameterType="com.midland.web.model.QuotationSecondHand"

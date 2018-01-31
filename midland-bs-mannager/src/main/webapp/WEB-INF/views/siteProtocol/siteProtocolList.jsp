@@ -58,7 +58,7 @@
     function delete1(id){
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/disclaimer/update?id="+id+"&isDelete=1",
+            url: "${ctx}/rest/siteProtocol/update?id="+id+"&isDelete=1",
             async: false, // 此处必须同步
             dataType: "json",
 
@@ -79,7 +79,7 @@
             title: ['修改'],
             shade: 0.3,
             area: ['100%', '100%'],
-            content: ['${ctx}/rest/disclaimer/to_update?id='+id,'yes']
+            content: ['${ctx}/rest/siteProtocol/to_update?id='+id,'yes']
         });
     }
 

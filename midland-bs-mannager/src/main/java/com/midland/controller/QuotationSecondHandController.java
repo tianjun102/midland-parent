@@ -95,7 +95,7 @@ public class QuotationSecondHandController extends BaseFilter {
         }
         if (obj.getStartTime() == null) {
             Date date = new Date();
-            obj.setStartTime(MidlandHelper.getMonth(date, -12));
+            obj.setStartTime(MidlandHelper.getMonthyyyyMMddHHmmss(date, -12));
         }
         if (obj.getEndTime() == null) {
             obj.setEndTime(MidlandHelper.getCurrentTime());
@@ -305,7 +305,7 @@ public class QuotationSecondHandController extends BaseFilter {
 
         if (obj.getStartTime() == null) {
             Date date = new Date();
-            obj.setStartTime(MidlandHelper.getMonth(date, -12));
+            obj.setStartTime(MidlandHelper.getMonthyyyyMMddHHmmss(date, -12));
         }
         if (obj.getEndTime() == null) {
             obj.setEndTime(MidlandHelper.getCurrentTime());

@@ -101,6 +101,16 @@ public class QuotationSecondHandServiceImpl implements QuotationSecondHandServic
             throw e;
         }
     }
+ @Override
+    public List<QuotationSecondHand> getQuotationSecondHandByDate(QuotationSecondHand quotationSecondHand) throws Exception {
+        try {
+            log.debug("getQuotationSecondHandByDate  {}", quotationSecondHand);
+            return quotationSecondHandMapper.getQuotationSecondHandByDate(quotationSecondHand);
+        } catch (Exception e) {
+            log.error("getQuotationSecondHandByDate  {}", quotationSecondHand, e);
+            throw e;
+        }
+    }
 
     /**
      * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
