@@ -114,25 +114,10 @@
 					</dt>
 					<dd>
 						<shiro:hasPermission name="serviceAreaList">
-							<a id = "left9" href="${ctx}/rest/privacy/index" target="contentF"><span>私隐政策</span></a>
-						</shiro:hasPermission>
-						<shiro:hasPermission name="serviceAreaList">
-							<a id = "left10" href="${ctx}/rest/disclaimer/index" target="contentF"><span>免责声明</span></a>
-						</shiro:hasPermission>
-						<shiro:hasPermission name="serviceAreaList">
-							<a id = "left11" href="${ctx}/rest/registrationProtocol/index" target="contentF"><span>注册协议</span></a>
-						</shiro:hasPermission>
-						<shiro:hasPermission name="serviceAreaList">
 							<a id = "left12" href="${ctx}/rest/serviceArea/index" target="contentF"><span>服务范围</span></a>
-						</shiro:hasPermission>
-						<shiro:hasPermission name="aboutUsList">
-							<a id = "left13" href="${ctx}/rest/aboutUs/index" target="contentF"><span>关于我们</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="tradingProcessList">
 							<a id = "left14" href="${ctx}/rest/tradingProcess/index" target="contentF"><span>买卖流程</span></a>
-						</shiro:hasPermission>
-						<shiro:hasPermission name="tradingProcessList">
-							<a id = "left15" href="${ctx}/rest/contactUs/index" target="contentF"><span>联系我们</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="filmLibraryList">
 							<a id = "left16" href="${ctx}/rest/liaisonRecord/index" target="contentF"><span>联络记录</span></a>
@@ -323,10 +308,6 @@
 				<dd>
 
 					<shiro:hasPermission name="popularList">
-						<a id = "left43" href="${ctx}/rest/record/index" target="contentF"><span>备案</span></a>
-					</shiro:hasPermission>
-
-					<shiro:hasPermission name="popularList">
 						<a id = "left44" href="${ctx}/rest/setting/showPopularIndex?type=3" target="contentF"><span>热门关注管理</span></a>
 					</shiro:hasPermission>
 
@@ -357,17 +338,9 @@
 					<shiro:hasPermission name="bsUserList">
 						<a id = "left51" href="${ctx}/rest/user/bsUserIndex" target="contentF"><span>前台用户管理</span></a>
 					</shiro:hasPermission>
+
 					<shiro:hasPermission name="userList">
-						<a id = "left50" href="${ctx}/rest/registrationProtocol/index1" target="contentF"><span>前台用户注册协议</span></a>
-					</shiro:hasPermission>
-					<shiro:hasPermission name="userList">
-						<a id = "left50" href="${ctx}/rest/disclaimer/index1" target="contentF"><span>免责申明</span></a>
-					</shiro:hasPermission>
-					<shiro:hasPermission name="userList">
-						<a id = "left50" href="${ctx}/rest/privacy/index1" target="contentF"><span>私隐政策</span></a>
-					</shiro:hasPermission>
-					<shiro:hasPermission name="userList">
-						<a id = "left50" href="${ctx}/rest/cornerFile/index1" target="contentF"><span>角文件</span></a>
+						<a id = "left50" href="${ctx}/rest/disclaimer/index1" target="contentF"><span>网站协议</span></a>
 					</shiro:hasPermission>
 
 					<shiro:hasPermission name="rolelist">

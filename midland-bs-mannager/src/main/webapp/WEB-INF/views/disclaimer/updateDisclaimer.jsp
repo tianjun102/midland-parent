@@ -18,7 +18,7 @@
             <input type="hidden" name="id" id="id" value="${item.id}">
             <%@include file="../menu/area_required.jsp" %>
             <li><span>平台:</span>
-                <select name="source" id="source" >
+                <select name="source" id="source">
                     <option
                             <c:if test="${item.source =='0'}">selected='selected'</c:if> value="0">网站
                     </option>
@@ -30,9 +30,35 @@
 
             <li id="textArea" style="display: block;"><span>免责申明：</span>
                 <textarea class="textarea-lg"
-                          name="registrationProtocol"
-                          id="myEditor" rows="" cols="">${item.registrationProtocol}</textarea>
+                          name="disclaimer"
+                          id="myEditor" rows="" cols="">${item.disclaimer}</textarea>
             </li>
+            <li id="textArea" style="display: block;"><span>联系我们：</span>
+                <textarea class="textarea-lg"
+                          name="contantUs"
+                          id="myEditor1" rows="" cols="">${item.contantUs}</textarea>
+            </li>
+            <li id="textArea" style="display: block;"><span>关于美联：</span>
+                <textarea class="textarea-lg"
+                          name="aboutUs"
+                          id="myEditor2" rows="" cols="">${item.aboutUs}</textarea>
+            </li>
+            <li id="textArea" style="display: block;"><span>脚文件：</span>
+                <textarea class="textarea-lg"
+                          name="cornerFile"
+                          id="myEditor3" rows="" cols="">${item.cornerFile}</textarea>
+            </li>
+            <li id="textArea" style="display: block;"><span>私隐政策：</span>
+                <textarea class="textarea-lg"
+                          name="privacy"
+                          id="myEditor4" rows="" cols="">${item.privacy}</textarea>
+            </li>
+            <li id="textArea" style="display: block;"><span>注册协议：</span>
+                <textarea class="textarea-lg"
+                          name="registrationProtocol"
+                          id="myEditor5" rows="" cols="">${item.registrationProtocol}</textarea>
+            </li>
+
             <li>
                 <span></span>
                 <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">更新</a>
@@ -45,6 +71,12 @@
 
 <script type="text/javascript">
     UE.getEditor('myEditor');
+    UE.getEditor('myEditor1');
+    UE.getEditor('myEditor2');
+    UE.getEditor('myEditor3');
+    UE.getEditor('myEditor4');
+    UE.getEditor('myEditor5');
+
 
     //保存数据
     function updateData() {

@@ -1,11 +1,9 @@
 package com.midland.controller;
 
 import com.midland.web.model.Disclaimer;
-import com.midland.web.model.user.User;
 import com.midland.web.service.DisclaimerService;
 import com.midland.base.BaseFilter;
 import com.midland.web.service.SettingService;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import java.util.Map;
 import java.util.HashMap;
@@ -28,7 +26,7 @@ public class DisclaimerController extends BaseFilter  {
 	private Logger log = LoggerFactory.getLogger(DisclaimerController.class);
 	@Autowired
 	private DisclaimerService disclaimerServiceImpl;
-	@Autowired
+@Autowired
 	private SettingService settingServiceImpl;
 
 	/**
@@ -54,15 +52,10 @@ public class DisclaimerController extends BaseFilter  {
 	 **/
 	@RequestMapping("add")
 	@ResponseBody
-	public Object addDisclaimer(Disclaimer disclaimer,HttpServletRequest request) throws Exception {
+	public Object addDisclaimer(Disclaimer disclaimer) throws Exception {
 		Map<String,Object> map = new HashMap<>();
 		try {
 			log.info("addDisclaimer {}",disclaimer);
-			if (StringUtils.isEmpty(disclaimer.getCityId())) {
-				User user = MidlandHelper.getCurrentUser(request);
-				disclaimer.setCityId(user.getCityId());
-				disclaimer.setCityName(user.getCityName());
-			}
 			disclaimer.setCreateTime(MidlandHelper.getCurrentTime());
 			disclaimerServiceImpl.insertDisclaimer(disclaimer);
 			map.put("state",0);
