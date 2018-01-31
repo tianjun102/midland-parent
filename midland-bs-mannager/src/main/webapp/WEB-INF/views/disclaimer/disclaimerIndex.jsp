@@ -22,7 +22,7 @@
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
 				<%@include file="../menu/area_required.jsp" %>
-				<li><span>平台:</span>
+				<li><span>平台 ：</span>
 					<select name="source" id="source" class="dropdown" >
 						<option value>全部 </option>
 						<option
@@ -34,9 +34,7 @@
 					</select>
 				</li>
 				</li>
-				<li><span>手机号码：</span>
-					<input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>
-				</li>
+
 				<li>
 					<input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/>
 				</li>

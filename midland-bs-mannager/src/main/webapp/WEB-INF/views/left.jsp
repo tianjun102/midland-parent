@@ -296,6 +296,51 @@
 					</dd>
 				</dl>
 			</shiro:hasPermission>
+ <%--站点管理--%>
+		<shiro:hasPermission name="siteManage">
+				<dl class="list-left6">
+					<dt>
+						<a href="javascript:;"
+						   dota="url(${ctx}/assets/img/06.png) no-repeat 20px center"
+						   data-img="url(${ctx}/assets/img/06_w.png) no-repeat 20px center">站点管理<span
+								class="glyphicon glyphicon-menu-right"></span></a>
+					</dt>
+					<dd>
+						<shiro:hasPermission name="popularList">
+							<a id = "left44" href="${ctx}/rest/setting/showPopularIndex?type=3" target="contentF"><span>热门关注管理</span></a>
+						</shiro:hasPermission>
+
+						<shiro:hasPermission name="popularCateList">
+							<a id = "left45" href="${ctx}/rest/category/index?type=3" target="contentF"><span>热门关注分类管理</span></a>
+						</shiro:hasPermission>
+
+						<shiro:hasPermission name="linkUrlList">
+							<a id = "left46" href="${ctx}/rest/setting/showlinkUrlIndex" target="contentF"><span>友情链接管理</span></a>
+						</shiro:hasPermission>
+						<shiro:hasPermission name="specialPageList">
+							<a id = "left53" href="${ctx}/rest/specialPage/index" target="contentF"><span>首页特殊模块配置</span></a>
+						</shiro:hasPermission>
+
+						<shiro:hasPermission name="qrCodeList">
+							<a id = "left54" href="${ctx}/rest/qrCode/index" target="contentF"><span>二维码管理</span></a>
+						</shiro:hasPermission>
+
+						<shiro:hasPermission name="pageConfList">
+							<a id = "left55" href="${ctx}/rest/pageConf/index" target="contentF"><span>页面配置</span></a>
+						</shiro:hasPermission>
+						<shiro:hasPermission name="userList">
+							<a id = "left50" href="${ctx}/rest/disclaimer/index1" target="contentF"><span>网站协议</span></a>
+						</shiro:hasPermission>
+						<shiro:hasPermission name="siteMapList">
+							<a id = "left58" href="${ctx}/rest/siteMap/index" target="contentF"><span>网站地图管理</span></a>
+						</shiro:hasPermission>
+
+						<shiro:hasPermission name="siteMapCate">
+							<a id = "left60" href="${ctx}/rest/category/index?type=4" target="contentF"><span>网站地图分类管理</span></a>
+						</shiro:hasPermission>
+					</dd>
+				</dl>
+			</shiro:hasPermission>
 
 		<shiro:hasPermission name="systemManage">
 			<dl class="list-left8">
@@ -307,17 +352,6 @@
 				</dt>
 				<dd>
 
-					<shiro:hasPermission name="popularList">
-						<a id = "left44" href="${ctx}/rest/setting/showPopularIndex?type=3" target="contentF"><span>热门关注管理</span></a>
-					</shiro:hasPermission>
-
-					<shiro:hasPermission name="popularCateList">
-						<a id = "left45" href="${ctx}/rest/category/index?type=3" target="contentF"><span>热门关注分类管理</span></a>
-					</shiro:hasPermission>
-
-					<shiro:hasPermission name="linkUrlList">
-						<a id = "left46" href="${ctx}/rest/setting/showlinkUrlIndex" target="contentF"><span>友情链接管理</span></a>
-					</shiro:hasPermission>
 
 					<shiro:hasPermission name="bannerList">
 						<a id = "left47" href="${ctx}/rest/setting/bannerIndex" target="contentF"><span>Banner管理</span></a>
@@ -339,25 +373,13 @@
 						<a id = "left51" href="${ctx}/rest/user/bsUserIndex" target="contentF"><span>前台用户管理</span></a>
 					</shiro:hasPermission>
 
-					<shiro:hasPermission name="userList">
-						<a id = "left50" href="${ctx}/rest/disclaimer/index1" target="contentF"><span>网站协议</span></a>
-					</shiro:hasPermission>
+
 
 					<shiro:hasPermission name="rolelist">
 						<a id = "left52" href="${ctx}/rest/role/roleIndex" target="contentF"><span>角色列表</span></a>
 					</shiro:hasPermission>
 
-					<shiro:hasPermission name="specialPageList">
-						<a id = "left53" href="${ctx}/rest/specialPage/index" target="contentF"><span>首页特殊模块配置</span></a>
-					</shiro:hasPermission>
 
-					<shiro:hasPermission name="qrCodeList">
-						<a id = "left54" href="${ctx}/rest/qrCode/index" target="contentF"><span>二维码管理</span></a>
-					</shiro:hasPermission>
-
-					<shiro:hasPermission name="pageConfList">
-						<a id = "left55" href="${ctx}/rest/pageConf/index" target="contentF"><span>页面配置</span></a>
-					</shiro:hasPermission>
 
 					<shiro:hasPermission name="feedbackList">
 						<a id = "left56" href="${ctx}/rest/feedback/index" target="contentF"><span>反馈管理</span></a>
@@ -367,13 +389,7 @@
 						<a id = "left57" href="${ctx}/rest/feedbackEmail/index?emailType=1" target="contentF"><span>反馈邮箱</span></a>
 					</shiro:hasPermission>
 
-					<shiro:hasPermission name="siteMapList">
-						<a id = "left58" href="${ctx}/rest/siteMap/index" target="contentF"><span>网站地图管理</span></a>
-					</shiro:hasPermission>
 
-					<shiro:hasPermission name="siteMapCate">
-						<a id = "left60" href="${ctx}/rest/category/index?type=4" target="contentF"><span>网站地图分类管理</span></a>
-					</shiro:hasPermission>
 					<shiro:hasPermission name="siteMapCate">
 						<a id = "left61" href="${ctx}/rest/setting/time/index" target="contentF"><span>经纪人响应时间</span></a>
 					</shiro:hasPermission>
