@@ -61,6 +61,9 @@ public class RecruitManagerController extends BaseFilter {
 		parem.put("id","*");
 		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
 		List<Area> cityList = cityMap.get("city");
+		recruitManager.setStartTime(MidlandHelper.getCurrentTime());
+		recruitManager.setEndTime(MidlandHelper.getyyyyMMddHHmmss(MidlandHelper.getCurrentTime(),3));
+		model.addAttribute("item",recruitManager);
 		model.addAttribute("cityList",cityList);
 		return "recruitManager/addRecruitManager";
 	}
@@ -74,6 +77,9 @@ public class RecruitManagerController extends BaseFilter {
 		Map<String,Object> map = new HashMap<>();
 		try {
 			log.debug("addRecruitManager {}",recruitManager);
+			if (recruitManager.getReleaseStatus()!=null&&recruitManager.getReleaseStatus()==0){
+				recruitManager.setReleaseTime(MidlandHelper.getCurrentTime());
+			}
 			recruitManagerServiceImpl.insertRecruitManager(recruitManager);
 			map.put("state",0);
 		} catch(Exception e) {

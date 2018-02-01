@@ -319,7 +319,7 @@ public class QuotationSecondHandController extends BaseFilter {
 
         if (obj.getStartTime() == null) {
             Date date = new Date();
-            obj.setStartTime(MidlandHelper.getMonthyyyyMMddHHmmss(date, -12));
+            obj.setStartTime(MidlandHelper.getyyyyMMddHHmmss(date, -12));
         }
         if (obj.getEndTime() == null) {
             obj.setEndTime(MidlandHelper.getCurrentTime());

@@ -29,7 +29,6 @@
             <ul class="adminfo row">
                 <li><span>招聘类型：</span>
                     <select name="type" id="type">
-                        <option value="" class="label">请选择</option>
                         <option
                                 <c:if test="${item.type==1}">selected="selected"</c:if> value="1">校招
                         </option>
@@ -61,7 +60,6 @@
                 </li>
                 <li><span>职业类别：</span>
                     <select name="category" id="category">
-
                         <option value="0" <c:if test="${item.category==0}">selected="selected"</c:if>>开发类</option>
                         <option value="1" <c:if test="${item.category==1}">selected="selected"</c:if>>设计类</option>
                         <option value="2" <c:if test="${item.category==2}">selected="selected"</c:if>>销售类</option>

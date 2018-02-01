@@ -58,6 +58,7 @@ function checkEmail(id,name,msg) {
 }
 
 function checkSelect(ids,msgs){
+    debugger;
     if (msgs==null||msgs==""){
         msgs = "不能为空";
     }

@@ -12,11 +12,6 @@
 
 </head>
 <body>
-<style>
-    .layui-layer {
-        top: 260px !important;
-    }
-</style>
 
 <div class="box">
     <section class="content">
@@ -28,17 +23,15 @@
             <input type="hidden" name="cityName" id="cityName" value="">
             <ul class="adminfo row">
                 <li><span>招聘类型：</span>
-                    <select name="type" id="type"
-                            >
-                        <option value="" class="label">请选择</option>
+                    <select name="type" id="type">
+                        <option value="" >请选择</option>
                         <option value="1">校招</option>
                         <option value="2">社招</option>
                     </select>
                     <span class="_star ">*</span>
                 </li>
                 <li><span>城市：</span>
-                    <select onchange="setCityName();" name="cityId" id="cityId"
-                            >
+                    <select onchange="setCityName();" name="cityId" id="cityId">
                         <c:forEach items="${cityList}" var="city">
                             <option value="${city.id}">${city.name}</option>
                         </c:forEach>
@@ -47,16 +40,15 @@
                 </li>
                 <li>
                     <span>上线时间：</span>
-                    <input type="text" name="startTime" class="Wdate half" id="time3"
+                    <input type="text" name="startTime" class="Wdate half" id="time3" value="${item.startTime}"
                            onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time4\')}'})"/>
                     <em class="gang">-</em>
-                    <input type="text" name="endTime" class="Wdate half" id="time4"
+                    <input type="text" name="endTime" class="Wdate half" id="time4" value="${item.endTime}"
                            onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'time3\')}'})"/>
                 </li>
                 <li><span>职业类别：</span>
-                    <select name="category" id="category"
-                            >
-                        <option value="">请选择</option>
+                    <select name="category" id="category">
+                        <option value="" >请选择</option>
                         <option value="0">开发类</option>
                         <option value="1">设计类</option>
                         <option value="2">销售类</option>
@@ -67,13 +59,12 @@
                     </select>
                     <span class="_star ">*</span>
                 </li>
+
                 <li><span>工作分组：</span>
-                    <select name="group" id="group"
-                            >
-                        <option value="">请选择</option>
+                    <select name="group" id="group">
+                        <option value="" >请选择</option>
                         <option value="0">前线组</option>
                         <option value="1">后勤组</option>
-
                     </select>
                     <span class="_star ">*</span>
                 </li>
@@ -81,11 +72,10 @@
                     <input id="post" name="post" maxlength="255" type="text" value="">
                 </li>
                 <li><span>招聘人数：</span>
-                    <input id="recruitersNum" name="recruitersNum" maxlength="255" type="text" value="">
+                    <input id="recruitersNum" name="recruitersNum" maxlength="255" type="text" value="" onblur="InitInput.setNumber(this,9,0,0)">
                 </li>
                 <li><span>学历要求：</span>
-                    <select name="education" id="education"
-                            >
+                    <select name="education" id="education">
                         <option value="0">不限</option>
                         <option value="1">高中</option>
                         <option value="2">大专</option>
@@ -95,8 +85,7 @@
                     <span class="_star ">*</span>
                 </li>
                 <li><span>工作年限：</span>
-                    <select name="workLift" id="workLift"
-                            >
+                    <select name="workLift" id="workLift">
                         <option value="0">不限</option>
                         <option value="6">实习生</option>
                         <option value="1">应届毕业生</option>
@@ -108,10 +97,9 @@
                     <span class="_star ">*</span>
                 </li>
                 <li><span>上线状态：</span>
-                    <select name="releaseStatus" id="releaseStatus"
-                            >
-                        <option value="0">上线</option>
+                    <select name="releaseStatus" id="releaseStatus" >
                         <option value="1">下线</option>
+                        <option value="0">上线</option>
                     </select>
                     <span class="_star ">*</span>
                 </li>
@@ -138,11 +126,23 @@
 </div>
 
 <script type="text/javascript">
+    $(function () {
+        if ($("#cityName").val() == "") {
+            $("#cityName").val("${cityList[0].name}");
+        }
+    })
+
     UE.getEditor('myEditor');
     UE.getEditor('myEditor1');
 
     //保存数据
     function updateData() {
+        if (!checkSelect('type', '请选择招聘类型')
+        || !checkSelect('category', '请选择职位类别')
+        || !checkSelect('group','请选择工作分组') ) {
+            return;
+        }
+        debugger;
         var data = $("#dataForm").serialize();
         $.ajax({
             type: "post",

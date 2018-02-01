@@ -76,10 +76,24 @@ public class MidlandHelper {
      * @param amount
      * @return
      */
-    public static String getMonthyyyyMMddHHmmss(Date time, Integer amount) {
+    public static String getyyyyMMddHHmmss(Date time, Integer amount) {
         DateFormat format = new SimpleDateFormat(COMMON_DATE);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(time);
+        calendar.add(Calendar.MONTH, amount);
+        return format.format(calendar.getTime());
+    }
+    /**
+     * 获取当前月+int的时间 格式为2018-01-01 12:12:12
+     * @param time
+     * @param amount
+     * @return
+     */
+    public static String getyyyyMMddHHmmss(String time, Integer amount) {
+        Date tempTime = DateUtils.parseStringToDateYYMMDDHHmmss(time);
+        DateFormat format = new SimpleDateFormat(COMMON_DATE);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(tempTime);
         calendar.add(Calendar.MONTH, amount);
         return format.format(calendar.getTime());
     }

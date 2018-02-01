@@ -55,7 +55,7 @@ public class QuotationController extends BaseFilter {
 
         if (quotation.getStartTime() == null) {
             Date date = new Date();
-            quotation.setStartTime(MidlandHelper.getMonthyyyyMMddHHmmss(date, -12));
+            quotation.setStartTime(MidlandHelper.getyyyyMMddHHmmss(date, -12));
         }
         if (quotation.getEndTime() == null) {
             quotation.setEndTime(MidlandHelper.getCurrentTime());
@@ -192,7 +192,7 @@ public class QuotationController extends BaseFilter {
 
             if (quotation.getStartTime() == null) {
                 Date date = new Date();
-                quotation.setStartTime(MidlandHelper.getMonthyyyyMMddHHmmss(date, -12));
+                quotation.setStartTime(MidlandHelper.getyyyyMMddHHmmss(date, -12));
             }
             if (quotation.getEndTime() == null) {
                 quotation.setEndTime(MidlandHelper.getCurrentTime());
@@ -235,7 +235,7 @@ public class QuotationController extends BaseFilter {
 
         if (quotation.getStartTime() == null) {
             Date date = new Date();
-            quotation.setStartTime(MidlandHelper.getMonthyyyyMMddHHmmss(date, -12));
+            quotation.setStartTime(MidlandHelper.getyyyyMMddHHmmss(date, -12));
         }
         if (quotation.getEndTime() == null) {
             quotation.setEndTime(MidlandHelper.getCurrentTime());
@@ -267,7 +267,7 @@ public class QuotationController extends BaseFilter {
         }
         if (obj.getStartTime() == null) {
             Date date = new Date();
-            obj.setStartTime(MidlandHelper.getMonthyyyyMMddHHmmss(date, -12));
+            obj.setStartTime(MidlandHelper.getyyyyMMddHHmmss(date, -12));
         }
         if (obj.getEndTime() == null) {
             obj.setEndTime(MidlandHelper.getCurrentTime());
@@ -436,7 +436,7 @@ public class QuotationController extends BaseFilter {
 
         if (obj.getStartTime() == null) {
             Date date = new Date();
-            obj.setStartTime(MidlandHelper.getMonthyyyyMMddHHmmss(date, -12));
+            obj.setStartTime(MidlandHelper.getyyyyMMddHHmmss(date, -12));
         }
         if (obj.getEndTime() == null) {
             obj.setEndTime(MidlandHelper.getCurrentTime());
