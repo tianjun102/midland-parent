@@ -10,6 +10,7 @@ import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -145,23 +146,31 @@ public class QuotationSecondHandRestController extends ServiceBaseFilter {
     public Object findQuotationSecondHandList(@RequestBody QuotationSecondHand obj, HttpServletRequest request) {
         Result result = new Result();
         Map map = new HashMap();
+        String date = MidlandHelper.getCurrentTime();
+        String startTime = MidlandHelper.getFormatyyMMToMonth(date, -12);
         try {
             if (StringUtils.isEmpty(obj.getAreaId()) && StringUtils.isEmpty(obj.getAreaName())) {
-                //如果没有选择区域,默认为全市
+                /**
+                 * 如果没有选择区域,默认为全市
+                 */
                 obj.setAreaId("0");
             }
             if (StringUtils.isEmpty(obj.getCityId())) {
-                //没有选择城市,默认为当前用户的城市
+                /**
+                 * 没有选择城市,默认为当前用户的城市
+                 */
                 obj.setCityId("085");
             }
             if (obj.getType() == null) {
-                //没有选择类型,默认为住宅:  0商业;1住宅;2其他;3办公
+                /**
+                 * 没有选择类型,默认为住宅:  0商业;1住宅;2其他;3办公
+                 */
                 obj.setType(1);
             }
-            String date = MidlandHelper.getCurrentTime();
+
             if (obj.getStartTime() == null) {
 
-                obj.setStartTime(MidlandHelper.getFormatyyMMToMonth(date, -12));
+                obj.setStartTime(MidlandHelper.getFormatyyMMToMonth(date, -13));
             }
             if (obj.getEndTime() == null) {
                 obj.setEndTime(date);
@@ -190,15 +199,24 @@ public class QuotationSecondHandRestController extends ServiceBaseFilter {
             final double[] avgPriceMax = {0};
             final double[] avgPriceMin = {0};
             /**
-             * 查询
+             * 思路:  只查询最近一年的数据,所以从当前月往前退12个月,因为要计算(环比上个月)数据,
+             * 那么12个月前的环比上个月就是13个月前的数据,所有一次性查询13个月前到现在的数据
+             *
              */
-            List<QuotationSecondHand> list = quotationSecondHandServiceImpl.findQuotationSecondHandList(obj);
-            obj.setStartTime(MidlandHelper.getFormatyyMMToMonth(obj.getStartTime(), -1));
-            obj.setEndTime(MidlandHelper.getFormatyyMMToMonth(obj.getEndTime(), -1));
             List<QuotationSecondHand> listTemp = quotationSecondHandServiceImpl.findQuotationSecondHandList(obj);
+            /**
+             * jdk 1.8 lamada表达式,stream ,filter,查询12个月前的数据到当前月的数据
+             */
+            List<QuotationSecondHand> list = listTemp.stream().filter(e->{
+                return e.getDataTime().compareTo(startTime)>=0;
+            }).collect(Collectors.toList());
+
             list.forEach(e->{
                 month.add(e.getDataTime());
                 final QuotationSecondHand[] res = {null};
+                /**
+                 * 计算环比,(当前月的数据-上个月的数据)/上个月的数据 * 100%=环比
+                 */
                 listTemp.forEach(e1->{
                     if (e.getDataTime().equals(MidlandHelper.getFormatyyMMToMonth(e1.getDataTime(), +1))) {
                         res[0] = e1;
@@ -216,14 +234,19 @@ public class QuotationSecondHandRestController extends ServiceBaseFilter {
                 if (res[0] != null&& res[0].getDealAvgPrice()!=null) {
                     avgPrice = Double.valueOf(res[0].getDealAvgPrice());
                 }
-                //
+                /**
+                 * 给前端图表用的图形最大值
+                 */
                 dealNumMax[0] = QuotationUtil.getMax(dealNumMax[0], e.getDealNum());
                 dealNumMin[0] = QuotationUtil.getMin(dealNumMin[0], e.getDealNum());
-                //
-
+                /**
+                 * 给前端图表用的图形最大值
+                 */
                 acreageMax[0] = QuotationUtil.getMax(acreageMax[0], Double.valueOf(e.getDealAcreage()==null?"0":e.getDealAcreage()));
                 acreageMin[0] = QuotationUtil.getMin(acreageMin[0],  Double.valueOf(e.getDealAcreage()==null?"0":e.getDealAcreage()));
-
+                /**
+                 * 给前端图表用的图形最大值
+                 */
                 avgPriceMax[0] = QuotationUtil.getMax(avgPriceMax[0], Double.valueOf(e.getDealAvgPrice()==null?"0":e.getDealAvgPrice()));
                 avgPriceMin[0] = QuotationUtil.getMin(avgPriceMin[0],  Double.valueOf(e.getDealAvgPrice()==null?"0":e.getDealAvgPrice()));
 
