@@ -93,6 +93,8 @@ public class QuotationSecondHandRestController extends ServiceBaseFilter {
     public Object getQuotationSecondHandByDate(@RequestBody QuotationSecondHand obj ,HttpServletRequest request){
         Result result = new Result();
         Map map = new HashMap();
+        String date = MidlandHelper.getCurrentTime();
+        //String date = "2017-05-01 12:12:12";
         try {
             if (obj.getCityId()==null){
                 result.setMsg("城市id不能为空");
@@ -100,7 +102,7 @@ public class QuotationSecondHandRestController extends ServiceBaseFilter {
                 return result;
             }
             obj.setType(1);//1住宅
-            obj.setDataTime(MidlandHelper.formatMonth(MidlandHelper.getCurrentTime()));
+            obj.setDataTime(MidlandHelper.formatMonth(date));
             List<QuotationSecondHand> quotationSecondHands = quotationSecondHandServiceImpl.getQuotationSecondHandByDate(obj);
             if (quotationSecondHands==null||quotationSecondHands.size()<1){
                 map.put("dealAvgPrice",0);//当前月的均价
@@ -111,7 +113,7 @@ public class QuotationSecondHandRestController extends ServiceBaseFilter {
                 return result;
             }
             map.put("dealAvgPrice",quotationSecondHands.get(0).getDealAvgPrice());//当前月的均价
-            obj.setDataTime(MidlandHelper.getMonth(new Date(),-1));
+            obj.setDataTime(MidlandHelper.getFormatyyMMToMonth(date,-1));
             List<QuotationSecondHand> quotationSecondHand1 = quotationSecondHandServiceImpl.getQuotationSecondHandByDate(obj);
             if (quotationSecondHand1==null||quotationSecondHand1.size()<1){
                 map.put("ratio",0);//环比上个月
@@ -145,77 +147,114 @@ public class QuotationSecondHandRestController extends ServiceBaseFilter {
         Map map = new HashMap();
         try {
             if (StringUtils.isEmpty(obj.getAreaId()) && StringUtils.isEmpty(obj.getAreaName())) {
+                //如果没有选择区域,默认为全市
                 obj.setAreaId("0");
-            } else {
-                obj.setAreaId(obj.getAreaId());
-                obj.setAreaName(obj.getAreaName());
             }
             if (StringUtils.isEmpty(obj.getCityId())) {
+                //没有选择城市,默认为当前用户的城市
                 obj.setCityId("085");
             }
             if (obj.getType() == null) {
-                obj.setType(0);
+                //没有选择类型,默认为住宅:  0商业;1住宅;2其他;3办公
+                obj.setType(1);
             }
+            String date = MidlandHelper.getCurrentTime();
             if (obj.getStartTime() == null) {
-                Date date = new Date();
-                obj.setStartTime(MidlandHelper.getMonthyyyyMMddHHmmss(date, -12));
+
+                obj.setStartTime(MidlandHelper.getFormatyyMMToMonth(date, -12));
             }
             if (obj.getEndTime() == null) {
-                obj.setEndTime(MidlandHelper.getCurrentTime());
+                obj.setEndTime(date);
             }
             List<String> month = new ArrayList<>();
-            List<Object> numRatioList = new ArrayList<>();
-            List<Object> acreageRatioList = new ArrayList<>();
+            /**
+             * 成交套数
+             */
             List<Object> numList = new ArrayList<>();
+            List<Object> numRatioList = new ArrayList<>();
+            final double[] dealNumMax = {0};
+            final double[] dealNumMin = {0};
+            /**
+             * 成交面积
+             */
+            List<Object> acreageRatioList = new ArrayList<>();
             List<Object> acreageList = new ArrayList<>();
-            double dealNumMax = 0;
-            double dealNumMin = 0;
-            double acreageMax = 0;
-            double acreageMin = 0;
+            final double[] acreageMax = {0};
+            final double[] acreageMin = {0};
+
+            /**
+             * 成交均价
+             */
+            List<Object> avgPriceList = new ArrayList<>();
+            List<Object> avgPriceRatioList = new ArrayList<>();
+            final double[] avgPriceMax = {0};
+            final double[] avgPriceMin = {0};
+            /**
+             * 查询
+             */
             List<QuotationSecondHand> list = quotationSecondHandServiceImpl.findQuotationSecondHandList(obj);
-            obj.setStartTime(MidlandHelper.getFormatPreMonth(obj.getStartTime(), -1));
-            obj.setEndTime(MidlandHelper.getFormatPreMonth(obj.getEndTime(), -1));
+            obj.setStartTime(MidlandHelper.getFormatyyMMToMonth(obj.getStartTime(), -1));
+            obj.setEndTime(MidlandHelper.getFormatyyMMToMonth(obj.getEndTime(), -1));
             List<QuotationSecondHand> listTemp = quotationSecondHandServiceImpl.findQuotationSecondHandList(obj);
-            for (QuotationSecondHand view : list) {
-                month.add(view.getDataTime());
-
-                QuotationSecondHand res = null;
-                for (QuotationSecondHand quoTemp : listTemp) {
-                    if (view.getDataTime().equals(MidlandHelper.getFormatyyMMToMonth(quoTemp.getDataTime(), +1))) {
-                        res = quoTemp;
+            list.forEach(e->{
+                month.add(e.getDataTime());
+                final QuotationSecondHand[] res = {null};
+                listTemp.forEach(e1->{
+                    if (e.getDataTime().equals(MidlandHelper.getFormatyyMMToMonth(e1.getDataTime(), +1))) {
+                        res[0] = e1;
                     }
+                });
+                Double preNum = 0.0;
+                if (res[0] != null && res[0].getDealNum() != null) {
+                    preNum = Double.valueOf(res[0].getDealNum());
                 }
-                Double preNum = null;
-                if (res != null && res.getDealNum() != null) {
-                    preNum = Double.valueOf(res.getDealNum());
+                Double preAcreage = 0.0;
+                if (res[0] != null&& res[0].getDealAcreage()!=null) {
+                    preAcreage = Double.valueOf(res[0].getDealAcreage());
                 }
-                Double preAcreage = null;
-                if (res != null&& res.getDealAcreage()!=null) {
-                    preAcreage = Double.valueOf(res.getDealAcreage());
+                Double avgPrice = 0.0;
+                if (res[0] != null&& res[0].getDealAvgPrice()!=null) {
+                    avgPrice = Double.valueOf(res[0].getDealAvgPrice());
                 }
                 //
-                dealNumMax = QuotationUtil.getMax(dealNumMax, view.getDealNum());
-                dealNumMin = QuotationUtil.getMin(dealNumMin, view.getDealNum());
+                dealNumMax[0] = QuotationUtil.getMax(dealNumMax[0], e.getDealNum());
+                dealNumMin[0] = QuotationUtil.getMin(dealNumMin[0], e.getDealNum());
                 //
 
-                acreageMax = QuotationUtil.getMax(acreageMax, Double.valueOf(view.getDealAcreage()==null?"0":view.getDealAcreage()));
-                acreageMin = QuotationUtil.getMin(acreageMin,  Double.valueOf(view.getDealAcreage()==null?"0":view.getDealAcreage()));
+                acreageMax[0] = QuotationUtil.getMax(acreageMax[0], Double.valueOf(e.getDealAcreage()==null?"0":e.getDealAcreage()));
+                acreageMin[0] = QuotationUtil.getMin(acreageMin[0],  Double.valueOf(e.getDealAcreage()==null?"0":e.getDealAcreage()));
 
-                numList.add(view.getDealNum());
-                acreageList.add(view.getDealAcreage());
-                Double numRatio = QuotationUtil.getRatio(Double.valueOf(view.getDealNum()), preNum);
-                Double acreageRatio = QuotationUtil.getRatio(Double.valueOf(view.getDealAcreage()), preAcreage);
+                avgPriceMax[0] = QuotationUtil.getMax(avgPriceMax[0], Double.valueOf(e.getDealAvgPrice()==null?"0":e.getDealAvgPrice()));
+                avgPriceMin[0] = QuotationUtil.getMin(avgPriceMin[0],  Double.valueOf(e.getDealAvgPrice()==null?"0":e.getDealAvgPrice()));
+
+                Double numRatio = QuotationUtil.getRatio(Double.valueOf(e.getDealNum()), preNum);
+                Double acreageRatio = QuotationUtil.getRatio(Double.valueOf(e.getDealAcreage()), preAcreage);
+                Double avgPriceRatio = QuotationUtil.getRatio(Double.valueOf(e.getDealAvgPrice()), avgPrice);
+
+                numList.add(e.getDealNum());
                 numRatioList.add(numRatio);
+
+                acreageList.add(e.getDealAcreage());
                 acreageRatioList.add(acreageRatio);
 
-            }
+                avgPriceList.add(e.getDealAvgPrice());
+                avgPriceRatioList.add(avgPriceRatio);
+            });
+
+
             map.put("month",month);
+
             map.put("numList",numList);
-            map.put("dealNumMax", dealNumMax );
-            map.put("acreageMax", acreageMax);
+            map.put("dealNumMax", dealNumMax[0]);
             map.put("numRatioList",numRatioList);
+
             map.put("acreageList",acreageList);
-            map.put("numRatioList",numRatioList);
+            map.put("acreageMax", acreageMax[0]);
+            map.put("acreageRatioList",acreageRatioList);
+
+            map.put("avgPriceList",avgPriceList);
+            map.put("avgPriceMax", avgPriceMax[0]);
+            map.put("avgPriceRatioList",avgPriceRatioList);
             result.setCode(ResultStatusUtils.STATUS_CODE_200);
             result.setMsg("success");
             result.setModel(map);
