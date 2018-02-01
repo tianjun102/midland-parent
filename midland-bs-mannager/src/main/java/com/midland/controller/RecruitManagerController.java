@@ -46,6 +46,7 @@ public class RecruitManagerController extends BaseFilter {
 		User user = MidlandHelper.getCurrentUser(request);
 		if(user.getIsSuper()==null){
 			model.addAttribute("cityId",user.getCityId());
+			model.addAttribute("cityName",user.getCityName());
 		}
 		model.addAttribute("isSuper",user.getIsSuper());
 		return "recruitManager/recruitManagerIndex";

@@ -10,32 +10,31 @@
 <body>
 
 <li><span>省：</span> <!-- 省 -->
-        <input type="hidden" name="provinceId">
-        <input type="hidden" name="regionSn"> <input type="hidden"
-                                                     name="provinceName">
-        <!-- 第一次进页面加载省 -->
-        <select id="provinces" onchange="initProvince()"
-                <c:if test="${not empty isSuper}"> style="height: 28px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;"</c:if>   <c:if test="${empty isSuper}">style="height: 27px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;background-color: #dddfe2;" disabled="disabled"</c:if> >
-            <option value="">请选择</option>
-            <option value="">全部</option>
-            <c:forEach items="${provinceList}" var="province">
-                <option
-                        value="${province.parentId}">${province.parentName}
-                </option>
-            </c:forEach>
-        </select>
+    <input type="hidden" name="provinceId">
+    <input type="hidden" name="regionSn"> <input type="hidden"
+                                                 name="provinceName">
+    <!-- 第一次进页面加载省 -->
+    <select id="provinces" onchange="initProvince()"
+            <c:if test="${not empty isSuper}"> style="height: 28px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;"</c:if>
+            <c:if test="${empty isSuper}">style="height: 27px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;background-color: #dddfe2;"
+            disabled="disabled"</c:if> >
+        <option value="">请选择</option>
+        <option value="">全部</option>
+        <c:forEach items="${provinceList}" var="province">
+            <option
+                    value="${province.parentId}">${province.parentName}
+            </option>
+        </c:forEach>
+    </select>
     <!-- 市 -->
     &nbsp;&nbsp;
     <p id="city" style="display: inline-block;height: 27px;">
         <span>市：</span>
-        <label></label> <c:if test="${not empty isSuper}"><input type="hidden" name="cityId" id="cityId" value="${cityId}"></c:if>
-        <c:if test="${not empty isSuper}"><input type="hidden" name="cityName" id="cityName"></c:if>
-        <c:if test="${empty isSuper}"><input type="hidden" name="cityId"  value="${cityId}"></c:if>
-        <c:if test="${empty isSuper}"><input type="hidden" name="cityName"  value="${cityName}"></c:if>
-        <select id="citys" onchange="initCity()"
-                <c:if test="${not empty isSuper}"> style="height: 28px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;"</c:if>   <c:if test="${empty isSuper}">style="height: 28px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;background-color: #dddfe2;" disabled="disabled"</c:if>>
-            <c:if test="${not empty isSuper}"><option selected="selected" value="${cityId}">${cityName}</option></c:if>
-
+        <label></label>
+        <input type="hidden" name="cityId" value="${cityId}">
+        <input type="hidden" name="cityName" value="${cityName}">
+        <select id="citys" onchange="initCity()" <c:if test="${not empty isSuper}">style="height: 28px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;"</c:if>
+                <c:if test="${empty isSuper}">style="height: 28px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;background-color: #dddfe2;" disabled="disabled"</c:if>>
             <option value="">请选择</option>
         </select>
     </p>
@@ -50,7 +49,7 @@
 
         /*$("input[name=provinceId]").val(addrId);
         $("input[name=provinceName]").val(addName);*/
-        if(addrId==null||addrId==""){
+        if (addrId == null || addrId == "") {
             $("#cityId").val("");
             $("#cityName").val("");
             $("#citys").html("<option value=''>请选择</option>");
