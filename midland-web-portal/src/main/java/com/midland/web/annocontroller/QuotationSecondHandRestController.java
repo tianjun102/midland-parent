@@ -173,7 +173,7 @@ public class QuotationSecondHandRestController extends ServiceBaseFilter {
                 obj.setStartTime(MidlandHelper.getFormatyyMMToMonth(date, -13));
             }
             if (obj.getEndTime() == null) {
-                obj.setEndTime(date);
+                obj.setEndTime(MidlandHelper.formatMonth(date));
             }
             List<String> month = new ArrayList<>();
             /**

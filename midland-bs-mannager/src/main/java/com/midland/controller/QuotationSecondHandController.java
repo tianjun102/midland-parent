@@ -25,9 +25,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
-@SuppressWarnings("all")
+
 @RequestMapping("/quotationSecondHand/")
 public class QuotationSecondHandController extends BaseFilter {
 
@@ -81,21 +82,28 @@ public class QuotationSecondHandController extends BaseFilter {
      **/
     @RequestMapping("toolsTip")
     public String toolsTip(QuotationSecondHand obj, String areaId, String areaName, String url, String showType, Model model) throws Exception {
+        String date = MidlandHelper.getCurrentTime();
+        String startTime = MidlandHelper.getFormatyyMMToMonth(date, -12);
         if (StringUtils.isEmpty(areaId) && StringUtils.isEmpty(areaName)) {
+            /**
+             * 如果没有选择区域,默认为全市
+             */
             obj.setAreaId("0");
-        } else {
-            obj.setAreaId(areaId);
-            obj.setAreaName(areaName);
         }
         if (StringUtils.isEmpty(obj.getCityId())) {
+            /**
+             * 没有选择城市,默认为当前用户的城市
+             */
             obj.setCityId("085");
         }
         if (obj.getType() == null) {
-            obj.setType(0);
+            /**
+             * 没有选择类型,默认为住宅:  0商业;1住宅;2其他;3办公
+             */
+            obj.setType(1);
         }
         if (obj.getStartTime() == null) {
-            Date date = new Date();
-            obj.setStartTime(MidlandHelper.getMonthyyyyMMddHHmmss(date, -12));
+            obj.setStartTime(MidlandHelper.getFormatyyMMToMonth(date, -13));
         }
         if (obj.getEndTime() == null) {
             obj.setEndTime(MidlandHelper.getCurrentTime());
@@ -109,10 +117,16 @@ public class QuotationSecondHandController extends BaseFilter {
         double listMin = 0;
         double ratioMax = 0;
         double ratioMin = 0;
-        List<QuotationSecondHand> list = quotationSecondHandServiceImpl.findQuotationSecondHandList(obj);
-        obj.setStartTime(MidlandHelper.getFormatPreMonth(obj.getStartTime(),-1));
-        obj.setEndTime(MidlandHelper.getFormatPreMonth(obj.getEndTime(),-1));
         List<QuotationSecondHand> listTemp = quotationSecondHandServiceImpl.findQuotationSecondHandList(obj);
+
+        /**
+         * jdk 1.8 lamada表达式,stream ,filter,查询12个月前的数据到当前月的数据
+         */
+        List<QuotationSecondHand> list = listTemp.stream().filter(e->{
+            return e.getDataTime().compareTo(startTime)>=0;
+        }).collect(Collectors.toList());
+
+
         if ("0".equals(showType)) {
             for (QuotationSecondHand view : list) {
                 month.add(view.getDataTime());

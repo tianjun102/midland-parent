@@ -34,12 +34,22 @@ public class MidlandHelper {
         return bigDecimal.toPlainString();
     }
 
+    /**
+     * String 2018-01-01 12:12:12  to   2018-01
+     * @param time
+     * @return
+     */
     public static String formatMonth(String time) {
         Date tempTime = DateUtils.parseStringToDateYYMMDD(time);
         DateFormat format = new SimpleDateFormat(MONTH);
         return format.format(tempTime);
     }
 
+    /**
+     * 数据格式化 小于8位时格式化为8位,大于8位,格式化为12位
+     * @param data
+     * @return
+     */
     public static String formatCode(Integer data) {
         NumberFormat format;
         if (data < 99999999) {
@@ -50,12 +60,22 @@ public class MidlandHelper {
         return format.format(data);
     }
 
+    /**
+     * 获取当前时间
+     * @return
+     */
     public static String getCurrentTime() {
         long intTime = System.currentTimeMillis();
         DateFormat format = new SimpleDateFormat(COMMON_DATE);
         return format.format(intTime);
     }
 
+    /**
+     * 获取当前月+int的时间 格式为2018-01-01 12:12:12
+     * @param time
+     * @param amount
+     * @return
+     */
     public static String getMonthyyyyMMddHHmmss(Date time, Integer amount) {
         DateFormat format = new SimpleDateFormat(COMMON_DATE);
         Calendar calendar = Calendar.getInstance();
@@ -63,6 +83,13 @@ public class MidlandHelper {
         calendar.add(Calendar.MONTH, amount);
         return format.format(calendar.getTime());
     }
+
+    /**
+     * 获取时间,格式为   2018-01
+     * @param time
+     * @param amount
+     * @return
+     */
     public static String getMonth(Date time, Integer amount) {
         DateFormat format = new SimpleDateFormat(MONTH);
         Calendar calendar = Calendar.getInstance();
@@ -71,16 +98,27 @@ public class MidlandHelper {
         return format.format(calendar.getTime());
     }
 
+    /**
+     * 2018-01-01 +  1  to   2018-02-01 00:00:00
+     * @param yyMMddtime
+     * @param amount
+     * @return
+     */
     public static String getFormatPreMonth(String yyMMddtime, Integer amount) {
         Date tempTime = DateUtils.parseStringToDateYYMMDD(yyMMddtime);
         DateFormat format = new SimpleDateFormat(COMMON_DATE);
-        ;
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(tempTime);
         calendar.add(Calendar.MONTH, amount);
         return format.format(calendar.getTime());
     }
 
+    /**
+     * 2018-01 + 1  to    2018-02
+     * @param time
+     * @param amount
+     * @return
+     */
     public static String getFormatyyMMToMonth(String time, Integer amount) {
         StringBuffer sb = new StringBuffer(time);
         sb.append("-01");
