@@ -177,20 +177,19 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 		int rowSize = sheet.getLastRowNum() + 1;
 		List<String> areaList = null;
 		List<String> soldNum = null;
-		for (int j = 0; j < rowSize; j++) {//遍历行
+		for (int j = 0; j < rowSize; j++) {//遍历所有行
 			Row row = sheet.getRow(j);
 			if (row == null) {//略过空行
 				continue;
 			}
 			List<String> list = null;
 			
-			if (j > 0 && j % 2 == 1) {
+			if (j > 0 && j % 2 == 1) {//第0行取日期,第一行开始,每两行为一条数据,j % 2 == 1行为面积的数据,j % 2 == 0行为成交面积的数据
 				areaList = new ArrayList<>();
 				list = areaList;
 			} else if (j > 0 && j % 2 == 0) {
 				soldNum = new ArrayList<>();
 				list = soldNum;
-				
 			}
 			int cellSize = row.getLastCellNum();//行中有多少个单元格，也就是有多少列
 			for (int k = 0; k < cellSize; k++) {
@@ -207,17 +206,18 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 					continue;
 				}
 				if (k == 0) {
-					;
+					//第0列为区域名称,全市,福田,罗湖,南山,龙岗等
 					if (value != null && !value.equals("")) {
 						distName = value;
 					}
 				} else if (k == 1) {
+					//第1列房子类型:商业,住宅,其它,办公
 					if (value != null && !value.equals("")) {
 						houseType = value;
 					}
 				} else if (k == 2) {
-					
-				} else {
+					//第2列不取值,默认j % 2 == 1行为面积的数据,j % 2 == 0行为成交面积的数据
+				} else {//排除k=0,1,2;   k=3为第一个月的数据,k=4为第二个月的数据,,以此类推
 					list.add(value);
 				}
 				
@@ -228,10 +228,10 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 				area.setId("0");
 				area.setName("全市");
 			} else {
-				area = getArea(cityId, distName);
+				area = getArea(cityId, distName);//通过区域名称从顶尖接口获取区域信息
 			}
 			if (j > 0 && j % 2 == 0) {
-				int length = areaList.size() < 12 ? areaList.size() : 12;
+				int length = areaList.size() < 12 ? areaList.size() : 12;//一年12个月,所以只取12条数据
 				for (int x = 0; x < length; x++) {
 					if (areaList.get(x) != null && !areaList.get(x).equals("")) {
 						Quotation quotation = new Quotation();
@@ -319,24 +319,40 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 					throw new IllegalDocumentException("日期错误");
 				}
 			}
+			/**
+			 * 每27行 为一个市的数据,前12行为住宅的数据,后15行为商业\其它\办公楼的数据
+			 */
 			int row_27 = j % 27;
 			if (j > 0 ) {
-				//每个市27行
-				if (j>188){
-					System.out.println(j);
-				}
-				if (row_27 != 0 && row_27<13){//每个市的前12行，为住宅信息
+
+				/**
+				 * 每个市27行
+				 * 每个市的前12行，为住宅信息
+				 */
+				if (row_27 != 0 && row_27<13){
 					int row_4=row_27%4;
 					if (row_4==1){
+						/**
+						 * 每27行的前12行里,每4行为一种数据,第1行为成交套数
+						 */
 						dealNum=new ArrayList<>();
 						list=dealNum;
 					}else if (row_4==2){
+						/**
+						 * 每27行的前12行里,每4行为一种数据,第2行为成交面积
+						 */
 						dealArea=new ArrayList<>();
 						list=dealArea;
 					}else if (row_4==3){
+						/**
+						 * 每27行的前12行里,每4行为一种数据,第3行为成交均价
+						 */
 						dealAvgPriceList=new ArrayList<>();
 						list=dealAvgPriceList;
 					}else if (row_4==0){
+						/**
+						 * 每27行的前12行里,每4行为一种数据,第4行为成交价格
+						 */
 						dealprice=new ArrayList<>();
 						list=dealprice;
 					}
@@ -355,11 +371,21 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 								distName = value;
 							}
 						} else if (k == 1) {
+							/**
+							 * 第一列为房源类型,有以下几种类型
+							 * 住宅类型houseType=1[90㎡以下(houseTypeId=0),90~144㎡(houseTypeId=1),144㎡以上(houseTypeId=2)],
+							 * houseType=0商业,
+							 * houseType=2其他,
+							 * houseType=3办公楼
+							 */
 							if (value != null && !value.equals("")) {
 								houseType = value;
 							}
 						} else if (k == 2) {
-							
+							/**
+							 * 第2列不取值,前12行 默认j % 4 == 1行为成交套数的数据,j % 4 == 2行为成交面积的数据,j % 4 == 3行为成交均价的数据,j % 4 == 0行为成交金额的数据
+							 * 后15行 默认j % 5 == 1行为成交套数的数据,j % 5 == 2行为成交面积的数据,j % 5 == 3行为成交均价的数据,j % 5== 4行为可售套数的数据,j % 5== 0行为可售面积的数据
+							 */
 						} else {
 							list.add(value);
 						}
@@ -430,21 +456,36 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
 					}
 					
 				}else{
-					//每个市的后16行，为商业、办公楼、其他信息
+					//每个市的后15行，为商业、办公楼、其他信息
 					int row_5=row_27==0?0:(row_27-12)%5;
 					if (row_5==1){
+						/**
+						 * 每5行中的第1行为成交套数
+						 */
 						dealNum=new ArrayList<>();
 						list=dealNum;
 					}else if (row_5==2){
+						/**
+						 * 每5行中的第2行为成交面积
+						 */
 						dealArea=new ArrayList<>();
 						list=dealArea;
 					}else if (row_5==3){
+						/**
+						 * 每5行中的第3行为成交均价
+						 */
 						dealAvgPriceList=new ArrayList<>();
 						list=dealAvgPriceList;
 					}else if (row_5==4){
+						/**
+						 * 每5行中的第4行为可售套数
+						 */
 						soldAbleNumList=new ArrayList<>();
 						list=soldAbleNumList;
 					}else if (row_5==0){
+						/**
+						 * 每5行中的第5行为可售面积
+						 */
 						soldAbleAreaList=new ArrayList<>();
 						list=soldAbleAreaList;
 					}
