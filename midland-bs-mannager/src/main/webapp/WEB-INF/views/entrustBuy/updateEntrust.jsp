@@ -31,7 +31,7 @@
 
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/appoint/update" method="post" id="appointInfoForm">
-        <ul class="userinfo row">
+        <ul class="userinfo width-md row">
             <input type="hidden" name="id" id="id" value="${entrust.id}">
             <input type="hidden" name="oldStatus" id="oldStatus" value="${entrust.status}">
             <li class="col-md-6"><span>委托编号：</span>

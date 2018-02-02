@@ -7,62 +7,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
-    <style type="text/css">
 
-        .dropdown {
-            position: relative;
-            width: 200px;
-            border: 1px solid #ccc;
-            cursor: pointer;
-            background: #fff;
-            border-radius: 3px;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-
-        .content ul.userinfo li:not(:last-child) input {
-            float: left;
-            width: 200px;
-            height: 28px;
-            line-height: 28px;
-            border: 1px solid #dbe2e6;
-            border-radius: 4px;
-            text-indent: 10px;
-            outline-color: #0099e0;
-        }
-
-
-        .fileupload .fileupload-item {
-            display: inline-block;
-            position: relative;
-            width: 110px;
-            height: 64px;
-            margin: 10px 10px 0 0;
-            overflow: hidden;
-            border: 1px solid #ccc;
-        }
-
-        .fileupload-item img {
-            max-width: 100%;
-            max-height: 100%;
-        }
-
-        .fileupload-item .xclose {
-            display: block;
-            position: absolute;
-            right: 0;
-            top: 0;
-            width: 16px;
-            height: 16px;
-            line-height: 16px;
-            text-align: center;
-            background: rgba(0, 0, 0, .7);
-            font-size: 14px;
-            color: #ddd;
-            cursor: pointer;
-        }
-    </style>
     <script type="text/javascript">
 
 
@@ -117,12 +62,12 @@
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/hotHand/add" method="post" id="dataForm">
-        <ul class="userinfo  row">
+        <ul class="userinfo width-md row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <%@include file="../menu/area_up_required.jsp" %>
             <li class="col-md-5"><span>均价：</span>
                 <input type="text" name="price" id="price" value="${item.price} "
-                       onblur="InitInput.setNumber(this,9,2,2)"/>
+                       onblur="InitInput.setNumber(this,9,2,2)"/>元/㎡起
             </li>
             <li class="col-md-5"><span>入伙日期：</span>
                 <input type="text" name="intoTime" id="intoTime" onblur="notEmpty('intoTime','intoTime','')"
@@ -133,15 +78,15 @@
             </li>
             <li class="col-md-5"><span>管理费用：</span>
                 <input type="text" name="managerCosts" id="managerCosts" value="${item.managerCosts}"
-                       onblur="InitInput.setNumber(this,9,2,2)"/>
+                       onblur="InitInput.setNumber(this,9,2,2)"/>元/㎡/月
             </li>
             <li class="col-md-5"><span>单位总数：</span>
-                <input type="text" name="unitTotal" id="unitTotal"  value="${item.unitTotal}"/>
+                <input type="text" name="unitTotal" id="unitTotal"  value="${item.unitTotal}"/>个
             </li>
             <li class="col-md-5"><span>物业座数：</span>
-                <input type="text" name="propertyNum" id="propertyNum"  value="${item.propertyNum}"/>
+                <input type="text" name="propertyNum" id="propertyNum"  value="${item.propertyNum}" onblur="InitInput.setNumber(this,9,0,0)"/>座
             </li>
-            <li class="col-md-5"><span>裝修标准：</span>
+            <li class="col-md-5"><span>裝修標準：</span>
                 <select name="decoration" id="decoration" class="dropdown">
                     <c:forEach items="${decorations}" var="s">
                         <option value="${s.id}" <c:if test="${s.id==item.decoration}">selected</c:if>>
@@ -158,14 +103,14 @@
 
             <li class="col-md-5"><span>占地面积：</span>
                 <input type="text" name="landArea" id="landArea" value="${item.landArea}"
-                       onblur="InitInput.setNumber(this,9,2,2)"/>
+                       onblur="InitInput.setNumber(this,9,2,2)"/>万㎡
             </li>
             <li class="col-md-5"><span>建筑面积：</span>
-                <input type="text" name="buildingArea" id="buildingArea"  value="${item.buildingArea}"/>
+                <input type="text" name="buildingArea" id="buildingArea"  value="${item.buildingArea}" onblur="InitInput.setNumber(this,9,2,2)"/>万㎡
             </li>
             <li class="col-md-5"><span>车位总数：</span>
                 <input type="text" name="parkingNum" id="parkingNum" value="${item.parkingNum}"
-                       onblur="InitInput.setNumber(this,9,0,0)"/>
+                       onblur="InitInput.setNumber(this,9,0,0)"/>个
             </li>
             <li class="col-md-5"><span>建筑类型：</span>
                 <input type="text" name="buildingType" id="buildingType" value="${item.buildingType}"
@@ -180,11 +125,13 @@
                        onblur="notEmpty('developer','developer','')"/>
             </li>
             <li class="col-md-5"><span>房源名：</span>
-                <input type="text" name="houseName" id="houseName" value="${item.houseName}"
-                />
+                <input type="text" name="houseName" id="houseName" value="${item.houseName}" />
+            </li>
+            <li class="col-md-5"><span>经纪人：</span>
+                <input type="text" name="agentName" id="agentName" disabled="disabled" value="${item.agentName}" />
             </li>
             <li class="col-md-8"><span>物业管理：</span>
-                <textarea name="propertyManagement" id="propertyManagement" style="width:calc(100% - 120px);height:50px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;">${item.propertyManagement}</textarea>
+                <textarea name="propertyManagement" id="propertyManagement" class="textarea-md">${item.propertyManagement}</textarea>
             </li>
             <li class="col-md-8"><span>地理位置：</span>
                 <textarea name="position" id="position" style="width:calc(100% - 120px);height:50px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;">${item.position}</textarea>
@@ -223,7 +170,7 @@
             </li>
             <li>
                 <span></span>
-                <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">保存</a>
+                <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">更新</a>
                 <a style="margin-left: 20px" class="public_btn bg3" id="cancel" onclick="closeWin();">取消</a>
             </li>
         </ul>

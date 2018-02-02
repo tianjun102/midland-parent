@@ -117,12 +117,12 @@
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/hotHand/update" method="post" id="dataForm">
-        <ul class="userinfo  row">
+        <ul class="userinfo width-md  row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <%@include file="../menu/area_up_required.jsp" %>
             <li class="col-md-5"><span>均价：</span>
                 <input type="text" name="price" id="price" value="${item.price} "
-                       onblur="InitInput.setNumber(this,9,2,2)"/>
+                       onblur="InitInput.setNumber(this,9,2,2)"/>元/㎡起
             </li>
             <li class="col-md-5"><span>入伙日期：</span>
                 <input type="text" name="intoTime" id="intoTime" onblur="notEmpty('intoTime','intoTime','')"
@@ -133,13 +133,13 @@
             </li>
             <li class="col-md-5"><span>管理费用：</span>
                 <input type="text" name="managerCosts" id="managerCosts" value="${item.managerCosts}"
-                       onblur="InitInput.setNumber(this,9,2,2)"/>
+                       onblur="InitInput.setNumber(this,9,2,2)"/>元/㎡/月
             </li>
             <li class="col-md-5"><span>单位总数：</span>
-                <input type="text" name="unitTotal" id="unitTotal"  value="${item.unitTotal}"/>
+                <input type="text" name="unitTotal" id="unitTotal"  value="${item.unitTotal}"/>个
             </li>
             <li class="col-md-5"><span>物业座数：</span>
-                <input type="text" name="propertyNum" id="propertyNum"  value="${item.propertyNum}"/>
+                <input type="text" name="propertyNum" id="propertyNum"  value="${item.propertyNum}" onblur="InitInput.setNumber(this,9,0,0)"/>座
             </li>
             <li class="col-md-5"><span>裝修標準：</span>
                 <select name="decoration" id="decoration" class="dropdown">
@@ -158,14 +158,14 @@
 
             <li class="col-md-5"><span>占地面积：</span>
                 <input type="text" name="landArea" id="landArea" value="${item.landArea}"
-                       onblur="InitInput.setNumber(this,9,2,2)"/>
+                       onblur="InitInput.setNumber(this,9,2,2)"/>万㎡
             </li>
             <li class="col-md-5"><span>建筑面积：</span>
-                <input type="text" name="buildingArea" id="buildingArea"  value="${item.buildingArea}"/>
+                <input type="text" name="buildingArea" id="buildingArea"  value="${item.buildingArea}" onblur="InitInput.setNumber(this,9,2,2)"/>万㎡
             </li>
             <li class="col-md-5"><span>车位总数：</span>
                 <input type="text" name="parkingNum" id="parkingNum" value="${item.parkingNum}"
-                       onblur="InitInput.setNumber(this,9,0,0)"/>
+                       onblur="InitInput.setNumber(this,9,0,0)"/>个
             </li>
             <li class="col-md-5"><span>建筑类型：</span>
                 <input type="text" name="buildingType" id="buildingType" value="${item.buildingType}"

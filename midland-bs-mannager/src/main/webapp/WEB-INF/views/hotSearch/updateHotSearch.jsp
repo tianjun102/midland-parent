@@ -14,7 +14,7 @@
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/hotSearch/add" method="post" id="dataForm">
-        <ul class="userinfo updInfo row">
+        <ul class="userinfo  width-md row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <li><span>搜索词：</span>
                 <input type="text" name="keywords" id="keywords" value="${item.keywords}" onblur="notEmpty('keywords','keywords','搜索词不能为空！');"/><label style="color: red" class = "_star " >*</label>

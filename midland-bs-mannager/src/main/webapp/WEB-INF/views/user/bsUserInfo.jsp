@@ -14,7 +14,7 @@
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/user/edit" method="post" id="userInfoForm">
-        <ul class="userinfo row">
+        <ul class="userinfo  width-md row">
             <input type="hidden" name="id" id="id" value="${user.id}">
             <input type="hidden" name="ph" id="ph" value="${user.phone}">
             <li><span>用户名：</span><input type="text" name="username" id="username" value="${user.username}"

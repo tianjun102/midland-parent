@@ -33,7 +33,7 @@
 
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/entrust/rentIn/update" method="post" id="appointInfoForm">
-        <ul class="userinfo row">
+        <ul class="userinfo  width-md row">
             <input type="hidden" name="id" id="id" value="${entrust.id}">
             <input type="hidden" name="oldStatus" id="oldStatus" value="${entrust.status}">
             <li class="col-md-6"><span>预约编号：</span>

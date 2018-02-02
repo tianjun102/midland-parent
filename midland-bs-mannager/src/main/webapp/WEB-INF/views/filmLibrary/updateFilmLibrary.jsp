@@ -61,7 +61,7 @@
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/filmLibrary/add" method="post" id="dataForm">
-        <ul class="adminfo row">
+        <ul class="adminfo  width-md row">
             <input type="hidden" id="id" name="id" value="${item.id}">
             <li style="display:flex;align-items:center">
                 <span>类型：</span>
