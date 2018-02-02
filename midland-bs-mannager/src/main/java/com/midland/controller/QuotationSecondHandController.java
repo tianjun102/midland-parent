@@ -113,10 +113,10 @@ public class QuotationSecondHandController extends BaseFilter {
         List<Object> acreageRatioList = new ArrayList<>();
         List<Object> numList = new ArrayList<>();
         List<Object> acreageList = new ArrayList<>();
-        double listMax = 0;
+        final double[] listMax = {0};
         double listMin = 0;
-        double ratioMax = 0;
-        double ratioMin = 0;
+        final double[] ratioMax = {0};
+        final double[] ratioMin = {0};
         List<QuotationSecondHand> listTemp = quotationSecondHandServiceImpl.findQuotationSecondHandList(obj);
 
         /**
@@ -126,65 +126,56 @@ public class QuotationSecondHandController extends BaseFilter {
             return e.getDataTime().compareTo(startTime)>=0;
         }).collect(Collectors.toList());
 
-
-        if ("0".equals(showType)) {
-            for (QuotationSecondHand view : list) {
-                month.add(view.getDataTime());
-                QuotationSecondHand res = null;
-                for (QuotationSecondHand quoTemp:listTemp){
-                    if (view.getDataTime().equals(MidlandHelper.getFormatyyMMToMonth(quoTemp.getDataTime(),+1))){
-                        res=quoTemp;
-                    }
+        list.forEach(e->{
+            month.add(e.getDataTime());
+            final QuotationSecondHand[] res = {null};
+            listTemp.forEach(e1->{
+                if (e.getDataTime().equals(MidlandHelper.getFormatyyMMToMonth(e1.getDataTime(),+1))){
+                    res[0] =e1;
                 }
+            });
+            if ("0".equals(showType)) {
                 Double preNum = null;
-                if (res != null&& res.getDealNum()!=null) {
-                    preNum = Double.valueOf(res.getDealNum());
+                if (res[0] != null && res[0].getDealNum() != null) {
+                    preNum = Double.valueOf(res[0].getDealNum());
                 }
-                numList.add(view.getDealNum());
-                Double ratio = QuotationUtil.getRatio(Double.valueOf(view.getDealNum()), preNum);
+                numList.add(e.getDealNum());
+                Double ratio = QuotationUtil.getRatio(Double.valueOf(e.getDealNum()), preNum);
 
                 numRatioList.add(ratio);
-                listMax = QuotationUtil.getMax(listMax, view.getDealNum());
-                ratioMax = QuotationUtil.getMax(ratioMax, ratio);
-                ratioMin = QuotationUtil.getMin(ratioMin, ratio);
-            }
-        } else {
-            for (QuotationSecondHand view : list) {
-                month.add(view.getDataTime());
-                QuotationSecondHand res = null;
-                for (QuotationSecondHand quoTemp:listTemp){
-                    if (view.getDataTime().equals(MidlandHelper.getFormatyyMMToMonth(quoTemp.getDataTime(),+1))){
-                        res=quoTemp;
-                    }
-                }
+                listMax[0] = QuotationUtil.getMax(listMax[0], e.getDealNum());
+                ratioMax[0] = QuotationUtil.getMax(ratioMax[0], ratio);
+                ratioMin[0] = QuotationUtil.getMin(ratioMin[0], ratio);
+            }else{
                 Double preAcreage = null;
-                if (res != null&& res.getDealAcreage()!=null) {
-                    preAcreage = Double.valueOf(res.getDealAcreage());
+                if (res[0] != null&& res[0].getDealAcreage()!=null) {
+                    preAcreage = Double.valueOf(res[0].getDealAcreage());
                 }
-                acreageList.add(view.getDealAcreage());
-                Double ratio = QuotationUtil.getRatio(Double.valueOf(view.getDealAcreage()), preAcreage);
-                listMax = QuotationUtil.getMax(listMax, Double.valueOf(view.getDealAcreage()));
-                ratioMax = QuotationUtil.getMax(ratioMax, ratio);
-                ratioMin = QuotationUtil.getMin(ratioMin, ratio);
+                acreageList.add(e.getDealAcreage());
+                Double ratio = QuotationUtil.getRatio(Double.valueOf(e.getDealAcreage()), preAcreage);
+                listMax[0] = QuotationUtil.getMax(listMax[0], Double.valueOf(e.getDealAcreage()));
+                ratioMax[0] = QuotationUtil.getMax(ratioMax[0], ratio);
+                ratioMin[0] = QuotationUtil.getMin(ratioMin[0], ratio);
                 acreageRatioList.add(ratio);
             }
-        }
+
+        });
         model.addAttribute("numList", numList);
         model.addAttribute("numRatioList", numRatioList);
         model.addAttribute("acreageList", acreageList);
         model.addAttribute("acreageRatioList", acreageRatioList);
-        listMax = QuotationUtil.getDoubleUp(listMax);
+        listMax[0] = QuotationUtil.getDoubleUp(listMax[0]);
         listMin = 0;
-        ratioMax = QuotationUtil.getRatioDoubleUp(ratioMax);
-        ratioMin = QuotationUtil.getRatioDoubleUp(ratioMin);
+        ratioMax[0] = QuotationUtil.getRatioDoubleUp(ratioMax[0]);
+        ratioMin[0] = QuotationUtil.getRatioDoubleUp(ratioMin[0]);
 //
         model.addAttribute("months", JSONArray.toJSONString(month));
-        model.addAttribute("listMax", listMax);
+        model.addAttribute("listMax", listMax[0]);
         model.addAttribute("listMin", listMin);
-        model.addAttribute("listStep", (listMax - listMin) / 10);
-        model.addAttribute("ratioMax", ratioMax);
-        model.addAttribute("ratioMin", ratioMin);
-        model.addAttribute("ratioStep", (ratioMax - ratioMin) / 10);
+        model.addAttribute("listStep", (listMax[0] - listMin) / 10);
+        model.addAttribute("ratioMax", ratioMax[0]);
+        model.addAttribute("ratioMin", ratioMin[0]);
+        model.addAttribute("ratioStep", (ratioMax[0] - ratioMin[0]) / 10);
 
         List<ParamObject> paramObjects = JsonMapReader.getMap("quotation_type");
         model.addAttribute("types", paramObjects);
@@ -307,43 +298,39 @@ public class QuotationSecondHandController extends BaseFilter {
 
     @RequestMapping("/export")
     public void quotationSecondHandExportExcel(QuotationSecondHand obj, HttpServletResponse response, HttpServletRequest request) throws Exception {
-        if (StringUtils.isEmpty(obj.getAreaId()) && StringUtils.isEmpty(obj.getAreaName())) {
-            obj.setAreaId("0");
-        } else {
-            obj.setAreaId(obj.getAreaId());
-            obj.setAreaName(obj.getAreaName());
-        }
-        if (StringUtils.isEmpty(obj.getCityId())) {
-            obj.setCityId("085");
-        }
-
-        if (obj.getStartTime() == null) {
-            Date date = new Date();
-            obj.setStartTime(MidlandHelper.getyyyyMMddHHmmss(date, -12));
-        }
-        if (obj.getEndTime() == null) {
-            obj.setEndTime(MidlandHelper.getCurrentTime());
+//        String date = MidlandHelper.getCurrentTime();
+//        String startTime = MidlandHelper.getFormatyyMMToMonth(date, -12);
+//        if (StringUtils.isEmpty(obj.getAreaId()) && StringUtils.isEmpty(obj.getAreaName())) {
+//            obj.setAreaId("0");
+//        }
+//        if (StringUtils.isEmpty(obj.getCityId())) {
+//            obj.setCityId("085");
+//        }
+//        if (obj.getStartTime() == null) {
+//            obj.setStartTime(MidlandHelper.getFormatyyMMToMonth(date, -13));
+//        }
+//        if (obj.getEndTime() == null) {
+//            obj.setEndTime(MidlandHelper.getCurrentTime());
+//        }
+        User user = MidlandHelper.getCurrentUser(request);
+        if(!Contant.isSuper.equals(user.getIsSuper())){//不是超级管理员，只能看属性城市的相关信息
+            obj.setCityId(user.getCityId());
         }
         List<String> month = new ArrayList<>();
-        List<Object> numRatioList = new ArrayList<>();
-        List<Object> acreageRatioList = new ArrayList<>();
-        List<Object> numList = new ArrayList<>();
-        List<Object> acreageList = new ArrayList<>();
-        double listMax = 0;
-        double listMin = 0;
-        double ratioMax = 0;
-        double ratioMin = 0;
-        List<QuotationSecondHand> list = quotationSecondHandServiceImpl.findQuotationSecondHandList(obj);
-        obj.setStartTime(MidlandHelper.getFormatPreMonth(obj.getStartTime(),-1));
-        obj.setEndTime(MidlandHelper.getFormatPreMonth(obj.getEndTime(),-1));
         List<QuotationSecondHand> listTemp = quotationSecondHandServiceImpl.findQuotationSecondHandList(obj);
+        /**
+         * jdk 1.8 lamada表达式,stream ,filter,查询12个月前的数据到当前月的数据
+         */
+        List<QuotationSecondHand> list = listTemp;
+
         List<QuotationSecondHand> listRes=new ArrayList<>();
         list.forEach(e->{
             month.add(e.getDataTime());
-            QuotationSecondHand res = null;
             listTemp.forEach(e1->{
-                if (e.getDataTime().equals(MidlandHelper.getFormatyyMMToMonth(e1.getDataTime(),+1))){
-                    e.setPreNum(e1.getDealNum());
+                if (e.getDataTime().equals(MidlandHelper.getFormatyyMMToMonth(e1.getDataTime(),+1))
+                        &&e.getType().equals(e1.getType())&& e.getCityId().equals(e1.getCityId())&&
+                        e.getAreaId().equals(e1.getAreaId())){
+                    e.setPreNum(e1.getDealNum()==null?0:e1.getDealNum());
                 }
             });
             listRes.add(e);
@@ -353,7 +340,7 @@ public class QuotationSecondHandController extends BaseFilter {
         //调用
 
         List<ExportModel> exportModels = new ArrayList<>();
-       listRes.forEach(e->{
+        listRes.forEach(e->{
             ExportModel exportModel = new ExportModel();
             exportModel.setModelName1(e.getCityName());
             exportModel.setModelName2(e.getAreaName());

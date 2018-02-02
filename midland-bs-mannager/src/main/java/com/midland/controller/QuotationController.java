@@ -55,10 +55,10 @@ public class QuotationController extends BaseFilter {
 
         if (quotation.getStartTime() == null) {
             Date date = new Date();
-            quotation.setStartTime(MidlandHelper.getyyyyMMddHHmmss(date, -12));
+            //quotation.setStartTime(MidlandHelper.getyyyyMMddHHmmss(date, -12));
         }
         if (quotation.getEndTime() == null) {
-            quotation.setEndTime(MidlandHelper.getCurrentTime());
+           // quotation.setEndTime(MidlandHelper.getCurrentTime());
         }
         List<ParamObject> paramObjects = JsonMapReader.getMap("quotation_type");
         model.addAttribute("types", paramObjects);
@@ -179,24 +179,25 @@ public class QuotationController extends BaseFilter {
     @RequestMapping("list")
     public String findQuotationList(Quotation quotation, Model model, HttpServletRequest request) {
         try {
+//            User user = MidlandHelper.getCurrentUser(request);
+//            if (StringUtils.isEmpty(quotation.getAreaId()) && StringUtils.isEmpty(quotation.getAreaName())) {
+//                quotation.setAreaId("0");
+//            } else {
+//                quotation.setAreaId(quotation.getAreaId());
+//                quotation.setAreaName(quotation.getAreaName());
+//            }
+//            if (StringUtils.isEmpty(quotation.getCityId())) {
+//                quotation.setCityId(user.getCityId());
+//            }
+//
+//            if (quotation.getStartTime() == null) {
+//                Date date = new Date();
+//                quotation.setStartTime(MidlandHelper.getyyyyMMddHHmmss(date, -12));
+//            }
+//            if (quotation.getEndTime() == null) {
+//                quotation.setEndTime(MidlandHelper.getCurrentTime());
+//            }
             User user = MidlandHelper.getCurrentUser(request);
-            if (StringUtils.isEmpty(quotation.getAreaId()) && StringUtils.isEmpty(quotation.getAreaName())) {
-                quotation.setAreaId("0");
-            } else {
-                quotation.setAreaId(quotation.getAreaId());
-                quotation.setAreaName(quotation.getAreaName());
-            }
-            if (StringUtils.isEmpty(quotation.getCityId())) {
-                quotation.setCityId(user.getCityId());
-            }
-
-            if (quotation.getStartTime() == null) {
-                Date date = new Date();
-                quotation.setStartTime(MidlandHelper.getyyyyMMddHHmmss(date, -12));
-            }
-            if (quotation.getEndTime() == null) {
-                quotation.setEndTime(MidlandHelper.getCurrentTime());
-            }
             log.debug("findQuotationList  {}", quotation);
             model.addAttribute("isSuper", user.getIsSuper());
             if (!Contant.isSuper.equals(user.getIsSuper())) {//不是超级管理员，只能看属性城市的相关信息
@@ -424,23 +425,23 @@ public class QuotationController extends BaseFilter {
 
     @RequestMapping("/export")
     public void quotationExportExcel(Quotation obj, HttpServletResponse response, HttpServletRequest request) throws Exception {
-        if (StringUtils.isEmpty(obj.getAreaId()) && StringUtils.isEmpty(obj.getAreaName())) {
-            obj.setAreaId("0");
-        } else {
-            obj.setAreaId(obj.getAreaId());
-            obj.setAreaName(obj.getAreaName());
-        }
-        if (StringUtils.isEmpty(obj.getCityId())) {
-            obj.setCityId("085");
-        }
-
-        if (obj.getStartTime() == null) {
-            Date date = new Date();
-            obj.setStartTime(MidlandHelper.getyyyyMMddHHmmss(date, -12));
-        }
-        if (obj.getEndTime() == null) {
-            obj.setEndTime(MidlandHelper.getCurrentTime());
-        }
+//        if (StringUtils.isEmpty(obj.getAreaId()) && StringUtils.isEmpty(obj.getAreaName())) {
+//            obj.setAreaId("0");
+//        } else {
+//            obj.setAreaId(obj.getAreaId());
+//            obj.setAreaName(obj.getAreaName());
+//        }
+//        if (StringUtils.isEmpty(obj.getCityId())) {
+//            obj.setCityId("085");
+//        }
+//
+//        if (obj.getStartTime() == null) {
+//            Date date = new Date();
+//            obj.setStartTime(MidlandHelper.getyyyyMMddHHmmss(date, -12));
+//        }
+//        if (obj.getEndTime() == null) {
+//            obj.setEndTime(MidlandHelper.getCurrentTime());
+//        }
         List<String> month = new ArrayList<>();
 
         List<Object> numList = new ArrayList<>();
@@ -460,15 +461,21 @@ public class QuotationController extends BaseFilter {
         double ratioMax = 0;
         double ratioMin = 0;
         List<Quotation> result = quotationServiceImpl.findQuotationList(obj);
-        obj.setStartTime(MidlandHelper.getFormatPreMonth(obj.getStartTime(), -1));
-        obj.setEndTime(MidlandHelper.getFormatPreMonth(obj.getEndTime(), -1));
-        List<Quotation> listTemp = quotationServiceImpl.findQuotationList(obj);
+        List<Quotation> listTemp = result;
         List<Quotation> listRes = new ArrayList<>();
         result.forEach(e -> {
             month.add(e.getDataTime());
             listTemp.forEach(e1 -> {
-                if (e.getDataTime().equals(MidlandHelper.getFormatyyMMToMonth(e1.getDataTime(), +1))) {
-                    e.setPreNum(e1.getDealNum());
+                if (e.getDataTime().equals(MidlandHelper.getFormatyyMMToMonth(e1.getDataTime(), +1))&&
+                        e.getCityId().equals(e1.getCityId())&& e.getAreaId().equals(e1.getAreaId())&&
+                        e.getType().equals(e1.getType())) {
+                    if (e.getHouseAcreage() !=null){
+                        if (e.getHouseAcreage().equals(e1.getHouseAcreage())){
+                            e.setPreNum(e1.getDealNum());
+                        }
+                    }else {
+                        e.setPreNum(e1.getDealNum());
+                    }
                 }
             });
             listRes.add(e);
