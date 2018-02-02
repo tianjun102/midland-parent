@@ -274,7 +274,6 @@ public class QuotationController extends BaseFilter {
             obj.setEndTime(MidlandHelper.getCurrentTime());
         }
         List<String> month = new ArrayList<>();
-
         List<Object> numList = new ArrayList<>();
         List<Object> numRatioList = new ArrayList<>();
         List<Object> acreageList = new ArrayList<>();
@@ -315,7 +314,6 @@ public class QuotationController extends BaseFilter {
                 listMax[0] = QuotationUtil.getMax(listMax[0], e.getDealNum());
                 ratioMax[0] = QuotationUtil.getMax(ratioMax[0], ratio);
                 ratioMin[0] = QuotationUtil.getMin(ratioMin[0], ratio);
-
             } else if ("1".equals(showType)) {
                 //成交面积
                 Double preDealAcreage = null;
@@ -340,25 +338,20 @@ public class QuotationController extends BaseFilter {
                 listMax[0] = QuotationUtil.getMax(listMax[0], Double.valueOf(e.getPrice()));
                 ratioMax[0] = QuotationUtil.getMax(ratioMax[0], ratio);
                 ratioMin[0] = QuotationUtil.getMin(ratioMin[0], ratio);
-
             } else if ("3".equals(showType) && e.getDealPrice() != null) {
                 //成交金额
-
                 Double preDealPrice = null;
                 if (res[0] != null && res[0].getDealPrice() != null) {
                     preDealPrice = Double.valueOf(res[0].getDealPrice());
                 }
                 turnVolumeList.add(e.getDealPrice());
                 Double ratio = QuotationUtil.getRatio(Double.valueOf(e.getDealPrice()), preDealPrice);
-
                 turnVolumeRatioList.add(ratio);
                 listMax[0] = QuotationUtil.getMax(listMax[0], Double.valueOf(e.getDealPrice()));
                 ratioMax[0] = QuotationUtil.getMax(ratioMax[0], ratio);
                 ratioMin[0] = QuotationUtil.getMin(ratioMin[0], ratio);
-
             } else if ("4".equals(showType) && e.getSoldNum() != null) {
                 //可售套数
-
                 Double preSoldNum = null;
                 if (res[0] != null && res[0].getSoldNum() != null) {
                     preSoldNum = Double.valueOf(res[0].getSoldNum());
@@ -369,10 +362,8 @@ public class QuotationController extends BaseFilter {
                 listMax[0] = QuotationUtil.getMax(listMax[0], e.getSoldNum());
                 ratioMax[0] = QuotationUtil.getMax(ratioMax[0], ratio);
                 ratioMin[0] = QuotationUtil.getMin(ratioMin[0], ratio);
-
             } else if ("5".equals(showType) && e.getSoldArea() != null) {
                 //可售面积
-
                 Double preSoldArea = null;
                 if (res[0] != null && res[0].getSoldArea() != null) {
                     preSoldArea = Double.valueOf(res[0].getSoldArea());
@@ -383,11 +374,8 @@ public class QuotationController extends BaseFilter {
                 listMax[0] = QuotationUtil.getMax(listMax[0], Double.valueOf(e.getSoldArea()));
                 ratioMax[0] = QuotationUtil.getMax(ratioMax[0], ratio);
                 ratioMin[0] = QuotationUtil.getMin(ratioMin[0], ratio);
-
             }
-
         });
-
         model.addAttribute("numList", numList);
         model.addAttribute("numRatioList", numRatioList);
         model.addAttribute("acreageList", acreageList);
@@ -404,7 +392,6 @@ public class QuotationController extends BaseFilter {
         listMin = 0;
         ratioMax[0] = QuotationUtil.getRatioDoubleUp(ratioMax[0]);
         ratioMin[0] = QuotationUtil.getRatioDoubleUp(ratioMin[0]);
-//
         model.addAttribute("months", JSONArray.toJSONString(month));
         model.addAttribute("listMax", listMax[0]);
         model.addAttribute("listStep", listMax[0] / 10);
@@ -425,41 +412,7 @@ public class QuotationController extends BaseFilter {
 
     @RequestMapping("/export")
     public void quotationExportExcel(Quotation obj, HttpServletResponse response, HttpServletRequest request) throws Exception {
-//        if (StringUtils.isEmpty(obj.getAreaId()) && StringUtils.isEmpty(obj.getAreaName())) {
-//            obj.setAreaId("0");
-//        } else {
-//            obj.setAreaId(obj.getAreaId());
-//            obj.setAreaName(obj.getAreaName());
-//        }
-//        if (StringUtils.isEmpty(obj.getCityId())) {
-//            obj.setCityId("085");
-//        }
-//
-//        if (obj.getStartTime() == null) {
-//            Date date = new Date();
-//            obj.setStartTime(MidlandHelper.getyyyyMMddHHmmss(date, -12));
-//        }
-//        if (obj.getEndTime() == null) {
-//            obj.setEndTime(MidlandHelper.getCurrentTime());
-//        }
         List<String> month = new ArrayList<>();
-
-        List<Object> numList = new ArrayList<>();
-        List<Object> numRatioList = new ArrayList<>();
-        List<Object> acreageList = new ArrayList<>();
-        List<Object> acreageRatioList = new ArrayList<>();
-        List<Object> dealAvgPriceList = new ArrayList<>();
-        List<Object> dealAvgPriceRatioList = new ArrayList<>();
-        List<Object> turnVolumeList = new ArrayList<>();
-        List<Object> turnVolumeRatioList = new ArrayList<>();
-        List<Object> soldNumList = new ArrayList<>();
-        List<Object> soldNumRatioList = new ArrayList<>();
-        List<Object> soldAcreageList = new ArrayList<>();
-        List<Object> soldAcreageRatioList = new ArrayList<>();
-        double listMax = 0;
-        double listMin = 0;
-        double ratioMax = 0;
-        double ratioMin = 0;
         List<Quotation> result = quotationServiceImpl.findQuotationList(obj);
         List<Quotation> listTemp = result;
         List<Quotation> listRes = new ArrayList<>();
@@ -480,8 +433,6 @@ public class QuotationController extends BaseFilter {
             });
             listRes.add(e);
         });
-
-
         PoiExcelExport pee = new PoiExcelExport(response, "新房信息", "sheet1");
         //调用
         List<ExportModel> exportModels = new ArrayList<>();
@@ -497,7 +448,6 @@ public class QuotationController extends BaseFilter {
             Double ratio = QuotationUtil.getRatio(Double.valueOf(e.getDealNum()), Double.valueOf(e.getPreNum() == null ? 0 : e.getPreNum()));
             exportModel.setModelName6(String.valueOf(ratio));
             exportModel.setModelName7(String.valueOf(e.getDealAcreage() == null ? 0 : e.getDealAcreage()));
-
             exportModel.setModelName8(String.valueOf(e.getPrice() == null ? 0 : e.getPrice()));
             exportModel.setModelName9(String.valueOf(e.getDealPrice() == null ? 0 : e.getDealPrice()));
             exportModel.setModelName10(String.valueOf(e.getSoldNum() == null ? 0 : e.getSoldNum()));
