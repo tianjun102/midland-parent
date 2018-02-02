@@ -1,5 +1,6 @@
 package com.midland.controller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.HotHand;
 import com.midland.web.model.temp.ListDescOtherParam;
 import com.midland.web.model.user.User;
@@ -52,6 +53,8 @@ public class HotHandController extends BaseFilter {
         settingServiceImpl.getAllProvinceList(model);
         User user = MidlandHelper.getCurrentUser(request);
         model.addAttribute("isSuper", user.getIsSuper());
+        List<ParamObject> obj = JsonMapReader.getMap("is_delete");
+        model.addAttribute("isDeletes",obj);
         return "hotHand/hotHandIndex";
     }
 
@@ -162,7 +165,7 @@ public class HotHandController extends BaseFilter {
             log.info("findHotHandList  {}", hotHand);
             MidlandHelper.doPage(request);
             User user = MidlandHelper.getCurrentUser(request);
-            if (",".equals(hotHand.getCityId()) || StringUtils.isEmpty(hotHand.getCityId())) {
+            if(!Contant.isSuper.equals(user.getIsSuper())){//不是超级管理员，只能看属性城市的相关信息
                 hotHand.setCityId(user.getCityId());
             }
             Page<HotHand> result = (Page<HotHand>) hotHandServiceImpl.findHotHandList(hotHand);

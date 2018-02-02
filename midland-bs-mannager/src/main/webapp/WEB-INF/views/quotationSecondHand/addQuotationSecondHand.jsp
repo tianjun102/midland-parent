@@ -39,7 +39,7 @@
             </li>
             <li class="col-sm-12 col-md-12 col-lg-12">
                 <span></span>
-                <a target="contentF" class="public_btn bg2" id="save" onclick="addData()">更新</a>
+                <a target="contentF" class="public_btn bg2" id="save" onclick="addData()">保存</a>
                 <a style="margin-left: 20px" class="public_btn bg3" id="cancel" onclick="closeWin();">取消</a>
             </li>
         </ul>

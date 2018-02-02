@@ -180,8 +180,10 @@
                        onblur="notEmpty('developer','developer','')"/>
             </li>
             <li class="col-md-5"><span>房源名：</span>
-                <input type="text" name="houseName" id="houseName" value="${item.houseName}"
-                />
+                <input type="text" name="houseName" id="houseName" value="${item.houseName}" />
+            </li>
+            <li class="col-md-5"><span>经纪人：</span>
+                <input type="text" name="agentName" id="agentName" disabled="disabled" value="${item.agentName}" />
             </li>
             <li class="col-md-8"><span>物业管理：</span>
                 <textarea name="propertyManagement" id="propertyManagement" style="width:calc(100% - 120px);height:50px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;">${item.propertyManagement}</textarea>

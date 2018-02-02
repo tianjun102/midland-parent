@@ -81,8 +81,8 @@
         select
         <include refid="Base_Column_List"/>
         from hot_hand
-        where
-        is_delete=0
+        where 1=1
+
         <include refid="select_option"/>
         <if test="sort==null or sort == 1">
             ORDER BY order_by desc

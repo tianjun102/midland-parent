@@ -60,8 +60,7 @@
         select
         <include refid="Base_Column_List"/>
         from community_album
-        where
-        is_delete=0
+        where 1=1
         <include refid="select_option"/>
         ORDER BY order_by desc
     </select>

@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.CommunityAlbum;
 import com.midland.web.service.CommunityAlbumService;
 import com.midland.base.ServiceBaseFilter;
@@ -93,6 +94,8 @@ public class CommunityAlbumRestController extends ServiceBaseFilter {
 		try {
 			log.info("findCommunityAlbumList  {}",obj);
 			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setIsShow(Contant.isShow);
 			Page<CommunityAlbum> list = (Page<CommunityAlbum>)communityAlbumServiceImpl.findCommunityAlbumList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

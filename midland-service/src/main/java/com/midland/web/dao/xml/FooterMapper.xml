@@ -64,8 +64,7 @@
         select
         <include refid="Base_Column_List"/>
         from footer
-        where
-        is_delete=0
+        where 1=1
         <include refid="select_option"/>
     </select>
 

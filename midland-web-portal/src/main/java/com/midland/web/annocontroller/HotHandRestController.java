@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.base.ServiceBaseFilter;
+import com.midland.web.Contants.Contant;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
 import com.midland.web.model.CommunityAlbum;
@@ -99,6 +100,8 @@ public class HotHandRestController extends ServiceBaseFilter {
             }
             CommunityAlbum communityAlbum = new CommunityAlbum();
             communityAlbum.setHotHandId(hotHand.getId());
+            communityAlbum.setIsShow(Contant.isShow);
+            communityAlbum.setIsDelete(Contant.isNotDelete);
             List<CommunityAlbum> communityAlbumResult = communityAlbumServiceImpl.findCommunityAlbumList(communityAlbum);
             List<Map> a = new ArrayList<>();
             List<Map> b = new ArrayList<>();
@@ -123,6 +126,8 @@ public class HotHandRestController extends ServiceBaseFilter {
             }
             LayoutMap layoutMap = new LayoutMap();
             layoutMap.setHotHandId(hotHand.getId());
+            layoutMap.setIsShow(Contant.isShow);
+            layoutMap.setIsDelete(Contant.isNotDelete);
             List<LayoutMap> layoutMapResult = lyoutMapServiceImpl.findLayoutMapList(layoutMap);
             List<Map> aa = new ArrayList<>();
             List<Map> bb = new ArrayList<>();
@@ -209,6 +214,7 @@ public class HotHandRestController extends ServiceBaseFilter {
         try {
             log.info("findHotHandList  {}", obj);
             MidlandHelper.doPage(request);
+            obj.setIsDelete(Contant.isNotDelete);
             Page<HotHand> list = (Page<HotHand>) hotHandServiceImpl.findHotHandList(obj);
             List<HotHand> listRes= new ArrayList<>();
             list.forEach(e->{

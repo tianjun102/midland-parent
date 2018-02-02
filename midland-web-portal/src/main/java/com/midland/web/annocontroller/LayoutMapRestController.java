@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.LayoutMap;
 import com.midland.web.service.LayoutMapService;
 import com.midland.base.ServiceBaseFilter;
@@ -93,6 +94,8 @@ public class LayoutMapRestController extends ServiceBaseFilter {
 		try {
 			log.info("findLayoutMapList  {}",obj);
 			MidlandHelper.doPage(request);
+			obj.setIsDelete(Contant.isNotDelete);
+			obj.setIsShow(Contant.isShow);
 			Page<LayoutMap> list = (Page<LayoutMap>)layoutMapServiceImpl.findLayoutMapList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);

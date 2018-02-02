@@ -28,6 +28,18 @@
 				<li><span>地理位置：</span>
 					<input type="text" name="position" id="position" placeholder="请输入地理位置" /></li>
 				</li>
+				<c:if test="${not empty isSuper}">
+					<li><span>是否删除：</span>
+						<select name="isDelete" id="isDelete" class="dropdown">
+							<option value="">全部</option>
+							<c:forEach items="${isDeletes}" var="s1">
+								<option value="${s1.id}" <c:if test="${s1.id==0}">selected</c:if>>
+										${s1.name}
+								</option>
+							</c:forEach>
+						</select>
+					</li>
+				</c:if>
 				<li><span>入伙时间：</span><input class="Wdate half" id="time1"
 											 onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time2\')}'})"
 											 name="startTime" /> <em class = "gang">-</em><input

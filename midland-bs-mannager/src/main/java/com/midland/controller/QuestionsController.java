@@ -173,6 +173,7 @@ public class QuestionsController extends BaseFilter {
 		Questions questions=questionsServiceImpl.selectByPrimaryKey(id);
 		Answer answer = new Answer();
 		answer.setQuestionsId(id);
+		answer.setIsDelete(Contant.isNotDelete);
 		List<Answer> answerList = answerServiceImpl.findAnswerList(answer);
 		List<ParamObject> paramObject = JsonMapReader.getMap("audit_status");
 		model.addAttribute("auditStatusList",paramObject);
@@ -186,6 +187,7 @@ public class QuestionsController extends BaseFilter {
 		Questions questions=questionsServiceImpl.selectByPrimaryKey(id);
 		Answer answer = new Answer();
 		answer.setQuestionsId(id);
+		answer.setIsDelete(Contant.isNotDelete);
 		List<Answer> answerList = answerServiceImpl.findAnswerList(answer);
 		model.addAttribute("questions",questions);
 		model.addAttribute("answerList",answerList);

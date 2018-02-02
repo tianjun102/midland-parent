@@ -208,7 +208,7 @@
             and id= #{id,jdbcType=INTEGER}
         </if>
         <if test="message != null">
-            and message like '%${message}'
+            and message like  CONCAT(CONCAT('%', #{message}), '%')
         </if>
         <if test="addTime != null">
             and add_time= #{addTime,jdbcType=TIMESTAMP}
@@ -223,10 +223,10 @@
             and user_id= #{userId,jdbcType=INTEGER}
         </if>
         <if test="userName != null">
-            and user_name like '%${userName}'
+            and user_name like  CONCAT(CONCAT('%', #{userName}), '%')
         </if>
         <if test="phone != null">
-            and phone= #{phone,jdbcType=VARCHAR}
+            and phone like  CONCAT(CONCAT('%', #{phone}), '%')
         </if>
         <if test="replyMsg != null">
             and reply_msg= #{replyMsg,jdbcType=LONGVARCHAR}
@@ -238,7 +238,7 @@
             and is_delete= #{isDelete,jdbcType=INTEGER}
         </if>
         <if test="email != null">
-            and email like '%${email}'
+            and email  like  CONCAT(CONCAT('%', #{email}), '%')
         </if>
         <if test="replyTime != null">
             and reply_time= #{replyTime,jdbcType=TIMESTAMP}

@@ -60,7 +60,7 @@
             </li>
             <li>
                 <span></span>
-                <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">更新</a>
+                <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">保存</a>
                 <a style="margin-left: 20px" class="public_btn bg3" id="cancel" onclick="closeWin();">取消</a>
             </li>
         </ul>
