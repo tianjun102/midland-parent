@@ -37,7 +37,7 @@ public class QrCodeController extends BaseFilter {
     @RequestMapping("index")
     public String qrCodeIndex(QrCode qrCode, Model model, HttpServletRequest request) throws Exception {
         /*Map<String,String> parem = new HashMap<>();
-		parem.put("flag","city");
+        parem.put("flag","city");
 		parem.put("id","*");
 		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
 		List<Area> cityList = cityMap.get("city");

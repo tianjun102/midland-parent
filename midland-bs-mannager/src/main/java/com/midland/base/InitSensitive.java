@@ -1,12 +1,10 @@
 package com.midland.base;
 
 import com.midland.web.util.JsonMapReader;
-import com.midland.web.util.ParamObject;
 import org.springframework.beans.propertyeditors.PropertiesEditor;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -21,7 +19,7 @@ public class InitSensitive extends PropertiesEditor {
         );
         SensitivewordFilter filter = new SensitivewordFilter(set);
         Set<String> set1 = filter.getSensitiveWord(text, 2);
-        if (set1.size()>0){
+        if (set1.size() > 0) {
             throw new IllegalArgumentException("包含敏感词汇");
         }
         setValue(text);

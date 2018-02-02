@@ -1,12 +1,7 @@
 package com.midland.base;
 
-import com.alibaba.fastjson.JSONArray;
-import com.midland.web.Contants.Contant;
-import com.midland.web.commons.Result;
 import com.midland.web.service.impl.PublicService;
 import com.midland.web.util.HTMLSpirit;
-import com.midland.web.util.JsonMapReader;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Set;
 
 public class SensitiveFilter implements HandlerInterceptor {
     @Autowired

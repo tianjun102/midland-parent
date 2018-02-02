@@ -228,7 +228,7 @@ public class UserController extends BaseFilter {
     public String head(Model model, HttpServletRequest request) {
 //    	HttpSession session = request.getSession();
         User user = MidlandHelper.getCurrentUser(request);
-    	
+
     	/*Notice notice=new Notice();
     	notice.setMsgType(1);//智者汇 看 系统公告
     	if(user!=null && user.getUserType().compareTo(1)==0){
@@ -451,7 +451,8 @@ public class UserController extends BaseFilter {
         model.addAttribute("sources", sources);
         return "user/updateUser";
     }
-/**
+
+    /**
      * 跳转到修改页面
      *
      * @return
@@ -487,8 +488,8 @@ public class UserController extends BaseFilter {
         if (userService.update(user) > 0) {
             if (StringUtils.isNotEmpty(user.getHeadImg())) {
                 User user1 = MidlandHelper.getCurrentUser(request);
-                user1.setHeadImg(user.getHeadImg()   );
-                request.getSession().setAttribute("userInfo",user1);
+                user1.setHeadImg(user.getHeadImg());
+                request.getSession().setAttribute("userInfo", user1);
             }
             map.put("state", 0);
             map.put("message", "success");

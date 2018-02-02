@@ -17,28 +17,29 @@ import java.util.Properties;
  */
 @Component
 public class JavaMailConfiguration {
-	@Autowired
-	private MailProperties mailProperties;
-	@Bean
-	public JavaMailSender javaMailSender(){
-		JavaMailSenderImpl javaMailSender =new JavaMailSenderImpl() ;
-		Properties props = new Properties();
-		props.setProperty("mail.smtp.socketFactory.class", mailProperties.getSslFactory());
-		props.setProperty("mail.smtp.socketFactory.fallback", mailProperties.getFallback());
-		props.setProperty("mail.smtp.port", mailProperties.getPort());
-		props.setProperty("mail.smtp.socketFactory.port", mailProperties.getFactoryPort());
-		props.setProperty("mail.smtp.auth", mailProperties.getAuth());
-		props.put("mail.smtp.host",mailProperties.getHost());
-		props.put("mail.smtp.username", mailProperties.getUserName());
-		props.put("mail.smtp.password", mailProperties.getAuthCode());
-		Session session = Session.getDefaultInstance(props,  new Authenticator() {
-			//身份认证
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(mailProperties.getUserName(), mailProperties.getAuthCode());
-			}
-		});
-		javaMailSender.setSession(session);
-		return javaMailSender;
-	}
-	
+    @Autowired
+    private MailProperties mailProperties;
+
+    @Bean
+    public JavaMailSender javaMailSender() {
+        JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+        Properties props = new Properties();
+        props.setProperty("mail.smtp.socketFactory.class", mailProperties.getSslFactory());
+        props.setProperty("mail.smtp.socketFactory.fallback", mailProperties.getFallback());
+        props.setProperty("mail.smtp.port", mailProperties.getPort());
+        props.setProperty("mail.smtp.socketFactory.port", mailProperties.getFactoryPort());
+        props.setProperty("mail.smtp.auth", mailProperties.getAuth());
+        props.put("mail.smtp.host", mailProperties.getHost());
+        props.put("mail.smtp.username", mailProperties.getUserName());
+        props.put("mail.smtp.password", mailProperties.getAuthCode());
+        Session session = Session.getDefaultInstance(props, new Authenticator() {
+            //身份认证
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(mailProperties.getUserName(), mailProperties.getAuthCode());
+            }
+        });
+        javaMailSender.setSession(session);
+        return javaMailSender;
+    }
+
 }

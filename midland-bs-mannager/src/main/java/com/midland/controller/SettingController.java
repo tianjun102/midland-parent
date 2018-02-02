@@ -7,7 +7,6 @@ import com.midland.config.MidlandConfig;
 import com.midland.task.TaskConfig;
 import com.midland.web.enums.ContextEnums;
 import com.midland.web.model.*;
-import com.midland.web.model.temp.ListDescOtherParam;
 import com.midland.web.model.user.User;
 import com.midland.web.service.BannerService;
 import com.midland.web.service.JdbcService;
@@ -49,17 +48,18 @@ public class SettingController extends BaseFilter {
     private TaskConfig taskConfig;
     @Autowired
     private BannerService bannerServiceImpl;
+
     // 进入热门关注首页面
     @RequestMapping(value = "showPopularIndex", method = {RequestMethod.GET, RequestMethod.POST})
     public String showPopularIndex(Model model, HttpServletRequest request) {
 
         settingService.getAllProvinceList(model);
         User user = MidlandHelper.getCurrentUser(request);
-        if(user.getIsSuper()==null){
-            model.addAttribute("cityId",user.getCityId());
+        if (user.getIsSuper() == null) {
+            model.addAttribute("cityId", user.getCityId());
         }
-        model.addAttribute("isSuper",user.getIsSuper());
-        model.addAttribute("type",request.getParameter("type"));
+        model.addAttribute("isSuper", user.getIsSuper());
+        model.addAttribute("type", request.getParameter("type"));
         return "setting/showPopularIndex";
     }
 
@@ -89,17 +89,17 @@ public class SettingController extends BaseFilter {
         Category category = new Category();
         int type = 3;
         category.setType(type);
-        model.addAttribute("type",type);
+        model.addAttribute("type", type);
         String result = getCategoryTree("", category);
         if (StringUtils.isNotEmpty(result)) {
             model.addAttribute("categoryData", result);
         }
         User user = MidlandHelper.getCurrentUser(request);
-        if(user.getIsSuper()==null){
-            model.addAttribute("cityId",user.getCityId());
-            model.addAttribute("cityName",user.getCityName());
+        if (user.getIsSuper() == null) {
+            model.addAttribute("cityId", user.getCityId());
+            model.addAttribute("cityName", user.getCityName());
         }
-        model.addAttribute("isSuper",user.getIsSuper());
+        model.addAttribute("isSuper", user.getIsSuper());
         return "setting/addPopular";
     }
 
@@ -145,13 +145,13 @@ public class SettingController extends BaseFilter {
     @RequestMapping("popular/sort")
     @ResponseBody
     public Map listDesc(Popular popular, int sort, Model model, HttpServletRequest request) throws Exception {
-        if (sort==1){
+        if (sort == 1) {
             popularServiceImpl.shiftUp(popular);
-        }else{
+        } else {
             popularServiceImpl.shiftDown(popular);
         }
         Map map = new HashMap();
-        map.put("state",0);
+        map.put("state", 0);
         return map;
     }
 
@@ -187,7 +187,7 @@ public class SettingController extends BaseFilter {
         Category category = new Category();
         int type = 3;
         category.setType(type);
-        model.addAttribute("type",type);
+        model.addAttribute("type", type);
         String resultCate = getCategoryTree("", category);
         if (StringUtils.isNotEmpty(resultCate)) {
             model.addAttribute("categoryData", resultCate);
@@ -195,11 +195,11 @@ public class SettingController extends BaseFilter {
         model.addAttribute("sheetList", sheetLst == null ? null : sheetLst.get("sheet"));
         model.addAttribute("item", popular);
         User user = MidlandHelper.getCurrentUser(request);
-        if(user.getIsSuper()==null){
-            model.addAttribute("cityId",user.getCityId());
-            model.addAttribute("cityName",user.getCityName());
+        if (user.getIsSuper() == null) {
+            model.addAttribute("cityId", user.getCityId());
+            model.addAttribute("cityName", user.getCityName());
         }
-        model.addAttribute("isSuper",user.getIsSuper());
+        model.addAttribute("isSuper", user.getIsSuper());
         return "setting/editPopular";
     }
 
@@ -241,11 +241,11 @@ public class SettingController extends BaseFilter {
         model.addAttribute("cityList",cityList);*/
         settingService.getAllProvinceList(model);
         User user = MidlandHelper.getCurrentUser(request);
-        if(user.getIsSuper()==null){
-            model.addAttribute("cityId",user.getCityId());
-            model.addAttribute("cityName",user.getCityName());
+        if (user.getIsSuper() == null) {
+            model.addAttribute("cityId", user.getCityId());
+            model.addAttribute("cityName", user.getCityName());
         }
-        model.addAttribute("isSuper",user.getIsSuper());
+        model.addAttribute("isSuper", user.getIsSuper());
         return "setting/linkUrlMannagerIndex";
     }
 
@@ -265,13 +265,13 @@ public class SettingController extends BaseFilter {
     @RequestMapping("linkUrlSort")
     @ResponseBody
     public Map listDesc(LinkUrlManager linkUrlManager, int sort, Model model, HttpServletRequest request) throws Exception {
-        if (sort==1){
+        if (sort == 1) {
             settingService.shiftUp(linkUrlManager);
-        }else{
+        } else {
             settingService.shiftDown(linkUrlManager);
         }
         Map map = new HashMap();
-        map.put("state",0);
+        map.put("state", 0);
         return map;
     }
 
@@ -285,11 +285,11 @@ public class SettingController extends BaseFilter {
         List<Area> cityList = cityMap.get("city");
         model.addAttribute("cityList", cityList);
         User user = MidlandHelper.getCurrentUser(request);
-        if(user.getIsSuper()==null){
-            model.addAttribute("cityId",user.getCityId());
-            model.addAttribute("cityName",user.getCityName());
+        if (user.getIsSuper() == null) {
+            model.addAttribute("cityId", user.getCityId());
+            model.addAttribute("cityName", user.getCityName());
         }
-        model.addAttribute("isSuper",user.getIsSuper());
+        model.addAttribute("isSuper", user.getIsSuper());
         return "setting/addLinkUrl";
     }
 
@@ -316,11 +316,11 @@ public class SettingController extends BaseFilter {
         linkUrlManager = settingService.findLinkUrlManager(linkUrlManager);
         model.addAttribute("linkUrlManager", linkUrlManager);
         User user = MidlandHelper.getCurrentUser(request);
-        if(user.getIsSuper()==null){
-            model.addAttribute("cityId",user.getCityId());
-            model.addAttribute("cityName",user.getCityName());
+        if (user.getIsSuper() == null) {
+            model.addAttribute("cityId", user.getCityId());
+            model.addAttribute("cityName", user.getCityName());
         }
-        model.addAttribute("isSuper",user.getIsSuper());
+        model.addAttribute("isSuper", user.getIsSuper());
         return "setting/editLinkUrl";
     }
 
@@ -360,13 +360,13 @@ public class SettingController extends BaseFilter {
         model.addAttribute("cityList",cityList);*/
         settingService.getAllProvinceList(model);
         List<ParamObject> obj = JsonMapReader.getMap("source");
-        model.addAttribute("sources",obj);
+        model.addAttribute("sources", obj);
         User user = MidlandHelper.getCurrentUser(request);
-        if(user.getIsSuper()==null){
-            model.addAttribute("cityId",user.getCityId());
-            model.addAttribute("cityName",user.getCityName());
+        if (user.getIsSuper() == null) {
+            model.addAttribute("cityId", user.getCityId());
+            model.addAttribute("cityName", user.getCityName());
         }
-        model.addAttribute("isSuper",user.getIsSuper());
+        model.addAttribute("isSuper", user.getIsSuper());
         return "setting/bannerIndex";
     }
 
@@ -397,11 +397,11 @@ public class SettingController extends BaseFilter {
         List<Area> cityList = cityMap.get("city");
         model.addAttribute("cityList", cityList);
         User user = MidlandHelper.getCurrentUser(request);
-        if(user.getIsSuper()==null){
-            model.addAttribute("cityId",user.getCityId());
-            model.addAttribute("cityName",user.getCityName());
+        if (user.getIsSuper() == null) {
+            model.addAttribute("cityId", user.getCityId());
+            model.addAttribute("cityName", user.getCityName());
         }
-        model.addAttribute("isSuper",user.getIsSuper());
+        model.addAttribute("isSuper", user.getIsSuper());
         return "setting/addBanner";
     }
 
@@ -436,11 +436,11 @@ public class SettingController extends BaseFilter {
         banner = settingService.findBanner(banner);
         model.addAttribute("banner", banner);
         User user = MidlandHelper.getCurrentUser(request);
-        if(user.getIsSuper()==null){
-            model.addAttribute("cityId",user.getCityId());
-            model.addAttribute("cityName",user.getCityName());
+        if (user.getIsSuper() == null) {
+            model.addAttribute("cityId", user.getCityId());
+            model.addAttribute("cityName", user.getCityName());
         }
-        model.addAttribute("isSuper",user.getIsSuper());
+        model.addAttribute("isSuper", user.getIsSuper());
         return "/setting/editBanner";
     }
 
@@ -480,7 +480,7 @@ public class SettingController extends BaseFilter {
     @RequestMapping(value = "time/index")
     public String timeSetting(Model model, HttpServletRequest request, Banner banner) {
 
-        model.addAttribute("item",taskConfig);
+        model.addAttribute("item", taskConfig);
         return "setting/timeSetting";
     }
 
@@ -489,20 +489,20 @@ public class SettingController extends BaseFilter {
     public Object timeSet(HttpServletRequest request) {
         Map map = new HashMap();
         try {
-            Double appointmentWarn = request.getParameter("appointmentWarn")==null?null:Double.valueOf(request.getParameter("appointmentWarn"));
-            Double appointClose = request.getParameter("appointClose")==null?null:Double.valueOf(request.getParameter("appointClose"));
-            Double taskInterval = request.getParameter("taskInterval")==null?null:Double.valueOf(request.getParameter("taskInterval"));
-            Double entrustWarn = request.getParameter("entrustWarn")==null?null:Double.valueOf(request.getParameter("entrustWarn"));
-            if(appointmentWarn ==null){
-                appointmentWarn=0.5;
+            Double appointmentWarn = request.getParameter("appointmentWarn") == null ? null : Double.valueOf(request.getParameter("appointmentWarn"));
+            Double appointClose = request.getParameter("appointClose") == null ? null : Double.valueOf(request.getParameter("appointClose"));
+            Double taskInterval = request.getParameter("taskInterval") == null ? null : Double.valueOf(request.getParameter("taskInterval"));
+            Double entrustWarn = request.getParameter("entrustWarn") == null ? null : Double.valueOf(request.getParameter("entrustWarn"));
+            if (appointmentWarn == null) {
+                appointmentWarn = 0.5;
             }
-            if(appointClose ==null){
-                appointClose=0.5;
+            if (appointClose == null) {
+                appointClose = 0.5;
             }
-            if (taskInterval ==null){
+            if (taskInterval == null) {
                 taskInterval = 0.5;
             }
-            if (entrustWarn ==null){
+            if (entrustWarn == null) {
                 entrustWarn = 0.5;
             }
             taskConfig.setAppointClose(appointClose);
@@ -511,7 +511,7 @@ public class SettingController extends BaseFilter {
             taskConfig.setEntrustWarn(entrustWarn);
             map.put("state", 0);
         } catch (Exception e) {
-            logger.error("",e);
+            logger.error("", e);
             map.put("state", -1);
         }
         return map;
@@ -521,13 +521,13 @@ public class SettingController extends BaseFilter {
     @ResponseBody
     public Map bannerSort(Banner banner, int sort, Model model, HttpServletRequest request) throws Exception {
 
-        if (sort==1){
+        if (sort == 1) {
             bannerServiceImpl.shiftUp(banner);
-        }else {
+        } else {
             bannerServiceImpl.shiftDown(banner);
         }
         Map map = new HashMap();
-        map.put("state",0);
+        map.put("state", 0);
         return map;
     }
 
@@ -536,23 +536,23 @@ public class SettingController extends BaseFilter {
      **/
     @RequestMapping("batchUpdateBanner")
     @ResponseBody
-    public Object batchUpdateBanner(String ids,Banner banner) throws Exception {
+    public Object batchUpdateBanner(String ids, Banner banner) throws Exception {
         List<Banner> commentList = new ArrayList<>();
-        String[] ides=ids.split(",",-1);
-        for (String id:ides ){
+        String[] ides = ids.split(",", -1);
+        for (String id : ides) {
             Banner comment1 = new Banner();
             comment1.setId(Integer.valueOf(id));
             comment1.setIsDelete(banner.getIsDelete());
             commentList.add(comment1);
         }
-        Map<String,Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         try {
-            logger.debug("updateCategoryById  {}",commentList);
+            logger.debug("updateCategoryById  {}", commentList);
             settingService.batchUpdateBanner(commentList);
-            map.put("state",0);
-        } catch(Exception e) {
-            logger.error("updateCategoryById  {}",commentList,e);
-            map.put("state",-1);
+            map.put("state", 0);
+        } catch (Exception e) {
+            logger.error("updateCategoryById  {}", commentList, e);
+            map.put("state", -1);
         }
         return map;
     }
@@ -562,23 +562,23 @@ public class SettingController extends BaseFilter {
      **/
     @RequestMapping("batchUpdatePopular")
     @ResponseBody
-    public Object batchUpdatePopular(String ids,Popular popular) throws Exception {
+    public Object batchUpdatePopular(String ids, Popular popular) throws Exception {
         List<Popular> commentList = new ArrayList<>();
-        String[] ides=ids.split(",",-1);
-        for (String id:ides ){
+        String[] ides = ids.split(",", -1);
+        for (String id : ides) {
             Popular comment1 = new Popular();
             comment1.setId(Integer.valueOf(id));
             comment1.setIsDelete(popular.getIsDelete());
             commentList.add(comment1);
         }
-        Map<String,Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         try {
-            logger.debug("updateCategoryById  {}",commentList);
+            logger.debug("updateCategoryById  {}", commentList);
             settingService.batchUpdatePopular(commentList);
-            map.put("state",0);
-        } catch(Exception e) {
-            logger.error("updateCategoryById  {}",commentList,e);
-            map.put("state",-1);
+            map.put("state", 0);
+        } catch (Exception e) {
+            logger.error("updateCategoryById  {}", commentList, e);
+            map.put("state", -1);
         }
         return map;
     }
@@ -589,23 +589,23 @@ public class SettingController extends BaseFilter {
      **/
     @RequestMapping("batchUpdatelinkUrl")
     @ResponseBody
-    public Object batchUpdatelinkUrl(String ids,LinkUrlManager linkUrlManager) throws Exception {
+    public Object batchUpdatelinkUrl(String ids, LinkUrlManager linkUrlManager) throws Exception {
         List<LinkUrlManager> commentList = new ArrayList<>();
-        String[] ides=ids.split(",",-1);
-        for (String id:ides ){
+        String[] ides = ids.split(",", -1);
+        for (String id : ides) {
             LinkUrlManager comment1 = new LinkUrlManager();
             comment1.setId(Integer.valueOf(id));
             comment1.setIsDelete(linkUrlManager.getIsDelete());
             commentList.add(comment1);
         }
-        Map<String,Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         try {
-            logger.debug("updateCategoryById  {}",commentList);
+            logger.debug("updateCategoryById  {}", commentList);
             settingService.batchUpdateLinkUrl(commentList);
-            map.put("state",0);
-        } catch(Exception e) {
-            logger.error("updateCategoryById  {}",commentList,e);
-            map.put("state",-1);
+            map.put("state", 0);
+        } catch (Exception e) {
+            logger.error("updateCategoryById  {}", commentList, e);
+            map.put("state", -1);
         }
         return map;
     }

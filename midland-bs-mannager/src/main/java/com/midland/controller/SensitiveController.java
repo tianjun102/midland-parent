@@ -20,40 +20,39 @@ import java.util.Map;
 @RequestMapping("/sensitive/")
 public class SensitiveController extends BaseFilter {
 
-	private Logger log = LoggerFactory.getLogger(SensitiveController.class);
-	@Autowired
-	private PublicService publicServiceImpl;
+    private Logger log = LoggerFactory.getLogger(SensitiveController.class);
+    @Autowired
+    private PublicService publicServiceImpl;
 
-	/**
-	 * 
-	 **/
-	@RequestMapping("index")
-	public String sensitiveIndex(Model model) throws Exception {
-		return "setting/sensitiveWord";
-	}
+    /**
+     *
+     **/
+    @RequestMapping("index")
+    public String sensitiveIndex(Model model) throws Exception {
+        return "setting/sensitiveWord";
+    }
 
-	@RequestMapping("add")
-	@ResponseBody
-	public Object sensitiveAdd(HttpServletRequest request,Model model){
-		Map map = new HashMap();
-		try {
+    @RequestMapping("add")
+    @ResponseBody
+    public Object sensitiveAdd(HttpServletRequest request, Model model) {
+        Map map = new HashMap();
+        try {
 
-			String V = request.getParameter("V");
-			String V1 = request.getParameter("V1");
-			if (StringUtils.isNotEmpty(V)) {
+            String V = request.getParameter("V");
+            String V1 = request.getParameter("V1");
+            if (StringUtils.isNotEmpty(V)) {
                 publicServiceImpl.addSet(V);
-				map.put("state",0);
-            }
-            else if (StringUtils.isNotEmpty(V1)) {
+                map.put("state", 0);
+            } else if (StringUtils.isNotEmpty(V1)) {
                 publicServiceImpl.moveSet(V1);
-				map.put("state",0);
-            }else {
-				map.put("state",-1);
+                map.put("state", 0);
+            } else {
+                map.put("state", -1);
             }
-		} catch (Exception e) {
-			map.put("state",-1);
-		}
-		return map;
-	}
+        } catch (Exception e) {
+            map.put("state", -1);
+        }
+        return map;
+    }
 
 }

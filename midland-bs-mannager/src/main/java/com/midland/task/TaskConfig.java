@@ -13,56 +13,54 @@ public class TaskConfig {
      * 预约未处理告警间隔时间
      */
     private Double appointmentWarn;
-    private String appointmentWarnKey ="appointmentWarnKey";
+    private String appointmentWarnKey = "appointmentWarnKey";
     /**
      * 预约关闭间隔时间
      */
     private Double appointClose;
     private String appointCloseKey = "appointCloseKey";
-    private Double initTime=0.5;
+    private Double initTime = 0.5;
 
 
     /**
      * 任务执行间隔时间
      */
     private Double taskInterval;
-    private String taskIntervalKey="taskIntervalKey";
-    private Double initTaskInterval=0.5;
+    private String taskIntervalKey = "taskIntervalKey";
+    private Double initTaskInterval = 0.5;
 
     /**
      * 预约管理-任务上次执行的时间
      */
     private Long taskAppointFirstTime;
-    private String taskAppointFirstTimeKey ="taskAppointFirstTimeKey";
+    private String taskAppointFirstTimeKey = "taskAppointFirstTimeKey";
 
     /**
      * 委托管理-任务上次执行的时间
      */
     private Long taskEntrustFirstTime;
-    private String taskEntrustFirstTimeKey ="taskEntrustFirstTimeKey";
-
+    private String taskEntrustFirstTimeKey = "taskEntrustFirstTimeKey";
 
 
     /**
      * 委托未处理告警间隔时间
      */
     private Double entrustWarn;
-    private String entrustWarnKey ="entrustWarnKey";
+    private String entrustWarnKey = "entrustWarnKey";
 
     @Autowired
     private RedisService redisServiceImpl;
 
 
-
-
-    public Double getEntrustWarn(){
-        if (entrustWarn == null){
+    public Double getEntrustWarn() {
+        if (entrustWarn == null) {
             Object value = redisServiceImpl.getValue(entrustWarnKey);
-            if (value == null){
-                redisServiceImpl.setValue(entrustWarnKey,initTime);;
+            if (value == null) {
+                redisServiceImpl.setValue(entrustWarnKey, initTime);
+                ;
                 entrustWarn = initTime;
-            }else{
-                entrustWarn =Double.valueOf(String.valueOf(value));
+            } else {
+                entrustWarn = Double.valueOf(String.valueOf(value));
             }
         }
         return entrustWarn;
@@ -74,15 +72,16 @@ public class TaskConfig {
         redisServiceImpl.setValue(entrustWarnKey, entrustWarn);
     }
 
-    public Long getTaskEntrustFirstTime(){
-        if (taskEntrustFirstTime == null){
+    public Long getTaskEntrustFirstTime() {
+        if (taskEntrustFirstTime == null) {
             Object value = redisServiceImpl.getValue(taskEntrustFirstTimeKey);
-            if (value == null){
-                long intTime = System.currentTimeMillis();;
-                redisServiceImpl.setValue(taskEntrustFirstTimeKey,intTime );
+            if (value == null) {
+                long intTime = System.currentTimeMillis();
+                ;
+                redisServiceImpl.setValue(taskEntrustFirstTimeKey, intTime);
                 taskEntrustFirstTime = intTime;
-            }else{
-                taskEntrustFirstTime =Long.valueOf(String.valueOf(value));
+            } else {
+                taskEntrustFirstTime = Long.valueOf(String.valueOf(value));
             }
         }
         return taskEntrustFirstTime;
@@ -95,17 +94,15 @@ public class TaskConfig {
     }
 
 
-
-
-    public Long getTaskAppointFirstTime(){
-        if (taskAppointFirstTime == null){
+    public Long getTaskAppointFirstTime() {
+        if (taskAppointFirstTime == null) {
             Object value = redisServiceImpl.getValue(taskAppointFirstTimeKey);
-            if (value == null){
+            if (value == null) {
                 long intTime = System.currentTimeMillis();
-                redisServiceImpl.setValue(taskAppointFirstTimeKey,intTime );
+                redisServiceImpl.setValue(taskAppointFirstTimeKey, intTime);
                 taskAppointFirstTime = intTime;
-            }else{
-                taskAppointFirstTime =Long.valueOf(String.valueOf(value));
+            } else {
+                taskAppointFirstTime = Long.valueOf(String.valueOf(value));
             }
         }
         return taskAppointFirstTime;
@@ -118,15 +115,15 @@ public class TaskConfig {
     }
 
 
-
-    public Double getTaskInterval(){
-        if (taskInterval == null){
+    public Double getTaskInterval() {
+        if (taskInterval == null) {
             Object value = redisServiceImpl.getValue(taskIntervalKey);
-            if (value == null){
-                redisServiceImpl.setValue(taskIntervalKey,initTime);
-                taskInterval = initTaskInterval;;
-            }else{
-                taskInterval =Double.valueOf(String.valueOf(value));
+            if (value == null) {
+                redisServiceImpl.setValue(taskIntervalKey, initTime);
+                taskInterval = initTaskInterval;
+                ;
+            } else {
+                taskInterval = Double.valueOf(String.valueOf(value));
             }
         }
         return taskInterval;
@@ -139,21 +136,16 @@ public class TaskConfig {
     }
 
 
-
-
-
-
-
-
-    public Double getAppointmentWarn(){
-        if (appointmentWarn == null){
-           Object value = redisServiceImpl.getValue(appointmentWarnKey);
-           if (value == null){
-               redisServiceImpl.setValue(appointmentWarnKey,initTime);;
-               appointmentWarn = initTime;
-           }else{
-               appointmentWarn =Double.valueOf(String.valueOf(value));
-           }
+    public Double getAppointmentWarn() {
+        if (appointmentWarn == null) {
+            Object value = redisServiceImpl.getValue(appointmentWarnKey);
+            if (value == null) {
+                redisServiceImpl.setValue(appointmentWarnKey, initTime);
+                ;
+                appointmentWarn = initTime;
+            } else {
+                appointmentWarn = Double.valueOf(String.valueOf(value));
+            }
         }
         return appointmentWarn;
     }
@@ -165,14 +157,15 @@ public class TaskConfig {
     }
 
 
-    public Double getAppointClose(){
-        if (appointClose == null){
-            Object value = redisServiceImpl.getValue(appointCloseKey);;
-            if (value == null){
-                redisServiceImpl.setValue(appointCloseKey,initTime);
+    public Double getAppointClose() {
+        if (appointClose == null) {
+            Object value = redisServiceImpl.getValue(appointCloseKey);
+            ;
+            if (value == null) {
+                redisServiceImpl.setValue(appointCloseKey, initTime);
                 appointClose = initTime;
-            }else{
-                appointClose =Double.valueOf(String.valueOf(value));
+            } else {
+                appointClose = Double.valueOf(String.valueOf(value));
             }
         }
         return appointClose;

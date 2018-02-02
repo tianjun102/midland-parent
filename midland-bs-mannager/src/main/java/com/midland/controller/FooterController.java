@@ -23,121 +23,123 @@ import java.util.Map;
 @RequestMapping("/footer/")
 public class FooterController extends BaseFilter {
 
-	private Logger log = LoggerFactory.getLogger(FooterController.class);
-	@Autowired
-	private FooterService footerServiceImpl;
+    private Logger log = LoggerFactory.getLogger(FooterController.class);
+    @Autowired
+    private FooterService footerServiceImpl;
 
-	/**
-	 * 
-	 **/
-	@RequestMapping("index")
-	public String footerIndex(Footer footer, Model model) throws Exception {
-		return "footer/footerIndex";
-	}
+    /**
+     *
+     **/
+    @RequestMapping("index")
+    public String footerIndex(Footer footer, Model model) throws Exception {
+        return "footer/footerIndex";
+    }
 
-	/**
-	 * 
-	 **/
-	@RequestMapping("to_add")
-	public String toAddFooter(Footer footer, Model model) throws Exception {
-		return "footer/addFooter";
-	}
+    /**
+     *
+     **/
+    @RequestMapping("to_add")
+    public String toAddFooter(Footer footer, Model model) throws Exception {
+        return "footer/addFooter";
+    }
 
-	/**
-	 * 新增
-	 **/
-	@RequestMapping("add")
-	@ResponseBody
-	public Object addFooter(Footer footer) throws Exception {
-		Map<String,Object> map = new HashMap<>();
-		try {
-			log.debug("addFooter {}",footer);
-			footerServiceImpl.insertFooter(footer);
-			map.put("state",0);
-		} catch(Exception e) {
-			log.error("addFooter异常 {}",footer,e);
-			map.put("state",-1);
-		}
-		return map;
-	}
+    /**
+     * 新增
+     **/
+    @RequestMapping("add")
+    @ResponseBody
+    public Object addFooter(Footer footer) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            log.debug("addFooter {}", footer);
+            footerServiceImpl.insertFooter(footer);
+            map.put("state", 0);
+        } catch (Exception e) {
+            log.error("addFooter异常 {}", footer, e);
+            map.put("state", -1);
+        }
+        return map;
+    }
 
-	/**
-	 * 查询
-	 **/
-	@RequestMapping("get_footer")
-	public String getFooterById(Integer id,Model model) {
-		log.debug("getFooterById  {}",id);
-		Footer result = footerServiceImpl.selectFooterById(id);
-		model.addAttribute("item",result);
-		return "footer/updateFooter";	}
+    /**
+     * 查询
+     **/
+    @RequestMapping("get_footer")
+    public String getFooterById(Integer id, Model model) {
+        log.debug("getFooterById  {}", id);
+        Footer result = footerServiceImpl.selectFooterById(id);
+        model.addAttribute("item", result);
+        return "footer/updateFooter";
+    }
 
-	/**
-	 * 删除
-	 **/
-	@RequestMapping("delete")
-	@ResponseBody
-	public Object deleteFooterById(Integer id)throws Exception {
-		Map<String,Object> map = new HashMap<>();
-		try {
-			log.debug("deleteFooterById  {}",id);
-			footerServiceImpl.deleteFooterById(id);
-			map.put("state",0);
-		} catch(Exception e) {
-			log.error("deleteFooterById  {}",id,e);
-			map.put("state",-1);
-		}
-		return map;
-	}
-	/**
-	 * 
-	 **/
-	@RequestMapping("to_update")
-	public String toUpdateFooter(Integer id,Model model) throws Exception {
-		Footer result = footerServiceImpl.selectFooterById(id);
-		model.addAttribute("item",result);
-		return "footer/updateFooter";
-	}
+    /**
+     * 删除
+     **/
+    @RequestMapping("delete")
+    @ResponseBody
+    public Object deleteFooterById(Integer id) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            log.debug("deleteFooterById  {}", id);
+            footerServiceImpl.deleteFooterById(id);
+            map.put("state", 0);
+        } catch (Exception e) {
+            log.error("deleteFooterById  {}", id, e);
+            map.put("state", -1);
+        }
+        return map;
+    }
 
-	/**
-	 * 更新
-	 **/
-	@RequestMapping("update")
-	@ResponseBody
-	public Object updateFooterById(Footer footer) throws Exception {
-		Map<String,Object> map = new HashMap<>();
-		try {
-			log.debug("updateFooterById  {}",footer);
-			if (footer.getId()!=null){
-			footerServiceImpl.updateFooterSelectiveById(footer);
-			}else{
-			footerServiceImpl.insertFooter(footer);
-			}
+    /**
+     *
+     **/
+    @RequestMapping("to_update")
+    public String toUpdateFooter(Integer id, Model model) throws Exception {
+        Footer result = footerServiceImpl.selectFooterById(id);
+        model.addAttribute("item", result);
+        return "footer/updateFooter";
+    }
 
-			map.put("state",0);
-		} catch(Exception e) {
-			log.error("updateFooterById  {}",footer,e);
-			map.put("state",-1);
-		}
-		return map;
-	}
+    /**
+     * 更新
+     **/
+    @RequestMapping("update")
+    @ResponseBody
+    public Object updateFooterById(Footer footer) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            log.debug("updateFooterById  {}", footer);
+            if (footer.getId() != null) {
+                footerServiceImpl.updateFooterSelectiveById(footer);
+            } else {
+                footerServiceImpl.insertFooter(footer);
+            }
 
-	/**
-	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
-	 **/
-	@RequestMapping("list")
-	public String findFooterList(Footer footer, Model model, HttpServletRequest request) {
-		try {
-			log.debug("findFooterList  {}",footer);
-			MidlandHelper.doPage(request);
-			Page<Footer> result = (Page<Footer>)footerServiceImpl.findFooterList(footer);
-			Paginator paginator=result.getPaginator();
-			model.addAttribute("paginator",paginator);
-			model.addAttribute("items",result);
-		} catch(Exception e) {
-			log.error("findFooterList  {}",footer,e);
-			model.addAttribute("paginator",null);
-			model.addAttribute("items",null);
-		}
-		return "footer/footerList";
-	}
+            map.put("state", 0);
+        } catch (Exception e) {
+            log.error("updateFooterById  {}", footer, e);
+            map.put("state", -1);
+        }
+        return map;
+    }
+
+    /**
+     * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
+     **/
+    @RequestMapping("list")
+    public String findFooterList(Footer footer, Model model, HttpServletRequest request) {
+        try {
+            log.debug("findFooterList  {}", footer);
+            MidlandHelper.doPage(request);
+            Page<Footer> result = (Page<Footer>) footerServiceImpl.findFooterList(footer);
+            Paginator paginator = result.getPaginator();
+            model.addAttribute("paginator", paginator);
+            model.addAttribute("items", result);
+        } catch (Exception e) {
+            log.error("findFooterList  {}", footer, e);
+            model.addAttribute("paginator", null);
+            model.addAttribute("items", null);
+        }
+        return "footer/footerList";
+    }
 }

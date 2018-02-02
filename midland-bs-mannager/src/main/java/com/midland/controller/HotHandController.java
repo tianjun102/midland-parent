@@ -1,36 +1,31 @@
 package com.midland.controller;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.Paginator;
+import com.midland.base.BaseFilter;
 import com.midland.web.Contants.Contant;
 import com.midland.web.model.HotHand;
-import com.midland.web.model.temp.ListDescOtherParam;
 import com.midland.web.model.user.User;
 import com.midland.web.service.HotHandService;
-import com.midland.base.BaseFilter;
 import com.midland.web.service.JdbcService;
 import com.midland.web.service.SettingService;
 import com.midland.web.util.JsonMapReader;
+import com.midland.web.util.MidlandHelper;
 import com.midland.web.util.ParamObject;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
-
-import java.util.Arrays;
-import java.util.Map;
-import java.util.HashMap;
-
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.Paginator;
-
-import java.util.List;
-
-import com.midland.web.util.MidlandHelper;
-import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @SuppressWarnings("all")
@@ -54,7 +49,7 @@ public class HotHandController extends BaseFilter {
         User user = MidlandHelper.getCurrentUser(request);
         model.addAttribute("isSuper", user.getIsSuper());
         List<ParamObject> obj = JsonMapReader.getMap("is_delete");
-        model.addAttribute("isDeletes",obj);
+        model.addAttribute("isDeletes", obj);
         return "hotHand/hotHandIndex";
     }
 
@@ -165,7 +160,7 @@ public class HotHandController extends BaseFilter {
             log.info("findHotHandList  {}", hotHand);
             MidlandHelper.doPage(request);
             User user = MidlandHelper.getCurrentUser(request);
-            if(!Contant.isSuper.equals(user.getIsSuper())){//不是超级管理员，只能看属性城市的相关信息
+            if (!Contant.isSuper.equals(user.getIsSuper())) {//不是超级管理员，只能看属性城市的相关信息
                 hotHand.setCityId(user.getCityId());
             }
             Page<HotHand> result = (Page<HotHand>) hotHandServiceImpl.findHotHandList(hotHand);

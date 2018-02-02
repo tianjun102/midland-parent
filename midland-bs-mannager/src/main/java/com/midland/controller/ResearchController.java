@@ -7,7 +7,6 @@ import com.midland.core.util.DateUtils;
 import com.midland.web.model.Area;
 import com.midland.web.model.Category;
 import com.midland.web.model.Information;
-import com.midland.web.model.temp.ListDescOtherParam;
 import com.midland.web.model.user.User;
 import com.midland.web.service.CategoryService;
 import com.midland.web.service.InformationService;
@@ -34,234 +33,235 @@ import java.util.Map;
 @RequestMapping("/research/")
 public class ResearchController extends BaseFilter {
 
-	private Logger log = LoggerFactory.getLogger(ResearchController.class);
-	@Autowired
-	private InformationService informationServiceImpl;
+    private Logger log = LoggerFactory.getLogger(ResearchController.class);
+    @Autowired
+    private InformationService informationServiceImpl;
 
-	@Autowired
-	private SettingService settingService;
+    @Autowired
+    private SettingService settingService;
 
-	@Autowired
-	private CategoryService categoryService;
+    @Autowired
+    private CategoryService categoryService;
 
-	@Autowired
-	private JdbcService jdbcService;
+    @Autowired
+    private JdbcService jdbcService;
 
-	/**
-	 * 
-	 **/
-	@RequestMapping("index")
-	public String informationIndex(Information information, Model model,HttpServletRequest request) throws Exception {
-		/*Map<String,String> parem = new HashMap<>();
+    /**
+     *
+     **/
+    @RequestMapping("index")
+    public String informationIndex(Information information, Model model, HttpServletRequest request) throws Exception {
+        /*Map<String,String> parem = new HashMap<>();
 		parem.put("flag","city");
 		parem.put("id","*");
 		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
 		List<Area> cityList = cityMap.get("city");
 		model.addAttribute("cityList",cityList);*/
-		Category cate2 = new Category();
-		//查询资讯分类
-		cate2.setType(0);
-		String result = getCategoryTree("",cate2);
-		if(StringUtils.isNotEmpty(result)){
-			model.addAttribute("categoryData",result );
-		}
-		settingService.getAllProvinceList(model);
-		User user = MidlandHelper.getCurrentUser(request);
-		if(user.getIsSuper()==null){
-			model.addAttribute("cityId",user.getCityId());
-			model.addAttribute("cityName",user.getCityName());
+        Category cate2 = new Category();
+        //查询资讯分类
+        cate2.setType(0);
+        String result = getCategoryTree("", cate2);
+        if (StringUtils.isNotEmpty(result)) {
+            model.addAttribute("categoryData", result);
+        }
+        settingService.getAllProvinceList(model);
+        User user = MidlandHelper.getCurrentUser(request);
+        if (user.getIsSuper() == null) {
+            model.addAttribute("cityId", user.getCityId());
+            model.addAttribute("cityName", user.getCityName());
 
-		}
-		model.addAttribute("isSuper",user.getIsSuper());
-		return "research/informationIndex";
-	}
+        }
+        model.addAttribute("isSuper", user.getIsSuper());
+        return "research/informationIndex";
+    }
 
-	/**
-	 * 
-	 **/
-	@RequestMapping("to_add")
-	public String toAddInformation(Information information, Model model,HttpServletRequest request) throws Exception {
-		Map<String,String> parem = new HashMap<>();
-		parem.put("flag","city");
-		parem.put("id","*");
-		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
-		Category category = new Category();
-		//查询资讯分类
-		category.setType(0);
-		String result = getCategoryTree("",category);
-		if(StringUtils.isNotEmpty(result)){
-			model.addAttribute("categoryData",result );
-		}
-		List<Area> cityList = cityMap.get("city");
-		model.addAttribute("cityList",cityList);
-		User user = MidlandHelper.getCurrentUser(request);
-		if(user.getIsSuper()==null){
-			model.addAttribute("cityId",user.getCityId());
-			model.addAttribute("cityName",user.getCityName());
-		}
-		model.addAttribute("isSuper",user.getIsSuper());
-		return "research/addInformation";
-	}
+    /**
+     *
+     **/
+    @RequestMapping("to_add")
+    public String toAddInformation(Information information, Model model, HttpServletRequest request) throws Exception {
+        Map<String, String> parem = new HashMap<>();
+        parem.put("flag", "city");
+        parem.put("id", "*");
+        Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
+        Category category = new Category();
+        //查询资讯分类
+        category.setType(0);
+        String result = getCategoryTree("", category);
+        if (StringUtils.isNotEmpty(result)) {
+            model.addAttribute("categoryData", result);
+        }
+        List<Area> cityList = cityMap.get("city");
+        model.addAttribute("cityList", cityList);
+        User user = MidlandHelper.getCurrentUser(request);
+        if (user.getIsSuper() == null) {
+            model.addAttribute("cityId", user.getCityId());
+            model.addAttribute("cityName", user.getCityName());
+        }
+        model.addAttribute("isSuper", user.getIsSuper());
+        return "research/addInformation";
+    }
 
-	/**
-	 * 新增
-	 **/
-	@RequestMapping("add")
-	@ResponseBody
-	public Object addInformation(Information information) throws Exception {
-		Map<String,Object> map = new HashMap<>();
-		try {
-			log.debug("addInformation {}",information);
-			information.setArticeType(0);
-			informationServiceImpl.insertInformation(information);
-			map.put("state",0);
-		} catch(Exception e) {
-			log.error("addInformation异常 {}",information,e);
-			map.put("state",-1);
-		}
-		return map;
-	}
+    /**
+     * 新增
+     **/
+    @RequestMapping("add")
+    @ResponseBody
+    public Object addInformation(Information information) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            log.debug("addInformation {}", information);
+            information.setArticeType(0);
+            informationServiceImpl.insertInformation(information);
+            map.put("state", 0);
+        } catch (Exception e) {
+            log.error("addInformation异常 {}", information, e);
+            map.put("state", -1);
+        }
+        return map;
+    }
 
-	/**
-	 * 查询
-	 **/
-	@RequestMapping("get_information")
-	public String getInformationById(Integer id,Model model) {
-		log.debug("getInformationById  {}",id);
-		Information result = informationServiceImpl.selectInformationById(id);
-		model.addAttribute("item",result);
-		return "research/updateInformation";	}
+    /**
+     * 查询
+     **/
+    @RequestMapping("get_information")
+    public String getInformationById(Integer id, Model model) {
+        log.debug("getInformationById  {}", id);
+        Information result = informationServiceImpl.selectInformationById(id);
+        model.addAttribute("item", result);
+        return "research/updateInformation";
+    }
 
-	/**
-	 * 删除
-	 **/
-	@RequestMapping("delete")
-	@ResponseBody
-	public Object deleteInformationById(Integer id)throws Exception {
-		Map<String,Object> map = new HashMap<>();
-		try {
-			log.debug("deleteInformationById  {}",id);
-			informationServiceImpl.deleteInformationById(id);
-			map.put("state",0);
-		} catch(Exception e) {
-			log.error("deleteInformationById  {}",id,e);
-			map.put("state",-1);
-		}
-		return map;
-	}
-	/**
-	 * 
-	 **/
-	@RequestMapping("to_update")
-	public String toUpdateInformation(Integer id,Model model,HttpServletRequest request) throws Exception {
-		Information result = informationServiceImpl.selectInformationById(id);
-		Map<String,String> parem = new HashMap<>();
-		parem.put("flag","city");
-		parem.put("id","*");
-		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
-		Category category = new Category();
-		//查询资讯分类
-		category.setType(0);
-		String cateResult = getCategoryTree("",category);
-		if(StringUtils.isNotEmpty(cateResult)){
-			model.addAttribute("categoryData",cateResult );
-		}
-		List<Area> cityList = cityMap.get("city");
-		model.addAttribute("item",result);
-		model.addAttribute("cityList",cityList);
-		User user = MidlandHelper.getCurrentUser(request);
-		if(user.getIsSuper()==null){
-			model.addAttribute("cityId",user.getCityId());
-			model.addAttribute("cityName",user.getCityName());
-		}
-		model.addAttribute("isSuper",user.getIsSuper());
-		return "research/updateInformation";
-	}
+    /**
+     * 删除
+     **/
+    @RequestMapping("delete")
+    @ResponseBody
+    public Object deleteInformationById(Integer id) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            log.debug("deleteInformationById  {}", id);
+            informationServiceImpl.deleteInformationById(id);
+            map.put("state", 0);
+        } catch (Exception e) {
+            log.error("deleteInformationById  {}", id, e);
+            map.put("state", -1);
+        }
+        return map;
+    }
 
-	/**
-	 * 更新
-	 **/
-	@RequestMapping("update")
-	@ResponseBody
-	public Object updateInformationById(Information information) throws Exception {
-		if(information.getStatus()!=null&&information.getStatus()==0){
-			information.setReleaseTime(DateUtils.nowDateToStringYYMMDDHHmmss());
-		}
-		Map<String,Object> map = new HashMap<>();
-		try {
-			log.debug("updateInformationById  {}",information);
-			informationServiceImpl.updateInformationById(information);
-			map.put("state",0);
-		} catch(Exception e) {
-			log.error("updateInformationById  {}",information,e);
-			map.put("state",-1);
-		}
-		return map;
-	}
+    /**
+     *
+     **/
+    @RequestMapping("to_update")
+    public String toUpdateInformation(Integer id, Model model, HttpServletRequest request) throws Exception {
+        Information result = informationServiceImpl.selectInformationById(id);
+        Map<String, String> parem = new HashMap<>();
+        parem.put("flag", "city");
+        parem.put("id", "*");
+        Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
+        Category category = new Category();
+        //查询资讯分类
+        category.setType(0);
+        String cateResult = getCategoryTree("", category);
+        if (StringUtils.isNotEmpty(cateResult)) {
+            model.addAttribute("categoryData", cateResult);
+        }
+        List<Area> cityList = cityMap.get("city");
+        model.addAttribute("item", result);
+        model.addAttribute("cityList", cityList);
+        User user = MidlandHelper.getCurrentUser(request);
+        if (user.getIsSuper() == null) {
+            model.addAttribute("cityId", user.getCityId());
+            model.addAttribute("cityName", user.getCityName());
+        }
+        model.addAttribute("isSuper", user.getIsSuper());
+        return "research/updateInformation";
+    }
 
-	/**
-	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
-	 **/
-	@RequestMapping("list")
-	public String findInformationList(Information information, Model model, HttpServletRequest request) {
-		try {
-			if(information.getCateId()!=null&&information.getCateId()==0){
-				information.setCateId(null);
-			}
-			log.debug("findInformationList  {}",information);
-			MidlandHelper.doPage(request);
-			Page<Information> result = (Page<Information>)informationServiceImpl.findInformationList(information);
-			Paginator paginator=result.getPaginator();
-			model.addAttribute("paginator",paginator);
-			model.addAttribute("items",result);
-		} catch(Exception e) {
-			log.error("findInformationList  {}",information,e);
-			model.addAttribute("paginator",null);
-			model.addAttribute("items",null);
-		}
-		return "research/informationList";
-	}
+    /**
+     * 更新
+     **/
+    @RequestMapping("update")
+    @ResponseBody
+    public Object updateInformationById(Information information) throws Exception {
+        if (information.getStatus() != null && information.getStatus() == 0) {
+            information.setReleaseTime(DateUtils.nowDateToStringYYMMDDHHmmss());
+        }
+        Map<String, Object> map = new HashMap<>();
+        try {
+            log.debug("updateInformationById  {}", information);
+            informationServiceImpl.updateInformationById(information);
+            map.put("state", 0);
+        } catch (Exception e) {
+            log.error("updateInformationById  {}", information, e);
+            map.put("state", -1);
+        }
+        return map;
+    }
+
+    /**
+     * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
+     **/
+    @RequestMapping("list")
+    public String findInformationList(Information information, Model model, HttpServletRequest request) {
+        try {
+            if (information.getCateId() != null && information.getCateId() == 0) {
+                information.setCateId(null);
+            }
+            log.debug("findInformationList  {}", information);
+            MidlandHelper.doPage(request);
+            Page<Information> result = (Page<Information>) informationServiceImpl.findInformationList(information);
+            Paginator paginator = result.getPaginator();
+            model.addAttribute("paginator", paginator);
+            model.addAttribute("items", result);
+        } catch (Exception e) {
+            log.error("findInformationList  {}", information, e);
+            model.addAttribute("paginator", null);
+            model.addAttribute("items", null);
+        }
+        return "research/informationList";
+    }
 
 
-	@RequestMapping("sort")
-	@ResponseBody
-	public Map listDesc(Information information, int sort, Model model, HttpServletRequest request) throws Exception {
-		if(sort==0){
-			informationServiceImpl.shiftTop(information);
-		}
-		else if (sort==1){
-			informationServiceImpl.shiftUp(information);
-		}else {
-			informationServiceImpl.shiftDown(information);
-		}
-		Map map = new HashMap();
-		map.put("state",0);
-		return map;
-	}
+    @RequestMapping("sort")
+    @ResponseBody
+    public Map listDesc(Information information, int sort, Model model, HttpServletRequest request) throws Exception {
+        if (sort == 0) {
+            informationServiceImpl.shiftTop(information);
+        } else if (sort == 1) {
+            informationServiceImpl.shiftUp(information);
+        } else {
+            informationServiceImpl.shiftDown(information);
+        }
+        Map map = new HashMap();
+        map.put("state", 0);
+        return map;
+    }
 
-	/**
-	 * 批量更新
-	 **/
-	@RequestMapping("batchUpdate")
-	@ResponseBody
-	public Object batchUpdate(String ids,Information information) throws Exception {
-		List<Information> commentList = new ArrayList<>();
-		String[] ides=ids.split(",",-1);
-		for (String id:ides ){
-			Information comment1 = new Information();
-			comment1.setId(Integer.valueOf(id));
-			comment1.setIsDelete(information.getIsDelete());
-			commentList.add(comment1);
-		}
-		Map<String,Object> map = new HashMap<>();
-		try {
-			log.debug("updateCategoryById  {}",commentList);
-			informationServiceImpl.batchUpdate(commentList);
-			map.put("state",0);
-		} catch(Exception e) {
-			log.error("updateCategoryById  {}",commentList,e);
-			map.put("state",-1);
-		}
-		return map;
-	}
+    /**
+     * 批量更新
+     **/
+    @RequestMapping("batchUpdate")
+    @ResponseBody
+    public Object batchUpdate(String ids, Information information) throws Exception {
+        List<Information> commentList = new ArrayList<>();
+        String[] ides = ids.split(",", -1);
+        for (String id : ides) {
+            Information comment1 = new Information();
+            comment1.setId(Integer.valueOf(id));
+            comment1.setIsDelete(information.getIsDelete());
+            commentList.add(comment1);
+        }
+        Map<String, Object> map = new HashMap<>();
+        try {
+            log.debug("updateCategoryById  {}", commentList);
+            informationServiceImpl.batchUpdate(commentList);
+            map.put("state", 0);
+        } catch (Exception e) {
+            log.error("updateCategoryById  {}", commentList, e);
+            map.put("state", -1);
+        }
+        return map;
+    }
 }

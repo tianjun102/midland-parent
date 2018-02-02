@@ -4,15 +4,18 @@ import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
-import com.midland.web.PublicUtils.QuotationUtil;
 import com.midland.web.Contants.Contant;
+import com.midland.web.PublicUtils.QuotationUtil;
 import com.midland.web.model.Area;
 import com.midland.web.model.ExportModel;
 import com.midland.web.model.QuotationSecondHand;
 import com.midland.web.model.user.User;
 import com.midland.web.service.QuotationSecondHandService;
 import com.midland.web.service.SettingService;
-import com.midland.web.util.*;
+import com.midland.web.util.JsonMapReader;
+import com.midland.web.util.MidlandHelper;
+import com.midland.web.util.ParamObject;
+import com.midland.web.util.PoiExcelExport;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +27,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
@@ -43,15 +49,15 @@ public class QuotationSecondHandController extends BaseFilter {
      *
      **/
     @RequestMapping("index")
-    public String quotationSecondHandIndex(QuotationSecondHand quotationSecondHand, Model model,HttpServletRequest request) throws Exception {
+    public String quotationSecondHandIndex(QuotationSecondHand quotationSecondHand, Model model, HttpServletRequest request) throws Exception {
         List<ParamObject> paramObjects = JsonMapReader.getMap("quotation_type");
         model.addAttribute("types", paramObjects);
         settingService.getAllProvinceList(model);
         User user = MidlandHelper.getCurrentUser(request);
-        model.addAttribute("isSuper",user.getIsSuper());
+        model.addAttribute("isSuper", user.getIsSuper());
 
         List<ParamObject> ojb = JsonMapReader.getMap("is_delete");
-        model.addAttribute("isDeletes",ojb);
+        model.addAttribute("isDeletes", ojb);
         return "quotationSecondHand/quotationSecondHandIndex";
     }
 
@@ -61,7 +67,7 @@ public class QuotationSecondHandController extends BaseFilter {
         model.addAttribute("types", paramObjects);
         model.addAttribute("isNew", "0");
         User user = MidlandHelper.getCurrentUser(request);
-        model.addAttribute("isSuper",user.getIsSuper());
+        model.addAttribute("isSuper", user.getIsSuper());
         settingService.getAllProvinceList(model);
         return "quotationSecondHand/toImport";
     }
@@ -122,16 +128,16 @@ public class QuotationSecondHandController extends BaseFilter {
         /**
          * jdk 1.8 lamada表达式,stream ,filter,查询12个月前的数据到当前月的数据
          */
-        List<QuotationSecondHand> list = listTemp.stream().filter(e->{
-            return e.getDataTime().compareTo(startTime)>=0;
+        List<QuotationSecondHand> list = listTemp.stream().filter(e -> {
+            return e.getDataTime().compareTo(startTime) >= 0;
         }).collect(Collectors.toList());
 
-        list.forEach(e->{
+        list.forEach(e -> {
             month.add(e.getDataTime());
             final QuotationSecondHand[] res = {null};
-            listTemp.forEach(e1->{
-                if (e.getDataTime().equals(MidlandHelper.getFormatyyMMToMonth(e1.getDataTime(),+1))){
-                    res[0] =e1;
+            listTemp.forEach(e1 -> {
+                if (e.getDataTime().equals(MidlandHelper.getFormatyyMMToMonth(e1.getDataTime(), +1))) {
+                    res[0] = e1;
                 }
             });
             if ("0".equals(showType)) {
@@ -146,9 +152,9 @@ public class QuotationSecondHandController extends BaseFilter {
                 listMax[0] = QuotationUtil.getMax(listMax[0], e.getDealNum());
                 ratioMax[0] = QuotationUtil.getMax(ratioMax[0], ratio);
                 ratioMin[0] = QuotationUtil.getMin(ratioMin[0], ratio);
-            }else{
+            } else {
                 Double preAcreage = null;
-                if (res[0] != null&& res[0].getDealAcreage()!=null) {
+                if (res[0] != null && res[0].getDealAcreage() != null) {
                     preAcreage = Double.valueOf(res[0].getDealAcreage());
                 }
                 acreageList.add(e.getDealAcreage());
@@ -190,8 +196,8 @@ public class QuotationSecondHandController extends BaseFilter {
     public String list(QuotationSecondHand obj, Model model, HttpServletRequest request) throws Exception {
 
         User user = MidlandHelper.getCurrentUser(request);
-        model.addAttribute("isSuper",user.getIsSuper());
-        if(!Contant.isSuper.equals(user.getIsSuper())){//不是超级管理员，只能看属性城市的相关信息
+        model.addAttribute("isSuper", user.getIsSuper());
+        if (!Contant.isSuper.equals(user.getIsSuper())) {//不是超级管理员，只能看属性城市的相关信息
             obj.setCityId(user.getCityId());
         }
         MidlandHelper.doPage(request);
@@ -268,7 +274,7 @@ public class QuotationSecondHandController extends BaseFilter {
     @RequestMapping("to_update")
     public String toUpdateQuotationSecondHand(Integer id, Model model) throws Exception {
         QuotationSecondHand result = quotationSecondHandServiceImpl.selectQuotationSecondHandById(id);
-        result.setDataTime(result.getDataTime()+"-01");
+        result.setDataTime(result.getDataTime() + "-01");
         List<ParamObject> paramObjects = JsonMapReader.getMap("quotation_type");
         Area province = settingService.getCityByCityId(result.getCityId());
         model.addAttribute("area", province);
@@ -313,7 +319,7 @@ public class QuotationSecondHandController extends BaseFilter {
 //            obj.setEndTime(MidlandHelper.getCurrentTime());
 //        }
         User user = MidlandHelper.getCurrentUser(request);
-        if(!Contant.isSuper.equals(user.getIsSuper())){//不是超级管理员，只能看属性城市的相关信息
+        if (!Contant.isSuper.equals(user.getIsSuper())) {//不是超级管理员，只能看属性城市的相关信息
             obj.setCityId(user.getCityId());
         }
         List<String> month = new ArrayList<>();
@@ -323,14 +329,14 @@ public class QuotationSecondHandController extends BaseFilter {
          */
         List<QuotationSecondHand> list = listTemp;
 
-        List<QuotationSecondHand> listRes=new ArrayList<>();
-        list.forEach(e->{
+        List<QuotationSecondHand> listRes = new ArrayList<>();
+        list.forEach(e -> {
             month.add(e.getDataTime());
-            listTemp.forEach(e1->{
-                if (e.getDataTime().equals(MidlandHelper.getFormatyyMMToMonth(e1.getDataTime(),+1))
-                        &&e.getType().equals(e1.getType())&& e.getCityId().equals(e1.getCityId())&&
-                        e.getAreaId().equals(e1.getAreaId())){
-                    e.setPreNum(e1.getDealNum()==null?0:e1.getDealNum());
+            listTemp.forEach(e1 -> {
+                if (e.getDataTime().equals(MidlandHelper.getFormatyyMMToMonth(e1.getDataTime(), +1))
+                        && e.getType().equals(e1.getType()) && e.getCityId().equals(e1.getCityId()) &&
+                        e.getAreaId().equals(e1.getAreaId())) {
+                    e.setPreNum(e1.getDealNum() == null ? 0 : e1.getDealNum());
                 }
             });
             listRes.add(e);
@@ -340,7 +346,7 @@ public class QuotationSecondHandController extends BaseFilter {
         //调用
 
         List<ExportModel> exportModels = new ArrayList<>();
-        listRes.forEach(e->{
+        listRes.forEach(e -> {
             ExportModel exportModel = new ExportModel();
             exportModel.setModelName1(e.getCityName());
             exportModel.setModelName2(e.getAreaName());
@@ -351,14 +357,14 @@ public class QuotationSecondHandController extends BaseFilter {
             exportModel.setModelName5(String.valueOf(e.getPreNum()));
             exportModel.setModelName6(String.valueOf(e.getDealAcreage()));
             //（当前月数据-上个月数据)/上个月数据=当月环比
-            Double ratio = QuotationUtil.getRatio(Double.valueOf(e.getDealNum()), Double.valueOf(e.getPreNum()==null?0:e.getPreNum()));
+            Double ratio = QuotationUtil.getRatio(Double.valueOf(e.getDealNum()), Double.valueOf(e.getPreNum() == null ? 0 : e.getPreNum()));
             exportModel.setModelName7(String.valueOf(ratio));
             exportModel.setModelName8(e.getDataTime());
             exportModel.setModelName9(e.getUpdateTime());
             exportModels.add(exportModel);
         });
         String titleColumn[] = {"modelName1", "modelName2", "modelName3", "modelName4", "modelName5", "modelName6", "modelName7", "modelName8", "modelName9"};
-        String titleName[] = {"城市", "区域", "类型", "成交套数","上月成交套数", "成交面积", "环比", "数据时间", "更新时间"};
+        String titleName[] = {"城市", "区域", "类型", "成交套数", "上月成交套数", "成交面积", "环比", "数据时间", "更新时间"};
         int titleSize[] = {13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13, 13};
         //其他设置 set方法可全不调用
         pee.wirteExcel(titleColumn, titleName, titleSize, exportModels, request);
@@ -369,23 +375,23 @@ public class QuotationSecondHandController extends BaseFilter {
      **/
     @RequestMapping("batchUpdate")
     @ResponseBody
-    public Object batchUpdate(String ids,QuotationSecondHand quotationSecondHand) throws Exception {
+    public Object batchUpdate(String ids, QuotationSecondHand quotationSecondHand) throws Exception {
         List<QuotationSecondHand> commentList = new ArrayList<>();
-        String[] ides=ids.split(",",-1);
-        for (String id:ides ){
+        String[] ides = ids.split(",", -1);
+        for (String id : ides) {
             QuotationSecondHand comment1 = new QuotationSecondHand();
             comment1.setId(Integer.valueOf(id));
             comment1.setIsDelete(quotationSecondHand.getIsDelete());
             commentList.add(comment1);
         }
-        Map<String,Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         try {
-            log.debug("updateCategoryById  {}",commentList);
+            log.debug("updateCategoryById  {}", commentList);
             quotationSecondHandServiceImpl.batchUpdate(commentList);
-            map.put("state",0);
-        } catch(Exception e) {
-            log.error("updateCategoryById  {}",commentList,e);
-            map.put("state",-1);
+            map.put("state", 0);
+        } catch (Exception e) {
+            log.error("updateCategoryById  {}", commentList, e);
+            map.put("state", -1);
         }
         return map;
     }

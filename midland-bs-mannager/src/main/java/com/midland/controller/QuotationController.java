@@ -4,13 +4,18 @@ import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
-import com.midland.web.PublicUtils.QuotationUtil;
 import com.midland.web.Contants.Contant;
-import com.midland.web.model.*;
+import com.midland.web.PublicUtils.QuotationUtil;
+import com.midland.web.model.Area;
+import com.midland.web.model.ExportModel;
+import com.midland.web.model.Quotation;
 import com.midland.web.model.user.User;
 import com.midland.web.service.QuotationService;
 import com.midland.web.service.SettingService;
-import com.midland.web.util.*;
+import com.midland.web.util.JsonMapReader;
+import com.midland.web.util.MidlandHelper;
+import com.midland.web.util.ParamObject;
+import com.midland.web.util.PoiExcelExport;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,7 +63,7 @@ public class QuotationController extends BaseFilter {
             //quotation.setStartTime(MidlandHelper.getyyyyMMddHHmmss(date, -12));
         }
         if (quotation.getEndTime() == null) {
-           // quotation.setEndTime(MidlandHelper.getCurrentTime());
+            // quotation.setEndTime(MidlandHelper.getCurrentTime());
         }
         List<ParamObject> paramObjects = JsonMapReader.getMap("quotation_type");
         model.addAttribute("types", paramObjects);
@@ -419,14 +424,14 @@ public class QuotationController extends BaseFilter {
         result.forEach(e -> {
             month.add(e.getDataTime());
             listTemp.forEach(e1 -> {
-                if (e.getDataTime().equals(MidlandHelper.getFormatyyMMToMonth(e1.getDataTime(), +1))&&
-                        e.getCityId().equals(e1.getCityId())&& e.getAreaId().equals(e1.getAreaId())&&
+                if (e.getDataTime().equals(MidlandHelper.getFormatyyMMToMonth(e1.getDataTime(), +1)) &&
+                        e.getCityId().equals(e1.getCityId()) && e.getAreaId().equals(e1.getAreaId()) &&
                         e.getType().equals(e1.getType())) {
-                    if (e.getHouseAcreage() !=null){
-                        if (e.getHouseAcreage().equals(e1.getHouseAcreage())){
+                    if (e.getHouseAcreage() != null) {
+                        if (e.getHouseAcreage().equals(e1.getHouseAcreage())) {
                             e.setPreNum(e1.getDealNum());
                         }
-                    }else {
+                    } else {
                         e.setPreNum(e1.getDealNum());
                     }
                 }

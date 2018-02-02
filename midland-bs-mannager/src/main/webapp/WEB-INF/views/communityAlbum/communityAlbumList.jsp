@@ -31,7 +31,7 @@
 						<input type="hidden" id="id" value="${item.id}"/>
 						<td><c:if test="${item.type ==0}">实景图</c:if>
                             <c:if test="${item.type ==1}">户型图</c:if></td>
-						<td>${item.imgUrl}</td>
+						<td><img src="${item.imgUrl}" alt=""  style="width:40px;height:40px" ></td>
 						<td><c:if test="${item.isDelete ==0}">正常</c:if>
                             <c:if test="${item.isDelete ==1}">删除</c:if></td>
 						<td><c:if test="${item.isShow ==0}">显示</c:if>
@@ -42,9 +42,9 @@
                             <a target="contentF" onclick="to_edit(${item.id })">编辑</a>
                             <a target="contentF" onclick="delete1(${item.id })">删除</a>
                             <a target="contentF" title="上移" class="up_img"
-                               onclick="sort(${item.id },${item.orderBy},2)"></a>
-                            <a target="contentF" title="下移" class="down_img"
                                onclick="sort(${item.id },${item.orderBy},1)"></a>
+                            <a target="contentF" title="下移" class="down_img"
+                               onclick="sort(${item.id },${item.orderBy},2)"></a>
                         </td>
                     </tr>
                 </c:forEach>
