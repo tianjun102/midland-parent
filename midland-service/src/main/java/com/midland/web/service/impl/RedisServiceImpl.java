@@ -15,12 +15,15 @@ public class RedisServiceImpl implements RedisService {
     @Autowired
     private IBaseRedisTemplate baseRedisTemplate;
 
+    /**
+     * 0关闭,1开启
+     * @param value
+     */
     @Override
     public void setAnswerAuditFlag(int value) {
 
         baseRedisTemplate.saveValue(Contant.answerAuditKey, value);
     }
-
     @Override
     public Integer getAnswerAuditFlag() {
 
@@ -29,6 +32,26 @@ public class RedisServiceImpl implements RedisService {
             //如果没有获取到值，说明还未设置，直接设置为“未开启”
             setAnswerAuditFlag(Contant.answerAuditClose);
             return Contant.answerAuditClose;
+        }
+        return result;
+    }
+    /**
+     * 0关闭,1开启
+     * @param value
+     */
+    @Override
+    public void setInformationOpenFlag(int value) {
+
+        baseRedisTemplate.saveValue(Contant.informationBannerKey, value);
+    }
+
+    @Override
+    public Integer getInformationOpenFlag() {
+        Integer result = (Integer) baseRedisTemplate.getValueByKey(Contant.informationBannerKey);
+        if (result == null) {
+            //如果没有获取到值，说明还未设置，直接设置为“未开启”
+            setAnswerAuditFlag(Contant.informationBannerClose);
+            return Contant.informationBannerClose;
         }
         return result;
     }

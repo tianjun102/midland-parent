@@ -78,6 +78,14 @@
 			</form>
 			<input style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;margin-top: 10px;" onclick="batchDelete(1)" class = "public_btn bg1" type="submit"  value = "批量删除"/>
 			<c:if test="${not empty isSuper}"><input style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;margin-top: 10px;" onclick="batchDelete(0)" class = "public_btn bg1" type="submit"  value = "批量恢复"/></c:if>
+			<c:choose>
+				<c:when test="${openFlag==1}">
+					<input style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;margin-top: 10px;" onclick="openOrCloseBanner(0)" class = "public_btn bg1" type="submit"  value = "开启滚动"/>
+				</c:when>
+				<c:otherwise>
+					<input style="margin-left: 20px;width: 70px;height: 28px;line-height: 28px!important;margin-top: 10px;" onclick="openOrCloseBanner(1)" class = "public_btn bg1" type="submit"  value = "关闭滚动"/>
+				</c:otherwise>
+			</c:choose>
 			<div id="listDiv"></div>
 		</section>
 	</div>
@@ -85,6 +93,33 @@
 	<!-- 本页私有js -->
 
 	<script type="text/javascript">
+
+        function openOrCloseBanner(id) {
+            //0隐藏，1显示
+            $.ajax({
+                type: "post",
+                url: "${ctx}/rest/information/banner/openOrClose?id=" + id,
+                async: false, // 此处必须同步
+                dataType: "json",
+
+                success: function (data) {
+                    if (data.state == 0) {
+                        window.location.reload();
+                    }else {
+                        layer.msg("操作失败！", {icon: 2});
+                    }
+                },
+                error: function (data) {
+                    if (data.responseText != null) {
+                        layer.msg(data.responseText, {icon: 2});
+                    } else {
+                        layer.msg("操作失败！", {icon: 2});
+                    }
+                }
+            })
+        }
+
+
         window.onload = function(){
             $('#searchForm').submit();
         }

@@ -14,6 +14,9 @@ public class Contant {
     /**
      * information
      */
+    public static final String informationBannerKey = "informationBannerKey";//前端资讯滚动是否展示key,0关闭,1开启
+    public static final int informationBannerClose = 0;//关闭前端资讯滚动,默认关闭
+    public static final int informationBannerOpen = 1;//开启前端资讯滚动
     public static final int INFORMATION = 1;//资讯
     public static final int MARKET_RESEARCH = 0;//市场研究
 

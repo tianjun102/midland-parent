@@ -6,7 +6,11 @@ package com.midland.web.service;
 public interface RedisService {
     void setAnswerAuditFlag(int value);
 
+    void setInformationOpenFlag(int value);
+
     Integer getAnswerAuditFlag();
+
+    Integer getInformationOpenFlag();
 
     Object getValue(String key);
 

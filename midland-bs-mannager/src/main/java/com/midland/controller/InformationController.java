@@ -9,10 +9,7 @@ import com.midland.web.model.Category;
 import com.midland.web.model.Information;
 import com.midland.web.model.temp.ListDescOtherParam;
 import com.midland.web.model.user.User;
-import com.midland.web.service.CategoryService;
-import com.midland.web.service.InformationService;
-import com.midland.web.service.JdbcService;
-import com.midland.web.service.SettingService;
+import com.midland.web.service.*;
 import com.midland.web.util.MidlandHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -46,7 +43,8 @@ public class InformationController extends BaseFilter {
 
 	@Autowired
 	private JdbcService jdbcService;
-
+	@Autowired
+	private RedisService redisServiceImpl;
 	/**
 	 * 
 	 **/
@@ -65,10 +63,42 @@ public class InformationController extends BaseFilter {
 			model.addAttribute("cityId",user.getCityId());
 			model.addAttribute("cityName",user.getCityName());
 		}
+		model.addAttribute("openFlag",redisServiceImpl.getInformationOpenFlag());
 		model.addAttribute("type",cate1.getType());
 		model.addAttribute("isSuper",user.getIsSuper());
 		return "information/informationIndex";
 	}
+
+	@RequestMapping("/banner/openOrClose")
+	@ResponseBody
+	public Object informationBannerOpenAndClose(Integer id) {
+		Map  map = new HashMap();
+		try {
+			redisServiceImpl.setInformationOpenFlag(id);
+			map.put("state",0);
+		} catch (Exception e) {
+			log.error("openAudit ",e);
+			map.put("state",0);
+
+		}
+		return map;
+	}
+
+	@RequestMapping("/banner/get")
+	@ResponseBody
+	public Object getinformationBannerOpenAndClose(Integer id) {
+		Map  map = new HashMap();
+		try {
+			redisServiceImpl.getInformationOpenFlag();
+			map.put("state",0);
+		} catch (Exception e) {
+			log.error("openAudit ",e);
+			map.put("state",0);
+
+		}
+		return map;
+	}
+
 
 	/**
 	 * 

@@ -6,16 +6,20 @@ import com.midland.web.model.Information;
 import com.midland.web.service.CommentService;
 import com.midland.web.service.InformationService;
 import com.midland.base.ServiceBaseFilter;
+import com.midland.web.service.RedisService;
 import org.slf4j.Logger;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
+
+import java.util.HashMap;
 import java.util.Map;
 import com.midland.web.util.MidlandHelper;
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +33,8 @@ public class InformationRestController extends ServiceBaseFilter {
 	private InformationService informationServiceImpl;
 	@Autowired
 	private CommentService commentServiceImpl;
-
+	@Autowired
+	private RedisService redisServiceImpl;
 	/**
 	 * 新增 资讯
 	 **/
@@ -49,7 +54,26 @@ public class InformationRestController extends ServiceBaseFilter {
 		}
 		return result;
 	}
-
+	@RequestMapping("/banner/get")
+	@ResponseBody
+	public Object getinformationBannerOpenAndClose(Integer id) {
+		Result result=new Result();
+		Map  map = new HashMap();
+		try {
+			int flag = redisServiceImpl.getInformationOpenFlag();
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
+			result.setMsg("success");
+			map.put("flag",flag);
+			result.setModel(map);
+		} catch (Exception e) {
+			log.error("openAudit ",e);
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			result.setMsg("service error");
+			map.put("flag",1);
+			result.setModel(map);
+		}
+		return result;
+	}
 	/**
 	 * 查询
 	 **/

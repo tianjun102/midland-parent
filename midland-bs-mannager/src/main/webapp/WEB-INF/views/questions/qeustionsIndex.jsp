@@ -17,11 +17,11 @@
             <p class="detail-title">
                 <span>买房助手>>问答记录列表</span>
                 <c:choose>
-                    <c:when test="${auditFlag==0}">
-                        <a class="setup" target="contentF" onclick="openOrCloseAudit(1)">开启审核</a>
+                    <c:when test="${auditFlag==1}">
+                        <a class="setup" target="contentF" onclick="openOrCloseAudit(0)">开启审核</a>
                     </c:when>
                     <c:otherwise>
-                        <a class="setup" target="contentF" onclick="openOrCloseAudit(0)">关闭审核</a>
+                        <a class="setup" target="contentF" onclick="openOrCloseAudit(1)">关闭审核</a>
                     </c:otherwise>
                 </c:choose>
             </p>
