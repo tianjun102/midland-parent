@@ -149,22 +149,34 @@
                     <label style="color: red" class = "_star " >*</label>
                 </li>
             </c:if>
-            <c:if test="${type != 2}">
-                <li><span>父节点：</span><input style="width: 250px!important;" type="text" value="${item.parentName}" name="parentName" onclick="showTree()" readonly="readonly"/>
-                    <input value="${item.parentId}" name="parentId" type="hidden"/><label style="color: red" class = "_star " >*</label>
-                    <div style = "font-size:12px; color:#afadad;text-indent: 70px;">(不选父分类则默认一级分类)</div>
-                </li>
-                <li  id="showDiv" style="display: none;padding-top: 0px;position:relative;" >
-                    <div class="zTreeDemoBackground left" style="position:absolute; left: -268px; top: 29px;"   onblur="test(event)">
-                        <ul id="categoryTree" class="ztree" style="width:235px; height: 140px!important;"></ul>
-                    </div>
-                    <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: -50px; top: 40px;" onclick="hideTree()">
-                </li>
-            </c:if>
+            <c:choose>
+                <c:when test="${type == 3}">
+                    <li><span>父节点：</span><input style="width: 250px!important;background-color: #dddfe2;" type="text" name="parentName" onclick="showTree()"
+                                                readonly="readonly" value="一级分类"/>
+                        <input name="parentId" type="hidden" value="0"/>
+                        <div style="font-size:12px; color:#afadad;text-indent: 70px;"></div>
+                    </li>
+                </c:when>
+                <c:otherwise>
+                    <c:if test="${type != 2}">
+                        <li><span>父节点：</span><input style="width: 250px!important;" type="text" value="${item.parentName}" name="parentName" onclick="showTree()" readonly="readonly"/>
+                            <input value="${item.parentId}" name="parentId" type="hidden"/><label style="color: red" class = "_star " >*</label>
+                            <div style = "font-size:12px; color:#afadad;text-indent: 70px;">(不选父分类则默认一级分类)</div>
+                        </li>
+                        <li  id="showDiv" style="display: none;padding-top: 0px;position:relative;" >
+                            <div class="zTreeDemoBackground left" style="position:absolute; left: -268px; top: 29px;"   onblur="test(event)">
+                                <ul id="categoryTree" class="ztree" style="width:235px; height: 140px!important;"></ul>
+                            </div>
+                            <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: -50px; top: 40px;" onclick="hideTree()">
+                        </li>
+                    </c:if>
+                </c:otherwise>
+            </c:choose>
+
             <li>
                 <span>分类名称：</span><input style="width:250px;" type="text" name="cateName" id="cateName" value="${item.cateName}" onblur="notEmpty('cateName','cateName','分类名称不能为空！');" maxlength="50"/>
             </li>
-            <c:if test="${type != 2}">
+            <c:if test="${type != 2 and type !=3}">
                 <li>
                     <span>网站链接：</span><input style="width:250px;" type="text" name="linkUrl" id="linkUrl" value="${item.linkUrl}" onblur="checkUrl('linkUrl','linkUrl','网站链接格式不正确！');" maxlength="50"/>
                 </li>
@@ -182,7 +194,7 @@
     function saveData(type) {
         debugger;
         if (notEmpty('cateName', 'cateName', '分类名称不能为空！')) {
-            if (type!=2 && !checkUrl('linkUrl', 'linkUrl', '网站链接格式不正确！')){
+            if (type!=2  && type !=3 && !checkUrl('linkUrl', 'linkUrl', '网站链接格式不正确！')){
                 return;
             }
         var data = $("#addFrom").serialize();

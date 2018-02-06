@@ -5,8 +5,8 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
-<%@include file="../layout/tablib.jsp" %>
-<%@include file="../layout/source.jsp" %>
+<%@include file="../../layout/tablib.jsp" %>
+<%@include file="../../layout/source.jsp" %>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
@@ -37,95 +37,93 @@
         </p>
         <form id="formId" action="${ctx}/rest/banner/addBanner" method="post" enctype="multipart/form-data"
               method="post">
-            <input type="hidden" name="cityName" id="cityName" value="${cityName}">
-            <c:if test="${empty isSuper}"><input type="hidden" name="cityId" value="${cityId}"></c:if>
+            <input type="hidden" name="cityName" id="cityName" value="${banner.cityName}">
+            <input type="hidden" name="id" value="${banner.id}">
             <ul class="adminfo width-lg row">
                 <li><span>展示方式：</span>
                     <select name="type" id="selectType" class="dropdown" onchange="selectTypes();">
-                        <option value="0">单页面</option>
-                        <option value="2">外网链接</option>
+                        <option <c:if test="${banner.type=='0'}"> selected='selected' </c:if> value="0">单页面</option>
+                        <option <c:if test="${banner.type=='2'}"> selected='selected' </c:if> value="2">外网链接</option>
                     </select>
                     <span class="_star ">*</span>
                 </li>
                 <li>
                     <span>上线时间：</span>
-                    <input type="text" name="startTime" id="startTime" class="Wdate half"
+                    <input type="text" name="startTime" id="startTime" class="Wdate half" value="${banner.startTime}"
                            onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'endTime\')}'})"/>
                     <em class="gang">-</em>
-                    <input type="text" name="endTime" id="endTime" class="Wdate half"
+                    <input type="text" name="endTime" id="endTime" class="Wdate half" value="${banner.endTime}"
                            onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'startTime\')}'})"/>
                 </li>
                 <li><span>城市：</span>
                     <select onchange="setCityName();" name="cityId" id="cityId"
-
                             <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
                         <option value="">全部</option>
                         <c:forEach items="${cityList}" var="city">
-                            <c:if test="${empty isSuper}">
-                                <option selected="selected" value="${cityId}">${cityName}</option>
-                            </c:if>
-                            <option value="${city.id}">${city.name}</option>
+                            <option <c:if test="${banner.cityId == city.id}"> selected='selected' </c:if>
+                                    value="${city.id}">${city.name}</option>
                         </c:forEach>
                     </select>
                 </li>
                 <li><span>平台：</span>
                     <select name="source" id="source">
-                        <option value="0">网站</option>
-                        <option value="1">微站</option>
+                        <option <c:if test="${banner.source=='0'}"> selected='selected' </c:if> value="0">网站</option>
+                        <option <c:if test="${banner.source=='1'}"> selected='selected' </c:if> value="1">微站</option>
                     </select>
                     <span class="_star ">*</span>
                 </li>
                 <li><span>模块：</span>
                     <select name="model" id="model">
-                        <option value="0">首页</option>
-                        <option value="1">新房</option>
-                        <option value="2">市场研究</option>
-                        <option value="3">资讯</option>
-                        <option value="4">地产新闻</option>
-                        <option value="5">美联资讯</option>
-                        <option value="6">购房指南</option>
-                        <option value="7">新政解读</option>
-                        <option value="8">人物专访</option>
-                        <option value="9">购房资格</option>
-                        <option value="10">关于我们</option>
-                        <option value="11">外销网</option>
+                        <option <c:if test="${banner.model=='0'}"> selected='selected' </c:if> value="0">首页</option>
+                        <option <c:if test="${banner.model=='1'}"> selected='selected' </c:if> value="1">新房</option>
+                        <option <c:if test="${banner.model=='2'}"> selected='selected' </c:if> value="2">市场研究</option>
+                        <option <c:if test="${banner.model=='3'}"> selected='selected' </c:if> value="3">资讯</option>
+                        <option <c:if test="${banner.model=='4'}"> selected='selected' </c:if> value="4">地产新闻</option>
+                        <option <c:if test="${banner.model=='5'}"> selected='selected' </c:if> value="5">美联资讯</option>
+                        <option <c:if test="${banner.model=='6'}"> selected='selected' </c:if> value="6">购房指南</option>
+                        <option <c:if test="${banner.model=='7'}"> selected='selected' </c:if> value="7">新政解读</option>
+                        <option <c:if test="${banner.model=='8'}"> selected='selected' </c:if> value="8">人物专访</option>
+                        <option <c:if test="${banner.model=='9'}"> selected='selected' </c:if> value="9">购房资格</option>
+                        <option <c:if test="${banner.model=='10'}"> selected='selected' </c:if> value="10">关于我们</option>
+                        <option <c:if test="${banner.model=='11'}"> selected='selected' </c:if> value="11">外销网</option>
                     </select>
                     <span class="_star ">*</span>
                 </li>
                 <li><span>位置：</span>
                     <select name="position" id="position">
-                        <option value="0">位置１</option>
-                        <option value="1">位置２</option>
-                        <option value="2">位置３</option>
-                        <option value="3">位置４</option>
+                        <option <c:if test="${banner.position=='0'}"> selected='selected' </c:if> value="0">位置１</option>
+                        <option <c:if test="${banner.position=='1'}"> selected='selected' </c:if> value="1">位置２</option>
+                        <option <c:if test="${banner.position=='2'}"> selected='selected' </c:if> value="2">位置３</option>
+                        <option <c:if test="${banner.position=='3'}"> selected='selected' </c:if> value="3">位置４</option>
                     </select>
                     <span class="_star ">*</span>
                 </li>
                 <li><span>图片：</span>
                     <div style="float: left;">
-                        <input type="hidden" name="bannerImg" id="bannerImg" value="${item.iconImg}">
+                        <input type="hidden" name="bannerImg" id="bannerImg" value="${banner.bannerImg}">
 
                         <img style="margin-bottom: 10px;max-width:200px;max-height:200px" id="iconImg1"
-                             src="${item.iconImg}">
+                             src="${banner.bannerImg}">
                         <input type="file" name="file_upload" id="file_upload"/>
                     </div>
                 </li>
                 <li><span>图片说明：</span><input type="text" name="imgDesc" placeholder="图片的alt"></li>
                 <!-- <li><span>小图：</span><img  src="" width="120px" height="100px" alt=""><input type="file" name="file2" id="file2" onchange="previewImg(this)"></li> -->
                 <li id="picLike"><span>图片链接：</span>
-                    <input id="bannerLinkurl" name="bannerLinkurl" maxlength="255" type="text"
-                           onblur="checkUrl('bannerLinkurl','bannerLinkurl','网址格式不正确！')" value="">
+                    <input id="bannerLinkurl" name="bannerLinkurl" maxlength="255"
+                           onblur="checkUrl('bannerLinkurl','bannerLinkurl','网址格式不正确！')" type="text"
+                           value="${banner.bannerLinkurl}">
                 </li>
-                <li id="textArea" style="display: none;"><textarea
-                        style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;float: right"
-                        name="detail" id="myEditor" rows="" cols=""></textarea></li>
+                <li id="textArea" <c:if test="${banner.type =='2'}"> style="display: none;" </c:if> ><textarea
+                        style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;" name="detail"
+                        id="myEditor" rows="" cols="">${banner.detail}</textarea></li>
             </ul>
             <ul class="adminfo row">
                 <li>
                     <span></span>
                     <a onclick="subumintBanner();" target="contentF" class="public_btn bg2">保存</a>
-                    <a style="margin-left: 20px" onclick="closeWin()" target="contentF"
-                       class="public_btn bg3" id="cancel">取消</a>
+                    <a style="margin-left: 20px" onclick="closeWin()" target="contentF" class="public_btn bg3"
+                       id="cancel">取消</a>
                 </li>
             </ul>
         </form>
@@ -153,7 +151,6 @@
             $("#enabled").val("1");
         }
     }
-
 
     function closeWin() {
         parent.layer.closeAll();
@@ -306,19 +303,18 @@
         var data = $("#formId").serialize();
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/setting/addBanner",
+            url: "${ctx}/rest/setting/editBanner",
             async: false, // 此处必须同步
             dataType: "json",
             data: data,
             success: function (data) {
                 if (data.result == "ok") {
-                    layer.msg("保存成功！", {icon: 1});
+                    layer.msg("修改成功！", {icon: 1});
                     setTimeout(function () {
                         parent.layer.closeAll();
-                        parent.$("#inquery").click();
                     }, 2000);
                 } else {
-                    layer.msg("新增失败！", {icon: 2});
+                    layer.msg("修改失败！", {icon: 2});
                 }
             },
             error: function (data) {

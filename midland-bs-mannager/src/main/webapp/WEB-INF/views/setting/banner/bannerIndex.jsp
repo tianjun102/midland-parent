@@ -5,8 +5,8 @@
 String path = request.getContextPath();
 String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
-<%@include file="../layout/tablib.jsp"%>
-<%@include file="../layout/source.jsp"%>
+<%@include file="../../layout/tablib.jsp"%>
+<%@include file="../../layout/source.jsp"%>
 
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
@@ -67,7 +67,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 						</c:forEach>
 					</select>
 				</li>--%>
-				<%@include file="../layout/sherchArea.jsp" %>
+				<%@include file="../../layout/sherchArea.jsp" %>
 				<li>
 					<span style = "float:left;">平台：</span>
 					<select name="source" id="source" class="dropdown">

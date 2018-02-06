@@ -32,11 +32,11 @@ public class Attention {
         this.id = id;
     }
 
-    public Integer getWebUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setWebUserId(Integer userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 

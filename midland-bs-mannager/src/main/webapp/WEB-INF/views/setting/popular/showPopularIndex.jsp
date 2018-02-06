@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="../layout/tablib.jsp"%>
-<%@include file="../layout/source.jsp"%>
+<%@include file="../../layout/tablib.jsp"%>
+<%@include file="../../layout/source.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -29,7 +29,7 @@
 			<ul class = "userinfo row">
 
 				<input type="hidden" name="type" value="${type}">
-				<%@include file="../layout/sherchArea.jsp" %>
+				<%@include file="../../layout/sherchArea.jsp" %>
 				<li>
 					<span style = "float:left;">平台：</span>
 					<select name="source" id="source" class="dropdown">

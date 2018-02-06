@@ -199,7 +199,7 @@ public class QuestionsRestController extends ServiceBaseFilter {
         List<Questions> list1 = new ArrayList<>();
         list.forEach(e -> {
             attentionList.forEach(e1 -> {
-                if (e.getUserId() != null && e.getUserId().equals(e1.getWebUserId()) &&
+                if (e.getUserId() != null && e.getUserId().equals(e1.getUserId()) &&
                         Contant.ATTENTION_QUESTION == e1.getType() &&
                         e.getId().equals(e1.getOtherId())) {
                     e.setIsAttention(true);
@@ -218,7 +218,7 @@ public class QuestionsRestController extends ServiceBaseFilter {
         List<Attention> attentionList = getAttentions(questions1);
         List<Questions> list1 = new ArrayList<>();
         attentionList.forEach(e->{
-            if (questions.getUserId() != null && questions.getUserId().equals(e.getWebUserId()) &&
+            if (questions.getUserId() != null && questions.getUserId().equals(e.getUserId()) &&
                     Contant.ATTENTION_QUESTION == e.getType() &&
                     questions.getId().equals(e.getOtherId())) {
                 questions.setIsAttention(true);
@@ -394,9 +394,14 @@ public class QuestionsRestController extends ServiceBaseFilter {
     public Object attentionQuestionList(@RequestBody Questions obj, HttpServletRequest request) {
         Result result = new Result();
         try {
-
+            if (obj.getUserId()==null){
+                result.setCode(ResultStatusUtils.STATUS_CODE_202);
+                result.setMsg("userId 不能为空");
+                return result;
+            }
             Attention attention = new Attention();
-            attention.setWebUserId(obj.getUserId());
+            attention.setUserId(obj.getUserId());
+            attention.setType(Contant.ATTENTION_QUESTION);
             List<Attention> attentionList = attentionServiceImpl.findAttentionList(attention);
             List<Integer> listTemp = new ArrayList<>();
             for (Attention at : attentionList) {

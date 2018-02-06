@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%@include file="../layout/tablib.jsp" %>
-<%@include file="../layout/source.jsp" %>
-<%@include file="../layout/zTree.jsp" %>
+<%@include file="../../layout/tablib.jsp" %>
+<%@include file="../../layout/source.jsp" %>
+<%@include file="../../layout/zTree.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -65,6 +65,9 @@
         });
 
         function beforeClick(treeId, treeNode, clickFlag) {
+            if(treeNode.id==0){
+                return;
+            }
             $("input[name='cateId']").val(treeNode.id);
             $("input[name='cateName']").val(treeNode.name);
             $("#showDiv").hide();
@@ -110,7 +113,7 @@
     <form action="" method="post" id="addFrom">
         <ul class="userinfo row">
             <input name="type" type="hidden" value="${type}" alt="热门关注的type=3"/>
-            <%@include file="../menu/sheet_required.jsp" %>
+            <%@include file="../../menu/sheet_required.jsp" %>
             <li>
                 <span style="float:left;">平台：</span>
                 <select name="source" id="source"
@@ -173,7 +176,9 @@
 <script type="text/javascript">
 
     function saveData() {
-        if (notEmpty('name', 'name', '链接名不能为空！') && notEmpty('cateName', 'cateName', '类型不能为空！') && checkSelect("source|menuId", "平台不能为空！|模块不能为空！") && checkUrl("url", "url", "网址格式不正确！")) {
+        if (checkSelect("citys","城市不能为空！")&&notEmpty('name', 'name', '链接名不能为空！') && notEmpty('cateName', 'cateName', '类型不能为空！')
+            && checkSelect("source|menuId", "平台不能为空！|模块不能为空！") && checkUrl("url", "url", "网址格式不正确！")
+            ) {
             var data = $("#addFrom").serialize();
             debugger;
             $.ajax({

@@ -60,7 +60,7 @@ public class SettingController extends BaseFilter {
         }
         model.addAttribute("isSuper", user.getIsSuper());
         model.addAttribute("type", request.getParameter("type"));
-        return "setting/showPopularIndex";
+        return "setting/popular/showPopularIndex";
     }
 
     // 进入热门关注列表页
@@ -80,7 +80,7 @@ public class SettingController extends BaseFilter {
         model.addAttribute("popularList", PopularList);
         model.addAttribute("paginator", PopularList.getPaginator());
 
-        return "setting/popularList";
+        return "setting/popular/popularList";
     }
 
     @RequestMapping(value = "toAddPage", method = {RequestMethod.GET, RequestMethod.POST})
@@ -100,7 +100,7 @@ public class SettingController extends BaseFilter {
             model.addAttribute("cityName", user.getCityName());
         }
         model.addAttribute("isSuper", user.getIsSuper());
-        return "setting/addPopular";
+        return "setting/popular/addPopular";
     }
 
 
@@ -200,7 +200,7 @@ public class SettingController extends BaseFilter {
             model.addAttribute("cityName", user.getCityName());
         }
         model.addAttribute("isSuper", user.getIsSuper());
-        return "setting/editPopular";
+        return "setting/popular/editPopular";
     }
 
 
@@ -246,7 +246,7 @@ public class SettingController extends BaseFilter {
             model.addAttribute("cityName", user.getCityName());
         }
         model.addAttribute("isSuper", user.getIsSuper());
-        return "setting/linkUrlMannagerIndex";
+        return "setting/linkUrl/linkUrlMannagerIndex";
     }
 
     // 进入友情链接列表页
@@ -258,7 +258,7 @@ public class SettingController extends BaseFilter {
         model.addAttribute("linkUrlList", linkUrlList);
         model.addAttribute("paginator", linkUrlList.getPaginator());
 
-        return "setting/linkUrlList";
+        return "setting/linkUrl/linkUrlList";
     }
 
 
@@ -290,7 +290,7 @@ public class SettingController extends BaseFilter {
             model.addAttribute("cityName", user.getCityName());
         }
         model.addAttribute("isSuper", user.getIsSuper());
-        return "setting/addLinkUrl";
+        return "setting/linkUrl/addLinkUrl";
     }
 
     @RequestMapping(value = "addLinkUrl", method = {RequestMethod.GET, RequestMethod.POST})
@@ -321,7 +321,7 @@ public class SettingController extends BaseFilter {
             model.addAttribute("cityName", user.getCityName());
         }
         model.addAttribute("isSuper", user.getIsSuper());
-        return "setting/editLinkUrl";
+        return "setting/linkUrl/editLinkUrl";
     }
 
 
@@ -367,7 +367,7 @@ public class SettingController extends BaseFilter {
             model.addAttribute("cityName", user.getCityName());
         }
         model.addAttribute("isSuper", user.getIsSuper());
-        return "setting/bannerIndex";
+        return "setting/banner/bannerIndex";
     }
 
     @RequestMapping(value = "bannerList", method = {RequestMethod.GET, RequestMethod.POST})
@@ -377,7 +377,7 @@ public class SettingController extends BaseFilter {
         Paginator paginator = bannerList.getPaginator();
         model.addAttribute("paginator", paginator);
         model.addAttribute("bannerList", bannerList);
-        return "setting/bannerList";
+        return "setting/banner/bannerList";
     }
 
     /**
@@ -402,7 +402,7 @@ public class SettingController extends BaseFilter {
             model.addAttribute("cityName", user.getCityName());
         }
         model.addAttribute("isSuper", user.getIsSuper());
-        return "setting/addBanner";
+        return "setting/banner/addBanner";
     }
 
 
@@ -441,7 +441,7 @@ public class SettingController extends BaseFilter {
             model.addAttribute("cityName", user.getCityName());
         }
         model.addAttribute("isSuper", user.getIsSuper());
-        return "/setting/editBanner";
+        return "setting/banner/editBanner";
     }
 
 

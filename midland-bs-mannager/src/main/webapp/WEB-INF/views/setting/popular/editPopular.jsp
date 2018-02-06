@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%@include file="../layout/tablib.jsp" %>
-<%@include file="../layout/source.jsp"%>
-<%@include file="../layout/zTree.jsp"%>
+<%@include file="../../layout/tablib.jsp" %>
+<%@include file="../../layout/source.jsp"%>
+<%@include file="../../layout/zTree.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -57,6 +57,9 @@
         });
 
         function beforeClick(treeId, treeNode, clickFlag) {
+            if(treeNode.id==0){
+                return;
+            }
             $("input[name='cateId']").val(treeNode.id);
             $("input[name='cateName']").val(treeNode.name);
             $("#showDiv").hide();
@@ -104,7 +107,7 @@
         <input type="hidden" name="id" id="id" value="${item.id}">
         <input name="type" type="hidden" value="${type}" alt="热门关注的type=3"/>
         <ul class="userinfo row">
-            <%@include file="../menu/sheet_required1.jsp" %>
+            <%@include file="../../menu/sheet_required1.jsp" %>
             <li>
                 <span style = "float:left;">平台：</span>
                 <select name="source" id="source" style="height: 28px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
@@ -141,7 +144,7 @@
                 <div class="zTreeDemoBackground left" style  = "position:absolute;top: -10px;"   onblur="test(event)">
                     <ul id="categoryTree" class="ztree" style  = "width:270px; height: 140px!important;"></ul>
                 </div>
-                <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: 323px;" onclick="hideTree()">
+                <img src="${ctx}/assets/img/Closed_16px.png" alt="关闭" style="vertical-align: top;position:absolute; left: 323px;" onclick="hideTree()">
             </li>
 
             <li><span>链接名：</span><input style="width:274px;" type="text" value="${item.name}" onblur="notEmpty('name','name','链接名不能为空！');" name="name" id="name" maxlength="50"/><span class="_star">*</span></li>
@@ -173,7 +176,7 @@
     })
 
     function saveData() {
-        if(notEmpty('name','name','链接名不能为空！')&&notEmpty('cateName','cateName','链接名不能为空！')&&checkSelect("source|menuId","平台不能为空！|类型不能为空！|模块不能为空！")&&checkUrl("url","url","网址格式不正确！")){
+        if(checkSelect("citys","城市不能为空！")&&notEmpty('name','name','链接名不能为空！')&&notEmpty('cateName','cateName','链接名不能为空！')&&checkSelect("source|menuId","平台不能为空！|类型不能为空！|模块不能为空！")&&checkUrl("url","url","网址格式不正确！")){
             var data = $("#addFrom").serialize();
             debugger;
             $.ajax({
@@ -208,96 +211,10 @@
         }
     }
 
-
-    function checkUserName() {
-        var regUserName = /^[a-zA-Z0-9_]{6,20}$/;
-        var userName = $("#username").val();
-        if (userName == null || userName.trim() == "") {
-            //$("#userNameCheck").text("用户名不能为空！");
-            layer.tips("用户名不能为空！", "input[name='username']", {tips: 1});
-            return false;
-        }
-        if (!regUserName.test(userName.trim())) {
-            layer.tips("仅支持英文、数字和下划线,长度为6-20个字符！", "input[name='username']", {tips: 1});
-            return false;
-        }
-        var a = true;
-        $.ajax({
-            type: "post",
-            url: "${ctx }/rest/user/checkUnique",
-            async: false, // 此处必须同步
-            dataType: "json",
-            data: {"userName": userName},
-            success: function (xmlobj) {
-                if (xmlobj.flag == 1) {
-                    layer.tips("该用户已存在！", "input[name='username']", {tips: 1});
-                    a = false;
-                } else {
-
-                    a = true;
-                }
-            }
-        });
-        return a;
-    }
-
-    //检查手机号格式
-    function checkPhone() {
-        var reg = /^1[3,4,5,7,8]\d{9}$/;
-        var phone = $("input[name='phone']").val();
-        if (phone.trim() == '') {
-            layer.tips("手机号不能为空！", "input[name='phone']", {tips: 3});
-            return false;
-        }
-        if (!reg.test(phone)) {
-            layer.tips("手机号格式有误,请核对!", "input[name='phone']", {tips: 3});
-            $("input[name='phone']").focus();
-            return false;
-        }
-        var a = true;
-        $.ajax({
-            type: "post",
-            url: "${ctx }/rest/user/checkPhoneUnique",
-            async: false, // 此处必须同步
-            dataType: "json",
-            data: {"phone": phone},
-            success: function (xmlobj) {
-                if (xmlobj.flag == 1) {
-                    layer.tips("当前手机号码已被使用，请更换手机号码！", "input[name='phone']", {tips: 1});
-                    a = false;
-                } else {
-                    a = true;
-                }
-            }
-        });
-        return a;
-    }
-
-    //检查邮箱格式
-    function checkEmail() {
-        var reg = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        var email = $("input[name='email']").val();
-        if (email.trim() == '') {
-            //layer.tips("邮箱不能为空！", "input[name='email']",{tips:3});
-            return true;
-        }
-        if (!reg.test(email)) {
-            layer.tips("邮箱格式有误,请核对!", "input[name='email']", {tips: 3});
-            $("input[name='email']").focus();
-            return false;
-        }
-        return true;
-    }
-
     //取消
     function closeWin() {
         parent.layer.closeAll();
     }
-
-
-
-
-
 
     //省级赋值
     function initProvince() {

@@ -5,7 +5,7 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
-<%@include file="../layout/tablib.jsp" %>
+<%@include file="../../layout/tablib.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -125,7 +125,7 @@
 <c:if test="${!empty paginator}">
     <c:set var="paginator" value="${paginator}"/>
     <c:set var="target" value="listDiv"/>
-    <%@include file="../layout/pagination.jsp" %>
+    <%@include file="../../layout/pagination.jsp" %>
 </c:if>
 <!-- 本页私有js -->
 <script type="text/javascript">
