@@ -8,7 +8,10 @@ import com.midland.task.TaskConfig;
 import com.midland.web.enums.ContextEnums;
 import com.midland.web.model.*;
 import com.midland.web.model.user.User;
-import com.midland.web.service.*;
+import com.midland.web.service.BannerService;
+import com.midland.web.service.JdbcService;
+import com.midland.web.service.PopularService;
+import com.midland.web.service.SettingService;
 import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
 import com.midland.web.util.ParamObject;
@@ -40,7 +43,7 @@ public class SettingController extends BaseFilter {
     @Autowired
     private PopularService popularServiceImpl;
     @Autowired
-    private CategoryService categoryServiceImpl;
+    private JdbcService jdbcService;
     @Autowired
     private TaskConfig taskConfig;
     @Autowired
@@ -87,7 +90,7 @@ public class SettingController extends BaseFilter {
         int type = 3;
         category.setType(type);
         model.addAttribute("type", type);
-        String result = categoryServiceImpl.getCategoryTree("", category);
+        String result = getCategoryTree("", category);
         if (StringUtils.isNotEmpty(result)) {
             model.addAttribute("categoryData", result);
         }
@@ -185,7 +188,7 @@ public class SettingController extends BaseFilter {
         int type = 3;
         category.setType(type);
         model.addAttribute("type", type);
-        String resultCate = categoryServiceImpl.getCategoryTree("", category);
+        String resultCate = getCategoryTree("", category);
         if (StringUtils.isNotEmpty(resultCate)) {
             model.addAttribute("categoryData", resultCate);
         }

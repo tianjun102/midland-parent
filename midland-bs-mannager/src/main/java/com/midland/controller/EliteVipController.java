@@ -49,8 +49,6 @@ public class EliteVipController extends BaseFilter {
     public String eliteVipIndex(EliteVip eliteVip, Model model, HttpServletRequest request) throws Exception {
         Category category = new Category();
         category.setType(2);
-        category.setIsShow(Contant.isShow);
-        category.setIsDelete(Contant.isNotDelete);
         List<Category> list = categoryServiceImpl.findCategoryList(category);
         model.addAttribute("categoryList", list);
 
@@ -68,7 +66,6 @@ public class EliteVipController extends BaseFilter {
         category.setType(2);
         category.setCityId(MidlandHelper.getCurrentUser(request).getCityId());//避免category查询出多个城市的类型,所以这里默认为登录用户的城市
         category.setIsDelete(Contant.isNotDelete);
-        category.setIsShow(Contant.isShow);
         List<Category> result = categoryServiceImpl.findCategoryList(category);
         settingServiceImpl.getAllProvinceList(model);
         model.addAttribute("cityId", MidlandHelper.getCurrentUser(request).getCityId());

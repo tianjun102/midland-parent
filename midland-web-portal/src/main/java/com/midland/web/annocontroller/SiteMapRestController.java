@@ -135,8 +135,6 @@ public class SiteMapRestController extends ServiceBaseFilter {
 			category.setType(4);//4为网站地图类型
 			category.setSource(0);//网站地图
 			List<Integer> categoryIds= new ArrayList<>();
-			category.setIsDelete(Contant.isNotDelete);
-			category.setIsShow(Contant.isShow);
 			List<Category> categories = categoryServiceImpl.findCategoryList(category);
 			categories.forEach(e->{
 				categoryIds.add(e.getId());

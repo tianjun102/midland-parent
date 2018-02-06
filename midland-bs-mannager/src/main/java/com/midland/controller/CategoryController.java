@@ -3,11 +3,11 @@ package com.midland.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
-import com.midland.web.Contants.Contant;
 import com.midland.web.model.Area;
 import com.midland.web.model.Category;
 import com.midland.web.model.user.User;
 import com.midland.web.service.CategoryService;
+import com.midland.web.service.JdbcService;
 import com.midland.web.service.SettingService;
 import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,12 +36,20 @@ public class CategoryController extends BaseFilter {
     private CategoryService categoryServiceImpl;
     @Autowired
     private SettingService settingService;
+    @Autowired
+    private JdbcService jdbcService;
 
     /**
      * 分类控制层
      **/
     @RequestMapping("index")
     public String categoryIndex(Category category, Model model, HttpServletRequest request) throws Exception {
+        /*Map<String,String> parem = new HashMap<>();
+		parem.put("flag","city");
+		parem.put("id","*");
+		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
+		List<Area> cityList = cityMap.get("city");*/
+		/*model.addAttribute("cityList",cityList);*/
         settingService.getAllProvinceList(model);
         User user = MidlandHelper.getCurrentUser(request);
         if (user.getIsSuper()==null){
@@ -63,7 +72,7 @@ public class CategoryController extends BaseFilter {
         parem.put("id", "*");
         Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
         List<Area> cityList = cityMap.get("city");
-        String result = categoryServiceImpl.getCategoryTree("", category);
+        String result = getCategoryTree("", category);
         if (StringUtils.isNotEmpty(result)) {
             model.addAttribute("categoryData", result);
         }
@@ -130,18 +139,22 @@ public class CategoryController extends BaseFilter {
      **/
     @RequestMapping("to_update")
     public String toUpdateCategory(Integer id, Model model, HttpServletRequest request) throws Exception {
+		/*Category category = new Category();
+		category.setParentId(0);*/
         Map<String, String> parem = new HashMap<>();
         parem.put("flag", "city");
         parem.put("id", "*");
         Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
         List<Area> cityList = cityMap.get("city");
         Category result = categoryServiceImpl.selectCategoryParentNameById(id);
+		/*List<Category> cateList = categoryServiceImpl.findCategoryList(category);*/
         Category newCategory = new Category();
         newCategory.setType(result.getType());
-        String cateResult = categoryServiceImpl.getCategoryTree("", newCategory);
+        String cateResult = getCategoryTree("", newCategory);
         if (StringUtils.isNotEmpty(cateResult)) {
             model.addAttribute("categoryData", cateResult);
         }
+		/*model.addAttribute("cateList",cateList);*/
         User user = MidlandHelper.getCurrentUser(request);
         if (user.getIsSuper() == null) {
             model.addAttribute("cityId", user.getCityId());
@@ -185,8 +198,6 @@ public class CategoryController extends BaseFilter {
             if (user.getIsSuper() == null) {
                 category.setCityId(MidlandHelper.getCurrentUser(request).getCityId());
             }
-            category.setIsDelete(Contant.isNotDelete);
-            category.setIsShow(Contant.isShow);
             Page<Category> result = (Page<Category>) categoryServiceImpl.findCategoryList(category);
             List<ParamObject> paramObjects2 = JsonMapReader.getMap("source");
             model.addAttribute("sources", paramObjects2);
@@ -222,8 +233,6 @@ public class CategoryController extends BaseFilter {
     public Object findChildList(Category category, Model model, HttpServletRequest request) {
         List<Category> cateList = null;
         try {
-            category.setIsShow(Contant.isShow);
-            category.setIsDelete(Contant.isNotDelete);
             cateList = categoryServiceImpl.findCategoryList(category);
         } catch (Exception e) {
             e.printStackTrace();

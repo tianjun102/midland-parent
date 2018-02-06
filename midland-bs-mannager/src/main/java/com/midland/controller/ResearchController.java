@@ -60,7 +60,7 @@ public class ResearchController extends BaseFilter {
         Category cate2 = new Category();
         //查询资讯分类
         cate2.setType(0);
-        String result = categoryService.getCategoryTree("", cate2);
+        String result = getCategoryTree("", cate2);
         if (StringUtils.isNotEmpty(result)) {
             model.addAttribute("categoryData", result);
         }
@@ -87,7 +87,7 @@ public class ResearchController extends BaseFilter {
         Category category = new Category();
         //查询资讯分类
         category.setType(0);
-        String result = categoryService.getCategoryTree("", category);
+        String result = getCategoryTree("", category);
         if (StringUtils.isNotEmpty(result)) {
             model.addAttribute("categoryData", result);
         }
@@ -163,7 +163,7 @@ public class ResearchController extends BaseFilter {
         Category category = new Category();
         //查询资讯分类
         category.setType(0);
-        String cateResult = categoryService.getCategoryTree("", category);
+        String cateResult = getCategoryTree("", category);
         if (StringUtils.isNotEmpty(cateResult)) {
             model.addAttribute("categoryData", cateResult);
         }

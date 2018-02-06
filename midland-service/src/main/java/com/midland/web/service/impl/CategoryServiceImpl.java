@@ -1,15 +1,14 @@
 package com.midland.web.service.impl;
 
-import com.midland.web.Contants.Contant;
 import com.midland.web.dao.CategoryMapper;
 import com.midland.web.model.Category;
 import com.midland.web.service.CategoryService;
-import com.midland.web.service.SiteMapService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +18,6 @@ public class CategoryServiceImpl implements CategoryService {
     private Logger log = LoggerFactory.getLogger(CategoryServiceImpl.class);
     @Autowired
     private CategoryMapper categoryMapper;
-    @Autowired
-    private SiteMapService siteMapServiceImpl;
 
     /**
      * 插入
@@ -42,6 +39,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     @Transactional
     public void shiftUp(Category category) throws Exception {
+        long time = System.currentTimeMillis();
         try {
             log.debug("shiftUp {}", category);
             Category obj = categoryMapper.shiftUp(category);
@@ -179,6 +177,16 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public List<Category> findCategoryTreeList(Category category) throws Exception {
+        try {
+            return categoryMapper.findCategoryTreeList(category);
+        } catch (Exception e) {
+            log.error("findCategoryTreeList  {}", category, e);
+            throw e;
+        }
+    }
+
+    @Override
     public Category selectCategoryParentNameById(Integer id) {
         try {
             return categoryMapper.selectCategoryParentById(id);
@@ -216,6 +224,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 
     public List<Category> testMune(List<Category> categoryList) {
+
         // 最后的结果
         List<Category> menuList = new ArrayList<Category>();
         // 先找到所有的一级菜单
@@ -265,50 +274,5 @@ public class CategoryServiceImpl implements CategoryService {
         return childList;
     }
 
-
-
-    // 把查询结果转换成JSON格式      type: 1-查询1-2级 ； 为空时查询所有
-    @Override
-    public String getCategoryTree(String type, Category category) {
-        // 避免数据库中存在换行符,进行菜单文字的过滤
-        // String replaceStr = "(\r\n|\r|\n|\n\r)";
-        List list = new ArrayList<>();
-        try {
-            category.setIsShow(Contant.isShow);
-            category.setIsDelete(Contant.isNotDelete);
-            list = findCategoryList(category);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        StringBuffer ret = new StringBuffer("");
-        if (list != null && list.size() > 0) {
-            for (int i = 0; i < list.size(); i++) {
-                Category cat = (Category) list.get(i);
-                ret.append("{id:").append(cat.getId()).append(", pId:").append(cat.getParentId());
-                if (cat.getParentId() == 0) {
-                    if (cat.getSource() == 0) {
-                        ret.append(", name:'").append(cat.getCateName() + "(网站)").append("',open:false,nocheck:true");
-                    } else {
-                        ret.append(", name:'").append(cat.getCateName() + "(微站)").append("',open:false,nocheck:true");
-                    }
-                } else {
-                    ret.append(", name:'").append(cat.getCateName()).append("',open:false,nocheck:true");
-
-                }
-                if ("".equals(type)) {
-                    ret.append(", chirdCount:").append(cat.getChirdCount());
-                }
-                if (!("0".equals(cat.getParentId().toString()))) {
-                    ret.append(",iconSkin:'pIcon03'");
-                }
-
-                ret.append("},");
-            }
-            return ret.substring(0, ret.length() - 1);
-        }
-
-        return "";
-    }
 
 }

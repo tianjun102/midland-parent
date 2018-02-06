@@ -1,7 +1,6 @@
 package com.midland.web.service;
 
 import com.midland.web.model.Category;
-import com.midland.web.model.Tree;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -45,13 +44,12 @@ public interface CategoryService {
 
     List<Category> findCategoryListByIdList(List ids) throws Exception;
 
+    List<Category> findCategoryTreeList(Category category) throws Exception;
+
     Category selectCategoryParentNameById(Integer id);
 
     void batchUpdate(List<Category> categoryList) throws Exception;
 
     public List<Category> findleveCategory(Category category) throws Exception;
-
-    // 把查询结果转换成JSON格式      type: 1-查询1-2级 ； 为空时查询所有
-    String getCategoryTree(String type, Category category);
 
 }

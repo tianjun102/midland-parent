@@ -4,7 +4,6 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.core.util.DateUtils;
-import com.midland.web.Contants.Contant;
 import com.midland.web.model.Area;
 import com.midland.web.model.Category;
 import com.midland.web.model.Information;
@@ -54,7 +53,7 @@ public class InformationController extends BaseFilter {
         Category cate1 = new Category();
         //查询资讯分类
         cate1.setType(1);
-        String result = categoryService.getCategoryTree("", cate1);
+        String result = getCategoryTree("", cate1);
         if (StringUtils.isNotEmpty(result)) {
             model.addAttribute("categoryData", result);
         }
@@ -114,8 +113,6 @@ public class InformationController extends BaseFilter {
         //查询资讯分类
         category.setType(1);
         category.setParentId(0);
-        category.setIsShow(Contant.isShow);
-        category.setIsDelete(Contant.isNotDelete);
         List<Category> cateList = categoryService.findCategoryList(category);
         List<Area> cityList = cityMap.get("city");
         User user = MidlandHelper.getCurrentUser(request);
@@ -125,7 +122,7 @@ public class InformationController extends BaseFilter {
         }
         Category category1 = new Category();
         category1.setType(1);
-        String result = categoryService.getCategoryTree("", category1);
+        String result = getCategoryTree("", category1);
         if (StringUtils.isNotEmpty(result)) {
             model.addAttribute("categoryData", result);
         }
@@ -202,8 +199,6 @@ public class InformationController extends BaseFilter {
         //查询资讯分类
         category.setType(1);
         category.setParentId(0);
-        category.setIsDelete(Contant.isNotDelete);
-        category.setIsShow(Contant.isShow);
         List<Category> cateList = categoryService.findCategoryList(category);
         List<Area> cityList = cityMap.get("city");
         category.setParentId(result.getCateParentid());
@@ -219,7 +214,7 @@ public class InformationController extends BaseFilter {
         }
         Category category1 = new Category();
         category1.setType(1);
-        String result1 = categoryService.getCategoryTree("", category1);
+        String result1 = getCategoryTree("", category1);
         if (StringUtils.isNotEmpty(result1)) {
             model.addAttribute("categoryData", result1);
         }
