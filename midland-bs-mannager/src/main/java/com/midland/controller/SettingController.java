@@ -8,10 +8,7 @@ import com.midland.task.TaskConfig;
 import com.midland.web.enums.ContextEnums;
 import com.midland.web.model.*;
 import com.midland.web.model.user.User;
-import com.midland.web.service.BannerService;
-import com.midland.web.service.JdbcService;
-import com.midland.web.service.PopularService;
-import com.midland.web.service.SettingService;
+import com.midland.web.service.*;
 import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
 import com.midland.web.util.ParamObject;
@@ -43,15 +40,15 @@ public class SettingController extends BaseFilter {
     @Autowired
     private PopularService popularServiceImpl;
     @Autowired
-    private JdbcService jdbcService;
+    private CategoryService categoryServiceImpl;
     @Autowired
     private TaskConfig taskConfig;
     @Autowired
     private BannerService bannerServiceImpl;
 
     // 进入热门关注首页面
-    @RequestMapping(value = "showPopularIndex", method = {RequestMethod.GET, RequestMethod.POST})
-    public String showPopularIndex(Model model, HttpServletRequest request) {
+    @RequestMapping(value = "popularIndex", method = {RequestMethod.GET, RequestMethod.POST})
+    public String popularIndex(Model model, HttpServletRequest request) {
 
         settingService.getAllProvinceList(model);
         User user = MidlandHelper.getCurrentUser(request);
@@ -60,7 +57,7 @@ public class SettingController extends BaseFilter {
         }
         model.addAttribute("isSuper", user.getIsSuper());
         model.addAttribute("type", request.getParameter("type"));
-        return "setting/popular/showPopularIndex";
+        return "setting/popular/popularIndex";
     }
 
     // 进入热门关注列表页
@@ -90,7 +87,7 @@ public class SettingController extends BaseFilter {
         int type = 3;
         category.setType(type);
         model.addAttribute("type", type);
-        String result = getCategoryTree("", category);
+        String result = categoryServiceImpl.getCategoryTree("", category);
         if (StringUtils.isNotEmpty(result)) {
             model.addAttribute("categoryData", result);
         }
@@ -188,7 +185,7 @@ public class SettingController extends BaseFilter {
         int type = 3;
         category.setType(type);
         model.addAttribute("type", type);
-        String resultCate = getCategoryTree("", category);
+        String resultCate = categoryServiceImpl.getCategoryTree("", category);
         if (StringUtils.isNotEmpty(resultCate)) {
             model.addAttribute("categoryData", resultCate);
         }

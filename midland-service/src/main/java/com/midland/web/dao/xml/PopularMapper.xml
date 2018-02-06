@@ -69,9 +69,6 @@
         <include refid="Base_Column_List"/>
         from popular
         where 1=1
-        <if test="isDelete == null">
-            and is_delete=0
-        </if>
         <include refid="select_option"/>
         ORDER by order_by asc
     </select>
@@ -265,7 +262,7 @@
             and menu_id= #{menuId,jdbcType=INTEGER}
         </if>
         <if test="name != null">
-            and name= #{name,jdbcType=VARCHAR}
+            and name like CONCAT(CONCAT('%', #{name}), '%')
         </if>
         <if test="source != null">
             and source= #{source,jdbcType=INTEGER}
@@ -301,7 +298,7 @@
             and sheet_name= #{sheetName,jdbcType=VARCHAR}
         </if>
         <if test="cateName != null">
-            and cate_name= #{cateName,jdbcType=VARCHAR}
+            and cate_name like CONCAT(CONCAT('%', #{cateName}), '%')
         </if>
         <if test="isShow != null">
             and is_show= #{isShow}
@@ -322,7 +319,7 @@
             and menu_id= #{menuId,jdbcType=INTEGER}
         </if>
         <if test="name != null">
-            and name= #{name,jdbcType=VARCHAR}
+            and name like CONCAT(CONCAT('%', #{name}), '%')
         </if>
         <if test="source != null">
             and source= #{source,jdbcType=INTEGER}
@@ -358,7 +355,7 @@
             and sheet_name= #{sheetName,jdbcType=VARCHAR}
         </if>
         <if test="cateName != null">
-            and cate_name= #{cateName,jdbcType=VARCHAR}
+            and cate_name like CONCAT(CONCAT('%', #{cateName}), '%')
         </if>
         <if test="isShow != null">
             and is_show= #{isShow}

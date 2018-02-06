@@ -41,12 +41,34 @@
 				<c:if test="${not empty isSuper}">
 					<li>
 						<span style = "float:left;">是否删除：</span>
-						<select name="isDelete" id="isDelete" style="height: 28px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+						<select name="isDelete" id="isDelete" class="dropdown">
+							<option value>全部</option>
 							<option value="0">未删除</option>
 							<option value="1">已删除</option>
 						</select>
 					</li>
 				</c:if>
+				<li><span>分类：</span>
+					<input type="text" name="cateName" id="cateName" placeholder="请输入分类名称" /></li>
+				</li>
+				<li>
+					<span style="float:left;">模块：</span>
+					<select name="menuId" id="menuId" class="dropdown">
+						<option value>全部</option>
+						<option value="0">首页</option>
+						<option value="1">新房</option>
+						<option value="2">二手房</option>
+						<option value="3">租房</option>
+						<option value="4">写字楼</option>
+						<option value="5">商铺</option>
+						<option value="6">小区</option>
+						<option value="7">经纪人</option>
+						<option value="8">外销网</option>
+						<option value="9">市场调究</option>
+						<option value="10">资讯</option>
+						<option value="11">问答</option>
+					</select>
+				</li>
 				<li><input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/></li>
 			</ul>
 			</form>

@@ -53,7 +53,7 @@ public class InformationController extends BaseFilter {
         Category cate1 = new Category();
         //查询资讯分类
         cate1.setType(1);
-        String result = getCategoryTree("", cate1);
+        String result = categoryService.getCategoryTree("", cate1);
         if (StringUtils.isNotEmpty(result)) {
             model.addAttribute("categoryData", result);
         }
@@ -122,7 +122,7 @@ public class InformationController extends BaseFilter {
         }
         Category category1 = new Category();
         category1.setType(1);
-        String result = getCategoryTree("", category1);
+        String result = categoryService.getCategoryTree("", category1);
         if (StringUtils.isNotEmpty(result)) {
             model.addAttribute("categoryData", result);
         }
@@ -214,7 +214,7 @@ public class InformationController extends BaseFilter {
         }
         Category category1 = new Category();
         category1.setType(1);
-        String result1 = getCategoryTree("", category1);
+        String result1 = categoryService.getCategoryTree("", category1);
         if (StringUtils.isNotEmpty(result1)) {
             model.addAttribute("categoryData", result1);
         }
