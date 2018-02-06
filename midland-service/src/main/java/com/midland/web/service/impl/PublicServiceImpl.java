@@ -109,8 +109,11 @@ public class PublicServiceImpl implements PublicService {
         if (vo == null) {
             return Collections.EMPTY_SET;
         }
+        /**
+         * 取出10万个敏感字符
+         */
         Set<String> obj = vo.distinctRandomMembers(Contant.SENSITIVE_CACHE_KEY, 100000);
-        if (obj.size() < 1) {
+        if (obj.size() < 1) {//如果redis里没有敏感字符,说明还未存放,从sensitive.json里取出,并存放到redis
             Set<String> temp = new HashSet<>();
             Arrays.asList(JsonMapReader.getSensitive("sensitive").split(",")).forEach(e1 ->
                     temp.add(e1)

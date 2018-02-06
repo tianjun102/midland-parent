@@ -38,7 +38,7 @@ public class SensitiveFilter implements HandlerInterceptor {
                 }
             });
         }
-        if (sb.toString().equals("false")) {
+        if (sb.toString().contains("false")) {
             return false;
         } else {
             return true;
