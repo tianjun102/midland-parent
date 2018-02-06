@@ -77,6 +77,9 @@
     });
 
     function beforeClick(treeId, treeNode, clickFlag) {
+        if (treeNode.id==0){
+            return;
+        }
         $("input[name='cateId']").val(treeNode.id);
         $("input[name='cateName']").val(treeNode.name);
         $("input[name='vipcate']").val(treeNode.name);
@@ -150,7 +153,7 @@
                     <label style="color: red" class = "_star " >*</label>
 
                 </li>
-                <li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >
+                <li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;z-index:999" >
                     <div class="zTreeDemoBackground left" style  = "position:absolute;left: 100px;top:-10px;"   onblur="test(event)">
                         <ul id="categoryTree" class="ztree" style  = "width:235px; height: 140px!important;"></ul>
                     </div>
