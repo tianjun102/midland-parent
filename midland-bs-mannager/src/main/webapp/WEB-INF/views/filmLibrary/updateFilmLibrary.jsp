@@ -66,8 +66,9 @@
             <li style="display:flex;align-items:center">
                 <span>类型：</span>
                 <select name="filmType" id="filmType" class="dropdown">
-                    <option value="0">楼盘展销会</option>
-                    <option value="1">看楼团</option>
+                    <option value="0" <c:if test="${item.filmType ==0}"  >selected="selected"</c:if> >住宅</option>
+                    <option value="1" <c:if test="${item.filmType ==1}"  >selected="selected"</c:if>>商铺</option>
+                    <option value="2" <c:if test="${item.filmType ==2}"  >selected="selected"</c:if>>写字楼</option>
                 </select>
             </li>
             <%@include file="../menu/area.jsp" %>

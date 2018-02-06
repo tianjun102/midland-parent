@@ -84,8 +84,9 @@
             <li style="display:flex;align-items:center">
                 <span>类型：</span>
                 <select name="filmType" id="filmType" class="dropdown">
-                    <option value="0">楼盘展销会</option>
-                    <option value="1">看楼团</option>
+                    <option value="0">住宅</option>
+                    <option value="1">商铺</option>
+                    <option value="1">写字楼</option>
                 </select>
             </li>
             <%@include file="../menu/area.jsp" %>

@@ -12,24 +12,15 @@
     <link rel="stylesheet" href="${ctx }/assets/css/common.css">
     <link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css">
     <style type="text/css">
-        /*.content ul.userinfo>li {
-            float: none !important;
-            margin-left: 20px;
-            padding-top: 20px;
-        }*/
-
         .dropdown {
             width: 274px !important;
         }
     </style>
     <script type="text/javascript">
-
         var setting = {
             check: {
                 enable: true,
                 chkboxType: {"Y": "sp", "N": "sp"}
-
-
             },
             data: {
                 simpleData: {
@@ -55,6 +46,9 @@
         });
 
         function beforeClick(treeId, treeNode, clickFlag) {
+            if(treeNode.id==0){
+                return;
+            }
             $("input[name='cateId']").val(treeNode.id);
             $("input[name='cateName']").val(treeNode.name);
             $("#showDiv").hide();

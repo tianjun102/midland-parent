@@ -150,7 +150,7 @@
                 </li>
             </c:if>
             <c:choose>
-                <c:when test="${type == 3}">
+                <c:when test="${type == 3  or type ==1}">
                     <li><span>父节点：</span><input style="width: 250px!important;background-color: #dddfe2;" type="text" name="parentName" onclick="showTree()"
                                                 readonly="readonly" value="一级分类"/>
                         <input name="parentId" type="hidden" value="0"/>

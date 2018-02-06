@@ -16,7 +16,7 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
-				<span>系统管理>>首页特殊模块管理</span>
+				<span>站点管理>>首页特殊模块管理</span>
 				<a class = "setup"  target="contentF" onclick="toAddPage()">新增</a>
 			</p>
 		<form action="${ctx }/rest/specialPage/list" method="POST" id="searchForm"

@@ -20,7 +20,7 @@
 <div class="box">
     <section class="content">
         <p class="detail-title">
-            <span>系统管理>>网站地图管理列表</span>
+            <span>站点管理>>网站地图管理列表</span>
             <a class="setup" target="contentF" onclick="toAddPage()">新增</a>
         </p>
         <form action="${ctx }/rest/siteMap/list" method="POST" id="searchForm"
@@ -55,9 +55,12 @@
                     </li>
                 </c:if>
                     <li><span>分类名称：</span>
-                        <input style="width: 243px;" type="text" class="vipcate" id="cateName" name="cateName"/>
+                        <input  type="text" class="vipcate" id="cateName" name="cateName" placeholder="分类名称"/>
 
 
+                    </li>
+                    <li><span>模块名称：</span>
+                        <input  type="text" class="vipcate" id="modeName" name="modeName" placeholder="模块名称"/>
                     </li>
                 <%--<li><span>类别：</span><input style="width: 243px;" type="text" class="vipcate" id="vipcate" name="vipcate"--%>
                                            <%--onclick="showTree()" readonly="readonly"/>--%>

@@ -21,7 +21,7 @@
 	<div class="box"> 
 		<section class = "content">
 			<p class = "detail-title">
-				<span>系统管理>>热门关注链接管理</span>
+				<span>站点管理>>热门关注链接管理</span>
 				<a class = "setup"  target="contentF" onclick="toAddPage()">添加</a>
 			</p>
 		<form action="${ctx}/rest/setting/showPopularList" method="POST" id="searchForm"
