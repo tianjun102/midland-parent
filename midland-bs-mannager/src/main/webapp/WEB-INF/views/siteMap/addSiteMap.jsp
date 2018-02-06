@@ -40,11 +40,12 @@
 
         function beforeClick(treeId, treeNode, clickFlag) {
             if(treeNode.id==0){
-                $("input[name='cateId']").val("");
-                $("input[name='cateName']").val("");
-                $("input[name='noteType']").val("");
-                $("input[name='modeId']").val("");
-                $("input[name='modeName']").val("");
+                return;
+//                $("input[name='cateId']").val("");
+//                $("input[name='cateName']").val("");
+//                $("input[name='noteType']").val("");
+//                $("input[name='modeId']").val("");
+//                $("input[name='modeName']").val("");
             }else{
                 if (treeNode.type==1){
                     $("input[name='cateId']").val(treeNode.pId);
@@ -67,7 +68,8 @@
         }
 
         function showTree(event){
-            var data = $("#dataForm").serialize();
+            var data="cityId="+$("#cityId").val()+"&source="+$("#source").val()+"&type="+$("#type").val();
+            debugger;
             $.ajax({
                 type: "post",
                 url: "${ctx}/rest/siteMap/choose",
@@ -105,9 +107,8 @@
     <form action="${ctx}/rest/siteMap/add" method="post" id="dataForm">
         <input type="hidden" name="cityName" id="cityName" value="${cityName}" >
         <input name="noteType" type="hidden"/>
-        <input name="type" type="hidden" value="${type}" alt="网站管理的type=4"/>
-        <input name="modeId" type="hidden"/>
-        <input name="modeName" type="hidden"/>
+        <input name="type" id="type" type="hidden" value="${type}" alt="网站管理的type=4"/>
+
         <c:if test="${empty isSuper}">
             <input type="hidden" name="cityId"  value="${cityId}">
         </c:if>
@@ -131,7 +132,7 @@
 
             <li><span>分类：</span><input style="width: 250px!important;" class="vipcate" id="showCateName" name="showCateName" onclick="showTree()" readonly="readonly"/>
                 <input name="cateName" id="cateName" type="hidden"/>
-                <input name="cateId" type="hidden"/><label style="color: red" class = "_star " >*</label>
+                <input name="cateId" id="cateId" type="hidden"/><label style="color: red" class = "_star " >*</label>
 
             </li>
 
@@ -154,7 +155,8 @@
                <input style="width: 250px!important;" type="text" name="linkUrl" id="linkUrl" onblur="checkUrl('linkUrl','linkUrl','链接格式不正确！')"/>
                 <span class = "_star ">*</span>
             </li>
-
+            <input name="modeId" class="modeId" type="hidden"/>
+            <input name="modeName" class="modeName" type="hidden"/>
             <li>
                 <span></span>
                 <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">保存</a>

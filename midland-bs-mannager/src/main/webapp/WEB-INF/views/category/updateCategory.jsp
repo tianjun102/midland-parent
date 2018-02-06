@@ -63,7 +63,7 @@
         }
 
         function showTree(event){
-            var data = $("#addFrom").serialize();
+            var data="cityId="+$("#cityId").val()+"&source="+$("#source").val()+"&type="+$("#type").val();
             $.ajax({
                 type: "post",
                 url: "${ctx}/rest/siteMap/choose",
@@ -99,8 +99,8 @@
 <body>
 <section class="content" style="border:none;">
     <form action="" method="post" id="addFrom">
-        <input type="hidden" name="id" value="${item.id}" >
-        <input type="hidden" name="type" value="${item.type}">
+        <input type="hidden" name="id"  value="${item.id}" >
+        <input type="hidden" name="type" id="type" value="${item.type}">
         <ul class="userinfo row">
             <li>
                 <span style = "float:left;">城市：</span>
