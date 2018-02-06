@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.core.util.DateUtils;
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.Area;
 import com.midland.web.model.Category;
 import com.midland.web.model.Information;
@@ -113,6 +114,8 @@ public class InformationController extends BaseFilter {
         //查询资讯分类
         category.setType(1);
         category.setParentId(0);
+        category.setIsShow(Contant.isShow);
+        category.setIsDelete(Contant.isNotDelete);
         List<Category> cateList = categoryService.findCategoryList(category);
         List<Area> cityList = cityMap.get("city");
         User user = MidlandHelper.getCurrentUser(request);
@@ -199,6 +202,8 @@ public class InformationController extends BaseFilter {
         //查询资讯分类
         category.setType(1);
         category.setParentId(0);
+        category.setIsDelete(Contant.isNotDelete);
+        category.setIsShow(Contant.isShow);
         List<Category> cateList = categoryService.findCategoryList(category);
         List<Area> cityList = cityMap.get("city");
         category.setParentId(result.getCateParentid());

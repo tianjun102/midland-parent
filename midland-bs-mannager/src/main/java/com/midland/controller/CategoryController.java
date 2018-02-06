@@ -3,6 +3,7 @@ package com.midland.controller;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.Area;
 import com.midland.web.model.Category;
 import com.midland.web.model.user.User;
@@ -184,6 +185,8 @@ public class CategoryController extends BaseFilter {
             if (user.getIsSuper() == null) {
                 category.setCityId(MidlandHelper.getCurrentUser(request).getCityId());
             }
+            category.setIsDelete(Contant.isNotDelete);
+            category.setIsShow(Contant.isShow);
             Page<Category> result = (Page<Category>) categoryServiceImpl.findCategoryList(category);
             List<ParamObject> paramObjects2 = JsonMapReader.getMap("source");
             model.addAttribute("sources", paramObjects2);
@@ -219,6 +222,8 @@ public class CategoryController extends BaseFilter {
     public Object findChildList(Category category, Model model, HttpServletRequest request) {
         List<Category> cateList = null;
         try {
+            category.setIsShow(Contant.isShow);
+            category.setIsDelete(Contant.isNotDelete);
             cateList = categoryServiceImpl.findCategoryList(category);
         } catch (Exception e) {
             e.printStackTrace();

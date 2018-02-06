@@ -1,5 +1,6 @@
 package com.midland.web.service.impl;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.dao.CategoryMapper;
 import com.midland.web.model.Category;
 import com.midland.web.service.CategoryService;
@@ -272,18 +273,12 @@ public class CategoryServiceImpl implements CategoryService {
         // 避免数据库中存在换行符,进行菜单文字的过滤
         // String replaceStr = "(\r\n|\r|\n|\n\r)";
         List list = new ArrayList<>();
-        if ("1".equals(type)) {
-            try {
-                list = findCategoryList(category);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            try {
-                list = findCategoryList(category);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        try {
+            category.setIsShow(Contant.isShow);
+            category.setIsDelete(Contant.isNotDelete);
+            list = findCategoryList(category);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         StringBuffer ret = new StringBuffer("");
