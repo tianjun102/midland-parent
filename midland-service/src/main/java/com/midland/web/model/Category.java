@@ -66,6 +66,18 @@ public class Category {
      */
     private String modeName;
 
+/**
+     * 是否是超链接0是,1否
+     */
+    private String isHref;
+
+    public String getIsHref() {
+        return isHref;
+    }
+
+    public void setIsHref(String isHref) {
+        this.isHref = isHref;
+    }
 
     public Integer getModeId() {
         return modeId;

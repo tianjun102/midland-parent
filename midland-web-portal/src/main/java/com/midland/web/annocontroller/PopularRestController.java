@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
+
+import java.util.List;
 import java.util.Map;
 import com.midland.web.util.MidlandHelper;
 import javax.servlet.http.HttpServletRequest;
@@ -96,15 +98,12 @@ public class PopularRestController extends ServiceBaseFilter {
 		 Result result=new Result();
 		try {
 			log.info("findPopularList  {}",obj);
-			MidlandHelper.doPage(request);
 			obj.setIsShow(Contant.isShow);
 			obj.setIsDelete(Contant.isNotDelete);
-			Page<Popular> list = (Page<Popular>)popularServiceImpl.findPopularList(obj);
-			Paginator paginator=list.getPaginator();
+			List<Popular> list = popularServiceImpl.findPopularList(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
 			result.setList(list);
-			result.setPaginator(paginator);
 		} catch(Exception e) {
 			log.error("findPopularList  {}",obj,e);
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);

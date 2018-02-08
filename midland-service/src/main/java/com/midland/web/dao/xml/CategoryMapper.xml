@@ -18,11 +18,12 @@
         <result column="link_url" property="linkUrl" jdbcType="VARCHAR"/>
         <result column="mode_id" property="modeId" jdbcType="INTEGER"/>
         <result column="mode_name" property="modeName" jdbcType="VARCHAR"/>
+        <result column="is_href" property="isHref" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
 		id,cate_name,status,order_by,parent_id,type,is_delete,city_id,city_name,cate_desc,is_show,source,link_url,mode_id
-		mode_name
+		mode_name,is_href
 	</sql>
 
     <select id="selectCategoryById" resultMap="BaseResultMap">
@@ -139,6 +140,11 @@
             <if test="modeName != null">
                 mode_name,
             </if>
+            <if test="isHref != null">
+                is_href,
+            </if>
+
+
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -184,6 +190,11 @@
             <if test="modeName != null">
                 #{modeName},
             </if>
+            <if test="isHref != null">
+                #{isHref,jdbcType=INTEGER},
+            </if>
+
+
         </trim>
     </insert>
 
@@ -229,6 +240,9 @@
         </if>
         <if test="modeName != null">
             mode_name= #{modeName},
+        </if>
+        <if test="isHref != null">
+            is_href=#{isHref,jdbcType=INTEGER},
         </if>
     </sql>
 
@@ -278,6 +292,9 @@
         <if test="modeName != null">
             and mode_name= #{modeName}
         </if>
+        <if test="isHref != null">
+            and is_href=#{isHref,jdbcType=INTEGER}
+        </if>
     </sql>
 
     <sql id="select_option1">
@@ -321,6 +338,9 @@
         </if>
         <if test="modeName != null">
             and mode_name= #{modeName}
+        </if>
+        <if test="isHref != null">
+            and is_href=#{isHref,jdbcType=INTEGER}
         </if>
     </sql>
 
@@ -392,6 +412,9 @@
         </if>
         <if test="modeId != null">
             and b.mode_id= #{modeId}
+        </if>
+        <if test="isHref != null">
+            and is_href=#{isHref,jdbcType=INTEGER}
         </if>
         ORDER BY b.order_by ASC
     </select>

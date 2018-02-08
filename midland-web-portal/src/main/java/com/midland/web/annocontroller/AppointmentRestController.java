@@ -52,6 +52,11 @@ public class AppointmentRestController extends ServiceBaseFilter {
             obj.setIsDelete(Contant.isNotDelete);
             obj.setAppointmentTime(MidlandHelper.getCurrentTime());
             obj.setAppointSn(publicServiceImpl.getCode(Contant.APPOINT_SN_KEY,"A"));
+            if(StringUtils.isNotEmpty(obj.getViewUrl())){
+                if (!obj.getViewUrl().contains("http://")){
+                    obj.setViewUrl("http://"+obj.getViewUrl());
+                }
+            }
             appointmentServiceImpl.insertAppointment(obj);
             String houseType =String.valueOf(obj.getHouseType());
             String houseId = String.valueOf(obj.getHouseId());

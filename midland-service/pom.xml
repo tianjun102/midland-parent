@@ -177,7 +177,12 @@
             <artifactId>mail</artifactId>
             <version>1.4.7</version>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/com.github.nobodxbodon/zhconverter -->
+        <dependency>
+            <groupId>com.github.nobodxbodon</groupId>
+            <artifactId>zhconverter</artifactId>
+            <version>0.0.5</version>
+        </dependency>
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>

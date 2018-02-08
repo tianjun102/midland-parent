@@ -16,10 +16,11 @@
         <result column="order_by" property="orderBy" jdbcType="INTEGER"/>
         <result column="is_show" property="isShow" jdbcType="INTEGER"/>
         <result column="source" property="source" jdbcType="INTEGER"/>
+        <result column="is_href" property="isHref" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,name,mode_id,mode_name,city_id,city_name,cate_id,cate_name,link_url,is_delete,order_by,is_show,source
+        id,name,mode_id,mode_name,city_id,city_name,cate_id,cate_name,link_url,is_delete,order_by,is_show,source,is_href
     </sql>
 
     <select id="selectSiteMapById" resultMap="BaseResultMap">
@@ -150,6 +151,10 @@
             <if test="source != null">
                 source,
             </if>
+            <if test="isHref != null">
+                is_href,
+            </if>
+
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -189,6 +194,10 @@
             <if test="source != null">
                 #{source,jdbcType=INTEGER},
             </if>
+            <if test="isHref != null">
+                #{isHref,jdbcType=INTEGER},
+            </if>
+
         </trim>
     </insert>
 
@@ -205,6 +214,8 @@
         order_by= #{orderBy,jdbcType=INTEGER},
         is_show= #{isShow,jdbcType=INTEGER},
         source= #{source,jdbcType=INTEGER},
+        is_href = #{isHref,jdbcType=INTEGER},
+
     </sql>
 
 
@@ -241,6 +252,10 @@
         <if test="source != null">
             source= #{source,jdbcType=INTEGER},
         </if>
+        <if test="isHref != null">
+            is_href=#{isHref,jdbcType=INTEGER},
+        </if>
+
     </sql>
 
     <sql id="select_option">
@@ -248,13 +263,13 @@
             and id= #{id,jdbcType=INTEGER}
         </if>
         <if test="name != null">
-            and name like  CONCAT(CONCAT('%', #{name}), '%')
+            and name like CONCAT(CONCAT('%', #{name}), '%')
         </if>
         <if test="modeId != null">
             and mode_id= #{modeId,jdbcType=INTEGER}
         </if>
         <if test="modeName != null">
-            and mode_name like  CONCAT(CONCAT('%', #{modeName}), '%')
+            and mode_name like CONCAT(CONCAT('%', #{modeName}), '%')
         </if>
         <if test="cityId != null">
             and city_id= #{cityId,jdbcType=VARCHAR}
@@ -266,7 +281,7 @@
             and cate_id= #{cateId,jdbcType=INTEGER}
         </if>
         <if test="cateName != null">
-            and cate_name like  CONCAT(CONCAT('%', #{cateName}), '%')
+            and cate_name like CONCAT(CONCAT('%', #{cateName}), '%')
         </if>
         <if test="linkUrl != null">
             and link_url= #{linkUrl,jdbcType=VARCHAR}
@@ -283,17 +298,20 @@
         <if test="source != null">
             and source= #{source,jdbcType=INTEGER}
         </if>
+        <if test="isHref != null">
+            and is_href=#{isHref,jdbcType=INTEGER}
+        </if>
     </sql>
-<sql id="select_option1">
+    <sql id="select_option1">
 
         <if test="name != null">
-            and name like  CONCAT(CONCAT('%', #{name}), '%')
+            and name like CONCAT(CONCAT('%', #{name}), '%')
         </if>
         <if test="modeId != null">
             and mode_id= #{modeId,jdbcType=INTEGER}
         </if>
         <if test="modeName != null">
-            and mode_name like  CONCAT(CONCAT('%', #{modeName}), '%')
+            and mode_name like CONCAT(CONCAT('%', #{modeName}), '%')
         </if>
         <if test="cityId != null">
             and city_id= #{cityId,jdbcType=VARCHAR}
@@ -319,6 +337,9 @@
         </if>
         <if test="source != null">
             and source= #{source,jdbcType=INTEGER}
+        </if>
+        <if test="isHref != null">
+            and is_href=#{isHref,jdbcType=INTEGER}
         </if>
     </sql>
 

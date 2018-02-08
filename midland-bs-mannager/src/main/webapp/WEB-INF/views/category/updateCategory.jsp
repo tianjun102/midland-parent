@@ -176,8 +176,14 @@
             <li>
                 <span>分类名称：</span><input style="width:250px;" type="text" name="cateName" id="cateName" value="${item.cateName}" onblur="notEmpty('cateName','cateName','分类名称不能为空！');" maxlength="50"/>
             </li>
+            <c:if test="${type == 4}">
+                <li id="isHrefId" ><span>超链接：</span>
+                    <label class="checkitem"><input type="radio" name="isHref" onclick="checkRadio()"  class="isHref" value="0" checked="checked"><span>是</span></label>
+                    <label class="checkitem"><input type="radio" name="isHref" onclick="checkRadio()" class="isHref" value="1"><span>否</span></label>
+                </li>
+            </c:if>
             <c:if test="${type != 2 and type !=3}">
-                <li>
+                <li id="linkUrlId">
                     <span>网站链接：</span><input style="width:250px;" type="text" name="linkUrl" id="linkUrl" value="${item.linkUrl}" onblur="checkUrl('linkUrl','linkUrl','网站链接格式不正确！');" maxlength="50"/>
                 </li>
             </c:if>
@@ -234,6 +240,13 @@
         setEmpty();
     })
 
+    function checkRadio() {
+        if($('input[name="isHref"]:checked').val()==1){
+            $("#linkUrlId").hide();
+        }else{
+            $("#linkUrlId").show();
+        }
+    }
     function setCityName(){
         setEmpty();
         $("#cityName").val($("#cityId option:selected").text())

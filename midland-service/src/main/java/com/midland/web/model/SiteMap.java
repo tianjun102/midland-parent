@@ -58,6 +58,19 @@ public class SiteMap {
      **/
     private Integer source;
 
+/**
+     * 是否展示为超链接0是,1否
+     **/
+    private Integer isHref;
+
+
+    public Integer getIsHref() {
+        return isHref;
+    }
+
+    public void setIsHref(Integer isHref) {
+        this.isHref = isHref;
+    }
 
     public Integer getId() {
         return id;

@@ -1,6 +1,7 @@
 package com.midland.web.annocontroller;
 
 import com.alibaba.fastjson.JSONArray;
+import com.github.nobodxbodon.zhconverter.简繁转换类;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.base.ServiceBaseFilter;
@@ -212,6 +213,10 @@ public class HotHandRestController extends ServiceBaseFilter {
     public Object findHotHandList(@RequestBody HotHand obj, HttpServletRequest request) {
         Result result = new Result();
         try {
+            简繁转换类 con=简繁转换类.取实例(简繁转换类.目标.简体);
+            if (StringUtils.isNotEmpty(obj.getBuildingType())){
+               obj.setBuildingType( con.转换(obj.getBuildingType()));
+            }
             log.info("findHotHandList  {}", obj);
             MidlandHelper.doPage(request);
             obj.setIsDelete(Contant.isNotDelete);

@@ -123,7 +123,11 @@ public class CommentRestController extends ServiceBaseFilter {
 			list.forEach(e->{
 				ids.add(e.getInformationId());
 			});
-			List<Information> informationList = informationServiceImpl.getByIdList(ids);
+			List<Information> informationList= new ArrayList<>();
+			if(ids.size()>0){
+				informationList = informationServiceImpl.getByIdList(ids);
+			}
+
 			List<Comment> comments=new ArrayList<>();
 			for (Comment comment:list){
 				for (Information in : informationList){

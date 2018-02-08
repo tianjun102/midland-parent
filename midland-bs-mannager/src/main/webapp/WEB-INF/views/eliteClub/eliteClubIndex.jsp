@@ -70,7 +70,7 @@
                 title:['新增'],
                 resize: false,
                 scrollbar:false,
-                content:['${ctx}/rest/eliteClub/to_add', 'no']
+                content:['${ctx}/rest/eliteClub/to_add', 'yes']
             });
         }
 		 window.onload = function(){

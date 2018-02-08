@@ -36,6 +36,15 @@
             color: #ddd;
             cursor: pointer;
         }
+        .fileupload{
+            float: left;
+        }
+        .fileupload .uploadify-button-text{
+            position: absolute;
+            left:50%;
+            transform: translateX(-50%);
+            bottom:0px;
+        }
     </style>
 
     <script type="text/javascript">
@@ -92,7 +101,7 @@
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/tradeFair/add" method="post" id="dataForm">
-        <ul class="userinfo updInfo row">
+        <ul class="adminfo width-lg row">
             <li style="display:flex;align-items:center">
                 <span>类型：</span>
                 <select name="tradeType" id="tradeType" class="dropdown">
@@ -113,9 +122,10 @@
             <li><span>楼盘名称：</span>
                 <input type="text" name="title" id="title"/>
             </li>
-            <li><span>简介：</span>
-                <textarea rows="" cols="" style="width: 250px;height: 100px;border: 1px solid #dbe2e6;"
-                          name="introduction" id="introduction"></textarea>
+            <li id="textArea" style="display: block;"><span>简介：</span>
+                <textarea class="textarea-lg"
+                          name="introduction"
+                          id="myEditor" rows="" cols="">${item.introduction}</textarea>
             </li>
 
             <li>
@@ -130,6 +140,8 @@
 </section>
 
 <script type="text/javascript">
+    UE.getEditor('myEditor');
+
     //保存数据
     function updateData() {
         var data = $("#dataForm").serialize();

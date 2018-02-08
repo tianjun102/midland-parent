@@ -19,13 +19,11 @@
             overflow: hidden;
             border: 1px solid #ccc;
         }
-
-        .fileupload-item img {
-            max-width: 100%;
-            max-height: 100%;
+        .fileupload-item img{
+            max-width:100%;
+            max-height:100%;
         }
-
-        .fileupload-item .xclose {
+        .fileupload-item .xclose{
             display: block;
             position: absolute;
             right: 0;
@@ -34,10 +32,19 @@
             height: 16px;
             line-height: 16px;
             text-align: center;
-            background: rgba(0, 0, 0, .7);
+            background: rgba(0,0,0,.7);
             font-size: 14px;
             color: #ddd;
             cursor: pointer;
+        }
+        .fileupload{
+            float: left;
+        }
+        .fileupload .uploadify-button-text{
+            position: absolute;
+            left:50%;
+            transform: translateX(-50%);
+            bottom:0px;
         }
     </style>
 
@@ -70,7 +77,7 @@
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/tradeFair/update" method="post" id="dataForm">
-        <ul class="userinfo updInfo row">
+        <ul class="adminfo width-lg row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <li>
                 <span>类型：</span>
@@ -99,9 +106,10 @@
             <li><span>楼盘名称：</span>
                 <input type="text" name="title" id="title" value="${item.title}"/>
             </li>
-            <li><span>简介：</span>
-                <textarea class="textarea-sm" rows="" cols="" name="introduction"
-                          id="introduction">${item.introduction}</textarea>
+            <li id="textArea" style="display: block;"><span>简介：</span>
+                <textarea class="textarea-lg"
+                          name="introduction"
+                          id="myEditor" rows="" cols="">${item.introduction}</textarea>
             </li>
 
             <li>
@@ -119,7 +127,7 @@
 <script type="text/javascript">
     //保存数据
 
-
+    UE.getEditor('myEditor');
 
     $(".fileupload").delegate(".xclose","click", function () {
         var temp = "";

@@ -170,6 +170,8 @@ public class SiteMapRestController extends ServiceBaseFilter {
 			Map map = new HashMap();
 			map.put("cateId",e.getId());
 			map.put("cateName",e.getCateName());
+			map.put("isHref",e.getIsHref());
+			map.put("linkUrl",e.getLinkUrl());
 			List<SiteMap> list = b.stream().filter(e1->e.getId().equals(e1.getCateId())).collect(Collectors.toList());
 			List<Map> listMap = new ArrayList<>();
 			list.forEach(e2->{

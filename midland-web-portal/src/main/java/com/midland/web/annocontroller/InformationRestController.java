@@ -84,17 +84,19 @@ public class InformationRestController extends ServiceBaseFilter {
 			Integer id =(Integer)map.get("id");
 			log.info("getInformationById  {}",id);
 			Information information = informationServiceImpl.selectInformationById(id);
-			Comment comment = new Comment();
-			comment.setInformationId(id);
-			Integer commentNum = 0;
-			try {
-				commentNum = commentServiceImpl.commentTotle(comment);
-			}catch (Exception e){
-				log.info("取评论数出错！");
+			if (information != null){
+				Comment comment = new Comment();
+				comment.setInformationId(id);
+				Integer commentNum = 0;
+				try {
+					commentNum = commentServiceImpl.commentTotle(comment);
+				}catch (Exception e){
+					log.info("取评论数出错！");
+				}
+				information.setCommentNum(commentNum);
+				information.setClickNum(information.getClickNum()==null?1:information.getClickNum()+1);
+				informationServiceImpl.updateInformationById(information);
 			}
-			information.setCommentNum(commentNum);
-			information.setClickNum(information.getClickNum()==null?1:information.getClickNum()+1);
-			informationServiceImpl.updateInformationById(information);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
 			result.setModel(information);

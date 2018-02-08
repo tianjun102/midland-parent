@@ -1,5 +1,6 @@
 package com.midland.controller;
 
+import com.github.nobodxbodon.zhconverter.简繁转换类;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
@@ -73,7 +74,10 @@ public class HotHandController extends BaseFilter {
         Map<String, Object> map = new HashMap<>();
         try {
             log.info("addHotHand {}", hotHand);
-
+            简繁转换类 con=简繁转换类.取实例(简繁转换类.目标.简体);
+            if (StringUtils.isEmpty(hotHand.getBuildingType())){
+                hotHand.setBuildingType( con.转换(hotHand.getBuildingType()));
+            }
             hotHand.setCreateTime(MidlandHelper.getCurrentTime());
             hotHandServiceImpl.insertHotHand(hotHand);
             map.put("state", 0);
@@ -141,6 +145,10 @@ public class HotHandController extends BaseFilter {
     public Object updateHotHandById(HotHand hotHand) throws Exception {
         Map<String, Object> map = new HashMap<>();
         try {
+            简繁转换类 con=简繁转换类.取实例(简繁转换类.目标.简体);
+            if (StringUtils.isEmpty(hotHand.getBuildingType())){
+                hotHand.setBuildingType( con.转换(hotHand.getBuildingType()));
+            }
             log.info("updateHotHandById  {}", hotHand);
             hotHandServiceImpl.updateHotHandById(hotHand);
             map.put("state", 0);
@@ -158,6 +166,10 @@ public class HotHandController extends BaseFilter {
     public String findHotHandList(HotHand hotHand, Model model, HttpServletRequest request) {
         try {
             log.info("findHotHandList  {}", hotHand);
+            简繁转换类 con=简繁转换类.取实例(简繁转换类.目标.简体);
+            if (StringUtils.isNotEmpty(hotHand.getBuildingType())){
+                hotHand.setBuildingType( con.转换(hotHand.getBuildingType()));
+            }
             MidlandHelper.doPage(request);
             User user = MidlandHelper.getCurrentUser(request);
             if (!Contant.isSuper.equals(user.getIsSuper())) {//不是超级管理员，只能看属性城市的相关信息
