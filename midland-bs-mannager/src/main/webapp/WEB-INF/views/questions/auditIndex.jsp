@@ -20,11 +20,13 @@
 <!--预约看房重新分配经纪人-->
 <div class="box">
     <section class="content">
-        <ul class="userinfo row">
+        <ul>
 
             <li>
-                <span>提问人：</span><span>${questions.questionName}</span>
-                <span>手机号码：</span><span>${questions.questionPhone}</span>
+                <span>提问人名：</span><span>${questions.questionName}</span>
+            </li>
+            <li>
+                <span >手机号码：</span><span>${questions.questionPhone}</span>
             </li>
 
 
@@ -44,9 +46,8 @@
         <form action="${ctx}/rest/questions/update" method="post" id="auditInfoForm">
             <ul class="userinfo row">
                 <input type="hidden" id="id" name="id" value="${questions.id}"/>
-                <li><span>备注：</span>
-                    <textarea name="auditRemark" id="auditRemark"
-                              style="width:260px;height:150px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;"></textarea>
+                <li style="width: 100%;"><span>备注：</span>
+                    <textarea name="auditRemark" id="auditRemark" class="textarea-lg"></textarea>
                 </li>
 
             </ul>

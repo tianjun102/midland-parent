@@ -149,7 +149,7 @@
 			type: 2,
 			title: ['修改友情链接'],
 			shade: 0.3,
-			area: ['500px', '500px'],
+			area: ['500px', '550px'],
 			content: ['${ctx}/rest/setting/toEditLinkUrlPage?id='+Id,'no']
 			});
 	}

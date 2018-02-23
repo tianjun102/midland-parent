@@ -341,9 +341,6 @@
 						<shiro:hasPermission name="aboutUs">
 							<a id = "left60" href="${ctx}/rest/siteProtocol/aboutUs" target="contentF"><span>关于美联</span></a>
 						</shiro:hasPermission>
-						<shiro:hasPermission name="contantUs">
-							<a id = "left60" href="${ctx}/rest/siteProtocol/contantUs" target="contentF"><span>联系我们</span></a>
-						</shiro:hasPermission>
 						<shiro:hasPermission name="privacy">
 							<a id = "left60" href="${ctx}/rest/siteProtocol/privacy" target="contentF"><span>私隐政策</span></a>
 						</shiro:hasPermission>
