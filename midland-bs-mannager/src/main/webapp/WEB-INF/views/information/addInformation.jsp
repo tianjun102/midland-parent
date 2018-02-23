@@ -190,6 +190,7 @@
                 <li>
                     <span></span>
                     <a onclick="subumintInformation();" target="contentF" class="public_btn bg2">保存</a>
+                    <%--<a onclick="viewInformation();" target="contentF" class="public_btn bg2">预览</a>--%>
                     <a style="margin-left: 20px" onclick="closeWin()" target="contentF"
                        class="public_btn bg3" id="cancel">取消</a>
                 </li>
@@ -225,6 +226,10 @@
 
     }
 
+    function viewInformation() {
+        window.open("http://43.254.55.177:8083/ML/information_index.html")
+    }
+    
     function subumintInformation() {
         if (notEmpty('title', 'title', '标题不能为空！')) {
             var data = $("#formId").serialize();

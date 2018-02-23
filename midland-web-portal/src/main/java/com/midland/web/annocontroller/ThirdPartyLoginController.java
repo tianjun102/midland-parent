@@ -2,6 +2,7 @@ package com.midland.web.annocontroller;
 import com.alibaba.fastjson.JSONObject;
 import com.github.qcloudsms.SmsSingleSender;
 import com.github.qcloudsms.SmsSingleSenderResult;
+import com.midland.config.MidlandConfig;
 import com.midland.core.entity.ThirdPartyUser;
 import com.midland.core.util.MD5Util;
 import com.midland.core.util.SmsUtil;
@@ -41,7 +42,8 @@ import java.util.concurrent.TimeUnit;
 public class ThirdPartyLoginController {
     @Resource
     private WebUserService userService;
-
+@Autowired
+private MidlandConfig midlandConfig;
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
 
@@ -90,7 +92,8 @@ public class ThirdPartyLoginController {
                     result.setMsg(Result.resultMsg.SUCCESS.toString());
                     result.setModel(userInfo);
                     redirectAttributes.addFlashAttribute("result",result);
-                    return "redirect:http://43.254.55.177:8083/web?token="+sessionId+"&code="+userInfo.getId();
+
+                    return "redirect:"+midlandConfig.getWebSite()+"/web?token="+sessionId+"&code="+userInfo.getId();
                     //************结束*************//
                 } else {// 如果未获取到OpenID
                     result.setCode(ResultStatusUtils.STATUS_CODE_203);
@@ -109,7 +112,7 @@ public class ThirdPartyLoginController {
             e.printStackTrace();
         }
 
-        return "redirect:http://43.254.55.177:8083/web?token=error";
+        return "redirect:"+midlandConfig.getWebSite()+"/web?token=error";
 
     }
 

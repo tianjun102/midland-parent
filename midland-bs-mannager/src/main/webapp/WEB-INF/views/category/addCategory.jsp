@@ -226,7 +226,6 @@
                 return;
             }
             var data = $("#addFrom").serialize();
-            debugger;
             $.ajax({
                 type: "post",
                 url: "${ctx}/rest/category/add",

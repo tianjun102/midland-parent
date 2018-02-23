@@ -96,7 +96,6 @@
                     async:false, // 此处必须同步
                     dataType: "json",
                     success: function(data){
-                        debugger;
                         if(data.state==0){
                             layer.msg("操作成功！",{icon:1});
                             setTimeout(function(){$("#searchForm").submit();},1000);

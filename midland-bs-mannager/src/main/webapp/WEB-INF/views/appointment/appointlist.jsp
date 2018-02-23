@@ -77,7 +77,7 @@
                              <a target="contentF" class="edit_img" title="编辑" onclick="toUpdateAppointment(${item.id})"></a>
                             </c:when>
                                 <c:otherwise>
-                                    <a target="contentF" class="see_img" title="查看" onclick="toUpdateAppointment(${item.id})"></a>
+                                    <a target="contentF" class="see_img" title="查看" onclick="to_view(${item.id})"></a>
                                 </c:otherwise>
                             </c:choose>
                         </td>
@@ -137,6 +137,15 @@
             shade: 0.3,
             area: ['100%', '100%'],
             content: ['${ctx}/rest/appoint/to_update?appointId=' + appointId,'yes']
+        });
+    }
+    function to_view(appointId) {
+       layer.open({
+            type: 2,
+            title: ['查看'],
+            shade: 0.3,
+            area: ['100%', '100%'],
+            content: ['${ctx}/rest/appoint/to_view?appointId=' + appointId,'yes']
         });
     }
 </script>

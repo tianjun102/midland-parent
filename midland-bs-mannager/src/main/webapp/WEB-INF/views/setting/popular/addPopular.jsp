@@ -75,7 +75,6 @@
 
         function showTree(event) {
             var data = $("#addFrom").serialize()+"&modeId="+$("#menuId option:selected").val();
-            debugger;
             $.ajax({
                 type: "post",
                 url: "${ctx}/rest/siteMap/choose",
@@ -182,7 +181,6 @@
             && checkSelect("source|menuId", "平台不能为空！|模块不能为空！") && checkUrl("url", "url", "网址格式不正确！")
             ) {
             var data = $("#addFrom").serialize();
-            debugger;
             $.ajax({
                 type: "post",
                 url: "${ctx}/rest/setting/addPopular",

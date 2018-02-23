@@ -138,7 +138,6 @@
             data: data,
             success: function (data) {
                 if (data.state == 0) {
-                    debugger;
                     $("#cates").html("<option  value=''>请选择</option>");
                     data.result.forEach(function (list) {
 

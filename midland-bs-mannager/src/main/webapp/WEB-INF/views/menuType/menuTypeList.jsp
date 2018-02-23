@@ -78,7 +78,6 @@
 
     //排序
     function sort(id, orderById, sort) {
-        debugger;
         var data = $("#searchForm").serialize();
         $.ajax({
             type: "post",

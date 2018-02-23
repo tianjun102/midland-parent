@@ -338,7 +338,6 @@
     };
 
     $(function () {
-        debugger;
         if(${cityName == null}){
             if (${cityList != null}){
                 $("#cityName").val("${cityList[0].name}");

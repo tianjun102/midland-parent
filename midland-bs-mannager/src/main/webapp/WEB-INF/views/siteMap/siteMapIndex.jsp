@@ -153,7 +153,6 @@
             dataType: "json",
             data: data + "&type=4",
             success: function (data) {
-                debugger;
                 var dfd = {id: 0, pId: 0, name: '分类', open: true, nocheck: true, iconSkin: "pIcon01"};
                 catProNodes = [dfd];
                 $.each(data.list, function (i, listItem) {

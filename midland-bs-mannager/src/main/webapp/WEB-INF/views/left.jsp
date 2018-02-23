@@ -338,6 +338,24 @@
 						<shiro:hasPermission name="siteMapCate">
 							<a id = "left60" href="${ctx}/rest/category/index?type=4" target="contentF"><span>网站地图分类管理</span></a>
 						</shiro:hasPermission>
+						<shiro:hasPermission name="aboutUs">
+							<a id = "left60" href="${ctx}/rest/siteProtocol/aboutUs" target="contentF"><span>关于美联</span></a>
+						</shiro:hasPermission>
+						<shiro:hasPermission name="contantUs">
+							<a id = "left60" href="${ctx}/rest/siteProtocol/contantUs" target="contentF"><span>联系我们</span></a>
+						</shiro:hasPermission>
+						<shiro:hasPermission name="privacy">
+							<a id = "left60" href="${ctx}/rest/siteProtocol/privacy" target="contentF"><span>私隐政策</span></a>
+						</shiro:hasPermission>
+						<shiro:hasPermission name="registrationProtocol">
+							<a id = "left60" href="${ctx}/rest/siteProtocol/registrationProtocol" target="contentF"><span>注册协议</span></a>
+						</shiro:hasPermission>
+						<shiro:hasPermission name="registrationProtocol">
+							<a id = "left60" href="${ctx}/rest/siteProtocol/disclaimer" target="contentF"><span>免责申明</span></a>
+						</shiro:hasPermission>
+						<shiro:hasPermission name="cornerFile">
+							<a id = "left60" href="${ctx}/rest/siteProtocol/cornerFile" target="contentF"><span>备案编号</span></a>
+						</shiro:hasPermission>
 					</dd>
 				</dl>
 			</shiro:hasPermission>

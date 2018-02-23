@@ -171,7 +171,6 @@
         function showTree(event){
             var data = $("#searchForm").serialize();
             data+="&type=1";
-            debugger;
             $.ajax({
                 type: "post",
                 url: "${ctx}/rest/siteMap/choose",

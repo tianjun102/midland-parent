@@ -72,7 +72,6 @@
                 layer.msg("发送失败，请检查手机号码！",{icon:2});
             },
             success: function (msg){
-                debugger;
                 if(msg.flag==1){
                     layer.msg("发送成功！",{icon:1});
                     $("#id").val(msg.id);

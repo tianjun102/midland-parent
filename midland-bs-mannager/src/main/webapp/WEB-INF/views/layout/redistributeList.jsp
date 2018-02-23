@@ -83,7 +83,6 @@
         var agentNo = intHot.parent().next().text();
         var agentName = intHot.parent().next().next().text();
         var agentPhone = intHot.parent().next().next().next().text();
-        debugger;
         $.ajax({
             type: "post",
             url: url,

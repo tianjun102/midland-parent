@@ -32,7 +32,7 @@
     <p id="city" style="display: inline-block;height: 28px;">
         <span>市：</span>
         <label></label> <input type="hidden" name="cityId" id="cityId" value="${cityId}" >
-        <input type="hidden" name="cityName" id="cityName">
+        <input type="hidden" name="cityName" id="cityName"  value="${cityName}">
         <select id="citys" name="citys" onchange="initCity()" style="height: 28px;width: 105px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;"  onblur="checkSelect('citys','请选择市级')">
             <c:choose>
                 <c:when test="${not empty cityName}">
@@ -60,9 +60,10 @@
 
             /*$("input[name=provinceId]").val(addrId);
             $("input[name=provinceName]").val(addName);*/
+            $("#cityId").val("");
+            $("#cityName").val("");
             if(addrId==null||addrId==""){
-                $("#cityId").val("");
-                $("#cityName").val("");
+
                 $("#citys").html("<option value='' >请选择</option>");
                 return;
             }

@@ -123,7 +123,6 @@
             var email = $("input[name='email']").val();
             var headImg = $("input[name='headImg']").val();
             var userRoles = $("input[name='userRoles']").val();
-            debugger;
 //            var userRoles = "";
 //            $('input[name="userRoles"]:checked').each(function () {
 //                userRoles += $(this).val() + ",";

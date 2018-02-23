@@ -304,20 +304,6 @@ public class QuotationSecondHandController extends BaseFilter {
 
     @RequestMapping("/export")
     public void quotationSecondHandExportExcel(QuotationSecondHand obj, HttpServletResponse response, HttpServletRequest request) throws Exception {
-//        String date = MidlandHelper.getCurrentTime();
-//        String startTime = MidlandHelper.getFormatyyMMToMonth(date, -12);
-//        if (StringUtils.isEmpty(obj.getAreaId()) && StringUtils.isEmpty(obj.getAreaName())) {
-//            obj.setAreaId("0");
-//        }
-//        if (StringUtils.isEmpty(obj.getCityId())) {
-//            obj.setCityId("085");
-//        }
-//        if (obj.getStartTime() == null) {
-//            obj.setStartTime(MidlandHelper.getFormatyyMMToMonth(date, -13));
-//        }
-//        if (obj.getEndTime() == null) {
-//            obj.setEndTime(MidlandHelper.getCurrentTime());
-//        }
         User user = MidlandHelper.getCurrentUser(request);
         if (!Contant.isSuper.equals(user.getIsSuper())) {//不是超级管理员，只能看属性城市的相关信息
             obj.setCityId(user.getCityId());
@@ -353,8 +339,8 @@ public class QuotationSecondHandController extends BaseFilter {
             List<ParamObject> quotationType = JsonMapReader.getMap("quotation_type");
 
             exportModel.setModelName3(MidlandHelper.getNameById(e.getType(), quotationType));
-            exportModel.setModelName4(String.valueOf(e.getDealNum()));
-            exportModel.setModelName5(String.valueOf(e.getPreNum()));
+            exportModel.setModelName4(String.valueOf(e.getDealNum()==null?0:e.getDealNum()));
+            exportModel.setModelName5(String.valueOf(e.getPreNum()==null?0:e.getPreNum()));
             exportModel.setModelName6(String.valueOf(e.getDealAcreage()));
             //（当前月数据-上个月数据)/上个月数据=当月环比
             Double ratio = QuotationUtil.getRatio(Double.valueOf(e.getDealNum()), Double.valueOf(e.getPreNum() == null ? 0 : e.getPreNum()));

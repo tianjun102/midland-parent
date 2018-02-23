@@ -69,7 +69,6 @@
 
         function showTree(event){
             var data="cityId="+$("#cityId").val()+"&source="+$("#source").val()+"&type="+$("#type").val();
-            debugger;
             $.ajax({
                 type: "post",
                 url: "${ctx}/rest/siteMap/choose",

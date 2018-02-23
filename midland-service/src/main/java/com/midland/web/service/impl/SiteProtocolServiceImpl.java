@@ -3,6 +3,7 @@ package com.midland.web.service.impl;
 import com.midland.web.model.SiteProtocol;
 import com.midland.web.dao.SiteProtocolMapper;
 import com.midland.web.service.SiteProtocolService;
+import com.midland.web.util.MidlandHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class SiteProtocolServiceImpl implements SiteProtocolService {
 	public void insertSiteProtocol(SiteProtocol siteProtocol) throws Exception {
 		try {
 			log.info("insert {}",siteProtocol);
+			siteProtocol.setCreateTime(MidlandHelper.getCurrentTime());
 			siteProtocolMapper.insertSiteProtocol(siteProtocol);
 		} catch(Exception e) {
 			log.error("insertSiteProtocol异常 {}",siteProtocol,e);

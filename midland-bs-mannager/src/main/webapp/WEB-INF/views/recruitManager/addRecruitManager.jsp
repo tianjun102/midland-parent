@@ -142,7 +142,6 @@
         || !checkSelect('group','请选择工作分组') ) {
             return;
         }
-        debugger;
         var data = $("#dataForm").serialize();
         $.ajax({
             type: "post",

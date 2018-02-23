@@ -61,7 +61,6 @@
 
     // 多图上传动作
     function _beforeInsertImage(t, result) {
-        debugger;
         var imageHtml = '';
         for(var i in result){
             imageHtml += '<li><img src="'+result[i].src+'" alt="'+result[i].alt+'" height="150"></li>';
@@ -71,7 +70,6 @@
 
     // 附件上传
     function _afterUpfile(t, filelist) {
-        debugger;
         var i, item, icon, title,
             html = '',
             URL = this.getOpt('UEDITOR_HOME_URL'),

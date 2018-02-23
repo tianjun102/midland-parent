@@ -198,7 +198,6 @@
 </section>
 <script type="text/javascript">
     function saveData(type) {
-        debugger;
         if (notEmpty('cateName', 'cateName', '分类名称不能为空！')) {
             if (type!=2  && type !=3 && !checkUrl('linkUrl', 'linkUrl', '网站链接格式不正确！')){
                 return;

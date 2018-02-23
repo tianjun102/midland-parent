@@ -385,7 +385,6 @@
 
     // 多图上传动作
     function _beforeInsertImage(t, result) {
-        debugger;
         var imageHtml = '';
         for(var i in result){
             imageHtml += '<img src="'+result[i].src+'" alt="'+result[i].alt+'" height="150">';

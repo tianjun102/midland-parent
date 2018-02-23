@@ -204,6 +204,19 @@ public class AppointmentController extends BaseFilter {
         model.addAttribute("pageSize", pageSize);
         return "appointment/updateAppointInfo";
     }
+ @RequestMapping("/to_view")
+    public String toViewAppointInfo(int appointId, Model model, String pageNo, String pageSize) {
+        Appointment appointment = appointmentServiceImpl.selectAppointmentById(appointId);
+        List<AppointLog> appointLogs = appointLogServiceImpl.selectAppointLogByAppointId(appointId);
+        getSelectParam(model);
+        List<ParamObject> paramObjects = JsonMapReader.getMap("decoration");
+        model.addAttribute("decorations", paramObjects);
+        model.addAttribute("appointment", appointment);
+        model.addAttribute("appointLogs", appointLogs);
+        model.addAttribute("pageNo", pageNo);
+        model.addAttribute("pageSize", pageSize);
+        return "appointment/viewAppointInfo";
+    }
 
 
     @RequestMapping("/update")

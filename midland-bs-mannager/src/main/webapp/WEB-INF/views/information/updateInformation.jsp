@@ -54,7 +54,6 @@
         function showTree(event) {
             var data = $("#formId").serialize();
             data+="&type=1";
-            debugger;
             $.ajax({
                 type: "post",
                 url: "${ctx}/rest/siteMap/choose",
