@@ -60,33 +60,29 @@ public class SecurityRealm extends AuthorizingRealm {
         Map userMap = (Map) JSONObject.parse(data);
         if (userMap != null) {
             if (("SUCCESS").equals(userMap.get("STATE"))) {
-                final List<Role> roleInfos1 = roleService.selectRolesByUserId("88888");
-                for (Role role1 : roleInfos1) {
-                    authorizationInfo.addRole(role1.getRoleSign());
-
-                    final List<Permission> permissions1 = permissionService.selectPermissionsByRoleId(role1.getId());
-                    for (Permission permission : permissions1) {
-                        // 添加权限
-                        authorizationInfo.addStringPermission(permission.getPermissionSign());
-                    }
-                }
-                return authorizationInfo;
+                final List<Role> roleInfos = roleService.selectRolesByUserId("88888");
+                return getAuthorizationInfo(authorizationInfo, roleInfos);
 
             }
         }
 
         final User user = userService.selectByUsername(username);
         final List<Role> roleInfos = roleService.selectRolesByUserId(user.getId());
-        for (Role role : roleInfos) {
-            // 添加角色
-//            System.err.println(role);
-            authorizationInfo.addRole(role.getRoleSign());
+        return getAuthorizationInfo(authorizationInfo, roleInfos);
+    }
 
-            final List<Permission> permissions = permissionService.selectPermissionsByRoleId(role.getId());
-            for (Permission permission : permissions) {
+    private AuthorizationInfo getAuthorizationInfo(SimpleAuthorizationInfo authorizationInfo, List<Role> roleInfos) {
+        for (Role role1 : roleInfos) {
+            authorizationInfo.addRole(role1.getRoleSign());
+
+            List<Permission> permissions1 = permissionService.selectPermissionsByRoleId(role1.getId());
+            for (Permission permission : permissions1) {
                 // 添加权限
-//                System.err.println(permission);
                 authorizationInfo.addStringPermission(permission.getPermissionSign());
+
+            }
+            if ("admin".equals(role1.getRoleSign())){
+                authorizationInfo.addStringPermission("rolelist");
             }
         }
         return authorizationInfo;

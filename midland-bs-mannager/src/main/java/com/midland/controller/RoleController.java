@@ -237,8 +237,9 @@ public class RoleController extends BaseFilter {
     @RequestMapping(value = "toAllocation", method = {RequestMethod.GET, RequestMethod.POST})
     public String allocation(Integer roleId, Model model) {
         if (roleId != null) {
-            String fmtData = this.permiTree(roleId);
             Role role = roleService.selectById(roleId);
+            String fmtData = this.permiTree(roleId,role.getRoleSign());
+
             model.addAttribute("dataFmt", fmtData);
             model.addAttribute("roles", role);
             model.addAttribute("defaultUrl", "content");
@@ -352,7 +353,7 @@ public class RoleController extends BaseFilter {
 	}*/
 
 
-    private String permiTree(Integer roleId) {
+    private String permiTree(Integer roleId,String roleSign) {
         // 避免数据库中存在换行符,进行菜单文字的过滤
         String replaceStr = "(\r\n|\r|\n|\n\r)";
         StringBuffer ret = new StringBuffer(""), retSon = new StringBuffer("");
@@ -361,6 +362,7 @@ public class RoleController extends BaseFilter {
             rp.setRoleId(roleId);
             // 获取所有该角色已有的权限
             List<RolePermission> rolePermission = roleService.getListPermission(rp);
+
             // 封装菜单级别信息,
             List<Permission> list = roleService.getPermissions();
 
@@ -369,6 +371,7 @@ public class RoleController extends BaseFilter {
                 if (dto.getPermissionType().compareTo(0) == 0) {
                     boolean hasParentAuth = false;
                     for (RolePermission e : rolePermission) {
+
                         if (e.getPermissionId().compareTo(dto.getId()) == 0) {
                             hasParentAuth = true;
                             break;
@@ -381,6 +384,9 @@ public class RoleController extends BaseFilter {
                     List<Permission> childAuth = dto.getPermissionList();
                     if (childAuth != null && childAuth.size() > 0) {
                         for (Permission childE : childAuth) {
+                            if ("admin".equals(roleSign)&&"rolelist".equals(childE.getPermissionSign())){
+                                continue;
+                            }
                             if (childE != null) {
                                 boolean hasChildAuth = false;
                                 for (RolePermission e : rolePermission) {
