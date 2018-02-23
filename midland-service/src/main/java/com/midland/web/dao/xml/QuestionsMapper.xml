@@ -289,6 +289,9 @@
         <if test="id != null">
             and id = #{id}
         </if>
+        <if test="keyWord != null and keyWord !=''">
+            and (questions_title like '%${keyWord}%' or questions_area like '%${keyWord}%')
+        </if>
         <if test="questionsTitle != null and questionsTitle !=''">
             and questions_title like '%${questionsTitle}%'
         </if>

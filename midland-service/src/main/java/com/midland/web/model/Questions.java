@@ -104,7 +104,18 @@ public class Questions {
      * 0按时间降序拍，1按点击降序排
      */
     private Integer sort;
+    /**
+     * 关键词
+     */
+    private String keyWord;
 
+    public String getKeyWord() {
+        return keyWord;
+    }
+
+    public void setKeyWord(String keyWord) {
+        this.keyWord = keyWord;
+    }
 
     public Integer getSort() {
         return sort;
