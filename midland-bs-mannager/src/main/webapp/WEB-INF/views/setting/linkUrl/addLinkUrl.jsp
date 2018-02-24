@@ -46,8 +46,7 @@
             <li>
                 <span style="float:left;">模块：</span>
                 <input type="hidden" name="modeName" id="modeName">
-                <select name="modeId" id="modeId"
-                        style="height: 28px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                <select name="modeId" id="modeId" style="height: 28px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option value="0">首页</option>
                     <option value="1">新房</option>
                     <option value="2">二手房</option>
@@ -96,6 +95,11 @@
                 data: data,
                 success: function (data) {
                     if (data.flag == 1) {
+                        var test = window.location.href;
+                        setCookie("cityId",$("#cityId").val(),test);
+                        setCookie("cityName",$("#cityName").val(),test);
+                        setCookie("modeName",$("#modeName").val(),test);
+                        setCookie("modeId",$("#modeId").val(),test);
                         layer.msg("新增成功！！！", {icon: 1});
                         $('#save').removeAttr("onclick");
                         setTimeout(function () {
@@ -123,6 +127,23 @@ $("#modeId").change(function () {
     $("#modeName").val($("#modeId").find("option:selected").text());
 })
     $(function () {
+        var test = window.location.href;
+        //设置城市选择的cookie
+        var cityId = getCookie("cityId",test);
+        var cityName = getCookie("cityName",test);
+        var modeId = getCookie("modeId",test);
+        var modeName = getCookie("modeName",test);
+        if ($("#cityName").val()==''){
+            $("#cityName").val( $("#cityId option:selected").text());
+        }
+        if (cityId !=''){
+            $("#cityId").val(cityId);
+            $("#cityName").val(cityName);
+        }
+        if(modeId !=''){
+            $("#modeId").val(modeId);
+            $("#modeName").val(modeName);
+        }
         if ($("#modeName").val()==''){
             $("#modeName").val("首页");
         }
@@ -144,24 +165,8 @@ $("#modeId").change(function () {
         var addrId = $("#provinces option:selected").val();
         var addName = $("#provinces option:selected").text();
         $("#districts").html("<option  >请选择</option>");
-        /*if ("请选择" == addName) {
-            //下级改变成请选择
-            $("#citys option:selected").text(addName);
-            $("#districts option:selected").text(addName);
-            $("#citys").html("<option  >请选择</option>");
-
-            $("input[name=provinceId]").val("");
-            $("input[name=provinceName]").val("");
-            $("input[name='cityId']").val("");
-            $("input[name='cityName']").val("");
-            $("input[name='distId']").val("");
-            $("input[name='distName']").val("");
-            return;
-        }*/
         $("input[name=provinceId]").val(addrId);
         $("input[name=provinceName]").val(addName);
-
-
         $.ajax({
             type : "post",
             url : "${ctx}/rest/setting/seleAddress?flag=city&id=" + addrId,

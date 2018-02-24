@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <script type="text/javascript" src="${ctx}/assets/scripts/jquery.min.js"></script>
+<script type="text/javascript" src="${ctx}/assets/scripts/cookie.js"></script>
 <script type="text/javascript" src="${ctx}/assets/plugins/jquery-validation/lib/jquery.form.js"></script>
 <script type="text/javascript" src="${ctx}/assets/scripts/jquery.easydropdown.js" ></script>
 <script type="text/javascript" src="${ctx}/assets/scripts/bootstrap.min.js"></script>
