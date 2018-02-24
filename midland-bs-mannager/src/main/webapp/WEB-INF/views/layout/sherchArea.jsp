@@ -31,8 +31,8 @@
     <p id="city" style="display: inline-block;height: 27px;">
         <span>市：</span>
         <label></label>
-        <input type="hidden" name="cityId" value="${cityId}">
-        <input type="hidden" name="cityName" value="${cityName}">
+        <input type="hidden" id="cityId"  name="cityId" value="${cityId}">
+        <input type="hidden" id="cityName" name="cityName" value="${cityName}">
         <select id="citys" onchange="initCity()" <c:if test="${not empty isSuper}">style="height: 28px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;"</c:if>
                 <c:if test="${empty isSuper}">style="height: 28px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;background-color: #dddfe2;" disabled="disabled"</c:if>>
             <option value="">请选择</option>
@@ -45,13 +45,10 @@
     function initProvince() {
         var addrId = $("#provinces option:selected").val();
         var addName = $("#provinces option:selected").text();
-        /*$("#districts").html("<option  >请选择</option>");*/
-
-        /*$("input[name=provinceId]").val(addrId);
-        $("input[name=provinceName]").val(addName);*/
+        $("#cityId").val("");
+        $("#cityName").val("");
         if (addrId == null || addrId == "") {
-            $("#cityId").val("");
-            $("#cityName").val("");
+
             $("#citys").html("<option value=''>请选择</option>");
             return;
         }
