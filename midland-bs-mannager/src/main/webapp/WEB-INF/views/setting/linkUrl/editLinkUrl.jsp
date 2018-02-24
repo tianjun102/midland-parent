@@ -119,6 +119,12 @@
     $("#modeId").change(function () {
         $("#modeName").val($("#modeId").find("option:selected").text());
     })
+    $(function () {
+        debugger;
+        if ($("#modeId").val()==0){
+            $("#modeName").val("首页");
+        }
+    })
 
     //取消
     function closeWin() {

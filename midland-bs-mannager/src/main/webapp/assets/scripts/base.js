@@ -95,7 +95,6 @@ function ajaxGet(url, target, callback) {
 function submitSearchRequest(formId,target){
     var pageNo = GetQueryString("pageNo",$("#"+target).attr("url"));
     var pageSize = GetQueryString("pageSize",$("#"+target).attr("url"));
-    debugger;
     $("#"+formId+" input[type='text']").each(function(){
         $(this).val($.trim($(this).val()).replace(new RegExp("'","gm"),"").replace(new RegExp("%","gm"),""));
     });

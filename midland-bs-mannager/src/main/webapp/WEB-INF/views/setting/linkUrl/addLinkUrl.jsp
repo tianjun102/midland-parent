@@ -122,86 +122,11 @@
 $("#modeId").change(function () {
     $("#modeName").val($("#modeId").find("option:selected").text());
 })
-
-    function checkUserName() {
-        var regUserName = /^[a-zA-Z0-9_]{6,20}$/;
-        var userName = $("#username").val();
-        if (userName == null || userName.trim() == "") {
-            //$("#userNameCheck").text("用户名不能为空！");
-            layer.tips("用户名不能为空！", "input[name='username']", {tips: 1});
-            return false;
+    $(function () {
+        if ($("#modeName").val()==''){
+            $("#modeName").val("首页");
         }
-        if (!regUserName.test(userName.trim())) {
-            layer.tips("仅支持英文、数字和下划线,长度为6-20个字符！", "input[name='username']", {tips: 1});
-            return false;
-        }
-        var a = true;
-        $.ajax({
-            type: "post",
-            url: "${ctx }/rest/user/checkUnique",
-            async: false, // 此处必须同步
-            dataType: "json",
-            data: {"userName": userName},
-            success: function (xmlobj) {
-                if (xmlobj.flag == 1) {
-                    layer.tips("该用户已存在！", "input[name='username']", {tips: 1});
-                    a = false;
-                } else {
-
-                    a = true;
-                }
-            }
-        });
-        return a;
-    }
-
-    //检查手机号格式
-    function checkPhone() {
-        var reg = /^1[3,4,5,7,8]\d{9}$/;
-        var phone = $("input[name='phone']").val();
-        if (phone.trim() == '') {
-            layer.tips("手机号不能为空！", "input[name='phone']", {tips: 3});
-            return false;
-        }
-        if (!reg.test(phone)) {
-            layer.tips("手机号格式有误,请核对!", "input[name='phone']", {tips: 3});
-            $("input[name='phone']").focus();
-            return false;
-        }
-        var a = true;
-        $.ajax({
-            type: "post",
-            url: "${ctx }/rest/user/checkPhoneUnique",
-            async: false, // 此处必须同步
-            dataType: "json",
-            data: {"phone": phone},
-            success: function (xmlobj) {
-                if (xmlobj.flag == 1) {
-                    layer.tips("当前手机号码已被使用，请更换手机号码！", "input[name='phone']", {tips: 1});
-                    a = false;
-                } else {
-                    a = true;
-                }
-            }
-        });
-        return a;
-    }
-
-    //检查邮箱格式
-    function checkEmail() {
-        var reg = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        var email = $("input[name='email']").val();
-        if (email.trim() == '') {
-            //layer.tips("邮箱不能为空！", "input[name='email']",{tips:3});
-            return true;
-        }
-        if (!reg.test(email)) {
-            layer.tips("邮箱格式有误,请核对!", "input[name='email']", {tips: 3});
-            $("input[name='email']").focus();
-            return false;
-        }
-        return true;
-    }
+    })
 
     //取消
     function closeWin() {
