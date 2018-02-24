@@ -34,6 +34,9 @@ function urlreplace(url,paramname,paramvalue){
     return url;
 }
 function setPage(pageNo,targets,pageSize){
+    if(pageSize==undefined) {
+        pageSize = $("#pageSize").val();
+    }
     if(targets==''||targets=='null'){
         alert('TODO');
     }else{
@@ -91,6 +94,8 @@ function ajaxGet(url, target, callback) {
 }
 function submitSearchRequest(formId,target){
     var pageNo = GetQueryString("pageNo",$("#"+target).attr("url"));
+    var pageSize = GetQueryString("pageSize",$("#"+target).attr("url"));
+    debugger;
     $("#"+formId+" input[type='text']").each(function(){
         $(this).val($.trim($(this).val()).replace(new RegExp("'","gm"),"").replace(new RegExp("%","gm"),""));
     });
@@ -99,6 +104,9 @@ function submitSearchRequest(formId,target){
     url=getRandedURL(url);
     if(pageNo!=null){
         url = url+"&pageNo="+pageNo;
+    }
+    if (pageSize!=null){
+        url = url+"&pageSize="+pageSize;
     }
     $.get(url,formSerialize,function(data, textStatus) {
         commonSuccessCallback(target,data);
