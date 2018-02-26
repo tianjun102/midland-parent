@@ -1,5 +1,8 @@
 package com.midland.web.model;
 
+/**
+ * 反馈
+ */
 public class Feedback {
     /**
      * 反馈信息表

@@ -1,6 +1,8 @@
 package com.midland.web.model;
 
-
+/**
+ * 热门关注
+ */
 public class Popular {
     /**
      * 热门关注配置表id 主键

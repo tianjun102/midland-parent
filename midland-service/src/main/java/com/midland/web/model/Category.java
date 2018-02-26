@@ -3,6 +3,9 @@ package com.midland.web.model;
 
 import java.util.List;
 
+/**
+ * 分类
+ */
 public class Category {
     /**
      *

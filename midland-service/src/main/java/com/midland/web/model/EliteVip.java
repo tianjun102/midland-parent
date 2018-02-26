@@ -1,6 +1,8 @@
 package com.midland.web.model;
 
-
+/**
+ * 精英会vip
+ */
 public class EliteVip {
     /**
      *

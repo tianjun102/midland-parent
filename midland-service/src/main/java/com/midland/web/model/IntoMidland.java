@@ -1,6 +1,8 @@
 package com.midland.web.model;
 
-
+/**
+ * 走进美联
+ */
 public class IntoMidland {
     /**
      * 招聘管理表主键id

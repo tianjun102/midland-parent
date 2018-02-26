@@ -1,6 +1,8 @@
 package com.midland.web.model;
 
-
+/**
+ * 新手房
+ */
 public class Quotation {
     /**
      * 行情表，主键

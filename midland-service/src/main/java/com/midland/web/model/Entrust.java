@@ -1,6 +1,8 @@
 package com.midland.web.model;
 
-
+/**
+ * 委托记录
+ */
 public class Entrust {
     /**
      * 委托表主键id；

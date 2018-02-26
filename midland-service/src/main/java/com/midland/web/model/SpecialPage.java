@@ -1,6 +1,8 @@
 package com.midland.web.model;
 
-
+/**
+ * 特殊页面配置
+ */
 public class SpecialPage {
     /**
      * 特殊页面配置表；id主键

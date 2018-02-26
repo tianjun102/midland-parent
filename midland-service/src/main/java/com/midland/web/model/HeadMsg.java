@@ -1,5 +1,8 @@
 package com.midland.web.model;
 
+/**
+ * 系统公告
+ */
 public class HeadMsg {
     /**
      *

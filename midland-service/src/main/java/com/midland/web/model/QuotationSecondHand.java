@@ -1,5 +1,8 @@
 package com.midland.web.model;
 
+/**
+ * 二手房
+ */
 public class QuotationSecondHand {
     /**
      * 行情表，主键

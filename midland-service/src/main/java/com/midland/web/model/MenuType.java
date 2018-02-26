@@ -1,6 +1,8 @@
 package com.midland.web.model;
 
-
+/**
+ * 菜单类型(微站)
+ */
 public class MenuType {
     /**
      * parent_id为0时是根节点

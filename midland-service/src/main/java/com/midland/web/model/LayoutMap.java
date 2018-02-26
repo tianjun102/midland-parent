@@ -1,6 +1,8 @@
 package com.midland.web.model;
 
-
+/**
+ * 热卖一手户型分布
+ */
 public class LayoutMap {
     /**
      * 户型分布图

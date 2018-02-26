@@ -1,6 +1,8 @@
 package com.midland.web.model;
 
-
+/**
+ * 消息中心
+ */
 public class CenterMsg{
 	/**
 	 * 消息中心主键

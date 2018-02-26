@@ -1,5 +1,8 @@
 package com.midland.web.model;
 
+/**
+ * 招聘管理
+ */
 public class RecruitManager {
     /**
      * 招聘管理表id

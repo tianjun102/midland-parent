@@ -1,6 +1,8 @@
 package com.midland.web.model;
 
-
+/**
+ * 热门搜索
+ */
 public class HotSearch {
     /**
      *

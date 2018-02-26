@@ -1,6 +1,8 @@
 package com.midland.web.model;
 
-
+/**
+ * 二维码
+ */
 public class QrCode {
     /**
      * id 二维码管理表

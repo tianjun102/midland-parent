@@ -1,5 +1,8 @@
 package com.midland.web.model;
 
+/**
+ * 简历投递
+ */
 public class ResumeManager {
     /**
      * 简历管理主键id

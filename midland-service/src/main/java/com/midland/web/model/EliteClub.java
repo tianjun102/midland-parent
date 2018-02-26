@@ -1,5 +1,8 @@
 package com.midland.web.model;
 
+/**
+ * 精英会活动表
+ */
 public class EliteClub {
     /**
      * 精英会主键id

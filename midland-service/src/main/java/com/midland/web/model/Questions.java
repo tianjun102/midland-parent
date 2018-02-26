@@ -3,6 +3,9 @@ package com.midland.web.model;
 
 import java.util.List;
 
+/**
+ * 问题
+ */
 public class Questions {
     /**
      * 问题主键

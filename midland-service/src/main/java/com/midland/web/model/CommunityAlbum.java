@@ -1,6 +1,8 @@
 package com.midland.web.model;
 
-
+/**
+ * 小区图片
+ */
 public class CommunityAlbum {
     /**
      * 小区图片表

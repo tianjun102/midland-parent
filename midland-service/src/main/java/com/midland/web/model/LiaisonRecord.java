@@ -1,5 +1,8 @@
 package com.midland.web.model;
 
+/**
+ * 联络记录
+ */
 public class LiaisonRecord {
     /**
      * 联络记录表id

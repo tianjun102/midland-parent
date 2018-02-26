@@ -4,6 +4,9 @@ package com.midland.web.model;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 网站地图
+ */
 public class SiteMap {
     /**
      * 网站地图主键id

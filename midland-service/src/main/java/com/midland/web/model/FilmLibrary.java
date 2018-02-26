@@ -1,6 +1,8 @@
 package com.midland.web.model;
 
-
+/**
+ * 片库
+ */
 public class FilmLibrary {
     /**
      * 片库id

@@ -1,6 +1,8 @@
 package com.midland.web.model;
 
-
+/**
+ * 回答
+ */
 public class Answer {
     /**
      * 回答表主键ID

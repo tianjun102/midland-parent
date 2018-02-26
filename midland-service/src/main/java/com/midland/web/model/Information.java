@@ -1,5 +1,8 @@
 package com.midland.web.model;
 
+/**
+ * 资讯,市场研究
+ */
 public class Information {
     /**
      * 资讯表，主键

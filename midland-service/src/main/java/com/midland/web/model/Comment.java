@@ -1,6 +1,8 @@
 package com.midland.web.model;
 
-
+/**
+ * 评论
+ */
 public class Comment {
     /**
      * 资讯评论表id

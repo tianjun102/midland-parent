@@ -1,6 +1,8 @@
 package com.midland.web.model;
 
-
+/**
+ * 联络邮箱管理
+ */
 public class LiaisonRecordEmail {
     /**
      *

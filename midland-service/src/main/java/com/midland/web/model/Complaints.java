@@ -1,5 +1,8 @@
 package com.midland.web.model;
 
+/**
+ * 投诉
+ */
 public class Complaints {
     /**
      * 投诉意见表

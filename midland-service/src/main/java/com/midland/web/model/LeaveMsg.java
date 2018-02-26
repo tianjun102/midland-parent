@@ -1,6 +1,8 @@
 package com.midland.web.model;
 
-
+/**
+ * 留言
+ */
 public class LeaveMsg {
     /**
      * 留言表主键

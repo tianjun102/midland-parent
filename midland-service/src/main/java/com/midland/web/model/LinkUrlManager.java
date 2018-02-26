@@ -1,6 +1,8 @@
 package com.midland.web.model;
 
-
+/**
+ * 友情链接
+ */
 public class LinkUrlManager {
     /**
      * 链接关联表

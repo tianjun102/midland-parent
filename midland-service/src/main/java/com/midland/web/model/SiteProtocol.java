@@ -1,6 +1,8 @@
 package com.midland.web.model;
 
-
+/**
+ * 网站协议
+ */
 public class SiteProtocol{
 	/**
 	 * 

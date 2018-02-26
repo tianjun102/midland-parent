@@ -1,5 +1,8 @@
 package com.midland.web.model;
 
+/**
+ * 轮播图
+ */
 public class Banner {
     /**
      *

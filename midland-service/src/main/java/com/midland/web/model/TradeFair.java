@@ -3,6 +3,9 @@ package com.midland.web.model;
 
 import java.util.List;
 
+/**
+ * 楼盘展销会
+ */
 public class TradeFair {
     /**
      * 楼盘展销会主键id

@@ -1,5 +1,8 @@
 package com.midland.web.model;
 
+/**
+ * 预约日志
+ */
 public class AppointLog {
     /**
      *

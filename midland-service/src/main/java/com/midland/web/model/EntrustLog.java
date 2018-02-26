@@ -1,5 +1,8 @@
 package com.midland.web.model;
 
+/**
+ * 委托日志
+ */
 public class EntrustLog {
     /**
      *

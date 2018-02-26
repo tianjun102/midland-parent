@@ -1,6 +1,8 @@
 package com.midland.web.model;
 
-
+/**
+ * 关注表
+ */
 public class Attention {
     /**
      *

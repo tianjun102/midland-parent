@@ -1,6 +1,8 @@
 package com.midland.web.model;
 
-
+/**
+ * 菜单
+ */
 public class Menu {
     /**
      * 菜单表主键

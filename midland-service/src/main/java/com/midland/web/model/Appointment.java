@@ -1,6 +1,8 @@
 package com.midland.web.model;
 
-
+/**
+ * 预约记录
+ */
 public class Appointment {
     /**
      * 预约记录表ID，采用自增长
