@@ -114,7 +114,6 @@ public class EntrustRestController extends ServiceBaseFilter {
 		Result result=new Result();
 		try {
 			log.info("addEntrust {}",obj);
-			getHouseSourceFromDingJian(obj.getHouseType(),obj.getHouseId());
 			obj.setEntrustTime(MidlandHelper.getCurrentTime());
 			obj.setResetFlag(1);
 			obj.setEntrustSn(publicServiceImpl.getCode(Contant.ENTRUST_SN_KEY,"E"));
@@ -132,19 +131,6 @@ public class EntrustRestController extends ServiceBaseFilter {
 				}
 			}
 			entrustServiceImpl.insertEntrust(obj);
-			//发送给经纪人的短信：模板56849，内容：您好{1},官网收到委托放盘，{1}{2}{3}，现已分配由您跟进，请尽快与客户进行联系，助您成交！
-			List<String> param = new ArrayList<>();
-			param.add(obj.getNickName());
-			param.add(obj.getNickName());
-			param.add(obj.getNickName());
-			apiHelper.smsSender(obj.getAgentPhone(),Contant.SMS_TEMPLATE_56849,param);
-
-			//发送给预约人的短信：模板id56848，内容：您好！您提交的看房日程由{1}电话{2}帮您带看，该经纪人会尽快联系您安排看房，请保持电话畅通，感谢！
-			List<String> param1 = new ArrayList<>();
-			param1.add(obj.getAgentName());
-			param1.add(obj.getAgentPhone());
-			apiHelper.smsSender(obj.getPhone(),Contant.SMS_TEMPLATE_56848,param1);
-
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
 		} catch(Exception e) {
@@ -154,27 +140,6 @@ public class EntrustRestController extends ServiceBaseFilter {
 		}
 		return result;
 	}
-
-	public void getHouseSourceFromDingJian(Integer houseType,String houseId){
-//		//   0新房，1二手房，2租房，3写字楼，4商铺，5其它
-//		Map map = new HashMap();
-//		map.put("id",houseId);
-//		if (houseType==0){
-//			String data = HttpUtils.get(midlandConfig.getNewhouse(), map);
-//			List<Area> areaList = MidlandHelper.getPojoList(data, Area.class);
-//		}else if (houseType == 1){
-//
-//		}else if (houseType == 2){
-//
-//		}else if (houseType == 3){
-//
-//		}else if (houseType == 4){
-//
-//		}else if (houseType == 5){
-//
-//		}
-	}
-
 
 	/**
 	 * 查询

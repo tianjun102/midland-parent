@@ -114,7 +114,7 @@ public class Contant {
     /**
      * 短信模板
      */
-    public static final int SMS_TEMPLATE_56849 = 56849;
+    public static final int SMS_TEMPLATE_89262 = 89262;
     public static final int SMS_TEMPLATE_56848 = 56848;
     public static final int SMS_TEMPLATE_56846 = 56846;
     public static final int SMS_TEMPLATE_56845 = 56845;
