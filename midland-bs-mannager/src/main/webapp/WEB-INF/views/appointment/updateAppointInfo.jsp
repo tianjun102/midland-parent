@@ -117,7 +117,7 @@
     function updateData() {
         if (notEmpty('nickName', 'nickName', '') && checkPhone('', 'phone', '')) {
             var data = $("#appointInfoForm").serialize();
-
+debugger
             $.ajax({
                 type: "post",
                 url: "${ctx}/rest/appoint/update",

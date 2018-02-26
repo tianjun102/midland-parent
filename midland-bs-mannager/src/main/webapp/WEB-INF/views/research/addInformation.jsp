@@ -329,7 +329,7 @@
             'onUploadSuccess': function (file, data, response) {
                 console.log(data);
                 $("#imgUrl").attr("value", data);
-                $("#iconImg2").attr("src", "${fileUrl}"+data);
+                $("#iconImg2").attr("src", data);
             },
             'onQueueComplete': function (queueData) {
                 if (queueData.uploadsSuccessful < 1) {

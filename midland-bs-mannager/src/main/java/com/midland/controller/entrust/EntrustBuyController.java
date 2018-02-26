@@ -8,10 +8,7 @@ import com.midland.config.MidlandConfig;
 import com.midland.web.Contants.Contant;
 import com.midland.web.api.ApiHelper;
 import com.midland.web.enums.ContextEnums;
-import com.midland.web.model.CenterMsg;
-import com.midland.web.model.Entrust;
-import com.midland.web.model.EntrustLog;
-import com.midland.web.model.ExportModel;
+import com.midland.web.model.*;
 import com.midland.web.model.user.User;
 import com.midland.web.service.CenterMsgService;
 import com.midland.web.service.EntrustLogService;
@@ -196,10 +193,13 @@ public class EntrustBuyController extends ServiceBaseFilter {
             StringBuilder msg = new StringBuilder();
             List<ParamObject> mapre = JsonMapReader.getMap("decoration");
             ParamObject object = JsonMapReader.getObject("decoration", entrust.getRenovation());
-            msg.append("你意向小区").append(entrust.getCommunityName()).append(",").append(entrust.getLayout()).append(",").append("意向面积").append(entrust.getMeasure()).append(",").append(object.getName()).append("的买房委托").append(entrust.getAgentName()).append("经纪人已受理，前去");
+            Entrust app=selectByPrimaryKey(entrust.getId());
+            msg.append("你意向小区").append(app.getCommunityName()).append(",").append(app.getLayout()).append(",").append("意向面积").append(app.getMeasure()).append(",").append(app.getRenovation()).append("房的预约").append(app.getAgentName()).append("经纪人已受理，前去");
             if (StringUtils.isNotEmpty(oldStatus) && Integer.valueOf(oldStatus) == entrust.getStatus()) {
                 CenterMsg centermsg = new CenterMsg();
-                centermsg.setType(4);
+                centermsg.setUserId(app.getUserId());
+                centermsg.setOtherUserId(app.getAgentId());
+                centermsg.setType(3);
                 centermsg.setJumpId(entrust.getId().toString());
                 centermsg.setTitle(Contant.APPOINT_TITLE.replace("||", entrust.getAgentName() == null ? "" : entrust.getAgentName()));
                 centermsg.setMsg(msg.toString());
@@ -251,6 +251,18 @@ public class EntrustBuyController extends ServiceBaseFilter {
             record.setResetFlag(0);//重新分配经纪人后，隐藏“重新分配按钮”
             record.setAssignedTime(MidlandHelper.getCurrentTime());
             entrustServiceImpl.updateEntrustById(record);
+//发送给经纪人的短信：模板56849，内容：您好{1},官网收到委托放盘，{1}{2}{3}，现已分配由您跟进，请尽快与客户进行联系，助您成交！
+            List<String> param = new ArrayList<>();
+            param.add(record.getNickName());
+            param.add(record.getCommunityName());
+            param.add(record.getLayout());
+            apiHelper.smsSender("18825234000",Contant.SMS_TEMPLATE_56849,param);
+
+            //发送给预约人的短信：模板id56848，内容：您好！您提交的看房日程由{1}电话{2}帮您带看，该经纪人会尽快联系您安排看房，请保持电话畅通，感谢！
+            List<String> param1 = new ArrayList<>();
+            param1.add(record.getAgentName());
+            param1.add(record.getAgentPhone());
+            apiHelper.smsSender("18825234000",Contant.SMS_TEMPLATE_56848,param1);
 
             map.put("state", 0);
         } catch (Exception e) {

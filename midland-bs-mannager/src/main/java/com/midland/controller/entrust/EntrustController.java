@@ -278,9 +278,22 @@ public class EntrustController extends ServiceBaseFilter {
         logger.info("resetAgent ： 重新分配经纪人，{}", record);
         Map map = new HashMap();
         try {
+            Entrust obj = selectByPrimaryKey(record.getId());
             record.setResetFlag(0);//重新分配经纪人后，隐藏“重新分配按钮”
             record.setAssignedTime(MidlandHelper.getCurrentTime());
             entrustServiceImpl.updateEntrustById(record);
+            //发送给经纪人的短信：模板56849，内容：您好{1},官网收到委托放盘，{1}{2}{3}，现已分配由您跟进，请尽快与客户进行联系，助您成交！
+            List<String> param = new ArrayList<>();
+            param.add(obj.getNickName()==null?"":obj.getNickName());
+            param.add(obj.getCommunityName()==null?"":obj.getCommunityName());
+            param.add(obj.getLayout()==null?"":obj.getLayout());
+            apiHelper.smsSender(record.getAgentPhone(),Contant.SMS_TEMPLATE_56849,param);
+
+            //发送给预约人的短信：模板id56848，内容：您好！您提交的看房日程由{1}电话{2}帮您带看，该经纪人会尽快联系您安排看房，请保持电话畅通，感谢！
+            List<String> param1 = new ArrayList<>();
+            param1.add(record.getAgentName()==null?"":record.getAgentName());
+            param1.add(record.getAgentPhone()==null?"":record.getAgentPhone());
+            apiHelper.smsSender(obj.getPhone(),Contant.SMS_TEMPLATE_56848,param1);
 
             map.put("state", 0);
         } catch (Exception e) {

@@ -104,7 +104,7 @@
             'onUploadSuccess': function (file, data, response) {
                 console.log(data);
                 $("#urlImg").attr("value", data);
-                $("#iconImg1").attr("src", "${fileUrl}"+data);
+                $("#iconImg1").attr("src", data);
             },
             'onQueueComplete': function (queueData) {
                 if (queueData.uploadsSuccessful < 1) {

@@ -70,7 +70,7 @@
             <tr>
                 <td><input type="checkbox" name="pid" value="${banner.id}"></td>
                 <td>${xh.count}</td>
-                <td><img style="height: 36px;" src="${fileUrl}${banner.bannerImg}" class="suo"/></td>
+                <td><img style="height: 36px;" src="${banner.bannerImg}" class="suo"/></td>
                 <td><c:if test="${banner.enabled =='1'}">开放</c:if><c:if test="${banner.enabled =='0'}">关闭</c:if></td>
                 <td>${banner.cityName}</td>
                 <td><c:if test="${banner.source =='0'}">网站</c:if><c:if test="${banner.source =='1'}">微站</c:if></td>

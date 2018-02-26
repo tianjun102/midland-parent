@@ -226,11 +226,12 @@ public class AppointmentController extends BaseFilter {
         try {
             String oldStatus = request.getParameter("oldStatus");
             StringBuilder msg = new StringBuilder();
-            List<ParamObject> mapre = JsonMapReader.getMap("decoration");
-            ParamObject object = JsonMapReader.getObject("decoration", record.getDecoration());
-            msg.append("你意向小区").append(record.getCommunityName()).append(",").append(record.getLayout()).append(",").append("意向面积").append(record.getMeasure()).append(",").append(object.getName()).append("的预约").append(record.getAgentName()).append("经纪人已受理，前去");
+            Appointment app=selectByPrimaryKey(record.getId());
+            msg.append("你意向小区").append(app.getCommunityName()).append(",").append(app.getLayout()).append(",").append("意向面积").append(app.getMeasure()).append(",").append(app.getDecoration()).append("房的预约").append(app.getAgentName()).append("经纪人已受理，前去");
             if (StringUtils.isNotEmpty(oldStatus) && Integer.valueOf(oldStatus) == record.getStatus()) {
                 CenterMsg centermsg = new CenterMsg();
+                centermsg.setUserId(app.getUserId());
+                centermsg.setOtherUserId(app.getAgentId());
                 centermsg.setType(3);
                 centermsg.setJumpId(record.getId().toString());
                 centermsg.setTitle(Contant.APPOINT_TITLE.replace("||", record.getAgentName() == null ? "" : record.getAgentName()));
