@@ -288,8 +288,8 @@ public class EntrustController extends ServiceBaseFilter {
             param.add(obj.getCommunityName()==null?"":obj.getCommunityName());
             param.add(obj.getNickName()==null?"":obj.getNickName());
             param.add(obj.getPhone()==null?"":obj.getPhone());
-           apiHelper.smsSender("18825234000",Contant.SMS_TEMPLATE_89262,param);
-//            apiHelper.smsSender(record.getAgentPhone(),Contant.SMS_TEMPLATE_89262,param);
+//           apiHelper.smsSender("13537670669",Contant.SMS_TEMPLATE_89262,param);
+            apiHelper.smsSender(record.getAgentPhone(),Contant.SMS_TEMPLATE_89262,param);
 
             //发送给预约人的短信：模板id56848，内容：您好！您提交的看房日程由{1}电话{2}帮您带看，该经纪人会尽快联系您安排看房，请保持电话畅通，感谢！
             List<String> param1 = new ArrayList<>();
