@@ -284,11 +284,12 @@ public class EntrustController extends ServiceBaseFilter {
             entrustServiceImpl.updateEntrustById(record);
             //发送给经纪人的短信：模板56849，内容：您好{1}(经纪人姓名),官网收到委托放盘，{1}(楼盘名称){2}(联系人){3}(电话)，现已分配由您跟进，请尽快与客户进行联系，助您成交！
             List<String> param = new ArrayList<>();
-            param.add(obj.getAgentName()==null?"":obj.getAgentName());
+            param.add(record.getAgentName()==null?"":record.getAgentName());
             param.add(obj.getCommunityName()==null?"":obj.getCommunityName());
+            param.add(obj.getNickName()==null?"":obj.getNickName());
             param.add(obj.getPhone()==null?"":obj.getPhone());
-           //apiHelper.smsSender("18825234000",Contant.SMS_TEMPLATE_89262,param);
-            apiHelper.smsSender(record.getAgentPhone(),Contant.SMS_TEMPLATE_89262,param);
+           apiHelper.smsSender("18825234000",Contant.SMS_TEMPLATE_89262,param);
+//            apiHelper.smsSender(record.getAgentPhone(),Contant.SMS_TEMPLATE_89262,param);
 
             //发送给预约人的短信：模板id56848，内容：您好！您提交的看房日程由{1}电话{2}帮您带看，该经纪人会尽快联系您安排看房，请保持电话畅通，感谢！
             List<String> param1 = new ArrayList<>();
