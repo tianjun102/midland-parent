@@ -59,10 +59,8 @@
 
 
                     <%--</li>--%>
-                    <li><span>模块名称：</span>
-                        <input  type="text" class="vipcate" id="modeName" name="modeName" placeholder="模块名称"/>
-                    </li>
-                <li><span>类别：</span><input  type="text" class="vipcate" id="vipcate" name="vipcate"
+
+                <li><span>分类名称：</span><input  type="text" class="vipcate" id="vipcate" name="vipcate"
                                            onclick="showTree()" readonly="readonly"/>
                     <input name="cateId" type="hidden"/>
                     <input name="cateName" type="hidden"/>
@@ -77,6 +75,9 @@
                          style="vertical-align: top;position:absolute; left: -46px;margin-top: 40px;"
                          onclick="hideTree()">
                 </li>
+                    <li><span>模块名称：</span>
+                        <input  type="text" class="vipcate" id="modeName" name="modeName" placeholder="模块名称"/>
+                    </li>
                 <li>
                     <input class="public_btn bg1" type="submit" name="inquery" id="inquery" value="查询"/>
                 </li>
