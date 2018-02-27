@@ -54,29 +54,29 @@
                         </select>
                     </li>
                 </c:if>
-                    <li><span>分类名称：</span>
-                        <input  type="text" class="vipcate" id="cateName" name="cateName" placeholder="分类名称"/>
+                    <%--<li><span>分类名称：</span>--%>
+                        <%--<input  type="text" class="vipcate" id="cateName" name="cateName" placeholder="分类名称"/>--%>
 
 
-                    </li>
+                    <%--</li>--%>
                     <li><span>模块名称：</span>
                         <input  type="text" class="vipcate" id="modeName" name="modeName" placeholder="模块名称"/>
                     </li>
-                <%--<li><span>类别：</span><input style="width: 243px;" type="text" class="vipcate" id="vipcate" name="vipcate"--%>
-                                           <%--onclick="showTree()" readonly="readonly"/>--%>
-                    <%--<input name="cateId" type="hidden"/>--%>
-                    <%--<input name="noteType" type="hidden"/>--%>
+                <li><span>类别：</span><input  type="text" class="vipcate" id="vipcate" name="vipcate"
+                                           onclick="showTree()" readonly="readonly"/>
+                    <input name="cateId" type="hidden"/>
+                    <input name="cateName" type="hidden"/>
 
-                <%--</li>--%>
-                <%--<li id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;">--%>
-                    <%--<div class="zTreeDemoBackground left" style="position:absolute;left: -263px;top:29px;"--%>
-                         <%--onblur="test(event)">--%>
-                        <%--<ul id="categoryTree" class="ztree" style="width:235px; height: 140px!important;"></ul>--%>
-                    <%--</div>--%>
-                    <%--<img src="${ctx}/assets/img/Closed_16px.png" alt="关闭"--%>
-                         <%--style="vertical-align: top;position:absolute; left: -46px;margin-top: 40px;"--%>
-                         <%--onclick="hideTree()">--%>
-                <%--</li>--%>
+                </li>
+                <li id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;">
+                    <div class="zTreeDemoBackground left" style="position:absolute;left: -263px;top:29px;"
+                         onblur="test(event)">
+                        <ul id="categoryTree" class="ztree" style="width:235px; height: 140px!important;"></ul>
+                    </div>
+                    <img src="${ctx}/assets/img/Closed_16px.png" alt="关闭"
+                         style="vertical-align: top;position:absolute; left: -46px;margin-top: 40px;"
+                         onclick="hideTree()">
+                </li>
                 <li>
                     <input class="public_btn bg1" type="submit" name="inquery" id="inquery" value="查询"/>
                 </li>
@@ -137,10 +137,17 @@
     });
 
     function beforeClick(treeId, treeNode, clickFlag) {
-        $("input[name='cateId']").val(treeNode.id);
-        $("input[name='cateName']").val(treeNode.name);
-        $("input[name='noteType']").val(treeNode.type);
-        $("input[name='vipcate']").val(treeNode.name);
+        if (treeNode.id==0){
+            $("input[name='cateId']").val("");
+            $("input[name='cateName']").val("");
+            $("input[name='noteType']").val(treeNode.type);
+            $("input[name='vipcate']").val("");
+        }else{
+            $("input[name='cateId']").val(treeNode.id);
+            $("input[name='cateName']").val(treeNode.name);
+            $("input[name='noteType']").val(treeNode.type);
+            $("input[name='vipcate']").val(treeNode.name);
+        }
         $("#showDiv").hide();
     }
 
