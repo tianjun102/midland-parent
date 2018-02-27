@@ -256,13 +256,22 @@
         $("#modeName").val($("#modeId option:selected").text())
     }
     function setEmpty() {
-        $("input[name='parentId']").val("");
-        $("input[name='parentName']").val("");
-        $("input[name='showCateName']").val("");
-        $("input[name='noteType']").val("");
-        $("input[name='modeId']").val("");
-        $("input[name='modeName']").val("");
+        debugger;
+        if (${type== 3} || ${type ==1} || ${type== 0 } ){
+            $("input[name='showCateName']").val("");
+            $("input[name='noteType']").val("");
+            $("input[name='modeId']").val("");
+            $("input[name='modeName']").val("");
+        }else{
+            $("input[name='parentId']").val("");
+            $("input[name='parentName']").val("");
+            $("input[name='showCateName']").val("");
+            $("input[name='noteType']").val("");
+            $("input[name='modeId']").val("");
+            $("input[name='modeName']").val("");
+        }
         $("#showDiv").hide();
+
     }
     //取消
     function closeWin() {
