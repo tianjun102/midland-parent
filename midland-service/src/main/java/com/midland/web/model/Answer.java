@@ -17,7 +17,7 @@ public class Answer {
      **/
     private String answerTime;
     /**
-     * 回答人名字（经纪人名称）
+     * 回答人名字（也可能是经纪人名称）
      **/
     private String answerName;
     /**
@@ -45,7 +45,7 @@ public class Answer {
      **/
     private String answerPhone;
     /**
-     * 回答人工号（经纪人工号）
+     * 回答人id（也可能是经纪人工号）
      **/
     private Integer answerNo;
 

@@ -3,6 +3,7 @@ package com.midland.web.annocontroller;
 import com.midland.web.model.CenterMsg;
 import com.midland.web.service.CenterMsgService;
 import com.midland.base.ServiceBaseFilter;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
@@ -92,6 +93,12 @@ public class CenterMsgRestController extends ServiceBaseFilter {
 		 Result result=new Result();
 		try {
 			log.info("findCenterMsgList  {}",obj);
+			if(StringUtils.isEmpty(obj.getUserId())){
+				log.error("userId不能为空");
+				result.setCode(ResultStatusUtils.STATUS_CODE_202);
+				result.setMsg("userId not empty");
+				return result;
+			}
 			MidlandHelper.doPage(request);
 			Page<CenterMsg> list = (Page<CenterMsg>)centerMsgServiceImpl.findCenterMsgList(obj);
 			Paginator paginator=list.getPaginator();

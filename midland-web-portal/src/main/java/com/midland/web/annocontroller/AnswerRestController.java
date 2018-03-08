@@ -42,7 +42,7 @@ public class AnswerRestController extends ServiceBaseFilter {
 		 Result result=new Result();
 		try {
 			log.info("addAnswer {}",obj);
-			obj.setAnswerTime(MidlandHelper.getCurrentTime());
+				obj.setAnswerTime(MidlandHelper.getCurrentTime());
 			obj.setAuditStatus(0);
 			obj.setAnswerTime(MidlandHelper.getCurrentTime());
 			answerServiceImpl.insertAnswer(obj);
@@ -50,11 +50,17 @@ public class AnswerRestController extends ServiceBaseFilter {
 			CenterMsg centerMsg = new CenterMsg();
 			centerMsg.setType(1);
 			centerMsg.setJumpId(obj.getQuestionsId().toString());
+			centerMsg.setAddTime(MidlandHelper.getCurrentTime());
+			centerMsg.setOtherUserId(String.valueOf(obj.getAnswerNo()));
 			//创建title
 			centerMsg.setTitle(obj.getAnswerName()==null?Contant.TOURISTS+Contant.ANSWER_TITLE:obj.getAnswerName()+Contant.ANSWER_TITLE);
 			//创建msg
 			centerMsg.setMsg(obj.getAnswerArea());
+			centerMsg.setHeadImg(obj.getHeadImg());
+
 			Questions questions =  questionsServiceImpl.selectByPrimaryKey(obj.getQuestionsId());
+			centerMsg.setCityId(questions.getCityId());
+			centerMsg.setCityName(questions.getCityName());
 			centerMsg.setUserId(questions.getUserId()==null?null:questions.getUserId().toString());
 			centerMsgServiceImpl.insertCenterMsg(centerMsg);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
