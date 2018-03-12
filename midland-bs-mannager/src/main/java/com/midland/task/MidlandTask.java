@@ -163,36 +163,4 @@ public class MidlandTask {
         }
     }
 
-//	@Scheduled(fixedRate = 3600000)
-//	public void appointReset(){
-//		try {
-//			Appointment temp = new Appointment();
-//			temp.setStatus(0);//
-//			temp.setResetFlag(0);//
-//			List<Appointment> lists = appointmentServiceImpl.findAppointmentList(temp);
-//			for (Appointment appointment1 : lists) {
-//				String time = appointment1.getAssignedTime();
-//				Date assignTime = MidlandHelper.stringToDate(time);
-//				Date date = new Date();
-//				Calendar calendar = Calendar.getInstance();
-//				calendar.setTime(date);
-//
-//				calendar.add(calendar.HOUR, -24);
-//				Date time_24 = calendar.getTime();
-//				if (time_24.getTime() > assignTime.getTime()) {
-//
-//					Appointment app = new Appointment();
-//					app.setResetFlag(1);//标记为展示
-//					app.setId(appointment1.getId());
-//					app.setEntrustTime(null);
-//					appointmentServiceImpl.updateAppointmentById(app);
-//
-//				}
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-
-
 }
