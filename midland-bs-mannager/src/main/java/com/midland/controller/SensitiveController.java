@@ -79,9 +79,10 @@ public class SensitiveController extends BaseFilter {
     @ResponseBody
     public Object sensitiveDel(HttpServletRequest request, Model model) {
         Map map = new HashMap();
-        String V1 = request.getParameter("V1");
+        String keyWord = request.getParameter("keyWord");
         try {
-            publicServiceImpl.moveSet(V1);
+            keyWord = java.net.URLDecoder.decode(keyWord,"UTF-8");
+            publicServiceImpl.moveSet(keyWord);
             map.put("state", 0);
         } catch (Exception e1) {
             e1.printStackTrace();

@@ -24,6 +24,7 @@
             text-indent: 0;
             position: relative;
         }
+
         .xclose {
             display: block;
             position: absolute;
@@ -44,8 +45,8 @@
 
 
 <div class="table-responsive m40" style="min-height:400px;">
-    <table class="table table-bordered table-add" >
-        <c:forEach items="${items}" var="item" >
+    <table class="table table-bordered table-add">
+        <c:forEach items="${items}" var="item">
             <div class="public_text">${item}<i class='xclose' onclick="delNote('${item}',this)">×</i></div>
         </c:forEach>
     </table>
@@ -59,12 +60,16 @@
 
 <script type="text/javascript">
     $(function () {
-        $(".table-responsive").css("max-height",result);
+        $(".table-responsive").css("max-height", result);
     })
-    function delNote(i,ths) {
-        var thisObj=$(ths);
 
-        var data="V1="+i;
+    function delNote(i, ths) {
+        var thisObj = $(ths);
+        var str = thisObj.parent().text();
+        str = str.substring(0, str.length - 1);
+
+        var data = "keyWord=" + encodeURIComponent(encodeURIComponent(str));
+        debugger;
         $.ajax({
             type: "post",
             url: "${ctx}/rest/sensitive/del",
@@ -86,24 +91,6 @@
         });
 
     }
-    $(".fileupload").delegate(".xclose", "click", function () {
-        var temp = "";
-        var $this = $(this);
-        var $parent = $this.parent("span");
-        var imgsrcs = $("#imgUrl").val();
-        var imgsrc = $parent.find("img").attr("src");
-        var imgArray = imgsrcs.split("||");
-        for (var i = 0; i < imgArray.length; i++) {
-            if (imgArray[i].match(imgsrc)) {
-                continue;
-            }
-            if (imgArray[i] != "" && imgArray != null) {
-                temp += imgArray[i] + "||";
-            }
-        }
-        $("#imgUrl").val(temp);
-        $parent.remove();
-    });
 
 </script>
 </body>

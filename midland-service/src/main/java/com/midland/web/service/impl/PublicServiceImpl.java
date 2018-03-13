@@ -30,6 +30,8 @@ public class PublicServiceImpl implements PublicService {
     @Autowired
     private RedisTemplate<String, String> redisStringTemplate;
 
+
+
     private static final Logger logger = LoggerFactory.getLogger(PublicServiceImpl.class);
 
     @Override
@@ -105,7 +107,7 @@ public class PublicServiceImpl implements PublicService {
     }
     @Override
     public List<String> sensitiveList() throws Exception {
-        Set set=null;
+        Set set;
         SetOperations<String, Object> vo = redisTemplate.opsForSet();
         if (vo == null) {
              set = Collections.EMPTY_SET;
