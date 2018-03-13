@@ -22,7 +22,7 @@
 				  <c:if test="${type==4}">站点管理>>网站地图分类管理</c:if></span>
             <a class="setup" target="contentF" onclick="toAddPage()">新增</a>
         </p>
-        <form action="${ctx }/rest//category/list" method="POST" id="searchForm"
+        <form action="${ctx }/rest/category/list" method="POST" id="searchForm"
               onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
             <input type="hidden" name="type" value="${type}">
             <ul class="userinfo row">

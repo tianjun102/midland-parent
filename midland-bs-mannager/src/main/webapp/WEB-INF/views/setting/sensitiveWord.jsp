@@ -23,34 +23,49 @@
 </head>
 <body>
 
+<div class="box">
+    <section class="content" style="border:none;">
+        <form action="${ctx}/rest/sensitive/add" method="post" id="timeSett">
+            <ul class="adminfo row">
+                <li class="col-md-6"><span>新增敏感字符：</span>
+                    <input type="text" name="V" id="V" onblur="notEmpty('V','V','');">
+                    <a target="contentF" class="public_btn bg2" id="save" onclick="submitTime()">保存</a>
+                </li>
+            </ul>
 
-<section class="content" style="border:none;">
-    <form action="${ctx}/rest/sensitive/add" method="post" id="timeSett">
-        <ul class="adminfo row">
-            <li class="col-md-6"><span>新增敏感字符：</span>
-                <input type="text" name="V" id="V"
-                       onblur="notEmpty('V','V','');"
-                       >
-            </li>
-            <li class="col-md-6"><span>删除敏感字符：</span>
-                <input type="text" name="V1" id="V1"
-                       onblur="notEmpty('V1','V1','')" >
-            </li>
+        </form>
+        <form action="${ctx}/rest/sensitive/list" method="post" id="searchForm"
+              onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
+            <ul class="adminfo row">
+                <li class="col-md-6"><span>关键字：</span>
+                    <input type="text" name="keyWord" id="keyWord">
+                    <input class="public_btn bg1" type="submit" name="inquery" id="inquery" value="查询"/>
+                </li>
+            </ul>
 
-            <li class="col-md-6">
-                <span></span>
-                <a target="contentF" class="public_btn bg2" id="save" onclick="submitTime()">保存</a>
-                <a style="margin-left: 20px" class="public_btn bg3" id="cancel" onclick="cancel1();">取消</a>
-            </li>
-        </ul>
+        </form>
+        <div id="listDiv"></div>
 
-    </form>
-</section>
-
+    </section>
+</div>
 
 <script type="text/javascript">
+    var result;
+    window.onload = function () {
+        $('#searchForm').submit();
+    }
+    $(function () {
+        var allHeight=$(document).height();
+        var h1=$("#timeSett").height();
+        var h2=$("#searchForm").height();
+        var h3=140;
+        debugger;
+        result=allHeight-h1-h2-h3;
+    })
+
     function submitTime() {
         var data = $("#timeSett").serialize();
+        debugger;
         $.ajax({
             type: "post",
             url: "${ctx}/rest/sensitive/add",
@@ -70,7 +85,7 @@
                 }
             },
             error: function (data) {
-                    layer.msg("保存失败！", {icon: 2});
+                layer.msg("保存失败！", {icon: 2});
             }
         });
     }

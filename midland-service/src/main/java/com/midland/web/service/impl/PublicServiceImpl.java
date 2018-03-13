@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @Service
 public class PublicServiceImpl implements PublicService {
@@ -102,6 +103,22 @@ public class PublicServiceImpl implements PublicService {
             throw new Exception("新增敏感词汇失败");
         }
     }
+    @Override
+    public List<String> sensitiveList() throws Exception {
+        Set set=null;
+        SetOperations<String, Object> vo = redisTemplate.opsForSet();
+        if (vo == null) {
+             set = Collections.EMPTY_SET;
+        }else {
+            /**
+             * 取出10万个敏感字符
+             */
+            set = vo.distinctRandomMembers(Contant.SENSITIVE_CACHE_KEY, 100000);
+        }
+        List<String> list = (List<String>)set.stream().collect(Collectors.toList());
+        List<String> list1 = list.stream().sorted().collect(Collectors.toList());
+        return list1;
+    }
 
     @Override
     public Set<String> getSensitiveSet() {
@@ -135,7 +152,10 @@ public class PublicServiceImpl implements PublicService {
         SetOperations<String, Object> vo = redisTemplate.opsForSet();
         Iterator<String> iterable = V.iterator();
         while (iterable.hasNext()) {
-            vo.add(Contant.SENSITIVE_CACHE_KEY, iterable.next());
+            String str = iterable.next();
+            if (StringUtils.isNotEmpty(str)){
+                vo.add(Contant.SENSITIVE_CACHE_KEY, str);
+            }
         }
 
 

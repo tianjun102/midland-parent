@@ -23,6 +23,8 @@ public interface PublicService {
 
     void addSet(Object V) throws Exception;
 
+    List<String> sensitiveList() throws Exception;
+
     Set<String> getSensitiveSet();
 
     void putSensitiveSet(String V);

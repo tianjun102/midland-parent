@@ -24,7 +24,7 @@ public class SensitiveFilter implements HandlerInterceptor {
         SensitivewordFilter filter = new SensitivewordFilter(set);
         StringBuffer sb = new StringBuffer();
         Map<String, String[]> map = request.getParameterMap();
-        if (!request.getRequestURI().contains("sensitive/add")) {//对敏感字符管理的请求不要拦截
+        if (!request.getRequestURI().contains("sensitive")) {//对敏感字符管理的请求不要拦截
             map.entrySet().forEach(item -> {
                 if (item.getValue() != null || !item.getValue().equals("")) {
                     String string = Arrays.toString(item.getValue());
