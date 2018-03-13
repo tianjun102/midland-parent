@@ -64,30 +64,32 @@
     })
 
     function submitTime() {
-        var data = $("#timeSett").serialize();
-        debugger;
-        $.ajax({
-            type: "post",
-            url: "${ctx}/rest/sensitive/add",
-            async: false, // 此处必须同步
-            dataType: "json",
-            data: data,
-            success: function (data) {
-                if (data.state == 0) {
-                    layer.msg("保存成功！！！", {icon: 1});
-                    $('#save').removeAttr("onclick");
-                    setTimeout(function () {
-                        window.open("${ctx}/rest/sensitive/index", "contentF");
-                    }, 1000);
+        if (notEmpty('V','V','')){
+            var data = $("#timeSett").serialize();
+            $.ajax({
+                type: "post",
+                url: "${ctx}/rest/sensitive/add",
+                async: false, // 此处必须同步
+                dataType: "json",
+                data: data,
+                success: function (data) {
+                    if (data.state == 0) {
+                        layer.msg("保存成功！！！", {icon: 1});
+                        $('#save').removeAttr("onclick");
+                        setTimeout(function () {
+                            window.open("${ctx}/rest/sensitive/index", "contentF");
+                        }, 1000);
 
-                } else {
+                    } else {
+                        layer.msg("保存失败！", {icon: 2});
+                    }
+                },
+                error: function (data) {
                     layer.msg("保存失败！", {icon: 2});
                 }
-            },
-            error: function (data) {
-                layer.msg("保存失败！", {icon: 2});
-            }
-        });
+            });
+        }
+
     }
 
     function cancel1() {
