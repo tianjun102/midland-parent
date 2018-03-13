@@ -44,7 +44,7 @@ public class SensitiveController extends BaseFilter {
                     e.contains(keyWord)).sorted((s1, s2) ->
                     s1.compareTo(s2)).collect(Collectors.toList());
             model.addAttribute("items", temp);
-
+            model.addAttribute("count", temp.size());
         } else {
             List<String> temp = list.stream().sorted((s1, s2) ->
                     s1.compareTo(s2)).collect(Collectors.toList());
@@ -71,6 +71,7 @@ public class SensitiveController extends BaseFilter {
                 map.put("state", -1);
             }
         } catch (Exception e) {
+            log.error("add 新增敏感词汇失败");
             map.put("state", -1);
         }
         return map;

@@ -75,9 +75,9 @@
                 success: function (data) {
                     if (data.state == 0) {
                         layer.msg("保存成功！！！", {icon: 1});
-                        $('#save').removeAttr("onclick");
                         setTimeout(function () {
-                            window.open("${ctx}/rest/sensitive/index", "contentF");
+                            $('#searchForm').submit();
+                            <%--window.open("${ctx}/rest/sensitive/index", "contentF");--%>
                         }, 1000);
 
                     } else {
