@@ -50,14 +50,9 @@
             <div class="public_text">${item}<i class='xclose' onclick="delNote('${item}',this)">×</i></div>
         </c:forEach>
     </table>
-</div>
-<!-- 分页 -->
-<c:if test="${!empty paginator}">
-    <c:set var="paginator" value="${paginator}"/>
-    <c:set var="target" value="listDiv"/>
-    <%@include file="../layout/pagination.jsp" %>
-</c:if>
 
+</div>
+<span >敏感字符总个数:<span id="count">${count}</span></span>
 <script type="text/javascript">
     $(function () {
         $(".table-responsive").css("max-height", result);
@@ -80,6 +75,7 @@
                 if (data.state == 0) {
                     layer.msg("删除成功！！！", {icon: 1});
                     thisObj.parent().remove();
+                    $("#count").text($("#count").text()-1);
 
                 } else {
                     layer.msg("删除失败！", {icon: 2});

@@ -40,6 +40,7 @@
                 <li class="col-md-6"><span>关键字：</span>
                     <input type="text" name="keyWord" id="keyWord">
                     <input class="public_btn bg1" type="submit" name="inquery" id="inquery" value="查询"/>
+
                 </li>
             </ul>
 
