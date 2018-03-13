@@ -59,7 +59,6 @@
         var h1=$("#timeSett").height();
         var h2=$("#searchForm").height();
         var h3=140;
-        debugger;
         result=allHeight-h1-h2-h3;
     })
 

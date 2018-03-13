@@ -11,7 +11,7 @@
             font-size: 14px;
             display: inline-block;
             color: #463d3d;
-            background: #e8e9f3;
+            background: #f2f3fb;
             padding-left: 5px;
             padding-right: 5px;
             padding-top: 5px;
@@ -29,11 +29,11 @@
             position: absolute;
             right: 0;
             top: 0;
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 9px;
             line-height: 10px;
             text-align: center;
-            background: rgba(0, 0, 0, .7);
+            background: rgba(86, 75, 75, 0.7);
             font-size: 14px;
             color: #ddd;
             cursor: pointer;
