@@ -11,10 +11,14 @@
         <result column="company_culture" property="companyCulture" jdbcType="LONGVARCHAR"/>
         <result column="promotion_benefits" property="promotionBenefits" jdbcType="LONGVARCHAR"/>
         <result column="contact_us" property="contactUs" jdbcType="LONGVARCHAR"/>
+        <result column="campus_welfare" property="campusWelfare" jdbcType="LONGVARCHAR"/>
+        <result column="recruiting_process" property="recruitingProcess" jdbcType="LONGVARCHAR"/>
+        <result column="into_midland" property="intoMidland" jdbcType="LONGVARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,company_profile,company_process,company_honor,company_training,company_culture,promotion_benefits,contact_us
+        id,company_profile,company_process,company_honor,company_training,company_culture,promotion_benefits,contact_us,
+        campus_welfare,recruiting_process,into_midland
     </sql>
 
     <select id="selectIntoMidlandById" resultMap="BaseResultMap">
@@ -71,6 +75,15 @@
             <if test="contactUs != null">
                 contact_us,
             </if>
+            <if test="campusWelfare != null">
+                campus_welfare,
+            </if>
+            <if test="recruitingProcess != null">
+                recruiting_process,
+            </if>
+            <if test="intoMidland != null">
+                into_midland,
+            </if>
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -94,6 +107,15 @@
             </if>
             <if test="contactUs != null">
                 #{contactUs,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="campusWelfare != null">
+               #{campusWelfare,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="recruitingProcess != null">
+                #{recruitingProcess,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="intoMidland != null">
+                #{intoMidland,jdbcType=LONGVARCHAR},
             </if>
         </trim>
     </insert>
@@ -120,6 +142,16 @@
         <if test="contactUs != null">
             contact_us= #{contactUs,jdbcType=LONGVARCHAR},
         </if>
+        <if test="campusWelfare != null">
+            campus_welfare= #{campusWelfare,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="recruitingProcess != null">
+            recruiting_process= #{recruitingProcess,jdbcType=LONGVARCHAR},
+        </if>
+        <if test="intoMidland != null">
+            into_midland= #{intoMidland,jdbcType=LONGVARCHAR},
+        </if>
+
     </sql>
 
     <sql id="select_option">
@@ -146,6 +178,15 @@
         </if>
         <if test="contactUs != null">
             and contact_us= #{contactUs,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="campusWelfare != null">
+            and campus_welfare= #{campusWelfare,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="recruitingProcess != null">
+            and recruiting_process= #{recruitingProcess,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="intoMidland != null">
+            and into_midland= #{intoMidland,jdbcType=LONGVARCHAR}
         </if>
     </sql>
 

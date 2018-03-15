@@ -258,6 +258,15 @@
 						<shiro:hasPermission name="researchList">
 							<a id = "left35" href="${ctx}/rest/intoMidland/index?flag=7" target="contentF"><span>联系我们</span></a>
 						</shiro:hasPermission>
+						<shiro:hasPermission name="researchList">
+							<a id = "left35" href="${ctx}/rest/intoMidland/index?flag=8" target="contentF"><span>校园福利</span></a>
+						</shiro:hasPermission>
+						<shiro:hasPermission name="researchList">
+							<a id = "left35" href="${ctx}/rest/intoMidland/index?flag=9" target="contentF"><span>招聘流程</span></a>
+						</shiro:hasPermission>
+						<shiro:hasPermission name="researchList">
+							<a id = "left35" href="${ctx}/rest/intoMidland/index?flag=10" target="contentF"><span>走进美联</span></a>
+						</shiro:hasPermission>
 					</dd>
 				</dl>
 		</shiro:hasPermission>

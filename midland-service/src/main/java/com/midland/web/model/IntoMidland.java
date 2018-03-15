@@ -36,7 +36,33 @@ public class IntoMidland {
      * 联系我们
      **/
     private String contactUs;
+    private String campusWelfare;
+    private String recruitingProcess;
+    private String intoMidland;
 
+    public String getCampusWelfare() {
+        return campusWelfare;
+    }
+
+    public void setCampusWelfare(String campusWelfare) {
+        this.campusWelfare = campusWelfare;
+    }
+
+    public String getRecruitingProcess() {
+        return recruitingProcess;
+    }
+
+    public void setRecruitingProcess(String recruitingProcess) {
+        this.recruitingProcess = recruitingProcess;
+    }
+
+    public String getIntoMidland() {
+        return intoMidland;
+    }
+
+    public void setIntoMidland(String intoMidland) {
+        this.intoMidland = intoMidland;
+    }
 
     public Integer getId() {
         return id;
