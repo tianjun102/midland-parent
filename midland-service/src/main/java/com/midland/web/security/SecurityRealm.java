@@ -15,6 +15,8 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Resource;
@@ -30,6 +32,7 @@ import java.util.Map;
  **/
 public class SecurityRealm extends AuthorizingRealm {
 
+    private Logger logger = LoggerFactory.getLogger(SecurityRealm.class);
     @Resource
     private UserService userService;
 
@@ -57,7 +60,13 @@ public class SecurityRealm extends AuthorizingRealm {
         param.put("userName", username);
         param.put("password", baseRedisTemplate.getValueByKey(username).toString());
         String data = HttpUtils.get(midlandConfig.getAgentLogin(), param);
-        Map userMap = (Map) JSONObject.parse(data);
+        Map userMap = null;
+        try {
+            userMap = (Map) JSONObject.parse(data);
+        } catch (Exception e) {
+            logger.error("请检查顶尖经纪人登录接口是否正常",e);
+            e.printStackTrace();
+        }
         if (userMap != null) {
             if (("SUCCESS").equals(userMap.get("STATE"))) {
                 final List<Role> roleInfos = roleService.selectRolesByUserId("88888");
@@ -101,7 +110,13 @@ public class SecurityRealm extends AuthorizingRealm {
         parem.put("password", oldPassWord);
         String data = null;
         data = HttpUtils.get(midlandConfig.getAgentLogin(), parem);
-        Map userMap = (Map) JSONObject.parse(data);
+        Map userMap = null;
+        try {
+            userMap = (Map) JSONObject.parse(data);
+        } catch (Exception e) {
+            logger.error("请检查顶尖经纪人登录接口是否正常",e);
+            e.printStackTrace();
+        }
         baseRedisTemplate.saveValue(username, oldPassWord);
         if (userMap != null) {
             if (("SUCCESS").equals(userMap.get("STATE"))) {

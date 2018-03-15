@@ -150,7 +150,13 @@ public class UserController extends BaseFilter {
             parem.put("userName", username);
             parem.put("password", password);
             String data = HttpUtils.get(midlandConfig.getAgentLogin(), parem);
-            Map userMap = (Map) JSONObject.parse(data);
+            Map userMap = null;
+            try {
+                userMap = (Map) JSONObject.parse(data);
+            } catch (Exception e) {
+                logger.error("请检查顶尖经纪人登录接口是否正常",e);
+                e.printStackTrace();
+            }
             if (userMap != null) {
                 if ("SUCCESS".equals(userMap.get("STATE"))) {
                     String dataDtail = HttpUtils.get(midlandConfig.getAgentDetail() + "?id=" + userMap.get("agenterId"), null);
