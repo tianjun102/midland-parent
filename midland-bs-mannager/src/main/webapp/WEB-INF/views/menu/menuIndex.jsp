@@ -22,9 +22,7 @@
                   onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
                 <ul class="userinfo row">
                     <%@include file="indexArea.jsp" %>
-                    <li><span>菜单名称：</span>
-                        <input type="text" name="menuName" id="menuName" placeholder="请输入菜单名称"/></li>
-                    </li>
+
                     <li><span>平台：</span>
                         <select name="source" id="source" class="dropdown">
                             <option value="">请选择</option>
@@ -34,6 +32,20 @@
                                 </option>
                             </c:forEach>
                         </select>
+                    </li>
+                    <li><span>类型：</span>
+                        <select name="menuTypeId" id="menuTypeId"
+                                style="height: 28px; width:120px;display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;">
+                            <option value="">请选择</option>
+                            <c:forEach items="${menuTypes}" var="s">
+                                <option value="${s.id}">
+                                        ${s.name}
+                                </option>
+                            </c:forEach>
+                        </select>
+                    </li>
+                    <li><span>菜单名称：</span>
+                        <input type="text" name="menuName" id="menuName" placeholder="请输入菜单名称"/></li>
                     </li>
                     <c:if test="${not empty isSuper}">
                         <li><span>是否删除：</span>
@@ -64,6 +76,45 @@
 
 
 <script type="text/javascript">
+
+    $("#citys").change(function () {
+        getMenuType()
+    })
+    $("#source").change(function () {
+        getMenuType()
+    })
+
+    function getMenuType() {
+        var data = $("#searchForm").serialize();
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/menuType/get_types",
+            async: false, // 此处必须同步
+            dataType: "json",
+            data: data,
+
+            success: function (data) {
+                if (data.state == 0) {
+                    var obj = data.data;
+                    var html = "<option value=>请选择</option>";
+                    for (var i = 0; i < obj.length; i++) {
+                        html += "<option value=\"" + obj[i].id + "\">" + obj[i].name + "</option>";
+                    }
+                    $("#menuTypeId").html(html);
+                    debugger;
+                }
+            },
+            error: function (data) {
+                if (data.responseText != null) {
+                    layer.msg(data.responseText, {icon: 2});
+                } else {
+                    layer.msg("操作失败！", {icon: 2});
+                }
+            }
+        })
+    }
+
+
     var allHeight = $(window).height();
 
     function addMenu() {

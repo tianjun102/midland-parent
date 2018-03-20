@@ -57,6 +57,7 @@
         layout,
         measure,
         agent_phone,
+        price,
         community_name,
         appointment_time as handle_time,
         decoration,
@@ -90,7 +91,7 @@
         layout,
         measure,
         agent_phone,
-
+        price,
         community_name,
         entrust_time as handle_time,
         renovation as decoration,

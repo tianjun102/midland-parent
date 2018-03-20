@@ -55,6 +55,11 @@ public class MenuController extends BaseFilter {
         model.addAttribute("isSuper", user.getIsSuper());
         List<ParamObject> obj = JsonMapReader.getMap("is_delete");
         model.addAttribute("isDeletes", obj);
+        MenuType menuType = new MenuType();
+        menuType.setCityId(user.getCityId());
+        menuType.setIsDelete(Contant.isNotDelete);
+        List<MenuType> menuTypes = menuTypeServiceImpl.findMenuTypeList(menuType);
+        model.addAttribute("menuTypes",menuTypes);
         return "menu/menuIndex";
     }
 

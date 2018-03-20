@@ -99,7 +99,11 @@ public class UploadImgUtil {
 		BASE64Decoder decoder = new BASE64Decoder();
 		try {
 			if(StringUtils.isNotEmpty(oldImg)){
-				boolean bool = FileUtils.deleteQuietly(new File("/home/"+oldImg));
+				if (oldImg.contains("home")){
+					boolean bool = FileUtils.deleteQuietly(new File(oldImg));
+				}else {
+					boolean bool = FileUtils.deleteQuietly(new File("/home/"+oldImg));
+				}
 			}
 			// Base64解码
 			byte[] b = decoder.decodeBuffer(img);
@@ -123,7 +127,7 @@ public class UploadImgUtil {
 			out.write(b);
 			out.flush();
 			out.close();
-			return "/upload/"+fileName;
+			return path+fileName;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "";

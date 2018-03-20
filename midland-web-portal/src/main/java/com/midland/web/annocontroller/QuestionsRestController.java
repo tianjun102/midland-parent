@@ -404,13 +404,13 @@ public class QuestionsRestController extends ServiceBaseFilter {
             attention.setType(Contant.ATTENTION_QUESTION);
             List<Attention> attentionList = attentionServiceImpl.findAttentionList(attention);
             List<Integer> listTemp = new ArrayList<>();
-            for (Attention at : attentionList) {
-                listTemp.add(at.getOtherId());
-            }
-            obj.setAttentionList(listTemp);
+            attentionList.forEach(e->listTemp.add(e.getOtherId()));
+            Questions temp = new Questions();
+            temp.setAttentionList(listTemp);
             MidlandHelper.doPage(request);
-            obj.setDescName("question_time");
-            Page<Questions> list = (Page<Questions>) questionsServiceImpl.attentionQuestionPage(obj);
+            temp.setDescName("question_time");
+            Page<Questions> list = (Page<Questions>) questionsServiceImpl.attentionQuestionPage(temp);
+            list.forEach(e->e.setIsAttention(true));
             result.setCode(ResultStatusUtils.STATUS_CODE_200);
             result.setList(list);
             result.setMsg("success");

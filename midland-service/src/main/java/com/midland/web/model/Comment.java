@@ -29,7 +29,7 @@ public class Comment {
      **/
     private Integer isDelete;
     /**
-     * 关联资讯表id
+     * type=0关联资讯表id;type=1委托详情id,type=2预约详情id
      **/
     private Integer informationId;
 
@@ -63,10 +63,10 @@ public class Comment {
     private Integer replyNum;
     private String informationTitle;
     private String informationImgUrl;
-    private Integer allScore;
-    private Integer serviceScore;
-    private Integer professionalSkills;
-    private Integer marketSpecialty;
+    private Double allScore;
+    private Double serviceScore;
+    private Double professionalSkills;
+    private Double marketSpecialty;
     private String agentName;
     private String agentUrl;
     private String agentId;
@@ -88,35 +88,35 @@ public class Comment {
         this.agentId = agentId;
     }
 
-    public Integer getAllScore() {
+    public Double getAllScore() {
         return allScore;
     }
 
-    public void setAllScore(Integer allScore) {
+    public void setAllScore(Double allScore) {
         this.allScore = allScore;
     }
 
-    public Integer getServiceScore() {
+    public Double getServiceScore() {
         return serviceScore;
     }
 
-    public void setServiceScore(Integer serviceScore) {
+    public void setServiceScore(Double serviceScore) {
         this.serviceScore = serviceScore;
     }
 
-    public Integer getProfessionalSkills() {
+    public Double getProfessionalSkills() {
         return professionalSkills;
     }
 
-    public void setProfessionalSkills(Integer professionalSkills) {
+    public void setProfessionalSkills(Double professionalSkills) {
         this.professionalSkills = professionalSkills;
     }
 
-    public Integer getMarketSpecialty() {
+    public Double getMarketSpecialty() {
         return marketSpecialty;
     }
 
-    public void setMarketSpecialty(Integer marketSpecialty) {
+    public void setMarketSpecialty(Double marketSpecialty) {
         this.marketSpecialty = marketSpecialty;
     }
 

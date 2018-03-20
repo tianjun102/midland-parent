@@ -179,6 +179,22 @@ public class MenuTypeController extends BaseFilter {
         }
         return "menuType/menuTypeList";
     }
+    @RequestMapping("get_types")
+    @ResponseBody
+    public Object getMenuTypes(MenuType menuType,HttpServletRequest request) {
+        Map map = new HashMap();
+        try {
+            log.info("findMenuTypeList  {}", menuType);
+            menuType.setIsDelete(Contant.isNotDelete);
+            List<MenuType> result = menuTypeServiceImpl.findMenuTypeList(menuType);
+            map.put("state",0);
+            map.put("data",result);
+        } catch (Exception e) {
+            log.error("findMenuTypeList  {}", menuType, e);
+            map.put("state",-1);
+        }
+        return map;
+    }
 
     /**
      * 批量更新
