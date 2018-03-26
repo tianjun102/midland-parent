@@ -1,10 +1,12 @@
 package com.midland.controller;
 
 import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.config.MidlandConfig;
 import com.midland.task.TaskConfig;
+import com.midland.web.Contants.Contant;
 import com.midland.web.enums.ContextEnums;
 import com.midland.web.model.*;
 import com.midland.web.model.user.User;
@@ -51,13 +53,16 @@ public class SettingController extends BaseFilter {
 
     // 进入热门关注首页面
     @RequestMapping(value = "popularIndex", method = {RequestMethod.GET, RequestMethod.POST})
-    public String popularIndex(Model model, HttpServletRequest request) {
-
+    public String popularIndex(Model model, HttpServletRequest request) throws Exception {
+        //初始化的时候,最多只拿出50个数据,
+        PageHelper.startPage(1, 50);
+        Page<Popular> po = ( Page<Popular>)popularServiceImpl.findPopularList(new Popular());
         settingService.getAllProvinceList(model);
         User user = MidlandHelper.getCurrentUser(request);
         if (user.getIsSuper() == null) {
             model.addAttribute("cityId", user.getCityId());
         }
+        model.addAttribute("cateList", po.getResult());
         model.addAttribute("isSuper", user.getIsSuper());
         model.addAttribute("type", request.getParameter("type"));
         return "setting/popular/popularIndex";
@@ -66,14 +71,7 @@ public class SettingController extends BaseFilter {
     // 进入热门关注列表页
     @RequestMapping(value = "showPopularList", method = {RequestMethod.GET, RequestMethod.POST})
     public String showPopularList(Model model, HttpServletRequest request, Popular popular) {
-        String pageSize = request.getParameter("pageSize");
-        String pageNo = request.getParameter("pageNo");
-        if (pageNo == null || pageNo.equals("")) {
-            pageNo = ContextEnums.PAGENO;
-        }
-        if (pageSize == null || pageSize.equals("")) {
-            pageSize = ContextEnums.PAGESIZE;
-        }
+
         MidlandHelper.doPage(request);
 
         Page<Popular> PopularList = (Page<Popular>) settingService.findPopularList(popular);
@@ -82,7 +80,24 @@ public class SettingController extends BaseFilter {
 
         return "setting/popular/popularList";
     }
+    //通过模块类型定位分类
+    @RequestMapping("getCate")
+    @ResponseBody
+    public Object dfsdf(Popular popular){
+        Map map = new HashMap();
+        try {
+            popular.setIsDelete(Contant.isNotDelete);
+            popular.setIsShow(Contant.isShow);
+            List<Popular> pularList = popularServiceImpl.findPopularList(popular);
+            map.put("state",0);
+            map.put("data",pularList);
 
+        } catch (Exception e) {
+            logger.error("toAddPage",e);
+            map.put("state",-1);
+        }
+        return map;
+    }
     @RequestMapping(value = "toAddPage", method = {RequestMethod.GET, RequestMethod.POST})
     public String toAddPage(Model model, HttpServletRequest request) {
         settingService.getAllProvinceList(model);
@@ -136,6 +151,7 @@ public class SettingController extends BaseFilter {
                 parem.put("flag", "1");
             }
         } catch (Exception e) {
+            logger.error("addPopular",e);
             parem.put("flag", "0");
         }
 

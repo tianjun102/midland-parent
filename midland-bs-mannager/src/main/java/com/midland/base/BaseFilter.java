@@ -31,9 +31,7 @@ public abstract class BaseFilter {
     @InitBinder
     protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {
         InitStringToNull stringEditor = new InitStringToNull();
-        //InitSensitive sensitive = new InitSensitive();
         binder.registerCustomEditor(String.class, stringEditor);
-        //binder.registerCustomEditor(String.class,sensitive);
     }
 
 

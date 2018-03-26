@@ -226,10 +226,6 @@
 
     }
 
-    function viewInformation() {
-        window.open("http://43.254.55.177:8083/ML/information_index.html")
-    }
-    
     function subumintInformation() {
         if (notEmpty('title', 'title', '标题不能为空！')) {
             var data = $("#formId").serialize();

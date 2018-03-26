@@ -386,10 +386,10 @@
             and date_format(str_to_date(data_time, '%Y-%m'),'%Y-%m')= #{dataTime,jdbcType=TIMESTAMP}
         </if>
         <if test="startTime != null">
-            and data_time &gt;= #{startTime,jdbcType=TIMESTAMP}
+            and date_format(str_to_date(data_time, '%Y-%m'),'%Y-%m') &gt;= date_format(str_to_date(#{startTime,jdbcType=TIMESTAMP}, '%Y-%m'),'%Y-%m')
         </if>
         <if test="endTime != null">
-            and data_time &lt;= #{endTime,jdbcType=TIMESTAMP}
+            and date_format(str_to_date(data_time, '%Y-%m'),'%Y-%m') &lt;= date_format(str_to_date(#{endTime,jdbcType=TIMESTAMP}, '%Y-%m'),'%Y-%m')
         </if>
         <if test="type != null">
             and type= #{type,jdbcType=INTEGER}

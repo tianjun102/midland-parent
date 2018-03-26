@@ -147,7 +147,7 @@ public class QuotationSecondHandRestController extends ServiceBaseFilter {
         Result result = new Result();
         Map map = new HashMap();
         String date = MidlandHelper.getCurrentTime();
-        String startTime = MidlandHelper.getFormatyyMMToMonth(date, -12);
+        String startTime;
         try {
             if (StringUtils.isEmpty(obj.getAreaId()) && StringUtils.isEmpty(obj.getAreaName())) {
                 /**
@@ -169,8 +169,10 @@ public class QuotationSecondHandRestController extends ServiceBaseFilter {
             }
 
             if (obj.getStartTime() == null) {
-
+                startTime=MidlandHelper.getFormatyyMMToMonth(date, -12);
                 obj.setStartTime(MidlandHelper.getFormatyyMMToMonth(date, -13));
+            }else{
+                startTime=obj.getStartTime();
             }
             if (obj.getEndTime() == null) {
                 obj.setEndTime(MidlandHelper.formatMonth(date));
@@ -207,8 +209,9 @@ public class QuotationSecondHandRestController extends ServiceBaseFilter {
             /**
              * jdk 1.8 lamada表达式,stream ,filter,查询12个月前的数据到当前月的数据
              */
+            String initTime=MidlandHelper.formatMonth(startTime);
             List<QuotationSecondHand> list = listTemp.stream().filter(e->{
-                return e.getDataTime().compareTo(startTime)>=0;
+                return e.getDataTime().compareTo(initTime)>=0;
             }).collect(Collectors.toList());
 
             list.forEach(e->{

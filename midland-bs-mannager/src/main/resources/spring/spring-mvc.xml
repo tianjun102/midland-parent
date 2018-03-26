@@ -16,10 +16,7 @@
     <!-- 扫描controller（controller层注入） -->
     <context:component-scan base-package="com.midland.controller"/>
 
-    <mvc:interceptors>
-        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
-        <bean class="com.midland.base.SensitiveFilter"></bean>
-    </mvc:interceptors>
+
 
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
         <property name="defaultLocale" value="zh_CN"/>

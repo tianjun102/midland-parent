@@ -48,9 +48,7 @@
 						</select>
 					</li>
 				</c:if>
-				<li><span>分类：</span>
-					<input type="text" name="cateName" id="cateName" placeholder="请输入分类名称" /></li>
-				</li>
+
 				<li>
 					<span style="float:left;">模块：</span>
 					<select name="menuId" id="menuId" class="dropdown">
@@ -69,6 +67,17 @@
 						<option value="11">问答</option>
 					</select>
 				</li>
+				<li><span>分类：</span>
+					<select name="cateId" id="cateId"
+							style="height: 28px; width:120px;display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;">
+						<option value="">请选择</option>
+						<c:forEach items="${cateList}" var="s">
+							<option value="${s.cateId}">
+									${s.cateName}
+							</option>
+						</c:forEach>
+					</select>
+				</li>
 				<li><input class = "public_btn bg1" type="submit" name="inquery" id="inquery" value = "查询"/></li>
 			</ul>
 			</form>
@@ -80,9 +89,43 @@
 	
 	
 	<script type="text/javascript">
-		/* $(function(){
-			$('#searchForm').submit();
-		}); */
+		$("#menuId").change(function () {
+		    var data = "menuId="+$("#menuId").val();
+		    debugger;
+            $.ajax({
+                type: "post",
+                url: "${ctx}/rest/setting/getCate",
+                async: false, // 此处必须同步
+                dataType: "json",
+                data: data,
+                success: function (data) {
+                    if (data.state == 0) {
+                        debugger;
+                        var obj = data.data;
+                        var html = "<option value=>请选择</option>";
+                        for (var i = 0; i < obj.length; i++) {
+                            html += "<option value=\"" + obj[i].id + "\">" + obj[i].name + "</option>";
+                        }
+                        $("#cateId").html(html);
+
+                    } else {
+                        layer.msg("新增失败！", {icon: 2});
+                    }
+                },
+                error: function (data) {
+                    if (data.responseText != null) {
+                        layer.msg(data.responseText, {icon: 2});
+                    } else {
+                        layer.msg("操作失败！", {icon: 2});
+                    }
+                }
+
+            });
+        })
+
+
+
+
 		 window.onload = function(){
              $('#searchForm').submit();
 		}

@@ -1,4 +1,4 @@
-package com.midland.base;
+package com.midland.web.sensitive;
 
 import com.midland.web.service.impl.PublicService;
 import com.midland.web.util.HTMLSpirit;

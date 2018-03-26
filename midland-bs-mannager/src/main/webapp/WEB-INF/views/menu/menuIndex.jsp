@@ -101,7 +101,7 @@
                         html += "<option value=\"" + obj[i].id + "\">" + obj[i].name + "</option>";
                     }
                     $("#menuTypeId").html(html);
-                    debugger;
+
                 }
             },
             error: function (data) {
