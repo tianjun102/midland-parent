@@ -71,7 +71,7 @@
                     <option value="2" <c:if test="${item.filmType ==2}"  >selected="selected"</c:if>>写字楼</option>
                 </select>
             </li>
-            <%@include file="../menu/area.jsp" %>
+            <%@include file="../menu/area_required.jsp" %>
             <li><span>楼盘ID：</span>
                 <input type="text" name="housesId" id="housesId" value="${item.housesId}"/>
             </li>
@@ -129,7 +129,7 @@
 
     //保存数据
     function saveData() {
-        if (notEmpty('housesId', 'housesId', '') && notEmpty('housesName', 'housesName', '')
+        if (checkSelect('citys','请选择市级')&& notEmpty('housesId', 'housesId', '') && notEmpty('housesName', 'housesName', '')
             && InitInput.setTime('duration', 'duration', '时间格式不正确')) {
             var data = $("#dataForm").serialize();
 

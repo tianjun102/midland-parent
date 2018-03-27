@@ -89,7 +89,7 @@
                     <option value="1">写字楼</option>
                 </select>
             </li>
-            <%@include file="../menu/area.jsp" %>
+            <%@include file="../menu/area_required.jsp" %>
 
             <li><span>楼盘ID：</span>
                 <input type="text" name="housesId" id="housesId" onblur="notEmpty('housesId','housesId','')"/>
@@ -151,9 +151,10 @@
         console.log(notEmpty('housesId', 'housesId', ''));
         console.log(notEmpty('housesName', 'housesName', ''));
         console.log(InitInput.setTime('duration','duration','时间格式不正确'));
-        if (notEmpty('housesId', 'housesId', '')
+        if (checkSelect('citys','请选择市级') && notEmpty('housesId', 'housesId', '')
             && notEmpty('housesName', 'housesName', '')
-            && InitInput.setTime('duration','duration','时间格式不正确')) {
+            && InitInput.setTime('duration','duration','时间格式不正确')
+            ) {
 
 
             $.ajax({
