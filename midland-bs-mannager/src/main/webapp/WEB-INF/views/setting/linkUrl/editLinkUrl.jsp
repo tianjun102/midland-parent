@@ -35,7 +35,6 @@
                     </select>
                 </p>
             </li>
-            <li><span>链接名：</span><input style="width:274px;" type="text" name="linkName" value="${linkUrlManager.linkName}" id="linkName" onblur="notEmpty('linkName','linkName','链接名不能为空！');" maxlength="50"/><span class="_star">*</span></li>
             <li>
                 <span style = "float:left;">平台：</span>
                 <select name="source" id="source" class="dropdown">
@@ -63,6 +62,8 @@
                 </select>
                 <span class="_star">*</span>
             </li>
+            <li><span>链接名：</span><input style="width:274px;" type="text" name="linkName" value="${linkUrlManager.linkName}" id="linkName" onblur="notEmpty('linkName','linkName','链接名不能为空！');" maxlength="50"/><span class="_star">*</span></li>
+
             <li>
                 <span>链接URL：</span><input style="width:274px;" type="text" name="linkUrl" id="linkUrl" onblur="checkUrl('linkUrl','linkUrl','网址格式不正确！')" value="${linkUrlManager.linkUrl}" /><span class="_star">*</span>
             </li>
@@ -83,7 +84,7 @@
 </section>
 <script type="text/javascript">
     function saveData() {
-        if(notEmpty('linkName','linkName','链接名不能为空！')&&checkSelect("source","平台不能为空！")&&notEmpty('linkUrl','linkUrl','链接名不能为空！')&&notEmpty('contacts','contacts','链接名不能为空！')&&notEmpty('phone','phone','联系方式不能为空！')){
+        if(notEmpty('linkName','linkName','链接名不能为空！')&&checkSelect("source","平台不能为空！")&&notEmpty('linkUrl','linkUrl','链接URL不能为空！')&&notEmpty('contacts','contacts','联系人不能为空！')&&notEmpty('phone','phone','联系方式不能为空！')){
             var data = $("#addFrom").serialize();
             $.ajax({
                 type: "post",
