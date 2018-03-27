@@ -181,7 +181,7 @@
         <dependency>
             <groupId>com.github.nobodxbodon</groupId>
             <artifactId>zhconverter</artifactId>
-            <version>0.0.5</version>
+            <version>0.0.4</version>
         </dependency>
         <dependency>
             <groupId>com.github.pagehelper</groupId>
@@ -495,11 +495,11 @@
 			<version>${commons.lang.version}</version>
 		</dependency>
 		
-		<dependency><!--常用工具类 -->
-			<groupId>com.euditor.json</groupId>
-			<artifactId>json</artifactId>
-			<version>1.0</version>
-		</dependency>
+		<!--<dependency>&lt;!&ndash;常用工具类 &ndash;&gt;-->
+			<!--<groupId>com.euditor.json</groupId>-->
+			<!--<artifactId>json</artifactId>-->
+			<!--<version>1.0</version>-->
+		<!--</dependency>-->
 		<!-- apache email -->
 		<dependency>
 		    <groupId>org.apache.commons</groupId>
