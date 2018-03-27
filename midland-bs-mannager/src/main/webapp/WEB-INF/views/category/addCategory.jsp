@@ -153,7 +153,7 @@
             </c:if>
 
             <c:choose>
-                <c:when test="${type == 3 or type ==1 or type == 0}">
+                <c:when test="${type == 3 or type ==1 or type == 0 or type ==4}">
                     <li><span>父节点：</span><input style="width: 250px!important;background-color: #dddfe2;" type="text" name="parentName" onclick="showTree()"
                                                 readonly="readonly" value="一级分类"/>
                         <input name="parentId" type="hidden" value="0"/>
@@ -222,7 +222,7 @@
     function saveData(type) {
 
         if (notEmpty('cateName', 'cateName', '分类名称不能为空！')) {
-            if (type != 2 && type !=3 && !checkUrl('linkUrl', 'linkUrl', '网站链接格式不正确！')) {
+            if (type != 2 && type !=3 && $('input[name="isHref"]:checked').val()==0 && !checkUrl('linkUrl', 'linkUrl', '网站链接格式不正确！')) {
                 return;
             }
             var data = $("#addFrom").serialize();

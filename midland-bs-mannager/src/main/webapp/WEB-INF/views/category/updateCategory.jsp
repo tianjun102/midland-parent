@@ -150,7 +150,7 @@
                 </li>
             </c:if>
             <c:choose>
-                <c:when test="${type == 3 or type ==1 or type == 0}">
+                <c:when test="${type == 3 or type ==1 or type == 0 or type ==4}">
                     <li><span>父节点：</span><input style="width: 250px!important;background-color: #dddfe2;" type="text" name="parentName" onclick="showTree()"
                                                 readonly="readonly" value="一级分类"/>
                         <input name="parentId" type="hidden" value="0"/>
@@ -178,12 +178,13 @@
             </li>
             <c:if test="${type == 4}">
                 <li id="isHrefId" ><span>超链接：</span>
-                    <label class="checkitem"><input type="radio" name="isHref" onclick="checkRadio()"  class="isHref" value="0" checked="checked"><span>是</span></label>
-                    <label class="checkitem"><input type="radio" name="isHref" onclick="checkRadio()" class="isHref" value="1"><span>否</span></label>
+                    <label class="checkitem"><input type="radio" name="isHref" onclick="checkRadio()"  class="isHref" value="0" <c:if test="${item.isHref==0}">checked="checked"</c:if> ><span>是</span></label>
+                    <label class="checkitem"><input type="radio" name="isHref" onclick="checkRadio()" class="isHref" value="1" <c:if test="${item.isHref==1}">checked="checked"</c:if> ><span>否</span></label>
                 </li>
             </c:if>
+
             <c:if test="${type != 2 and type !=3}">
-                <li id="linkUrlId">
+                <li id="linkUrlId" <c:if test="${item.isHref==0}">style="display: block" </c:if><c:if test="${item.isHref==1}">style="display: none" </c:if>>
                     <span>网站链接：</span><input style="width:250px;" type="text" name="linkUrl" id="linkUrl" value="${item.linkUrl}" onblur="checkUrl('linkUrl','linkUrl','网站链接格式不正确！');" maxlength="50"/>
                 </li>
             </c:if>
@@ -199,7 +200,8 @@
 <script type="text/javascript">
     function saveData(type) {
         if (notEmpty('cateName', 'cateName', '分类名称不能为空！')) {
-            if (type!=2  && type !=3 && !checkUrl('linkUrl', 'linkUrl', '网站链接格式不正确！')){
+
+            if (type != 2 && type !=3 && $('input[name="isHref"]:checked').val()==0 && !checkUrl('linkUrl', 'linkUrl', '网站链接格式不正确！')) {
                 return;
             }
         var data = $("#addFrom").serialize();
