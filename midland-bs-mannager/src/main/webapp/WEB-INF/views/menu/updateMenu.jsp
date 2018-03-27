@@ -99,10 +99,10 @@
                 <input name="menuTypeId" type="hidden" value="${item.menuTypeId}"/><label style="color: red" class = "_star " >*</label>
             </li>
             <li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >
-                <div class="zTreeDemoBackground left" style  = "position:absolute;top: -10px;"   onblur="test(event)">
+                <div class="zTreeDemoBackground left" style  = "position:absolute;left: -268px; top: 29px;z-index: 998"   onblur="test(event)">
                     <ul id="categoryTree" class="ztree" style  = "width:250px; height: 140px!important;"></ul>
                 </div>
-                <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: 323px;" onclick="hideTree()">
+                <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: -50px; top: 40px;z-index: 999" onclick="hideTree()">
             </li>
             <li><span>菜单名：</span>
                 <input type="text" name="menuName" id="menuName" value="${item.menuName}" onblur="notEmpty('menuName','menuName','')"/>

@@ -167,7 +167,7 @@
                             <input name="parentId" type="hidden"/>
                             <div style="font-size:12px; color:#afadad;text-indent: 70px;">(不选父分类则默认一级分类)</div>
                         </li>
-                        <li id="showDiv" style="display: none;padding-top: 0px;position:relative;">
+                        <li id="showDiv"  style="display: none;padding-top: 0px;position:relative;">
                             <div class="zTreeDemoBackground left" style="position:absolute; left: -268px; top: 29px;"
                                  onblur="test(event)">
                                 <ul id="categoryTree" class="ztree" style="width:235px; height: 140px!important;"></ul>
