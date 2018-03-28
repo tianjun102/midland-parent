@@ -147,6 +147,17 @@ public class PopularServiceImpl implements PopularService {
     }
 
     @Override
+    public List<Popular> findCateGory(Popular popular) throws Exception {
+        try {
+            log.debug("findPopularList  {}", popular);
+            return popularMapper.findCateGory(popular);
+        } catch (Exception e) {
+            log.error("findPopularList  {}", popular, e);
+            throw e;
+        }
+    }
+
+    @Override
     public void batchUpdate(List<Popular> popularList) throws Exception {
         try {
             log.debug("popularList  {}", popularList);

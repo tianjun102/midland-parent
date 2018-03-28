@@ -155,6 +155,26 @@ public class SiteMapServiceImpl implements SiteMapService {
             throw e;
         }
     }
+ @Override
+    public List<SiteMap> findCateGory(SiteMap siteMap) throws Exception {
+        try {
+            log.debug("findCateGory  {}", siteMap);
+            return siteMapMapper.findCateGory(siteMap);
+        } catch (Exception e) {
+            log.error("findCateGory  {}", siteMap, e);
+            throw e;
+        }
+    }
+@Override
+    public List<SiteMap> findModes(SiteMap siteMap) throws Exception {
+        try {
+            log.debug("findModes  {}", siteMap);
+            return siteMapMapper.findModes(siteMap);
+        } catch (Exception e) {
+            log.error("findModes  {}", siteMap, e);
+            throw e;
+        }
+    }
 
     @Override
     public List<SiteMap> findSiteMapByList(List<Integer> cateId) throws Exception {

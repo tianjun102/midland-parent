@@ -114,6 +114,15 @@
 					</dt>
 					<dd>
 						<shiro:hasPermission name="serviceAreaList">
+							<a id = "left9" href="${ctx}/rest/privacy/index" target="contentF"><span>私隐政策</span></a>
+						</shiro:hasPermission>
+						<shiro:hasPermission name="serviceAreaList">
+							<a id = "left10" href="${ctx}/rest/disclaimer/index" target="contentF"><span>免责声明</span></a>
+						</shiro:hasPermission>
+						<shiro:hasPermission name="aboutUsList">
+							<a id = "left13" href="${ctx}/rest/aboutUs/index" target="contentF"><span>关于我们</span></a>
+						</shiro:hasPermission>
+						<shiro:hasPermission name="serviceAreaList">
 							<a id = "left12" href="${ctx}/rest/serviceArea/index" target="contentF"><span>服务范围</span></a>
 						</shiro:hasPermission>
 						<shiro:hasPermission name="tradingProcessList">

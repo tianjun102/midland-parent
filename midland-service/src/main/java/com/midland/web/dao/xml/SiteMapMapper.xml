@@ -80,6 +80,32 @@
         <include refid="select_option"/>
         ORDER BY order_by DESC
     </select>
+
+    <select id="findCateGory" parameterType="com.midland.web.model.SiteMap" resultMap="BaseResultMap">
+        select DISTINCT (cate_id) as cate_id ,cate_name
+        from site_map
+        where 1=1
+        <if test="isDelete == null">
+            and is_delete=0
+        </if>
+        <include refid="select_option"/>
+        AND cate_id is NOT NULL
+        ORDER BY order_by DESC
+    </select>
+
+ <select id="findModes" parameterType="com.midland.web.model.SiteMap" resultMap="BaseResultMap">
+        select DISTINCT (mode_id) as mode_id ,mode_name
+        from site_map
+        where 1=1
+        <if test="isDelete == null">
+            and is_delete=0
+        </if>
+        <include refid="select_option"/>
+        AND mode_id is NOT NULL
+        ORDER BY order_by DESC
+    </select>
+
+
     <select id="findSiteMapByList" parameterType="com.midland.web.model.SiteMap" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

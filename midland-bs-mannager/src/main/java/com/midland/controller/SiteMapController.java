@@ -1,8 +1,10 @@
 package com.midland.controller;
 
 import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
+import com.midland.web.Contants.Contant;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
 import com.midland.web.model.Area;
@@ -46,21 +48,60 @@ public class SiteMapController extends BaseFilter {
      **/
     @RequestMapping("index")
     public String siteMapIndex(SiteMap siteMap, Model model, HttpServletRequest request) throws Exception {
-        Category cate1 = new Category();
+
         //查询资讯分类
-        cate1.setType(4);
-        String result = getSiteMap("", cate1);
-        if (StringUtils.isNotEmpty(result)) {
-            model.addAttribute("categoryData", result);
-        }
+
+        //初始化的时候,最多只拿出50个数据,
+        PageHelper.startPage(1, 50);
+        Page<SiteMap> result = (Page<SiteMap>) siteMapServiceImpl.findCateGory(siteMap);
+
+        PageHelper.startPage(1, 50);
+        Page<SiteMap> result1 = (Page<SiteMap>) siteMapServiceImpl.findModes(siteMap);
+
+
         settingService.getAllProvinceList(model);
         User user = MidlandHelper.getCurrentUser(request);
         if (user.getIsSuper() == null) {
             model.addAttribute("cityId", user.getCityId());
             model.addAttribute("cityName", user.getCityName());
         }
+        model.addAttribute("cateList", result.getResult());
+        model.addAttribute("modeList", result1.getResult());
         model.addAttribute("isSuper", user.getIsSuper());
         return "siteMap/siteMapIndex";
+    }
+
+    //通过模块类型定位分类
+    @RequestMapping("getCate")
+    @ResponseBody
+    public Object getCate(SiteMap siteMap){
+        Map map = new HashMap();
+        try {
+            List<SiteMap> siteMaps = siteMapServiceImpl.findCateGory(siteMap);
+            map.put("state",0);
+            map.put("data",siteMaps);
+
+        } catch (Exception e) {
+            log.error("getCate",e);
+            map.put("state",-1);
+        }
+        return map;
+    }
+ //通过模块类型定位分类
+    @RequestMapping("getMode")
+    @ResponseBody
+    public Object getMode(SiteMap siteMap){
+        Map map = new HashMap();
+        try {
+            List<SiteMap> siteMaps = siteMapServiceImpl.findModes(siteMap);
+            map.put("state",0);
+            map.put("data",siteMaps);
+
+        } catch (Exception e) {
+            log.error("getMode",e);
+            map.put("state",-1);
+        }
+        return map;
     }
 
     @RequestMapping("choose")

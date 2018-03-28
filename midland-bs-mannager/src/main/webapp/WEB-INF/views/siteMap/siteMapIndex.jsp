@@ -2,7 +2,6 @@
          pageEncoding="UTF-8" %>
 <%@include file="../layout/tablib.jsp" %>
 <%@include file="../layout/source.jsp" %>
-<%@include file="../layout/zTree.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -26,24 +25,16 @@
         <form action="${ctx }/rest/siteMap/list" method="POST" id="searchForm"
               onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
             <ul class="userinfo row">
-                <%--<li>
-                    <span style = "float:left;">城市：</span>
-                    <select name="cityId" id="cityId" style="height: 28px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
-                        <option value="">全部</option>
-                        <c:forEach items="${cityList}" var="city">
-                            <option value="${city.id}">${city.name}</option>
-                        </c:forEach>
-                    </select>
-                </li>--%>
+
                 <%@include file="../layout/sherchArea.jsp" %>
-                <li>
-                    <span style="float:left;">平台：</span>
-                    <select name="source" id="source" class="dropdown">
-                        <option value="">全部</option>
-                        <option value="0">网站</option>
-                        <option value="1">微站</option>
-                    </select>
-                </li>
+                <%--<li>--%>
+                    <%--<span style="float:left;">平台：</span>--%>
+                    <%--<select name="source" id="source" class="dropdown">--%>
+                        <%--<option value="">全部</option>--%>
+                        <%--<option value="0">网站</option>--%>
+                        <%--<option value="1">微站</option>--%>
+                    <%--</select>--%>
+                <%--</li>--%>
                 <c:if test="${not empty isSuper}">
                     <li>
                         <span style="float:left;">是否删除：</span>
@@ -54,30 +45,31 @@
                         </select>
                     </li>
                 </c:if>
-                    <%--<li><span>分类名称：</span>--%>
-                        <%--<input  type="text" class="vipcate" id="cateName" name="cateName" placeholder="分类名称"/>--%>
 
 
-                    <%--</li>--%>
-
-                <li><span>分类名称：</span><input  type="text" class="vipcate" id="vipcate" name="vipcate"
-                                           onclick="showTree()" readonly="readonly"/>
-                    <input name="cateId" type="hidden"/>
-                    <input name="cateName" type="hidden"/>
-
+                <li><span>分类名称：</span>
+                    <select name="cateId" id="cateId"
+                            style="height: 28px; width:120px;display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;">
+                        <option value="">请选择</option>
+                        <c:forEach items="${cateList}" var="s">
+                            <option value="${s.cateId}">
+                                    ${s.cateName}
+                            </option>
+                        </c:forEach>
+                    </select>
                 </li>
-                <li id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;">
-                    <div class="zTreeDemoBackground left" style="position:absolute;left: -263px;top:29px;"
-                         onblur="test(event)">
-                        <ul id="categoryTree" class="ztree" style="width:235px; height: 140px!important;"></ul>
-                    </div>
-                    <img src="${ctx}/assets/img/Closed_16px.png" alt="关闭"
-                         style="vertical-align: top;position:absolute; left: -46px;margin-top: 40px;"
-                         onclick="hideTree()">
-                </li>
-                    <li><span>模块名称：</span>
-                        <input  type="text" class="vipcate" id="modeName" name="modeName" placeholder="模块名称"/>
-                    </li>
+
+
+                <li><span>模块名称：</span>
+                    <select name="modeId" id="modeId"
+                            style="height: 28px; width:120px;display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;">
+                        <option value="">请选择</option>
+                        <c:forEach items="${modeList}" var="s">
+                            <option value="${s.modeId}">
+                                    ${s.modeName}
+                            </option>
+                        </c:forEach>
+                    </select>                </li>
                 <li>
                     <input class="public_btn bg1" type="submit" name="inquery" id="inquery" value="查询"/>
                 </li>
@@ -113,37 +105,95 @@
 </script>
 <script type="text/javascript" src="${ctx}/assets/scripts/layer/layer.js"></script>
 <script type="text/javascript">
+    $("#citys").change(function () {
+        getcates();
+        getmodes();
+    })
+    $("#cateId").change(function () {
+        getmodes();
+    })
+    $("#isDelete").change(function () {
+        getcates();
+        getmodes();
+    })
 
-    var setting = {
-        check: {
-            enable: true,
-            chkboxType: {"Y": "sp", "N": "sp"}
+    function getcates() {
+        var data = "&cityId="+$("#cityId").val()+"&isDelete="+$("#isDelete").val();
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/siteMap/getCate",
+            async: false, // 此处必须同步
+            dataType: "json",
+            data: data,
+            success: function (data) {
+                if (data.state == 0) {
+                    var obj = data.data;
+                    var html = "<option value=>请选择</option>";
+                    for (var i = 0; i < obj.length; i++) {
+                        html += "<option value=\"" + obj[i].cateId + "\">" + obj[i].cateName + "</option>";
+                    }
+                    $("#cateId").html(html);
 
-
-        },
-        data: {
-            simpleData: {
-                enable: true
+                } else {
+                    layer.msg("新增失败！", {icon: 2});
+                }
+            },
+            error: function (data) {
+                if (data.responseText != null) {
+                    layer.msg(data.responseText, {icon: 2});
+                } else {
+                    layer.msg("操作失败！", {icon: 2});
+                }
             }
-        },
-        callback: {
-            beforeClick: beforeClick
-        }
-    };
-    var catProNodes = [{id: 0, pId: 0, name: '分类', open: true, nocheck: true, iconSkin: "pIcon01"}, ${categoryData}];
+
+        });
+    }
+
+function getmodes() {
+    var data = "cateId=" + $("#cateId").val()+"&cityId="+$("#cityId").val()+"&isDelete="+$("#isDelete").val();
+
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/siteMap/getMode",
+            async: false, // 此处必须同步
+            dataType: "json",
+            data: data,
+            success: function (data) {
+                if (data.state == 0) {
+                    debugger;
+                    var obj = data.data;
+                    var html = "<option value=>请选择</option>";
+                    for (var i = 0; i < obj.length; i++) {
+
+                        html += "<option value=\"" + obj[i].modeId + "\">" + obj[i].modeName + "</option>";
+                    }
+                    $("#modeId").html(html);
+
+                } else {
+                    layer.msg("新增失败！", {icon: 2});
+                }
+            },
+            error: function (data) {
+                if (data.responseText != null) {
+                    layer.msg(data.responseText, {icon: 2});
+                } else {
+                    layer.msg("操作失败！", {icon: 2});
+                }
+            }
+
+        });
+    }
 
 
-    $(document).ready(function () {
-        $.fn.zTree.init($("#categoryTree"), setting, catProNodes);
-    });
+
 
     function beforeClick(treeId, treeNode, clickFlag) {
-        if (treeNode.id==0){
+        if (treeNode.id == 0) {
             $("input[name='cateId']").val("");
             $("input[name='cateName']").val("");
             $("input[name='noteType']").val(treeNode.type);
             $("input[name='vipcate']").val("");
-        }else{
+        } else {
             $("input[name='cateId']").val(treeNode.id);
             $("input[name='cateName']").val(treeNode.name);
             $("input[name='noteType']").val(treeNode.type);

@@ -52,7 +52,7 @@
                     <li>
                         <span></span>
                         <a onclick="subumintBanner();" target="contentF" class="public_btn bg2">保存</a>
-                        <a style="margin-left: 20px" onclick="window.parent.location.reload();" href="#"
+                        <a style="margin-left: 20px"  href="${ctx}/rest/aboutUs/index"
                            target="contentF" class="public_btn bg3" id="cancel">取消</a>
                     </li>
                 </ul>

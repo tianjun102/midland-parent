@@ -28,10 +28,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value = "/setting")
@@ -56,13 +54,14 @@ public class SettingController extends BaseFilter {
     public String popularIndex(Model model, HttpServletRequest request) throws Exception {
         //初始化的时候,最多只拿出50个数据,
         PageHelper.startPage(1, 50);
-        Page<Popular> po = ( Page<Popular>)popularServiceImpl.findPopularList(new Popular());
+        Page<Popular> po = ( Page<Popular>)popularServiceImpl.findCateGory(new Popular());
+
         settingService.getAllProvinceList(model);
         User user = MidlandHelper.getCurrentUser(request);
         if (user.getIsSuper() == null) {
             model.addAttribute("cityId", user.getCityId());
         }
-        model.addAttribute("cateList", po.getResult());
+        model.addAttribute("cateList",  po.getResult());
         model.addAttribute("isSuper", user.getIsSuper());
         model.addAttribute("type", request.getParameter("type"));
         return "setting/popular/popularIndex";
@@ -83,7 +82,7 @@ public class SettingController extends BaseFilter {
     //通过模块类型定位分类
     @RequestMapping("getCate")
     @ResponseBody
-    public Object dfsdf(Popular popular){
+    public Object getCate(Popular popular){
         Map map = new HashMap();
         try {
             popular.setIsDelete(Contant.isNotDelete);
@@ -93,7 +92,7 @@ public class SettingController extends BaseFilter {
             map.put("data",pularList);
 
         } catch (Exception e) {
-            logger.error("toAddPage",e);
+            logger.error("getCate",e);
             map.put("state",-1);
         }
         return map;

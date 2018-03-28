@@ -24,6 +24,7 @@ public interface PopularMapper {
     Popular shiftDown(Popular popular);
 
     List<Popular> findPopularList(Popular popular);
+    List<Popular> findCateGory(Popular popular);
 
     int batchUpdate(@Param("popularList") List<Popular> popularList);
 

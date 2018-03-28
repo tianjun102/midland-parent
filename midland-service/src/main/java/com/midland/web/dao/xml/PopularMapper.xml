@@ -72,6 +72,13 @@
         <include refid="select_option"/>
         ORDER by order_by asc
     </select>
+ <select id="findCateGory" parameterType="com.midland.web.model.Popular" resultMap="BaseResultMap">
+        select DISTINCT (cate_id) as cate_id,cate_name
+        from popular
+        where 1=1
+        <include refid="select_option"/>
+        ORDER by order_by asc
+    </select>
 
     <insert id="insertPopular" parameterType="com.midland.web.model.Popular">
         <selectKey resultType="INTEGER" order="BEFORE" keyProperty="orderBy">

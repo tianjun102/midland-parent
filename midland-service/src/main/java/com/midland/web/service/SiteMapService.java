@@ -41,6 +41,10 @@ public interface SiteMapService {
     List<SiteMap> findSiteMapList(SiteMap siteMap) throws Exception;
 
 
+    List<SiteMap> findCateGory(SiteMap siteMap) throws Exception;
+
+    List<SiteMap> findModes(SiteMap siteMap) throws Exception;
+
     List<SiteMap> findSiteMapByList(List<Integer> cateId) throws Exception;
 
     List<SiteMap> findSiteMapByModeId(List<Integer> cateId) throws Exception;

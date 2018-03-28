@@ -29,6 +29,10 @@ public interface SiteMapMapper {
 
     List<SiteMap> findSiteMapList(SiteMap siteMap);
 
+    List<SiteMap> findCateGory(SiteMap siteMap);
+
+    List<SiteMap> findModes(SiteMap siteMap);
+
     int batchUpdate(@Param("siteMapList") List<SiteMap> siteMapList);
 
 }
