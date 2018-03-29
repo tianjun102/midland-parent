@@ -310,6 +310,7 @@
                     layer.msg("修改成功！", {icon: 1});
                     setTimeout(function () {
                         parent.layer.closeAll();
+                        parent.$("#inquery").click();
                     }, 2000);
                 } else {
                     layer.msg("修改失败！", {icon: 2});

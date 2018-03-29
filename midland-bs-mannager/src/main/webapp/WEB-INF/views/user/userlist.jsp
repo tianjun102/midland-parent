@@ -51,18 +51,18 @@
                             <a onclick="userRole(${cust.id },'${cust.userCnName }')" target="contentF" class="uList_img"
                                title="角色列表"></a>
                             <a target="contentF" onclick="alterUser(${cust.id })" class="edit_img" title="编辑"></a>
-                            <%--<a target="contentF"--%>
-                                    <%--<c:choose>--%>
-                                        <%--<c:when  test="${cust.auditStatus==0}">--%>
-                                            <%--title="审核实名信息" class="check_img"--%>
-                                        <%--</c:when>--%>
-                                        <%--<c:otherwise>--%>
-                                            <%--title="查看实名信息" class="see_img"--%>
-                                        <%--</c:otherwise>--%>
-                                    <%--</c:choose>--%>
+                                <%--<a target="contentF"--%>
+                                <%--<c:choose>--%>
+                                <%--<c:when  test="${cust.auditStatus==0}">--%>
+                                <%--title="审核实名信息" class="check_img"--%>
+                                <%--</c:when>--%>
+                                <%--<c:otherwise>--%>
+                                <%--title="查看实名信息" class="see_img"--%>
+                                <%--</c:otherwise>--%>
+                                <%--</c:choose>--%>
 
-                                    <%--onclick="auditOrView(${cust.id })"--%>
-                            <%--</a>--%>
+                                <%--onclick="auditOrView(${cust.id })"--%>
+                                <%--</a>--%>
                         </td>
                     </tr>
                 </c:forEach>
@@ -86,16 +86,16 @@
 <script type="text/javascript">
     //删除
     //修改
-function auditOrView(userId) {
+    function auditOrView(userId) {
 
-    layer.open({
-        type: 2,
-        title: ['用户信息'],
-        shade: 0.3,
-        area: ['100%', '100%'],
-        content: ['${ctx}/rest/user/findUser?userId=' + userId + '&flag=1', 'no']
-    });
-}
+        layer.open({
+            type: 2,
+            title: ['用户信息'],
+            shade: 0.3,
+            area: ['100%', '100%'],
+            content: ['${ctx}/rest/user/findUser?userId=' + userId + '&flag=1', 'no']
+        });
+    }
 
     function viewRealRegistration(userId) {
         layer.open({
