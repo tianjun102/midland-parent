@@ -34,6 +34,7 @@
 		<form action="${ctx }/rest/user/userList" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
+				<input type="hidden" name="userType" value ="0"/>
 				<li><span>用户名：</span><input type="text" name="username" id="username" placeholder="请输入用户名" /></li>
 				<li><span>手机号码：</span><input type="text" name="phone" id="phone" placeholder="请输入手机号码" /></li>
 				<li><span>实名状态：</span>
@@ -101,7 +102,7 @@
 			layer.open({
 				type: 2,
 				skin: 'layer-style',
-				area: ['500px','450px'],
+				area: ['500px','500px'],
 				shadeClose: false, //点击遮罩关闭
 				title:['创建用户'],
 				resize: false,

@@ -14,54 +14,29 @@
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/user/edit" method="post" id="userInfoForm">
-        <ul class="userinfo  width-md row">
+        <ul class="userinfo row">
             <input type="hidden" name="id" id="id" value="${user.id}">
             <input type="hidden" name="ph" id="ph" value="${user.phone}">
             <li><span>用户名：</span><input type="text" name="username" id="username" value="${user.username}"
                                         disabled="disabled"/></li>
             <li><span>用户名称：</span><input type="text" name="userCnName" id="userCnName" value="${user.userCnName}"
-                                         disabled="disabled"/></li>
-            <li><span>真实姓名：</span><input type="text" value="${user.actualName}" disabled="disabled"/></li>
+                                         maxlength="50"/><span class="_star">*</span></li>
+
             <li><span>用户类型：</span><input type="text" name="userType" id="userType"
                                          <c:if test="${user.userType==0}">value="管理员"</c:if>
                                          <c:if test="${user.userType==1}">value="经纪人"</c:if>
                                          <c:if test="${user.userType==2}">value="前端用户"</c:if>
                                          disabled="disabled"/></li>
-            <%-- <li>
-                    <span>用户类型：</span>
-                    <select style= "display:inline-block!important;" name="userType" id="userType" class="dropdown" disabled="disabled">
-                        <option value=""
-                            <c:if test="${user.userType==-1}">selected="selected"</c:if>>请选择</option>
-                        <option value="0"
-                            <c:if test="${user.userType==0}">selected="selected"</c:if>>智者汇</option>
-                        <option value="1"
-                            <c:if test="${user.userType==1}">selected="selected"</c:if>>渠道服务商</option>
-                        <option value="2"
-                            <c:if test="${user.userType==2}">selected="selected"</c:if>>终端服务商</option>
-                        <option value="3"
-                            <c:if test="${user.userType==3}">selected="selected"</c:if>>安装专员</option>
-                    </select>
-                </li> --%>
-            <li><span>手机号码：</span><input type="text" name="phone" id="phone" value="${user.phone}" disabled="disabled"
-                                         onblur="checkPhone();"/></li>
-            <li><span>邮箱：</span><input type="text" name="email" id="email" value="${user.email}" onblur="checkEmail();"
-                                       disabled="disabled"/></li>
-            <%-- <li style = "display:flex;align-items:center">
-                <span>角色类型：</span>
-                <c:if test="${!empty roles }">
-                    <c:forEach items="${roles }" var="role">
-                        <input style="width:20px;height: 20px" type="checkbox" name="userRoles" value="${role.id }"
-                            <c:forEach items="${userRoles }" var="userRole">
-                                 <c:if test="${userRole.id ==role.id }">checked="true"</c:if>
-                             </c:forEach> />
-                        <label>${role.roleName }</label>
-                    </c:forEach>
-                </c:if>
-            </li> --%>
+
+            <li><span>手机号码：</span><input type="text" name="phone" id="phone" value="${user.phone}"
+                                         onblur="checkPhone();"/><span class="_star">*</span></li>
+            <li><span>邮箱：</span><input type="text" name="email" id="email" value="${user.email}"
+                                       onblur="checkEmail();"/></li>
+
             <li>
                 <span></span>
-                <%--<a target="contentF" class = "public_btn bg2" id="save" onclick="saveData()">保存</a> --%>
-                <%--<a style="margin-left: 20px" class = "public_btn bg3" id="cancel" onclick="closeWin();">取消</a>--%>
+                <a target="contentF" class="public_btn bg2" id="save" onclick="saveData()">保存</a>
+                <a style="margin-left: 20px" class="public_btn bg3" id="cancel" onclick="closeWin();">取消</a>
             </li>
         </ul>
 
@@ -110,7 +85,7 @@
                     if (data.responseText != null) {
                         layer.msg(data.responseText, {icon: 2});
                     } else {
-                        layer.msg("操作失败！", {icon: 2});
+                        layer.msg("保存失败！", {icon: 2});
                     }
                 }
             });

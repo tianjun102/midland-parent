@@ -232,17 +232,8 @@ public class UserController extends BaseFilter {
      */
     @RequestMapping(value = "/head", method = {RequestMethod.GET, RequestMethod.POST})
     public String head(Model model, HttpServletRequest request) {
-//    	HttpSession session = request.getSession();
         User user = MidlandHelper.getCurrentUser(request);
 
-    	/*Notice notice=new Notice();
-    	notice.setMsgType(1);//智者汇 看 系统公告
-    	if(user!=null && user.getUserType().compareTo(1)==0){
-    		notice.setMsgType(2);//渠道商看 应用通知
-    	}
-    	notice.setIsSend(1);
-    	notice.setIsDelete(1);
-    	List<NoticeWithBLOBs> list=noticeService.selectNoticeList(notice);*/
         HeadMsg headMsg = new HeadMsg();
         List list = null;
         try {
@@ -266,31 +257,69 @@ public class UserController extends BaseFilter {
      */
     @RequestMapping(value = "/left", method = {RequestMethod.GET, RequestMethod.POST})
     public String left(Model model, HttpSession session) throws Exception {
-//    	//父菜单
-//    	List<Menu> menusTemp = new ArrayList<>();
-//    	List<Menu> menus = new ArrayList<>();
-//
-//	    List<Menu> menuRootList = menuServiceImpl.findMenuList(new Menu());
-//	    for (Menu temp : menuRootList){
-//		    if (temp.getParentId() == 0){
-//			    menusTemp.add(temp);
-//		    }
-//	    }
-//
-//	    for (Menu temp : menusTemp){
-//	    	List<Menu> menuTemp = new ArrayList<>();
-//	    	//遍历子菜单
-//	        for (Menu menu : menuRootList){
-//	            if (menu.getParentId() == temp.getId()){
-//				    menuTemp.add(menu);
-//			    }
-//		    }
-//		    temp.setMenuChild(menuTemp);
-//		    menus.add(temp);
-//	    }
-//	    model.addAttribute("items",menus);
         return "left";
     }
+
+    //*******************************前端用户**********************************************************
+
+    /**
+     * 进入用户列表搜索页面
+     *
+     * @param user
+     * @param model
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/bsUserIndex", method = {RequestMethod.GET, RequestMethod.POST})
+    public String bsUserIndex(User user, Model model, HttpServletRequest request) {
+        List<ParamObject> sources = JsonMapReader.getMap("source");
+        model.addAttribute("sources", sources);
+        return "user/bsUserIndex";
+    }
+
+
+    /**
+     * 查询前台用户
+     *
+     * @return
+     */
+    @RequestMapping(value = "/bsUserInfo", method = {RequestMethod.GET, RequestMethod.POST})
+    public String userInfo(String userId, Model model, HttpServletRequest request) {
+        User userInfo = userService.selectById(userId);
+        model.addAttribute("user", userInfo);
+        Role role = new Role();
+        role.setState(1);
+        List<Role> roles = roleService.selectRoleList(role);//所有角色
+        List<Role> userRoles = roleService.selectRolesByUserId(userId);//用户的角色
+        model.addAttribute("roles", roles);
+        model.addAttribute("userRoles", userRoles);
+        return "user/bsUserInfo";
+    }
+
+    /**
+     * 前台用户列表查询
+     *
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "/bsUserList", method = {RequestMethod.GET, RequestMethod.POST})
+    public String bsUserList(User user, Model model, HttpServletRequest request) {
+        User currUser = MidlandHelper.getCurrentUser(request);
+        if (StringUtils.isEmpty(currUser.getIsSuper())) {
+            if (StringUtils.isEmpty(user.getCityId())) {
+                user.setCityId(currUser.getCityId());
+            }
+        }
+        getUserList(user, model, request);
+        List<ParamObject> map = JsonMapReader.getMap("audit_status");
+        model.addAttribute("auditSatusList", map);
+        return "user/bsUserlist";
+    }
+
+
+
+    //********************************后台用户**********************************************************
+
 
     /**
      * 进入用户列表搜索页面
@@ -451,6 +480,7 @@ public class UserController extends BaseFilter {
      */
     @RequestMapping(value = "/toUpdatePage", method = {RequestMethod.GET, RequestMethod.POST})
     public String toUpdatePage(Model model, String userId, HttpServletRequest request) {
+        settingService.getAllProvinceList(model);
         User userInfo = userService.selectById(userId);
         model.addAttribute("item", userInfo);
         List<ParamObject> sources = JsonMapReader.getMap("source");
@@ -929,60 +959,6 @@ public class UserController extends BaseFilter {
         pee.wirteExcel(titleColumn, titleName, titleSize, exportModels, request);
     }
 
-
-    /**
-     * 查询前台用户
-     *
-     * @return
-     */
-    @RequestMapping(value = "/bsUserInfo", method = {RequestMethod.GET, RequestMethod.POST})
-    public String userInfo(String userId, Model model, HttpServletRequest request) {
-        User userInfo = userService.selectById(userId);
-        model.addAttribute("user", userInfo);
-        Role role = new Role();
-        role.setState(1);
-        List<Role> roles = roleService.selectRoleList(role);//所有角色
-        List<Role> userRoles = roleService.selectRolesByUserId(userId);//用户的角色
-        model.addAttribute("roles", roles);
-        model.addAttribute("userRoles", userRoles);
-        return "user/bsUserInfo";
-    }
-
-    /**
-     * 前台用户列表查询
-     *
-     * @param user
-     * @return
-     */
-    @RequestMapping(value = "/bsUserList", method = {RequestMethod.GET, RequestMethod.POST})
-    public String bsUserList(User user, Model model, HttpServletRequest request) {
-        user.setUserType(2);
-        User currUser = MidlandHelper.getCurrentUser(request);
-        if (StringUtils.isEmpty(currUser.getIsSuper())) {
-            if (StringUtils.isEmpty(user.getCityId())) {
-                user.setCityId(currUser.getCityId());
-            }
-        }
-        getUserList(user, model, request);
-        List<ParamObject> map = JsonMapReader.getMap("audit_status");
-        model.addAttribute("auditSatusList", map);
-        return "user/bsUserList";
-    }
-
-    /**
-     * 进入用户列表搜索页面
-     *
-     * @param user
-     * @param model
-     * @param request
-     * @return
-     */
-    @RequestMapping(value = "/bsUserIndex", method = {RequestMethod.GET, RequestMethod.POST})
-    public String bsUserIndex(User user, Model model, HttpServletRequest request) {
-        List<ParamObject> sources = JsonMapReader.getMap("source");
-        model.addAttribute("sources", sources);
-        return "user/bsUserIndex";
-    }
 
 
     @RequestMapping(value = "/vcode/toVcode", method = {RequestMethod.GET, RequestMethod.POST})

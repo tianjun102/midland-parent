@@ -17,16 +17,14 @@
         <tr>
             <th style="width: 5%">序号</th>
             <th style="width: 7%">用户名</th>
+            <th style="width: 7%">用户昵称</th>
             <th style="width: 10%">手机号码</th>
-            <th style="width: 12%">邮箱</th>
-            <th style="width: 8%">真实姓名</th>
             <th style="width: 15%">注册时间</th>
             <th style="width: 6%">平台</th>
             <th style="width: 6%">实名状态</th>
             <th style="width: 7%">审核人</th>
             <th style="width: 15%">审核时间</th>
-            <%--<th style="width: 10%">用户类型</th>--%>
-            <th style="width: 15%">操作</th>
+            <th style="width: 25%">操作</th>
         </tr>
         </thead>
         <tbody>
@@ -37,9 +35,8 @@
                     <tr>
                         <td>${xh.count }</td>
                         <td>${cust.username }</td>
+                        <td>${cust.userCnName }</td>
                         <td>${cust.phone }</td>
-                        <td>${cust.email }</td>
-                        <td>${cust.actualName }</td>
                         <td>${cust.createTime }</td>
                         <td><c:if test="${cust.source ==0 }">网站</c:if>
                             <c:if test="${cust.source ==1 }">微站</c:if></td>
@@ -50,28 +47,21 @@
                         </c:forEach></td>
                         <td>${cust.auditName }</td>
                         <td>${cust.auditTime }</td>
-                            <%--<td>--%>
-                            <%--<c:if test="${cust.userType==0}">智者汇</c:if> --%>
-                            <%--<c:if test="${cust.userType==1}">渠道服务商</c:if>--%>
-                            <%--</td>--%>
                         <td>
-                                <%--<a onclick="preUpdate(${cust.id })" target="contentF" class = "edit_img" title = "编辑"></a>--%>
-                           <%-- <a onclick="userRole(${cust.id },'${cust.userCnName }')" target="contentF" class="uList_img"
-                               title="角色列表"></a>--%>
-                                <%--<a href="#" onclick="isReset(${cust.id })" target="contentF" class = "reset_img" title = "重置密码"></a>--%>
-                                <%--<a target="contentF" class = "delete_img" title = "删除" onclick="isDelete(${cust.id })" --%>
 
-                            <%--<a target="contentF" onclick="alterUser(${cust.id })" class="edit_img" title="编辑"></a>--%>
-                                <%--<c:choose>--%>
-                                <%--<c:when test="${cust.isBlack==0}">--%>
-                                <%--<a target="contentF" onclick="takeInblacklist(${cust.id })">加入黑名单</a>--%>
-                                <%--</c:when>--%>
-                                <%--<c:otherwise>--%>
-                                <%--<a target="contentF" onclick="takeOutblacklist(${cust.id })">撤销黑名单</a>--%>
+                            <a target="contentF" onclick="alterUser(${cust.id })" class="edit_img" title="编辑"></a>
+                            <a target="contentF"
+                                    <c:choose>
+                                        <c:when  test="${cust.auditStatus==0}">
+                                            title="审核实名信息" class="check_img"
+                                        </c:when>
+                                        <c:otherwise>
+                                            title="查看实名信息" class="see_img"
+                                        </c:otherwise>
+                                    </c:choose>
 
-                                <%--</c:otherwise>--%>
-                                <%--</c:choose>--%>
-                            <a target="contentF" title="查看实名信息" class="see_img" onclick="viewRealRegistration(${cust.id })"> </a>
+                               onclick="auditOrView(${cust.id })"
+                            </a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -95,7 +85,16 @@
 <script type="text/javascript">
     //删除
     //修改
+    function auditOrView(userId) {
 
+        layer.open({
+            type: 2,
+            title: ['用户信息'],
+            shade: 0.3,
+            area: ['600px', '600px'],
+            content: ['${ctx}/rest/user/findUser?userId=' + userId + '&flag=1', 'no']
+        });
+    }
 
     function viewRealRegistration(userId) {
         layer.open({
@@ -103,7 +102,7 @@
             title: ['用户信息'],
             shade: 0.3,
             area: ['500px', '500px'],
-            content: ['${ctx}/rest/user/bsUserInfo?userId=' + userId, 'no']
+            content: ['${ctx}/rest/user/findUser?userId=' + userId + '&flag=1', 'no']
         });
     }
 
@@ -127,8 +126,8 @@
             type: 2,
             title: ['编辑用户'],
             shade: 0.3,
-            area: ['500px', '450px'],
-            content: ['${ctx}/rest/user/toUpdatePage?userId=' + userId, 'no']
+            area: ['600px', '600px'],
+            content: ['${ctx}/rest/user/toUpdatePage?userId=' + userId, 'yes']
         });
     }
 
