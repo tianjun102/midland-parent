@@ -85,11 +85,10 @@ public class SettingController extends BaseFilter {
     public Object getCate(Popular popular){
         Map map = new HashMap();
         try {
-            popular.setIsDelete(Contant.isNotDelete);
-            popular.setIsShow(Contant.isShow);
-            List<Popular> pularList = popularServiceImpl.findPopularList(popular);
+            PageHelper.startPage(1,50);
+            Page<Popular> pularList =(Page<Popular>) popularServiceImpl.findPopularList(popular);
             map.put("state",0);
-            map.put("data",pularList);
+            map.put("data",pularList.getResult());
 
         } catch (Exception e) {
             logger.error("getCate",e);
@@ -416,7 +415,10 @@ public class SettingController extends BaseFilter {
             model.addAttribute("cityId", user.getCityId());
             model.addAttribute("cityName", user.getCityName());
         }
+        banner.setStartTime(MidlandHelper.formatDate(MidlandHelper.getCurrentTime()));
+        banner.setEndTime(MidlandHelper.formatDate(MidlandHelper.getyyyyMMddHHmmss(MidlandHelper.getCurrentTime(), 3)));
         model.addAttribute("isSuper", user.getIsSuper());
+        model.addAttribute("item", banner);
         return "setting/banner/addBanner";
     }
 

@@ -49,10 +49,10 @@
                 </li>
                 <li>
                     <span>上线时间：</span>
-                    <input type="text" name="startTime" id="startTime" class="Wdate half"
+                    <input type="text" name="startTime" id="startTime" class="Wdate half" value="${item.startTime}"
                            onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'endTime\')}'})"/>
                     <em class="gang">-</em>
-                    <input type="text" name="endTime" id="endTime" class="Wdate half"
+                    <input type="text" name="endTime" id="endTime" class="Wdate half" value="${item.endTime}"
                            onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'startTime\')}'})"/>
                 </li>
                 <li><span>城市：</span>
@@ -67,6 +67,7 @@
                             <option value="${city.id}">${city.name}</option>
                         </c:forEach>
                     </select>
+                    <span class="_star ">*</span>
                 </li>
                 <li><span>平台：</span>
                     <select name="source" id="source">
@@ -103,16 +104,16 @@
                 </li>
                 <li><span>图片：</span>
                     <div style="float: left;">
-                        <input type="hidden" name="bannerImg" id="bannerImg" value="${item.iconImg}">
+                        <input type="hidden" name="bannerImg" id="bannerImg" value="${item.bannerImg}">
 
                         <img style="margin-bottom: 10px;max-width:200px;max-height:200px" id="iconImg1"
-                             src="${item.iconImg}">
+                             src="${item.bannerImg}">
                         <input type="file" name="file_upload" id="file_upload"/>
                     </div>
                 </li>
                 <li><span>图片说明：</span><input type="text" name="imgDesc" placeholder="图片的alt"></li>
                 <!-- <li><span>小图：</span><img  src="" width="120px" height="100px" alt=""><input type="file" name="file2" id="file2" onchange="previewImg(this)"></li> -->
-                <li id="picLike"><span>图片链接：</span>
+                <li id="picLike" style="display: none;"><span>图片链接：</span>
                     <input id="bannerLinkurl" name="bannerLinkurl" maxlength="255" type="text"
                            onblur="checkUrl('bannerLinkurl','bannerLinkurl','网址格式不正确！')" value="">
                 </li>
@@ -295,9 +296,10 @@
     }
 
     function subumintBanner() {
-        if (!(notEmpty('startTime', 'startTime', '开始时间不能为空！') && notEmpty('endTime', 'endTime', '结束时间不能为空！') && checkSelect("source|model|position", "平台不能为空！|模块不能为空！|位置不能为空！"))) {
+        if (!(notEmpty('startTime', 'startTime', '开始时间不能为空！') && notEmpty('endTime', 'endTime', '结束时间不能为空！') && checkSelect("source|model|position|cityId", "平台不能为空！|模块不能为空！|位置不能为空！|城市不能为空!"))) {
             return;
         }
+        debugger;
         if ($("#picLike").attr("style") != 'display: none;') {
             if (!checkUrl('bannerLinkurl', 'bannerLinkurl', '网址格式不正确！')) {
                 return;

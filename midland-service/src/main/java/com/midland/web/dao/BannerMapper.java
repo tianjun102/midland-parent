@@ -18,6 +18,7 @@ public interface BannerMapper {
     int insertBanner(Banner banner);
 
     List<Banner> findBannerList(Banner banner);
+    List<Banner> findRestBannerList(Banner banner);
 
     int batchUpdate(@Param("bannerList") List<Banner> bannerList);
 

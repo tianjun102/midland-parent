@@ -102,7 +102,7 @@ public class BannerRestController extends ServiceBaseFilter {
 			obj.setIsDelete(Contant.isNotDelete);
 			log.info("findBannerList  {}",obj);
 			MidlandHelper.doPage(request);
-			Page<Banner> list = (Page<Banner>)bannerServiceImpl.findBannerList(obj);
+			Page<Banner> list = (Page<Banner>)bannerServiceImpl.findRestBannerList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");

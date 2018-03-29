@@ -21,6 +21,7 @@ import java.util.*;
 public class MidlandHelper {
 
     private static final String COMMON_DATE = "yyyy-MM-dd HH:mm:ss";
+    private static final String DATE = "yyyy-MM-dd";
     private static final String MONTH = "yyyy-MM";
     private static final String CODE_FORMAT = "#00000000";
     private static final String LONG_CODE_FORMAT = "#000000000000";
@@ -36,6 +37,7 @@ public class MidlandHelper {
 
     /**
      * String 2018-01-01 12:12:12  to   2018-01
+     *
      * @param time
      * @return
      */
@@ -45,8 +47,15 @@ public class MidlandHelper {
         return format.format(tempTime);
     }
 
+    public static String formatDate(String time) {
+        Date tempTime = DateUtils.parseStringToDateYYMMDD(time);
+        DateFormat format = new SimpleDateFormat(DATE);
+        return format.format(tempTime);
+    }
+
     /**
      * 数据格式化 小于8位时格式化为8位,大于8位,格式化为12位
+     *
      * @param data
      * @return
      */
@@ -62,6 +71,7 @@ public class MidlandHelper {
 
     /**
      * 获取当前时间
+     *
      * @return
      */
     public static String getCurrentTime() {
@@ -72,6 +82,7 @@ public class MidlandHelper {
 
     /**
      * 获取当前月+int的时间 格式为2018-01-01 12:12:12
+     *
      * @param time
      * @param amount
      * @return
@@ -83,8 +94,10 @@ public class MidlandHelper {
         calendar.add(Calendar.MONTH, amount);
         return format.format(calendar.getTime());
     }
+
     /**
      * 获取当前月+int的时间 格式为2018-01-01 12:12:12
+     *
      * @param time
      * @param amount
      * @return
@@ -100,6 +113,7 @@ public class MidlandHelper {
 
     /**
      * 获取时间,格式为   2018-01
+     *
      * @param time
      * @param amount
      * @return
@@ -114,6 +128,7 @@ public class MidlandHelper {
 
     /**
      * 2018-01-01 +  1  to   2018-02-01 00:00:00
+     *
      * @param yyMMddtime
      * @param amount
      * @return
@@ -129,6 +144,7 @@ public class MidlandHelper {
 
     /**
      * 2018-01 + 1  to    2018-02
+     *
      * @param time
      * @param amount
      * @return

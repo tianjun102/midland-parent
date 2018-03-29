@@ -142,6 +142,16 @@ public class BannerServiceImpl implements BannerService {
             throw e;
         }
     }
+ @Override
+    public List<Banner> findRestBannerList(Banner banner) throws Exception {
+        try {
+            log.debug("findRestBannerList  {}", banner);
+            return bannerMapper.findRestBannerList(banner);
+        } catch (Exception e) {
+            log.error("findRestBannerList  {}", banner, e);
+            throw e;
+        }
+    }
 
     @Override
     public void batchUpdate(List<Banner> bannerList) throws Exception {

@@ -1,6 +1,7 @@
 package com.midland.controller;
 
 import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.core.util.DateUtils;
@@ -50,13 +51,10 @@ public class InformationController extends BaseFilter {
      **/
     @RequestMapping("index")
     public String informationIndex(Information information, Model model, HttpServletRequest request) throws Exception {
-        Category cate1 = new Category();
-        //查询资讯分类
-        cate1.setType(1);
-        String result = getCategoryTree("", cate1);
-        if (StringUtils.isNotEmpty(result)) {
-            model.addAttribute("categoryData", result);
-        }
+        PageHelper.startPage(1,50);
+        information.setArticeType(1);
+        Page<Information> result = (Page<Information>) informationServiceImpl.getCates(information);
+
         settingService.getAllProvinceList(model);
         User user = MidlandHelper.getCurrentUser(request);
         if (user.getIsSuper() == null) {
@@ -64,7 +62,8 @@ public class InformationController extends BaseFilter {
             model.addAttribute("cityName", user.getCityName());
         }
         model.addAttribute("openFlag", redisServiceImpl.getInformationOpenFlag());
-        model.addAttribute("type", cate1.getType());
+        model.addAttribute("type", 1);
+        model.addAttribute("cateList", result.getResult());
         model.addAttribute("isSuper", user.getIsSuper());
         return "information/informationIndex";
     }
@@ -78,7 +77,7 @@ public class InformationController extends BaseFilter {
             map.put("state", 0);
         } catch (Exception e) {
             log.error("openAudit ", e);
-            map.put("state", 0);
+            map.put("state", -1);
 
         }
         return map;
@@ -93,8 +92,25 @@ public class InformationController extends BaseFilter {
             map.put("state", 0);
         } catch (Exception e) {
             log.error("openAudit ", e);
-            map.put("state", 0);
+            map.put("state", -1);
 
+        }
+        return map;
+    }
+
+    @RequestMapping("/getCate")
+    @ResponseBody
+    public Object getCate(Information information) {
+        Map map = new HashMap();
+        try {
+            PageHelper.startPage(1,50);
+
+            Page<Information> result = (Page<Information>) informationServiceImpl.getCates(information);
+            map.put("data", result.getResult());
+            map.put("state", 0);
+        } catch (Exception e) {
+            log.error("getCate ", e);
+            map.put("state", -1);
         }
         return map;
     }
@@ -266,6 +282,25 @@ public class InformationController extends BaseFilter {
         }
         return "information/informationList";
     }
+
+     @RequestMapping("getCates")
+     @ResponseBody
+     public Object getCates(Information information, Model model, HttpServletRequest request) {
+        Map map = new HashMap();
+        try {
+            PageHelper.startPage(1,50);
+            information.setArticeType(1);
+            Page<Information> result = (Page<Information>) informationServiceImpl.getCates(information);
+            map.put("state",0);
+            map.put("data",result.getResult());
+        } catch (Exception e) {
+            log.error("findInformationList  {}", information, e);
+            map.put("state",-1);
+        }
+        return map;
+    }
+
+
 
 
     @RequestMapping("sort")

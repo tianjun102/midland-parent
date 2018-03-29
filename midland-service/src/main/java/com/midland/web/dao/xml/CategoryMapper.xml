@@ -47,6 +47,15 @@
         where id= #{id}
     </update>
 
+    <select id="getCateGorys" parameterType="com.midland.web.model.Category" resultMap="BaseResultMap">
+        select
+        DISTINCT(cate_name),id
+        from category
+        where 1=1
+        <include refid="select_option"/>
+        ORDER BY order_by ASC
+    </select>
+
     <select id="findCategoryList" parameterType="com.midland.web.model.Category" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

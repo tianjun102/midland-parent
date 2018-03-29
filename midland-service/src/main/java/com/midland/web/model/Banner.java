@@ -77,6 +77,8 @@ public class Banner {
 
     private Integer orderBy;
 
+
+
     public Integer getId() {
         return id;
     }

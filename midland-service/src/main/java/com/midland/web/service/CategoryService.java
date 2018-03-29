@@ -46,6 +46,8 @@ public interface CategoryService {
 
     List<Category> findCategoryTreeList(Category category) throws Exception;
 
+    List<Category> getCateGorys(Category category) throws Exception;
+
     Category selectCategoryParentNameById(Integer id);
 
     void batchUpdate(List<Category> categoryList) throws Exception;

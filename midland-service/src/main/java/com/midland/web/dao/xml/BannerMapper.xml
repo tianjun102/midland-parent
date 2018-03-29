@@ -24,10 +24,10 @@
         <result column="order_by" property="orderBy" jdbcType="INTEGER"/>
     </resultMap>
 
-    <sql id="Base_Column_List">
-		id,banner_img,banner_linkurl,img_desc,sort_order,enabled,city_id,source,model,DATE_FORMAT(start_time,'%Y-%m-%d %H:%i:%s') start_time,DATE_FORMAT(end_time,'%Y-%m-%d %H:%i:%s') end_time,position,video_url,detail,is_delete,city_name,clik_num,type,order_by
-	</sql>
 
+    <sql id="Base_Column_List">
+        id,banner_img,banner_linkurl,img_desc,sort_order,enabled,city_id,source,model,DATE_FORMAT(start_time,'%Y-%m-%d') start_time,DATE_FORMAT(end_time,'%Y-%m-%d') end_time,position,video_url,detail,is_delete,city_name,clik_num,type,order_by
+    </sql>
     <select id="selectById" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -76,6 +76,20 @@
             and is_delete=0
         </if>
         <include refid="select_option"/>
+        ORDER BY order_by,position ASC
+    </select>
+
+    <select id="findRestBannerList" parameterType="com.midland.web.model.Banner" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from banner
+        where 1=1
+        <if test="isDelete == null">
+            and is_delete=0
+        </if>
+        <include refid="select_option"/>
+        and date_format(str_to_date(start_time, '%Y-%m-%d'),'%Y-%m-%d') &lt;= date_format(str_to_date(now(), '%Y-%m-%d'),'%Y-%m-%d')
+        and date_format(str_to_date(end_time, '%Y-%m-%d'),'%Y-%m-%d') &gt;= date_format(str_to_date(now(), '%Y-%m-%d'),'%Y-%m-%d')
         ORDER BY order_by,position ASC
     </select>
 
@@ -257,6 +271,7 @@
     </sql>
 
     <sql id="select_option">
+
         <if test="id != null">
             and id= #{id,jdbcType=INTEGER}
         </if>
@@ -285,10 +300,10 @@
             and model= #{model,jdbcType=VARCHAR}
         </if>
         <if test="startTime != null">
-            and start_time>= #{startTime,jdbcType=TIMESTAMP}
+            and date_format(str_to_date(start_time, '%Y-%m-%d'),'%Y-%m-%d') &gt;= date_format(str_to_date(#{startTime,jdbcType=TIMESTAMP}, '%Y-%m-%d'),'%Y-%m-%d')
         </if>
         <if test="endTime != null">
-            and #{endTime,jdbcType=TIMESTAMP} >= end_time
+            and date_format(str_to_date(#{end_time,jdbcType=TIMESTAMP}, '%Y-%m-%d'),'%Y-%m-%d') &gt;= date_format(str_to_date(endTime, '%Y-%m-%d'),'%Y-%m-%d')
         </if>
         <if test="position != null">
             and position= #{position,jdbcType=VARCHAR}
@@ -342,10 +357,10 @@
             and model= #{model,jdbcType=VARCHAR}
         </if>
         <if test="startTime != null">
-            and start_time>= #{startTime,jdbcType=TIMESTAMP}
+            and date_format(str_to_date(start_time, '%Y-%m-%d'),'%Y-%m-%d') &gt;= date_format(str_to_date(#{startTime,jdbcType=TIMESTAMP}, '%Y-%m-%d'),'%Y-%m-%d')
         </if>
         <if test="endTime != null">
-            and #{endTime,jdbcType=TIMESTAMP} >= end_time
+            and date_format(str_to_date(#{end_time,jdbcType=TIMESTAMP}, '%Y-%m-%d'),'%Y-%m-%d') &gt;= date_format(str_to_date(endTime, '%Y-%m-%d'),'%Y-%m-%d')
         </if>
         <if test="position != null">
             and position= #{position,jdbcType=VARCHAR}

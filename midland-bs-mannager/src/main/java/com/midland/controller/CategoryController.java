@@ -1,8 +1,10 @@
 package com.midland.controller;
 
 import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.Area;
 import com.midland.web.model.Category;
 import com.midland.web.model.user.User;
@@ -44,12 +46,8 @@ public class CategoryController extends BaseFilter {
      **/
     @RequestMapping("index")
     public String categoryIndex(Category category, Model model, HttpServletRequest request) throws Exception {
-        /*Map<String,String> parem = new HashMap<>();
-		parem.put("flag","city");
-		parem.put("id","*");
-		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
-		List<Area> cityList = cityMap.get("city");*/
-		/*model.addAttribute("cityList",cityList);*/
+        PageHelper.startPage(1, 50);
+        Page<Category> po = ( Page<Category>)categoryServiceImpl.getCateGorys(category);
         settingService.getAllProvinceList(model);
         User user = MidlandHelper.getCurrentUser(request);
         if (user.getIsSuper()==null){
@@ -58,6 +56,7 @@ public class CategoryController extends BaseFilter {
         }
 
         model.addAttribute("type", category.getType());
+        model.addAttribute("cateList", po.getResult());
         model.addAttribute("isSuper", user.getIsSuper());
         return "category/categoryIndex";
     }
@@ -133,6 +132,23 @@ public class CategoryController extends BaseFilter {
         }
         return map;
     }
+    @RequestMapping("getCate")
+    @ResponseBody
+    public Object getCate(Category category){
+        Map map = new HashMap();
+        try {
+            PageHelper.startPage(1,50);
+            Page<Category> cateGorys = (Page<Category>)categoryServiceImpl.getCateGorys(category);
+            map.put("state",0);
+            map.put("data",cateGorys.getResult());
+
+        } catch (Exception e) {
+            log.error("getCate",e);
+            map.put("state",-1);
+        }
+        return map;
+    }
+
 
     /**
      *

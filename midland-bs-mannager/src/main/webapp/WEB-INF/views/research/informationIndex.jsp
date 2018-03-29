@@ -28,7 +28,7 @@
 		<form action="${ctx }/rest/research/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo row">
-				<input type="hidden" name="articeType" value="0"/>
+				<input type="hidden" name="articeType" id="articeType" value="0"/>
 				<%@include file="../layout/sherchArea.jsp" %>
 				<li><span>平台：</span>
 					<select name="source" id="source" class="dropdown">
@@ -37,16 +37,7 @@
 					</select>
 				</li>
 
-				<li><span>类别：</span><input style="width: 243px;" type="text" class="vipcate" id="vipcate"  name="vipcate" onclick="showTree()" readonly="readonly"/>
-					<input name="cateId" type="hidden"/>
 
-				</li>
-				<li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >
-					<div class="zTreeDemoBackground left" style  = "position:absolute;left: -263px;top:29px;"   onblur="test(event)">
-						<ul id="categoryTree" class="ztree" style  = "width:235px; height: 140px!important;"></ul>
-					</div>
-					<img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: -46px;margin-top: 40px;" onclick="hideTree()">
-				</li>
 				<li>
 					<span style = "float:left;">状态：</span>
 					<select name="status" id="status"  class="dropdown">
@@ -55,6 +46,18 @@
 						<option value="1">下架</option>
 					</select>
 				</li>
+				<li><span>分类：</span>
+					<select name="cateName" id="id"
+							style="height: 28px; width:120px;display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;">
+						<option value="">请选择</option>
+						<c:forEach items="${cateList}" var="s">
+							<option value="${s.cateName}">
+									${s.cateName}
+							</option>
+						</c:forEach>
+					</select>
+				</li>
+
 				<li><span>标题：</span><input type="text" name="title" id="title" placeholder="请输入标题" /></li>
 				<li>
 					<span>发布时间：</span><input class="Wdate half" id="time1"
@@ -94,7 +97,60 @@
 	
 	<script type="text/javascript">
 
-		function toAddPage() {
+
+        $("#source").change(function () {
+            getCate();
+        })
+        $("#status").change(function () {
+            getCate();
+        })
+        $("#citys").change(function () {
+            getCate();
+        })
+        $("#isDelete").change(function () {
+            getCate();
+        })
+
+        function getCate() {
+            var data = "articeType=" + $("#articeType").val() + "&cityId=" + $("#cityId").val() +
+                "&isDelete=" + $("#isDelete").val() + "&source=" + $("#source").val() + "&status=" + $("#status").val();
+			debugger;
+            $.ajax({
+                type: "post",
+                url: "${ctx}/rest/information/getCate",
+                async: false, // 此处必须同步
+                dataType: "json",
+                data: data,
+                success: function (data) {
+                    if (data.state == 0) {
+                        debugger;
+                        var obj = data.data;
+                        var html = "<option value=>请选择</option>";
+                        for (var i = 0; i < obj.length; i++) {
+                            html += "<option value=\"" + obj[i].cateName + "\">" + obj[i].cateName + "</option>";
+                        }
+                        $("#id").html(html);
+
+                    } else {
+                        layer.msg("获取资讯分类失败！", {icon: 2});
+                    }
+                },
+                error: function (data) {
+                    if (data.responseText != null) {
+                        layer.msg(data.responseText, {icon: 2});
+                    } else {
+                        layer.msg("操作失败！", {icon: 2});
+                    }
+                }
+
+            });
+        }
+
+
+
+
+
+        function toAddPage() {
             layer.open({
                 type: 2,
                 title: ['新增市场调究'],
@@ -102,94 +158,6 @@
                 area: ['100%', '100%'],
                 content: ['${ctx}/rest/research/to_add' , 'yes']
             });
-        }
-
-
-        var setting = {
-            check: {
-                enable: true,
-                chkboxType: { "Y": "sp", "N": "sp" }
-
-
-            },
-            data: {
-                simpleData: {
-                    enable: true
-                }
-            },
-            callback: {
-                beforeClick: beforeClick
-            }
-        };
-        var catProNodes =[{id:0, pId:0,name:'分类',open:true,nocheck:true,iconSkin:"pIcon01"},${categoryData}];
-
-
-        $(document).ready(function(){
-            $.fn.zTree.init($("#categoryTree"), setting, catProNodes);
-        });
-
-        function beforeClick(treeId, treeNode, clickFlag) {
-            $("input[name='cateId']").val(treeNode.id);
-            $("input[name='cateName']").val(treeNode.name);
-            $("input[name='vipcate']").val(treeNode.name);
-            $("#showDiv").hide();
-        }
-
-        function showTree(event){
-            var data = $("#searchForm").serialize();
-            data+="&type=0";
-            $.ajax({
-                type: "post",
-                url: "${ctx}/rest/siteMap/choose",
-                async: false, // 此处必须同步
-                dataType: "json",
-                data: data,
-                success: function (data) {
-                    var dfd={id:0, pId:0,name:'分类',open:true,nocheck:true,iconSkin:"pIcon01"};
-                    catProNodes =[dfd];
-                    $.each(data.list,function (i,listItem) {
-                        catProNodes.push(listItem);
-                    });
-                    $.fn.zTree.init($("#categoryTree"), setting, catProNodes);
-                    $("#showDiv").show();
-                },
-                error: function (data) {
-                    if (data.responseText != null) {
-                        layer.msg(data.responseText, {icon: 2});
-                    } else {
-                        layer.msg("保存失败！", {icon: 2});
-                    }
-                }
-            });
-            $("#showDiv").show();
-        }
-
-        function hideTree(event){
-            $("#showDiv").hide();
-        }
-
-
-        $("#source").change(function () {
-            setEmpty();
-        })
-
-        $("#citys").change(function () {
-            setEmpty();
-            $("#cityName").val($("#cityId option:selected").text());
-        })
-
-        function setMenuName(){
-            setEmpty();
-            $("#modeName").val($("#modeId option:selected").text())
-        }
-        function setEmpty() {
-            $("input[name='cateId']").val("");
-            $("input[name='cateName']").val("");
-            $("input[name='showCateName']").val("");
-            $("input[name='noteType']").val("");
-            $("input[name='modeId']").val("");
-            $("input[name='modeName']").val("");
-            $("#showDiv").hide();
         }
 
 

@@ -77,9 +77,10 @@ public class SiteMapController extends BaseFilter {
     public Object getCate(SiteMap siteMap){
         Map map = new HashMap();
         try {
-            List<SiteMap> siteMaps = siteMapServiceImpl.findCateGory(siteMap);
+            PageHelper.startPage(1,50);
+            Page<SiteMap> siteMaps =(Page<SiteMap>) siteMapServiceImpl.findCateGory(siteMap);
             map.put("state",0);
-            map.put("data",siteMaps);
+            map.put("data",siteMaps.getResult());
 
         } catch (Exception e) {
             log.error("getCate",e);
@@ -93,9 +94,10 @@ public class SiteMapController extends BaseFilter {
     public Object getMode(SiteMap siteMap){
         Map map = new HashMap();
         try {
-            List<SiteMap> siteMaps = siteMapServiceImpl.findModes(siteMap);
+            PageHelper.startPage(1,50);
+            Page<SiteMap> siteMaps =(Page<SiteMap>) siteMapServiceImpl.findModes(siteMap);
             map.put("state",0);
-            map.put("data",siteMaps);
+            map.put("data",siteMaps.getResult());
 
         } catch (Exception e) {
             log.error("getMode",e);

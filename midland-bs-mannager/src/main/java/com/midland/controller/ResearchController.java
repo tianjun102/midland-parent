@@ -1,6 +1,7 @@
 package com.midland.controller;
 
 import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.core.util.DateUtils;
@@ -51,19 +52,9 @@ public class ResearchController extends BaseFilter {
      **/
     @RequestMapping("index")
     public String informationIndex(Information information, Model model, HttpServletRequest request) throws Exception {
-        /*Map<String,String> parem = new HashMap<>();
-		parem.put("flag","city");
-		parem.put("id","*");
-		Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
-		List<Area> cityList = cityMap.get("city");
-		model.addAttribute("cityList",cityList);*/
-        Category cate2 = new Category();
-        //查询资讯分类
-        cate2.setType(0);
-        String result = getCategoryTree("", cate2);
-        if (StringUtils.isNotEmpty(result)) {
-            model.addAttribute("categoryData", result);
-        }
+        PageHelper.startPage(1,50);
+        Page<Information> result = (Page<Information>) informationServiceImpl.getCates(information);
+
         settingService.getAllProvinceList(model);
         User user = MidlandHelper.getCurrentUser(request);
         if (user.getIsSuper() == null) {
@@ -71,6 +62,7 @@ public class ResearchController extends BaseFilter {
             model.addAttribute("cityName", user.getCityName());
 
         }
+        model.addAttribute("cateList", result.getResult());
         model.addAttribute("isSuper", user.getIsSuper());
         return "research/informationIndex";
     }
