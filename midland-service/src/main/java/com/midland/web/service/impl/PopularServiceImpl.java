@@ -149,10 +149,10 @@ public class PopularServiceImpl implements PopularService {
     @Override
     public List<Popular> findCateGory(Popular popular) throws Exception {
         try {
-            log.debug("findPopularList  {}", popular);
+            log.debug("findCateGory  {}", popular);
             return popularMapper.findCateGory(popular);
         } catch (Exception e) {
-            log.error("findPopularList  {}", popular, e);
+            log.error("findCateGory  {}", popular, e);
             throw e;
         }
     }

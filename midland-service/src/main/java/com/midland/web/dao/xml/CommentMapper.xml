@@ -315,9 +315,20 @@
         <if test="agentId != null">
             AND agent_id= #{agentId}
         </if>
-        <if test="type != null">
-            and type= #{type,jdbcType=INTEGER}
-        </if>
+        <choose>
+            <when test="types !=null and types.size()>0">
+                and type in
+                <foreach collection="types" item="item" index="index" separator="," open="(" close=")">
+                    #{item}
+                </foreach>
+            </when>
+            <otherwise>
+                <if test="type != null">
+                    and type= #{type,jdbcType=INTEGER}
+                </if>
+            </otherwise>
+        </choose>
+
         <if test="status != null">
             and status= #{status,jdbcType=INTEGER}
         </if>

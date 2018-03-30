@@ -68,11 +68,11 @@
 					</select>
 				</li>
 				<li><span>分类：</span>
-					<select name="cateId" id="cateId"
+					<select name="cateName" id="cateName"
 							style="height: 28px; width:120px;display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;">
 						<option value="">请选择</option>
 						<c:forEach items="${cateList}" var="s">
-							<option value="${s.cateId}">
+							<option value="${s.cateName}">
 									${s.cateName}
 							</option>
 						</c:forEach>
@@ -104,9 +104,9 @@
                         var obj = data.data;
                         var html = "<option value=>请选择</option>";
                         for (var i = 0; i < obj.length; i++) {
-                            html += "<option value=\"" + obj[i].id + "\">" + obj[i].name + "</option>";
+                            html += "<option value=\"" + obj[i].cateName + "\">" + obj[i].cateName + "</option>";
                         }
-                        $("#cateId").html(html);
+                        $("#cateName").html(html);
 
                     } else {
                         layer.msg("新增失败！", {icon: 2});

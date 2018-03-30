@@ -86,7 +86,7 @@ public class SettingController extends BaseFilter {
         Map map = new HashMap();
         try {
             PageHelper.startPage(1,50);
-            Page<Popular> pularList =(Page<Popular>) popularServiceImpl.findPopularList(popular);
+            Page<Popular> pularList =(Page<Popular>) popularServiceImpl.findCateGory(popular);
             map.put("state",0);
             map.put("data",pularList.getResult());
 

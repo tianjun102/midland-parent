@@ -1,5 +1,7 @@
 package com.midland.web.model;
 
+import java.util.List;
+
 /**
  * 评论
  */
@@ -42,6 +44,11 @@ public class Comment {
      **/
     private Integer type;
 
+    /**
+     * type的多个值,  以逗号隔开:1,2
+     */
+    private List<Integer> types;
+
     private String commentTime;
 
     private String startTime;
@@ -71,6 +78,14 @@ public class Comment {
     private String agentUrl;
     private String agentId;
 
+
+    public List<Integer> getTypes() {
+        return types;
+    }
+
+    public void setTypes(List<Integer> types) {
+        this.types = types;
+    }
 
     public Integer getInformationType() {
         return informationType;
