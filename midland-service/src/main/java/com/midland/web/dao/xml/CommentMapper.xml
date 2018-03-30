@@ -28,13 +28,17 @@
 
     <sql id="Base_Column_List">
 		id,comment,user,status,source,is_delete,information_id,type,comment_time,`like`,user_id,head_img,reply_num,all_score,service_score,professional_skills,market_specialty,agent_name,agent_url,agent_id
-</sql>
+    </sql>
 
     <select id="selectCommentById" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from comment
         where id= #{id}
+    </select>
+
+    <select id="getScore" resultMap="BaseResultMap">
+        select sum(all_score)/count(1) from comment where type in(1,2) and agent_id=#{agentId};
     </select>
 
     <delete id="deleteCommentById">

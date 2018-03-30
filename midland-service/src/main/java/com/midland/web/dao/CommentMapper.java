@@ -20,6 +20,8 @@ public interface CommentMapper {
 
     Map getAvgScore(Comment comment);
 
+    Map getScore(Comment comment);
+
     List<Comment> findCommentList(Comment comment);
 
     int batchUpdate(@Param("commentList") List<Comment> commentList);

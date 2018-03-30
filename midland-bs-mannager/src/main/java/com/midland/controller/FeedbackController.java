@@ -7,7 +7,9 @@ import com.midland.web.model.ExportModel;
 import com.midland.web.model.Feedback;
 import com.midland.web.model.user.User;
 import com.midland.web.service.FeedbackService;
+import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
+import com.midland.web.util.ParamObject;
 import com.midland.web.util.PoiExcelExport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +41,8 @@ public class FeedbackController extends BaseFilter {
     @RequestMapping("index")
     public String feedbackIndex(Feedback feedback, Model model, HttpServletRequest request) throws Exception {
         User user = MidlandHelper.getCurrentUser(request);
+        List<ParamObject> paramObjects2 = JsonMapReader.getMap("source");
+        model.addAttribute("sources", paramObjects2);
         model.addAttribute("isSuper", user.getIsSuper());
         return "feedback/feedbackIndex";
     }
