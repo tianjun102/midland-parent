@@ -3,6 +3,7 @@ package com.midland.web.service.impl;
 import com.midland.web.dao.AttentionMapper;
 import com.midland.web.model.Attention;
 import com.midland.web.service.AttentionService;
+import com.midland.web.util.MidlandHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class AttentionServiceImpl implements AttentionService {
     public void insertAttention(Attention attention) throws Exception {
         try {
             log.info("insert {}", attention);
+            attention.setCreateTime(MidlandHelper.getCurrentTime());
             attentionMapper.insertAttention(attention);
         } catch (Exception e) {
             if (e instanceof DuplicateKeyException) {

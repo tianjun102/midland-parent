@@ -217,14 +217,19 @@ public class SiteMapController extends BaseFilter {
         Map<String, String> parem = new HashMap<>();
         parem.put("flag", "city");
         parem.put("id", "*");
-        Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
-        List<Area> cityList = cityMap.get("city");
+
         Category category = new Category();
         category.setType(4);
         String resultCate = getSiteMap("", category);
         if (StringUtils.isNotEmpty(resultCate)) {
             model.addAttribute("categoryData", resultCate);
         }
+        Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
+        List<Area> cityList=new ArrayList<>();
+        if (cityMap != null){
+            cityList = cityMap.get("city");
+        }
+
         model.addAttribute("cityList", cityList);
         model.addAttribute("item", result);
         User user = MidlandHelper.getCurrentUser(request);

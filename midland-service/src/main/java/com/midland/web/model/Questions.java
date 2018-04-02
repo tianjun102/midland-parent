@@ -73,6 +73,12 @@ public class Questions {
     private String endTime;
 
     /**
+     * 当前问题被当前用户关注的id
+     */
+    private String attentionId;
+
+
+    /**
      * 按照字段降序排
      */
     private String descName;
@@ -111,6 +117,14 @@ public class Questions {
      * 关键词
      */
     private String keyWord;
+
+    public String getAttentionId() {
+        return attentionId;
+    }
+
+    public void setAttentionId(String attentionId) {
+        this.attentionId = attentionId;
+    }
 
     public String getKeyWord() {
         return keyWord;

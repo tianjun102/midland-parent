@@ -17,6 +17,7 @@ import java.util.HashMap;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -359,19 +360,22 @@ public class QuestionsRestController extends ServiceBaseFilter {
     }
 
     /**
-     * 问题关注
+     * 取消关注
      *
      * @param obj userId,otherId
      * @return
      */
     @RequestMapping("attention/cancel")
+    @Transactional
     public Object QuestionAttentionCancel(@RequestBody Attention obj) {
         Result result = new Result();
         try {
             obj.setType(Contant.ATTENTION_QUESTION);
             Attention attention = attentionServiceImpl.selectAttentionById(obj.getId());
-            questionsServiceImpl.deleteByPrimaryKey(obj.getId());
-            questionsServiceImpl.attentionCancel(obj.getOtherId());
+            if (attention !=null){
+                attentionServiceImpl.deleteAttentionById(attention.getId());
+                questionsServiceImpl.attentionCancel(attention.getOtherId());
+            }
             result.setCode(ResultStatusUtils.STATUS_CODE_200);
             result.setMsg("success");
         } catch (Exception e) {
@@ -403,14 +407,25 @@ public class QuestionsRestController extends ServiceBaseFilter {
             attention.setUserId(obj.getUserId());
             attention.setType(Contant.ATTENTION_QUESTION);
             List<Attention> attentionList = attentionServiceImpl.findAttentionList(attention);
-            List<Integer> listTemp = new ArrayList<>();
-            attentionList.forEach(e->listTemp.add(e.getOtherId()));
-            Questions temp = new Questions();
-            temp.setAttentionList(listTemp);
-            MidlandHelper.doPage(request);
-            temp.setDescName("question_time");
-            Page<Questions> list = (Page<Questions>) questionsServiceImpl.attentionQuestionPage(temp);
-            list.forEach(e->e.setIsAttention(true));
+            Page<Questions> list=new Page<Questions>();
+            if (attentionList.size()>0){
+                List<Integer> listTemp = new ArrayList<>();
+                attentionList.forEach(e->listTemp.add(e.getOtherId()));
+                Questions temp = new Questions();
+                temp.setAttentionList(listTemp);
+                MidlandHelper.doPage(request);
+                temp.setDescName("question_time");
+                list = (Page<Questions>) questionsServiceImpl.attentionQuestionPage(temp);
+                list.forEach(e->{
+                    attentionList.forEach(e1->{
+                        if (e.getId().equals(e1.getOtherId())){
+                            e.setIsAttention(true);
+                            e.setAttentionId(String.valueOf(e1.getId()));
+                        }
+                    });
+
+                });
+            }
             result.setCode(ResultStatusUtils.STATUS_CODE_200);
             result.setList(list);
             result.setMsg("success");

@@ -103,7 +103,7 @@
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/siteMap/add" method="post" id="dataForm">
         <input type="hidden" name="id" id="id" value="${item.id}" >
-        <input type="hidden" name="cityName" id="cityName" value="${item.cityName}" >
+        <input type="text" name="cityName" id="cityName" value="${item.cityName}" >
         <input name="noteType" type="hidden"/>
         <input name="type" type="hidden"  id="type" value="${type}" alt="网站管理的type=4"/>
         <input name="modeId" type="hidden" value="${item.modeId}"/>
@@ -125,18 +125,6 @@
                 <span class = "_star ">*</span>
             </li>
 
-            <%--<li><span>分类：</span>
-                <input type="hidden" name="cateName" id="cateName" value="">
-                <select onchange="setCateName();" name="cateId" id="cateId" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
-                    <option value="">全部</option>
-                    <option <c:if test="${item.cateId==0}">selected="selected"</c:if> value="0">新房</option>
-                    <option <c:if test="${item.cateId==1}">selected="selected"</c:if> value="1">二手房</option>
-                    <option <c:if test="${item.cateId==2}">selected="selected"</c:if> value="2">租房</option>
-                    <option <c:if test="${item.cateId==3}">selected="selected"</c:if> value="3">写字楼</option>
-                    <option <c:if test="${item.cateId==4}">selected="selected"</c:if> value="4">商铺</option>
-                </select>
-                <span class = "_star ">*</span>
-            </li>--%>
             <li><span>分类：</span><input style="width: 250px!important;" class="vipcate" id="showCateName" name="showCateName" type="text"
                                        <c:if test="${item.modeId != null}">value="${item.cateName}(${item.modeName})"</c:if>
                                        <c:if test="${item.modeId == null}">value="${item.cateName}"</c:if>
@@ -176,6 +164,10 @@
 </section>
 
 <script type="text/javascript">
+    $(function () {
+        $("#cityName").val($("#cityId option:selected").text())
+    })
+
     //保存数据
     function updateData() {
         if(!(notEmpty('name','name','关键字不能为空！')&&checkSelect("source|cityId","平台不能为空！城市不能为空！")&&notEmpty('cateName','cateName','模块不能为空！')&&checkUrl('linkUrl','linkUrl','链接格式不正确！'))){
