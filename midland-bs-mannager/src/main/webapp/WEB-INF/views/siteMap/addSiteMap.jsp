@@ -29,11 +29,8 @@
                 beforeClick: beforeClick
             }
         };
-        var catProNodes =[{id:0, pId:0,name:'分类',open:true,nocheck:true,iconSkin:"pIcon01"},${categoryData}];
-        console.log(2,typeof ${categoryData});
-//        var catProNodes =[{id:0, pId:0,name:'分类',open:true,nocheck:true,iconSkin:"pIcon01"},null];
-
-
+        var catProNodes =[${categoryData}];
+        debugger;
         $(document).ready(function(){
             $.fn.zTree.init($("#categoryTree"), setting, catProNodes);
         });
@@ -77,7 +74,7 @@
                 data: data,
                 success: function (data) {
                     var dfd={id:0, pId:0,name:'分类',open:true,nocheck:true,iconSkin:"pIcon01"};
-                        catProNodes =[dfd];
+                        catProNodes =[];
                     $.each(data.list,function (i,listItem) {
                         catProNodes.push(listItem);
                     });

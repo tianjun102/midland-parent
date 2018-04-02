@@ -114,12 +114,18 @@ public class Contant {
     /**
      * 短信模板
      */
+    //发送给经纪人的短信：模板56849，内容：您好{1}(经纪人姓名),官网收到委托放盘，{1}(楼盘名称){2}(联系人){3}(电话)，现已分配由您跟进，请尽快与客户进行联系，助您成交！
     public static final int SMS_TEMPLATE_89262 = 89262;
+    //发送给预约人的短信：模板id56848，内容：您好！您提交的看房日程由{1}电话{2}帮您带看，该经纪人会尽快联系您安排看房，请保持电话畅通，感谢！
     public static final int SMS_TEMPLATE_56848 = 56848;
+    //发送给预约人的短信：模板id56848，内容：您好！您提交的看房日程由{1}电话{2}帮您带看，该经纪人会尽快联系您安排看房，请保持电话畅通，感谢！
     public static final int SMS_TEMPLATE_56846 = 56846;
+    //发送给经纪人的知府：模板56846，内容：您好{1}女士/先生忆通过官网约看{2}房源，现已分配由您跟进，请在24小时内与客户进行联系，联系方式请登录管理后台中查询
     public static final int SMS_TEMPLATE_56845 = 56845;
-    public static final int SMS_TEMPLATE_63647 = 63647;//预约记录超过24小时发送短信通知
-    public static final int SMS_TEMPLATE_54711 = 54711;//发送短信验证码,预约短信
+    //预约记录超过24小时发送短信通知
+    public static final int SMS_TEMPLATE_63647 = 63647;
+    //发送短信验证码,预约短信
+    public static final int SMS_TEMPLATE_54711 = 54711;
 
     public static final String ANSWER_TITLE = "回答了我的提问：";
     public static final String COMMENT_TITLE = "对你的评论进行了回复：";

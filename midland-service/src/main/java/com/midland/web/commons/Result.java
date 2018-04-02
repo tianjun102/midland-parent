@@ -27,6 +27,10 @@ public class Result<T> implements Serializable {
     private String token;
     private String code_url;
     /**
+     * Meta信息
+     */
+    private Meta meta;
+    /**
      * 请求接口返回状态值
      */
     private Integer code;
@@ -40,6 +44,15 @@ public class Result<T> implements Serializable {
     private Map<Object, Object> map;
 
     private List<Map<T, T>> listMap;
+
+
+    public Meta getMeta() {
+        return meta;
+    }
+
+    public void setMeta(Meta meta) {
+        this.meta = meta;
+    }
 
     public Integer getNumber() {
         return number;

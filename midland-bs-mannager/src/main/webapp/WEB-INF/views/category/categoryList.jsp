@@ -14,16 +14,16 @@
     <table class="table table-bordered table-add">
         <thead>
         <tr>
-            <th style="width: 10%"><a href="#" onclick="checkall()">全选</a> / <a href="#" onclick="delcheckall()">全部取消</a></th>
+            <th style="width: 10%"><a href="#" onclick="checkall()">全选</a> / <a href="#"
+                                                                                onclick="delcheckall()">全部取消</a></th>
             <th style="width: 8%">编号</th>
             <c:if test="${type != 2}">
                 <th style="width: 10%">父分类名称</th>
             </c:if>
-
-            <th style="width: 15%">分类名称</th>
             <c:if test="${type == 3}">
                 <th style="width: 15%">模块名称</th>
             </c:if>
+            <th style="width: 15%">分类名称</th>
             <th style="width: 10%">城市</th>
             <th style="width: 10%">平台</th>
             <th style="width: 32%">操作</th>
@@ -41,11 +41,12 @@
                         <c:if test="${type != 2}">
                             <td><c:if test="${empty item.parentName}">一级分类</c:if>${item.parentName}</td>
                         </c:if>
-                        <td>${item.cateName }</td>
                         <c:if test="${type == 3}">
                             <td>${item.modeName }</td>
                         </c:if>
-                            <td>${item.cityName }</td>
+                        <td>${item.cateName }</td>
+
+                        <td>${item.cityName }</td>
                         <td><c:forEach items="${sources}" var="s">
                             <c:if test="${item.source == s.id}">${s.name}</c:if>
                         </c:forEach></td>

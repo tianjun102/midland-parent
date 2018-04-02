@@ -29,7 +29,7 @@
                 beforeClick: beforeClick
             }
         };
-        var catProNodes =[{id:0, pId:0,name:'分类',open:true,nocheck:true,iconSkin:"pIcon01"},${categoryData}];
+        var catProNodes =[${categoryData}];
 
 
         $(document).ready(function(){
@@ -78,7 +78,7 @@
                 data: data,
                 success: function (data) {
                     var dfd={id:0, pId:0,name:'分类',open:true,nocheck:true,iconSkin:"pIcon01"};
-                    catProNodes =[dfd];
+                    catProNodes =[];
                     $.each(data.list,function (i,listItem) {
                         catProNodes.push(listItem);
                     });

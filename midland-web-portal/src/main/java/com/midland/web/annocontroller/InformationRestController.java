@@ -81,7 +81,7 @@ public class InformationRestController extends ServiceBaseFilter {
 	public Object getInformationById(@RequestBody Map map) {
 		 Result result=new Result();
 		try {
-			Integer id =(Integer)map.get("id");
+			Integer id =Integer.valueOf(String.valueOf(map.get("id")));
 			log.info("getInformationById  {}",id);
 			Information information = informationServiceImpl.selectInformationById(id);
 			if (information != null){
