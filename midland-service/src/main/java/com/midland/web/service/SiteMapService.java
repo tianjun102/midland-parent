@@ -29,6 +29,10 @@ public interface SiteMapService {
 
     void updateSiteMapSelectiveById(SiteMap siteMap) throws Exception;
 
+    void showAndHide(SiteMap siteMap) throws Exception;
+
+    void updateIsDelete(SiteMap siteMap) throws Exception;
+
     @Transactional
     void shiftUp(SiteMap siteMap) throws Exception;
 
@@ -46,6 +50,8 @@ public interface SiteMapService {
     List<SiteMap> findModes(SiteMap siteMap) throws Exception;
 
     List<SiteMap> findSiteMapByList(List<Integer> cateId) throws Exception;
+
+    List<SiteMap> findSiteMapByListAndIsShow(List<Integer> cateId, Integer isShow) throws Exception;
 
     List<SiteMap> findSiteMapByModeId(List<Integer> cateId) throws Exception;
 

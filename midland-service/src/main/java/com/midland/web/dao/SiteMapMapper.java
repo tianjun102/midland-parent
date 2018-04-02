@@ -17,13 +17,17 @@ public interface SiteMapMapper {
 
     int updateSiteMapSelectiveById(SiteMap siteMap);
 
+    int showAndHide(SiteMap siteMap);
+
+    int updateIsDelete(SiteMap siteMap);
+
     int insertSiteMap(SiteMap siteMap);
 
     SiteMap shiftUp(SiteMap siteMap);
 
     SiteMap shiftDown(SiteMap siteMap);
 
-    List<SiteMap> findSiteMapByList(@Param("list") List<Integer> list);
+    List<SiteMap> findSiteMapByList(@Param("list") List<Integer> list,@Param("isShow") Integer isShow);
 
     List<SiteMap> findSiteMapByModeId(@Param("list") List<Integer> list);
 

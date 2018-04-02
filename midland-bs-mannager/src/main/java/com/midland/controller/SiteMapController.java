@@ -207,6 +207,23 @@ public class SiteMapController extends BaseFilter {
         }
         return map;
     }
+    /**
+     * 逻辑删除
+     **/
+    @RequestMapping("delete1")
+    @ResponseBody
+    public Object delete1(SiteMap siteMap) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            log.debug("updateIsDelete  {}", siteMap);
+            siteMapServiceImpl.updateIsDelete(siteMap);
+            map.put("state", 0);
+        } catch (Exception e) {
+            log.error("updateIsDelete  {}", siteMap, e);
+            map.put("state", -1);
+        }
+        return map;
+    }
 
     /**
      *
@@ -255,6 +272,20 @@ public class SiteMapController extends BaseFilter {
             map.put("state", 0);
         } catch (Exception e) {
             log.error("updateSiteMapById  {}", siteMap, e);
+            map.put("state", -1);
+        }
+        return map;
+    }
+    @RequestMapping("showAndHide")
+    @ResponseBody
+    public Object showAndHide(SiteMap siteMap) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            log.debug("showAndHide  {}", siteMap);
+            siteMapServiceImpl.showAndHide(siteMap);
+            map.put("state", 0);
+        } catch (Exception e) {
+            log.error("showAndHide  {}", siteMap, e);
             map.put("state", -1);
         }
         return map;

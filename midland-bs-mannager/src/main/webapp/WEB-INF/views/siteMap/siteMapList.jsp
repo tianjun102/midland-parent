@@ -96,7 +96,7 @@
             yes: function(index){
                 $.ajax({
                     type: "post",
-                    url: "${ctx}/rest/siteMap/update?id="+id+"&isDelete="+isDelete,
+                    url: "${ctx}/rest/siteMap/delete1?id="+id+"&isDelete="+isDelete,
                     cache:false,
                     async:false, // 此处必须同步
                     dataType: "json",
@@ -170,7 +170,7 @@
                 yes: function(index){
                     $.ajax({
                         type: "post",
-                        url: "${ctx}/rest/siteMap/update?id="+id+"&isShow=1",
+                        url: "${ctx}/rest/siteMap/showAndHide?id="+id+"&isShow=1",
                         cache:false,
                         async:false, // 此处必须同步
                         dataType: "json",
@@ -208,7 +208,7 @@
                 yes: function(index){
                     $.ajax({
                         type: "post",
-                        url: "${ctx}/rest/siteMap/update?id="+id+"&isShow=0",
+                        url: "${ctx}/rest/siteMap/showAndHide?id="+id+"&isShow=0",
                         cache:false,
                         async:false, // 此处必须同步
                         dataType: "json",

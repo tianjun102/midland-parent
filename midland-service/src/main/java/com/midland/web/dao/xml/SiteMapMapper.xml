@@ -51,6 +51,25 @@
 
     </select>
 
+    <delete id="updateIsDelete">
+        update site_map
+        <set>
+            is_delete= #{isDelete,jdbcType=INTEGER},
+        </set>
+
+        where id= #{id}
+    </delete>
+
+
+    <update id="showAndHide">
+        update site_map
+        <set>
+            is_show= #{isShow,jdbcType=INTEGER},
+        </set>
+
+        where id= #{id}
+    </update>
+
 
     <update id="updateSiteMapSelectiveById">
         update site_map
@@ -106,11 +125,15 @@
     </select>
 
 
-    <select id="findSiteMapByList" parameterType="com.midland.web.model.SiteMap" resultMap="BaseResultMap">
+    <select id="findSiteMapByList" parameterType="map" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from site_map
-        where 1=1 and is_delete=0 AND mode_id is null
+        where 1=1 and is_delete=0
+        <if test="isShow != null">
+            AND is_show=0
+        </if>
+        AND mode_id is null
         <if test="list.size >0">
             AND cate_id in
             <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
@@ -124,7 +147,7 @@
         select
         <include refid="Base_Column_List"/>
         from site_map
-        where 1=1 and is_delete=0
+        where 1=1 and is_delete=0  AND is_show=0
         <if test="list.size >0">
             AND mode_id in
             <foreach collection="list" index="index" item="item" open="(" separator="," close=")">

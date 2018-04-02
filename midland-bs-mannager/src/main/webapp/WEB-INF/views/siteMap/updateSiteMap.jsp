@@ -45,7 +45,10 @@
 //                $("input[name='modeId']").val("");
 //                $("input[name='modeName']").val("");
             }else{
-                if (treeNode.type==1){
+                if(treeNode.name==$("#name").val()){
+                    return;
+                }
+                else if (treeNode.type==1){
                     $("input[name='cateId']").val(treeNode.pId);
                     $("input[name='cateName']").val(treeNode.pName);
                     $("input[name='showCateName']").val(treeNode.pName+'('+treeNode.name+')');
@@ -103,7 +106,7 @@
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/siteMap/add" method="post" id="dataForm">
         <input type="hidden" name="id" id="id" value="${item.id}" >
-        <input type="text" name="cityName" id="cityName" value="${item.cityName}" >
+        <input type="hidden" name="cityName" id="cityName" value="${item.cityName}" >
         <input name="noteType" type="hidden"/>
         <input name="type" type="hidden"  id="type" value="${type}" alt="网站管理的type=4"/>
         <input name="modeId" type="hidden" value="${item.modeId}"/>
@@ -135,7 +138,7 @@
             </li>
             <li  id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;" >
                 <div class="zTreeDemoBackground left" style  = "position:absolute;top: -10px;"   onblur="test(event)">
-                    <ul id="categoryTree" class="ztree" style  = "width:250px; height: 140px!important;"></ul>
+                    <ul id="categoryTree" class="ztree" style  = "width:250px; height: 240px!important;"></ul>
                 </div>
                 <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: 305px;" onclick="hideTree()">
             </li>

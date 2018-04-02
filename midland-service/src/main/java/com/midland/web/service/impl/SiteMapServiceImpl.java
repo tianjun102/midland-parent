@@ -3,6 +3,7 @@ package com.midland.web.service.impl;
 import com.midland.web.dao.SiteMapMapper;
 import com.midland.web.model.SiteMap;
 import com.midland.web.service.SiteMapService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+import static com.midland.web.Contants.Contant.isShow;
 
 @Service
 public class SiteMapServiceImpl implements SiteMapService {
@@ -79,12 +82,39 @@ public class SiteMapServiceImpl implements SiteMapService {
     public void updateSiteMapSelectiveById(SiteMap siteMap) throws Exception {
         try {
             log.debug("updateSiteMapSelectiveById  {}", siteMap);
+
             int result = siteMapMapper.updateSiteMapSelectiveById(siteMap);
             if (result < 1) {
                 throw new Exception("updateSiteMapSelectiveById");
             }
         } catch (Exception e) {
             log.error("updateSiteMapSelectiveById  {}", siteMap, e);
+            throw e;
+        }
+    }
+  @Override
+    public void showAndHide(SiteMap siteMap) throws Exception {
+        try {
+            log.debug("showAndHide  {}", siteMap);
+            int result = siteMapMapper.showAndHide(siteMap);
+            if (result < 1) {
+                throw new Exception("showAndHide");
+            }
+        } catch (Exception e) {
+            log.error("showAndHide  {}", siteMap, e);
+            throw e;
+        }
+    }
+ @Override
+    public void updateIsDelete(SiteMap siteMap) throws Exception {
+        try {
+            log.debug("updateIsDelete  {}", siteMap);
+            int result = siteMapMapper.updateIsDelete(siteMap);
+            if (result < 1) {
+                throw new Exception("updateIsDelete");
+            }
+        } catch (Exception e) {
+            log.error("updateIsDelete  {}", siteMap, e);
             throw e;
         }
     }
@@ -104,11 +134,11 @@ public class SiteMapServiceImpl implements SiteMapService {
             int nextOrderBy = obj.getOrderBy();
             int currOrderBy = siteMap.getOrderBy();
             obj.setOrderBy(-999999999);
-            siteMapMapper.updateSiteMapSelectiveById(obj);
+            updateSiteMapSelectiveById(obj);
             siteMap.setOrderBy(nextOrderBy);
-            siteMapMapper.updateSiteMapSelectiveById(siteMap);
+            updateSiteMapSelectiveById(siteMap);
             obj.setOrderBy(currOrderBy);
-            siteMapMapper.updateSiteMapSelectiveById(obj);
+            updateSiteMapSelectiveById(obj);
         } catch (Exception e) {
             log.error("shiftUp {}", siteMap, e);
             throw e;
@@ -130,11 +160,11 @@ public class SiteMapServiceImpl implements SiteMapService {
             int nextOrderBy = obj.getOrderBy();
             int currOrderBy = siteMap.getOrderBy();
             obj.setOrderBy(-999999999);
-            siteMapMapper.updateSiteMapSelectiveById(obj);
+            updateSiteMapSelectiveById(obj);
             siteMap.setOrderBy(nextOrderBy);
-            siteMapMapper.updateSiteMapSelectiveById(siteMap);
+            updateSiteMapSelectiveById(siteMap);
             obj.setOrderBy(currOrderBy);
-            siteMapMapper.updateSiteMapSelectiveById(obj);
+            updateSiteMapSelectiveById(obj);
         } catch (Exception e) {
             log.error("shiftDown异常 {}", siteMap, e);
             throw e;
@@ -180,9 +210,19 @@ public class SiteMapServiceImpl implements SiteMapService {
     public List<SiteMap> findSiteMapByList(List<Integer> cateId) throws Exception {
         try {
             log.debug("findSiteMapByList  {}", cateId);
-            return siteMapMapper.findSiteMapByList(cateId);
+            return findSiteMapByListAndIsShow(cateId,null);
         } catch (Exception e) {
             log.error("findSiteMapByList  {}", cateId, e);
+            throw e;
+        }
+    }
+    @Override
+    public List<SiteMap> findSiteMapByListAndIsShow(List<Integer> cateId, Integer isShow) throws Exception {
+        try {
+            log.debug("findSiteMapByListAndIsShow  {}", cateId);
+            return siteMapMapper.findSiteMapByList(cateId,isShow);
+        } catch (Exception e) {
+            log.error("findSiteMapByListAndIsShow  {}", cateId, e);
             throw e;
         }
     }
