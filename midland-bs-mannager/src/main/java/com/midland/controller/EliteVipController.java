@@ -67,10 +67,11 @@ public class EliteVipController extends BaseFilter {
         category.setCityId(MidlandHelper.getCurrentUser(request).getCityId());//避免category查询出多个城市的类型,所以这里默认为登录用户的城市
         category.setIsDelete(Contant.isNotDelete);
         List<Category> result = categoryServiceImpl.findCategoryList(category);
+        model.addAttribute("vipCateGory", result);
         settingServiceImpl.getAllProvinceList(model);
         model.addAttribute("cityId", MidlandHelper.getCurrentUser(request).getCityId());
         model.addAttribute("cityName", MidlandHelper.getCurrentUser(request).getCityName());
-        model.addAttribute("vipCateGory", result);
+
         model.addAttribute("type", category.getType());
         return "eliteVip/addEliteVip";
     }
@@ -152,9 +153,8 @@ public class EliteVipController extends BaseFilter {
         Category category = new Category();
         category.setType(2);
         category.setIsDelete(Contant.isNotDelete);
-        category.setId(eliteVip.getCateId());
         category.setIsShow(Contant.isShow);
-        List<Category> result = categoryServiceImpl.findCategoryListFromCityIdById(category);
+        List<Category> result = categoryServiceImpl.findCategoryList(category);
         settingServiceImpl.getAllProvinceList(model);
         String cityId = null;
         String cityName = null;
@@ -166,6 +166,7 @@ public class EliteVipController extends BaseFilter {
             cityId = user.getCityId();
             cityName = user.getCityName();
         }
+
         model.addAttribute("cityId", cityId);
         model.addAttribute("cityName", cityName);
         model.addAttribute("vipCateGory", result);

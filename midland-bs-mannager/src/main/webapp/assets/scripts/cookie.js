@@ -2,7 +2,7 @@
 //例如可以设置setCookie("password","12345",(3600000*24*180)),180有效
 function setCookie(name, value, path, expires) {
     if (value != '') {
-        deleteCookie(name);
+        deleteCookie(name,path);
     }
     var expdate = new Date();
     expires = 3600000 * 24 * 7;
@@ -30,10 +30,13 @@ function getCookie(name,url) {
 }
 
 //删除某一cookie
-function deleteCookie(name) {
-    var expdate = new Date();
-    expdate.setTime(expdate.getTime() - (3600 * 24 * 1000 * 1));
-    setCookie(name, "","", expdate);
+function deleteCookie(name,path)
+{
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    var cval=getCookie(name);
+    if(cval!=null)
+        document.cookie= name + "="+cval+";expires="+exp.toGMTString();
 }
 
 //检查是否存在此cookie

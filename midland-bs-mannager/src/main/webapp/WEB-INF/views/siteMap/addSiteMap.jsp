@@ -139,16 +139,12 @@
                 <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: 305px;" onclick="hideTree()">
             </li>
 
-            <%--<li>
-                <span>模块名称：</span><input type="text" name="modeName" id="modeName" onblur="notEmpty('modeName','modeName','模块名称不能为空！')">
-                <span class = "_star ">*</span>
-            </li>--%>
             <li><span>关键字：</span>
                 <input style="width: 250px!important;" type="text" name="name" id="name" onblur="notEmpty('name','name','关键字不能为空！')"/>
                 <span class = "_star ">*</span>
             </li>
             <li><span>链接：</span>
-               <input style="width: 250px!important;" type="text" name="linkUrl" id="linkUrl" onblur="checkUrl('linkUrl','linkUrl','链接格式不正确！')"/>
+               <input style="width: 250px!important;"  type="text" name="linkUrl" id="linkUrl" onblur="checkUrl('linkUrl','linkUrl','链接格式不正确！')"/>
                 <span class = "_star ">*</span>
             </li>
             <input name="modeId" class="modeId" type="hidden"/>

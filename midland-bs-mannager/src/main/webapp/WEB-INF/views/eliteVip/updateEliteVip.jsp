@@ -92,6 +92,16 @@
 <script type="text/javascript">
 
 
+    $(function () {
+        if (${item.cateId==null}){
+            if (${vipCateGory.size()>0}){
+                $("#cateId").val("${vipCateGory[0].id}");
+                $("#cateName").val("${vipCateGory[0].cateName}");
+            }
+        }
+    })
+
+
     $("#cates").change(function () {
         $("#cateId").val($("#cates option:selected").val());
         if ($("#cates option:selected").text()=="请选择"){

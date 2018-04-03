@@ -172,10 +172,10 @@
 <script type="text/javascript">
     $(function () {
         var test = window.location.href;
+
         //设置城市选择的cookie
-        var cityId = getCookie("cityId",test);
-        var cityName = getCookie("cityName",test);
-        debugger;
+        var cityId = getCookie("popuolarCityId",test);
+        var cityName = getCookie("popuolarCityName",test);
         if ($("#cityName").val()==''){
             $("#cityName").val( $("#cityId option:selected").text());
         }
@@ -200,9 +200,10 @@
                 data: data,
                 success: function (data) {
                     if (data.flag == 1) {
+                        debugger;
                         var test = window.location.href;
-                        setCookie("cityId",$("#cityId").val(),test);
-                        setCookie("cityName",$("#cityName").val(),test);
+                        setCookie("popuolarCityId",$("#cityId").val(),test);
+                        setCookie("popuolarCityName",$("#cityName").val(),test);
                         layer.msg("新增成功！！！", {icon: 1});
                         $('#save').removeAttr("onclick");
                         setTimeout(function () {

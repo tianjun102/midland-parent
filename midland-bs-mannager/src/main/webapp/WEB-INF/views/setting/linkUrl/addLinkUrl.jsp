@@ -96,10 +96,10 @@
                 success: function (data) {
                     if (data.flag == 1) {
                         var test = window.location.href;
-                        setCookie("cityId",$("#cityId").val(),test);
-                        setCookie("cityName",$("#cityName").val(),test);
-                        setCookie("modeName",$("#modeName").val(),test);
-                        setCookie("modeId",$("#modeId").val(),test);
+                        setCookie("linkUrlCityId",$("#cityId").val(),test);
+                        setCookie("linkUrlCityName",$("#cityName").val(),test);
+                        setCookie("linkUrlModeName",$("#modeName").val(),test);
+                        setCookie("linkUrlModeId",$("#modeId").val(),test);
                         layer.msg("新增成功！！！", {icon: 1});
                         $('#save').removeAttr("onclick");
                         setTimeout(function () {
@@ -129,10 +129,10 @@ $("#modeId").change(function () {
     $(function () {
         var test = window.location.href;
         //设置城市选择的cookie
-        var cityId = getCookie("cityId",test);
-        var cityName = getCookie("cityName",test);
-        var modeId = getCookie("modeId",test);
-        var modeName = getCookie("modeName",test);
+        var cityId = getCookie("linkUrlCityId",test);
+        var cityName = getCookie("linkUrlCityName",test);
+        var modeId = getCookie("linkUrlModeId",test);
+        var modeName = getCookie("linkUrlModeName",test);
         if ($("#cityName").val()==''){
             $("#cityName").val( $("#cityId option:selected").text());
         }

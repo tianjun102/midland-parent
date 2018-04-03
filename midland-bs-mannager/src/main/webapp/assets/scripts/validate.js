@@ -61,7 +61,6 @@ function checkSelect(ids,msgs){
     if (msgs==null||msgs==""){
         msgs = "不能为空";
     }
-    debugger;
     var  idArr= new Array();
     var  msgArr= new Array();
     idArr = ids.split("|");
