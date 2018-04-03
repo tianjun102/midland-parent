@@ -65,7 +65,7 @@
                             <c:choose>
                                 <c:when test="${item.startTime >date or item.endTime<date}">
                                     <a target="contentF" title="上线" class="lineup_img"
-                                       onclick="updateStatus(${item.id},${item.releaseStatus});"></a>
+                                       onclick="updateStatus(${item.id},1);"></a>
 
                                 </c:when>
                                 <c:otherwise>
