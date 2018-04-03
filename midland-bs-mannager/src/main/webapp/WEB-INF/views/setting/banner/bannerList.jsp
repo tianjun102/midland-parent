@@ -87,12 +87,23 @@
                     <c:if test="${banner.model=='9'}">购房资格</c:if>
                     <c:if test="${banner.model=='10'}">关于我们</c:if>
                     <c:if test="${banner.model=='11'}">外销网</c:if>
+                    <c:if test="${banner.model=='12'}">招聘管理</c:if>
                 </td>
                 <td>
-                    <c:if test="${banner.position==0}">位置一</c:if>
-                    <c:if test="${banner.position==1}">位置二</c:if>
-                    <c:if test="${banner.position==2}">位置三</c:if>
-                    <c:if test="${banner.position==3}">位置四</c:if>
+                    <c:if test="${banner.model==12}">
+                        <c:if test="${banner.position=='0'}">招聘首页</c:if>
+                        <c:if test="${banner.position=='1'}">校园职位</c:if>
+                        <c:if test="${banner.position=='2'}">招聘流程</c:if>
+                        <c:if test="${banner.position=='3'}">走进美联</c:if>
+                        <c:if test="${banner.position=='4'}">校园福利</c:if>
+                    </c:if>
+                    <c:if test="${banner.model !=12}">
+                        <c:if test="${banner.position==0}">位置一</c:if>
+                        <c:if test="${banner.position==1}">位置二</c:if>
+                        <c:if test="${banner.position==2}">位置三</c:if>
+                        <c:if test="${banner.position==3}">位置四</c:if>
+                    </c:if>
+
                 </td>
                 <td>${banner.startTime}</td>
                 <td>${banner.endTime}</td>

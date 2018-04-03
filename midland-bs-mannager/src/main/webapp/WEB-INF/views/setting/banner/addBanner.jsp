@@ -90,6 +90,7 @@
                         <option value="9">购房资格</option>
                         <option value="10">关于我们</option>
                         <option value="11">外销网</option>
+                        <option value="12">招聘管理</option>
                     </select>
                     <span class="_star ">*</span>
                 </li>
@@ -134,6 +135,23 @@
 </div>
 </body>
 <script type="text/javascript">
+
+
+    $("#model").change(function () {
+        if ($("#model").val()=="12"){
+            $("#position").html(" <option value=\"0\">招聘首页</option>")
+            $("#position").append(" <option value=\"1\">校园职位</option>")
+            $("#position").append(" <option value=\"2\">招聘流程</option>")
+            $("#position").append(" <option value=\"3\">走进美联</option>")
+            $("#position").append(" <option value=\"4\">校园福利</option>")
+        }else {
+            $("#position").html("<option value=\"0\">位置１</option>")
+            $("#position").append("<option value=\"1\">位置２</option>")
+            $("#position").append("<option value=\"2\">位置３</option>")
+            $("#position").append("<option value=\"3\">位置４</option>")
+        }
+    })
+
     var ImgObj = new Image();   //建立一个图像对象
     var AllImgExt = ".jpg|.jpeg|.gif|.bmp|.png|"//全部图片格式类型
     var FileObj, ImgFileSize, ImgWidth, ImgHeight, FileExt, ErrMsg, FileMsg, HasCheked, IsImg//全局变量 图片相关属性

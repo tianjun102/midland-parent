@@ -85,15 +85,26 @@
                         <option <c:if test="${banner.model=='9'}"> selected='selected' </c:if> value="9">购房资格</option>
                         <option <c:if test="${banner.model=='10'}"> selected='selected' </c:if> value="10">关于我们</option>
                         <option <c:if test="${banner.model=='11'}"> selected='selected' </c:if> value="11">外销网</option>
+                        <option <c:if test="${banner.model=='12'}"> selected='selected' </c:if> value="12">招聘管理</option>
                     </select>
                     <span class="_star ">*</span>
                 </li>
                 <li><span>位置：</span>
                     <select name="position" id="position">
-                        <option <c:if test="${banner.position=='0'}"> selected='selected' </c:if> value="0">位置１</option>
-                        <option <c:if test="${banner.position=='1'}"> selected='selected' </c:if> value="1">位置２</option>
-                        <option <c:if test="${banner.position=='2'}"> selected='selected' </c:if> value="2">位置３</option>
-                        <option <c:if test="${banner.position=='3'}"> selected='selected' </c:if> value="3">位置４</option>
+                        <c:if test="${banner.model==12}">
+                            <option value="0" <c:if test="${banner.position=='0'}"> selected='selected' </c:if>>招聘首页</option>
+                            <option value="1" <c:if test="${banner.position=='1'}"> selected='selected' </c:if>>校园职位</option>
+                            <option value="2" <c:if test="${banner.position=='2'}"> selected='selected' </c:if>>招聘流程</option>
+                            <option value="3" <c:if test="${banner.position=='3'}"> selected='selected' </c:if>>走进美联</option>
+                            <option value="4" <c:if test="${banner.position=='4'}"> selected='selected' </c:if>>校园福利</option>
+                        </c:if>
+                        <c:if test="${banner.model !=12}">
+                            <option <c:if test="${banner.position=='0'}"> selected='selected' </c:if> value="0">位置１</option>
+                            <option <c:if test="${banner.position=='1'}"> selected='selected' </c:if> value="1">位置２</option>
+                            <option <c:if test="${banner.position=='2'}"> selected='selected' </c:if> value="2">位置３</option>
+                            <option <c:if test="${banner.position=='3'}"> selected='selected' </c:if> value="3">位置４</option>
+                        </c:if>
+
                     </select>
                     <span class="_star ">*</span>
                 </li>
@@ -129,6 +140,23 @@
 </div>
 </body>
 <script type="text/javascript">
+
+    $("#model").change(function () {
+        if ($("#model").val()=="12"){
+            $("#position").html(" <option value=\"0\">招聘首页</option>")
+            $("#position").append(" <option value=\"1\">校园职位</option>")
+            $("#position").append(" <option value=\"2\">招聘流程</option>")
+            $("#position").append(" <option value=\"3\">走进美联</option>")
+            $("#position").append(" <option value=\"4\">校园福利</option>")
+        }else {
+            $("#position").html("<option value=\"0\">位置１</option>")
+            $("#position").append("<option value=\"1\">位置２</option>")
+            $("#position").append("<option value=\"2\">位置３</option>")
+            $("#position").append("<option value=\"3\">位置４</option>")
+        }
+    })
+
+
     var ImgObj = new Image();   //建立一个图像对象
     var AllImgExt = ".jpg|.jpeg|.gif|.bmp|.png|"//全部图片格式类型
     var FileObj, ImgFileSize, ImgWidth, ImgHeight, FileExt, ErrMsg, FileMsg, HasCheked, IsImg//全局变量 图片相关属性
