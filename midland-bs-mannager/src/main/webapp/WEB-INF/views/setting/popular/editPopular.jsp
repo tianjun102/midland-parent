@@ -50,14 +50,7 @@
                 beforeClick: beforeClick
             }
         };
-        var catProNodes = [{
-            id: 0,
-            pId: 0,
-            name: '分类',
-            open: true,
-            nocheck: true,
-            iconSkin: "pIcon01"
-        }, ${categoryData}];
+        var catProNodes = [${categoryData}];
 
 
         $(document).ready(function () {
@@ -83,7 +76,7 @@
                 data: data,
                 success: function (data) {
                     var dfd = {id: 0, pId: 0, name: '分类', open: true, nocheck: true, iconSkin: "pIcon01"};
-                    catProNodes = [dfd];
+                    catProNodes = [];
                     $.each(data.list, function (i, listItem) {
                         catProNodes.push(listItem);
                     });
@@ -113,7 +106,7 @@
         <input type="hidden" name="id" id="id" value="${item.id}">
         <input name="type" type="hidden" value="${type}" alt="热门关注的type=3"/>
         <ul class="userinfo row">
-            <%@include file="../../menu/sheet_required1.jsp" %>
+            <%@include file="../../menu/area_up_required.jsp" %>
             <li>
                 <span style="float:left;">平台：</span>
                 <select name="source" id="source"

@@ -50,14 +50,7 @@
                 beforeClick: beforeClick
             }
         };
-        var catProNodes = [{
-            id: 0,
-            pId: 0,
-            name: '分类',
-            open: true,
-            nocheck: true,
-            iconSkin: "pIcon01"
-        }, ${categoryData}];
+        var catProNodes = [${categoryData}];
 
 
         $(document).ready(function () {
@@ -83,7 +76,7 @@
                 data: data,
                 success: function (data) {
                     var dfd = {id: 0, pId: 0, name: '分类', open: true, nocheck: true, iconSkin: "pIcon01"};
-                    catProNodes = [dfd];
+                    catProNodes = [];
                     $.each(data.list, function (i, listItem) {
                         catProNodes.push(listItem);
                     });
@@ -112,7 +105,7 @@
     <form action="" method="post" id="addFrom">
         <ul class="userinfo row">
             <input name="type" type="hidden" value="${type}" alt="热门关注的type=3"/>
-            <%@include file="../../menu/sheet_required.jsp" %>
+            <%@include file="../../menu/area_required.jsp" %>
             <li>
                 <span style="float:left;">平台：</span>
                 <select name="source" id="source"
@@ -177,7 +170,21 @@
 
 </section>
 <script type="text/javascript">
-
+    $(function () {
+        var test = window.location.href;
+        //设置城市选择的cookie
+        var cityId = getCookie("cityId",test);
+        var cityName = getCookie("cityName",test);
+        debugger;
+        if ($("#cityName").val()==''){
+            $("#cityName").val( $("#cityId option:selected").text());
+        }
+        if (cityId !=''){
+            $("#citys").append("<option value="+cityId+">"+cityName+"</option>");
+            $("#citys").val(cityId);
+            $("#cityName").val(cityName);
+        }
+    })
 
 
     function saveData() {
@@ -193,6 +200,9 @@
                 data: data,
                 success: function (data) {
                     if (data.flag == 1) {
+                        var test = window.location.href;
+                        setCookie("cityId",$("#cityId").val(),test);
+                        setCookie("cityName",$("#cityName").val(),test);
                         layer.msg("新增成功！！！", {icon: 1});
                         $('#save').removeAttr("onclick");
                         setTimeout(function () {

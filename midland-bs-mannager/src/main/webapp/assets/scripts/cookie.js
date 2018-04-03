@@ -13,7 +13,6 @@ function setCookie(name, value, path, expires) {
 
 //根据cookie名，取得cookie值
 function getCookie(name,url) {
-    debugger;
     var search = name + "=";
     if (document.URL != url){
         return;
