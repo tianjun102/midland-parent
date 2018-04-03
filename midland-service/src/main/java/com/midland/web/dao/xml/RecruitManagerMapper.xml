@@ -24,7 +24,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,type,post,recruiters_num,education,work_lift,start_time,end_time,release_status,post_desc,job_claim,city_id,city_name,release_time,email,is_delete
+        id,type,post,recruiters_num,education,work_lift,DATE_FORMAT(start_time,'%Y-%m-%d %H:%i:%s')start_time,DATE_FORMAT(end_time,'%Y-%m-%d %H:%i:%s')end_time,release_status,post_desc,job_claim,city_id,city_name,release_time,email,is_delete
         ,g_roup ,category
     </sql>
 

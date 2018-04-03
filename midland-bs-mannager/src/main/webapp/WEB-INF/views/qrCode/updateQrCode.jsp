@@ -103,7 +103,7 @@
             'buttonText': '上传图片',
             'onUploadSuccess': function (file, data, response) {
                 console.log(data);
-                $("#urlImg").attr("value", data);
+                $("#imgUrl").attr("value", data);
                 $("#iconImg1").attr("src", data);
             },
             'onQueueComplete': function (queueData) {

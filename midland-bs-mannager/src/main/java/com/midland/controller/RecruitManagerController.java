@@ -162,6 +162,30 @@ public class RecruitManagerController extends BaseFilter {
         }
         return map;
     }
+    /**
+     * 招聘信息上线与下线
+     **/
+    @RequestMapping("publish")
+    @ResponseBody
+    public Object publish(RecruitManager recruitManager) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        if (recruitManager.getReleaseStatus() != null && recruitManager.getReleaseStatus() == 1) {
+            recruitManager.setReleaseTime(DateUtils.nowDateToStringYYMMDDHHmmss());
+        }else{
+            recruitManager.setReleaseTime(DateUtils.nowDateToStringYYMMDDHHmmss());
+            recruitManager.setStartTime(MidlandHelper.getCurrentTime());
+            recruitManager.setEndTime(MidlandHelper.getyyyyMMddHHmmss(MidlandHelper.getCurrentTime(),3));
+        }
+        try {
+            log.debug("publish  {}", recruitManager);
+            recruitManagerServiceImpl.updateRecruitManagerById(recruitManager);
+            map.put("state", 0);
+        } catch (Exception e) {
+            log.error("publish  {}", recruitManager, e);
+            map.put("state", -1);
+        }
+        return map;
+    }
 
     /**
      * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
@@ -174,6 +198,7 @@ public class RecruitManagerController extends BaseFilter {
             Page<RecruitManager> result = (Page<RecruitManager>) recruitManagerServiceImpl.findRecruitManagerList(recruitManager);
             Paginator paginator = result.getPaginator();
             model.addAttribute("paginator", paginator);
+            model.addAttribute("date", MidlandHelper.getCurrentTime());
             model.addAttribute("items", result);
         } catch (Exception e) {
             log.error("findRecruitManagerList  {}", recruitManager, e);
