@@ -123,6 +123,11 @@ public class BannerRestController extends ServiceBaseFilter {
 	public Object clickNum(@RequestBody Banner banner) throws Exception {
 		Result result=new Result();
 		try {
+			if (banner.getId()==null){
+				result.setCode(ResultStatusUtils.STATUS_CODE_202);
+				result.setMsg("id不能为空!");
+				return result;
+			}
 			log.info("updateBannerById  {}",banner);
 			banner = bannerServiceImpl.selectById(banner.getId());
 			Integer clickNum = banner.getClikNum();

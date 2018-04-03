@@ -61,13 +61,14 @@ function checkSelect(ids,msgs){
     if (msgs==null||msgs==""){
         msgs = "不能为空";
     }
+    debugger;
     var  idArr= new Array();
     var  msgArr= new Array();
     idArr = ids.split("|");
     msgArr = msgs.split("|");
     for (var i=0;i<idArr.length ;i++ )
     {
-        if (($("#"+idArr[i]).val()!=null&&$("#"+idArr[i]).val()!="")||($("#"+idArr[i]+" option:selected").val()!=null&&$("#"+idArr[i]+" option:selected").val()!="")){
+        if ($("#"+idArr[i]+" option:selected").val()!="请选择"&&(($("#"+idArr[i]).val()!=null&&$("#"+idArr[i]).val()!="")||($("#"+idArr[i]+" option:selected").val()!=null&&$("#"+idArr[i]+" option:selected").val()!=""))){
             continue;
         }else {
             layer.tips(msgArr[i], "select[name='"+idArr[i]+"']",{tips:3});

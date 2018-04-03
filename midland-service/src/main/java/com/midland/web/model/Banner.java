@@ -71,6 +71,9 @@ public class Banner {
      */
     private String cityName;
 
+    /**
+     * 点击量
+     */
     private Integer clikNum;
 
     private Integer type;

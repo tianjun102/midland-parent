@@ -130,7 +130,10 @@ public class InformationController extends BaseFilter {
         category.setType(1);
         category.setParentId(0);
         List<Category> cateList = categoryService.findCategoryList(category);
-        List<Area> cityList = cityMap.get("city");
+        List<Area> cityList=new ArrayList<>();
+        if (cityMap !=null){
+            cityList = cityMap.get("city");
+        }
         User user = MidlandHelper.getCurrentUser(request);
         if (user.getIsSuper() == null) {
             model.addAttribute("cityId", user.getCityId());
@@ -216,7 +219,10 @@ public class InformationController extends BaseFilter {
         category.setType(1);
         category.setParentId(0);
         List<Category> cateList = categoryService.findCategoryList(category);
-        List<Area> cityList = cityMap.get("city");
+        List<Area> cityList=new ArrayList<>();
+        if (cityMap !=null){
+            cityList = cityMap.get("city");
+        }
         category.setParentId(result.getCateParentid());
         List<Category> cateChildList = categoryService.findCategoryList(category);
         model.addAttribute("item", result);

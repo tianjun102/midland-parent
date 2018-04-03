@@ -163,6 +163,10 @@
             <li><span>链接URL：</span><input style="width:274px;" type="text" name="url" id="url" value=""
                                           onblur="checkUrl('url','url','网址格式不正确！')"/><span class="_star">*</span>
             </li>
+            <li id="nofollowId"><span>nofollow：</span>
+                <label class="checkitem"><input type="radio" name="nofollow" class="nofollow" value="1" ><span>是</span></label>
+                <label class="checkitem"><input type="radio" name="nofollow" class="nofollow" value="0" checked="checked"  ><span>否</span></label>
+            </li>
             <li style="padding-top:30px;">
                 <span></span>
                 <a target="contentF" class="public_btn bg2" id="save" onclick="saveData()">保存</a>

@@ -22,10 +22,11 @@
         <result column="is_show" property="isShow" jdbcType="INTEGER"/>
         <result column="order_by" property="orderBy" jdbcType="INTEGER"/>
         <result column="sell_rent" property="sellRent" jdbcType="INTEGER"/>
+        <result column="nofollow" property="nofollow" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,cate_id,menu_id,name,source,url,province_id,city_id,area_id,sheet_id,is_delete,province_name,city_name,area_name,sheet_name,cate_name,is_show,order_by,sell_rent
+        id,cate_id,menu_id,name,source,url,province_id,city_id,area_id,sheet_id,is_delete,province_name,city_name,area_name,sheet_name,cate_name,is_show,order_by,sell_rent,nofollow
     </sql>
 
     <select id="selectById" resultMap="BaseResultMap">
@@ -140,6 +141,9 @@
             <if test="sellRent != null">
                 sell_rent,
             </if>
+            <if test="nofollow != null">
+                nofollow,
+            </if>
 
         </trim>
         values
@@ -198,6 +202,11 @@
             <if test="sellRent != null">
                 #{sellRent},
             </if>
+            <if test="nofollow != null">
+                #{nofollow},
+            </if>
+
+
         </trim>
     </insert>
 
@@ -256,6 +265,9 @@
         <if test="sellRent != null">
             sell_rent=#{sellRent},
         </if>
+        <if test="nofollow != null">
+            nofollow=#{nofollow},
+        </if>
     </sql>
 
     <sql id="select_option">
@@ -311,11 +323,16 @@
             and is_show= #{isShow}
         </if>
         <if test="orderBy != null">
-            order_by=#{orderBy}
+            and order_by=#{orderBy}
         </if>
         <if test="sellRent != null">
-            sell_rent=#{sellRent}
+            and sell_rent=#{sellRent}
         </if>
+        <if test="nofollow != null">
+            and nofollow=#{nofollow}
+        </if>
+
+
     </sql>
     <sql id="select_option1">
 
@@ -369,8 +386,13 @@
         </if>
 
         <if test="sellRent != null">
-            sell_rent=#{sellRent}
+            and sell_rent=#{sellRent}
         </if>
+
+        <if test="nofollow != null">
+            and nofollow=#{nofollow}
+        </if>
+
     </sql>
 
 

@@ -83,7 +83,10 @@ public class ResearchController extends BaseFilter {
         if (StringUtils.isNotEmpty(result)) {
             model.addAttribute("categoryData", result);
         }
-        List<Area> cityList = cityMap.get("city");
+        List<Area> cityList=new ArrayList<>();
+        if (cityMap !=null){
+            cityList = cityMap.get("city");
+        }
         model.addAttribute("cityList", cityList);
         User user = MidlandHelper.getCurrentUser(request);
         if (user.getIsSuper() == null) {
@@ -159,7 +162,10 @@ public class ResearchController extends BaseFilter {
         if (StringUtils.isNotEmpty(cateResult)) {
             model.addAttribute("categoryData", cateResult);
         }
-        List<Area> cityList = cityMap.get("city");
+        List<Area> cityList=new ArrayList<>();
+        if (cityMap !=null){
+            cityList = cityMap.get("city");
+        }
         model.addAttribute("item", result);
         model.addAttribute("cityList", cityList);
         User user = MidlandHelper.getCurrentUser(request);

@@ -70,7 +70,10 @@ public class FeedbackEmailController extends BaseFilter {
         parem.put("flag", "city");
         parem.put("id", "*");
         Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
-        List<Area> cityList = cityMap.get("city");
+        List<Area> cityList=new ArrayList<>();
+        if (cityMap !=null){
+            cityList = cityMap.get("city");
+        }
         model.addAttribute("emailType", feedbackEmail.getEmailType());
         model.addAttribute("cityList", cityList);
         User user = MidlandHelper.getCurrentUser(request);
@@ -139,7 +142,10 @@ public class FeedbackEmailController extends BaseFilter {
         parem.put("flag", "city");
         parem.put("id", "*");
         Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
-        List<Area> cityList = cityMap.get("city");
+        List<Area> cityList=new ArrayList<>();
+        if (cityMap !=null){
+            cityList = cityMap.get("city");
+        }
         model.addAttribute("cityList", cityList);
         model.addAttribute("item", result);
         User user = MidlandHelper.getCurrentUser(request);

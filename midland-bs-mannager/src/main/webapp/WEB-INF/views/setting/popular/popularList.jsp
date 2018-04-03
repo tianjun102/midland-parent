@@ -21,6 +21,7 @@
 							<th style="width: 5%">模块</th>
 							<th style="width: 10%">分类</th>
 							<th style="width: 10%">名称</th>
+							<th style="width: 10%">follow</th>
 							<th style="width: 15%">操作</th>
 						</tr>
 					</thead>
@@ -53,6 +54,8 @@
 								</td>
 								<td>${popular.cateName}</td>
 								<td>${popular.name}</td>
+								<td><c:if test="${popular.nofollow==0}">否</c:if>
+									<c:if test="${popular.nofollow==1}">是</c:if></td>
 								<td>
 									<c:if test="${popular.isDelete==0}">
 									<a onclick="preUpdate(${popular.id })" target="contentF" class = "edit_img" title = "编辑"></a>

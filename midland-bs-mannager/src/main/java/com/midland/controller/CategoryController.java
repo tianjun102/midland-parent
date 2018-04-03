@@ -70,7 +70,11 @@ public class CategoryController extends BaseFilter {
         parem.put("flag", "city");
         parem.put("id", "*");
         Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
-        List<Area> cityList = cityMap.get("city");
+        List<Area> cityList=new ArrayList<>();
+        if (cityMap !=null){
+            cityList = cityMap.get("city");
+        }
+
         String result = getCategoryTree("", category);
         if (StringUtils.isNotEmpty(result)) {
             model.addAttribute("categoryData", result);
@@ -161,7 +165,10 @@ public class CategoryController extends BaseFilter {
         parem.put("flag", "city");
         parem.put("id", "*");
         Map<String, List<Area>> cityMap = settingService.queryCityByRedis(parem);
-        List<Area> cityList = cityMap.get("city");
+        List<Area> cityList=new ArrayList<>();
+        if (cityMap !=null){
+            cityList = cityMap.get("city");
+        }
         Category result = categoryServiceImpl.selectCategoryParentNameById(id);
 		/*List<Category> cateList = categoryServiceImpl.findCategoryList(category);*/
         Category newCategory = new Category();

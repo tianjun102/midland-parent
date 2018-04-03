@@ -77,6 +77,18 @@ public class Popular {
      */
     private Integer orderBy;
 
+    /**
+     * 前端设置是否是nofollow
+     */
+    private Integer nofollow;
+
+    public Integer getNofollow() {
+        return nofollow;
+    }
+
+    public void setNofollow(Integer nofollow) {
+        this.nofollow = nofollow;
+    }
 
     public String getSellRent() {
         return sellRent;
