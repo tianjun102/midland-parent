@@ -117,7 +117,6 @@
                     <option <c:if test="${item.source == '0'}"> selected = 'selected'</c:if> value="0">网站</option>
                     <option <c:if test="${item.source == '1'}"> selected = 'selected'</c:if> value="1">微站</option>
                 </select>
-                <div style = "font-size:12px; color:#afadad;text-indent: 70px;height: 18px;"></div>
             </li>
             <%--<li>
                 <span>父分类：</span>
@@ -149,29 +148,29 @@
                     <label style="color: red" class = "_star " >*</label>
                 </li>
             </c:if>
-            <c:choose>
-                <c:when test="${type == 3 or type ==1 or type == 0 or type ==4}">
-                    <li><span>父节点：</span><input style="width: 250px!important;background-color: #dddfe2;" type="text" name="parentName" onclick="showTree()"
-                                                readonly="readonly" value="一级分类"/>
-                        <input name="parentId" type="hidden" value="0"/>
-                        <div style="font-size:12px; color:#afadad;text-indent: 70px;"></div>
-                    </li>
-                </c:when>
-                <c:otherwise>
-                    <c:if test="${type != 2}">
-                        <li><span>父节点：</span><input style="width: 250px!important;" type="text" value="${item.parentName}" name="parentName" onclick="showTree()" readonly="readonly"/>
-                            <input value="${item.parentId}" name="parentId" type="hidden"/><label style="color: red" class = "_star " >*</label>
-                            <div style = "font-size:12px; color:#afadad;text-indent: 70px;">(不选父分类则默认一级分类)</div>
-                        </li>
-                        <li  id="showDiv" style="display: none;padding-top: 0px;position:relative;" >
-                            <div class="zTreeDemoBackground left" style="position:absolute; left: -268px; top: 29px;"   onblur="test(event)">
-                                <ul id="categoryTree" class="ztree" style="width:235px; height: 140px!important;"></ul>
-                            </div>
-                            <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: -50px; top: 40px;" onclick="hideTree()">
-                        </li>
-                    </c:if>
-                </c:otherwise>
-            </c:choose>
+            <%--<c:choose>--%>
+                <%--<c:when test="${type == 3 or type ==1 or type == 0 or type ==4}">--%>
+                    <%--<li><span>父节点：</span><input style="width: 250px!important;background-color: #dddfe2;" type="text" name="parentName" onclick="showTree()"--%>
+                                                <%--readonly="readonly" value="一级分类"/>--%>
+                        <%--<input name="parentId" type="hidden" value="0"/>--%>
+                        <%--<div style="font-size:12px; color:#afadad;text-indent: 70px;"></div>--%>
+                    <%--</li>--%>
+                <%--</c:when>--%>
+                <%--<c:otherwise>--%>
+                    <%--<c:if test="${type != 2}">--%>
+                        <%--<li><span>父节点：</span><input style="width: 250px!important;" type="text" value="${item.parentName}" name="parentName" onclick="showTree()" readonly="readonly"/>--%>
+                            <%--<input value="${item.parentId}" name="parentId" type="hidden"/><label style="color: red" class = "_star " >*</label>--%>
+                            <%--<div style = "font-size:12px; color:#afadad;text-indent: 70px;">(不选父分类则默认一级分类)</div>--%>
+                        <%--</li>--%>
+                        <%--<li  id="showDiv" style="display: none;padding-top: 0px;position:relative;" >--%>
+                            <%--<div class="zTreeDemoBackground left" style="position:absolute; left: -268px; top: 29px;"   onblur="test(event)">--%>
+                                <%--<ul id="categoryTree" class="ztree" style="width:235px; height: 140px!important;"></ul>--%>
+                            <%--</div>--%>
+                            <%--<img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: -50px; top: 40px;" onclick="hideTree()">--%>
+                        <%--</li>--%>
+                    <%--</c:if>--%>
+                <%--</c:otherwise>--%>
+            <%--</c:choose>--%>
 
             <li>
                 <span>分类名称：</span><input style="width:250px;" type="text" name="cateName" id="cateName" value="${item.cateName}" onblur="notEmpty('cateName','cateName','分类名称不能为空！');" maxlength="50"/>

@@ -166,12 +166,12 @@
         layer.open({
             type: 2,
             skin: 'layer-style',
-            area: ['420px', '450px'],
+            area: ['420px', '350px'],
             shadeClose: false, //点击遮罩关闭
             title: ['新增分类'],
             resize: false,
             scrollbar: false,
-            content: ['${ctx}/rest/category/to_add?type=${type}', 'yes']
+            content: ['${ctx}/rest/category/to_add?type=${type}', 'no']
         });
     }
 
