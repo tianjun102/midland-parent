@@ -54,10 +54,12 @@ public class Contant {
     public static final int isShow = 0;
 
     /**
-     * 招聘信息上线下线
+     * 招聘信息上线
      */
     public static final int isUP = 0;
-
+    /**
+     * 招聘信息下线
+     */
     public static final int isDown = 1;
     /**
      * 委托类型
