@@ -109,7 +109,10 @@ public class MetaController extends BaseFilter  {
 	 **/
 	@RequestMapping("to_update")
 	public String toUpdateMeta(Integer id,Model model,HttpServletRequest request) throws Exception {
+		settingService.getAllProvinceList(model);
 		Meta result = metaServiceImpl.selectMetaById(id);
+		List<ParamObject> sources = JsonMapReader.getMap("source");
+		model.addAttribute("sources", sources);
 		model.addAttribute("item",result);
 		return "meta/updateMeta";
 	}

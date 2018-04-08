@@ -12,12 +12,13 @@
 		<result column="description" property="description" jdbcType="VARCHAR" />
 		<result column="mode_id" property="modeId" jdbcType="INTEGER" />
 		<result column="mode_name" property="modeName" jdbcType="VARCHAR" />
-		<result column="second_mode_name" property="secondModeName" jdbcType="INTEGER" />
-		<result column="second_mode_id" property="secondModeId" jdbcType="VARCHAR" />
+		<result column="second_mode_name" property="secondModeName" jdbcType="VARCHAR" />
+		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+		<result column="second_mode_id" property="secondModeId" jdbcType="INTEGER" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,source,city_id,city_name,title,keywords,description,mode_id,mode_name,second_mode_name,second_mode_id
+		id,source,city_id,city_name,title,keywords,description,mode_id,mode_name,second_mode_name,is_delete,second_mode_id
 	</sql>
 
 	<select id="selectMetaById" resultMap="BaseResultMap">
@@ -41,7 +42,7 @@
 
 	<select id="findMetaList" parameterType="com.midland.web.model.Meta" resultMap="BaseResultMap">
 		select <include refid="Base_Column_List" /> from meta
-		where  1=1
+		where 1=1
 		<include refid="select_option" />
 	</select>
 
@@ -75,6 +76,9 @@
 			<if test="secondModeName != null">
 				second_mode_name,
 			</if>
+			<if test="isDelete != null">
+				is_delete,
+			</if>
 			<if test="secondModeId != null">
 				second_mode_id,
 			</if>
@@ -106,10 +110,13 @@
 				#{modeName,jdbcType=VARCHAR},
 			</if>
 			<if test="secondModeName != null">
-				#{secondModeName,jdbcType=INTEGER},
+				#{secondModeName,jdbcType=VARCHAR},
+			</if>
+			<if test="isDelete != null">
+				#{isDelete,jdbcType=INTEGER},
 			</if>
 			<if test="secondModeId != null">
-				#{secondModeId,jdbcType=VARCHAR},
+				#{secondModeId,jdbcType=INTEGER},
 			</if>
 		</trim>
 	</insert>
@@ -140,10 +147,13 @@
 			mode_name= #{modeName,jdbcType=VARCHAR},
 		</if>
 		<if test="secondModeName != null">
-			second_mode_name= #{secondModeName,jdbcType=INTEGER},
+			second_mode_name= #{secondModeName,jdbcType=VARCHAR},
+		</if>
+		<if test="isDelete != null">
+			is_delete= #{isDelete,jdbcType=INTEGER},
 		</if>
 		<if test="secondModeId != null">
-			second_mode_id= #{secondModeId,jdbcType=VARCHAR},
+			second_mode_id= #{secondModeId,jdbcType=INTEGER},
 		</if>
 	</sql>
 
@@ -176,10 +186,13 @@
 			 and mode_name= #{modeName,jdbcType=VARCHAR}
 		</if>
 		<if test="secondModeName != null">
-			 and second_mode_name= #{secondModeName,jdbcType=INTEGER}
+			 and second_mode_name= #{secondModeName,jdbcType=VARCHAR}
+		</if>
+		<if test="isDelete != null">
+			 and is_delete= #{isDelete,jdbcType=INTEGER}
 		</if>
 		<if test="secondModeId != null">
-			 and second_mode_id= #{secondModeId,jdbcType=VARCHAR}
+			 and second_mode_id= #{secondModeId,jdbcType=INTEGER}
 		</if>
 	</sql>
 

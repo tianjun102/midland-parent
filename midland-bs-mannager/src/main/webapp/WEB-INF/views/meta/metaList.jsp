@@ -42,8 +42,13 @@
 						<td>${item.modeName}</td>
 						<td>${item.secondModeName}</td>
 						<td>
-                            <a target="contentF" onclick="to_edit(${item.id })">编辑</a>
-                            <a target="contentF" onclick="delete1(${item.id })">删除</a>
+                            <c:if test="${item.isDelete==0}">
+                                <a target="contentF" onclick="deleteOrRecover(${item.id },1)" class="delete_img"></a>
+                            </c:if>
+                            <c:if test="${item.isDelete==1}">
+                                <a target="contentF" class="recove_img" onclick="deleteOrRecover(${item.id },0)"></a>
+                            </c:if>
+                            <a target="contentF" class="edit_img"  onclick="to_edit(${item.id })"></a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -66,11 +71,11 @@
 
 <script type="text/javascript">
 
-    function delete1(id){
+    function deleteOrRecover(id,value){
         debugger;
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/meta/update?id="+id+"&isDelete=1",
+            url: "${ctx}/rest/meta/update?id="+id+"&isDelete="+value,
             async: false, // 此处必须同步
             dataType: "json",
 
@@ -90,7 +95,7 @@
             type: 2,
             title: ['修改'],
             shade: 0.3,
-            area: ['500px', '700px'],
+            area: ['100%', '100%'],
             content: ['${ctx}/rest/meta/to_update?id='+id,'no']
         });
     }

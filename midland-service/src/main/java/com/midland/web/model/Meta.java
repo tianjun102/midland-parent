@@ -43,6 +43,10 @@ public class Meta{
 	 **/
 	private String secondModeName;
 	/**
+	 * 是否删除,0否1是
+	 **/
+	private Integer isDelete;
+	/**
 	 * 子模块id
 	 **/
 	private Integer secondModeId;
@@ -128,6 +132,14 @@ public class Meta{
 		this.secondModeName = secondModeName;
 	}
 
+	public Integer getIsDelete() {
+		return isDelete;
+	}
+
+	public void setIsDelete(Integer isDelete) {
+		this.isDelete = isDelete;
+	}
+
 	public Integer getSecondModeId() {
 		return secondModeId;
 	}
@@ -168,6 +180,9 @@ public class Meta{
 		}
 		if (secondModeName != null) {
 			sb.append(", \"secondModeName\":\"").append(secondModeName).append("\"");
+		}
+		if (isDelete != null) {
+			sb.append(", \"isDelete\":\"").append(isDelete).append("\"");
 		}
 		if (secondModeId != null) {
 			sb.append(", \"secondModeId\":\"").append(secondModeId).append("\"");
