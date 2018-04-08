@@ -40,8 +40,6 @@ public class MenuController extends BaseFilter {
     private MenuTypeService menuTypeServiceImpl;
     @Autowired
     private SettingService settingService;
-    @Autowired
-    private JdbcService jdbcService;
 
     /**
      *

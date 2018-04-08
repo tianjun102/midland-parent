@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.midland.web.dao.MetaMapper">
+
+ 	<resultMap id="BaseResultMap" type="com.midland.web.model.Meta" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="source" property="source" jdbcType="INTEGER" />
+		<result column="city_id" property="cityId" jdbcType="VARCHAR" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="keywords" property="keywords" jdbcType="VARCHAR" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="mode_id" property="modeId" jdbcType="INTEGER" />
+		<result column="mode_name" property="modeName" jdbcType="VARCHAR" />
+		<result column="second_mode_name" property="secondModeName" jdbcType="INTEGER" />
+		<result column="second_mode_id" property="secondModeId" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id,source,city_id,city_name,title,keywords,description,mode_id,mode_name,second_mode_name,second_mode_id
+	</sql>
+
+	<select id="selectMetaById" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from meta
+		 where id= #{id}
+	</select>
+
+	<delete id="deleteMetaById" >
+		delete from meta
+		 where id= #{id}
+	</delete>
+
+	<update id="updateMetaById" >
+		update meta 
+		<set>
+		<include refid="update_option"/>
+		</set>
+
+		 where id= #{id}
+	</update>
+
+	<select id="findMetaList" parameterType="com.midland.web.model.Meta" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" /> from meta
+		where  1=1
+		<include refid="select_option" />
+	</select>
+
+	<insert id="insertMeta" parameterType="com.midland.web.model.Meta">
+		insert into meta
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="source != null">
+				source,
+			</if>
+			<if test="cityId != null">
+				city_id,
+			</if>
+			<if test="cityName != null">
+				city_name,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="keywords != null">
+				keywords,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="modeId != null">
+				mode_id,
+			</if>
+			<if test="modeName != null">
+				mode_name,
+			</if>
+			<if test="secondModeName != null">
+				second_mode_name,
+			</if>
+			<if test="secondModeId != null">
+				second_mode_id,
+			</if>
+		</trim>
+		values
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="source != null">
+				#{source,jdbcType=INTEGER},
+			</if>
+			<if test="cityId != null">
+				#{cityId,jdbcType=VARCHAR},
+			</if>
+			<if test="cityName != null">
+				#{cityName,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="keywords != null">
+				#{keywords,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="modeId != null">
+				#{modeId,jdbcType=INTEGER},
+			</if>
+			<if test="modeName != null">
+				#{modeName,jdbcType=VARCHAR},
+			</if>
+			<if test="secondModeName != null">
+				#{secondModeName,jdbcType=INTEGER},
+			</if>
+			<if test="secondModeId != null">
+				#{secondModeId,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<sql id="update_option">
+		<if test="source != null">
+			source= #{source,jdbcType=INTEGER},
+		</if>
+		<if test="cityId != null">
+			city_id= #{cityId,jdbcType=VARCHAR},
+		</if>
+		<if test="cityName != null">
+			city_name= #{cityName,jdbcType=VARCHAR},
+		</if>
+		<if test="title != null">
+			title= #{title,jdbcType=VARCHAR},
+		</if>
+		<if test="keywords != null">
+			keywords= #{keywords,jdbcType=VARCHAR},
+		</if>
+		<if test="description != null">
+			description= #{description,jdbcType=VARCHAR},
+		</if>
+		<if test="modeId != null">
+			mode_id= #{modeId,jdbcType=INTEGER},
+		</if>
+		<if test="modeName != null">
+			mode_name= #{modeName,jdbcType=VARCHAR},
+		</if>
+		<if test="secondModeName != null">
+			second_mode_name= #{secondModeName,jdbcType=INTEGER},
+		</if>
+		<if test="secondModeId != null">
+			second_mode_id= #{secondModeId,jdbcType=VARCHAR},
+		</if>
+	</sql>
+
+	<sql id="select_option">
+		<if test="id != null">
+			 and id= #{id,jdbcType=INTEGER}
+		</if>
+		<if test="source != null">
+			 and source= #{source,jdbcType=INTEGER}
+		</if>
+		<if test="cityId != null">
+			 and city_id= #{cityId,jdbcType=VARCHAR}
+		</if>
+		<if test="cityName != null">
+			 and city_name= #{cityName,jdbcType=VARCHAR}
+		</if>
+		<if test="title != null">
+			 and title= #{title,jdbcType=VARCHAR}
+		</if>
+		<if test="keywords != null">
+			 and keywords= #{keywords,jdbcType=VARCHAR}
+		</if>
+		<if test="description != null">
+			 and description= #{description,jdbcType=VARCHAR}
+		</if>
+		<if test="modeId != null">
+			 and mode_id= #{modeId,jdbcType=INTEGER}
+		</if>
+		<if test="modeName != null">
+			 and mode_name= #{modeName,jdbcType=VARCHAR}
+		</if>
+		<if test="secondModeName != null">
+			 and second_mode_name= #{secondModeName,jdbcType=INTEGER}
+		</if>
+		<if test="secondModeId != null">
+			 and second_mode_id= #{secondModeId,jdbcType=VARCHAR}
+		</if>
+	</sql>
+
+</mapper>

@@ -1,5 +1,10 @@
 package com.midland.web.Contants;
 
+import com.midland.web.model.Category;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by 'ms.x' on 2017/9/7.
  */
@@ -141,5 +146,46 @@ public class Contant {
     public static final String APPOINT_TITLE = "您的预约，||经纪人已经受理";
     public static final String ATTENTION_TITLE = "您关注的||有新增房源动态";
     public static final String TOURISTS = "游客";
+
+    public enum ExportSale {
+        dfefe(1,"dsf");
+
+        ExportSale(int id, String cateName) {
+            this.id = id;
+            this.cateName = cateName;
+        }
+
+        private int id;
+        private String cateName;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getCateName() {
+            return cateName;
+        }
+
+        public void setCateName(String cateName) {
+            this.cateName = cateName;
+        }
+
+        public List<Category> enumToList(){
+            List<Category> list=new ArrayList<>();
+           for (ExportSale ExportSale : ExportSale.values()){
+               Category category = new Category();
+               category.setId(ExportSale.id);
+               category.setCateName(ExportSale.cateName);
+               list.add(category);
+           }
+           return list;
+        }
+
+    }
+
 
 }

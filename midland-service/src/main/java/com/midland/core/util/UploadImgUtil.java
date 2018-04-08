@@ -87,10 +87,10 @@ public class UploadImgUtil {
 
 	public static String GenerateImage(Map<String, String> map) { // 对字节数组字符串进行Base64解码并生成图片
 		
-		if (StringUtils.isEmpty(map.get("userName")) || StringUtils.isEmpty(map.get("imgContent"))) // 图像数据为空
+		if (StringUtils.isEmpty(map.get("fileName")) || StringUtils.isEmpty(map.get("imgContent"))) // 图像数据为空
 			return "";
 		String imgContent = map.get("imgContent");
-		String userName = map.get("userName");
+		String fileNameTemp = map.get("fileName");
 		String path = map.get("path");
 		String oldImg = map.get("oldImg");
 		
@@ -114,7 +114,7 @@ public class UploadImgUtil {
 				}
 			}
 			// 生成jpeg图片
-			String fileName = "head/"+userName+"."+type;// 新生成的图片;
+			String fileName = "head/"+fileNameTemp+"."+type;// 新生成的图片;
 			String imgFilePath = path + fileName ;
 			File fl = new File(imgFilePath);
 			if (!fl.getParentFile().exists()) {

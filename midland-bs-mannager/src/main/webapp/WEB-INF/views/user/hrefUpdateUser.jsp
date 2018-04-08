@@ -81,7 +81,7 @@
                 </select>
                 <span class="_star">*</span>
             </li>
-            <%@include file="../menu/area_up_required1.jsp" %>
+            <%@include file="../menu/area_up_required-mod6.jsp" %>
             <li class="col-md-6"><span>手机号码：</span><input  type="text" name="phone" disabled="true"
                                                           id="phone" value="${item.phone}" onblur="checkPhone();"/></li>
             <li class="col-md-6"><span>邮箱：</span><input  type="text" name="email" id="email"
