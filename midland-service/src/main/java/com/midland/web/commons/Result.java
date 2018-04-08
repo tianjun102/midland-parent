@@ -1,6 +1,7 @@
 package com.midland.web.commons;
 
 import com.github.pagehelper.Paginator;
+import com.midland.web.model.Meta;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -29,7 +30,7 @@ public class Result<T> implements Serializable {
     /**
      * Meta信息
      */
-    private Meta meta;
+    private MetaResult meta;
     /**
      * 请求接口返回状态值
      */
@@ -46,12 +47,15 @@ public class Result<T> implements Serializable {
     private List<Map<T, T>> listMap;
 
 
-    public Meta getMeta() {
+    public MetaResult getMeta() {
         return meta;
     }
 
-    public void setMeta(Meta meta) {
-        this.meta = meta;
+    public void setMeta(Meta meta1) {
+        this.meta=new MetaResult();
+        meta.setDescription(meta1.getDescription());
+        meta.setKeywords(meta1.getKeywords());
+        meta1.setTitle(meta1.getTitle());
     }
 
     public Integer getNumber() {

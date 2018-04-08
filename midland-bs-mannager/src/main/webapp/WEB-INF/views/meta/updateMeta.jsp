@@ -89,8 +89,7 @@
     function extracted(val) {
         if (val == 8) {
             $("#childMode").show();
-            var data = "type=0" + "&cityId=" + $("#cityId").val() + "&source=" + $("#source").val();
-            getCate(data);
+            getExportSaleCates()
         } else if (val == 9) {
             $("#childMode").show();
             var data = "type=0" + "&cityId=" + $("#cityId").val() + "&source=" + $("#source").val();
@@ -138,6 +137,37 @@
             }
         });
     }
+
+    function getExportSaleCates() {
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/meta/getExportSaleCates",
+            async: false, // 此处必须同步
+            dataType: "json",
+            success: function (data) {
+                if (data.state == 0) {
+                    var obj = data.data;
+                    debugger;
+                    var html = "<option value=>请选择</option>";
+                    for (var i = 0; i < obj.length; i++) {
+                        html += "<option value=\"" + obj[i].id + "\">" + obj[i].cateName + "</option>";
+                    }
+                    $("#secondModeId").html(html);
+
+                } else {
+                    layer.msg("保存失败！", {icon: 2});
+                }
+            },
+            error: function (data) {
+                if (data.responseText != null) {
+                    layer.msg(data.responseText, {icon: 2});
+                } else {
+                    layer.msg("操作失败！", {icon: 2});
+                }
+            }
+        });
+    }
+
 
     //保存数据
     function updateData() {

@@ -150,7 +150,7 @@ public class Meta{
 
 	@Override
 	public String toString() {
-		 final StringBuffer sb=new StringBuffer("Meta{");
+		 final StringBuffer sb=new StringBuffer("MetaResult{");
 		if (id != null) {
 			sb.append(", \"id\":\"").append(id).append("\"");
 		}

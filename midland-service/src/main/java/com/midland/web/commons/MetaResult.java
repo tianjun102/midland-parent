@@ -1,6 +1,6 @@
 package com.midland.web.commons;
 
-public class Meta {
+public class MetaResult {
     private String title;
     private String keywords;
     private String description;

@@ -148,7 +148,12 @@ public class Contant {
     public static final String TOURISTS = "游客";
 
     public enum ExportSale {
-        dfefe(1,"dsf");
+        index(0,"首页"),
+        hotHand(1,"热卖一手"),
+        film(2,"视频片库"),
+        soldProcess(3,"买卖流程"),
+        aboutUs(4,"关于我们"),
+        service(5,"服务范围");
 
         ExportSale(int id, String cateName) {
             this.id = id;
@@ -174,7 +179,7 @@ public class Contant {
             this.cateName = cateName;
         }
 
-        public List<Category> enumToList(){
+        public static List<Category> enumToList(){
             List<Category> list=new ArrayList<>();
            for (ExportSale ExportSale : ExportSale.values()){
                Category category = new Category();

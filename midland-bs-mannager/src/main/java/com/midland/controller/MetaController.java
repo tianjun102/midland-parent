@@ -1,5 +1,6 @@
 package com.midland.controller;
 
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.Meta;
 import com.midland.web.model.user.User;
 import com.midland.web.service.MetaService;
@@ -155,5 +156,20 @@ public class MetaController extends BaseFilter  {
 			model.addAttribute("items",null);
 		}
 		return "meta/metaList";
+	}
+
+	@RequestMapping("getExportSaleCates")
+	@ResponseBody
+	public Object getCate(){
+		Map map = new HashMap();
+		try {
+			map.put("state",0);
+			map.put("data",Contant.ExportSale.enumToList());
+
+		} catch (Exception e) {
+			log.error("getCate",e);
+			map.put("state",-1);
+		}
+		return map;
 	}
 }
