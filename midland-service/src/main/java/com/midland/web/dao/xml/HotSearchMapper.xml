@@ -28,6 +28,10 @@
         from hot_search
         where id= #{id}
     </select>
+    <update id="click_num" >
+        UPDATE hot_search SET count=count+1
+        where id= #{id}
+    </update>
 
     <delete id="deleteHotSearchById">
         delete from hot_search
@@ -241,7 +245,7 @@
 
 
     </sql>
-   <sql id="select_option1">
+    <sql id="select_option1">
 
         <if test="keywords != null">
             and keywords= #{keywords,jdbcType=VARCHAR}

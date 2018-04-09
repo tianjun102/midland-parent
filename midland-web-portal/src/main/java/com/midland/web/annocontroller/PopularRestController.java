@@ -28,27 +28,7 @@ public class PopularRestController extends ServiceBaseFilter {
 	@Autowired
 	private PopularService popularServiceImpl;
 
-	/**
-	 * 新增
-	 **/
-	@RequestMapping("add")
-	public Object addPopular(@RequestBody Popular obj) throws Exception {
-		 Result result=new Result();
-		try {
-			log.info("addPopular {}",obj);
-			obj.setIsDelete(Contant.isNotDelete);
-			obj.setIsShow(Contant.isShow);
 
-			popularServiceImpl.insertPopular(obj);
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg("success");
-		} catch(Exception e) {
-			log.error("addPopular异常 {}",obj,e);
-			result.setCode(ResultStatusUtils.STATUS_CODE_203);
-			result.setMsg("service error");
-		}
-		return result;
-	}
 
 	/**
 	 * 查询
@@ -71,24 +51,6 @@ public class PopularRestController extends ServiceBaseFilter {
 		return result;
 	}
 
-	/**
-	 * 更新
-	 **/
-	@RequestMapping("update")
-	public Object updatePopularById(@RequestBody Popular obj) throws Exception {
-		 Result result=new Result();
-		try {
-			log.info("updatePopularById  {}",obj);
-			popularServiceImpl.updateById(obj);
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg("success");
-		} catch(Exception e) {
-			log.error("updatePopularById  {}",obj,e);
-			result.setCode(ResultStatusUtils.STATUS_CODE_203);
-			result.setMsg("service error");
-		}
-		return result;
-	}
 
 	/**
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）

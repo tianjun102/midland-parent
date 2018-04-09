@@ -17,6 +17,8 @@ public interface HotSearchService {
      **/
     void deleteHotSearchById(Integer id) throws Exception;
 
+    void click_num(Integer id) throws Exception;
+
     @Transactional
     void shiftUp(HotSearch hotSearch) throws Exception;
 

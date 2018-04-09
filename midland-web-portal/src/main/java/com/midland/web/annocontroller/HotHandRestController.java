@@ -42,24 +42,7 @@ public class HotHandRestController extends ServiceBaseFilter {
     @Autowired
     private PublicService publicServiceImpl;
 
-    /**
-     * 新增
-     **/
-    @RequestMapping("add")
-    public Object addHotHand(@RequestBody HotHand obj) throws Exception {
-        Result result = new Result();
-        try {
-            log.info("addHotHand {}", obj);
-            hotHandServiceImpl.insertHotHand(obj);
-            result.setCode(ResultStatusUtils.STATUS_CODE_200);
-            result.setMsg("success");
-        } catch (Exception e) {
-            log.error("addHotHand异常 {}", obj, e);
-            result.setCode(ResultStatusUtils.STATUS_CODE_203);
-            result.setMsg("service error");
-        }
-        return result;
-    }
+
 
     /**
      * 查询
@@ -187,24 +170,7 @@ public class HotHandRestController extends ServiceBaseFilter {
         }
         return JSONArray.toJSONString(result);
     }
-    /**
-     * 更新
-     **/
-    @RequestMapping("update")
-    public Object updateHotHandById(@RequestBody HotHand obj) throws Exception {
-        Result result = new Result();
-        try {
-            log.info("updateHotHandById  {}", obj);
-            hotHandServiceImpl.updateHotHandById(obj);
-            result.setCode(ResultStatusUtils.STATUS_CODE_200);
-            result.setMsg("success");
-        } catch (Exception e) {
-            log.error("updateHotHandById  {}", obj, e);
-            result.setCode(ResultStatusUtils.STATUS_CODE_203);
-            result.setMsg("service error");
-        }
-        return result;
-    }
+
 
     /**
      * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）

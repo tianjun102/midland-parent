@@ -57,6 +57,22 @@ public class HotSearchServiceImpl implements HotSearchService {
             throw e;
         }
     }
+    /**
+     * 记录搜索次数
+     **/
+    @Override
+    public void click_num(Integer id) throws Exception {
+        try {
+            log.debug("click_num  {}", id);
+            int result = hotSearchMapper.click_num(id);
+            if (result < 1) {
+                throw new Exception("click_num");
+            }
+        } catch (Exception e) {
+            log.error("click_num  {}", id, e);
+            throw e;
+        }
+    }
 
     /**
      * 上移

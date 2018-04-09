@@ -31,25 +31,6 @@ public class BannerRestController extends ServiceBaseFilter {
 	@Autowired
 	private BannerService bannerServiceImpl;
 
-	/**
-	 * 新增
-	 **/
-	@RequestMapping("add")
-	public Object addBanner(@RequestBody Banner obj) throws Exception {
-		 Result result=new Result();
-		try {
-			log.info("addBanner {}",obj);
-			obj.setIsDelete(Contant.isNotDelete);
-			bannerServiceImpl.insertBanner(obj);
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg("success");
-		} catch(Exception e) {
-			log.error("addBanner异常 {}",obj,e);
-			result.setCode(ResultStatusUtils.STATUS_CODE_203);
-			result.setMsg("service error");
-		}
-		return result;
-	}
 
 	/**
 	 * 查询
@@ -72,24 +53,7 @@ public class BannerRestController extends ServiceBaseFilter {
 		return result;
 	}
 
-	/**
-	 * 更新
-	 **/
-	@RequestMapping("update")
-	public Object updateBannerById(@RequestBody Banner obj) throws Exception {
-		 Result result=new Result();
-		try {
-			log.info("updateBannerById  {}",obj);
-			bannerServiceImpl.updateById(obj);
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg("success");
-		} catch(Exception e) {
-			log.error("updateBannerById  {}",obj,e);
-			result.setCode(ResultStatusUtils.STATUS_CODE_203);
-			result.setMsg("service error");
-		}
-		return result;
-	}
+
 
 	/**
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）

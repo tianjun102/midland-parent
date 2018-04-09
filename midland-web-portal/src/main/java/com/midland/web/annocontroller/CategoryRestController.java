@@ -25,26 +25,6 @@ public class CategoryRestController extends ServiceBaseFilter {
 	@Autowired
 	private CategoryService categoryServiceImpl;
 
-	/**
-	 * 新增
-	 **/
-	@RequestMapping("add")
-	public Object addCategory(@RequestBody Category obj) throws Exception {
-		 Result result=new Result();
-		try {
-			log.info("addCategory {}",obj);
-			obj.setIsShow(Contant.isShow);
-			obj.setIsDelete(Contant.isNotDelete);
-			categoryServiceImpl.insertCategory(obj);
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg("success");
-		} catch(Exception e) {
-			log.error("addCategory异常 {}",obj,e);
-			result.setCode(ResultStatusUtils.STATUS_CODE_203);
-			result.setMsg("service error");
-		}
-		return result;
-	}
 
 	/**
 	 * 查询
@@ -67,24 +47,7 @@ public class CategoryRestController extends ServiceBaseFilter {
 		return result;
 	}
 
-	/**
-	 * 更新
-	 **/
-	@RequestMapping("update")
-	public Object updateCategoryById(@RequestBody Category obj) throws Exception {
-		 Result result=new Result();
-		try {
-			log.info("updateCategoryById  {}",obj);
-			categoryServiceImpl.updateCategoryById(obj);
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg("success");
-		} catch(Exception e) {
-			log.error("updateCategoryById  {}",obj,e);
-			result.setCode(ResultStatusUtils.STATUS_CODE_203);
-			result.setMsg("service error");
-		}
-		return result;
-	}
+
 
 	/**
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）

@@ -30,24 +30,7 @@ public class QuotationSecondHandRestController extends ServiceBaseFilter {
     @Autowired
     private QuotationSecondHandService quotationSecondHandServiceImpl;
 
-    /**
-     * 新增
-     **/
-    @RequestMapping("add")
-    public Object addQuotationSecondHand(@RequestBody QuotationSecondHand obj) throws Exception {
-        Result result = new Result();
-        try {
-            log.info("addQuotationSecondHand {}", obj);
-            quotationSecondHandServiceImpl.insertQuotationSecondHand(obj);
-            result.setCode(ResultStatusUtils.STATUS_CODE_200);
-            result.setMsg("success");
-        } catch (Exception e) {
-            log.error("addQuotationSecondHand异常 {}", obj, e);
-            result.setCode(ResultStatusUtils.STATUS_CODE_203);
-            result.setMsg("service error");
-        }
-        return result;
-    }
+
 
     /**
      * 查询
@@ -70,24 +53,7 @@ public class QuotationSecondHandRestController extends ServiceBaseFilter {
         return result;
     }
 
-    /**
-     * 更新
-     **/
-    @RequestMapping("update")
-    public Object updateQuotationSecondHandById(@RequestBody QuotationSecondHand obj) throws Exception {
-        Result result = new Result();
-        try {
-            log.info("updateQuotationSecondHandById  {}", obj);
-            quotationSecondHandServiceImpl.updateQuotationSecondHandById(obj);
-            result.setCode(ResultStatusUtils.STATUS_CODE_200);
-            result.setMsg("success");
-        } catch (Exception e) {
-            log.error("updateQuotationSecondHandById  {}", obj, e);
-            result.setCode(ResultStatusUtils.STATUS_CODE_203);
-            result.setMsg("service error");
-        }
-        return result;
-    }
+
 
 
     @RequestMapping("getAvgPriceAndRatio")

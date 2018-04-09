@@ -37,26 +37,7 @@ public class SiteMapRestController extends ServiceBaseFilter {
     @Autowired
     private CategoryService categoryServiceImpl;
 
-    /**
-     * 新增
-     **/
-    @RequestMapping("add")
-    public Object addSitemap(@RequestBody SiteMap obj) throws Exception {
-        Result result = new Result();
-        try {
-            log.info("addSitemap {}", obj);
-            obj.setIsDelete(Contant.isNotDelete);
-            obj.setIsShow(Contant.isShow);
-            siteMapServiceImpl.insertSiteMap(obj);
-            result.setCode(ResultStatusUtils.STATUS_CODE_200);
-            result.setMsg("success");
-        } catch (Exception e) {
-            log.error("addSitemap异常 {}", obj, e);
-            result.setCode(ResultStatusUtils.STATUS_CODE_203);
-            result.setMsg("service error");
-        }
-        return result;
-    }
+
 
     /**
      * 查询
@@ -79,24 +60,7 @@ public class SiteMapRestController extends ServiceBaseFilter {
         return result;
     }
 
-    /**
-     * 更新
-     **/
-    @RequestMapping("update")
-    public Object updateSitemapById(@RequestBody SiteMap obj) throws Exception {
-        Result result = new Result();
-        try {
-            log.info("updateSitemapById  {}", obj);
-            siteMapServiceImpl.updateSiteMapById(obj);
-            result.setCode(ResultStatusUtils.STATUS_CODE_200);
-            result.setMsg("success");
-        } catch (Exception e) {
-            log.error("updateSitemapById  {}", obj, e);
-            result.setCode(ResultStatusUtils.STATUS_CODE_203);
-            result.setMsg("service error");
-        }
-        return result;
-    }
+
 
     @RequestMapping("list")
     public Object findSitemapList(@RequestBody SiteMap obj, HttpServletRequest request) {

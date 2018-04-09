@@ -29,25 +29,6 @@ public class RecruitManagerRestController extends ServiceBaseFilter {
 	@Autowired
 	private RecruitManagerService recruitManagerServiceImpl;
 
-	/**
-	 * 新增
-	 **/
-	@RequestMapping("add")
-	public Object addRecruitManager(@RequestBody RecruitManager obj) throws Exception {
-		 Result result=new Result();
-		try {
-			log.info("addRecruitManager {}",obj);
-			obj.setIsDelete(Contant.isNotDelete);
-			recruitManagerServiceImpl.insertRecruitManager(obj);
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg("success");
-		} catch(Exception e) {
-			log.error("addRecruitManager异常 {}",obj,e);
-			result.setCode(ResultStatusUtils.STATUS_CODE_203);
-			result.setMsg("service error");
-		}
-		return result;
-	}
 
 	/**
 	 * 查询
@@ -70,24 +51,6 @@ public class RecruitManagerRestController extends ServiceBaseFilter {
 		return result;
 	}
 
-	/**
-	 * 更新
-	 **/
-	@RequestMapping("update")
-	public Object updateRecruitManagerById(@RequestBody RecruitManager obj) throws Exception {
-		 Result result=new Result();
-		try {
-			log.info("updateRecruitManagerById  {}",obj);
-			recruitManagerServiceImpl.updateRecruitManagerById(obj);
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg("success");
-		} catch(Exception e) {
-			log.error("updateRecruitManagerById  {}",obj,e);
-			result.setCode(ResultStatusUtils.STATUS_CODE_203);
-			result.setMsg("service error");
-		}
-		return result;
-	}
 
 	/**
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）

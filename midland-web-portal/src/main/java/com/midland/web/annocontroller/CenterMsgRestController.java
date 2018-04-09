@@ -27,25 +27,6 @@ public class CenterMsgRestController extends ServiceBaseFilter {
 	private CenterMsgService centerMsgServiceImpl;
 
 	/**
-	 * 新增
-	 **/
-	@RequestMapping("add")
-	public Object addCenterMsg(@RequestBody CenterMsg obj) throws Exception {
-		 Result result=new Result();
-		try {
-			log.info("addCenterMsg {}",obj);
-			centerMsgServiceImpl.insertCenterMsg(obj);
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg("success");
-		} catch(Exception e) {
-			log.error("addCenterMsg异常 {}",obj,e);
-			result.setCode(ResultStatusUtils.STATUS_CODE_203);
-			result.setMsg("service error");
-		}
-		return result;
-	}
-
-	/**
 	 * 查询
 	 **/
 	@RequestMapping("get")
@@ -60,25 +41,6 @@ public class CenterMsgRestController extends ServiceBaseFilter {
 			result.setModel(centerMsg);
 		} catch(Exception e) {
 			log.error("getCenterMsg异常 {}",map,e);
-			result.setCode(ResultStatusUtils.STATUS_CODE_203);
-			result.setMsg("service error");
-		}
-		return result;
-	}
-
-	/**
-	 * 更新
-	 **/
-	@RequestMapping("update")
-	public Object updateCenterMsgById(@RequestBody CenterMsg obj) throws Exception {
-		 Result result=new Result();
-		try {
-			log.info("updateCenterMsgById  {}",obj);
-			centerMsgServiceImpl.updateCenterMsgById(obj);
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg("success");
-		} catch(Exception e) {
-			log.error("updateCenterMsgById  {}",obj,e);
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);
 			result.setMsg("service error");
 		}

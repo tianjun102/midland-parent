@@ -35,25 +35,7 @@ public class InformationRestController extends ServiceBaseFilter {
 	private CommentService commentServiceImpl;
 	@Autowired
 	private RedisService redisServiceImpl;
-	/**
-	 * 新增 资讯
-	 **/
-	@RequestMapping("add")
-	public Object addInformation(@RequestBody Information obj) throws Exception {
-		 Result result=new Result();
-		try {
-			log.info("addInformation {}",obj);
-			obj.setIsDelete(Contant.isNotDelete);
-			informationServiceImpl.insertInformation(obj);
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg("success");
-		} catch(Exception e) {
-			log.error("addInformation异常 {}",obj,e);
-			result.setCode(ResultStatusUtils.STATUS_CODE_203);
-			result.setMsg("service error");
-		}
-		return result;
-	}
+
 	@RequestMapping("/banner/get")
 	@ResponseBody
 	public Object getinformationBannerOpenAndClose(Integer id) {
@@ -108,24 +90,7 @@ public class InformationRestController extends ServiceBaseFilter {
 		return result;
 	}
 
-	/**
-	 * 更新
-	 **/
-	@RequestMapping("update")
-	public Object updateInformationById(@RequestBody Information obj) throws Exception {
-		 Result result=new Result();
-		try {
-			log.info("updateInformationById  {}",obj);
-			informationServiceImpl.updateInformationById(obj);
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg("success");
-		} catch(Exception e) {
-			log.error("updateInformationById  {}",obj,e);
-			result.setCode(ResultStatusUtils.STATUS_CODE_203);
-			result.setMsg("service error");
-		}
-		return result;
-	}
+
 
 	/**
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）

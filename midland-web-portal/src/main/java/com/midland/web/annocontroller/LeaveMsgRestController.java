@@ -78,24 +78,7 @@ public class LeaveMsgRestController extends ServiceBaseFilter {
 		return result;
 	}
 
-	/**
-	 * 更新
-	 **/
-	@RequestMapping("update")
-	public Object updateLeaveMsgById(@RequestBody LeaveMsg obj) throws Exception {
-		 Result result=new Result();
-		try {
-			log.info("updateLeaveMsgById  {}",obj);
-			leaveMsgServiceImpl.updateLeaveMsgById(obj);
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg("success");
-		} catch(Exception e) {
-			log.error("updateLeaveMsgById  {}",obj,e);
-			result.setCode(ResultStatusUtils.STATUS_CODE_203);
-			result.setMsg("service error");
-		}
-		return result;
-	}
+
 
 	@RequestMapping("delete")
 	public Object deleteLeaveMsgById(@RequestBody LeaveMsg obj) throws Exception {

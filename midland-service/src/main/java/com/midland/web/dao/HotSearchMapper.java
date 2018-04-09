@@ -14,6 +14,7 @@ public interface HotSearchMapper {
     int deleteHotSearchById(Integer hotSearch);
 
     int updateHotSearchById(HotSearch hotSearch);
+    int click_num(Integer id);
 
     int insertHotSearch(HotSearch hotSearch);
 

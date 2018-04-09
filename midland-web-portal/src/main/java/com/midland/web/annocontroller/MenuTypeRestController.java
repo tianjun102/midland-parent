@@ -26,25 +26,7 @@ public class MenuTypeRestController extends ServiceBaseFilter {
 	@Autowired
 	private MenuTypeService menuTypeServiceImpl;
 
-	/**
-	 * 新增
-	 **/
-	@RequestMapping("add")
-	public Object addMenuType(@RequestBody MenuType obj) throws Exception {
-		Result result=new Result();
-		try {
-			log.info("addMenuType {}",obj);
-			obj.setIsDelete(Contant.isNotDelete);
-			menuTypeServiceImpl.insertMenuType(obj);
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg("success");
-		} catch(Exception e) {
-			log.error("addMenuType异常 {}",obj,e);
-			result.setCode(ResultStatusUtils.STATUS_CODE_203);
-			result.setMsg("service error");
-		}
-		return result;
-	}
+
 
 	/**
 	 * 查询
@@ -67,24 +49,7 @@ public class MenuTypeRestController extends ServiceBaseFilter {
 		return result;
 	}
 
-	/**
-	 * 更新
-	 **/
-	@RequestMapping("update")
-	public Object updateMenuTypeById(@RequestBody MenuType obj) throws Exception {
-		 Result result=new Result();
-		try {
-			log.info("updateMenuTypeById  {}",obj);
-			menuTypeServiceImpl.updateMenuTypeById(obj);
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg("success");
-		} catch(Exception e) {
-			log.error("updateMenuTypeById  {}",obj,e);
-			result.setCode(ResultStatusUtils.STATUS_CODE_203);
-			result.setMsg("service error");
-		}
-		return result;
-	}
+
 
 	/**
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）

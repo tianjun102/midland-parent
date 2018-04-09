@@ -29,27 +29,6 @@ public class LinkUrlManagerRestController extends ServiceBaseFilter {
 	private LinkUrlManagerService linkUrlManagerServiceImpl;
 
 	/**
-	 * 新增
-	 **/
-	@RequestMapping("add")
-	public Object addLinkUrlManager(@RequestBody LinkUrlManager obj) throws Exception {
-		 Result result=new Result();
-		try {
-			log.info("addLinkUrlManager {}",obj);
-			obj.setIsDelete(Contant.isNotDelete);
-			obj.setIsShow(Contant.isShow);
-			linkUrlManagerServiceImpl.insertLinkUrlManager(obj);
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg("success");
-		} catch(Exception e) {
-			log.error("addLinkUrlManager异常 {}",obj,e);
-			result.setCode(ResultStatusUtils.STATUS_CODE_203);
-			result.setMsg("service error");
-		}
-		return result;
-	}
-
-	/**
 	 * 查询
 	 **/
 	@RequestMapping("get")
@@ -70,24 +49,7 @@ public class LinkUrlManagerRestController extends ServiceBaseFilter {
 		return result;
 	}
 
-	/**
-	 * 更新
-	 **/
-	@RequestMapping("update")
-	public Object updateLinkUrlManagerById(@RequestBody LinkUrlManager obj) throws Exception {
-		 Result result=new Result();
-		try {
-			log.info("updateLinkUrlManagerById  {}",obj);
-			linkUrlManagerServiceImpl.updateById(obj);
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg("success");
-		} catch(Exception e) {
-			log.error("updateLinkUrlManagerById  {}",obj,e);
-			result.setCode(ResultStatusUtils.STATUS_CODE_203);
-			result.setMsg("service error");
-		}
-		return result;
-	}
+
 
 	/**
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）

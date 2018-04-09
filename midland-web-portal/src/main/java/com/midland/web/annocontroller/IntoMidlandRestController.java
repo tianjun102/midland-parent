@@ -25,24 +25,6 @@ public class IntoMidlandRestController extends ServiceBaseFilter {
 	@Autowired
 	private IntoMidlandService intoMidlandServiceImpl;
 
-	/**
-	 * 新增
-	 **/
-	@RequestMapping("add")
-	public Object addIntoMidland(@RequestBody IntoMidland obj) throws Exception {
-		 Result result=new Result();
-		try {
-			log.info("addIntoMidland {}",obj);
-			intoMidlandServiceImpl.insertIntoMidland(obj);
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg("success");
-		} catch(Exception e) {
-			log.error("addIntoMidland异常 {}",obj,e);
-			result.setCode(ResultStatusUtils.STATUS_CODE_203);
-			result.setMsg("service error");
-		}
-		return result;
-	}
 
 	/**
 	 * 查询
@@ -65,24 +47,7 @@ public class IntoMidlandRestController extends ServiceBaseFilter {
 		return result;
 	}
 
-	/**
-	 * 更新
-	 **/
-	@RequestMapping("update")
-	public Object updateIntoMidlandById(@RequestBody IntoMidland obj) throws Exception {
-		 Result result=new Result();
-		try {
-			log.info("updateIntoMidlandById  {}",obj);
-			intoMidlandServiceImpl.updateIntoMidlandById(obj);
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg("success");
-		} catch(Exception e) {
-			log.error("updateIntoMidlandById  {}",obj,e);
-			result.setCode(ResultStatusUtils.STATUS_CODE_203);
-			result.setMsg("service error");
-		}
-		return result;
-	}
+
 
 	/**
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）

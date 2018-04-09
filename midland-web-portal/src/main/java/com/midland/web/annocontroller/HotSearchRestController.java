@@ -26,26 +26,7 @@ public class HotSearchRestController extends ServiceBaseFilter {
 	@Autowired
 	private HotSearchService hotSearchServiceImpl;
 
-	/**
-	 * 新增
-	 **/
-	@RequestMapping("add")
-	public Object addHotSearch(@RequestBody HotSearch obj) throws Exception {
-		 Result result=new Result();
-		try {
-			log.info("addHotSearch {}",obj);
-			obj.setIsDelete(Contant.isNotDelete);
-			obj.setIsShow(Contant.isShow);
-			hotSearchServiceImpl.insertHotSearch(obj);
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg("success");
-		} catch(Exception e) {
-			log.error("addHotSearch异常 {}",obj,e);
-			result.setCode(ResultStatusUtils.STATUS_CODE_203);
-			result.setMsg("service error");
-		}
-		return result;
-	}
+
 
 	/**
 	 * 查询
@@ -68,24 +49,27 @@ public class HotSearchRestController extends ServiceBaseFilter {
 		return result;
 	}
 
-	/**
-	 * 更新
-	 **/
-	@RequestMapping("update")
-	public Object updateHotSearchById(@RequestBody HotSearch obj) throws Exception {
-		 Result result=new Result();
-		try {
-			log.info("updateHotSearchById  {}",obj);
-			hotSearchServiceImpl.updateHotSearchById(obj);
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg("success");
-		} catch(Exception e) {
-			log.error("updateHotSearchById  {}",obj,e);
-			result.setCode(ResultStatusUtils.STATUS_CODE_203);
-			result.setMsg("service error");
+	@RequestMapping("click_num")
+	public Object searchCount(@RequestBody HotSearch  obj, HttpServletRequest request){
+		Result result=new Result();
+		if (obj.getId()==null){
+			result.setMsg("id不能为空");
+			result.setCode(ResultStatusUtils.STATUS_CODE_202);
+			return result;
 		}
-		return result;
+		try {
+			hotSearchServiceImpl.selectHotSearchById(obj.getId());
+			result.setMsg("success");
+			result.setCode(ResultStatusUtils.STATUS_CODE_202);
+			return result;
+		} catch (Exception e) {
+			log.error("click_num",e);
+			result.setMsg("service error");
+			result.setCode(ResultStatusUtils.STATUS_CODE_203);
+			return result;
+		}
 	}
+
 
 	/**
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
@@ -111,4 +95,8 @@ public class HotSearchRestController extends ServiceBaseFilter {
 		}
 		return result;
 	}
+
+
+
+
 }

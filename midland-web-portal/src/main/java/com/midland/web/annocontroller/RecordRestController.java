@@ -26,27 +26,7 @@ public class RecordRestController extends ServiceBaseFilter {
 	@Autowired
 	private RecordService recordServiceImpl;
 
-	/**
-	 * 新增
-	 **/
-	@RequestMapping("add")
-	public Object addRecord(@RequestBody Record obj) throws Exception {
-		 Result result=new Result();
-		try {
-			log.info("addRecord {}",obj);
-			obj.setIsDelete(Contant.isNotDelete);
-			obj.setIsShow(Contant.isShow);
-			obj.setAddTime(MidlandHelper.getCurrentTime());
-			recordServiceImpl.insertRecord(obj);
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg("success");
-		} catch(Exception e) {
-			log.error("addRecord异常 {}",obj,e);
-			result.setCode(ResultStatusUtils.STATUS_CODE_203);
-			result.setMsg("service error");
-		}
-		return result;
-	}
+
 
 	/**
 	 * 查询
@@ -69,24 +49,7 @@ public class RecordRestController extends ServiceBaseFilter {
 		return result;
 	}
 
-	/**
-	 * 更新
-	 **/
-	@RequestMapping("update")
-	public Object updateRecordById(@RequestBody Record obj) throws Exception {
-		 Result result=new Result();
-		try {
-			log.info("updateRecordById  {}",obj);
-			recordServiceImpl.updateRecordById(obj);
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg("success");
-		} catch(Exception e) {
-			log.error("updateRecordById  {}",obj,e);
-			result.setCode(ResultStatusUtils.STATUS_CODE_203);
-			result.setMsg("service error");
-		}
-		return result;
-	}
+
 
 	/**
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
