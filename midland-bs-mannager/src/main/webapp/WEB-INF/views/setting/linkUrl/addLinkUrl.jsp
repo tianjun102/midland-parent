@@ -68,7 +68,7 @@
                 <span>链接URL：</span><input style="width:274px;" type="text" name="linkUrl" id="linkUrl" value="" onblur="checkUrl('linkUrl','linkUrl','网址格式不正确！')" /><span class="_star">*</span>
             </li>
             <li><span>联系人：</span><input style="width:274px;" type="text" name="contacts" id="contacts" onblur="notEmpty('contacts','contacts','联系人不能为空！');" maxlength="50"/><span class="_star">*</span></li>
-            <li><span>联系方式：</span><input style="width:274px;" type="text" name="phone" id="phone" onblur="notEmpty('phone','phone','联系方式不能为空！');" maxlength="50"/><span class="_star">*</span></li>
+            <li><span>联系方式：</span><input style="width:274px;" type="text" name="phone" id="phone" onblur="checkPhone('phone','phone','联系方式格式错误！');" maxlength="50"/><span class="_star">*</span></li>
             <li><span>备注：</span> <textarea name="remarks"
                                              id="remarks"
                                              style="width: 61%; height: 50px; resize: none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;"></textarea>

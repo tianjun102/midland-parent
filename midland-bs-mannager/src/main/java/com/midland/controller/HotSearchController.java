@@ -219,12 +219,13 @@ public class HotSearchController extends BaseFilter {
             exportModel.setModelName1(hotSearch1.getId().toString());
             exportModel.setModelName2(hotSearch1.getCityName());
             exportModel.setModelName3(hotSearch1.getKeywords());
-            exportModel.setModelName4(hotSearch1.getMenuName());
+            exportModel.setModelName4(String.valueOf(hotSearch1.getCount()==null?0:hotSearch1.getCount()));
+            exportModel.setModelName5(hotSearch1.getMenuName());
             exportModels.add(exportModel);
         }
-        String titleColumn[] = {"modelName1", "modelName2", "modelName3", "modelName4"};
-        String titleName[] = {"编号", "城市", "热搜词", "模块"};
-        int titleSize[] = {13, 13, 13, 13};
+        String titleColumn[] = {"modelName1", "modelName2", "modelName3", "modelName4", "modelName5"};
+        String titleName[] = {"编号", "城市", "热搜词","搜索量" ,"模块"};
+        int titleSize[] = {13, 13, 13, 13,13};
         //其他设置 set方法可全不调用
         pee.wirteExcel(titleColumn, titleName, titleSize, exportModels, request);
     }

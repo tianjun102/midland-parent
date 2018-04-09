@@ -16,20 +16,21 @@
     <form action="${ctx}/rest/hotSearch/add" method="post" id="dataForm">
         <ul class="userinfo  width-md row">
             <input type="hidden" name="id" id="id" value="${item.id}">
-            <li><span>搜索词：</span>
-                <input type="text" name="keywords" id="keywords" value="${item.keywords}" onblur="notEmpty('keywords','keywords','搜索词不能为空！');"/><label style="color: red" class = "_star " >*</label>
-            </li>
+
             <li>
                 <span style = "float:left;">城市：</span>
                 <input type="hidden" name="cityName" id="cityName" value="${item.cityName}">
                 <select onchange="setCityName()" name="cityId" id="cityId" class="dropdown" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
+                    <option value="">请选择</option>
+
                     <c:forEach items="${cityList}" var="city">
-                    <option <c:if test="${item.cityId == city.id}">selected="selected"</c:if> value="${city.id}">${city.name}</option>
+                        <option <c:if test="${item.cityId == city.id}">selected="selected"</c:if> value="${city.id}">${city.name}</option>
                     </c:forEach>
                 </select>
             </li>
             <li><span>平台：</span>
                 <select name="source" id="source" class="dropdown">
+                    <option value="">请选择</option>
                     <option value="0" <c:if test="${item.source == 0}">selected="selected"</c:if>>网站</option>
                     <option value="1" <c:if test="${item.source == 1}">selected="selected"</c:if>>微站</option>
                 </select>
@@ -37,7 +38,7 @@
 
             <li><span>模块：</span>
                 <input type="hidden" id="menuName" name="menuName" value="${item.menuName}" >
-                <select onchange="setMenuName()" name="menuId" id="menuId" class="dropdown">
+                <select onchange="setMenuName()" name="menuId" id="menuId" class="dropdown" style="z-index: 999">
                     <option <c:if test="${item.menuId =='0'}">selected="selected"</c:if> value="0">首页</option>
                     <option <c:if test="${item.menuId =='1'}">selected="selected"</c:if> value="1">新房</option>
                     <option <c:if test="${item.menuId =='2'}">selected="selected"</c:if> value="2">二手房</option>
@@ -52,6 +53,9 @@
                     <option <c:if test="${item.menuId =='11'}">selected="selected"</c:if> value="11">问答</option>
                 </select>
                 <label style="color: red" class = "_star " >*</label>
+            </li>
+            <li><span>搜索词：</span>
+                <input type="text" name="keywords" id="keywords" value="${item.keywords}" onblur="notEmpty('keywords','keywords','搜索词不能为空！');"/><label style="color: red" class = "_star " >*</label>
             </li>
             <li><span>地址：</span>
                 <input type="text" name="url" id="url" value="${item.url}"  onblur="checkUrl('url','url','链接格式不正确！')">
@@ -69,7 +73,7 @@
 <script type="text/javascript">
     //保存数据
     function updateData() {
-        if(notEmpty('keywords','keywords','搜索词不能为空！')&&checkSelect('menuId','请选择模块！')&&checkUrl('url','url','链接格式不正确！')){
+        if(checkSelect('cityId|source|menuId','请选择城市!|请选择平台!|请选择模块！')&&notEmpty('keywords','keywords','搜索词不能为空！')&&checkUrl('url','url','链接格式不正确！')){
         var data = $("#dataForm").serialize();
         $.ajax({
             type: "post",

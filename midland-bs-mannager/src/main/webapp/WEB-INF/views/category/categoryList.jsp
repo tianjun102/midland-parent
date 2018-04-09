@@ -32,14 +32,12 @@
                 <c:forEach items="${requestScope.items }" var="item"
                            varStatus="xh">
                     <tr>
-                        <input type="hidden" id="id" value="${item.id}"/>
                         <td><input type="checkbox" name="pid" value="${item.id}"></td>
                         <td>${xh.count }</td>
                         <c:if test="${type == 3}">
                             <td>${item.modeName }</td>
                         </c:if>
                         <td>${item.cateName }</td>
-
                         <td>${item.cityName }</td>
                         <td><c:forEach items="${sources}" var="s">
                             <c:if test="${item.source == s.id}">${s.name}</c:if>
@@ -141,7 +139,7 @@
 
     //排序
     function sort(id, orderById, sort) {
-        var data = $("#searchForm").serialize();
+        var data = "type=3&cityId="+$("#cityId").val()+"&source="+$("#source").val()+"&modeId="+$("#modeId").val()+"&isDelete"+$("#isDelete").val()
         $.ajax({
             type: "post",
             url: "${ctx}/rest/category/sort?sort=" + sort + "&orderBy=" + orderById + "&id=" + id,
@@ -150,6 +148,7 @@
             data: data,
 
             success: function (data) {
+                debugger;
                 if (data.state == 0) {
                     $('#searchForm').submit();
                 }

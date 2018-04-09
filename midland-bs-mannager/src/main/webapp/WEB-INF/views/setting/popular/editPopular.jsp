@@ -163,7 +163,7 @@
             </li>
             <li id="sellrentLi" style="display: none"><span>租售：</span>
                 <label class="checkitem"><input id="radio1" type="radio" name="sellRent"
-                                                value="0"><span>租房</span></label>
+                                                value="0" checked="checked"><span>租房</span></label>
                 <label class="checkitem"><input id="radio2" type="radio" name="sellRent"
                                                 value="1"><span>售房</span></label>
             </li>
