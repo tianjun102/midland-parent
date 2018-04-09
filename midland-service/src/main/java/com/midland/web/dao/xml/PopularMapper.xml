@@ -28,12 +28,15 @@
     <sql id="Base_Column_List">
         id,cate_id,menu_id,name,source,url,province_id,city_id,area_id,sheet_id,is_delete,province_name,city_name,area_name,sheet_name,cate_name,is_show,order_by,sell_rent,nofollow
     </sql>
+   <sql id="Base_Column_List_collection">
+        a.id,a.cate_id,a.menu_id,a.name,a.source,a.url,a.province_id,a.city_id,a.area_id,a.sheet_id,a.is_delete,a.province_name,a.city_name,a.area_name,a.sheet_name,a.is_show,a.order_by,a.sell_rent,a.nofollow
+    </sql>
 
     <select id="selectById" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
-        from popular
-        where id= #{id}
+        <include refid="Base_Column_List_collection"/>,b.cate_name
+        from popular a,category b
+        where a.id= #{id} and a.cate_id=b.id
     </select>
 
     <delete id="deleteById">
@@ -67,18 +70,16 @@
 
     <select id="findPopularList" parameterType="com.midland.web.model.Popular" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
-        from popular
-        where 1=1
-        <include refid="select_option"/>
+        <include refid="Base_Column_List_collection"/>,b.cate_name
+        from popular a,category b
+        where a.cate_id=b.id
+        <include refid="select_option_collection"/>
         ORDER by order_by asc
     </select>
  <select id="findCateGory" parameterType="com.midland.web.model.Popular" resultMap="BaseResultMap">
-        select DISTINCT(cate_name)
-        from popular
-        where 1=1
-        <include refid="select_option"/>
-        ORDER by order_by asc
+     select DISTINCT(cate_id),b.cate_name from popular a,category b where a.cate_id=b.id
+        <include refid="select_option_collection"/>
+        ORDER by a.order_by asc
     </select>
 
     <insert id="insertPopular" parameterType="com.midland.web.model.Popular">
@@ -268,6 +269,72 @@
         <if test="nofollow != null">
             nofollow=#{nofollow},
         </if>
+    </sql>
+
+
+    <sql id="select_option_collection">
+        <if test="id != null">
+            and a.id= #{id,jdbcType=INTEGER}
+        </if>
+        <if test="cateId != null">
+            and a.cate_id= #{cateId,jdbcType=INTEGER}
+        </if>
+        <if test="menuId != null">
+            and a.menu_id= #{menuId,jdbcType=INTEGER}
+        </if>
+        <if test="name != null">
+            and a.name like CONCAT(CONCAT('%', #{name}), '%')
+        </if>
+        <if test="source != null">
+            and a.source= #{source,jdbcType=INTEGER}
+        </if>
+        <if test="url != null">
+            and a.url= #{url,jdbcType=VARCHAR}
+        </if>
+        <if test="provinceId != null">
+            and a.province_id= #{provinceId,jdbcType=VARCHAR}
+        </if>
+        <if test="cityId != null">
+            and a.city_id= #{cityId,jdbcType=VARCHAR}
+        </if>
+        <if test="areaId != null">
+            and a.area_id= #{areaId,jdbcType=VARCHAR}
+        </if>
+        <if test="sheetId != null">
+            and a.sheet_id= #{sheetId,jdbcType=VARCHAR}
+        </if>
+        <if test="isDelete != null">
+            and a.is_delete= #{isDelete,jdbcType=INTEGER}
+        </if>
+        <if test="provinceName != null">
+            and a.province_name= #{provinceName,jdbcType=VARCHAR}
+        </if>
+        <if test="cityName != null">
+            and a.city_name= #{cityName,jdbcType=VARCHAR}
+        </if>
+        <if test="areaName != null">
+            and a.area_name= #{areaName,jdbcType=VARCHAR}
+        </if>
+        <if test="sheetName != null">
+            and a.sheet_name= #{sheetName,jdbcType=VARCHAR}
+        </if>
+        <if test="cateName != null">
+            and a.cate_name like CONCAT(CONCAT('%', #{cateName}), '%')
+        </if>
+        <if test="isShow != null">
+            and a.is_show= #{isShow}
+        </if>
+        <if test="orderBy != null">
+            and a.order_by=#{orderBy}
+        </if>
+        <if test="sellRent != null">
+            and a.sell_rent=#{sellRent}
+        </if>
+        <if test="nofollow != null">
+            and a.nofollow=#{nofollow}
+        </if>
+
+
     </sql>
 
     <sql id="select_option">

@@ -86,6 +86,8 @@ public class CategoryServiceImpl implements CategoryService {
         }
     }
 
+
+
     /**
      * 查询
      **/
@@ -93,6 +95,17 @@ public class CategoryServiceImpl implements CategoryService {
     public Category selectCategoryById(Integer id) {
         log.debug("selectCategoryById  {}", id);
         return categoryMapper.selectCategoryById(id);
+    }
+
+
+
+    /**
+     * 查询
+     **/
+    @Override
+    public List<Category> getCateGorysByIds(List<Integer> ids) {
+        log.debug("getCateGorysByIds  {}", ids);
+        return categoryMapper.getCateGorysByIds(ids);
     }
 
     /**

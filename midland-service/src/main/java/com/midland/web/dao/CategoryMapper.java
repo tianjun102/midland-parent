@@ -14,6 +14,7 @@ public interface CategoryMapper {
     int deleteCategoryById(Integer category);
 
     int updateCategoryById(Category category);
+    List<Category> getCateGorysByIds(List<Integer> ids);
 
     Category shiftUp(Category category);
 

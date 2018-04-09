@@ -47,6 +47,19 @@
                         <option value="1">下架</option>
                     </select>
                 </li>
+
+                <li><span>分类：</span>
+                    <select name="cateId" id="id"
+                            style="height: 28px; width:120px;display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;">
+                        <option value="">请选择</option>
+                        <c:forEach items="${cateList}" var="s">
+                            <option value="${s.cateId}">
+                                    ${s.cateName}
+                            </option>
+                        </c:forEach>
+                    </select>
+                </li>
+                <li><span>标题：</span><input type="text" name="title" id="title" placeholder="请输入标题"/></li>
                 <c:if test="${not empty isSuper}">
                     <li>
                         <span style="float:left;">是否删除：</span>
@@ -57,18 +70,6 @@
                         </select>
                     </li>
                 </c:if>
-                <li><span>分类：</span>
-                    <select name="cateName" id="id"
-                            style="height: 28px; width:120px;display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;">
-                        <option value="">请选择</option>
-                        <c:forEach items="${cateList}" var="s">
-                            <option value="${s.cateName}">
-                                    ${s.cateName}
-                            </option>
-                        </c:forEach>
-                    </select>
-                </li>
-                <li><span>标题：</span><input type="text" name="title" id="title" placeholder="请输入标题"/></li>
                 <li>
                     <span>发布时间：</span><input class="Wdate half" id="time1"
                                              onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time2\')}'})"
@@ -133,7 +134,7 @@
                     var obj = data.data;
                     var html = "<option value=>请选择</option>";
                     for (var i = 0; i < obj.length; i++) {
-                        html += "<option value=\"" + obj[i].cateName + "\">" + obj[i].cateName + "</option>";
+                        html += "<option value=\"" + obj[i].cateId + "\">" + obj[i].cateName + "</option>";
                     }
                     $("#id").html(html);
 

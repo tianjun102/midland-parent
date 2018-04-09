@@ -18,6 +18,8 @@ public interface CategoryService {
      **/
     Category selectCategoryById(Integer id);
 
+    List<Category> getCateGorysByIds(List<Integer> ids);
+
     /**
      * 主键删除
      **/

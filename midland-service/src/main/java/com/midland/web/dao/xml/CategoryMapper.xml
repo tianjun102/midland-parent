@@ -47,6 +47,19 @@
         where id= #{id}
     </update>
 
+    <select id="getCateGorysByIds" parameterType="java.util.List" resultMap="BaseResultMap">
+        select
+        cate_name,id
+        from category
+        where id IN
+        <foreach collection="ids" item="item" open="(" close=")" >
+            #{item},
+        </foreach>
+
+        ORDER BY order_by ASC
+    </select>
+
+
     <select id="getCateGorys" parameterType="com.midland.web.model.Category" resultMap="BaseResultMap">
         select
         DISTINCT(cate_name),id

@@ -15,17 +15,22 @@
         <result column="is_delete" property="isDelete" jdbcType="INTEGER"/>
         <result column="cate_id" property="cateId" jdbcType="INTEGER"/>
         <result column="cate_name" property="cateName" jdbcType="VARCHAR"/>
+        <result column="city_id" property="cityId" jdbcType="VARCHAR"/>
+        <result column="city_name" property="cityName" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-		id,type,level,cname,ename,address,post,img_url,img_desc,is_delete,cate_id,cate_name
+		id,type,level,cname,ename,address,post,img_url,img_desc,is_delete,cate_id,cate_name,city_id,city_name
+	</sql>
+<sql id="Base_Column_List_collection">
+		a.id,a.type,a.level,a.cname,a.ename,a.address,a.post,a.img_url,a.img_desc,a.is_delete,a.cate_id,a.city_id,a.city_name
 	</sql>
 
     <select id="selectEliteVipById" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
-        from elite_vip
-        where id= #{id}
+        <include refid="Base_Column_List_collection"/>,b.cate_name
+        from elite_vip a,category b
+        where a.id= #{id} and a.cate_id=b.id
     </select>
 
     <delete id="deleteEliteVipById">
@@ -44,13 +49,13 @@
 
     <select id="findEliteVipList" parameterType="com.midland.web.model.EliteVip" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
-        from elite_vip
-        where 1=1
+        <include refid="Base_Column_List_collection"/>,b.cate_name
+        from elite_vip a,category b
+        where a.cate_id=b.id
         <if test="isDelete == null">
-            and is_delete=0
+            and a.is_delete=0
         </if>
-        <include refid="select_option"/>
+        <include refid="select_option_collecton"/>
     </select>
 
     <insert id="insertEliteVip" parameterType="com.midland.web.model.EliteVip">
@@ -89,6 +94,12 @@
             <if test="cateName != null">
                 cate_name,
             </if>
+            <if test="cityId != null">
+                city_id,
+            </if>
+            <if test="cityName != null">
+                city_name,
+            </if>
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -124,6 +135,12 @@
             </if>
             <if test="cateName != null">
                 #{cateName,jdbcType=VARCHAR},
+            </if>
+            <if test="cityId != null">
+                #{cityId,jdbcType=VARCHAR},
+            </if>
+            <if test="cityName != null">
+                #{cityName,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -162,9 +179,62 @@
         <if test="cateName != null">
             cate_name= #{cateName,jdbcType=VARCHAR},
         </if>
+        <if test="cityId != null">
+            city_id= #{cityId,jdbcType=VARCHAR},
+        </if>
+        <if test="cityName != null">
+            city_name= #{cityName,jdbcType=VARCHAR},
+        </if>
+        <if test="cityId != null">
+            city_id= #{cityId,jdbcType=VARCHAR},
+        </if>
+        <if test="cityName != null">
+            city_name= #{cityName,jdbcType=VARCHAR},
+        </if>
     </sql>
 
-    <sql id="select_option">
+    <sql id="select_option_collecton">
+        <if test="id != null">
+            and a.id= #{id,jdbcType=INTEGER}
+        </if>
+        <if test="type != null">
+            and a.type= #{type,jdbcType=VARCHAR}
+        </if>
+        <if test="level != null">
+            and a.level like CONCAT(CONCAT('%', #{level}), '%')
+        </if>
+        <if test="cname != null">
+            and a.cname like CONCAT(CONCAT('%', #{cname}), '%')
+        </if>
+        <if test="ename != null">
+            and a.ename like CONCAT(CONCAT('%', #{ename}), '%')
+        </if>
+        <if test="address != null">
+            and a.address= #{address,jdbcType=VARCHAR}
+        </if>
+        <if test="post != null">
+            and a.post like CONCAT(CONCAT('%', #{post}), '%')
+        </if>
+        <if test="imgUrl != null">
+            and a.img_url= #{imgUrl,jdbcType=VARCHAR}
+        </if>
+        <if test="imgDesc != null">
+            and a.img_desc= #{imgDesc,jdbcType=VARCHAR}
+        </if>
+        <if test="isDelete != null">
+            and a.is_delete= #{isDelete,jdbcType=INTEGER}
+        </if>
+        <if test="cateId != null">
+            and a.cate_id= #{cateId,jdbcType=INTEGER}
+        </if>
+        <if test="cityId != null">
+            and a.city_id= #{cityId,jdbcType=VARCHAR}
+        </if>
+        <if test="cityName != null">
+            and a.city_name= #{cityName,jdbcType=VARCHAR}
+        </if>
+    </sql>
+<sql id="select_option">
         <if test="id != null">
             and id= #{id,jdbcType=INTEGER}
         </if>
@@ -200,6 +270,12 @@
         </if>
         <if test="cateName != null">
             and cate_name like CONCAT(CONCAT('%', #{cateName}), '%')
+        </if>
+        <if test="cityId != null">
+            and city_id= #{cityId,jdbcType=VARCHAR}
+        </if>
+        <if test="cityName != null">
+            and city_name= #{cityName,jdbcType=VARCHAR}
         </if>
     </sql>
 

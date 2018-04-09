@@ -19,7 +19,6 @@
             <c:if test="${empty isSuper}">style="height: 27px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;background-color: #dddfe2;"
             disabled="disabled"</c:if> >
         <option value="">请选择</option>
-        <option value="">全部</option>
         <c:forEach items="${provinceList}" var="province">
             <option
                     value="${province.parentId}">${province.parentName}

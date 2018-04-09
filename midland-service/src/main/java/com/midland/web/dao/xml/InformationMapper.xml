@@ -35,12 +35,15 @@
     <sql id="Base_Column_List">
 		id,cate_id,cate_parentId,type,title,source,enclosure,meta_keywords,meta_desc,img_url,img_desc,details,order_by,click_num,is_delete,artice_type,DATE_FORMAT(release_time,'%Y-%m-%d %H:%i:%s') release_time,comment,city_id,city_name,cate_name,status,platform,author,summary,is_show
 	</sql>
+    <sql id="Base_Column_List_collection">
+		a.id,a.cate_id,a.cate_parentId,a.type,a.title,a.source,a.enclosure,a.meta_keywords,a.meta_desc,a.img_url,a.img_desc,a.details,a.order_by,a.click_num,a.is_delete,a.artice_type,DATE_FORMAT(a.release_time,'%Y-%m-%d %H:%i:%s') release_time,a.comment,a.city_id,a.city_name,a.status,a.platform,a.author,a.summary,a.is_show
+	</sql>
 
     <select id="selectInformationById" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
-        from information
-        where id= #{id}
+        <include refid="Base_Column_List_collection"/>,b.cate_name
+        from information a,category b
+        where a.id= #{id} and a.cate_id=b.id
     </select>
 
 
@@ -93,23 +96,22 @@
     </update>
 
     <select id="getCates" parameterType="com.midland.web.model.Information" resultMap="BaseResultMap">
-        select DISTINCT(cate_name) from information
-        where 1=1
-        <include refid="select_option"/>
-        ORDER BY order_by DESC
+        select DISTINCT(cate_id),b.cate_name from information a,category b where a.cate_id=b.id
+        <include refid="select_option_collection"/>
+        ORDER BY a.order_by DESC
     </select>
 
 
     <select id="findInformationList" parameterType="com.midland.web.model.Information" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
-        from information
-        where 1=1
+        <include refid="Base_Column_List_collection"/>,b.cate_name
+        from information a,category b
+        where a.cate_id=b.id
         <if test="isDelete == null">
-            and is_delete=0
+            and a.is_delete=0
         </if>
-        <include refid="select_option"/>
-        ORDER BY order_by DESC
+        <include refid="select_option_collection"/>
+        ORDER BY a.order_by DESC
     </select>
 
 
@@ -445,7 +447,90 @@
             and is_show=#{isShow}
         </if>
     </sql>
+    <sql id="select_option_collection">
+        <if test="id != null">
+            and a.id= #{id,jdbcType=INTEGER}
+        </if>
+        <if test="cateId != null">
+            and a.cate_id= #{cateId,jdbcType=INTEGER}
+        </if>
+        <if test="cateParentid != null">
+            and a.cate_parentId= #{cateParentid,jdbcType=INTEGER}
+        </if>
+        <if test="type != null">
+            and a.type= #{type,jdbcType=VARCHAR}
+        </if>
+        <if test="title != null">
+            and a.title= #{title,jdbcType=VARCHAR}
+        </if>
+        <if test="source != null">
+            and a.source= #{source,jdbcType=VARCHAR}
+        </if>
+        <if test="enclosure != null">
+            and a.enclosure= #{enclosure,jdbcType=VARCHAR}
+        </if>
+        <if test="metaKeywords != null">
+            and a.meta_keywords= #{metaKeywords,jdbcType=VARCHAR}
+        </if>
+        <if test="metaDesc != null">
+            and a.meta_desc= #{metaDesc,jdbcType=VARCHAR}
+        </if>
+        <if test="imgUrl != null">
+            and a.img_url= #{imgUrl,jdbcType=VARCHAR}
+        </if>
+        <if test="imgDesc != null">
+            and a.img_desc= #{imgDesc,jdbcType=VARCHAR}
+        </if>
+        <if test="details != null">
+            and a.details= #{details,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="orderBy != null">
+            and a.order_by= #{orderBy,jdbcType=INTEGER}
+        </if>
+        <if test="clickNum != null">
+            and a.click_num= #{clickNum,jdbcType=INTEGER}
+        </if>
+        <if test="isDelete != null">
+            and a.is_delete= #{isDelete,jdbcType=INTEGER}
+        </if>
+        <if test="articeType != null">
+            and a.artice_type= #{articeType,jdbcType=INTEGER}
+        </if>
+        <if test="releaseTime != null">
+            and a.release_time= #{releaseTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="comment != null">
+            and a.comment= #{comment,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="cityId != null">
+            and a.city_id = #{cityId}
+        </if>
+        <if test="cityName != null">
+            and a.city_name = #{cityName}
+        </if>
 
+        <if test="status != null">
+            and a.status = #{status}
+        </if>
+        <if test="platform != null">
+            and a.platform = #{platform}
+        </if>
+        <if test="startTime != null">
+            and a.release_time &gt; #{startTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="endTime != null">
+            and a.release_time &lt; #{endTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="author != null">
+            and a.author = #{author}
+        </if>
+        <if test="summary != null">
+            and a.summary = #{summary}
+        </if>
+        <if test="isShow != null">
+            and a.is_show=#{isShow}
+        </if>
+    </sql>
 
     <sql id="select_option">
         <if test="id != null">

@@ -52,7 +52,31 @@ public class EliteVip {
      * 分类名称
      **/
     private String cateName;
+    /**
+     * 城市id
+     **/
+    private Integer cityId;
+    /**
+     * 城市名称
+     **/
+    private String cityName;
 
+
+    public Integer getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(Integer cityId) {
+        this.cityId = cityId;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
 
     public Integer getId() {
         return id;

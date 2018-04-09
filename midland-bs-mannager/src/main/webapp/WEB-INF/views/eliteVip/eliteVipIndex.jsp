@@ -65,14 +65,7 @@
 		<form action="${ctx }/rest/eliteVip/list" method="POST" id="searchForm"
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo width-sm row">
-				<%--<li><span>select：</span>
-					<select name="cityId" id="cityId" class="dropdown">
-						<option value="" >全部</option>
-						<c:forEach items="${citys}" var="item">
-						<option value="${item.id}" >${item.name}</option>
-						</c:forEach>
-					</select>
-				</li>--%>
+				<%@include file="../layout/sherchArea.jsp" %>
 				<li><span>会员级别：</span><input type="text" class="vipcate" name="cateName"/></li>
 				<li><span>会员分类：</span><input type="text" class="vipcate" name="level"/></li>
 

@@ -51,7 +51,7 @@ public class EliteVipController extends BaseFilter {
         category.setType(2);
         List<Category> list = categoryServiceImpl.findCategoryList(category);
         model.addAttribute("categoryList", list);
-
+        settingServiceImpl.getAllProvinceList(model);
         User user = MidlandHelper.getCurrentUser(request);
         model.addAttribute("isSuper", user.getIsSuper());
         return "eliteVip/eliteVipIndex";
@@ -167,8 +167,8 @@ public class EliteVipController extends BaseFilter {
             cityName = user.getCityName();
         }
 
-        model.addAttribute("cityId", cityId);
-        model.addAttribute("cityName", cityName);
+//        model.addAttribute("cityId", cityId);
+//        model.addAttribute("cityName", cityName);
         model.addAttribute("vipCateGory", result);
         model.addAttribute("item", eliteVip);
         return "eliteVip/updateEliteVip";

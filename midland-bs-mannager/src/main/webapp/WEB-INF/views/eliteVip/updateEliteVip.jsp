@@ -1,13 +1,13 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
-<%@include file="../layout/tablib.jsp"%>
-<%@include file="../layout/source.jsp"%>
-<%@include file="../layout/zTree.jsp"%>
+<%@include file="../layout/tablib.jsp" %>
+<%@include file="../layout/source.jsp" %>
+<%@include file="../layout/zTree.jsp" %>
 
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
@@ -18,33 +18,35 @@
 <!-- BEGIN HEAD -->
 <head>
     <base href="<%=basePath%>">
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>修改会员</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta content="" name="description" />
-    <meta content="" name="author" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="" name="description"/>
+    <meta content="" name="author"/>
     <meta name="MobileOptimized" content="320">
     <link rel="stylesheet" href="${ctx}/assets/css/ztree/css/demo.css">
     <link rel="stylesheet" href="${ctx }/assets/css/common.css">
     <link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css"/>
 </head>
-<body >
+<body>
 <div class="box">
-    <section class = "content">
-        <p class = "detail-title">
+    <section class="content">
+        <p class="detail-title">
             <span>修改会员</span>
         </p>
-        <form id="formId" action="${ctx}/rest/banner/addBanner" method="post" enctype="multipart/form-data" method="post">
-            <ul class = "adminfo  width-lg row">
+        <form id="formId" action="${ctx}/rest/banner/addBanner" method="post" enctype="multipart/form-data"
+              method="post">
+            <ul class="adminfo  width-lg row">
                 <input type="hidden" name="id" id="id" value="${item.id}">
                 <%@include file="../menu/area_required.jsp" %>
                 <li><span>会员级别：</span>
                     <input type="hidden" name="cateId" id="cateId" value="${item.cateId}"/>
                     <input type="hidden" name="cateName" id="cateName" value="${item.cateName}">
-                    <select id="cates" name="cates" >
+                    <select id="cates" name="cates">
                         <c:forEach items="${vipCateGory}" var="s">
-                        <option value="${s.id}" <c:if test="${s.id==item.cateId}">selected="selected"</c:if>>${s.cateName}</option>
+                            <option value="${s.id}"
+                                    <c:if test="${s.id==item.cateId}">selected="selected"</c:if>>${s.cateName}</option>
                         </c:forEach>
                     </select>
                 </li>
@@ -78,11 +80,12 @@
 
             </ul>
 
-            <ul class = "adminfo row">
+            <ul class="adminfo row">
                 <li>
                     <span></span>
-                    <a onclick="updateData();" target="contentF" class = "public_btn bg2">保存</a>
-                    <a style="margin-left: 20px" onclick="closeWin()" target="contentF" class="public_btn bg3" id="cancel">取消</a>
+                    <a onclick="updateData();" target="contentF" class="public_btn bg2">保存</a>
+                    <a style="margin-left: 20px" onclick="closeWin()" target="contentF" class="public_btn bg3"
+                       id="cancel">取消</a>
                 </li>
             </ul>
         </form>
@@ -93,8 +96,8 @@
 
 
     $(function () {
-        if (${item.cateId==null}){
-            if (${vipCateGory.size()>0}){
+        if (${item.cateId==null}) {
+            if (${vipCateGory.size()>0}) {
                 $("#cateId").val("${vipCateGory[0].id}");
                 $("#cateName").val("${vipCateGory[0].cateName}");
             }
@@ -104,9 +107,9 @@
 
     $("#cates").change(function () {
         $("#cateId").val($("#cates option:selected").val());
-        if ($("#cates option:selected").text()=="请选择"){
+        if ($("#cates option:selected").text() == "请选择") {
             $("#cateName").val("");
-        }else{
+        } else {
             $("#cateName").val($("#cates option:selected").text());
         }
 
@@ -121,7 +124,7 @@
             url: "${ctx}/rest/eliteVip/getVipCate",
             async: false, // 此处必须同步
             dataType: "json",
-            data: {cityId:data},
+            data: {cityId: data},
             success: function (data) {
                 if (data.state == 0) {
                     $("#cates").html("<option  value=''>请选择</option>");
@@ -144,36 +147,41 @@
             }
         });
     })
+
     //保存数据
     function updateData() {
-        var data = $("#formId").serialize();
-        $.ajax({
-            type: "post",
-            url: "${ctx}/rest/eliteVip/update",
-            async: false, // 此处必须同步
-            dataType: "json",
-            data: data,
-            success: function (data) {
-                if (data.state == 0) {
-                    layer.msg("保存成功！！！", {icon: 1});
-                    $('#save').removeAttr("onclick");
-                    setTimeout(function () {
-                        parent.layer.closeAll();
-                        parent.$("#inquery").click();
-                    }, 1000);
+        if (checkSelect("citys|cates", "请选择城市!|请选择会员级别!", "请选择会员级别!")) {
 
-                } else {
-                    layer.msg("保存失败！", {icon: 2});
+
+            var data = $("#formId").serialize();
+            $.ajax({
+                type: "post",
+                url: "${ctx}/rest/eliteVip/update",
+                async: false, // 此处必须同步
+                dataType: "json",
+                data: data,
+                success: function (data) {
+                    if (data.state == 0) {
+                        layer.msg("保存成功！！！", {icon: 1});
+                        $('#save').removeAttr("onclick");
+                        setTimeout(function () {
+                            parent.layer.closeAll();
+                            parent.$("#inquery").click();
+                        }, 1000);
+
+                    } else {
+                        layer.msg("保存失败！", {icon: 2});
+                    }
+                },
+                error: function (data) {
+                    if (data.responseText != null) {
+                        layer.msg(data.responseText, {icon: 2});
+                    } else {
+                        layer.msg("保存失败！", {icon: 2});
+                    }
                 }
-            },
-            error: function (data) {
-                if (data.responseText != null) {
-                    layer.msg(data.responseText, {icon: 2});
-                } else {
-                    layer.msg("保存失败！", {icon: 2});
-                }
-            }
-        });
+            });
+        }
     }
 
     //取消

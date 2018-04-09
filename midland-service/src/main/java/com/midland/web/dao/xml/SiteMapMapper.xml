@@ -22,12 +22,15 @@
     <sql id="Base_Column_List">
         id,name,mode_id,mode_name,city_id,city_name,cate_id,cate_name,link_url,is_delete,order_by,is_show,source,is_href
     </sql>
+    <sql id="Base_Column_List_collection">
+        a.id,a.name,a.mode_id,a.mode_name,a.city_id,a.city_name,a.cate_id,a.link_url,a.is_delete,a.order_by,a.is_show,a.source,a.is_href
+    </sql>
 
     <select id="selectSiteMapById" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
-        from site_map
-        where id= #{id}
+        <include refid="Base_Column_List_collection"/>,b.cate_name
+        from site_map a,category b
+        where a.id= #{id} and a.cate_id=b.id
     </select>
 
     <delete id="deleteSiteMapById">
@@ -90,26 +93,26 @@
 
     <select id="findSiteMapList" parameterType="com.midland.web.model.SiteMap" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
-        from site_map
-        where 1=1
+        <include refid="Base_Column_List_collection"/>,b.cate_name
+        from site_map a,category b
+        where a.cate_id=b.id
         <if test="isDelete == null">
-            and is_delete=0
+            and a.is_delete=0
         </if>
-        <include refid="select_option"/>
-        ORDER BY order_by DESC
+        <include refid="select_option_collection"/>
+        ORDER BY a.order_by DESC
     </select>
 
     <select id="findCateGory" parameterType="com.midland.web.model.SiteMap" resultMap="BaseResultMap">
-        select DISTINCT (cate_id) as cate_id ,cate_name
-        from site_map
-        where 1=1
+        select DISTINCT (a.cate_id) as cate_id ,b.cate_name
+        from site_map a,category b
+        where a.cate_id=b.id
         <if test="isDelete == null">
-            and is_delete=0
+            and a.is_delete=0
         </if>
-        <include refid="select_option"/>
-        AND cate_id is NOT NULL
-        ORDER BY order_by DESC
+        <include refid="select_option_collection"/>
+        AND a.cate_id is NOT NULL
+        ORDER BY a.order_by DESC
     </select>
 
  <select id="findModes" parameterType="com.midland.web.model.SiteMap" resultMap="BaseResultMap">
@@ -306,7 +309,50 @@
         </if>
 
     </sql>
-
+    <sql id="select_option_collection">
+        <if test="id != null">
+            and a.id= #{id,jdbcType=INTEGER}
+        </if>
+        <if test="name != null">
+            and a.name like CONCAT(CONCAT('%', #{name}), '%')
+        </if>
+        <if test="modeId != null">
+            and a.mode_id= #{modeId,jdbcType=INTEGER}
+        </if>
+        <if test="modeName != null">
+            and a.mode_name like CONCAT(CONCAT('%', #{modeName}), '%')
+        </if>
+        <if test="cityId != null">
+            and a.city_id= #{cityId,jdbcType=VARCHAR}
+        </if>
+        <if test="cityName != null">
+            and a.city_name= #{cityName,jdbcType=VARCHAR}
+        </if>
+        <if test="cateId != null">
+            and a.cate_id= #{cateId,jdbcType=INTEGER}
+        </if>
+        <if test="cateName != null">
+            and a.cate_name like CONCAT(CONCAT('%', #{cateName}), '%')
+        </if>
+        <if test="linkUrl != null">
+            and a.link_url= #{linkUrl,jdbcType=VARCHAR}
+        </if>
+        <if test="isDelete != null">
+            and a.is_delete= #{isDelete,jdbcType=INTEGER}
+        </if>
+        <if test="orderBy != null">
+            and a.order_by= #{orderBy,jdbcType=INTEGER}
+        </if>
+        <if test="isShow != null">
+            and a.is_show= #{isShow,jdbcType=INTEGER}
+        </if>
+        <if test="source != null">
+            and a.source= #{source,jdbcType=INTEGER}
+        </if>
+        <if test="isHref != null">
+            and a.is_href=#{isHref,jdbcType=INTEGER}
+        </if>
+    </sql>
     <sql id="select_option">
         <if test="id != null">
             and id= #{id,jdbcType=INTEGER}

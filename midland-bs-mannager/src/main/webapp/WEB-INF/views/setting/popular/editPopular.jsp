@@ -218,7 +218,7 @@
     })
 
     function saveData() {
-        if (checkSelect("citys", "城市不能为空！") && notEmpty('name', 'name', '链接名不能为空！') && notEmpty('cateName', 'cateName', '链接名不能为空！') && checkSelect("source|menuId", "平台不能为空！|类型不能为空！|模块不能为空！") && checkUrl("url", "url", "网址格式不正确！")) {
+        if (checkSelect("citys", "城市不能为空！") && notEmpty('name', 'name', '链接名不能为空！') && notEmpty('cateName', 'cateName', '分类不能为空！') && checkSelect("source|menuId", "平台不能为空！|类型不能为空！|模块不能为空！") && checkUrl("url", "url", "网址格式不正确！")) {
             var data = $("#addFrom").serialize();
             $.ajax({
                 type: "post",

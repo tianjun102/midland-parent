@@ -24,6 +24,7 @@
             <th style="width: 8%">会员英文名</th>
             <th style="width: 8%">所属地区</th>
             <th style="width: 8%">会员职位</th>
+            <th style="width: 8%">城市</th>
             <th style="width: 10%">操作</th>
         </tr>
         </thead>
@@ -45,6 +46,7 @@
                         <td>${item.ename}</td>
                         <td>${item.address}</td>
                         <td>${item.post}</td>
+                        <td>${item.cityName}</td>
                         <td>
                             <c:if test="${item.isDelete==0}">
                                 <a class="edit_img" target="contentF" onclick="to_edit(${item.id})"></a>
