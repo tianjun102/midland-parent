@@ -121,7 +121,7 @@
             <li><span>META描述：</span>
                 <input type="text" name="metaDescription" id="metaDescription" value="${item.metaDescription}"/>
             </li>
-            <li><span>标题：</span>
+            <li><span>META标题：</span>
                 <input type="text" name="metaTitle" id="metaTitle" value="${item.metaTitle}"/>
             </li>
             <li><span style="vertical-align: top;">图片上传：</span>

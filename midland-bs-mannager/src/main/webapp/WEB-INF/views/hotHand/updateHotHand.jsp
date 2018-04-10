@@ -138,7 +138,7 @@
             <li class="col-md-5"><span>META描述：</span>
                 <input type="text" name="metaDescription" id="metaDescription" value="${item.metaDescription}"/>
             </li>
-            <li class="col-md-5"><span>标题：</span>
+            <li class="col-md-5"><span>META标题：</span>
                 <input type="text" name="metaTitle" id="metaTitle" value="${item.metaTitle}"/>
             </li>
             <li class="col-md-5"><span>均价：</span>

@@ -124,7 +124,7 @@
             <li><span>META描述：</span>
                 <input type="text" name="metaDescription" id="metaDescription" value=""/>
             </li>
-            <li><span>标题：</span>
+            <li><span>META标题：</span>
                 <input type="text" name="metaTitle" id="metaTitle" value=""/>
             </li>
             <li><span>楼盘ID：</span>

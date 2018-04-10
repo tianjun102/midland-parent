@@ -11,7 +11,18 @@
     <link rel="stylesheet" href="${ctx}/assets/css/ztree/css/demo.css">
     <link rel="stylesheet" href="${ctx }/assets/css/common.css">
     <link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css">
-
+    <style type="text/css">
+        .content ul.adminfo > li > span {
+            float: left;
+            display: inline-block;
+            width: 100px;
+            height: 28px;
+            line-height: 28px;
+            text-align: right;
+            font-size: 14px;
+            color: rgb(102, 102, 102);
+        }
+    </style>
     <script type="text/javascript">
 
         var setting = {
@@ -144,13 +155,14 @@
                         <input type="file" name="file_upload" id="file_upload"/>
                     </div>
                 </li>
-                <li>
-                    <span>META关键字：</span>
-                    <input type="text" name="metaKeywords" value="${item.metaKeywords}" />
+                <li><span>META关键词：</span>
+                    <input type="text" name="metaKeywords" id="metaKeywords" value="${item.metaKeywords}"/>
                 </li>
-                <li>
-                    <span>META描述：</span>
-                    <input type="text" name="metaDesc" value="${item.metaDesc}" />
+                <li><span>META描述：</span>
+                    <input type="text" name="metaDescription" id="metaDescription" value="${item.metaDescription}"/>
+                </li>
+                <li><span>META标题：</span>
+                    <input type="text" name="metaTitle" id="metaTitle" value="${item.metaTitle}"/>
                 </li>
                 <li>
                     <span>作者：</span>

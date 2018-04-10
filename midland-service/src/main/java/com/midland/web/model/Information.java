@@ -32,14 +32,7 @@ public class Information {
      * 附件地址
      **/
     private String enclosure;
-    /**
-     * meta关键字
-     **/
-    private String metaKeywords;
-    /**
-     * meta描述
-     **/
-    private String metaDesc;
+
     /**
      * 缩略图
      **/
@@ -119,6 +112,27 @@ public class Information {
      * 0隐藏1显示
      */
     private String isShow;
+    private String metaTitle;
+    private String metaKeywords;
+    private String metaDescription;
+
+    public String getMetaTitle() {
+        return metaTitle;
+    }
+
+    public void setMetaTitle(String metaTitle) {
+        this.metaTitle = metaTitle;
+    }
+
+
+
+    public String getMetaDescription() {
+        return metaDescription;
+    }
+
+    public void setMetaDescription(String metaDescription) {
+        this.metaDescription = metaDescription;
+    }
 
 
     public String getIsShow() {
@@ -201,13 +215,7 @@ public class Information {
         this.metaKeywords = metaKeywords;
     }
 
-    public String getMetaDesc() {
-        return metaDesc;
-    }
 
-    public void setMetaDesc(String metaDesc) {
-        this.metaDesc = metaDesc;
-    }
 
     public String getImgUrl() {
         return imgUrl;
@@ -391,9 +399,7 @@ public class Information {
         if (metaKeywords != null) {
             sb.append(", \"metaKeywords\":\"").append(metaKeywords).append("\"");
         }
-        if (metaDesc != null) {
-            sb.append(", \"metaDesc\":\"").append(metaDesc).append("\"");
-        }
+
         if (imgUrl != null) {
             sb.append(", \"imgUrl\":\"").append(imgUrl).append("\"");
         }

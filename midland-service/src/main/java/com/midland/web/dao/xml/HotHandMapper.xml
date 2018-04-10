@@ -39,9 +39,8 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,price,DATE_FORMAT(into_time,'%Y-%m-%d
-        %H:%i:%s')into_time,manager_costs,city_id,city_name,unit_total,land_area,parking_num,building_type,property_address,developer,decoration,property_management,property_desc,property_advantages,position,supporting,house_name,img_url,agent_name,agent_id,DATE_FORMAT(create_time,'%Y-%m-%d
-        %H:%i:%s')create_time,is_delete,order_by,is_show,feature,recommend,building_area,property_num,meta_title,meta_keywords,meta_description
+        id,price,DATE_FORMAT(into_time,'%Y-%m-%d %H:%i:%s')into_time,manager_costs,city_id,city_name,unit_total,land_area,parking_num,building_type,property_address,developer,decoration,property_management,property_desc,property_advantages,position,supporting,house_name,img_url,agent_name,agent_id,
+        DATE_FORMAT(create_time,'%Y-%m-%d %H:%i:%s')create_time,is_delete,order_by,is_show,feature,recommend,building_area,property_num,meta_title,meta_keywords,meta_description
     </sql>
 
     <select id="selectHotHandById" resultMap="BaseResultMap">

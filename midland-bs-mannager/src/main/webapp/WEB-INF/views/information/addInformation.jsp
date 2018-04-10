@@ -12,6 +12,18 @@
     <link rel="stylesheet" href="${ctx }/assets/css/common.css">
     <link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css">
     <style type="text/css">
+        .content ul.adminfo > li > span {
+            float: left;
+            display: inline-block;
+            width: 100px;
+            height: 28px;
+            line-height: 28px;
+            text-align: right;
+            font-size: 14px;
+            color: rgb(102, 102, 102);
+        }
+    </style>
+    <style type="text/css">
         .dropdown {
             width: 274px !important;
         }
@@ -65,7 +77,7 @@
                 data: data,
                 success: function (data) {
                     var dfd={id:0, pId:0,name:'分类',open:true,nocheck:true,iconSkin:"pIcon01"};
-                    catProNodes =[dfd];
+                    catProNodes =[];
                     $.each(data.list,function (i,listItem) {
                         catProNodes.push(listItem);
                     });
@@ -102,8 +114,8 @@
                     <span style="float:left;">城市：</span>
                     <c:if test="${empty isSuper}"><input type="hidden" name="cityId" value="${cityId}"></c:if>
                     <input type="hidden" name="cityName" id="cityName" value="${cityName}">
-                    <select onchange="setCityName()" name="cityId" id="cityId"
-                            <c:if test="${empty isSuper}"> disabled="disabled"</c:if> >
+                    <select onchange="setCityName()" name="cityId" id="cityId" <c:if test="${empty isSuper}"> disabled="disabled"</c:if> >
+                        <option value="">请选择</option>
                         <c:forEach items="${cityList}" var="city">
                             <c:if test="${empty isSuper}">
                                 <option selected="selected" value="${cityId}">${cityName}</option>
@@ -111,9 +123,12 @@
                             <option value="${city.id}">${city.name}</option>
                         </c:forEach>
                     </select>
+                    <span class="_star ">*</span>
                 </li>
+
                 <li><span>平台：</span>
                     <select name="source" id="source">
+                        <option value="">请选择</option>
                         <option value="0">网站</option>
                         <option value="1">微站</option>
                     </select>
@@ -153,13 +168,14 @@
                         <input type="file" name="file_upload" id="file_upload"/>
                     </div>
                 </li>
-                <li>
-                    <span>META关键字：</span>
-                    <input type="text" name="metaKeywords"/>
+                <li><span>META关键词：</span>
+                    <input type="text" name="metaKeywords" id="metaKeywords" value=""/>
                 </li>
-                <li>
-                    <span>META描述：</span>
-                    <input type="text" name="metaDesc"/>
+                <li><span>META描述：</span>
+                    <input type="text" name="metaDescription" id="metaDescription" value=""/>
+                </li>
+                <li><span>META标题：</span>
+                    <input type="text" name="metaTitle" id="metaTitle" value=""/>
                 </li>
                 <li>
                     <span>作者：</span>
@@ -227,7 +243,7 @@
     }
 
     function subumintInformation() {
-        if (notEmpty('title', 'title', '标题不能为空！')) {
+        if (checkSelect("cityId|source",'请选择城市|请选择平台')&&notEmpty('title', 'title', '标题不能为空！')) {
             var data = $("#formId").serialize();
             $.ajax({
                 type: "post",
@@ -348,7 +364,6 @@
             dataType: "json",
             data: "",
             success: function (data) {
-                console.log(data);
                 $("#cateId").html("<option value='' >请选择</option>");
                 data.forEach(function (list) {
                     $("#cateId").append(

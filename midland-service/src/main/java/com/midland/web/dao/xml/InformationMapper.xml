@@ -10,8 +10,6 @@
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="source" property="source" jdbcType="INTEGER"/>
         <result column="enclosure" property="enclosure" jdbcType="VARCHAR"/>
-        <result column="meta_keywords" property="metaKeywords" jdbcType="VARCHAR"/>
-        <result column="meta_desc" property="metaDesc" jdbcType="VARCHAR"/>
         <result column="img_url" property="imgUrl" jdbcType="VARCHAR"/>
         <result column="img_desc" property="imgDesc" jdbcType="VARCHAR"/>
         <result column="details" property="details" jdbcType="LONGVARCHAR"/>
@@ -29,14 +27,16 @@
         <result column="author" property="author" jdbcType="VARCHAR"/>
         <result column="summary" property="summary" jdbcType="VARCHAR"/>
         <result column="is_show" property="isShow" jdbcType="INTEGER"/>
-
+        <result column="meta_title" property="metaTitle" jdbcType="VARCHAR"/>
+        <result column="meta_keywords" property="metaKeywords" jdbcType="VARCHAR"/>
+        <result column="meta_description" property="metaDescription" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-		id,cate_id,cate_parentId,type,title,source,enclosure,meta_keywords,meta_desc,img_url,img_desc,details,order_by,click_num,is_delete,artice_type,DATE_FORMAT(release_time,'%Y-%m-%d %H:%i:%s') release_time,comment,city_id,city_name,cate_name,status,platform,author,summary,is_show
+		id,cate_id,cate_parentId,type,title,source,enclosure,img_url,img_desc,details,order_by,click_num,is_delete,artice_type,DATE_FORMAT(release_time,'%Y-%m-%d %H:%i:%s') release_time,comment,city_id,city_name,cate_name,status,platform,author,summary,is_show,meta_title,meta_keywords,meta_description
 	</sql>
     <sql id="Base_Column_List_collection">
-		a.id,a.cate_id,a.cate_parentId,a.type,a.title,a.source,a.enclosure,a.meta_keywords,a.meta_desc,a.img_url,a.img_desc,a.details,a.order_by,a.click_num,a.is_delete,a.artice_type,DATE_FORMAT(a.release_time,'%Y-%m-%d %H:%i:%s') release_time,a.comment,a.city_id,a.city_name,a.status,a.platform,a.author,a.summary,a.is_show
+		a.id,a.cate_id,a.cate_parentId,a.type,a.title,a.source,a.enclosure,a.img_url,a.img_desc,a.details,a.order_by,a.click_num,a.is_delete,a.artice_type,DATE_FORMAT(a.release_time,'%Y-%m-%d %H:%i:%s') release_time,a.comment,a.city_id,a.city_name,a.status,a.platform,a.author,a.summary,a.is_show,a.meta_title,a.meta_keywords,a.meta_description
 	</sql>
 
     <select id="selectInformationById" resultMap="BaseResultMap">
@@ -151,12 +151,7 @@
             <if test="enclosure != null">
                 enclosure,
             </if>
-            <if test="metaKeywords != null">
-                meta_keywords,
-            </if>
-            <if test="metaDesc != null">
-                meta_desc,
-            </if>
+
             <if test="imgUrl != null">
                 img_url,
             </if>
@@ -207,6 +202,15 @@
             </if>
             <if test="isShow != null">
                 is_show,
+            </if>
+            <if test="metaTitle != null">
+                meta_title,
+            </if>
+            <if test="metaKeywords != null">
+                meta_keywords,
+            </if>
+            <if test="metaDescription != null">
+                meta_description,
             </if>
         </trim>
         values
@@ -286,6 +290,15 @@
             <if test="isShow != null">
                 #{isShow},
             </if>
+            <if test="metaTitle != null">
+                #{metaTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="metaKeywords != null">
+                #{metaKeywords,jdbcType=VARCHAR},
+            </if>
+            <if test="metaDescription != null">
+                #{metaDescription,jdbcType=VARCHAR},
+            </if>
         </trim>
     </insert>
 
@@ -308,12 +321,7 @@
         <if test="enclosure != null">
             enclosure= #{enclosure,jdbcType=VARCHAR},
         </if>
-        <if test="metaKeywords != null">
-            meta_keywords= #{metaKeywords,jdbcType=VARCHAR},
-        </if>
-        <if test="metaDesc != null">
-            meta_desc= #{metaDesc,jdbcType=VARCHAR},
-        </if>
+
         <if test="imgUrl != null">
             img_url= #{imgUrl,jdbcType=VARCHAR},
         </if>
@@ -365,6 +373,15 @@
         <if test="isShow != null">
             is_show=#{isShow},
         </if>
+        <if test="metaTitle != null">
+            meta_title= #{metaTitle,jdbcType=VARCHAR},
+        </if>
+        <if test="metaKeywords != null">
+            meta_keywords=#{metaKeywords,jdbcType=VARCHAR},
+        </if>
+        <if test="metaDescription != null">
+            meta_description=#{metaDescription,jdbcType=VARCHAR},
+        </if>
     </sql>
 
     <sql id="select_option1">
@@ -386,12 +403,7 @@
         <if test="enclosure != null">
             and enclosure= #{enclosure,jdbcType=VARCHAR}
         </if>
-        <if test="metaKeywords != null">
-            and meta_keywords= #{metaKeywords,jdbcType=VARCHAR}
-        </if>
-        <if test="metaDesc != null">
-            and meta_desc= #{metaDesc,jdbcType=VARCHAR}
-        </if>
+
         <if test="imgUrl != null">
             and img_url= #{imgUrl,jdbcType=VARCHAR}
         </if>
@@ -469,12 +481,7 @@
         <if test="enclosure != null">
             and a.enclosure= #{enclosure,jdbcType=VARCHAR}
         </if>
-        <if test="metaKeywords != null">
-            and a.meta_keywords= #{metaKeywords,jdbcType=VARCHAR}
-        </if>
-        <if test="metaDesc != null">
-            and a.meta_desc= #{metaDesc,jdbcType=VARCHAR}
-        </if>
+
         <if test="imgUrl != null">
             and a.img_url= #{imgUrl,jdbcType=VARCHAR}
         </if>
@@ -554,12 +561,7 @@
         <if test="enclosure != null">
             and enclosure= #{enclosure,jdbcType=VARCHAR}
         </if>
-        <if test="metaKeywords != null">
-            and meta_keywords= #{metaKeywords,jdbcType=VARCHAR}
-        </if>
-        <if test="metaDesc != null">
-            and meta_desc= #{metaDesc,jdbcType=VARCHAR}
-        </if>
+
         <if test="imgUrl != null">
             and img_url= #{imgUrl,jdbcType=VARCHAR}
         </if>
