@@ -9,6 +9,30 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
     <style type="text/css">
+        .dropdown {
+            position: relative;
+            width: 280px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            background: #fff;
+            border-radius: 3px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        .content ul.adminfo > li > span {
+            float: left;
+            display: inline-block;
+            width: 100px;
+            height: 28px;
+            line-height: 28px;
+            text-align: right;
+            font-size: 14px;
+            color: rgb(102, 102, 102);
+        }
+    </style>
+    <style type="text/css">
         .fileupload .fileupload-item {
             display: inline-block;
             position: relative;
@@ -18,11 +42,13 @@
             overflow: hidden;
             border: 1px solid #ccc;
         }
-        .fileupload-item img{
-            max-width:100%;
-            max-height:100%;
+
+        .fileupload-item img {
+            max-width: 100%;
+            max-height: 100%;
         }
-        .fileupload-item .xclose{
+
+        .fileupload-item .xclose {
             display: block;
             position: absolute;
             right: 0;
@@ -31,19 +57,21 @@
             height: 16px;
             line-height: 16px;
             text-align: center;
-            background: rgba(0,0,0,.7);
+            background: rgba(0, 0, 0, .7);
             font-size: 14px;
             color: #ddd;
             cursor: pointer;
         }
-        .fileupload{
+
+        .fileupload {
             float: left;
         }
-        .fileupload .uploadify-button-text{
+
+        .fileupload .uploadify-button-text {
             position: absolute;
-            left:50%;
+            left: 50%;
             transform: translateX(-50%);
-            bottom:0px;
+            bottom: 0px;
         }
     </style>
 
@@ -61,19 +89,19 @@
                     $(".fileupload").append("<span class='fileupload-item'><img src='" + data + "'><i class='xclose'>×</i></span>")
                     $("#imgUrl").attr("value", data + "||" + $("#imgUrl").val());
 
-                    $(".xclose").on("click",function () {
-                        var temp="";
+                    $(".xclose").on("click", function () {
+                        var temp = "";
                         var $this = $(this);
                         var $parent = $this.parent("span");
                         var imgsrcs = $("#imgUrl").val();
                         var imgsrc = $parent.find("img").attr("src");
                         var imgArray = imgsrcs.split("||");
-                        for (var i=0;i<imgArray.length;i++){
-                            if(imgArray[i].match(imgsrc)){
+                        for (var i = 0; i < imgArray.length; i++) {
+                            if (imgArray[i].match(imgsrc)) {
                                 continue;
                             }
-                            if (imgArray[i]!=""&&imgArray!=null){
-                                temp+=imgArray[i]+"||";
+                            if (imgArray[i] != "" && imgArray != null) {
+                                temp += imgArray[i] + "||";
                             }
                         }
                         $("#imgUrl").val(temp);
@@ -105,9 +133,20 @@
             <li style="display:flex;align-items:center">
                 <span>类型：</span>
                 <select name="tradeType" id="tradeType" class="dropdown">
+                    <option value="">请选择</option>
                     <option value="0">楼盘展销会</option>
                     <option value="1">看楼团</option>
                 </select>
+                <label style="color: red" class="_star ">*</label>
+            </li>
+            <li><span>META关键词：</span>
+                <input type="text" name="metaKeywords" id="metaKeywords" value=""/>
+            </li>
+            <li><span>META描述：</span>
+                <input type="text" name="metaDescription" id="metaDescription" value=""/>
+            </li>
+            <li><span>标题：</span>
+                <input type="text" name="metaTitle" id="metaTitle" value=""/>
             </li>
             <li><span style="vertical-align: top;">图片上传：</span>
                 <div class="fileupload">
@@ -144,34 +183,38 @@
 
     //保存数据
     function updateData() {
-        var data = $("#dataForm").serialize();
-        $.ajax({
-            type: "post",
-            url: "${ctx}/rest/tradeFair/add",
-            async: false, // 此处必须同步
-            dataType: "json",
-            data: data,
-            success: function (data) {
-                if (data.state == 0) {
-                    layer.msg("保存成功！！！", {icon: 1});
-                    $('#save').removeAttr("onclick");
-                    setTimeout(function () {
-                        parent.layer.closeAll();
-                        parent.$("#inquery").click();
-                    }, 1000);
+        if (checkSelect("tradeType", '请选择类型')) {
 
-                } else {
-                    layer.msg("保存失败！", {icon: 2});
+            var data = $("#dataForm").serialize();
+            $.ajax({
+                type: "post",
+                url: "${ctx}/rest/tradeFair/add",
+                async: false, // 此处必须同步
+                dataType: "json",
+                data: data,
+                success: function (data) {
+                    if (data.state == 0) {
+                        layer.msg("保存成功！！！", {icon: 1});
+                        $('#save').removeAttr("onclick");
+                        setTimeout(function () {
+                            parent.layer.closeAll();
+                            parent.$("#inquery").click();
+                        }, 1000);
+
+                    } else {
+                        layer.msg("保存失败！", {icon: 2});
+                    }
+                },
+                error: function (data) {
+                    if (data.responseText != null) {
+                        layer.msg(data.responseText, {icon: 2});
+                    } else {
+                        layer.msg("保存失败！", {icon: 2});
+                    }
                 }
-            },
-            error: function (data) {
-                if (data.responseText != null) {
-                    layer.msg(data.responseText, {icon: 2});
-                } else {
-                    layer.msg("保存失败！", {icon: 2});
-                }
-            }
-        });
+            });
+        }
+
     }
 
     //取消

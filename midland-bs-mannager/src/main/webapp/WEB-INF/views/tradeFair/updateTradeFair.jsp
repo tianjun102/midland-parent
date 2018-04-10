@@ -10,6 +10,30 @@
     <link rel="stylesheet" type="text/css" href="${ctx }/assets/scripts/uploadify/uploadify.css">
     <script type="text/javascript" src="${ctx }/assets/scripts/uploadify/jquery.uploadify.min.js"></script>
     <style type="text/css">
+        .dropdown {
+            position: relative;
+            width: 280px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            background: #fff;
+            border-radius: 3px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        .content ul.adminfo > li > span {
+            float: left;
+            display: inline-block;
+            width: 100px;
+            height: 28px;
+            line-height: 28px;
+            text-align: right;
+            font-size: 14px;
+            color: rgb(102, 102, 102);
+        }
+    </style>
+    <style type="text/css">
         .fileupload .fileupload-item {
             display: inline-block;
             position: relative;
@@ -89,6 +113,16 @@
                             <c:if test="${item.tradeType==1}">selected</c:if> >看楼团
                     </option>
                 </select>
+                <label style="color: red" class="_star ">*</label>
+            </li>
+            <li><span>META关键词：</span>
+                <input type="text" name="metaKeywords" id="metaKeywords" value="${item.metaKeywords}"/>
+            </li>
+            <li><span>META描述：</span>
+                <input type="text" name="metaDescription" id="metaDescription" value="${item.metaDescription}"/>
+            </li>
+            <li><span>标题：</span>
+                <input type="text" name="metaTitle" id="metaTitle" value="${item.metaTitle}"/>
             </li>
             <li><span style="vertical-align: top;">图片上传：</span>
                 <div class="fileupload">

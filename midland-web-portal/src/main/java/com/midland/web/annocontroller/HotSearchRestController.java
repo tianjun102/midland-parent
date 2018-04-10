@@ -58,9 +58,9 @@ public class HotSearchRestController extends ServiceBaseFilter {
 			return result;
 		}
 		try {
-			hotSearchServiceImpl.selectHotSearchById(obj.getId());
+			hotSearchServiceImpl.click_num(obj.getId());
 			result.setMsg("success");
-			result.setCode(ResultStatusUtils.STATUS_CODE_202);
+			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			return result;
 		} catch (Exception e) {
 			log.error("click_num",e);

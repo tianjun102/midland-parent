@@ -7,7 +7,18 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
-
+    <style type="text/css">
+        .content ul.userinfo > li > span {
+            float: left;
+            display: inline-block;
+            width: 100px;
+            height: 28px;
+            line-height: 28px;
+            text-align: right;
+            font-size: 14px;
+            color: rgb(102, 102, 102);
+        }
+    </style>
     <script type="text/javascript">
 
 
@@ -65,6 +76,15 @@
         <ul class="userinfo width-md row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <%@include file="../menu/area_up_required.jsp" %>
+            <li class="col-md-5"><span>META关键词：</span>
+                <input type="text" name="metaKeywords" id="metaKeywords" value=""/>
+            </li>
+            <li class="col-md-5"><span>META描述：</span>
+                <input type="text" name="metaDescription" id="metaDescription" value=""/>
+            </li>
+            <li class="col-md-5"><span>标题：</span>
+                <input type="text" name="metaTitle" id="metaTitle" value=""/>
+            </li>
             <li class="col-md-5"><span>均价：</span>
                 <input type="text" name="price" id="price" value="${item.price} "
                        onblur="InitInput.setNumber(this,9,2,2)"/>元/㎡起

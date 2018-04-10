@@ -7,6 +7,31 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
+    <style type="text/css">
+        .dropdown {
+            position: relative;
+            width: 250px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            background: #fff;
+            border-radius: 3px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        .content ul.adminfo > li > span {
+            float: left;
+            display: inline-block;
+            width: 100px;
+            height: 28px;
+            line-height: 28px;
+            text-align: right;
+            font-size: 14px;
+            color: rgb(102, 102, 102);
+        }
+    </style>
+
     <script type="text/javascript">
         $(function () {
             $('#file_upload').uploadify({
@@ -81,16 +106,27 @@
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/filmLibrary/add" method="post" id="dataForm">
         <ul class="adminfo  width-md row">
+            <%@include file="../menu/area_required.jsp" %>
             <li style="display:flex;align-items:center">
                 <span>类型：</span>
                 <select name="filmType" id="filmType" class="dropdown">
+                    <option value="">请选择</option>
                     <option value="0">住宅</option>
                     <option value="1">商铺</option>
                     <option value="1">写字楼</option>
                 </select>
+                <label style="color: red" class="_star ">*</label>
             </li>
-            <%@include file="../menu/area_required.jsp" %>
 
+            <li><span>META关键词：</span>
+                <input type="text" name="metaKeywords" id="metaKeywords" value=""/>
+            </li>
+            <li><span>META描述：</span>
+                <input type="text" name="metaDescription" id="metaDescription" value=""/>
+            </li>
+            <li><span>标题：</span>
+                <input type="text" name="metaTitle" id="metaTitle" value=""/>
+            </li>
             <li><span>楼盘ID：</span>
                 <input type="text" name="housesId" id="housesId" onblur="notEmpty('housesId','housesId','')"/>
             </li>
@@ -148,13 +184,10 @@
     //保存数据
     function saveData() {
         var data = $("#dataForm").serialize();
-        console.log(notEmpty('housesId', 'housesId', ''));
-        console.log(notEmpty('housesName', 'housesName', ''));
-        console.log(InitInput.setTime('duration','duration','时间格式不正确'));
-        if (checkSelect('citys','请选择市级') && notEmpty('housesId', 'housesId', '')
+        if (checkSelect('citys|filmType', '请选择市级|请选择类型') && notEmpty('housesId', 'housesId', '')
             && notEmpty('housesName', 'housesName', '')
-            && InitInput.setTime('duration','duration','时间格式不正确')
-            ) {
+            && InitInput.setTime('duration', 'duration', '时间格式不正确')
+        ) {
 
 
             $.ajax({

@@ -8,6 +8,18 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
     <style type="text/css">
+        .content ul.userinfo > li > span {
+            float: left;
+            display: inline-block;
+            width: 100px;
+            height: 28px;
+            line-height: 28px;
+            text-align: right;
+            font-size: 14px;
+            color: rgb(102, 102, 102);
+        }
+    </style>
+    <style type="text/css">
 
         .dropdown {
             position: relative;
@@ -120,14 +132,21 @@
         <ul class="userinfo width-md  row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <%@include file="../menu/area_up_required.jsp" %>
+            <li class="col-md-5"><span>META关键词：</span>
+                <input type="text" name="metaKeywords" id="metaKeywords" value="${item.metaKeywords}"/>
+            </li>
+            <li class="col-md-5"><span>META描述：</span>
+                <input type="text" name="metaDescription" id="metaDescription" value="${item.metaDescription}"/>
+            </li>
+            <li class="col-md-5"><span>标题：</span>
+                <input type="text" name="metaTitle" id="metaTitle" value="${item.metaTitle}"/>
+            </li>
             <li class="col-md-5"><span>均价：</span>
                 <input type="text" name="price" id="price" value="${item.price} "
                        onblur="InitInput.setNumber(this,9,2,2)"/>元/㎡起
             </li>
             <li class="col-md-5"><span>入伙日期：</span>
-                <input type="text" name="intoTime" id="intoTime" onblur="notEmpty('intoTime','intoTime','')"
-                       value="${item.intoTime}"
-                       onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})"
+                <input type="text" name="intoTime" value="${item.intoTime}" id="intoTime" onblur="notEmpty('intoTime','intoTime','')" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})"
                        maxlength="50"/>
 
             </li>

@@ -14,10 +14,13 @@
         <result column="operator_id" property="operatorId" jdbcType="INTEGER"/>
         <result column="operator_name" property="operatorName" jdbcType="VARCHAR"/>
         <result column="trade_type" property="tradeType" jdbcType="INTEGER"/>
+        <result column="meta_title" property="metaTitle" jdbcType="VARCHAR"/>
+        <result column="meta_keywords" property="metaKeywords" jdbcType="VARCHAR"/>
+        <result column="meta_description" property="metaDescription" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,img_url,title,houses_id,introduction,is_show,is_delete,description,operator_id,operator_name,trade_type
+        id,img_url,title,houses_id,introduction,is_show,is_delete,description,operator_id,operator_name,trade_type,meta_title,meta_keywords,meta_description
     </sql>
 
     <select id="selectTradeFairById" resultMap="BaseResultMap">
@@ -83,6 +86,15 @@
             <if test="tradeType != null">
                 trade_type,
             </if>
+            <if test="metaTitle != null">
+                meta_title,
+            </if>
+            <if test="metaKeywords != null">
+                meta_keywords,
+            </if>
+            <if test="metaDescription != null">
+                meta_description,
+            </if>
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -115,6 +127,15 @@
             </if>
             <if test="tradeType != null">
                 #{tradeType,jdbcType=INTEGER},
+            </if>
+            <if test="metaTitle != null">
+                #{metaTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="metaKeywords != null">
+                #{metaKeywords,jdbcType=VARCHAR},
+            </if>
+            <if test="metaDescription != null">
+                #{metaDescription,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -149,6 +170,15 @@
         </if>
         <if test="tradeType != null">
             trade_type= #{tradeType,jdbcType=INTEGER},
+        </if>
+        <if test="metaTitle != null">
+            meta_title= #{metaTitle,jdbcType=VARCHAR},
+        </if>
+        <if test="metaKeywords != null">
+            meta_keywords=#{metaKeywords,jdbcType=VARCHAR},
+        </if>
+        <if test="metaDescription != null">
+            meta_description=#{metaDescription,jdbcType=VARCHAR},
         </if>
     </sql>
 

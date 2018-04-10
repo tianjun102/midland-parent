@@ -64,8 +64,10 @@
                 </li>
                 <li><span>页面：</span>
                     <%--<input type="text" name="model" id="model" value="${item.model}"/>--%>
-                    <select name="model" id="model"
-                            onchange="selectSource()">
+                    <select name="model" id="model" onchange="selectSource()">
+                        <option
+                                <c:if test="${item.model =='11'}">selected="selected"</c:if> value="11">整站
+                        </option>
                         <option
                                 <c:if test="${item.model =='0'}">selected="selected"</c:if> value="0">首页
                         </option>
@@ -97,19 +99,19 @@
                                 <c:if test="${item.model =='9'}">selected="selected"</c:if> value="9">市场研究
                         </option>
                         <option
-                                <c:if test="${item.model =='10'}">selected="selected"</c:if> value="9">资讯
+                                <c:if test="${item.model =='10'}">selected="selected"</c:if> value="10">资讯
                         </option>
                     </select>
                 </li>
-                <li><span>META关键词：</span>
-                    <input type="text" name="metaLable" id="metaLable" value="${item.metaLable}"/>
-                </li>
-                <li><span>META描述：</span>
-                    <input type="text" name="metaDesc" id="metaDesc" value="${item.metaDesc}"/>
-                </li>
-                <li><span>标题：</span>
-                    <input type="text" name="title" id="title" value="${item.title}"/>
-                </li>
+                <%--<li><span>META关键词：</span>--%>
+                    <%--<input type="text" name="metaLable" id="metaLable" value="${item.metaLable}"/>--%>
+                <%--</li>--%>
+                <%--<li><span>META描述：</span>--%>
+                    <%--<input type="text" name="metaDesc" id="metaDesc" value="${item.metaDesc}"/>--%>
+                <%--</li>--%>
+                <%--<li><span>标题：</span>--%>
+                    <%--<input type="text" name="title" id="title" value="${item.title}"/>--%>
+                <%--</li>--%>
                 <li><span>CNZZ状态：</span>
                     <%--<input type="text" name="metaShow" id="metaShow" value="${item.metaShow}"/>--%>
                     <span style="width: 50px !important;"> 开启&nbsp; </span><input

@@ -19,10 +19,13 @@
         <result column="duration" property="duration" jdbcType="VARCHAR"/>
         <result column="is_show" property="isShow" jdbcType="INTEGER"/>
         <result column="city_name" property="cityName" jdbcType="VARCHAR"/>
+        <result column="meta_title" property="metaTitle" jdbcType="VARCHAR"/>
+        <result column="meta_keywords" property="metaKeywords" jdbcType="VARCHAR"/>
+        <result column="meta_description" property="metaDescription" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,city_id,img_desc,houses_name,houses_id,introduction,video_url,is_delete,click_num,film_type,img_url,operator_id,operator_name,duration,is_show,city_name
+        id,city_id,img_desc,houses_name,houses_id,introduction,video_url,is_delete,click_num,film_type,img_url,operator_id,operator_name,duration,is_show,city_name,meta_title,meta_keywords,meta_description
     </sql>
 
     <select id="selectFilmLibraryById" resultMap="BaseResultMap">
@@ -105,6 +108,16 @@
             <if test="cityName != null">
                 city_name,
             </if>
+
+            <if test="metaTitle != null">
+                meta_title,
+            </if>
+            <if test="metaKeywords != null">
+                meta_keywords,
+            </if>
+            <if test="metaDescription != null">
+                meta_description,
+            </if>
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -152,6 +165,15 @@
             </if>
             <if test="cityName != null">
                 #{cityName,jdbcType=VARCHAR},
+            </if>
+            <if test="metaTitle != null">
+                #{metaTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="metaKeywords != null">
+                #{metaKeywords,jdbcType=VARCHAR},
+            </if>
+            <if test="metaDescription != null">
+                #{metaDescription,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -201,6 +223,15 @@
         </if>
         <if test="cityName != null">
             city_name= #{cityName,jdbcType=VARCHAR},
+        </if>
+        <if test="metaTitle != null">
+            meta_title= #{metaTitle,jdbcType=VARCHAR},
+        </if>
+        <if test="metaKeywords != null">
+            meta_keywords=#{metaKeywords,jdbcType=VARCHAR},
+        </if>
+        <if test="metaDescription != null">
+            meta_description=#{metaDescription,jdbcType=VARCHAR},
         </if>
     </sql>
 

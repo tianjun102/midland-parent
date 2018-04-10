@@ -38,6 +38,7 @@
                             <c:if test="${item.source=='1'}">微站</c:if>
                         </td>
 						<td>
+
                             <c:if test="${item.model =='0'}">首页</c:if>
                             <c:if test="${item.model =='1'}">新房</c:if>
                             <c:if test="${item.model =='2'}">二手房</c:if>
@@ -45,6 +46,11 @@
                             <c:if test="${item.model =='4'}">写字楼</c:if>
                             <c:if test="${item.model =='5'}">商铺</c:if>
                             <c:if test="${item.model =='6'}">小区</c:if>
+                            <c:if test="${item.model =='7'}">经纪人</c:if>
+                            <c:if test="${item.model =='8'}">外销网</c:if>
+                            <c:if test="${item.model =='9'}">市场研究</c:if>
+                            <c:if test="${item.model =='10'}">资讯</c:if>
+                            <c:if test="${item.model =='11'}">整站</c:if>
                         </td>
                         <td><c:if test="${item.baiduShow==1}">开启</c:if>
                             <c:if test="${item.baiduShow==0}">关闭</c:if>

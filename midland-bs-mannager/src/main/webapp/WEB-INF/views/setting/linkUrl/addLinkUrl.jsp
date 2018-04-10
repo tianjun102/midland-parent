@@ -1,21 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@include file="../../layout/tablib.jsp" %>
-<%@include file="../../layout/source.jsp"%>
+<%@include file="../../layout/source.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>添加友情链接</title>
     <style type="text/css">
-        .content ul.userinfo>li {
+        .content ul.userinfo > li {
             float: none !important;
             margin-left: 20px;
             padding-top: 20px;
         }
 
         .dropdown {
-            width: 274px!important;
+            width: 274px !important;
         }
     </style>
 </head>
@@ -27,26 +27,36 @@
                 <span>城市：</span>
                 <p style="display: inline-block;height: 28px;">
                     <input type="hidden" name="cityName" id="cityName" value="${cityName}">
-                    <c:if test="${empty isSuper}"><input type="hidden" name="cityId"  value="${cityId}"></c:if>
-                    <select onchange="SetcityNam();" name="cityId" id="cityId" style="height: 28px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
+                    <c:if test="${empty isSuper}"><input type="hidden" name="cityId" value="${cityId}"></c:if>
+                    <select onchange="SetcityNam();" name="cityId" id="cityId"
+                            style="height: 28px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;padding-left:5px; "
+                            <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
+                        <option value="">请选择</option>
                         <c:forEach items="${cityList}" var="city">
-                            <c:if test="${empty isSuper}"><option selected="selected" value="${cityId}">${cityName}</option></c:if>
+                            <c:if test="${empty isSuper}">
+                                <option selected="selected" value="${cityId}">${cityName}</option>
+                            </c:if>
                             <option value="${city.id}">${city.name}</option>
                         </c:forEach>
                     </select>
+                    <span class="_star">*</span>
                 </p>
             </li>
             <li>
-                <span style = "float:left;">平台：</span>
-                <select name="source" id="source" class="dropdown">
+                <span style="float:left;">平台：</span>
+                <select name="source" id="source" class="dropdown" >
+                    <option value="">请选择</option>
                     <option value="0">网站</option>
                     <option value="1">微站</option>
                 </select>
+                <span class="_star">*</span>
             </li>
             <li>
                 <span style="float:left;">模块：</span>
                 <input type="hidden" name="modeName" id="modeName">
-                <select name="modeId" id="modeId" style="height: 28px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                <select name="modeId" id="modeId"
+                        style="height: 28px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;padding-left:5px;">
+                    <option value="">请选择</option>
                     <option value="0">首页</option>
                     <option value="1">新房</option>
                     <option value="2">二手房</option>
@@ -62,17 +72,23 @@
                 </select>
                 <span class="_star">*</span>
             </li>
-            <li><span>链接名：</span><input style="width:274px;" type="text" name="linkName" id="linkName" onblur="notEmpty('linkName','linkName','链接名不能为空！');" maxlength="50"/><span class="_star">*</span></li>
+            <li><span>链接名：</span><input style="width:274px;" type="text" name="linkName" id="linkName"
+                                        onblur="notEmpty('linkName','linkName','链接名不能为空！');" maxlength="50"/><span
+                    class="_star">*</span></li>
 
             <li>
-                <span>链接URL：</span><input style="width:274px;" type="text" name="linkUrl" id="linkUrl" value="" onblur="checkUrl('linkUrl','linkUrl','网址格式不正确！')" /><span class="_star">*</span>
+                <span>链接URL：</span><input style="width:274px;" type="text" name="linkUrl" id="linkUrl" value=""
+                                          onblur="checkUrl('linkUrl','linkUrl','网址格式不正确！')"/><span
+                    class="_star">*</span>
             </li>
-            <li><span>联系人：</span><input style="width:274px;" type="text" name="contacts" id="contacts" onblur="notEmpty('contacts','contacts','联系人不能为空！');" maxlength="50"/><span class="_star">*</span></li>
-            <li><span>联系方式：</span><input style="width:274px;" type="text" name="phone" id="phone" onblur="checkPhone('phone','phone','联系方式格式错误！');" maxlength="50"/><span class="_star">*</span></li>
+            <li><span>联系人：</span><input style="width:274px;" type="text" name="contacts" id="contacts"
+                                        maxlength="50"/><span class="_star"></span></li>
+            <li><span>联系方式：</span><input style="width:274px;" type="text" name="phone" id="phone" maxlength="50"/><span
+                    class="_star"></span></li>
             <li><span>备注：</span> <textarea name="remarks"
-                                             id="remarks"
-                                             style="width: 61%; height: 50px; resize: none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;"></textarea>
-                </li>
+                                           id="remarks"
+                                           style="width: 61%; height: 50px; resize: none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;"></textarea>
+            </li>
             <li style="padding-top:30px;">
                 <span></span>
                 <a target="contentF" class="public_btn bg2" id="save" onclick="saveData()">保存</a>
@@ -84,8 +100,8 @@
 </section>
 <script type="text/javascript">
     function saveData() {
-        if(notEmpty('linkName','linkName','链接名不能为空！')&&checkSelect("source","平台不能为空！")&&notEmpty('linkUrl','linkUrl','链接URL不能为空！')&&notEmpty('contacts','contacts','联系人不能为空！')&&notEmpty('phone','phone','联系方式不能为空！')){
-           var data = $("#addFrom").serialize();
+        if (checkSelect("cityId|source|modeId", "请选择城市！|请选择平台！|请选择模块！") &&notEmpty('linkName', 'linkName', '链接名不能为空！') &&  notEmpty('linkUrl', 'linkUrl', '链接URL不能为空！') && checkUrl('linkUrl', 'linkUrl', '网址格式不正确！')) {
+            var data = $("#addFrom").serialize();
 
             $.ajax({
                 type: "post",
@@ -95,15 +111,17 @@
                 data: data,
                 success: function (data) {
                     if (data.flag == 1) {
+                        debugger;
                         var test = window.location.href;
-                        setCookie("linkUrlCityId",$("#cityId").val(),test);
-                        setCookie("linkUrlCityName",$("#cityName").val(),test);
-                        setCookie("linkUrlModeName",$("#modeName").val(),test);
-                        setCookie("linkUrlModeId",$("#modeId").val(),test);
+                        setCookie("linkUrlCityId", $("#cityId").val(), test);
+                        setCookie("linkUrlCityName", $("#cityName").val(), test);
+                        setCookie("linkUrlModeName", $("#modeName").val(), test);
+                        setCookie("linkUrlModeId", $("#modeId").val(), test);
+                        setCookie("linkUrlSource", $("#source").val(), test);
                         layer.msg("新增成功！！！", {icon: 1});
                         $('#save').removeAttr("onclick");
                         setTimeout(function () {
-                            $('#searchForm',window.parent.document).submit();
+                            $('#searchForm', window.parent.document).submit();
                             closeWin();
                         }, 1000);
 
@@ -123,30 +141,32 @@
         }
     }
 
-$("#modeId").change(function () {
-    $("#modeName").val($("#modeId").find("option:selected").text());
-})
+    $("#modeId").change(function () {
+        $("#modeName").val($("#modeId").find("option:selected").text());
+    })
     $(function () {
         var test = window.location.href;
         //设置城市选择的cookie
-        var cityId = getCookie("linkUrlCityId",test);
-        var cityName = getCookie("linkUrlCityName",test);
-        var modeId = getCookie("linkUrlModeId",test);
-        var modeName = getCookie("linkUrlModeName",test);
-        if ($("#cityName").val()==''){
-            $("#cityName").val( $("#cityId option:selected").text());
+        var cityId = getCookie("linkUrlCityId", test);
+        var cityName = getCookie("linkUrlCityName", test);
+        var modeId = getCookie("linkUrlModeId", test);
+        var modeName = getCookie("linkUrlModeName", test);
+        var source = getCookie("linkUrlSource", test);
+        if ($("#cityName").val() == '') {
+            $("#cityName").val($("#cityId option:selected").text());
         }
-        if (cityId !=''){
+        if (cityId != '') {
             $("#cityId").val(cityId);
             $("#cityName").val(cityName);
         }
-        if(modeId !=''){
+        if (modeId != '') {
             $("#modeId").val(modeId);
             $("#modeName").val(modeName);
         }
-        if ($("#modeName").val()==''){
-            $("#modeName").val("首页");
+        if (source !=''){
+            $("#source").val(linkUrlSource);
         }
+
     })
 
     //取消
@@ -154,10 +174,6 @@ $("#modeId").change(function () {
         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
         parent.layer.close(index);
     }
-
-
-
-
 
 
     //省级赋值
@@ -168,17 +184,17 @@ $("#modeId").change(function () {
         $("input[name=provinceId]").val(addrId);
         $("input[name=provinceName]").val(addName);
         $.ajax({
-            type : "post",
-            url : "${ctx}/rest/setting/seleAddress?flag=city&id=" + addrId,
-            async : false, // 此处必须同步
-            dataType : "json",
-            data : "",
-            success : function(data) {
+            type: "post",
+            url: "${ctx}/rest/setting/seleAddress?flag=city&id=" + addrId,
+            async: false, // 此处必须同步
+            dataType: "json",
+            data: "",
+            success: function (data) {
                 $("#citys").html("<option  >请选择</option>");
 
-                data.result.forEach(function(list) {
+                data.result.forEach(function (list) {
                     $("#citys").append(
-                        "<option value="+list.id+" >" + list.name + "</option>");
+                        "<option value=" + list.id + " >" + list.name + "</option>");
                 })
             }
         });
@@ -203,16 +219,16 @@ $("#modeId").change(function () {
         $("input[name='cityId']").val(addrId);
         $("input[name='cityName']").val(addName);
         $.ajax({
-            type : "post",
-            url : "${ctx}/rest/setting/seleAddress?flag=area&id=" + addrId,
-            async : false, // 此处必须同步
-            dataType : "json",
-            data : "",
-            success : function(data) {
+            type: "post",
+            url: "${ctx}/rest/setting/seleAddress?flag=area&id=" + addrId,
+            async: false, // 此处必须同步
+            dataType: "json",
+            data: "",
+            success: function (data) {
                 $("#districts").html("<option value='' >请选择</option>");
-                data.result.forEach(function(list) {
+                data.result.forEach(function (list) {
                     $("#districts").append(
-                        "<option value="+list.id+" >"
+                        "<option value=" + list.id + " >"
                         + list.name + "</option>");
                 })
             }
@@ -222,7 +238,7 @@ $("#modeId").change(function () {
 
     //区级赋值
     function initDistrict() {
-        var cityId =$("input[name='cityId']").val();
+        var cityId = $("input[name='cityId']").val();
         var addrId = $("#districts option:selected").val();
         var addName = $("#districts option:selected").text();
         if ("请选择" == addName) {
@@ -237,16 +253,16 @@ $("#modeId").change(function () {
         $("input[name='distName']").val(addName);
 
         $.ajax({
-            type : "post",
-            url : "${ctx}/rest/setting/seleAddress?flag=sheet&id=" + cityId+"&parentId=" + addrId,
-            async : false, // 此处必须同步
-            dataType : "json",
-            data : "",
-            success : function(data) {
+            type: "post",
+            url: "${ctx}/rest/setting/seleAddress?flag=sheet&id=" + cityId + "&parentId=" + addrId,
+            async: false, // 此处必须同步
+            dataType: "json",
+            data: "",
+            success: function (data) {
                 $("#sheets").html("<option value='' >请选择</option>");
-                data.result.forEach(function(list) {
+                data.result.forEach(function (list) {
                     $("#sheets").append(
-                        "<option value="+list.id+" >"
+                        "<option value=" + list.id + " >"
                         + list.name + "</option>");
                 })
             }
@@ -257,7 +273,7 @@ $("#modeId").change(function () {
 
     //区级赋值
     function initSheet() {
-        var cityId =$("input[name='cityId']").val();
+        var cityId = $("input[name='cityId']").val();
         var addrId = $("#sheets option:selected").val();
         var addName = $("#sheets option:selected").text();
         if ("请选择" == addName) {
@@ -273,10 +289,9 @@ $("#modeId").change(function () {
 
     }
 
-    function SetcityNam(){
+    function SetcityNam() {
         $("#cityName").val($("#cityId option:selected").text())
     }
-
 
 
 </script>

@@ -7,7 +7,30 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
+    <style type="text/css">
+        .dropdown {
+            position: relative;
+            width: 250px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            background: #fff;
+            border-radius: 3px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
 
+        .content ul.adminfo > li > span {
+            float: left;
+            display: inline-block;
+            width: 100px;
+            height: 28px;
+            line-height: 28px;
+            text-align: right;
+            font-size: 14px;
+            color: rgb(102, 102, 102);
+        }
+    </style>
     <script type="text/javascript">
         $(function () {
             $('#file_upload').uploadify({
@@ -63,6 +86,7 @@
     <form action="${ctx}/rest/filmLibrary/add" method="post" id="dataForm">
         <ul class="adminfo  width-md row">
             <input type="hidden" id="id" name="id" value="${item.id}">
+            <%@include file="../menu/area_required.jsp" %>
             <li style="display:flex;align-items:center">
                 <span>类型：</span>
                 <select name="filmType" id="filmType" class="dropdown">
@@ -71,7 +95,16 @@
                     <option value="2" <c:if test="${item.filmType ==2}"  >selected="selected"</c:if>>写字楼</option>
                 </select>
             </li>
-            <%@include file="../menu/area_required.jsp" %>
+
+            <li><span>META关键词：</span>
+                <input type="text" name="metaKeywords" id="metaKeywords" value="${item.metaKeywords}"/>
+            </li>
+            <li><span>META描述：</span>
+                <input type="text" name="metaDescription" id="metaDescription" value="${item.metaDescription}"/>
+            </li>
+            <li><span>标题：</span>
+                <input type="text" name="metaTitle" id="metaTitle" value="${item.metaTitle}"/>
+            </li>
             <li><span>楼盘ID：</span>
                 <input type="text" name="housesId" id="housesId" value="${item.housesId}"/>
             </li>
