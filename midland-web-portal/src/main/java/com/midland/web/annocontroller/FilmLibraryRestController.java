@@ -11,6 +11,7 @@ import com.midland.web.model.Meta;
 import com.midland.web.service.FilmLibraryService;
 import com.midland.web.service.MetaService;
 import com.midland.web.util.MidlandHelper;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,6 +121,21 @@ public class FilmLibraryRestController extends ServiceBaseFilter {
         Result result = new Result();
 
         try {
+            if (StringUtils.isEmpty(obj.getCityId())){
+                result.setMsg("cityId不能为空");
+                result.setCode(ResultStatusUtils.STATUS_CODE_202);
+                return result;
+            }
+            Meta meta = new Meta();
+            meta.setCityId(obj.getCityId());
+            meta.setModeId(8);//跟metaIndex页面的modeId对应
+            meta.setSecondModeId(Contant.ExportSale.film.getId());
+            meta.setSource(0);
+            meta.setIsDelete(Contant.isNotDelete);
+            List<Meta> res =  metaServiceImpl.findMetaList(meta);
+            if (res.size()>0){
+                result.setMeta(res.get(0));
+            }
             log.info("findFilmLibraryList  {}", obj);
             MidlandHelper.doPage(request);
             obj.setIsDelete(Contant.isNotDelete);

@@ -41,7 +41,7 @@
 
             <li class="col-md-6" id="childMode"><span>子模块：</span>
                 <input type="hidden" name="secondModeName" id="secondModeName" value="${item.secondModeName}">
-                <select name="secondModeId" id="secondModeId" style="height: 28px;width: 250px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;">
+                <select name="secondModeId" id="secondModeId" style="height: 28px;width: 250px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;padding-left: 5px">
                     <option value=>请选择</option>
                 </select>
             </li>
@@ -112,7 +112,6 @@
             success: function (data) {
                 if (data.state == 0) {
                     var obj = data.data;
-                    debugger;
                     var html = "<option value=>请选择</option>";
                     for (var i = 0; i < obj.length; i++) {
                         var val = obj[i].id;
@@ -147,10 +146,14 @@
             success: function (data) {
                 if (data.state == 0) {
                     var obj = data.data;
-                    debugger;
                     var html = "<option value=>请选择</option>";
                     for (var i = 0; i < obj.length; i++) {
-                        html += "<option value=\"" + obj[i].id + "\">" + obj[i].cateName + "</option>";
+                        var val = obj[i].id;
+                        html += "<option value=\"" + obj[i].id + "\" ";
+                        if (${item.secondModeId}==val){
+                            html += "selected=\"selected\"";
+                        }
+                        html+=">" + obj[i].cateName + "</option>";
                     }
                     $("#secondModeId").html(html);
 
