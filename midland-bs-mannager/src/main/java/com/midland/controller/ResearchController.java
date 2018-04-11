@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.core.util.DateUtils;
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.Area;
 import com.midland.web.model.Category;
 import com.midland.web.model.Information;
@@ -46,23 +47,29 @@ public class ResearchController extends BaseFilter {
 
     @Autowired
     private JdbcService jdbcService;
-
+    @Autowired
+    private CategoryService categoryServiceImpl;
     /**
      *
      **/
     @RequestMapping("index")
     public String informationIndex(Information information, Model model, HttpServletRequest request) throws Exception {
+        User user = MidlandHelper.getCurrentUser(request);
         PageHelper.startPage(1,50);
-        Page<Information> result = (Page<Information>) informationServiceImpl.getCates(information);
+        Category category = new Category();
+        category.setIsDelete(Contant.isNotDelete);
+        category.setType(0);
+        category.setCityId(user.getCityId());
+        Page<Category> cateList =(Page<Category>) categoryServiceImpl.getCateGorys(category);
 
         settingService.getAllProvinceList(model);
-        User user = MidlandHelper.getCurrentUser(request);
+
         if (user.getIsSuper() == null) {
             model.addAttribute("cityId", user.getCityId());
             model.addAttribute("cityName", user.getCityName());
 
         }
-        model.addAttribute("cateList", result.getResult());
+        model.addAttribute("cateList", cateList.getResult());
         model.addAttribute("isSuper", user.getIsSuper());
         return "research/informationIndex";
     }

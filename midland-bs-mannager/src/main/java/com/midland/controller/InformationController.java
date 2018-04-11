@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.core.util.DateUtils;
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.Area;
 import com.midland.web.model.Category;
 import com.midland.web.model.Information;
@@ -45,15 +46,18 @@ public class InformationController extends BaseFilter {
     private JdbcService jdbcService;
     @Autowired
     private RedisService redisServiceImpl;
-
+    @Autowired
+    private CategoryService categoryServiceImpl;
     /**
      *
      **/
     @RequestMapping("index")
     public String informationIndex(Information information, Model model, HttpServletRequest request) throws Exception {
         PageHelper.startPage(1,50);
-        information.setArticeType(1);
-        Page<Information> result = (Page<Information>) informationServiceImpl.getCates(information);
+        Category category = new Category();
+        category.setType(1);
+        category.setIsDelete(Contant.isNotDelete);
+        Page<Category> cateList =(Page<Category>) categoryServiceImpl.getCateGorys(category);
 
         settingService.getAllProvinceList(model);
         User user = MidlandHelper.getCurrentUser(request);
@@ -63,7 +67,7 @@ public class InformationController extends BaseFilter {
         }
         model.addAttribute("openFlag", redisServiceImpl.getInformationOpenFlag());
         model.addAttribute("type", 1);
-        model.addAttribute("cateList", result.getResult());
+        model.addAttribute("cateList", cateList.getResult());
         model.addAttribute("isSuper", user.getIsSuper());
         return "information/informationIndex";
     }
@@ -100,13 +104,14 @@ public class InformationController extends BaseFilter {
 
     @RequestMapping("/getCate")
     @ResponseBody
-    public Object getCate(Information information) {
+    public Object getCate(Category category) {
         Map map = new HashMap();
         try {
             PageHelper.startPage(1,50);
 
-            Page<Information> result = (Page<Information>) informationServiceImpl.getCates(information);
-            map.put("data", result.getResult());
+            category.setIsDelete(Contant.isNotDelete);
+            Page<Category> cateList =(Page<Category>) categoryServiceImpl.getCateGorys(category);
+            map.put("data", cateList.getResult());
             map.put("state", 0);
         } catch (Exception e) {
             log.error("getCate ", e);
@@ -291,16 +296,16 @@ public class InformationController extends BaseFilter {
 
      @RequestMapping("getCates")
      @ResponseBody
-     public Object getCates(Information information, Model model, HttpServletRequest request) {
+     public Object getCates(Category category, Model model, HttpServletRequest request) {
         Map map = new HashMap();
         try {
             PageHelper.startPage(1,50);
-            information.setArticeType(1);
-            Page<Information> result = (Page<Information>) informationServiceImpl.getCates(information);
+            category.setIsDelete(Contant.isNotDelete);
+            Page<Category> cateList =(Page<Category>) categoryServiceImpl.getCateGorys(category);
             map.put("state",0);
-            map.put("data",result.getResult());
+            map.put("data",cateList.getResult());
         } catch (Exception e) {
-            log.error("findInformationList  {}", information, e);
+            log.error("getCates  {}", category, e);
             map.put("state",-1);
         }
         return map;

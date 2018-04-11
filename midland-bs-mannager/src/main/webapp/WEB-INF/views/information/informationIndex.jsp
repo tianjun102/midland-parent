@@ -53,7 +53,7 @@
                             style="height: 28px; width:120px;display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <option value="">请选择</option>
                         <c:forEach items="${cateList}" var="s">
-                            <option value="${s.cateId}">
+                            <option value="${s.id}">
                                     ${s.cateName}
                             </option>
                         </c:forEach>
@@ -119,8 +119,7 @@
     })
 
     function getCate() {
-        var data = "articeType=" + $("#articeType").val() + "&cityId=" + $("#cityId").val() +
-            "&isDelete=" + $("#isDelete").val() + "&source=" + $("#source").val() + "&status=" + $("#status").val();
+        var data =  "&cityId=" + $("#cityId").val() + "&source=" + $("#source").val() +"&type=1";
 
         $.ajax({
             type: "post",
@@ -134,7 +133,7 @@
                     var obj = data.data;
                     var html = "<option value=>请选择</option>";
                     for (var i = 0; i < obj.length; i++) {
-                        html += "<option value=\"" + obj[i].cateId + "\">" + obj[i].cateName + "</option>";
+                        html += "<option value=\"" + obj[i].id + "\">" + obj[i].cateName + "</option>";
                     }
                     $("#id").html(html);
 
