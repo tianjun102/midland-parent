@@ -101,7 +101,7 @@
     })
 
     function getcate() {
-        var data = "menuId=" + $("#menuId").val() + "&source=" + $("#source").val() + "&cityId=" + $("#cityId").val();
+        var data = "modeId=" + $("#menuId").val() + "&source=" + $("#source").val() + "&cityId=" + $("#cityId").val()+ "&type=3" ;
         $.ajax({
             type: "post",
             url: "${ctx}/rest/setting/getCate",
@@ -114,7 +114,7 @@
                     var obj = data.data;
                     var html = "<option value=>请选择</option>";
                     for (var i = 0; i < obj.length; i++) {
-                        html += "<option value=\"" + obj[i].cateId + "\">" + obj[i].cateName + "</option>";
+                        html += "<option value=\"" + obj[i].id + "\">" + obj[i].cateName + "</option>";
                     }
                     $("#cateId").html(html);
 

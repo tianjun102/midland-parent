@@ -11,6 +11,7 @@ import com.midland.web.model.Area;
 import com.midland.web.model.Category;
 import com.midland.web.model.SiteMap;
 import com.midland.web.model.user.User;
+import com.midland.web.service.CategoryService;
 import com.midland.web.service.JdbcService;
 import com.midland.web.service.SettingService;
 import com.midland.web.service.SiteMapService;
@@ -42,7 +43,8 @@ public class SiteMapController extends BaseFilter {
     private SettingService settingService;
     @Autowired
     private JdbcService jdbcService;
-
+    @Autowired
+    private CategoryService categoryServiceImpl;
     /**
      *
      **/
@@ -52,8 +54,11 @@ public class SiteMapController extends BaseFilter {
         //查询资讯分类
 
         //初始化的时候,最多只拿出50个数据,
-        PageHelper.startPage(1, 50);
-        Page<SiteMap> result = (Page<SiteMap>) siteMapServiceImpl.findCateGory(siteMap);
+        PageHelper.startPage(1,50);
+        Category category = new Category();
+        category.setType(4);//4是网站地图类型
+        category.setIsDelete(Contant.isNotDelete);
+        Page<Category> cateList =(Page<Category>) categoryServiceImpl.getCateGorys(category);
 
         PageHelper.startPage(1, 50);
         Page<SiteMap> result1 = (Page<SiteMap>) siteMapServiceImpl.findModes(siteMap);
@@ -65,7 +70,7 @@ public class SiteMapController extends BaseFilter {
             model.addAttribute("cityId", user.getCityId());
             model.addAttribute("cityName", user.getCityName());
         }
-        model.addAttribute("cateList", result.getResult());
+        model.addAttribute("cateList", cateList.getResult());
         model.addAttribute("modeList", result1.getResult());
         model.addAttribute("isSuper", user.getIsSuper());
         return "siteMap/siteMapIndex";
@@ -74,13 +79,14 @@ public class SiteMapController extends BaseFilter {
     //通过模块类型定位分类
     @RequestMapping("getCate")
     @ResponseBody
-    public Object getCate(SiteMap siteMap){
+    public Object getCate(Category category){
         Map map = new HashMap();
         try {
             PageHelper.startPage(1,50);
-            Page<SiteMap> siteMaps =(Page<SiteMap>) siteMapServiceImpl.findCateGory(siteMap);
+            category.setIsDelete(Contant.isNotDelete);
+            Page<Category> pularList =(Page<Category>) categoryServiceImpl.getCateGorys(category);
             map.put("state",0);
-            map.put("data",siteMaps.getResult());
+            map.put("data",pularList.getResult());
 
         } catch (Exception e) {
             log.error("getCate",e);

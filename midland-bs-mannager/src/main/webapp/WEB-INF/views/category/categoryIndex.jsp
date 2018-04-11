@@ -61,16 +61,7 @@
                         </select>
                     </li>
                 </c:if>
-                <c:if test="${not empty isSuper}">
-                    <li>
-                        <span style="float:left;">是否删除：</span>
-                        <select name="isDelete" id="isDelete"
-                                style="height: 28px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
-                            <option value="0">未删除</option>
-                            <option value="1">已删除</option>
-                        </select>
-                    </li>
-                </c:if>
+
                 <c:choose>
                     <c:when test="${type==3}">
                         <li><span>分类：</span>
@@ -89,7 +80,16 @@
                         </li>
                     </c:otherwise>
                 </c:choose>
-
+                <c:if test="${not empty isSuper}">
+                    <li>
+                        <span style="float:left;">是否删除：</span>
+                        <select name="isDelete" id="isDelete"
+                                style="height: 28px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                            <option value="0">未删除</option>
+                            <option value="1">已删除</option>
+                        </select>
+                    </li>
+                </c:if>
 
                 <li><input class="public_btn bg1" type="submit" name="inquery" id="inquery" value="查询"/></li>
             </ul>

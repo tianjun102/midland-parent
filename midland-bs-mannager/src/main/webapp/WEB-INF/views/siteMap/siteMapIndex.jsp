@@ -28,23 +28,13 @@
 
                 <%@include file="../layout/sherchArea.jsp" %>
                 <%--<li>--%>
-                    <%--<span style="float:left;">平台：</span>--%>
-                    <%--<select name="source" id="source" class="dropdown">--%>
-                        <%--<option value="">全部</option>--%>
-                        <%--<option value="0">网站</option>--%>
-                        <%--<option value="1">微站</option>--%>
-                    <%--</select>--%>
+                <%--<span style="float:left;">平台：</span>--%>
+                <%--<select name="source" id="source" class="dropdown">--%>
+                <%--<option value="">全部</option>--%>
+                <%--<option value="0">网站</option>--%>
+                <%--<option value="1">微站</option>--%>
+                <%--</select>--%>
                 <%--</li>--%>
-                <c:if test="${not empty isSuper}">
-                    <li>
-                        <span style="float:left;">是否删除：</span>
-                        <select name="isDelete" id="isDelete"
-                                style="height: 28px;width: 100px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
-                            <option value="0">未删除</option>
-                            <option value="1">已删除</option>
-                        </select>
-                    </li>
-                </c:if>
 
 
                 <li><span>分类名称：</span>
@@ -52,7 +42,7 @@
                             style="height: 28px; width:120px;display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <option value="">请选择</option>
                         <c:forEach items="${cateList}" var="s">
-                            <option value="${s.cateId}">
+                            <option value="${s.id}">
                                     ${s.cateName}
                             </option>
                         </c:forEach>
@@ -69,7 +59,18 @@
                                     ${s.modeName}
                             </option>
                         </c:forEach>
-                    </select>                </li>
+                    </select>
+                </li>
+                <c:if test="${not empty isSuper}">
+                    <li>
+                        <span style="float:left;">是否删除：</span>
+                        <select name="isDelete" id="isDelete"
+                                style="height: 28px;width: 100px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                            <option value="0">未删除</option>
+                            <option value="1">已删除</option>
+                        </select>
+                    </li>
+                </c:if>
                 <li>
                     <input class="public_btn bg1" type="submit" name="inquery" id="inquery" value="查询"/>
                 </li>
@@ -118,7 +119,7 @@
     })
 
     function getcates() {
-        var data = "&cityId="+$("#cityId").val()+"&isDelete="+$("#isDelete").val();
+        var data = "&cityId=" + $("#cityId").val() + "&isDelete=" + $("#isDelete").val()+"&type=4";
         $.ajax({
             type: "post",
             url: "${ctx}/rest/siteMap/getCate",
@@ -130,7 +131,7 @@
                     var obj = data.data;
                     var html = "<option value=>请选择</option>";
                     for (var i = 0; i < obj.length; i++) {
-                        html += "<option value=\"" + obj[i].cateId + "\">" + obj[i].cateName + "</option>";
+                        html += "<option value=\"" + obj[i].id + "\">" + obj[i].cateName + "</option>";
                     }
                     $("#cateId").html(html);
 
@@ -149,8 +150,8 @@
         });
     }
 
-function getmodes() {
-    var data = "cateId=" + $("#cateId").val()+"&cityId="+$("#cityId").val()+"&isDelete="+$("#isDelete").val();
+    function getmodes() {
+        var data = "cateId=" + $("#cateId").val() + "&cityId=" + $("#cityId").val() + "&isDelete=" + $("#isDelete").val();
 
         $.ajax({
             type: "post",
@@ -183,8 +184,6 @@ function getmodes() {
 
         });
     }
-
-
 
 
     function beforeClick(treeId, treeNode, clickFlag) {

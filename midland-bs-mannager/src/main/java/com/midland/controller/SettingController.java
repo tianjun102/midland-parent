@@ -10,10 +10,7 @@ import com.midland.web.Contants.Contant;
 import com.midland.web.enums.ContextEnums;
 import com.midland.web.model.*;
 import com.midland.web.model.user.User;
-import com.midland.web.service.BannerService;
-import com.midland.web.service.JdbcService;
-import com.midland.web.service.PopularService;
-import com.midland.web.service.SettingService;
+import com.midland.web.service.*;
 import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
 import com.midland.web.util.ParamObject;
@@ -48,7 +45,8 @@ public class SettingController extends BaseFilter {
     private TaskConfig taskConfig;
     @Autowired
     private BannerService bannerServiceImpl;
-
+    @Autowired
+    private CategoryService categoryServiceImpl;
     // 进入热门关注首页面
     @RequestMapping(value = "popularIndex", method = {RequestMethod.GET, RequestMethod.POST})
     public String popularIndex(Model model, HttpServletRequest request) throws Exception {
@@ -82,13 +80,14 @@ public class SettingController extends BaseFilter {
     //通过模块类型定位分类
     @RequestMapping("getCate")
     @ResponseBody
-    public Object getCate(Popular popular){
+    public Object getCate(Category category){
         Map map = new HashMap();
         try {
             PageHelper.startPage(1,50);
-            Page<Popular> pularList =(Page<Popular>) popularServiceImpl.findCateGory(popular);
+            category.setIsDelete(Contant.isNotDelete);
+            Page<Category> cateList =(Page<Category>) categoryServiceImpl.getCateGorys(category);
             map.put("state",0);
-            map.put("data",pularList.getResult());
+            map.put("data",cateList.getResult());
 
         } catch (Exception e) {
             logger.error("getCate",e);

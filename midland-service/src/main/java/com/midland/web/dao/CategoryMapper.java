@@ -25,6 +25,7 @@ public interface CategoryMapper {
     List<Category> findCategoryList(Category category);
 
     List<Category> getCateGorys(Category category);
+    List<Category> getModels(Category category);
 
     List<Category> findCategoryTreeList(Category category);
 

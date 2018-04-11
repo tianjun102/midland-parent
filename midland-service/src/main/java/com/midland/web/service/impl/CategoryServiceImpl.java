@@ -207,6 +207,15 @@ public class CategoryServiceImpl implements CategoryService {
             throw e;
         }
     }
+ @Override
+    public List<Category> getModels(Category category) throws Exception {
+        try {
+            return categoryMapper.getModels(category);
+        } catch (Exception e) {
+            log.error("getModels  {}", category, e);
+            throw e;
+        }
+    }
 
     @Override
     public Category selectCategoryParentNameById(Integer id) {
