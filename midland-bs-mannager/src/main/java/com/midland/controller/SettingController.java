@@ -50,16 +50,21 @@ public class SettingController extends BaseFilter {
     // 进入热门关注首页面
     @RequestMapping(value = "popularIndex", method = {RequestMethod.GET, RequestMethod.POST})
     public String popularIndex(Model model, HttpServletRequest request) throws Exception {
+        User user = MidlandHelper.getCurrentUser(request);
         //初始化的时候,最多只拿出50个数据,
         PageHelper.startPage(1, 50);
-        Page<Popular> po = ( Page<Popular>)popularServiceImpl.findCateGory(new Popular());
+        Category category = new Category();
+        category.setIsDelete(Contant.isNotDelete);
+        category.setType(3);
+        category.setCityId(user.getCityId());
+        Page<Category> cateList =(Page<Category>) categoryServiceImpl.getCateGorys(category);
 
         settingService.getAllProvinceList(model);
-        User user = MidlandHelper.getCurrentUser(request);
+
         if (user.getIsSuper() == null) {
             model.addAttribute("cityId", user.getCityId());
         }
-        model.addAttribute("cateList",  po.getResult());
+        model.addAttribute("cateList",  cateList.getResult());
         model.addAttribute("isSuper", user.getIsSuper());
         model.addAttribute("type", request.getParameter("type"));
         return "setting/popular/popularIndex";

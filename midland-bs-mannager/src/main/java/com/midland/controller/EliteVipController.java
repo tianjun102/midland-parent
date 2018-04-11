@@ -47,12 +47,14 @@ public class EliteVipController extends BaseFilter {
      **/
     @RequestMapping("index")
     public String eliteVipIndex(EliteVip eliteVip, Model model, HttpServletRequest request) throws Exception {
+        User user = MidlandHelper.getCurrentUser(request);
         Category category = new Category();
         category.setType(2);
+        category.setCityId(user.getCityId());
         List<Category> list = categoryServiceImpl.findCategoryList(category);
-        model.addAttribute("categoryList", list);
+        model.addAttribute("cateList", list);
         settingServiceImpl.getAllProvinceList(model);
-        User user = MidlandHelper.getCurrentUser(request);
+
         model.addAttribute("isSuper", user.getIsSuper());
         return "eliteVip/eliteVipIndex";
     }

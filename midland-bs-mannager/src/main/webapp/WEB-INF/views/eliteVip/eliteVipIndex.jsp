@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="${ctx}/assets/css/ztree/css/demo.css">
 <link rel="stylesheet" href="${ctx }/assets/css/common.css">
 <link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css"/>
+
 	<script type="text/javascript">
 
         var setting = {
@@ -66,7 +67,14 @@
 				onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
 			<ul class = "userinfo width-sm row">
 				<%@include file="../layout/sherchArea.jsp" %>
-				<li><span>会员级别：</span><input type="text" class="vipcate" name="cateName"/></li>
+				<li><span>会员级别：</span>
+					<select id="cateId" name="cateId" style="height: 28px;width: 190px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+						<option value="">请选择</option>
+						<c:forEach items="${cateList}" var="s">
+							<option value="${s.id}">${s.cateName}</option>
+						</c:forEach>
+					</select>
+				</li>
 				<li><span>会员分类：</span><input type="text" class="vipcate" name="level"/></li>
 
 				<li><span>中文名：</span>

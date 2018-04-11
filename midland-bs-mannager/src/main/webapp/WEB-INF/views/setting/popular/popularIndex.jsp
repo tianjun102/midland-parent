@@ -61,7 +61,7 @@
                     <select name="cateId" id="cateId" style="height: 28px; width:120px;display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <option value="">请选择</option>
                         <c:forEach items="${cateList}" var="s">
-                            <option value="${s.cateId}"> ${s.cateName} </option>
+                            <option value="${s.id}"> ${s.cateName} </option>
                         </c:forEach>
                     </select>
                 </li>
