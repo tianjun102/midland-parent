@@ -3,10 +3,13 @@ package com.midland.web.annocontroller;
 import com.midland.web.Contants.Contant;
 import com.midland.web.model.Comment;
 import com.midland.web.model.Information;
+import com.midland.web.model.Meta;
 import com.midland.web.service.CommentService;
 import com.midland.web.service.InformationService;
 import com.midland.base.ServiceBaseFilter;
+import com.midland.web.service.MetaService;
 import com.midland.web.service.RedisService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ResultStatusUtils;
@@ -20,6 +23,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import com.midland.web.util.MidlandHelper;
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +39,8 @@ public class InformationRestController extends ServiceBaseFilter {
 	private CommentService commentServiceImpl;
 	@Autowired
 	private RedisService redisServiceImpl;
-
+	@Autowired
+	private MetaService metaServiceImpl;
 	@RequestMapping("/banner/get")
 	@ResponseBody
 	public Object getinformationBannerOpenAndClose(Integer id) {
@@ -99,7 +104,26 @@ public class InformationRestController extends ServiceBaseFilter {
 	public Object findInformationList(@RequestBody Information  obj, HttpServletRequest request) {
 		 Result result=new Result();
 		try {
+			if (StringUtils.isEmpty(obj.getCityId())||obj.getSource()==null||obj.getArticeType()==null){
+				result.setMsg("cityId,source,articeType不能为空");
+				result.setCode(ResultStatusUtils.STATUS_CODE_202);
+				return result;
+			}
+			Meta meta = new Meta();
+			meta.setCityId(obj.getCityId());
+			if (obj.getArticeType()==0){//市场研究
+				meta.setModeId(9);//跟metaIndex页面的modeId对应
+			}else if(obj.getArticeType()==1){//资讯
+				meta.setModeId(10);//跟metaIndex页面的modeId对应
+			}
 
+			meta.setSecondModeId(obj.getCateId());
+			meta.setSource(0);
+			meta.setIsDelete(Contant.isNotDelete);
+			List<Meta> res =  metaServiceImpl.findMetaList(meta);
+			if (res.size()>0){
+				result.setMeta(res.get(0));
+			}
 			log.info("findInformationList  {}",obj);
 			MidlandHelper.doPage(request);
 			obj.setIsDelete(Contant.isNotDelete);

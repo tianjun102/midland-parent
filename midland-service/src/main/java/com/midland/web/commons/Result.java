@@ -49,6 +49,9 @@ public class Result<T> implements Serializable {
     private List<Map<T, T>> listMap;
 
     public MetaResult getMeta() {
+        if (meta==null){
+            meta=new MetaResult();
+        }
         return meta;
     }
 

@@ -11,9 +11,11 @@ import com.midland.web.commons.core.util.ResultStatusUtils;
 import com.midland.web.model.CommunityAlbum;
 import com.midland.web.model.HotHand;
 import com.midland.web.model.LayoutMap;
+import com.midland.web.model.Meta;
 import com.midland.web.service.CommunityAlbumService;
 import com.midland.web.service.HotHandService;
 import com.midland.web.service.LayoutMapService;
+import com.midland.web.service.MetaService;
 import com.midland.web.service.impl.PublicService;
 import com.midland.web.util.MidlandHelper;
 import org.apache.commons.lang3.StringUtils;
@@ -41,7 +43,8 @@ public class HotHandRestController extends ServiceBaseFilter {
     private LayoutMapService lyoutMapServiceImpl;
     @Autowired
     private PublicService publicServiceImpl;
-
+    @Autowired
+    private MetaService metaServiceImpl;
 
 
     /**
@@ -179,6 +182,23 @@ public class HotHandRestController extends ServiceBaseFilter {
     public Object findHotHandList(@RequestBody HotHand obj, HttpServletRequest request) {
         Result result = new Result();
         try {
+
+            if (StringUtils.isEmpty(obj.getCityId())){
+                result.setMsg("cityId不能为空");
+                result.setCode(ResultStatusUtils.STATUS_CODE_202);
+                return result;
+            }
+            Meta meta = new Meta();
+            meta.setCityId(obj.getCityId());
+            meta.setModeId(8);//跟metaIndex页面的modeId对应
+
+            meta.setSecondModeId(Contant.ExportSale.hotHand.getId());
+            meta.setSource(0);
+            meta.setIsDelete(Contant.isNotDelete);
+            List<Meta> res =  metaServiceImpl.findMetaList(meta);
+            if (res.size()>0){
+                result.setMeta(res.get(0));
+            }
             简繁转换类 con=简繁转换类.取实例(简繁转换类.目标.简体);
             if (StringUtils.isNotEmpty(obj.getBuildingType())){
                obj.setBuildingType( con.转换(obj.getBuildingType()));
