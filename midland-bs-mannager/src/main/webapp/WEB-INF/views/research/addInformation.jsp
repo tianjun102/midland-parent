@@ -133,6 +133,7 @@
                     <input type="hidden" name="cityName" id="cityName" value="${cityName}">
                     <c:if test="${empty isSuper}"><input type="hidden" name="cityId"  value="${cityId}"></c:if>
                     <select onchange="setCityName()" name="cityId" id="cityId" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
+                        <option value="">请选择</option>
                         <c:forEach items="${cityList}" var="city">
                             <c:if test="${empty isSuper}"><option selected="selected" value="${cityId}">${cityName}</option></c:if>
                             <option value="${city.id}">${city.name}</option>
@@ -141,6 +142,7 @@
                 </li>
                 <li><span>平台：</span>
                     <select name="source" id="source">
+                        <option value="">请选择</option>
                         <option value="0" >网站</option>
                         <option value="1" >微站</option>
                     </select>
@@ -175,13 +177,14 @@
                         <input type="file" name="file_upload" id="file_upload"/>
                     </div>
                 </li>
-                <li>
-                    <span>META关键字：</span>
-                    <input type="text" name="metaKeywords"  />
+                <li><span>META关键词：</span>
+                    <input type="text" name="metaKeywords" id="metaKeywords" value=""/>
                 </li>
-                <li>
-                    <span>META描述：</span>
-                    <input type="text" name="metaDesc"  />
+                <li><span>META描述：</span>
+                    <input type="text" name="metaDescription" id="metaDescription" value=""/>
+                </li>
+                <li><span>META标题：</span>
+                    <input type="text" name="metaTitle" id="metaTitle" value=""/>
                 </li>
                 <li>
                     <span>作者：</span>
@@ -240,7 +243,7 @@
     UE.getEditor('myEditor');
     function subumintInformation(){
         var data = $("#formId").serialize();
-        if(notEmpty('vipcate','vipcate','请填写市场分类！')&&notEmpty('title','title','标题不能为空！')){
+        if(checkSelect('cityId|source','请选择城市|请选择平台')&&notEmpty('vipcate','vipcate','请填写市场分类！')&&notEmpty('title','title','标题不能为空！')){
         $.ajax({
             type: "post",
             url: "${ctx}/rest/research/add",

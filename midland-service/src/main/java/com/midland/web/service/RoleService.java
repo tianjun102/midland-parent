@@ -6,6 +6,7 @@ import com.midland.web.model.Permission;
 import com.midland.web.model.role.Role;
 import com.midland.web.model.role.RoleAuth;
 import com.midland.web.model.role.RolePermission;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -50,7 +51,8 @@ public interface RoleService extends GenericService<Role, Integer> {
 
     List<Permission> getPermissions();
 
-    int saveRolePermissions(String roleId, String permissionIds);
+    @Transactional
+    void saveRolePermissions(Integer rId, List<RolePermission> rolePermissionList);
 
     int updateRoleUser(Integer roleId, String userIds);
 

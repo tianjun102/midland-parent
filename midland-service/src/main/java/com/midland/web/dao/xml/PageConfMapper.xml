@@ -56,6 +56,62 @@
         <include refid="select_option"/>
     </select>
 
+    <select id="findRestPageConfList" parameterType="com.midland.web.model.PageConf" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from page_conf where 1=1
+        <if test="isDelete == null">
+            and is_delete=0
+        </if>
+        <include refid="select_option_rest"/>
+        order by model desc
+    </select>
+    <sql id="select_option_rest">
+        <if test="id != null">
+            and id= #{id,jdbcType=INTEGER}
+        </if>
+        <if test="cityId != null">
+            and city_id= #{cityId,jdbcType=VARCHAR}
+        </if>
+        <if test="cityName != null">
+            and city_name= #{cityName,jdbcType=VARCHAR}
+        </if>
+
+        <if test="model != null">
+            and (model= #{model,jdbcType=INTEGER} or model=11)
+        </if>
+        <if test="metaLable != null">
+            and meta_lable= #{metaLable,jdbcType=VARCHAR}
+        </if>
+        <if test="metaShow != null">
+            and meta_show= #{metaShow,jdbcType=INTEGER}
+        </if>
+        <if test="baiduCode != null">
+            and baidu_code= #{baiduCode,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="baiduShow != null">
+            and baidu_show= #{baiduShow,jdbcType=INTEGER}
+        </if>
+        <if test="cnzzCode != null">
+            and cnzz_code= #{cnzzCode,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="cnzzCodeWechat != null">
+            and cnzz_code_wechat= #{cnzzCodeWechat,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="baiduCodeWechat != null">
+            and baidu_code_wechat= #{baiduCodeWechat,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="metaDesc != null">
+            and meta_desc= #{metaDesc,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="title != null">
+            and title= #{title,jdbcType=VARCHAR}
+        </if>
+        <if test="isDelete != null">
+            and is_delete= #{isDelete,jdbcType=INTEGER}
+        </if>
+        <if test="source != null">
+            and source= #{source,jdbcType=INTEGER}
+        </if>
+    </sql>
     <insert id="insertPageConf" parameterType="com.midland.web.model.PageConf">
         insert into page_conf
         <trim prefix="(" suffix=")" suffixOverrides=",">

@@ -16,6 +16,7 @@ import com.midland.web.model.user.UserRole;
 import com.midland.web.service.RoleService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -168,52 +169,61 @@ public class RoleServiceImpl extends GenericServiceImpl<Role, Integer> implement
     }
 
     @Override
-    public int saveRolePermissions(String roleId, String permissionIds) {
-        //角色id
-        Integer rId = Integer.valueOf(roleId);
-        //数据更改数目
-        int n = 0;
-
-        RolePermission rp = new RolePermission();
-        rp.setRoleId(rId);
-        List<RolePermission> permissionIdList = roleMapper.getListPermission(rp);//已有的权限
-
-        if (StringUtils.isNotEmpty(permissionIds)) {
-
-            String[] ids = permissionIds.split(",");
-            List<RolePermission> rolePermissionList = new ArrayList<RolePermission>();//页面传的权限
-            RolePermission rolePermission = null;
-            for (int a = 0; a < ids.length; a++) {//数组转换成list
-                rolePermission = new RolePermission();
-                rolePermission.setRoleId(Integer.valueOf(roleId));
-                rolePermission.setPermissionId(Integer.valueOf(ids[a]));
-                rolePermissionList.add(rolePermission);
-            }
-
-            //rolePermissionList留下是要新增的
-            //permissionIdList留下是要删除的
-            for (int i = rolePermissionList.size() - 1; i >= 0; i--) {
-                Integer p1 = rolePermissionList.get(i).getPermissionId();
-                for (int j = permissionIdList.size() - 1; j >= 0; j--) {
-                    Integer p2 = permissionIdList.get(j).getPermissionId();
-                    if (p2.compareTo(p1) == 0) {//相同的去除，剩下新增和删除的
-                        permissionIdList.remove(j);
-                        rolePermissionList.remove(i);
-                        break;
-                    }
-                }
-            }
-
-            if (rolePermissionList != null && rolePermissionList.size() > 0) {
-                n = n + rolePermissionMapper.insertBatch(rolePermissionList);//批量新增
-            }
+    @Transactional
+    public void saveRolePermissions(Integer rId, List<RolePermission> rolePermissionList) {
+        rolePermissionMapper.deleteBatchByRoleId(rId);
+        if (rolePermissionList != null && rolePermissionList.size() > 0) {
+            rolePermissionMapper.insertBatch(rolePermissionList);//批量新增
         }
-        if (permissionIdList != null && permissionIdList.size() > 0) {
-            n = n + rolePermissionMapper.deleteBatch(rId, permissionIdList);//批量删除
-        }
-
-        return n;
     }
+
+//    @Override
+//    public int saveRolePermissions(String roleId, String permissionIds) {
+//        //角色id
+//        Integer rId = Integer.valueOf(roleId);
+//        //数据更改数目
+//        int n = 0;
+//
+//        RolePermission rp = new RolePermission();
+//        rp.setRoleId(rId);
+//        List<RolePermission> permissionIdList = roleMapper.getListPermission(rp);//已有的权限
+//
+//        if (StringUtils.isNotEmpty(permissionIds)) {
+//
+//            String[] ids = permissionIds.split(",");
+//            List<RolePermission> rolePermissionList = new ArrayList<RolePermission>();//页面传的权限
+//            RolePermission rolePermission = null;
+//            for (int a = 0; a < ids.length; a++) {//数组转换成list
+//                rolePermission = new RolePermission();
+//                rolePermission.setRoleId(Integer.valueOf(roleId));
+//                rolePermission.setPermissionId(Integer.valueOf(ids[a]));
+//                rolePermissionList.add(rolePermission);
+//            }
+//
+//            //rolePermissionList留下是要新增的
+//            //permissionIdList留下是要删除的
+//            for (int i = rolePermissionList.size() - 1; i >= 0; i--) {
+//                Integer p1 = rolePermissionList.get(i).getPermissionId();
+//                for (int j = permissionIdList.size() - 1; j >= 0; j--) {
+//                    Integer p2 = permissionIdList.get(j).getPermissionId();
+//                    if (p2.compareTo(p1) == 0) {//相同的去除，剩下新增和删除的
+//                        permissionIdList.remove(j);
+//                        rolePermissionList.remove(i);
+//                        break;
+//                    }
+//                }
+//            }
+//
+//            if (rolePermissionList != null && rolePermissionList.size() > 0) {
+//                n = n + rolePermissionMapper.insertBatch(rolePermissionList);//批量新增
+//            }
+//        }
+//        if (permissionIdList != null && permissionIdList.size() > 0) {
+//            n = n + rolePermissionMapper.deleteBatch(rId, permissionIdList);//批量删除
+//        }
+//
+//        return n;
+//    }
 
     @Override
     public int updateRoleUser(Integer roleId, String userIds) {

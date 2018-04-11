@@ -19,6 +19,8 @@ public interface PageConfMapper {
 
     List<PageConf> findPageConfList(PageConf pageConf);
 
+    List<PageConf> findRestPageConfList(PageConf pageConf);
+
     int batchUpdate(@Param("pageConfList") List<PageConf> pageConfList);
 
 }

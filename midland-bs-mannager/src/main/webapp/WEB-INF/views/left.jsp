@@ -384,6 +384,7 @@
 						class="glyphicon glyphicon-menu-right"></span></a>
 				</dt>
 				<dd>
+
 					<shiro:hasPermission name="metaSetting">
 						<a id = "left47" href="${ctx}/rest/meta/index" target="contentF"><span>meta管理</span></a>
 					</shiro:hasPermission>

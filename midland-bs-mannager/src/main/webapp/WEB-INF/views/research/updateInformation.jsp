@@ -172,13 +172,14 @@
                         <input type="file" name="file_upload" id="file_upload"/>
                     </div>
                 </li>
-                <li>
-                    <span>META关键字：</span>
-                    <input type="text" name="metaKeywords" value="${item.metaKeywords}" />
+                <li><span>META关键词：</span>
+                    <input type="text" name="metaKeywords" id="metaKeywords" value="${item.metaKeywords}"/>
                 </li>
-                <li>
-                    <span>META描述：</span>
-                    <input type="text" name="metaDesc" value="${item.metaDesc}" />
+                <li><span>META描述：</span>
+                    <input type="text" name="metaDescription" id="metaDescription" value="${item.metaDescription}"/>
+                </li>
+                <li><span>META标题：</span>
+                    <input type="text" name="metaTitle" id="metaTitle" value="${item.metaTitle}"/>
                 </li>
                 <li>
                     <span>作者：</span>

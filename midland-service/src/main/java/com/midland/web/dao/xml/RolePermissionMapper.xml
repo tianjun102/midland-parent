@@ -193,6 +193,12 @@
     </insert>
 
     <!-- 批量删除 -->
+    <delete id="deleteBatchByRoleId">
+        delete from role_permission
+        where role_id=#{roleId,jdbcType=BIGINT}
+    </delete>
+
+    <!-- 批量删除 -->
     <delete id="deleteBatch">
         delete from role_permission
         where role_id=#{roleId,jdbcType=BIGINT}

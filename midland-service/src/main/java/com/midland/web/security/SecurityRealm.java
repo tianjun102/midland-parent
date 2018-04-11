@@ -91,6 +91,7 @@ public class SecurityRealm extends AuthorizingRealm {
 
             }
             if ("admin".equals(role1.getRoleSign())){
+                authorizationInfo.addStringPermission("systemManage");
                 authorizationInfo.addStringPermission("rolelist");
             }
         }

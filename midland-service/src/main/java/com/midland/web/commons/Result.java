@@ -27,10 +27,7 @@ public class Result<T> implements Serializable {
     private Long len;
     private String token;
     private String code_url;
-    /**
-     * Meta信息
-     */
-    private MetaResult meta;
+
     /**
      * 请求接口返回状态值
      */
@@ -45,19 +42,6 @@ public class Result<T> implements Serializable {
     private Map<Object, Object> map;
 
     private List<Map<T, T>> listMap;
-
-
-    public MetaResult getMeta() {
-        return meta;
-    }
-
-    public void setMeta(Meta meta1) {
-        this.meta=new MetaResult();
-        meta.setDescription(meta1.getDescription());
-        meta.setKeywords(meta1.getKeywords());
-        meta1.setTitle(meta1.getTitle());
-    }
-
     public Integer getNumber() {
         return number;
     }

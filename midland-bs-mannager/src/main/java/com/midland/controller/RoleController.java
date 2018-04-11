@@ -11,6 +11,7 @@ import com.midland.web.model.role.RolePermission;
 import com.midland.web.model.user.User;
 import com.midland.web.service.RoleService;
 import com.midland.web.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -260,9 +262,24 @@ public class RoleController extends BaseFilter {
     @ResponseBody
     public Object saveRolePermissions(String roleId, String permissionIds) throws Exception {
         Map<String, Object> map = new HashMap<String, Object>();
-        Integer saveFlag = roleService.saveRolePermissions(roleId, permissionIds);
+        //角色id
+        Integer rId = Integer.valueOf(roleId);
+        //数据更改数目
+        int n = 0;
+        List<RolePermission> rolePermissionList = new ArrayList<RolePermission>();//页面传的权限
+        if (StringUtils.isNotEmpty(permissionIds)) {
+            String[] ids = permissionIds.split(",");
+            RolePermission rolePermission = null;
+            for (int a = 0; a < ids.length; a++) {//数组转换成list
+                rolePermission = new RolePermission();
+                rolePermission.setRoleId(Integer.valueOf(roleId));
+                rolePermission.setPermissionId(Integer.valueOf(ids[a]));
+                rolePermissionList.add(rolePermission);
+            }
+        }
+        roleService.saveRolePermissions(rId,rolePermissionList);
 
-        map.put("saveFlag", saveFlag);
+        map.put("saveFlag", 1);
         return map;
     }
 

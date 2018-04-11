@@ -233,12 +233,7 @@
             <if test="enclosure != null">
                 #{enclosure,jdbcType=VARCHAR},
             </if>
-            <if test="metaKeywords != null">
-                #{metaKeywords,jdbcType=VARCHAR},
-            </if>
-            <if test="metaDesc != null">
-                #{metaDesc,jdbcType=VARCHAR},
-            </if>
+
             <if test="imgUrl != null">
                 #{imgUrl,jdbcType=VARCHAR},
             </if>

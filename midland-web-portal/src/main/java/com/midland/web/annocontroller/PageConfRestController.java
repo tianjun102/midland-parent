@@ -1,5 +1,6 @@
 package com.midland.web.annocontroller;
 
+import com.github.pagehelper.PageHelper;
 import com.midland.web.Contants.Contant;
 import com.midland.web.model.PageConf;
 import com.midland.web.service.PageConfService;
@@ -26,25 +27,6 @@ public class PageConfRestController extends ServiceBaseFilter {
 	@Autowired
 	private PageConfService pageConfServiceImpl;
 
-	/**
-	 * 新增
-	 **/
-	@RequestMapping("add")
-	public Object addPageConf(@RequestBody PageConf obj) throws Exception {
-		 Result result=new Result();
-		try {
-			log.info("addPageConf {}",obj);
-			obj.setIsDelete(Contant.isNotDelete);
-			pageConfServiceImpl.insertPageConf(obj);
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg("success");
-		} catch(Exception e) {
-			log.error("addPageConf异常 {}",obj,e);
-			result.setCode(ResultStatusUtils.STATUS_CODE_203);
-			result.setMsg("service error");
-		}
-		return result;
-	}
 
 	/**
 	 * 查询
@@ -67,24 +49,6 @@ public class PageConfRestController extends ServiceBaseFilter {
 		return result;
 	}
 
-	/**
-	 * 更新
-	 **/
-	@RequestMapping("update")
-	public Object updatePageConfById(@RequestBody PageConf obj) throws Exception {
-		 Result result=new Result();
-		try {
-			log.info("updatePageConfById  {}",obj);
-			pageConfServiceImpl.updatePageConfById(obj);
-			result.setCode(ResultStatusUtils.STATUS_CODE_200);
-			result.setMsg("success");
-		} catch(Exception e) {
-			log.error("updatePageConfById  {}",obj,e);
-			result.setCode(ResultStatusUtils.STATUS_CODE_203);
-			result.setMsg("service error");
-		}
-		return result;
-	}
 
 	/**
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
@@ -96,9 +60,9 @@ public class PageConfRestController extends ServiceBaseFilter {
 			obj.setBaiduShow(0);
 			obj.setMetaShow(0);
 			log.info("findPageConfList  {}",obj);
-			MidlandHelper.doPage(request);
+			PageHelper.startPage(1,1);
 			obj.setIsDelete(Contant.isNotDelete);
-			Page<PageConf> list = (Page<PageConf>)pageConfServiceImpl.findPageConfList(obj);
+			Page<PageConf> list = (Page<PageConf>)pageConfServiceImpl.findRestPageConfList(obj);
 			Paginator paginator=list.getPaginator();
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");

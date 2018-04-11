@@ -77,16 +77,6 @@ public class FilmLibraryRestController extends ServiceBaseFilter {
                 result.setCode(ResultStatusUtils.STATUS_CODE_202);
                 return result;
             }
-            Meta meta = new Meta();
-            meta.setCityId(cityId);
-            meta.setModeId(8);//跟metaIndex页面的modeId对应
-            meta.setSecondModeId(Contant.ExportSale.film.getId());
-            meta.setSource(source);
-            meta.setIsDelete(Contant.isNotDelete);
-            List<Meta> res =  metaServiceImpl.findMetaList(meta);
-            if (res.size()>0){
-                result.setMeta(res.get(0));
-            }
 
             log.info("getFilmLibraryById  {}", id);
             FilmLibrary filmLibrary = filmLibraryServiceImpl.selectFilmLibraryById(id);
@@ -128,18 +118,8 @@ public class FilmLibraryRestController extends ServiceBaseFilter {
     @RequestMapping("list")
     public Object findFilmLibraryList(@RequestBody FilmLibrary obj, HttpServletRequest request) {
         Result result = new Result();
-        Meta meta = new Meta();
 
         try {
-            meta.setCityId(obj.getCityId());
-            meta.setModeId(8);//跟metaIndex页面的modeId对应
-            meta.setSecondModeId(Contant.ExportSale.film.getId());
-            meta.setSource(0);//只有网站有片库
-            meta.setIsDelete(Contant.isNotDelete);
-            List<Meta> res =  metaServiceImpl.findMetaList(meta);
-            if (res.size()>0){
-                result.setMeta(res.get(0));
-            }
             log.info("findFilmLibraryList  {}", obj);
             MidlandHelper.doPage(request);
             obj.setIsDelete(Contant.isNotDelete);

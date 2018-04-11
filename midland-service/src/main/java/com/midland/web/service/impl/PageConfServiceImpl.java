@@ -89,6 +89,17 @@ public class PageConfServiceImpl implements PageConfService {
     }
 
     @Override
+    public List<PageConf> findRestPageConfList(PageConf pageConf) throws Exception {
+        try {
+            log.debug("findPageConfList  {}", pageConf);
+            return pageConfMapper.findRestPageConfList(pageConf);
+        } catch (Exception e) {
+            log.error("findPageConfList  {}", pageConf, e);
+            throw e;
+        }
+    }
+
+    @Override
     public void batchUpdate(List<PageConf> pageConfList) throws Exception {
         try {
             log.debug("updatePageConfById  {}", pageConfList);
