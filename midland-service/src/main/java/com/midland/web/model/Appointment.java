@@ -137,10 +137,12 @@ public class Appointment {
     private String userId;
 
     /**
+     * 暂时不用
      * 1新房,2二手房,3租房,4写字楼,5商铺,6小区
      */
     private Integer modeId;
     /**
+     * 暂时不用
      * 1新房,2二手房,3租房,4写字楼,5商铺,6小区
      */
     private String modeName;
