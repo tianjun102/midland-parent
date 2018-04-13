@@ -346,9 +346,9 @@
 						<shiro:hasPermission name="pageConfList">
 							<a id = "left55" href="${ctx}/rest/pageConf/index" target="contentF"><span>页面配置</span></a>
 						</shiro:hasPermission>
-						<shiro:hasPermission name="userList">
-							<a id = "left50" href="${ctx}/rest/siteProtocol/index" target="contentF"><span>网站协议</span></a>
-						</shiro:hasPermission>
+						<%--<shiro:hasPermission name="userList">--%>
+							<%--<a id = "left50" href="${ctx}/rest/siteProtocol/index" target="contentF"><span>网站协议</span></a>--%>
+						<%--</shiro:hasPermission>--%>
 						<shiro:hasPermission name="siteMapList">
 							<a id = "left58" href="${ctx}/rest/siteMap/index" target="contentF"><span>网站地图管理</span></a>
 						</shiro:hasPermission>

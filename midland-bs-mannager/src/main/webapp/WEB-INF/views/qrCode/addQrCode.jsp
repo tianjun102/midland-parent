@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@include file="../layout/tablib.jsp" %>
-<%@include file="../layout/source.jsp"%>
+<%@include file="../layout/source.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,27 +14,37 @@
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/qrCode/add" method="post" id="dataForm">
-        <input type="hidden" name="cityName" id="cityName" value="${cityName}" >
-        <c:if test="${empty isSuper}"><input type="hidden" name="cityId"  value="${cityId}"></c:if>
+        <input type="hidden" name="cityName" id="cityName" value="${cityName}">
+        <c:if test="${empty isSuper}"><input type="hidden" name="cityId" value="${cityId}"></c:if>
         <ul class="userinfo row">
             <li>
-                <span style = "float:left;">城市：</span>
-                <select onclick="setCityName();" name="cityId" id="cityId" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
-                    <c:if test="${empty isSuper}"><option selected="selected" value="${cityId}">${cityName}</option></c:if>
+                <span style="float:left;">城市：</span>
+                <select onclick="setCityName();" name="cityId" id="cityId"
+                        style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;"
+                        <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
+                    <option value="">请选择</option>
+                    <c:if test="${empty isSuper}">
+                        <option selected="selected" value="${cityId}">${cityName}</option>
+                    </c:if>
                     <c:forEach items="${cityList}" var="city">
                         <option value="${city.id}">${city.name}</option>
                     </c:forEach>
                 </select>
+                <span class="_star ">*</span>
             </li>
             <li><span>平台：</span>
-            <select name="source" id="source" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                <select name="source" id="source"
+                        style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <option value="">请选择</option>
                     <option value="0">网站</option>
                     <option value="1">微站</option>
                 </select>
+                <span class="_star ">*</span>
             </li>
             <li><span>名称：</span>
-                <input type="text" style="width: 250px!important;" name="name" id="name" value="" onblur="notEmpty('name','name','名称不能为空！')"/>
-                <span class = "_star ">*</span>
+                <input type="text" style="width: 250px!important;" name="name" id="name" value=""
+                       onblur="notEmpty('name','name','名称不能为空！')"/>
+                <span class="_star ">*</span>
             </li>
             <li><span>图片：</span>
                 <div style="float: left;">
@@ -58,37 +68,36 @@
 <script type="text/javascript">
     //保存数据
     function updateData() {
-        if(!notEmpty('name','name','名称不能为空！')){
-            return;
-        }
-        var data = $("#dataForm").serialize();
-        $.ajax({
-            type: "post",
-            url: "${ctx}/rest/qrCode/add",
-            async: false, // 此处必须同步
-            dataType: "json",
-            data: data,
-            success: function (data) {
-                if (data.state == 0) {
-                    layer.msg("保存成功！！！", {icon: 1});
-                    $('#save').removeAttr("onclick");
-                    setTimeout(function () {
-                        parent.layer.closeAll();
-                        parent.$("#inquery").click();
-                    }, 1000);
+        if (checkSelect('cityId|source', '请选择城市|请选择平台') && notEmpty('name', 'name', '名称不能为空！')) {
+            var data = $("#dataForm").serialize();
+            $.ajax({
+                type: "post",
+                url: "${ctx}/rest/qrCode/add",
+                async: false, // 此处必须同步
+                dataType: "json",
+                data: data,
+                success: function (data) {
+                    if (data.state == 0) {
+                        layer.msg("保存成功！！！", {icon: 1});
+                        $('#save').removeAttr("onclick");
+                        setTimeout(function () {
+                            parent.layer.closeAll();
+                            parent.$("#inquery").click();
+                        }, 1000);
 
-                } else {
-                    layer.msg("保存失败！", {icon: 2});
+                    } else {
+                        layer.msg("保存失败！", {icon: 2});
+                    }
+                },
+                error: function (data) {
+                    if (data.responseText != null) {
+                        layer.msg(data.responseText, {icon: 2});
+                    } else {
+                        layer.msg("保存失败！", {icon: 2});
+                    }
                 }
-            },
-            error: function (data) {
-                if (data.responseText != null) {
-                    layer.msg(data.responseText, {icon: 2});
-                } else {
-                    layer.msg("保存失败！", {icon: 2});
-                }
-            }
-        });
+            });
+        }
     }
 
     //取消
@@ -117,7 +126,7 @@
         });
     })
 
-    function setCityName(){
+    function setCityName() {
         $("#cityName").val($("#cityId option:selected").text())
     }
 </script>

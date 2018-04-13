@@ -12,6 +12,7 @@ import com.midland.web.util.MidlandHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -89,8 +90,15 @@ public class PageConfController extends BaseFilter {
             pageConfServiceImpl.insertPageConf(pageConf);
             map.put("state", 0);
         } catch (Exception e) {
-            log.error("addPageConf异常 {}", pageConf, e);
-            map.put("state", -1);
+            if (e instanceof DuplicateKeyException){
+                log.error("已存在该配置 {}", pageConf, e);
+                map.put("state", 1);
+            }else{
+                log.error("addPageConf异常 {}", pageConf, e);
+                map.put("state", -1);
+            }
+
+
         }
         return map;
     }
