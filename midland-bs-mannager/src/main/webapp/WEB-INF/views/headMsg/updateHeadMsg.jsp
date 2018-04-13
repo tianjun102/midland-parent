@@ -20,8 +20,9 @@
             <li><span>标题：</span>
                <input type="text" name="title" id="title" value="${item.title}"/>
             </li>
-            <li><span>公告：</span>
-               <input type="text" name="content" id="content" value="${item.content}"/>
+            <li id="textArea" style="display: block;"><span>公告：</span>
+                <textarea style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;" name="content"
+                          id="myEditor" rows="" cols="">${item.content}</textarea>
             </li>
 
             <li>
@@ -35,6 +36,8 @@
 </section>
 
 <script type="text/javascript">
+    HasCheked = true;
+    UE.getEditor('myEditor');
     //保存数据
     function updateData() {
         var data = $("#dataForm").serialize();

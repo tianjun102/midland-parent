@@ -81,7 +81,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				<c:choose>
 				<c:when test="${!empty list }">
 						<c:forEach items="${list }" var="notice" varStatus="xh">
-							<li><a href="${ctx}/rest/notice/viewNotice?id=${notice.id }" target="contentF">系统公告：${notice.title }</a><span class="date"><div class='time'></div></span></li>
+							<li><a href="${ctx}/rest/headMsg/show?id=${notice.id }" target="contentF">系统公告：${notice.title }</a><span class="date"><div class='time'></div></span></li>
 						</c:forEach>
 				</c:when>
 				<c:otherwise>

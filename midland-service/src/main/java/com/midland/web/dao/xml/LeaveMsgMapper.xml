@@ -19,11 +19,12 @@
         <result column="agent_id" property="agentId" jdbcType="VARCHAR"/>
         <result column="agent_name" property="agentName" jdbcType="VARCHAR"/>
         <result column="agent_url" property="agentUrl" jdbcType="VARCHAR"/>
+        <result column="user_delete" property="userDelete" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,message,date_format(str_to_date(add_time, '%Y-%m'),'%Y-%m')add_time,user_id,user_name,phone,reply_msg,type,
-        is_delete,email,reply_time,city_id,city_name,agent_name,agent_id,agent_url
+        is_delete,email,reply_time,city_id,city_name,agent_name,agent_id,agent_url,user_delete
     </sql>
 
     <select id="selectLeaveMsgById" resultMap="BaseResultMap">
@@ -53,6 +54,7 @@
         from leave_msg
         where 1=1
         <include refid="select_option"/>
+        ORDER by id desc
     </select>
 
     <insert id="insertLeaveMsg" parameterType="com.midland.web.model.LeaveMsg">
@@ -94,14 +96,17 @@
             <if test="cityName != null">
                 city_name,
             </if>
-            <if test="agent_id != null">
+            <if test="agentId != null">
                 agent_id,
             </if>
-            <if test="agent_name != null">
+            <if test="agentName != null">
                 agent_name,
             </if>
-            <if test="agent_url != null">
+            <if test="agentUrl != null">
                 agent_url,
+            </if>
+ <if test="userDelete != null">
+     user_delete,
             </if>
 
         </trim>
@@ -143,15 +148,19 @@
             <if test="cityName != null">
                 #{cityName,jdbcType=VARCHAR},
             </if>
-            <if test="agent_id != null">
+            <if test="agentId != null">
                 #{agentId,jdbcType=VARCHAR},
             </if>
-            <if test="agent_name != null">
+            <if test="agentName != null">
                 #{agentName,jdbcType=VARCHAR},
             </if>
-            <if test="agent_url != null">
+            <if test="agentUrl != null">
                 #{agentUrl,jdbcType=VARCHAR},
             </if>
+            <if test="userDelete != null">
+                #{userDelete,jdbcType=INTEGER},
+            </if>
+
         </trim>
     </insert>
 
@@ -201,6 +210,10 @@
         <if test="agentUrl != null">
             agent_url = #{agentUrl,jdbcType=VARCHAR},
         </if>
+        <if test="userDelete != null">
+            user_delete = #{userDelete,jdbcType=INTEGER},
+        </if>
+
     </sql>
 
     <sql id="select_option">
@@ -258,6 +271,10 @@
         <if test="agentUrl != null">
             agent_url = #{agentUrl,jdbcType=VARCHAR}
         </if>
+        <if test="userDelete != null">
+            user_delete = #{userDelete,jdbcType=INTEGER}
+        </if>
+
     </sql>
 
 

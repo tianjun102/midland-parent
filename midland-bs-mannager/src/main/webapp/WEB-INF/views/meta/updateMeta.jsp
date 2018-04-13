@@ -31,6 +31,7 @@
                 <input type="hidden" name="modeName" id="modeName" value="${item.modeName}">
                 <select name="modeId" id="modeId" class="dropdown">
                     <option value="" >请选择</option>
+                    <option value="1" <c:if test="${item.modeId== 1}">selected="selected"</c:if>>新房首页</option>
                     <option value="8" <c:if test="${item.modeId== 8}">selected="selected"</c:if>>外销网</option>
                     <option value="9" <c:if test="${item.modeId== 9}">selected="selected"</c:if>>市场调究</option>
                     <option value="10" <c:if test="${item.modeId== 10}">selected="selected"</c:if>>资讯</option>
@@ -98,7 +99,7 @@
             $("#childMode").show();
             var data = "type=1" + "&cityId=" + $("#cityId").val() + "&source=" + $("#source").val();
             getCate(data);
-        } else if (val == 11) {
+        } else if (val == 11 || val==1) {
             $("#childMode").hide();
         }
     }

@@ -31,6 +31,14 @@ public class HeadMsgController extends BaseFilter {
     @Autowired
     private HeadMsgService headMsgServiceImpl;
 
+    @RequestMapping("show")
+    public String showHeadMsg(HeadMsg headMsg, Model model, HttpServletRequest request){
+        HeadMsg result = headMsgServiceImpl.selectHeadMsgById(headMsg.getId());
+        model.addAttribute("item", result);
+        return "headMsg/showHeadMsg";
+    }
+
+
     /**
      *
      **/

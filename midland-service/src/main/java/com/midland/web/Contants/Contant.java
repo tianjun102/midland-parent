@@ -140,6 +140,8 @@ public class Contant {
     //发送短信验证码,预约短信
     public static final int SMS_TEMPLATE_54711 = 54711;
 
+    public static final int SMS_TEMPLATE_LEAVE_MSG = 107057;
+
     public static final String ANSWER_TITLE = "回答了我的提问：";
     public static final String COMMENT_TITLE = "对你的评论进行了回复：";
     public static final String ENTRUST_TITLE = "您的买房委托，||经纪人已经受理";

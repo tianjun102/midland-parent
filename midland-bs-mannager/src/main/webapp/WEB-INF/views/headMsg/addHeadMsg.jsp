@@ -14,13 +14,14 @@
 <body>
 <section class="content" style="border:none;">
     <form action="${ctx}/rest/headMsg/add" method="post" id="dataForm">
-        <ul class="userinfo row">
+        <ul class="adminfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <li><span>标题：</span>
                <input type="text" name="title" id="title" ß/>
             </li>
-            <li><span>公告：</span>
-               <input type="text" name="content" id="content" ß/>
+            <li id="textArea" style="display: block;"><span>公告：</span>
+                    <textarea style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;" name="content"
+                              id="myEditor" rows="" cols="">${item.content}</textarea>
             </li>
             <li>
                 <span></span>
@@ -33,6 +34,8 @@
 </section>
 
 <script type="text/javascript">
+    HasCheked = true;
+    UE.getEditor('myEditor');
     //保存数据
     function updateData() {
         var data = $("#dataForm").serialize();

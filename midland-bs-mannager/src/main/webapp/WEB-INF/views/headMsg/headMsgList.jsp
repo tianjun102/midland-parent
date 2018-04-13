@@ -16,7 +16,7 @@
             <tr>
 				<th style="width: 8%">创建时间</th>
 				<th style="width: 8%">标题</th>
-				<th style="width: 8%">公告</th>
+				<%--<th style="width: 8%">公告</th>--%>
 				<th style="width: 8%">删除</th>
 				<th style="width: 8%">显示</th>
                 <th style="width: 10%">操作</th>
@@ -30,7 +30,7 @@
 						<input type="hidden" id="id" value="${item.id}"/>
 						<td>${item.createTime}</td>
 						<td>${item.title}</td>
-						<td>${item.content}</td>
+						<%--<td>${item.content}</td>--%>
 						<td><c:forEach items="${isDeletes}" var="s1">
                             <c:if test="${s1.id==item.isDelete}">${s1.name}</c:if>
                         </c:forEach></td>
@@ -123,7 +123,7 @@
             type: 2,
             title: ['修改'],
             shade: 0.3,
-            area: ['500px', '300px'],
+            area: ['100%', '100%'],
             content: ['${ctx}/rest/headMsg/to_update?id='+id,'no']
         });
     }

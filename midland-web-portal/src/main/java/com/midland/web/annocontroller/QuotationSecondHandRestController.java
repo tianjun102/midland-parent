@@ -54,7 +54,59 @@ public class QuotationSecondHandRestController extends ServiceBaseFilter {
     }
 
 
+    /**
+     * 获取同比数据
+     * @param obj
+     * @param request
+     * @return
+     */
+    @RequestMapping("getAvgPriceAndTb")
+    public Object getQuotationSecondHandTongBiByDate(@RequestBody QuotationSecondHand obj ,HttpServletRequest request){
+        Result result = new Result();
+        Map map = new HashMap();
+        String date = MidlandHelper.getCurrentTime();
+        //String date = "2017-05-01 12:12:12";
+        try {
+            if (obj.getCityId()==null){
+                result.setMsg("城市id不能为空");
+                result.setCode(ResultStatusUtils.STATUS_CODE_203);
+                return result;
+            }
+            obj.setType(1);//1住宅
+            obj.setDataTime(MidlandHelper.formatMonth(date));
+            List<QuotationSecondHand> quotationSecondHands = quotationSecondHandServiceImpl.getQuotationSecondHandByDate(obj);
+            if (quotationSecondHands==null||quotationSecondHands.size()<1){
+                map.put("dealAvgPrice",0);//当前月的均价
+                map.put("ratio",0);//同比去年
+                result.setModel(map);
+                result.setCode(ResultStatusUtils.STATUS_CODE_200);
+                result.setMsg("成功");
+                return result;
+            }
+            map.put("dealAvgPrice",quotationSecondHands.get(0).getDealAvgPrice());//当前月的均价
+            obj.setDataTime(MidlandHelper.getFormatyyMMToMonth(date,-12));
+            List<QuotationSecondHand> quotationSecondHand1 = quotationSecondHandServiceImpl.getQuotationSecondHandByDate(obj);
+            if (quotationSecondHand1==null||quotationSecondHand1.size()<1){
+                map.put("ratio",0);//同比去年
+                result.setModel(map);
+                result.setCode(ResultStatusUtils.STATUS_CODE_200);
+                result.setMsg("成功");
+                return result;
+            }
 
+            Double ratio = QuotationUtil.getRatio(Double.valueOf(quotationSecondHands.get(0).getDealAvgPrice()),
+                    Double.valueOf(quotationSecondHand1.get(0).getDealAvgPrice()));
+            map.put("ratio",ratio);//同比去年
+            result.setCode(ResultStatusUtils.STATUS_CODE_200);
+            result.setMsg("成功");
+            result.setModel(map);
+        } catch (Exception e) {
+            result.setCode(ResultStatusUtils.STATUS_CODE_203);
+            result.setMsg("系统繁忙,请重试!");
+            result.setModel(map);
+        }
+        return  result;
+    }
 
     @RequestMapping("getAvgPriceAndRatio")
     public Object getQuotationSecondHandByDate(@RequestBody QuotationSecondHand obj ,HttpServletRequest request){

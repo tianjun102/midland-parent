@@ -1,6 +1,7 @@
 package com.midland.web.annocontroller;
 
 import com.midland.web.Contants.Contant;
+import com.midland.web.api.ApiHelper;
 import com.midland.web.model.LeaveMsg;
 import com.midland.web.service.LeaveMsgService;
 import com.midland.base.ServiceBaseFilter;
@@ -30,7 +31,8 @@ public class LeaveMsgRestController extends ServiceBaseFilter {
 	private Logger log = LoggerFactory.getLogger(LeaveMsgRestController.class);
 	@Autowired
 	private LeaveMsgService leaveMsgServiceImpl;
-
+	@Autowired
+	private ApiHelper apiHelper;
 	/**
 	 * 新增
 	 **/
@@ -40,8 +42,13 @@ public class LeaveMsgRestController extends ServiceBaseFilter {
 		try {
 			log.info("addLeaveMsg {}",obj);
 			obj.setIsDelete(Contant.isNotDelete);
+			obj.setUserDelete(Contant.isNotDelete);
 			obj.setAddTime(MidlandHelper.getCurrentTime());
+			obj.setReplyTime(null);
 			leaveMsgServiceImpl.insertLeaveMsg(obj);
+			List<String> param1 = new ArrayList<>();
+
+			apiHelper.smsSender(obj.getPhone(),Contant.SMS_TEMPLATE_LEAVE_MSG,param1);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");
 		} catch(Exception e) {
@@ -89,7 +96,7 @@ public class LeaveMsgRestController extends ServiceBaseFilter {
 				result.setCode(ResultStatusUtils.STATUS_CODE_202);
 				result.setMsg("id不能为空");
 			}
-			obj.setIsDelete(Contant.isDelete);
+			obj.setUserDelete(Contant.isDelete);
 			leaveMsgServiceImpl.updateLeaveMsgById(obj);
 			result.setCode(ResultStatusUtils.STATUS_CODE_200);
 			result.setMsg("success");

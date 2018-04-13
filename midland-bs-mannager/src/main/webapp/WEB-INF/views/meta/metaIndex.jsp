@@ -36,6 +36,7 @@
                     <input type="hidden" name="modeName" id="modeName">
                     <select name="modeId" id="modeId" class="dropdown">
                         <option value="">请选择</option>
+                        <option value="1">新房首页</option>
                         <option value="8">外销网</option>
                         <option value="9">市场调究</option>
                         <option value="10">资讯</option>
@@ -94,7 +95,7 @@
             $("#childMode").show();
             var data = "type=1" + "&cityId=" + $("#cityId").val() + "&source=" + $("#source").val();
             getCate(data);
-        } else if ($("#modeId").val() == 11) {
+        } else if ($("#modeId").val() == 11 || $("#modeId").val() == 1) {
             $("#childMode").hide();
         }
     })

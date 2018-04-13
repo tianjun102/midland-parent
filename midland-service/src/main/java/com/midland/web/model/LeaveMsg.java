@@ -74,6 +74,19 @@ public class LeaveMsg {
      */
     private String agentUrl;
 
+    /**
+     * 前端用户发起的删除,0未删除,1已删除
+     */
+    private Integer userDelete;
+
+
+    public Integer getUserDelete() {
+        return userDelete;
+    }
+
+    public void setUserDelete(Integer userDelete) {
+        this.userDelete = userDelete;
+    }
 
     public String getAgentName() {
         return agentName;
