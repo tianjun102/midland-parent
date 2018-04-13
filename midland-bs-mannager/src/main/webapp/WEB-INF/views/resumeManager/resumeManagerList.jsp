@@ -151,6 +151,11 @@
                 fileNames.push($(this).next().val().substring($(this).next().val().lastIndexOf("/")+1,$(this).next().val().length))
             }
         });
+        debugger;
+        if (fileUrls.length<1||fileNames.length<1){
+            layer.msg("请选择资源！", {icon: 3});
+            return;
+        }
         window.location.href="${ctx}/rest/resumeManager/batDownload?filePaths="+fileUrls+"&fileNames="+fileNames;
     }
 
