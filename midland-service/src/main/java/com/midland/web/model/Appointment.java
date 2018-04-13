@@ -136,6 +136,14 @@ public class Appointment {
      */
     private String userId;
 
+    /**
+     * 1新房,2二手房,3租房,4写字楼,5商铺,6小区
+     */
+    private Integer modeId;
+    /**
+     * 1新房,2二手房,3租房,4写字楼,5商铺,6小区
+     */
+    private String modeName;
 
     /**
      * 评论管理时为了区分是预约未评论还是委托未评论加上去的
@@ -163,6 +171,23 @@ public class Appointment {
      * 房源图片地址
      */
     private String houseImg;
+
+
+    public Integer getModeId() {
+        return modeId;
+    }
+
+    public void setModeId(Integer modeId) {
+        this.modeId = modeId;
+    }
+
+    public String getModeName() {
+        return modeName;
+    }
+
+    public void setModeName(String modeName) {
+        this.modeName = modeName;
+    }
 
     public String getUserId() {
         return userId;

@@ -129,6 +129,7 @@
             </li>
             <li><span>楼盘ID：</span>
                 <input type="text" name="housesId" id="housesId" onblur="notEmpty('housesId','housesId','')"/>
+                <label style="color: red" class="_star ">*</label>
             </li>
 
             <li><span>楼盘名称：</span>

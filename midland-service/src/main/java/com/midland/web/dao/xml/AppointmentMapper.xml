@@ -28,6 +28,8 @@
         <result column="city_id" property="cityId" jdbcType="VARCHAR"/>
         <result column="city_name" property="cityName" jdbcType="VARCHAR"/>
         <result column="area_id" property="areaId" jdbcType="INTEGER"/>
+        <result column="mode_id" property="modeId" jdbcType="INTEGER"/>
+        <result column="mode_name" property="modeName" jdbcType="VARCHAR"/>
         <result column="flag" property="flag" jdbcType="INTEGER"/>
         <result column="agent_phone" property="agentPhone" jdbcType="VARCHAR"/>
         <result column="view_url" property="viewUrl" jdbcType="VARCHAR"/>
@@ -45,6 +47,7 @@
 		id,appoint_sn,source,nick_name,user_id,phone,house_type,sell_rent,DATE_FORMAT(appointment_time,'%Y-%m-%d %H:%i:%s')appointment_time,area_name,community_name,
 		address,layout,measure,price,DATE_FORMAT(entrust_time,'%Y-%m-%d %H:%i:%s')entrust_time,agent_id,agent_name,status,DATE_FORMAT(handle_time,'%Y-%m-%d %H:%i:%s')handle_time,
 		decoration,is_delete,city_id,city_name,area_id,flag,agent_phone,view_url,reset_flag,DATE_FORMAT(assigned_time,'%Y-%m-%d %H:%i:%s')assigned_time,sex,range_to_subway,avg_price,house_id,house_img,house_floor
+		,mode_id,mode_name
 	</sql>
 
     <select id="getUnCommentList" parameterType="com.midland.web.model.Appointment" resultMap="BaseResultMap">
@@ -270,6 +273,12 @@
             <if test="houseFloor != null">
                 house_floor,
             </if>
+<if test="modeId != null">
+                mode_id,
+            </if>
+            <if test="modeName != null">
+                mode_name,
+            </if>
 
         </trim>
         values
@@ -379,6 +388,12 @@
             <if test="houseFloor != null">
                 #{houseFloor},
             </if>
+            <if test="modeId != null">
+                #{modeId},
+            </if>
+            <if test="modeName != null">
+                #{modeName},
+            </if>
         </trim>
 
     </insert>
@@ -473,6 +488,12 @@
         </if>
         <if test="sex != null">
             sex= #{sex,jdbcType=INTEGER},
+        </if>
+        <if test="modeId != null">
+            mode_id= #{modeId},
+        </if>
+        <if test="modeName != null">
+            mode_name=#{modeName},
         </if>
 
     </sql>
@@ -573,6 +594,12 @@
         </if>
         <if test="assignedTime != null">
             and assigned_time= #{assignedTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="modeId != null">
+            and mode_id= #{modeId}
+        </if>
+        <if test="modeName != null">
+            and mode_name=#{modeName}
         </if>
     </sql>
 

@@ -14,8 +14,7 @@
     <table class="table table-bordered table-add">
         <thead>
         <tr>
-            <th style="width: 10%"><a href="#" onclick="checkall()">全选</a> / <a href="#"
-                                                                                onclick="delcheckall()">全部取消</a></th>
+            <th style="width: 10%"><a href="#" onclick="checkall()">全选</a> / <a href="#"  onclick="delcheckall()">全部取消</a></th>
             <th style="width: 8%">编号</th>
             <c:if test="${type == 3}">
                 <th style="width: 15%">模块名称</th>
@@ -139,7 +138,16 @@
 
     //排序
     function sort(id, orderById, sort) {
-        var data = "type=3&cityId="+$("#cityId").val()+"&source="+$("#source").val()+"&modeId="+$("#modeId").val()+"&isDelete"+$("#isDelete").val()
+        var data = "&cityId="+$("#cityId").val()+"&isDelete="+$("#isDelete").val()+"&type=${type}";
+       if (${type==3}){
+            data+="&modeId="+$("#modeId").val();
+       }
+       if (${type==2}){
+           data+="&source=0";
+       }else {
+           data+="&source="+$("#source").val();
+       }
+        debugger;
         $.ajax({
             type: "post",
             url: "${ctx}/rest/category/sort?sort=" + sort + "&orderBy=" + orderById + "&id=" + id,

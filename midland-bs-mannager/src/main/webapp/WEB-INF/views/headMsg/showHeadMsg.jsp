@@ -15,6 +15,9 @@
 <div class="box">
     <section class="content">
         <div id="headIndex" style="height: 93%">
+            <h1 align="center">${item.title}</h1>
+        <br>
+        <br>
            ${item.content}
         </div>
     </section>

@@ -106,7 +106,8 @@
                 <input type="text" name="metaTitle" id="metaTitle" value="${item.metaTitle}"/>
             </li>
             <li><span>楼盘ID：</span>
-                <input type="text" name="housesId" id="housesId" value="${item.housesId}"/>
+                <input type="text" name="housesId" id="housesId" value="${item.housesId}" onblur="notEmpty('housesId','housesId','')"/>
+                <label style="color: red" class="_star ">*</label>
             </li>
 
             <li><span>楼盘名称：</span>
