@@ -32,6 +32,18 @@ public class ResumeManager {
      * 附件地址
      **/
     private String enclosureUrl;
+
+    /**
+     * 附件Base64转码后的字符串
+     **/
+    private String enclosureCode;
+
+    /**
+     * 附件名称
+     */
+    private String enclosureName;
+
+
     /**
      * 城市id
      **/
@@ -55,6 +67,22 @@ public class ResumeManager {
 
     private String title;
 
+
+    public String getEnclosureName() {
+        return enclosureName;
+    }
+
+    public void setEnclosureName(String enclosureName) {
+        this.enclosureName = enclosureName;
+    }
+
+    public String getEnclosureCode() {
+        return enclosureCode;
+    }
+
+    public void setEnclosureCode(String enclosureCode) {
+        this.enclosureCode = enclosureCode;
+    }
 
     public Integer getId() {
         return id;

@@ -133,6 +133,50 @@ public class UploadImgUtil {
 			return "";
 		}
 	}
+	public static String GenerateFile(String fileName,String fileContent,String path,String oldFileName) { // 对字节数组字符串进行Base64解码并生成图片
+
+		if (StringUtils.isEmpty(fileName) || StringUtils.isEmpty(fileContent)) // 图像数据为空
+			return "";
+
+		String type = fileContent.substring(fileContent.indexOf("/")+1,fileContent.indexOf(";"));
+		String img = fileContent.substring(fileContent.indexOf(",")+1,fileContent.length());
+		BASE64Decoder decoder = new BASE64Decoder();
+		try {
+			if(StringUtils.isNotEmpty(oldFileName)){
+				if (oldFileName.contains("home")){
+					boolean bool = FileUtils.deleteQuietly(new File(oldFileName));
+				}else {
+					boolean bool = FileUtils.deleteQuietly(new File("/home/"+oldFileName));
+				}
+			}
+			// Base64解码
+			byte[] b = decoder.decodeBuffer(img);
+
+			for (int i = 0; i < b.length; ++i) {
+				if (b[i] < 0) {// 调整异常数据
+					b[i] += 256;
+				}
+			}
+			// 生成jpeg图片
+			String fileNamet = "temp/"+fileName+"."+type;// 新生成的图片;
+			String imgFilePath = path + fileNamet ;
+			File fl = new File(imgFilePath);
+			if (!fl.getParentFile().exists()) {
+				fl.getParentFile().mkdirs();
+			}
+			if (!fl.exists()) {
+				fl.createNewFile();
+			}
+			OutputStream out = new FileOutputStream(imgFilePath);
+			out.write(b);
+			out.flush();
+			out.close();
+			return path+fileName;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "";
+		}
+	}
 
 	public static void main(String[] args) {
 		/*	UploadImgUtil u = new UploadImgUtil();

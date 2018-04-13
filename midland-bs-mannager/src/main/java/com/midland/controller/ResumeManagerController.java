@@ -218,14 +218,8 @@ public class ResumeManagerController extends BaseFilter {
     @RequestMapping("/batDownload")
     @ResponseBody
     public void batDownload(String filePaths, String fileNames, HttpServletRequest request, HttpServletResponse response) {
-        /*if(StringUtils.isEmpty(filePaths)) {
-			filePaths = "D:/upload/1.txt|D:/upload/2.doc|D:/upload/3.xls";
-		}
-		if(StringUtils.isEmpty(fileNames)){
-			fileNames = "1.txt|2.doc|3.xls";
-		}*/
+
         String zipRoot = "/home/upload/work/";
-        zipRoot="E:/";
         String tmpFileName = "work.zip";
         byte[] buffer = new byte[1024];
         String strZipPath = (zipRoot + tmpFileName);
@@ -233,29 +227,43 @@ public class ResumeManagerController extends BaseFilter {
         if (!file.exists()){
             file.mkdirs();
         }
+        ZipOutputStream out=null;
         try {
-            ZipOutputStream out = new ZipOutputStream(new FileOutputStream(strZipPath));
+            out = new ZipOutputStream(new FileOutputStream(strZipPath));
             String[] files = filePaths.split(",", -1);
             String[] names = fileNames.split(",", -1);
             // 下载的文件集合
             for (int i = 0; i < files.length; i++) {
-                FileInputStream fis = new FileInputStream((files[i]));
-                out.putNextEntry(new ZipEntry(names[i]));
-                //设置压缩文件内的字符编码，不然会变成乱码
-                out.setEncoding("GBK");
-                int len;
-                // 读入需要下载的文件的内容，打包到zip文件
-                while ((len = fis.read(buffer)) > 0) {
-                    out.write(buffer, 0, len);
+                try {
+                    FileInputStream fis = new FileInputStream((files[i]));
+                    out.putNextEntry(new ZipEntry(names[i]));
+                    //设置压缩文件内的字符编码，不然会变成乱码
+                    out.setEncoding("GBK");
+                    int len;
+                    // 读入需要下载的文件的内容，打包到zip文件
+                    while ((len = fis.read(buffer)) > 0) {
+                        out.write(buffer, 0, len);
+                    }
+                    out.closeEntry();
+                    fis.close();
+                } catch (IOException e) {
+                    log.error("下载简历失败",e);
                 }
-                out.closeEntry();
-                fis.close();
             }
-            out.close();
+
             saveAs(zipRoot + tmpFileName, tmpFileName, response);
 
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            if (out !=null){
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
         }
     }
 

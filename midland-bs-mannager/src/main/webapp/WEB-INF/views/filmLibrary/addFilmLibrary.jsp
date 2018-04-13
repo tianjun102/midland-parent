@@ -134,6 +134,7 @@
 
             <li><span>楼盘名称：</span>
                 <input type="text" name="housesName" id="housesName" onblur="notEmpty('housesName','housesName','')"/>
+                <label style="color: red" class="_star ">*</label>
             </li>
 
             <li><span>视频上传：</span>

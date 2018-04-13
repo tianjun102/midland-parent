@@ -217,6 +217,9 @@ InitInput = {
 		var time =/^(20|21|22|23|[0-1]\d):[0-5]\d:[0-5]\d$/;
         var regExp = new RegExp(time);
         var value=$('#'+id).val();
+        if (value==null||value==""){
+        	return true;
+		}
         if(!regExp.test(value)){
             layer.tips(msg, "input[name='"+name+"']", {tips: 1});
             return false;
