@@ -41,7 +41,7 @@
                         <td>${item.cityName}</td>
 						<td>
                             <a target="contentF" title="回复" class="reply_img" onclick="to_edit(${item.id })"></a>
-                            <a target="contentF" title="下载简历" class="updown_img" href="${ctx}/rest/resumeManager/fileDownload"></a>
+                            <a target="contentF" title="下载简历" class="down_img1" onclick="download1('${item.enclosureUrl}')" ></a>
                             <c:if test="${item.isDelete==0}">
                                 <a target="contentF" title="删除" onclick="delete1(${item.id },1)" class="delete_img"></a>
                             </c:if>
@@ -69,6 +69,10 @@
 </c:if>
 
 <script type="text/javascript">
+
+    function download1(filePath) {
+        window.location.href ="${ctx}/rest/resumeManager/fileDownload?filePath="+filePath;
+    }
 
     function delete1(id,isDelete){
         var msg = "您确定要删除当前数据吗？";

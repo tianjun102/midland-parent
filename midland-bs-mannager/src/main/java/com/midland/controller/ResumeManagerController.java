@@ -196,7 +196,7 @@ public class ResumeManagerController extends BaseFilter {
     public void fileDownload(String filePath, HttpServletRequest request,
                              HttpServletResponse response) {
         try {
-            File file = new File("D://bg_new.jpg");
+            File file = new File(filePath);
             if (!file.exists()) {
                 System.out.println("文件不存在");
             }
@@ -224,10 +224,15 @@ public class ResumeManagerController extends BaseFilter {
 		if(StringUtils.isEmpty(fileNames)){
 			fileNames = "1.txt|2.doc|3.xls";
 		}*/
-
+        String zipRoot = "/home/upload/work/";
+        zipRoot="E:/";
         String tmpFileName = "work.zip";
         byte[] buffer = new byte[1024];
-        String strZipPath = ("/home/upload/work/" + tmpFileName);
+        String strZipPath = (zipRoot + tmpFileName);
+        File file = new File(zipRoot);
+        if (!file.exists()){
+            file.mkdirs();
+        }
         try {
             ZipOutputStream out = new ZipOutputStream(new FileOutputStream(strZipPath));
             String[] files = filePaths.split(",", -1);
@@ -247,7 +252,7 @@ public class ResumeManagerController extends BaseFilter {
                 fis.close();
             }
             out.close();
-            saveAs("/home/upload/work/" + tmpFileName, tmpFileName, response);
+            saveAs(zipRoot + tmpFileName, tmpFileName, response);
 
         } catch (Exception e) {
             e.printStackTrace();

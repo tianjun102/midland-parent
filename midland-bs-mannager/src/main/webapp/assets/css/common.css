@@ -554,6 +554,9 @@ input.date {
 .table-add tr td a.updown_img {
 	background: url(../img/updown_default.png) no-repeat center center;
 }
+.table-add tr td a.down_img1 {
+	background: url(../img/down.jpg) no-repeat center center;
+}
 .table-add tr td a.updown_img:hover {
 	background: url(../img/updown_active.png) no-repeat center center;
 }
