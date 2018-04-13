@@ -53,6 +53,7 @@
                 <li><span>城市：</span>
                     <select onchange="setCityName();" name="cityId" id="cityId"
                             <c:if test="${empty isSuper}">disabled="disabled"</c:if>>
+                        <option value="">请选择</option>
                         <c:forEach items="${cityList}" var="city">
                             <c:if test="${empty isSuper}">
                                 <option selected="selected" value="${cityId}">${cityName}</option>
@@ -60,9 +61,11 @@
                             <option value="${city.id}">${city.name}</option>
                         </c:forEach>
                     </select>
+                    <span class="_star ">*</span>
                 </li>
                 <li><span>平台：</span>
                     <select name="source" id="source">
+                        <option value="">请选择</option>
                         <option value="0">网站</option>
                         <option value="1">微站</option>
                     </select>
@@ -82,25 +85,6 @@
                     </select>
                     <span class="_star ">*</span>
                 </li>
-                <%--            <li><span>标题：</span>
-                                                    <input id="title" name="title" maxlength="255" type="text" value="" onblur="notEmpty('title','title','标题不能为空！');">
-                                                    <span class = "_star ">*</span>
-                                                </li>
-                                               <li><span>描述：</span>
-                                                    <input id="description" name="description" maxlength="255" type="text" value="" onblur="notEmpty('description','description','描述不能为空！');">
-                                                    <span class = "_star ">*</span>
-                                                </li>
-                                                <li><span>均价：</span>
-                                                    <input type="text" name="price" id="price"  value="" onblur="notEmpty('price','price','均价不能为空！');" onfocus="InitInput.setNumber(this,9,2,2);"/>
-                                                    <span class = "_star ">*</span>
-                                                </li>
-                                                <li><span>地址：</span>
-                                                    <input type="text" name="address" id="address" value="" onblur="notEmpty('address','address','地址不能为空！');"/>
-                                                    <span class = "_star ">*</span>
-                                                </li>
-                                                <li><span>地铁描述：</span>
-                                                    <input type="text" name="subwayDistance" id="subwayDistance" value=""/>
-                                                </li>--%>
                 <li><span>图片：</span>
                     <div style="float: left;">
                         <input type="hidden" name="imgUrl" id="imgUrl" value="${item.iconImg}">
@@ -222,36 +206,36 @@
 
 
     function subumintSpecialPage() {
-        if (!(notEmpty('modeName', 'modeName', '模块名称不能为空！') && checkUrl('linkUrl', 'linkUrl', '链接格式不正确！') && checkUrl('detailsUrl', 'detailsUrl', '链接格式不正确！'))) {
-            return;
-        }
-        var data = $("#formId").serialize();
-        $.ajax({
-            type: "post",
-            url: "${ctx}/rest/specialPage/add",
-            async: false, // 此处必须同步
-            dataType: "json",
-            data: data,
-            success: function (data) {
-                if (data.state == "0") {
-                    layer.msg("保存成功！", {icon: 1});
-                    setTimeout(function () {
-                        parent.layer.closeAll();
-                        parent.$("#inquery").click();
-                    }, 2000);
-                } else {
-                    layer.msg("新增失败！", {icon: 2});
-                }
-            },
-            error: function (data) {
-                if (data.responseText != null) {
-                    layer.msg(data.responseText, {icon: 2});
-                } else {
-                    layer.msg("保存失败！", {icon: 2});
-                }
-            }
+        if (checkSelect('cityId|source', '请选择城市|请选择平台') && (notEmpty('modeName', 'modeName', '模块名称不能为空！') && checkUrl('linkUrl', 'linkUrl', '链接格式不正确！') && checkUrl('detailsUrl', 'detailsUrl', '链接格式不正确！'))) {
 
-        });
+            var data = $("#formId").serialize();
+            $.ajax({
+                type: "post",
+                url: "${ctx}/rest/specialPage/add",
+                async: false, // 此处必须同步
+                dataType: "json",
+                data: data,
+                success: function (data) {
+                    if (data.state == "0") {
+                        layer.msg("保存成功！", {icon: 1});
+                        setTimeout(function () {
+                            parent.layer.closeAll();
+                            parent.$("#inquery").click();
+                        }, 2000);
+                    } else {
+                        layer.msg("新增失败！", {icon: 2});
+                    }
+                },
+                error: function (data) {
+                    if (data.responseText != null) {
+                        layer.msg(data.responseText, {icon: 2});
+                    } else {
+                        layer.msg("保存失败！", {icon: 2});
+                    }
+                }
+
+            });
+        }
 
     }
 
@@ -282,7 +266,7 @@
             'onUploadSuccess': function (file, data, response) {
                 console.log(data);
                 $("#imgUrl").attr("value", data);
-                $("#iconImg1").attr("src",data);
+                $("#iconImg1").attr("src", data);
             },
             'onQueueComplete': function (queueData) {
                 if (queueData.uploadsSuccessful < 1) {

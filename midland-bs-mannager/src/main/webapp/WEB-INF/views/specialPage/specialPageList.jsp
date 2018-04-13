@@ -42,8 +42,8 @@
 						<td>${item.modeName}</td>
 						<td>${item.cityName}</td>
 						<td>
-                            <a class="up_img" title="上移" target="contentF" onclick="sort(${item.id },${item.orderBy},1)"></a>
-                            <a class="down_img" title="下移" target="contentF" onclick="sort(${item.id },${item.orderBy},2)"></a>
+                            <a class="up_img" title="上移" target="contentF" onclick="sort(${item.id },${item.orderBy},2)"></a>
+                            <a class="down_img" title="下移" target="contentF" onclick="sort(${item.id },${item.orderBy},1)"></a>
                             <c:if test="${item.isDelete==0}">
                             <a class="edit_img" title="编辑" target="contentF" onclick="to_edit(${item.id})"></a>
                             </c:if>
@@ -195,12 +195,13 @@
 
     //排序
     function sort(id,orderById,sort) {
+        var data = $("#searchForm").serialize();
         $.ajax({
             type: "post",
             url: "${ctx}/rest/specialPage/sort?sort="+sort+"&orderBy="+orderById+"&id="+id,
             async: false, // 此处必须同步
             dataType: "json",
-
+            data:data,
             success: function (data) {
                 if (data.state==0){
                     $('#searchForm').submit();
