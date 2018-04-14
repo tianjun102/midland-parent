@@ -53,7 +53,8 @@
                              onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'time2\')}'})"
                              name="startTime" value="${item.startTime}"/> <em class="gang">-</em><input class="Wdate half"
                             onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'time1\')}'})"
-                            id="time2" name="endTime" value="${item.endTime}"/></li>
+                            id="time2" name="endTime" value="${item.endTime}"/>
+                    </li>
                     <li>
                         <input class="public_btn bg1" type="submit" name="inquery" id="inquery" value="查询"/>
                     </li>

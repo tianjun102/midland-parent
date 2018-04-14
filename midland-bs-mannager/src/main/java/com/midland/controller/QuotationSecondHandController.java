@@ -230,6 +230,7 @@ public class QuotationSecondHandController extends BaseFilter {
         Map<String, Object> map = new HashMap<>();
         try {
             log.debug("addQuotationSecondHand {}", quotationSecondHand);
+            quotationSecondHand.setUpdateTime(MidlandHelper.getCurrentTime());
             quotationSecondHandServiceImpl.insertQuotationSecondHand(quotationSecondHand);
             map.put("state", 0);
         } catch (Exception e) {
@@ -293,6 +294,7 @@ public class QuotationSecondHandController extends BaseFilter {
         Map<String, Object> map = new HashMap<>();
         try {
             log.debug("updateQuotationSecondHandById  {}", quotationSecondHand);
+            quotationSecondHand.setUpdateTime(MidlandHelper.getCurrentTime());
             quotationSecondHandServiceImpl.updateQuotationSecondHandById(quotationSecondHand);
             map.put("state", 0);
         } catch (Exception e) {

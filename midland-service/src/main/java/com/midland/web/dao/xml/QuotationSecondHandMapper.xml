@@ -186,8 +186,6 @@
                 <if test="s.dealAvgPrice != null">
                     deal_avg_price,
                 </if>
-
-
             </trim>
             values
             <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -280,7 +278,7 @@
             <if test="sliceName != null">
                 slice_name,
             </if>
-            <if test="s.dealAvgPrice != null">
+            <if test="dealAvgPrice != null">
                 deal_avg_price,
             </if>
         </trim>
@@ -326,8 +324,8 @@
                 #{sliceName,jdbcType=VARCHAR},
             </if>
 
-            <if test="s.dealAvgPrice != null">
-                #{s.dealAvgPrice,jdbcType=VARCHAR},
+            <if test="dealAvgPrice != null">
+                #{dealAvgPrice,jdbcType=VARCHAR},
             </if>
 
         </trim>

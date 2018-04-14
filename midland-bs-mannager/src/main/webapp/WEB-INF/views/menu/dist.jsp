@@ -132,7 +132,8 @@
                 dataType: "json",
                 data: "",
                 success: function (data) {
-                    $("#districts").html("<option value='' >全市</option>");
+                    $("#districts").html("<option value='' >请选择</option>");
+                    $("#districts").append("<option value='0' >全市</option>");
                     data.result.forEach(function (list) {
                         $("#districts").append(
                             "<option value=" + list.id + " >"
