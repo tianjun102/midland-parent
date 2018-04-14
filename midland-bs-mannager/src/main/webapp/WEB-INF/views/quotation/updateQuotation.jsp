@@ -30,19 +30,19 @@
             </li>
             <%@include file="../menu/sheet_required.jsp" %>
             <li class=""><span>成交套数：</span>
-               <input type="text" name="dealNum" id="dealNum" value="${item.dealNum}"/>
+               <input type="text" name="dealNum" id="dealNum" value="${item.dealNum}" onfocus="InitInput.setNumber(this,9,0,0)"/>
             </li>
             <li class=""><span>成交面积：</span>
-               <input type="text" name="dealAcreage" id="dealAcreage" value="${item.dealAcreage}"/>
+               <input type="text" name="dealAcreage" id="dealAcreage" value="${item.dealAcreage}" onfocus="InitInput.setNumber(this,9,2,2)"/>
             </li>
             <li class=""><span>成交均价：</span>
-               <input type="text" name="price" id="price" value="${item.price}"/>
+               <input type="text" name="price" id="price" value="${item.price}" onfocus="InitInput.setNumber(this,9,2,2)"/>
             </li>
             <li class=""><span>可售套数：</span>
-               <input type="text" name="soldNum" id="soldNum" value="${item.soldNum}"/>
+               <input type="text" name="soldNum" id="soldNum" value="${item.soldNum}" onfocus="InitInput.setNumber(this,9,0,0)"/>
             </li>
             <li class=""><span>可售面积：</span>
-               <input type="text" name="soldArea" id="soldArea" value="${item.soldArea}"/>
+               <input type="text" name="soldArea" id="soldArea" value="${item.soldArea}" onfocus="InitInput.setNumber(this,9,2,2)"/>
             </li>
             <li class="col-sm-12 col-md-12 col-lg-12">
                 <span></span>

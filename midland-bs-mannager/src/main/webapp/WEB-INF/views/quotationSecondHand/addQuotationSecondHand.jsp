@@ -29,13 +29,13 @@
             </li>
             <%@include file="../menu/sheet_required.jsp" %>
             <li class=""><span>成交套数：</span>
-                <input type="text" name="dealNum" id="dealNum" value="${item.dealNum}"/>
+                <input type="text" name="dealNum" id="dealNum" value="${item.dealNum}" onfocus="InitInput.setNumber(this,9,0,0)"/>
             </li>
             <li class=""><span>成交面积：</span>
-                <input type="text" name="dealAcreage" id="dealAcreage" value="${item.dealAcreage}"/>
+                <input type="text" name="dealAcreage" id="dealAcreage" value="${item.dealAcreage}" onfocus="InitInput.setNumber(this,9,2,2)"/>
             </li>
             <li class=""><span>成交金额：</span>
-                <input type="text" name="dealAvgPrice" id="dealAvgPrice" value="${item.dealAvgPrice}"/>
+                <input type="text" name="dealAvgPrice" id="dealAvgPrice" value="${item.dealAvgPrice}" onfocus="InitInput.setNumber(this,9,2,2)"/>
             </li>
             <li class="col-sm-12 col-md-12 col-lg-12">
                 <span></span>
