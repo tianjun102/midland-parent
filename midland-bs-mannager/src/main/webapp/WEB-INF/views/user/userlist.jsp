@@ -20,10 +20,10 @@
             <th style="width: 7%">用户昵称</th>
             <th style="width: 10%">手机号码</th>
             <th style="width: 15%">注册时间</th>
-            <th style="width: 6%">平台</th>
-            <th style="width: 6%">实名状态</th>
-            <th style="width: 7%">审核人</th>
-            <th style="width: 15%">审核时间</th>
+            <%--<th style="width: 6%">平台</th>--%>
+            <%--<th style="width: 6%">实名状态</th>--%>
+            <%--<th style="width: 7%">审核人</th>--%>
+            <%--<th style="width: 15%">审核时间</th>--%>
             <th style="width: 25%">操作</th>
         </tr>
         </thead>
@@ -38,15 +38,15 @@
                         <td>${cust.userCnName }</td>
                         <td>${cust.phone }</td>
                         <td>${cust.createTime }</td>
-                        <td><c:if test="${cust.source ==0 }">网站</c:if>
-                            <c:if test="${cust.source ==1 }">微站</c:if></td>
-                        <td><c:forEach items="${auditSatusList}" var="s">
-                            <c:if test="${cust.auditStatus eq s.id}">
-                                ${s.name}
-                            </c:if>
-                        </c:forEach></td>
-                        <td>${cust.auditName }</td>
-                        <td>${cust.auditTime }</td>
+                        <%--<td><c:if test="${cust.source ==0 }">网站</c:if>--%>
+                            <%--<c:if test="${cust.source ==1 }">微站</c:if></td>--%>
+                        <%--<td><c:forEach items="${auditSatusList}" var="s">--%>
+                            <%--<c:if test="${cust.auditStatus eq s.id}">--%>
+                                <%--${s.name}--%>
+                            <%--</c:if>--%>
+                        <%--</c:forEach></td>--%>
+                        <%--<td>${cust.auditName }</td>--%>
+                        <%--<td>${cust.auditTime }</td>--%>
                         <td>
                             <a onclick="userRole(${cust.id },'${cust.userCnName }')" target="contentF" class="uList_img"
                                title="角色列表"></a>

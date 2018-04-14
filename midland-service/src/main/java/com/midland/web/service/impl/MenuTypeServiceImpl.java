@@ -139,10 +139,12 @@ public class MenuTypeServiceImpl implements MenuTypeService {
         try {
             log.info("findMenuTypeList  {}", menuType);
             return menuTypeMapper.findMenuTypeList(menuType);
+
         } catch (Exception e) {
             log.error("findMenuTypeList  {}", menuType, e);
             throw e;
         }
+
     }
 
     @Override

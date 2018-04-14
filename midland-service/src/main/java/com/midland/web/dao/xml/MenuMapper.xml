@@ -250,9 +250,14 @@
         <if test="cityName != null">
             and city_name= #{cityName,jdbcType=VARCHAR}
         </if>
-        <if test="menuTypeId != null">
-            and menu_type_id= #{menuTypeId}
-        </if>
+        <choose>
+            <when test="menuTypeId != null">
+                and menu_type_id= #{menuTypeId}
+            </when>
+            <otherwise>
+                and menu_type_id != -1
+            </otherwise>
+        </choose>
         <if test="menuTypeName != null">
             and menu_type_name like CONCAT(CONCAT('%', #{menuTypeName}), '%')
         </if>
@@ -293,9 +298,14 @@
         <if test="cityName != null">
             and city_name= #{cityName,jdbcType=VARCHAR}
         </if>
-        <if test="menuTypeId != null">
-            and menu_type_id= #{menuTypeId}
-        </if>
+        <choose>
+            <when test="menuTypeId != null">
+                and menu_type_id= #{menuTypeId}
+            </when>
+            <otherwise>
+                and menu_type_id != -1
+            </otherwise>
+        </choose>
         <if test="menuTypeName != null">
             and menu_type_name like CONCAT(CONCAT('%', #{menuTypeName}), '%')
         </if>

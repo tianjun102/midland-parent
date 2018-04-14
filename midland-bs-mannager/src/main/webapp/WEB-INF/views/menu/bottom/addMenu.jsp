@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%@include file="../layout/tablib.jsp" %>
-<%@include file="../layout/source.jsp"%>
-<%@include file="../layout/zTree.jsp"%>
+<%@include file="../../layout/tablib.jsp" %>
+<%@include file="../../layout/source.jsp"%>
+<%@include file="../../layout/zTree.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,12 +11,14 @@
     <link rel="stylesheet" href="${ctx}/assets/css/ztree/css/demo.css">
     <link rel="stylesheet" href="${ctx }/assets/css/common.css">
     <link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css"/>
+
     <style type="text/css">
         .dropdown {
             width: 248px;!important;
 
         }
     </style>
+
     <script type="text/javascript">
         $(function () {
             $('#file_upload').uploadify({
@@ -82,29 +84,22 @@
     <form action="${ctx}/rest/menu/add" method="post" id="dataForm">
         <ul class="userinfo width-md row">
             <input type="hidden" name="id" id="id" value="${item.id}">
-            <%@include file="area_required.jsp" %>
-
+            <%@include file="../area_required.jsp" %>
+            <input type="hidden" name="menuTypeId" value="-1"/>
+            <input type="hidden" name="menuTypeName" value="底部菜单"/>
             <li style="display:flex;align-items:center">
                 <span>平台：</span>
-                <select name="source" id="source" class="dropdown" onchange="fieldChange()">
+                <select name="source" id="source" class="dropdown" onchange="fieldChange()" >
+                    <option value="">请选择</option>
                     <c:forEach items="${sources}" var="s">
                         <option value="${s.id}" <c:if test="${s.id == item.source}">selected="selected"</c:if>>
                                 ${s.name}
                         </option>
                     </c:forEach>
                 </select>
+                <label style="color: red" class = "_star " >*</label>
             </li>
 
-            <li style="display: none" id="menuTypeZtreeId"><span>类型：</span>
-                <input class="vipcate" id="menuTypeName" name="menuTypeName" onclick="showTree()" readonly="readonly"/>
-                <input name="menuTypeId" type="hidden"/><label style="color: red" class = "_star " >*</label>
-            </li>
-            <li  id="showDiv" style="display: none;padding-top: 0px; position:relative;" >
-                <div class="zTreeDemoBackground left" style  = "position:absolute;left: -268px; top: 29px;z-index: 998  "   onblur="test(event)">
-                    <ul id="categoryTree" class="ztree" style  = "width:250px; height: 140px!important;"></ul>
-                </div>
-                <img  src="${ctx}/assets/img/Closed_16px.png"  alt="关闭" style="vertical-align: top;position:absolute; left: -50px; top: 40px;z-index: 999" onclick="hideTree()">
-            </li>
             <li><span>菜单名：</span>
                 <input type="text" name="menuName" id="menuName" value="${item.menuName}" onblur="notEmpty('menuName','menuName','')"/>
                 <label style="color: red" class = "_star " >*</label>
@@ -131,23 +126,10 @@
 
 </section>
 <script type="text/javascript">
-    function fieldChange() {
-        var j = $("#source option:selected").val()
-        if (j == 0) {
-            $("#menuTypeId").val("")
-            $("#menuTypeName").val("")
-            $("#menuTypeZtreeId").css('display', 'none');
-        } else if (j == 1) {
-            $("#menuTypeId").val("")
-            $("#menuTypeName").val("")
-            $("#menuTypeZtreeId").css('display', 'block');
-
-        }
-    }
 
     //保存数据
     function updateData() {
-        if (!checkSelect('citys','请选择市级')||!notEmpty('menuName','menuName','')){
+        if (!checkSelect('citys|source','请选择市级|请选择平台')||!notEmpty('menuName','menuName','')){
             return;
         }
         var data = $("#dataForm").serialize();

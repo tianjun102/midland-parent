@@ -7,7 +7,6 @@ import com.midland.web.Contants.Contant;
 import com.midland.web.model.Menu;
 import com.midland.web.model.MenuType;
 import com.midland.web.model.user.User;
-import com.midland.web.service.JdbcService;
 import com.midland.web.service.MenuService;
 import com.midland.web.service.MenuTypeService;
 import com.midland.web.service.SettingService;
@@ -42,7 +41,7 @@ public class MenuController extends BaseFilter {
     private SettingService settingService;
 
     /**
-     *
+     *  菜单
      **/
     @RequestMapping("index")
     public String menuIndex(Menu menu, Model model, HttpServletRequest request) throws Exception {
@@ -60,6 +59,8 @@ public class MenuController extends BaseFilter {
         model.addAttribute("menuTypes",menuTypes);
         return "menu/menuIndex";
     }
+
+
 
     /**
      *
@@ -230,4 +231,83 @@ public class MenuController extends BaseFilter {
         }
         return map;
     }
+//===================================================================================================================
+    /**
+     * 底部菜单
+     */
+
+    @RequestMapping("/bottom/index")
+    public String botommMenuIndex(Menu menu, Model model, HttpServletRequest request) throws Exception {
+        settingService.getAllProvinceList(model);
+        List<ParamObject> sources = JsonMapReader.getMap("source");
+        model.addAttribute("sources", sources);
+        User user = MidlandHelper.getCurrentUser(request);
+        model.addAttribute("isSuper", user.getIsSuper());
+        List<ParamObject> obj = JsonMapReader.getMap("is_delete");
+        model.addAttribute("isDeletes", obj);
+        return "menu/bottom/index";
+    }
+
+    /**
+     * 底部菜单
+     */
+
+    @RequestMapping("bottom/to_add")
+    public String toAddBottomMenu(Menu menu, Model model, HttpServletRequest request) throws Exception {
+        settingService.getAllProvinceList(model);
+        List<ParamObject> sources = JsonMapReader.getMap("source");
+        model.addAttribute("sources", sources);
+        User user = MidlandHelper.getCurrentUser(request);
+        if (user.getIsSuper() == null) {
+            model.addAttribute("cityId", user.getCityId());
+            model.addAttribute("cityName", user.getCityName());
+        }
+        model.addAttribute("isSuper", user.getIsSuper());
+        String res = menuTypeServiceImpl.findRootMenuTypeTree(new MenuType());
+        model.addAttribute("menuTypes", res);
+        return "menu/bottom/addMenu";
+    }
+
+    /**
+     *
+     **/
+    @RequestMapping("bottom/to_update")
+    public String toUpdateBottomMenu(Integer id, Model model) throws Exception {
+        settingService.getAllProvinceList(model);
+
+        Menu result = menuServiceImpl.selectMenuById(id);
+        model.addAttribute("item", result);
+        List<ParamObject> sources = JsonMapReader.getMap("source");
+        model.addAttribute("sources", sources);
+        settingService.getAllProvinceList(model);
+        String res = menuTypeServiceImpl.findRootMenuTypeTree(new MenuType());
+        model.addAttribute("menuTypes", res);
+        return "menu/bottom/updateMenu";
+    }
+    @RequestMapping("bottom/list")
+    public String findBottomMenuList(Menu menu, Model model, HttpServletRequest request) {
+        try {
+            log.debug("findMenuList  {}", menu);
+            User user = MidlandHelper.getCurrentUser(request);
+            model.addAttribute("isSuper", user.getIsSuper());
+            if (!Contant.isSuper.equals(user.getIsSuper())) {//不是超级管理员，只能看属性城市的相关信息
+                menu.setCityId(user.getCityId());
+            }
+            MidlandHelper.doPage(request);
+            Page<Menu> result = (Page<Menu>) menuServiceImpl.findMenuList(menu);
+            Paginator paginator = result.getPaginator();
+            List<ParamObject> obj = JsonMapReader.getMap("is_delete");
+            model.addAttribute("isDeletes", obj);
+            List<ParamObject> sources = JsonMapReader.getMap("source");
+            model.addAttribute("sources", sources);
+            model.addAttribute("paginator", paginator);
+            model.addAttribute("items", result);
+        } catch (Exception e) {
+            log.error("findMenuList  {}", menu, e);
+            model.addAttribute("paginator", null);
+            model.addAttribute("items", null);
+        }
+        return "menu/bottom/menuList";
+    }
+
 }
