@@ -1,33 +1,35 @@
 package com.midland.web.filter;
 
-import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
-public class ReponseFilter implements HandlerInterceptor {
 
-    @Override
-    public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        httpServletResponse.setHeader("Access-Control-Allow-Origin", httpServletRequest.getHeader("Origin"));
-        httpServletResponse.setHeader("Access-Control-Allow-Credentials", "true");
-        httpServletResponse.setHeader("P3P", "CP=CAO PSA OUR");
-        if (httpServletRequest.getHeader("Access-Control-Request-Method") != null && "OPTIONS".equals(httpServletRequest.getMethod())) {
-            httpServletResponse.addHeader("Access-Control-Allow-Methods", "POST,GET,TRACE,OPTIONS");
-            httpServletResponse.addHeader("Access-Control-Allow-Headers", "Content-Type,Origin,Accept");
-            httpServletResponse.addHeader("Access-Control-Max-Age", "120");
-        }
-        return true;
-    }
+public class ReponseFilter implements Filter {
 
     @Override
-    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
+    public void init(FilterConfig filterConfig) throws ServletException {
 
     }
 
     @Override
-    public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS, DELETE");
+        response.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Headers", "DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type");
+        response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, client_id, uuid, Authorization");
+        response.setHeader("Access-Control-Allow-Credentials","true");
+        filterChain.doFilter(servletRequest, servletResponse);
+    }
+
+    @Override
+    public void destroy() {
 
     }
 }

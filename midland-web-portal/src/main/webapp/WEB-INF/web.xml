@@ -22,7 +22,7 @@
 		<listener-class>org.springframework.web.util.WebAppRootListener</listener-class>
 	</listener>
 	<!-- Spring -->
-
+	//====================================================================
 	<filter>
 		<filter-name>springSessionRepositoryFilter</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -34,6 +34,17 @@
 	<session-config>
         <session-timeout>30</session-timeout>
     </session-config>
+
+	//====================================================================
+	<filter>
+		<filter-name>cors</filter-name>
+		<filter-class>com.midland.web.filter.ReponseFilter</filter-class><!--你过滤器的包 -->
+	</filter>
+	<filter-mapping>
+		<filter-name>cors</filter-name>
+		<url-pattern>/*</url-pattern><!-- 你开放的接口前缀  -->
+	</filter-mapping>
+	//====================================================================
 	<filter>
 		<filter-name>sessionFilter</filter-name>
 		<filter-class>com.midland.web.filter.GetContextFilter</filter-class>
@@ -43,6 +54,7 @@
 		<filter-name>sessionFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	//====================================================================
 	<!-- 配置Spring字符编码过滤器 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
@@ -61,7 +73,7 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-
+	//====================================================================
 	<!-- Spring MVC 核心控制器 DispatcherServlet 配置 -->
 	<servlet>
 		<servlet-name>DispatcherServlet</servlet-name><!--在DispatcherServlet的初始化过程中，框架会在web应用的 WEB-INF文件夹下寻找名为[servlet-name]-servlet.xml 的配置文件，生成文件中定义的bean。-->

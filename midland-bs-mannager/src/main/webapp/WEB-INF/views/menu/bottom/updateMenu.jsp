@@ -17,70 +17,7 @@
 
         }
     </style>
-    <script type="text/javascript">
-        $(function () {
-            $('#file_upload').uploadify({
-                'swf': '${ctx }/assets/scripts/uploadify/uploadify.swf',
-                'uploader': '${ctx }/rest/upload/img',
-                'multi': false,// 是否支持多个文件上传
-                'buttonText': '上传文件',
-                'onUploadSuccess': function (file, data, response) {
-                    $("#iconImg").attr("value", data);
-                    $("#iconImg1").attr("src", data);
-                },
-                'onQueueComplete': function (queueData) {
-                    if (queueData.uploadsSuccessful < 1) {
-                        alert('文件上传失败');
-                    }
-                }
-            });
-            if (${item.source ==1}){
-                $("#menuTypeZtreeId").css('display', 'block');
-            }
 
-
-        })
-    </script>
-    <script type="text/javascript">
-
-        var setting = {
-            check: {
-                enable: true,
-                chkboxType: { "Y": "sp", "N": "sp" }
-
-
-            },
-            data: {
-                simpleData: {
-                    enable: true
-                }
-            },
-            callback: {
-                beforeClick: beforeClick
-            }
-        };
-        var catProNodes =[${menuTypes}];
-
-
-        $(document).ready(function(){
-            $.fn.zTree.init($("#categoryTree"), setting, catProNodes);
-        });
-
-        function beforeClick(treeId, treeNode, clickFlag) {
-            $("input[name='menuTypeId']").val(treeNode.id);
-            $("input[name='menuTypeName']").val(treeNode.name);
-            $("#showDiv").hide();
-        }
-
-        function showTree(event){
-            $("#showDiv").show();
-        }
-
-        function hideTree(event){
-            $("#showDiv").hide();
-        }
-
-    </script>
 </head>
 <body>
 <section class="content" style="border:none;">
@@ -107,15 +44,7 @@
             <li><span>链接：</span>
                 <input type="text" name="url" id="url" value="${item.url}" placeholder="相对路径"/>
             </li>
-            <li><span>图标：</span>
-                <div style="float: left;">
-                    <input type="hidden" name="iconImg" id="iconImg" value="${item.iconImg}">
 
-                    <img style="margin-bottom: 10px;max-width:80px;max-height:80px" id="iconImg1"
-                         src="${item.iconImg}">
-                    <input type="file" name="file_upload" id="file_upload"/>
-                </div>
-            </li>
             <li>
                 <span></span>
                 <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">更新</a>
