@@ -55,6 +55,28 @@
 </section>
 
 <script type="text/javascript">
+    $(function () {
+        if(${item.provinceId!=''&&item.provinceId!=null}){
+            $("#provinces").val('${item.provinceId}');
+            initProvince();
+            $("#citys").val('${item.cityId}');
+            if (${item.areaId !=null && item.areaId!=''}){
+                initCity();
+                $("#districts").val('${item.areaId}');
+            }
+            if (${item.areaId !=null && item.areaId!=''}){
+                initCity();
+                $("#districts").val('${item.areaId}');
+            }
+            initDistrict();
+            debugger;
+            if (${item.sliceId !=null && item.sliceId!='' && item.sliceId!='0'}){
+                $("#sheets").val('${item.sliceId}');
+            }
+
+        }
+    })
+
     //保存数据
     function updateData() {
         if (notEmpty('time1','dataTime','日期不能为空')&&checkSelect('districts','请选择区级')){

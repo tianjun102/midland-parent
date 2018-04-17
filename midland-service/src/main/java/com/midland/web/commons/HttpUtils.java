@@ -293,21 +293,5 @@ public class HttpUtils {
         return body;
     }
 
-    public static void main(String[] args) {
-        Map<String, String> map = new HashMap<String, String>();
-        Map<String, String> map1 = new HashMap<String, String>();
-        Map<String, Map> map2 = new HashMap<String, Map>();
-        Map<String, String> map3 = new HashMap<String, String>();
-        map1.put("idcard", "2721041119850428294227");
-        map1.put("beginDate", "272016-07-0127");
-        map1.put("endDate", "272016-07-3027");
-        map2.put("conditionJson", map1);
-        map3.put("params", map2.toString());
-
-
-        map.put("params", "{\"conditionJson\":{\"idcard\":\"2721041119850428294227\",\"beginDate\":\"272016-07-0127\",\"endDate\":\"272016-07-3027\"}}");
-        String a = post("http://218.18.9.171:8181/dingjian/api?dataCenter=dataSource_mldc&apiNumber=104_getDealreportInfoByIdCard", map3);
-        System.out.print(a);
-    }
 
 }

@@ -32,6 +32,7 @@
                 </li>
                 <li><span>城市：</span>
                     <select onchange="setCityName();" name="cityId" id="cityId">
+                        <option value="" >请选择</option>
                         <c:forEach items="${cityList}" var="city">
                             <option value="${city.id}">${city.name}</option>
                         </c:forEach>
@@ -137,9 +138,7 @@
 
     //保存数据
     function updateData() {
-        if (!checkSelect('type', '请选择招聘类型')
-        || !checkSelect('category', '请选择职位类别')
-        || !checkSelect('group','请选择工作分组') ) {
+        if (!checkSelect('type|cityId|category|group', '请选择招聘类型|请选择城市|请选择职位类别|请选择工作分组')) {
             return;
         }
         var data = $("#dataForm").serialize();

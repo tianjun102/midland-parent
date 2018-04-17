@@ -12,9 +12,9 @@
 
             <li class=""><span>省：</span> <!-- 省 -->
                 <p id="province" style="display: inline-block;height: 28px;">
-                    <input type="hidden"  name="provinceId">
-                    <input type="hidden" name="regionSn"> <input type="hidden"
-                                                                 name="provinceName">
+                    <input type="hidden"  name="provinceId" id="provinceId">
+                    <input type="hidden" name="regionSn">
+                    <input type="hidden"  name="provinceName" id="provinceName">
                     <!-- 第一次进页面加载省 -->
                     <select id="provinces" name="provinces" onchange="initProvince()"
                             style="height: 100%;width: 102px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" onblur="checkSelect('provinces','请选择省级')">
@@ -30,8 +30,8 @@
                 &nbsp;&nbsp;
                 <p id="city" style="display: inline-block;height: 28px;">
                     <span>市：</span>
-                    <input type="hidden" name="cityId">
-                    <input type="hidden" name="cityName">
+                    <input type="hidden" name="cityId" id="cityId">
+                    <input type="hidden" name="cityName"  id="cityName">
                     <select id="citys" name="citys" onchange="initCity()" style="height: 100%;width: 102px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" onblur="checkSelect('citys','请选择市级')">
                         <c:choose>
                             <c:when test="${not empty item.cityId}">
@@ -86,6 +86,10 @@
     function initProvince() {
         var addrId = $("#provinces option:selected").val();
         var addName = $("#provinces option:selected").text();
+        if (addrId==''||addrId=='undefined'||addrId==null){
+            addrId=$("#provinceId").val();
+            addName=$("#provinceName").val();
+        }
         $("#citys").html("<option value='' >请选择</option>");
         $("#districts").html("<option  value=''>请选择</option>");
         $("#sheets").html("<option  value=''>请选择</option>");

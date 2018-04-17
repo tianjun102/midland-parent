@@ -55,8 +55,7 @@
         function initProvince() {
             var addrId = $("#provinces option:selected").val();
             var addName = $("#provinces option:selected").text();
-            /*$("#districts").html("<option  >请选择</option>");*/
-debugger
+
             $("input[name=provinceId]").val(addrId);
             $("input[name=provinceName]").val(addName);
             $("#cityId").val("");

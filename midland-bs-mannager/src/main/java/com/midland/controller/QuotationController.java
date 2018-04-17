@@ -150,6 +150,7 @@ public class QuotationController extends BaseFilter {
     @RequestMapping("to_update")
     public String toUpdateQuotation(Integer id, Model model) throws Exception {
         Quotation result = quotationServiceImpl.selectQuotationById(id);
+        result.setProvinceName(StringUtils.trim(result.getProvinceName()));
         result.setDataTime(result.getDataTime() + "-01");
         List<ParamObject> paramObjects = JsonMapReader.getMap("quotation_type");
         Area province = settingService.getCityByCityId(result.getCityId());

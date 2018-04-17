@@ -17,6 +17,14 @@ public class Quotation {
      **/
     private Integer type;
     /**
+     * 省id
+     **/
+    private String provinceId;
+    /**
+     * 省名称
+     **/
+    private String provinceName;
+    /**
      *
      **/
     private String cityId;
@@ -99,6 +107,22 @@ public class Quotation {
      * 截至时间
      **/
     private String endTime;
+
+    public String getProvinceId() {
+        return provinceId;
+    }
+
+    public void setProvinceId(String provinceId) {
+        this.provinceId = provinceId;
+    }
+
+    public String getProvinceName() {
+        return provinceName;
+    }
+
+    public void setProvinceName(String provinceName) {
+        this.provinceName = provinceName;
+    }
 
     public Integer getPreNum() {
         return preNum;

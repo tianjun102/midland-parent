@@ -18,12 +18,14 @@
         <result column="area_name" property="areaName" jdbcType="VARCHAR"/>
         <result column="slice_name" property="sliceName" jdbcType="VARCHAR"/>
         <result column="deal_avg_price" property="dealAvgPrice" jdbcType="VARCHAR"/>
+        <result column="province_id" property="provinceId" jdbcType="VARCHAR"/>
+        <result column="province_name" property="provinceName" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,date_format(str_to_date(data_time,
         '%Y-%m'),'%Y-%m')data_time,type,city_id,area_id,slice_id,deal_num,deal_acreage,ring_ratio,DATE_FORMAT(update_time,'%Y-%m-%d
-        %H:%i:%s')update_time,is_delete,city_name,area_name,slice_name,deal_avg_price
+        %H:%i:%s')update_time,is_delete,city_name,area_name,slice_name,deal_avg_price,province_id,province_name
     </sql>
     <select id="selectQuotationSecondHandById" resultMap="BaseResultMap">
         select
@@ -187,6 +189,12 @@
                 <if test="s.dealAvgPrice != null">
                     deal_avg_price,
                 </if>
+                <if test="s.provinceId != null">
+                    province_id,
+                </if>
+                <if test="s.provinceName != null">
+                    province_name,
+                </if>
             </trim>
             values
             <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -232,7 +240,12 @@
                 <if test="s.dealAvgPrice != null">
                     #{s.dealAvgPrice,jdbcType=VARCHAR},
                 </if>
-
+                <if test="s.provinceId != null">
+                    #{s.provinceId,jdbcType=VARCHAR},
+                </if>
+                <if test="s.provinceName != null">
+                    #{s.provinceName,jdbcType=VARCHAR},
+                </if>
 
             </trim>
         </foreach>
@@ -282,6 +295,12 @@
             <if test="dealAvgPrice != null">
                 deal_avg_price,
             </if>
+            <if test="provinceId != null">
+                province_id,
+            </if>
+            <if test="provinceName != null">
+                province_name,
+            </if>
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -328,7 +347,12 @@
             <if test="dealAvgPrice != null">
                 #{dealAvgPrice,jdbcType=VARCHAR},
             </if>
-
+            <if test="provinceId != null">
+                #{provinceId,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceName != null">
+                #{provinceName,jdbcType=VARCHAR},
+            </if>
         </trim>
     </insert>
 
@@ -374,6 +398,12 @@
         </if>
         <if test="dealAvgPrice != null">
             deal_avg_price=#{dealAvgPrice,jdbcType=VARCHAR},
+        </if>
+        <if test="provinceId != null">
+            province_id=#{provinceId,jdbcType=VARCHAR},
+        </if>
+        <if test="provinceName != null">
+            province_name=#{provinceName,jdbcType=VARCHAR},
         </if>
     </sql>
 
@@ -429,6 +459,12 @@
 
         <if test="dealAvgPrice != null">
             and deal_avg_price=#{dealAvgPrice,jdbcType=VARCHAR}
+        </if>
+        <if test="provinceId != null">
+            and province_id=#{provinceId,jdbcType=VARCHAR}
+        </if>
+        <if test="provinceName != null">
+            and province_name=#{provinceName,jdbcType=VARCHAR}
         </if>
     </sql>
 
