@@ -164,7 +164,7 @@
             title: ['修改'],
             shade: 0.3,
             area: ['500px', '350px'],
-            content: ['${ctx}/rest/menu/to_update?id=' + id, 'no']
+            content: ['${ctx}/rest/menu/bottom/to_update?id=' + id, 'no']
         });
     }
 

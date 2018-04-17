@@ -173,7 +173,6 @@
 <script type="text/javascript">
     $(function () {
         var test = window.location.href;
-
         //设置城市选择的cookie
         var cityId = getCookie("popuolarCityId",test);
         var cityName = getCookie("popuolarCityName",test);

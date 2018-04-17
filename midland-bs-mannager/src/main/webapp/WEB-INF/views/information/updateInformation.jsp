@@ -110,14 +110,14 @@
                 <li>
                     <span style = "float:left;">城市：</span>
                     <input type="hidden" name="cityName" id="cityName" value="">
-                    <select onchange="setCityName()" name="cityId" id="cityId" style="height: 28px;width: 274px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if> >
+                    <select onchange="setCityName()" name="cityId" id="cityId" style="height: 28px;width: 280px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;" <c:if test="${empty isSuper}">disabled="disabled"</c:if> >
                         <c:forEach items="${cityList}" var="city">
                             <option <c:if test="${item.cityId == city.id}"> selected ='selected' </c:if>  value="${city.id}">${city.name}</option>
                         </c:forEach>
                     </select>
                 </li>
                 <li><span>平台：</span>
-                    <select name="source" id="source" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                    <select name="source" id="source" style="height: 28px;width: 280px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;padding-left:5px;">
                         <option <c:if test="${item.source==0}">selected="selected"</c:if> value="0" >网站</option>
                         <option <c:if test="${item.source==1}">selected="selected"</c:if> value="1" >微站</option>
                     </select>

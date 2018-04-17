@@ -119,6 +119,21 @@ public class SettingController extends BaseFilter {
         model.addAttribute("isSuper", user.getIsSuper());
         return "setting/popular/addPopular";
     }
+    @RequestMapping(value = "queryProvinceByCityId", method = {RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public Object queryProvinceByCityId(Model model, HttpServletRequest request,String cityId){
+        Map map = new HashMap();
+        try {
+            Area list = settingService.queryProvinceByCityId(cityId);
+            map.put("state",0);
+            map.put("data",list);
+        } catch (Exception e) {
+            logger.error("queryProvinceByCityId",e);
+            map.put("state",-1);
+        }
+        return map;
+    }
+
 
 
     @RequestMapping(value = "seleAddress", method = {RequestMethod.GET, RequestMethod.POST})
@@ -217,6 +232,8 @@ public class SettingController extends BaseFilter {
             model.addAttribute("cityId", user.getCityId());
             model.addAttribute("cityName", user.getCityName());
         }
+        model.addAttribute("provinceId", popular.getProvinceId());
+        model.addAttribute("provinceName", popular.getProvinceName());
         model.addAttribute("isSuper", user.getIsSuper());
         return "setting/popular/editPopular";
     }

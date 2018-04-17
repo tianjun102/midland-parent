@@ -126,7 +126,7 @@
                 <span class = "_star ">*</span>
             </li>
 
-            <li><span>分类：</span><input style="width: 250px!important;" class="vipcate" id="showCateName" name="showCateName" onclick="showTree()" readonly="readonly"/>
+            <li><span>分类：</span><input style="width: 250px!important;" type="text" class="vipcate" id="showCateName" name="showCateName" onclick="showTree()" readonly="readonly"/>
                 <input name="cateName" id="cateName" type="hidden"/>
                 <input name="cateId" id="cateId" type="hidden"/><label style="color: red" class = "_star " >*</label>
 

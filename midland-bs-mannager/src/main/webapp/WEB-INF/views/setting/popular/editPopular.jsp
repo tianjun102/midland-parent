@@ -169,8 +169,8 @@
             </li>
             <li><span>类型：</span><input class="vipcate" id="cateName" name="cateName" value="${item.cateName}"
                                        onclick="showTree()" readonly="readonly"/>
-                <input name="cateId" value="${item.cateId}" type="hidden"/><label style="color: red"
-                                                                                  class="_star ">*</label>
+                <input name="cateId" value="${item.cateId}" type="hidden"/>
+                <span class="_star">*</span>
 
             </li>
             <li id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;">
@@ -204,6 +204,15 @@
 </section>
 <script type="text/javascript">
     $(function () {
+        if(${item.provinceId!=''&&item.provinceId!=nul}){
+            $("#provinces").val('${item.provinceId}');
+            $("#provinceId").val('${item.provinceId}');
+            $("#provinceName").val('${item.provinceName}');
+            initProvince();
+            debugger;
+            $("#citys").val('${item.cityId}');
+        }
+
         if (${item.menuId==4}|| ${item.menuId==5}) {
             if (${item.sellRent==0}) {
                 $("#radio1").attr('checked', 'true');
@@ -255,46 +264,6 @@
     //取消
     function closeWin() {
         parent.layer.closeAll();
-    }
-
-    //省级赋值
-    function initProvince() {
-        var addrId = $("#provinces option:selected").val();
-        var addName = $("#provinces option:selected").text();
-        $("#districts").html("<option  >请选择</option>");
-        /*if ("请选择" == addName) {
-            //下级改变成请选择
-            $("#citys option:selected").text(addName);
-            $("#districts option:selected").text(addName);
-            $("#citys").html("<option  >请选择</option>");
-
-            $("input[name=provinceId]").val("");
-            $("input[name=provinceName]").val("");
-            $("input[name='cityId']").val("");
-            $("input[name='cityName']").val("");
-            $("input[name='distId']").val("");
-            $("input[name='distName']").val("");
-            return;
-        }*/
-        $("input[name=provinceId]").val(addrId);
-        $("input[name=provinceName]").val(addName);
-
-
-        $.ajax({
-            type: "post",
-            url: "${ctx}/rest/setting/seleAddress?flag=city&id=" + addrId,
-            async: false, // 此处必须同步
-            dataType: "json",
-            data: "",
-            success: function (data) {
-                $("#citys").html("<option  >请选择</option>");
-
-                data.result.forEach(function (list) {
-                    $("#citys").append(
-                        "<option value=" + list.id + " >" + list.name + "</option>");
-                })
-            }
-        });
     }
 
 
