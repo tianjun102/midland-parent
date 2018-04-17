@@ -56,6 +56,7 @@
             and is_delete=0
         </if>
         <include refid="select_option"/>
+        ORDER BY data_time desc
     </select>
     <select id="getQuotationSecondHandByDate" parameterType="com.midland.web.model.QuotationSecondHand"
             resultMap="BaseResultMap">

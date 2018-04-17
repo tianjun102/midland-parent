@@ -14,9 +14,9 @@
 
 <li style="display:flex;align-items:center"><span>省：</span> <!-- 省 -->
     <label></label>
-    <input type="hidden" name="provinceId">
+    <input type="hidden" name="provinceId" id="provinceId">
     <input type="hidden" name="regionSn">
-    <input type="hidden"  name="provinceName">
+    <input type="hidden"  name="provinceName" id="provinceName">
     <!-- 第一次进页面加载省 -->
     <select id="provinces" onchange="initProvince()" style="height: 28px;width: 105px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;"  >
         <option>请选择</option>
@@ -57,8 +57,8 @@
             var addName = $("#provinces option:selected").text();
             /*$("#districts").html("<option  >请选择</option>");*/
 
-            /*$("input[name=provinceId]").val(addrId);
-            $("input[name=provinceName]").val(addName);*/
+            $("input[name=provinceId]").val(addrId);
+            $("input[name=provinceName]").val(addName);
             $("#cityId").val("");
             $("#cityName").val("");
             if(addrId==null||addrId==""){

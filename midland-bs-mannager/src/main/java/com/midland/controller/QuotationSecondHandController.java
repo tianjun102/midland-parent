@@ -88,109 +88,134 @@ public class QuotationSecondHandController extends BaseFilter {
      **/
     @RequestMapping("toolsTip")
     public String toolsTip(QuotationSecondHand obj, String areaId, String areaName, String url, String showType, Model model) throws Exception {
-        String date = MidlandHelper.getCurrentTime();
-        String startTime = MidlandHelper.getFormatyyMMToMonth(date, -12);
-        if (StringUtils.isEmpty(areaId) && StringUtils.isEmpty(areaName)) {
-            /**
-             * 如果没有选择区域,默认为全市
-             */
-            obj.setAreaId("0");
-        }
-        if (StringUtils.isEmpty(obj.getCityId())) {
-            /**
-             * 没有选择城市,默认为当前用户的城市
-             */
-            obj.setCityId("085");
-        }
-        if (obj.getType() == null) {
-            /**
-             * 没有选择类型,默认为住宅:  0商业;1住宅;2其他;3办公
-             */
-            obj.setType(1);
-        }
-        if (obj.getStartTime() == null) {
-            obj.setStartTime(MidlandHelper.getFormatyyMMToMonth(date, -13));
-        }
-        if (obj.getEndTime() == null) {
-            obj.setEndTime(MidlandHelper.getCurrentTime());
-        }
-        List<String> month = new ArrayList<>();
-        List<Object> numRatioList = new ArrayList<>();
-        List<Object> acreageRatioList = new ArrayList<>();
-        List<Object> numList = new ArrayList<>();
-        List<Object> acreageList = new ArrayList<>();
-        final double[] listMax = {0};
-        double listMin = 0;
-        final double[] ratioMax = {0};
-        final double[] ratioMin = {0};
-        List<QuotationSecondHand> listTemp = quotationSecondHandServiceImpl.findQuotationSecondHandList(obj);
+        try {
+            String date = MidlandHelper.getCurrentTime();
+            String startTime = MidlandHelper.getFormatyyMMToMonth(date, -12);
+            if (StringUtils.isEmpty(areaId) && StringUtils.isEmpty(areaName)) {
+                /**
+                 * 如果没有选择区域,默认为全市
+                 */
+                obj.setAreaId("0");
+            }
+            if (StringUtils.isEmpty(obj.getCityId())) {
+                /**
+                 * 没有选择城市,默认为当前用户的城市
+                 */
+                obj.setCityId("085");
+            }
+            if (obj.getType() == null) {
+                /**
+                 * 没有选择类型,默认为住宅:  0商业;1住宅;2其他;3办公
+                 */
+                obj.setType(1);
+            }
+            if (obj.getStartTime() == null) {
+                obj.setStartTime(MidlandHelper.getFormatyyMMToMonth(date, -12));
+            }
+            if (obj.getEndTime() == null) {
+                obj.setEndTime(MidlandHelper.getCurrentTime());
+            }
+            List<String> month = new ArrayList<>();
+            List<Object> numRatioList = new ArrayList<>();
+            List<Object> acreageRatioList = new ArrayList<>();
+            List<Object> numList = new ArrayList<>();
+            List<Object> acreageList = new ArrayList<>();
+            final double[] listMax = {0};
+            double listMin = 0;
+            final double[] ratioMax = {0};
+            final double[] ratioMin = {0};
+            List<QuotationSecondHand> listTemp = quotationSecondHandServiceImpl.findQuotationSecondHandList(obj);
 
-        /**
-         * jdk 1.8 lamada表达式,stream ,filter,查询12个月前的数据到当前月的数据
-         */
-        List<QuotationSecondHand> list = listTemp.stream().filter(e -> {
-            return e.getDataTime().compareTo(startTime) >= 0;
-        }).collect(Collectors.toList());
+            List<String> time = MidlandHelper.getBettenTime(obj.getStartTime(),obj.getEndTime());
 
-        list.forEach(e -> {
-            month.add(e.getDataTime());
-            final QuotationSecondHand[] res = {null};
-            listTemp.forEach(e1 -> {
-                if (e.getDataTime().equals(MidlandHelper.getFormatyyMMToMonth(e1.getDataTime(), +1))) {
-                    res[0] = e1;
+            /**
+             * jdk 1.8 lamada表达式,stream ,filter,查询12个月前的数据到当前月的数据
+             */
+            List<QuotationSecondHand> list = listTemp.stream().filter(e -> {
+                return e.getDataTime().compareTo(startTime) >= 0;
+            }).collect(Collectors.toList());
+            List<String> timelist= new ArrayList<>();
+            list.forEach(e->{
+                timelist.add(e.getDataTime());
+            });
+            time.forEach(e->{
+                if (!timelist.contains(e)){
+                    QuotationSecondHand q=new QuotationSecondHand();
+                    q.setDataTime(e);
+                    q.setDealNum(0);
+                    q.setDealAcreage("0");
+                    list.add(q) ;
                 }
             });
-            if ("0".equals(showType)) {
-                Double preNum = null;
-                if (res[0] != null && res[0].getDealNum() != null) {
-                    preNum = Double.valueOf(res[0].getDealNum());
-                }
-                numList.add(e.getDealNum());
-                Double ratio = QuotationUtil.getRatio(Double.valueOf(e.getDealNum()), preNum);
 
-                numRatioList.add(ratio);
-                listMax[0] = QuotationUtil.getMax(listMax[0], e.getDealNum());
-                ratioMax[0] = QuotationUtil.getMax(ratioMax[0], ratio);
-                ratioMin[0] = QuotationUtil.getMin(ratioMin[0], ratio);
-            } else {
-                Double preAcreage = null;
-                if (res[0] != null && res[0].getDealAcreage() != null) {
-                    preAcreage = Double.valueOf(res[0].getDealAcreage());
+            list.stream().sorted((s1,s2)->{
+                return s1.getDataTime().compareTo(s2.getDataTime());
+            }).forEach(e -> {
+                month.add(e.getDataTime());
+                final QuotationSecondHand[] res = {null};
+                listTemp.forEach(e1 -> {
+                    if (e.getDataTime().equals(MidlandHelper.getFormatyyMMToMonth(e1.getDataTime(), +1))) {
+                        res[0] = e1;
+                    }
+                });
+                if ("0".equals(showType)) {
+                    Double preNum = null;
+                    if (res[0] != null && res[0].getDealNum() != null) {
+                        preNum = Double.valueOf(res[0].getDealNum());
+                    }
+                    numList.add(e.getDealNum());
+                    Double ratio = QuotationUtil.getRatio(Double.valueOf(e.getDealNum()), preNum);
+
+                    numRatioList.add(ratio);
+                    listMax[0] = QuotationUtil.getMax(listMax[0], e.getDealNum());
+                    ratioMax[0] = QuotationUtil.getMax(ratioMax[0], ratio);
+                    ratioMin[0] = QuotationUtil.getMin(ratioMin[0], ratio);
+                } else {
+                    Double preAcreage = null;
+                    if (res[0] != null && res[0].getDealAcreage() != null) {
+                        preAcreage = Double.valueOf(res[0].getDealAcreage());
+                    }
+                    acreageList.add(e.getDealAcreage());
+                    Double ratio = QuotationUtil.getRatio(Double.valueOf(e.getDealAcreage()), preAcreage);
+                    listMax[0] = QuotationUtil.getMax(listMax[0], Double.valueOf(e.getDealAcreage()));
+                    ratioMax[0] = QuotationUtil.getMax(ratioMax[0], ratio);
+                    ratioMin[0] = QuotationUtil.getMin(ratioMin[0], ratio);
+                    acreageRatioList.add(ratio);
                 }
-                acreageList.add(e.getDealAcreage());
-                Double ratio = QuotationUtil.getRatio(Double.valueOf(e.getDealAcreage()), preAcreage);
-                listMax[0] = QuotationUtil.getMax(listMax[0], Double.valueOf(e.getDealAcreage()));
-                ratioMax[0] = QuotationUtil.getMax(ratioMax[0], ratio);
-                ratioMin[0] = QuotationUtil.getMin(ratioMin[0], ratio);
-                acreageRatioList.add(ratio);
+
+            });
+            model.addAttribute("numList", numList);
+            model.addAttribute("numRatioList", numRatioList);
+            model.addAttribute("acreageList", acreageList);
+            model.addAttribute("acreageRatioList", acreageRatioList);
+            listMax[0] = QuotationUtil.getDoubleUp(listMax[0]);
+            listMin = 0;
+            ratioMax[0] = QuotationUtil.getRatioDoubleUp(ratioMax[0]);
+            ratioMin[0] = QuotationUtil.getRatioDoubleUp(ratioMin[0]);
+//
+            model.addAttribute("months", JSONArray.toJSONString(month));
+            model.addAttribute("listMax", listMax[0]);
+            model.addAttribute("listMin", listMin);
+            model.addAttribute("listStep", (listMax[0] - listMin) / 10);
+            model.addAttribute("ratioMax", ratioMax[0]);
+            model.addAttribute("ratioMin", ratioMin[0]);
+            model.addAttribute("ratioStep", (ratioMax[0] - ratioMin[0]) / 10);
+
+            List<ParamObject> paramObjects = JsonMapReader.getMap("quotation_type");
+            model.addAttribute("types", paramObjects);
+
+            if (url != null) {
+                return "quotationSecondHand/" + url;
             }
 
-        });
-        model.addAttribute("numList", numList);
-        model.addAttribute("numRatioList", numRatioList);
-        model.addAttribute("acreageList", acreageList);
-        model.addAttribute("acreageRatioList", acreageRatioList);
-        listMax[0] = QuotationUtil.getDoubleUp(listMax[0]);
-        listMin = 0;
-        ratioMax[0] = QuotationUtil.getRatioDoubleUp(ratioMax[0]);
-        ratioMin[0] = QuotationUtil.getRatioDoubleUp(ratioMin[0]);
-//
-        model.addAttribute("months", JSONArray.toJSONString(month));
-        model.addAttribute("listMax", listMax[0]);
-        model.addAttribute("listMin", listMin);
-        model.addAttribute("listStep", (listMax[0] - listMin) / 10);
-        model.addAttribute("ratioMax", ratioMax[0]);
-        model.addAttribute("ratioMin", ratioMin[0]);
-        model.addAttribute("ratioStep", (ratioMax[0] - ratioMin[0]) / 10);
-
-        List<ParamObject> paramObjects = JsonMapReader.getMap("quotation_type");
-        model.addAttribute("types", paramObjects);
-
-        if (url != null) {
-            return "quotationSecondHand/" + url;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return "quotationSecondHand/dealNumContent";
     }
+
+
+
 
     @RequestMapping("list")
     public String list(QuotationSecondHand obj, Model model, HttpServletRequest request) throws Exception {

@@ -160,6 +160,18 @@ public class MidlandHelper {
         return format.format(calendar.getTime());
     }
 
+    public static List<String> getBettenTime(String startTime, String endTime){
+        endTime=MidlandHelper.formatMonth(endTime);
+        List<String> list = new ArrayList();
+        String dataTime=startTime;
+        while (dataTime.compareTo(endTime)<=0){
+            list.add(dataTime);
+            dataTime = MidlandHelper.getFormatyyMMToMonth(dataTime,1);
+
+        }
+        return list;
+    }
+
     public static Date stringToDate(String time) throws ParseException {
         DateFormat format = new SimpleDateFormat(COMMON_DATE);
         return format.parse(time);

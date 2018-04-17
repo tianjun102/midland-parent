@@ -70,7 +70,7 @@
                         <span style="float:left;">是否删除：</span>
                         <select name="isDelete" id="isDelete" class="dropdown">
                             <option value>全部</option>
-                            <option value="0">未删除</option>
+                            <option value="0" selected="selected">未删除</option>
                             <option value="1">已删除</option>
                         </select>
                     </li>

@@ -76,6 +76,7 @@
             and is_delete=0
         </if>
         <include refid="select_option"/>
+        order by data_time desc
     </select>
 
     <insert id="insertQuotationBatch" parameterType="java.util.List">

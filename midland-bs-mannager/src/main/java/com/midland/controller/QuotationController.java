@@ -299,7 +299,27 @@ public class QuotationController extends BaseFilter {
         obj.setStartTime(MidlandHelper.getFormatPreMonth(obj.getStartTime(), -1));
         obj.setEndTime(MidlandHelper.getFormatPreMonth(obj.getEndTime(), -1));
         List<Quotation> listTemp = quotationServiceImpl.findQuotationList(obj);
-        result.forEach(e -> {
+        List<String> time = MidlandHelper.getBettenTime(obj.getStartTime(),obj.getEndTime());
+        List<String> timelist= new ArrayList<>();
+        result.forEach(e->{
+            timelist.add(e.getDataTime());
+        });
+        time.forEach(e->{
+            if (!timelist.contains(e)){
+                Quotation q=new Quotation();
+                q.setDataTime(e);
+                q.setDealNum(0);
+                q.setDealAcreage("0");
+                q.setPrice("0");
+                q.setDealPrice("0");
+                q.setSoldNum(0);
+                q.setSoldArea("0");
+                result.add(q) ;
+            }
+        });
+        result.stream().sorted((s1,s2)->{
+           return s1.getDataTime().compareTo(s2.getDataTime());
+        }).forEach(e -> {
             month.add(e.getDataTime());
             final Quotation[] res = {null};
             listTemp.forEach(e1 -> {
