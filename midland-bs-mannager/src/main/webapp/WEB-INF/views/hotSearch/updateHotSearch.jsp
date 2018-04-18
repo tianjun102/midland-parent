@@ -39,7 +39,7 @@
             <li><span>模块：</span>
                 <input type="hidden" id="menuName" name="menuName" value="${item.menuName}" >
                 <select onchange="setMenuName()" name="menuId" id="menuId" class="dropdown" style="z-index: 999">
-                    <option <c:if test="${item.menuId =='0'}">selected="selected"</c:if> value="0">首页</option>
+                    <%--<option <c:if test="${item.menuId =='0'}">selected="selected"</c:if> value="0">首页</option>--%>
                     <option <c:if test="${item.menuId =='1'}">selected="selected"</c:if> value="1">新房</option>
                     <option <c:if test="${item.menuId =='2'}">selected="selected"</c:if> value="2">二手房</option>
                     <option <c:if test="${item.menuId =='3'}">selected="selected"</c:if> value="3">租房</option>
