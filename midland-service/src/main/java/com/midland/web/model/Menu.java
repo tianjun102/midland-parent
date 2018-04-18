@@ -57,6 +57,14 @@ public class Menu {
      **/
     private String cityName;
     /**
+     * 省id
+     **/
+    private String provinceId;
+    /**
+     * 省名称
+     **/
+    private String provinceName;
+    /**
      * 微站菜单类型Id
      */
     private Integer menuTypeId;
@@ -65,6 +73,21 @@ public class Menu {
      */
     private String menuTypeName;
 
+    public String getProvinceId() {
+        return provinceId;
+    }
+
+    public void setProvinceId(String provinceId) {
+        this.provinceId = provinceId;
+    }
+
+    public String getProvinceName() {
+        return provinceName;
+    }
+
+    public void setProvinceName(String provinceName) {
+        this.provinceName = provinceName;
+    }
 
     public Integer getMenuTypeId() {
         return menuTypeId;

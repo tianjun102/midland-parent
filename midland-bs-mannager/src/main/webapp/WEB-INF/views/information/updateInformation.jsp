@@ -255,8 +255,10 @@
             success: function (data) {
                 if(data.state==0){
                     layer.msg("更新成功！",{icon:1});
-                    parent.layer.closeAll();
-                    parent.$("#inquery").click();
+                    setTimeout(function () {
+                        parent.layer.closeAll();
+                        parent.$("#inquery").click();
+                    }, 2000);
                 } else {
                     layer.msg("更新失败！", {icon: 2});
                 }

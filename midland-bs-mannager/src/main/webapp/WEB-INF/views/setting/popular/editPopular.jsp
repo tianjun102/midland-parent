@@ -204,12 +204,9 @@
 </section>
 <script type="text/javascript">
     $(function () {
-        if(${item.provinceId!=''&&item.provinceId!=nul}){
+        if(${item.provinceId!=''&&item.provinceId!=null}){
             $("#provinces").val('${item.provinceId}');
-            $("#provinceId").val('${item.provinceId}');
-            $("#provinceName").val('${item.provinceName}');
             initProvince();
-            debugger;
             $("#citys").val('${item.cityId}');
         }
 

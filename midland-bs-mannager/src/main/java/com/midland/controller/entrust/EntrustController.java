@@ -295,7 +295,7 @@ public class EntrustController extends ServiceBaseFilter {
             List<String> param1 = new ArrayList<>();
             param1.add(record.getAgentName()==null?"":record.getAgentName());
             param1.add(record.getAgentPhone()==null?"":record.getAgentPhone());
-//            apiHelper.smsSender("18825234000",Contant.SMS_TEMPLATE_56848,param1);
+//            apiHelper.smsSender("12345678912",Contant.SMS_TEMPLATE_56848,param1);
             apiHelper.smsSender(obj.getPhone(),Contant.SMS_TEMPLATE_56848,param1);
 
             map.put("state", 0);

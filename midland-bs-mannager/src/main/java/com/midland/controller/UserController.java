@@ -1,5 +1,4 @@
 package com.midland.controller;
-
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.Paginator;
@@ -12,7 +11,6 @@ import com.midland.core.util.HttpUtils;
 import com.midland.core.util.MD5Util;
 import com.midland.core.util.SmsUtil;
 import com.midland.web.Contants.Contant;
-import com.midland.web.api.SmsSender.SmsClient;
 import com.midland.web.api.SmsSender.SmsModel;
 import com.midland.web.model.Area;
 import com.midland.web.model.ExportModel;
@@ -87,8 +85,7 @@ public class UserController extends BaseFilter {
     @Autowired
     private MidlandConfig midlandConfig;
 
-    @Autowired
-    private SmsClient smsClient;
+
 
     @Autowired
     private SmsSingleSender sender;
@@ -193,11 +190,9 @@ public class UserController extends BaseFilter {
 
             e.printStackTrace();
             return "login";
-            //return "redirect:"+midlandConfig.getLoginUrl()+"?errorCode=1";
+
         }
-        /*if(user.getPassword().equals("92925488b28ab12584ac8fcaa8a27a0f497b2c62940c8f4fbc8ef19ebc87c43e")){
-            return "redirect:/rest/user/forcedModifyPassword";
-        }*/
+
         return "redirect:/";
     }
 

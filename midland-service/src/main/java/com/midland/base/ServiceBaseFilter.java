@@ -5,6 +5,8 @@ import com.midland.web.model.SiteMap;
 import com.midland.web.service.CategoryService;
 import com.midland.web.service.SiteMapService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.TransientDataAccessResourceException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -36,7 +38,14 @@ public abstract class ServiceBaseFilter {
 	@ExceptionHandler({Exception.class})
 	public void handlerException(Exception e, HttpServletResponse response) throws IOException {
 		e.printStackTrace();
-		responseInfo(response, "系统繁忙，请重试！...");
+		if (e instanceof DuplicateKeyException) {
+			responseInfo(response, "数据已存在，请检查！...");
+		}else if(e instanceof TransientDataAccessResourceException){
+			responseInfo(response, "package too big！...");
+		}
+		else {
+			responseInfo(response, "系统繁忙，请重试！...");
+		}
 	}
 	
 	private void responseInfo(HttpServletResponse response, String info) throws IOException {

@@ -136,6 +136,13 @@
 
 </section>
 <script type="text/javascript">
+    $(function () {
+        if(${item.provinceId!=''&&item.provinceId!=null}){
+            $("#provinces").val('${item.provinceId}');
+            initProvince();
+            $("#citys").val('${item.cityId}');
+        }
+    })
     function fieldChange() {
         var j = $("#source option:selected").val()
         if (j == 0) {

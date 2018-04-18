@@ -141,7 +141,7 @@
             </li>
             <li><span>类型：</span><input class="vipcate" type="text" id="cateName" name="cateName" onclick="showTree()"
                                        readonly="readonly"/>
-                <input name="cateId" type="hidden"/><label style="color: red" class="_star ">*</label>
+                <input name="cateId" id="cateId" type="hidden"/><label style="color: red" class="_star ">*</label>
 
             </li>
             <li id="showDiv" style="display: none;padding-top: 0px;padding-left: 70px; position:relative;">
@@ -180,6 +180,8 @@
         var provinceName = getCookie("popuolarProvinceName",test);
         var source = getCookie("popuolarSource",test);
         var menuId = getCookie("popuolarMenuId",test);
+        var cateId = getCookie("popuolarCateId",test);
+        var cateName = getCookie("popuolarCateName",test);
         if (provinceId !=''){
             $("#provinces").val(provinceId);
             initProvince();
@@ -192,6 +194,10 @@
         }
         if (menuId !=''){
             $("#menuId").val(menuId);
+        }
+        if (cateId !=''&&cateName!=''){
+            $("#cateId").val(cateId);
+            $("#cateName").val(cateName);
         }
 
         if (cityId !=''){
@@ -223,6 +229,8 @@
                         setCookie("popuolarProvinceName",$("#provinceName").val(),test);
                         setCookie("popuolarSource",$("#source").val(),test);
                         setCookie("popuolarMenuId",$("#menuId").val(),test);
+                        setCookie("popuolarCateId",$("#cateId").val(),test);
+                        setCookie("popuolarCateName",$("#cateName").val(),test);
                         layer.msg("新增成功！！！", {icon: 1});
                         $('#save').removeAttr("onclick");
                         setTimeout(function () {

@@ -8,80 +8,30 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class SmsProperties {
-
-    @Value("${url}")
-    private String url;
     /**
      * 应用id
      */
-    @Value("${bizAppId}")
-    private String bizAppId;
+    @Value("${appId}")
+    private String appId;
     /**
-     * 客户编号
+     * 应用key
      */
-    @Value("${customerId}")
-    private String customerId;
+    @Value("${appKey}")
+    private String appKey;
 
-    /**
-     * 用户名编号
-     */
-    @Value("${userId}")
-    private String userId;
-
-
-    @Value("${charset}")
-    private String charset = "utf-8";
-
-    @Value("${password}")
-    private String password;
-
-
-    public String getUrl() {
-        return url;
+    public String getAppId() {
+        return appId;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setAppId(String appId) {
+        this.appId = appId;
     }
 
-    public String getBizAppId() {
-        return bizAppId;
+    public String getAppKey() {
+        return appKey;
     }
 
-    public void setBizAppId(String bizAppId) {
-        this.bizAppId = bizAppId;
+    public void setAppKey(String appKey) {
+        this.appKey = appKey;
     }
-
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getCharset() {
-        return charset;
-    }
-
-    public void setCharset(String charset) {
-        this.charset = charset;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
 }

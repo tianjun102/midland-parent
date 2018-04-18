@@ -18,11 +18,12 @@
         <result column="menu_type_id" property="menuTypeId" jdbcType="INTEGER"/>
         <result column="menu_type_name" property="menuTypeName" jdbcType="VARCHAR"/>
         <result column="is_delete" property="isDelete" jdbcType="INTEGER"/>
-
+        <result column="province_id" property="provinceId" jdbcType="VARCHAR"/>
+        <result column="province_name" property="provinceName" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,icon_img,city_id,menu_name,click_num,order_by,url,is_show,position,parent_id,source,is_delete,city_name,menu_type_id,menu_type_name
+        id,icon_img,city_id,menu_name,click_num,order_by,url,is_show,position,parent_id,source,is_delete,city_name,menu_type_id,menu_type_name,province_id,province_name
     </sql>
 
     <select id="selectMenuById" resultMap="BaseResultMap">
@@ -117,6 +118,13 @@
             <if test="menuTypeName != null">
                 menu_type_name,
             </if>
+            <if test="provinceId != null">
+                province_id,
+            </if>
+            <if test="provinceName != null">
+                province_name,
+            </if>
+
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -162,6 +170,13 @@
             <if test="menuTypeName != null">
                 #{menuTypeName},
             </if>
+            <if test="provinceId != null">
+                #{provinceId,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceName != null">
+                #{provinceName,jdbcType=VARCHAR},
+            </if>
+
         </trim>
     </insert>
 
@@ -208,6 +223,13 @@
         <if test="menuTypeName != null">
             menu_type_name= #{menuTypeName},
         </if>
+        <if test="provinceId != null">
+            province_id=#{provinceId,jdbcType=VARCHAR},
+        </if>
+        <if test="provinceName != null">
+            province_name=#{provinceName,jdbcType=VARCHAR},
+        </if>
+
     </sql>
 
     <sql id="select_option">
@@ -261,6 +283,13 @@
         <if test="menuTypeName != null">
             and menu_type_name like CONCAT(CONCAT('%', #{menuTypeName}), '%')
         </if>
+        <if test="provinceId != null">
+            and province_id=#{provinceId,jdbcType=VARCHAR}
+        </if>
+        <if test="provinceName != null">
+            and province_name=#{provinceName,jdbcType=VARCHAR}
+        </if>
+
     </sql>
     <sql id="select_option1">
 
@@ -309,6 +338,13 @@
         <if test="menuTypeName != null">
             and menu_type_name like CONCAT(CONCAT('%', #{menuTypeName}), '%')
         </if>
+        <if test="provinceId != null">
+            and province_id=#{provinceId,jdbcType=VARCHAR}
+        </if>
+        <if test="provinceName != null">
+            and province_name=#{provinceName,jdbcType=VARCHAR}
+        </if>
+
     </sql>
 
     <update id="batchUpdate" parameterType="java.util.List">

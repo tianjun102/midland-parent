@@ -13,6 +13,7 @@ import com.midland.web.service.SettingService;
 import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
 import com.midland.web.util.ParamObject;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -137,6 +138,7 @@ public class MenuController extends BaseFilter {
         settingService.getAllProvinceList(model);
 
         Menu result = menuServiceImpl.selectMenuById(id);
+        result.setProvinceName(StringUtils.trim(result.getProvinceName()));
         model.addAttribute("item", result);
         List<ParamObject> sources = JsonMapReader.getMap("source");
         model.addAttribute("sources", sources);
@@ -276,6 +278,7 @@ public class MenuController extends BaseFilter {
         settingService.getAllProvinceList(model);
 
         Menu result = menuServiceImpl.selectMenuById(id);
+        result.setProvinceName(StringUtils.trim(result.getProvinceName()));
         model.addAttribute("item", result);
         List<ParamObject> sources = JsonMapReader.getMap("source");
         model.addAttribute("sources", sources);

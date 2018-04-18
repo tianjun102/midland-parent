@@ -22,11 +22,8 @@
         <property name="locations">
             <list>
                 <value>classpath*:properties/application.properties</value>
-                <value>classpath*:properties/dataBackup.properties</value>
-                <value>classpath*:properties/appsetting.properties</value>
                 <value>classpath*:properties/midland.properties</value>
-                <value>classpath*:properties/sms.properties</value>
-                <value>classpath*:properties/mail.properties</value>
+                <value>classpath*:properties/mail_SMS.properties</value>
             </list>
         </property>
     </bean>

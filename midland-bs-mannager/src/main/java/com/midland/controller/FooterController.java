@@ -57,6 +57,7 @@ public class FooterController extends BaseFilter {
         } catch (Exception e) {
             log.error("addFooter异常 {}", footer, e);
             map.put("state", -1);
+            throw e;
         }
         return map;
     }
@@ -119,6 +120,7 @@ public class FooterController extends BaseFilter {
         } catch (Exception e) {
             log.error("updateFooterById  {}", footer, e);
             map.put("state", -1);
+            throw e;
         }
         return map;
     }

@@ -2,6 +2,7 @@ import com.github.qcloudsms.SmsSingleSender;
 import com.github.qcloudsms.SmsSingleSenderResult;
 import com.midland.config.MidlandConfig;
 import com.midland.core.util.HttpUtils;
+import com.midland.web.Contants.Contant;
 import com.midland.web.api.ApiHelper;
 import com.midland.web.commons.core.util.ConstantUtils;
 import com.midland.web.model.WebUser;
@@ -23,9 +24,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -122,12 +121,10 @@ public class PTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}*/
-
+	List<String> str = new ArrayList<>();
 
 		try {
-			SmsSingleSender sender = new   SmsSingleSender(1400048150, "cf34fd4134eb80f7accac8a37329a873");
-			SmsSingleSenderResult result = sender.send(1, "86", "13600158343", "【美联物业】验证码测试1234", "", "");
-			System.out.print(result);
+			apiHelper.smsSender("12345678912", Contant.SMS_TEMPLATE_LEAVE_MSG,str );
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

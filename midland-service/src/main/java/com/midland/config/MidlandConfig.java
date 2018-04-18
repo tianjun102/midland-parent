@@ -23,16 +23,8 @@ public class MidlandConfig {
 
 	@Value("${webSite}")
 	private String webSite;
-	@Value("${newhouse}")
-	private String newhouse;
-	@Value("${second}")
-	private String second;
-	@Value("${rent}")
-	private String rent;
-	@Value("${work}")
-	private String work;
-	@Value("${shop}")
-	private String shop;
+
+
 
 	public void setAgentLogin(String agentLogin) {
 		this.agentLogin = agentLogin;
@@ -42,45 +34,6 @@ public class MidlandConfig {
 		this.agentDetail = agentDetail;
 	}
 
-	public String getNewhouse() {
-		return newhouse;
-	}
-
-	public void setNewhouse(String newhouse) {
-		this.newhouse = newhouse;
-	}
-
-	public String getSecond() {
-		return second;
-	}
-
-	public void setSecond(String second) {
-		this.second = second;
-	}
-
-	public String getRent() {
-		return rent;
-	}
-
-	public void setRent(String rent) {
-		this.rent = rent;
-	}
-
-	public String getWork() {
-		return work;
-	}
-
-	public void setWork(String work) {
-		this.work = work;
-	}
-
-	public String getShop() {
-		return shop;
-	}
-
-	public void setShop(String shop) {
-		this.shop = shop;
-	}
 
 	public String getWebSite() {
 		return webSite;

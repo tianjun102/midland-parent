@@ -6,6 +6,7 @@ import com.midland.web.service.CategoryService;
 import com.midland.web.service.SiteMapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.TransientDataAccessResourceException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -40,7 +41,10 @@ public abstract class BaseFilter {
         e.printStackTrace();
         if (e instanceof DuplicateKeyException) {
             responseInfo(response, "数据已存在，请检查！...");
-        } else {
+        }else if(e instanceof TransientDataAccessResourceException){
+            responseInfo(response, "package too big！...");
+        }
+        else {
             responseInfo(response, "系统繁忙，请重试！...");
         }
 
