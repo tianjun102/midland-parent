@@ -373,6 +373,9 @@
                 <shiro:hasPermission name="cornerFile">
                     <a id="left60" href="${ctx}/rest/siteProtocol/cornerFile" target="contentF"><span>备案编号</span></a>
                 </shiro:hasPermission>
+                <shiro:hasPermission name="filmManage">
+                    <a id="left60" href="${ctx}/rest/setting/filmIndex" target="contentF"><span>宣传片</span></a>
+                </shiro:hasPermission>
             </dd>
         </dl>
     </shiro:hasPermission>
@@ -429,10 +432,10 @@
                 </shiro:hasPermission>
 
 
-                <shiro:hasPermission name="siteMapCate">
+                <shiro:hasPermission name="timeOutManage">
                     <a id="left61" href="${ctx}/rest/setting/time/index" target="contentF"><span>经纪人响应时间</span></a>
                 </shiro:hasPermission>
-                <shiro:hasPermission name="siteMapCate">
+                <shiro:hasPermission name="sensitiveManage">
                     <a id="left61" href="${ctx}/rest/sensitive/index" target="contentF"><span>敏感字符管理</span></a>
                 </shiro:hasPermission>
 
@@ -452,7 +455,7 @@
                     <a id="left65" href="${ctx}/rest/discount/index" target="contentF"><span>折扣列表</span></a>
                 </shiro:hasPermission>
                 <shiro:hasPermission name="systemNotice">
-                    <a id="left65" href="${ctx}/rest/headMsg/index" target="contentF"><span>首页公告</span></a>
+                    <a id="left65" href="${ctx}/rest/headMsg/index" target="contentF"><span>系统公告</span></a>
                 </shiro:hasPermission>
                 <shiro:hasPermission name="descIndexList">
                     <a id="left66" href="${ctx}/rest/loanType/descIndex" target="contentF"><span>计算器说明</span></a>

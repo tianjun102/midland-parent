@@ -654,5 +654,10 @@ public class SettingController extends BaseFilter {
         return map;
     }
 
+    @RequestMapping("filmIndex")
+    public String filmIndex( Model model, HttpServletRequest request){
+        return "video/index";
+    }
+
 
 }
