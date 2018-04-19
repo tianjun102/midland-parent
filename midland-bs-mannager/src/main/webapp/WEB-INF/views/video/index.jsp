@@ -63,7 +63,15 @@
                 'multi': true,// 是否支持多个文件上传
                 'buttonText': '上传文件',
                 'onUploadSuccess': function (file, data, response) {
-                   $("#video_source").attr("src",)
+                    var myPlayer = videojs('my-video');
+                    var videoUrl = data;
+                    videojs("my-video", {}, function() {
+                        window.myPlayer = this;
+                        $("#mymoda .video-con #my-video source").attr("src", videoUrl);
+                        myPlayer.src(videoUrl);
+                        myPlayer.load(videoUrl);
+                        myPlayer.play();
+                    });
                 },
                 'onQueueComplete': function (queueData) {
                     if (queueData.uploadsSuccessful < 1) {
@@ -79,16 +87,16 @@
 </head>
 
 <body>
-	<div class="m">
-		<video id="my-video" class="video-js" controls preload="auto" width="740" height="400"
+	<div class="m" style="width:100%; height: 100%; margin-top:0;">
+		<video id="my-video" class="video-js" controls preload="auto" style = "width:100%;height: 906px;"
 		  poster="m.png" data-setup="{}">
-			<source id="video_source" src="http://jq22com.qiniudn.com/jq22-sp.mp4" type="video/mp4">
+			<source src="http://jq22com.qiniudn.com/jq22-sp.mp4" type="video/mp4">
 			<p class="vjs-no-js">
 			  To view this video please enable JavaScript, and consider upgrading to a web browser that
 			  <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
 			</p>
 		  </video>
-		<li><span style="vertical-align: top;">图片上传：</span>
+		<li>
 			<div class="fileupload">
 				<input type="hidden" name="imgUrl" id="imgUrl" value="${item.imgUrl}">
 				<input type="file" name="file_upload" id="file_upload"/>
