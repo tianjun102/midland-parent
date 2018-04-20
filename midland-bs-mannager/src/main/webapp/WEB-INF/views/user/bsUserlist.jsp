@@ -142,8 +142,10 @@
                 if (obj.state == 0) {
                     layer.msg("成功！", {icon: 5});
                     $('#searchForm').submit();
+                }else if (obj.state==1){
+                    layer.msg("用户已存在！！", {icon: 7});
                 }
-                if (obj.state == -1) {
+                else {
                     layer.msg("失败！！", {icon: 7});
                 }
 
@@ -164,6 +166,9 @@
                     layer.msg("成功！", {icon: 5});
                     layer.closeAll();
                     $('#searchForm').submit();
+                }else if (obj.state==1){
+                    layer.msg("用户已存在！！", {icon: 7});
+
                 }
                 if (obj.state == -1) {
                     layer.msg("失败！！", {icon: 7});

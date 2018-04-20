@@ -46,15 +46,15 @@
                 </select>
             </li>
             <li class="col-md-11"><span>title：</span>
-                <textarea name="title" id="title"
+                <textarea name="websiteTitle" id="title"
                           style="width:calc(100% - 120px);height:50px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;"></textarea>
             </li>
             <li class="col-md-11"><span>keywords：</span>
-                <textarea name="keywords" id="keywords"
+                <textarea name="websiteKeyWords" id="keywords"
                           style="width:calc(100% - 120px);height:50px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;"></textarea>
             </li>
             <li class="col-md-11"><span>description：</span>
-                <textarea name="description" id="description"
+                <textarea name="websiteDescription" id="description"
                           style="width:calc(100% - 120px);height:50px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;"></textarea>
             </li>
 

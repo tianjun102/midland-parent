@@ -57,9 +57,9 @@ public class Result<T> implements Serializable {
 
     public void setMeta(Meta meta1) {
         this.meta=new MetaResult();
-        meta.setDescription(meta1.getDescription());
-        meta.setKeywords(meta1.getKeywords());
-        meta.setTitle(meta1.getTitle());
+        meta.setWebsiteDescription(meta1.getWebsiteDescription());
+        meta.setWebsiteKeyWords(meta1.getWebsiteKeyWords());
+        meta.setWebsiteTitle(meta1.getWebsiteTitle());
     }
     public Integer getNumber() {
         return number;

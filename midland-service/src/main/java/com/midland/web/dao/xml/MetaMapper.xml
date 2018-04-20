@@ -7,9 +7,9 @@
 		<result column="source" property="source" jdbcType="INTEGER" />
 		<result column="city_id" property="cityId" jdbcType="VARCHAR" />
 		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
-		<result column="title" property="title" jdbcType="VARCHAR" />
-		<result column="keywords" property="keywords" jdbcType="VARCHAR" />
-		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="website_title" property="websiteTitle" jdbcType="VARCHAR" />
+		<result column="website_key_words" property="websiteKeyWords" jdbcType="VARCHAR" />
+		<result column="website_description" property="websiteDescription" jdbcType="VARCHAR" />
 		<result column="mode_id" property="modeId" jdbcType="INTEGER" />
 		<result column="mode_name" property="modeName" jdbcType="VARCHAR" />
 		<result column="second_mode_name" property="secondModeName" jdbcType="VARCHAR" />
@@ -18,7 +18,7 @@
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,source,city_id,city_name,title,keywords,description,mode_id,mode_name,second_mode_name,is_delete,second_mode_id
+		id,source,city_id,city_name,website_title,website_key_words,website_description,mode_id,mode_name,second_mode_name,is_delete,second_mode_id
 	</sql>
 
 	<select id="selectMetaById" resultMap="BaseResultMap">
@@ -58,14 +58,14 @@
 			<if test="cityName != null">
 				city_name,
 			</if>
-			<if test="title != null">
-				title,
+			<if test="websiteTitle != null">
+				website_title,
 			</if>
-			<if test="keywords != null">
-				keywords,
+			<if test="websiteKeyWords != null">
+				website_key_words,
 			</if>
-			<if test="description != null">
-				description,
+			<if test="websiteDescription != null">
+				website_description,
 			</if>
 			<if test="modeId != null">
 				mode_id,
@@ -94,14 +94,14 @@
 			<if test="cityName != null">
 				#{cityName,jdbcType=VARCHAR},
 			</if>
-			<if test="title != null">
-				#{title,jdbcType=VARCHAR},
+			<if test="websiteTitle != null">
+				#{websiteTitle,jdbcType=VARCHAR},
 			</if>
-			<if test="keywords != null">
-				#{keywords,jdbcType=VARCHAR},
+			<if test="websiteKeyWords != null">
+				#{websiteKeyWords,jdbcType=VARCHAR},
 			</if>
-			<if test="description != null">
-				#{description,jdbcType=VARCHAR},
+			<if test="websiteDescription != null">
+				#{websiteDescription,jdbcType=VARCHAR},
 			</if>
 			<if test="modeId != null">
 				#{modeId,jdbcType=INTEGER},
@@ -131,14 +131,14 @@
 		<if test="cityName != null">
 			city_name= #{cityName,jdbcType=VARCHAR},
 		</if>
-		<if test="title != null">
-			title= #{title,jdbcType=VARCHAR},
+		<if test="websiteTitle != null">
+			website_title= #{websiteTitle,jdbcType=VARCHAR},
 		</if>
-		<if test="keywords != null">
-			keywords= #{keywords,jdbcType=VARCHAR},
+		<if test="websiteKeyWords != null">
+			website_key_words= #{websiteKeyWords,jdbcType=VARCHAR},
 		</if>
-		<if test="description != null">
-			description= #{description,jdbcType=VARCHAR},
+		<if test="websiteDescription != null">
+			website_description= #{websiteDescription,jdbcType=VARCHAR},
 		</if>
 		<if test="modeId != null">
 			mode_id= #{modeId,jdbcType=INTEGER},
@@ -170,14 +170,14 @@
 		<if test="cityName != null">
 			 and city_name= #{cityName,jdbcType=VARCHAR}
 		</if>
-		<if test="title != null">
-			 and title= #{title,jdbcType=VARCHAR}
+		<if test="websiteTitle != null">
+			 and website_title= #{websiteTitle,jdbcType=VARCHAR}
 		</if>
-		<if test="keywords != null">
-			 and keywords= #{keywords,jdbcType=VARCHAR}
+		<if test="websiteKeyWords != null">
+			 and website_key_words= #{websiteKeyWords,jdbcType=VARCHAR}
 		</if>
-		<if test="description != null">
-			 and description= #{description,jdbcType=VARCHAR}
+		<if test="websiteDescription != null">
+			 and website_description= #{websiteDescription,jdbcType=VARCHAR}
 		</if>
 		<if test="modeId != null">
 			 and mode_id= #{modeId,jdbcType=INTEGER}

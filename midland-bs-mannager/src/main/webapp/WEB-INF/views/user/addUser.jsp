@@ -80,7 +80,7 @@
                 dataType: "json",
                 data: $('#addFrom').serialize(),
                 success: function (data) {
-                    if (data.flag == 1) {
+                    if (data.state == 0) {
                         layer.msg("保存成功！！！", {icon: 1});
                         $('#save').removeAttr("onclick");
                         setTimeout(function () {
@@ -88,7 +88,11 @@
                             parent.$("#inquery").click();
                         }, 1000);
 
-                    } else {
+                    }else if(data.state==1){
+                        layer.msg("用户已存在！", {icon: 2});
+                    }
+
+                    else {
                         layer.msg("保存失败！", {icon: 2});
                     }
                 },

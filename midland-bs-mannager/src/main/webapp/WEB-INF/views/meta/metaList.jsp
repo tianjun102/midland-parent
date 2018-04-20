@@ -36,9 +36,9 @@
                         <td><c:forEach items="${sources}" var="s">
                             <c:if test="${item.source == s.id}">${s.name}</c:if>
                         </c:forEach></td>
-						<td>${item.title}</td>
-						<td>${item.keywords}</td>
-						<td>${item.description}</td>
+						<td>${item.websiteTitle}</td>
+						<td>${item.websiteKeyWords}</td>
+						<td>${item.websiteDescription}</td>
 						<td>${item.modeName}</td>
 						<td>${item.secondModeName}</td>
 						<td>

@@ -19,46 +19,47 @@
                 <select name="source" id="source" class="dropdown">
                     <option value="">请选择</option>
                     <c:forEach items="${sources}" var="s1">
-                    <option value="${s1.id}" <c:if test="${item.source== s1.id}">selected="selected"</c:if>   >
+                        <option value="${s1.id}"
+                                <c:if test="${item.source== s1.id}">selected="selected"</c:if>   >
                                 ${s1.name}
                         </option>
                     </c:forEach>
                 </select>
-                <label style="color: red;padding-top: 0!important;" class = "_star " >*</label>
+                <label style="color: red;padding-top: 0!important;" class="_star ">*</label>
             </li>
 
             <li class="col-md-6"><span>模块：</span>
                 <input type="hidden" name="modeName" id="modeName" value="${item.modeName}">
                 <select name="modeId" id="modeId" class="dropdown">
-                    <option value="" >请选择</option>
+                    <option value="">请选择</option>
                     <option value="1" <c:if test="${item.modeId== 1}">selected="selected"</c:if>>新房首页</option>
                     <option value="8" <c:if test="${item.modeId== 8}">selected="selected"</c:if>>外销网</option>
                     <option value="9" <c:if test="${item.modeId== 9}">selected="selected"</c:if>>市场调究</option>
                     <option value="10" <c:if test="${item.modeId== 10}">selected="selected"</c:if>>资讯</option>
                     <option value="11" <c:if test="${item.modeId== 11}">selected="selected"</c:if>>问答</option>
                 </select>
-                <label style="color: red;padding-top: 0!important;" class = "_star " >*</label>
+                <label style="color: red;padding-top: 0!important;" class="_star ">*</label>
             </li>
 
             <li class="col-md-6" id="childMode"><span>子模块：</span>
                 <input type="hidden" name="secondModeName" id="secondModeName" value="${item.secondModeName}">
-                <select name="secondModeId" id="secondModeId" style="height: 28px;width: 250px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;padding-left: 5px">
+                <select name="secondModeId" id="secondModeId"
+                        style="height: 28px;width: 250px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;padding-left: 5px">
                     <option value=>请选择</option>
                 </select>
             </li>
             <li class="col-md-11"><span>title：</span>
-                <textarea name="title" id="title"
-                          style="width:calc(100% - 120px);height:50px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;">${item.title}</textarea>
+                <textarea name="websiteTitle" id="title"
+                          style="width:calc(100% - 120px);height:50px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;">${item.websiteTitle}</textarea>
             </li>
             <li class="col-md-11"><span>keywords：</span>
-                <textarea name="keywords" id="keywords"
-                          style="width:calc(100% - 120px);height:50px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;">${item.keywords}</textarea>
+                <textarea name="websiteKeyWords" id="keywords"
+                          style="width:calc(100% - 120px);height:50px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;">${item.websiteKeyWords}</textarea>
             </li>
             <li class="col-md-11"><span>description：</span>
-                <textarea name="description" id="description"
-                          style="width:calc(100% - 120px);height:50px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;">${item.description}</textarea>
+                <textarea name="websiteDescription" id="description"
+                          style="width:calc(100% - 120px);height:50px;resize:none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;">${item.websiteDescription}</textarea>
             </li>
-
 
 
             <li class="col-md-6">
@@ -99,10 +100,11 @@
             $("#childMode").show();
             var data = "type=1" + "&cityId=" + $("#cityId").val() + "&source=" + $("#source").val();
             getCate(data);
-        } else if (val == 11 || val==1) {
+        } else if (val == 11 || val == 1) {
             $("#childMode").hide();
         }
     }
+
     function getCate(data) {
         $.ajax({
             type: "post",
@@ -117,10 +119,11 @@
                     for (var i = 0; i < obj.length; i++) {
                         var val = obj[i].id;
                         html += "<option value=\"" + obj[i].id + "\" ";
-                        if (${item.secondModeId}==val){
+                        if ('${item.secondModeId}'==val)
+                        {
                             html += "selected=\"selected\"";
                         }
-                        html+=">" + obj[i].cateName + "</option>";
+                        html += ">" + obj[i].cateName + "</option>";
                     }
                     $("#secondModeId").html(html);
 
@@ -151,10 +154,12 @@
                     for (var i = 0; i < obj.length; i++) {
                         var val = obj[i].id;
                         html += "<option value=\"" + obj[i].id + "\" ";
-                        if (${item.secondModeId}==val){
+                        if ('${item.secondModeId}'==val)
+                        {
                             html += "selected=\"selected\"";
                         }
-                        html+=">" + obj[i].cateName + "</option>";
+
+                        html += ">" + obj[i].cateName + "</option>";
                     }
                     $("#secondModeId").html(html);
 
@@ -175,7 +180,7 @@
 
     //保存数据
     function updateData() {
-        if (checkSelect('citys', '城市不能为空', '城市不能为空')&& checkSelect('source', '平台不能为空', '') &&checkSelect('modeId', '模块不能为空', '') ) {
+        if (checkSelect('citys', '城市不能为空', '城市不能为空') && checkSelect('source', '平台不能为空', '') && checkSelect('modeId', '模块不能为空', '')) {
             var data = $("#addForm").serialize();
             debugger
             $.ajax({

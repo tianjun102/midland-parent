@@ -1,32 +1,31 @@
 package com.midland.web.commons;
 
 public class MetaResult {
-    private String title;
-    private String keywords;
-    private String description;
+    private String websiteTitle;
+    private String websiteKeyWords;
+    private String websiteDescription;
 
-
-    public String getTitle() {
-        return title;
+    public String getWebsiteTitle() {
+        return websiteTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setWebsiteTitle(String websiteTitle) {
+        this.websiteTitle = websiteTitle;
     }
 
-    public String getKeywords() {
-        return keywords;
+    public String getWebsiteKeyWords() {
+        return websiteKeyWords;
     }
 
-    public void setKeywords(String keywords) {
-        this.keywords = keywords;
+    public void setWebsiteKeyWords(String websiteKeyWords) {
+        this.websiteKeyWords = websiteKeyWords;
     }
 
-    public String getDescription() {
-        return description;
+    public String getWebsiteDescription() {
+        return websiteDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setWebsiteDescription(String websiteDescription) {
+        this.websiteDescription = websiteDescription;
     }
 }

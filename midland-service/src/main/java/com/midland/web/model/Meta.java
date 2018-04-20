@@ -21,15 +21,15 @@ public class Meta{
 	/**
 	 * 
 	 **/
-	private String title;
+	private String websiteTitle;
 	/**
 	 * 
 	 **/
-	private String keywords;
+	private String websiteKeyWords;
 	/**
 	 * 
 	 **/
-	private String description;
+	private String websiteDescription;
 	/**
 	 * 模块id
 	 **/
@@ -84,28 +84,28 @@ public class Meta{
 		this.cityName = cityName;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getWebsiteTitle() {
+		return websiteTitle;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setWebsiteTitle(String websiteTitle) {
+		this.websiteTitle = websiteTitle;
 	}
 
-	public String getKeywords() {
-		return keywords;
+	public String getWebsiteKeyWords() {
+		return websiteKeyWords;
 	}
 
-	public void setKeywords(String keywords) {
-		this.keywords = keywords;
+	public void setWebsiteKeyWords(String websiteKeyWords) {
+		this.websiteKeyWords = websiteKeyWords;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getWebsiteDescription() {
+		return websiteDescription;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setWebsiteDescription(String websiteDescription) {
+		this.websiteDescription = websiteDescription;
 	}
 
 	public Integer getModeId() {
@@ -163,14 +163,14 @@ public class Meta{
 		if (cityName != null) {
 			sb.append(", \"cityName\":\"").append(cityName).append("\"");
 		}
-		if (title != null) {
-			sb.append(", \"title\":\"").append(title).append("\"");
+		if (websiteTitle != null) {
+			sb.append(", \"websiteTitle\":\"").append(websiteTitle).append("\"");
 		}
-		if (keywords != null) {
-			sb.append(", \"keywords\":\"").append(keywords).append("\"");
+		if (websiteKeyWords != null) {
+			sb.append(", \"websiteKeyWords\":\"").append(websiteKeyWords).append("\"");
 		}
-		if (description != null) {
-			sb.append(", \"description\":\"").append(description).append("\"");
+		if (websiteDescription != null) {
+			sb.append(", \"websiteDescription\":\"").append(websiteDescription).append("\"");
 		}
 		if (modeId != null) {
 			sb.append(", \"modeId\":\"").append(modeId).append("\"");

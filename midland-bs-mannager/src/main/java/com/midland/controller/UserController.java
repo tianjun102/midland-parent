@@ -36,6 +36,7 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Controller;
@@ -394,14 +395,19 @@ public class UserController extends BaseFilter {
      */
     @RequestMapping(value = "/addUser", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public Object addUser(User user) {
+    public Object addUser(User user) throws Exception {
         Map<String, Object> map = new HashMap<>();
-        map.put("flag", 0);
         try {
             userService.addUser(user);
-            map.put("flag", 1);
+            map.put("state", 0);
         } catch (Exception e) {
-            logger.error("addUser :{}", user, e);
+            if (e instanceof DuplicateKeyException){
+                logger.error("addUser :{}{}", user, e.getMessage());
+                map.put("state", 1);
+            }else {
+                logger.error("addUser :{}", user, e);
+                map.put("state",-1);
+            }
         }
 
         return map;
@@ -559,13 +565,25 @@ public class UserController extends BaseFilter {
     @ResponseBody
     public Object updateUserInfo(User user) {
         Map<String, Object> map = new HashMap<>();
-        if (userService.modifyUser(user) > 0) {
-            map.put("state", 0);
-            map.put("message", "success");
-            return map;
+        try {
+            if (userService.modifyUser(user) > 0) {
+                map.put("state", 0);
+                map.put("message", "success");
+                return map;
+            }
+            map.put("state", -1);
+            map.put("message", "fail");
+
+        } catch (Exception e) {
+            if (e instanceof DuplicateKeyException){
+                logger.error("update :{}{}", user, e.getMessage());
+                map.put("state", 1);
+            }else {
+                logger.error("update :{}", user, e);
+                map.put("state",-1);
+            }
+
         }
-        map.put("state", -1);
-        map.put("message", "fail");
         return map;
     }
 

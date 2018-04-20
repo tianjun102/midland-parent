@@ -24,6 +24,7 @@
                 <value>classpath*:properties/application.properties</value>
                 <value>classpath*:properties/midland.properties</value>
                 <value>classpath*:properties/mail_SMS.properties</value>
+                <value>classpath*:properties/sftp.properties</value>
             </list>
         </property>
     </bean>
