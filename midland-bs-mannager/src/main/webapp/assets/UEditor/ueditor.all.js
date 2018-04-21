@@ -24457,6 +24457,7 @@ UE.plugin.register('simpleupload', function (){
 
                 function callback(){
                     try{
+                        debugger;
                         var link, json, loader,
                             body = (iframe.contentDocument || iframe.contentWindow.document).body,
                             result = body.innerText || body.textContent || '';
@@ -24474,6 +24475,7 @@ UE.plugin.register('simpleupload', function (){
                             showErrorLoader && showErrorLoader(json.state);
                         }
                     }catch(er){
+                        debugger;
                         showErrorLoader && showErrorLoader(me.getLang('simpleupload.loadError'));
                     }
                     form.reset();
