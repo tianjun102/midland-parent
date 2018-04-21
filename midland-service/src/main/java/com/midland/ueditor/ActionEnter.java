@@ -102,7 +102,7 @@ public class ActionEnter extends ServiceBaseFilter {
 				break;
 				
 		}
-		
+
 		return state.toJSONString();
 		
 	}

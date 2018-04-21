@@ -1,5 +1,4 @@
-import com.github.qcloudsms.SmsSingleSender;
-import com.github.qcloudsms.SmsSingleSenderResult;
+import com.jcraft.jsch.SftpException;
 import com.midland.config.MidlandConfig;
 import com.midland.core.util.HttpUtils;
 import com.midland.web.Contants.Contant;
@@ -9,6 +8,7 @@ import com.midland.web.model.WebUser;
 import com.midland.web.model.remote.Agent;
 import com.midland.web.service.AppointmentService;
 import com.midland.web.util.MidlandHelper;
+import com.midland.web.util.sftp.SFTPClient;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +19,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.*;
@@ -46,7 +44,9 @@ public class PTest {
 	private JavaMailSender javaMailSender;
 	@Autowired
 	private ApiHelper apiHelper;
-	
+	@Autowired
+	private SFTPClient sftpUtil;
+
 	@Test
 	public void dsfs(){
 		Map map1 = new HashMap();
@@ -59,6 +59,15 @@ public class PTest {
 		map1.put("id","000c372c-b14f-48e1-a4ae-ba4d5f8d6771");
 		String data1 = HttpUtils.get(midlandConfig.getAgentDetail(), map);
 		List resul1t = MidlandHelper.getAgentPojoList(data1, Agent.class);
+	}
+
+	@Test
+	public void sdfeds() throws FileNotFoundException, SftpException {
+		sftpUtil.login();
+			File file = new File("C:/Users/xiams01/Pictures/201995-120HG1030762.jpg");
+			InputStream is = new FileInputStream(file);
+		sftpUtil.upload("/upload","", "201995-120HG103076212323.jpg", is);
+		sftpUtil.logout();
 	}
 	
 	@Test

@@ -56,7 +56,7 @@
 
             $('#file_upload1').uploadify({
                 'swf': '${ctx }/assets/scripts/uploadify/uploadify.swf',
-                'uploader': '${ctx }/rest/upload/img',
+                'uploader': '${ctx }/rest/upload/video',
                 'multi': false,// 是否支持多个文件上传
                 'fileTypeExts': '*.rm;*.rmvb;*.wmv;*.avi;*.mp4;*.3gp;*.mkv',
                 'onSelectError': uploadify_onSelectError,

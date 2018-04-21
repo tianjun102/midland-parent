@@ -1,5 +1,7 @@
 package com.midland.controller.upload;
 
+import com.jcraft.jsch.SftpException;
+import com.midland.config.SftpProperties;
 import com.midland.core.util.AppSetting;
 import com.midland.web.Contants.Contant;
 import com.midland.web.MidlandException.IllegalCityException;
@@ -11,6 +13,7 @@ import com.midland.web.service.QuotationService;
 import com.midland.web.service.SettingService;
 import com.midland.web.util.Calculate;
 import com.midland.web.util.MidlandHelper;
+import com.midland.web.util.sftp.SFTPClient;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -46,7 +49,6 @@ import java.util.*;
  * Created by 'ms.x' on 2017/8/17.
  */
 @Controller
-@SuppressWarnings("all")
 @RequestMapping("/upload")
 public class FileLoadController implements ServletConfigAware, ServletContextAware {
 
@@ -57,6 +59,8 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
     private QuotationService quotationServiceImpl;
     @Autowired
     private SettingService settingServiceImpl;
+    @Autowired
+    private SFTPClient sftpClient;
     @Autowired
     private QuotationSecondHandService quotationSecondHandServiceImpl;
 
@@ -648,7 +652,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
     }
 
     /**
-     * 图片,文件上传
+     * 图片上传
      *
      * @param request
      * @param response
@@ -656,9 +660,43 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
      * @throws FileUploadException
      */
     @RequestMapping("/img")
-    public void upload(HttpServletRequest request, HttpServletResponse response) throws IOException, FileUploadException {
-        DiskFileItemFactory factory = new DiskFileItemFactory();
+    public void uploadImg(HttpServletRequest request, HttpServletResponse response) throws IOException, FileUploadException, SftpException {
 
+        uploadFile(request, response, sftpClient.getSftpProperties().getImgPath());
+    }
+    /**
+     * 视频上传
+     *
+     * @param request
+     * @param response
+     * @throws IOException
+     * @throws FileUploadException
+     */
+    @RequestMapping("/video")
+    public void uploadVideo(HttpServletRequest request, HttpServletResponse response) throws IOException, FileUploadException, SftpException {
+
+        uploadFile(request, response, sftpClient.getSftpProperties().getVideoPath());
+    }
+
+    /**
+     * 文件上传
+     *
+     * @param request
+     * @param response
+     * @throws IOException
+     * @throws FileUploadException
+     */
+    @RequestMapping("/file")
+    public void uploadAttach(HttpServletRequest request, HttpServletResponse response) throws IOException, FileUploadException, SftpException {
+
+        uploadFile(request, response, sftpClient.getSftpProperties().getFilePath());
+    }
+
+
+
+
+    private void uploadFile(HttpServletRequest request, HttpServletResponse response, String storePath) throws IOException, SftpException {
+        DiskFileItemFactory factory = new DiskFileItemFactory();
         // Configure a repository (to ensure a secure temp location is used)
         ServletContext servletContext = this.servletContext;
         File repository = (File) servletContext.getAttribute("javax.servlet.context.tempdir");
@@ -675,7 +713,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
                     if (item.isFormField()) {
                         processFormField(item);
                     } else {
-                        filePath = processUploadedFile(item);
+                        filePath = processUploadedFile(storePath,item);
                     }
                 }
                 response.getWriter().print(filePath);
@@ -688,7 +726,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
         }
     }
 
-    private String processUploadedFile(FileItem item) throws FileUploadException {
+    private String processUploadedFile(String storePath,FileItem item) throws FileUploadException, IOException, SftpException {
         // Process a file upload
         if (!item.isFormField()) {
             UUID uuid = UUID.randomUUID();
@@ -697,37 +735,56 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
             String name = fileName.substring(0, index);
             String prefix = fileName.substring(index);
             fileName = uuid + "_" + name + prefix;
-
-            String storePath;
-            String opposite;
-            if (isWindows()) {
-                opposite = "/store/";
-                storePath = System.getProperty("test.webapp") + opposite;
-            } else {
-                storePath = AppSetting.getAppSetting("upload_dir");
-                opposite = storePath;
-            }
-            File file = new File(storePath);
-            if (!file.exists()) {
-                try {
-                    file.mkdirs();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            File uploadedFile = new File(storePath + fileName);
-            if (!uploadedFile.exists()) {
-                try {
-                    item.write(uploadedFile);
-                } catch (Exception e) {
-                    throw new FileUploadException("上传失败");
-                }
-            }
-            return opposite + fileName;
+            sftpClient.login();
+            sftpClient.upload(storePath,  fileName,  item.getInputStream());
+            sftpClient.logout();
+            StringBuffer sb = new StringBuffer();
+            sb.append(sftpClient.getSftpProperties().getImgDomain()).append(storePath).append(fileName);
+            return sb.toString();
         }
         return null;
     }
 
+
+//    private String processUploadedFile(FileItem item) throws FileUploadException {
+//        // Process a file upload
+//        if (!item.isFormField()) {
+//            UUID uuid = UUID.randomUUID();
+//            String fileName = item.getName();
+//            int index = fileName.lastIndexOf(".");
+//            String name = fileName.substring(0, index);
+//            String prefix = fileName.substring(index);
+//            fileName = uuid + "_" + name + prefix;
+//
+//            String storePath;
+//            String opposite;
+//            if (isWindows()) {
+//                opposite = "/store/";
+//                storePath = System.getProperty("test.webapp") + opposite;
+//            } else {
+//                storePath = AppSetting.getAppSetting("upload_dir");
+//                opposite = storePath;
+//            }
+//            File file = new File(storePath);
+//            if (!file.exists()) {
+//                try {
+//                    file.mkdirs();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            File uploadedFile = new File(storePath + fileName);
+//            if (!uploadedFile.exists()) {
+//                try {
+//                    item.write(uploadedFile);
+//                } catch (Exception e) {
+//                    throw new FileUploadException("上传失败");
+//                }
+//            }
+//            return opposite + fileName;
+//        }
+//        return null;
+//    }
 
     private void processFormField(FileItem item) {
         // Process a regular form field
@@ -807,5 +864,6 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
             return this;
         }
     }
+
 
 }
