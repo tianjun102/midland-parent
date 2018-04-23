@@ -23,6 +23,7 @@ public class MidlandHelper {
     private static final String COMMON_DATE = "yyyy-MM-dd HH:mm:ss";
     private static final String DATE = "yyyy-MM-dd";
     private static final String MONTH = "yyyy-MM";
+    private static final String FILENAME_MONTH = "yyyyMM";
     private static final String CODE_FORMAT = "#00000000";
     private static final String LONG_CODE_FORMAT = "#000000000000";
 
@@ -44,6 +45,17 @@ public class MidlandHelper {
     public static String formatMonth(String time) {
         Date tempTime = DateUtils.parseStringToDateYYMMDD(time);
         DateFormat format = new SimpleDateFormat(MONTH);
+        return format.format(tempTime);
+    }
+ /**
+     * String 2018-01-01 12:12:12  to   2018-01
+     *
+     * @param time
+     * @return
+     */
+    public static String formatFileNameMonth(String time) {
+        Date tempTime = DateUtils.parseStringToDateYYMMDD(time);
+        DateFormat format = new SimpleDateFormat(FILENAME_MONTH);
         return format.format(tempTime);
     }
 

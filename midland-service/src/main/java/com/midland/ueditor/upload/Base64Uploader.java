@@ -29,9 +29,10 @@ public final class Base64Uploader extends ServiceBaseFilter {
 				(String) conf.get("filename"));
 		
 		savePath = savePath + suffix;
-		String physicalPath = (String) conf.get("rootPath") + savePath;
+		String fileName = savePath.substring(savePath.lastIndexOf("/") + 1, savePath.length());
+		String path = savePath.substring(0, savePath.lastIndexOf("/") + 1);
 
-		State storageState = StorageManager.saveBinaryFile(data, physicalPath);
+		State storageState = StorageManager.saveBinaryFileBySFTP(data,path, fileName);
 
 		if (storageState.isSuccess()) {
 			storageState.putInfo("url", AppSetting.getAppSetting("imgdomain")+PathFormat.format(savePath.substring(1, savePath.length())));

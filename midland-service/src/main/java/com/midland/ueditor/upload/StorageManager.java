@@ -1,11 +1,14 @@
 package com.midland.ueditor.upload;
 
 
+import com.jcraft.jsch.SftpException;
 import com.midland.base.ServiceBaseFilter;
 import com.midland.ueditor.define.AppInfo;
 import com.midland.ueditor.define.BaseState;
 import com.midland.ueditor.define.State;
+import com.midland.web.util.sftp.SFTPClient;
 import org.apache.commons.io.FileUtils;
+import org.apache.xmlbeans.impl.xb.xsdschema.AppinfoDocument;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +21,35 @@ public class StorageManager  extends ServiceBaseFilter {
 
 	public StorageManager() {
 	}
-	
+
+	public static State saveBinaryFileBySFTP(byte[] data, String path,String fileName) {
+
+		InputStream is =  new ByteArrayInputStream(data);
+		File file = new File(path);
+
+		State state = valid(file);
+
+		if (!state.isSuccess()) {
+			return state;
+		}
+		SFTPClient sftpClient = SFTPClient.getInstance();
+
+		try {
+			sftpClient.login();
+			sftpClient.upload(path,fileName,is);
+		}catch (SftpException e) {
+			return new BaseState(false, AppInfo.IO_ERROR);
+		} finally {
+			sftpClient.logout();
+		}
+
+		state = new BaseState(true, file.getAbsolutePath());
+		state.putInfo( "size", data.length );
+		state.putInfo( "title", file.getName() );
+		return state;
+	}
+
+
 	public static State saveBinaryFile(byte[] data, String path) {
 		File file = new File(path);
 
@@ -85,6 +116,39 @@ public class StorageManager  extends ServiceBaseFilter {
 		return new BaseState(false, AppInfo.IO_ERROR);
 	}
 
+	public static State saveFileBySFTP(InputStream is, String path, long maxSize,String fileName){
+		State state = null;
+
+		File tmpFile = getTmpFile();
+
+		SFTPClient sftpClient =null;
+		try {
+
+			if (tmpFile.length() > maxSize) {
+				tmpFile.delete();
+				return new BaseState(false, AppInfo.MAX_SIZE);
+			}
+			sftpClient= SFTPClient.getInstance();
+			sftpClient.login();
+			sftpClient.upload(path,fileName,is);
+			state = new BaseState(true, AppInfo.SUCCESS);
+			if (!state.isSuccess()) {
+				sftpClient.delete(path,fileName);
+			}
+			return state;
+
+		} catch (SftpException e) {
+			try {
+				sftpClient.delete(path,fileName);
+			} catch (SftpException e1) {
+				e1.printStackTrace();
+			}
+			return new BaseState(false, AppInfo.IO_ERROR);
+		}finally {
+			sftpClient.logout();
+		}
+	}
+
 	public static State saveFileByInputStream(InputStream is, String path,String shortPath) {
 		State state = null;
 
@@ -121,6 +185,7 @@ public class StorageManager  extends ServiceBaseFilter {
 		String tmpFileName = (Math.random() * 10000 + "").replace(".", "");
 		return new File(tmpDir, tmpFileName);
 	}
+
 
 	private static State saveTmpFile(File tmpFile, String path,String shortPath) {
 		State state = null;

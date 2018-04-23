@@ -3,6 +3,7 @@ package com.midland.web.controller;
 import com.github.qcloudsms.SmsSingleSender;
 import com.github.qcloudsms.SmsSingleSenderResult;
 import com.google.common.collect.Maps;
+import com.midland.config.SftpProperties;
 import com.midland.core.util.SmsUtil;
 import com.midland.core.util.UploadImgUtil;
 import com.midland.web.api.SmsSender.SmsModel;
@@ -404,7 +405,9 @@ public class WebUserController extends WebCommonsController {
             if (null != obj) {
                 WebUser user = (WebUser) obj;
                 Map<String, String> map = Maps.newHashMap();
-                map.put("path", "/home/upload/");
+                StringBuilder sb=new StringBuilder();
+                sb.append(SftpProperties.getInstance().getImgPath()).append("headImg/").append(MidlandHelper.formatFileNameMonth(MidlandHelper.getCurrentTime())).append("/");
+                map.put("path", sb.toString());
                 map.put("fileName", user.getUsername());
                 map.put("oldImg", user.getHeadImg());
                 map.put("imgContent", params.get("imgContent"));

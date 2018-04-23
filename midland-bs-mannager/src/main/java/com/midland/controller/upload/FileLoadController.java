@@ -661,8 +661,9 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
      */
     @RequestMapping("/img")
     public void uploadImg(HttpServletRequest request, HttpServletResponse response) throws IOException, FileUploadException, SftpException {
-
-        uploadFile(request, response, sftpClient.getSftpProperties().getImgPath());
+        StringBuilder sb = new StringBuilder();
+        sb.append(sftpClient.getSftpProperties().getImgPath()).append(MidlandHelper.formatFileNameMonth(MidlandHelper.getCurrentTime())).append("/");
+        uploadFile(request, response, sb.toString());
     }
     /**
      * 视频上传
@@ -674,8 +675,9 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
      */
     @RequestMapping("/video")
     public void uploadVideo(HttpServletRequest request, HttpServletResponse response) throws IOException, FileUploadException, SftpException {
-
-        uploadFile(request, response, sftpClient.getSftpProperties().getVideoPath());
+        StringBuilder sb = new StringBuilder();
+        sb.append(sftpClient.getSftpProperties().getVideoPath()).append(MidlandHelper.formatFileNameMonth(MidlandHelper.getCurrentTime())).append("/");
+        uploadFile(request, response, sb.toString());
     }
 
     /**
@@ -688,8 +690,9 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
      */
     @RequestMapping("/file")
     public void uploadAttach(HttpServletRequest request, HttpServletResponse response) throws IOException, FileUploadException, SftpException {
-
-        uploadFile(request, response, sftpClient.getSftpProperties().getFilePath());
+        StringBuilder sb = new StringBuilder();
+        sb.append(sftpClient.getSftpProperties().getFilePath()).append(MidlandHelper.formatFileNameMonth(MidlandHelper.getCurrentTime())).append("/");
+        uploadFile(request, response, sb.toString());
     }
 
 
@@ -735,9 +738,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
             String name = fileName.substring(0, index);
             String prefix = fileName.substring(index);
             fileName = uuid + "_" + name + prefix;
-            sftpClient.login();
-            sftpClient.upload(storePath,  fileName,  item.getInputStream());
-            sftpClient.logout();
+            sftpClient.loginUploadLogout(storePath,  fileName,  item.getInputStream());
             StringBuffer sb = new StringBuffer();
             sb.append(sftpClient.getSftpProperties().getImgDomain()).append(storePath).append(fileName);
             return sb.toString();

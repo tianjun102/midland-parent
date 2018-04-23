@@ -1,16 +1,14 @@
 package com.midland.core.util;
 
-import java.io.File;
+import java.io.*;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.midland.config.SftpProperties;
+import com.midland.web.util.sftp.SFTPClient;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.math.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -58,30 +56,6 @@ public class UploadImgUtil {
 		return null;
 	};
 
-	public static String uploadImgFile(MultipartFile file, String path) {
-		String str = File.separator + "upload" + File.separator;
-		if (file == null)
-			return str;
-		try {
-			String fileName = file.getOriginalFilename();
-			String prefix = fileName.substring(fileName.lastIndexOf("."));
-			fileName = System.currentTimeMillis() + prefix;
-			File fl = new File(path + fileName);
-			if (!fl.getParentFile().exists()) {
-				fl.getParentFile().mkdirs();
-			}
-			if (!fl.exists()) {
-				fl.createNewFile();
-			}
-			if (StringUtils.isNotBlank(fileName)) {
-				file.transferTo(fl);
-			}
-			str = str + fileName;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return str;
-	}
 
 	// base64字符串转化成图片
 
@@ -93,18 +67,15 @@ public class UploadImgUtil {
 		String fileNameTemp = map.get("fileName");
 		String path = map.get("path");
 		String oldImg = map.get("oldImg");
-		
+
+
 		String type = imgContent.substring(imgContent.indexOf("/")+1,imgContent.indexOf(";"));
-		String img = imgContent.substring(imgContent.indexOf(",")+1,imgContent.length());
+		String fileName = fileNameTemp+"."+type;
+   		String img = imgContent.substring(imgContent.indexOf(",")+1,imgContent.length());
 		BASE64Decoder decoder = new BASE64Decoder();
+		SFTPClient sftpClient=null;
 		try {
-			if(StringUtils.isNotEmpty(oldImg)){
-				if (oldImg.contains("home")){
-					boolean bool = FileUtils.deleteQuietly(new File(oldImg));
-				}else {
-					boolean bool = FileUtils.deleteQuietly(new File("/home/"+oldImg));
-				}
-			}
+
 			// Base64解码
 			byte[] b = decoder.decodeBuffer(img);
 
@@ -113,24 +84,21 @@ public class UploadImgUtil {
 					b[i] += 256;
 				}
 			}
-			// 生成jpeg图片
-			String fileName = "head/"+fileNameTemp+"."+type;// 新生成的图片;
-			String imgFilePath = path + fileName ;
-			File fl = new File(imgFilePath);
-			if (!fl.getParentFile().exists()) {
-				fl.getParentFile().mkdirs();
-			}
-			if (!fl.exists()) {
-				fl.createNewFile();
-			}
-			OutputStream out = new FileOutputStream(imgFilePath);
-			out.write(b);
-			out.flush();
-			out.close();
-			return path+fileName;
+			InputStream is = new ByteArrayInputStream(b);
+			sftpClient=SFTPClient.getInstance();
+			sftpClient.login();
+			sftpClient.upload(path,fileName,is);
+			StringBuilder sb = new StringBuilder();
+			sb.append(SftpProperties.getInstance().getImgDomain());
+			sb.append(path).append(fileName);
+			return sb.toString();
+
 		} catch (Exception e) {
 			e.printStackTrace();
+			sftpClient.logout();
 			return "";
+		}finally {
+
 		}
 	}
 	public static String GenerateFile(String fileName,String fileContent,String path,String oldFileName) { // 对字节数组字符串进行Base64解码并生成图片

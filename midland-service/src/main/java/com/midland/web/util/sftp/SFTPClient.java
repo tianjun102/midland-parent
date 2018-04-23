@@ -19,19 +19,43 @@ import java.util.Vector;
 public class SFTPClient {
     private transient Logger log = LoggerFactory.getLogger(this.getClass());  
     
-    private ChannelSftp sftp;  
-        
+    private  ChannelSftp sftp;
+    private static SFTPClient sftpClient;
+    private static SftpProperties sftpProperties = SftpProperties.getInstance();
+
+
     private Session session;
 
-    @Autowired
-    private SftpProperties sftpProperties;
-    public SFTPClient(){}
-    
+
+    private SFTPClient(){}
+
+
+
+    public static SFTPClient getInstance(){
+        if (sftpClient==null){
+            synchronized (SFTPClient.class){
+                if (sftpClient==null){
+                    sftpClient=new SFTPClient();
+                }
+            }
+        }
+        return sftpClient;
+    }
+
+
+    public void loginUploadLogout(String directory, String sftpFileName, InputStream input) throws SftpException {
+        login();
+        upload(directory,sftpFileName,input);
+        logout();
+    }
+
+
     /** 
      * 连接sftp服务器 
      */  
     public void login(){  
-        try {  
+        try {
+
             JSch jsch = new JSch();  
             if (StringUtils.isNotEmpty(sftpProperties.getPrivateKey())) {
                 jsch.addIdentity(sftpProperties.getPrivateKey());// 设置私钥

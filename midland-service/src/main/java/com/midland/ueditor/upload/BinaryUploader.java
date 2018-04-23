@@ -74,11 +74,12 @@ public class BinaryUploader  extends ServiceBaseFilter {
 
 			savePath = PathFormat.parse(savePath, originFileName);
 
-			String physicalPath = (String) conf.get("rootPath") + savePath;
+			String fileName = savePath.substring(savePath.lastIndexOf("/") + 1, savePath.length());
+			String path = savePath.substring(0, savePath.lastIndexOf("/") + 1);
 
 			InputStream is = fileStream.openStream();
-			State storageState = StorageManager.saveFileByInputStream(is,
-					physicalPath, maxSize,savePath);
+			State storageState = StorageManager.saveFileBySFTP(is,
+					path, maxSize,fileName);
 			is.close();
 
 			if (storageState.isSuccess()) {

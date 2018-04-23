@@ -1,34 +1,51 @@
 package com.midland.config;
 
-import org.apache.commons.lang3.text.StrBuilder;
+import com.midland.core.util.AppSetting;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
-@Component
+import java.io.InputStream;
+import java.util.Properties;
+
+@Configuration
 public class SftpProperties {
+    private static SftpProperties sftpProperties;
 
-    @Value("${sftp.host}")
-    private String host;//服务器连接ip
-    @Value("${sftp.username}")
-    private String username;//用户名
-    @Value("${sftp.password}")
-    private String password;//密码
-    @Value("${sftp.port}")
-    private int port;//端口号
-    @Value("${sftp.privateKey}")
-    private String privateKey;//私钥
-    @Value("${sftp.basePath}")
-    private String basePath;//根目录
+    private static Properties prop = new Properties();
+    private String host=String.valueOf(prop.get("sftp.host"));//服务器连接ip
+    private String username=String.valueOf(prop.get("sftp.username"));//用户名
+    private String password=String.valueOf(prop.get("sftp.password"));//密码
+    private int port=Integer.valueOf(String.valueOf(prop.get("sftp.port")));//端口号
+    private String privateKey=String.valueOf(prop.get("sftp.privateKey"));//私钥
+    private String basePath=String.valueOf(prop.get("sftp.basePath"));//根目录
 
 
-    @Value("${img.domain}")
-    private String imgDomain;//图片根地址
-    @Value("${file.path}")
-    private String filePath;//图片根地址
-    @Value("${video.path}")
-    private String videoPath;//图片根地址
-    @Value("${img.path}")
-    private String imgPath;//图片根地址
+    private String imgDomain=String.valueOf(prop.get("img.domain"));//图片根地址
+    private String filePath=String.valueOf(prop.get("file.path"));//图片根地址
+    private String videoPath=String.valueOf(prop.get("video.path"));//图片根地址
+    private String imgPath=String.valueOf(prop.get("img.path"));//图片根地址
+
+    static{
+        try {
+            InputStream inputStream =
+                    AppSetting.class.getClassLoader().getResourceAsStream("/properties/sftp.properties");
+            prop.load(inputStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    public static SftpProperties getInstance(){
+        if (sftpProperties==null){
+            synchronized (SftpProperties.class){
+                if (sftpProperties==null){
+                    sftpProperties=new SftpProperties();
+                }
+            }
+        }
+        return sftpProperties;
+    }
+
 
 
     public String getFilePath() {
