@@ -2,6 +2,7 @@ package com.midland.ueditor.upload;
 
 
 import com.midland.base.ServiceBaseFilter;
+import com.midland.config.SftpProperties;
 import com.midland.core.util.AppSetting;
 import com.midland.ueditor.PathFormat;
 import com.midland.ueditor.define.AppInfo;
@@ -83,7 +84,7 @@ public class BinaryUploader  extends ServiceBaseFilter {
 			is.close();
 
 			if (storageState.isSuccess()) {
-				storageState.putInfo("url", AppSetting.getAppSetting("imgdomain")+PathFormat.format(savePath.substring(1, savePath.length())));
+				storageState.putInfo("url", SftpProperties.getInstance().getImgDomain()+PathFormat.format(savePath.substring(1, savePath.length())));
 				storageState.putInfo("type", suffix);
 				storageState.putInfo("original", originFileName + suffix);
 				

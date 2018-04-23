@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import com.midland.config.SftpProperties;
 import com.midland.core.util.AppSetting;
 import com.midland.ueditor.PathFormat;
 import com.midland.ueditor.define.AppInfo;
@@ -96,7 +97,7 @@ public class ImageHunter {
 			State state = StorageManager.saveFileByInputStream( connection.getInputStream(), physicalPath ,savePath);
 			
 			if ( state.isSuccess() ) {
-				state.putInfo( "url", AppSetting.getAppSetting("imgdomain")+PathFormat.format( savePath.substring(1, savePath.length()) ) );
+				state.putInfo( "url", SftpProperties.getInstance().getImgDomain()+PathFormat.format( savePath.substring(1, savePath.length()) ) );
 				state.putInfo( "source", urlStr );
 			}
 			

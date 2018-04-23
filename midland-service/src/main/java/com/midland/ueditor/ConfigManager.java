@@ -11,6 +11,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.midland.config.SftpProperties;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -147,7 +148,7 @@ public final class ConfigManager {
 		
 		conf.put( "savePath", savePath );
 		//conf.put( "rootPath", this.rootPath );
-		conf.put( "rootPath", AppSetting.getAppSetting("upload_dir") );
+		conf.put( "rootPath", AppSetting.getAppSetting(SftpProperties.getInstance().getBasePath()) );
 		return conf;
 		
 	}

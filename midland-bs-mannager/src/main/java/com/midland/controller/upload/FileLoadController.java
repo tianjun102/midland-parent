@@ -747,46 +747,6 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
     }
 
 
-//    private String processUploadedFile(FileItem item) throws FileUploadException {
-//        // Process a file upload
-//        if (!item.isFormField()) {
-//            UUID uuid = UUID.randomUUID();
-//            String fileName = item.getName();
-//            int index = fileName.lastIndexOf(".");
-//            String name = fileName.substring(0, index);
-//            String prefix = fileName.substring(index);
-//            fileName = uuid + "_" + name + prefix;
-//
-//            String storePath;
-//            String opposite;
-//            if (isWindows()) {
-//                opposite = "/store/";
-//                storePath = System.getProperty("test.webapp") + opposite;
-//            } else {
-//                storePath = AppSetting.getAppSetting("upload_dir");
-//                opposite = storePath;
-//            }
-//            File file = new File(storePath);
-//            if (!file.exists()) {
-//                try {
-//                    file.mkdirs();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//            File uploadedFile = new File(storePath + fileName);
-//            if (!uploadedFile.exists()) {
-//                try {
-//                    item.write(uploadedFile);
-//                } catch (Exception e) {
-//                    throw new FileUploadException("上传失败");
-//                }
-//            }
-//            return opposite + fileName;
-//        }
-//        return null;
-//    }
-
     private void processFormField(FileItem item) {
         // Process a regular form field
         if (item.isFormField()) {
