@@ -121,11 +121,28 @@ public class UserController extends BaseFilter {
                 nameCookie.setPath(request.getContextPath());
                 nameCookie.setMaxAge(60 * 60 * 24 * 3);
                 response.addCookie(nameCookie);
-                Cookie passwordCookie = new Cookie("password", password);
+                Cookie passwordCookie = new Cookie("password", URLEncoder.encode(password));
                 passwordCookie.setPath(request.getContextPath());
                 passwordCookie.setMaxAge(60 * 60 * 24 * 3);
                 response.addCookie(passwordCookie);
+                Cookie remenber = new Cookie("remenber",flag);
+                remenber.setPath(request.getContextPath());
+                remenber.setMaxAge(60 * 60 * 24 * 3);
+                response.addCookie(remenber);
 
+            }else {
+                Cookie nameCookie = new Cookie("username", null);
+                nameCookie.setPath(request.getContextPath());
+                nameCookie.setMaxAge(60 * 60 * 24 * 3);
+                response.addCookie(nameCookie);
+                Cookie passwordCookie = new Cookie("password", null);
+                passwordCookie.setPath(request.getContextPath());
+                passwordCookie.setMaxAge(60 * 60 * 24 * 3);
+                response.addCookie(passwordCookie);
+                Cookie remenber = new Cookie("remenber",null);
+                remenber.setPath(request.getContextPath());
+                remenber.setMaxAge(60 * 60 * 24 * 3);
+                response.addCookie(remenber);
             }
             user.setPassword(ApplicationUtils.sha256Hex(password));
             user.setUsername(username);
@@ -209,7 +226,7 @@ public class UserController extends BaseFilter {
         // 登出操作
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
-        return "redirect: /loginIndex";
+        return "login";
     }
 
     @RequestMapping(value = "/loginIndex", method = RequestMethod.GET)

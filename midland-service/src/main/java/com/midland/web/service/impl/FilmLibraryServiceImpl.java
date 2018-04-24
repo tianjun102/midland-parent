@@ -73,6 +73,22 @@ public class FilmLibraryServiceImpl implements FilmLibraryService {
             throw e;
         }
     }
+    /**
+     * 统计点击量
+     **/
+    @Override
+    public void clickNum(Integer id) throws Exception {
+        try {
+            log.debug("clickNum  {}", id);
+            int result = filmLibraryMapper.clickNum(id);
+            if (result < 1) {
+                throw new Exception("clickNum失败");
+            }
+        } catch (Exception e) {
+            log.error("clickNum  {}", id, e);
+            throw e;
+        }
+    }
 
     /**
      * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）

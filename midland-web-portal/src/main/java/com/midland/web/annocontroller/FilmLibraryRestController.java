@@ -114,6 +114,26 @@ public class FilmLibraryRestController extends ServiceBaseFilter {
     }
 
     /**
+     * 更新
+     **/
+    @RequestMapping("click_num")
+    public Object clickNum(@RequestBody FilmLibrary obj) throws Exception {
+        Result result = new Result();
+        try {
+            log.info("clickNum  {}", obj);
+            filmLibraryServiceImpl.clickNum(obj.getId());
+            result.setCode(ResultStatusUtils.STATUS_CODE_200);
+            result.setMsg("success");
+        } catch (Exception e) {
+            log.error("clickNum  {}", obj, e);
+            result.setCode(ResultStatusUtils.STATUS_CODE_203);
+            result.setMsg("service error");
+        }
+        return result;
+    }
+
+
+    /**
      * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
      **/
     @RequestMapping("list")

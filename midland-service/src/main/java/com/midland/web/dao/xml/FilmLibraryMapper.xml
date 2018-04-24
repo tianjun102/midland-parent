@@ -49,6 +49,10 @@
         where id= #{id}
     </update>
 
+    <update id="clickNum">
+        update film_library set click_num=click_num+1 where id= #{id}
+    </update>
+
     <select id="findFilmLibraryList" parameterType="com.midland.web.model.FilmLibrary" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

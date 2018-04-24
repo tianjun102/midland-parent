@@ -14,6 +14,7 @@ public interface FilmLibraryMapper {
     int deleteFilmLibraryById(Integer filmLibrary);
 
     int updateFilmLibraryById(FilmLibrary filmLibrary);
+    int clickNum(Integer id );
 
     int insertFilmLibrary(FilmLibrary filmLibrary);
 

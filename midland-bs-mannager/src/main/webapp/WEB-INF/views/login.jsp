@@ -39,6 +39,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <%
      String username = "";
      String password = "";
+     String remenber = "0";
  
      Cookie[] cookies = request.getCookies();
      if (cookies != null) {
@@ -47,11 +48,20 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 				 username = cookies[i].getValue();
 			 } else if ("password".equals(cookies[i].getName())) {
 				 password = cookies[i].getValue();
+			 }else if("remenber".equals(cookies[i].getName())){
+			     remenber=cookies[i].getValue();
 			 }
 		 }
 	 }
 %>
-<script type="text/javascript" > 
+<script type="text/javascript" >
+	$(function () {
+		if (<%= remenber%>==1){
+		    $("#remenberChech").attr("checked",true);
+		}
+    })
+
+
 if (window != top) 
 top.location.href = location.href; 
 </script>
@@ -94,14 +104,14 @@ top.location.href = location.href;
 						</ul>
 						<form action="" method="post" id="bill">
 							<div class="login-box">
-								<input class = "boxwrap" type="text" name="username" id="username" value="<%=username %>" placeholder="用户名" /> 
+								<input class = "boxwrap" type="text" name="username" id="username" value="<%=username %>" onblur="checkCookie()" placeholder="用户名" />
 								<img src="${ctx}/assets/img/user.png" id="user"> 
 								<input class = "boxwrap" type="password" name="password" id="password" value="<%=password %>" placeholder="密码" /> 
 								<img src="${ctx}/assets/img/lock.png" id="lock"> 
 								<input class = "boxwrap" type="text" name="id-code" id="id-code" placeholder="验证码" maxlength="4" onblur="javascript:;" /> 
 								<img src="${ctx}/assets/img/key.png" id="key">
 								<a href="#" class="yz-code"><input class = "boxwrap" type="button" id="code" onclick="createCode();" /></a>
-								<em class = "remeber"><input type = "checkbox" name="remember" value="1"/>记住密码</em> 
+								<em class = "remeber"><input id="remenberChech" type = "checkbox" name="remember" value="1" />记住密码</em>
 								<span class="warn-area"	id="warnArea"></span>
 							</div>
 							<input type="button" value="登录" id="logsub" />
@@ -135,6 +145,19 @@ top.location.href = location.href;
 
 	<!-- 本页私有js -->
 	<script type="text/javascript">
+		function checkCookie() {
+		    debugger;
+            if ("<%= username%>" != $("#username").val()){
+                $("#password").val("");
+                $("#remenberChech").attr("checked",false);
+            }else {
+                $("#password").val("<%= password%>");
+                $("#remenberChech").attr("checked",true);
+
+			}
+        }
+		
+		
 		//二维码显示
 		
 		$(".two_code").hover(function() {

@@ -26,6 +26,8 @@ public interface FilmLibraryService {
      **/
     void insertFilmLibrary(FilmLibrary filmLibrary) throws Exception;
 
+    void clickNum(Integer id) throws Exception;
+
     /**
      * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
      **/

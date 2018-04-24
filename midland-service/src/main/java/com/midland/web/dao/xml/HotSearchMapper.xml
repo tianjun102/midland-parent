@@ -6,7 +6,6 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="keywords" property="keywords" jdbcType="VARCHAR"/>
         <result column="count" property="count" jdbcType="INTEGER"/>
-        <result column="sort_order" property="sortOrder" jdbcType="INTEGER"/>
         <result column="city_id" property="cityId" jdbcType="VARCHAR"/>
         <result column="menu_id" property="menuId" jdbcType="INTEGER"/>
         <result column="is_show" property="isShow" jdbcType="INTEGER"/>
@@ -19,7 +18,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,keywords,count,sort_order,city_id,menu_id,is_show,order_by,is_delete,city_name,menu_name,source,url
+        id,keywords,count,city_id,menu_id,is_show,order_by,is_delete,city_name,menu_name,source,url
     </sql>
 
     <select id="selectHotSearchById" resultMap="BaseResultMap">
@@ -72,7 +71,20 @@
             and is_delete=0
         </if>
         <include refid="select_option"/>
-        ORDER BY order_by ASC
+        <choose>
+            <when test="sortOrder==null">
+                ORDER BY order_by ASC
+            </when>
+            <otherwise>
+                <if test="sortOrder==0">
+                    ORDER BY count ASC
+                </if>
+                <if test="sortOrder==1">
+                    ORDER BY count DESC
+                </if>
+            </otherwise>
+        </choose>
+
     </select>
 
     <insert id="insertHotSearch" parameterType="com.midland.web.model.HotSearch">
@@ -87,9 +99,7 @@
             <if test="count != null">
                 count,
             </if>
-            <if test="sortOrder != null">
-                sort_order,
-            </if>
+
             <if test="cityId != null">
                 city_id,
             </if>
@@ -127,9 +137,7 @@
             <if test="count != null">
                 #{count,jdbcType=INTEGER},
             </if>
-            <if test="sortOrder != null">
-                #{sortOrder,jdbcType=INTEGER},
-            </if>
+
             <if test="cityId != null">
                 #{cityId,jdbcType=VARCHAR},
             </if>
@@ -168,9 +176,7 @@
         <if test="count != null">
             count= #{count,jdbcType=INTEGER},
         </if>
-        <if test="sortOrder != null">
-            sort_order= #{sortOrder,jdbcType=INTEGER},
-        </if>
+
         <if test="cityId != null">
             city_id= #{cityId,jdbcType=VARCHAR},
         </if>
@@ -212,9 +218,7 @@
         <if test="count != null">
             and count= #{count,jdbcType=INTEGER}
         </if>
-        <if test="sortOrder != null">
-            and sort_order= #{sortOrder,jdbcType=INTEGER}
-        </if>
+
         <if test="cityId != null">
             and city_id= #{cityId,jdbcType=VARCHAR}
         </if>
@@ -253,9 +257,7 @@
         <if test="count != null">
             and count= #{count,jdbcType=INTEGER}
         </if>
-        <if test="sortOrder != null">
-            and sort_order= #{sortOrder,jdbcType=INTEGER}
-        </if>
+
         <if test="cityId != null">
             and city_id= #{cityId,jdbcType=VARCHAR}
         </if>
