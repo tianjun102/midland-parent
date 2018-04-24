@@ -738,7 +738,16 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
             String name = fileName.substring(0, index);
             String prefix = fileName.substring(index);
             fileName = uuid + "_" + name + prefix;
-            sftpClient.loginUploadLogout(storePath,  fileName,  item.getInputStream());
+            try {
+                sftpClient.login();
+                sftpClient.upload(storePath,  fileName,  item.getInputStream());
+            } catch (SftpException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }finally {
+                sftpClient.logout();
+            }
             StringBuffer sb = new StringBuffer();
             sb.append(sftpClient.getSftpProperties().getImgDomain()).append(storePath).append(fileName);
             return sb.toString();

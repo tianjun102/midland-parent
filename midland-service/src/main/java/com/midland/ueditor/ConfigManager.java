@@ -148,7 +148,7 @@ public final class ConfigManager {
 		
 		conf.put( "savePath", savePath );
 		//conf.put( "rootPath", this.rootPath );
-		conf.put( "rootPath", AppSetting.getAppSetting(SftpProperties.getInstance().getBasePath()) );
+		conf.put( "rootPath",SftpProperties.getInstance().getBasePath() );
 		return conf;
 		
 	}

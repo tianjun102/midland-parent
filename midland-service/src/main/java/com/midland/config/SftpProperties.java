@@ -1,6 +1,7 @@
 package com.midland.config;
 
 import com.midland.core.util.AppSetting;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,7 +16,7 @@ public class SftpProperties {
     private String host=String.valueOf(prop.get("sftp.host"));//服务器连接ip
     private String username=String.valueOf(prop.get("sftp.username"));//用户名
     private String password=String.valueOf(prop.get("sftp.password"));//密码
-    private int port=Integer.valueOf(String.valueOf(prop.get("sftp.port")));//端口号
+    private Integer port=Integer.valueOf(StringUtils.isEmpty("null".equals(String.valueOf(prop.get("sftp.port")))?null:String.valueOf(prop.get("sftp.port")))?"22":String.valueOf(prop.get("sftp.port")));//端口号
     private String privateKey=String.valueOf(prop.get("sftp.privateKey"));//私钥
     private String basePath=String.valueOf(prop.get("sftp.basePath"));//根目录
 
@@ -120,11 +121,11 @@ public class SftpProperties {
         this.password = password;
     }
 
-    public int getPort() {
+    public Integer getPort() {
         return port;
     }
 
-    public void setPort(int port) {
+    public void setPort(Integer port) {
         this.port = port;
     }
 

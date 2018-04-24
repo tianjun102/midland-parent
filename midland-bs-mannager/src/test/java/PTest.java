@@ -1,5 +1,6 @@
-import com.jcraft.jsch.SftpException;
+import com.jcraft.jsch.*;
 import com.midland.config.MidlandConfig;
+import com.midland.config.SftpProperties;
 import com.midland.core.util.HttpUtils;
 import com.midland.web.Contants.Contant;
 import com.midland.web.api.ApiHelper;
@@ -9,6 +10,7 @@ import com.midland.web.model.remote.Agent;
 import com.midland.web.service.AppointmentService;
 import com.midland.web.util.MidlandHelper;
 import com.midland.web.util.sftp.SFTPClient;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,14 +63,7 @@ public class PTest {
 		List resul1t = MidlandHelper.getAgentPojoList(data1, Agent.class);
 	}
 
-	@Test
-	public void sdfeds() throws FileNotFoundException, SftpException {
-		sftpUtil.login();
-			File file = new File("C:/Users/xiams01/Pictures/201995-120HG1030762.jpg");
-			InputStream is = new FileInputStream(file);
-		sftpUtil.upload("/upload","", "201995-120HG103076212323.jpg", is);
-		sftpUtil.logout();
-	}
+
 	
 	@Test
 	public void test() throws IOException {

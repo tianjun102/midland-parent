@@ -43,11 +43,6 @@ public class SFTPClient {
     }
 
 
-    public void loginUploadLogout(String directory, String sftpFileName, InputStream input) throws SftpException {
-        login();
-        upload(directory,sftpFileName,input);
-        logout();
-    }
 
 
     /** 
@@ -116,28 +111,45 @@ public class SFTPClient {
      * @param sftpFileName  sftp端文件名  
      * @param input   输入流
      */  
-    public void upload(String basePath,String directory, String sftpFileName, InputStream input) throws SftpException{  
-        try {   
+    public void upload(String basePath,String directory, String sftpFileName, InputStream input) {
+        try {
             sftp.cd(basePath);
-            sftp.cd(directory);  
+        } catch (SftpException e) {
+            //目录不存在，则创建文件夹
+            String [] dirs=basePath.split("/");
+            mkdirs(dirs);
+        }
+        try {
+            sftp.cd(directory);
         } catch (SftpException e) { 
             //目录不存在，则创建文件夹
             String [] dirs=directory.split("/");
-            String tempPath=basePath;
-            for(String dir:dirs){
-                if(null== dir || "".equals(dir)) continue;
-            	tempPath+="/"+dir;
-            	try{ 
-            		sftp.cd(tempPath);
-            	}catch(SftpException ex){
-            		sftp.mkdir(tempPath);
-            		sftp.cd(tempPath);
-            	}
+            mkdirs(dirs);
+        }
+        try {
+            sftp.put(input, sftpFileName);  //上传文件
+        } catch (SftpException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void mkdirs(String[] dirs) {
+        for(String dir:dirs){
+            if(null== dir || "".equals(dir)) continue;
+            try{
+                sftp.cd(dir);
+            }catch(SftpException ex){
+
+                try {
+                    sftp.mkdir(dir);
+                    sftp.cd(dir);
+                } catch (SftpException e1) {
+                    e1.printStackTrace();
+                }
             }
-        }  
-        sftp.put(input, sftpFileName);  //上传文件
-    } 
-    
+        }
+    }
+
 
     /** 
      * 下载文件。
