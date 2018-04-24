@@ -14,12 +14,12 @@
     <table class="table table-bordered table-add">
         <thead>
             <tr>
-                <th style="width: 8%"><a href="#" onclick="checkall()" >全选</a> / <a href="#" onclick="delcheckall()" >取消</a></th>
-                <th style="width: 10%">编号</th>
+                <th style="width: 5%"><a href="#" onclick="checkall()" >全选</a> / <a href="#" onclick="delcheckall()" >取消</a></th>
+                <th style="width: 5%">编号</th>
                 <th style="width: 10%">城市</th>
                 <th style="width: 20%">热搜词</th>
-                <th style="width: 20%">热搜量</th>
-				<th style="width: 10%">模块</th>
+                <th style="width: 8%;-moz-user-select:none;">热搜量&nbsp;&nbsp;<span id="sort_click" class="sort_both" ></span></th>
+				<th style="width: 15%">模块</th>
 				<th style="width: 10%">平台</th>
                 <th style="width: 30%">操作</th>
             </tr>
@@ -49,6 +49,16 @@
                             </c:if>
                             <a target="contentF" class="up_img" title="上移" onclick="sort(${item.id },${item.orderBy},2)"></a>
                             <a target="contentF" class="down_img" title="下移" onclick="sort(${item.id },${item.orderBy},1)"></a>
+                            <c:choose>
+                                <c:when test="${item.isShow==0}">
+                                    <a target="contentF" class="onoff_img" title="状态：显示"
+                                       onclick="hiddenOrShow(${item.id },1)"></a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a target="contentF" class="offon_img" title="状态：隐藏"
+                                       onclick="hiddenOrShow(${item.id },0)"></a>
+                                </c:otherwise>
+                            </c:choose>
                         </td>
                     </tr>
                 </c:forEach>
@@ -70,6 +80,55 @@
 </c:if>
 
 <script type="text/javascript">
+$(function () {
+    if ('${sortOrder}'=='0'){
+        $("#sort_click").attr("class","sort_asc");
+        $("#sortOrder").val(0);
+    }else if('${sortOrder}'=='1'){
+        $("#sort_click").attr("class","sort_desc");
+        $("#sortOrder").val(1);
+    }
+
+})
+$("#sort_click").click(function () {
+    if ($("#sort_click").attr("class")=="sort_both"){
+        $("#sort_click").attr("class","sort_asc");
+        $("#sortOrder").val(0);
+        $('#searchForm').submit();
+    }else if ($("#sort_click").attr("class")=="sort_asc"){
+        $("#sort_click").attr("class","sort_desc");
+        $("#sortOrder").val(1);
+        $('#searchForm').submit();
+    }else {
+        $("#sort_click").attr("class","sort_asc");
+        $("#sortOrder").val(0);
+        $('#searchForm').submit();
+    }
+})
+
+
+function hiddenOrShow(id, flag) {
+    //0隐藏，1显示
+    $.ajax({
+        type: "post",
+        url: "${ctx}/rest/hotSearch/update?id=" + id + "&isShow=" + flag,
+        async: false, // 此处必须同步
+        dataType: "json",
+
+        success: function (data) {
+            if (data.state == 0) {
+                $('#searchForm').submit();
+            }
+        },
+        error: function (data) {
+            if (data.responseText != null) {
+                layer.msg(data.responseText, {icon: 2});
+            } else {
+                layer.msg("操作失败！", {icon: 2});
+            }
+        }
+    })
+}
 
     function delete1(id,isDelete){
         var msg = "您确定要删除当前数据吗？";
@@ -135,6 +194,11 @@
 
     //排序
     function sort(id,orderById,sort) {
+        debugger;
+        if ($("#sortOrder").val()!=''){
+            layer.msg("热搜量已排序,无法调整顺序,请刷新页面!", {icon: 2});
+            return false;
+        }
         var data = $("#searchForm").serialize();
         $.ajax({
             type: "post",

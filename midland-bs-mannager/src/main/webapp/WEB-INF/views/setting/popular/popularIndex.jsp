@@ -65,6 +65,9 @@
                         </c:forEach>
                     </select>
                 </li>
+                <li><span>名称：</span>
+                    <input type="text" name="name" />
+                </li>
                 <c:if test="${not empty isSuper}">
                     <li>
                         <span style="float:left;">是否删除：</span>

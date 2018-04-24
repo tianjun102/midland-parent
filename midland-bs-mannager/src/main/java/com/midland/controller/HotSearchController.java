@@ -185,6 +185,7 @@ public class HotSearchController extends BaseFilter {
             Page<HotSearch> result = (Page<HotSearch>) hotSearchServiceImpl.findHotSearchList(hotSearch);
             Paginator paginator = result.getPaginator();
             model.addAttribute("paginator", paginator);
+            model.addAttribute("sortOrder", hotSearch.getSortOrder());
             model.addAttribute("items", result);
         } catch (Exception e) {
             log.error("findHotSearchList  {}", hotSearch, e);

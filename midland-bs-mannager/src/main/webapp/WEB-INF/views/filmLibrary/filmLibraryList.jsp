@@ -15,14 +15,15 @@
         <thead>
         <tr>
             <th style="width: auto"><a href="#" onclick="checkall()" >全选</a> / <a href="#" onclick="delcheckall()" >取消</a></th>
-            <th style="width: 8%">编号</th>
+            <th style="width: 5%">编号</th>
             <th style="width: 8%">城市</th>
-            <th style="width: 15%">预览图</th>
-            <th style="width: 10%">状态</th>
+            <th style="width: 5%">预览图</th>
+            <th style="width: 5%">状态</th>
             <th style="width: 32%">楼盘名称</th>
             <th style="width: 10%">楼盘ID</th>
-            <th style="width: 15%">录盘人</th>
-            <th style="width: 15%">类型</th>
+            <th style="width: 10%">录盘人</th>
+            <th style="width: 8%">类型</th>
+            <th style="width: 8%">访问量</th>
             <th style="width: 15%">删除状态</th>
             <th style="width: 10%">操作</th>
         </tr>
@@ -52,6 +53,7 @@
                         <td><c:forEach items="${filmTypes}" var="s">
                             <c:if test="${s.id==item.filmType}">${s.name}</c:if>
                         </c:forEach> </td>
+                        <td> ${item.clickNum}  </td>
                         <td>
                             <c:forEach items="${isDeletes}" var="s1">
                                 <c:if test="${s1.id==item.isDelete}">${s1.name}</c:if>

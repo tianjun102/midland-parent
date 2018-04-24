@@ -122,13 +122,13 @@
                             value="0">
                 </li>
                 <li id="cnzzPc"
-                    <c:if test="${item.source=='1'}">style='display: none'</c:if> ><span>CNZZ配置：</span><textarea
+                    <c:if test="${item.source=='1'}">style='display: none'</c:if> ><span>CNZZ配置：</span><script
                         style="width: 87%;min-height: 250px;resize:none; outline-color: #0099e0;float: left"
-                        name="cnzzCode" id="myEditor" rows="" cols="">${item.cnzzCode}</textarea></li>
+                        name="cnzzCode" id="myEditor" rows="" cols="">${item.cnzzCode}</script></li>
                 <li id="cnzzWechat"
-                    <c:if test="${item.source=='0'}">style='display: none'</c:if> ><span>CNZZ微站配置：</span><textarea
+                    <c:if test="${item.source=='0'}">style='display: none'</c:if> ><span>CNZZ微站配置：</span><script
                         style="width: 87%;min-height: 250px;resize:none; outline-color: #0099e0;float: left"
-                        name="cnzzCodeWechat" id="myEditor2" rows="" cols="">${item.cnzzCodeWechat}</textarea></li>
+                        name="cnzzCodeWechat" id="myEditor2" rows="" cols="">${item.cnzzCodeWechat}</script></li>
                 <li><span>百度计量状态：</span>
                     <%--<input type="text" name="baiduShow" id="baiduShow" value="${item.baiduShow}"/>--%>
                     <span style="width: 50px !important;"> 开启&nbsp; </span><input
@@ -139,13 +139,13 @@
                             value="0">
                 </li>
                 <li id="baiduPc"
-                    <c:if test="${item.source=='1'}">style='display: none'</c:if> ><span>百度计量代码：</span><textarea
+                    <c:if test="${item.source=='1'}">style='display: none'</c:if> ><span>百度计量代码：</span><script
                         style="width: 87%;min-height: 250px;resize:none; outline-color: #0099e0;float: left"
-                        name="baiduCode" id="myEditor1" rows="" cols="">${item.baiduCode}</textarea></li>
+                        name="baiduCode" id="myEditor1" rows="" cols="">${item.baiduCode}</script></li>
                 <li id="baiduWechat"
-                    <c:if test="${item.source=='0'}">style='display: none'</c:if> ><span>百度计量微站代码：</span><textarea
+                    <c:if test="${item.source=='0'}">style='display: none'</c:if> ><span>百度计量微站代码：</span><script
                         style="width: 87%;min-height: 250px;resize:none; outline-color: #0099e0;float: left;"
-                        name="baiduCodeWechat" id="myEditor3" rows="" cols="">${item.baiduCodeWechat}</textarea></li>
+                        name="baiduCodeWechat" id="myEditor3" rows="" cols="">${item.baiduCodeWechat}</script></li>
 
             </ul>
             <ul class="adminfo row">

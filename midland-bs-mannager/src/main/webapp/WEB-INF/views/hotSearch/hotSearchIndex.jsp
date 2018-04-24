@@ -22,6 +22,7 @@
         <form action="${ctx }/rest/hotSearch/list" method="POST" id="searchForm"
               onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
             <ul class="userinfo row">
+                <input type="hidden" id="sortOrder" name="sortOrder"/>
                 <%--<li>
                     <span style = "float:left;">城市：</span>
                     <select name="cityId" id="cityId" style="height: 28px;width: 150px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">

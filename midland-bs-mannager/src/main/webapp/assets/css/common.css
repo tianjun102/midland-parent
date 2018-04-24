@@ -733,7 +733,24 @@ input.date {
 .table-add tr td a.stick_img:hover {
 	background: url(../img/icon/stick-1.png) no-repeat center center;
 }
-
+.table-add tr th .sort_asc {
+	width:8px;
+	height:14px;
+	display: inline-block;
+	background: url(../img/icon/sort_asc.png) no-repeat center center;
+}
+.table-add tr th .sort_both {
+	width:8px;
+	height:12px;
+	display: inline-block;
+	background: url(../img/icon/sort_both.png) no-repeat center center;
+}
+.table-add tr th .sort_desc {
+	width:8px;
+	height:14px;
+	display: inline-block;
+	background: url(../img/icon/sort_desc.png) no-repeat center center;
+}
 
 
 
