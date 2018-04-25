@@ -10,7 +10,9 @@ import com.midland.web.model.user.User;
 import com.midland.web.service.HotSearchService;
 import com.midland.web.service.JdbcService;
 import com.midland.web.service.SettingService;
+import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
+import com.midland.web.util.ParamObject;
 import com.midland.web.util.PoiExcelExport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -217,15 +219,17 @@ public class HotSearchController extends BaseFilter {
         List<ExportModel> exportModels = new ArrayList<>();
         for (HotSearch hotSearch1 : dataList) {
             ExportModel exportModel = new ExportModel();
-            exportModel.setModelName1(hotSearch1.getId().toString());
-            exportModel.setModelName2(hotSearch1.getCityName());
-            exportModel.setModelName3(hotSearch1.getKeywords());
-            exportModel.setModelName4(String.valueOf(hotSearch1.getCount()==null?0:hotSearch1.getCount()));
-            exportModel.setModelName5(hotSearch1.getMenuName());
+            exportModel.setModelName1(hotSearch1.getCityName());
+            exportModel.setModelName2(hotSearch1.getKeywords());
+            exportModel.setModelName3(String.valueOf(hotSearch1.getCount()==null?0:hotSearch1.getCount()));
+            exportModel.setModelName4(hotSearch1.getMenuName());
+            List<ParamObject> sources = JsonMapReader.getMap("source");
+            exportModel.setModelName5(MidlandHelper.getNameById(hotSearch1.getSource(), sources));
+
             exportModels.add(exportModel);
         }
         String titleColumn[] = {"modelName1", "modelName2", "modelName3", "modelName4", "modelName5"};
-        String titleName[] = {"编号", "城市", "热搜词","搜索量" ,"模块"};
+        String titleName[] = { "城市", "热搜词","搜索量" ,"模块","平台"};
         int titleSize[] = {13, 13, 13, 13,13};
         //其他设置 set方法可全不调用
         pee.wirteExcel(titleColumn, titleName, titleSize, exportModels, request);

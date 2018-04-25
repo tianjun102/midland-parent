@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 @Service
 public class MetaServiceImpl implements MetaService {
@@ -84,4 +86,57 @@ public class MetaServiceImpl implements MetaService {
 			throw e;
 		}
 	}
+
+	/**
+	 * 上移
+	 **/
+	@Override
+	@Transactional
+	public void shiftUp(Meta menu) throws Exception {
+		try {
+			log.debug("shiftUp {}", menu);
+			Meta obj = metaMapper.shiftUp(menu);
+			if (obj == null){
+				return;
+			}
+			int nextOrderBy = obj.getOrderBy();
+			int currOrderBy = menu.getOrderBy();
+			obj.setOrderBy(-999999999);
+			metaMapper.updateMetaById(obj);
+			menu.setOrderBy(nextOrderBy);
+			metaMapper.updateMetaById(menu);
+			obj.setOrderBy(currOrderBy);
+			metaMapper.updateMetaById(obj);
+		} catch (Exception e) {
+			log.error("shiftUp {}", menu, e);
+			throw e;
+		}
+	}
+
+	/**
+	 * 下移
+	 **/
+	@Override
+	@Transactional
+	public void shiftDown(Meta menu) throws Exception {
+		try {
+			log.debug("shiftDown {}", menu);
+			Meta obj = metaMapper.shiftDown(menu);
+			if (obj == null){
+				return;
+			}
+			int nextOrderBy = obj.getOrderBy();
+			int currOrderBy = menu.getOrderBy();
+			obj.setOrderBy(-999999999);
+			metaMapper.updateMetaById(obj);
+			menu.setOrderBy(nextOrderBy);
+			metaMapper.updateMetaById(menu);
+			obj.setOrderBy(currOrderBy);
+			metaMapper.updateMetaById(obj);
+		} catch (Exception e) {
+			log.error("shiftDown异常 {}", menu, e);
+			throw e;
+		}
+	}
+	
 }

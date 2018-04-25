@@ -4,10 +4,8 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
-import com.midland.config.MidlandConfig;
 import com.midland.task.TaskConfig;
 import com.midland.web.Contants.Contant;
-import com.midland.web.enums.ContextEnums;
 import com.midland.web.model.*;
 import com.midland.web.model.user.User;
 import com.midland.web.service.*;
@@ -25,8 +23,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/setting")
@@ -35,18 +35,18 @@ public class SettingController extends BaseFilter {
     private final Logger logger = LoggerFactory.getLogger(SettingController.class);
     @Autowired
     private SettingService settingService;
-    @Autowired
-    private MidlandConfig midlandConfig;
+
     @Autowired
     private PopularService popularServiceImpl;
-    @Autowired
-    private JdbcService jdbcService;
+
     @Autowired
     private TaskConfig taskConfig;
     @Autowired
     private BannerService bannerServiceImpl;
     @Autowired
     private CategoryService categoryServiceImpl;
+    @Autowired
+    private RedisService redisServiceImpl;
     // 进入热门关注首页面
     @RequestMapping(value = "popularIndex", method = {RequestMethod.GET, RequestMethod.POST})
     public String popularIndex(Model model, HttpServletRequest request) throws Exception {
@@ -656,8 +656,30 @@ public class SettingController extends BaseFilter {
 
     @RequestMapping("filmIndex")
     public String filmIndex( Model model, HttpServletRequest request){
+        String videoUrl = (String)redisServiceImpl.getValue(Contant.MIDLAND_VIDEO_URL_KEY);
+        model.addAttribute("videoUrl",videoUrl);
         return "video/index";
     }
+
+
+    @RequestMapping("videoSave")
+    @ResponseBody
+    public Object videoSave(HttpServletRequest request){
+        Map<String, Object> map = new HashMap<>();
+        String videoUrl=null;
+        try {
+            videoUrl=request.getParameter("videoUrl");
+            redisServiceImpl.setValue(Contant.MIDLAND_VIDEO_URL_KEY,videoUrl);
+        } catch (Exception e) {
+            logger.error("videoSave",videoUrl);
+        }
+        map.put("state",0);
+        map.put("data",videoUrl);
+        return map;
+
+    }
+
+
 
 
 }

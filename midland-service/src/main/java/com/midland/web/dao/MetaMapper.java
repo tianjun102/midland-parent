@@ -14,5 +14,8 @@ public interface MetaMapper {
 	int insertMeta(Meta meta);
 
 	List<Meta> findMetaList(Meta meta);
+	Meta shiftUp(Meta menu);
+
+	Meta shiftDown(Meta menu);
 
 }

@@ -1,6 +1,8 @@
 package com.midland.web.service;
 
 import com.midland.web.model.Meta;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 public interface MetaService {
 
@@ -29,4 +31,9 @@ public interface MetaService {
 	 **/
 	List<Meta> findMetaList(Meta meta) throws Exception;
 
+	@Transactional
+	void shiftUp(Meta menu) throws Exception;
+
+	@Transactional
+    void shiftDown(Meta menu) throws Exception;
 }

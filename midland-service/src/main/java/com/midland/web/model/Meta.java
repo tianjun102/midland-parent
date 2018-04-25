@@ -50,7 +50,18 @@ public class Meta{
 	 * 子模块id
 	 **/
 	private Integer secondModeId;
+/**
+	 * 排序
+	 **/
+	private Integer orderBy;
 
+	public Integer getOrderBy() {
+		return orderBy;
+	}
+
+	public void setOrderBy(Integer orderBy) {
+		this.orderBy = orderBy;
+	}
 
 	public Integer getId() {
 		return id;

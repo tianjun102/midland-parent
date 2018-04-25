@@ -172,4 +172,16 @@ public class MetaController extends BaseFilter  {
 		}
 		return map;
 	}
+	@RequestMapping("sort")
+	@ResponseBody
+	public Map listDesc(Meta menu, int sort, Model model, HttpServletRequest request) throws Exception {
+		if (sort == 1) {
+			metaServiceImpl.shiftUp(menu);
+		} else {
+			metaServiceImpl.shiftDown(menu);
+		}
+		Map map = new HashMap();
+		map.put("state", 0);
+		return map;
+	}
 }

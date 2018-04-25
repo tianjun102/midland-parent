@@ -59,7 +59,7 @@
         $(function () {
             $('#file_upload').uploadify({
                 'swf': '${ctx }/assets/scripts/uploadify/uploadify.swf',
-                'uploader': '${ctx }/rest/upload/img',
+                'uploader': '${ctx }/rest/upload/video',
                 'multi': true,// 是否支持多个文件上传
                 'buttonText': '上传文件',
                 'onUploadSuccess': function (file, data, response) {
@@ -72,6 +72,7 @@
                         myPlayer.load(videoUrl);
                         myPlayer.play();
                     });
+                    $("#videoUrl").val(data);
                 },
                 'onQueueComplete': function (queueData) {
                     if (queueData.uploadsSuccessful < 1) {
@@ -90,7 +91,7 @@
 	<div class="m" style="width:100%; height: 100%; margin-top:0;">
 		<video id="my-video" class="video-js" controls preload="auto" style = "width:100%;height: 906px;"
 		  poster="m.png" data-setup="{}">
-			<source src="http://jq22com.qiniudn.com/jq22-sp.mp4" type="video/mp4">
+			<source src="${videoUrl}" type="video/mp4">
 			<p class="vjs-no-js">
 			  To view this video please enable JavaScript, and consider upgrading to a web browser that
 			  <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
@@ -102,6 +103,11 @@
 				<input type="file" name="file_upload" id="file_upload"/>
 			</div>
 		</li>
+		<form id="videoForm" action="${ctx}/setting/videoSave">
+			<input type="hidden" id="videoUrl" name="videoUrl" >
+			<a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">确定</a>
+		</form>
+
 		  <script src="${ctx}/assets/video/js/video.min.js"></script>
 		  <script type="text/javascript">
 			var myPlayer = videojs('my-video');
@@ -113,4 +119,34 @@
 	</div>
 
 </body>
+<
+<script type="text/javascript">
+    function updateData() {
+        if (notEmpty('videoUrl', 'videoUrl', '请上传视频')) {
+            var data = $("#videoForm").serialize();
+            $.ajax({
+                type: "post",
+                url: "${ctx}/rest/setting/videoSave",
+                async: false, // 此处必须同步
+                dataType: "json",
+                data: data,
+                success: function (data) {
+                    if (data.state == 0) {
+                        layer.msg("操作成功！！！", {icon: 1});
+
+                    } else {
+                        layer.msg("操作失败！", {icon: 2});
+                    }
+                },
+                error: function (data) {
+                    if (data.responseText != null) {
+                        layer.msg(data.responseText, {icon: 2});
+                    } else {
+                        layer.msg("操作失败！", {icon: 2});
+                    }
+                }
+            });
+        }
+    }
+</script>
 </html>

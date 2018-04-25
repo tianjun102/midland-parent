@@ -85,6 +85,11 @@ public class Contant {
 
 
     /**
+     * 美联宣传片存储地址
+     */
+    public static final String MIDLAND_VIDEO_URL_KEY="midland_video_url";
+
+    /**
      * 关注类型
      */
     public static final int ATTENTION_QUESTION = 1;//关注问题
