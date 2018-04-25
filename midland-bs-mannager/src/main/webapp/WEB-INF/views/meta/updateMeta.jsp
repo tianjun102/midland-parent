@@ -33,7 +33,7 @@
                 <select name="modeId" id="modeId" class="dropdown">
                     <option value="">请选择</option>
                     <option value="1" <c:if test="${item.modeId== 1}">selected="selected"</c:if>>新房首页</option>
-                    <option value="8" <c:if test="${item.modeId== 8}">selected="selected"</c:if>>外销网</option>
+                    <option value="8" <c:if test="${item.modeId== 8}">selected="selected"</c:if>>外销网首页</option>
                     <option value="9" <c:if test="${item.modeId== 9}">selected="selected"</c:if>>市场调究</option>
                     <option value="10" <c:if test="${item.modeId== 10}">selected="selected"</c:if>>资讯</option>
                     <option value="11" <c:if test="${item.modeId== 11}">selected="selected"</c:if>>问答</option>
@@ -89,10 +89,7 @@
     })
 
     function extracted(val) {
-        if (val == 8) {
-            $("#childMode").show();
-            getExportSaleCates()
-        } else if (val == 9) {
+        if (val == 9) {
             $("#childMode").show();
             var data = "type=0" + "&cityId=" + $("#cityId").val() + "&source=" + $("#source").val();
             getCate(data);

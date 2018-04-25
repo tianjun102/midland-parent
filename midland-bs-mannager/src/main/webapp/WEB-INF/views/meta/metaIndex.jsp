@@ -37,7 +37,7 @@
                     <select name="modeId" id="modeId" class="dropdown">
                         <option value="">请选择</option>
                         <option value="1">新房首页</option>
-                        <option value="8">外销网</option>
+                        <option value="8">外销网首页</option>
                         <option value="9">市场调究</option>
                         <option value="10">资讯</option>
                         <option value="11">问答</option>
@@ -84,10 +84,7 @@
     $("#modeId").change(function () {
         $("#modeName").val($("#modeId option:selected").text())
         debugger;
-        if ($("#modeId").val() == 8) {
-            $("#childMode").show();
-            getExportSaleCates();
-        } else if ($("#modeId").val() == 9) {
+       if ($("#modeId").val() == 9) {
             $("#childMode").show();
             var data = "type=0" + "&cityId=" + $("#cityId").val() + "&source=" + $("#source").val();
             getCate(data);
