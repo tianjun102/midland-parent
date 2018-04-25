@@ -54,6 +54,11 @@
                 </select>
                 <label style="color: red" class = "_star " >*</label>
             </li>
+            <li id="sellrentLi" style="display: none"><span>租售：</span>
+                <label class="checkitem"><input class="radioClass" type="radio" name="sellRent" value="0" checked="checked"><span>租房</span></label>
+                <label class="checkitem"><input class="radioClass" type="radio" name="sellRent" value="1" <c:if test="${item.sellRent==1}">checked="checked"</c:if> ><span>售房</span></label>
+
+            </li>
             <li><span>搜索词：</span>
                 <input type="text" name="keywords" id="keywords" value="${item.keywords}" onblur="notEmpty('keywords','keywords','搜索词不能为空！');"/><label style="color: red" class = "_star " >*</label>
             </li>
@@ -71,6 +76,28 @@
 </section>
 
 <script type="text/javascript">
+
+    $(function () {
+        if (${item.menuId == 5}) {
+            $("#sellrentLi").show();
+            $(".radioClass").removeAttr("disabled","disabled");
+        } else {
+            $("#sellrentLi").hide();
+            $(".radioClass").attr("disabled","disabled");
+        }
+    })
+
+    $("#menuId").change(function () {
+        if ($("#menuId").val() == 5) {
+            $("#sellrentLi").show();
+            $(".radioClass").removeAttr("disabled","disabled");
+        } else {
+            $("#sellrentLi").hide();
+            $(".radioClass").attr("disabled","disabled");
+        }
+    })
+
+
     //保存数据
     function updateData() {
         if(checkSelect('cityId|source|menuId','请选择城市!|请选择平台!|请选择模块！')&&notEmpty('keywords','keywords','搜索词不能为空！')&&checkUrl('url','url','链接格式不正确！')){

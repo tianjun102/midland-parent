@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@include file="../layout/tablib.jsp" %>
-<%@include file="../layout/source.jsp"%>
+<%@include file="../layout/source.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,17 +18,20 @@
             <input type="hidden" name="id" id="id" value="${item.id}">
 
             <li>
-                <span style = "float:left;">城市：</span>
+                <span style="float:left;">城市：</span>
                 <input type="hidden" name="cityName" id="cityName" value="${cityName}">
-                <c:if test="${empty isSuper}"><input type="hidden" name="cityId"  value="${cityId}"></c:if>
-                <select onchange="setCityName()" name="cityId" id="cityId" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;padding-left: 5px;">
+                <c:if test="${empty isSuper}"><input type="hidden" name="cityId" value="${cityId}"></c:if>
+                <select onchange="setCityName()" name="cityId" id="cityId"
+                        style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;padding-left: 5px;">
                     <option value="">请选择</option>
                     <c:forEach items="${cityList}" var="city">
-                        <c:if test="${empty isSuper}"><option selected="selected" value="${cityId}">${cityName}</option></c:if>
+                        <c:if test="${empty isSuper}">
+                            <option selected="selected" value="${cityId}">${cityName}</option>
+                        </c:if>
                         <option value="${city.id}">${city.name}</option>
                     </c:forEach>
                 </select>
-                <label style="color: red" class = "_star " >*</label>
+                <label style="color: red" class="_star ">*</label>
             </li>
             <li><span>平台：</span>
                 <select name="source" id="source" class="dropdown">
@@ -36,12 +39,13 @@
                     <option value="0">网站</option>
                     <option value="1">微站</option>
                 </select>
-                <label style="color: red" class = "_star " >*</label>
+                <label style="color: red" class="_star ">*</label>
             </li>
 
             <li><span>模块：</span>
-                <input type="hidden" id="menuName" name="menuName" value="" >
-                <select onchange="setMenuName()" name="menuId" id="menuId" style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;padding-left: 5px;">
+                <input type="hidden" id="menuName" name="menuName" value="">
+                <select onchange="setMenuName()" name="menuId" id="menuId"
+                        style="height: 28px;width: 250px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;padding-left: 5px;">
                     <option value="">请选择</option>
                     <%--<option value="0">首页</option>--%>
                     <option value="1">新房</option>
@@ -56,10 +60,16 @@
                     <option value="10">资讯</option>
                     <option value="11">问答</option>
                 </select>
-                <label style="color: red" class = "_star " >*</label>
+                <label style="color: red" class="_star ">*</label>
+            </li>
+            <li id="sellrentLi" style="display: none"><span>租售：</span>
+                <label class="checkitem"><input class="radioClass" type="radio" name="sellRent" value="0" checked="checked"><span>租房</span></label>
+                <label class="checkitem"><input class="radioClass" type="radio" name="sellRent" value="1"><span>售房</span></label>
+
             </li>
             <li><span>搜索词：</span>
-                <input type="text" name="keywords" id="keywords"  onblur="notEmpty('keywords','keywords','搜索词不能为空！');" /><label style="color: red" class = "_star " >*</label>
+                <input type="text" name="keywords" id="keywords" onblur="notEmpty('keywords','keywords','搜索词不能为空！');"/>
+                <label style="color: red" class="_star ">*</label>
             </li>
             <li><span>地址：</span>
                 <input type="text" name="url" id="url" value="${item.url}" onblur="checkUrl('url','url','链接格式不正确！')">
@@ -75,37 +85,48 @@
 </section>
 
 <script type="text/javascript">
+
+    $("#menuId").change(function () {
+        if ($("#menuId").val() == 5) {
+            $("#sellrentLi").show();
+            $(".radioClass").removeAttr("disabled","disabled");
+        } else {
+            $("#sellrentLi").hide();
+            $(".radioClass").attr("disabled","disabled");
+        }
+    })
+
     //保存数据
     function updateData() {
-        if(checkSelect('cityId|source|menuId','请选择城市!|请选择平台!|请选择模块！')&&notEmpty('keywords','keywords','搜索词不能为空！')&&checkUrl('url','url','链接格式不正确！')){
-        var data = $("#dataForm").serialize();
-        $.ajax({
-            type: "post",
-            url: "${ctx}/rest/hotSearch/add",
-            async: false, // 此处必须同步
-            dataType: "json",
-            data: data,
-            success: function (data) {
-                if (data.state == 0) {
-                    layer.msg("保存成功！！！", {icon: 1});
-                    $('#save').removeAttr("onclick");
-                    setTimeout(function () {
-                        parent.layer.closeAll();
-                        parent.$("#inquery").click();
-                    }, 1000);
+        if (checkSelect('cityId|source|menuId', '请选择城市!|请选择平台!|请选择模块！') && notEmpty('keywords', 'keywords', '搜索词不能为空！') && checkUrl('url', 'url', '链接格式不正确！')) {
+            var data = $("#dataForm").serialize();
+            $.ajax({
+                type: "post",
+                url: "${ctx}/rest/hotSearch/add",
+                async: false, // 此处必须同步
+                dataType: "json",
+                data: data,
+                success: function (data) {
+                    if (data.state == 0) {
+                        layer.msg("保存成功！！！", {icon: 1});
+                        $('#save').removeAttr("onclick");
+                        setTimeout(function () {
+                            parent.layer.closeAll();
+                            parent.$("#inquery").click();
+                        }, 1000);
 
-                } else {
-                    layer.msg("保存失败！", {icon: 2});
+                    } else {
+                        layer.msg("保存失败！", {icon: 2});
+                    }
+                },
+                error: function (data) {
+                    if (data.responseText != null) {
+                        layer.msg(data.responseText, {icon: 2});
+                    } else {
+                        layer.msg("保存失败！", {icon: 2});
+                    }
                 }
-            },
-            error: function (data) {
-                if (data.responseText != null) {
-                    layer.msg(data.responseText, {icon: 2});
-                } else {
-                    layer.msg("保存失败！", {icon: 2});
-                }
-            }
-        });
+            });
         }
     }
 
@@ -114,11 +135,11 @@
         parent.layer.closeAll();
     }
 
-    function setCityName(){
+    function setCityName() {
         $("#cityName").val($("#cityId option:selected").text())
     }
 
-    function setMenuName(){
+    function setMenuName() {
         $("#menuName").val($("#menuId option:selected").text())
     }
 

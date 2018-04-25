@@ -58,6 +58,19 @@ public class HotSearch {
      * 链接
      */
     private String url;
+    /**
+     * 租0,售1
+     */
+    private String sellRent;
+
+
+    public String getSellRent() {
+        return sellRent;
+    }
+
+    public void setSellRent(String sellRent) {
+        this.sellRent = sellRent;
+    }
 
     public String getUrl() {
         return url;
