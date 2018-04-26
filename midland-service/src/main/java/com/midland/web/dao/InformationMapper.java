@@ -17,6 +17,7 @@ public interface InformationMapper {
 
     Information shiftTop(Information information);
     Information shiftUp(Information information);
+    int getCountByCateId(int type);
 
     Information shiftDown(Information information);
 

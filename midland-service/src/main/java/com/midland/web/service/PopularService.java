@@ -8,6 +8,8 @@ import java.util.List;
 public interface PopularService {
 
 
+    int getCountByCateId(int cateId) throws Exception;
+
     @Transactional
     void shiftUp(Popular popular) throws Exception;
 

@@ -55,6 +55,9 @@
 
     </select>
 
+    <select id="getCountByCateId" parameterType="int" resultType="int">
+        select count(1) from information where is_delete=0 and cate_id=#{cateId}
+    </select>
 
     <select id="shiftDown" parameterType="com.midland.web.model.Information" resultMap="BaseResultMap">
         select id,order_by from information where 1=1

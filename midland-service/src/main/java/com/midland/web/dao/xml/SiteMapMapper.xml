@@ -91,6 +91,10 @@
         where id= #{id}
     </update>
 
+    <select id="getCountByCateId" parameterType="int" resultType="int">
+        select count(1) from site_map where is_delete=0 and cate_id=#{cateId}
+    </select>
+
     <select id="findSiteMapList" parameterType="com.midland.web.model.SiteMap" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List_collection"/>,b.cate_name

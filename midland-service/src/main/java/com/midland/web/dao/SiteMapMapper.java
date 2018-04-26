@@ -35,6 +35,9 @@ public interface SiteMapMapper {
 
     List<SiteMap> findCateGory(SiteMap siteMap);
 
+    int getCountByCateId(int cateId);
+
+
     List<SiteMap> findModes(SiteMap siteMap);
 
     int batchUpdate(@Param("siteMapList") List<SiteMap> siteMapList);

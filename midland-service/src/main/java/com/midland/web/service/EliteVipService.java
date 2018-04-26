@@ -16,6 +16,8 @@ public interface EliteVipService {
      **/
     void deleteEliteVipById(Integer id) throws Exception;
 
+    int getCountByCateId(int cateId) throws Exception;
+
     /**
      * 主键更新
      **/

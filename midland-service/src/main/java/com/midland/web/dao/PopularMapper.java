@@ -14,6 +14,7 @@ public interface PopularMapper {
     int deleteById(Integer popular);
 
     int updateById(Popular popular);
+    int getCountByCateId(int cateId);
 
 
 

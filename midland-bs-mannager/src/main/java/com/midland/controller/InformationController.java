@@ -48,16 +48,17 @@ public class InformationController extends BaseFilter {
     private RedisService redisServiceImpl;
     @Autowired
     private CategoryService categoryServiceImpl;
+
     /**
      *
      **/
     @RequestMapping("index")
     public String informationIndex(Information information, Model model, HttpServletRequest request) throws Exception {
-        PageHelper.startPage(1,50);
+        PageHelper.startPage(1, 50);
         Category category = new Category();
         category.setType(1);
         category.setIsDelete(Contant.isNotDelete);
-        Page<Category> cateList =(Page<Category>) categoryServiceImpl.getCateGorys(category);
+        Page<Category> cateList = (Page<Category>) categoryServiceImpl.getCateGorys(category);
 
         settingService.getAllProvinceList(model);
         User user = MidlandHelper.getCurrentUser(request);
@@ -107,10 +108,10 @@ public class InformationController extends BaseFilter {
     public Object getCate(Category category) {
         Map map = new HashMap();
         try {
-            PageHelper.startPage(1,50);
+            PageHelper.startPage(1, 50);
 
             category.setIsDelete(Contant.isNotDelete);
-            Page<Category> cateList =(Page<Category>) categoryServiceImpl.getCateGorys(category);
+            Page<Category> cateList = (Page<Category>) categoryServiceImpl.getCateGorys(category);
             map.put("data", cateList.getResult());
             map.put("state", 0);
         } catch (Exception e) {
@@ -135,8 +136,8 @@ public class InformationController extends BaseFilter {
         category.setType(1);
         category.setParentId(0);
         List<Category> cateList = categoryService.findCategoryList(category);
-        List<Area> cityList=new ArrayList<>();
-        if (cityMap !=null){
+        List<Area> cityList = new ArrayList<>();
+        if (cityMap != null) {
             cityList = cityMap.get("city");
         }
         User user = MidlandHelper.getCurrentUser(request);
@@ -224,8 +225,8 @@ public class InformationController extends BaseFilter {
         category.setType(1);
         category.setParentId(0);
         List<Category> cateList = categoryService.findCategoryList(category);
-        List<Area> cityList=new ArrayList<>();
-        if (cityMap !=null){
+        List<Area> cityList = new ArrayList<>();
+        if (cityMap != null) {
             cityList = cityMap.get("city");
         }
         category.setParentId(result.getCateParentid());
@@ -294,24 +295,22 @@ public class InformationController extends BaseFilter {
         return "information/informationList";
     }
 
-     @RequestMapping("getCates")
-     @ResponseBody
-     public Object getCates(Category category, Model model, HttpServletRequest request) {
+    @RequestMapping("getCates")
+    @ResponseBody
+    public Object getCates(Category category, Model model, HttpServletRequest request) {
         Map map = new HashMap();
         try {
-            PageHelper.startPage(1,50);
+            PageHelper.startPage(1, 50);
             category.setIsDelete(Contant.isNotDelete);
-            Page<Category> cateList =(Page<Category>) categoryServiceImpl.getCateGorys(category);
-            map.put("state",0);
-            map.put("data",cateList.getResult());
+            Page<Category> cateList = (Page<Category>) categoryServiceImpl.getCateGorys(category);
+            map.put("state", 0);
+            map.put("data", cateList.getResult());
         } catch (Exception e) {
             log.error("getCates  {}", category, e);
-            map.put("state",-1);
+            map.put("state", -1);
         }
         return map;
     }
-
-
 
 
     @RequestMapping("sort")
@@ -326,6 +325,30 @@ public class InformationController extends BaseFilter {
         }
         Map map = new HashMap();
         map.put("state", 0);
+        return map;
+    }
+
+    @RequestMapping("delete_query_cateId")
+    @ResponseBody
+    public Map getcountByCateId(HttpServletRequest request) throws Exception {
+        int count = 0;
+        Map map = new HashMap();
+        Integer cateId = null;
+        try {
+            String cateIdStr = request.getParameter("cateId");
+            if (StringUtils.isEmpty(cateIdStr)) {
+                map.put("state", -1);
+                map.put("message", "cateId 不能为空,且为int型");
+                return map;
+            }
+            cateId = Integer.valueOf(cateIdStr);
+            count = informationServiceImpl.getCountByCateId(cateId);
+            map.put("state", 0);
+            map.put("data", count);
+        } catch (Exception e) {
+            log.error("getcountByCateId {}", cateId, e);
+            map.put("state", -1);
+        }
         return map;
     }
 

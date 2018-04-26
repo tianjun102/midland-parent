@@ -38,6 +38,8 @@ public interface InformationService {
     @Transactional
     void shiftDown(Information information) throws Exception;
 
+    int getCountByCateId(int cateId) throws Exception;
+
     /**
      * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
      **/

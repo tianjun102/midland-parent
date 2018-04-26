@@ -28,7 +28,12 @@ public class Category {
      **/
     private Integer parentId;
     /**
-     * 0=市场调研分类；1=资讯分类
+     * type=0 市场研究
+     * type=1 资讯
+     * type=2 会员分类
+     * type=3 热门关注分类
+     * type=4 网站地图分类
+     *
      **/
     private Integer type;
     /**

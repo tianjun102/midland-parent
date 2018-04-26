@@ -31,7 +31,17 @@ public class PopularServiceImpl implements PopularService {
             throw e;
         }
     }
+    @Override
+    public int getCountByCateId(int cateId) throws Exception {
+        try {
+            log.debug("getCountByCateId {}", cateId);
+            return popularMapper.getCountByCateId(cateId);
 
+        } catch (Exception e) {
+            log.error("getCountByCateId {}", cateId, e);
+            throw e;
+        }
+    }
 
 
     /**

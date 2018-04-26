@@ -80,11 +80,42 @@
 </c:if>
 
 <script type="text/javascript">
-
     function delete1(id, isDelete) {
         var msg = "您确定要删除当前分类吗？";
         if (isDelete == 0) {
             msg = "您确定要恢复当前分类吗？"
+        }else if(isDelete==1){
+            if ('${type}'==0){
+                var url ="${ctx}/rest/information/delete_query_cateId?cateId="+id;
+                var msg="请先删除此分类有关的市场研究";
+                if (!ajaxQuery(url,msg)){
+                    return;
+                }
+            }else if('${type}'==1){
+                var url ="${ctx}/rest/information/delete_query_cateId?cateId="+id;
+                var msg="请先删除此分类有关的资讯";
+                if (!ajaxQuery(url,msg)){
+                    return;
+                }
+            }else if('${type}'==2){
+                var url ="${ctx}/rest/eliteVip/delete_query_cateId?cateId="+id;
+                var msg="请先删除此分类有关的会员";
+                if (!ajaxQuery(url,msg)){
+                    return;
+                }
+            }else if('${type}'==3){
+                var url ="${ctx}/rest/setting/delete_query_cateId?cateId="+id;
+                var msg="请先删除此分类有关的热门关注";
+                if (!ajaxQuery(url,msg)){
+                    return;
+                }
+            }else if('${type}'==4){
+                var url ="${ctx}/rest/siteMap/delete_query_cateId?cateId="+id;
+                var msg="请先删除此分类有关的网站地图";
+                if (!ajaxQuery(url,msg)){
+                    return;
+                }
+            }
         }
         layer.open({
             type: 1,
@@ -124,6 +155,31 @@
                 btn.css('text-align', 'center');
             }
         });
+    }
+
+    function ajaxQuery(url,msg) {
+        var result=false;
+        $.ajax({
+            type: "post",
+            url: url,
+            cache: false,
+            async: false, // 此处必须同步
+            dataType: "json",
+            success: function (data) {
+                if (data.state == 0) {
+                    if (data.data>0){
+                        layer.msg(msg, {icon: 2});
+                        result= false;
+                    }else {
+                        result= true;
+                    }
+                } else {
+                    layer.msg("删除失败！！", {icon: 7});
+                    result= false;
+                }
+            }
+        });
+        return result;
     }
 
     function to_edit(id) {

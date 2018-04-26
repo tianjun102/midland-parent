@@ -188,6 +188,30 @@ public class SettingController extends BaseFilter {
         return map;
     }
 
+    @RequestMapping("delete_query_cateId")
+    @ResponseBody
+    public Map getcountByCateId(HttpServletRequest request) throws Exception {
+        int count = 0;
+        Map map = new HashMap();
+        Integer cateId = null;
+        try {
+            String cateIdStr = request.getParameter("cateId");
+            if (StringUtils.isEmpty(cateIdStr)) {
+                map.put("state", -1);
+                map.put("message", "cateId 不能为空,且为int型");
+                return map;
+            }
+            cateId = Integer.valueOf(cateIdStr);
+            count = popularServiceImpl.getCountByCateId(cateId);
+            map.put("state", 0);
+            map.put("data", count);
+        } catch (Exception e) {
+            logger.error("getcountByCateId {}", cateId, e);
+            map.put("state", -1);
+        }
+        return map;
+    }
+
     @RequestMapping(value = "toEditPage", method = {RequestMethod.GET, RequestMethod.POST})
     public String toEditPage(Model model, HttpServletRequest request, Popular popular) {
         popular = settingService.findPopular(popular);

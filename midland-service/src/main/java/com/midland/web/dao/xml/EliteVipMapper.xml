@@ -38,6 +38,11 @@
 		 where id= #{id}
 	</delete>
 
+    <select id="getCountByCateId" parameterType="int" resultType="int">
+        select count(1) from elite_vip where is_delete=0 and cate_id=#{cateId}
+    </select>
+
+
     <update id="updateEliteVipById">
         update elite_vip
         <set>

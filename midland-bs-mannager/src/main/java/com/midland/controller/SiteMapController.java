@@ -76,6 +76,30 @@ public class SiteMapController extends BaseFilter {
         return "siteMap/siteMapIndex";
     }
 
+    @RequestMapping("delete_query_cateId")
+    @ResponseBody
+    public Map getcountByCateId(HttpServletRequest request) throws Exception {
+        int count = 0;
+        Map map = new HashMap();
+        Integer cateId = null;
+        try {
+            String cateIdStr = request.getParameter("cateId");
+            if (StringUtils.isEmpty(cateIdStr)) {
+                map.put("state", -1);
+                map.put("message", "cateId 不能为空,且为int型");
+                return map;
+            }
+            cateId = Integer.valueOf(cateIdStr);
+            count = siteMapServiceImpl.getCountByCateId(cateId);
+            map.put("state", 0);
+            map.put("data", count);
+        } catch (Exception e) {
+            log.error("getcountByCateId {}", cateId, e);
+            map.put("state", -1);
+        }
+        return map;
+    }
+
     //通过模块类型定位分类
     @RequestMapping("getCate")
     @ResponseBody

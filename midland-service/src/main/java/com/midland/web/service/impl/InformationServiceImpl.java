@@ -148,6 +148,18 @@ public class InformationServiceImpl implements InformationService {
         }
     }
 
+    @Override
+    public int getCountByCateId(int cateId) throws Exception {
+        try {
+            log.debug("getCountByCateId {}", cateId);
+            return informationMapper.getCountByCateId(cateId);
+
+        } catch (Exception e) {
+            log.error("getCountByCateId {}", cateId, e);
+            throw e;
+        }
+    }
+
 
     /**
      * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）

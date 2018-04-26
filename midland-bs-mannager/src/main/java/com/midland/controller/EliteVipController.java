@@ -12,6 +12,7 @@ import com.midland.web.service.EliteVipService;
 import com.midland.web.service.SettingService;
 import com.midland.web.service.impl.PublicService;
 import com.midland.web.util.MidlandHelper;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +78,31 @@ public class EliteVipController extends BaseFilter {
         model.addAttribute("type", category.getType());
         return "eliteVip/addEliteVip";
     }
+
+    @RequestMapping("delete_query_cateId")
+    @ResponseBody
+    public Map getcountByCateId(HttpServletRequest request) throws Exception {
+        int count = 0;
+        Map map = new HashMap();
+        Integer cateId = null;
+        try {
+            String cateIdStr = request.getParameter("cateId");
+            if (StringUtils.isEmpty(cateIdStr)) {
+                map.put("state", -1);
+                map.put("message", "cateId 不能为空,且为int型");
+                return map;
+            }
+            cateId = Integer.valueOf(cateIdStr);
+            count = eliteVipServiceImpl.getCountByCateId(cateId);
+            map.put("state", 0);
+            map.put("data", count);
+        } catch (Exception e) {
+            log.error("getcountByCateId {}", cateId, e);
+            map.put("state", -1);
+        }
+        return map;
+    }
+
 
     @RequestMapping("getVipCate")
     @ResponseBody

@@ -14,6 +14,7 @@ public interface EliteVipMapper {
     int deleteEliteVipById(Integer eliteVip);
 
     int updateEliteVipById(EliteVip eliteVip);
+    int getCountByCateId(Integer cateId);
 
     int insertEliteVip(EliteVip eliteVip);
 

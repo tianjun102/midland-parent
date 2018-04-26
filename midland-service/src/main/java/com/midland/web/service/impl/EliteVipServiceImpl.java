@@ -57,6 +57,19 @@ public class EliteVipServiceImpl implements EliteVipService {
         }
     }
 
+    @Override
+    public int getCountByCateId(int cateId) throws Exception {
+        try {
+            log.debug("getCountByCateId {}", cateId);
+            return eliteVipMapper.getCountByCateId(cateId);
+
+        } catch (Exception e) {
+            log.error("getCountByCateId {}", cateId, e);
+            throw e;
+        }
+    }
+
+
     /**
      * 更新
      **/

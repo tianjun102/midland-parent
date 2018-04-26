@@ -195,6 +195,19 @@ public class SiteMapServiceImpl implements SiteMapService {
             throw e;
         }
     }
+
+    @Override
+    public int getCountByCateId(int cateId) throws Exception {
+        try {
+            log.debug("getCountByCateId {}", cateId);
+            return siteMapMapper.getCountByCateId(cateId);
+
+        } catch (Exception e) {
+            log.error("getCountByCateId {}", cateId, e);
+            throw e;
+        }
+    }
+
 @Override
     public List<SiteMap> findModes(SiteMap siteMap) throws Exception {
         try {
