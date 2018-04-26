@@ -38,6 +38,9 @@
         from popular a,category b
         where a.id= #{id} and a.cate_id=b.id
     </select>
+    <select id="getCountByCateId" parameterType="int" resultType="int">
+        select count(1) from popular where is_delete=0 and cate_id=#{cateId}
+    </select>
 
     <delete id="deleteById">
         delete from popular
