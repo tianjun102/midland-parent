@@ -6,6 +6,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+	<style type="text/css">
+		input.orderByF:hover {
+			color: #7ee043;
+			/* font-weight: bold; */
+
+		}
+	</style>
 </head>
 <body>
 
@@ -22,7 +29,7 @@
 							<th style="width: 10%">分类</th>
 							<th style="width: 10%">名称</th>
 							<th style="width: 10%">nofollow</th>
-							<th style="width: 15%">操作</th>
+							<th style="width: 20%">操作</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -57,6 +64,10 @@
 								<td><c:if test="${popular.nofollow==0}">否</c:if>
 									<c:if test="${popular.nofollow==1}">是</c:if></td>
 								<td>
+									<input type="text" name="orderByF" class="orderByF"
+										   style="width: 25px;border:none;text-align: center;background: transparent;"
+										   onblur="sortForm(${popular.id},this.value)" value="${popular.orderByF}"
+											onfocus="sortFocus(this)">
 									<c:if test="${popular.isDelete==0}">
 									<a onclick="preUpdate(${popular.id })" target="contentF" class = "edit_img" title = "编辑"></a>
 									</c:if>
@@ -66,8 +77,8 @@
 									<c:if test="${popular.isDelete==1}">
 										<a target="contentF" class="recove_img" title="恢复" onclick="isDelete(${popular.id },0)"></a>
 									</c:if>
-									<a target="contentF" class="up_img" title="上移" onclick="sort(${popular.id },${popular.orderBy},2)"></a>
-									<a target="contentF" class="down_img" title="下移" onclick="sort(${popular.id },${popular.orderBy},1)"></a>
+									<a target="contentF" class="up_img" title="上移" onclick="sort(${popular.id },${popular.orderByF},${popular.orderBy},1)"></a>
+									<a target="contentF" class="down_img" title="下移" onclick="sort(${popular.id },${popular.orderByF},${popular.orderBy},2)"></a>
 
 									<a <c:if test="${popular.isShow==0}">class="onoff_img"</c:if> <c:if test="${popular.isShow==1}">class="offon_img"</c:if> target="contentF" onclick="updatePopular(${popular.isShow},${popular.id })"></a>
 								  </td>
@@ -92,12 +103,39 @@
 
 <script type="text/javascript">
 
+	function sortFocus(this) {
+	    alert(1);
+        $(this).css("border-style","solid");
+        $(this).css("border-color","blue");
+    }
+	
+	function sortForm(id,orderByF) {
+
+        var data = "id="+id+"&orderByF="+orderByF;
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/setting/saveEditPopular",
+            async: false, // 此处必须同步
+            dataType: "json",
+            data:data,
+            success: function (data) {
+                if (data.flag==1){
+                    $('#searchForm').submit();
+
+                }
+            },
+            error: function () {
+                layer.msg("操作失败！", {icon: 2});
+            }
+        })
+	}
+	
     //排序
-    function sort(id,orderById,sort) {
+    function sort(id,orderByF,orderById,sort) {
         var data = $("#searchForm").serialize();
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/setting/popular/sort?sort="+sort+"&orderBy="+orderById+"&id="+id,
+            url: "${ctx}/rest/setting/popular/sort?sort="+sort+"&orderByF="+orderByF+"&orderBy="+orderById+"&id="+id,
             async: false, // 此处必须同步
             dataType: "json",
             data:data,

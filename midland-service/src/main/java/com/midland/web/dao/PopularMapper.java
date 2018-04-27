@@ -21,8 +21,10 @@ public interface PopularMapper {
     int insertPopular(Popular popular);
 
     Popular shiftUp(Popular popular);
+    Popular shiftUp_Up(Popular popular);
 
     Popular shiftDown(Popular popular);
+    Popular shiftDown_Down(Popular popular);
 
     List<Popular> findPopularList(Popular popular);
     List<Popular> findCateGory(Popular popular);

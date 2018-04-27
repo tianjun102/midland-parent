@@ -73,6 +73,10 @@ public class Popular {
 
     private Integer isShow;
     /**
+     * 手动排序
+     */
+    private Integer orderByF;
+    /**
      * 排序
      */
     private Integer orderBy;
@@ -81,6 +85,14 @@ public class Popular {
      * 前端设置是否是nofollow
      */
     private Integer nofollow;
+
+    public Integer getOrderByF() {
+        return orderByF;
+    }
+
+    public void setOrderByF(Integer orderByF) {
+        this.orderByF = orderByF;
+    }
 
     public Integer getNofollow() {
         return nofollow;

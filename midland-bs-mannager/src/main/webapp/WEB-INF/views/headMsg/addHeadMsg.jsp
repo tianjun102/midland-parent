@@ -17,7 +17,7 @@
         <ul class="adminfo row">
             <input type="hidden" name="id" id="id" value="${item.id}">
             <li><span>标题：</span>
-               <input type="text" name="title" id="title" ß/>
+               <input type="text" name="title" id="title" />
             </li>
             <li id="textArea" style="display: block;"><span>公告：</span>
                     <textarea style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;" name="content"

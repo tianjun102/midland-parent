@@ -54,15 +54,26 @@ public class PopularServiceImpl implements PopularService {
             log.debug("shiftUp {}", popular);
             Popular obj = popularMapper.shiftUp(popular);
             if (obj == null){
+                obj=popularMapper.shiftUp_Up(popular);
+            }
+            if (obj == null){
                 return;
             }
             int nextOrderBy = obj.getOrderBy();
+            int nextOrderByF= obj.getOrderByF();
             int currOrderBy = popular.getOrderBy();
-            obj.setOrderBy(-999999999);
-            popularMapper.updateById(obj);
-            popular.setOrderBy(nextOrderBy);
+            int currOrderByF = popular.getOrderByF();
+
+            if (currOrderByF != nextOrderByF){
+                popular.setOrderByF(nextOrderByF);
+                obj.setOrderByF(currOrderByF);
+            }else {
+                obj.setOrderBy(-999999999);
+                popularMapper.updateById(obj);
+                popular.setOrderBy(nextOrderBy);
+                obj.setOrderBy(currOrderBy);
+            }
             popularMapper.updateById(popular);
-            obj.setOrderBy(currOrderBy);
             popularMapper.updateById(obj);
         } catch (Exception e) {
             log.error("shiftUp {}", popular, e);
@@ -80,15 +91,29 @@ public class PopularServiceImpl implements PopularService {
             log.debug("shiftDown {}", popular);
             Popular obj = popularMapper.shiftDown(popular);
             if (obj == null){
+                obj=popularMapper.shiftDown_Down(popular);
+            }
+            if (obj == null){
                 return;
             }
             int nextOrderBy = obj.getOrderBy();
+            int nextOrderByF=obj.getOrderByF();
             int currOrderBy = popular.getOrderBy();
-            obj.setOrderBy(-999999999);
-            popularMapper.updateById(obj);
-            popular.setOrderBy(nextOrderBy);
+            int currOrderByF = popular.getOrderByF();
+
+
+
+            if (currOrderByF != nextOrderByF){
+                popular.setOrderByF(nextOrderByF);
+                obj.setOrderByF(currOrderByF);
+            }else {
+                obj.setOrderBy(-999999999);
+                popularMapper.updateById(obj);
+                popular.setOrderBy(nextOrderBy);
+                obj.setOrderBy(currOrderBy);
+            }
+
             popularMapper.updateById(popular);
-            obj.setOrderBy(currOrderBy);
             popularMapper.updateById(obj);
         } catch (Exception e) {
             log.error("shiftDown异常 {}", popular, e);

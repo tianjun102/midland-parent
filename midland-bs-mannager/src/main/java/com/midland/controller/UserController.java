@@ -202,6 +202,7 @@ public class UserController extends BaseFilter {
             }
             authUserInfo.setRoles(roles);
             request.getSession().setAttribute("userInfo", authUserInfo);
+            //request.getSession().setMaxInactiveInterval(1);
         } catch (AuthenticationException e) {
             // 身份验证失败
             model.addAttribute("error", "用户名或密码错误!");

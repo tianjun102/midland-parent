@@ -6,12 +6,21 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
+    <style>
+
+        td {
+
+            white-space:nowrap;overflow:hidden;text-overflow: ellipsis;
+
+        }
+
+    </style>
 </head>
 <body>
 
 
 <div class="table-responsive m40">
-    <table class="table table-bordered table-add">
+    <table style="table-layout: fixed;" class="table table-bordered table-add">
         <thead>
             <tr>
                 <th style="width: 3%">编号</th>
@@ -23,7 +32,7 @@
 				<th style="width: 8%">keywords</th>
 				<th style="width: 8%">description</th>
 
-                <th style="width: 10%">操作</th>
+                <th style="width: 20%">操作</th>
             </tr>
         </thead>
         <tbody>
@@ -39,9 +48,9 @@
                         </c:forEach></td>
                         <td>${item.modeName}</td>
                         <td>${item.secondModeName}</td>
-						<td>${item.websiteTitle}</td>
-						<td>${item.websiteKeyWords}</td>
-						<td>${item.websiteDescription}</td>
+						<td title="${item.websiteTitle}">${item.websiteTitle}</td>
+						<td title="${item.websiteKeyWords}">${item.websiteKeyWords}</td>
+						<td title="${item.websiteDescription}">${item.websiteDescription}</td>
 						<td>
                             <c:if test="${item.isDelete==0}">
                                 <a target="contentF" onclick="deleteOrRecover(${item.id },1)" class="delete_img"></a>

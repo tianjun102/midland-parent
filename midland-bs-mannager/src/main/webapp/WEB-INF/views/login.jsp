@@ -98,7 +98,7 @@ top.location.href = location.href;
 				<div class="login-bg">
 					<div class="longin-layer">
 						<ul class="login-tab">
-							<li class="li_focus"><a href="javascript:;">用户登录</a></li>
+							<li class="li_focus"><a >用户登录</a></li>
 							<!-- <li><a href="javascript:;">管理员登录</a></li> -->
 							<input type="hidden" value="0" id="hid" />
 						</ul>
@@ -168,28 +168,28 @@ top.location.href = location.href;
 
 	
 	
-		// jQuery完成登录界面的tab切换
-		$('.login-tab').on('click', 'li', function() {
-			/*  */
-			$('.login-tab li').removeClass('li_focus');
-			$(this).addClass('li_focus');
-			$("input.boxwrap:not(:last-child)").each(function() {
-				$(this).val('');
-			});
-
-			var index = $(this).index();
-			if (index == 0) {
-				$(".login_bg").removeClass("bg_2");
-				$(".login_bg").addClass("bg_1");
-				$(".forget").show();
-			} else {
-				$(".login_bg").removeClass("bg_1");
-				$(".login_bg").addClass("bg_2");
-				$(".forget").hide();
-			}
-			$('.form-list').addClass('form-hide');
-			$('.form-list').eq(index).removeClass('form-hide');
-		})
+//		// jQuery完成登录界面的tab切换
+//		$('.login-tab').on('click', 'li', function() {
+//			/*  */
+//			$('.login-tab li').removeClass('li_focus');
+//			$(this).addClass('li_focus');
+//			$("input.boxwrap:not(:last-child)").each(function() {
+//				$(this).val('');
+//			});
+//
+//			var index = $(this).index();
+//			if (index == 0) {
+//				$(".login_bg").removeClass("bg_2");
+//				$(".login_bg").addClass("bg_1");
+//				$(".forget").show();
+//			} else {
+//				$(".login_bg").removeClass("bg_1");
+//				$(".login_bg").addClass("bg_2");
+//				$(".forget").hide();
+//			}
+//			$('.form-list').addClass('form-hide');
+//			$('.form-list').eq(index).removeClass('form-hide');
+//		})
 
 		//原生js判断用户名密码是否为空
 		function checkUser1() {

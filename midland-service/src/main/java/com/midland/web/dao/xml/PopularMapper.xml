@@ -21,15 +21,18 @@
         <result column="cate_name" property="cateName" jdbcType="VARCHAR"/>
         <result column="is_show" property="isShow" jdbcType="INTEGER"/>
         <result column="order_by" property="orderBy" jdbcType="INTEGER"/>
+        <result column="order_by_f" property="orderByF" jdbcType="INTEGER" />
         <result column="sell_rent" property="sellRent" jdbcType="INTEGER"/>
         <result column="nofollow" property="nofollow" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,cate_id,menu_id,name,source,url,province_id,city_id,area_id,sheet_id,is_delete,province_name,city_name,area_name,sheet_name,cate_name,is_show,order_by,sell_rent,nofollow
+        id,cate_id,menu_id,name,source,url,province_id,city_id,area_id,sheet_id,is_delete,province_name,city_name,area_name,sheet_name,
+        cate_name,is_show,order_by,sell_rent,nofollow,order_by_f
     </sql>
    <sql id="Base_Column_List_collection">
-        a.id,a.cate_id,a.menu_id,a.name,a.source,a.url,a.province_id,a.city_id,a.area_id,a.sheet_id,a.is_delete,a.province_name,a.city_name,a.area_name,a.sheet_name,a.is_show,a.order_by,a.sell_rent,a.nofollow
+        a.id,a.cate_id,a.menu_id,a.name,a.source,a.url,a.province_id,a.city_id,a.area_id,a.sheet_id,a.is_delete,a.province_name,
+        a.city_name,a.area_name,a.sheet_name,a.is_show,a.order_by,a.sell_rent,a.nofollow,a.order_by_f
     </sql>
 
     <select id="selectById" resultMap="BaseResultMap">
@@ -57,17 +60,64 @@
     </update>
 
     <select id="shiftDown" parameterType="com.midland.web.model.Popular" resultMap="BaseResultMap">
-        select id,order_by from popular where 1=1
+        select id,order_by_f,order_by from popular where 1=1
         <include refid="select_option1"/>
-        AND
-        order_by &lt; #{orderBy} order by order_by desc LIMIT 1
+        AND order_by_f=#{orderByF}
+        and order_by &lt; #{orderBy}
+        ORDER BY order_by_f desc ,order_by desc LIMIT 1;
 
     </select>
-    <select id="shiftUp" parameterType="com.midland.web.model.Popular" resultMap="BaseResultMap">
-        select id,order_by from popular where 1=1
+    <select id="shiftDown_Down" parameterType="com.midland.web.model.Popular" resultMap="BaseResultMap">
+        select id,order_by_f,order_by from popular where 1=1
         <include refid="select_option1"/>
-        AND
-        order_by &gt; #{orderBy} order by order_by asc LIMIT 1
+        AND order_by_f=(
+            SELECT order_by_f from popular where
+            order_by_f &lt; #{orderByF}
+            ORDER BY order_by_f desc limit 1
+        )
+        ORDER BY order_by_f desc ,order_by desc LIMIT 1;
+
+    </select>
+
+    <select id="shiftUp" parameterType="com.midland.web.model.Popular" resultMap="BaseResultMap">
+        SELECT
+        id,
+        order_by_f,
+        order_by
+        FROM
+        popular
+        WHERE
+        1 = 1 <include refid = "select_option1" />
+        AND order_by_f = #{orderByF}
+        and order_by>#{orderBy}
+        ORDER BY order_by_f asc ,order_by asc LIMIT 1;
+
+
+
+    </select>
+
+
+    <select id="shiftUp_Up" parameterType="com.midland.web.model.Popular" resultMap="BaseResultMap">
+        SELECT
+        id,
+        order_by_f,
+        order_by
+        FROM
+        popular
+        WHERE
+        1 = 1
+        <include refid = "select_option1" />
+        AND order_by_f = (
+            SELECT
+            order_by_f
+            FROM
+            popular
+            WHERE
+            1 = 1
+            <include refid = "select_option1" />
+            and order_by_f > #{orderByF}
+            ORDER BY order_by_f asc limit 1)
+        ORDER BY order_by_f asc ,order_by LIMIT 1;
 
     </select>
 
@@ -77,7 +127,7 @@
         from popular a,category b
         where a.cate_id=b.id
         <include refid="select_option_collection"/>
-        ORDER by order_by asc
+        ORDER by order_by_f desc,order_by desc
     </select>
  <select id="findCateGory" parameterType="com.midland.web.model.Popular" resultMap="BaseResultMap">
      select DISTINCT(cate_id),b.cate_name from popular a,category b where a.cate_id=b.id
@@ -89,6 +139,7 @@
         <selectKey resultType="INTEGER" order="BEFORE" keyProperty="orderBy">
             SELECT Max(order_by)+1 as orderBy from popular
         </selectKey>
+
         insert into popular
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="cateId != null">
@@ -148,6 +199,10 @@
             <if test="nofollow != null">
                 nofollow,
             </if>
+            <if test="orderByF != null">
+                order_by_f,
+            </if>
+
 
         </trim>
         values
@@ -208,6 +263,9 @@
             </if>
             <if test="nofollow != null">
                 #{nofollow},
+            </if>
+            <if test="orderByF != null">
+                #{orderBy},
             </if>
 
 
@@ -272,6 +330,10 @@
         <if test="nofollow != null">
             nofollow=#{nofollow},
         </if>
+        <if test="orderByF != null">
+            order_by_f= #{orderByF,jdbcType=INTEGER},
+        </if>
+
     </sql>
 
 
@@ -336,7 +398,9 @@
         <if test="nofollow != null">
             and a.nofollow=#{nofollow}
         </if>
-
+        <if test="orderByF != null">
+            and a.order_by_f= #{orderByF,jdbcType=INTEGER}
+        </if>
 
     </sql>
 
@@ -401,7 +465,9 @@
         <if test="nofollow != null">
             and nofollow=#{nofollow}
         </if>
-
+        <if test="orderByF != null">
+            and order_by_f= #{orderByF,jdbcType=INTEGER}
+        </if>
 
     </sql>
     <sql id="select_option1">
@@ -462,7 +528,6 @@
         <if test="nofollow != null">
             and nofollow=#{nofollow}
         </if>
-
     </sql>
 
 
