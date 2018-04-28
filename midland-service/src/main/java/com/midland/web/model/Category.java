@@ -74,10 +74,23 @@ public class Category {
      */
     private String modeName;
 
-/**
+    /**
      * 是否是超链接0是,1否
      */
     private String isHref;
+
+    /**
+     * 写字楼的租售:0租1售
+     */
+    private String sellRent;
+
+    public String getSellRent() {
+        return sellRent;
+    }
+
+    public void setSellRent(String sellRent) {
+        this.sellRent = sellRent;
+    }
 
     public String getIsHref() {
         return isHref;

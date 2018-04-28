@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.HashMap;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -72,8 +73,14 @@ public class MetaController extends BaseFilter  {
 			metaServiceImpl.insertMeta(meta);
 			map.put("state",0);
 		} catch(Exception e) {
-			log.error("addMeta异常 {}",meta,e);
-			map.put("state",-1);
+			if (e instanceof DuplicateKeyException){
+				log.error("addMeta meta信息已存在{}",meta,e);
+				map.put("state",1);
+			}else{
+				log.error("addMeta异常 {}",meta,e);
+				map.put("state",-1);
+			}
+
 		}
 		return map;
 	}
@@ -130,8 +137,14 @@ public class MetaController extends BaseFilter  {
 			metaServiceImpl.updateMetaById(meta);
 			map.put("state",0);
 		} catch(Exception e) {
-			log.error("updateMetaById  {}",meta,e);
-			map.put("state",-1);
+			if (e instanceof DuplicateKeyException){
+				log.error("updateMetaById meta信息已存在{}",meta,e);
+				map.put("state",1);
+			}else{
+				log.error("updateMetaById  {}",meta,e);
+				map.put("state",-1);
+			}
+
 		}
 		return map;
 	}

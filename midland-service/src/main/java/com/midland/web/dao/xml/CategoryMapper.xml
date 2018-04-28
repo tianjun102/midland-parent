@@ -19,12 +19,13 @@
         <result column="mode_id" property="modeId" jdbcType="INTEGER"/>
         <result column="mode_name" property="modeName" jdbcType="VARCHAR"/>
         <result column="is_href" property="isHref" jdbcType="INTEGER"/>
+        <result column="sell_rent" property="sellRent" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-		id,cate_name,status,order_by,parent_id,type,is_delete,city_id,city_name,cate_desc,is_show,source,link_url,mode_id
-		mode_name,is_href
-	</sql>
+        id,cate_name,status,order_by,parent_id,type,is_delete,city_id,city_name,cate_desc,is_show,source,link_url,mode_id
+        mode_name,is_href,sell_rent
+    </sql>
 
     <select id="selectCategoryById" resultMap="BaseResultMap">
         select
@@ -34,9 +35,9 @@
     </select>
 
     <delete id="deleteCategoryById">
-		delete from category
-		 where id= #{id}
-	</delete>
+        delete from category
+        where id= #{id}
+    </delete>
 
     <update id="updateCategoryById">
         update category
@@ -52,7 +53,7 @@
         cate_name,id
         from category
         where id IN
-        <foreach collection="ids" item="item" open="(" close=")" >
+        <foreach collection="ids" item="item" open="(" close=")">
             #{item},
         </foreach>
 
@@ -173,6 +174,9 @@
             <if test="isHref != null">
                 is_href,
             </if>
+            <if test="sellRent != null">
+                sell_rent,
+            </if>
 
 
         </trim>
@@ -223,7 +227,9 @@
             <if test="isHref != null">
                 #{isHref,jdbcType=INTEGER},
             </if>
-
+            <if test="sellRent != null">
+                #{sellRent,jdbcType=INTEGER},
+            </if>
 
         </trim>
     </insert>
@@ -273,6 +279,9 @@
         </if>
         <if test="isHref != null">
             is_href=#{isHref,jdbcType=INTEGER},
+        </if>
+        <if test="sellRent != null">
+            sell_rent=#{sellRent,jdbcType=INTEGER},
         </if>
     </sql>
 
@@ -325,6 +334,9 @@
         <if test="isHref != null">
             and is_href=#{isHref,jdbcType=INTEGER}
         </if>
+        <if test="sellRent != null">
+            and sell_rent=#{sellRent,jdbcType=INTEGER}
+        </if>
     </sql>
 
     <sql id="select_option1">
@@ -371,6 +383,9 @@
         </if>
         <if test="isHref != null">
             and is_href=#{isHref,jdbcType=INTEGER}
+        </if>
+        <if test="sellRent != null">
+            and sell_rent=#{sellRent,jdbcType=INTEGER}
         </if>
     </sql>
 
@@ -446,14 +461,17 @@
         <if test="isHref != null">
             and is_href=#{isHref,jdbcType=INTEGER}
         </if>
+        <if test="sellRent != null">
+            and sell_rent=#{sellRent,jdbcType=INTEGER}
+        </if>
         ORDER BY b.order_by ASC
     </select>
 
     <select id="selectCategoryParentById" resultType="com.midland.web.model.Category">
-		SELECT b.*,(SELECT cate_name from category a where a.id=b.parent_id ) as parent_name
-		FROM `category` b
-		where b.is_delete=0 and b.id= #{id,jdbcType=INTEGER}
-	</select>
+        SELECT b.*,(SELECT cate_name from category a where a.id=b.parent_id ) as parent_name
+        FROM `category` b
+        where b.is_delete=0 and b.id= #{id,jdbcType=INTEGER}
+    </select>
 
     <update id="batchUpdate" parameterType="java.util.List">
         <foreach collection="categoryList" item="item" index="index" open="" close="" separator=";">

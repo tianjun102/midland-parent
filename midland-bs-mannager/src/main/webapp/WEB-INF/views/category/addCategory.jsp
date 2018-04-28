@@ -12,92 +12,12 @@
     <link rel="stylesheet" href="${ctx }/assets/css/common.css">
     <link rel="stylesheet" href="${ctx }/assets/css/easydropdown.css">
     <style type="text/css">
-        /*.content ul.userinfo>li {
-            float: none !important;
-            margin-left: 20px;
-            padding-top: 20px;
-        }*/
 
         .dropdown {
             width: 274px !important;
         }
     </style>
-    <script type="text/javascript">
 
-        var setting = {
-            check: {
-                enable: true,
-                chkboxType: {"Y": "sp", "N": "sp"}
-
-
-            },
-            data: {
-                simpleData: {
-                    enable: true
-                }
-            },
-            callback: {
-                beforeClick: beforeClick
-            }
-        };
-
-        $(document).ready(function () {
-            var catProNodes = null;
-            if ('${type}' == 3) {
-                catProNodes = [{id: 0, pId: 0, name: '分类', open: true, nocheck: true, iconSkin: "pIcon01"}
-                    , ${categoryData}];
-            } else {
-                catProNodes = [{
-                    id: 0,
-                    pId: 0,
-                    name: '分类',
-                    open: true,
-                    nocheck: true,
-                    iconSkin: "pIcon01"
-                }, ${categoryData}];
-            }
-            $.fn.zTree.init($("#categoryTree"), setting, catProNodes);
-        });
-
-        function beforeClick(treeId, treeNode, clickFlag) {
-            $("input[name='parentId']").val(treeNode.id);
-            $("input[name='parentName']").val(treeNode.name);
-            $("#showDiv").hide();
-        }
-
-        function showTree(event) {
-            var data = $("#addFrom").serialize();
-            $.ajax({
-                type: "post",
-                url: "${ctx}/rest/siteMap/choose",
-                async: false, // 此处必须同步
-                dataType: "json",
-                data: data,
-                success: function (data) {
-                    var dfd = {id: 0, pId: 0, name: '分类', open: true, nocheck: true, iconSkin: "pIcon01"};
-                    catProNodes = [dfd];
-                    $.each(data.list, function (i, listItem) {
-                        catProNodes.push(listItem);
-                    });
-                    $.fn.zTree.init($("#categoryTree"), setting, catProNodes);
-                    $("#showDiv").show();
-                },
-                error: function (data) {
-                    if (data.responseText != null) {
-                        layer.msg(data.responseText, {icon: 2});
-                    } else {
-                        layer.msg("保存失败！", {icon: 2});
-                    }
-                }
-            });
-            $("#showDiv").show();
-        }
-
-        function hideTree(event) {
-            $("#showDiv").hide();
-        }
-
-    </script>
 </head>
 <body>
 <section class="content" style="border:none;">
@@ -152,33 +72,12 @@
                     <label style="color: red" class="_star ">*</label>
                 </li>
             </c:if>
+            <li id="sellrentLi" style="display: none"><span>租售：</span>
+                <label class="checkitem"><input class="radioClass" type="radio" name="sellRent" value="0" checked="checked"><span>租房</span></label>
+                <label class="checkitem"><input class="radioClass" type="radio" name="sellRent" value="1" <c:if test="${item.sellRent==1}">checked="checked"</c:if> ><span>售房</span></label>
 
-            <%--<c:choose>--%>
-                <%--<c:when test="${type == 3 or type ==1 or type == 0 or type ==4}">--%>
-                    <%--<li><span>父节点：</span><input style="width: 250px!important;background-color: #dddfe2;" type="text" name="parentName" onclick="showTree()"--%>
-                                                <%--readonly="readonly" value="一级分类"/>--%>
-                        <%--<input name="parentId" type="hidden" value="0"/>--%>
-                        <%--<div style="font-size:12px; color:#afadad;text-indent: 70px;"></div>--%>
-                    <%--</li>--%>
-                <%--</c:when>--%>
-                <%--<c:otherwise>--%>
-                    <%--<c:if test="${type != 2}">--%>
-                        <%--<li><span>父节点：</span><input style="width: 250px!important;" type="text" name="parentName" onclick="showTree()"--%>
-                                                    <%--readonly="readonly"/>--%>
-                            <%--<input name="parentId" type="hidden"/>--%>
-                            <%--<div style="font-size:12px; color:#afadad;text-indent: 70px;">(不选父分类则默认一级分类)</div>--%>
-                        <%--</li>--%>
-                        <%--<li id="showDiv"  style="display: none;padding-top: 0px;position:relative;">--%>
-                            <%--<div class="zTreeDemoBackground left" style="position:absolute; left: -268px; top: 29px;"--%>
-                                 <%--onblur="test(event)">--%>
-                                <%--<ul id="categoryTree" class="ztree" style="width:235px; height: 140px!important;"></ul>--%>
-                            <%--</div>--%>
-                            <%--<img src="${ctx}/assets/img/Closed_16px.png" alt="关闭"--%>
-                                 <%--style="vertical-align: top;position:absolute; left: -50px; top: 40px;" onclick="hideTree()">--%>
-                        <%--</li>--%>
-                    <%--</c:if>--%>
-                <%--</c:otherwise>--%>
-            <%--</c:choose>--%>
+            </li>
+
             <li>
                 <span>分类名称：</span><input style="width:250px;" type="text" name="cateName" id="cateName"
                                          onblur="notEmpty('cateName','cateName','分类名称不能为空！');" maxlength="50"/>
@@ -211,6 +110,26 @@
     $(function () {
         if ($("#isHrefId").val()==1){
             $("#linkUrlId").css("display","none");
+        }
+    })
+
+    $(function () {
+        if (${item.menuId == 5 and item.menuId == 4}) {
+            $("#sellrentLi").show();
+            $(".radioClass").removeAttr("disabled","disabled");
+        } else {
+            $("#sellrentLi").hide();
+            $(".radioClass").attr("disabled","disabled");
+        }
+    })
+
+    $("#modeId").change(function () {
+        if ($("#modeId").val() == 4 || $("#modeId").val() == 5) {
+            $("#sellrentLi").show();
+            $(".radioClass").removeAttr("disabled","disabled");
+        } else {
+            $("#sellrentLi").hide();
+            $(".radioClass").attr("disabled","disabled");
         }
     })
 

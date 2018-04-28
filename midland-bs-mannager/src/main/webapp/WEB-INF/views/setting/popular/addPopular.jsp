@@ -70,7 +70,7 @@
             var data = $("#addFrom").serialize()+"&modeId="+$("#menuId option:selected").val();
             $.ajax({
                 type: "post",
-                url: "${ctx}/rest/siteMap/choose",
+                url: "${ctx}/rest/category/choose",
                 async: false, // 此处必须同步
                 dataType: "json",
                 data: data,
@@ -135,8 +135,8 @@
                 <span class="_star">*</span>
             </li>
             <li id="sellrentLi" style="display: none"><span>租售：</span>
-                <label class="checkitem"><input type="radio" name="sellRent" value="0" checked="checked"><span>租房</span></label>
-                <label class="checkitem"><input type="radio" name="sellRent" value="1"><span>售房</span></label>
+                <label class="checkitem"><input type="radio" onclick="setEmpty()" name="sellRent" value="0" checked="checked"><span>租房</span></label>
+                <label class="checkitem"><input type="radio" onclick="setEmpty()" name="sellRent" value="1"><span>售房</span></label>
 
             </li>
             <li><span>类型：</span><input class="vipcate" type="text" id="cateName" name="cateName" onclick="showTree()"
@@ -194,6 +194,9 @@
         }
         if (menuId !=''){
             $("#menuId").val(menuId);
+            if (menuId==4||menuId==5){
+                $("#sellrentLi").show();
+            }
         }
         if (cateId !=''&&cateName!=''){
             $("#cateId").val(cateId);
@@ -267,6 +270,7 @@
     $("#source").change(function () {
         setEmpty();
     })
+
     $("#provinces").change(function () {
         setEmpty();
     })

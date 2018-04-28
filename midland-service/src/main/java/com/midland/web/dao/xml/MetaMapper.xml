@@ -65,6 +65,20 @@
 		ORDER BY order_by desc
 	</select>
 
+	<select id="ifExist"  parameterType="com.midland.web.model.Meta" resultType="int">
+		select count(1) from meta
+		where 1=1
+		<include refid="select_option" />
+
+	</select>
+	<select id="ifExist_update"  parameterType="com.midland.web.model.Meta" resultType="int">
+		select count(1) from meta
+		where 1=1
+		<include refid="select_option1" />
+		AND id != #{id}
+
+	</select>
+
 	<insert id="insertMeta" parameterType="com.midland.web.model.Meta">
 		<selectKey resultType="INTEGER" order="BEFORE" keyProperty="orderBy">
 			SELECT Max(order_by)+1 as orderBy from menu

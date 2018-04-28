@@ -195,6 +195,8 @@
                             parent.$("#inquery").click();
                         }, 1000);
 
+                    }else if (data.state == 1){
+                        layer.msg("meta信息已存在！", {icon: 2});
                     } else {
                         layer.msg("操作失败！", {icon: 2});
                     }

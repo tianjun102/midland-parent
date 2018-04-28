@@ -103,10 +103,9 @@
 
 <script type="text/javascript">
 
-	function sortFocus(this) {
-	    alert(1);
-        $(this).css("border-style","solid");
-        $(this).css("border-color","blue");
+	function sortFocus(obj) {
+        $(obj).css("border-style","solid 1px");
+        $(obj).css("border-color","blue");
     }
 	
 	function sortForm(id,orderByF) {

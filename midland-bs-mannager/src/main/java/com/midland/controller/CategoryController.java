@@ -5,6 +5,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.Paginator;
 import com.midland.base.BaseFilter;
 import com.midland.web.Contants.Contant;
+import com.midland.web.commons.Result;
+import com.midland.web.commons.core.util.ResultStatusUtils;
 import com.midland.web.model.Area;
 import com.midland.web.model.Category;
 import com.midland.web.model.user.User;
@@ -207,6 +209,34 @@ public class CategoryController extends BaseFilter {
         }
         return map;
     }
+
+    @RequestMapping("choose")
+    @ResponseBody
+    public Object siteMapChoose(Category cate, Model model, HttpServletRequest request) throws Exception {
+        Result<Object> result = new Result();
+        List result1;
+        try {
+            Category cate1 = new Category();
+            cate1.setType(cate.getType());
+            cate1.setCityId(cate.getCityId());
+            cate1.setIsDelete(Contant.isNotDelete);
+            cate1.setSource(cate.getSource());
+            cate1.setSellRent(cate.getSellRent());
+            cate1.setModeId(cate.getModeId());
+
+            result1 = getSiteObject("", cate1);
+            result.setCode(ResultStatusUtils.STATUS_CODE_200);
+            result.setMsg("success");
+            result.setList(result1);
+        } catch (Exception e) {
+            log.error("siteMapChoose", e);
+            result.setCode(ResultStatusUtils.STATUS_CODE_203);
+            result.setMsg("service error");
+        }
+
+        return result;
+    }
+
 
     /**
      * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）

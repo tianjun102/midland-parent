@@ -23,7 +23,7 @@
                         </option>
                     </c:forEach>
                 </select>
-                <label style="color: red;padding-top: 0!important;" class = "_star " >*</label>
+                <label style="color: red;padding-top: 0!important;" class="_star ">*</label>
             </li>
 
             <li class="col-md-6"><span>模块：</span>
@@ -36,12 +36,13 @@
                     <option value="10">资讯</option>
                     <option value="11">问答</option>
                 </select>
-                <label style="color: red;padding-top: 0!important;" class = "_star " >*</label>
+                <label style="color: red;padding-top: 0!important;" class="_star ">*</label>
             </li>
 
             <li class="col-md-6" id="childMode"><span>子模块：</span>
                 <input type="hidden" name="secondModeName" id="secondModeName">
-                <select name="secondModeId" id="secondModeId" style="height: 28px;width: 250px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;">
+                <select name="secondModeId" id="secondModeId"
+                        style="height: 28px;width: 250px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option value=>请选择</option>
                 </select>
             </li>
@@ -59,10 +60,9 @@
             </li>
 
 
-
             <li class="col-md-6">
                 <span></span>
-                <a target="contentF" class="public_btn bg2" id="save" onclick="updateData()">保存</a>
+                <a target="contentF" class="public_btn bg2" id="save" onclick="saveData()">保存</a>
 
                 <a style="margin-left: 20px" class="public_btn bg3" id="cancel" onclick="closeWin1()">取消</a>
             </li>
@@ -80,49 +80,49 @@
 
     $("#modeId").change(function () {
         $("#modeName").val($("#modeId option:selected").text())
-        if ($("#modeId").val()==9){
+        if ($("#modeId").val() == 9) {
             $("#childMode").show();
-            var data = "type=0"+"&cityId="+$("#cityId").val()+"&source="+$("#source").val();
+            var data = "type=0" + "&cityId=" + $("#cityId").val() + "&source=" + $("#source").val();
             getCate(data);
-        }else if ($("#modeId").val()==10){
+        } else if ($("#modeId").val() == 10) {
             $("#childMode").show();
-            var data = "type=1"+"&cityId="+$("#cityId").val()+"&source="+$("#source").val();
+            var data = "type=1" + "&cityId=" + $("#cityId").val() + "&source=" + $("#source").val();
             getCate(data);
-        }else if ($("#modeId").val()==11 || $("#modeId").val()==1){
+        } else if ($("#modeId").val() == 11 || $("#modeId").val() == 1) {
             $("#childMode").hide();
         }
     })
 
-function getCate(data) {
-    $.ajax({
-        type: "post",
-        url: "${ctx}/rest/category/getCate",
-        async: false, // 此处必须同步
-        dataType: "json",
-        data: data,
-        success: function (data) {
-            if (data.state == 0) {
-                var obj = data.data;
-                debugger;
-                var html = "<option value=>请选择</option>";
-                for (var i = 0; i < obj.length; i++) {
-                    html += "<option value=\"" + obj[i].id + "\">" + obj[i].cateName + "</option>";
-                }
-                $("#secondModeId").html(html);
+    function getCate(data) {
+        $.ajax({
+            type: "post",
+            url: "${ctx}/rest/category/getCate",
+            async: false, // 此处必须同步
+            dataType: "json",
+            data: data,
+            success: function (data) {
+                if (data.state == 0) {
+                    var obj = data.data;
+                    debugger;
+                    var html = "<option value=>请选择</option>";
+                    for (var i = 0; i < obj.length; i++) {
+                        html += "<option value=\"" + obj[i].id + "\">" + obj[i].cateName + "</option>";
+                    }
+                    $("#secondModeId").html(html);
 
-            } else {
-                layer.msg("保存失败！", {icon: 2});
+                } else {
+                    layer.msg("保存失败！", {icon: 2});
+                }
+            },
+            error: function (data) {
+                if (data.responseText != null) {
+                    layer.msg(data.responseText, {icon: 2});
+                } else {
+                    layer.msg("操作失败！", {icon: 2});
+                }
             }
-        },
-        error: function (data) {
-            if (data.responseText != null) {
-                layer.msg(data.responseText, {icon: 2});
-            } else {
-                layer.msg("操作失败！", {icon: 2});
-            }
-        }
-    });
-}
+        });
+    }
 
     function getExportSaleCates() {
         $.ajax({
@@ -155,8 +155,8 @@ function getCate(data) {
     }
 
     //保存数据
-    function updateData() {
-        if (checkSelect('citys', '城市不能为空', '城市不能为空')&& checkSelect('source', '平台不能为空', '') &&checkSelect('modeId', '模块不能为空', '') ) {
+    function saveData() {
+        if (checkSelect('citys', '城市不能为空', '城市不能为空') && checkSelect('source', '平台不能为空', '') && checkSelect('modeId', '模块不能为空', '')) {
             var data = $("#addForm").serialize();
             debugger
             $.ajax({
@@ -174,7 +174,10 @@ function getCate(data) {
                             parent.$("#inquery").click();
                         }, 1000);
 
-                    } else {
+                    }else if (data.state == 1){
+                        layer.msg("meta信息不能重复添加！", {icon: 2});
+                    }
+                    else {
                         layer.msg("保存失败！", {icon: 2});
                     }
                 },
