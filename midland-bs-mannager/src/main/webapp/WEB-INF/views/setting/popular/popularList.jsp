@@ -33,6 +33,7 @@
 						</tr>
 					</thead>
 					<tbody>
+					<input type="hidden" id="oldSort">
 				<c:choose>
 					<c:when test="${!empty requestScope.popularList }">
 						<c:forEach items="${requestScope.popularList}" var="popular"
@@ -64,10 +65,9 @@
 								<td><c:if test="${popular.nofollow==0}">否</c:if>
 									<c:if test="${popular.nofollow==1}">是</c:if></td>
 								<td>
-									<input type="text" name="orderByF" class="orderByF"
+									<input type="text" name="orderByF" onfocus="sortFocus(this)" class="orderByF"
 										   style="width: 25px;border:none;text-align: center;background: transparent;"
-										   onblur="sortForm(${popular.id},this.value)" value="${popular.orderByF}"
-											onfocus="sortFocus(this)">
+										   onblur="sortForm(${popular.id},this)" value="${popular.orderByF}" >
 									<c:if test="${popular.isDelete==0}">
 									<a onclick="preUpdate(${popular.id })" target="contentF" class = "edit_img" title = "编辑"></a>
 									</c:if>
@@ -104,11 +104,18 @@
 <script type="text/javascript">
 
 	function sortFocus(obj) {
-        $(obj).css("border-style","solid 1px");
-        $(obj).css("border-color","blue");
+        $(obj).css("border","solid 1px");
+        $("#oldSort").val($(obj).val());
     }
 	
-	function sortForm(id,orderByF) {
+	function sortForm(id,obj) {
+	    debugger;
+	    var orderByF=$(obj).val();
+		if ($("#oldSort").val()==orderByF){
+            $(obj).css("border","none");
+		    return;
+		}
+
 
         var data = "id="+id+"&orderByF="+orderByF;
         $.ajax({

@@ -73,6 +73,7 @@
             </li>
             <li><span>地址：</span>
                 <input type="text" name="url" id="url" value="${item.url}" onblur="checkUrl('url','url','链接格式不正确！')">
+                <label style="color: red" class="_star ">*</label>
             </li>
             <li>
                 <span></span>
@@ -87,7 +88,7 @@
 <script type="text/javascript">
 
     $("#menuId").change(function () {
-        if ($("#menuId").val() == 5) {
+        if ($("#menuId").val() == 5||$("#menuId").val() == 4) {
             $("#sellrentLi").show();
             $(".radioClass").removeAttr("disabled","disabled");
         } else {
