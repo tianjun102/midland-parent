@@ -63,17 +63,16 @@ public class PopularServiceImpl implements PopularService {
             int nextOrderByF= obj.getOrderByF();
             int currOrderBy = popular.getOrderBy();
             int currOrderByF = popular.getOrderByF();
+            Popular temp = new Popular();
+            temp.setId(popular.getId());
 
-            if (currOrderByF != nextOrderByF){
-                popular.setOrderByF(nextOrderByF);
-                obj.setOrderByF(currOrderByF);
-            }else {
                 obj.setOrderBy(-999999999);
                 popularMapper.updateById(obj);
-                popular.setOrderBy(nextOrderBy);
+                temp.setOrderByF(nextOrderByF);
+                temp.setOrderBy(nextOrderBy);
+                obj.setOrderByF(currOrderByF);
                 obj.setOrderBy(currOrderBy);
-            }
-            popularMapper.updateById(popular);
+            popularMapper.updateById(temp);
             popularMapper.updateById(obj);
         } catch (Exception e) {
             log.error("shiftUp {}", popular, e);
@@ -100,20 +99,19 @@ public class PopularServiceImpl implements PopularService {
             int nextOrderByF=obj.getOrderByF();
             int currOrderBy = popular.getOrderBy();
             int currOrderByF = popular.getOrderByF();
+            Popular temp = new Popular();
+            temp.setId(popular.getId());
 
 
 
-            if (currOrderByF != nextOrderByF){
-                popular.setOrderByF(nextOrderByF);
-                obj.setOrderByF(currOrderByF);
-            }else {
-                obj.setOrderBy(-999999999);
-                popularMapper.updateById(obj);
-                popular.setOrderBy(nextOrderBy);
-                obj.setOrderBy(currOrderBy);
-            }
+            obj.setOrderBy(-999999999);
+            popularMapper.updateById(obj);
+            temp.setOrderByF(nextOrderByF);
+            temp.setOrderBy(nextOrderBy);
+            obj.setOrderByF(currOrderByF);
+            obj.setOrderBy(currOrderBy);
 
-            popularMapper.updateById(popular);
+            popularMapper.updateById(temp);
             popularMapper.updateById(obj);
         } catch (Exception e) {
             log.error("shiftDown异常 {}", popular, e);

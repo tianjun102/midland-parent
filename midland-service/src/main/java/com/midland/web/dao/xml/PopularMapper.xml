@@ -71,8 +71,9 @@
         select id,order_by_f,order_by from popular where 1=1
         <include refid="select_option1"/>
         AND order_by_f=(
-            SELECT order_by_f from popular where
-            order_by_f &lt; #{orderByF}
+            SELECT order_by_f from popular where 1=1
+          <include refid="select_option1"/>
+            and order_by_f &lt; #{orderByF}
             ORDER BY order_by_f desc limit 1
         )
         ORDER BY order_by_f desc ,order_by desc LIMIT 1;
