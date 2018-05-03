@@ -192,11 +192,17 @@
 		<if test="secondModeName != null">
 			second_mode_name= #{secondModeName,jdbcType=VARCHAR},
 		</if>
+		<if test="secondModeName ==''">
+			second_mode_name= null,
+		</if>
 		<if test="isDelete != null">
 			is_delete= #{isDelete,jdbcType=INTEGER},
 		</if>
-		<if test="secondModeId != null">
+		<if test="secondModeId != null and secondModeId != -1">
 			second_mode_id= #{secondModeId,jdbcType=INTEGER},
+		</if>
+		<if test="secondModeId == -1">
+			second_mode_id= null,
 		</if>
 		<if test="orderBy != null">
 			order_by= #{orderBy,jdbcType=INTEGER},

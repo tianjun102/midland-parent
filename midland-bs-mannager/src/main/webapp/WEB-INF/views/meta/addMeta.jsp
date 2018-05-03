@@ -90,6 +90,12 @@
             getCate(data);
         } else if ($("#modeId").val() == 11 || $("#modeId").val() == 1) {
             $("#childMode").hide();
+            $("#secondModeId").val("");
+            $("#secondModeName").val("");
+        }else{
+            $("#childMode").hide();
+            $("#secondModeId").val("");
+            $("#secondModeName").val("");
         }
     })
 

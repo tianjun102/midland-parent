@@ -9,6 +9,7 @@ import com.midland.web.service.SettingService;
 import com.midland.web.util.JsonMapReader;
 import com.midland.web.util.MidlandHelper;
 import com.midland.web.util.ParamObject;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 
 import java.util.List;
@@ -93,25 +94,10 @@ public class MetaController extends BaseFilter  {
 		log.info("getMetaById  {}",id);
 		Meta result = metaServiceImpl.selectMetaById(id);
 		model.addAttribute("item",result);
-		return "meta/updateMeta";	}
-
-	/**
-	 * 删除
-	 **/
-	@RequestMapping("delete")
-	@ResponseBody
-	public Object deleteMetaById(Integer id,HttpServletRequest request)throws Exception {
-		Map<String,Object> map = new HashMap<>();
-		try {
-			log.info("deleteMetaById  {}",id);
-			metaServiceImpl.deleteMetaById(id);
-			map.put("state",0);
-		} catch(Exception e) {
-			log.error("deleteMetaById  {}",id,e);
-			map.put("state",-1);
-		}
-		return map;
+		return "meta/updateMeta";
 	}
+
+
 	/**
 	 * 
 	 **/
@@ -134,6 +120,14 @@ public class MetaController extends BaseFilter  {
 		Map<String,Object> map = new HashMap<>();
 		try {
 			log.info("updateMetaById  {}",meta);
+			Meta meta1 = new Meta();
+			meta1.setId(meta.getId());
+			meta1.setCityId(meta.getCityId());
+			meta1.setIsDelete(Contant.isNotDelete);
+			meta1.setSecondModeId(meta.getSecondModeId());
+			meta1.setSource(meta.getSource());
+			meta1.setModeId(meta.getModeId());
+			metaServiceImpl.ifExist_update(meta1);
 			metaServiceImpl.updateMetaById(meta);
 			map.put("state",0);
 		} catch(Exception e) {
@@ -148,7 +142,39 @@ public class MetaController extends BaseFilter  {
 		}
 		return map;
 	}
+	/**
+	 * 更新
+	 **/
+	@RequestMapping("delete")
+	@ResponseBody
+	public Object deleteMetaById(Meta meta,HttpServletRequest request) throws Exception {
+		Map<String,Object> map = new HashMap<>();
+		try {
+			log.info("deleteMetaById  {}",meta);
+			if (meta.getIsDelete()==Contant.isNotDelete){
+				Meta meta1 = new Meta();
+				meta1.setId(meta.getId());
+				meta1.setCityId(meta.getCityId());
+				meta1.setIsDelete(Contant.isNotDelete);
+				meta1.setSecondModeId(meta.getSecondModeId());
+				meta1.setSource(meta.getSource());
+				meta1.setModeId(meta.getModeId());
+				metaServiceImpl.ifExist_update(meta1);
+			}
+			metaServiceImpl.updateMetaById(meta);
+			map.put("state",0);
+		} catch(Exception e) {
+			if (e instanceof DuplicateKeyException){
+				log.error("deleteMetaById meta信息已存在,不能恢复当前meta信息{}",meta,e);
+				map.put("state",1);
+			}else{
+				log.error("deleteMetaById  {}",meta,e);
+				map.put("state",-1);
+			}
 
+		}
+		return map;
+	}
 	/**
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
 	 **/

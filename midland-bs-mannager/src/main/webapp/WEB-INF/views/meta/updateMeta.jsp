@@ -99,6 +99,12 @@
             getCate(data);
         } else if (val == 11 || val == 1) {
             $("#childMode").hide();
+            $("#secondModeId").val("");
+            $("#secondModeName").val("");
+        }else{
+            $("#childMode").hide();
+            $("#secondModeId").val("");
+            $("#secondModeName").val("");
         }
     }
 

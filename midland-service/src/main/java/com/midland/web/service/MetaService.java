@@ -26,7 +26,9 @@ public interface MetaService {
 	 **/
 	void insertMeta(Meta meta) throws Exception;
 
-	/**
+    void ifExist_update(Meta meta) throws Exception;
+
+    /**
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
 	 **/
 	List<Meta> findMetaList(Meta meta) throws Exception;

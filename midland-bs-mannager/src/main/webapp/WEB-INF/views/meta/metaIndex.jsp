@@ -33,7 +33,6 @@
                     </select>
                 </li>
                 <li><span>模块：</span>
-                    <input type="hidden" name="modeName" id="modeName">
                     <select name="modeId" id="modeId" class="dropdown">
                         <option value="">请选择</option>
                         <option value="1">新房首页</option>
@@ -45,7 +44,6 @@
                 </li>
 
                 <li id="childMode"><span>子模块：</span>
-                    <input type="hidden" name="secondModeName" id="secondModeName">
                     <select name="secondModeId" id="secondModeId"
                             style="height: 28px;width: 120px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <option value=>请选择</option>
@@ -76,13 +74,13 @@
 <script type="text/javascript">
 
 
-    $("#secondModeId").change(function () {
-        $("#secondModeName").val($("#secondModeId option:selected").text());
-    })
+//    $("#secondModeId").change(function () {
+//        $("#secondModeName").val($("#secondModeId option:selected").text());
+//    })
 
 
     $("#modeId").change(function () {
-        $("#modeName").val($("#modeId option:selected").text())
+       // $("#modeName").val($("#modeId option:selected").text())
         debugger;
        if ($("#modeId").val() == 9) {
             $("#childMode").show();
@@ -94,7 +92,12 @@
             getCate(data);
         } else if ($("#modeId").val() == 11 || $("#modeId").val() == 1) {
             $("#childMode").hide();
-        }
+            $("#secondModeId").val("");
+
+        }else {
+           $("#childMode").hide();
+           $("#secondModeId").val("");
+       }
     })
 
     function getCate(data) {
@@ -115,7 +118,7 @@
                     $("#secondModeId").html(html);
 
                 } else {
-                    layer.msg("保存失败！", {icon: 2});
+                    layer.msg("操作失败！", {icon: 2});
                 }
             },
             error: function (data) {

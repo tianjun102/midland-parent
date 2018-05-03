@@ -64,24 +64,7 @@ public class MetaRestController extends BaseFilter  {
 		return map;
 	}
 
-	/**
-	 * 更新
-	 **/
-	@RequestMapping("update")
-	public Object updateMetaById(@RequestBody Meta obj) throws Exception {
-		 Map<String,Object> map = new HashMap<>();
-		try {
-			log.info("updateMetaById  {}",obj);
-			metaServiceImpl.updateMetaById(obj);
-			map.put("state",0);
-			map.put("msg","success");
-		} catch(Exception e) {
-			log.error("updateMetaById  {}",obj,e);
-			map.put("state",-1);
-			map.put("msg","fail");
-		}
-		return map;
-	}
+
 
 	/**
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）

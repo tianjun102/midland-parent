@@ -53,10 +53,10 @@
 						<td title="${item.websiteDescription}">${item.websiteDescription}</td>
 						<td>
                             <c:if test="${item.isDelete==0}">
-                                <a target="contentF" onclick="deleteOrRecover(${item.id },1)" class="delete_img"></a>
+                                <a target="contentF" onclick="deleteOrRecover(${item.id },1,${item.source },${item.cityId },${item.modeId },${item.secondModeId })" class="delete_img"></a>
                             </c:if>
                             <c:if test="${item.isDelete==1}">
-                                <a target="contentF" class="recove_img" onclick="deleteOrRecover(${item.id },0)"></a>
+                                <a target="contentF" class="recove_img" onclick="deleteOrRecover(${item.id },0,${item.source },'${item.cityId }',${item.modeId },${item.secondModeId })"></a>
                             </c:if>
                             <a target="contentF" class="edit_img"  onclick="to_edit(${item.id })"></a>
                             <a target="contentF" title="上移" class="up_img"
@@ -85,17 +85,24 @@
 
 <script type="text/javascript">
 
-    function deleteOrRecover(id,value){
+    function deleteOrRecover(id,value,source,cityId,modeId,secondModeId){
         debugger;
+        var data = "cityId="+cityId+"&modeId="+modeId+"&source="+source;
+        if (typeof(secondModeId)!='undefined'){
+            data+="&secondModeId="+secondModeId;
+        }
+
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/meta/update?id="+id+"&isDelete="+value,
+            url: "${ctx}/rest/meta/delete?id="+id+"&isDelete="+value,
             async: false, // 此处必须同步
             dataType: "json",
-
+            data:data,
             success: function (data) {
                 if (data.state==0){
                     $('#searchForm').submit();
+                }else if (data.state==1){
+                    layer.msg("列表meta信息已存在,不能恢复当前meta信息！", {icon: 2});
                 }
             },
             error: function () {

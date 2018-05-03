@@ -4,6 +4,7 @@ import com.midland.web.Contants.Contant;
 import com.midland.web.model.Meta;
 import com.midland.web.dao.MetaMapper;
 import com.midland.web.service.MetaService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,16 +76,10 @@ public class MetaServiceImpl implements MetaService {
 	public void updateMetaById(Meta meta) throws Exception {
 		try {
 			log.debug("updateMetaById  {}",meta);
-			Meta meta1 = new Meta();
-			meta1.setId(meta.getId());
-			meta1.setCityId(meta.getCityId());
-			meta1.setIsDelete(Contant.isNotDelete);
-			meta1.setSecondModeId(meta.getSecondModeId());
-			meta1.setSource(meta.getSource());
-			meta1.setModeId(meta.getModeId());
-			int count = metaMapper.ifExist_update(meta1);
-			if (count>0){
-				throw new DuplicateKeyException("meta信息已存在");
+
+			if(meta.getSecondModeId()==null && StringUtils.isEmpty(meta.getSecondModeName())){
+				meta.setSecondModeId(-1);
+				meta.setSecondModeName("");
 			}
 			int result = metaMapper.updateMetaById(meta);
 			if (result < 1) {
@@ -95,6 +90,26 @@ public class MetaServiceImpl implements MetaService {
 			throw e;
 		}
 	}
+	/**
+	 * 查询是否已存在信息,如果存在就跑出异常
+	 **/
+	@Override
+	public void ifExist_update(Meta meta) throws Exception {
+		try {
+			log.debug("updateMetaById  {}",meta);
+
+			int result = metaMapper.ifExist_update(meta);
+			if (result > 0) {
+				throw new DuplicateKeyException("meta信息已存在");
+			}
+		} catch(Exception e) {
+			log.error("updateMetaById  {}",meta,e);
+			throw e;
+		}
+	}
+
+
+
 
 	/**
 	 * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
