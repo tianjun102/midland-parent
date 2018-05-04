@@ -55,6 +55,15 @@
                         <option value="11">问答</option>
                     </select>
                 </li>
+                <li id="sellrentLi" style="display:none" >
+                    <span style="float:left;">租售：</span>
+                    <select name="sellRent" id="sellRentIndexId" class="dropdown">
+                        <option value="">全部</option>
+                        <option value="0">租</option>
+                        <option value="1">售</option>
+                    </select>
+                </li>
+
                 <c:if test="${not empty isSuper}">
                     <li>
                         <span style="float:left;">是否删除：</span>
@@ -79,9 +88,18 @@
 
 
 <script type="text/javascript">
-    /* $(function(){
-        $('#searchForm').submit();
-    }); */
+    $("#modeId").change(function () {
+        if ($("#modeId").val() == 5||$("#modeId").val() == 4) {
+            $("#sellrentLi").show();
+            $(".radioClass").removeAttr("disabled","disabled");
+        } else {
+            $("#sellrentLi").hide();
+            $(".radioClass").attr("disabled","disabled");
+        }
+    })
+
+
+
     window.onload = function () {
         $('#searchForm').submit();
     }
@@ -90,12 +108,12 @@
         layer.open({
             type: 2,
             skin: 'layer-style',
-            area: ['500px', '550px'],
+            area: ['500px', '650px'],
             shadeClose: false, //点击遮罩关闭
             title: ['新建友情链接'],
             resize: false,
             scrollbar: false,
-            content: ['${ctx}/rest/linkUrlManager/to_add', 'no']
+            content: ['${ctx}/rest/linkUrlManager/to_add', 'yes']
         });
     }
 </script>

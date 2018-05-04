@@ -103,6 +103,9 @@
     function updateData() {
         if(checkSelect('cityId|source|menuId','请选择城市!|请选择平台!|请选择模块！')&&notEmpty('keywords','keywords','搜索词不能为空！')&&checkUrl('url','url','链接格式不正确！')){
         var data = $("#dataForm").serialize();
+            if ($("#sellrentLi").css("display")=='none'){
+                data+="&sellRent=-1";
+            }
         $.ajax({
             type: "post",
             url: "${ctx}/rest/hotSearch/update",

@@ -20,6 +20,7 @@
 							<th style="width: 5%">平台</th>
 							<th style="width: 5%">模块</th>
 							<th style="width: 5%">名称</th>
+							<th style="width: 5%">租售</th>
 							<th style="width: 10%">操作</th>
 						</tr>
 					</thead>
@@ -38,6 +39,8 @@
 								</td>
 								<td>${linkUrl.modeName}</td>
 								<td>${linkUrl.linkName}</td>
+								<td><c:if test="${linkUrl.sellRent==0}">租</c:if>
+									<c:if test="${linkUrl.sellRent==1}">售</c:if></td>
 
 								<td>
 									<a target="contentF" title="上移" class="up_img" onclick="sort(${linkUrl.id },${linkUrl.orderBy},1)"></a>
@@ -126,7 +129,7 @@
 			type: 2,
 			title: ['修改友情链接'],
 			shade: 0.3,
-			area: ['500px', '550px'],
+			area: ['500px', '650px'],
 			content: ['${ctx}/rest/linkUrlManager/to_update?id='+Id,'no']
 			});
 	}

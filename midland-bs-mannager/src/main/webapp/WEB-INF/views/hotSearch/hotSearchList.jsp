@@ -20,6 +20,7 @@
                 <th style="width: 20%">热搜词</th>
                 <th style="width: 8%;-moz-user-select:none;">热搜量&nbsp;&nbsp;<span id="sort_click" class="sort_both" ></span></th>
 				<th style="width: 15%">模块</th>
+                <th style="width: 5%">租售</th>
 				<th style="width: 10%">平台</th>
                 <th style="width: 30%">操作</th>
             </tr>
@@ -35,8 +36,12 @@
                         <td>${item.keywords}</td>
                         <td>${item.count}</td>
                         <td>${item.menuName}</td>
+                        <td><c:if test="${item.sellRent==0}">租</c:if>
+                            <c:if test="${item.sellRent==1}">售</c:if>
+                        </td>
                         <td><c:if test="${item.source==0}">网站</c:if>
-                            <c:if test="${item.source==1}">微站</c:if></td>
+                            <c:if test="${item.source==1}">微站</c:if>
+                        </td>
 						<td>
                             <c:if test="${item.isDelete==0}">
                             <a class="edit_img" title="编辑" target="contentF" onclick="to_edit(${item.id })"></a>

@@ -70,7 +70,7 @@
             var data = $("#addFrom").serialize() + "&modeId=" + $("#menuId").find("option:selected").val();
             $.ajax({
                 type: "post",
-                url: "${ctx}/rest/siteMap/choose",
+                url: "${ctx}/rest/category/choose",
                 async: false, // 此处必须同步
                 dataType: "json",
                 data: data,
@@ -162,10 +162,8 @@
                 </select>
             </li>
             <li id="sellrentLi" style="display: none"><span>租售：</span>
-                <label class="checkitem"><input id="radio1" type="radio" name="sellRent"
-                                                value="0" checked="checked"><span>租房</span></label>
-                <label class="checkitem"><input id="radio2" type="radio" name="sellRent"
-                                                value="1"><span>售房</span></label>
+                <label class="checkitem"><input class="radioClass" type="radio" name="sellRent" value="0" onclick="setEmpty()" checked="checked"><span>租房</span></label>
+                <label class="checkitem"><input class="radioClass" type="radio" name="sellRent" value="1" onclick="setEmpty()" <c:if test="${item.sellRent==1}">checked="checked"</c:if> ><span>售房</span></label>
             </li>
             <li><span>类型：</span><input class="vipcate" id="cateName" name="cateName" value="${item.cateName}"
                                        onclick="showTree()" readonly="readonly"/>
@@ -188,10 +186,14 @@
                                           onblur="checkUrl('url','url','网址格式不正确！')"/><span class="_star">*</span>
             </li>
             <li id="nofollowId"><span>nofollow：</span>
-                <label class="checkitem"><input type="radio" name="nofollow" class="nofollow" value="1"
-                                                <c:if test="${item.nofollow==1}">checked="checked"</c:if> ><span>是</span></label>
-                <label class="checkitem"><input type="radio" name="nofollow" class="nofollow" value="0"
-                                                <c:if test="${item.nofollow==0}">checked="checked"</c:if> ><span>否</span></label>
+                <label class="checkitem">
+                <input type="radio" name="nofollow" class="nofollow" value="1"
+                  <c:if test="${item.nofollow==1}">checked="checked"</c:if> >
+                <span>是</span></label>
+                <label class="checkitem">
+                <input type="radio" name="nofollow" class="nofollow" value="0"
+                  <c:if test="${item.nofollow==0}">checked="checked"</c:if> >
+                <span>否</span></label>
             </li>
             <li style="padding-top:30px;">
                 <span></span>
@@ -203,6 +205,8 @@
 
 </section>
 <script type="text/javascript">
+
+
     $(function () {
         if(${item.provinceId!=''&&item.provinceId!=null}){
             $("#provinces").val('${item.provinceId}');
@@ -211,13 +215,10 @@
         }
 
         if (${item.menuId==4}|| ${item.menuId==5}) {
-            if (${item.sellRent==0}) {
-                $("#radio1").attr('checked', 'true');
-            } else if (${item.sellRent==1}) {
-                $("#radio2").attr('checked', 'true');
-            }
+            $(".radioClass").removeAttr("disabled","disabled");
             $("#sellrentLi").show();
         } else {
+            $(".radioClass").attr("disabled","disabled");
             $("#sellrentLi").hide();
         }
 
@@ -226,6 +227,9 @@
     function saveData() {
         if (checkSelect("citys", "城市不能为空！") && notEmpty('name', 'name', '链接名不能为空！') && notEmpty('cateName', 'cateName', '分类不能为空！') && checkSelect("source|menuId", "平台不能为空！|类型不能为空！|模块不能为空！") && checkUrl("url", "url", "网址格式不正确！")) {
             var data = $("#addFrom").serialize();
+            if ($("#sellrentLi").css("display")=='none'){
+                data+="&sellRent=-1";
+            }
             $.ajax({
                 type: "post",
                 url: "${ctx}/rest/setting/saveEditPopular",
@@ -276,10 +280,18 @@
     $("#menuId").change(function () {
         if ($("#menuId option:selected").val() == 4 || $("#menuId option:selected").val() == 5) {
             $("#sellrentLi").show();
+            $(".radioClass").removeAttr("disabled","disabled");
+
         } else {
             $("#sellrentLi").hide();
+            $(".radioClass").attr("disabled","disabled");
+
         }
         setEmpty();
+    })
+
+    $("#").change(function(){
+        setEmpty()
     })
 
     function setEmpty() {

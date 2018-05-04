@@ -62,6 +62,10 @@
                 </select>
                 <span class="_star">*</span>
             </li>
+            <li id="sellrentLi" style="display: none"><span>租售：</span>
+                <label class="checkitem"><input class="radioClass" type="radio" name="sellRent" value="0" checked="checked"><span>租房</span></label>
+                <label class="checkitem"><input class="radioClass" type="radio" name="sellRent" value="1" <c:if test="${linkUrlManager.sellRent==1}">checked="checked"</c:if> ><span>售房</span></label>
+            </li>
             <li><span>链接名：</span><input style="width:274px;" type="text" name="linkName" value="${linkUrlManager.linkName}" id="linkName" onblur="notEmpty('linkName','linkName','链接名不能为空！');" maxlength="50"/><span class="_star">*</span></li>
 
             <li>
@@ -83,9 +87,35 @@
 
 </section>
 <script type="text/javascript">
+    $(function () {
+        if (${linkUrlManager.modeId == 5 or linkUrlManager.modeId ==4}) {
+            $("#sellrentLi").show();
+            $(".radioClass").removeAttr("disabled","disabled");
+        } else {
+            $("#sellrentLi").hide();
+            $(".radioClass").attr("disabled","disabled");
+        }
+    })
+
+    $("#modeId").change(function () {
+        if ($("#modeId").val() == 5||$("#modeId").val() == 4) {
+            $("#sellrentLi").show();
+            $(".radioClass").removeAttr("disabled","disabled");
+        } else {
+            $("#sellrentLi").hide();
+            $(".radioClass").attr("disabled","disabled");
+        }
+    })
+
+
     function saveData() {
         if(notEmpty('linkName','linkName','链接名不能为空！')&&checkSelect("source","平台不能为空！")&&notEmpty('linkUrl','linkUrl','链接URL不能为空！')&&checkUrl('linkUrl','linkUrl','网址格式不正确！')){
+            debugger
+
             var data = $("#addFrom").serialize();
+            if ($("#sellrentLi").css("display")=='none'){
+                data+="&sellRent=-1";
+            }
             $.ajax({
                 type: "post",
                 url: "${ctx}/rest/linkUrlManager/update",

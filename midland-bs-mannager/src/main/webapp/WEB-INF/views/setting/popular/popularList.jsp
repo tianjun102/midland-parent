@@ -28,6 +28,7 @@
 							<th style="width: 5%">模块</th>
 							<th style="width: 10%">分类</th>
 							<th style="width: 10%">名称</th>
+							<th style="width: 10%">租售</th>
 							<th style="width: 10%">nofollow</th>
 							<th style="width: 20%">操作</th>
 						</tr>
@@ -62,8 +63,12 @@
 								</td>
 								<td>${popular.cateName}</td>
 								<td>${popular.name}</td>
+								<td><c:if test="${popular.sellRent==0}">租</c:if>
+									<c:if test="${popular.sellRent==1}">售</c:if>
+								</td>
 								<td><c:if test="${popular.nofollow==0}">否</c:if>
-									<c:if test="${popular.nofollow==1}">是</c:if></td>
+									<c:if test="${popular.nofollow==1}">是</c:if>
+								</td>
 								<td>
 									<input type="text" name="orderByF" onfocus="sortFocus(this)" class="orderByF"
 										   style="width: 25px;border:none;text-align: center;background: transparent;"
