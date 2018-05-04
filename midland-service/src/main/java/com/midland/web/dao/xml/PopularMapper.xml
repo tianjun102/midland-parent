@@ -30,14 +30,17 @@
         id,cate_id,menu_id,name,source,url,province_id,city_id,area_id,sheet_id,is_delete,province_name,city_name,area_name,sheet_name,
         cate_name,is_show,order_by,sell_rent,nofollow,order_by_f
     </sql>
-   <sql id="Base_Column_List_collection">
-        a.id,a.cate_id,a.menu_id,a.name,a.source,a.url,a.province_id,a.city_id,a.area_id,a.sheet_id,a.is_delete,a.province_name,
-        a.city_name,a.area_name,a.sheet_name,a.is_show,a.order_by,a.sell_rent,a.nofollow,a.order_by_f
+   <sql id="Base_Column_List_a">
+        a.id,a.name,a.url,a.area_id,a.sheet_id,a.is_delete,
+        a.area_name,a.sheet_name,a.is_show,a.order_by,a.nofollow,a.order_by_f,a.province_id,a.province_name
+    </sql>
+    <sql id="base_column_list_b">
+        b.sell_rent,b.city_id,b.city_name,b.source,b.id,b.cate_name,b.mode_id as menu_id
     </sql>
 
     <select id="selectById" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List_collection"/>,b.cate_name
+        <include refid="Base_Column_List_a"/>,<include refid="base_column_list_b"/>
         from popular a,category b
         where a.id= #{id} and a.cate_id=b.id
     </select>
@@ -124,7 +127,7 @@
 
     <select id="findPopularList" parameterType="com.midland.web.model.Popular" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List_collection"/>,b.cate_name
+        <include refid="Base_Column_List_a"/>,<include refid="base_column_list_b"/>
         from popular a,category b
         where a.cate_id=b.id
         <include refid="select_option_collection"/>
