@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="../../layout/tablib.jsp"%>
+<%@include file="../layout/tablib.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -69,33 +69,10 @@
 	<c:if test="${!empty paginator}"> 
 		  <c:set var="paginator" value="${paginator}"/>
 		  <c:set var="target" value="listDiv"/>
-		  <%@include file="../../layout/pagination.jsp"%>
+		  <%@include file="../layout/pagination.jsp"%>
 	</c:if>		  
 
 <script type="text/javascript">
-
-    function consume(userId){
-        $.ajax({
-            type: "post",
-            url: "${ctx}/rest/user/update?id="+userId+'&isBlack=1'+'&blackRemark='+$('#blackRemark').val(),
-            cache:false,
-            async:false, // 此处必须同步
-            dataType: "json",
-            success: function(obj){
-                if(obj.state==0){
-                    layer.msg("成功！",{icon:5});
-                    parent.window.location.reload();
-                    parent.layer.closeAll();
-                }
-                if(obj.state==-1){
-                    layer.msg("失败！！",{icon:7});
-                }
-
-            }
-        });
-    }
-
-
 
 	function isDelete(Id,isDelete){
         var msg = "您确定要删除当前数据吗？";
@@ -118,12 +95,12 @@
 			  yes: function(index){
 				  $.ajax({ 
 						type: "post", 
-						url: "${ctx}/rest/setting/deleteLinkUrl?id="+Id+"&isDelete="+isDelete,
+						url: "${ctx}/rest/linkUrlManager/update?id="+Id+"&isDelete="+isDelete,
 						cache:false, 
 						async:false, // 此处必须同步
 						dataType: "json",
 						success: function(xmlobj){
-							if(xmlobj.flag==1){
+							if(xmlobj.state==0){
 								layer.msg("操作成功！",{icon:1});
 								setTimeout(function(){$("#searchForm").submit();},1000);
 							}
@@ -150,26 +127,17 @@
 			title: ['修改友情链接'],
 			shade: 0.3,
 			area: ['500px', '550px'],
-			content: ['${ctx}/rest/setting/toEditLinkUrlPage?id='+Id,'no']
+			content: ['${ctx}/rest/linkUrlManager/to_update?id='+Id,'no']
 			});
 	}
-	//角色列表
-	function userRole(userId,userName){
-		layer.open({
-			type: 2,
-			title: ['用户角色信息:'+userName],
-			shade: 0.3,
-			area: ['600px', '450px'],
-			content: ['${ctx}/rest/user/userRole?userId='+userId,'yes']
-			});
-	}
+
 
     //排序
     function sort(id,orderById,sort) {
 	    var data = $("#searchForm").serialize();
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/setting/linkUrlSort?sort="+sort+"&orderBy="+orderById+"&id="+id,
+            url: "${ctx}/rest/linkUrlManager/sort?sort="+sort+"&orderBy="+orderById+"&id="+id,
             async: false, // 此处必须同步
             dataType: "json",
 			data:data,
@@ -194,7 +162,7 @@
 
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/setting/saveEditLinkUrl?isShow="+isShow+"&id="+id,
+            url: "${ctx}/rest/linkUrlManager/update?isShow="+isShow+"&id="+id,
             async:false, // 此处必须同步
             dataType: "json",
             data:"",
@@ -233,7 +201,7 @@
         }
         $.ajax({
             type: "post",
-            url: "${ctx}/rest/setting/batchUpdatelinkUrl?ids="+ids+"&isDelete="+status,
+            url: "${ctx}/rest/linkUrlManager/batchUpdate?ids="+ids+"&isDelete="+status,
             async: false, // 此处必须同步
             dataType: "json",
 

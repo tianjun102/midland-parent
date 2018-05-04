@@ -334,7 +334,7 @@
                 </shiro:hasPermission>
 
                 <shiro:hasPermission name="linkUrlList">
-                    <a id="left46" href="${ctx}/rest/setting/showlinkUrlIndex" target="contentF"><span>友情链接管理</span></a>
+                    <a id="left46" href="${ctx}/rest/linkUrlManager/index" target="contentF"><span>友情链接管理</span></a>
                 </shiro:hasPermission>
                 <shiro:hasPermission name="specialPageList">
                     <a id="left53" href="${ctx}/rest/specialPage/index" target="contentF"><span>首页特殊模块配置</span></a>

@@ -34,9 +34,7 @@ public class SettingServiceImpl implements SettingService {
 
     @Autowired
     private PopularMapper popularMapper;
-
-    @Autowired
-    private LinkUrlManagerMapper linkUrlMapper;
+    
 
     @Autowired
     private BannerMapper bannerMapper;
@@ -264,98 +262,8 @@ public class SettingServiceImpl implements SettingService {
         }
 
     }
-
-    /**
-     * 友情链接列表实现方法
-     *
-     * @param linkUrlManager
-     * @return
-     */
-    @Override
-    public List<LinkUrlManager> findLinkUrlList(LinkUrlManager linkUrlManager) {
-        return linkUrlMapper.findLinkUrlManagerList(linkUrlManager);
-    }
-
-    @Override
-    public LinkUrlManager findLinkUrlManager(LinkUrlManager linkUrlManager) {
-        return linkUrlMapper.selectById(linkUrlManager.getId());
-    }
-
-    @Override
-    public int updateLinkUrlManager(LinkUrlManager linkUrlManager) {
-        return linkUrlMapper.updateById(linkUrlManager);
-    }
-
-    @Override
-    public int insertLinkUrlManage(LinkUrlManager linkUrlManager) {
-        return linkUrlMapper.insertLinkUrlManager(linkUrlManager);
-    }
-
-    /**
-     * 上移
-     **/
-    @Override
-    @Transactional
-    public void shiftUp(LinkUrlManager category) throws Exception {
-        try {
-            log.debug("shiftUp {}", category);
-            LinkUrlManager obj = linkUrlMapper.shiftUp(category);
-            if (obj == null){
-                return;
-            }
-            int nextOrderBy = obj.getOrderBy();
-            int currOrderBy = category.getOrderBy();
-            obj.setOrderBy(-999999999);
-            linkUrlMapper.updateById(obj);
-            category.setOrderBy(nextOrderBy);
-            linkUrlMapper.updateById(category);
-            obj.setOrderBy(currOrderBy);
-            linkUrlMapper.updateById(obj);
-        } catch (Exception e) {
-            log.error("shiftUp {}", category, e);
-            throw e;
-        }
-    }
-
-    /**
-     * 下移
-     **/
-    @Override
-    @Transactional
-    public void shiftDown(LinkUrlManager linkUrlManager) throws Exception {
-        try {
-            log.debug("shiftDown {}", linkUrlManager);
-            LinkUrlManager obj = linkUrlMapper.shiftDown(linkUrlManager);
-            if (obj == null){
-                return;
-            }
-            int nextOrderBy = obj.getOrderBy();
-            int currOrderBy = linkUrlManager.getOrderBy();
-            obj.setOrderBy(-999999999);
-            linkUrlMapper.updateById(obj);
-            linkUrlManager.setOrderBy(nextOrderBy);
-            linkUrlMapper.updateById(linkUrlManager);
-            obj.setOrderBy(currOrderBy);
-            linkUrlMapper.updateById(obj);
-        } catch (Exception e) {
-            log.error("shiftDown异常 {}", linkUrlManager, e);
-            throw e;
-        }
-    }
     
-    @Override
-    public void batchUpdateLinkUrl(List<LinkUrlManager> linkUrlManagerList) throws Exception {
-        try {
-            log.debug("batchUpdateLinkUrl  {}", linkUrlManagerList);
-            int result = linkUrlMapper.batchUpdate(linkUrlManagerList);
-            if (result < 1) {
-                throw new Exception("batchUpdateLinkUrl失败");
-            }
-        } catch (Exception e) {
-            log.error("batchUpdateLinkUrl  {}", linkUrlManagerList, e);
-            throw e;
-        }
-    }
+    
 
     @Override
     public List<Banner> findBannerList(Banner banner) {

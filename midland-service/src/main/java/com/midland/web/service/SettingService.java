@@ -39,29 +39,7 @@ public interface SettingService {
     public Map<String, List<Area>> queryAreaByRedis(Map<String, String> parem);
 
     void batchUpdatePopular(List<Popular> popularList) throws Exception;
-
-    /**
-     * 友情链接
-     *
-     * @param linkUrlManager
-     * @return
-     */
-
-    public List<LinkUrlManager> findLinkUrlList(LinkUrlManager linkUrlManager);
-
-    public LinkUrlManager findLinkUrlManager(LinkUrlManager linkUrlManager);
-
-    public int updateLinkUrlManager(LinkUrlManager linkUrlManager);
-
-    public int insertLinkUrlManage(LinkUrlManager linkUrlManager);
-
-    @Transactional
-    void shiftUp(LinkUrlManager category) throws Exception;
-
-    @Transactional
-    void shiftDown(LinkUrlManager linkUrlManager) throws Exception;
-
-    void batchUpdateLinkUrl(List<LinkUrlManager> linkUrlManagerList) throws Exception;
+    
 
 
     /**

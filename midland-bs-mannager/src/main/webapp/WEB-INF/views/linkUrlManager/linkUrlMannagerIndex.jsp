@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%@include file="../../layout/tablib.jsp" %>
-<%@include file="../../layout/source.jsp" %>
+<%@include file="../layout/tablib.jsp" %>
+<%@include file="../layout/source.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -24,11 +24,11 @@
             <span>站点管理>>友情链接管理</span>
             <a class="setup" target="contentF" onclick="toAddPage()">添加</a>
         </p>
-        <form action="${ctx}/rest/setting/showlinkUrlList" method="POST" id="searchForm"
+        <form action="${ctx}/rest/linkUrlManager/list" method="POST" id="searchForm"
               onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
             <ul class="userinfo row">
 
-                <%@include file="../../layout/sherchArea.jsp" %>
+                <%@include file="../layout/sherchArea.jsp" %>
                 <li>
                     <span style="float:left;">平台：</span>
                     <select name="source" id="source" class="dropdown">
@@ -95,7 +95,7 @@
             title: ['新建友情链接'],
             resize: false,
             scrollbar: false,
-            content: ['${ctx}/rest/setting/toAddLinkUrlPage', 'no']
+            content: ['${ctx}/rest/linkUrlManager/to_add', 'no']
         });
     }
 </script>

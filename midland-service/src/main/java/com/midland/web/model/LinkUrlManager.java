@@ -58,7 +58,19 @@ public class LinkUrlManager {
     private Integer modeId;
 
     private String modeName;
-
+    /**
+     * 租售：0租，1售
+     */
+    private Integer sellRent;
+    
+    public Integer getSellRent() {
+        return sellRent;
+    }
+    
+    public void setSellRent(Integer sellRent) {
+        this.sellRent = sellRent;
+    }
+    
     public Integer getModeId() {
         return modeId;
     }

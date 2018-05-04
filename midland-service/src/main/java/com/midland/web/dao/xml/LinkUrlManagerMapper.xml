@@ -17,10 +17,12 @@
         <result column="city_name" property="cityName" jdbcType="VARCHAR"/>
         <result column="mode_id" property="modeId" jdbcType="INTEGER"/>
         <result column="mode_name" property="modeName" jdbcType="VARCHAR"/>
+        <result column="sell_rent" property="sellRent" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,city_id,link_name,link_url,contacts,phone,remarks,is_show,order_by,is_delete,source,city_name,mode_id,mode_name
+        id,city_id,link_name,link_url,contacts,phone,remarks,is_show,order_by,
+        is_delete,source,city_name,mode_id,mode_name,sell_rent
     </sql>
 
     <select id="shiftDown" parameterType="com.midland.web.model.LinkUrlManager" resultMap="BaseResultMap">
@@ -116,6 +118,10 @@
             <if test="modeName != null">
                 mode_name,
             </if>
+            <if test="sellRent != null">
+                sell_rent,
+            </if>
+
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -158,6 +164,10 @@
             <if test="modeName != null">
                 #{modeName,jdbcType=VARCHAR},
             </if>
+            <if test="sellRent != null">
+                #{sellRent,jdbcType=INTEGER},
+            </if>
+
         </trim>
     </insert>
 
@@ -200,6 +210,9 @@
         </if>
         <if test="modeName != null">
             mode_name=#{modeName,jdbcType=VARCHAR},
+        </if>
+        <if test="sellRent != null">
+            sell_rent=#{sellRent,jdbcType=INTEGER},
         </if>
     </sql>
 
@@ -246,6 +259,9 @@
         <if test="modeName != null">
             and mode_name=#{modeName,jdbcType=VARCHAR}
         </if>
+        <if test="sellRent != null">
+            AND sell_rent=#{sellRent,jdbcType=INTEGER}
+        </if>
     </sql>
 
     <sql id="select_option1">
@@ -286,6 +302,9 @@
         </if>
         <if test="modeName != null">
             and mode_name=#{modeName,jdbcType=VARCHAR}
+        </if>
+        <if test="sellRent != null">
+            AND sell_rent=#{sellRent,jdbcType=INTEGER}
         </if>
     </sql>
 

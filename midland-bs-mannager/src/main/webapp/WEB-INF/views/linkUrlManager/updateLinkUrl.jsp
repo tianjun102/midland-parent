@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%@include file="../../layout/tablib.jsp" %>
-<%@include file="../../layout/source.jsp"%>
+<%@include file="../layout/tablib.jsp" %>
+<%@include file="../layout/source.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -72,7 +72,7 @@
             <li><span>备注：</span> <textarea name="remarks"
                                            id="remarks"
                                            style="width: 61%; height: 50px; resize: none; border: 1px solid #dbe2e6; border-radius: 4px; outline-color: #0099e0;">${linkUrlManager.remarks}</textarea>
-                <label style="color: red"  class = "_star ">*</label></li>
+               </li>
             <li style="padding-top:30px;">
                 <span></span>
                 <a target="contentF" class="public_btn bg2" id="save" onclick="saveData()">保存</a>
@@ -88,12 +88,12 @@
             var data = $("#addFrom").serialize();
             $.ajax({
                 type: "post",
-                url: "${ctx}/rest/setting/saveEditLinkUrl",
+                url: "${ctx}/rest/linkUrlManager/update",
                 async: false, // 此处必须同步
                 dataType: "json",
                 data: data,
                 success: function (data) {
-                    if (data.flag == 1) {
+                    if (data.state == 0) {
                         layer.msg("修改成功！！！", {icon: 1});
                         $('#save').removeAttr("onclick");
                         setTimeout(function () {

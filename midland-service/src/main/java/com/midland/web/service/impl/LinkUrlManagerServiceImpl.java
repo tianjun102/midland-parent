@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -84,6 +85,59 @@ public class LinkUrlManagerServiceImpl implements LinkUrlManagerService {
             return linkUrlManagerMapper.findLinkUrlManagerList(linkUrlManager);
         } catch (Exception e) {
             log.error("findLinkUrlManagerList  {}", linkUrlManager, e);
+            throw e;
+        }
+    }
+    
+    
+    /**
+     * 上移
+     **/
+    @Override
+    @Transactional
+    public void shiftUp(LinkUrlManager category) throws Exception {
+        try {
+            log.debug("shiftUp {}", category);
+            LinkUrlManager obj = linkUrlManagerMapper.shiftUp(category);
+            if (obj == null){
+                return;
+            }
+            int nextOrderBy = obj.getOrderBy();
+            int currOrderBy = category.getOrderBy();
+            obj.setOrderBy(-999999999);
+            linkUrlManagerMapper.updateById(obj);
+            category.setOrderBy(nextOrderBy);
+            linkUrlManagerMapper.updateById(category);
+            obj.setOrderBy(currOrderBy);
+            linkUrlManagerMapper.updateById(obj);
+        } catch (Exception e) {
+            log.error("shiftUp {}", category, e);
+            throw e;
+        }
+    }
+    
+    /**
+     * 下移
+     **/
+    @Override
+    @Transactional
+    public void shiftDown(LinkUrlManager linkUrlManager) throws Exception {
+        try {
+            log.debug("shiftDown {}", linkUrlManager);
+            LinkUrlManager obj = linkUrlManagerMapper.shiftDown(linkUrlManager);
+            if (obj == null){
+                return;
+            }
+            int nextOrderBy = obj.getOrderBy();
+            int currOrderBy = linkUrlManager.getOrderBy();
+            obj.setOrderBy(-999999999);
+            linkUrlManagerMapper.updateById(obj);
+            linkUrlManager.setOrderBy(nextOrderBy);
+            linkUrlManagerMapper.updateById(linkUrlManager);
+            obj.setOrderBy(currOrderBy);
+            linkUrlManagerMapper.updateById(obj);
+        } catch (Exception e) {
+            log.error("shiftDown异常 {}", linkUrlManager, e);
             throw e;
         }
     }

@@ -38,7 +38,7 @@
     <logger name="org.hibernate.engine.query.HQLQueryPlan" level="DEBUG" />
 
     <!-- 日志输出级别 -->
-    <root level="info">
+    <root level="debug">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE" />
     </root>

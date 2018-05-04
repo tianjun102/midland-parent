@@ -77,14 +77,14 @@ top.location.href = location.href;
 				<a href="index.html">
 					<img src="${ctx}/assets/img/logo.png" title="wks">
 				</a>
-				<div class="login">
-					<a href="http://www.jeavox.com.cn/">美联物业</a>
-					<a class = "two_code" href="javascript:;">
-						<img src="${ctx}/assets/img/APP.png"/>
-						手机APP
-						<img class = "two_2" src="${ctx}/assets/img/two.png"/>
-					</a>
-				</div>	
+				<%--<div class="login">--%>
+					<%--<a href="#">美联物业</a>--%>
+					<%--<a class = "two_code" href="javascript:;">--%>
+						<%--<img src="${ctx}/assets/img/APP.png"/>--%>
+						<%--手机APP--%>
+						<%--<img class = "two_2" src="${ctx}/assets/img/two.png"/>--%>
+					<%--</a>--%>
+				<%--</div>	--%>
 			</div>
 		</div>	
 	</div>

@@ -1,6 +1,7 @@
 package com.midland.web.service;
 
 import com.midland.web.model.LinkUrlManager;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,6 +31,12 @@ public interface LinkUrlManagerService {
      * 分页，这里建议使用插件（com.github.pagehelper.PageHelper）
      **/
     List<LinkUrlManager> findLinkUrlManagerList(LinkUrlManager linkUrlManager) throws Exception;
-
-    void batchUpdate(List<LinkUrlManager> linkUrlManagerList) throws Exception;
+	
+	@Transactional
+	void shiftUp(LinkUrlManager category) throws Exception;
+	
+	@Transactional
+	void shiftDown(LinkUrlManager linkUrlManager) throws Exception;
+	
+	void batchUpdate(List<LinkUrlManager> linkUrlManagerList) throws Exception;
 }
