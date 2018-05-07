@@ -19,10 +19,10 @@
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath*:properties/test/application.properties</value>
-                <value>classpath*:properties/test/mail_SMS.properties</value>
-                <value>classpath*:properties/test/midland.properties</value>
-                <value>classpath*:properties/test/sftp.properties</value>
+                <value>classpath*:properties/application.properties</value>
+                <value>classpath*:properties/mail_SMS.properties</value>
+                <value>classpath*:properties/midland.properties</value>
+                <value>classpath*:properties/sftp.properties</value>
             </list>
         </property>
     </bean>
