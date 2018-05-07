@@ -53,6 +53,7 @@
             and is_delete=0
         </if>
         <include refid="select_option"/>
+        order by id DESC
     </select>
 
     <insert id="insertFeedback" parameterType="com.midland.web.model.Feedback">

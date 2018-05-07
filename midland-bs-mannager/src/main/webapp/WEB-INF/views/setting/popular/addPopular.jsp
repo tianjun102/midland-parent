@@ -58,7 +58,7 @@
         });
 
         function beforeClick(treeId, treeNode, clickFlag) {
-            if(treeNode.id==0){
+            if (treeNode.id == 0) {
                 return;
             }
             $("input[name='cateId']").val(treeNode.id);
@@ -67,7 +67,7 @@
         }
 
         function showTree(event) {
-            var data = $("#addFrom").serialize()+"&modeId="+$("#menuId option:selected").val();
+            var data = $("#addFrom").serialize() + "&modeId=" + $("#menuId option:selected").val();
             $.ajax({
                 type: "post",
                 url: "${ctx}/rest/category/choose",
@@ -158,8 +158,10 @@
                                           onblur="checkUrl('url','url','网址格式不正确！')"/><span class="_star">*</span>
             </li>
             <li id="nofollowId"><span>nofollow：</span>
-                <label class="checkitem"><input type="radio" name="nofollow" class="nofollow" value="1" ><span>是</span></label>
-                <label class="checkitem"><input type="radio" name="nofollow" class="nofollow" value="0" checked="checked"  ><span>否</span></label>
+                <label class="checkitem"><input type="radio" name="nofollow" class="nofollow"
+                                                value="1"><span>是</span></label>
+                <label class="checkitem"><input type="radio" name="nofollow" class="nofollow" value="0"
+                                                checked="checked"><span>否</span></label>
             </li>
             <li style="padding-top:30px;">
                 <span></span>
@@ -174,48 +176,57 @@
     $(function () {
         var test = window.location.href;
         //设置城市选择的cookie
-        var cityId = getCookie("popuolarCityId",test);
-        var cityName = getCookie("popuolarCityName",test);
-        var provinceId = getCookie("popuolarProvinceId",test);
-        var provinceName = getCookie("popuolarProvinceName",test);
-        var source = getCookie("popuolarSource",test);
-        var menuId = getCookie("popuolarMenuId",test);
-        var cateId = getCookie("popuolarCateId",test);
-        var cateName = getCookie("popuolarCateName",test);
-        if (provinceId !=''){
+        var cityId = getCookie("popuolarCityId", test);
+        var cityName = getCookie("popuolarCityName", test);
+        var provinceId = getCookie("popuolarProvinceId", test);
+        var provinceName = getCookie("popuolarProvinceName", test);
+        var source = getCookie("popuolarSource", test);
+        var menuId = getCookie("popuolarMenuId", test);
+        var cateId = getCookie("popuolarCateId", test);
+        var cateName = getCookie("popuolarCateName", test);
+        var sellRent = getCookie("popuolarSellRentId", test);
+        if (provinceId != '') {
             $("#provinces").val(provinceId);
             initProvince();
         }
-        if (provinceName!='undefined'&&provinceName!=''){
+        if (provinceName != 'undefined' && provinceName != '') {
             $("#provinceName").val(provinceName);
         }
-        if (source !=''){
+        if (source != '') {
             $("#source").val(source);
         }
-        if (menuId !=''){
+        if (menuId != '') {
             $("#menuId").val(menuId);
-            if (menuId==4||menuId==5){
+            if (menuId == 4 || menuId == 5) {
                 $("#sellrentLi").show();
             }
         }
-        if (cateId !=''&&cateName!=''){
+        if (cateId != '' && cateName != '') {
             $("#cateId").val(cateId);
             $("#cateName").val(cateName);
         }
 
-        if (cityId !=''){
+        if (cityId != '') {
             $("#citys").val(cityId);
             $("#cityId").val(cityId);
             $("#cityName").val(cityName);
+        }
+        if(sellRent !=''){
+            debugger;
+            if (sellRent==0){
+                $("input[type=radio][name='sellRent'][value='0']").attr("checked",'checked');
+            }else if(sellRent==1){
+                $("input[type=radio][name='sellRent'][value='1']").attr("checked",'checked');
+            }
         }
     })
 
 
     function saveData() {
-        if (checkSelect("citys","城市不能为空！")&&notEmpty('name', 'name', '链接名不能为空！') && notEmpty('cateName', 'cateName', '类型不能为空！')
-            && checkSelect("source|menuId", "平台不能为空！|模块不能为空！") && checkUrl("url", "url", "网址格式不正确！")
-            ) {
+        if (checkSelect("citys", "城市不能为空！") && notEmpty('name', 'name', '链接名不能为空！') && notEmpty('cateName', 'cateName', '类型不能为空！')
+            && checkSelect("source|menuId", "平台不能为空！|模块不能为空！") && checkUrl("url", "url", "网址格式不正确！")) {
             var data = $("#addFrom").serialize();
+            var sellRent = $("input[name='sellRent']:checked").val();
             $.ajax({
                 type: "post",
                 url: "${ctx}/rest/setting/addPopular",
@@ -226,14 +237,15 @@
                     if (data.flag == 1) {
                         debugger;
                         var test = window.location.href;
-                        setCookie("popuolarCityId",$("#cityId").val(),test);
-                        setCookie("popuolarCityName",$("#cityName").val(),test);
-                        setCookie("popuolarProvinceId",$("#provinces").val(),test);
-                        setCookie("popuolarProvinceName",$("#provinceName").val(),test);
-                        setCookie("popuolarSource",$("#source").val(),test);
-                        setCookie("popuolarMenuId",$("#menuId").val(),test);
-                        setCookie("popuolarCateId",$("#cateId").val(),test);
-                        setCookie("popuolarCateName",$("#cateName").val(),test);
+                        setCookie("popuolarCityId", $("#cityId").val(), test);
+                        setCookie("popuolarCityName", $("#cityName").val(), test);
+                        setCookie("popuolarProvinceId", $("#provinces").val(), test);
+                        setCookie("popuolarProvinceName", $("#provinceName").val(), test);
+                        setCookie("popuolarSource", $("#source").val(), test);
+                        setCookie("popuolarMenuId", $("#menuId").val(), test);
+                        setCookie("popuolarCateId", $("#cateId").val(), test);
+                        setCookie("popuolarCateName", $("#cateName").val(), test);
+                        setCookie("popuolarSellRentId", sellRent, test);
                         layer.msg("新增成功！！！", {icon: 1});
                         $('#save').removeAttr("onclick");
                         setTimeout(function () {
@@ -259,8 +271,6 @@
     }
 
 
-
-
     //取消
     function closeWin() {
         parent.layer.closeAll();
@@ -280,11 +290,12 @@
     $("#menuId").change(function () {
         if ($("#menuId option:selected").val() == 4 || $("#menuId option:selected").val() == 5) {
             $("#sellrentLi").show();
-        }else {
+        } else {
             $("#sellrentLi").hide();
         }
         setEmpty();
     })
+
     function setEmpty() {
         $("input[name='cateId']").val("");
         $("input[name='cateName']").val("");
