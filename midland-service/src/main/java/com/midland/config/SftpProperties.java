@@ -29,7 +29,7 @@ public class SftpProperties {
     static{
         try {
             InputStream inputStream =
-                    AppSetting.class.getClassLoader().getResourceAsStream("/properties/sftp.properties");
+                    AppSetting.class.getClassLoader().getResourceAsStream("/properties/test/sftp.properties");
             prop.load(inputStream);
         } catch (Exception e) {
             e.printStackTrace();
