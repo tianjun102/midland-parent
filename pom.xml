@@ -51,9 +51,6 @@
             <properties>
                 <package.environment>staging</package.environment>
             </properties>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
         </profile>
         <profile>
             <id>prod</id>
@@ -90,7 +87,7 @@
                         <!--动态指定文件-->
                         <resource>
                             <directory>src/main/resources/properties/${package.environment}</directory>
-                            <targetPath>WEB-INF/classes</targetPath>
+                            <targetPath>WEB-INF/classes/properties</targetPath>
                             <filtering>true</filtering>
                         </resource>
                     </webResources>

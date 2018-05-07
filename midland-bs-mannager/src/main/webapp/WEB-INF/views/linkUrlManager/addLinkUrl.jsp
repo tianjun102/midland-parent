@@ -83,7 +83,7 @@
 
             <li>
                 <span>链接URL：</span>
-                <input style="width:274px;" type="text" name="linkUrl" id="linkUrl" value="" onblur="checkUrl('linkUrl','linkUrl','网址格式不正确！')"/>
+                <input style="width:274px;" type="text" name="linkUrl" id="linkUrl" value="" onblur="checkWebUrl('linkUrl','linkUrl','网址格式不正确！')"/>
                 <span class="_star">*</span>
             </li>
             <li><span>联系人：</span>
@@ -120,7 +120,7 @@
 
 
     function saveData() {
-        if (checkSelect("cityId|source|modeId", "请选择城市！|请选择平台！|请选择模块！") &&notEmpty('linkName', 'linkName', '链接名不能为空！') &&  notEmpty('linkUrl', 'linkUrl', '链接URL不能为空！') && checkUrl('linkUrl', 'linkUrl', '网址格式不正确！')) {
+        if (checkSelect("cityId|source|modeId", "请选择城市！|请选择平台！|请选择模块！") &&notEmpty('linkName', 'linkName', '链接名不能为空！') &&  notEmpty('linkUrl', 'linkUrl', '链接URL不能为空！') && checkWebUrl('linkUrl', 'linkUrl', '网址格式不正确！')) {
             var data = $("#addFrom").serialize();
 
             $.ajax({

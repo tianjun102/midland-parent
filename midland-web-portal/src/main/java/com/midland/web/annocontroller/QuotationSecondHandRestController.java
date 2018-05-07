@@ -187,7 +187,7 @@ public class QuotationSecondHandRestController extends ServiceBaseFilter {
             }
 
             if (obj.getStartTime() == null) {
-                startTime=MidlandHelper.getFormatyyMMToMonth(date, -12);
+                startTime=MidlandHelper.getyyyyMMddHHmmss(date, -12);
                 obj.setStartTime(MidlandHelper.getFormatyyMMToMonth(date, -13));
             }else{
                 startTime=obj.getStartTime();

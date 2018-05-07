@@ -69,7 +69,7 @@
             <li><span>链接名：</span><input style="width:274px;" type="text" name="linkName" value="${linkUrlManager.linkName}" id="linkName" onblur="notEmpty('linkName','linkName','链接名不能为空！');" maxlength="50"/><span class="_star">*</span></li>
 
             <li>
-                <span>链接URL：</span><input style="width:274px;" type="text" name="linkUrl" id="linkUrl" onblur="checkUrl('linkUrl','linkUrl','网址格式不正确！')" value="${linkUrlManager.linkUrl}" /><span class="_star">*</span>
+                <span>链接URL：</span><input style="width:274px;" type="text" name="linkUrl" id="linkUrl" onblur="checkWebUrl('linkUrl','linkUrl','网址格式不正确！')" value="${linkUrlManager.linkUrl}" /><span class="_star">*</span>
             </li>
             <li><span>联系人：</span><input style="width:274px;" type="text" value="${linkUrlManager.contacts}" name="contacts" id="contacts"  maxlength="50"/><span class="_star"></span></li>
             <li><span>联系方式：</span><input style="width:274px;" type="text" value="${linkUrlManager.phone}" name="phone" id="phone"  maxlength="50"/><span class="_star"></span></li>
@@ -109,7 +109,7 @@
 
 
     function saveData() {
-        if(notEmpty('linkName','linkName','链接名不能为空！')&&checkSelect("source","平台不能为空！")&&notEmpty('linkUrl','linkUrl','链接URL不能为空！')&&checkUrl('linkUrl','linkUrl','网址格式不正确！')){
+        if(notEmpty('linkName','linkName','链接名不能为空！')&&checkSelect("source","平台不能为空！")&&notEmpty('linkUrl','linkUrl','链接URL不能为空！')&&checkWebUrl('linkUrl','linkUrl','网址格式不正确！')){
             debugger
 
             var data = $("#addFrom").serialize();

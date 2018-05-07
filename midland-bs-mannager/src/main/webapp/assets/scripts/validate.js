@@ -97,4 +97,27 @@ function checkUrl(id,name,msg){
     }
     return true;
 }
+function checkWebUrl(id,name,msg){
+    debugger;
+    var urlString = $("#"+id).val();
+
+    if(urlString==null || urlString.trim() == ''){
+        if (msg==null||msg==""){
+            msg = "网址不能为空！";
+        }
+        layer.tips(msg, "input[name='"+name+"']",{tips:3});
+        return false;
+    }
+    if(urlString!=""){
+        if (msg==null||msg==""){
+            msg = "网址格式不正确！";
+        }
+        var reg=/^((https|http|ftp|rtsp|mms)?:\/\/)[^\s]+/g;
+        if(!reg.test(urlString)){
+            layer.tips(msg, "input[name='"+name+"']",{tips:3});
+            return false;
+        }
+    }
+    return true;
+}
 

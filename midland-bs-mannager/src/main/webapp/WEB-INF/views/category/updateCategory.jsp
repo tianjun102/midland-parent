@@ -127,7 +127,11 @@
             if (type != 2 && type !=3 && $('input[name="isHref"]:checked').val()==0 && !checkUrl('linkUrl', 'linkUrl', '网站链接格式不正确！')) {
                 return;
             }
+            debugger;
         var data = $("#addFrom").serialize();
+            if ($("#sellrentLi").css("display")=='none'){
+                data+="&sellRent=-1";
+            }
         $.ajax({
             type: "post",
             url: "${ctx}/rest/category/update",
