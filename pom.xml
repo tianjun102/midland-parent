@@ -63,6 +63,9 @@
             <properties>
                 <package.environment>dev</package.environment>
             </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
         </profile>
     </profiles>
     <build>
@@ -87,7 +90,7 @@
                         <!--动态指定文件-->
                         <resource>
                             <directory>src/main/resources/properties/${package.environment}</directory>
-                            <targetPath>WEB-INF/classes/properties</targetPath>
+                            <targetPath>WEB-INF/classes/properties/test</targetPath>
                             <filtering>true</filtering>
                         </resource>
                     </webResources>
