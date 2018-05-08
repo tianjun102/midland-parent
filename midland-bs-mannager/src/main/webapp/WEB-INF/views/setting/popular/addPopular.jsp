@@ -135,8 +135,8 @@
                 <span class="_star">*</span>
             </li>
             <li id="sellrentLi" style="display: none"><span>租售：</span>
-                <label class="checkitem"><input type="radio" onclick="setEmpty()" name="sellRent" value="0" checked="checked"><span>租房</span></label>
-                <label class="checkitem"><input type="radio" onclick="setEmpty()" name="sellRent" value="1"><span>售房</span></label>
+                <label class="checkitem"><input type="radio" onclick="setEmpty()" class="radioClass" name="sellRent" value="0" checked="checked"><span>租房</span></label>
+                <label class="checkitem"><input type="radio" onclick="setEmpty()" class="radioClass" name="sellRent" value="1"><span>售房</span></label>
 
             </li>
             <li><span>类型：</span><input class="vipcate" type="text" id="cateName" name="cateName" onclick="showTree()"
@@ -199,6 +199,9 @@
             $("#menuId").val(menuId);
             if (menuId == 4 || menuId == 5) {
                 $("#sellrentLi").show();
+                $(".radioClass").removeAttr("disabled","disabled");
+            }else{
+                $(".radioClass").attr("disabled","disabled");
             }
         }
         if (cateId != '' && cateName != '') {
@@ -212,7 +215,6 @@
             $("#cityName").val(cityName);
         }
         if(sellRent !=''){
-            debugger;
             if (sellRent==0){
                 $("input[type=radio][name='sellRent'][value='0']").attr("checked",'checked');
             }else if(sellRent==1){
@@ -290,8 +292,10 @@
     $("#menuId").change(function () {
         if ($("#menuId option:selected").val() == 4 || $("#menuId option:selected").val() == 5) {
             $("#sellrentLi").show();
+            $(".radioClass").removeAttr("disabled","disabled");
         } else {
             $("#sellrentLi").hide();
+            $(".radioClass").attr("disabled","disabled");
         }
         setEmpty();
     })
