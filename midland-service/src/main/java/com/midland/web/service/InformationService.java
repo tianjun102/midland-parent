@@ -45,7 +45,6 @@ public interface InformationService {
      **/
     List<Information> findInformationList(Information information) throws Exception;
 
-    List<Information> getCates(Information information) throws Exception;
 
     List<Information> findNewestInformationList(Information information) throws Exception;
 

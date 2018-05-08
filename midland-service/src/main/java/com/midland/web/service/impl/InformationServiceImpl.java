@@ -175,16 +175,6 @@ public class InformationServiceImpl implements InformationService {
         }
     }
 
-    @Override
-    public List<Information> getCates(Information information) throws Exception {
-        try {
-            log.debug("getCates  {}", information);
-            return informationMapper.getCates(information);
-        } catch (Exception e) {
-            log.error("getCates  {}", information, e);
-            throw e;
-        }
-    }
 
     @Override
     public List<Information> findNewestInformationList(Information information) throws Exception {

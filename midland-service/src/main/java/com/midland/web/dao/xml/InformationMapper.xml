@@ -35,13 +35,16 @@
     <sql id="Base_Column_List">
 		id,cate_id,cate_parentId,type,title,source,enclosure,img_url,img_desc,details,order_by,click_num,is_delete,artice_type,DATE_FORMAT(release_time,'%Y-%m-%d %H:%i:%s') release_time,comment,city_id,city_name,cate_name,status,platform,author,summary,is_show,meta_title,meta_keywords,meta_description
 	</sql>
-    <sql id="Base_Column_List_collection">
-		a.id,a.cate_id,a.cate_parentId,a.type,a.title,a.source,a.enclosure,a.img_url,a.img_desc,a.details,a.order_by,a.click_num,a.is_delete,a.artice_type,DATE_FORMAT(a.release_time,'%Y-%m-%d %H:%i:%s') release_time,a.comment,a.city_id,a.city_name,a.status,a.platform,a.author,a.summary,a.is_show,a.meta_title,a.meta_keywords,a.meta_description
+    <sql id="Base_Column_List_a">
+		a.id,a.cate_parentId,a.type,a.title,a.enclosure,a.img_url,a.img_desc,a.details,a.order_by,a.click_num,a.is_delete,a.artice_type,DATE_FORMAT(a.release_time,'%Y-%m-%d %H:%i:%s') release_time,a.comment,a.status,a.platform,a.author,a.summary,a.is_show,a.meta_title,a.meta_keywords,a.meta_description
 	</sql>
+    <sql id="Base_Column_List_b">
+        b.id as cate_id,b.cate_name,b.source,b.city_id,b.city_name
+    </sql>
 
     <select id="selectInformationById" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List_collection"/>,b.cate_name
+        <include refid="Base_Column_List_a"/>,<include refid="Base_Column_List_b"/>
         from information a,category b
         where a.id= #{id} and a.cate_id=b.id
     </select>
@@ -98,16 +101,10 @@
         where id= #{id}
     </update>
 
-    <select id="getCates" parameterType="com.midland.web.model.Information" resultMap="BaseResultMap">
-        select DISTINCT(cate_id),b.cate_name from information a,category b where a.cate_id=b.id
-        <include refid="select_option_collection"/>
-        ORDER BY a.order_by DESC
-    </select>
-
 
     <select id="findInformationList" parameterType="com.midland.web.model.Information" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List_collection"/>,b.cate_name
+        <include refid="Base_Column_List_a"/>,<include refid="Base_Column_List_b"/>
         from information a,category b
         where a.cate_id=b.id
         <if test="isDelete == null">
@@ -462,7 +459,7 @@
             and a.id= #{id,jdbcType=INTEGER}
         </if>
         <if test="cateId != null">
-            and a.cate_id= #{cateId,jdbcType=INTEGER}
+            and b.id= #{cateId,jdbcType=INTEGER}
         </if>
         <if test="cateParentid != null">
             and a.cate_parentId= #{cateParentid,jdbcType=INTEGER}
@@ -474,7 +471,7 @@
             and a.title= #{title,jdbcType=VARCHAR}
         </if>
         <if test="source != null">
-            and a.source= #{source,jdbcType=VARCHAR}
+            and b.source= #{source,jdbcType=VARCHAR}
         </if>
         <if test="enclosure != null">
             and a.enclosure= #{enclosure,jdbcType=VARCHAR}
@@ -508,10 +505,10 @@
             and a.comment= #{comment,jdbcType=LONGVARCHAR}
         </if>
         <if test="cityId != null">
-            and a.city_id = #{cityId}
+            and b.city_id = #{cityId}
         </if>
         <if test="cityName != null">
-            and a.city_name = #{cityName}
+            and b.city_name = #{cityName}
         </if>
 
         <if test="status != null">

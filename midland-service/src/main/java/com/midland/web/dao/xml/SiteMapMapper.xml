@@ -22,13 +22,16 @@
     <sql id="Base_Column_List">
         id,name,mode_id,mode_name,city_id,city_name,cate_id,cate_name,link_url,is_delete,order_by,is_show,source,is_href
     </sql>
-    <sql id="Base_Column_List_collection">
-        a.id,a.name,a.mode_id,a.mode_name,a.city_id,a.city_name,a.cate_id,a.link_url,a.is_delete,a.order_by,a.is_show,a.source,a.is_href
+    <sql id="Base_Column_List_a">
+        a.id,a.name,a.link_url,a.is_delete,a.order_by,a.is_show,a.mode_id,a.mode_name,a.is_href
+    </sql>
+    <sql id="Base_Column_List_b">
+        b.city_id,b.city_name,b.id as cate_id,b.cate_name,b.source
     </sql>
 
     <select id="selectSiteMapById" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List_collection"/>,b.cate_name
+        <include refid="Base_Column_List_a"/>,<include refid="Base_Column_List_b"/>
         from site_map a,category b
         where a.id= #{id} and a.cate_id=b.id
     </select>
@@ -97,9 +100,9 @@
 
     <select id="findSiteMapList" parameterType="com.midland.web.model.SiteMap" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List_collection"/>,b.cate_name
+        <include refid="Base_Column_List_a"/>,<include refid="Base_Column_List_b"/>
         from site_map a,category b
-        where a.cate_id=b.id
+        where a.cate_id=b.id AND b.is_delete=0
         <if test="isDelete == null">
             and a.is_delete=0
         </if>
@@ -327,16 +330,16 @@
             and a.mode_name like CONCAT(CONCAT('%', #{modeName}), '%')
         </if>
         <if test="cityId != null">
-            and a.city_id= #{cityId,jdbcType=VARCHAR}
+            and b.city_id= #{cityId,jdbcType=VARCHAR}
         </if>
         <if test="cityName != null">
-            and a.city_name= #{cityName,jdbcType=VARCHAR}
+            and b.city_name= #{cityName,jdbcType=VARCHAR}
         </if>
         <if test="cateId != null">
-            and a.cate_id= #{cateId,jdbcType=INTEGER}
+            and b.id= #{cateId,jdbcType=INTEGER}
         </if>
         <if test="cateName != null">
-            and a.cate_name like CONCAT(CONCAT('%', #{cateName}), '%')
+            and b.cate_name like CONCAT(CONCAT('%', #{cateName}), '%')
         </if>
         <if test="linkUrl != null">
             and a.link_url= #{linkUrl,jdbcType=VARCHAR}
@@ -351,7 +354,7 @@
             and a.is_show= #{isShow,jdbcType=INTEGER}
         </if>
         <if test="source != null">
-            and a.source= #{source,jdbcType=INTEGER}
+            and b.source= #{source,jdbcType=INTEGER}
         </if>
         <if test="isHref != null">
             and a.is_href=#{isHref,jdbcType=INTEGER}
