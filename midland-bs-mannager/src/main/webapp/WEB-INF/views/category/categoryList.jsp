@@ -21,7 +21,9 @@
             </c:if>
             <th style="width: 15%">分类名称</th>
             <th style="width: 10%">城市</th>
-            <th style="width: 10%">租售</th>
+            <c:if test="${type==3}">
+                <th style="width: 10%">租售</th>
+            </c:if>
             <th style="width: 10%">平台</th>
             <th style="width: 32%">操作</th>
         </tr>
@@ -39,9 +41,12 @@
                         </c:if>
                         <td>${item.cateName }</td>
                         <td>${item.cityName }</td>
-                        <td><c:if test="${item.sellRent==0}">租</c:if>
-                            <c:if test="${item.sellRent==1}">售</c:if>
-                        </td>
+                        <c:if test="${type==3}">
+                            <td><c:if test="${item.sellRent==0}">租</c:if>
+                                <c:if test="${item.sellRent==1}">售</c:if>
+                            </td>
+                        </c:if>
+
                         <td><c:forEach items="${sources}" var="s">
                             <c:if test="${item.source == s.id}">${s.name}</c:if>
                         </c:forEach></td>
