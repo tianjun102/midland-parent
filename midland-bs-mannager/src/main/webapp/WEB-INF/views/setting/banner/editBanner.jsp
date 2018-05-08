@@ -117,13 +117,17 @@
                         <input type="file" name="file_upload" id="file_upload"/>
                     </div>
                 </li>
-                <li><span>图片说明：</span><input type="text" name="imgDesc" placeholder="图片的alt"></li>
-                <li id="picLike"  <c:if test="${banner.type =='0'}"> style="display: none;" </c:if><c:if test="${banner.type =='2'}"> style="display: block;" </c:if> ><span>图片链接：</span>
+                <li><span>图片说明：</span><input type="text" name="imgDesc" placeholder="图片的alt" value="${banner.imgDesc}"></li>
+                <li id="picLike"
+                        <c:if test="${banner.type =='0'}"> style="display: none;" </c:if>
+                        <c:if test="${banner.type =='2'}"> style="display: block;" </c:if> >
+                    <span>图片链接：</span>
                     <input id="bannerLinkurl" name="bannerLinkurl" maxlength="255"
                            onblur="checkUrl('bannerLinkurl','bannerLinkurl','网址格式不正确！')" type="text"
                            value="${banner.bannerLinkurl}">
                 </li>
-                <li id="textArea" <c:if test="${banner.type =='2'}"> style="display: none;" </c:if><c:if test="${banner.type =='0'}"> style="display: block;" </c:if> ><textarea
+                <li id="textArea" <c:if test="${banner.type =='2'}"> style="display: none;"
+                </c:if><c:if test="${banner.type =='0'}"> style="display: block;" </c:if> ><textarea
                         style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;" name="detail"
                         id="myEditor" rows="" cols="">${banner.detail}</textarea></li>
             </ul>
