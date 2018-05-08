@@ -53,10 +53,10 @@
 						<td title="${item.websiteDescription}">${item.websiteDescription}</td>
 						<td>
                             <c:if test="${item.isDelete==0}">
-                                <a target="contentF" onclick="deleteOrRecover(${item.id },1,${item.source },${item.cityId },${item.modeId },${item.secondModeId })" class="delete_img"></a>
+                                <a target="contentF" onclick="deleteOrRecover(${item.id },1,${item.source },'${item.cityId }',${item.modeId },${item.secondModeId })" class="delete_img"></a>
                             </c:if>
                             <c:if test="${item.isDelete==1}">
-                                <a target="contentF" class="recove_img" onclick="deleteOrRecover(${item.id },0,${item.source },'${item.cityId }',${item.modeId },${item.secondModeId })"></a>
+                                <a target="contentF" onclick="deleteOrRecover(${item.id },0,${item.source },'${item.cityId }',${item.modeId },${item.secondModeId })" class="recove_img"></a>
                             </c:if>
                             <a target="contentF" class="edit_img"  onclick="to_edit(${item.id })"></a>
                             <a target="contentF" title="上移" class="up_img"

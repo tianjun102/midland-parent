@@ -41,10 +41,10 @@
 
             <li class="col-md-6" id="childMode"><span>子模块：</span>
                 <input type="hidden" name="secondModeName" id="secondModeName">
-                <select name="secondModeId" id="secondModeId"
-                        style="height: 28px;width: 250px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;">
+                <select name="secondModeId" id="secondModeId" style="height: 28px;width: 250px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;">
                     <option value=>请选择</option>
                 </select>
+                <label style="color: red;padding-top: 0!important;" class="_star ">*</label>
             </li>
             <li class="col-md-11"><span>title：</span>
                 <textarea name="websiteTitle" id="title"
@@ -72,6 +72,16 @@
 </section>
 
 <script type="text/javascript">
+
+
+    $(function () {
+        $("#childMode").hide();
+        $("#secondModeId").val("");
+        $("#secondModeName").val("");
+    })
+
+
+
 
     $("#secondModeId").change(function () {
         $("#secondModeName").val($("#secondModeId option:selected").text());
@@ -109,7 +119,6 @@
             success: function (data) {
                 if (data.state == 0) {
                     var obj = data.data;
-                    debugger;
                     var html = "<option value=>请选择</option>";
                     for (var i = 0; i < obj.length; i++) {
                         html += "<option value=\"" + obj[i].id + "\">" + obj[i].cateName + "</option>";
@@ -139,7 +148,6 @@
             success: function (data) {
                 if (data.state == 0) {
                     var obj = data.data;
-                    debugger;
                     var html = "<option value=>请选择</option>";
                     for (var i = 0; i < obj.length; i++) {
                         html += "<option value=\"" + obj[i].id + "\">" + obj[i].cateName + "</option>";
@@ -162,9 +170,11 @@
 
     //保存数据
     function saveData() {
-        if (checkSelect('citys', '城市不能为空', '城市不能为空') && checkSelect('source', '平台不能为空', '') && checkSelect('modeId', '模块不能为空', '')) {
+        if (checkSelect('citys|source|modeId', '城市不能为空|平台不能为空|模块不能为空', '城市不能为空|平台不能为空|模块不能为空')) {
+            if ($("#childMode").css("display")!='none'&&!checkSelect('secondModeId', '子模块不能为空', '')){
+                return;
+            }
             var data = $("#addForm").serialize();
-            debugger
             $.ajax({
                 type: "post",
                 url: "${ctx}/rest/meta/add",
