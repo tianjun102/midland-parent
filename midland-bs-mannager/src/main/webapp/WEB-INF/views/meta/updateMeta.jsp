@@ -47,6 +47,7 @@
                         style="height: 28px;width: 250px; display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;padding-left: 5px">
                     <option value=>请选择</option>
                 </select>
+                <label style="color: red;padding-top: 0!important;" class="_star ">*</label>
             </li>
             <li class="col-md-11"><span>title：</span>
                 <textarea name="websiteTitle" id="title"
@@ -184,8 +185,11 @@
     //保存数据
     function updateData() {
         if (checkSelect('citys', '城市不能为空', '城市不能为空') && checkSelect('source', '平台不能为空', '') && checkSelect('modeId', '模块不能为空', '')) {
+            if ($("#childMode").css("display")!='none'&&!checkSelect('secondModeId', '子模块不能为空', '')){
+                return;
+            }
+
             var data = $("#addForm").serialize();
-            debugger
             $.ajax({
                 type: "post",
                 url: "${ctx}/rest/meta/update",
