@@ -129,12 +129,12 @@
         select
         <include refid="Base_Column_List_a"/>,<include refid="base_column_list_b"/>
         from popular a,category b
-        where a.cate_id=b.id
+        where a.cate_id=b.id AND b.is_delete=0
         <include refid="select_option_collection"/>
         ORDER by order_by_f desc,order_by desc
     </select>
  <select id="findCateGory" parameterType="com.midland.web.model.Popular" resultMap="BaseResultMap">
-     select DISTINCT(cate_id),b.cate_name from popular a,category b where a.cate_id=b.id
+     select DISTINCT(cate_id),b.cate_name from popular a,category b where a.cate_id=b.id AND b.is_delete=0
         <include refid="select_option_collection"/>
         ORDER by a.order_by asc
     </select>
@@ -349,7 +349,7 @@
             and a.cate_id= #{cateId,jdbcType=INTEGER}
         </if>
         <if test="menuId != null">
-            and a.menu_id= #{menuId,jdbcType=INTEGER}
+            and b.mode_id= #{menuId,jdbcType=INTEGER}
         </if>
         <if test="name != null">
             and a.name like CONCAT(CONCAT('%', #{name}), '%')
