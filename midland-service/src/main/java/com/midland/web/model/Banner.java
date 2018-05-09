@@ -80,7 +80,15 @@ public class Banner {
 
     private Integer orderBy;
 
+    private Integer nofollow;
 
+    public Integer getNofollow() {
+        return nofollow;
+    }
+
+    public void setNofollow(Integer nofollow) {
+        this.nofollow = nofollow;
+    }
 
     public Integer getId() {
         return id;

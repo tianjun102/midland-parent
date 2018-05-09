@@ -355,6 +355,13 @@ section.content p.detail-title .left:hover {
 	margin-right: 10px;
 	outline: none;
 }
+.content ul.adminfo li .checkitem{
+	display: inline-block;
+	height: 28px;
+	line-height: 28px;
+	margin-right: 10px;
+	outline: none;
+}
 .content ul.userinfo li>em.gang {
 	display:inline-block;
 	height:28px;

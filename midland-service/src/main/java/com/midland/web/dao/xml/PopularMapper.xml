@@ -35,7 +35,7 @@
         a.area_name,a.sheet_name,a.is_show,a.order_by,a.nofollow,a.order_by_f,a.province_id,a.province_name
     </sql>
     <sql id="base_column_list_b">
-        b.sell_rent,b.city_id,b.city_name,b.source,b.id,b.cate_name,b.mode_id as menu_id
+        b.sell_rent,b.city_id,b.city_name,b.source,b.id as cate_id,b.cate_name,b.mode_id as menu_id
     </sql>
 
     <select id="selectById" resultMap="BaseResultMap">

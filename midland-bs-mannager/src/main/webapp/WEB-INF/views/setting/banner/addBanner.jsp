@@ -23,6 +23,9 @@
     <meta content="" name="description"/>
     <meta content="" name="author"/>
     <meta name="MobileOptimized" content="320">
+    <link rel="stylesheet" href="${ctx }/assets/css/common.css">
+
+
     <style>
         .layui-layer-msg {
             top: 260px !important;
@@ -118,9 +121,19 @@
                     <input id="bannerLinkurl" name="bannerLinkurl" maxlength="255" type="text"
                            onblur="checkUrl('bannerLinkurl','bannerLinkurl','网址格式不正确！')" value="">
                 </li>
+                <li id="nofollowId" style="display: none;"><span>nofollow：</span>
+                    <label class="checkitem">
+                        <input type="radio" name="nofollow" class="nofollow" value="1"  >
+                        <span>是</span></label>
+                    <label class="checkitem">
+                        <input type="radio" name="nofollow" class="nofollow" value="0" checked="checked" >
+                        <span>否</span></label>
+                </li>
                 <li id="textArea" style="display: block;"><textarea
                         style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;float: right"
-                        name="detail" id="myEditor" rows="" cols=""></textarea></li>
+                        name="detail" id="myEditor" rows="" cols=""></textarea>
+                </li>
+
             </ul>
             <ul class="adminfo row">
                 <li>
@@ -213,102 +226,21 @@
 
     }
 
-    function delecte(ths) {
-        layer.open({
-            type: 1,
-            skin: 'layer-style',
-            area: ['440px', '250px'],
-            shadeClose: false, //点击遮罩关闭
-            title: ['是否删除'],
-            resize: false,
-            scrollbar: false,
-            content:
-            '<section class = "content" style = "border:none;">' +
-            '<dl>' +
-            '<dt style = "text-align: center; margin-top: 20px;"><img src="${ctx}/assets/img/!.png"/></dt>' +
-            '<dd>' +
-            '<p style = "text-align: center; margin-top: 20px;">您确定要删除当前用户列表吗</p>' +
-            '</dd>' +
-            '</dl>' +
-            '</section>',
-            btn: ['确定', '取消'],
-            btnAlign: 'c',
-            yes: function (index) {
-                var catId = $("#cat_Id").val();
-                $(ths).parent().parent().remove();
-                var array = new Array();
-                $("input:hidden[name$='].prodId']").each(function () {
-                    array.push($(this).val());
-                });
-                if ($("input:hidden[name$='].prodId']").size() > 0) {
-                    $("#bannerId").val("/banner/bannerinfo?productId=" + array + "&catId=" + catId);
-                } else {
-                    $("#bannerId").val("");
-                }
-                layer.close(index);
-                layer.msg("操作成功！", {icon: 1});
-            }
-            , success: function (layero) {
-                var btn = layero.find('.layui-layer-btn');
-                btn.css('text-align', 'center');
-            }
-        });
-
-    }
-
-    function deleteText() {
-
-
-        layer.open({
-            type: 1,
-            skin: 'layer-style',
-            area: ['440px', '250px'],
-            shadeClose: false, //点击遮罩关闭
-            title: ['是否删除'],
-            resize: false,
-            scrollbar: false,
-            content:
-            '<section class = "content" style = "border:none;">' +
-            '<dl>' +
-            '<dt style = "text-align: center; margin-top: 20px;"><img src="${ctx}/assets/img/!.png"/></dt>' +
-            '<dd>' +
-            '<p style = "text-align: center; margin-top: 20px;">将删除添加的商品</p>' +
-            '</dd>' +
-            '</dl>' +
-            '</section>',
-            btn: ['确定', '取消'],
-            btnAlign: 'c',
-            yes: function (index) {
-                $("#cat_Id").val("");
-                $("input[name='isAll']").val("");
-                $("#catName").html("");
-                $("#productList").find("tr").remove();
-                $("#bannerId").val("");
-                layer.close(index);
-                layer.msg("操作成功！", {icon: 1});
-            }
-        });
-
-    }
-
     function selectTypes() {
-        if ($("#selectType option:selected").val() == 1) {
-            $("#searchbatton").show();
-            $("#catInfo").show();
-            $("#prodInfo").show();
-            $("#textArea").hide();
-        } else if ($("#selectType option:selected").val() == 0) {
+       if ($("#selectType option:selected").val() == 0) {
             $("#searchbatton").hide();
             $("#catInfo").hide();
             $("#prodInfo").hide();
             $("#picLike").hide();
             $("#textArea").show();
+            $("#nofollowId").hide();
         } else {
             $("#searchbatton").hide();
             $("#catInfo").hide();
             $("#prodInfo").hide();
             $("#textArea").hide();
             $("#picLike").show();
+            $("#nofollowId").show();
         }
 
     }

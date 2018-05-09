@@ -126,6 +126,15 @@
                            onblur="checkUrl('bannerLinkurl','bannerLinkurl','网址格式不正确！')" type="text"
                            value="${banner.bannerLinkurl}">
                 </li>
+                <li id="nofollowId"><span>nofollow：</span>
+                    <label class="checkitem">
+                        <input type="radio" name="nofollow" class="nofollow" value="1"
+                               checked="checked" >
+                        <span>是</span></label>
+                    <label class="checkitem">
+                        <input type="radio" name="nofollow" class="nofollow" value="0" <c:if test="${banner.nofollow !=1}">checked="checked"</c:if> >
+                        <span>否</span></label>
+                </li>
                 <li id="textArea" <c:if test="${banner.type =='2'}"> style="display: none;"
                 </c:if><c:if test="${banner.type =='0'}"> style="display: block;" </c:if> ><textarea
                         style="width: 92%;min-height: 350px;resize:none; outline-color: #0099e0;" name="detail"
@@ -144,6 +153,18 @@
 </div>
 </body>
 <script type="text/javascript">
+
+    $(function () {
+        if (${banner.type==0}){
+            $("#nofollowId").hide();
+            $(".nofollow").attr("disabled","disabled");
+        }else {
+            $("#nofollowId").show();
+            $(".nofollow").removeAttr("disabled","disabled");
+        }
+    })
+
+
 
     $("#model").change(function () {
         if ($("#model").val()=="12"){
@@ -300,23 +321,20 @@
     }
 
     function selectTypes() {
-        if ($("#selectType option:selected").val() == 1) {
-            $("#searchbatton").show();
-            $("#catInfo").show();
-            $("#prodInfo").show();
-            $("#textArea").hide();
-        } else if ($("#selectType option:selected").val() == 0) {
+       if ($("#selectType option:selected").val() == 0) {
             $("#searchbatton").hide();
             $("#catInfo").hide();
             $("#prodInfo").hide();
             $("#picLike").hide();
             $("#textArea").show();
+            $("#nofollowId").hide();
         } else {
             $("#searchbatton").hide();
             $("#catInfo").hide();
             $("#prodInfo").hide();
             $("#textArea").hide();
             $("#picLike").show();
+            $("#nofollowId").show();
         }
 
     }
