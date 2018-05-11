@@ -57,6 +57,13 @@
                         <option value="11">问答</option>
                     </select>
                 </li>
+                <li id="sellrentLi" style="display: none"><span>租售：</span>
+                    <select name="sellRent" id="sellRent" class="dropdown">
+                        <option value>全部</option>
+                        <option value="0">租房</option>
+                        <option value="1">售房</option>
+                    </select>
+                </li>
                 <li><span>分类：</span>
                     <select name="cateId" id="cateId" style="height: 28px; width:120px;display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;">
                         <option value="">请选择</option>
@@ -94,6 +101,13 @@
 
 <script type="text/javascript">
     $("#menuId").change(function () {
+        if ($("#menuId option:selected").val() == 4 || $("#menuId option:selected").val() == 5) {
+            $("#sellrentLi").show();
+            $("#sellRent").removeAttr("disabled","disabled");
+        } else {
+            $("#sellrentLi").hide();
+            $("#sellRent").attr("disabled","disabled");
+        }
         getcate();
     })
     $("#source").change(function () {

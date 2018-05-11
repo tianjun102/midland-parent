@@ -140,7 +140,7 @@
     </select>
 
     <insert id="insertPopular" parameterType="com.midland.web.model.Popular">
-        <selectKey resultType="INTEGER" order="BEFORE" keyProperty="orderBy">
+        <selectKey  resultType="INTEGER" order="BEFORE" keyProperty="orderBy">
             SELECT Max(order_by)+1 as orderBy from popular
         </selectKey>
 

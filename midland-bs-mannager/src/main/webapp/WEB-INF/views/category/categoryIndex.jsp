@@ -21,16 +21,14 @@
 				  <c:if test="${type==4}">站点管理>>网站地图分类管理</c:if></span>
             <a class="setup" target="contentF" onclick="toAddPage()">新增</a>
         </p>
-        <form action="${ctx }/rest/category/list" method="POST" id="searchForm"
+        <form action="${ctx }/rest/category/list?type=${type}" method="POST" id="searchForm"
               onsubmit="submitSearchRequest('searchForm','listDiv');return false;">
-            <input type="hidden" name="type" value="${type}">
             <ul class="userinfo row">
                 <%@include file="../layout/sherchArea.jsp" %>
                 <c:if test="${type != 2}">
                     <li>
                         <span style="float:left;">平台：</span>
-                        <select name="source" id="source"
-                                style="height: 28px;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
+                        <select name="source" id="source" style="height: 28px;width: 120px; display: inline-table;border-radius: 4px;border: 1px solid #dbe2e6;">
                             <option value>全部</option>
                             <option value="0">网站</option>
                             <option value="1">微站</option>
