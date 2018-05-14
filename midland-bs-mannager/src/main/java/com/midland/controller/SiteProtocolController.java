@@ -169,6 +169,31 @@ public class SiteProtocolController extends BaseFilter {
         settingServiceImpl.getAllProvinceList(model);
         return "siteProtocol/aboutUs";
     }
+    /**
+     * 美联荣誉
+     **/
+    @RequestMapping("honor")
+    public String honor(SiteProtocol siteProtocol, Model model, HttpServletRequest request) throws Exception {
+        User user = MidlandHelper.getCurrentUser(request);
+        if (user.getIsSuper() != null) {
+            siteProtocol.setSource(siteProtocol.getSource() != null ? siteProtocol.getSource() : user.getSource());
+            siteProtocol.setCityId(isEmpty(siteProtocol.getCityId()) ? user.getCityId():siteProtocol.getCityId());
+        } else {
+            siteProtocol.setSource(user.getSource());
+            siteProtocol.setCityId(user.getCityId());
+        }
+
+        List<SiteProtocol> result = siteProtocolServiceImpl.findSiteProtocolList(siteProtocol);
+        if (result != null && result.size() > 0) {
+            model.addAttribute("item", result.get(0));
+        }
+
+        model.addAttribute("isSuper", user.getIsSuper());
+        model.addAttribute("cityId", user.getCityId());
+        model.addAttribute("cityName", user.getCityName());
+        settingServiceImpl.getAllProvinceList(model);
+        return "siteProtocol/honor";
+    }
 
     /**
      * 私隐政策
@@ -324,6 +349,15 @@ public class SiteProtocolController extends BaseFilter {
         }
         return updateOrSaveSiteProtocol(siteProtocol);
     }
+     @RequestMapping("update/honor")
+    @ResponseBody
+    public Object updatehonor(SiteProtocol siteProtocol){
+        if (StringUtils.isEmpty(siteProtocol.getHonor())){
+            siteProtocol.setHonor("");
+        }
+        return updateOrSaveSiteProtocol(siteProtocol);
+    }
+
     @RequestMapping("update/disclaimer")
     @ResponseBody
     public Object updateDisclaimer(SiteProtocol siteProtocol){

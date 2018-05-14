@@ -358,7 +358,10 @@
                     <a id="left60" href="${ctx}/rest/category/index?type=4" target="contentF"><span>网站地图分类管理</span></a>
                 </shiro:hasPermission>
                 <shiro:hasPermission name="aboutUs">
-                    <a id="left60" href="${ctx}/rest/siteProtocol/aboutUs" target="contentF"><span>关于美联</span></a>
+                    <a id="left60" href="${ctx}/rest/siteProtocol/aboutUs" target="contentF"><span>美联介绍</span></a>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="honor">
+                    <a id="left60" href="${ctx}/rest/siteProtocol/honor" target="contentF"><span>美联荣誉</span></a>
                 </shiro:hasPermission>
                 <shiro:hasPermission name="privacy">
                     <a id="left60" href="${ctx}/rest/siteProtocol/privacy" target="contentF"><span>私隐政策</span></a>

@@ -82,15 +82,15 @@
     $("#modeId").change(function () {
        // $("#modeName").val($("#modeId option:selected").text())
         debugger;
-       if ($("#modeId").val() == 9) {
+       if ($("#modeId").val() == 9) {//市场研究
             $("#childMode").show();
             var data = "type=0" + "&cityId=" + $("#cityId").val() + "&source=" + $("#source").val();
-            getCate(data);
-        } else if ($("#modeId").val() == 10) {
+            getCate(data,9);
+        } else if ($("#modeId").val() == 10) {//资讯
             $("#childMode").show();
             var data = "type=1" + "&cityId=" + $("#cityId").val() + "&source=" + $("#source").val();
-            getCate(data);
-        } else if ($("#modeId").val() == 11 || $("#modeId").val() == 1) {
+            getCate(data,10);
+        } else if ($("#modeId").val() == 11 || $("#modeId").val() == 1) {//问答,新房首页
             $("#childMode").hide();
             $("#secondModeId").val("");
 
@@ -100,7 +100,7 @@
        }
     })
 
-    function getCate(data) {
+    function getCate(data,modeId) {
         $.ajax({
             type: "post",
             url: "${ctx}/rest/category/getCate",
@@ -112,6 +112,9 @@
                     var obj = data.data;
                     debugger;
                     var html = "<option value=>请选择</option>";
+                    if(modeId==9){
+                        html += "<option value=\"0\" >首页</option>";
+                    }
                     for (var i = 0; i < obj.length; i++) {
                         html += "<option value=\"" + obj[i].id + "\">" + obj[i].cateName + "</option>";
                     }

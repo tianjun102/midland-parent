@@ -12,13 +12,14 @@
 		<result column="about_us" property="aboutUs" jdbcType="LONGVARCHAR" />
 		<result column="corner_file" property="cornerFile" jdbcType="LONGVARCHAR" />
 		<result column="privacy" property="privacy" jdbcType="LONGVARCHAR" />
+		<result column="honor" property="honor" jdbcType="LONGVARCHAR" />
 		<result column="registration_protocol" property="registrationProtocol" jdbcType="LONGVARCHAR" />
 		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
 		<result column="is_delete" property="isDelete" jdbcType="INTEGER" />
 	</resultMap>
 
 	<sql id="Base_Column_List">
-		id,source,city_id,city_name,disclaimer,contant_us,about_us,corner_file,privacy,registration_protocol,create_time,is_delete
+		id,source,city_id,city_name,disclaimer,contant_us,about_us,corner_file,privacy,honor,registration_protocol,create_time,is_delete
 	</sql>
 
 	<select id="selectSiteProtocolById" resultMap="BaseResultMap">
@@ -74,6 +75,9 @@
 			<if test="privacy != null">
 				privacy,
 			</if>
+			<if test="honor != null">
+				honor,
+			</if>
 			<if test="registrationProtocol != null">
 				registration_protocol,
 			</if>
@@ -109,6 +113,9 @@
 			</if>
 			<if test="privacy != null">
 				#{privacy,jdbcType=LONGVARCHAR},
+			</if>
+			 <if test="honor != null">
+				#{honor,jdbcType=LONGVARCHAR},
 			</if>
 			<if test="registrationProtocol != null">
 				#{registrationProtocol,jdbcType=LONGVARCHAR},
@@ -146,6 +153,9 @@
 		</if>
 		<if test="privacy != null">
 			privacy= #{privacy,jdbcType=LONGVARCHAR},
+		</if>
+		<if test="honor != null">
+			honor= #{honor,jdbcType=LONGVARCHAR},
 		</if>
 		<if test="registrationProtocol != null">
 			registration_protocol= #{registrationProtocol,jdbcType=LONGVARCHAR},
@@ -185,6 +195,9 @@
 		</if>
 		<if test="privacy != null">
 			 and privacy= #{privacy,jdbcType=LONGVARCHAR}
+		</if>
+		<if test="honor != null">
+			 and honor= #{honor,jdbcType=LONGVARCHAR}
 		</if>
 		<if test="registrationProtocol != null">
 			 and registration_protocol= #{registrationProtocol,jdbcType=LONGVARCHAR}

@@ -40,6 +40,11 @@ public class SiteProtocol{
 	 * 私隐政策
 	 **/
 	private String privacy;
+
+	/**
+	 * 美联荣誉
+	 */
+	private String honor;
 	/**
 	 * 注册协议
 	 **/
@@ -53,6 +58,14 @@ public class SiteProtocol{
 	 **/
 	private Integer isDelete;
 
+
+	public String getHonor() {
+		return honor;
+	}
+
+	public void setHonor(String honor) {
+		this.honor = honor;
+	}
 
 	public Integer getId() {
 		return id;

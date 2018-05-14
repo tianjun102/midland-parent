@@ -93,11 +93,11 @@
         if (val == 9) {
             $("#childMode").show();
             var data = "type=0" + "&cityId=" + $("#cityId").val() + "&source=" + $("#source").val();
-            getCate(data);
+            getCate(data,9);
         } else if (val == 10) {
             $("#childMode").show();
             var data = "type=1" + "&cityId=" + $("#cityId").val() + "&source=" + $("#source").val();
-            getCate(data);
+            getCate(data,10);
         } else if (val == 11 || val == 1) {
             $("#childMode").hide();
             $("#secondModeId").val("");
@@ -109,7 +109,7 @@
         }
     }
 
-    function getCate(data) {
+    function getCate(data,modeId) {
         $.ajax({
             type: "post",
             url: "${ctx}/rest/category/getCate",
@@ -120,6 +120,14 @@
                 if (data.state == 0) {
                     var obj = data.data;
                     var html = "<option value=>请选择</option>";
+                    if(modeId==9){
+                        html += "<option value=\"0\"" ;
+                        if ('${item.secondModeId}'==0)
+                        {
+                            html += "selected=\"selected\"";
+                        }
+                        html +=">首页</option>";
+                    }
                     for (var i = 0; i < obj.length; i++) {
                         var val = obj[i].id;
                         html += "<option value=\"" + obj[i].id + "\" ";
