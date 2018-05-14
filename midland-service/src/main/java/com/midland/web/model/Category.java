@@ -67,10 +67,34 @@ public class Category {
 
     /**
      * 模块id
+     * 0   首页
+     * 1   新房
+     * 2   二手房
+     * 3   租房
+     * 4   写字楼
+     * 5   商铺
+     * 6   小区
+     * 7   经纪人
+     * 8   外销网
+     * 9   市场调究
+     * 10  资讯
+     * 11  问答
      */
     private Integer modeId;
     /**
      * 模块名称
+     * 0   首页
+     * 1   新房
+     * 2   二手房
+     * 3   租房
+     * 4   写字楼
+     * 5   商铺
+     * 6   小区
+     * 7   经纪人
+     * 8   外销网
+     * 9   市场调究
+     * 10  资讯
+     * 11  问答
      */
     private String modeName;
 
@@ -80,7 +104,9 @@ public class Category {
     private String isHref;
 
     /**
-     * 写字楼的租售:0租1售
+     * 写字楼的租售:
+     * 0 租
+     * 1 售
      */
     private String sellRent;
 
