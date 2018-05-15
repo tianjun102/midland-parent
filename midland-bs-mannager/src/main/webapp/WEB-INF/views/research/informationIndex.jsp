@@ -39,14 +39,7 @@
 				</li>
 
 
-				<li>
-					<span style = "float:left;">状态：</span>
-					<select name="status" id="status"  class="dropdown">
-						<option value="">全部</option>
-						<option value="0">上架</option>
-						<option value="1">下架</option>
-					</select>
-				</li>
+
 				<li><span>分类：</span>
 					<select name="cateId" id="id"
 							style="height: 28px; width:120px;display: inline-block;border-radius: 4px;border: 1px solid #dbe2e6;">
@@ -58,7 +51,14 @@
 						</c:forEach>
 					</select>
 				</li>
-
+				<li>
+					<span style = "float:left;">状态：</span>
+					<select name="status" id="status"  class="dropdown">
+						<option value="">全部</option>
+						<option value="0">上架</option>
+						<option value="1">下架</option>
+					</select>
+				</li>
 				<li><span>标题：</span><input type="text" name="title" id="title" placeholder="请输入标题" /></li>
 				<li>
 					<span>发布时间：</span><input class="Wdate half" id="time1"
