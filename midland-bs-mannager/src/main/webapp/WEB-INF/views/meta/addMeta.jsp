@@ -120,7 +120,7 @@
                 if (data.state == 0) {
                     var obj = data.data;
                     var html = "<option value=>请选择</option>";
-                    if(modeId==9){
+                    if(modeId==9 || modeId==10){
                         html += "<option value=\"0\" >首页</option>";
                     }
                     for (var i = 0; i < obj.length; i++) {

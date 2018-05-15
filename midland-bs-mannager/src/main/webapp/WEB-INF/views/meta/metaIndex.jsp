@@ -80,25 +80,33 @@
 
 
     $("#modeId").change(function () {
-       // $("#modeName").val($("#modeId option:selected").text())
-        debugger;
-       if ($("#modeId").val() == 9) {//市场研究
-            $("#childMode").show();
-            var data = "type=0" + "&cityId=" + $("#cityId").val() + "&source=" + $("#source").val();
-            getCate(data,9);
-        } else if ($("#modeId").val() == 10) {//资讯
-            $("#childMode").show();
-            var data = "type=1" + "&cityId=" + $("#cityId").val() + "&source=" + $("#source").val();
-            getCate(data,10);
-        } else if ($("#modeId").val() == 11 || $("#modeId").val() == 1) {//问答,新房首页
-            $("#childMode").hide();
-            $("#secondModeId").val("");
-
-        }else {
-           $("#childMode").hide();
-           $("#secondModeId").val("");
-       }
+       sef($("#modeId").val());
     })
+    $("#citys").change(function () {
+       sef($("#modeId").val());
+    })
+    $("#source").change(function () {
+       sef($("#modeId").val());
+    })
+
+function sef(val){
+    if ( val== 9) {//市场研究
+        $("#childMode").show();
+        var data = "type=0" + "&cityId=" + $("#cityId").val() + "&source=" + $("#source").val();
+        getCate(data,val);
+    } else if (val == 10) {//资讯
+        $("#childMode").show();
+        var data = "type=1" + "&cityId=" + $("#cityId").val() + "&source=" + $("#source").val();
+        getCate(data,val);
+    } else if (val == 11 || val == 1) {//问答,新房首页
+        $("#childMode").hide();
+        $("#secondModeId").val("");
+
+    }else {
+        $("#childMode").hide();
+        $("#secondModeId").val("");
+    }
+}
 
     function getCate(data,modeId) {
         $.ajax({
@@ -112,7 +120,7 @@
                     var obj = data.data;
                     debugger;
                     var html = "<option value=>请选择</option>";
-                    if(modeId==9){
+                    if(modeId==9 || modeId==10){
                         html += "<option value=\"0\" >首页</option>";
                     }
                     for (var i = 0; i < obj.length; i++) {

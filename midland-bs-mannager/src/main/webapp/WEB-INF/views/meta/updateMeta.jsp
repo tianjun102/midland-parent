@@ -120,7 +120,7 @@
                 if (data.state == 0) {
                     var obj = data.data;
                     var html = "<option value=>请选择</option>";
-                    if(modeId==9){
+                    if(modeId==9 || modeId==10){
                         html += "<option value=\"0\"" ;
                         if ('${item.secondModeId}'==0)
                         {
@@ -135,42 +135,6 @@
                         {
                             html += "selected=\"selected\"";
                         }
-                        html += ">" + obj[i].cateName + "</option>";
-                    }
-                    $("#secondModeId").html(html);
-
-                } else {
-                    layer.msg("保存失败！", {icon: 2});
-                }
-            },
-            error: function (data) {
-                if (data.responseText != null) {
-                    layer.msg(data.responseText, {icon: 2});
-                } else {
-                    layer.msg("操作失败！", {icon: 2});
-                }
-            }
-        });
-    }
-
-    function getExportSaleCates() {
-        $.ajax({
-            type: "post",
-            url: "${ctx}/rest/meta/getExportSaleCates",
-            async: false, // 此处必须同步
-            dataType: "json",
-            success: function (data) {
-                if (data.state == 0) {
-                    var obj = data.data;
-                    var html = "<option value=>请选择</option>";
-                    for (var i = 0; i < obj.length; i++) {
-                        var val = obj[i].id;
-                        html += "<option value=\"" + obj[i].id + "\" ";
-                        if ('${item.secondModeId}'==val)
-                        {
-                            html += "selected=\"selected\"";
-                        }
-
                         html += ">" + obj[i].cateName + "</option>";
                     }
                     $("#secondModeId").html(html);
