@@ -92,8 +92,6 @@ public class SamlLoginController {
         System.out.println(sb.toString());
         System.out.println(RelayState);
 
-        //System.out.println(request.getParameter("SAMLResponse"));
-        //System.out.println(request.getParameter("RelayState"));
         try {
             // 获取认证后信息，首先验证信息有效性，并返回认证信息中的登录账号
             loginame = validate(SAMLResponse);
