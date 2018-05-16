@@ -19,6 +19,7 @@
             <th style="width: 32%">楼盘名称</th>
             <th style="width: 10%">楼盘ID</th>
             <th style="width: 15%">预览图</th>
+            <th style="width: 15%">类型</th>
             <th style="width: 10%">状态</th>
             <th style="width: 15%">录盘人</th>
             <th style="width: 5%">删除状态</th>
@@ -36,9 +37,16 @@
                         <td>${xh.count }</td>
                         <td>${item.title }</td>
                         <td>${item.housesId }</td>
-                        <td><c:forEach items="${item.imgUrlList }" var="s">
-                            <img src="${s }" style="width:30px;padding: 0 3px;" alt="">
-                        </c:forEach> </td>
+                        <td>
+                            <c:forEach items="${item.imgUrlList }" var="s">
+                                <img src="${s }" style="width:30px;padding: 0 3px;" alt="">
+                            </c:forEach>
+                        </td>
+                        <td>
+                           <c:if test="${item.tradeType==0 }">看楼团</c:if>
+                           <c:if test="${item.tradeType==1 }">楼盘展销会</c:if>
+                        </td>
+
                         <td><c:choose>
                             <c:when test="${item.isShow==0 }">
                                 显示

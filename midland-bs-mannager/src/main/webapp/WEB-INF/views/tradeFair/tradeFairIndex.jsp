@@ -7,7 +7,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
-
+<style type="text/css">
+    .dropdown {
+        width: 130px !important;
+    }
+</style>
 </head>
 <body>
 <div class="box">
@@ -25,6 +29,14 @@
                     </li>
                     <li><span>楼盘名称：</span>
                         <input type="text" name="title" id="title" placeholder="请输入楼盘名称"/></li>
+                    </li>
+                    <li><span>类型：</span>
+                        <select name="tradeType" id="tradeType" class="dropdown">
+                            <option value="">全部</option>
+                            <option value="0">楼盘展销会</option>
+                            <option value="1">看楼团</option>
+
+                        </select>
                     </li>
                     <li><span>状态：</span>
                         <select name="isShow" id="isShow" class="dropdown">
