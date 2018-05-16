@@ -328,6 +328,7 @@
             $("#picLike").hide();
             $("#textArea").show();
             $("#nofollowId").hide();
+           $(".nofollow").attr("disabled","disabled");
         } else {
             $("#searchbatton").hide();
             $("#catInfo").hide();
@@ -335,6 +336,7 @@
             $("#textArea").hide();
             $("#picLike").show();
             $("#nofollowId").show();
+           $(".nofollow").removeAttr("disabled","disabled");
         }
 
     }
