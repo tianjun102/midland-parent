@@ -33,6 +33,10 @@ public class ResultStatusUtils {
      * 服务器成功处理了请求，但未返回任何内容。
      */
     public final static int STATUS_CODE_204 = 204;
+    /**
+     * 有敏感字符
+     */
+    public final static int STATUS_CODE_205 = 205;
 
     /**
      * 服务器不理解请求的语法。

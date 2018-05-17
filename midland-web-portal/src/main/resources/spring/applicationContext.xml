@@ -28,10 +28,6 @@
     </bean>
     <mvc:interceptors>
         <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
-        <!--<bean class="com.midland.web.filter.ReponseFilter"></bean>-->
-    </mvc:interceptors>
-    <mvc:interceptors>
-        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
         <bean class="com.midland.web.sensitive.SensitiveFilter"></bean>
     </mvc:interceptors>
 
