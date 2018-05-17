@@ -227,7 +227,7 @@ public class UserController extends BaseFilter {
         // 登出操作
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
-        return "login";
+        return "/page/login";
     }
 
     @RequestMapping(value = "/loginIndex", method = RequestMethod.GET)
