@@ -9,6 +9,22 @@ import java.util.List;
  * Created by 'ms.x' on 2017/9/7.
  */
 public class Contant {
+    //*********************************************系统常量***********************************************
+
+    /**
+     * sso新用户第一次登录的初始密码
+     */
+    public static final String screat="88888888";
+    /**
+     * 后台用户
+     */
+    public static final int USER_TYPE_MANAGER =0;
+    /**
+     * 前端用户
+     */
+    public static final int USER_TYPE_VIEW =1;
+    //*********************************************系统常量***********************************************
+
 
     /**
      * 资讯

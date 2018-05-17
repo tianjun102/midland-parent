@@ -29,7 +29,7 @@ public class User {
      */
     private String password;
     /**
-     * etyn 用户类型，：0=智者汇；1=渠道渠道商；2=终端服务商；3=安装专员
+     * 用户类型：0=管理员；1=经纪人；2=前端用户
      */
     private Integer userType;
     /**

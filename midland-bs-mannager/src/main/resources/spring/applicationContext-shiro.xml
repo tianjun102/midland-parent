@@ -7,7 +7,7 @@
 
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
-        <property name="loginUrl" value="/rest/page/login"/>
+        <property name="loginUrl" value="/rest/saml/saml_callback"/>
         <property name="successUrl" value="/rest/index"/>
         <property name="unauthorizedUrl" value="/rest/page/401"/>
         <property name="filterChainDefinitions">

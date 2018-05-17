@@ -95,7 +95,7 @@ public class UserServiceImpl extends GenericServiceImpl<User, String> implements
             user.setCreateTime(MidlandHelper.getCurrentTime());
             user.setState("1");
             if (user.getUserType() == null) {
-                user.setUserType(0);//默认为0  沃可视
+                user.setUserType(0);//默认为0  后台用户
             }
             user.setPassword(ApplicationUtils.sha256Hex(com.midland.web.security.Resource.DEFAULT_PASSWORD));
             int n = userMapper.insertSelective(user);//新增返回主键id值
