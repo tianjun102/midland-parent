@@ -79,7 +79,6 @@ public class SamlLoginController {
             // 传递参数至页面，接入应用可将此步骤直接Post认证页面
             model.addAttribute("SAMLRequest", samlRequest);
             model.addAttribute("RelayState", samlProperties.getClientRedirectUrl());
-            return "redirect:/saml_callback";
         }
         model.addAttribute("loginName", session.getAttribute("loginName"));
 
@@ -89,7 +88,6 @@ public class SamlLoginController {
     }
 
     @RequestMapping(value = "saml_callback")
-    @ResponseBody
     public String responseView(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
         HttpSession session = request.getSession();
         String loginame = "";
@@ -113,7 +111,7 @@ public class SamlLoginController {
             }
             Subject subject = SecurityUtils.getSubject();
             if (subject.isAuthenticated()) {
-                return "redirect:/index";
+                return "redirect:/";
             }
             UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
             //登录
@@ -134,7 +132,7 @@ public class SamlLoginController {
            logger.error("saml_callback ",e);
         }
 
-        return "redirect:/user/contentIndex";
+        return "redirect:/";
     }
 
     public static String encoding(String originalString) {

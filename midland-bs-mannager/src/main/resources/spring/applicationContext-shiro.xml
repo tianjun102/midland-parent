@@ -7,7 +7,11 @@
 
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
-        <property name="loginUrl" value="/rest/saml/saml_callback"/>
+        <!--************************单点登录********如果不做单点登录,可以删除*******************-->
+        <!--<property name="loginUrl" value="/rest/page/login"/>-->
+        <property name="loginUrl" value="/rest/saml/samlIndex"/>
+        <!--************************单点登录********如果不做单点登录,可以删除*******************-->
+
         <property name="successUrl" value="/rest/index"/>
         <property name="unauthorizedUrl" value="/rest/page/401"/>
         <property name="filterChainDefinitions">
@@ -16,6 +20,12 @@
                 /app/** = anon
                 /assets/** = anon
                 <!-- 登录页允许访问 -->
+                <!--************************单点登录********如果不做单点登录,可以删除*******************-->
+                /rest/saml/saml_callback = anon
+                /rest/page/login = anon
+                <!--************************单点登录********如果不做单点登录,可以删除*******************-->
+
+
                 /rest/user/login = anon
                 /rest/user/sendMail = anon
                 /rest/user/checkLink = anon
