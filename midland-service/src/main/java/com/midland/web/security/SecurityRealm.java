@@ -103,11 +103,12 @@ public class SecurityRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+        String oldPassWord = SysContext.getRequest().getParameter("password");
         String username = String.valueOf(token.getPrincipal());
         String password = new String((char[]) token.getCredentials());
         Map<String, String> parem = new HashMap<>();
         parem.put("userName", username);
-        parem.put("password", password);
+        parem.put("password", oldPassWord);
         String data = null;
         data = HttpUtils.get(midlandConfig.getAgentLogin(), parem);
         Map userMap = null;
@@ -117,7 +118,7 @@ public class SecurityRealm extends AuthorizingRealm {
             logger.error("请检查顶尖经纪人登录接口是否正常",e);
             e.printStackTrace();
         }
-        baseRedisTemplate.saveValue(username, password);
+        baseRedisTemplate.saveValue(username, oldPassWord);
         if (userMap != null) {
             if (("SUCCESS").equals(userMap.get("STATE"))) {
                 SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(username, password, getName());
