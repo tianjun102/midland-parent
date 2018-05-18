@@ -49,19 +49,15 @@
                               <c:if test="${flag==1}">name="eliteDesc"</c:if>
                               <c:if test="${flag==2}">name="memberShip"</c:if>
                               <c:if test="${flag==3}">name="development"</c:if>
-                              id="myEditor" rows="" cols="">
-						      <c:if test="${flag==0}">${item.purpose}</c:if>
-							  <c:if test="${flag==1}">${item.eliteDesc}</c:if>
-							  <c:if test="${flag==2}">${item.memberShip}</c:if>
-							  <c:if test="${flag==3}">${item.development}</c:if>
-					</textarea>
+                              id="myEditor" rows="" cols=""
+                    ><c:if test="${flag==0}">${item.purpose}</c:if><c:if test="${flag==1}">${item.eliteDesc}</c:if><c:if test="${flag==2}">${item.memberShip}</c:if><c:if test="${flag==3}">${item.development}</c:if></textarea>
                 </li>
 
                 <ul class="adminfo row">
                     <li>
                         <span></span>
                         <a onclick="subumintBanner();" target="contentF" class="public_btn bg2">保存</a>
-                        <a style="margin-left: 20px" href="${ctx}/rest/banner/bannerindex" target="contentF"
+                        <a style="margin-left: 20px"  target="contentF"
                            class="public_btn bg3" id="cancel">取消</a>
                     </li>
                 </ul>
@@ -75,6 +71,10 @@
     HasCheked = true;
     UE.getEditor('myEditor');
 
+
+    $("#cancel").click(function () {
+        window.location.reload();
+    })
 
     function subumintBanner() {
         var data = $("#formId").serialize();
@@ -91,7 +91,13 @@
                     layer.msg("保存失败！", {icon: 2});
                 }
             },
-             error: function (data) {                        if (data.responseText!= null){                            layer.msg(data.responseText, {icon: 2});                        }else {                            layer.msg("保存失败！", {icon: 2});                        }                    }
+            error: function (data) {
+                if (data.responseText != null) {
+                    layer.msg(data.responseText, {icon: 2});
+                } else {
+                    layer.msg("保存失败！", {icon: 2});
+                }
+            }
 
         });
 

@@ -72,6 +72,7 @@
                         myPlayer.load(videoUrl);
                         myPlayer.play();
                     });
+                    debugger;
                     $("#videoUrl").val(data);
                 },
                 'onQueueComplete': function (queueData) {
@@ -89,8 +90,7 @@
 
 <body>
 	<div class="m" style="width:100%; height: 100%; margin-top:0;">
-		<video id="my-video" class="video-js" controls preload="auto" style = "width:100%;height: 906px;"
-		  poster="m.png" data-setup="{}">
+		<video id="my-video" class="video-js" controls preload="auto" style = "width:100%;height: 906px;" poster="m.png" data-setup="{}">
 			<source src="${videoUrl}" type="video/mp4">
 			<p class="vjs-no-js">
 			  To view this video please enable JavaScript, and consider upgrading to a web browser that
@@ -117,9 +117,7 @@
 			});
 		</script>
 	</div>
-
 </body>
-<
 <script type="text/javascript">
     function updateData() {
         if (notEmpty('videoUrl', 'videoUrl', '请上传视频')) {
