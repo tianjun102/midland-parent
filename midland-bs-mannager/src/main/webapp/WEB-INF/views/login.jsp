@@ -232,7 +232,7 @@ top.location.href = location.href;
 				})
 
 				$("#logsub").click(function() {
-					if ( true||ceckUser1()&&validate()) {
+					if (checkUser1()&&validate()) {
 						var userName = $("#username").val();
 						var passWord = $("#password").val();
 						if ($("#hid").val() == "0") {

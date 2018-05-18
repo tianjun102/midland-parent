@@ -119,31 +119,18 @@ public class UserController extends BaseFilter {
                 //创建Cookie
 
                 Cookie nameCookie = new Cookie("username", username);
-                nameCookie.setPath(request.getContextPath());
+                nameCookie.setPath("/");
                 nameCookie.setMaxAge(60 * 60 * 24 * 3);
                 response.addCookie(nameCookie);
                 Cookie passwordCookie = new Cookie("password", URLEncoder.encode(password));
-                passwordCookie.setPath(request.getContextPath());
+                passwordCookie.setPath("/");
                 passwordCookie.setMaxAge(60 * 60 * 24 * 3);
                 response.addCookie(passwordCookie);
                 Cookie remenber = new Cookie("remenber",flag);
-                remenber.setPath(request.getContextPath());
+                remenber.setPath("/");
                 remenber.setMaxAge(60 * 60 * 24 * 3);
                 response.addCookie(remenber);
 
-            }else {
-                Cookie nameCookie = new Cookie("username", null);
-                nameCookie.setPath(request.getContextPath());
-                nameCookie.setMaxAge(60 * 60 * 24 * 3);
-                response.addCookie(nameCookie);
-                Cookie passwordCookie = new Cookie("password", null);
-                passwordCookie.setPath(request.getContextPath());
-                passwordCookie.setMaxAge(60 * 60 * 24 * 3);
-                response.addCookie(passwordCookie);
-                Cookie remenber = new Cookie("remenber",null);
-                remenber.setPath(request.getContextPath());
-                remenber.setMaxAge(60 * 60 * 24 * 3);
-                response.addCookie(remenber);
             }
             user.setPassword(password);
             user.setUsername(username);
@@ -156,7 +143,7 @@ public class UserController extends BaseFilter {
                 return "login";
             }
             UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword(),userType);
-            if (userType != null && userType.equals("1")) {
+            if (flag != null && flag.equals("1")) {
                 token.setRememberMe(true);
             }
             // 身份验证
@@ -223,12 +210,22 @@ public class UserController extends BaseFilter {
      * @return
      */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(HttpSession session) {
-        session.removeAttribute("userInfo");
-        // 登出操作
-        Subject subject = SecurityUtils.getSubject();
-        subject.logout();
-        return "login";
+    @ResponseBody
+    public Object logout(HttpSession session) {
+        Map map = new HashMap();
+        try {
+            session.removeAttribute("userInfo");
+            // 登出操作
+            Subject subject = SecurityUtils.getSubject();
+            subject.logout();
+            map.put("state",0);
+            map.put("message","success");
+        } catch (Exception e) {
+            map.put("state",-1);
+            map.put("message","service error");
+        }
+
+        return map;
     }
 
     @RequestMapping(value = "/loginIndex", method = RequestMethod.GET)

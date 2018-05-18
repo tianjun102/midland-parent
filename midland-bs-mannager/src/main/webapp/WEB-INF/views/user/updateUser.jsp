@@ -185,22 +185,6 @@
             return false;
         }
         var a = true;
-        <%--$.ajax({ --%>
-        <%--type: "post", --%>
-        <%--url: "${ctx }/rest/user/checkUnique",--%>
-        <%--async:false, // 此处必须同步--%>
-        <%--dataType: "json",--%>
-        <%--data:{"userName":userName},--%>
-        <%--success: function(xmlobj){ --%>
-        <%--if (xmlobj.flag==1){--%>
-        <%--layer.tips("该用户已存在！", "input[name='username']",{tips:1});--%>
-        <%--a=false;--%>
-        <%--}else{--%>
-        <%----%>
-        <%--a=true;--%>
-        <%--}--%>
-        <%--} --%>
-        <%--});--%>
         return a;
     }
 

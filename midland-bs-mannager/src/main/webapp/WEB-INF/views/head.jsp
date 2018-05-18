@@ -129,8 +129,19 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 			e.preventDefault();
 			sessionStorage.removeItem("href");
 			sessionStorage.removeItem("ID");
-			window.location.href = "${ctx}/rest/user/logout";
-		})
+			//window.location.href = "${ctx}/rest/user/logout";
+
+            $.ajax({
+            type: "get",
+            url: "${ctx}/rest/user/logout",
+            async:false, // 此处必须同步
+            dataType: "json",
+            success: function(data) {
+                if (data.state ==0) {
+                    parent.location.reload()
+                }
+            }})
+		});
 		
 		$(document).ready(function() {
 			$("a").click(function(event) {
@@ -148,13 +159,6 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		})
         function toUpdate(userId) {
             window.open("${ctx}/rest/user/hrefUpdateUser?userId=" +userId, "contentF");
-            <%--layer.open({--%>
-                <%--type: 2,--%>
-                <%--title: ['用户修改'],--%>
-                <%--shade: 0.3,--%>
-                <%--area: ['100%', '100%'],--%>
-                <%--content: ['${ctx}/rest/user/toUpdatePage?userId=' +userId,"contentF"]--%>
-            <%--});--%>
         }
 	</script>
 	</body>
