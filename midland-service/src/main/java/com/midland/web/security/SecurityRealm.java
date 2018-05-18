@@ -45,9 +45,6 @@ public class SecurityRealm extends AuthorizingRealm {
     private PermissionService permissionService;
 
     @Autowired
-    private IBaseRedisTemplate baseRedisTemplate;
-
-    @Autowired
     private MidlandConfig midlandConfig;
 
     /**
@@ -87,9 +84,9 @@ public class SecurityRealm extends AuthorizingRealm {
         String username = String.valueOf(token.getPrincipal());
         String password = new String((char[]) token.getCredentials());
 
-        if ("1".equals(upt.getHost())){//经纪人
+        if (String.valueOf(Contant.USER_TYPE_MANAGER).equals(upt.getHost())){//经纪人
             return getAuthenticationInfo(password, username, password);
-        }else if ("0".equals(upt.getHost())){//后台用户
+        }else if (String.valueOf(Contant.USER_TYPE_MANAGER).equals(upt.getHost())){//后台用户
             return getAuthenticationInfo((UsernamePasswordToken) token, username, password);
         }else{
             throw new AuthenticationException("用户名或密码错误.");

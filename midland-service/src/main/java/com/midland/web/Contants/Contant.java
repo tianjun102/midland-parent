@@ -9,12 +9,21 @@ import java.util.List;
  * Created by 'ms.x' on 2017/9/7.
  */
 public class Contant {
-
+    //*********************************************系统常量***********************************************
 
     /**
-     * 用户资源
+     * 后台用户
      */
-    public static final String USER = "user:";
+    public static final int USER_TYPE_MANAGER =0;
+    /**
+     * 经纪人
+     */
+    public static final int USER_TYPE_AGENT =1;
+    /**
+     * 前端用户
+     */
+    public static final int USER_TYPE_VIEW =2;
+    //*********************************************系统常量***********************************************
 
     /**
      * 默认密码
@@ -198,13 +207,13 @@ public class Contant {
 
         public static List<Category> enumToList(){
             List<Category> list=new ArrayList<>();
-           for (ExportSale ExportSale : ExportSale.values()){
-               Category category = new Category();
-               category.setId(ExportSale.id);
-               category.setCateName(ExportSale.cateName);
-               list.add(category);
-           }
-           return list;
+            for (ExportSale ExportSale : ExportSale.values()){
+                Category category = new Category();
+                category.setId(ExportSale.id);
+                category.setCateName(ExportSale.cateName);
+                list.add(category);
+            }
+            return list;
         }
 
     }
