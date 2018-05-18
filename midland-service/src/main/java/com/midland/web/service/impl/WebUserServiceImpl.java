@@ -102,6 +102,9 @@ public class WebUserServiceImpl implements WebUserService {
 
     @Override
     public int updateUser(WebUser user) {
+        if (StringUtils.isNotEmpty(user.getPassword())){
+            user.setPassword(ApplicationUtils.sha256Hex(user.getPassword()));
+        }
         return webUserMapper.updateByPrimaryKeySelective(user);
     }
 

@@ -159,7 +159,7 @@ public class CenterUserController extends WebCommonsController {
     	WebUser user=new WebUser();
     	user.setPhone(phone);
     	WebUser oldUser= webUserServiceImpl.findtUserByEntity(user);
-    	oldUser.setPassword(ApplicationUtils.sha256Hex(newPwd));
+    	oldUser.setPassword(newPwd);
     	int n= webUserServiceImpl.updateUser(oldUser);
         // 登出操作
         if(n>0){

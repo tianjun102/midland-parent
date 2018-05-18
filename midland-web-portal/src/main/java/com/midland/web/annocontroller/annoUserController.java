@@ -260,7 +260,7 @@ public class annoUserController extends ServiceBaseFilter {
         Result result_ = new Result();
         map.put("flag", 0);
         WebUser user = new WebUser();
-        user.setPassword(ApplicationUtils.sha256Hex(newPwd));
+        user.setPassword(newPwd);
         user.setId(id);
         int n = userService.updateUser(user);
         if (n > 0) {

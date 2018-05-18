@@ -3,6 +3,7 @@ package com.midland.web.service.impl;
 import com.midland.core.generic.GenericDao;
 import com.midland.core.generic.GenericServiceImpl;
 import com.midland.core.util.ApplicationUtils;
+import com.midland.web.Contants.Contant;
 import com.midland.web.dao.UserMapper;
 import com.midland.web.model.user.User;
 import com.midland.web.model.user.UserRole;
@@ -33,6 +34,9 @@ public class UserServiceImpl extends GenericServiceImpl<User, String> implements
 
     @Override
     public int update(User model) {
+        if (StringUtils.isNotEmpty(model.getPassword())){
+            model.setPassword(ApplicationUtils.sha256Hex(model.getPassword()));
+        }
         return userMapper.updateByPrimaryKeySelective(model);
     }
 
@@ -95,9 +99,9 @@ public class UserServiceImpl extends GenericServiceImpl<User, String> implements
             user.setCreateTime(MidlandHelper.getCurrentTime());
             user.setState("1");
             if (user.getUserType() == null) {
-                user.setUserType(0);//默认为0  后台用户
+                user.setUserType(0);//默认为0  后台
             }
-            user.setPassword(ApplicationUtils.sha256Hex(com.midland.web.security.Resource.DEFAULT_PASSWORD));
+            user.setPassword(ApplicationUtils.sha256Hex(Contant.DEFAULT_PASSWORD));
             int n = userMapper.insertSelective(user);//新增返回主键id值
             if (n < 1) {
                 throw new Exception("新增用户失败");

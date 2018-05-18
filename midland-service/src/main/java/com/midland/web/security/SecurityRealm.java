@@ -3,7 +3,9 @@ package com.midland.web.security;
 import com.alibaba.fastjson.JSONObject;
 import com.midland.config.MidlandConfig;
 import com.midland.core.redis.IBaseRedisTemplate;
+import com.midland.core.util.ApplicationUtils;
 import com.midland.core.util.HttpUtils;
+import com.midland.web.Contants.Contant;
 import com.midland.web.model.Permission;
 import com.midland.web.model.role.Role;
 import com.midland.web.model.user.User;
@@ -54,34 +56,12 @@ public class SecurityRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        String username = String.valueOf(principals.getPrimaryPrincipal());
-
-        Map<String, String> param = new HashMap<>();
-        param.put("userName", username);
-        param.put("password", baseRedisTemplate.getValueByKey(username).toString());
-        String data = HttpUtils.get(midlandConfig.getAgentLogin(), param);
-        Map userMap = null;
-        try {
-            userMap = (Map) JSONObject.parse(data);
-        } catch (Exception e) {
-            logger.error("请检查顶尖经纪人登录接口是否正常",e);
-            e.printStackTrace();
-        }
-        if (userMap != null) {
-            if (("SUCCESS").equals(userMap.get("STATE"))) {
-                final List<Role> roleInfos = roleService.selectRolesByUserId("88888");
-                return getAuthorizationInfo(authorizationInfo, roleInfos);
-
-            }
-        }
-
-        final User user = userService.selectByUsername(username);
-        final List<Role> roleInfos = roleService.selectRolesByUserId(user.getId());
-        return getAuthorizationInfo(authorizationInfo, roleInfos);
+        final List<Role> roles = roleService.selectRolesByUserId(String.valueOf(principals.getPrimaryPrincipal()));
+        return getAuthorizationInfo(authorizationInfo, roles);
     }
 
-    private AuthorizationInfo getAuthorizationInfo(SimpleAuthorizationInfo authorizationInfo, List<Role> roleInfos) {
-        for (Role role1 : roleInfos) {
+    private AuthorizationInfo getAuthorizationInfo(SimpleAuthorizationInfo authorizationInfo, List<Role> roles) {
+        for (Role role1 : roles) {
             authorizationInfo.addRole(role1.getRoleSign());
 
             List<Permission> permissions1 = permissionService.selectPermissionsByRoleId(role1.getId());
@@ -103,13 +83,42 @@ public class SecurityRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        String oldPassWord = SysContext.getRequest().getParameter("password");
+        UsernamePasswordToken upt=(UsernamePasswordToken)token;
         String username = String.valueOf(token.getPrincipal());
         String password = new String((char[]) token.getCredentials());
+
+        if ("1".equals(upt.getHost())){//经纪人
+            return getAuthenticationInfo(password, username, password);
+        }else if ("0".equals(upt.getHost())){//后台用户
+            return getAuthenticationInfo((UsernamePasswordToken) token, username, password);
+        }else{
+            throw new AuthenticationException("用户名或密码错误.");
+        }
+
+    }
+
+    private AuthenticationInfo getAuthenticationInfo(UsernamePasswordToken token, String username, String password) {
+        //List<String> areaList = MidlandHelper.getPojoList(data, String.class);
+        // 通过数据库进行验证
+        User authentication = null;
+        String sha256Hex_password= ApplicationUtils.sha256Hex(password);
+        if (token.isRememberMe()) {
+            authentication = userService.authentication(new User(username, sha256Hex_password, "1"));
+        } else {
+            authentication = userService.authentication(new User(username, sha256Hex_password));
+        }
+        if (authentication == null) {
+            throw new AuthenticationException("用户名或密码错误.");
+        }
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(authentication.getId(), password, getName());
+        return authenticationInfo;
+    }
+
+    private AuthenticationInfo getAuthenticationInfo(String oldPassWord, String username, String password) {
+        String data = null;
         Map<String, String> parem = new HashMap<>();
         parem.put("userName", username);
         parem.put("password", oldPassWord);
-        String data = null;
         data = HttpUtils.get(midlandConfig.getAgentLogin(), parem);
         Map userMap = null;
         try {
@@ -118,26 +127,14 @@ public class SecurityRealm extends AuthorizingRealm {
             logger.error("请检查顶尖经纪人登录接口是否正常",e);
             e.printStackTrace();
         }
-        baseRedisTemplate.saveValue(username, oldPassWord);
         if (userMap != null) {
             if (("SUCCESS").equals(userMap.get("STATE"))) {
                 SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(username, password, getName());
                 return authenticationInfo;
             }
         }
-        //List<String> areaList = MidlandHelper.getPojoList(data, String.class);
-        // 通过数据库进行验证
-        User authentication = null;
-        if (((UsernamePasswordToken) token).isRememberMe()) {
-            authentication = userService.authentication(new User(username, password, "1"));
-        } else {
-            authentication = userService.authentication(new User(username, password));
-        }
-        if (authentication == null) {
-            throw new AuthenticationException("用户名或密码错误.");
-        }
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(username, password, getName());
-        return authenticationInfo;
+        //经纪人接口找不到信息就抛出异常
+        throw new AuthenticationException("用户名或密码错误.");
     }
 
 }

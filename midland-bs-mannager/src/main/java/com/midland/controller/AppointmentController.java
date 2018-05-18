@@ -27,6 +27,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -59,7 +60,7 @@ public class AppointmentController extends BaseFilter {
 
     Logger logger = LoggerFactory.getLogger(AppointmentController.class);
 
-    @RequestMapping("/index")
+    @RequestMapping(value="/index",method = RequestMethod.GET)
     public String showAppointIndex(HttpServletRequest request, Model model) {
         getSelectParam(model);
         User user = MidlandHelper.getCurrentUser(request);

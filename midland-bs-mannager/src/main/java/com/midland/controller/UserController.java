@@ -110,6 +110,7 @@ public class UserController extends BaseFilter {
         SysContext.setResponse((HttpServletResponse) response);
         String flag = request.getParameter("remember");//记住密码
         String userType = request.getParameter("userType");
+        userType = "0";
         try {
 
             Subject subject = SecurityUtils.getSubject();
@@ -118,33 +119,20 @@ public class UserController extends BaseFilter {
                 //创建Cookie
 
                 Cookie nameCookie = new Cookie("username", username);
-                nameCookie.setPath(request.getContextPath());
+                nameCookie.setPath("/");
                 nameCookie.setMaxAge(60 * 60 * 24 * 3);
                 response.addCookie(nameCookie);
                 Cookie passwordCookie = new Cookie("password", URLEncoder.encode(password));
-                passwordCookie.setPath(request.getContextPath());
+                passwordCookie.setPath("/");
                 passwordCookie.setMaxAge(60 * 60 * 24 * 3);
                 response.addCookie(passwordCookie);
                 Cookie remenber = new Cookie("remenber",flag);
-                remenber.setPath(request.getContextPath());
+                remenber.setPath("/");
                 remenber.setMaxAge(60 * 60 * 24 * 3);
                 response.addCookie(remenber);
 
-            }else {
-                Cookie nameCookie = new Cookie("username", null);
-                nameCookie.setPath(request.getContextPath());
-                nameCookie.setMaxAge(60 * 60 * 24 * 3);
-                response.addCookie(nameCookie);
-                Cookie passwordCookie = new Cookie("password", null);
-                passwordCookie.setPath(request.getContextPath());
-                passwordCookie.setMaxAge(60 * 60 * 24 * 3);
-                response.addCookie(passwordCookie);
-                Cookie remenber = new Cookie("remenber",null);
-                remenber.setPath(request.getContextPath());
-                remenber.setMaxAge(60 * 60 * 24 * 3);
-                response.addCookie(remenber);
             }
-            user.setPassword(ApplicationUtils.sha256Hex(password));
+            user.setPassword(password);
             user.setUsername(username);
             // 已登陆则 跳到首页
             if (subject.isAuthenticated()) {
@@ -154,8 +142,8 @@ public class UserController extends BaseFilter {
                 model.addAttribute("error", "参数错误！");
                 return "login";
             }
-            UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
-            if (userType != null && userType.equals("1")) {
+            UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword(),userType);
+            if (flag != null && flag.equals("1")) {
                 token.setRememberMe(true);
             }
             // 身份验证
@@ -174,7 +162,7 @@ public class UserController extends BaseFilter {
             }
             if (userMap != null) {
                 if ("SUCCESS".equals(userMap.get("STATE"))) {
-                    String dataDtail = HttpUtils.get(midlandConfig.getAgentDetail() + "?id=" + userMap.get("agenterId"), null);
+                    String dataDtail = HttpUtils.get(midlandConfig.getAgentDetail() + "?id=" + "0024e866-540c-4246-b778-a0a126e8f807", null);
                     Agenter agenterList = MidlandHelper.getPojo(dataDtail);
                     if (agenterList != null) {
                         User agenterUser = new User();
@@ -222,12 +210,22 @@ public class UserController extends BaseFilter {
      * @return
      */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(HttpSession session) {
-        session.removeAttribute("userInfo");
-        // 登出操作
-        Subject subject = SecurityUtils.getSubject();
-        subject.logout();
-        return "/page/login";
+    @ResponseBody
+    public Object logout(HttpSession session) {
+        Map map = new HashMap();
+        try {
+            session.removeAttribute("userInfo");
+            // 登出操作
+            Subject subject = SecurityUtils.getSubject();
+            subject.logout();
+            map.put("state",0);
+            map.put("message","success");
+        } catch (Exception e) {
+            map.put("state",-1);
+            map.put("message","service error");
+        }
+
+        return map;
     }
 
     @RequestMapping(value = "/loginIndex", method = RequestMethod.GET)
@@ -739,7 +737,7 @@ public class UserController extends BaseFilter {
         User sessionUser = (User) request.getSession().getAttribute("userInfo");
         User user = new User();
         user.setId(sessionUser.getId());
-        user.setPassword(ApplicationUtils.sha256Hex(newPwd));
+        user.setPassword(newPwd);
         int n = userService.update(user);
         session.removeAttribute("userInfo");
         // 登出操作
@@ -765,7 +763,7 @@ public class UserController extends BaseFilter {
         if (userId != null) {
             User user = new User();
             user.setId(userId);
-            user.setPassword(ApplicationUtils.sha256Hex(com.midland.web.security.Resource.DEFAULT_PASSWORD));
+            user.setPassword(Contant.DEFAULT_PASSWORD);
             if (userService.update(user) > 0) {
                 map.put("flag", 1);
             }
@@ -872,7 +870,7 @@ public class UserController extends BaseFilter {
         User user = userService.selectByUsername(username);
         if (user != null) {
             mobile = user.getPhone();
-            content = "【沃可视】 您正在重置密码,验证码:" + vcode + ",请在15分钟内按页面提示提交验证码,切勿将验证码泄露于他人。";
+            content = " 您正在重置密码,验证码:" + vcode + ",请在15分钟内按页面提示提交验证码,切勿将验证码泄露于他人。";
             if (mobile != null && mobile.length() > 0) {
                 if (SmsUtil.send(mobile, content)) {
                     ValueOperations<String, Object> vo = redisTemplate.opsForValue();
@@ -1091,7 +1089,7 @@ public class UserController extends BaseFilter {
         if (userId != null) {
             User user = new User();
             user.setId(userId);
-            user.setPassword(ApplicationUtils.sha256Hex(com.midland.web.security.Resource.DEFAULT_PASSWORD));
+            user.setPassword(Contant.DEFAULT_PASSWORD);
             if (userService.update(user) > 0) {
                 map.put("flag", 1);
             }
@@ -1111,7 +1109,7 @@ public class UserController extends BaseFilter {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("flag", 0);
         User user = new User();
-        user.setPassword(ApplicationUtils.sha256Hex(newPwd));
+        user.setPassword(newPwd);
         user.setId(id);
         int n = userService.update(user);
         if (n > 0) {
