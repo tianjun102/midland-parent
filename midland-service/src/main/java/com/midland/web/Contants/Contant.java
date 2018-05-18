@@ -207,13 +207,13 @@ public class Contant {
 
         public static List<Category> enumToList(){
             List<Category> list=new ArrayList<>();
-           for (ExportSale ExportSale : ExportSale.values()){
-               Category category = new Category();
-               category.setId(ExportSale.id);
-               category.setCateName(ExportSale.cateName);
-               list.add(category);
-           }
-           return list;
+            for (ExportSale ExportSale : ExportSale.values()){
+                Category category = new Category();
+                category.setId(ExportSale.id);
+                category.setCateName(ExportSale.cateName);
+                list.add(category);
+            }
+            return list;
         }
 
     }
