@@ -10,6 +10,16 @@ import java.util.List;
  */
 public class Contant {
 
+
+    /**
+     * 用户资源
+     */
+    public static final String USER = "user:";
+
+    /**
+     * 默认密码
+     */
+    public static final String DEFAULT_PASSWORD = "888888";
     /**
      * 资讯
      */
