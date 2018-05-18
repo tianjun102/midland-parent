@@ -84,7 +84,7 @@ public class SecurityRealm extends AuthorizingRealm {
         String username = String.valueOf(token.getPrincipal());
         String password = new String((char[]) token.getCredentials());
 
-        if (String.valueOf(Contant.USER_TYPE_MANAGER).equals(upt.getHost())){//经纪人
+        if (String.valueOf(Contant.USER_TYPE_AGENT).equals(upt.getHost())){//经纪人
             return getAuthenticationInfo(password, username, password);
         }else if (String.valueOf(Contant.USER_TYPE_MANAGER).equals(upt.getHost())){//后台用户
             return getAuthenticationInfo((UsernamePasswordToken) token, username, password);
