@@ -106,7 +106,7 @@ public class SamlLoginController {
                     user.setUsername(loginame);
                     user.setUserCnName(loginame);
                     user.setUserType(Contant.USER_TYPE_MANAGER);
-                    user.setPassword(ApplicationUtils.sha256Hex(Contant.screat));
+                    user.setPassword(ApplicationUtils.sha256Hex(Contant.DEFAULT_PASSWORD));
                     userServiceImpl.addUser(user);
             }
             Subject subject = SecurityUtils.getSubject();

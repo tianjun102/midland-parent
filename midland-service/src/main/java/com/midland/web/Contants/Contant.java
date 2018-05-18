@@ -12,25 +12,18 @@ public class Contant {
     //*********************************************系统常量***********************************************
 
     /**
-     * sso新用户第一次登录的初始密码
-     */
-    public static final String screat="88888888";
-    /**
      * 后台用户
      */
     public static final int USER_TYPE_MANAGER =0;
     /**
+     * 经纪人
+     */
+    public static final int USER_TYPE_AGENT =1;
+    /**
      * 前端用户
      */
-    public static final int USER_TYPE_VIEW =1;
+    public static final int USER_TYPE_VIEW =2;
     //*********************************************系统常量***********************************************
-
-
-
-    /**
-     * 用户资源
-     */
-    public static final String USER = "user:";
 
     /**
      * 默认密码
