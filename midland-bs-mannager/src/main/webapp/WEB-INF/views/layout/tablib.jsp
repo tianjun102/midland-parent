@@ -12,3 +12,11 @@
 <%@ taglib prefix="form"   uri="http://www.springframework.org/tags/form" %>
 <c:set var="ctx" value="${pageContext['request'].contextPath}"/>
 
+<script language="javascript">
+    //防止页面后退
+    history.pushState(null, null, document.URL);
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, document.URL);
+    });
+</script>
+
