@@ -50,6 +50,7 @@ import java.util.*;
  */
 @Controller
 @RequestMapping("/upload")
+@SuppressWarnings("all")
 public class FileLoadController implements ServletConfigAware, ServletContextAware {
 
     private final Logger logger = LoggerFactory.getLogger(FileLoadController.class);
@@ -90,6 +91,7 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
             FileItem fileItem = getUploadFileItem(request, response);
             is = fileItem.getInputStream();
             wb = getWorkbook(fileItem, is);
+            //读取excel
             quotationExcelReader(request, wb);
             response.getWriter().print("成功");
         } catch (Exception e) {
@@ -288,9 +290,9 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
         String cityId = excelCity.getCityId();
         String cityName = excelCity.getCityName();
 
-        String dateMonth = null;
-        String houseType = null;
-        String distName = null;
+        String dateMonth = null;//读取月数
+        String houseType = null;//房屋类型,例如住宅,办公楼
+        String distName = null;//区域名称,例如福田,罗湖
         if (StringUtils.isEmpty(cityId) || StringUtils.isEmpty(cityName)) {
             throw new IllegalCityException("请选择城市");
         }
@@ -308,14 +310,10 @@ public class FileLoadController implements ServletConfigAware, ServletContextAwa
             if (row == null) {//略过空行
                 continue;
             }
-            if (j == 0) {//获取日期
+            if (j == 0) {//第一行为时间(获取日期)
                 Cell cell = row.getCell(1);
-                String value = null;
                 if (cell != null) {
-                    ;
-                    if (StringUtils.isNotEmpty(cell.toString())) {
 
-                    }
                     dateMonth = String.valueOf(Double.valueOf(cell.toString()).intValue());
                     if (dateMonth == null) {
                         throw new IllegalDocumentException("日期错误");
