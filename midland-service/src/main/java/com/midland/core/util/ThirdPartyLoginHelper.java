@@ -23,19 +23,21 @@ public final class ThirdPartyLoginHelper {
 	 * @param
 	 * @return
 	 */
-	public static final Map<String, String> getQQTokenAndOpenid(String code, String host) throws Exception {
+	public static final Map<String, String> getQQTokenAndOpenid(
+			String tokenUrl,String grantType,String clientId,String clientSecret,
+																String code,
+			String redirectUrl,String openIdUrl) throws Exception {
 		Map<String, String> map = new HashMap<String, String>();
 		// 获取令牌
-		String tokenUrl = "https://graph.qq.com/oauth2.0/token";
-		tokenUrl = tokenUrl + "?grant_type=authorization_code&client_id=" + "101432824"
-				+ "&client_secret=" + "0446b2c6df40dfab4707056ff5657c80" + "&code=" + code
-				+ "&redirect_uri=http://10.58.189.10:8085/thirdParty/callback/qq";
+
+		tokenUrl = tokenUrl + "?grant_type="+grantType+"&client_id=" + clientId
+				+ "&client_secret=" + clientSecret + "&code=" + code
+				+ "&redirect_uri="+redirectUrl;
 		String tokenRes = BaseHttpUtil.httpClientPost(tokenUrl);
 		if (tokenRes != null && tokenRes.indexOf("access_token") > -1) {
 			Map<String, String> tokenMap = toMap(tokenRes);
 			map.put("access_token", tokenMap.get("access_token"));
 			// 获取QQ用户的唯一标识openID
-			String openIdUrl = "https://graph.qq.com/oauth2.0/me";
 			openIdUrl = openIdUrl + "?access_token=" + tokenMap.get("access_token");
 			String openIdRes = BaseHttpUtil.httpClientPost(openIdUrl);
 			int i = openIdRes.indexOf("(");
@@ -48,7 +50,6 @@ public final class ThirdPartyLoginHelper {
 		}
 		return map;
 	}
-
 
 	/**
 	 * 获取QQ用户信息

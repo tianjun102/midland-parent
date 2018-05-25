@@ -1,4 +1,6 @@
 package com.midland.web.annocontroller;
+
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.qcloudsms.SmsSingleSender;
 import com.github.qcloudsms.SmsSingleSenderResult;
@@ -12,10 +14,13 @@ import com.midland.web.commons.FastJsonUtils;
 import com.midland.web.commons.Result;
 import com.midland.web.commons.core.util.ConstantUtils;
 import com.midland.web.commons.core.util.ResultStatusUtils;
+import com.midland.web.configuration.ThirdPartLoginProperties;
 import com.midland.web.model.WebUser;
 import com.midland.web.model.user.User;
 import com.midland.web.service.WebUserService;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -28,8 +33,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,33 +47,40 @@ import java.util.concurrent.TimeUnit;
 @Controller
 @RequestMapping(value = "/thirdParty")
 public class ThirdPartyLoginController {
+    private static final Logger logger = LoggerFactory.getLogger(ThirdPartyLoginController.class);
     @Resource
     private WebUserService userService;
-@Autowired
-private MidlandConfig midlandConfig;
-    @Resource
-    private RedisTemplate<String, Object> redisTemplate;
+    @Autowired
+    private MidlandConfig midlandConfig;
+
 
     @Autowired
-    private SmsSingleSender sender;
+    private ThirdPartLoginProperties thirdPartLoginProperties;
 
-    @RequestMapping(value = "/contentIndex", method = {RequestMethod.GET,RequestMethod.POST})
-    public  String contentIndex(HttpServletRequest request, HttpServletResponse response){
+    @RequestMapping(value = "/contentIndex", method = {RequestMethod.GET, RequestMethod.POST})
+    public String contentIndex(HttpServletRequest request, HttpServletResponse response) {
         return "contentIndex";
 
     }
 
 
-    @RequestMapping(value = "/callback/qq", method = {RequestMethod.GET,RequestMethod.POST})
-    public String qqCallback(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap,RedirectAttributes redirectAttributes) {
+    @RequestMapping(value = "/callback/qq", method = {RequestMethod.GET, RequestMethod.POST})
+    public String qqCallback(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap, RedirectAttributes redirectAttributes) throws ServletException, IOException {
         Result<WebUser> result = new Result<>();
         String sessionId = request.getSession().getId();
-        String host = request.getHeader("host");
+        logger.info("callback/qq  {}", JSONArray.toJSONString(request.getParameterMap()));
         try {
             String code = request.getParameter("code");
             if (StringUtils.isNotBlank(code)) {// 如果不为空
                 // 获取token和openid
-                Map<String, String> map = ThirdPartyLoginHelper.getQQTokenAndOpenid(code, host);
+                Map<String, String> map = ThirdPartyLoginHelper.getQQTokenAndOpenid(
+                        thirdPartLoginProperties.getTokenUrl(),
+                        thirdPartLoginProperties.getGrantType(),
+                        thirdPartLoginProperties.getClientId(),
+                        thirdPartLoginProperties.getClientSecret(),
+                        code,
+                        thirdPartLoginProperties.getRedirectUri(),
+                        thirdPartLoginProperties.getOpenIdUrl());
                 String openId = map.get("openId");
                 if (StringUtils.isNotBlank(openId)) {// 如果openID存在
                     // 获取第三方用户信息存放到session中
@@ -76,14 +90,14 @@ private MidlandConfig midlandConfig;
                     WebUser userInfo = new WebUser();
                     userInfo.setQqOpenId(openId);
                     userInfo = userService.findtUserByEntity(userInfo);
-                    if(userInfo==null){
+                    if (userInfo == null) {
                         userInfo = new WebUser();
                         userInfo.setQqOpenId(openId);
                         userInfo.setUserCnName(thirdUser.getUserName());
                         userInfo.setHeadImg(thirdUser.getAvatarUrl());
                         userInfo.setUserType(2);
                         userInfo.setState(1);
-                        String id =  userService.addWebUser(userInfo);
+                        String id = userService.addWebUser(userInfo);
                         userInfo.setId(id);
                         request.getSession().setAttribute(ConstantUtils.USER_SESSION, userInfo);
                     }
@@ -91,31 +105,30 @@ private MidlandConfig midlandConfig;
                     result.setCode(ResultStatusUtils.STATUS_CODE_200);
                     result.setMsg(Result.resultMsg.SUCCESS.toString());
                     result.setModel(userInfo);
-                    redirectAttributes.addFlashAttribute("result",result);
+                    redirectAttributes.addFlashAttribute("result", result);
 
-                    return "redirect:"+midlandConfig.getWebSite()+"/web?token="+sessionId+"&code="+userInfo.getId();
+                    return "redirect:" + midlandConfig.getWebSite() + "/web?token=" + sessionId + "&code=" + userInfo.getId();
                     //************结束*************//
                 } else {// 如果未获取到OpenID
                     result.setCode(ResultStatusUtils.STATUS_CODE_203);
                     result.setMsg(Result.resultMsg.SUCCESS.toString());
-                    redirectAttributes.addFlashAttribute("result",result);
+                    redirectAttributes.addFlashAttribute("result", result);
                 }
             } else {// 如果没有返回令牌，则直接返回到登录页面
                 result.setCode(ResultStatusUtils.STATUS_CODE_203);
                 result.setMsg(Result.resultMsg.SUCCESS.toString());
-                redirectAttributes.addFlashAttribute("result",result);
+                redirectAttributes.addFlashAttribute("result", result);
             }
         } catch (Exception e) {
             result.setCode(ResultStatusUtils.STATUS_CODE_203);
             result.setMsg(Result.resultMsg.SUCCESS.toString());
-            redirectAttributes.addFlashAttribute("result",result);
+            redirectAttributes.addFlashAttribute("result", result);
             e.printStackTrace();
         }
 
-        return "redirect:"+midlandConfig.getWebSite()+"/web?token=error";
+        return "redirect:" + midlandConfig.getWebSite() + "/web?token=error";
 
     }
-
 
 
 }

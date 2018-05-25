@@ -635,4 +635,31 @@ public class WebUserController extends WebCommonsController {
     }
 
 
+    @RequestMapping("getUserInfo")
+    public Object getUserInfo(HttpServletRequest request){
+        Result result = new Result();
+        try {
+            String userId = request.getParameter("userId");
+            if (StringUtils.isEmpty(userId)){
+                result.setCode(ResultStatusUtils.STATUS_CODE_202);
+                result.setMsg("userId不能为空");
+                return result;
+            }
+            WebUser user = userService.getUserByUserId(userId);
+            if (user!=null){
+                user.setPassword(null);
+            }
+
+            result.setCode(ResultStatusUtils.STATUS_CODE_200);
+            result.setMsg("success");
+            result.setModel(user);
+            return result;
+        } catch (Exception e) {
+            logger.error("getUserInfo ",e);
+            result.setCode(ResultStatusUtils.STATUS_CODE_203);
+            result.setMsg("service error");
+            return result;
+        }
+    }
+
 }

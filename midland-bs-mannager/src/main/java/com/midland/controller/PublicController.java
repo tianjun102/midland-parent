@@ -10,6 +10,7 @@ import com.midland.config.MidlandConfig;
 import com.midland.core.util.HttpUtils;
 import com.midland.web.model.remote.Agent;
 import com.midland.web.util.MidlandHelper;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,13 +60,17 @@ public class PublicController extends BaseFilter {
     public String getAppointRedistribute(Agent agent, Model model, HttpServletRequest request) {
         String pageSize = request.getParameter("pageSize");
         String pageNo = request.getParameter("pageNo");
+        String keyword=request.getParameter("keyword");
         if (pageSize == null) {
-            pageSize = "5";
+            pageSize = "20";
         }
         if (pageNo == null) {
             pageNo = "1";
         }
         Map map1 = agent.agentToMap();
+        if (StringUtils.isNotEmpty(keyword)){
+            map1.put("keyword", keyword);
+        }
         map1.put("pageSize", pageSize);
         map1.put("pageNo", pageNo);
         String data = HttpUtils.get(midlandConfig.getAgentPage(), map1);

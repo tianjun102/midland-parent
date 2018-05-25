@@ -6,6 +6,7 @@ import com.midland.web.commons.exception.ServiceException;
 import com.midland.web.dao.WebUserMapper;
 import com.midland.web.model.WebUser;
 import com.midland.web.service.WebUserService;
+import com.midland.web.util.MidlandHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -141,6 +143,7 @@ public class WebUserServiceImpl implements WebUserService {
 
     @Override
     public String addWebUser(WebUser user) {
+        user.setCreateTime(new Date());
         return webUserMapper.addWebUser(user);
     }
 
