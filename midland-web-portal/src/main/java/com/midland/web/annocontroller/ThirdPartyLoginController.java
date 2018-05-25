@@ -63,7 +63,6 @@ public class ThirdPartyLoginController {
 
     }
 
-
     @RequestMapping(value = "/callback/qq", method = {RequestMethod.GET, RequestMethod.POST})
     public String qqCallback(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap, RedirectAttributes redirectAttributes) throws ServletException, IOException {
         Result<WebUser> result = new Result<>();
@@ -106,8 +105,8 @@ public class ThirdPartyLoginController {
                     result.setMsg(Result.resultMsg.SUCCESS.toString());
                     result.setModel(userInfo);
                     redirectAttributes.addFlashAttribute("result", result);
-
-                    return "redirect:" + midlandConfig.getWebSite() + "/web?token=" + sessionId + "&code=" + userInfo.getId();
+                    logger.error("ssssssssssssss {}",midlandConfig.getWebSite() + "?token=" + sessionId + "&code=" + userInfo.getId());
+                    return "redirect:" + midlandConfig.getWebSite() + "?token=" + sessionId + "&code=" + userInfo.getId();
                     //************结束*************//
                 } else {// 如果未获取到OpenID
                     result.setCode(ResultStatusUtils.STATUS_CODE_203);

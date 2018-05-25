@@ -635,8 +635,9 @@ public class WebUserController extends WebCommonsController {
     }
 
 
-    @RequestMapping("getUserInfo")
+    @RequestMapping("/getUserInfo")
     public Object getUserInfo(HttpServletRequest request){
+        logger.info("getUserInfo x-auth-token:{},userId:{}",request.getHeader("x-auth-token"),request.getParameter("userId"));
         Result result = new Result();
         try {
             String userId = request.getParameter("userId");
