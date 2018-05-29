@@ -76,7 +76,8 @@ public class HotSearchRestController extends ServiceBaseFilter {
 	 **/
 	@RequestMapping("list")
 	public Object findHotSearchList(@RequestBody HotSearch  obj, HttpServletRequest request) {
-		 Result result=new Result();
+		long ti=System.currentTimeMillis();
+		  Result result=new Result();
 		try {
 			log.info("findHotSearchList  {}",obj);
 			obj.setIsDelete(Contant.isNotDelete);
@@ -93,6 +94,8 @@ public class HotSearchRestController extends ServiceBaseFilter {
 			result.setCode(ResultStatusUtils.STATUS_CODE_203);
 			result.setMsg("service error");
 		}
+		System.out.println(System.currentTimeMillis()-ti);
+		System.out.println("=====================================");
 		return result;
 	}
 

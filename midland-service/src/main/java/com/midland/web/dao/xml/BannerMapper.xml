@@ -222,6 +222,7 @@
     </insert>
 
     <sql id="update_option">
+
         <if test="bannerImg != null">
             banner_img= #{bannerImg,jdbcType=VARCHAR},
         </if>
@@ -287,6 +288,9 @@
         <if test="id != null">
             and id= #{id,jdbcType=INTEGER}
         </if>
+        <if test="cityId != null">
+            and city_id= #{cityId,jdbcType=VARCHAR}
+        </if>
         <if test="bannerImg != null">
             and banner_img= #{bannerImg,jdbcType=VARCHAR}
         </if>
@@ -302,9 +306,7 @@
         <if test="enabled != null">
             and enabled= #{enabled,jdbcType=INTEGER}
         </if>
-        <if test="cityId != null">
-            and city_id= #{cityId,jdbcType=VARCHAR}
-        </if>
+
         <if test="source != null">
             and source= #{source,jdbcType=INTEGER}
         </if>
@@ -347,7 +349,9 @@
 
     </sql>
     <sql id="select_option1">
-
+        <if test="cityId != null">
+            and city_id= #{cityId,jdbcType=VARCHAR}
+        </if>
         <if test="bannerImg != null">
             and banner_img= #{bannerImg,jdbcType=VARCHAR}
         </if>
@@ -363,9 +367,7 @@
         <if test="enabled != null">
             and enabled= #{enabled,jdbcType=INTEGER}
         </if>
-        <if test="cityId != null">
-            and city_id= #{cityId,jdbcType=VARCHAR}
-        </if>
+
         <if test="source != null">
             and source= #{source,jdbcType=INTEGER}
         </if>

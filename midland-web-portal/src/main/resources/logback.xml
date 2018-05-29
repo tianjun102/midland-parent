@@ -32,10 +32,10 @@
     </appender>
     <!-- show parameters for hibernate file 专为 Hibernate 定制 -->
     <logger name="org.hibernate.type.descriptor.file.BasicBinder" level="TRACE" />
-    <logger name="org.hibernate.type.descriptor.file.BasicExtractor" level="DEBUG" />
-    <logger name="org.hibernate.SQL" level="DEBUG" />
-    <logger name="org.hibernate.engine.QueryParameters" level="DEBUG" />
-    <logger name="org.hibernate.engine.query.HQLQueryPlan" level="DEBUG" />
+    <logger name="org.hibernate.type.descriptor.file.BasicExtractor" level="info" />
+    <logger name="org.hibernate.SQL" level="info" />
+    <logger name="org.hibernate.engine.QueryParameters" level="info" />
+    <logger name="org.hibernate.engine.query.HQLQueryPlan" level="info" />
 
     <!-- 日志输出级别 -->
     <root level="info">

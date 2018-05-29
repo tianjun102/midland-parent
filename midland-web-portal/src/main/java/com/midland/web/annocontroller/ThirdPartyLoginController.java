@@ -98,8 +98,8 @@ public class ThirdPartyLoginController {
                         userInfo.setState(1);
                         String id = userService.addWebUser(userInfo);
                         userInfo.setId(id);
-                        request.getSession().setAttribute(ConstantUtils.USER_SESSION, userInfo);
                     }
+                    request.getSession().setAttribute(ConstantUtils.USER_SESSION, userInfo);
                     result.setToken(sessionId);
                     result.setCode(ResultStatusUtils.STATUS_CODE_200);
                     result.setMsg(Result.resultMsg.SUCCESS.toString());
