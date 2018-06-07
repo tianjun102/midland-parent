@@ -12,6 +12,28 @@ public class Contant {
     //*********************************************系统常量***********************************************
 
     /**
+     * 网站
+     */
+    public static final int WEB_SOURCE_0 =0;
+    /**
+     * 微站
+     */
+    public static final int WECHAT_SOURCE_1 =1;
+
+    /**
+    * type=0 市场研究
+     * type=1 资讯
+     * type=2 会员分类
+     * type=3 热门关注分类
+     * type=4 网站地图分类
+     **/
+    public static final int CATEGORY_TYPE_0 =0;
+    public static final int CATEGORY_TYPE_1 =1;
+    public static final int CATEGORY_TYPE_2 =2;
+    public static final int CATEGORY_TYPE_3 =3;
+    public static final int CATEGORY_TYPE_4 =4;
+
+    /**
      * 后台用户
      */
     public static final int USER_TYPE_MANAGER =0;

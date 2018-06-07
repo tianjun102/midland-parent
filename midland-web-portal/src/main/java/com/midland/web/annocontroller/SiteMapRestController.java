@@ -47,7 +47,7 @@ public class SiteMapRestController extends ServiceBaseFilter {
         Result result = new Result();
         try {
             Integer id = (Integer) map.get("id");
-            log.info("getSitemapById  {}", id);
+            log.info("getSitemapById  id ={}", id);
             SiteMap SiteMap = siteMapServiceImpl.selectSiteMapById(id);
             result.setCode(ResultStatusUtils.STATUS_CODE_200);
             result.setMsg("success");
@@ -96,8 +96,8 @@ public class SiteMapRestController extends ServiceBaseFilter {
             }
             Category category = new Category();
             category.setCityId(obj.getCityId());
-            category.setType(4);//4为网站地图类型
-            category.setSource(0);//网站地图
+            category.setType(Contant.CATEGORY_TYPE_4);//4为网站地图类型
+            category.setSource(Contant.WEB_SOURCE_0);//网站地图 0
             List<Integer> categoryIds = new ArrayList<>();
             List<Category> categories = categoryServiceImpl.findCategoryList(category);
             categories.forEach(e -> {
@@ -112,7 +112,7 @@ public class SiteMapRestController extends ServiceBaseFilter {
                 siteMapIds.add(e.getId());
             });
             /**
-             * 用modeId获取
+             * 用modeId获取网站地图第二级
              */
             List<SiteMap> list = siteMapServiceImpl.findSiteMapByModeId(siteMapIds);
             List<Map> map = siteMapForm(categories, siteMaps, list);
